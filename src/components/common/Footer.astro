@@ -1,0 +1,52 @@
+---
+const quickLinks = {
+  left: [
+    { label: 'Voir nos T2 à louer', href: '/biens/louer/appartement-2-pieces/' },
+    { label: 'Voir nos T3 à louer', href: '/biens/louer/appartement-3-pieces/' },
+    { label: 'Voir nos T4 et plus à louer', href: '/biens/louer/appartement-4-pieces/' },
+  ],
+  right: [
+    { label: 'Voir nos pavillons à louer', href: '/biens/louer/villa/' },
+    { label: 'Voir les bureaux/locaux à louer', href: '/biens/louer/bureaux/' },
+    { label: 'Mentions légales et nos tarifs', href: '/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/' },
+    { label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' },
+  ],
+};
+---
+
+<footer class="footer">
+  <div class="footer__cta">
+    <img
+      src="/images/footer-agencies.jpg"
+      alt="Nos agences à Marseille"
+      loading="lazy"
+    />
+    <div class="footer__cta-overlay">
+      <p>NOUS CROYONS AUX BELLES EXPERIENCES IMMOBILIERES</p>
+    </div>
+  </div>
+
+  <div class="footer__content">
+    <div class="footer__inner">
+      <div class="footer__links">
+        <h3>Acces rapide:</h3>
+        <div class="footer__columns">
+          <ul>
+            {quickLinks.left.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+          <ul>
+            {quickLinks.right.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__contact">
+        <a href="/contact-immobiliere-pujol/" class="btn btn--primary">Contactez-nous</a>
+      </div>
+    </div>
+  </div>
+</footer>

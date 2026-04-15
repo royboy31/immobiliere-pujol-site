@@ -1,0 +1,55 @@
+$ease-out : cubic-bezier(.19,.68,.27,1);
+
+
+/*
+*
+* DIRECT VARIABLES
+*
+*/
+$darkblue			: #55666f;
+$green			  : #B2C54F;
+$orange			  : #FD7F24;
+$grey			    : #7e7e7d;
+$light-grey		: #f5f5f4;
+$lightest-grey: #fbfbfa;
+$dark-grey    : #55666f;
+$black		  	: #000000;
+$red-google		: #DC4E41;
+$blue-facebook: #3B5998;
+$blue-twitter	: #1DA1F2;
+
+
+/*
+*
+* RELATIVE VARIABLES
+*
+*/
+$button-background 	: $green;
+$link-color 		: $green;
+$text-color			: $grey;
+$input-focus-color	: $green;
+$label-color		: lighten($grey, 15%);
+$input-color		: lighten($grey, 35%);
+$subnav-background	: lighten($green, 35%);
+$subnav-color		: white;
+$action-border-color: lighten($grey, 40%);
+$hero-overlay		: rgba($black, 0.5);
+
+$border-color		: lighten($grey, 40%);
+
+$floating-nav-border: lighten($grey, 40%);
+
+$news-background 	: $lightest-grey;
+$blogs-background 	: white;
+
+$burger-color		: $grey;
+
+$section-background	: $light-grey;
+
+$floating-item		: $light-grey;
+
+$tag-background		: darken($light-grey, 0%);
+
+$google				: $red-google;
+$facebook			: $blue-facebook;
+$twitter			: $blue-twitter;

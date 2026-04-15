@@ -1,0 +1,52 @@
+$main-font : "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+html {
+	font-family: $main-font;
+	font-size: 62.5%; /* 62.5% of 16px = 10px */
+	color: $text-color;
+
+	@media screen and (max-width: 30rem) {
+		font-size: 50%;
+	}
+
+	body {
+		font-size: 5rem;
+	}
+}
+
+p, blockquote, * {
+	font-weight: 300;
+}
+
+blockquote {
+	font-style: italic;
+	margin-bottom: 1rem; margin-top: 1rem;
+	line-height: 130%;
+}
+
+strong {
+	font-weight: 500;
+}
+
+h1 {
+	font-size: 1.5rem;
+
+	@media screen and (min-width: 975px) {
+		font-size: 2rem;
+	}
+}
+
+.bold {
+	font-weight: 700;
+}
+
+.center {
+	text-align: center;
+}
+
+sup {
+	position: relative;
+	top: -5px;
+	font-size: 62.5%;
+}

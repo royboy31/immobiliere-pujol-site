@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Single expert profile — /experts/{slug}/
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from content collection
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Expert – Immobilière Pujol">
+  <article class="expert-single">
+    <div class="expert-single__photo"></div>
+    <div class="expert-single__info">
+      <!-- Name, role, phone, email, social links -->
+    </div>
+    <div class="expert-single__description"></div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Blog category archive — /categorie/{slug}/
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from content collection
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title={`Catégorie – Immobilière Pujol`}>
+  <section class="blog-archive">
+    <h1></h1>
+    <div class="blog-archive__grid">
+      <!-- Blog post cards filtered by category -->
+    </div>
+  </section>
+</BaseLayout>

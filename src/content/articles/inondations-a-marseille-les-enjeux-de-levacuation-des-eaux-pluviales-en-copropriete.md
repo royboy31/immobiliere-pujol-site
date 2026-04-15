@@ -1,0 +1,25 @@
+---
+title: "Inondations, orages, copropriétés. (2)|infiltration eau copropriete|Inondations, orages, copropriétés."
+slug: "inondations-a-marseille-les-enjeux-de-levacuation-des-eaux-pluviales-en-copropriete"
+date: "2024-12-06 14:36:39"
+categories: ["Le marché immobilier à marseille"]
+featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/12/Inondations-orages-coproprietes.-2.jpg"
+---
+
+<h2>Les inondations à Marseille : une réalité à laquelle il faut faire face</h2>
+<p>Les fortes pluies des 7 et 8 octobre 2024 ont causé des dégâts considérables à Marseille.<br />
+Si l’image du Vieux-Port débordant peut prêter à sourire, elle illustre bien un problème récurrent : que faire face à de tels événements, au niveau de la copropriété, lorsque la mer déborde ?</p>
+<p>Nos gestionnaires de copropriété ont particulièrement souffert lors de cet épisode, avec des sous-sols inondés à plus de 4 mètres de hauteur, des cascades d’eau dévalant les escaliers communs et 20 cm d’eau devant les portes-fenêtres des terrasses en rez-de-chaussée. Les ascenseurs sont restés à l’arrêt, et de nombreuses fosses ont été inondées.</p>
+<h2>Des facteurs multiples à l’origine des sinistres</h2>
+<p>Les inondations lors de fortes précipitations sont souvent causées par des infiltrations d’eau. L’absence d’entretien du bâti et la fragilité des toitures expliquent en grande partie ces infiltrations, qui entraînent un débordement d’eau dans les parties communes et les appartements. </p>
+<p>Lorsque l’eau provient des toitures, des chéneaux ou des dalles non étanches, l’évacuation des eaux pluviales – prévue pour évacuer 3L/min/m² – se révèle insuffisante. En cas de forte pluie, les systèmes d’évacuation sont rapidement engorgés, l’eau déborde alors des terrasses ou passe au-dessus des relevés d’étanchéité pour s’infiltrer dans les logements. <br />
+Les infrastructures d’évacuation ne sont tout simplement pas conçues pour gérer de telles quantités d’eau. Bien qu'il soit complexe et coûteux de revoir l'ensemble des réseaux d’évacuation des immeubles pour faire face à ces situations, la question se pose : si ces événements, jadis exceptionnels, deviennent plus fréquents, comment adapter nos infrastructures ?</p>
+<p><img class=" wp-image-929668 alignleft" src="https://www.immobiliere-pujol.fr/content/uploads/2024/12/infiltration-eau-copropriete-.jpg" alt="" width="177" height="239" />Lors de ces épisodes pluvieux, les sous-sols des copropriétés, en particulier les parkings, sont également de plus en plus impactés et inondés. En principe, il n'y a pas de système d’évacuation des eaux pluviales en sous-sol, seulement des regards aveugles pour récupérer les hydrocarbures. Cependant, dans les constructions récentes, les pluies parviennent tout de même à s’infiltrer par les descentes de voiture ou par des fissures et joints de dilatation dans les dalles.</p>
+<p>En conséquence, l’eau s’accumule en grande quantité, car elle n’est pas correctement gérée en amont. Les pompes de relevage, destinées à évacuer l’eau vers un bassin de rétention ou le réseau d’eaux pluviales communal, sont souvent insuffisantes. En cas de surcharge, elles disjonctent et s’arrêtent, entraînant une montée rapide de l’eau dans les sous-sols.</p>
+<h2>Des solutions pour prévenir les inondations</h2>
+<p>Plusieurs solutions peuvent être envisagées pour prévenir ces inondations. L’installation de clapets anti-retour sur les canalisations raccordées au réseau d’eaux pluviales est une première option. Cependant, ces clapets sont fragiles et risquent de céder sous la pression de l’eau en retour.</p>
+<p>Il est également crucial de réviser les normes de construction, notamment en adaptant les systèmes d’évacuation d’eau pour les nouvelles constructions. Les fosses et les pompes de relevage doivent être dimensionnées pour faire face aux quantités d’eau actuelles, qui, après avoir été quinquennales puis annuelles, surviennent désormais plusieurs fois par an.</p>
+<p>Dans l’ancien, les maîtres d’œuvre doivent tenir compte de ces enjeux lors des ravalements ou de travaux de rénovation. Les évacuations d’eaux de toiture, par exemple, peuvent être repensées pour mieux gérer les fortes pluies. Les artisans que nous sélectionnons, qu'il s'agisse de maçons ou de couvreurs, doivent également jouer un rôle clé en alertant sur les éléments défectueux et en proposant des solutions durables et conformes aux normes en vigueur.</p>
+<h2>La responsabilité des pouvoirs publics</h2>
+<p>Les pouvoirs publics doivent prendre la mesure de ces sinistres à répétition. Si rien n’est fait pour améliorer l’évacuation des eaux pluviales à Marseille, le réseau public sera rapidement submergé lors de chaque épisode de fortes pluies.</p>
+<p>En outre, les assureurs, confrontés à une augmentation des sinistres liés aux eaux pluviales, risquent de répercuter ces risques accrus sur les propriétaires, en augmentant les primes et les franchises des polices d'assurance.</p>

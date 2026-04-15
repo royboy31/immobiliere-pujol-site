@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Single service page — /services/{slug}/
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from content collection
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Service – Immobilière Pujol">
+  <article class="service-single">
+    <section class="service-single__hero">
+    </section>
+    <section class="service-single__content">
+      <slot />
+    </section>
+    <section class="service-single__form">
+      <!-- Related Gravity Form -->
+    </section>
+  </article>
+</BaseLayout>

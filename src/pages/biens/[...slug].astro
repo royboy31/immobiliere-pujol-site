@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Property type taxonomy — /biens/{name}/{type}/
+// Uses rest params to handle nested paths like /biens/loues/, /biens/louer/appartement-2-pieces/
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from taxonomy data
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Biens – Immobilière Pujol">
+  <section class="ads-archive ads-archive--taxonomy">
+    <h1></h1>
+    <div class="ads-archive__results">
+      <div class="ads-archive__list"></div>
+      <div class="ads-archive__map"></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Arrondissement taxonomy — /arrondissement/{name}/{type}/
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from taxonomy data
+  return [];
+};
+
+const { slug } = Astro.params;
+---
+
+<BaseLayout title="Arrondissement – Immobilière Pujol">
+  <section class="ads-archive ads-archive--arrondissement">
+    <h1></h1>
+    <div class="ads-archive__results">
+      <div class="ads-archive__list"></div>
+      <div class="ads-archive__map"></div>
+    </div>
+  </section>
+</BaseLayout>

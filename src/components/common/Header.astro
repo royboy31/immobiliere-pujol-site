@@ -1,0 +1,100 @@
+---
+// Navigation structure from WordPress menu export
+const navItems = [
+  {
+    label: 'Mise en location',
+    href: '/service-immobilier/mettre-en-location/',
+    children: [
+      { label: 'Nos conseils et services en location', href: '/services/nos-conseils-en-location/' },
+      { label: 'Estimation de loyer', href: '/services/estimation-de-loyer/' },
+      { label: 'Nos annonces de location', href: '/annonces/locations/' },
+    ],
+  },
+  {
+    label: 'Gestion locative',
+    href: '/service-immobilier/gestion-locative/',
+    children: [
+      { label: 'Nos conseils et services en gestion', href: '/services/conseils-gestion-locative/' },
+      { label: 'Etude du marché locatif à Marseille', href: '/services/etude-marche-locatif/' },
+      { label: 'Obtenir un devis de Gestion Locative', href: '/services/devis-gestion-locative-marseille/' },
+      { label: 'Contacter notre expert en gestion locative', href: '/services/contacter-un-conseiller-en-gestion-locative/' },
+    ],
+  },
+  {
+    label: 'Vendre',
+    href: '/service-immobilier/vendre/',
+    children: [
+      { label: 'Nos conseils et services pour vendre', href: '/services/conseils-pour-vendre/' },
+      { label: 'Estimation de prix de vente', href: '/services/estimation-prix-de-vente/' },
+      { label: 'Nos annonces en vente', href: '/annonces/ventes/' },
+    ],
+  },
+  {
+    label: 'Syndic',
+    href: '/service-immobilier/syndic-de-copropriete-a-marseille/',
+    children: [
+      { label: 'Nos conseils et services en syndic', href: '/services/conseils-syndic/' },
+      { label: 'Obtenir un devis en Syndic', href: '/services/devis-syndic/' },
+    ],
+  },
+  {
+    label: "L'agence",
+    href: '/service-immobilier/agence-immobiliere-pujol/',
+    children: [
+      { label: 'Qui sommes-nous?', href: '/services/pourquoi-nous-faisons-ce-metier/' },
+      { label: 'Les avis de nos clients', href: '/services/avis-clients/' },
+      { label: 'Immobilière Pujol in english', href: '/services/immobiliere-pujol-in-english/' },
+      { label: 'Candidater chez nous', href: '/services/candidater/' },
+    ],
+  },
+  {
+    label: 'Le blog',
+    href: '/blog/',
+  },
+];
+---
+
+<header class="header">
+  <div class="header__inner">
+    <a href="/" class="header__logo" aria-label="Immobilière Pujol - Accueil">
+      <img src="/images/logo-pujol.svg" alt="Immobilière Pujol" width="200" height="60" />
+    </a>
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul class="nav">
+        {navItems.map((item) => (
+          <li class={`nav__item ${item.children ? 'nav__item--has-children' : ''}`}>
+            <a href={item.href} class="nav__link">{item.label}</a>
+            {item.children && (
+              <ul class="nav__submenu">
+                {item.children.map((child) => (
+                  <li class="nav__submenu-item">
+                    <a href={child.href} class="nav__submenu-link">{child.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <a href="/annonces/" class="header__action" aria-label="Voir les annonces">
+        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#annonces" /></svg>
+      </a>
+      <a href="/mon-compte/" class="header__action" aria-label="Mon compte">
+        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#account" /></svg>
+      </a>
+      <button class="header__search-toggle" aria-label="Rechercher">
+        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#search" /></svg>
+      </button>
+    </div>
+
+    <button class="header__burger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

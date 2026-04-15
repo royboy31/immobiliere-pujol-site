@@ -1,0 +1,143 @@
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+
+// TRANSFORM
+// generic transform
+@mixin transform($transforms) {
+	   -moz-transform: $transforms;
+	     -o-transform: $transforms;
+	    -ms-transform: $transforms;
+	-webkit-transform: $transforms;
+          transform: $transforms;
+}
+// rotate
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+	 @include transform(scale($scale));
+}
+// translate
+@mixin translate($x, $y) {
+   @include transform(translate($x, $y));
+}
+// skew
+@mixin skew($x, $y) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin($origin) {
+    moz-transform-origin: $origin;
+	     -o-transform-origin: $origin;
+	    -ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+          transform-origin: $origin;
+}
+
+
+
+// CENTERING
+@mixin center($position: "both") {
+  position: absolute;
+
+  @if $position == "vertical" {
+    top: 50%;
+    @include transform(translateY(-50%));
+  }
+
+  @if $position == "horizontal" {
+    left: 50%;
+    @include transform(translateX(-50%));
+  }
+
+  @if $position == "both" {
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+  }
+}
+
+
+// Animation
+
+@mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+        @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+        @content;
+    }
+    @-ms-keyframes #{$animation-name} {
+        @content;
+    }
+    @-o-keyframes #{$animation-name} {
+        @content;
+    }
+    @keyframes #{$animation-name} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+
+
+// --------------------------------------------------------
+// arrows
+// --------------------------------------------------------
+// $direction: top, left, right, bottom, top-left, top-right, bottom-left, bottom-right
+// $color: hex, rgb or rbga
+// $size: px or em
+// @example
+// .element{
+//     @include arrow(top, #000, 50px);
+// }
+@mixin arrow($direction, $color, $size){
+    display: block;
+    height: 0;
+    width: 0;
+
+    @if $direction == 'top' {
+        border-left: $size solid transparent;
+      border-right: $size solid transparent;
+      border-bottom: $size solid $color;
+    } @else if $direction == 'right' {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+      border-left: $size solid $color;
+    } @else if $direction == 'bottom' {
+        border-top: $size solid $color;
+        border-right: $size solid transparent;
+        border-left: $size solid transparent;
+    } @else if $direction == 'left' {
+        border-top: $size solid transparent;
+      border-right: $size solid $color;
+      border-bottom: $size solid transparent;
+    } @else if $direction == 'top-left' {
+        border-top: $size solid $color;
+        border-right: $size solid transparent;
+    } @else if $direction == 'top-right' {
+        border-top: $size solid $color;
+        border-left: $size solid transparent;
+    } @else if $direction == 'bottom-left' {
+        border-bottom: $size solid $color;
+        border-right: $size solid transparent;
+    } @else if $direction == 'bottom-right' {
+        border-bottom: $size solid $color;
+        border-left: $size solid transparent;
+    }
+}

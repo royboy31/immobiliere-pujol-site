@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Catch-all route for:
+// - Blog posts at root level (e.g., /copropriete-vous-subissez-un-degats-des-eaux-que-faire/)
+// - Static pages (e.g., /politique-de-confidentialite/)
+// - Service landing pages (e.g., /service-immobilier/syndic-de-copropriete-a-marseille/)
+// - Prix immobilier articles (e.g., /les-prix-au-m²-13012-marseille/)
+// - Contact pages (e.g., /contact-immobiliere-pujol/)
+// - Tag pages (e.g., /tag/gestion-locative/)
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Merge articles + pages + service-immobilier content collections
+  // Each returns { params: { slug: 'the-full-path' }, props: { entry } }
+  return [];
+};
+
+interface Props {
+  entry: any;
+  type: 'article' | 'page' | 'service-landing' | 'tag';
+}
+
+const { entry, type } = Astro.props;
+---
+
+<BaseLayout
+  title={entry?.title || 'Immobilière Pujol'}
+  description={entry?.excerpt || ''}
+>
+  <article class={`content content--${type}`}>
+    <h1>{entry?.title}</h1>
+    <div class="content__body" set:html={entry?.content} />
+  </article>
+</BaseLayout>

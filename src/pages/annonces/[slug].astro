@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+// Single property listing — /annonces/{slug}/
+// Handles all 4 URL patterns: L-prefix, neot, numeric, ubiflow refs
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // TODO: Load from content collection or API
+  return [];
+};
+
+interface Props {
+  annonce: any;
+}
+
+const { annonce } = Astro.props;
+---
+
+<BaseLayout
+  title={`${annonce?.title || 'Annonce'} – Immobilière Pujol`}
+  description={annonce?.excerpt || ''}
+>
+  <article class="ad-single">
+    <section class="ad-single__gallery">
+      <!-- Swiper/slideshow for property photos -->
+    </section>
+
+    <section class="ad-single__content">
+      <div class="ad-single__info">
+        <h1>{annonce?.title}</h1>
+        <!-- Price, surface, rooms, location -->
+      </div>
+
+      <div class="ad-single__description">
+        <!-- Full property description -->
+      </div>
+
+      <div class="ad-single__details">
+        <!-- DPE, heating, floor, parking, etc. -->
+      </div>
+
+      <div class="ad-single__contact">
+        <!-- Contact form (Gravity Form #2 for location, #13 for vente) -->
+      </div>
+    </section>
+
+    <section class="ad-single__map">
+      <!-- Leaflet map with property location -->
+    </section>
+  </article>
+</BaseLayout>
