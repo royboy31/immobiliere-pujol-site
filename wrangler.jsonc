@@ -10,19 +10,12 @@
 	"observability": {
 		"enabled": true
 	},
-	// D1 database — create with: npx wrangler d1 create pujol-annonces
-	// Then paste the database_id here. For local dev, wrangler uses a local SQLite.
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "pujol-annonces",
-			"database_id": "local"
-		}
-	],
-	"r2_buckets": [
-		{
-			"binding": "PHOTOS",
-			"bucket_name": "pujol-photos"
-		}
-	]
+	// D1 + R2 bindings — uncomment when creating the resources in Gate 2:
+	//   npx wrangler d1 create pujol-annonces
+	//   npx wrangler r2 bucket create pujol-photos
+	// Then paste the database_id and re-enable.
+	//
+	// "d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "PASTE_ID_HERE" }],
+	// "r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }]
+	"vars": {}
 }

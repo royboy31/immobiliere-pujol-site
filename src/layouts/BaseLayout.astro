@@ -21,9 +21,9 @@ const {
 
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 
-// STAGING: block all indexing until go-live. Remove this when switching to production.
-const isStaging = !import.meta.env.PROD || !Astro.site?.hostname?.includes('immobiliere-pujol.fr');
-const shouldNoindex = noindex || isStaging;
+// STAGING: block all indexing until go-live.
+// Set ALLOW_INDEXING=true in Cloudflare env vars when ready for production.
+const shouldNoindex = noindex || !import.meta.env.ALLOW_INDEXING;
 ---
 
 <!DOCTYPE html>
