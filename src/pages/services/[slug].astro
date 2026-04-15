@@ -1,25 +1,51 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
 
-// Single service page — /services/{slug}/
-export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Load from content collection
-  return [];
-};
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services
+    .filter((entry) => entry.data.slug && entry.data.slug !== 'services')
+    .map((entry) => {
+      // Slugs in collection are stored as "services/slug-name", strip the prefix
+      const slug = entry.data.slug.replace(/^services\//, '');
+      return {
+        params: { slug },
+        props: { entry },
+      };
+    });
+}
 
-const { slug } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const title = entry.data.seoTitle || `${entry.data.title} – Immobilière Pujol`;
+const description = entry.data.seoDescription || '';
 ---
 
-<BaseLayout title="Service – Immobilière Pujol">
+<BaseLayout title={title} description={description}>
   <article class="service-single">
     <section class="service-single__hero">
+      {entry.data.heroVideo && (
+        <video autoplay muted loop playsinline>
+          <source src={entry.data.heroVideo} type="video/mp4" />
+        </video>
+      )}
+      {entry.data.featuredImage && !entry.data.heroVideo && (
+        <img src={entry.data.featuredImage} alt={entry.data.title} />
+      )}
+      <h1>{entry.data.title}</h1>
     </section>
+
     <section class="service-single__content">
-      <slot />
+      <Content />
     </section>
-    <section class="service-single__form">
-      <!-- Related Gravity Form -->
-    </section>
+
+    {entry.data.relatedForm && (
+      <section class="service-single__form" id="form">
+        <!-- Form placeholder — connected in Gate 3 -->
+        <p>Formulaire: {entry.data.formTitle || 'Contactez-nous'}</p>
+      </section>
+    )}
   </article>
 </BaseLayout>

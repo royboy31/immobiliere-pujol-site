@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('serviceImmobilier');
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  title={entry.data.seoTitle || `${entry.data.title} – Immobilière Pujol`}
+  description={entry.data.seoDescription || ''}
+>
+  <article class="service-landing">
+    <section class="service-landing__hero">
+      {entry.data.heroImage && (
+        <img src={entry.data.heroImage} alt={entry.data.title} />
+      )}
+      <h1>{entry.data.title}</h1>
+      {entry.data.subtitle && <p class="service-landing__subtitle">{entry.data.subtitle}</p>}
+    </section>
+
+    <section class="service-landing__content">
+      <Content />
+    </section>
+
+    <section class="service-landing__cta">
+      {entry.data.ctaText && (
+        <a href="#form" class="btn btn--primary">{entry.data.ctaText}</a>
+      )}
+    </section>
+
+    <section class="service-landing__form" id="form">
+      <!-- Form placeholder — will be connected in Gate 3 -->
+    </section>
+  </article>
+</BaseLayout>

@@ -1,35 +1,97 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
 
-// Catch-all route for:
-// - Blog posts at root level (e.g., /copropriete-vous-subissez-un-degats-des-eaux-que-faire/)
-// - Static pages (e.g., /politique-de-confidentialite/)
-// - Service landing pages (e.g., /service-immobilier/syndic-de-copropriete-a-marseille/)
-// - Prix immobilier articles (e.g., /les-prix-au-m²-13012-marseille/)
-// - Contact pages (e.g., /contact-immobiliere-pujol/)
-// - Tag pages (e.g., /tag/gestion-locative/)
+// Catch-all route for root-level URLs:
+// - Blog posts (891 articles)
+// - Static pages (32 pages)
+// - PriceHubble estimation page
+// - Contact page
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Merge articles + pages + service-immobilier content collections
-  // Each returns { params: { slug: 'the-full-path' }, props: { entry } }
-  return [];
-};
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  const pages = await getCollection('pages');
+
+  const articlePaths = articles.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry, type: 'article' as const },
+  }));
+
+  const pagePaths = pages.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry, type: 'page' as const },
+  }));
+
+  return [...articlePaths, ...pagePaths];
+}
 
 interface Props {
   entry: any;
-  type: 'article' | 'page' | 'service-landing' | 'tag';
+  type: 'article' | 'page';
 }
 
 const { entry, type } = Astro.props;
+const { Content } = await render(entry);
+
+// Detect prix-au-m2 category for special template
+const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
+  (cat: string) => cat.toLowerCase().includes('prix') && cat.toLowerCase().includes('m')
+);
+
+const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
+const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
 ---
 
-<BaseLayout
-  title={entry?.title || 'Immobilière Pujol'}
-  description={entry?.excerpt || ''}
->
-  <article class={`content content--${type}`}>
-    <h1>{entry?.title}</h1>
-    <div class="content__body" set:html={entry?.content} />
+<BaseLayout title={title} description={description}>
+  <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2 }]}>
+    <header class="content__header">
+      <h1>{entry.data.title}</h1>
+      {type === 'article' && entry.data.date && (
+        <time datetime={entry.data.date}>
+          {new Date(entry.data.date).toLocaleDateString('fr-FR', {
+            year: 'numeric', month: 'long', day: 'numeric'
+          })}
+        </time>
+      )}
+    </header>
+
+    {type === 'article' && isPrixM2 && (
+      <aside class="content__sidebar content__sidebar--prix-m2">
+        <h3>Prix au m² par arrondissement</h3>
+        <nav>
+          <!-- Populated by component in Gate 1 completion -->
+          <p>Sidebar arrondissements — a implementer</p>
+        </nav>
+      </aside>
+    )}
+
+    <div class="content__body">
+      <Content />
+    </div>
+
+    {type === 'article' && entry.data.categories && (
+      <footer class="content__footer">
+        <div class="content__categories">
+          {entry.data.categories.map((cat: string) => {
+            const catSlug = cat.toLowerCase()
+              .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-|-$/g, '');
+            return <a href={`/categorie/${catSlug}/`} class="tag">{cat}</a>;
+          })}
+        </div>
+        {entry.data.tags && (
+          <div class="content__tags">
+            {entry.data.tags.map((tag: string) => {
+              const tagSlug = tag.toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+              return <a href={`/tag/${tagSlug}/`} class="tag tag--small">{tag}</a>;
+            })}
+          </div>
+        )}
+      </footer>
+    )}
   </article>
 </BaseLayout>

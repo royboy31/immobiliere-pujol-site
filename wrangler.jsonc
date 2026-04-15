@@ -1,7 +1,7 @@
 {
 	"compatibility_date": "2026-04-02",
 	"compatibility_flags": ["global_fetch_strictly_public"],
-	"name": "site",
+	"name": "immobiliere-pujol",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",
@@ -9,5 +9,20 @@
 	},
 	"observability": {
 		"enabled": true
-	}
+	},
+	// D1 database — create with: npx wrangler d1 create pujol-annonces
+	// Then paste the database_id here. For local dev, wrangler uses a local SQLite.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "pujol-annonces",
+			"database_id": "local"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "PHOTOS",
+			"bucket_name": "pujol-photos"
+		}
+	]
 }

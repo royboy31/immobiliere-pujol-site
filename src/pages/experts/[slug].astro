@@ -1,22 +1,54 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
 
-// Single expert profile — /experts/{slug}/
-export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Load from content collection
-  return [];
-};
+export async function getStaticPaths() {
+  const experts = await getCollection('experts');
+  return experts.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+}
 
-const { slug } = Astro.params;
+const { entry } = Astro.props;
+const expert = entry.data;
 ---
 
-<BaseLayout title="Expert – Immobilière Pujol">
+<BaseLayout
+  title={`${expert.title.split('|').pop()?.trim() || expert.title} – Immobilière Pujol`}
+  description={expert.description || `Découvrez le profil de ${expert.title.split('|').pop()?.trim()} chez Immobilière Pujol`}
+>
   <article class="expert-single">
-    <div class="expert-single__photo"></div>
-    <div class="expert-single__info">
-      <!-- Name, role, phone, email, social links -->
+    <div class="expert-single__header">
+      {expert.photo && (
+        <img
+          src={expert.photo}
+          alt={expert.title.split('|').pop()?.trim()}
+          class="expert-single__photo"
+          loading="lazy"
+        />
+      )}
+      <div class="expert-single__info">
+        <h1>{expert.title.split('|').pop()?.trim()}</h1>
+        {expert.fonction && <p class="expert-single__role">{expert.fonction}</p>}
+        {expert.phone && <a href={`tel:${expert.phone}`} class="expert-single__phone">{expert.phone}</a>}
+        {expert.email && <a href={`mailto:${expert.email}`} class="expert-single__email">{expert.email}</a>}
+        <div class="expert-single__social">
+          {expert.linkedin && <a href={expert.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
+          {expert.facebook && <a href={expert.facebook} target="_blank" rel="noopener">Facebook</a>}
+          {expert.instagram && <a href={expert.instagram} target="_blank" rel="noopener">Instagram</a>}
+        </div>
+      </div>
     </div>
-    <div class="expert-single__description"></div>
+
+    {expert.description && (
+      <div class="expert-single__description" set:html={expert.description} />
+    )}
+
+    <section class="expert-single__listings">
+      <h2>Biens gérés</h2>
+      <!-- Populated from D1 in Gate 2 — expert's active + sold/rented listings -->
+      <p>Chargement des annonces...</p>
+    </section>
   </article>
 </BaseLayout>

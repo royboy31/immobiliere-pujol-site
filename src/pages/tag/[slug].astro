@@ -5,26 +5,31 @@ import { getCollection } from 'astro:content';
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
 
-  // Collect all unique categories across articles
-  const categoryMap = new Map<string, { name: string; articles: typeof articles }>();
+  // Collect all unique tags across articles
+  const tagMap = new Map<string, typeof articles>();
   for (const article of articles) {
-    const categories = article.data.categories || [];
-    for (const cat of categories) {
-      const catSlug = cat.toLowerCase()
+    const tags = article.data.tags || [];
+    for (const tag of tags) {
+      const tagSlug = tag.toLowerCase()
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-|-$/g, '');
-      if (!categoryMap.has(catSlug)) {
-        categoryMap.set(catSlug, { name: cat, articles: [] });
+      if (!tagMap.has(tagSlug)) {
+        tagMap.set(tagSlug, []);
       }
-      categoryMap.get(catSlug)!.articles.push(article);
+      tagMap.get(tagSlug)!.push(article);
     }
   }
 
-  return Array.from(categoryMap.entries()).map(([slug, { name, articles }]) => ({
+  return Array.from(tagMap.entries()).map(([slug, articles]) => ({
     params: { slug },
     props: {
-      category: name,
+      tag: articles[0]?.data.tags?.find((t: string) =>
+        t.toLowerCase()
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-|-$/g, '') === slug
+      ) || slug,
       articles: articles.sort((a, b) =>
         new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
       ),
@@ -33,19 +38,19 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  category: string;
+  tag: string;
   articles: any[];
 }
 
-const { category, articles } = Astro.props;
+const { tag, articles } = Astro.props;
 ---
 
 <BaseLayout
-  title={`${category} – Immobilière Pujol`}
-  description={`Articles dans la catégorie : ${category}`}
+  title={`${tag} – Immobilière Pujol`}
+  description={`Articles sur le thème : ${tag}`}
 >
-  <section class="blog-archive blog-archive--category">
-    <h1>{category}</h1>
+  <section class="blog-archive blog-archive--tag">
+    <h1>{tag}</h1>
     <p class="blog-archive__count">{articles.length} article{articles.length > 1 ? 's' : ''}</p>
 
     <div class="blog-archive__grid">
@@ -58,11 +63,6 @@ const { category, articles } = Astro.props;
             <a href={`/${article.data.slug}/`}>{article.data.title}</a>
           </h2>
           {article.data.excerpt && <p>{article.data.excerpt}</p>}
-          <time datetime={article.data.date}>
-            {new Date(article.data.date).toLocaleDateString('fr-FR', {
-              year: 'numeric', month: 'long', day: 'numeric'
-            })}
-          </time>
         </article>
       ))}
     </div>

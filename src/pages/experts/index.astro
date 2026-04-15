@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// Experts archive — /experts/
+import { getCollection } from 'astro:content';
+
+const experts = await getCollection('experts');
 ---
 
 <BaseLayout
@@ -10,7 +12,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <section class="experts-archive">
     <h1>Nos experts</h1>
     <div class="experts-archive__grid">
-      <!-- Expert cards -->
+      {experts.map((entry) => {
+        const expert = entry.data;
+        const displayName = expert.title.split('|').pop()?.trim() || expert.title;
+        return (
+          <a href={`/experts/${expert.slug}/`} class="expert-card">
+            {expert.photo && (
+              <img src={expert.photo} alt={displayName} loading="lazy" class="expert-card__photo" />
+            )}
+            <h2 class="expert-card__name">{displayName}</h2>
+            {expert.fonction && <p class="expert-card__role">{expert.fonction}</p>}
+          </a>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>

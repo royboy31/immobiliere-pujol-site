@@ -131,6 +131,22 @@ const services = defineCollection({
   }),
 });
 
+// Service landing pages (/service-immobilier/{slug}/)
+const serviceImmobilier = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    subtitle: z.string().optional(),
+    heroImage: z.string().optional(),
+    ctaText: z.string().optional(),
+    parentService: z.string().optional(), // links to one of the 4 main services
+    relatedForm: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+  }),
+});
+
 // Expert profiles
 const experts = defineCollection({
   type: 'data',
@@ -167,6 +183,7 @@ export const collections = {
   annonces,
   articles,
   services,
+  serviceImmobilier,
   experts,
   pages,
 };
