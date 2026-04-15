@@ -1,11 +1,11 @@
 ---
-title: "immobilière pujol nf habitat marseille|meilleur syndic de marseille|immobilière pujol NF habitat"
+title: "immobilière pujol nf habitat marseille"
 slug: "certification-nf-habitat-etre-un-syndic-acteur-engage-quest-ce-que-cela-signifie"
 date: "2021-01-08 17:57:04"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/immobiliere-pujol-nf-habitat-marseille.jpg"
 seoTitle: "Certification NF Habitat - Être un syndic &quot;acteur engagé&quot; c&#039;est à dire ? ?"
-seoDescription: "Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l&#039;occasion de travailler avec nous, vous le savez : nous sommes très engagés et investis dans notre métier."
+seoDescription: "Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l'occasion de travailler avec nous, vous le savez : nous sommes très engagés et investis dans notre métier."
 ---
 
 <p>Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l'occasion de travailler avec nous, vous le savez : <strong>nous sommes très engagés et investis dans notre métier.</strong> <br />

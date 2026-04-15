@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Vaufreges 13009 Marseille"
 slug: "local/gestion-immobiliere-a-vaufreges-13009-marseille"
 date: "2023-08-28 14:54:31"
 ---

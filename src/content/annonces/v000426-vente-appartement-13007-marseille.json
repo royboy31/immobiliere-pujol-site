@@ -1,6 +1,6 @@
 {
   "id": 54555,
-  "title": "B000426_956|B000426_1ED3|B000426_6B9C|B000426_A019|B000426_EC6F",
+  "title": "B000426_1ED3",
   "slug": "v000426-vente-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000426-vente-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "Marseille",
   "quartier": "VIEUX PORT",
-  "prix": 67000.0,
-  "charges": 45.0,
+  "prix": 67000,
+  "charges": 45,
   "honoraires": "0.00",
   "surface": 24.75,
   "surfaceTerrain": 24.75,

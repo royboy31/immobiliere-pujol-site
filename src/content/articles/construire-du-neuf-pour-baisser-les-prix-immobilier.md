@@ -5,7 +5,7 @@ date: "2012-02-11 08:03:30"
 categories: ["L'immobilier neuf à marseille"]
 tags: ["investissement neuf marseille", "Programme immobilier neuf marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/programme-neuf-marseille-cote-7eme-289_TD_05_1_xl.jpg"
-seoTitle: "Construire des immeubles neufs pour faire baisser le prix de l’immobilier à Marseille|Construire des immeubles neufs pour faire baisser le prix de l’immobilier à Marseille"
+seoTitle: "Construire des immeubles neufs pour faire baisser le prix de l’immobilier à Marseille"
 seoDescription: "Aujourd’hui, tous nos hommes politiques pensent à construire du neuf pour faire baisser les prix de l’immobilier sous la pression du lobby des promoteurs, l’objectif est discutable, car cela revient à ruiner les propriétaires, mais le moyen, lui est absurde... Le mieux c’est de rénover les immeubles déjà existants."
 ---
 

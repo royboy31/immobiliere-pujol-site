@@ -1,6 +1,6 @@
 {
   "id": 228322,
-  "title": "LO36210001_248E|LO36210001_248E.JPG|LO36210001_659F.JPG|LO36210001_5C06.JPG|LO36210001_F2A9.JPG|LO36210001_1E8D.JPG|LO36210001_3458.JPG",
+  "title": "LO36210001_248E.JPG",
   "slug": "l002093-location-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002093-location-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "CINQ AVENUES",
-  "prix": 810.0,
-  "charges": 95.0,
+  "prix": 810,
+  "charges": 95,
   "honoraires": "900.25",
   "garantie": "715",
   "surface": 69.25,

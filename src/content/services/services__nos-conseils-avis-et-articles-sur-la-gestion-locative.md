@@ -1,7 +1,7 @@
 ---
-title: "Nos conseils, avis et articles  : Le Blog de l&rsquo;agence &#8211; Immobilière Pujol"
+title: "Nos conseils, avis et articles  : Le Blog de l'agence – Immobilière Pujol"
 slug: "services/nos-conseils-avis-et-articles-sur-la-gestion-locative"
-seoDescription: "Guider vos choix immobiliers La raison d&#039;être de notre agence est de guider vos choix immobiliers, qu&#039;il s&#039;agisse de gestion locative, de la vente d&#039;un bien ou de la gestion d&#039;une copropriété. Les grands groupes immobiliers n&#039;ont ni le temps ni l&#039;intention de vous accompagner tout au long de votre,…"
+seoDescription: "Guider vos choix immobiliers La raison d'être de notre agence est de guider vos choix immobiliers, qu'il s'agisse de gestion locative, de la vente d'un bien ou de la gestion d'une copropriété. Les grands groupes immobiliers n'ont ni le temps ni l'intention de vous accompagner tout au long de votre,…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

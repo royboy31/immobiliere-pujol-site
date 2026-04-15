@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Sainte Marguerite 13009 Marseille"
 slug: "local/gestion-dappartements-a-sainte-marguerite-13009-marseille"
 date: "2023-05-09 15:26:26"
 ---

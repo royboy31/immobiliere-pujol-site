@@ -1,5 +1,5 @@
 ---
-title: "Estimez votre loyer à Marseille &#8211; Immobilière Pujol"
+title: "Estimez votre loyer à Marseille – Immobilière Pujol"
 slug: "services/estimer-votre-loyer"
 seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une équipe de professionnels de la location qui conclue 400 baux par an avec de bons locataires"
 ---

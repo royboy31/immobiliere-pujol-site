@@ -1,7 +1,7 @@
 ---
-title: "Comment changer de syndic de copropriété à Marseille? &#8211; Immobilière Pujol"
+title: "Comment changer de syndic de copropriété à Marseille? – Immobilière Pujol"
 slug: "services/comment-changer-de-syndic-a-marseille"
-seoDescription: "Changez de syndic de copropriété à Marseille est facile. Il vous suffit de lire cette page et de consultez l&#039;immobilière Pujol. Devis en 24h"
+seoDescription: "Changez de syndic de copropriété à Marseille est facile. Il vous suffit de lire cette page et de consultez l'immobilière Pujol. Devis en 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -1,6 +1,6 @@
 {
   "id": 227913,
-  "title": "LO36830002_255510214637|LO36830002_83F3.JPG|LO36830002_7CAC.jpg|LO36830002_B4E7.JPG|LO36830002_E8F8.JPG|LO36830002_F984.JPG|LO36830002_915.JPG|LO36830002_2885.JPG|LO36830002_3799.JPG|LO36830002_561F.JPG",
+  "title": "LO36830002_255510214637",
   "slug": "l002075-location-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002075-location-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "MARSEILLE",
   "quartier": "SAINT TRONC",
-  "prix": 995.0,
-  "charges": 97.0,
+  "prix": 995,
+  "charges": 97,
   "honoraires": "891.15",
   "garantie": "898",
   "surface": 68.55,

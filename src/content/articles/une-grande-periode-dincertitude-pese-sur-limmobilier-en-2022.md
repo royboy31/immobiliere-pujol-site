@@ -5,7 +5,7 @@ date: "2022-01-14 10:09:03"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille", "Mon quartier, ma ville Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/01/Immobilier-a-Marseille-quelles-incertitudes-pour-2022.jpg"
 seoTitle: "2022 : une grande période d&#039;incertitudes - Immobilière Pujol"
-seoDescription: "Qui est capable d&#039;anticiper les conséquences profondes du Covid ? du construire mieux ? Notre article ne se veut pas alarmiste ! Il faut rester bien informé."
+seoDescription: "Qui est capable d'anticiper les conséquences profondes du Covid ? du construire mieux ? Notre article ne se veut pas alarmiste ! Il faut rester bien informé."
 ---
 
 <p>Nous n'allons pas jouer les Cassandre car tous ces articles qui font des prévisions nous laissent perplexes. Comment peut-on aujourd’hui prétendre pouvoir identifier les tendances de ces prochains mois ou années face à tant d’incertitudes ? Face à tant de changements économiques, sociaux et environnementaux ?</p>

@@ -1,12 +1,12 @@
 ---
-title: "vivre-quartier-territoire-nord-marseille-e1497252687975|vivre-quartier-territoire-nord-marseille|grand-littoral-300x116"
+title: "vivre-quartier-territoire-nord-marseille-e1497252687975"
 slug: "vivre-investir-dans-les-quartiers-nord-de-marseille"
 date: "2017-06-15 06:34:43"
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Mon quartier, ma ville Marseille"]
 tags: ["acheter appartement marseile", "conseils investissement immobilier", "investir a marseille", "investir dans l'immobilier", "marseille", "quartier difficile marseille", "quartiers nord"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/vivre-quartier-territoire-nord-marseille-e1497252687975.jpg"
-seoTitle: "Vivre et investir dans les quartiers nord à Marseille - Immobilière Pujol|Vivre et investir dans les quartiers nord à Marseille - Immobilière Pujol"
-seoDescription: "Choisir de vivre ou d'investir dans les quartiers nord à Marseille est un choix difficile et perdant jusqu'à ce jour mais qui...|Choisir de vivre ou d'investir dans les quartiers nord à Marseille est un choix difficile et perdant jusqu'à ce jour mais qui..."
+seoTitle: "Vivre et investir dans les quartiers nord à Marseille - Immobilière Pujol"
+seoDescription: "Choisir de vivre ou d'investir dans les quartiers nord à Marseille est un choix difficile et perdant jusqu'à ce jour mais qui..."
 ---
 
 <h1>Choisir de vivre ou d'investir dans les quartiers nord de Marseille qui ont si mauvaise réputation...</h1>

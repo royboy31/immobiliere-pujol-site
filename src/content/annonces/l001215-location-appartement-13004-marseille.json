@@ -1,6 +1,6 @@
 {
   "id": 90915,
-  "title": "LO31330003_5CD2|LO31330003_5CD2.jpg|LO31330003_5540.jpg|LO31330003_6947.jpg|LO31330003_3AE1.jpg|LO31330003_92BA.jpg|LO31330003_A818.jpg",
+  "title": "LO31330003_5CD2.jpg",
   "slug": "l001215-location-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001215-location-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "CHUTES-LAVIE",
-  "prix": 605.0,
-  "charges": 50.0,
+  "prix": 605,
+  "charges": 50,
   "honoraires": "547.3",
   "garantie": "555",
   "surface": 42.1,

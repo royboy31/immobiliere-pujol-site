@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere Aux Chartreux 13004 Marseille"
 slug: "local/gestion-immobiliere-aux-chartreux-13004-marseille"
 date: "2024-06-10 10:02:13"
 ---

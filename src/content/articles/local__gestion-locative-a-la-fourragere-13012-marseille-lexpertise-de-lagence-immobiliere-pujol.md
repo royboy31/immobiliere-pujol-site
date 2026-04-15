@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Fourragere 13012 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-locative-a-la-fourragere-13012-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 14:37:31"
 ---

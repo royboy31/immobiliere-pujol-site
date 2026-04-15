@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Administrateur De Bien A Montredon 13008 Marseille"
 slug: "local/administrateur-de-bien-a-montredon-13008-marseille"
 date: "2023-12-12 14:55:13"
 ---

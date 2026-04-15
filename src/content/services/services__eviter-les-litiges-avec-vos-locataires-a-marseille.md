@@ -1,7 +1,7 @@
 ---
-title: "Comment diminuer les risques de litiges avec vos locataires à Marseille &#8211; Immobilière Pujol"
+title: "Comment diminuer les risques de litiges avec vos locataires à Marseille – Immobilière Pujol"
 slug: "services/eviter-les-litiges-avec-vos-locataires-a-marseille"
-seoDescription: "Ce que nous faisons pour diminuer les risques liés à la location. Comment nous le faisons. Consultez l&#039;immobilière Pujol, agence de location et gestion parmi les plus recommandée à Marseille"
+seoDescription: "Ce que nous faisons pour diminuer les risques liés à la location. Comment nous le faisons. Consultez l'immobilière Pujol, agence de location et gestion parmi les plus recommandée à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

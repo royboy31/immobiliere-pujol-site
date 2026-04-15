@@ -1,5 +1,5 @@
 ---
-title: "Emma gestionnaire de copropriete marseille|travaux en copropriete supprimer un plancher|travaux en copropritété à marseile reconstruire un plancher"
+title: "Emma gestionnaire de copropriete marseille"
 slug: "trop-fiere-mon-premier-immeuble-sorti-de-peril-sauver-un-immeuble-apprendre-un-metier"
 date: "2025-02-12 19:44:25"
 categories: ["L'équipe", "Le marché immobilier à marseille"]

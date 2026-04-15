@@ -1,7 +1,7 @@
 ---
-title: "Property management, a question of expertise &#8211; Immobilière Pujol"
+title: "Property management, a question of expertise – Immobilière Pujol"
 slug: "services/property-management-question-expertise"
-seoDescription: "Property management is not for everyone. It&#039;s exciting work, but also complex and challenging. There are many human and emotional aspects, presenting a constant challenge. It&#039;s a hands-on job. We manage all aspects of co-ownership properties: reception staff, cleaners, refuse sorting and disposal, maintenance of green areas, fire detection, heating,…"
+seoDescription: "Property management is not for everyone. It's exciting work, but also complex and challenging. There are many human and emotional aspects, presenting a constant challenge. It's a hands-on job. We manage all aspects of co-ownership properties: reception staff, cleaners, refuse sorting and disposal, maintenance of green areas, fire detection, heating,…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

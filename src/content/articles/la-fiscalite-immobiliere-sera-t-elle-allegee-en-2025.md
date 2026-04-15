@@ -1,5 +1,5 @@
 ---
-title: "BAISSE de l fisclaite immobiliere en 2025|fiscalite de l'immobilier"
+title: "BAISSE de l fisclaite immobiliere en 2025"
 slug: "la-fiscalite-immobiliere-sera-t-elle-allegee-en-2025"
 date: "2023-11-30 06:22:41"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

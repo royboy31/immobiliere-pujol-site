@@ -1,5 +1,5 @@
 ---
-title: "13002 vieille charité|prix au m2 dans le neuf en 2018 dans 13002|prix au m2 de l'immobilier neuf dans le 13002 en 2018"
+title: "13002 vieille charité"
 slug: "prix-immobilier-neuf-13002-2018"
 date: "2019-06-28 08:00:05"
 categories: ["L'immobilier neuf à marseille", "Prix au m2 par arrondissement à Marseille"]

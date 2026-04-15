@@ -1,5 +1,5 @@
 ---
-title: "Our advisory and transactions service &#8211; Immobilière Pujol"
+title: "Our advisory and transactions service – Immobilière Pujol"
 slug: "services/advisory-transactions-service"
 seoDescription: "We support you in your investment plans and help you better distribute your resources - in either traditional or innovative ways - and to achieve the best possible added value on the sale of your property (our average sale time is 45 days!). We are familiar with the local and…"
 ---

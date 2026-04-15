@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Syndic De Copropriete Marseille/Merci Pour Votre Demande Pour Les Honoraires De Syndic"
 slug: "syndic-de-copropriete-marseille/merci-pour-votre-demande-pour-les-honoraires-de-syndic"
 date: "2019-07-30 09:19:30"
 ---

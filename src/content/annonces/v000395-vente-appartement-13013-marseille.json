@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "ST JUST|ST JUST|ST JUST",
   "honoraires": "7.50|7.50|7.50",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "1|1|1",
   "nbEtages": "1|1|1",
@@ -35,6 +35,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre St Just, Marseille, France|Appartement 3 pièces à vendre St Just, Marseille, France|Appartement 3 pièces à vendre St Just, Marseille, France",
-  "seoDescription": "EXCLUSIVITE T3 de 55m² avec jardinet à rénover situé dans une résidence sécurisée, calme, à l&rsquo;ambiance &lsquo;village&rsquo;. Ce t3 lumineux, au 1er &#8230;|EXCLUSIVITE T3 de 55m² avec jardinet à rénover situé dans une résidence sécurisée, calme, à l&rsquo;ambiance &lsquo;village&rsquo;. Ce t3 lumineux, au 1er &#8230;|EXCLUSIVITE T3 de 55m² avec jardinet à rénover situé dans une résidence sécurisée, calme, à l&rsquo;ambiance &lsquo;village&rsquo;. Ce t3 lumineux, au 1er &#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre St Just, Marseille, France",
+  "seoDescription": "EXCLUSIVITE T3 de 55m² avec jardinet à rénover situé dans une résidence sécurisée, calme, à l&rsquo;ambiance &lsquo;village&rsquo;. Ce t3 lumineux, au 1er &#8230;"
 }

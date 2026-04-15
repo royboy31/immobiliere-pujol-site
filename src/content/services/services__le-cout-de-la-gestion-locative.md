@@ -1,7 +1,7 @@
 ---
-title: "Combien coûte la gestion locative d&rsquo;un bien ? &#8211; Immobilière Pujol"
+title: "Combien coûte la gestion locative d'un bien ? – Immobilière Pujol"
 slug: "services/le-cout-de-la-gestion-locative"
-seoDescription: "Le coût d&#039;une gestion locative à partir de 4% HT, ou 25€ par mois. Recevez l&#039;offre de l&#039;Immobilière Pujol en moins de 24h. Notre agence est parmi les plus recommandées par ses clients"
+seoDescription: "Le coût d'une gestion locative à partir de 4% HT, ou 25€ par mois. Recevez l'offre de l'Immobilière Pujol en moins de 24h. Notre agence est parmi les plus recommandées par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

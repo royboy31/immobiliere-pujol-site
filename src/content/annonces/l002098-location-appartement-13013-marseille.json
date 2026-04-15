@@ -1,6 +1,6 @@
 {
   "id": 228459,
-  "title": "LO37090001_3CB3.JPG|LO37090001_6347.JPG|LO37090001_C68D.JPG|LO37090001_BAD4.JPG|LO37090001_AEDD.JPG|LO37090001_9671.JPG|LO37090001_80C4.JPG|LO37090001_8C2F.JPG|LO37090001_7171.JPG",
+  "title": "LO37090001_3CB3.JPG",
   "slug": "l002098-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002098-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "LA ROSE",
-  "prix": 595.0,
-  "charges": 50.0,
+  "prix": 595,
+  "charges": 50,
   "honoraires": "360",
   "garantie": "545",
   "surface": 43.8,

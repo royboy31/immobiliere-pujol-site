@@ -12,7 +12,7 @@
   "codePostal": "13009|13009|13009",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CABOT|CABOT|CABOT",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesEau": 0,
   "etage": "5|5|5",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.38.21|04.91.37.38.21|04.91.37.38.21",
   "emailAAfficher": "nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre Cabot, Marseille, France|Appartement 1 pièce à vendre Cabot, Marseille, France|Appartement 1 pièce à vendre Cabot, Marseille, France",
-  "seoDescription": "Studio de 25 m² au calme et au soleil avec terrasse de 100m² environ, une cave et un parking situé dans la résidence de l&rsquo;allée des pins 13009 Marsei&#8230;|Studio de 25 m² au calme et au soleil avec terrasse de 100m² environ, une cave et un parking situé dans la résidence de l&rsquo;allée des pins 13009 Marsei&#8230;|Studio de 25 m² au calme et au soleil avec terrasse de 100m² environ, une cave et un parking situé dans la résidence de l&rsquo;allée des pins 13009 Marsei&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre Cabot, Marseille, France",
+  "seoDescription": "Studio de 25 m² au calme et au soleil avec terrasse de 100m² environ, une cave et un parking situé dans la résidence de l&rsquo;allée des pins 13009 Marsei&#8230;"
 }

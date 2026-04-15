@@ -1,7 +1,7 @@
 ---
-title: "Comment estimer le prix d&rsquo;un loyer à Marseille ? &#8211; Immobilière Pujol"
+title: "Comment estimer le prix d'un loyer à Marseille ? – Immobilière Pujol"
 slug: "services/comment-nous-estimons-le-prix-de-votre-loyer-sur-marseille"
-seoDescription: "Parce qu&#039;un loyer correctement fixé attire les bons locataires, faites estimer votre loyer par l&#039;Immobilière Pujol qui professionnels louer plus de  400 biens par an"
+seoDescription: "Parce qu'un loyer correctement fixé attire les bons locataires, faites estimer votre loyer par l'Immobilière Pujol qui professionnels louer plus de  400 biens par an"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -1,6 +1,6 @@
 {
   "id": 1360694,
-  "title": "||||||||||||||||||||||||||",
+  "title": "",
   "slug": "ljvap120009728-13010-marseille-france-4",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/ljvap120009728-13010-marseille-france-4/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "50 Boulevard De La Testanière, 13010, Marseille 10eme Arrondissement, France",
-  "prix": 765.0,
-  "charges": 75.0,
+  "prix": 765,
+  "charges": 75,
   "honoraires": "571.12",
   "garantie": "690",
   "surface": 36.28,

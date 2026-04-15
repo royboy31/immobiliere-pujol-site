@@ -1,6 +1,6 @@
 {
   "id": 38773,
-  "title": "LO01970009_87FE10430436|LO01970009_23DA.JPG|LO01970009_1169.JPG|LO01970009_19C7.JPG|LO01970009_F12E.JPG|LO01970009_2F64.JPG|LO01970009_4484.JPG|LO01970009_53D6.JPG|LO01970009_65AA.JPG",
+  "title": "LO01970009_87FE10430436",
   "slug": "l001897-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001897-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "ST CHARLES",
-  "prix": 872.0,
-  "charges": 50.0,
+  "prix": 872,
+  "charges": 50,
   "honoraires": "923.78",
   "garantie": "822",
   "surface": 71.06,

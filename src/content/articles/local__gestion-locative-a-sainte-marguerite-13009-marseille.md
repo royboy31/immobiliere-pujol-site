@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Sainte Marguerite 13009 Marseille"
 slug: "local/gestion-locative-a-sainte-marguerite-13009-marseille"
 date: "2023-05-09 14:35:55"
 ---

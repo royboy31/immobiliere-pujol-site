@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Vauban 13006 Marseille"
 slug: "local/gestion-de-bien-a-vauban-13006-marseille"
 date: "2023-05-09 14:51:42"
 ---

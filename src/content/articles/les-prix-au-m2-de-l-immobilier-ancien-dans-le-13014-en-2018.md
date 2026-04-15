@@ -1,5 +1,5 @@
 ---
-title: "Les prix au m2 de l'immobilier ancien dans le 13014 en 2018|13014|13014"
+title: "Les prix au m2 de l'immobilier ancien dans le 13014 en 2018"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13014-en-2018"
 date: "2019-05-19 08:04:53"
 categories: ["Prix au m2 par arrondissement à Marseille"]

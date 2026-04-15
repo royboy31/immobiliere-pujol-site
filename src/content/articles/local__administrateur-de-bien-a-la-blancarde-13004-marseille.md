@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Administrateur De Bien A La Blancarde 13004 Marseille"
 slug: "local/administrateur-de-bien-a-la-blancarde-13004-marseille"
 date: "2023-05-09 15:20:19"
 ---

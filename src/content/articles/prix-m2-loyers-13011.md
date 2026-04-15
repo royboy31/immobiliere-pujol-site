@@ -1,11 +1,11 @@
 ---
-title: "La_Treille-village32|11 ème arrondissement loyer 2018"
+title: "La_Treille-village32"
 slug: "prix-m2-loyers-13011"
 date: "2020-02-06 10:37:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/La_Treille-village32.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13011 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13011.   La durée d&#039;occupation moyenne est de 60 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13011.   La durée d'occupation moyenne est de 60 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

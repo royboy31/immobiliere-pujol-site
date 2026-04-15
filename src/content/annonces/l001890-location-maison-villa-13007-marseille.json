@@ -1,6 +1,6 @@
 {
   "id": 38745,
-  "title": "LO36030001_4E79.jpg|LO36030001_2207.jpg|LO36030001_3BD9.jpg|LO36030001_4540.jpg|LO36030001_58CA.jpg|LO36030001_6781.jpg|LO36030001_7722.jpg",
+  "title": "LO36030001_4E79.jpg",
   "slug": "l001890-location-maison-villa-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001890-location-maison-villa-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "TELLENE",
-  "prix": 2000.0,
-  "charges": 0.0,
+  "prix": 2000,
+  "charges": 0,
   "honoraires": "1272.96",
   "garantie": "4000",
   "surface": 97.92,

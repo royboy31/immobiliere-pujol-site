@@ -1,6 +1,6 @@
 {
   "id": 89599,
-  "title": "{\"discarded_img\":0,\"scene\":2}|LO11440012_2D7|LO11440012_C843|LO11440012_EA74|LO11440012_F2CE|LO11440012_FAEA",
+  "title": "{\"discarded_img\":0,\"scene\":2}",
   "slug": "l000584-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000584-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "NOAILLES",
-  "prix": 650.0,
-  "charges": 35.0,
+  "prix": 650,
+  "charges": 35,
   "honoraires": "666.77",
   "garantie": "1230",
   "surface": 51.48,

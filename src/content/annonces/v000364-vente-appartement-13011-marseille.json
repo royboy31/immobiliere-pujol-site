@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "LA POMME|LA POMME|LA POMME",
   "honoraires": "7.20|7.20|7.20",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "6|6|6",
   "nbEtages": "10|10|10",
@@ -35,6 +35,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 4 pièces à vendre La Pomme, Marseille, France|Appartement 4 pièces à vendre La Pomme, Marseille, France|Appartement 4 pièces à vendre La Pomme, Marseille, France",
-  "seoDescription": "ECLUSIVITE , T4 de 68m² avec balcon et garage situé bd Mireille Lauze.Cet appartement, au 6ème étage avec ascenseur, se compose d&rsquo;un hall d&rsquo;ent&#8230;|ECLUSIVITE , T4 de 68m² avec balcon et garage situé bd Mireille Lauze.Cet appartement, au 6ème étage avec ascenseur, se compose d&rsquo;un hall d&rsquo;ent&#8230;|ECLUSIVITE , T4 de 68m² avec balcon et garage situé bd Mireille Lauze.Cet appartement, au 6ème étage avec ascenseur, se compose d&rsquo;un hall d&rsquo;ent&#8230;"
+  "seoTitle": "Appartement 4 pièces à vendre La Pomme, Marseille, France",
+  "seoDescription": "ECLUSIVITE , T4 de 68m² avec balcon et garage situé bd Mireille Lauze.Cet appartement, au 6ème étage avec ascenseur, se compose d&rsquo;un hall d&rsquo;ent&#8230;"
 }

@@ -1,11 +1,11 @@
 ---
-title: "2020 dans l'immobiliere Marseille ancien et neuf2|2020 dans l'immobiliere Marseille ancien et neuf2|2020 dans l'immobiliere Marseille ancien et neuf3"
+title: "2020 dans l'immobiliere Marseille ancien et neuf2"
 slug: "une-nouvelle-decennie-immobiliere-a-marseille"
 date: "2020-01-26 06:03:39"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/01/2020-dans-limmobiliere-Marseille-ancien-et-neuf2-1.jpg"
 seoTitle: "Une nouvelle décennies immobilière à Marseille"
-seoDescription: "L&#039;épargne sans risque n&#039;existe plus. Soyez entreprenant, raisonné et pragmatique pour cette décennie d&#039;investissement immobilier"
+seoDescription: "L'épargne sans risque n'existe plus. Soyez entreprenant, raisonné et pragmatique pour cette décennie d'investissement immobilier"
 ---
 
 <!-- wp:heading -->

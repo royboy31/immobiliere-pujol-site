@@ -1,5 +1,5 @@
 ---
-title: "travaux d'investissement locatif|travaux entretien logement|travaux nvestissement|travaux renovation energetiques||retouche photo (21)"
+title: "travaux d'investissement locatif"
 slug: "evolution-des-loyers-a-marseille"
 date: "2025-03-17 11:20:04"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

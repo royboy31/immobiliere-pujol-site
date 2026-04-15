@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative Dans Le 13004 A Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-locative-dans-le-13004-a-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 14:37:58"
 ---

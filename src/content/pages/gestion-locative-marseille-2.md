@@ -1,9 +1,9 @@
 ---
-title: ""
+title: "Pour vous aider à gérer à louer à Marseille Immobilière Pujol"
 slug: "gestion-locative-marseille-2"
 date: "2018-11-26 10:47:01"
 seoTitle: "Pour vous aider à gérer à louer à Marseille Immobilière Pujol"
-seoDescription: "Vous avez besoin d&#039;aide en gestion locative ou en location à Marseille. Consultez l&#039;immobilière Pujol"
+seoDescription: "Vous avez besoin d'aide en gestion locative ou en location à Marseille. Consultez l'immobilière Pujol"
 ---
 
 <h1>Gestion locative Marseille – Faire louer en toute sérénité</h1>

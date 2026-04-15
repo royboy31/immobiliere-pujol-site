@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Jean Du Desert 13012 Marseille"
 slug: "local/gestion-de-bien-a-saint-jean-du-desert-13012-marseille"
 date: "2023-05-09 14:56:00"
 ---

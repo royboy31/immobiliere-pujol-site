@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Contactez le syndic Immobiliere Pujol"
 slug: "syndic-de-copropriete-marseille/merci-pour-votre-demande-de-devis-en-gestion-locative"
 date: "2019-07-30 09:25:41"
 seoTitle: "Contactez le syndic Immobiliere Pujol"

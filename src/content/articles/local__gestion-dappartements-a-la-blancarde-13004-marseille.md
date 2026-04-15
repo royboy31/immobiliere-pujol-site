@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A La Blancarde 13004 Marseille"
 slug: "local/gestion-dappartements-a-la-blancarde-13004-marseille"
 date: "2024-01-04 13:17:28"
 ---

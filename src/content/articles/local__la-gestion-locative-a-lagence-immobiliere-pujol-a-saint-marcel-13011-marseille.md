@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/La Gestion Locative A Lagence Immobiliere Pujol A Saint Marcel 13011 Marseille"
 slug: "local/la-gestion-locative-a-lagence-immobiliere-pujol-a-saint-marcel-13011-marseille"
 date: "2023-05-09 14:41:56"
 ---

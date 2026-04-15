@@ -1,7 +1,7 @@
 ---
-title: "Une agence pour la location de votre appartement à Marseille &#8211; Immobilière Pujol"
+title: "Une agence pour la location de votre appartement à Marseille – Immobilière Pujol"
 slug: "services/agence-location-appartement-marseille"
-seoDescription: "Une Agence Pour La Location De Votre Appartement à Marseille. Une agence recommandée par ses clients. Consultez l&#039;Immobilière Pujol"
+seoDescription: "Une Agence Pour La Location De Votre Appartement à Marseille. Une agence recommandée par ses clients. Consultez l'Immobilière Pujol"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

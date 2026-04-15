@@ -1,7 +1,7 @@
 ---
-title: "Comment calculer les honoraires du syndic pour la gestion de votre copropriété ? &#8211; Immobilière Pujol"
+title: "Comment calculer les honoraires du syndic pour la gestion de votre copropriété ? – Immobilière Pujol"
 slug: "services/comment-calculer-le-cout-de-gestion-de-copropriete"
-seoDescription: "Evaluez les honoraires de gestion d&#039;un syndic de copropriété à Marseille. Consultez un syndic recommandé par ses clients"
+seoDescription: "Evaluez les honoraires de gestion d'un syndic de copropriété à Marseille. Consultez un syndic recommandé par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

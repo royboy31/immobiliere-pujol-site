@@ -1,6 +1,6 @@
 {
   "id": 1224345,
-  "title": "|||||||||||||||||||",
+  "title": "",
   "slug": "l250596-51-rue-pierre-dupre-perier-13008-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250596-51-rue-pierre-dupre-perier-13008-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "328 Boulevard Du Redon, 13009, Marseille 9eme Arrondissement, France",
-  "prix": 600.0,
-  "charges": 40.0,
+  "prix": 600,
+  "charges": 40,
   "honoraires": "442.8",
   "garantie": "560",
   "surface": 34.08,

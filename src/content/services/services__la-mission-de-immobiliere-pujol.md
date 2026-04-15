@@ -1,7 +1,7 @@
 ---
-title: "La mission de l&rsquo;Immobilière Pujol &#8211; Immobilière Pujol"
+title: "La mission de l'Immobilière Pujol – Immobilière Pujol"
 slug: "services/la-mission-de-immobiliere-pujol"
-seoDescription: "L&#039;Immobilière Pujol est une entreprise qui incarne l&#039;éthique, l&#039;égalité et le développement durable dans le secteur immobilier à Marseille. Engagés envers la responsabilité sociale, nous offrons des services de qualité tout en contribuant au logement et à la fluidité du marché. Avec intégrité et engagement, nous croyons en la création de belles expériences immobilières pour nos clients."
+seoDescription: "L'Immobilière Pujol est une entreprise qui incarne l'éthique, l'égalité et le développement durable dans le secteur immobilier à Marseille. Engagés envers la responsabilité sociale, nous offrons des services de qualité tout en contribuant au logement et à la fluidité du marché. Avec intégrité et engagement, nous croyons en la création de belles expériences immobilières pour nos clients."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

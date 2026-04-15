@@ -12,7 +12,7 @@
   "codePostal": "13006|13006|13006",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CASTELLANE|CASTELLANE|CASTELLANE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesEau": 0,
   "etage": "2|2|2",
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce produit d'investissement Castellane, Marseille, France|Appartement 1 pièce produit d'investissement Castellane, Marseille, France|Appartement 1 pièce produit d'investissement Castellane, Marseille, France",
-  "seoDescription": "Appartement de type 1/2 à rénover situé au 2e étage sans ascenseur dans un immeuble ancien Oprès de la place Castellabe. L&rsquo;appartement fait 32m² et s&#8230;|Appartement de type 1/2 à rénover situé au 2e étage sans ascenseur dans un immeuble ancien Oprès de la place Castellabe. L&rsquo;appartement fait 32m² et s&#8230;|Appartement de type 1/2 à rénover situé au 2e étage sans ascenseur dans un immeuble ancien Oprès de la place Castellabe. L&rsquo;appartement fait 32m² et s&#8230;"
+  "seoTitle": "Appartement 1 pièce produit d'investissement Castellane, Marseille, France",
+  "seoDescription": "Appartement de type 1/2 à rénover situé au 2e étage sans ascenseur dans un immeuble ancien Oprès de la place Castellabe. L&rsquo;appartement fait 32m² et s&#8230;"
 }

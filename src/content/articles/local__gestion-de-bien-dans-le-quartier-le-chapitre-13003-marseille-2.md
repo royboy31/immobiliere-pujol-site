@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le Quartier Le Chapitre 13003 Marseille 2"
 slug: "local/gestion-de-bien-dans-le-quartier-le-chapitre-13003-marseille-2"
 date: "2023-05-09 15:13:09"
 ---

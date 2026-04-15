@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Croix Rouge 13013 Marseille"
 slug: "local/gestion-locative-a-la-croix-rouge-13013-marseille"
 date: "2023-05-09 14:38:38"
 ---

@@ -1,11 +1,11 @@
 ---
-title: "immobilier marseille 2023 2024|contactez-nous"
+title: "immobilier marseille 2023 2024"
 slug: "limmobilier-a-marseille-un-marche-dans-une-grande-en-transition"
 date: "2023-09-13 07:43:52"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/immobilier-marseille-2023-2024-scaled.jpg"
 seoTitle: "Le marché immobilier à Marseille en 2023/2024"
-seoDescription: "Le marché immobilier marseillais est dans une phase de transition que ce soit en transaction ou en location. A quoi faut-il s&#039;attendre fin 2023 et en 2024? L&#039;immobilière Pujol vous livre son analyse"
+seoDescription: "Le marché immobilier marseillais est dans une phase de transition que ce soit en transaction ou en location. A quoi faut-il s'attendre fin 2023 et en 2024? L'immobilière Pujol vous livre son analyse"
 ---
 
 <p>Le marché immobilier à Marseille est en pleine transition.</p>

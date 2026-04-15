@@ -1,5 +1,5 @@
 ---
-title: "immeuble peril marseille|aileen syndic a marseille|aileen syndic a marseille|aileen syndic a marseille"
+title: "immeuble peril marseille"
 slug: "sortir-un-immeuble-du-peril"
 date: "2025-06-06 10:10:29"
 categories: ["Le marché immobilier à marseille"]

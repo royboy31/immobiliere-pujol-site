@@ -1,6 +1,6 @@
 {
   "id": 230115,
-  "title": "LO29160009_44512290858|LO29160009_A6DE.JPG|LO29160009_924.JPG|LO29160009_317D.JPG|LO29160009_4608.JPG|LO29160009_4498.JPG",
+  "title": "LO29160009_44512290858",
   "slug": "l002143-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002143-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "LES OLIVES",
-  "prix": 925.0,
-  "charges": 20.0,
+  "prix": 925,
+  "charges": 20,
   "honoraires": "814.84",
   "garantie": "905",
   "surface": 62.68,

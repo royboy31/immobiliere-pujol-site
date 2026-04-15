@@ -1,6 +1,6 @@
 {
   "id": 227775,
-  "title": "LO11580003_EA1D|LO11580003_EA1D.jpg|LO11580003_FAE7.jpg|LO11580003_325.jpg|LO11580003_BF0.jpg|LO11580003_1671.jpg",
+  "title": "LO11580003_EA1D.jpg",
   "slug": "l002071-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002071-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "CONCEPTION",
-  "prix": 485.0,
-  "charges": 25.0,
+  "prix": 485,
+  "charges": 25,
   "honoraires": "472.94",
   "garantie": "460",
   "surface": 36.38,

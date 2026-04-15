@@ -1,5 +1,5 @@
 ---
-title: "De quoi dépend le niveau des charges de copropriété? &#8211; Immobilière Pujol"
+title: "De quoi dépend le niveau des charges de copropriété? – Immobilière Pujol"
 slug: "services/bien-se-renseigner-sur-les-couts-de-syndic-de-copropriete-a-marseille"
 seoDescription: "OPTIMISEZ vos charges et faites gérer votre copropriété par un syndic qui renégocie vos contrats et fait baisser les prix des charges de copropriété"
 ---

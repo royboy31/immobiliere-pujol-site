@@ -1,12 +1,12 @@
 ---
-title: "comment faire de belles photos immobilieres|photo immobiliere|loc meuble castellane marseille|location meuble standing castellane (Copy)"
+title: "comment faire de belles photos immobilieres"
 slug: "photos-montrent-qualite-appartements-a-louer"
 date: "2017-02-08 14:07:57"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 tags: ["acheter un appartement", "annonces immobilières marseille", "louer un appartement", "photos annonces immobilières"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/02/location-meuble-wifi-castellane-scaled.jpg"
 seoTitle: "Pourquoi mettre les photos qui montrent la qualité des appartements à louer ou à vendre dans les annonces?"
-seoDescription: "90% des premiers contacts avec un bien immobilier se font via Internet. Et donc forcément grâce aux photos des annonces immobilières. Selon l’étude, 76% des visiteurs s’attardent sur la description de l’annonce juste après avoir vu les photos...|90% des premiers contacts avec un bien immobilier se font via Internet. Et donc forcément grâce aux photos des annonces immobilières. Selon l’étude, 76% des visiteurs s’attardent sur la description de l’annonce juste après avoir vu les photos..."
+seoDescription: "90% des premiers contacts avec un bien immobilier se font via Internet. Et donc forcément grâce aux photos des annonces immobilières. Selon l’étude, 76% des visiteurs s’attardent sur la description de l’annonce juste après avoir vu les photos..."
 ---
 
 <p><img class="alignnone size-medium wp-image-386404" src="https://www.immobiliere-pujol.fr/content/uploads/2017/02/location-meuble-wifi-castellane-800x534.jpg" alt="" width="800" height="534" />La quasi-totalité des premiers contacts avec un bien immobilier se fait par le biais d’internet. Ce qui veut dire par l’annonce.<br />

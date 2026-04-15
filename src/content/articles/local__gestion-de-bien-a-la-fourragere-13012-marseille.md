@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A La Fourragere 13012 Marseille"
 slug: "local/gestion-de-bien-a-la-fourragere-13012-marseille"
 date: "2023-05-09 14:56:15"
 ---

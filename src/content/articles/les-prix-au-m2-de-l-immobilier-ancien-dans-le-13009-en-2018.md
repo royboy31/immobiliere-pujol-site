@@ -1,5 +1,5 @@
 ---
-title: "prix immobilier ancien 13009|immobilier ancien 2018 marseille 13009|mazargues-13009|13009"
+title: "prix immobilier ancien 13009"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13009-en-2018"
 date: "2019-05-30 09:20:56"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -1,5 +1,5 @@
 ---
-title: "Les loyers dans le 13006 à Marseille entre 2014 et 2018|Les loyers dans le 13006 à Marseille entre 2014 et 2018|Les loyers dans le 13006 à Marseille entre 2014 et 2018"
+title: "Les loyers dans le 13006 à Marseille entre 2014 et 2018"
 slug: "les-loyers-dans-le-13006-a-marseille-entre-2014-et-2018"
 date: "2019-06-14 07:05:01"
 categories: ["Prix au m2 par arrondissement à Marseille"]

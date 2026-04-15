@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Vauban 13006 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-immobiliere-a-vauban-13006-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-09 15:15:48"
 ---

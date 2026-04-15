@@ -1,7 +1,7 @@
 ---
-title: "L&rsquo;agence de location immobilière Pujol à Marseille &#8211; Immobilière Pujol"
+title: "L'agence de location immobilière Pujol à Marseille – Immobilière Pujol"
 slug: "services/lagence-de-location-immobiliere-pujol-a-marseille"
-seoDescription: "Contactez l&#039;agence de location la plus recommandée par ses clients, Immobilière Pujol  Proposition commerciale en 24h"
+seoDescription: "Contactez l'agence de location la plus recommandée par ses clients, Immobilière Pujol  Proposition commerciale en 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

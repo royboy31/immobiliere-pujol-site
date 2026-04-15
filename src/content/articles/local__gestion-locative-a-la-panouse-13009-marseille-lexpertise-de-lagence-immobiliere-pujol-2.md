@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Panouse 13009 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-locative-a-la-panouse-13009-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-09 14:35:44"
 ---

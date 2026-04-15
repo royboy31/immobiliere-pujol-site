@@ -1,7 +1,7 @@
 ---
-title: "Ce que nous ferons pour louer rapidement votre appartement à Marseille &#8211; Immobilière Pujol"
+title: "Ce que nous ferons pour louer rapidement votre appartement à Marseille – Immobilière Pujol"
 slug: "services/ce-que-nous-ferons-pour-louer-rapidement-votre-appartement"
-seoDescription: "Nous louons en moins de 35 jours les appartements qui nous sont confiés. Nous vous présentons le dossier pour avoir votre accord. Recevez la proposition de l&#039;Immobilière Pujol en moins de 24h"
+seoDescription: "Nous louons en moins de 35 jours les appartements qui nous sont confiés. Nous vous présentons le dossier pour avoir votre accord. Recevez la proposition de l'Immobilière Pujol en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

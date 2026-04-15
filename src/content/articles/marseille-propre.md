@@ -1,5 +1,5 @@
 ---
-title: "la propreté a marseille|marseille propre 2|marseille propre|marseille sale"
+title: "la propreté a marseille"
 slug: "marseille-propre"
 date: "2018-05-22 07:20:25"
 categories: ["Mon quartier, ma ville Marseille"]

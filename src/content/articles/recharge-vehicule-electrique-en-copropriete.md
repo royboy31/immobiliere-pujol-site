@@ -1,11 +1,11 @@
 ---
-title: "borne recharge voiture copropriete|Le raccordement à un compteur dédié aux bornes de recharge|Le raccordement à une colonne électrique dédiée|Le raccordement à une colonne électrique dédiée|Le raccordement au compteur électrique de la copropriété|exper gestionnaire copro marseille"
+title: "borne recharge voiture copropriete"
 slug: "recharge-vehicule-electrique-en-copropriete"
 date: "2023-05-02 08:16:37"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/05/borne-recharge-voiture-copropriete-scaled.jpg"
 seoTitle: "Recharge des véhicules électriques en copropriété : que faut il installer ?"
-seoDescription: "Réponses d&#039;un gestionnaire de copropriété à Marseille à toutes les questions que les copropriétaires se posent sur la pose de bornes individuelles de recharges pour les véhicules électriques (IRVE)"
+seoDescription: "Réponses d'un gestionnaire de copropriété à Marseille à toutes les questions que les copropriétaires se posent sur la pose de bornes individuelles de recharges pour les véhicules électriques (IRVE)"
 ---
 
 <p><br />

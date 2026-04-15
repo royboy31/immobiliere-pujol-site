@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Rouviere 13009 Marseille"
 slug: "local/gestion-locative-a-la-rouviere-13009-marseille"
 date: "2023-05-09 14:32:46"
 ---

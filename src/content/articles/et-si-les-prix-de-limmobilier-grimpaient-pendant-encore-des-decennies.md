@@ -1,5 +1,5 @@
 ---
-title: "Hausse des prix de l'immobilier à Marseille|Indice de prix, nombre et montant des ventes de logements anciens et indice des loyers"
+title: "Hausse des prix de l'immobilier à Marseille"
 slug: "et-si-les-prix-de-limmobilier-grimpaient-pendant-encore-des-decennies"
 date: "2021-10-08 14:44:58"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]

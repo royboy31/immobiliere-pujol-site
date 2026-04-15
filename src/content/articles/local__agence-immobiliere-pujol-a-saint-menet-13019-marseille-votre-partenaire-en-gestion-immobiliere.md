@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Agence Immobiliere Pujol A Saint Menet 13019 Marseille Votre Partenaire En Gestion Immobiliere"
 slug: "local/agence-immobiliere-pujol-a-saint-menet-13019-marseille-votre-partenaire-en-gestion-immobiliere"
 date: "2023-05-09 15:48:18"
 ---

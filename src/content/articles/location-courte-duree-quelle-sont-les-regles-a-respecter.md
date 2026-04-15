@@ -1,5 +1,5 @@
 ---
-title: "regles location courte duree|louer en airbnb regles|location courte duree marseille|legislation location courte duree"
+title: "regles location courte duree"
 slug: "location-courte-duree-quelle-sont-les-regles-a-respecter"
 date: "2021-01-27 09:42:11"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

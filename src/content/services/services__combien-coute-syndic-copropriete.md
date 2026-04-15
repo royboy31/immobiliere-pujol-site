@@ -1,7 +1,7 @@
 ---
-title: "Combien coûte un syndic de copropriété à Marseille? &#8211; Immobilière Pujol"
+title: "Combien coûte un syndic de copropriété à Marseille? – Immobilière Pujol"
 slug: "services/combien-coute-syndic-copropriete"
-seoDescription: "Les honoraires du syndic à Marseille varient entre 150€ et 300€ le lot. Demandez un Devis à l&#039;Immobilière Pujol, le syndic le plus recommandé par ses clients"
+seoDescription: "Les honoraires du syndic à Marseille varient entre 150€ et 300€ le lot. Demandez un Devis à l'Immobilière Pujol, le syndic le plus recommandé par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

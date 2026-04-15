@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Saint Barnabe 13012 Marseille 2"
 slug: "local/gestion-immobiliere-a-saint-barnabe-13012-marseille-2"
 date: "2023-05-09 15:36:45"
 ---

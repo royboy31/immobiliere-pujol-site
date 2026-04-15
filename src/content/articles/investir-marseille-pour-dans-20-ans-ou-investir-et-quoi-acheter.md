@@ -1,5 +1,5 @@
 ---
-title: "marseille-398881_1920|ou-investir-marseille"
+title: "marseille-398881_1920"
 slug: "investir-marseille-pour-dans-20-ans-ou-investir-et-quoi-acheter"
 date: "2017-12-30 07:30:40"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "JOLIETTE|JOLIETTE|JOLIETTE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "etage": "5|5|5",
   "nbEtages": "6|6|6",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Joliette, Marseille, France|Appartement 2 pièces à vendre Joliette, Marseille, France|Appartement 2 pièces à vendre Joliette, Marseille, France",
-  "seoDescription": "En exclusvité, Type 2 à rénover situé à 50m de la place de la Joliette dans un bel immeuble bourgeois bien entretenu. Cet appartement se trouve au 5 étage &#8230;|En exclusvité, Type 2 à rénover situé à 50m de la place de la Joliette dans un bel immeuble bourgeois bien entretenu. Cet appartement se trouve au 5 étage &#8230;|En exclusvité, Type 2 à rénover situé à 50m de la place de la Joliette dans un bel immeuble bourgeois bien entretenu. Cet appartement se trouve au 5 étage &#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Joliette, Marseille, France",
+  "seoDescription": "En exclusvité, Type 2 à rénover situé à 50m de la place de la Joliette dans un bel immeuble bourgeois bien entretenu. Cet appartement se trouve au 5 étage &#8230;"
 }

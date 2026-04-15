@@ -1,5 +1,5 @@
 ---
-title: "les prix au m2 de l'immobilier neuf dans le 13004|Les prix au m2 de l'immobilier neuf dans le 13004 en 2018"
+title: "les prix au m2 de l'immobilier neuf dans le 13004"
 slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13004-en-2018"
 date: "2019-07-10 13:56:54"
 categories: ["L'immobilier neuf à marseille", "Prix au m2 par arrondissement à Marseille"]

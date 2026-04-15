@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Tronc 13011 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-de-bien-a-saint-tronc-13011-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-09 15:14:13"
 ---

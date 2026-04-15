@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Biens A Vaufreges 13009 Marseille"
 slug: "local/ladministrateur-de-biens-a-vaufreges-13009-marseille"
 date: "2024-05-13 13:11:20"
 ---

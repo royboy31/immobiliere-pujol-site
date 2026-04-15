@@ -1,11 +1,11 @@
 ---
-title: "energie finale sur dpe|energie finale dpe|dpe en g en 2023"
+title: "energie finale sur dpe"
 slug: "dpe-en-g-peut-on-louer-en-2023"
 date: "2022-12-30 09:59:33"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/energie-finale-sur-dpe.png"
 seoTitle: "Les biens loué en G seront-il louables en 2023?"
-seoDescription: "En 2023, les biens loués dont le DPE est en G seront louable jusqu&#039;en 2025 sous certaines conditions. Lesquelles? Lisez cet article pour le savoir"
+seoDescription: "En 2023, les biens loués dont le DPE est en G seront louable jusqu'en 2025 sous certaines conditions. Lesquelles? Lisez cet article pour le savoir"
 ---
 
 <p>Les interdictions de location des logements les plus énergivores vont commencer début  2023 pour les appartements dont le DPE les classe en G . <br />

@@ -1,6 +1,6 @@
 {
   "id": 1366213,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "578neot-211-boulevard-sainte-marguerite-13009-marseille-9eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/578neot-211-boulevard-sainte-marguerite-13009-marseille-9eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "211 Boulevard Sainte Marguerite, 13009, Marseille 9eme Arrondissement, France",
-  "prix": 1000.0,
-  "charges": 135.0,
+  "prix": 1000,
+  "charges": 135,
   "honoraires": "771.56",
   "garantie": "865",
   "surface": 59.35,

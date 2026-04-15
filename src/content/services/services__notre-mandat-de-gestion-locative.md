@@ -1,5 +1,5 @@
 ---
-title: "Notre mandat de gestion locative &#8211; Immobilière Pujol"
+title: "Notre mandat de gestion locative – Immobilière Pujol"
 slug: "services/notre-mandat-de-gestion-locative"
 seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%ht. Notre équipe est parmi les plus reconnues à Marseille. Contactez nous"
 ---

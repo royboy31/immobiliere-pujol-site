@@ -1,6 +1,6 @@
 {
   "id": 53675,
-  "title": "LO10340004_15A4|LO10340004_3749|LO10340004_4FD8|LO10340004_6711",
+  "title": "LO10340004_15A4",
   "slug": "l000047-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000047-location-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "MARSEILLE",
   "quartier": "LUMINY",
-  "prix": 430.0,
-  "charges": 25.0,
+  "prix": 430,
+  "charges": 25,
   "honoraires": "247.13",
   "garantie": "405",
   "surface": 19.01,

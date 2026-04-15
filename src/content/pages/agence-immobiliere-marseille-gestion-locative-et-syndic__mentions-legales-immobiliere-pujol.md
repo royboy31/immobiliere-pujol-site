@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Les mentions légales de l'Immobilière Pujol à Marseille"
 slug: "agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol"
 date: "2017-12-19 17:46:25"
 seoTitle: "Les mentions légales de l'Immobilière Pujol à Marseille"

@@ -1,5 +1,5 @@
 ---
-title: "PUJ-3154-031219|PUJ-3253-031219"
+title: "PUJ-3154-031219"
 slug: "avec-la-crise-economique-noubliez-pas-que-vous-pouvez-garantir-vos-loyers"
 date: "2020-05-21 08:18:41"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

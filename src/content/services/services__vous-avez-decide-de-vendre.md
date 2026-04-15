@@ -1,5 +1,5 @@
 ---
-title: "Vous avez décidé de vendre &#8211; Immobilière Pujol"
+title: "Vous avez décidé de vendre – Immobilière Pujol"
 slug: "services/vous-avez-decide-de-vendre"
 seoDescription: "Ne vous inquiétez, vous n’êtes pas tout seul. Vendre un bien immobilier est un événement dans sa vie. Et comme tout le monde, vous souhaitez trouver un acquéreur qui sera prêt, motivé et qui aura la capacité financière d’acheter votre bien dans les meilleures conditions. Nous sommes là pour vous accompagner …"
 ---

@@ -3,7 +3,7 @@ title: "prix de ancien dans le 13005 en 2019"
 slug: "quel-est-le-prix-de-limmobilier-ancien-dans-le-13005-en-2019"
 date: "2020-02-14 09:56:00"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-ancien-dans-le-13005-en-2019.jpg"
-seoDescription: "Voici un comparatif des prix de l&#039;immobilier ancien dans le 13005 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
+seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13005 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Biens A La Croix Rouge 13013 Marseille"
 slug: "local/ladministrateur-de-biens-a-la-croix-rouge-13013-marseille"
 date: "2023-05-09 15:20:55"
 ---

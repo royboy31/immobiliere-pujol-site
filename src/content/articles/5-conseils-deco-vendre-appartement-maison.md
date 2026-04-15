@@ -4,8 +4,8 @@ slug: "5-conseils-deco-vendre-appartement-maison"
 date: "2016-10-19 17:28:41"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Decoration-dun-appartement-pour-mieux-louer-et-vendre.jpg"
-seoTitle: "5 idées et conseils déco pour mieux vendre son appartement ou maison - L'Immobilier à Marseille|5 idées et conseils déco pour mieux vendre son appartement ou maison - L'Immobilier à Marseille"
-seoDescription: "Stéphane Pujol, agent immobilier à Marseille, nous donne 5 idées et conseils déco pour valoriser son appartement ou sa maison et vendre son bien facilement. Dans cette optique, il y a des décorations prioritaires, voire essentielles pour séduire et convaincre les clients|Stéphane Pujol, agent immobilier à Marseille, nous donne 5 idées et conseils déco pour valoriser son appartement ou sa maison et vendre son bien facilement. Dans cette optique, il y a des décorations prioritaires, voire essentielles pour séduire et convaincre les clients"
+seoTitle: "5 idées et conseils déco pour mieux vendre son appartement ou maison - L'Immobilier à Marseille"
+seoDescription: "Stéphane Pujol, agent immobilier à Marseille, nous donne 5 idées et conseils déco pour valoriser son appartement ou sa maison et vendre son bien facilement. Dans cette optique, il y a des décorations prioritaires, voire essentielles pour séduire et convaincre les clients"
 ---
 
 Quand nous parlons déco dans l'immobilier, c'est pour mieux vendre.

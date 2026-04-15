@@ -1,6 +1,6 @@
 {
   "id": 52208,
-  "title": "LO34070013_4C28|LO34070013_4C28.JPG|LO34070013_5C5F.JPG",
+  "title": "LO34070013_4C28.JPG",
   "slug": "l001498-location-parking-box-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001498-location-parking-box-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "BAILLE/CONCEPTION",
-  "prix": 175.0,
-  "charges": 20.0,
+  "prix": 175,
+  "charges": 20,
   "honoraires": "0.00",
   "garantie": "155",
   "surface": 26.5,

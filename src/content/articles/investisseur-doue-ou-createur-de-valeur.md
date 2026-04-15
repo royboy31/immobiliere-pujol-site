@@ -5,8 +5,8 @@ date: "2013-03-03 07:54:57"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: ["investissement immobilier marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/achat-investissement-marseille-e1482142602328.jpg"
-seoTitle: "Comment créer de la valeur en investissant dans l'immobilier à marseille?|Comment créer de la valeur en investissant dans l'immobilier à marseille?"
-seoDescription: "Investir c'est créer de la valeur et choisir un bon investissement. Ce temps pour investir dans une vie est très court et il ne faut pas laisser passer sa ou ses fenêtres d'investissement. Il n'y a pas de règles et l'important est d'identifier votre timing sans le laisser passer.|Investir c'est créer de la valeur et choisir un bon investissement. Ce temps pour investir dans une vie est très court et il ne faut pas laisser passer sa ou ses fenêtres d'investissement. Il n'y a pas de règles et l'important est d'identifier votre timing sans le laisser passer."
+seoTitle: "Comment créer de la valeur en investissant dans l'immobilier à marseille?"
+seoDescription: "Investir c'est créer de la valeur et choisir un bon investissement. Ce temps pour investir dans une vie est très court et il ne faut pas laisser passer sa ou ses fenêtres d'investissement. Il n'y a pas de règles et l'important est d'identifier votre timing sans le laisser passer."
 ---
 
 <img class="size-full wp-image-40599 alignright" src="https://www.immobiliere-pujol.fr/content/uploads/2013/03/Investisseur-immobilier-heureux-a-Marseille.jpg" alt="investir a marseille" width="260" height="193" />

@@ -1,6 +1,6 @@
 {
   "id": 1254439,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250632-173-boulevard-saint-loup-saint-loup-13011-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250632-173-boulevard-saint-loup-saint-loup-13011-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "173 Boulevard Saint-loup, Saint-loup, 13011, Marseille 11eme Arrondissement, France",
-  "prix": 950.0,
-  "charges": 160.0,
+  "prix": 950,
+  "charges": 160,
   "honoraires": "1017.38",
   "garantie": "1580",
   "surface": 78.26,

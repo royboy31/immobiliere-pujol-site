@@ -1,6 +1,6 @@
 {
   "id": 85233,
-  "title": "LO31010002_FCE|LO31010002_FCE.JPG|LO31010002_1A88.JPG|LO31010002_745.JPG|LO31010002_2302.JPG|LO31010002_D819.JPG|LO31010002_2F71.JPG",
+  "title": "LO31010002_1A88.JPG",
   "slug": "l001764-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001764-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "CASTELLANE",
-  "prix": 600.0,
-  "charges": 30.0,
+  "prix": 600,
+  "charges": 30,
   "honoraires": "603.46",
   "garantie": "1140",
   "surface": 46.42,

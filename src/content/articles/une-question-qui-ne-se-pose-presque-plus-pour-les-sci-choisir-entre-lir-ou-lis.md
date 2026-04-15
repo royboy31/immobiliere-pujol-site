@@ -1,5 +1,5 @@
 ---
-title: "fiscalite-des-sci-a-choisir-2|fiscalite-sci"
+title: "fiscalite-des-sci-a-choisir-2"
 slug: "une-question-qui-ne-se-pose-presque-plus-pour-les-sci-choisir-entre-lir-ou-lis"
 date: "2017-12-24 07:18:04"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

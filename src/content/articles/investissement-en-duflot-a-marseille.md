@@ -1,12 +1,12 @@
 ---
-title: "programme-neuf-hameau-5eme-13005-marseile|programme-neuf-le-moana-13009-marseille"
+title: "programme-neuf-hameau-5eme-13005-marseile"
 slug: "investissement-en-duflot-a-marseille"
 date: "2018-03-01 07:58:14"
 categories: ["Le marché immobilier à marseille"]
 tags: ["Achat appartement neuf Marseille", "dispositif pinel", "Investissement locatif Marseille", "rentabilité", "rentabilité d'un pinel à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/programme-neuf-hameau-5eme-13005-marseile.jpg"
-seoTitle: "La rentabilité d'un Pinel à Marseille - Immobilière Pujol|La rentabilité d'un Pinel à Marseille - Immobilière Pujol"
-seoDescription: "Comment rentabilité d'un bien Pinel à Marseille ? Si vous voulez acheter un appartement neuf à Marseille, lisez cet article !|Comment rentabilité d'un bien Pinel à Marseille ? Si vous voulez acheter un appartement neuf à Marseille, lisez cet article !"
+seoTitle: "La rentabilité d'un Pinel à Marseille - Immobilière Pujol"
+seoDescription: "Comment rentabilité d'un bien Pinel à Marseille ? Si vous voulez acheter un appartement neuf à Marseille, lisez cet article !"
 ---
 
 <p>Le neuf est un placement sans risque s'il est raisonné. Mais n'attendez pas une forte rentabilité dans un Pinel.</p>

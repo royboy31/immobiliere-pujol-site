@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Déclaration sinistre syndic et location"
 slug: "contact-immobiliere-pujol/merci-pour-votre-demande-pour-lannonce-qui-vous-a-interesse"
 date: "2019-07-30 09:23:17"
 seoTitle: "Déclaration sinistre syndic et location"

@@ -1,5 +1,5 @@
 ---
-title: "avis client syndic marseille pujol|avis-client-syndic-marseille-1|avis-client-syndic-marseille-2|avis-client-syndic-marseille-3|avis-client-gestion-de-syndic-marseille"
+title: "avis client syndic marseille pujol"
 slug: "avis-clients-gestion-syndic-marseille"
 date: "2019-08-03 17:32:46"
 excerpt: "Depuis 2017, l’agence Immobilière Pujol adhère à la démarche qualité proposée par “Opinion System”. Cet organisme est certifié ISO 20252 : c’est une façon pour nous de démontrer notre bonne foi et notre transparence."

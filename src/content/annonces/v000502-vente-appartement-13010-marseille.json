@@ -1,6 +1,6 @@
 {
   "id": 229899,
-  "title": "B000502_977E|B000502_977E.jpg|B000502_D2F5.jpg",
+  "title": "B000502_977E.jpg",
   "slug": "v000502-vente-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000502-vente-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "Marseille",
   "quartier": "SAINT TRONC",
-  "prix": 147000.0,
-  "charges": 142.0,
+  "prix": 147000,
+  "charges": 142,
   "honoraires": "0.00",
   "surface": 68.35,
   "surfaceTerrain": 68.35,

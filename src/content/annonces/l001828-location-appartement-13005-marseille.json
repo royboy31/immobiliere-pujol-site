@@ -1,6 +1,6 @@
 {
   "id": 90726,
-  "title": "LO35750001_7E7E|LO35750001_6D33.JPG|LO35750001_7FF9.JPG|LO35750001_9C40.JPG|LO35750001_2363.JPG|LO35750001_5EC1.JPG|LO35750001_5129.JPG|LO35750001_4517.JPG|LO35750001_B157.JPG",
+  "title": "LO35750001_6D33.JPG",
   "slug": "l001828-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001828-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "TIMONE",
-  "prix": 595.0,
-  "charges": 25.0,
+  "prix": 595,
+  "charges": 25,
   "honoraires": "723.97",
   "garantie": "570",
   "surface": 55.69,

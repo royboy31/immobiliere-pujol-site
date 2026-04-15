@@ -1,10 +1,10 @@
 ---
-title: "longchamp marseille|prix de l'ancien dans le 13004 en 2019|prix de l'ancien dans le 13004 en 2019|prix de l'ancien dans le 13004 en 2019|40073322_1398818613582711_1700240190842339328_o"
+title: "longchamp marseille"
 slug: "quel-est-le-prix-de-limmobilier-ancien-dans-le-13004-en-2019"
 date: "2020-02-14 09:56:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/02/longchamp-marseille.jpg"
-seoDescription: "Voici un comparatif des prix de l&#039;immobilier ancien dans le 13004 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
+seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13004 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
 
 <!-- wp:group -->

@@ -1,11 +1,11 @@
 ---
-title: "13006|6 ème arrondissement loyer 2018"
+title: "6 ème arrondissement loyer 2018"
 slug: "prix-m2-loyers-13006"
 date: "2020-01-31 10:56:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13006-1.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13006 en 2019"
-seoDescription: "Le prix moyen des loyers (en €/m2) est de 13,4 dans le 13006.  La durée d&#039;occupation est de 50,9€ mois"
+seoDescription: "Le prix moyen des loyers (en €/m2) est de 13,4 dans le 13006.  La durée d'occupation est de 50,9€ mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

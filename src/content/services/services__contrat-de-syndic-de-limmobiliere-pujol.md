@@ -1,7 +1,7 @@
 ---
-title: "Contrat de syndic de l&rsquo;immobilière Pujol &#8211; Immobilière Pujol"
+title: "Contrat de syndic de l'immobilière Pujol – Immobilière Pujol"
 slug: "services/contrat-de-syndic-de-limmobiliere-pujol"
-seoDescription: "Notre équipe de syndic est l&#039;une des plus mieux évaluez par ses clients. Consultez nous et recevez une proposition de syndic en moins de 24h"
+seoDescription: "Notre équipe de syndic est l'une des plus mieux évaluez par ses clients. Consultez nous et recevez une proposition de syndic en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

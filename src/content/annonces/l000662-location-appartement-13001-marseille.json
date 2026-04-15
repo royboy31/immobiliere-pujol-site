@@ -1,6 +1,6 @@
 {
   "id": 89791,
-  "title": "LO03320006_5DE|LO03320006_151|LO03320006_152|LO03320006_2BA7|LO03320006_6ACA|LO03320006_7D52",
+  "title": "LO03320006_2BA7",
   "slug": "l000662-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000662-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "PARADIS",
-  "prix": 415.0,
-  "charges": 40.0,
+  "prix": 415,
+  "charges": 40,
   "honoraires": "323.05",
   "garantie": "375",
   "surface": 24.85,

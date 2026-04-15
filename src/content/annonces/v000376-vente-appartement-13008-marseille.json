@@ -12,7 +12,7 @@
   "codePostal": "13008|13008|13008",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "PERIER|PERIER|PERIER",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -37,6 +37,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre Perier, Marseille, France|Appartement 1 pièce à vendre Perier, Marseille, France|Appartement 1 pièce à vendre Perier, Marseille, France",
-  "seoDescription": "Vente chambre de 9m², haut de Perier, 13008 marseille.Cette chambre se situe dans une petite copropriété, au calme.Elle dispose d&rsquo;une douche et de wc&#8230;|Vente chambre de 9m², haut de Perier, 13008 marseille.Cette chambre se situe dans une petite copropriété, au calme.Elle dispose d&rsquo;une douche et de wc&#8230;|Vente chambre de 9m², haut de Perier, 13008 marseille.Cette chambre se situe dans une petite copropriété, au calme.Elle dispose d&rsquo;une douche et de wc&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre Perier, Marseille, France",
+  "seoDescription": "Vente chambre de 9m², haut de Perier, 13008 marseille.Cette chambre se situe dans une petite copropriété, au calme.Elle dispose d&rsquo;une douche et de wc&#8230;"
 }

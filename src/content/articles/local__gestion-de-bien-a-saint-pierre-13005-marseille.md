@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Pierre 13005 Marseille"
 slug: "local/gestion-de-bien-a-saint-pierre-13005-marseille"
 date: "2023-05-09 14:54:22"
 ---

@@ -1,6 +1,6 @@
 {
   "id": 78794,
-  "title": "B000437_B9F5|B000437_28CC|B000437_7660|B000437_E818|B000437_AB45|B000437_D67D|B000437_FC55",
+  "title": "B000437_B9F5",
   "slug": "v000437-vente-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000437-vente-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "Marseille",
   "quartier": "SAINT JUST",
-  "prix": 123000.0,
-  "charges": 225.0,
+  "prix": 123000,
+  "charges": 225,
   "honoraires": "0.00",
   "surface": 84.82,
   "surfaceTerrain": 84.82,

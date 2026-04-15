@@ -1,6 +1,6 @@
 {
   "id": 1120814,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "mbvco20009659-13007-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/mbvco20009659-13007-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13007, Marseille, France",
-  "prix": 120000.0,
-  "charges": 0.0,
+  "prix": 120000,
+  "charges": 0,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 29.49,

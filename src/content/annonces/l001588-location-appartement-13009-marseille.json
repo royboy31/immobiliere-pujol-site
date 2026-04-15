@@ -1,6 +1,6 @@
 {
   "id": 91402,
-  "title": "LO10330001_33CA.JPG|LO10330001_348A.JPG|LO10330001_4C39.JPG|LO10330001_786B.JPG|LO10330001_980A.JPG|LO10330001_C3CE.JPG|LO10330001_E5DD.JPG|LO10330001_73C2.JPG|LO10330001_89FB.JPG",
+  "title": "LO10330001_33CA.JPG",
   "slug": "l001588-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001588-location-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "MARSEILLE",
   "quartier": "LE CABOT",
-  "prix": 1208.0,
-  "charges": 250.0,
+  "prix": 1208,
+  "charges": 250,
   "honoraires": "1511.12",
   "garantie": "958",
   "surface": 116.24,

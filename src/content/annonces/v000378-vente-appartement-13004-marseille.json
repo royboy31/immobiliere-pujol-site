@@ -12,7 +12,7 @@
   "codePostal": "13004|13004|13004",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CHAVE / BLANCARDE|CHAVE / BLANCARDE|CHAVE / BLANCARDE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "etage": "3|3|3",
@@ -35,6 +35,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre Chave / Blancarde, Marseille, France|Appartement 1 pièce à vendre Chave / Blancarde, Marseille, France|Appartement 1 pièce à vendre Chave / Blancarde, Marseille, France",
-  "seoDescription": "Studio de 15,5m² situé 163 bd boisson 13004 Marseille (limite 13005).Au 3ème étage avec ascenseur d&rsquo;un immeuble semi-récent, ce studio se compose d&#8230;|Studio de 15,5m² situé 163 bd boisson 13004 Marseille (limite 13005).Au 3ème étage avec ascenseur d&rsquo;un immeuble semi-récent, ce studio se compose d&#8230;|Studio de 15,5m² situé 163 bd boisson 13004 Marseille (limite 13005).Au 3ème étage avec ascenseur d&rsquo;un immeuble semi-récent, ce studio se compose d&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre Chave / Blancarde, Marseille, France",
+  "seoDescription": "Studio de 15,5m² situé 163 bd boisson 13004 Marseille (limite 13005).Au 3ème étage avec ascenseur d&rsquo;un immeuble semi-récent, ce studio se compose d&#8230;"
 }

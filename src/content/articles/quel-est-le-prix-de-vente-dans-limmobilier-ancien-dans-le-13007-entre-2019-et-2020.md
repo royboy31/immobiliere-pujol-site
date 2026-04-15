@@ -1,5 +1,5 @@
 ---
-title: "Palais-du-Pharo-Marseille|1|2|3|4|5|6|MAT-20141001-7041|vallon-auffes-marseille.jpg__850x600_q85_crop_subsampling-2_upscale|palais-pharo-monument-tourisme|187602057"
+title: "Palais-du-Pharo-Marseille"
 slug: "quel-est-le-prix-de-vente-dans-limmobilier-ancien-dans-le-13007-entre-2019-et-2020"
 date: "2021-02-19 05:50:35"
 categories: ["Prix au m2 par arrondissement à Marseille"]

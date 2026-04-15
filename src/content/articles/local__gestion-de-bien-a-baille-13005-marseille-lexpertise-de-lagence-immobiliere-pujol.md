@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Baille 13005 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-de-bien-a-baille-13005-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2024-05-13 13:13:42"
 ---

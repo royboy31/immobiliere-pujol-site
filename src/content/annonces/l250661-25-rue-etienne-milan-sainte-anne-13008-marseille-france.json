@@ -1,6 +1,6 @@
 {
   "id": 1269115,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250661-25-rue-etienne-milan-sainte-anne-13008-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250661-25-rue-etienne-milan-sainte-anne-13008-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "25 Rue Etienne Milan, Sainte Anne, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 1100.0,
-  "charges": 50.0,
+  "prix": 1100,
+  "charges": 50,
   "honoraires": "752.05",
   "garantie": "2100",
   "surface": 57.85,

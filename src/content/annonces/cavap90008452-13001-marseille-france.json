@@ -1,6 +1,6 @@
 {
   "id": 627783,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "cavap90008452-13001-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/cavap90008452-13001-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13001, Marseille, France",
-  "prix": 140000.0,
-  "charges": 77.0,
+  "prix": 140000,
+  "charges": 77,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 40.42,

@@ -1,6 +1,6 @@
 {
   "id": 230049,
-  "title": "B000505_FD68|B000505_FD68.JPG|B000505_3467.JPG|B000505_463D.JPG|B000505_339C.JPG|B000505_59B3.JPG|B000505_9FD6.JPG|B000505_2BDB.JPG|B000505_7A2B.JPG|B000505_F3A4.JPG",
+  "title": "B000505_FD68.JPG",
   "slug": "v000505-vente-appartement-13011-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000505-vente-appartement-13011-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13011",
   "ville": "Marseille",
   "quartier": "LA POMME",
-  "prix": 215000.0,
-  "charges": 127.0,
+  "prix": 215000,
+  "charges": 127,
   "honoraires": "0.00",
   "surface": 64.9,
   "surfaceTerrain": 64.9,

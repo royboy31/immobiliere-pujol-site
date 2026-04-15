@@ -1,6 +1,6 @@
 {
   "id": 85953,
-  "title": "LO32330002_B01416373421|LO32330002_4B8.jpg|LO32330002_274D.JPG|LO32330002_900B.JPG|LO32330002_AFE8.JPG|LO32330002_DDFF.JPG|LO32330002_CC5B.JPG",
+  "title": "LO32330002_B01416373421",
   "slug": "l000985-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000985-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "ST MITRE",
-  "prix": 655.0,
-  "charges": 60.0,
+  "prix": 655,
+  "charges": 60,
   "honoraires": "543.27",
   "garantie": "595",
   "surface": 41.79,

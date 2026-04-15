@@ -1,5 +1,5 @@
 ---
-title: "prix au m² de l'immobilier neuf dans le 13009 en 2018|tBksRCJQ"
+title: "prix au m² de l'immobilier neuf dans le 13009 en 2018"
 slug: "les-prix-au-m2-de-limmobilier-neuf-dans-le-13009-en-2018"
 date: "2019-06-12 14:03:59"
 categories: ["Prix au m2 par arrondissement à Marseille"]

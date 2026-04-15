@@ -1,6 +1,6 @@
 {
   "id": 52881,
-  "title": "LO01100001_298718014503|LO01100001_BAB8|LO01100001_D650|LO01100001_E3FD|LO01100001_EF29|LO01100001_FE3E",
+  "title": "LO01100001_298718014503",
   "slug": "l000463-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000463-location-appartement-13007-marseille/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "77 Rue Chateaubriand, 13007, MARSEILLE, France",
   "codePostal": "13007",
   "ville": "MARSEILLE",
-  "prix": 610.0,
-  "charges": 25.0,
+  "prix": 610,
+  "charges": 25,
   "honoraires": "268.19",
   "garantie": "585",
   "surface": 21.6,

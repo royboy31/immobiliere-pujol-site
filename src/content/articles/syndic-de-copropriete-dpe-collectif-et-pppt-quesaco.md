@@ -1,11 +1,11 @@
 ---
-title: "immeuble en copropriete|plan pluriannuel de travaux|calendrier dpe pppt"
+title: "immeuble en copropriete"
 slug: "syndic-de-copropriete-dpe-collectif-et-pppt-quesaco"
 date: "2022-03-16 09:59:01"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/03/immeuble-en-copropriete-scaled.jpg"
 seoTitle: "Syndic - DPE collectif et PPPT objectifs et enjeux"
-seoDescription: "Toutes nos réponses à vos questions sur l&#039;obligation de DPE collectif en copropriété et le projet de plan pluriannuel de travaux !"
+seoDescription: "Toutes nos réponses à vos questions sur l'obligation de DPE collectif en copropriété et le projet de plan pluriannuel de travaux !"
 ---
 
 <p><span style="font-weight: 400;">En début d’année, nous vous avions fait part de </span><a href="https://www.immobiliere-pujol.fr/une-grande-periode-dincertitude-pese-sur-limmobilier-en-2022/"><span style="font-weight: 400;">nos incertitudes pour l’année 2022</span></a><span style="font-weight: 400;">. Si nous étions loin de prédire la guerre en Ukraine, nous avions déjà mis l’accent sur l’impact majeur qu’aurait la loi Climat et Résilience sur nos modes de vie en copropriété. </span></p>

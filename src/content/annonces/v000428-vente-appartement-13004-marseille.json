@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CHAVE / BLANCARDE|CHAVE / BLANCARDE|CHAVE / BLANCARDE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "etage": "4|4|4",
   "nbEtages": "5|5|5",
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Chave / Blancarde, Marseille, France|Appartement 2 pièces à vendre Chave / Blancarde, Marseille, France|Appartement 2 pièces à vendre Chave / Blancarde, Marseille, France",
-  "seoDescription": "Studio de 22m² en duplex situé bd Boisson (côté bd chave) 13004 Marseille.Dans un immeuble bien entretenu et sécurisé, ce studio, au 4ème étage avec ascens&#8230;|Studio de 22m² en duplex situé bd Boisson (côté bd chave) 13004 Marseille.Dans un immeuble bien entretenu et sécurisé, ce studio, au 4ème étage avec ascens&#8230;|Studio de 22m² en duplex situé bd Boisson (côté bd chave) 13004 Marseille.Dans un immeuble bien entretenu et sécurisé, ce studio, au 4ème étage avec ascens&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Chave / Blancarde, Marseille, France",
+  "seoDescription": "Studio de 22m² en duplex situé bd Boisson (côté bd chave) 13004 Marseille.Dans un immeuble bien entretenu et sécurisé, ce studio, au 4ème étage avec ascens&#8230;"
 }

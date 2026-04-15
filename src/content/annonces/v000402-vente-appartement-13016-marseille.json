@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "SAINT-HENRI|SAINT-HENRI|SAINT-HENRI",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.38.21|04.91.37.38.21|04.91.37.38.21",
   "emailAAfficher": "nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Saint-henri, Marseille, France|Appartement 3 pièces à vendre Saint-henri, Marseille, France|Appartement 3 pièces à vendre Saint-henri, Marseille, France",
-  "seoDescription": "EXCLUSIVITE T3 de 72m² à rénover situé 105 rue Rabelais 13016 Marseille. Cet appartement de type 3 traversant se compose d&rsquo;une partie cuisine et gran&#8230;|EXCLUSIVITE T3 de 72m² à rénover situé 105 rue Rabelais 13016 Marseille. Cet appartement de type 3 traversant se compose d&rsquo;une partie cuisine et gran&#8230;|EXCLUSIVITE T3 de 72m² à rénover situé 105 rue Rabelais 13016 Marseille. Cet appartement de type 3 traversant se compose d&rsquo;une partie cuisine et gran&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Saint-henri, Marseille, France",
+  "seoDescription": "EXCLUSIVITE T3 de 72m² à rénover situé 105 rue Rabelais 13016 Marseille. Cet appartement de type 3 traversant se compose d&rsquo;une partie cuisine et gran&#8230;"
 }

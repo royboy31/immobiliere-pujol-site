@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Julien 13012 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-de-bien-a-saint-julien-13012-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-09 15:11:19"
 ---

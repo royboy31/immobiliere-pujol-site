@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 immobilier ancien 13004|prix au m2 de l'ancien dans le 4eme arrondissement de Marseille en 2018"
+title: "prix au m2 immobilier ancien 13004"
 slug: "le-prix-de-limmobilier-ancien-dans-le-13004-en-2018"
 date: "2019-05-15 08:24:44"
 categories: ["Prix au m2 par arrondissement à Marseille"]

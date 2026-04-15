@@ -1,6 +1,6 @@
 {
   "id": 230121,
-  "title": "LO34660001_1DE9|LO34660001_1DE9.JPG|LO34660001_3B18.JPG|LO34660001_2F5F.JPG|LO34660001_835D.JPG|LO34660001_ADBA.JPG",
+  "title": "LO34660001_1DE9.JPG",
   "slug": "l001937-location-local-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001937-location-local-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "MARSEILLE",
   "quartier": "SAINT-JULIEN",
-  "prix": 2382.0,
-  "charges": 182.0,
+  "prix": 2382,
+  "charges": 182,
   "honoraires": "200",
   "garantie": "6600",
   "surface": 120.33,

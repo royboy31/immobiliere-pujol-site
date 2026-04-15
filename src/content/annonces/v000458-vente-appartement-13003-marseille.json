@@ -1,6 +1,6 @@
 {
   "id": 227828,
-  "title": "B000458_129.JPG|B000458_1F04.JPG|B000458_2EC4.JPG|B000458_D016.JPG|B000458_EF6.JPG",
+  "title": "B000458_1F04.JPG",
   "slug": "v000458-vente-appartement-13003-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000458-vente-appartement-13003-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13003",
   "ville": "Marseille",
   "quartier": "BELLE DE MAI",
-  "prix": 155000.0,
-  "charges": 100.0,
+  "prix": 155000,
+  "charges": 100,
   "honoraires": "0.00",
   "surface": 98.87,
   "surfaceTerrain": 98.87,

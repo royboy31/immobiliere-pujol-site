@@ -1,6 +1,6 @@
 {
   "id": 86916,
-  "title": "LO04710002_B4FE|LO04710002_1308|LO04710002_216|LO04710002_2AEC|LO04710002_3605|LO04710002_57D8|LO04710002_747D|LO04710002_F04A",
+  "title": "LO04710002_B4FE",
   "slug": "l000689-location-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000689-location-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "MARSEILLE",
   "quartier": "TIMONE",
-  "prix": 690.0,
-  "charges": 140.0,
+  "prix": 690,
+  "charges": 140,
   "honoraires": "919.36",
   "garantie": "550",
   "surface": 70.72,

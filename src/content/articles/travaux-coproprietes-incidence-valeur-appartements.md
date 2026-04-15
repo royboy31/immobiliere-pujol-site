@@ -1,5 +1,5 @@
 ---
-title: "Faire-des-travaux|FullSizeRender-22"
+title: "Faire-des-travaux"
 slug: "travaux-coproprietes-incidence-valeur-appartements"
 date: "2016-05-31 12:29:29"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]

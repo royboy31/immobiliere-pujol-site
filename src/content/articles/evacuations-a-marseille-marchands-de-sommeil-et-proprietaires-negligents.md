@@ -1,5 +1,5 @@
 ---
-title: "evacuations marseille|lost-places-1730891_1920|lost-places-3138894_1920"
+title: "evacuations marseille"
 slug: "evacuations-a-marseille-marchands-de-sommeil-et-proprietaires-negligents"
 date: "2019-02-10 13:48:03"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

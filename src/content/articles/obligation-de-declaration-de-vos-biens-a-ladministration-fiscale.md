@@ -1,5 +1,5 @@
 ---
-title: "declaration des logement sur impot.gouv|declaration des logement sur impot.gouv"
+title: "declaration des logement sur impot.gouv"
 slug: "obligation-de-declaration-de-vos-biens-a-ladministration-fiscale"
 date: "2023-03-13 17:00:18"
 categories: ["Le marché immobilier à marseille"]

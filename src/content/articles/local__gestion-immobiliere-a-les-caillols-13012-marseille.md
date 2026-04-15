@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Les Caillols 13012 Marseille"
 slug: "local/gestion-immobiliere-a-les-caillols-13012-marseille"
 date: "2023-05-09 15:44:25"
 ---

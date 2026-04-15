@@ -1,11 +1,11 @@
 ---
-title: "cadre reglementaire renovation copropriete|les intervenants dans la rénovation enrgetique en copropriete|recevoir guide sur renovation energetique en copropriete"
+title: "cadre reglementaire renovation copropriete"
 slug: "livre-blanc-sur-la-renovation-energetique-en-copropriete"
 date: "2023-03-07 13:26:50"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/cadre-legislatif.png"
 seoTitle: "Comment rénover une copropriété de manière énergétique?"
-seoDescription: "Ce livre blanc écrit par l&#039;Immobilière Pujol, syndic à Marseille vous apporte des réponses à cette question vaste et complexe."
+seoDescription: "Ce livre blanc écrit par l'Immobilière Pujol, syndic à Marseille vous apporte des réponses à cette question vaste et complexe."
 ---
 
 <h3>Comment rénover énergétiquement les copropriétés ?</h3>

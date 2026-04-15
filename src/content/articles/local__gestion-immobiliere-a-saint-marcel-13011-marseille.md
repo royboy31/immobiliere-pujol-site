@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Saint Marcel 13011 Marseille"
 slug: "local/gestion-immobiliere-a-saint-marcel-13011-marseille"
 date: "2023-05-09 14:50:48"
 ---

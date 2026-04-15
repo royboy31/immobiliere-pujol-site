@@ -1,6 +1,6 @@
 {
   "id": 227014,
-  "title": "LO33900001_C7DD.JPG|LO33900001_8AD6.JPG|LO33900001_9F88.JPG|LO33900001_C15A.JPG|LO33900001_13AC.JPG|LO33900001_2C55.JPG|LO33900001_3E58.JPG|LO33900001_4DAB.JPG|LO33900001_5D0D.JPG",
+  "title": "LO33900001_C7DD.JPG",
   "slug": "l002058-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002058-location-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "MARSEILLE",
   "quartier": "SORMIOU",
-  "prix": 940.0,
-  "charges": 70.0,
+  "prix": 940,
+  "charges": 70,
   "honoraires": "955.11",
   "garantie": "870",
   "surface": 73.47,

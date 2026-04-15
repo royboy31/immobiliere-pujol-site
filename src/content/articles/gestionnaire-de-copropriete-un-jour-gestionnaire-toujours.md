@@ -1,5 +1,5 @@
 ---
-title: "|krikrikri|PU-1777"
+title: "krikrikri"
 slug: "gestionnaire-de-copropriete-un-jour-gestionnaire-toujours"
 date: "2020-06-21 06:00:35"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/photo_ec44b8850bdc4695fdbd11cc7410db62-6.jpg"

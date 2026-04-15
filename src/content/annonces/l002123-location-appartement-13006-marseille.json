@@ -1,6 +1,6 @@
 {
   "id": 229715,
-  "title": "LO37020001_EE8B.jpg|LO37020001_D97B.jpg|LO37020001_CC1B.jpg|LO37020001_9143.jpg|LO37020001_BF0B.jpg|LO37020001_CC4B.jpg|LO37020001_AE32.jpg|LO37020001_E939.jpg",
+  "title": "LO37020001_EE8B.jpg",
   "slug": "l002123-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002123-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "COURS JULIEN",
-  "prix": 700.0,
-  "charges": 30.0,
+  "prix": 700,
+  "charges": 30,
   "honoraires": "360",
   "garantie": "670",
   "surface": 57.82,

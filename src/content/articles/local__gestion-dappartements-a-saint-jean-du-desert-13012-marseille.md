@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Saint Jean Du Desert 13012 Marseille"
 slug: "local/gestion-dappartements-a-saint-jean-du-desert-13012-marseille"
 date: "2024-01-04 13:17:29"
 ---

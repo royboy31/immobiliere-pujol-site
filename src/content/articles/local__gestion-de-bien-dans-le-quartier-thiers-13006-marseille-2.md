@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le Quartier Thiers 13006 Marseille 2"
 slug: "local/gestion-de-bien-dans-le-quartier-thiers-13006-marseille-2"
 date: "2024-05-13 13:12:22"
 ---

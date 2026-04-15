@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Saint Pierre 13005 Marseille"
 slug: "local/gestion-dappartements-a-saint-pierre-13005-marseille"
 date: "2024-01-04 13:17:28"
 ---

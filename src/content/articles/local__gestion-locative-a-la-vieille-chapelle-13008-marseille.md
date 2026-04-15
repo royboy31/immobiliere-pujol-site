@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Vieille Chapelle 13008 Marseille"
 slug: "local/gestion-locative-a-la-vieille-chapelle-13008-marseille"
 date: "2023-05-09 14:31:46"
 ---

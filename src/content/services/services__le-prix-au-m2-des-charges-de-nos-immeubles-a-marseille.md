@@ -1,7 +1,7 @@
 ---
-title: "Les charges de copropriété  : définition et prix &#8211; Immobilière Pujol"
+title: "Les charges de copropriété  : définition et prix – Immobilière Pujol"
 slug: "services/le-prix-au-m2-des-charges-de-nos-immeubles-a-marseille"
-seoDescription: "Les moyennes des charges de copropriété à Marseille. Consultez les charges que nous obtenions pour le compte de nos clients. Consultez l&#039;Immobilière Pujol"
+seoDescription: "Les moyennes des charges de copropriété à Marseille. Consultez les charges que nous obtenions pour le compte de nos clients. Consultez l'Immobilière Pujol"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "TIMONE|TIMONE|TIMONE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "6|6|6",
   "nbEtages": "7|7|7",
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Timone, Marseille, France|Appartement 3 pièces à vendre Timone, Marseille, France|Appartement 3 pièces à vendre Timone, Marseille, France",
-  "seoDescription": "EXCLUSIVITE venre type 3 traversant avec balcon/terrasse plein sud et au calme à côté du métro Timone. Ce T3 se trouve au 6e étage avec ascenseur et se com&#8230;|EXCLUSIVITE venre type 3 traversant avec balcon/terrasse plein sud et au calme à côté du métro Timone. Ce T3 se trouve au 6e étage avec ascenseur et se com&#8230;|EXCLUSIVITE venre type 3 traversant avec balcon/terrasse plein sud et au calme à côté du métro Timone. Ce T3 se trouve au 6e étage avec ascenseur et se com&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Timone, Marseille, France",
+  "seoDescription": "EXCLUSIVITE venre type 3 traversant avec balcon/terrasse plein sud et au calme à côté du métro Timone. Ce T3 se trouve au 6e étage avec ascenseur et se com&#8230;"
 }

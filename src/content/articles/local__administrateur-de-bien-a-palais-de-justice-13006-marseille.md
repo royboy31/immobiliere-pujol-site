@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Administrateur De Bien A Palais De Justice 13006 Marseille"
 slug: "local/administrateur-de-bien-a-palais-de-justice-13006-marseille"
 date: "2023-05-09 15:15:27"
 ---

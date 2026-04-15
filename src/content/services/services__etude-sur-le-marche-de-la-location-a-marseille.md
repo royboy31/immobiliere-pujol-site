@@ -1,7 +1,7 @@
 ---
-title: "Etude sur le marché de la location à Marseille &#8211; Immobilière Pujol"
+title: "Etude sur le marché de la location à Marseille – Immobilière Pujol"
 slug: "services/etude-sur-le-marche-de-la-location-a-marseille"
-seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondissement, durée d&#039;occupation moyenne en location vide ou meublée..."
+seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondissement, durée d'occupation moyenne en location vide ou meublée..."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

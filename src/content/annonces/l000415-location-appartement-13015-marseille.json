@@ -1,6 +1,6 @@
 {
   "id": 52497,
-  "title": "LO29270001_7918|LO29270001_1E60|LO29270001_2CC9|LO29270001_3843|LO29270001_4813|LO29270001_5C67|LO29270001_956B|LO29270001_A395|LO29270001_E2ED",
+  "title": "LO29270001_7918",
   "slug": "l000415-location-appartement-13015-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000415-location-appartement-13015-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13015",
   "ville": "MARSEILLE",
   "quartier": "SAINT ANTOINE",
-  "prix": 460.0,
-  "charges": 20.0,
+  "prix": 460,
+  "charges": 20,
   "honoraires": "390",
   "garantie": "440",
   "surface": 36.16,

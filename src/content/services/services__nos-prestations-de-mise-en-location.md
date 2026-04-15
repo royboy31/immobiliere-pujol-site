@@ -1,7 +1,7 @@
 ---
-title: "Mise en location à Marseille  : ce que nous allons faire pour vous &#8211; Immobilière Pujol"
+title: "Mise en location à Marseille  : ce que nous allons faire pour vous – Immobilière Pujol"
 slug: "services/nos-prestations-de-mise-en-location"
-seoDescription: "Bien louer à Marseille : ce que l&#039;immobilière Pujol, agence la plus recommandée par ses clients va faire pour vous"
+seoDescription: "Bien louer à Marseille : ce que l'immobilière Pujol, agence la plus recommandée par ses clients va faire pour vous"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

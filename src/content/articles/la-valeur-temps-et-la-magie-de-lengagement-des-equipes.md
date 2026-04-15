@@ -1,5 +1,5 @@
 ---
-title: "meilleur syndic marseille (1)|PUJOL-0848|PUJ-3253-031219|PUJOL-0848"
+title: "meilleur syndic marseille (1)"
 slug: "la-valeur-temps-et-la-magie-de-lengagement-des-equipes"
 date: "2024-06-19 08:18:33"
 categories: ["Le marché immobilier à marseille"]

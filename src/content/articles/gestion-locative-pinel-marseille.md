@@ -1,5 +1,5 @@
 ---
-title: "achat pinel neuf marseille|gestion locative neuf marseille|contact devis gestion locative"
+title: "achat pinel neuf marseille"
 slug: "gestion-locative-pinel-marseille"
 date: "2022-12-15 08:36:40"
 categories: ["L'immobilier neuf à marseille", "Mes conseils pour investir en immobilier à Marseille"]

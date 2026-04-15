@@ -1,11 +1,11 @@
 ---
-title: "LEstaque_depuis_le_port|16 ème arrondissement loyer 2018"
+title: "LEstaque_depuis_le_port"
 slug: "prix-m2-loyers-13016"
 date: "2020-02-10 10:45:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/LEstaque_depuis_le_port.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13016 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 12,5 dans le 13016. La durée d&#039;occupation est de 62 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 12,5 dans le 13016. La durée d'occupation est de 62 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

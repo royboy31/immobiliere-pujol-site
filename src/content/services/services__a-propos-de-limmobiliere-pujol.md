@@ -1,7 +1,7 @@
 ---
-title: "A propos de l&rsquo;Immobilière Pujol &#8211; Immobilière Pujol"
+title: "A propos de l'Immobilière Pujol – Immobilière Pujol"
 slug: "services/a-propos-de-limmobiliere-pujol"
-seoDescription: "L&#039;équipe est composée de 70 personnes autour des principaux métiers de l’immobilier. Notre activité se répartit entre : La gestion locative qui représente 50% de l&#039;activité de l&#039;agence : nous gérons les biens de plus de 1200 propriétaires en habitation et plus de 250 baux commerciaux, privés et institutionnels La…"
+seoDescription: "L'équipe est composée de 70 personnes autour des principaux métiers de l’immobilier. Notre activité se répartit entre : La gestion locative qui représente 50% de l'activité de l'agence : nous gérons les biens de plus de 1200 propriétaires en habitation et plus de 250 baux commerciaux, privés et institutionnels La…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

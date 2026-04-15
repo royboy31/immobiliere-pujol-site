@@ -1,10 +1,10 @@
 ---
-title: "VALEUR VERTE LOGEMENTS|impact dpe sur prix de vente|repartition des dpe des logements vendus en 2020"
+title: "VALEUR VERTE LOGEMENTS"
 slug: "la-valeur-verte-des-logements"
 date: "2022-09-20 16:38:12"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/09/VALEUR-VERTE-LOGEMENTS.jpg"
-seoDescription: "Impact de l&#039;étiquette énergie sur le prix d&#039;un appartement . Les mauvaises notes E,  F et G font-elles baisser le prix de vente?"
+seoDescription: "Impact de l'étiquette énergie sur le prix d'un appartement . Les mauvaises notes E,  F et G font-elles baisser le prix de vente?"
 ---
 
 <p class="_04xlpA direction-ltr align-justify para-style-body"><span class="JsGRdQ">La </span><strong><span class="JsGRdQ">valeur verte</span></strong><span class="JsGRdQ"><strong> d'un logement</strong>, </span><span class="JsGRdQ">définie "l<em>’augmentation de valeur engendrée par une meilleure performance énergétique et en</em></span><span class="JsGRdQ"><em>vironnementale d’un bien immobilier par rapport à un autre, toutes choses égales par ailleurs</em> " et selon les bases notariales</span><span class="JsGRdQ">.</span></p>

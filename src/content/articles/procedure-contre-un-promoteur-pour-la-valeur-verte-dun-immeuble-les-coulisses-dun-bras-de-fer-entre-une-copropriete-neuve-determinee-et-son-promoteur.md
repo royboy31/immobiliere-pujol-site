@@ -1,11 +1,11 @@
 ---
-title: "proces gagne syndic face promoteur|proces copropriete contre promoteur|indeminsation proces syndic contre promoteur"
+title: "proces gagne syndic face promoteur"
 slug: "procedure-contre-un-promoteur-pour-la-valeur-verte-dun-immeuble-les-coulisses-dun-bras-de-fer-entre-une-copropriete-neuve-determinee-et-son-promoteur"
 date: "2023-12-08 08:42:53"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/11/GODCHOT-1.jpg"
 seoTitle: "Copropriété à Marseille : Victoire Judiciaire contre les Promesses Non Tenues dans le Neuf"
-seoDescription: "Découvrez le récit d&#039;une copropriété marseillaise confrontée à des malfaçons et promesses non tenues dans des logements neufs. Ce récit met en lumière la victoire obtenue devant le Tribunal judiciaire de Marseille, reconnaissant les préjudices liés à la performance énergétique."
+seoDescription: "Découvrez le récit d'une copropriété marseillaise confrontée à des malfaçons et promesses non tenues dans des logements neufs. Ce récit met en lumière la victoire obtenue devant le Tribunal judiciaire de Marseille, reconnaissant les préjudices liés à la performance énergétique."
 ---
 
 <p>&nbsp;</p>

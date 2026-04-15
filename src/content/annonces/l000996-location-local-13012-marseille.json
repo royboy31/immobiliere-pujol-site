@@ -1,6 +1,6 @@
 {
   "id": 228363,
-  "title": "LO03390007_E82F|LO03390007_E82F.jpg",
+  "title": "LO03390007_E82F.jpg",
   "slug": "l000996-location-local-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000996-location-local-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "MARSEILLE",
   "quartier": "SAINT-PIERRE",
-  "prix": 573.0,
-  "charges": 80.0,
+  "prix": 573,
+  "charges": 80,
   "honoraires": "710.4",
   "garantie": "1480",
   "surface": 95.04,

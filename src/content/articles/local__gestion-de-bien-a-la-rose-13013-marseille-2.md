@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A La Rose 13013 Marseille 2"
 slug: "local/gestion-de-bien-a-la-rose-13013-marseille-2"
 date: "2024-05-13 13:12:31"
 ---

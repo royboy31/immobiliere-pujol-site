@@ -1,5 +1,5 @@
 ---
-title: "_IGP0386|prix m2 appartements anciens marseille 13010|prix m2 appartements anciens marseille 13010|prix m² appartements anciens la capelette marseille|prix m2 appartements anciens marseille 13010 menpenti|prix m² appartements anciens pont de vivaux|prix m² appartements anciens saint loup|prix m² appartements anciens saint tronc|prix m² appartements anciens la timone|images|unnamed|DSC03218.jpeg|vivauxCopierjpg_5f6ef12b9f042|Pont de Vivaux - 13210 - 3000441--|EgliseStLaurent-Capelette|_IGP0388|FXP_Monuments_IMG_1228|0_0019"
+title: "_IGP0386"
 slug: "prix-de-vente-marche-immobilier-ancien-marseille-13010-2019-2020"
 date: "2021-03-25 14:55:14"
 categories: ["Prix au m2 par arrondissement à Marseille"]

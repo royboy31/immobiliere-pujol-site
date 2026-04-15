@@ -1,11 +1,11 @@
 ---
-title: "Squat marseille|photo immeuble marseille|barre immeuble marseille"
+title: "Squat marseille"
 slug: "le-squat-a-marseille-un-probleme-de-plus-pour-les-quartiers-difficiles"
 date: "2018-01-22 07:43:58"
 categories: ["Mon quartier, ma ville Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/Squat-marseille.jpg"
-seoTitle: "C'est quoi le problème du squat? conséquence du squat d'un appartement à Marseille|C'est quoi le problème du squat? conséquence du squat d'un appartement à Marseille"
-seoDescription: "Le squat est devenu une difficulté à gérer à Marseille. Faites appel à des professionnels quand vous y êtes confrontés. Quoi faire et comment réagir afin de régler les problèmes concernant le squat dans votre appartement ?|Le squat est devenu une difficulté à gérer à Marseille. Faites appel à des professionnels quand vous y êtes confrontés. Quoi faire et comment réagir afin de régler les problèmes concernant le squat dans votre appartement ?"
+seoTitle: "C'est quoi le problème du squat? conséquence du squat d'un appartement à Marseille"
+seoDescription: "Le squat est devenu une difficulté à gérer à Marseille. Faites appel à des professionnels quand vous y êtes confrontés. Quoi faire et comment réagir afin de régler les problèmes concernant le squat dans votre appartement ?"
 ---
 
 Une de mes amies se révoltait contre la mairie et 13 habitat qui procédaient à des expulsions de squatter en pleine année scolaire. Le débat s’est donc engagé sur Facebook entre le droit de la propriété et l’humanisme. Le sujet est difficile.

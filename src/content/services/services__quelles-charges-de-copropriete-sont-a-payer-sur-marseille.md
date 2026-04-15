@@ -1,7 +1,7 @@
 ---
-title: "Estimation des honoraires du syndic pour la gestion de votre copropriété à Marseille ? &#8211; Immobilière Pujol"
+title: "Estimation des honoraires du syndic pour la gestion de votre copropriété à Marseille ? – Immobilière Pujol"
 slug: "services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille"
-seoDescription: "Estimez les honoraires de syndic à Marseille  Consultez L&#039;immobilière Pujol, syndic reconnu pour la qualité de son travail"
+seoDescription: "Estimez les honoraires de syndic à Marseille  Consultez L'immobilière Pujol, syndic reconnu pour la qualité de son travail"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -1,6 +1,6 @@
 {
   "id": 230042,
-  "title": "B000506_E1DC|B000506_E1DC.JPG|B000506_AD5E.JPG|B000506_ED76.JPG|B000506_FA48.JPG|B000506_584.JPG|B000506_3530.JPG",
+  "title": "B000506_E1DC.JPG",
   "slug": "v000506-vente-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000506-vente-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "Marseille",
   "quartier": "TIMONE",
-  "prix": 88000.0,
-  "charges": 98.0,
+  "prix": 88000,
+  "charges": 98,
   "honoraires": "0.00",
   "surface": 42.37,
   "surfaceTerrain": 42.37,

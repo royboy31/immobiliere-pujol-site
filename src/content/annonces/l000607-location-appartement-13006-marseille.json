@@ -1,6 +1,6 @@
 {
   "id": 52590,
-  "title": "LO00630001_8B2A14194299|LO00630001_129F|LO00630001_1DE6|LO00630001_27AE|LO00630001_2851|LO00630001_4D8|LO00630001_D5CA|LO00630001_E4AA|LO00630001_F618",
+  "title": "LO00630001_8B2A14194299",
   "slug": "l000607-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000607-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "BRETEUIL",
-  "prix": 760.0,
-  "charges": 60.0,
+  "prix": 760,
+  "charges": 60,
   "honoraires": "645.84",
   "garantie": "700",
   "surface": 49.68,

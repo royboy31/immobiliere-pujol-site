@@ -5,7 +5,7 @@ date: "2020-02-25 06:59:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13015-en-2019.jpg"
 seoTitle: "Quel est le prix de l&#039;immobilier dans le 13015 en 2019 ?"
-seoDescription: "Voici un comparatif des prix de l&#039;immobilier ancien dans le 13015 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
+seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13015 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

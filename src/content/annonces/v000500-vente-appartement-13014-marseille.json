@@ -1,6 +1,6 @@
 {
   "id": 229891,
-  "title": "B000500_16FE|B000500_16FE.jpg|B000500_48FC.jpg|B000500_634A.jpg|B000500_72ED.jpg|B000500_7F5F.jpg|B000500_B96B.jpg|B000500_F5D.jpg",
+  "title": "B000500_16FE.jpg",
   "slug": "v000500-vente-appartement-13014-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000500-vente-appartement-13014-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13014",
   "ville": "Marseille",
   "quartier": "SAINTE MARTHE",
-  "prix": 99000.0,
-  "charges": 106.0,
+  "prix": 99000,
+  "charges": 106,
   "honoraires": "0.00",
   "surface": 38.95,
   "surfaceTerrain": 38.95,

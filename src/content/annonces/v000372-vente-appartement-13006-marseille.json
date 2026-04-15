@@ -12,7 +12,7 @@
   "codePostal": "13006|13006|13006",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "PREFECTURE|PREFECTURE|PREFECTURE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "2|2|2",
   "nbEtages": "0",
@@ -34,6 +34,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Prefecture, Marseille, France|Appartement 2 pièces à vendre Prefecture, Marseille, France|Appartement 2 pièces à vendre Prefecture, Marseille, France",
-  "seoDescription": "Rue Bel Air, Type 2 avec balcon à rénover. Cet appartement se trouve au 2e étage avec ascenseur dans une résidence semi-récente. L&rsquo;appartement est en&#8230;|Rue Bel Air, Type 2 avec balcon à rénover. Cet appartement se trouve au 2e étage avec ascenseur dans une résidence semi-récente. L&rsquo;appartement est en&#8230;|Rue Bel Air, Type 2 avec balcon à rénover. Cet appartement se trouve au 2e étage avec ascenseur dans une résidence semi-récente. L&rsquo;appartement est en&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Prefecture, Marseille, France",
+  "seoDescription": "Rue Bel Air, Type 2 avec balcon à rénover. Cet appartement se trouve au 2e étage avec ascenseur dans une résidence semi-récente. L&rsquo;appartement est en&#8230;"
 }

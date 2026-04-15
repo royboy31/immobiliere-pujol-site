@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Une Solution Cle En Main Pour Les Proprietaires"
 slug: "local/gestion-de-bien-une-solution-cle-en-main-pour-les-proprietaires"
 date: "2023-05-09 14:51:48"
 ---

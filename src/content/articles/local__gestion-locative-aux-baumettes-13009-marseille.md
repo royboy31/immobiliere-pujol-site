@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative Aux Baumettes 13009 Marseille"
 slug: "local/gestion-locative-aux-baumettes-13009-marseille"
 date: "2023-05-09 14:32:12"
 ---

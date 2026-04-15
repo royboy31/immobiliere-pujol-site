@@ -12,7 +12,7 @@
   "codePostal": "13012|13012|13012",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "SAINT BARNABE|SAINT BARNABE|SAINT BARNABE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "8|8|8",
   "nbEtages": "0",
@@ -33,6 +33,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 4 pièces à vendre Saint Barnabe, Marseille, France|Appartement 4 pièces à vendre Saint Barnabe, Marseille, France|Appartement 4 pièces à vendre Saint Barnabe, Marseille, France",
-  "seoDescription": "Ce T4 fait environ 80 m² et se situe au 8eme étage avec ascenseur dans la Résidence Haiti avec chauffage et eau collectifs.L&rsquo;appartement est traversa&#8230;|Ce T4 fait environ 80 m² et se situe au 8eme étage avec ascenseur dans la Résidence Haiti avec chauffage et eau collectifs.L&rsquo;appartement est traversa&#8230;|Ce T4 fait environ 80 m² et se situe au 8eme étage avec ascenseur dans la Résidence Haiti avec chauffage et eau collectifs.L&rsquo;appartement est traversa&#8230;"
+  "seoTitle": "Appartement 4 pièces à vendre Saint Barnabe, Marseille, France",
+  "seoDescription": "Ce T4 fait environ 80 m² et se situe au 8eme étage avec ascenseur dans la Résidence Haiti avec chauffage et eau collectifs.L&rsquo;appartement est traversa&#8230;"
 }

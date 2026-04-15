@@ -1,5 +1,5 @@
 ---
-title: "compostage collectif en copropriété|exemple compostage collectivité copropriété"
+title: "compostage collectif en copropriété"
 slug: "compostage-dans-les-coproprietes-a-marseille"
 date: "2021-12-29 07:35:49"
 categories: ["Le marché immobilier à marseille"]

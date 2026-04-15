@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 de l'immobilier neuf dans le 13012 en 2018|13012-3"
+title: "prix au m2 de l'immobilier neuf dans le 13012 en 2018"
 slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13012-en-2018"
 date: "2019-05-15 09:49:53"
 categories: ["Arrondissements Marseille>Arrondissement 13012 Marseille", "Prix au m2 par arrondissement à Marseille"]

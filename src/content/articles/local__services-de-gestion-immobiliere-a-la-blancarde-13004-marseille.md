@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Services De Gestion Immobiliere A La Blancarde 13004 Marseille"
 slug: "local/services-de-gestion-immobiliere-a-la-blancarde-13004-marseille"
 date: "2023-08-28 14:54:31"
 ---

@@ -1,6 +1,6 @@
 {
   "id": 230565,
-  "title": "B000510_42D8|B000510_42D8.JPG|B000510_FC7C.JPG|B000510_3338.JPG|B000510_7275.JPG|B000510_FFE2.JPG|B000510_D026.JPG|B000510_E834.JPG",
+  "title": "B000510_42D8.JPG",
   "slug": "v000510-produit-dinvestissement-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000510-produit-dinvestissement-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "Marseille",
   "quartier": "LE CABOT",
-  "prix": 72000.0,
-  "charges": 47.0,
+  "prix": 72000,
+  "charges": 47,
   "honoraires": "0.00",
   "surface": 20.47,
   "surfaceTerrain": 20.47,

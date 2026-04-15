@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 immobilier ancien 13003|garage-belle-de-mai-13002|garage-belle-de-mai-13002-1|garage-belle-de-mai-13002-1-1"
+title: "prix au m2 immobilier ancien 13003"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13003-en-2018"
 date: "2019-05-29 08:22:38"
 categories: ["Prix au m2 par arrondissement à Marseille"]

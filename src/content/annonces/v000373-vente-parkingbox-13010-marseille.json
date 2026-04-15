@@ -12,9 +12,9 @@
   "codePostal": "13010|13010|13010",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CAPELETTE|CAPELETTE|CAPELETTE",
-  "charges": 0.0,
-  "surface": 0.0,
-  "surfaceTerrain": 0.0,
+  "charges": 0,
+  "surface": 0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
   "nbWC": 0,
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Parking/Box 2 emplacements à vendre Capelette, Marseille, France|Parking/Box 2 emplacements à vendre Capelette, Marseille, France|Parking/Box 2 emplacements à vendre Capelette, Marseille, France",
-  "seoDescription": "Vente d&rsquo;un grand garage double (une voiture derrière l&rsquo;autre) en sous-sol dans une résidence récente situé Bd St Jean 13010 MarseilleBien situé&#8230;|Vente d&rsquo;un grand garage double (une voiture derrière l&rsquo;autre) en sous-sol dans une résidence récente situé Bd St Jean 13010 MarseilleBien situé&#8230;|Vente d&rsquo;un grand garage double (une voiture derrière l&rsquo;autre) en sous-sol dans une résidence récente situé Bd St Jean 13010 MarseilleBien situé&#8230;"
+  "seoTitle": "Parking/Box 2 emplacements à vendre Capelette, Marseille, France",
+  "seoDescription": "Vente d&rsquo;un grand garage double (une voiture derrière l&rsquo;autre) en sous-sol dans une résidence récente situé Bd St Jean 13010 MarseilleBien situé&#8230;"
 }

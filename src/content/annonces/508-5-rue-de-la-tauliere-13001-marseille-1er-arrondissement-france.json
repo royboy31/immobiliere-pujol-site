@@ -1,6 +1,6 @@
 {
   "id": 1305927,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "508-5-rue-de-la-tauliere-13001-marseille-1er-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/508-5-rue-de-la-tauliere-13001-marseille-1er-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "5 Rue De La Tauliere, 13001, Marseille 1er Arrondissement, France",
-  "prix": 780.0,
-  "charges": 30.0,
+  "prix": 780,
+  "charges": 30,
   "honoraires": "513.89",
   "garantie": "750",
   "surface": 39.53,

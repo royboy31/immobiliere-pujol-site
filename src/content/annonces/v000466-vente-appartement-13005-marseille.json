@@ -1,6 +1,6 @@
 {
   "id": 228150,
-  "title": "B000466_82BB.jpg|B000466_C400.jpg|B000466_B827.jpg|B000466_A625.jpg|B000466_51A5.jpg|B000466_6F31.jpg|B000466_777F.jpg|B000466_6444.jpg",
+  "title": "B000466_82BB.jpg",
   "slug": "v000466-vente-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000466-vente-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "Marseille",
   "quartier": "BAILLE",
-  "prix": 115000.0,
-  "charges": 50.0,
+  "prix": 115000,
+  "charges": 50,
   "honoraires": "0.00",
   "surface": 39.6,
   "surfaceTerrain": 39.6,

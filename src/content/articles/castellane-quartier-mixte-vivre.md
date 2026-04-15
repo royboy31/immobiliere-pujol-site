@@ -1,12 +1,12 @@
 ---
-title: "castellane|Capture-1"
+title: "castellane"
 slug: "castellane-quartier-mixte-vivre"
 date: "2017-01-20 15:00:32"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille", "Mon quartier, ma ville Marseille"]
 tags: ["acheter à marseille", "castellane", "louer à marseille", "marseille", "ou vivre a marseille", "trouver un appartement à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/castellane.jpg"
-seoTitle: "Castellane : un quartier où vivre à Marseille - L'immobilier à Marseille|Castellane : un quartier où vivre à Marseille - L'immobilier à Marseille"
-seoDescription: "Pour moi, Castellane est un quartier où il fait bon vivre, l’exemple même d’une mixité réussie. Historiquement, ce quartier de Marseille ...|Pour moi, Castellane est un quartier où il fait bon vivre, l’exemple même d’une mixité réussie. Historiquement, ce quartier de Marseille ..."
+seoTitle: "Castellane : un quartier où vivre à Marseille - L'immobilier à Marseille"
+seoDescription: "Pour moi, Castellane est un quartier où il fait bon vivre, l’exemple même d’une mixité réussie. Historiquement, ce quartier de Marseille ..."
 ---
 
 <p>Castellane est l’exemple même d’une mixité réussie. Historiquement, ce quartier du sixième arrondissement de Marseille était surtout connu pour être bourgeois. Aujourd’hui encore, il s’agit d’<strong>un quartier où il fait bon vivre à Marseille</strong>.</p>

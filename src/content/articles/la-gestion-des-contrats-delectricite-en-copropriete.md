@@ -1,11 +1,11 @@
 ---
-title: "prix electricite copropriete|negociation contrat electricite syndic|devis syndic"
+title: "prix electricite copropriete"
 slug: "la-gestion-des-contrats-delectricite-en-copropriete"
 date: "2023-09-19 05:05:10"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/IMG_0319-scaled.jpg"
 seoTitle: "Comment votre syndic négocie-t-il vos contrats d&#039;électricité?"
-seoDescription: "Chez Immobilière Pujol Marseille,  nous nous engageons en tant que syndic à négocier le meilleur prix d&#039;électricité pour votre copropriété et à faire baisser vos charges. En savoir plus sur nos méthodes."
+seoDescription: "Chez Immobilière Pujol Marseille,  nous nous engageons en tant que syndic à négocier le meilleur prix d'électricité pour votre copropriété et à faire baisser vos charges. En savoir plus sur nos méthodes."
 ---
 
 <div>Notre objectif en tant que syndic est de réduire en permanence les charges dans les copropriétés que nous gérons.</div>

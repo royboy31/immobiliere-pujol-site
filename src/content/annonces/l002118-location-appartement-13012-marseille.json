@@ -1,6 +1,6 @@
 {
   "id": 229627,
-  "title": "L002118_A3F7.jpg|L002118_B82D.jpg|L002118_AF05.jpg|L002118_9A59.jpg|L002118_82B9.jpg|L002118_5450.jpg|L002118_C5BB.jpg|L002118_D4A1.jpg|L002118_E1E0.jpg",
+  "title": "L002118_A3F7.jpg",
   "slug": "l002118-location-appartement-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002118-location-appartement-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "Marseille",
   "quartier": "SAINT-JULIEN",
-  "prix": 1240.0,
-  "charges": 228.0,
+  "prix": 1240,
+  "charges": 228,
   "honoraires": "728.64",
   "garantie": "1012",
   "surface": 80.6,

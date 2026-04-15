@@ -5,8 +5,8 @@ date: "2017-06-12 04:38:34"
 categories: ["Arrondissements Marseille>Arrondissement 13006 Marseille", "Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille", "Mon quartier, ma ville Marseille"]
 tags: ["acheter appartement 13006", "acheter appartement ancien", "acheter appartement marseille", "acheter appartement neuf", "acheter un appartement", "acheter un appartement castellane", "investir immobilier marseille", "Programme neuf marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/B000396_BA10.jpg"
-seoTitle: "Acheter à Castellane pour 200 000 € - Immobilière Pujol|Acheter à Castellane pour 200 000 € - Immobilière Pujol"
-seoDescription: "Je vous propose de passer en revue ce qui se vend à Castellane (13006) entre 150 000€ et 200 000€, dans le neuf ou l'ancien. Il y a en a pour tous les goûts car le quartier est ouvert à la ville et à tous ses habitants .|Je vous propose de passer en revue ce qui se vend à Castellane (13006) entre 150 000€ et 200 000€, dans le neuf ou l'ancien. Il y a en a pour tous les goûts car le quartier est ouvert à la ville et à tous ses habitants ."
+seoTitle: "Acheter à Castellane pour 200 000 € - Immobilière Pujol"
+seoDescription: "Je vous propose de passer en revue ce qui se vend à Castellane (13006) entre 150 000€ et 200 000€, dans le neuf ou l'ancien. Il y a en a pour tous les goûts car le quartier est ouvert à la ville et à tous ses habitants ."
 ---
 
 <span style="font-weight: 400;">J’aime le 6e arrondissement de Marseille : vous le savez. Castellane est mon quartier préféré, celui où j’investis et fais investir mes clients sans l’ombre d’une hésitation. Je vous propose de passer en revue ce qui s’y vend entre 150 000€ et 200 000€.</span>

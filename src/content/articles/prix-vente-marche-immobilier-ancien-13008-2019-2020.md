@@ -1,5 +1,5 @@
 ---
-title: "le corbusier|prix m2 appartements anciens par marseille 13008 par quartier|prix m2 appartements anciens par type marseille 13008|prix m2 appartements anciens par marseille 13008 Bonneveine|prix m2 appartements anciens marseille 13008 perier|prix m2 appartements anciens marseille 13008 la plage|prix m2 appartements anciens marseille 13008 pointe rouge|7|8|9|10|pouce-cesar-marseille-600x360-600x360|LO13160001_2F41|centon|pointu-les-goudes9|balade-parc-26eme-centenaire.jpg__2000x1328_q85_crop_subsampling-2|13.01-Rond-point-du-Prado-083-Marseille-format-site-300x200|P1030080|_MG_3426DxO|9-New Marseille Low © By StephPeyriguerPhotographer-46|parc (Copy)|la-madrague marseille 13008|plan-à-voile-pionte-rouge3|Prix de vente dans marseille 13008 (1)|IMG_0095"
+title: "le corbusier"
 slug: "prix-vente-marche-immobilier-ancien-13008-2019-2020"
 date: "2021-02-25 17:15:44"
 categories: ["Prix au m2 par arrondissement à Marseille"]

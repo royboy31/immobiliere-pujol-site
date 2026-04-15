@@ -1,7 +1,7 @@
 ---
-title: "Notre assurance garantie loyers impayés au taux de 1,8% TTC &#8211; Immobilière Pujol"
+title: "Notre assurance garantie loyers impayés au taux de 1,8% TTC – Immobilière Pujol"
 slug: "services/notre-garantie-de-loyers-impayes"
-seoDescription: "Bénéficiez d&#039;une assurance loyers impayés au taux bas de 1,8% TTC et sans franchise en étant client de l&#039;Immobilière Pujol pour la gestion locative de votre bien. Devis en moins de 24h"
+seoDescription: "Bénéficiez d'une assurance loyers impayés au taux bas de 1,8% TTC et sans franchise en étant client de l'Immobilière Pujol pour la gestion locative de votre bien. Devis en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

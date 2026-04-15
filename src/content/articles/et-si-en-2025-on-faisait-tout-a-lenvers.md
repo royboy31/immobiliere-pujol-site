@@ -1,5 +1,5 @@
 ---
-title: "equipe pujol 2024|carte voeux 2024 (1)"
+title: "equipe pujol 2024"
 slug: "et-si-en-2025-on-faisait-tout-a-lenvers"
 date: "2025-01-02 08:59:04"
 categories: ["Le marché immobilier à marseille"]

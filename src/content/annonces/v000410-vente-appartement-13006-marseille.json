@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "LODI|LODI|LODI",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "3|3|3",
   "nbEtages": "4|4|4",
@@ -33,6 +33,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Lodi, Marseille, France|Appartement 3 pièces à vendre Lodi, Marseille, France|Appartement 3 pièces à vendre Lodi, Marseille, France",
-  "seoDescription": "EXCLUSIVITE T3 de 78m² +cave situé rue de Lodi 13006 Marseille.Dans un immeuble ancien typique marseillais, bien entretenu, ce T3 à rénover, traversant, au&#8230;|EXCLUSIVITE T3 de 78m² +cave situé rue de Lodi 13006 Marseille.Dans un immeuble ancien typique marseillais, bien entretenu, ce T3 à rénover, traversant, au&#8230;|EXCLUSIVITE T3 de 78m² +cave situé rue de Lodi 13006 Marseille.Dans un immeuble ancien typique marseillais, bien entretenu, ce T3 à rénover, traversant, au&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Lodi, Marseille, France",
+  "seoDescription": "EXCLUSIVITE T3 de 78m² +cave situé rue de Lodi 13006 Marseille.Dans un immeuble ancien typique marseillais, bien entretenu, ce T3 à rénover, traversant, au&#8230;"
 }

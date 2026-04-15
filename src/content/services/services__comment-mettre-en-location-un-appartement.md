@@ -1,7 +1,7 @@
 ---
-title: "Comment mettre en location un appartement? &#8211; Immobilière Pujol"
+title: "Comment mettre en location un appartement? – Immobilière Pujol"
 slug: "services/comment-mettre-en-location-un-appartement"
-seoDescription: "Louer vite et bien Marseille . Comment et pourquoi choisir l&#039;agence immobilière Pujol spécialiste de la location à Marseille reconnue et recommandée"
+seoDescription: "Louer vite et bien Marseille . Comment et pourquoi choisir l'agence immobilière Pujol spécialiste de la location à Marseille reconnue et recommandée"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

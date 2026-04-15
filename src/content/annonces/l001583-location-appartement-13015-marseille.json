@@ -1,6 +1,6 @@
 {
   "id": 90961,
-  "title": "LO32080002_B559.JPG|LO32080002_F2D7.JPG|LO32080002_DCF6.JPG|LO32080002_713.JPG|LO32080002_1103.JPG",
+  "title": "LO32080002_B559.JPG",
   "slug": "l001583-location-appartement-13015-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001583-location-appartement-13015-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13015",
   "ville": "MARSEILLE",
   "quartier": "LA CABUCELLE",
-  "prix": 500.0,
-  "charges": 30.0,
+  "prix": 500,
+  "charges": 30,
   "honoraires": "645.06",
   "garantie": "470",
   "surface": 49.62,

@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 de l'immobilier neuf dans le 13015 en 2018|13015-1"
+title: "prix au m2 de l'immobilier neuf dans le 13015 en 2018"
 slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13015-en-2018"
 date: "2019-05-15 12:55:24"
 categories: ["Prix au m2 par arrondissement à Marseille"]

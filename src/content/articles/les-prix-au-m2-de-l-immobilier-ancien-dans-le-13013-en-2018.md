@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 de l'immobilier ancien dans le 13013|13010-1"
+title: "prix au m2 de l'immobilier ancien dans le 13013"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13013-en-2018"
 date: "2019-06-13 07:58:49"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -1,6 +1,6 @@
 {
   "id": 86963,
-  "title": "LO04340009_2105|LO04340009_114C|LO04340009_3773|LO04340009_3E57|LO04340009_4692|LO04340009_CF89|LO04340009_F88D",
+  "title": "LO04340009_2105",
   "slug": "l001564-location-appartement-13011-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001564-location-appartement-13011-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13011",
   "ville": "MARSEILLE",
   "quartier": "SAINT-MARCEL",
-  "prix": 395.0,
-  "charges": 20.0,
+  "prix": 395,
+  "charges": 20,
   "honoraires": "239.46",
   "garantie": "750",
   "surface": 18.42,

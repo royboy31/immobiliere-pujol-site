@@ -1,5 +1,5 @@
 ---
-title: "immeuble a risque|Immeuble a risque marseille"
+title: "immeuble a risque"
 slug: "quest-ce-quun-immeuble-a-risque"
 date: "2019-02-07 04:59:10"
 categories: ["Mon quartier, ma ville Marseille"]

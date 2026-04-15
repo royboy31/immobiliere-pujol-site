@@ -1,11 +1,11 @@
 ---
-title: "photo immeuble marseille|prix-au-m2-13010|10 ème arrondissement loer 2018"
+title: "photo immeuble marseille"
 slug: "prix-m2-loyers-13010"
 date: "2020-02-05 10:35:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/photo-marseille.jpeg"
 seoTitle: "Les prix au m2 des loyers dans le 13010 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 12,4 dans le 13010.  La durée d&#039;occupation moyenne est de 47 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 12,4 dans le 13010.  La durée d'occupation moyenne est de 47 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

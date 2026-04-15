@@ -1,7 +1,7 @@
 ---
-title: "Location d&rsquo;appartements à Marseille : nos résultats et nos tarifs ! &#8211; Immobilière Pujol"
+title: "Location d'appartements à Marseille : nos résultats et nos tarifs ! – Immobilière Pujol"
 slug: "services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix"
-seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de taux d&#039;encaissements des loyers. Immobilière Pujol, une agence recommandée par ses clients"
+seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de taux d'encaissements des loyers. Immobilière Pujol, une agence recommandée par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

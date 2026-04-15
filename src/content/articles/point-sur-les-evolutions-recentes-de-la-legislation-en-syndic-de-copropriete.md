@@ -5,7 +5,7 @@ date: "2020-05-31 16:37:31"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/revendication_640x480.jpg"
 seoTitle: "Les évolutions de la législation en syndic de copropriété"
-seoDescription: "MERCI AU COVID d&#039;avoir accélérer l&#039;évolution de notre législation en syndic de copropriété. Point sur cette évolution"
+seoDescription: "MERCI AU COVID d'avoir accélérer l'évolution de notre législation en syndic de copropriété. Point sur cette évolution"
 ---
 
 <p>Grâce à un webinar de l'Unis, syndicat professionnel dont nous sommes membre, Christophe Ballery qui a rejoint notre équipe depuis quelques mois a rédigé une synthèse sur les évolutions des lois en copropriété, à destination de notre équipe que nous vous partageons également, vous, nos clients et nos lecteurs.</p>

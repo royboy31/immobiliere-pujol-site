@@ -1,6 +1,6 @@
 {
   "id": 52913,
-  "title": "LO12400004_A75D|LO12400004_A75D.JPG|LO12400004_BE32.JPG|LO12400004_C9BC.JPG|LO12400004_D575.JPG|LO12400004_EB9F.JPG|LO12400004_FAA4.JPG|LO12400004_D71A.JPG",
+  "title": "LO12400004_A75D.JPG",
   "slug": "l000622-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000622-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "ENDOUME",
-  "prix": 488.0,
-  "charges": 37.0,
+  "prix": 488,
+  "charges": 37,
   "honoraires": "473.20",
   "garantie": "451",
   "surface": 36.4,

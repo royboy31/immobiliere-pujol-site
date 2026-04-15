@@ -1,6 +1,6 @@
 {
   "id": 51854,
-  "title": "LO11650001_690912034218|LO11650001_2A6C|LO11650001_35CE|LO11650001_3683|LO11650001_3EA0|LO11650001_567F|LO11650001_8BA9|LO11650001_A230.JPG",
+  "title": "LO11650001_690912034218",
   "slug": "l001919-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001919-location-appartement-13006-marseille/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "122 Boulevard Notre Dame, Vauban, 13006, MARSEILLE, France",
   "codePostal": "13006",
   "ville": "MARSEILLE",
-  "prix": 700.0,
-  "charges": 40.0,
+  "prix": 700,
+  "charges": 40,
   "honoraires": "349.44",
   "garantie": "660",
   "surface": 26.88,

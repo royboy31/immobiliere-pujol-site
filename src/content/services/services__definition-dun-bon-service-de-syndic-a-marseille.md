@@ -1,7 +1,7 @@
 ---
-title: "Comment établir un cahier des charges de contrat de syndic? &#8211; Immobilière Pujol"
+title: "Comment établir un cahier des charges de contrat de syndic? – Immobilière Pujol"
 slug: "services/definition-dun-bon-service-de-syndic-a-marseille"
-seoDescription: "Une copropriété bien géré, c&#039;est un bon service syndic et un cadre de gestion équilibré. Cela permet d&#039;optimiser vos charges. Consultez l&#039;immobilière Pujol"
+seoDescription: "Une copropriété bien géré, c'est un bon service syndic et un cadre de gestion équilibré. Cela permet d'optimiser vos charges. Consultez l'immobilière Pujol"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

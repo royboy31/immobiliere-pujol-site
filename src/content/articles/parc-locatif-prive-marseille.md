@@ -1,5 +1,5 @@
 ---
-title: "analyse loyers marseille|FireShot Capture 475 - GESTION immobiliere pujol et So nice - Chat - mail.google.com|FireShot Capture 479 - Zoom sur le niveau des loyers à Marseille - Google Docs - docs.google.com|FireShot Capture 478 - Zoom sur le niveau des loyers à Marseille - Google Docs - docs.google.com|FireShot Capture 476 - Yanport - App - app.yanport.com|FireShot Capture 474 - AVIS CLIENTS - Chat - mail.google.com|Image1|prix des loyers a marseille|ECOLUTON LOYER DE MARCHE A MARSEILLE|analyse"
+title: "analyse loyers marseille"
 slug: "parc-locatif-prive-marseille"
 date: "2024-10-18 09:33:36"
 categories: ["Le marché immobilier à marseille"]

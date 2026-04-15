@@ -1,5 +1,5 @@
 ---
-title: "Vendre son appartement à Marseille fin 2025|Vendre son appartement à Marseille fin 2025"
+title: "Vendre son appartement à Marseille fin 2025"
 slug: "marche-vente-marseille-fin-2025"
 date: "2025-12-04 13:51:03"
 categories: ["Le marché immobilier à marseille"]

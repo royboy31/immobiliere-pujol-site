@@ -1,5 +1,5 @@
 ---
-title: "Les prix au m2 de l'immobilier neuf dans le 13001 en 2018|Les prix au m2 de l'immobilier neuf dans le 13001 en 2018"
+title: "Les prix au m2 de l'immobilier neuf dans le 13001 en 2018"
 slug: "prix-immobilier-neuf-marseille-13001-2018"
 date: "2019-06-25 16:00:34"
 categories: ["Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13001"]

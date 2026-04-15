@@ -1,6 +1,6 @@
 {
   "id": 53636,
-  "title": "LO34450001_F168|LO34450001_101D|LO34450001_1ADC|LO34450001_26F3|LO34450001_32DB|LO34450001_3EE2|LO34450001_57D",
+  "title": "LO34450001_F168",
   "slug": "l001977-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001977-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "ST PIERRE/JEANNE D'A",
-  "prix": 474.0,
-  "charges": 50.0,
+  "prix": 474,
+  "charges": 50,
   "honoraires": "399.75",
   "garantie": "424",
   "surface": 30.75,

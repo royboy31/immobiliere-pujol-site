@@ -1,5 +1,5 @@
 ---
-title: "amelioration enrgetique location marseille|caroline|entreprise de renovation energetique marseille|signature caro"
+title: "amelioration enrgetique location marseille"
 slug: "deficit-foncier-pour-les-bailleurs-hausse-du-plafond"
 date: "2023-09-18 09:05:37"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

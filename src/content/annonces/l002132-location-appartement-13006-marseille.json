@@ -1,6 +1,6 @@
 {
   "id": 229807,
-  "title": "LO37410001_1FAC.JPG|LO37410001_3C1E.JPG|LO37410001_4BEE.JPG|LO37410001_6795.JPG|LO37410001_8186.JPG|LO37410001_8FA1.JPG|LO37410001_A52D.JPG",
+  "title": "LO37410001_1FAC.JPG",
   "slug": "l002132-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002132-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "PALAIS DE JUSTICE",
-  "prix": 595.0,
-  "charges": 25.0,
+  "prix": 595,
+  "charges": 25,
   "honoraires": "360",
   "garantie": "570",
   "surface": 40.15,

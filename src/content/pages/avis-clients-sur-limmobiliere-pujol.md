@@ -1,9 +1,9 @@
 ---
-title: ""
+title: "Avis sur l'agence immobilière Pujol à Marseille"
 slug: "avis-clients-sur-limmobiliere-pujol"
 date: "2021-01-07 16:57:24"
 seoTitle: "Avis sur l&#039;agence immobilière Pujol à Marseille"
-seoDescription: "Consultez les avis clients sur l&#039;Immobilière Pujol, agence immobilière à Marseille - syndic- gestion locative- vente de biens immobiliers"
+seoDescription: "Consultez les avis clients sur l'Immobilière Pujol, agence immobilière à Marseille - syndic- gestion locative- vente de biens immobiliers"
 ---
 
 <p><img class="wp-image-385835 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol--800x257.jpg" alt="" width="664" height="214" /></p>

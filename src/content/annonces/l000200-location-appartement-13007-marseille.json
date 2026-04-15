@@ -1,6 +1,6 @@
 {
   "id": 80900,
-  "title": "{\"discarded_img\":0,\"scene\":2}|LO30350001_3335.JPG|LO30350001_5CC5.JPG|LO30350001_6934.JPG|LO30350001_84A2.JPG|LO30350001_9333.JPG|LO30350001_C6F1.JPG|LO30350001_D42C.JPG|LO30350001_F505.JPG|LO30350001_A157.JPG",
+  "title": "{\"discarded_img\":0,\"scene\":2}",
   "slug": "l000200-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000200-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "CORDERIE",
-  "prix": 1045.0,
-  "charges": 145.0,
+  "prix": 1045,
+  "charges": 145,
   "honoraires": "938.86",
   "garantie": "900",
   "surface": 72.22,

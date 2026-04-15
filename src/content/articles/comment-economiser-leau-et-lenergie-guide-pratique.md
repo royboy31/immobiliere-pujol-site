@@ -5,7 +5,7 @@ date: "2023-03-07 10:51:57"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/GESTES-pour-reduitre-facrture-eau-et-electricite.jpg"
 seoTitle: "Guide pour éconimiser eau et électricité"
-seoDescription: "Guide publié par l&#039;ADEME afin de réduire vois facture d&#039;eau et d&#039;électricité\nLes gestes à mettre en place"
+seoDescription: "Guide publié par l'ADEME afin de réduire vois facture d'eau et d'électricité\nLes gestes à mettre en place"
 ---
 
 <p>Cet article vous donne accès au  guide de l'ADEME sur les gestes à mettre en place pour faire de économie d'eau et d'électricité </p>

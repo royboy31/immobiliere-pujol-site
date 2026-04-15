@@ -1,7 +1,7 @@
 ---
-title: "Le blog de l&rsquo;immobilière Pujol &#8211; Immobilière Pujol"
+title: "Le blog de l'immobilière Pujol – Immobilière Pujol"
 slug: "services/le-blog-de-limmobiliere-pujol"
-seoDescription: "Ce blog est un espace d&#039;information et de communication pour nos clients et nos futurs clients. Nous le tenons depuis la création de la société  au gré du temps et des ressources que nous pouvons y consacrer et au gré de nos envies. C&#039;est aussi un espace de liberté, d&#039;avis…"
+seoDescription: "Ce blog est un espace d'information et de communication pour nos clients et nos futurs clients. Nous le tenons depuis la création de la société  au gré du temps et des ressources que nous pouvons y consacrer et au gré de nos envies. C'est aussi un espace de liberté, d'avis…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

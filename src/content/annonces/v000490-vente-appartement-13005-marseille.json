@@ -1,6 +1,6 @@
 {
   "id": 229397,
-  "title": "B000490_16CF.jpg|B000490_6A02.jpg|B000490_78E8.jpg|B000490_854C.jpg|B000490_A9FD.jpg|B000490_9914.jpg",
+  "title": "B000490_16CF.jpg",
   "slug": "v000490-vente-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000490-vente-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "Marseille",
   "quartier": "BAILLE/CONCEPTION",
-  "prix": 105000.0,
-  "charges": 70.0,
+  "prix": 105000,
+  "charges": 70,
   "honoraires": "0.00",
   "surface": 42.92,
   "surfaceTerrain": 42.92,

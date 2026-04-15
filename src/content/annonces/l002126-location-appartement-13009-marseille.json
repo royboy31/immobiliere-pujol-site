@@ -1,6 +1,6 @@
 {
   "id": 229696,
-  "title": "LO34440001_3FDB|LO34440001_3FDB.JPG|LO34440001_2637.JPG|LO34440001_D777.JPG|LO34440001_F3BA.JPG|LO34440001_FD8F.JPG",
+  "title": "LO34440001_3FDB.JPG",
   "slug": "l002126-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002126-location-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "MARSEILLE",
   "quartier": "MAZARGUES",
-  "prix": 380.0,
-  "charges": 20.0,
+  "prix": 380,
+  "charges": 20,
   "honoraires": "307.19",
   "garantie": "360",
   "surface": 23.63,

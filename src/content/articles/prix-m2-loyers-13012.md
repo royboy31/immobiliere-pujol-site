@@ -1,11 +1,11 @@
 ---
-title: "Marseille-Saint-Julien455|12 ème arrondissement loyer 2018"
+title: "Marseille-Saint-Julien455"
 slug: "prix-m2-loyers-13012"
 date: "2020-02-01 10:39:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Saint-Julien455.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13012 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13012.  La durée d&#039;occupation moyenne est de 50 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13012.  La durée d'occupation moyenne est de 50 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

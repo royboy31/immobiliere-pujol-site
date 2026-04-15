@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "COURS JULIEN|COURS JULIEN|COURS JULIEN",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -36,6 +36,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Local 7 pièces produit d'investissement Cours Julien, Marseille, France|Local 7 pièces produit d'investissement Cours Julien, Marseille, France|Local 7 pièces produit d'investissement Cours Julien, Marseille, France",
-  "seoDescription": "Local 7 pièces|Local 7 pièces|Local 7 pièces"
+  "seoTitle": "Local 7 pièces produit d'investissement Cours Julien, Marseille, France",
+  "seoDescription": "Local 7 pièces"
 }

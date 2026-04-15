@@ -5,8 +5,8 @@ date: "2013-01-13 00:58:38"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: ["investissement marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/50-testaniere.png"
-seoTitle: "Marché de l'immobilier: arrêt de l'investissement à Marseille|Marché de l'immobilier: arrêt de l'investissement à Marseille"
-seoDescription: "Tous les projets d'investissement locatif à Marseille, sont-ils en stand by ou carrément arrêtés? Les vendeurs sont dans un creux d’activité depuis déjà 6 mois avec uniquement de petits investissements. Quelques vendeurs contraints, quelques exilés fiscaux en partance qui liquident leur patrimoine.|Tous les projets d'investissement locatif à Marseille, sont-ils en stand by ou carrément arrêtés? Les vendeurs sont dans un creux d’activité depuis déjà 6 mois avec uniquement de petits investissements. Quelques vendeurs contraints, quelques exilés fiscaux en partance qui liquident leur patrimoine."
+seoTitle: "Marché de l'immobilier: arrêt de l'investissement à Marseille"
+seoDescription: "Tous les projets d'investissement locatif à Marseille, sont-ils en stand by ou carrément arrêtés? Les vendeurs sont dans un creux d’activité depuis déjà 6 mois avec uniquement de petits investissements. Quelques vendeurs contraints, quelques exilés fiscaux en partance qui liquident leur patrimoine."
 ---
 
 <img class="wp-image-2383 size-medium alignright" title="exit l'investisseur immobilier" src="https://www.immobiliere-pujol.fr/content/uploads/2013/01/exit-linvestisseur-immobilier-225x300.jpg" alt="" width="225" height="300" />

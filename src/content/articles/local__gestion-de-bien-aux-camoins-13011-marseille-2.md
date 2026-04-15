@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Aux Camoins 13011 Marseille 2"
 slug: "local/gestion-de-bien-aux-camoins-13011-marseille-2"
 date: "2023-05-09 15:14:33"
 ---

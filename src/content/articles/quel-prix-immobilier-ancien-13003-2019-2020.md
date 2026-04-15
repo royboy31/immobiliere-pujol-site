@@ -1,5 +1,5 @@
 ---
-title: "Caserne_du_Muy|images|téléchargement|téléchargement (1)|téléchargement (3)|This-Is-Not-Music-005"
+title: "Caserne_du_Muy"
 slug: "quel-prix-immobilier-ancien-13003-2019-2020"
 date: "2021-01-10 18:03:58"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -1,7 +1,7 @@
 ---
-title: "Comment évaluer son syndic? &#8211; Immobilière Pujol"
+title: "Comment évaluer son syndic? – Immobilière Pujol"
 slug: "services/definition-de-syndic-professionnel-le-gestionnaire-de-copropriete-a-marseille"
-seoDescription: "Comment évaluez le service de votre syndic de copropriété à Marseille ? Consultez l&#039;Immobilière Pujol, le syndic le plus recommandés par ses clients"
+seoDescription: "Comment évaluez le service de votre syndic de copropriété à Marseille ? Consultez l'Immobilière Pujol, le syndic le plus recommandés par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

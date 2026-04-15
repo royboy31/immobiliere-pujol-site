@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Saint Menet 13019 Marseille"
 slug: "local/gestion-dappartements-a-saint-menet-13019-marseille"
 date: "2024-01-04 13:17:29"
 ---

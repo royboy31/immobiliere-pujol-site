@@ -1,6 +1,6 @@
 {
   "id": 54914,
-  "title": "LO36640003_AABF|LO36640003_8B4E|LO36640003_A0AC|LO36640003_B5EB|LO36640003_C02D",
+  "title": "LO36640003_AABF",
   "slug": "l002032-location-bureaux-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002032-location-bureaux-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "PREFECTURE",
-  "prix": 650.0,
-  "charges": 0.0,
+  "prix": 650,
+  "charges": 0,
   "honoraires": "936",
   "garantie": "650",
   "surface": 56.28,

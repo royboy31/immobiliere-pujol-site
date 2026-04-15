@@ -1,6 +1,6 @@
 {
   "id": 54521,
-  "title": "LO33220007_41A9.JPG|LO33220007_8E94|LO33220007_EF16.JPG|LO33220007_F351.JPG|LO33220007_4FFC.JPG|LO33220007_6D6C.JPG|LO33220007_619.JPG|LO33220007_975B.JPG",
+  "title": "LO33220007_41A9.JPG",
   "slug": "l001392-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001392-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "ROUCAS BLANC",
-  "prix": 675.0,
-  "charges": 55.0,
+  "prix": 675,
+  "charges": 55,
   "honoraires": "546.26",
   "garantie": "620",
   "surface": 42.02,

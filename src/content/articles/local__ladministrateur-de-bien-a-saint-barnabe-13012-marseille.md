@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Bien A Saint Barnabe 13012 Marseille"
 slug: "local/ladministrateur-de-bien-a-saint-barnabe-13012-marseille"
 date: "2024-05-13 13:11:09"
 ---

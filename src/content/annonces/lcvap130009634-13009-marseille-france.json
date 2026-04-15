@@ -1,6 +1,6 @@
 {
   "id": 1082276,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "lcvap130009634-13009-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/lcvap130009634-13009-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13009, Marseille, France",
-  "prix": 205000.0,
-  "charges": 76.0,
+  "prix": 205000,
+  "charges": 76,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 40.75,

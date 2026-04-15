@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bureaux A Malpasse 13013 Marseille"
 slug: "local/gestion-de-bureaux-a-malpasse-13013-marseille"
 date: "2023-05-09 15:38:06"
 ---

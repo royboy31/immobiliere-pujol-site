@@ -1,5 +1,5 @@
 ---
-title: "prix de l'immobilier ancien 13007|13007"
+title: "prix de l'immobilier ancien 13007"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13007-en-2018"
 date: "2019-06-04 12:53:10"
 categories: ["Prix au m2 par arrondissement à Marseille"]

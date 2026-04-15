@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Pont De Vivaux 13013 Marseille 2"
 slug: "local/gestion-de-bien-a-pont-de-vivaux-13013-marseille-2"
 date: "2023-05-09 15:14:03"
 ---

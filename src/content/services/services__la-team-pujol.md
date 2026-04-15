@@ -1,5 +1,5 @@
 ---
-title: "La team Pujol &#8211; Immobilière Pujol"
+title: "La team Pujol – Immobilière Pujol"
 slug: "services/la-team-pujol"
 seoDescription: "A la rencontre de notre équipe ! Nous aimons notre métier mais nous aimons aussi partager de bons moments ensemble, rire, chanter, danser, .........."
 ---

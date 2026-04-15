@@ -1,5 +1,5 @@
 ---
-title: "residence tourisme lmnp|residence-tourisme-lmnp|Ne-vous-faites-pas-avoir-residence-avec-service"
+title: "residence tourisme lmnp"
 slug: "arnaque-residence-service"
 date: "2019-09-20 06:28:32"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

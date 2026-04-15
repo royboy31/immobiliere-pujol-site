@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Agence de location Marseille – Immobilière Pujol"
 slug: "agence-de-location-marseille"
 date: "2018-11-26 14:19:03"
 seoTitle: "Agence de location Marseille – Immobilière Pujol"

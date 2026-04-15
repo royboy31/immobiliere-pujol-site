@@ -1,6 +1,6 @@
 {
   "id": 54361,
-  "title": "B000424_9851|B000424_358B|B000424_4B18|B000424_5D39|B000424_70F1|B000424_896C|B000424_DAE",
+  "title": "B000424_9851",
   "slug": "v000424-vente-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000424-vente-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "Marseille",
   "quartier": "LE CABOT",
-  "prix": 98000.0,
-  "charges": 180.0,
+  "prix": 98000,
+  "charges": 180,
   "honoraires": "0.00",
   "surface": 55.2,
   "surfaceTerrain": 55.2,

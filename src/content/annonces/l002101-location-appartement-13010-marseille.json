@@ -1,6 +1,6 @@
 {
   "id": 228508,
-  "title": "LO37120001_65CD|LO37120001_81D3.JPG|LO37120001_CFE.JPG|LO37120001_65CD.JPG|LO37120001_73D8.JPG|LO37120001_8DBB.JPG|LO37120001_AD3B.JPG|LO37120001_767E.JPG|LO37120001_9CCF.JPG|LO37120001_617E.JPG",
+  "title": "LO37120001_81D3.JPG",
   "slug": "l002101-location-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002101-location-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "MARSEILLE",
   "quartier": "SAINT LOUP",
-  "prix": 850.0,
-  "charges": 90.0,
+  "prix": 850,
+  "charges": 90,
   "honoraires": "360",
   "garantie": "760",
   "surface": 77.3,

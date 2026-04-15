@@ -1,10 +1,10 @@
 ---
-title: "prix de l ancien dans le 13006|prix de l ancien dans le 13006|prix de l immobilier ancien 13006 en 2019|20180414_170220"
+title: "prix de l ancien dans le 13006"
 slug: "quel-est-le-prix-de-limmobilier-ancien-dans-le-13006-en-2019"
 date: "2020-02-15 09:56:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13006-1.jpg"
-seoDescription: "Voici un comparatif des prix de l&#039;immobilier ancien dans le 13006 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
+seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13006 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

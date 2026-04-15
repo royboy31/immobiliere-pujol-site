@@ -1,6 +1,6 @@
 {
   "id": 54179,
-  "title": "LO32920001_3F0C|LO32920001_1CCC|LO32920001_349B|LO32920001_495E|LO32920001_541D|LO32920001_5E9D.JPG|LO32920001_72B4.JPG|LO32920001_7FB5.JPG|LO32920001_6852.JPG",
+  "title": "LO32920001_5E9D.JPG",
   "slug": "l001147-location-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001147-location-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "SAINT-JUST",
-  "prix": 670.0,
-  "charges": 120.0,
+  "prix": 670,
+  "charges": 120,
   "honoraires": "500",
   "garantie": "550",
   "surface": 61.84,

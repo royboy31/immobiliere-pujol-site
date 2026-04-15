@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Menpenti 13010 Marseille"
 slug: "local/gestion-immobiliere-a-menpenti-13010-marseille"
 date: "2023-05-09 15:47:12"
 ---

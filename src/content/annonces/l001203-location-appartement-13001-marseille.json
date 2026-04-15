@@ -1,6 +1,6 @@
 {
   "id": 52261,
-  "title": "LO03290004_6F3112400288|LO03290004_1CCF|LO03290004_7FED|LO03290004_A77B|LO03290004_B734|LO03290004_CB90|LO03290004_E307|LO03290004_EF9|LO03290004_F4F2",
+  "title": "LO03290004_6F3112400288",
   "slug": "l001203-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001203-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "VIEUX PORT",
-  "prix": 440.0,
-  "charges": 30.0,
+  "prix": 440,
+  "charges": 30,
   "honoraires": "285.74",
   "garantie": "820",
   "surface": 21.98,

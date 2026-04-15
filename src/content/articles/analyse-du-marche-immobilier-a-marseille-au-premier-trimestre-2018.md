@@ -1,5 +1,5 @@
 ---
-title: "B000504_D54F.jpg|Immobilier-la-carte-des-prix-de-Marseille-Capital.fr_"
+title: "Immobilier-la-carte-des-prix-de-Marseille-Capital.fr_"
 slug: "analyse-du-marche-immobilier-a-marseille-au-premier-trimestre-2018"
 date: "2018-04-11 07:35:26"
 categories: ["Le marché immobilier à marseille"]

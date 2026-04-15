@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Chateau Gombert 13013 Marseille 2"
 slug: "local/gestion-immobiliere-a-chateau-gombert-13013-marseille-2"
 date: "2023-05-09 15:45:47"
 ---

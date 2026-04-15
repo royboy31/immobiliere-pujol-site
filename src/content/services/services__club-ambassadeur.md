@@ -1,5 +1,5 @@
 ---
-title: "Club ambassadeur &#8211; Immobilière Pujol"
+title: "Club ambassadeur – Immobilière Pujol"
 slug: "services/club-ambassadeur"
 ---
 

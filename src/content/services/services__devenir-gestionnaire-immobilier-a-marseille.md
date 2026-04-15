@@ -1,7 +1,7 @@
 ---
-title: "Devenir un collaborateur de l&rsquo;Immobilière Pujol &#8211; Immobilière Pujol"
+title: "Devenir un collaborateur de l'Immobilière Pujol – Immobilière Pujol"
 slug: "services/devenir-gestionnaire-immobilier-a-marseille"
-seoDescription: "Les métiers sur lesquels l&#039;immobilière Pujol recrute sont les métiers de gestionnaire locatif, gestionnaires de copropriété et négociateur immobilier."
+seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les métiers de gestionnaire locatif, gestionnaires de copropriété et négociateur immobilier."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -1,12 +1,12 @@
 ---
-title: "prix au m2 de l'immobilier neuf dans le 13007 en 2018|13007-1"
+title: "prix au m2 de l'immobilier neuf dans le 13007 en 2018"
 slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13007-en-2018"
 date: "2019-06-12 14:00:11"
 categories: ["L'immobilier neuf à marseille", "Prix au m2 par arrondissement à Marseille"]
 tags: ["13007", "7e arrondissement", "immobilier", "marseille", "neuf", "prix", "prix au m2"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13007-2.jpeg"
 seoTitle: "Les prix au m2 de l&#039;immobilier neuf dans le 13007 en 2018"
-seoDescription: "Les prix au m2 de l&#039;immobilier neuf dans le 13007 en 2018; Le prix médian pour un T2 est de 5510€ le m"
+seoDescription: "Les prix au m2 de l'immobilier neuf dans le 13007 en 2018; Le prix médian pour un T2 est de 5510€ le m"
 ---
 
 <!-- wp:paragraph -->

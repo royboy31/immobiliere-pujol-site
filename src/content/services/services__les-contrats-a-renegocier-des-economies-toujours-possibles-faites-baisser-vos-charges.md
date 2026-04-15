@@ -1,7 +1,7 @@
 ---
-title: "Comment négocier les contrats de la copropriété? &#8211; Immobilière Pujol"
+title: "Comment négocier les contrats de la copropriété? – Immobilière Pujol"
 slug: "services/les-contrats-a-renegocier-des-economies-toujours-possibles-faites-baisser-vos-charges"
-seoDescription: "Voilà les coût des charges de copropriété à Marseille à payer. Voilà des coûts &quot;normaux&quot; . En cas de questions sur le niveau des charges. Consultez nous"
+seoDescription: "Voilà les coût des charges de copropriété à Marseille à payer. Voilà des coûts \"normaux\" . En cas de questions sur le niveau des charges. Consultez nous"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

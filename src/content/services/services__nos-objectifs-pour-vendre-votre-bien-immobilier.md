@@ -1,7 +1,7 @@
 ---
-title: "Nos actions pour vendre votre bien immobilier &#8211; Immobilière Pujol"
+title: "Nos actions pour vendre votre bien immobilier – Immobilière Pujol"
 slug: "services/nos-objectifs-pour-vendre-votre-bien-immobilier"
-seoDescription: "Chaque année, nous réalisons de nombreuses ventes d&#039;appartements, maisons ou immeubles à usage d&#039;habitation ainsi que des transactions de bureaux et de locaux commerciaux à Marseille. Quels est notre méthode et quels sont nos actions pour vendre rapidement votre bien ? Fixer un prix de vente concurrentiel Fixer un prix de…"
+seoDescription: "Chaque année, nous réalisons de nombreuses ventes d'appartements, maisons ou immeubles à usage d'habitation ainsi que des transactions de bureaux et de locaux commerciaux à Marseille. Quels est notre méthode et quels sont nos actions pour vendre rapidement votre bien ? Fixer un prix de vente concurrentiel Fixer un prix de…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

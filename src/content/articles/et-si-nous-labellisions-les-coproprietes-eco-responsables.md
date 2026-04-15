@@ -1,5 +1,5 @@
 ---
-title: "montagne aride|si l’état faisait respecter les 19°C dans les immeubles en chauffage collectif, les consommations de gaz et d'électricité baisseraient d’un bon 15% (7% par degré de moins) (1)"
+title: "montagne aride"
 slug: "et-si-nous-labellisions-les-coproprietes-eco-responsables"
 date: "2020-11-18 10:01:18"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

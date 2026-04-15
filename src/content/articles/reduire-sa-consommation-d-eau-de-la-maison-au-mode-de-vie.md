@@ -1,5 +1,5 @@
 ---
-title: "comment reduire sa consommation d'eau|5-astuces-pour-reduire-sa-consommation-dEAU"
+title: "comment reduire sa consommation d'eau"
 slug: "reduire-sa-consommation-d-eau-de-la-maison-au-mode-de-vie"
 date: "2019-07-09 07:49:02"
 categories: ["Mon quartier, ma ville Marseille"]

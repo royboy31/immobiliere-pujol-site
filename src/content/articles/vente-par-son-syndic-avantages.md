@@ -1,5 +1,5 @@
 ---
-title: "Vente par son syndic pujol|vente copropiete gestion pujol marseille"
+title: "Vente par son syndic pujol"
 slug: "vente-par-son-syndic-avantages"
 date: "2025-06-13 12:34:54"
 categories: ["Le marché immobilier à marseille"]

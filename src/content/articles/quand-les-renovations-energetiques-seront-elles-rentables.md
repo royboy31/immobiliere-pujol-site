@@ -1,11 +1,11 @@
 ---
-title: "renovations energetiques et dpe immeubles marseillais|passoire energetique comment renover son appartement|rentabilite des investissements en renovations energetiques||rentabilté des rénovations|renovations energetiques appartements marseillais rentabilite"
+title: "renovations energetiques et dpe immeubles marseillais"
 slug: "quand-les-renovations-energetiques-seront-elles-rentables"
 date: "2022-02-10 14:19:47"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/01/renovations-energetiques-et-dpe-immeubles-marseillais.jpg"
 seoTitle: "Quand les rénovations énergétiques seront-elles rentables ?"
-seoDescription: "Jamais. Personne ne mesure la quantité des travaux, le coût, la rentabilité des investissements ou encore l&#039;impact sur les prix! Pourtant, dans 10 ans..."
+seoDescription: "Jamais. Personne ne mesure la quantité des travaux, le coût, la rentabilité des investissements ou encore l'impact sur les prix! Pourtant, dans 10 ans..."
 ---
 
 <p>Jamais. Oui, jamais !</p>

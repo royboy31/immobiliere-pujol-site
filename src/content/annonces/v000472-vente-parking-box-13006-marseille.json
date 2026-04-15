@@ -1,6 +1,6 @@
 {
   "id": 228418,
-  "title": "B000472_847B.jpg|B000472_A9E5.jpg",
+  "title": "B000472_847B.jpg",
   "slug": "v000472-vente-parking-box-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000472-vente-parking-box-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "Marseille",
   "quartier": "CASTELLANE",
-  "prix": 16000.0,
-  "charges": 0.0,
+  "prix": 16000,
+  "charges": 0,
   "honoraires": "0.00",
   "surface": 13.5,
   "surfaceTerrain": 13.5,

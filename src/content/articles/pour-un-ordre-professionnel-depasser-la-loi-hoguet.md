@@ -1,5 +1,5 @@
 ---
-title: "ORDRE DES SYNDIC MARSEILLAIS|ORDRE SYNDIC MARSEILLE"
+title: "ORDRE DES SYNDIC MARSEILLAIS"
 slug: "pour-un-ordre-professionnel-depasser-la-loi-hoguet"
 date: "2026-03-25 09:36:45"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

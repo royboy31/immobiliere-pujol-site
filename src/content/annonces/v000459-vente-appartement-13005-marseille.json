@@ -1,6 +1,6 @@
 {
   "id": 227934,
-  "title": "B000459_A161.JPG|B000459_B150.JPG|B000459_C045.JPG|B000459_CEDC.JPG|B000459_8665.JPG|B000459_DCC8.JPG",
+  "title": "B000459_A161.JPG",
   "slug": "v000459-vente-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000459-vente-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "Marseille",
   "quartier": "TIMONE/ST PIERRE",
-  "prix": 50000.0,
-  "charges": 45.0,
+  "prix": 50000,
+  "charges": 45,
   "honoraires": "0.00",
   "surface": 19.73,
   "surfaceTerrain": 19.73,

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Lagence Immobiliere Pujol Dans Le Quartier Palais De Justice 13006 Marseille 2"
 slug: "local/gestion-locative-a-lagence-immobiliere-pujol-dans-le-quartier-palais-de-justice-13006-marseille-2"
 date: "2023-05-09 14:30:14"
 ---

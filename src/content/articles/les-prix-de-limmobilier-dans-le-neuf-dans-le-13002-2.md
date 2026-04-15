@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Les Prix De Limmobilier Dans Le Neuf Dans Le 13002 2"
 slug: "les-prix-de-limmobilier-dans-le-neuf-dans-le-13002-2"
 date: "2016-03-30 08:22:12"
 categories: ["Arrondissements Marseille>Arrondissement 13002 Marseille", "Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13002"]

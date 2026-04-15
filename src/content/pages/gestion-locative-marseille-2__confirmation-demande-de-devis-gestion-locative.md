@@ -1,9 +1,9 @@
 ---
-title: ""
+title: "Vous confirmez une demande de devis en gestion locative"
 slug: "gestion-locative-marseille-2/confirmation-demande-de-devis-gestion-locative"
 date: "2018-01-02 09:26:15"
 seoTitle: "Vous confirmez une demande de devis en gestion locative"
-seoDescription: "Confirmez votre demande de devis à l&#039;Immobilière Pujol, agence de gestion locative à Marseille"
+seoDescription: "Confirmez votre demande de devis à l'Immobilière Pujol, agence de gestion locative à Marseille"
 ---
 
 <p>&nbsp;</p>

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A La Rose 13013 Marseille"
 slug: "local/gestion-dappartements-a-la-rose-13013-marseille"
 date: "2024-01-04 13:17:28"
 ---

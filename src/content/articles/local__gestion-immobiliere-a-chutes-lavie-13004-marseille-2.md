@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Chutes Lavie 13004 Marseille 2"
 slug: "local/gestion-immobiliere-a-chutes-lavie-13004-marseille-2"
 date: "2023-08-28 14:54:31"
 ---

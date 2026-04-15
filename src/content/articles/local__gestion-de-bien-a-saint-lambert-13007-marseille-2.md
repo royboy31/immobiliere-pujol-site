@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Lambert 13007 Marseille 2"
 slug: "local/gestion-de-bien-a-saint-lambert-13007-marseille-2"
 date: "2024-05-13 13:13:21"
 ---

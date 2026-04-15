@@ -1,6 +1,6 @@
 {
   "id": 616324,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "pcvap50008367-13006-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/pcvap50008367-13006-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13006, Marseille, France",
-  "prix": 255000.0,
-  "charges": 325.0,
+  "prix": 255000,
+  "charges": 325,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 83.72,

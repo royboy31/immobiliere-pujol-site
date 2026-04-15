@@ -1,5 +1,5 @@
 ---
-title: "dpe collectif copropriete marseille|photo_2a3885c9754f51583808989ab9e06289|logo .fond transparent"
+title: "dpe collectif copropriete marseille"
 slug: "dpe-collectifs-par-typlologie-de-copropriete"
 date: "2024-06-05 08:28:36"
 categories: ["Le marché immobilier à marseille"]

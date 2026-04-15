@@ -1,5 +1,5 @@
 ---
-title: "Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018|Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018|Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018"
+title: "Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018"
 slug: "evolution-des-loyers-dans-le-13013-a-marseille-entre-2014-et-2018"
 date: "2019-06-12 10:20:09"
 categories: ["Prix au m2 par arrondissement à Marseille"]

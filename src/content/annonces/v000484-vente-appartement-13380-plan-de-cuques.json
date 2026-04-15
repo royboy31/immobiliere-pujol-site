@@ -1,6 +1,6 @@
 {
   "id": 229287,
-  "title": "B000484_1858.jpg|B000484_30A.jpg|B000484_EA9F.jpg|B000484_D522.jpg|B000484_CC86.jpg|B000484_C30F.jpg|B000484_A47A.jpg|B000484_3681.JPG|B000484_2886.jpg",
+  "title": "B000484_1858.jpg",
   "slug": "v000484-vente-appartement-13380-plan-de-cuques",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000484-vente-appartement-13380-plan-de-cuques/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13380",
   "ville": "Plan de cuques",
   "quartier": "PLAN DE CUQUES",
-  "prix": 220000.0,
-  "charges": 85.0,
+  "prix": 220000,
+  "charges": 85,
   "honoraires": "0.00",
   "surface": 53.25,
   "surfaceTerrain": 53.25,

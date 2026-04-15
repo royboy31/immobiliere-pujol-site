@@ -1,7 +1,7 @@
 ---
-title: "Notre assurance loyers impayés à 1,8% TTC &#8211; Immobilière Pujol"
+title: "Notre assurance loyers impayés à 1,8% TTC – Immobilière Pujol"
 slug: "services/notre-assurance-loyers-impayes-a-18-ttc"
-seoDescription: "Obtenez une proposition de gestion avec une garantie de loyers impayés Notre assurance de loyers impayés comprend: Une garantie de paiement des loyers et des charges an cas de défaillance du locataire sans limite. Une prise en charge des dégradations immobilières dans le cadre d&#039;un plafond de 7500€ Une prise en…"
+seoDescription: "Obtenez une proposition de gestion avec une garantie de loyers impayés Notre assurance de loyers impayés comprend: Une garantie de paiement des loyers et des charges an cas de défaillance du locataire sans limite. Une prise en charge des dégradations immobilières dans le cadre d'un plafond de 7500€ Une prise en…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

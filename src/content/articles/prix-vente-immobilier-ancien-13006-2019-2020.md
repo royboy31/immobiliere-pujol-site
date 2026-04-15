@@ -1,5 +1,5 @@
 ---
-title: "castellane prado|3|Tableaux article 13006|4|5|6|7|8|9|10|place Castelane6|_MG_4759DxO|Marseille cours ju|FXP_Monuments_IMG_1355|Préfecture de Marseille de nuit2|_MG_4462DxO"
+title: "castellane prado"
 slug: "prix-vente-immobilier-ancien-13006-2019-2020"
 date: "2021-01-22 13:45:41"
 categories: ["Prix au m2 par arrondissement à Marseille"]

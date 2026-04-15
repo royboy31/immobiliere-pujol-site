@@ -1,5 +1,5 @@
 ---
-title: "Choisir son agence immobilière à Marseille &#8211; Immobilière Pujol"
+title: "Choisir son agence immobilière à Marseille – Immobilière Pujol"
 slug: "services/choisir-son-agence-immobiliere-a-marseille"
 seoDescription: "Vous avez décidé de vendre . Une première décision importante doit être prise : choisir le bon agent Immobilier. La vente de votre bien nécessite plus qu’un panneau sur votre maison ou des papiers dans les boites aux lettres. Vous avez besoin de quelqu’un qui  : soit à vos côtés de la…"
 ---

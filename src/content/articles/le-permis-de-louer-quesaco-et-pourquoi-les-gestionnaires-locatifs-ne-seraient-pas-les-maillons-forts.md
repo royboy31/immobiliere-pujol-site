@@ -1,5 +1,5 @@
 ---
-title: "permis de louer immobiliere pujol|question|permis de louer immoibilier"
+title: "permis de louer immobiliere pujol"
 slug: "le-permis-de-louer-quesaco-et-pourquoi-les-gestionnaires-locatifs-ne-seraient-pas-les-maillons-forts"
 date: "2019-05-04 08:29:15"
 categories: ["Le marché immobilier à marseille"]

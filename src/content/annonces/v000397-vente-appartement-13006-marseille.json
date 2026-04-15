@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CASTELLANE|CASTELLANE|CASTELLANE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "5|5|5",
   "nbEtages": "0",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.33.55|04.91.37.33.55|04.91.37.33.55",
   "emailAAfficher": "caroline@immobiliere-pujol.fr|caroline@immobiliere-pujol.fr|caroline@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Castellane, Marseille, France|Appartement 3 pièces à vendre Castellane, Marseille, France|Appartement 3 pièces à vendre Castellane, Marseille, France",
-  "seoDescription": "EXCLUSIVITE Grand appartement de type 3 lumineux de 84m² avec balcons et garage situé à côté de la place Castellane . Cet appartement à rénover se trouve a&#8230;|EXCLUSIVITE Grand appartement de type 3 lumineux de 84m² avec balcons et garage situé à côté de la place Castellane . Cet appartement à rénover se trouve a&#8230;|EXCLUSIVITE Grand appartement de type 3 lumineux de 84m² avec balcons et garage situé à côté de la place Castellane . Cet appartement à rénover se trouve a&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Castellane, Marseille, France",
+  "seoDescription": "EXCLUSIVITE Grand appartement de type 3 lumineux de 84m² avec balcons et garage situé à côté de la place Castellane . Cet appartement à rénover se trouve a&#8230;"
 }

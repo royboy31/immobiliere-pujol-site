@@ -1,5 +1,5 @@
 ---
-title: "optmisation investissement marseille|valorisatio loyer investissement marseille"
+title: "optmisation investissement marseille"
 slug: "comment-optimiser-la-rentabilite-locative-de-votre-grand-studio"
 date: "2024-05-27 15:15:58"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

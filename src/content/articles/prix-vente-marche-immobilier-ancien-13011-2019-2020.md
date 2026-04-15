@@ -1,5 +1,5 @@
 ---
-title: "2-Village-de-St-Marcel|1|2|3|4|5|transactions4e9c66aab0870|P1060475|LO34730002_B956|1|2|3|4|5|6|7|8|9|Tableaux article 13011|Afracom_façade_La-Valentine_Marseille_9552|La-Treille.-Village.-Verlin|Les Camoins - 13211 - 3000453--|Marseille-11-Accates|Marseille-11-Accates|Tableaux article 13011 (1)|Tableaux article 13011"
+title: "2-Village-de-St-Marcel"
 slug: "prix-vente-marche-immobilier-ancien-13011-2019-2020"
 date: "2021-04-29 09:29:15"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -1,6 +1,6 @@
 {
   "id": 83804,
-  "title": "LO33000001_BC8E|LO33000001_BC8E.JPG|LO33000001_2013.JPG|LO33000001_73B.JPG|LO33000001_4075.JPG|LO33000001_4AE2.JPG|LO33000001_5780.JPG|LO33000001_81.JPG|LO33000001_74B2.JPG|LO33000001_8B01.JPG",
+  "title": "LO33000001_BC8E.JPG",
   "slug": "l001186-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001186-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "ROND POINT DU PRADO",
-  "prix": 2710.0,
-  "charges": 210.0,
+  "prix": 2710,
+  "charges": 210,
   "honoraires": "1687.14",
   "garantie": "2500",
   "surface": 129.78,

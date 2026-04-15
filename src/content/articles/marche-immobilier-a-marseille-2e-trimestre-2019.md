@@ -1,5 +1,5 @@
 ---
-title: "Le marché immobilier à Marseille|analyse-marché-immobilier-marseille|evolution-des-prix-dans-le-13001-marseille|prix-appartement-neuf-dans-le-13001-marseille"
+title: "Le marché immobilier à Marseille"
 slug: "marche-immobilier-a-marseille-2e-trimestre-2019"
 date: "2019-07-25 03:59:52"
 excerpt: "Comme chaque trimestre, nous dressons un bilan du marché immobilier à Marseille : location, vente…"

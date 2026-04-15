@@ -1,6 +1,6 @@
 {
   "id": 38799,
-  "title": "LO32750001_3D00.JPG|LO32750001_195A.JPG|LO32750001_E18E.JPG|LO32750001_FECB.JPG|LO32750001_852.JPG|LO32750001_583A.JPG|LO32750001_9758.JPG|LO32750001_A9D8.JPG|LO32750001_BDED.JPG",
+  "title": "LO32750001_3D00.JPG",
   "slug": "l001085-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001085-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "RABATAU",
-  "prix": 900.0,
-  "charges": 100.0,
+  "prix": 900,
+  "charges": 100,
   "honoraires": "874.25",
   "garantie": "1600",
   "surface": 67.25,

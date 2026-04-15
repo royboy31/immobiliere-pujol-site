@@ -1,6 +1,6 @@
 {
   "id": 87875,
-  "title": "LO02640007_5927|LO02640007_15BE|LO02640007_27C|LO02640007_2B42|LO02640007_A328|LO02640007_C191|LO02640007_D7E0|LO02640007_E8A3|LO02640007_F8F9",
+  "title": "LO02640007_5927",
   "slug": "l000427-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000427-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "LIEUTAUD / PREFECTUR",
-  "prix": 835.0,
-  "charges": 80.0,
+  "prix": 835,
+  "charges": 80,
   "honoraires": "1711.06",
   "garantie": "755",
   "surface": 131.62,

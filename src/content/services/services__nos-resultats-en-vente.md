@@ -1,7 +1,7 @@
 ---
-title: "Nos résultats en vente &#8211; Immobilière Pujol"
+title: "Nos résultats en vente – Immobilière Pujol"
 slug: "services/nos-resultats-en-vente"
-seoDescription: "Chaque membre de l&#039;équipe réalise entre 30 ventes et 40 ventes tous les ans , un résultat bien au-dessus de la moyenne des agents immobiliers. Notre délai pour vendre est en moyenne de 45 jours. La moyenne du secteur immobilier à Marseille oscille entre 88 et 105 jours. Pour les biens…"
+seoDescription: "Chaque membre de l'équipe réalise entre 30 ventes et 40 ventes tous les ans , un résultat bien au-dessus de la moyenne des agents immobiliers. Notre délai pour vendre est en moyenne de 45 jours. La moyenne du secteur immobilier à Marseille oscille entre 88 et 105 jours. Pour les biens…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

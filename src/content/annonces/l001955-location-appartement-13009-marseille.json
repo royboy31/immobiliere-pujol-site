@@ -1,6 +1,6 @@
 {
   "id": 52961,
-  "title": "LO36240001_1BD6|LO36240001_2A9D|LO36240001_9A9C|LO36240001_B99F|LO36240001_DD54",
+  "title": "LO36240001_1BD6",
   "slug": "l001955-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001955-location-appartement-13009-marseille/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "70 Chemin Joseph Aiguier, 13009, Marseille, France",
   "codePostal": "13009",
   "ville": "MARSEILLE",
-  "prix": 550.0,
-  "charges": 50.0,
+  "prix": 550,
+  "charges": 50,
   "honoraires": "380.12",
   "garantie": "500",
   "surface": 29.24,

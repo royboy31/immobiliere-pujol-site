@@ -1,11 +1,11 @@
 ---
-title: "13015|15 ème arrondissement loyer 2018"
+title: "15 ème arrondissement loyer 2018"
 slug: "prix-m2-loyers-13015"
 date: "2020-02-09 11:01:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13015.jpg"
 seoTitle: "Les prix au m2 des loyers en 2019 dans le 13015"
-seoDescription: "Le prix moyen (en €/m2) est de 11,2 dans le 13015. La durée d&#039;occupation est de 53 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 11,2 dans le 13015. La durée d'occupation est de 53 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

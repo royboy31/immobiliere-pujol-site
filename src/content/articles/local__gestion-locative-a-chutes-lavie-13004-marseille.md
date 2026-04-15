@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Chutes Lavie 13004 Marseille"
 slug: "local/gestion-locative-a-chutes-lavie-13004-marseille"
 date: "2023-05-09 14:38:27"
 ---

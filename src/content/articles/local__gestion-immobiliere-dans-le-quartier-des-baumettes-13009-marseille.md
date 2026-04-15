@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere Dans Le Quartier Des Baumettes 13009 Marseille"
 slug: "local/gestion-immobiliere-dans-le-quartier-des-baumettes-13009-marseille"
 date: "2023-05-09 15:42:24"
 ---

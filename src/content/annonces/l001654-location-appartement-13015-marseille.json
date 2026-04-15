@@ -1,6 +1,6 @@
 {
   "id": 88719,
-  "title": "LO34840001_D3A6|LO34840001_D3A6.JPG|LO34840001_1393.JPG|LO34840001_1DD1.JPG|LO34840001_3355.JPG|LO34840001_4782.JPG|LO34840001_5567.JPG|LO34840001_5F19.JPG",
+  "title": "LO34840001_D3A6.JPG",
   "slug": "l001654-location-appartement-13015-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001654-location-appartement-13015-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13015",
   "ville": "MARSEILLE",
   "quartier": "LES AYGALADES",
-  "prix": 655.0,
-  "charges": 100.0,
+  "prix": 655,
+  "charges": 100,
   "honoraires": "600",
   "garantie": "555",
   "surface": 65.73,

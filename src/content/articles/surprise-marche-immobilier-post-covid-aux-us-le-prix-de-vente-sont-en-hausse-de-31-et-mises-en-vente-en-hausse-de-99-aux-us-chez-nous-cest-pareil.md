@@ -1,5 +1,5 @@
 ---
-title: "PUJ-3211-031219 (1)|reprise post covid en immobilier"
+title: "PUJ-3211-031219 (1)"
 slug: "surprise-marche-immobilier-post-covid-aux-us-le-prix-de-vente-sont-en-hausse-de-31-et-mises-en-vente-en-hausse-de-99-aux-us-chez-nous-cest-pareil"
 date: "2020-06-18 07:42:35"
 categories: ["Le marché immobilier à marseille"]

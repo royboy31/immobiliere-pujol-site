@@ -1,5 +1,5 @@
 ---
-title: "13006|PRIX 2017 IMMEUBLES ANCIENS 13006 MARSEILLE"
+title: "PRIX 2017 IMMEUBLES ANCIENS 13006 MARSEILLE"
 slug: "prix-statistiques-immobilier-13006-marseille-2016"
 date: "2016-02-06 17:19:29"
 categories: ["Arrondissements Marseille>Arrondissement 13006 Marseille", "Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13006"]

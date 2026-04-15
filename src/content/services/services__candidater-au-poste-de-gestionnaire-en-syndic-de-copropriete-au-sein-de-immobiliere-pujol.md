@@ -1,5 +1,5 @@
 ---
-title: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol &#8211; Immobilière Pujol"
+title: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol – Immobilière Pujol"
 slug: "services/candidater-au-poste-de-gestionnaire-en-syndic-de-copropriete-au-sein-de-immobiliere-pujol"
 seoDescription: "Déposer votre candidature au poste de gestionnaires syndic de copropriétés chez Immobilière Pujol"
 ---

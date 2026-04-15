@@ -1,5 +1,5 @@
 ---
-title: "prix des loyers marseillais|prix des loyers a marseille"
+title: "prix des loyers marseillais"
 slug: "encadrement-des-loyers-marseille"
 date: "2022-12-11 14:37:54"
 categories: ["Le marché immobilier à marseille"]

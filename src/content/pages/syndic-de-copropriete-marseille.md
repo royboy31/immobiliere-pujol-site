@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Confiez votre copropriété à un bon syndic à Marseille"
 slug: "syndic-de-copropriete-marseille"
 date: "2018-11-26 14:10:04"
 seoTitle: "Confiez votre copropriété à un bon syndic à Marseille"

@@ -1,10 +1,10 @@
 ---
-title: "20220630_114410|echafaudage2"
+title: "20220630_114410"
 slug: "pppt-en-copropriete-quesako"
 date: "2022-09-19 16:56:04"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/09/20220630_114410-scaled.jpg"
-seoDescription: "Le PPPT ou Projet de plan pluri annuel de travaux vise à lister les travaux nécessaires pour la rénovation énergétique d&#039;une copropriété"
+seoDescription: "Le PPPT ou Projet de plan pluri annuel de travaux vise à lister les travaux nécessaires pour la rénovation énergétique d'une copropriété"
 ---
 
 <p>La Loi Climat et Résilience du 22 août 2021, dans son article à l'article 171, a rendu obligatoire, le Projet de Plan Pluriannuel de Travaux pour les copropriétés, le PPPT.<br />

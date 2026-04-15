@@ -5,7 +5,7 @@ date: "2020-05-10 19:01:23"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/marche-immo.jpg"
 seoTitle: "Situation des prix immobilier du 13006 avant confinement"
-seoDescription: "Stéphane Pujol, directeur de l&#039;agence Immobilière Pujol à Marseille vous donne les chiffres en mars 2020 (avant confinement) sur le marché de la location et de la transaction dans le 6eme arrondissement de Marseille"
+seoDescription: "Stéphane Pujol, directeur de l'agence Immobilière Pujol à Marseille vous donne les chiffres en mars 2020 (avant confinement) sur le marché de la location et de la transaction dans le 6eme arrondissement de Marseille"
 ---
 
 <p>En trois ans les prix de l'Immobilier dans le 6eme arrondissement de Marseille ont augmenté de 21%.</p>

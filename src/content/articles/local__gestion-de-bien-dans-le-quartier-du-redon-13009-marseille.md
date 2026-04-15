@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le Quartier Du Redon 13009 Marseille"
 slug: "local/gestion-de-bien-dans-le-quartier-du-redon-13009-marseille"
 date: "2023-05-09 14:53:26"
 ---

@@ -1,7 +1,7 @@
 ---
-title: "Comment identifier un bon gestionnaire de copropriétés? &#8211; Immobilière Pujol"
+title: "Comment identifier un bon gestionnaire de copropriétés? – Immobilière Pujol"
 slug: "services/connaitres-les-qualites-requises-pour-le-metier-de-gestionnaire-syndic"
-seoDescription: "Un bon syndic, c&#039;est de bons gestionnaires de copropriété. Bien formés, qui sont dans un cadre qui leur permet de délivrer un bon service et de prendre soin de leurs clients"
+seoDescription: "Un bon syndic, c'est de bons gestionnaires de copropriété. Bien formés, qui sont dans un cadre qui leur permet de délivrer un bon service et de prendre soin de leurs clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

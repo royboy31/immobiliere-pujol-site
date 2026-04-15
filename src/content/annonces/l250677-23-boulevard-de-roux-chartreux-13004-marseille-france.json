@@ -1,6 +1,6 @@
 {
   "id": 1278793,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250677-23-boulevard-de-roux-chartreux-13004-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250677-23-boulevard-de-roux-chartreux-13004-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "23 Boulevard De Roux, Chartreux, 13004, Marseille 4eme Arrondissement, France",
-  "prix": 600.0,
-  "charges": 30.0,
+  "prix": 600,
+  "charges": 30,
   "honoraires": "228.8",
   "garantie": "1140",
   "surface": 17.6,

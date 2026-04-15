@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 de l'immobilier neuf dans le 13008 en 2018|13008|13008|13008"
+title: "prix au m2 de l'immobilier neuf dans le 13008 en 2018"
 slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13008-en-2018"
 date: "2019-06-12 14:01:05"
 categories: ["L'immobilier neuf à marseille", "Prix au m2 par arrondissement à Marseille"]

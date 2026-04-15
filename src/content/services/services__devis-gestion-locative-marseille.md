@@ -1,5 +1,5 @@
 ---
-title: "Obtenir un devis pour la gestion locative de vos biens immobiliers &#8211; Immobilière Pujol"
+title: "Obtenir un devis pour la gestion locative de vos biens immobiliers – Immobilière Pujol"
 slug: "services/devis-gestion-locative-marseille"
 seoDescription: "Obtenir un devis pour une gestion locative de biens immobiliers: notre offre, nos devis par une équipe parmi les plus recommandé de notre ville"
 ---

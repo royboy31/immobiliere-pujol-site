@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "BORELY/BONNEVEINE|BORELY/BONNEVEINE|BORELY/BONNEVEINE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "1|1|1",
   "nbEtages": "5|5|5",
@@ -36,6 +36,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.38.21|04.91.37.38.21|04.91.37.38.21",
   "emailAAfficher": "nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Borely/bonneveine, Marseille, France|Appartement 3 pièces à vendre Borely/bonneveine, Marseille, France|Appartement 3 pièces à vendre Borely/bonneveine, Marseille, France",
-  "seoDescription": "EXCLUSIVITE Type 3 lumineux, récent et traversant avec deux grandes terrasses, un garage situé au 1er étage Avenue Clot Bey et à 3mn du Parc Borély et à 5m&#8230;|EXCLUSIVITE Type 3 lumineux, récent et traversant avec deux grandes terrasses, un garage situé au 1er étage Avenue Clot Bey et à 3mn du Parc Borély et à 5m&#8230;|EXCLUSIVITE Type 3 lumineux, récent et traversant avec deux grandes terrasses, un garage situé au 1er étage Avenue Clot Bey et à 3mn du Parc Borély et à 5m&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Borely/bonneveine, Marseille, France",
+  "seoDescription": "EXCLUSIVITE Type 3 lumineux, récent et traversant avec deux grandes terrasses, un garage situé au 1er étage Avenue Clot Bey et à 3mn du Parc Borély et à 5m&#8230;"
 }

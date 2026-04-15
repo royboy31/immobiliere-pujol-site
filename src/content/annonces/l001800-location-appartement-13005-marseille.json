@@ -1,6 +1,6 @@
 {
   "id": 90466,
-  "title": "LO34390001_F5FF|LO34390001_F105.JPG|LO34390001_1623.JPG|LO34390001_2041.JPG|LO34390001_2D7B.JPG|LO34390001_2224.JPG|LO34390001_3A77.JPG|LO34390001_2CBF.JPG",
+  "title": "LO34390001_F105.JPG",
   "slug": "l001800-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001800-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "SAINT PIERRE",
-  "prix": 700.0,
-  "charges": 50.0,
+  "prix": 700,
+  "charges": 50,
   "honoraires": "700",
   "garantie": "650",
   "surface": 64.89,

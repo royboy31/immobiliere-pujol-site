@@ -1,6 +1,6 @@
 {
   "id": 91316,
-  "title": "LO35440002_900B.JPG|LO35440002_7633.JPG|LO35440002_631F.JPG|LO35440002_9BEE.JPG|LO35440002_4D8C.JPG|LO35440002_85DD.JPG|LO35440002_AD0F.JPG",
+  "title": "LO35440002_900B.JPG",
   "slug": "l001860-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001860-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "SAINT-VICTOR",
-  "prix": 500.0,
-  "charges": 60.0,
+  "prix": 500,
+  "charges": 60,
   "honoraires": "450.71",
   "garantie": "440",
   "surface": 34.67,

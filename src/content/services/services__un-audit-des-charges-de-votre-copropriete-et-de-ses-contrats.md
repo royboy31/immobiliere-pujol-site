@@ -1,5 +1,5 @@
 ---
-title: "Un audit des charges de votre copropriété et de ses contrats &#8211; Immobilière Pujol"
+title: "Un audit des charges de votre copropriété et de ses contrats – Immobilière Pujol"
 slug: "services/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats"
 seoDescription: "Nous mettons en concurrence tous les contrats souscrits pour le compte de votre copropriété. Consultez nous et recevez un devis en moins de 24h"
 ---

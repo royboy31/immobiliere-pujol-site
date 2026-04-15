@@ -1,6 +1,6 @@
 {
   "id": 87865,
-  "title": "LO35700001_565A11022490|LO35700001_A002.JPG|LO35700001_985E.JPG|LO35700001_C6B2.JPG|LO35700001_DB83.JPG|LO35700001_E894.JPG|LO35700001_44B.JPG|LO35700001_1785.JPG|LO35700001_5647.jpg|LO35700001_C6B1.jpg",
+  "title": "LO35700001_565A11022490",
   "slug": "l001826-location-appartement-04000-digne-les-bains",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001826-location-appartement-04000-digne-les-bains/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "04000",
   "ville": "DIGNE LES BAINS",
   "quartier": "LA SEBE",
-  "prix": 785.0,
-  "charges": 15.0,
+  "prix": 785,
+  "charges": 15,
   "honoraires": "0.00",
   "garantie": "770",
   "surface": 94.89,

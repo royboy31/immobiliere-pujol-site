@@ -1,11 +1,11 @@
 ---
-title: "LO30010003_949A.JPG|2 ème arrondissement loyer 2018"
+title: "2 ème arrondissement loyer 2018"
 slug: "prix-m2-loyers-13002"
 date: "2019-01-27 10:29:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO30010003_949A.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13002 en 2019"
-seoDescription: "Le prix moyen des loyers (en €/m2) est de 12,4 dans le 13002\nLa durée d&#039;occupation moyenne est 45 mois"
+seoDescription: "Le prix moyen des loyers (en €/m2) est de 12,4 dans le 13002\nLa durée d'occupation moyenne est 45 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

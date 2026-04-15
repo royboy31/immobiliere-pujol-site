@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Aux Trois Lucs 13012 Marseille"
 slug: "local/gestion-de-bien-aux-trois-lucs-13012-marseille"
 date: "2023-05-09 14:56:36"
 ---

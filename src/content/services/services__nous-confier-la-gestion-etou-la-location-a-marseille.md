@@ -1,7 +1,7 @@
 ---
-title: "Nous confier la gestion et/ou la location à Marseille &#8211; Immobilière Pujol"
+title: "Nous confier la gestion et/ou la location à Marseille – Immobilière Pujol"
 slug: "services/nous-confier-la-gestion-etou-la-location-a-marseille"
-seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux. Nos clients nous recommandent. Découvre pourquoi et recevez une proposition de l&#039;Immobilière Pujol"
+seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux. Nos clients nous recommandent. Découvre pourquoi et recevez une proposition de l'Immobilière Pujol"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

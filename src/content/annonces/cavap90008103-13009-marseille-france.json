@@ -1,6 +1,6 @@
 {
   "id": 592426,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "cavap90008103-13009-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/cavap90008103-13009-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13009, Marseille, France",
-  "prix": 260000.0,
-  "charges": 180.0,
+  "prix": 260000,
+  "charges": 180,
   "garantie": "0",
   "surface": 67.94,
   "surfaceTerrain": 67.94,

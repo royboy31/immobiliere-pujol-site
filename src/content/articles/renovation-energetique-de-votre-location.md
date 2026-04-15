@@ -1,5 +1,5 @@
 ---
-title: "Travaux de renovation energetique appartement à louer|dpe avant travaux G|analyse dpe avant travaux|analyse dpe avant travaux|caroline pujol renovation energetique de vos logements"
+title: "Travaux de renovation energetique appartement à louer"
 slug: "renovation-energetique-de-votre-location"
 date: "2023-03-15 06:46:19"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

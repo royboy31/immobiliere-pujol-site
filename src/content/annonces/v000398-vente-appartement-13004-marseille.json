@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CHAVE / BLANCARDE|CHAVE / BLANCARDE|CHAVE / BLANCARDE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "1|1|1",
   "nbEtages": "4|4|4",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Chave / Blancarde, Marseille, France|Appartement 3 pièces à vendre Chave / Blancarde, Marseille, France|Appartement 3 pièces à vendre Chave / Blancarde, Marseille, France",
-  "seoDescription": "Appartement 3 pièces|Appartement 3 pièces|Appartement 3 pièces"
+  "seoTitle": "Appartement 3 pièces à vendre Chave / Blancarde, Marseille, France",
+  "seoDescription": "Appartement 3 pièces"
 }

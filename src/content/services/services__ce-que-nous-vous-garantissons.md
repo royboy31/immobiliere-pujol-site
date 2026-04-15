@@ -1,5 +1,5 @@
 ---
-title: "Ce que nous vous garantissons &#8211; Immobilière Pujol"
+title: "Ce que nous vous garantissons – Immobilière Pujol"
 slug: "services/ce-que-nous-vous-garantissons"
 seoDescription: "Nous vous garantissons: une location rapide aux meilleures conditions du marché: 37 jours en moyenne en 2016 et 39 jours en 2017 une transparence totale et un accès 24H/24H en temps réel à tous les documents avec un accès à tous vos documents (devis, courriers, décompte de gestion, factures, nos…"
 ---

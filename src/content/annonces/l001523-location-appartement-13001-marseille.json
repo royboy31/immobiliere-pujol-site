@@ -1,6 +1,6 @@
 {
   "id": 54059,
-  "title": "LO30440006_1780|LO30440006_1780.JPG|LO30440006_306D.JPG|LO30440006_3703.JPG|LO30440006_74D1.JPG|LO30440006_58D7.JPG|LO30440006_3F6D.JPG|LO30440006_6122.JPG",
+  "title": "LO30440006_1780.JPG",
   "slug": "l001523-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001523-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "CANEBIERE",
-  "prix": 480.0,
-  "charges": 30.0,
+  "prix": 480,
+  "charges": 30,
   "honoraires": "449.28",
   "garantie": "450",
   "surface": 34.56,

@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "LODI|LODI|LODI",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "etage": "2|2|2",
   "nbEtages": "3|3|3",
@@ -33,6 +33,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Lodi, Marseille, France|Appartement 2 pièces à vendre Lodi, Marseille, France|Appartement 2 pièces à vendre Lodi, Marseille, France",
-  "seoDescription": "EXCLUSIVITE, Type 2 de 31m² situé rue Roger Brun 13005 Marseille.Cet appartement, au 2ème étage sans ascenseur, se compose: d&rsquo;un hall d&rsquo;entrée,&#8230;|EXCLUSIVITE, Type 2 de 31m² situé rue Roger Brun 13005 Marseille.Cet appartement, au 2ème étage sans ascenseur, se compose: d&rsquo;un hall d&rsquo;entrée,&#8230;|EXCLUSIVITE, Type 2 de 31m² situé rue Roger Brun 13005 Marseille.Cet appartement, au 2ème étage sans ascenseur, se compose: d&rsquo;un hall d&rsquo;entrée,&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Lodi, Marseille, France",
+  "seoDescription": "EXCLUSIVITE, Type 2 de 31m² situé rue Roger Brun 13005 Marseille.Cet appartement, au 2ème étage sans ascenseur, se compose: d&rsquo;un hall d&rsquo;entrée,&#8230;"
 }

@@ -1,5 +1,5 @@
 ---
-title: "Labellisation des appartements à louer et stratégies de commercialisation &#8211; Immobilière Pujol"
+title: "Labellisation des appartements à louer et stratégies de commercialisation – Immobilière Pujol"
 slug: "services/labellisation-des-appartements-a-louer-et-strategies-de-commercialisation"
 seoDescription: "Découvrez nos stratégies de commercialisation qui valorisent votre appartement. Comment nous faisons ? Consultez notre agence de location parmi les plus recommandée à Marseille"
 ---

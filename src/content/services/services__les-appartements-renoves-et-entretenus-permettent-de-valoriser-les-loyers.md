@@ -1,7 +1,7 @@
 ---
-title: "Les appartements rénovés et entretenus permettent de valoriser les loyers &#8211; Immobilière Pujol"
+title: "Les appartements rénovés et entretenus permettent de valoriser les loyers – Immobilière Pujol"
 slug: "services/les-appartements-renoves-et-entretenus-permettent-de-valoriser-les-loyers"
-seoDescription: "Un bel appartement attirera un bon locataire. Découvrez les offres de location de l&#039;immobilière Pujol, agence parmi les plus recommandées à Marseille"
+seoDescription: "Un bel appartement attirera un bon locataire. Découvrez les offres de location de l'immobilière Pujol, agence parmi les plus recommandées à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

@@ -1,5 +1,5 @@
 ---
-title: "Evaluez les prestations et leur coût pour une véritable mise en concurrence &#8211; Immobilière Pujol"
+title: "Evaluez les prestations et leur coût pour une véritable mise en concurrence – Immobilière Pujol"
 slug: "services/comment-faire-baisser-les-charges-de-copropriete-a-marseille"
 seoDescription: "Evaluez votre votre syndic, sa réactivité, la qualité de son travail et consultez un syndic parmi les plus recommandé de notre ville. Immobilière Pujol"
 ---

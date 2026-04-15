@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Agence Immobiliere Pujol Gestion Immobiliere A Saint Barnabe 13012 Marseille"
 slug: "local/agence-immobiliere-pujol-gestion-immobiliere-a-saint-barnabe-13012-marseille"
 date: "2023-08-28 14:54:31"
 ---

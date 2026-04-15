@@ -1,6 +1,6 @@
 {
   "id": 54932,
-  "title": "LO32110001_BA07|LO32110001_BA07.JPG|LO32110001_E5CB.JPG|LO32110001_FCA0.JPG|LO32110001_2ECD.JPG|LO32110001_1B64.JPG|LO32110001_3D94.jpg",
+  "title": "LO32110001_BA07.JPG",
   "slug": "l002035-location-appartement-13400-aubagne",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002035-location-appartement-13400-aubagne/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "11 Bis Rue De La Fraternitè, 13400, Marseille, France",
   "codePostal": "13400",
   "ville": "AUBAGNE",
-  "prix": 620.0,
-  "charges": 25.0,
+  "prix": 620,
+  "charges": 25,
   "honoraires": "548.08",
   "garantie": "595",
   "surface": 42.16,

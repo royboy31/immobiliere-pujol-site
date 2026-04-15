@@ -1,10 +1,10 @@
 ---
-title: "recrutement agence immobiliere|recrutement immobilier"
+title: "recrutement agence immobiliere"
 slug: "besoin-de-competences"
 date: "2022-02-24 15:41:14"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/02/recrutement-agence-immobiliere.jpg"
-seoDescription: "Le métier de gestionnaire va nécessiter plus de compétences qualifiées pour appréhender et faire face à la complexité de la gestion d&#039;immeubles !"
+seoDescription: "Le métier de gestionnaire va nécessiter plus de compétences qualifiées pour appréhender et faire face à la complexité de la gestion d'immeubles !"
 ---
 
 <p>De Ketele, docteur en psychopédagogie écrit en 2007 "<em>Les mondes de l’action ont besoin de former l’Homme aux défis du complexe et donc d’une approche centrée sur de « vraies » compétences</em>". Cela n'a jamais été, selon moi, autant d'actualités. Notre métier de gestionnaire d'immeuble va nécessiter de plus en plus <strong>de compétences qualifiées</strong> pour appréhender et faire face à la totalité de la complexité de la gestion de nos immeubles.</p>

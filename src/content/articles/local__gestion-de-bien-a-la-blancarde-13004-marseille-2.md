@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A La Blancarde 13004 Marseille 2"
 slug: "local/gestion-de-bien-a-la-blancarde-13004-marseille-2"
 date: "2023-05-09 15:11:39"
 ---

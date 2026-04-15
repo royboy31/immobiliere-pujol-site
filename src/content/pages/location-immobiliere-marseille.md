@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Louer en toute sérénité à Marseille"
 slug: "location-immobiliere-marseille"
 date: "2018-11-26 10:32:49"
 seoTitle: "Louer en toute sérénité à Marseille"

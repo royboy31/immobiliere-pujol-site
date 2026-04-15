@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Perier 13008 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-de-bien-a-perier-13008-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-12-12 14:54:39"
 ---

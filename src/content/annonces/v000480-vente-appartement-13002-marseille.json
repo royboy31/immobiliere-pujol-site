@@ -1,6 +1,6 @@
 {
   "id": 229131,
-  "title": "B000480_244D.jpg|B000480_3100.jpg|B000480_39BC.jpg|B000480_45D2.jpg|B000480_6F85.jpg|B000480_516C.jpg|B000480_5CE7.jpg",
+  "title": "B000480_244D.jpg",
   "slug": "v000480-vente-appartement-13002-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000480-vente-appartement-13002-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13002",
   "ville": "Marseille",
   "quartier": "JOLIETTE",
-  "prix": 100000.0,
-  "charges": 50.0,
+  "prix": 100000,
+  "charges": 50,
   "honoraires": "0.00",
   "surface": 33.32,
   "surfaceTerrain": 33.32,

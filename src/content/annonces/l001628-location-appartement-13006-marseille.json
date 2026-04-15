@@ -1,6 +1,6 @@
 {
   "id": 78773,
-  "title": "LO34700003_807A|LO34700003_C556|LO34700003_C22C.JPG|LO34700003_C9CB.JPG|LO34700003_D64B.JPG|LO34700003_DD8C.JPG|LO34700003_EC4D.JPG|LO34700003_E49F.JPG|LO34700003_D080.JPG",
+  "title": "LO34700003_C22C.JPG",
   "slug": "l001628-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001628-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "PUGET",
-  "prix": 615.0,
-  "charges": 50.0,
+  "prix": 615,
+  "charges": 50,
   "honoraires": "440.05",
   "garantie": "565",
   "surface": 33.85,

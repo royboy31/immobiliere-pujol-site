@@ -1,10 +1,10 @@
 ---
-title: "Immobiliere Pujol 13006 Marseille|Gabriella - Accueil Immobilière Pujol|Stéphane Pujol - vente location gestion syndic à marseille"
+title: "Immobiliere Pujol 13006 Marseille"
 slug: "gabriella-notre-precieuse-tour-de-controle"
 date: "2022-06-09 06:31:41"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/06/PUJOL-0883.jpg"
 seoTitle: "Gabriella, 20 ans de collaboration, d&#039;évolution, de partage"
-seoDescription: "Une simple standardiste ? Jamais, Gabriella est bien plus que cela, elle nous accompagne chaque jour sur tous les métiers que nous pratiquons, de la location à la gestion, du syndic de copropriété à la transaction  ! Rien ne lui échappe et c&#039;est pour cette raison qu&#039;elle est notre fabuleuse tour de contrôle..."
+seoDescription: "Une simple standardiste ? Jamais, Gabriella est bien plus que cela, elle nous accompagne chaque jour sur tous les métiers que nous pratiquons, de la location à la gestion, du syndic de copropriété à la transaction  ! Rien ne lui échappe et c'est pour cette raison qu'elle est notre fabuleuse tour de contrôle..."
 ---
 
 <p><span style="font-weight: 400; font-family: arial, helvetica, sans-serif;"><span style="font-family: arial, helvetica, sans-serif;"><span style="font-weight: 400;"><img class="wp-image-514566  alignleft" src="https://www.immobiliere-pujol.fr/content/uploads/2022/06/PUJ-4050-scaled-e1654610888117-351x600.jpg" alt="Immobilière Pujol Vente d'appartements et maisons à Marseille" width="272" height="465" /></span></span>Lorsque j’ai racheté le cabinet Athenoux, j’ai trouvé ce visage, ce sourire, cette gentillesse, cette bonhomie, cette patience qui m’attendait à l’accueil et qui aujourd'hui toujours fidèle, accueille toujours nos clients.</span></p>

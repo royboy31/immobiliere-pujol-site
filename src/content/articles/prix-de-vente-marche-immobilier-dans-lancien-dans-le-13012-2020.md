@@ -1,5 +1,5 @@
 ---
-title: "saint barnabé|1|2|3|4|5|6|7|8|montolivet|rue montaigne|caillols|saint jean du desert|saint julien|fourragere"
+title: "saint barnabé"
 slug: "prix-de-vente-marche-immobilier-dans-lancien-dans-le-13012-2020"
 date: "2021-06-10 07:42:20"
 categories: ["Prix au m2 par arrondissement à Marseille"]

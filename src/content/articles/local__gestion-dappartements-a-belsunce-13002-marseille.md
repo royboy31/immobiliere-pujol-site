@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Belsunce 13002 Marseille"
 slug: "local/gestion-dappartements-a-belsunce-13002-marseille"
 date: "2024-01-04 13:17:29"
 ---

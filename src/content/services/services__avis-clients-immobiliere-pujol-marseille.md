@@ -1,7 +1,7 @@
 ---
-title: "Avis clients sur l&rsquo;Immobilière Pujol &#8211; Immobilière Pujol"
+title: "Avis clients sur l'Immobilière Pujol – Immobilière Pujol"
 slug: "services/avis-clients-immobiliere-pujol-marseille"
-seoDescription: "consultez les avis déposés par les clients de l&#039;Immobilière Pujol, syndic, gestion locative n"
+seoDescription: "consultez les avis déposés par les clients de l'Immobilière Pujol, syndic, gestion locative n"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

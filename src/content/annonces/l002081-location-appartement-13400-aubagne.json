@@ -1,6 +1,6 @@
 {
   "id": 228000,
-  "title": "LO32110002_4415|LO32110002_4415.JPG|LO32110002_7651.JPG|LO32110002_C1A3.JPG|LO32110002_D83A.JPG",
+  "title": "LO32110002_4415.JPG",
   "slug": "l002081-location-appartement-13400-aubagne",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002081-location-appartement-13400-aubagne/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "11 Bis Rue De La Fraternitè, 13400, AUBAGNE, France",
   "codePostal": "13400",
   "ville": "AUBAGNE",
-  "prix": 590.0,
-  "charges": 30.0,
+  "prix": 590,
+  "charges": 30,
   "honoraires": "648.57",
   "garantie": "560",
   "surface": 49.89,

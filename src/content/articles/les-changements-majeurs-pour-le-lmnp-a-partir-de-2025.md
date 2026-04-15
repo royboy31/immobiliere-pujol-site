@@ -1,5 +1,5 @@
 ---
-title: "{\"discarded_img\":0,\"scene\":2}|EXPERT GESTION PATRIMOINE PUJOL"
+title: "Les Changements Majeurs Pour Le Lmnp A Partir De 2025"
 slug: "les-changements-majeurs-pour-le-lmnp-a-partir-de-2025"
 date: "2024-12-10 08:33:15"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

@@ -1,6 +1,6 @@
 {
   "id": 706302,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "mbvap20009176-13012-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/mbvap20009176-13012-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13012, Marseille, France",
-  "prix": 120000.0,
-  "charges": 36.0,
+  "prix": 120000,
+  "charges": 36,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 22.5,

@@ -1,11 +1,11 @@
 ---
-title: "13014|14 ème arrondissment loyer 2018"
+title: "14 ème arrondissment loyer 2018"
 slug: "prix-m2-loyers-13014"
 date: "2020-02-08 10:43:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2015/10/13014.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13014 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 11,8 dans le 13014.  La durée d&#039;occupation est de 52 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 11,8 dans le 13014.  La durée d'occupation est de 52 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

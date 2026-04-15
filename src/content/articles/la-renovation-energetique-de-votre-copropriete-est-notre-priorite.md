@@ -1,5 +1,5 @@
 ---
-title: "renovation energetique immeuble marseille|stephane"
+title: "renovation energetique immeuble marseille"
 slug: "la-renovation-energetique-de-votre-copropriete-est-notre-priorite"
 date: "2025-09-11 08:28:44"
 categories: ["Le marché immobilier à marseille"]

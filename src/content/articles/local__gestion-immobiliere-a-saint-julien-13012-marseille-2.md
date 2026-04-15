@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Saint Julien 13012 Marseille 2"
 slug: "local/gestion-immobiliere-a-saint-julien-13012-marseille-2"
 date: "2023-08-28 14:54:31"
 ---

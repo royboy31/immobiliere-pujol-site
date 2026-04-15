@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A La Blancarde 13004 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-locative-a-la-blancarde-13004-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 14:38:11"
 ---

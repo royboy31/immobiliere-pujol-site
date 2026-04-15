@@ -1,6 +1,6 @@
 {
   "id": 54043,
-  "title": "B000417_BE91|B000417_9CBE|B000417_A971|B000417_B3E2|B000417_C9EC|B000417_D70D|B000417_E258",
+  "title": "B000417_BE91",
   "slug": "v000417-vente-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000417-vente-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "Marseille",
   "quartier": "CABOT REDON",
-  "prix": 105000.0,
-  "charges": 250.0,
+  "prix": 105000,
+  "charges": 250,
   "honoraires": "0.00",
   "surface": 72.15,
   "surfaceTerrain": 72.15,

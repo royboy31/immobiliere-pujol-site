@@ -1,0 +1,35 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const services = await getCollection('services');
+const pages = await getCollection('pages');
+
+const sample = articles[0];
+const sampleKeys = sample ? Object.keys(sample) : [];
+const sampleDataKeys = sample?.data ? Object.keys(sample.data) : [];
+---
+
+<BaseLayout title="Debug" noindex={true}>
+  <div style="padding: 2rem; font-family: monospace; white-space: pre-wrap;">
+    <h1>Stats</h1>
+    <p>Articles: {articles.length} | Services: {services.length} | Pages: {pages.length}</p>
+
+    <h2>Sample Article — top-level keys</h2>
+    <p>{JSON.stringify(sampleKeys)}</p>
+
+    <h2>Sample Article — data keys</h2>
+    <p>{JSON.stringify(sampleDataKeys)}</p>
+
+    <h2>Sample Article — id</h2>
+    <p>{sample?.id}</p>
+
+    <h2>Sample Article — full data</h2>
+    <p>{JSON.stringify(sample?.data, null, 2)}</p>
+
+    <h2>Sample Article — body exists?</h2>
+    <p>{sample?.body ? 'YES (' + sample.body.length + ' chars)' : 'NO'}</p>
+  </div>
+</BaseLayout>

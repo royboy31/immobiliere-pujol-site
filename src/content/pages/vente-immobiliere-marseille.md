@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Vente immobilière à Marseille. La formule qui vous avantage"
 slug: "vente-immobiliere-marseille"
 date: "2018-11-26 10:39:07"
 seoTitle: "Vente immobilière à Marseille. La formule qui vous avantage"

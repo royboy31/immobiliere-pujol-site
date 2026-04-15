@@ -1,5 +1,5 @@
 ---
-title: "Demander une estimation du loyer de votre appartement sur Marseille &#8211; Immobilière Pujol"
+title: "Demander une estimation du loyer de votre appartement sur Marseille – Immobilière Pujol"
 slug: "services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille"
 seoDescription: "Ce service est uniquement fourni pour des biens immobiliers situés à Marseille, Allauch et Plan de Cuques. &nbsp;"
 ---

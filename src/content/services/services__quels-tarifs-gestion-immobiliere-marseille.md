@@ -1,7 +1,7 @@
 ---
-title: "Les tarifs et coûts de la gestion locative à Marseille &#8211; Immobilière Pujol"
+title: "Les tarifs et coûts de la gestion locative à Marseille – Immobilière Pujol"
 slug: "services/quels-tarifs-gestion-immobiliere-marseille"
-seoDescription: "Gestion locative à partir de 4%HT, assurance loyers impayés à 1,8% TTC . Immobilière Pujol l&#039;agence la plus recommandée par ses clients"
+seoDescription: "Gestion locative à partir de 4%HT, assurance loyers impayés à 1,8% TTC . Immobilière Pujol l'agence la plus recommandée par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

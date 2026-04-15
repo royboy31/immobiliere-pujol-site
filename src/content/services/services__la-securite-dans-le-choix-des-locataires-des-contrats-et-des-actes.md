@@ -1,7 +1,7 @@
 ---
-title: "Choisir le bon locataire et sécuriser vos contrats  : les tarifs &#8211; Immobilière Pujol"
+title: "Choisir le bon locataire et sécuriser vos contrats  : les tarifs – Immobilière Pujol"
 slug: "services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes"
-seoDescription: "Quels sont les tarifs de l&#039;Immobilière Pujol pour trouver un bon locataire et sécuriser vos contrats de location?"
+seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un bon locataire et sécuriser vos contrats de location?"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

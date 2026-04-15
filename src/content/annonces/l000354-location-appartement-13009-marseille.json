@@ -1,6 +1,6 @@
 {
   "id": 89133,
-  "title": "LO12640003_603D|LO12640003_91F8|LO12640003_9BD8|LO12640003_B1E9|LO12640003_C24F|LO12640003_D12E|LO12640003_E22A|LO12640003_E442",
+  "title": "LO12640003_603D",
   "slug": "l000354-location-appartement-13009-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000354-location-appartement-13009-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13009",
   "ville": "MARSEILLE",
   "quartier": "REDON",
-  "prix": 830.0,
-  "charges": 170.0,
+  "prix": 830,
+  "charges": 170,
   "honoraires": "861.38",
   "garantie": "660",
   "surface": 66.26,

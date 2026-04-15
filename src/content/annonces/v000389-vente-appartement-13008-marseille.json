@@ -12,7 +12,7 @@
   "codePostal": "13008|13008|13008",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "PERIER|PERIER|PERIER",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "etage": "2|2|2",
   "nbEtages": "4|4|4",
@@ -30,6 +30,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Perier, Marseille, France|Appartement 2 pièces à vendre Perier, Marseille, France|Appartement 2 pièces à vendre Perier, Marseille, France",
-  "seoDescription": "Type 2 au calme quartier Pérer.Gaston Crémieux situé au 2e étage sans ascenseur dans un immeuble ancien. L&rsquo;appartement se compose : d&rsquo;un séjour&#8230;|Type 2 au calme quartier Pérer.Gaston Crémieux situé au 2e étage sans ascenseur dans un immeuble ancien. L&rsquo;appartement se compose : d&rsquo;un séjour&#8230;|Type 2 au calme quartier Pérer.Gaston Crémieux situé au 2e étage sans ascenseur dans un immeuble ancien. L&rsquo;appartement se compose : d&rsquo;un séjour&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Perier, Marseille, France",
+  "seoDescription": "Type 2 au calme quartier Pérer.Gaston Crémieux situé au 2e étage sans ascenseur dans un immeuble ancien. L&rsquo;appartement se compose : d&rsquo;un séjour&#8230;"
 }

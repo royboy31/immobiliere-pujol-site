@@ -1,6 +1,6 @@
 {
   "id": 911315,
-  "title": "||||||||||||||||||||",
+  "title": "",
   "slug": "l002832-6-allae-turcat-mery-rouet-13008-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002832-6-allae-turcat-mery-rouet-13008-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "6 Allã©e Turcat Mery, Rouet, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 110.0,
-  "charges": 25.0,
+  "prix": 110,
+  "charges": 25,
   "honoraires": "150",
   "garantie": "85",
   "coupDeCoeur": false,

@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "SAINT BARNABE|SAINT BARNABE|SAINT BARNABE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "8|8|8",
   "nbEtages": "0",
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 4 pièces à vendre Saint Barnabe, Marseille, France|Appartement 4 pièces à vendre Saint Barnabe, Marseille, France|Appartement 4 pièces à vendre Saint Barnabe, Marseille, France",
-  "seoDescription": "EXCLUSIVITE à 50m du métro Louis Amand, T4 d&rsquo;environ 80m² en bon état avec parking dans une résidence calme arborée et fermée. Cet appartemetn se sit&#8230;|EXCLUSIVITE à 50m du métro Louis Amand, T4 d&rsquo;environ 80m² en bon état avec parking dans une résidence calme arborée et fermée. Cet appartemetn se sit&#8230;|EXCLUSIVITE à 50m du métro Louis Amand, T4 d&rsquo;environ 80m² en bon état avec parking dans une résidence calme arborée et fermée. Cet appartemetn se sit&#8230;"
+  "seoTitle": "Appartement 4 pièces à vendre Saint Barnabe, Marseille, France",
+  "seoDescription": "EXCLUSIVITE à 50m du métro Louis Amand, T4 d&rsquo;environ 80m² en bon état avec parking dans une résidence calme arborée et fermée. Cet appartemetn se sit&#8230;"
 }

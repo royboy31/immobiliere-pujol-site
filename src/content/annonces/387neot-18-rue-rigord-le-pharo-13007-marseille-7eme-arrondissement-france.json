@@ -1,6 +1,6 @@
 {
   "id": 1382330,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "387neot-18-rue-rigord-le-pharo-13007-marseille-7eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/387neot-18-rue-rigord-le-pharo-13007-marseille-7eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "18 Rue Rigord, Le Pharo, 13007, Marseille 7eme Arrondissement, France",
-  "prix": 750.0,
-  "charges": 23.0,
+  "prix": 750,
+  "charges": 23,
   "honoraires": "527.82",
   "garantie": "727",
   "surface": 40.23,

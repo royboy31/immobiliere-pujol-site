@@ -1,5 +1,5 @@
 ---
-title: "Locations à Marseille|Marché de la location à Marseille - IMMOBILIERE PUJOL|Délais de relocation à Marseille - IMMOBILIERE PUJOL|JE TELECHARGE dossier location marseille"
+title: "Locations à Marseille"
 slug: "etude-sur-marche-de-la-location-a-marseille-2021"
 date: "2021-06-30 14:27:46"
 categories: ["Le marché immobilier à marseille"]

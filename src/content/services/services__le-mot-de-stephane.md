@@ -1,5 +1,5 @@
 ---
-title: "Le mot de Stéphane Pujol &#8211; Immobilière Pujol"
+title: "Le mot de Stéphane Pujol – Immobilière Pujol"
 slug: "services/le-mot-de-stephane"
 seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujours été pour moi source de révolte. Trop de personnes sont mal conseillées et mal accompagnées, achètent et investissent sur un coup de tête, sur de fausses croyances ou en rencontrant un vendeur de rêve… Partager ma vision de l’immobilier Pourquoi…"
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Comment vérifier la solvabilité d&rsquo;un locataire? &#8211; Immobilière Pujol"
+title: "Comment vérifier la solvabilité d'un locataire? – Immobilière Pujol"
 slug: "services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille"
 seoDescription: "Les documents que vous êtes en droit de demander. Ce que vous pouvez vérifier pour louer à  un bon locataire. Recevez une proposition de notre agence parmi les plus recommandée par ses clients"
 ---

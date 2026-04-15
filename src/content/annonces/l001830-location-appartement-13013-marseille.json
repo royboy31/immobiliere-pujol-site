@@ -1,6 +1,6 @@
 {
   "id": 90778,
-  "title": "LO04290003_2782|LO04290003_1411|LO04290003_42C0|LO04290003_57F|LO04290003_5CB7|LO04290003_78D0|LO04290003_BFF4|LO04290003_EA21|LO04290003_F9BB",
+  "title": "LO04290003_2782",
   "slug": "l001830-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001830-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "SAINT JUST",
-  "prix": 655.0,
-  "charges": 65.0,
+  "prix": 655,
+  "charges": 65,
   "honoraires": "600",
   "garantie": "590",
   "surface": 46.33,

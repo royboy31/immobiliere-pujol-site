@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Bien A Lagence Immobiliere Pujol A Bonneveine 13008 Marseille"
 slug: "local/ladministrateur-de-bien-a-lagence-immobiliere-pujol-a-bonneveine-13008-marseille"
 date: "2023-05-09 15:15:37"
 ---

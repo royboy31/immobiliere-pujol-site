@@ -1,11 +1,11 @@
 ---
-title: "Chateau-Gombert|13 ème arrondissement loyer 2018"
+title: "Chateau-Gombert"
 slug: "prix-m2-loyers-13013"
 date: "2020-02-07 10:41:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Chateau-Gombert.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13013 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 12,2 dans le 13013.  La durée d&#039;occupation moyenne est de 50 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 12,2 dans le 13013.  La durée d'occupation moyenne est de 50 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

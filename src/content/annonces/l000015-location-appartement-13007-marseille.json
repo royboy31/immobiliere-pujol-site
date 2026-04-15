@@ -1,6 +1,6 @@
 {
   "id": 51833,
-  "title": "LO01100002_5AAE13280514|LO01100002_218E|LO01100002_2C1A|LO01100002_3696|LO01100002_41DD|LO01100002_49AB|LO01100002_FB86",
+  "title": "LO01100002_5AAE13280514",
   "slug": "l000015-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000015-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "4 SEPTEMBRE",
-  "prix": 560.0,
-  "charges": 25.0,
+  "prix": 560,
+  "charges": 25,
   "honoraires": "295.62",
   "garantie": "1070",
   "surface": 22.74,

@@ -1,10 +1,10 @@
 ---
-title: "syndic éco-responsable|ciel bleu|syndic éco-responsable|syndi éco|réunion de copropriété|syndic développement durable"
+title: "syndic éco-responsable"
 slug: "syndic-de-copro-ecologie"
 date: "2020-10-09 10:56:21"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/10/ricardo-gomez-angel-WsEAiVwGrwo-unsplash-scaled.jpg"
 seoTitle: "Pandémie, syndic de copropriété et écologie"
-seoDescription: "Comme tout le monde, nous aspirons à un monde meilleur, plus juste, plus vert. Mais syndic de copro et écologie font-ils bon ménage ? Chez Immobilière Pujol, nous avons notre avis -&gt;"
+seoDescription: "Comme tout le monde, nous aspirons à un monde meilleur, plus juste, plus vert. Mais syndic de copro et écologie font-ils bon ménage ? Chez Immobilière Pujol, nous avons notre avis ->"
 ---
 
 <p><span id="p10">Le coronavirus, le confinement et la crise qui s'ensuit nous ont laissés dans l'espérance d'un "Monde d'<span id="44">Après</span>", dont on ne sait d'ailleurs pas très bien ce qu'il contient...</span><span id="p11"> Mais dont on est sûr qu'on en attend du changement !</span><span id="p12"> C'est aussi vrai pour les syndics de copropriété.</span><span id="p13"> Comme tout le monde, nous aspirons à un monde meilleur, plus juste, plus vert.</span><span id="p14"> Mais <strong>syndic de <span id="45" class="s-rg-t">copro</span> et écologie font-ils bon ménage ?</strong></span><span id="p15"> Le développement durable a-t-il sa juste place dans la gestion des immeubles aujourd'hui ?</span></p>

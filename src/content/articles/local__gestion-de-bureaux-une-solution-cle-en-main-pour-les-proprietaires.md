@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bureaux Une Solution Cle En Main Pour Les Proprietaires"
 slug: "local/gestion-de-bureaux-une-solution-cle-en-main-pour-les-proprietaires"
 date: "2023-05-09 15:36:18"
 ---

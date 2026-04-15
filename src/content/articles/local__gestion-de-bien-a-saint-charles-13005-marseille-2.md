@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Saint Charles 13005 Marseille 2"
 slug: "local/gestion-de-bien-a-saint-charles-13005-marseille-2"
 date: "2023-05-09 15:13:15"
 ---

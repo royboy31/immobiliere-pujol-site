@@ -1,5 +1,5 @@
 ---
-title: "immeuble 1 salavtor façade pierre apres ravalement|quartier vieux port marseille 13001 marche marseillais|immeuble 1 salavtor façade pierre ravalée|facade"
+title: "immeuble 1 salavtor façade pierre apres ravalement"
 slug: "un-syndic-utile-un-administrateur-de-biens-utile"
 date: "2020-09-23 05:42:11"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

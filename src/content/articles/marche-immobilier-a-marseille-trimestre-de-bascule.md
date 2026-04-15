@@ -4,8 +4,8 @@ slug: "marche-immobilier-a-marseille-trimestre-de-bascule"
 date: "2016-11-22 17:40:42"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/investissement-bureaux-13008-marseille-1.jpg"
-seoTitle: "Le marché de l'immobilier à Marseille: est-ce un trimestre de bascule ?|Le marché de l'immobilier à Marseille: est-ce un trimestre de bascule ?"
-seoDescription: "Bilan au 31/10/2016 du marché de l'immobilier à Marseille : Le marché de la location est bon, mais moins solide que l’année dernière ... LIRE LA SUITE|Bilan au 31/10/2016 du marché de l'immobilier à Marseille : Le marché de la location est bon, mais moins solide que l’année dernière ... LIRE LA SUITE"
+seoTitle: "Le marché de l'immobilier à Marseille: est-ce un trimestre de bascule ?"
+seoDescription: "Bilan au 31/10/2016 du marché de l'immobilier à Marseille : Le marché de la location est bon, mais moins solide que l’année dernière ... LIRE LA SUITE"
 ---
 
 <strong>Bilan au 31/10/2016</strong>

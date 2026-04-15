@@ -1,11 +1,11 @@
 ---
-title: "prix energie|faire des economies energie|hausse prix energie"
+title: "prix energie"
 slug: "prix-de-lenergie-en-2023"
 date: "2023-03-14 11:55:35"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/PXL_20221018_155218650-1-scaled.jpg"
 seoTitle: "Les prix de l&#039;électricité et du gaz en 2023"
-seoDescription: "Quels seront les tarifs de l&#039;énergie en 2023? Le bouclier tarifaire sera-t-il toujours actif? Quelles conséquence à titre individuel et collectif?"
+seoDescription: "Quels seront les tarifs de l'énergie en 2023? Le bouclier tarifaire sera-t-il toujours actif? Quelles conséquence à titre individuel et collectif?"
 ---
 
 <p>En 2022 et 2023, le tarif réglementé de l'électricité et du gaz aurait dû augmenter dans des proportions faramineuses, jusqu’à +400%.<br />

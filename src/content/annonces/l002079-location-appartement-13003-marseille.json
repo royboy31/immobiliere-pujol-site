@@ -1,6 +1,6 @@
 {
   "id": 228036,
-  "title": "LO36990001_E0B10143167|LO36990001_56E3.jpg|LO36990001_28BC.jpg|LO36990001_33C9.jpg|LO36990001_1D12.jpg|LO36990001_113A.jpg|LO36990001_E585.jpg|LO36990001_458.jpg|LO36990001_454E.jpg",
+  "title": "LO36990001_E0B10143167",
   "slug": "l002079-location-appartement-13003-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002079-location-appartement-13003-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13003",
   "ville": "MARSEILLE",
   "quartier": "JOLIETTE",
-  "prix": 870.0,
-  "charges": 130.0,
+  "prix": 870,
+  "charges": 130,
   "honoraires": "750.49",
   "garantie": "740",
   "surface": 57.73,

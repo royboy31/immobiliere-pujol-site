@@ -1,6 +1,6 @@
 {
   "id": 1191623,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "ljvap120009682-13009-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/ljvap120009682-13009-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "199e Avenue Du Prado, Mermoz Prado, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 1200.0,
-  "charges": 120.0,
+  "prix": 1200,
+  "charges": 120,
   "honoraires": "807.92",
   "garantie": "1080",
   "surface": 61.58,

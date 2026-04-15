@@ -1,7 +1,7 @@
 ---
-title: "Comment choisir son locataire pour une gestion immobilière sans risques ? &#8211; Immobilière Pujol"
+title: "Comment choisir son locataire pour une gestion immobilière sans risques ? – Immobilière Pujol"
 slug: "services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque"
-seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les meilleurs candidats. Vous restez maître du choix du locataire. Recevez une proposition de l&#039;Immobilière Pujol en moins de 24h"
+seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les meilleurs candidats. Vous restez maître du choix du locataire. Recevez une proposition de l'Immobilière Pujol en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

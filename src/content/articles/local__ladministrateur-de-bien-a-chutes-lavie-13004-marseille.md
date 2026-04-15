@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Bien A Chutes Lavie 13004 Marseille"
 slug: "local/ladministrateur-de-bien-a-chutes-lavie-13004-marseille"
 date: "2024-05-13 13:10:58"
 ---

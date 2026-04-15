@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A St Mitre 13013 Marseille"
 slug: "local/gestion-dappartements-a-st-mitre-13013-marseille"
 date: "2024-01-04 13:17:28"
 ---

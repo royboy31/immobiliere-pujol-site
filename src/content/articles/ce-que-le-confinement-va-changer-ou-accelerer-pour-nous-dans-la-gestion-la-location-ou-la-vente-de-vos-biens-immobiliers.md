@@ -1,10 +1,10 @@
 ---
-title: "immobilier et coronavirus|immobilieer et coronavirsu"
+title: "immobilier et coronavirus"
 slug: "ce-que-le-confinement-va-changer-ou-accelerer-pour-nous-dans-la-gestion-la-location-ou-la-vente-de-vos-biens-immobiliers"
 date: "2020-05-08 05:02:53"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/immobilier-et-coronavirus.jpg"
-seoDescription: "Propriétaire ou locataire, vendez ou louez votre appartement à Marseille  en toute sérénité et sécurité avec l&#039;Immobilière Pujol"
+seoDescription: "Propriétaire ou locataire, vendez ou louez votre appartement à Marseille  en toute sérénité et sécurité avec l'Immobilière Pujol"
 ---
 
 <p><br />

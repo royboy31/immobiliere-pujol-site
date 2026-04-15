@@ -1,5 +1,5 @@
 ---
-title: "Notre service de gestion immobilière &#8211; Immobilière Pujol"
+title: "Notre service de gestion immobilière – Immobilière Pujol"
 slug: "services/notre-service-de-gestion-immobiliere"
 seoDescription: "Une organisation simplifiée Notre organisation est volontairement simple pour que le service de gestion immobilière soit rapide et efficace. Il n’y a aucun intermédiaire entre le gestionnaire locatif et le client, pas même une aide-comptable ou une assistante. Les relations sont directes entre le propriétaire et son gestionnaire. Le gestionnaire gère…"
 ---

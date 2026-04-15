@@ -1,6 +1,6 @@
 {
   "id": 54181,
-  "title": "LO00800004_9899|LO00800004_65AE|LO00800004_7D5E|LO00800004_8BA7|LO00800004_A81A|LO00800004_B56A|LO00800004_C113|LO00800004_CBF1",
+  "title": "LO00800004_9899",
   "slug": "l001999-location-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001999-location-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "MARSEILLE",
   "quartier": "CAPELETTE",
-  "prix": 520.0,
-  "charges": 60.0,
+  "prix": 520,
+  "charges": 60,
   "honoraires": "350",
   "garantie": "460",
   "surface": 41.01,

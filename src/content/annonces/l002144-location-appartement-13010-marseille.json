@@ -1,6 +1,6 @@
 {
   "id": 230308,
-  "title": "LO37030001_F33515135364|LO37030001_605A.jpg|LO37030001_6915.jpg|LO37030001_7396.jpg|LO37030001_58A8.jpg|LO37030001_5099.jpg|LO37030001_F009.jpg|LO37030001_7D0D.jpg",
+  "title": "LO37030001_F33515135364",
   "slug": "l002144-location-appartement-13010-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002144-location-appartement-13010-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13010",
   "ville": "MARSEILLE",
   "quartier": "PONT DE VIVAUX",
-  "prix": 847.0,
-  "charges": 65.0,
+  "prix": 847,
+  "charges": 65,
   "honoraires": "743.60",
   "garantie": "782",
   "surface": 57.2,

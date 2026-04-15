@@ -1,5 +1,5 @@
 ---
-title: "Qualité des services et des travaux = tranquillité = pérennité en copropriété &#8211; Immobilière Pujol"
+title: "Qualité des services et des travaux = tranquillité = pérennité en copropriété – Immobilière Pujol"
 slug: "services/formulaire-vous-voulez-un-service-de-qualite-des-charges-optimisees"
 seoDescription: "La mauvaise qualité coûte chère. Faites gérer votre copropriété par un syndic soucieux de la qualité des prestataires et des travaux dans le temps"
 ---

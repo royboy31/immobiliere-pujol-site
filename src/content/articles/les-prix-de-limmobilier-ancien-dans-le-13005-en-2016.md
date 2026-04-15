@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Les Prix De Limmobilier Ancien Dans Le 13005 En 2016"
 slug: "les-prix-de-limmobilier-ancien-dans-le-13005-en-2016"
 date: "2016-03-30 07:07:31"
 categories: ["Arrondissements Marseille>Arrondissement 13005 Marseille", "Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13005"]

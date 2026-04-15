@@ -1,6 +1,6 @@
 {
   "id": 1260131,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250642-16-rue-du-camas-camas-conception-13005-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250642-16-rue-du-camas-camas-conception-13005-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "14 Avenue De La Barquiere, Mazargues Village, 13009, Marseille 9eme Arrondissement, France",
-  "prix": 1200.0,
-  "charges": 180.0,
+  "prix": 1200,
+  "charges": 180,
   "honoraires": "759.46",
   "garantie": "1020",
   "surface": 58.42,

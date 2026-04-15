@@ -1,12 +1,12 @@
 ---
-title: "operation-grand-centre-ville-marseille5|Faire-des-travaux|operation-grand-centre-ville-marseille|operation-grand-centre-ville-marseille2|operation-grand-centre-ville-marseille3|operation-grand-centre-ville-marseille4"
+title: "operation-grand-centre-ville-marseille5"
 slug: "grand-centre-ville-se-refait-une-beaute"
 date: "2018-02-17 06:21:18"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: ["centre ville", "marseille", "operation grand centre", "projet immobilier", "ravalement de facade", "soleam", "suvention", "travaux de renovation"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/02/operation-grand-centre-ville-marseille5.jpg"
-seoTitle: "Opération Grand Centre-Ville de Marseille - Immobilière Pujol|Opération Grand Centre-Ville de Marseille - Immobilière Pujol"
-seoDescription: "Je suis Marseillais de père en fils et j’ai toujours vécu dans le centre de ma ville entre le vieux port et Castellane. Alors, parlons franchement : notre centre-ville n’est pas à la hauteur de nos attentes. Nous n’entretenons pas nos immeubles...|Je suis Marseillais de père en fils et j’ai toujours vécu dans le centre de ma ville entre le vieux port et Castellane. Alors, parlons franchement : notre centre-ville n’est pas à la hauteur de nos attentes. Nous n’entretenons pas nos immeubles..."
+seoTitle: "Opération Grand Centre-Ville de Marseille - Immobilière Pujol"
+seoDescription: "Je suis Marseillais de père en fils et j’ai toujours vécu dans le centre de ma ville entre le vieux port et Castellane. Alors, parlons franchement : notre centre-ville n’est pas à la hauteur de nos attentes. Nous n’entretenons pas nos immeubles..."
 ---
 
 Ma famille habite Marseille depuis des générations. Hormis une petite infidélité, j’ai toujours vécu dans le centre de ma ville entre le vieux port et Castellane. Alors, parlons franchement : notre centre-ville n’est pas à la hauteur de nos attentes. Nous n’entretenons pas nos immeubles. La mairie (hormis Euromediterranée) n’est pas parvenue à travers le PRI et les Opah à inverser ce constat et surtout notre comportement individualiste a fait le reste…c’est-à-dire beaucoup.

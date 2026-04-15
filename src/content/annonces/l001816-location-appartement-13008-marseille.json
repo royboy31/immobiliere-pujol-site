@@ -1,6 +1,6 @@
 {
   "id": 90619,
-  "title": "LO35680001_A47D|LO35680001_A47D.JPG|LO35680001_C25A.JPG|LO35680001_CD34.JPG|LO35680001_D743.JPG|LO35680001_E049.JPG",
+  "title": "LO35680001_A47D.JPG",
   "slug": "l001816-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001816-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "ROUET",
-  "prix": 673.0,
-  "charges": 70.0,
+  "prix": 673,
+  "charges": 70,
   "honoraires": "577.07",
   "garantie": "603",
   "surface": 44.39,

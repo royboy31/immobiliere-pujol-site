@@ -1,10 +1,10 @@
 ---
-title: "comment-acheter-bureau|comment-acheter-ses-bureaux"
+title: "comment-acheter-bureau"
 slug: "opportunites-fiscales-pour-les-petits-patrons-la-location-de-bureaux-equipes"
 date: "2017-12-22 16:49:48"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/12/comment-acheter-bureau.jpg"
-seoTitle: "Comment acheter ses bureaux et son local quand on est patron à Marseille?|Comment acheter ses bureaux et son local quand on est patron à Marseille?"
-seoDescription: "Un patron de pme ou un médecin doit acheter ses bureaux, tout comme le commerçant doit acheter sa boutique pour se constituer son patrimoine.|Un patron de pme ou un médecin doit acheter ses bureaux, tout comme le commerçant doit acheter sa boutique pour se constituer son patrimoine."
+seoTitle: "Comment acheter ses bureaux et son local quand on est patron à Marseille?"
+seoDescription: "Un patron de pme ou un médecin doit acheter ses bureaux, tout comme le commerçant doit acheter sa boutique pour se constituer son patrimoine."
 ---
 
 A mon avis, tout entrepreneur, tout patron, tout commerçant et tout indépendant doit (à partir du moment où il a une visibilité sur l’exploitation de son activité) acheter ses bureaux, investir dans son outil de travail ou son local quand il est commerçant. Au premier rang de ces outils, la boutique, le bureau ou le local d’activité constitue souvent un avantage concurrentiel différenciant. Pour cette raison, le petit patron doit devenir propriétaire. C’est également la première étape pour bâtir une stratégie patrimoniale.

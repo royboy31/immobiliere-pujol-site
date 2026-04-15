@@ -1,11 +1,11 @@
 ---
-title: "marseille-2|5 ème arrondissement loyer 2018"
+title: "marseille-2"
 slug: "prix-m2-loyers-13005"
 date: "2020-01-30 10:55:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-2.png"
 seoTitle: "Les prix au m2 des loyers dans le 13005 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,8 dans le 13005.  La durée d&#039;occupation est de 46 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 13,8 dans le 13005.  La durée d'occupation est de 46 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

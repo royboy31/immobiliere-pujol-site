@@ -1,11 +1,11 @@
 ---
-title: "prix immobilier vieux port marseille|unnamed|105979988_4059093934133209_9153263110598395733_o|téléchargement|opera-municipal-de-marseille-grand-theatre-rue-moliere-13001-marseille-3-700x466|Prix au m² opera marseille|prix m² rue des feuillants 13001|prix m² bd voltaire 13001|prix vente rue sainte marseille|prix de vente rue davso marseille|prix appartement place thiars marseille|photo_d20c149b7fd92cb34bfd41e74a45daf0 (1)"
+title: "prix immobilier vieux port marseille"
 slug: "quel-prix-immobilier-ancien-13001-aout-2019-juillet-2020"
 date: "2020-11-26 17:58:32"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/20170313_142442-scaled.jpg"
 seoTitle: "Prix de l&#039;immobilier dans le 13001 entre 2019 et 2020"
-seoDescription: "Comparatif des prix de l&#039;immobilier ancien dans le 13001, détaillé par quartier et par type de bien immobilier. Exclusivité Immobilière Pujol !"
+seoDescription: "Comparatif des prix de l'immobilier ancien dans le 13001, détaillé par quartier et par type de bien immobilier. Exclusivité Immobilière Pujol !"
 ---
 
 <p><span style="color: #000000;">Cet article est le premier d'une série sur les prix de vente des arrondissements à Marseille au 31 Juillet 2020, donc après le premier choc du confinement. </span></p>

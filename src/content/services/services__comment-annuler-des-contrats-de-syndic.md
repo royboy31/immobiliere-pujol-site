@@ -1,5 +1,5 @@
 ---
-title: "Comment résilier un contrat de syndic en cours de mandat? &#8211; Immobilière Pujol"
+title: "Comment résilier un contrat de syndic en cours de mandat? – Immobilière Pujol"
 slug: "services/comment-annuler-des-contrats-de-syndic"
 seoDescription: "Résilier le contrat de votre syndic de copropriété et changez de syndic. La marche à suivre ici ! Immobilière Pujol, un syndic reconnu par ses clients"
 ---

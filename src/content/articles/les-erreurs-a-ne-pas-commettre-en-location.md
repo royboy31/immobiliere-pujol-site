@@ -1,10 +1,10 @@
 ---
-title: "7 péchés capitaux de la gestion immobilière|péché 6 : surpayer les entrepreuneurs|péché 5 : réparations et entretien à la sauvette|péché 3 : s'improviser pro du marketing|péché 7 : ne pas tenir compte des lois sur le logement|péché 1 : fixer vous-même le loyer|péché 4 : louer aux mauvaises personnes|péché 2 : devoir courir après les loyers|marché immobilier location marseille 2020"
+title: "7 péchés capitaux de la gestion immobilière"
 slug: "les-erreurs-a-ne-pas-commettre-en-location"
 date: "2021-09-14 08:31:43"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/06/Blog-Immobiliere-Pujol-header-3.jpg"
 seoTitle: "Les erreurs à ne pas commettre pour louer son appartement"
-seoDescription: "Cet article s&#039;adresse à tous ceux qui pensent que louer et gérer seul son investissement locatif est facile et sans risque"
+seoDescription: "Cet article s'adresse à tous ceux qui pensent que louer et gérer seul son investissement locatif est facile et sans risque"
 ---
 
 <p><span data-contrast="auto">Cet article s'adresse à tous ceux qui pensent que louer et gérer seul son investissement locatif est facile et sans risque. </span></p>

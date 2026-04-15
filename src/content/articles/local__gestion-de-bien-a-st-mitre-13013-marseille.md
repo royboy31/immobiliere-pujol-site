@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A St Mitre 13013 Marseille"
 slug: "local/gestion-de-bien-a-st-mitre-13013-marseille"
 date: "2023-05-09 15:12:25"
 ---

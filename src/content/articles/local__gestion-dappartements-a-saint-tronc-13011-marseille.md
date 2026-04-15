@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Saint Tronc 13011 Marseille"
 slug: "local/gestion-dappartements-a-saint-tronc-13011-marseille"
 date: "2023-05-09 15:31:31"
 ---

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "La politique de confidentialité de L'immobilière Pujol"
 slug: "politique-de-confidentialite"
 date: "2018-09-06 13:54:11"
 seoTitle: "La politique de confidentialité de L'immobilière Pujol"

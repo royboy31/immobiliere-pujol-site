@@ -1,11 +1,11 @@
 ---
-title: "Marseille-Mazargues57|9 ème arrondissement loyer 2018"
+title: "Marseille-Mazargues57"
 slug: "prix-m2-loyers-13009"
 date: "2020-02-05 10:34:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Mazargues57.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13009 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,9 dans le 13009.  La durée d&#039;occupation moyenne est de 49 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 13,9 dans le 13009.  La durée d'occupation moyenne est de 49 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

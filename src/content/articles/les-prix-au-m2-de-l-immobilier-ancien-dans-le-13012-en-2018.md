@@ -1,5 +1,5 @@
 ---
-title: "prix de l'ancien dans le 13012|13012|13012"
+title: "prix de l'ancien dans le 13012"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13012-en-2018"
 date: "2019-06-12 07:54:51"
 categories: ["Prix au m2 par arrondissement à Marseille"]

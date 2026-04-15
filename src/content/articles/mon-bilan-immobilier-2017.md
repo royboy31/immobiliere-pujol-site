@@ -1,9 +1,9 @@
 ---
-title: "le marche de la vente a marseille|loyer 2017 a marseille par type appartement|Loyer par arrondissement a marseille en 2017"
+title: "le marche de la vente a marseille"
 slug: "mon-bilan-immobilier-2017"
 date: "2018-01-14 17:17:37"
-seoTitle: "Le marche immobilier à Marseille en 2017 vu par une agence immobilière|Le marche immobilier à Marseille en 2017 vu par une agence immobilière"
-seoDescription: "Vous voulez savoir quel est l'état du marché immobilier à Marseille au début de 2018. Découvrez dans cet article l'avis de notre agence immobilière sur ce sujet.|Vous voulez savoir quel est l'état du marché immobilier à Marseille au début de 2018. Découvrez dans cet article l'avis de notre agence immobilière sur ce sujet."
+seoTitle: "Le marche immobilier à Marseille en 2017 vu par une agence immobilière"
+seoDescription: "Vous voulez savoir quel est l'état du marché immobilier à Marseille au début de 2018. Découvrez dans cet article l'avis de notre agence immobilière sur ce sujet."
 ---
 
 Après les festivités de ces vacances de Noël, retour au boulot et projets pour cette année. Je ne sais si cela est le fait de vieillir ou d’être saturé d’informations contradictoires, mais j’ai l’impression que l’année 2017 a été bonne et en même temps mauvaise.

@@ -1,5 +1,5 @@
 ---
-title: "anniversaire Gabriella Immobilière Pujol|20170212_204322|anniversaire Gabriella Immobilière Pujol"
+title: "anniversaire Gabriella Immobilière Pujol"
 slug: "vie-dequipe-gabriella-notre-tour-de-controle"
 date: "2021-01-21 09:58:44"
 categories: ["L'équipe"]

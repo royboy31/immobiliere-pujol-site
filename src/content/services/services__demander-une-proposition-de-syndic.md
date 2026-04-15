@@ -1,5 +1,5 @@
 ---
-title: "Demandez une proposition de syndic &#8211; Immobilière Pujol"
+title: "Demandez une proposition de syndic – Immobilière Pujol"
 slug: "services/demander-une-proposition-de-syndic"
 seoDescription: "Demandez une proposition de syndic de copropriété à Marseille à un syndic recommandé par ses clients et parmi les mieux évaluez dans notre ville."
 ---

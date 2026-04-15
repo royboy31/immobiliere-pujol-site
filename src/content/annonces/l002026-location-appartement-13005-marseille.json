@@ -1,6 +1,6 @@
 {
   "id": 54783,
-  "title": "LO29250002_C9DA|LO29250002_1666|LO29250002_274F|LO29250002_37BB|LO29250002_5B9B|LO29250002_92E9|LO29250002_A27A|LO29250002_B920|LO29250002_E2E1",
+  "title": "LO29250002_C9DA",
   "slug": "l002026-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002026-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "TIMONE/ST PIERRE",
-  "prix": 804.0,
-  "charges": 120.0,
+  "prix": 804,
+  "charges": 120,
   "honoraires": "746.07",
   "garantie": "683.56",
   "surface": 57.39,

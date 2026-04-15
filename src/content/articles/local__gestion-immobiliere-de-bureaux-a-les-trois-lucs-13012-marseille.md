@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere De Bureaux A Les Trois Lucs 13012 Marseille"
 slug: "local/gestion-immobiliere-de-bureaux-a-les-trois-lucs-13012-marseille"
 date: "2023-05-09 15:37:05"
 ---

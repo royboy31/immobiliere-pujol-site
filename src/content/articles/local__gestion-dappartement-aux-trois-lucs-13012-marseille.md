@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartement Aux Trois Lucs 13012 Marseille"
 slug: "local/gestion-dappartement-aux-trois-lucs-13012-marseille"
 date: "2024-01-04 13:17:29"
 ---

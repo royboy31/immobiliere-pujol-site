@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Agence Immobiliere Pujol Votre Partenaire En Gestion Locative A Pont De Vivaux 13010 Marseille"
 slug: "local/agence-immobiliere-pujol-votre-partenaire-en-gestion-locative-a-pont-de-vivaux-13010-marseille"
 date: "2023-05-09 15:47:21"
 ---

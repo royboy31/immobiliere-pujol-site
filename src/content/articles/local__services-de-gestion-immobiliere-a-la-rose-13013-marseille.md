@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Services De Gestion Immobiliere A La Rose 13013 Marseille"
 slug: "local/services-de-gestion-immobiliere-a-la-rose-13013-marseille"
 date: "2023-05-09 15:46:19"
 ---

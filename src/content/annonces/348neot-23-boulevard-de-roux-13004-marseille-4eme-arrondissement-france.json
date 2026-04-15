@@ -1,6 +1,6 @@
 {
   "id": 1366212,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "348neot-23-boulevard-de-roux-13004-marseille-4eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/348neot-23-boulevard-de-roux-13004-marseille-4eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "23 Boulevard De Roux, 13004, Marseille 4eme Arrondissement, France",
-  "prix": 550.0,
-  "charges": 30.0,
+  "prix": 550,
+  "charges": 30,
   "honoraires": "266.43",
   "garantie": "1040",
   "surface": 17.6,

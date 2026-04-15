@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Saint Loup 13011 Marseille"
 slug: "local/gestion-dappartements-a-saint-loup-13011-marseille"
 date: "2023-06-29 10:30:36"
 ---

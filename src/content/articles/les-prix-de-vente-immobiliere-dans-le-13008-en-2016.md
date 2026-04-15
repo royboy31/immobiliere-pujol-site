@@ -5,7 +5,7 @@ date: "2016-03-10 17:55:47"
 categories: ["Arrondissements Marseille>Arrondissement 13008 Marseille", "Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13008"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/investissement-bureaux-13008-marseille1.jpg"
 seoTitle: "Quels sont les prix de l'immobilier ancien dans le 13008 en 2016 Marseille?"
-seoDescription: "Quels ont été les prix médians des appartements et maisons anciennes vendues dans le 13008 à Marseille en 2016. Lisez cet article pour le savoir|Quels ont été les prix médians des appartements et maisons anciennes vendues dans le 13008 à Marseille en 2016. Lisez cet article pour le savoir"
+seoDescription: "Quels ont été les prix médians des appartements et maisons anciennes vendues dans le 13008 à Marseille en 2016. Lisez cet article pour le savoir"
 ---
 
 <h4><strong>La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians .<br />

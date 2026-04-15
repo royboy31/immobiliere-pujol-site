@@ -1,5 +1,5 @@
 ---
-title: "travaux sur copro en peril|Annonce sous offre (1)|20240829_113444 (1)|Gestion de copropriété difficile|Annonce sous offre (4)|Annonce sous offre (3)"
+title: "travaux sur copro en peril"
 slug: "agir-en-copropriete-quand-le-peril-menace-le-cas-du-79-canebiere-a-marseille"
 date: "2024-09-18 06:35:48"
 categories: ["Le marché immobilier à marseille"]

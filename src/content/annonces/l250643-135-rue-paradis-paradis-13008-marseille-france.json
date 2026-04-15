@@ -1,6 +1,6 @@
 {
   "id": 1260132,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250643-135-rue-paradis-paradis-13008-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250643-135-rue-paradis-paradis-13008-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "135 Rue Paradis, Paradis, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 550.0,
-  "charges": 15.0,
+  "prix": 550,
+  "charges": 15,
   "honoraires": "274.17",
   "garantie": "1070",
   "surface": 21.09,

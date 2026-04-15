@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "LA POMME|LA POMME|LA POMME",
   "honoraires": "11.11|11.11|11.11",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "2|2|2",
   "nbEtages": "13|13|13",
@@ -33,6 +33,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre La Pomme, Marseille, France|Appartement 3 pièces à vendre La Pomme, Marseille, France|Appartement 3 pièces à vendre La Pomme, Marseille, France",
-  "seoDescription": "T3 à rénover situé Résidence Parc Bel Ombre, boulevard Mireille Lauze 13011 Marseille.Cet appartement de 53m² se compose d&rsquo;un hall d&rsquo;entrée, un&#8230;|T3 à rénover situé Résidence Parc Bel Ombre, boulevard Mireille Lauze 13011 Marseille.Cet appartement de 53m² se compose d&rsquo;un hall d&rsquo;entrée, un&#8230;|T3 à rénover situé Résidence Parc Bel Ombre, boulevard Mireille Lauze 13011 Marseille.Cet appartement de 53m² se compose d&rsquo;un hall d&rsquo;entrée, un&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre La Pomme, Marseille, France",
+  "seoDescription": "T3 à rénover situé Résidence Parc Bel Ombre, boulevard Mireille Lauze 13011 Marseille.Cet appartement de 53m² se compose d&rsquo;un hall d&rsquo;entrée, un&#8230;"
 }

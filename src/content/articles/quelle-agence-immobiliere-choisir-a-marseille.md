@@ -1,5 +1,5 @@
 ---
-title: "PU-1653|PU-1653-300x188|PU-1653-300x188"
+title: "PU-1653"
 slug: "quelle-agence-immobiliere-choisir-a-marseille"
 date: "2011-09-28 14:03:24"
 categories: ["Le marché immobilier à marseille"]

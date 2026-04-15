@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 de l'immobilier neuf dans le 3eme arrondissement de Marseille en 2018|Les prix au m2 de l'immobilier neuf dans le 13003 en 2018"
+title: "prix au m2 de l'immobilier neuf dans le 3eme arrondissement de Marseille en 2018"
 slug: "les-prix-au-m2-de-limmobilier-neuf-dans-le-13003-en-2018"
 date: "2019-06-03 08:56:10"
 categories: ["Prix au m2 par arrondissement à Marseille"]

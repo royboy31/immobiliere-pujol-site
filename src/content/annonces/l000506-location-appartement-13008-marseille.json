@@ -1,6 +1,6 @@
 {
   "id": 54823,
-  "title": "LO02960001_240209184009|LO02960001_3BF2|LO02960001_73BC|LO02960001_8D6F|LO02960001_99C5|LO02960001_A484|LO02960001_B1B4|LO02960001_C404|LO02960001_D4BE|LO02960001_E162",
+  "title": "LO02960001_240209184009",
   "slug": "l000506-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000506-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "PRADO/MICHELET",
-  "prix": 1190.0,
-  "charges": 140.0,
+  "prix": 1190,
+  "charges": 140,
   "honoraires": "1021.67",
   "garantie": "2100",
   "surface": 78.59,

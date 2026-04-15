@@ -1,9 +1,9 @@
 ---
-title: ""
+title: "Estimation de loyer à Marseille"
 slug: "location-immobiliere-marseille/merci-pour-votre-demande-destimation-de-loyer"
 date: "2019-07-30 09:30:07"
 seoTitle: "Estimation de loyer à Marseille"
-seoDescription: "L&#039;équipe gestion locative de l&#039;immobilière vous donne une estimation de loyers gratuite. Consultez nous avant de mettre en location"
+seoDescription: "L'équipe gestion locative de l'immobilière vous donne une estimation de loyers gratuite. Consultez nous avant de mettre en location"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

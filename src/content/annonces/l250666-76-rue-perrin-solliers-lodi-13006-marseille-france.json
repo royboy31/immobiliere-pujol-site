@@ -1,6 +1,6 @@
 {
   "id": 1271997,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250666-76-rue-perrin-solliers-lodi-13006-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250666-76-rue-perrin-solliers-lodi-13006-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "76 Rue Perrin Solliers, Lodi, 13006, Marseille 6eme Arrondissement, France",
-  "prix": 680.0,
-  "charges": 35.0,
+  "prix": 680,
+  "charges": 35,
   "honoraires": "455.13",
   "garantie": "645",
   "surface": 35.01,

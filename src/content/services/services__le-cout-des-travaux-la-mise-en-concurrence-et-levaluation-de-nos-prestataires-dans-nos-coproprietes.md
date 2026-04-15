@@ -1,7 +1,7 @@
 ---
-title: "Mettre en place des procédures pour contrôler le coût des travaux &#8211; Immobilière Pujol"
+title: "Mettre en place des procédures pour contrôler le coût des travaux – Immobilière Pujol"
 slug: "services/le-cout-des-travaux-la-mise-en-concurrence-et-levaluation-de-nos-prestataires-dans-nos-coproprietes"
-seoDescription: "Contrôlez les travaux, contrôlez vos fournisseurs. Combien coûte les travaux en copropriété à Marseille. Consultez l&#039;Immobilière Pujol, le syndic le plus recommandé par ses clients à Marseille"
+seoDescription: "Contrôlez les travaux, contrôlez vos fournisseurs. Combien coûte les travaux en copropriété à Marseille. Consultez l'Immobilière Pujol, le syndic le plus recommandé par ses clients à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

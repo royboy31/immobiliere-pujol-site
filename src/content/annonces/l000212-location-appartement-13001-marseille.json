@@ -1,6 +1,6 @@
 {
   "id": 86658,
-  "title": "LO29610003_A040|LO29610003_6A7F|LO29610003_858|LO29610003_E2CD|LO29610003_F63E",
+  "title": "LO29610003_A040",
   "slug": "l000212-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000212-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "LA PLAINE",
-  "prix": 441.0,
-  "charges": 31.0,
+  "prix": 441,
+  "charges": 31,
   "honoraires": "403.26",
   "garantie": "410",
   "surface": 31.02,

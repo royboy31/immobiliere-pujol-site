@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Agence Immobiliere Pujol Votre Partenaire En Gestion Immobiliere A La Croix Rouge 13013 Marseille"
 slug: "local/agence-immobiliere-pujol-votre-partenaire-en-gestion-immobiliere-a-la-croix-rouge-13013-marseille"
 date: "2023-05-09 15:45:42"
 ---

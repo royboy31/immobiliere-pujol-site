@@ -5,7 +5,7 @@ date: "2020-05-12 19:01:41"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/stephane-pujol-marseille.png"
 seoTitle: "Les prix de l&#039;immobilier dans le 13005 Marseille"
-seoDescription: "Comment le marché de l&#039;immobilier dans le 5eme arrondissement de Marseille s&#039;est-il comporté entre 2017 et 2020,? La réponse en vidéo avec Stéphane Pujol"
+seoDescription: "Comment le marché de l'immobilier dans le 5eme arrondissement de Marseille s'est-il comporté entre 2017 et 2020,? La réponse en vidéo avec Stéphane Pujol"
 ---
 
 <p>Le 5eme arrondissement de Marseille est un bon quartier dans lequel l'offre que se soit en termes de location ou de transaction a énormément baissé en 3 ans.<br />

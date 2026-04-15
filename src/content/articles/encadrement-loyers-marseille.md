@@ -1,12 +1,12 @@
 ---
-title: "encadrement des loyers marseille|évolution loyer moyen par type d'appartement 3e trimestre 2020|classement loyer m2 plus grandes villes france"
+title: "encadrement des loyers marseille"
 slug: "encadrement-loyers-marseille"
 date: "2020-12-01 09:00:50"
 excerpt: "Quiconque connaît Marseille peut témoigner de la contreproductivité de procéder à l'encadrement des loyers à l’heure actuelle. Et voici pourquoi."
 categories: ["Le marché immobilier à marseille", "Mon quartier, ma ville Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/Untitled-1.jpg"
 seoTitle: "Encadrement des loyers à Marseille : une idée contreproductive ? (oui)"
-seoDescription: "Quiconque connaît Marseille peut témoigner de la contreproductivité de procéder à l&#039;encadrement des loyers à l’heure actuelle. Et voici pourquoi."
+seoDescription: "Quiconque connaît Marseille peut témoigner de la contreproductivité de procéder à l'encadrement des loyers à l’heure actuelle. Et voici pourquoi."
 ---
 
 <p>Le 27 novembre dernier, la visite de la Ministre du Logement, Emmanuelle Wargon, à Marseille, a été une parfaite illustration de la décorrélation qui existe entre les enjeux politiques et la réalité du terrain.</p>

@@ -1,6 +1,6 @@
 {
   "id": 229210,
-  "title": "LO37240001_B6A4.jpg|LO37240001_C730.jpg|LO37240001_D337.jpg|LO37240001_DE15.jpg|LO37240001_ED2A.jpg|LO37240001_FC2E.jpg|LO37240001_AC91.jpg|LO37240001_9678.jpg",
+  "title": "LO37240001_B6A4.jpg",
   "slug": "l002113-location-appartement-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002113-location-appartement-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "MARSEILLE",
   "quartier": "BEAUMONT",
-  "prix": 1320.0,
-  "charges": 20.0,
+  "prix": 1320,
+  "charges": 20,
   "honoraires": "360",
   "garantie": "1300",
   "surface": 85.48,

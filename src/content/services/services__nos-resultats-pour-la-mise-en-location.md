@@ -1,5 +1,5 @@
 ---
-title: "Nos résultats pour la mise en location à Marseille &#8211; Immobilière Pujol"
+title: "Nos résultats pour la mise en location à Marseille – Immobilière Pujol"
 slug: "services/nos-resultats-pour-la-mise-en-location"
 seoDescription: "Votre appartement loué en moins de 35 jours chez Immobilière Pujol Marseille. Recevez un devis gratuit de mise en location"
 ---

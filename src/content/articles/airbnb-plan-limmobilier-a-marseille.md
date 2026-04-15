@@ -5,8 +5,8 @@ date: "2017-01-30 17:00:17"
 categories: ["Le marché immobilier à marseille"]
 tags: ["airbnb", "marché immobilier marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO37470001_94D3.jpg"
-seoTitle: "Airbnb est-il un bon plan immobilier pour la ville de Marseille? - L'immobilier à Marseille|Airbnb est-il un bon plan immobilier pour la ville de Marseille? - L'immobilier à Marseille"
-seoDescription: "On connaît tous Airbnb, la plateforme communautaire de location qui totalise plus de 1,5 million d’annonces ... mais est-ce un bon plan immobilier ? Le principal point à prendre en considération est l’emplacement. Airbnb séduit les touristes, mais aussi les congressistes qui veulent être au cœur de la ville.|On connaît tous Airbnb, la plateforme communautaire de location qui totalise plus de 1,5 million d’annonces ... mais est-ce un bon plan immobilier ? Le principal point à prendre en considération est l’emplacement. Airbnb séduit les touristes, mais aussi les congressistes qui veulent être au cœur de la ville."
+seoTitle: "Airbnb est-il un bon plan immobilier pour la ville de Marseille? - L'immobilier à Marseille"
+seoDescription: "On connaît tous Airbnb, la plateforme communautaire de location qui totalise plus de 1,5 million d’annonces ... mais est-ce un bon plan immobilier ? Le principal point à prendre en considération est l’emplacement. Airbnb séduit les touristes, mais aussi les congressistes qui veulent être au cœur de la ville."
 ---
 
 <span style="font-weight: 400;">Tous les voyageurs connaissent <strong>Airbnb</strong> : cette plateforme communautaire de location de logements entre particuliers fondée en 2008 totalise aujourd’hui plus de 1,5 million d’annonces dans 34 000 villes et 192 pays ! Le nom est tiré d'Air Bed &amp; Breakfast, littéralement « matelas pneumatique et petit-déjeuner ». </span>

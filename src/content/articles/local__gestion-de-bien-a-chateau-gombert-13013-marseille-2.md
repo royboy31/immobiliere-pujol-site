@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Chateau Gombert 13013 Marseille 2"
 slug: "local/gestion-de-bien-a-chateau-gombert-13013-marseille-2"
 date: "2023-05-09 15:12:00"
 ---

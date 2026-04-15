@@ -1,11 +1,11 @@
 ---
-title: "sabine article gestion locative|total de l'offre de locations à Marseille|exemple mise en valeur d'appartement immobilière pujol|sabine manset immobilière pujol|sabine gestion locative im"
+title: "sabine article gestion locative"
 slug: "sabine-manoussos-ces-petits-plus-qui-valorisent-les-biens-a-louer-a-marseille"
 date: "2021-04-23 10:59:51"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/04/sabine-article-gestion-locative.jpg"
 seoTitle: "Ces petits &quot;plus&quot; qui valorisent les biens à louer à Marseille"
-seoDescription: "Ces petits &quot;plus&quot; qui valorisent les biens à louer à Marseille par Sabine Manoussos responsable de la location chez Immobilière Pujol"
+seoDescription: "Ces petits \"plus\" qui valorisent les biens à louer à Marseille par Sabine Manoussos responsable de la location chez Immobilière Pujol"
 ---
 
 <p>Sabine Manoussos connaît très bien le <a href="https://www.immobiliere-pujol.fr/service-immobilier/mettre-en-location/" target="_blank" rel="noopener">marché locatif à Marseille</a>. Responsable de notre service gestion location depuis 11 ans, avec <strong>450 biens mis en location chaque année</strong>, elle porte un regard expert et sans compromis sur la situation de la ville, ses atouts, et ses spécificités. Elle nous livre ici ses réflexions sur le marché et son évolution probable dans les années à venir.</p>

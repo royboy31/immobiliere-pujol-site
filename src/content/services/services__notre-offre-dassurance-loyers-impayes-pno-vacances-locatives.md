@@ -1,7 +1,7 @@
 ---
-title: "Quelles sont assurances locatives et pourquoi les souscrire? &#8211; Immobilière Pujol"
+title: "Quelles sont assurances locatives et pourquoi les souscrire? – Immobilière Pujol"
 slug: "services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives"
-seoDescription: "Notre assurance loyers impayés à 1,8% est l&#039;une des plus complète du marché. Notre assurance PNO à 35€ par an. Contactez nous et recevez une offre en moins de 24h"
+seoDescription: "Notre assurance loyers impayés à 1,8% est l'une des plus complète du marché. Notre assurance PNO à 35€ par an. Contactez nous et recevez une offre en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

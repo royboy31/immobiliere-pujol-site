@@ -1,5 +1,5 @@
 ---
-title: "prix au m2 immobilier ancien dans le 2eme arrondissement de Marseille|7 - Balcon au Panier - WEB"
+title: "prix au m2 immobilier ancien dans le 2eme arrondissement de Marseille"
 slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13002-en-2018"
 date: "2019-05-31 08:17:05"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -4,8 +4,8 @@ slug: "tu-achetes-quoi-avec-100-000e-a-marseille"
 date: "2015-04-20 10:42:17"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO37470001_77B4.jpg"
-seoTitle: "Que peut-on acheter sur le marché immobilier avec 100 000€ à Marseille ?|Que peut-on acheter sur le marché immobilier avec 100 000€ à Marseille ?"
-seoDescription: "Que peut on acheter à Marseille avec 100 000€ au printemps 2015? découvrez les différentes options sur les appartement à vendre à Marseille|Que peut on acheter à Marseille avec 100 000€ au printemps 2015? découvrez les différentes options sur les appartement à vendre à Marseille"
+seoTitle: "Que peut-on acheter sur le marché immobilier avec 100 000€ à Marseille ?"
+seoDescription: "Que peut on acheter à Marseille avec 100 000€ au printemps 2015? découvrez les différentes options sur les appartement à vendre à Marseille"
 ---
 
 De temps à temps, je m'amuse à regarder ce qu'on peut acheter à Marseille avec un certain budget.

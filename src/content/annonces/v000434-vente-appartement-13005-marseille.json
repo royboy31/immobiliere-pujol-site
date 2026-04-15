@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CAMAS|CAMAS|CAMAS",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "5|5|5",
   "nbEtages": "6|6|6",
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Camas, Marseille, France|Appartement 3 pièces à vendre Camas, Marseille, France|Appartement 3 pièces à vendre Camas, Marseille, France",
-  "seoDescription": "EXCLUSIVITE T3 de 67m² situé 16 rue du Camas 13005 Marseille.T3 de 65m² traversant, lumineux avec vue dégagée, dans un immeuble bien entretenu au 5ème étag&#8230;|EXCLUSIVITE T3 de 67m² situé 16 rue du Camas 13005 Marseille.T3 de 65m² traversant, lumineux avec vue dégagée, dans un immeuble bien entretenu au 5ème étag&#8230;|EXCLUSIVITE T3 de 67m² situé 16 rue du Camas 13005 Marseille.T3 de 65m² traversant, lumineux avec vue dégagée, dans un immeuble bien entretenu au 5ème étag&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Camas, Marseille, France",
+  "seoDescription": "EXCLUSIVITE T3 de 67m² situé 16 rue du Camas 13005 Marseille.T3 de 65m² traversant, lumineux avec vue dégagée, dans un immeuble bien entretenu au 5ème étag&#8230;"
 }

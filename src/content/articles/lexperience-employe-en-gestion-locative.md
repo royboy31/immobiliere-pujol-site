@@ -1,12 +1,12 @@
 ---
-title: "faire de la gestion locative a marseille|gestion locative|poste de gestionnaire immobilier marseille"
+title: "faire de la gestion locative a marseille"
 slug: "lexperience-employe-en-gestion-locative"
 date: "2020-01-14 09:54:06"
 categories: ["Le marché immobilier à marseille"]
 tags: ["gestion locative"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/05/P-4788-050117.jpg"
 seoTitle: "c&#039;est quoi le métier de gestionnaire locatif à Marseille"
-seoDescription: "Un métier passionnant où il est question de service, de relation client et d&#039;organisation"
+seoDescription: "Un métier passionnant où il est question de service, de relation client et d'organisation"
 ---
 
 <p>Les attentes en gestion locative sont différentes qu’en syndic. <br />

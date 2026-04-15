@@ -1,6 +1,6 @@
 {
   "id": 1319728,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "560-86-rue-du-rouet-13008-marseille-8eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/560-86-rue-du-rouet-13008-marseille-8eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "86 Rue Du Rouet, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 115.0,
-  "charges": 5.0,
+  "prix": 115,
+  "charges": 5,
   "honoraires": "150",
   "garantie": "110",
   "meuble": false,

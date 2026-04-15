@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le Quartier Opera 13001 Marseille 2"
 slug: "local/gestion-de-bien-dans-le-quartier-opera-13001-marseille-2"
 date: "2023-05-09 15:13:20"
 ---

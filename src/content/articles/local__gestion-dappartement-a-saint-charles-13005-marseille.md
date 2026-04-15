@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartement A Saint Charles 13005 Marseille"
 slug: "local/gestion-dappartement-a-saint-charles-13005-marseille"
 date: "2024-01-04 13:17:28"
 ---

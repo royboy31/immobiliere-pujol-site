@@ -1,11 +1,11 @@
 ---
-title: "Marseille_France_entry_of_port_with_Fort_Saint-Nicolas_Fort_Saint-Jean_and_Palais_du_Pharo|7 ème arrondissement loyer 2018"
+title: "Marseille_France_entry_of_port_with_Fort_Saint-Nicolas_Fort_Saint-Jean_and_Palais_du_Pharo"
 slug: "prix-m2-loyers-13007"
 date: "2020-02-02 10:58:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille_France_entry_of_port_with_Fort_Saint-Nicolas_Fort_Saint-Jean_and_Palais_du_Pharo.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13007 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13007.  La durée d&#039;occupation moyenne est de 50 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13007.  La durée d'occupation moyenne est de 50 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

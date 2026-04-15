@@ -1,7 +1,7 @@
 ---
-title: "Contacter un expert en gestion locative &#8211; Immobilière Pujol"
+title: "Contacter un expert en gestion locative – Immobilière Pujol"
 slug: "services/contacter-un-conseiller-en-gestion-locative"
-seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez Immobilière Pujol Bonjour, vous souhaitez avoir des renseignements et obtenir un proposition personnalisée pour la gestion locative de vos biens à Marseille que se soit dans le neuf , dans l&#039;ancien pour une location vide ou meublée , pour des bureaux ou des…"
+seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez Immobilière Pujol Bonjour, vous souhaitez avoir des renseignements et obtenir un proposition personnalisée pour la gestion locative de vos biens à Marseille que se soit dans le neuf , dans l'ancien pour une location vide ou meublée , pour des bureaux ou des…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

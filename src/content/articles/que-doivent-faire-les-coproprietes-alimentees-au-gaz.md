@@ -1,11 +1,11 @@
 ---
-title: "hausse prix du gaz 2022|crise gaz"
+title: "hausse prix du gaz 2022"
 slug: "que-doivent-faire-les-coproprietes-alimentees-au-gaz"
 date: "2022-03-07 16:32:47"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/03/hausse-prix-du-gaz-2022-scaled.jpg"
 seoTitle: "Crise du gaz : que faire dans les copropriétés chauffées au gaz ?"
-seoDescription: "Invasion de l&#039;Ukraine, sanctions envers la Russie, électrification de notre économie : la suppression du gaz est une question à se poser !"
+seoDescription: "Invasion de l'Ukraine, sanctions envers la Russie, électrification de notre économie : la suppression du gaz est une question à se poser !"
 ---
 
 <p>J'ai commencé cet article avant l'invasion de l'Ukraine... J'avais déjà comme objectif de donner des éléments de réponse à la question, à laquelle mes gestionnaires sont confrontés depuis quelques mois : que doit-on faire dans les copropriétés ayant un chauffage et eau chaude collective alimentés par une chaufferie au gaz. </p>

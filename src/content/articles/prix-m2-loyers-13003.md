@@ -1,11 +1,11 @@
 ---
-title: "13003-300x287|3 ème arrondissement loyer 2018"
+title: "13003-300x287"
 slug: "prix-m2-loyers-13003"
 date: "2019-01-28 10:52:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/01/13003-300x287.jpg"
 seoTitle: "Les prix au m2 des loyers en 2019 dans le 13003"
-seoDescription: "Le prix moyen (en €/m2) est de 11,6 dans le 13003.  La durée d&#039;occupation est de 54 mois."
+seoDescription: "Le prix moyen (en €/m2) est de 11,6 dans le 13003.  La durée d'occupation est de 54 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

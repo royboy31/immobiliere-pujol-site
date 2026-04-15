@@ -12,9 +12,9 @@
   "codePostal": "13006|13006|13006",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CASTELLANE|CASTELLANE|CASTELLANE",
-  "charges": 0.0,
+  "charges": 0,
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
   "nbWC": 0,
@@ -35,6 +35,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.33.55|04.91.37.33.55|04.91.37.33.55",
   "emailAAfficher": "caroline@immobiliere-pujol.fr|caroline@immobiliere-pujol.fr|caroline@immobiliere-pujol.fr",
-  "seoTitle": "Parking/Box 1 emplacement à vendre Castellane, Marseille, France|Parking/Box 1 emplacement à vendre Castellane, Marseille, France|Parking/Box 1 emplacement à vendre Castellane, Marseille, France",
-  "seoDescription": "Place de parking couverte située au 30 avenue de toulon au niveau rez-de-chaussée de la résidence Villa Catsellane.Possibilité de mettre une voiture et une&#8230;|Place de parking couverte située au 30 avenue de toulon au niveau rez-de-chaussée de la résidence Villa Catsellane.Possibilité de mettre une voiture et une&#8230;|Place de parking couverte située au 30 avenue de toulon au niveau rez-de-chaussée de la résidence Villa Catsellane.Possibilité de mettre une voiture et une&#8230;"
+  "seoTitle": "Parking/Box 1 emplacement à vendre Castellane, Marseille, France",
+  "seoDescription": "Place de parking couverte située au 30 avenue de toulon au niveau rez-de-chaussée de la résidence Villa Catsellane.Possibilité de mettre une voiture et une&#8230;"
 }

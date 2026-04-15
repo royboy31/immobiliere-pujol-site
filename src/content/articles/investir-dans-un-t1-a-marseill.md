@@ -5,8 +5,8 @@ date: "2013-02-25 08:29:51"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: ["Investissement locatif Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/vente-appartement-marseille1.jpg"
-seoTitle: "Opportunité à saisir à Marseille: investissement dans un t1|Opportunité à saisir à Marseille: investissement dans un t1"
-seoDescription: "Vente d'un T1 rue roger brun 13005, idéal pour un investissement locatif pour un appartement de type 1 au 3ème étage sans ascenseur- voir la simulation financière. 35m, est loué 500€ par mois et mis à prix 95 000€.|Vente d'un T1 rue roger brun 13005, idéal pour un investissement locatif pour un appartement de type 1 au 3ème étage sans ascenseur- voir la simulation financière. 35m, est loué 500€ par mois et mis à prix 95 000€."
+seoTitle: "Opportunité à saisir à Marseille: investissement dans un t1"
+seoDescription: "Vente d'un T1 rue roger brun 13005, idéal pour un investissement locatif pour un appartement de type 1 au 3ème étage sans ascenseur- voir la simulation financière. 35m, est loué 500€ par mois et mis à prix 95 000€."
 ---
 
 <h2><img class="alignnone wp-image-2950 size-medium" title="vente T1 rue roger brun" src="https://www.immobiliere-pujol.fr/content/uploads/2013/02/vente-T1-rue-roger-brun-300x225.jpg" alt="" width="300" height="225" /> <img class="alignnone wp-image-2951" title="achat t1 rue roger brun 13005" src="https://www.immobiliere-pujol.fr/content/uploads/2013/02/achat-t1-rue-roger-brun-13005.jpg" alt="" width="242" height="181" /></h2>

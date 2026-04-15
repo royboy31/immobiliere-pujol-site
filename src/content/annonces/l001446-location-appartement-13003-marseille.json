@@ -1,6 +1,6 @@
 {
   "id": 85682,
-  "title": "LO33910001_D26E|LO33910001_429D.JPG|LO33910001_7C35.JPG|LO33910001_87BA.JPG|LO33910001_ACB8.JPG|LO33910001_F0AC.JPG|LO33910001_C92E.JPG|LO33910001_4331.JPG|LO33910001_156C.JPG",
+  "title": "LO33910001_429D.JPG",
   "slug": "l001446-location-appartement-13003-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001446-location-appartement-13003-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13003",
   "ville": "MARSEILLE",
   "quartier": "BELLE DE MAI",
-  "prix": 585.0,
-  "charges": 45.0,
+  "prix": 585,
+  "charges": 45,
   "honoraires": "532.22",
   "garantie": "540",
   "surface": 40.94,

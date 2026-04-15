@@ -1,5 +1,5 @@
 ---
-title: "Rénovation appartement locatif , séjour|Travaux de rénovation location marseille|shoootin-photo-2 (Copy)"
+title: "Rénovation appartement locatif , séjour"
 slug: "aavant-apres-renovation-dun-appartement-pour-de-la-location-meublee"
 date: "2020-07-15 15:50:21"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

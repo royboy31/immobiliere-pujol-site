@@ -1,6 +1,6 @@
 {
   "id": 1275424,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250673-1-route-de-la-gavotte-saint-antoine-13015-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250673-1-route-de-la-gavotte-saint-antoine-13015-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "1 Route De La Gavotte, Saint Antoine, 13015, Marseille 15eme Arrondissement, France",
-  "prix": 420.0,
-  "charges": 30.0,
+  "prix": 420,
+  "charges": 30,
   "honoraires": "605.28",
   "garantie": "390",
   "surface": 46.56,

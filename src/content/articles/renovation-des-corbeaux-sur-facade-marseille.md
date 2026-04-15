@@ -1,5 +1,5 @@
 ---
-title: "Corbeaux 7 Dominicaines|Ravalement de façade 7 Dominicaines|Corbeaux - ravalement de façade 7 dominicaines|Corbeaux 7 Dominicaines (2)|Lola Pennanec'h|7 Dominicaines - Ravalement de façade"
+title: "Corbeaux 7 Dominicaines"
 slug: "renovation-des-corbeaux-sur-facade-marseille"
 date: "2021-09-24 08:27:22"
 categories: ["Le marché immobilier à marseille"]

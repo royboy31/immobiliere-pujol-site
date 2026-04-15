@@ -1,5 +1,5 @@
 ---
-title: "Du_printemps_à_l'été|IMG_4086_2|vue sur vert marseille"
+title: "Du_printemps_à_l'été"
 slug: "chiche"
 date: "2022-06-23 08:57:39"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

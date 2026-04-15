@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "PERIER|PERIER|PERIER",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "0",
   "nbEtages": "0",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Perier, Marseille, France|Appartement 2 pièces à vendre Perier, Marseille, France|Appartement 2 pièces à vendre Perier, Marseille, France",
-  "seoDescription": "Grand appartement de type 2 de 53m² avec entrée privative et faibles charges situé dans un immeuble bourgeois bien entretenu Bd Périer. Cet appartement se &#8230;|Grand appartement de type 2 de 53m² avec entrée privative et faibles charges situé dans un immeuble bourgeois bien entretenu Bd Périer. Cet appartement se &#8230;|Grand appartement de type 2 de 53m² avec entrée privative et faibles charges situé dans un immeuble bourgeois bien entretenu Bd Périer. Cet appartement se &#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Perier, Marseille, France",
+  "seoDescription": "Grand appartement de type 2 de 53m² avec entrée privative et faibles charges situé dans un immeuble bourgeois bien entretenu Bd Périer. Cet appartement se &#8230;"
 }

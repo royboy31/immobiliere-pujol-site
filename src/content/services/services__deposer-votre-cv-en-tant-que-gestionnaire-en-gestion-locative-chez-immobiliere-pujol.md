@@ -1,5 +1,5 @@
 ---
-title: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol &#8211; Immobilière Pujol"
+title: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol – Immobilière Pujol"
 slug: "services/deposer-votre-cv-en-tant-que-gestionnaire-en-gestion-locative-chez-immobiliere-pujol"
 seoDescription: "Déposez votre candidature pour un poste de gestion locative chez Immobilière Pujol"
 ---

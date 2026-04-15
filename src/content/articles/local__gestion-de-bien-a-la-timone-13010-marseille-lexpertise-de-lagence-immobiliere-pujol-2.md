@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A La Timone 13010 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-de-bien-a-la-timone-13010-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-18 16:23:31"
 ---

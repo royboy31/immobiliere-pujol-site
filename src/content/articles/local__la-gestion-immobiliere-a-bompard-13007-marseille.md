@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/La Gestion Immobiliere A Bompard 13007 Marseille"
 slug: "local/la-gestion-immobiliere-a-bompard-13007-marseille"
 date: "2023-05-09 14:45:51"
 ---

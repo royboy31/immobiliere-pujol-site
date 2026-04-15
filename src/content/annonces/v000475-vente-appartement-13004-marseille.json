@@ -1,6 +1,6 @@
 {
   "id": 228798,
-  "title": "B000475_12FC.jpg|B000475_4340.jpg|B000475_66E7.jpg|B000475_8A11.jpg|B000475_8AC9.jpg|B000475_B3D0.jpg",
+  "title": "B000475_12FC.jpg",
   "slug": "v000475-vente-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000475-vente-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "Marseille",
   "quartier": "BLANCARDE.",
-  "prix": 92000.0,
-  "charges": 90.0,
+  "prix": 92000,
+  "charges": 90,
   "honoraires": "8.00",
   "surface": 53.19,
   "surfaceTerrain": 53.19,

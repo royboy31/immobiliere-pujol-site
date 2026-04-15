@@ -1,6 +1,6 @@
 {
   "id": 1254438,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250631-205-avenue-du-prado-prado-perier-13008-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250631-205-avenue-du-prado-prado-perier-13008-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "205 Avenue Du Prado, Prado/perier, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 590.0,
-  "charges": 50.0,
+  "prix": 590,
+  "charges": 50,
   "honoraires": "445.51",
   "garantie": "540",
   "surface": 34.27,

@@ -1,7 +1,7 @@
 ---
-title: "Les avis clients de l&rsquo;Immobilière Pujol &#8211; Immobilière Pujol"
+title: "Les avis clients de l'Immobilière Pujol – Immobilière Pujol"
 slug: "services/les-avis-clients-de-limmobiliere-pujol"
-seoDescription: "Voir tous les avis clients de l&#039;agence Pujol immobilier à Marseille, l&#039;agence la plus recommandées par ses clients"
+seoDescription: "Voir tous les avis clients de l'agence Pujol immobilier à Marseille, l'agence la plus recommandées par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

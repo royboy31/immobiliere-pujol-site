@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Saint Jean Du Desert 13012 Marseille"
 slug: "local/gestion-locative-a-saint-jean-du-desert-13012-marseille"
 date: "2023-05-09 14:37:11"
 ---

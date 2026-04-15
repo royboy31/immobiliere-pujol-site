@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Administrateur De Biens A La Rose 13013 Marseille"
 slug: "local/administrateur-de-biens-a-la-rose-13013-marseille"
 date: "2023-05-09 15:21:55"
 ---

@@ -1,6 +1,6 @@
 {
   "id": 1016112,
-  "title": "||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250286-8-rue-roger-brun-baille-ave-toulon-13006-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250286-8-rue-roger-brun-baille-ave-toulon-13006-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "8 Rue Roger Brun, Baille/ave Toulon, 13006, Marseille 6eme Arrondissement, France",
-  "prix": 570.0,
-  "charges": 50.0,
+  "prix": 570,
+  "charges": 50,
   "honoraires": "452.27",
   "garantie": "520",
   "surface": 34.79,

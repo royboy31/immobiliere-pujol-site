@@ -1,5 +1,5 @@
 ---
-title: "avis client vente appartement marseille|avis-client-vente-appartement-marseille|avis-client-vente-dappartement-marseille|avis-client-transaction|avis-client|avis-client-vente-appartement|avis-client-sur-la-vente-dappartement-a-marseille"
+title: "avis client vente appartement marseille"
 slug: "les-avis-clients-de-immobiliere-pujol-pour-les-ventes-dappartements-a-marseille"
 date: "2018-08-31 13:54:19"
 excerpt: "Pour les ventes réalisées par l’agence Pujol, plus de soixante avis client ont été déposés sur la plateforme. Nos clients nous remercient généralement pour notre capacité de conseil et notre rapidité d'exécution. Certains appartements, en vente depuis un an, ont pu trouver acheteur en l’espace d’un "

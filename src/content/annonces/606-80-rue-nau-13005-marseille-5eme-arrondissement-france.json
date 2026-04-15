@@ -1,6 +1,6 @@
 {
   "id": 1319824,
-  "title": "|||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "606-80-rue-nau-13005-marseille-5eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/606-80-rue-nau-13005-marseille-5eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "80 Rue Nau, 13005, Marseille 5eme Arrondissement, France",
-  "prix": 650.0,
-  "charges": 15.0,
+  "prix": 650,
+  "charges": 15,
   "honoraires": "585",
   "garantie": "635",
   "surface": 37.5,

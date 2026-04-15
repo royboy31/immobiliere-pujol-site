@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "ST CHARLES|ST CHARLES|ST CHARLES",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "etage": "5|5|5",
@@ -32,6 +32,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre St Charles, Marseille, France|Appartement 1 pièce à vendre St Charles, Marseille, France|Appartement 1 pièce à vendre St Charles, Marseille, France",
-  "seoDescription": "T1 de 36m² avec balcon, à rénover, au 51 rue Flegier 13001 Marseille.Cet appartement, au 5ème étage sans ascenseur d&rsquo;un immeuble ancien bien entreten&#8230;|T1 de 36m² avec balcon, à rénover, au 51 rue Flegier 13001 Marseille.Cet appartement, au 5ème étage sans ascenseur d&rsquo;un immeuble ancien bien entreten&#8230;|T1 de 36m² avec balcon, à rénover, au 51 rue Flegier 13001 Marseille.Cet appartement, au 5ème étage sans ascenseur d&rsquo;un immeuble ancien bien entreten&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre St Charles, Marseille, France",
+  "seoDescription": "T1 de 36m² avec balcon, à rénover, au 51 rue Flegier 13001 Marseille.Cet appartement, au 5ème étage sans ascenseur d&rsquo;un immeuble ancien bien entreten&#8230;"
 }

@@ -1,6 +1,6 @@
 {
   "id": 230416,
-  "title": "LO37530001_1402|LO37530001_222A.jpg|LO37530001_2855.jpg|LO37530001_1AC6.jpg|LO37530001_1334.jpg|LO37530001_FEC0.jpg|LO37530001_31AD.jpg|LO37530001_4620.jpg|LO37530001_5081.jpg",
+  "title": "LO37530001_222A.jpg",
   "slug": "l002148-location-appartement-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002148-location-appartement-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "MARSEILLE",
   "quartier": "CAILLOLS",
-  "prix": 952.0,
-  "charges": 160.0,
+  "prix": 952,
+  "charges": 160,
   "honoraires": "774.28",
   "garantie": "792",
   "surface": 59.56,

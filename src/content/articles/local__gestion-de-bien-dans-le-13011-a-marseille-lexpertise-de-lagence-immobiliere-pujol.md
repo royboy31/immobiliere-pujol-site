@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le 13011 A Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-de-bien-dans-le-13011-a-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 15:00:47"
 ---

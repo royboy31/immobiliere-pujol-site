@@ -1,7 +1,7 @@
 ---
-title: "Recevez votre devis de location d&rsquo;appartements à Marseille en 24h &#8211; Immobilière Pujol"
+title: "Recevez votre devis de location d'appartements à Marseille en 24h – Immobilière Pujol"
 slug: "services/recevez-votre-devis-de-location-en-24h"
-seoDescription: "Devis sous 24h pour la location de votre appartement ou maison. Immobilière Pujol, l&#039;agence de location la plus recommandées par ses clients"
+seoDescription: "Devis sous 24h pour la location de votre appartement ou maison. Immobilière Pujol, l'agence de location la plus recommandées par ses clients"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

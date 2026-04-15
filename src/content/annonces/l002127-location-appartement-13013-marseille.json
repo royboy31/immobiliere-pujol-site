@@ -1,6 +1,6 @@
 {
   "id": 229728,
-  "title": "LO35170001_4309|LO35170001_6743.JPG|LO35170001_93A3.JPG|LO35170001_9EA0.JPG|LO35170001_BDF1.JPG|LO35170001_4309.jpg|LO35170001_838E.jpg",
+  "title": "LO35170001_6743.JPG",
   "slug": "l002127-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002127-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "CROIX-ROUGE",
-  "prix": 770.0,
-  "charges": 100.0,
+  "prix": 770,
+  "charges": 100,
   "honoraires": "596.18",
   "garantie": "670",
   "surface": 45.86,

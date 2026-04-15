@@ -1,5 +1,5 @@
 ---
-title: "Capture|Prélèvement à la source"
+title: "Capture"
 slug: "prelevement-a-la-source-2018-maximisez-vos-travaux-ou-nen-faites-rien"
 date: "2018-05-28 09:14:44"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

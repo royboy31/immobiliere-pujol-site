@@ -1,9 +1,9 @@
 ---
-title: ""
+title: "Faire confiance à une agence de gestion immobilière"
 slug: "gestion-immobiliere-marseille"
 date: "2018-11-26 14:04:06"
 seoTitle: "Faire confiance à une agence de gestion immobilière"
-seoDescription: "Faire confiance à une agence de gestion immobilière à Marseille, c&#039;est facile, c&#039;est Immobilière Pujol"
+seoDescription: "Faire confiance à une agence de gestion immobilière à Marseille, c'est facile, c'est Immobilière Pujol"
 ---
 
 <h1>Gestion immobilière Marseille – Pour la location et les copropriétés</h1>

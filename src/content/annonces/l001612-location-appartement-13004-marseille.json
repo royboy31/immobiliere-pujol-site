@@ -1,6 +1,6 @@
 {
   "id": 88319,
-  "title": "LO34710001_AF53.JPG|LO34710001_2510.JPG|LO34710001_B37F.JPG|LO34710001_835A.JPG|LO34710001_AC9C.JPG|LO34710001_2F4E.JPG|LO34710001_77D4.JPG",
+  "title": "LO34710001_AF53.JPG",
   "slug": "l001612-location-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001612-location-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "SEBASTOPOL",
-  "prix": 950.0,
-  "charges": 80.0,
+  "prix": 950,
+  "charges": 80,
   "honoraires": "870",
   "garantie": "870",
   "surface": 93.42,

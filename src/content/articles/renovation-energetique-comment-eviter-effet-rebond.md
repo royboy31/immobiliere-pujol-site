@@ -1,5 +1,5 @@
 ---
-title: "Effet rebond suite a une renovation|bon gestionnaire copropriete marseille"
+title: "Effet rebond suite a une renovation"
 slug: "renovation-energetique-comment-eviter-effet-rebond"
 date: "2023-03-14 12:30:55"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

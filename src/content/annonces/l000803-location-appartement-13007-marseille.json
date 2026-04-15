@@ -1,6 +1,6 @@
 {
   "id": 80950,
-  "title": "LO01400003_FCB3|LO01400003_FCB3.jpg|LO01400003_9683.jpg|LO01400003_2B87.jpg|LO01400003_1C24.jpg|LO01400003_C83.jpg|LO01400003_C8FE.jpg|LO01400003_DCD5.jpg|LO01400003_E9A7.jpg",
+  "title": "LO01400003_FCB3.jpg",
   "slug": "l000803-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000803-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "PHARO/AV DE LA CORSE",
-  "prix": 675.0,
-  "charges": 50.0,
+  "prix": 675,
+  "charges": 50,
   "honoraires": "630.76",
   "garantie": "625",
   "surface": 48.52,

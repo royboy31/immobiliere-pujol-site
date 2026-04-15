@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Dans Le 13010 A Marseille 2"
 slug: "local/gestion-de-bien-dans-le-13010-a-marseille-2"
 date: "2023-05-09 15:13:52"
 ---

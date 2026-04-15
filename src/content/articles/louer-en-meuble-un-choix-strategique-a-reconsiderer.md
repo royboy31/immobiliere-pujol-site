@@ -1,5 +1,5 @@
 ---
-title: "{\"discarded_img\":0,\"scene\":2}|caroline"
+title: "Louer En Meuble Un Choix Strategique A Reconsiderer"
 slug: "louer-en-meuble-un-choix-strategique-a-reconsiderer"
 date: "2024-09-17 13:35:43"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

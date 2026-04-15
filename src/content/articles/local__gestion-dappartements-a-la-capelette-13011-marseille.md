@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A La Capelette 13011 Marseille"
 slug: "local/gestion-dappartements-a-la-capelette-13011-marseille"
 date: "2024-01-04 13:17:29"
 ---

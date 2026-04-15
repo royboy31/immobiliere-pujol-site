@@ -1,5 +1,5 @@
 ---
-title: "Comment faire une mise en concurrence de syndic à Marseille ? &#8211; Immobilière Pujol"
+title: "Comment faire une mise en concurrence de syndic à Marseille ? – Immobilière Pujol"
 slug: "services/comment-faire-une-mise-en-concurrence-de-syndic-a-marseille"
 seoDescription: "Mettez en concurrence votre syndic pour que votre immeuble soit mieux géré. Consultez un syndic de copropriété parmi les plus recommandé   de sa ville"
 ---

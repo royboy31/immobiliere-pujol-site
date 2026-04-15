@@ -12,7 +12,7 @@
   "codePostal": "13005|13005|13005",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "BAILLE/TIMONE|BAILLE/TIMONE|BAILLE/TIMONE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "etage": "1|1|1",
@@ -35,6 +35,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre Baille/timone, Marseille, France|Appartement 1 pièce à vendre Baille/timone, Marseille, France|Appartement 1 pièce à vendre Baille/timone, Marseille, France",
-  "seoDescription": "Studio avec balcon et parking vendu occupé situé impasse de la papeterie 13005 Marseille.Ce studio, au 1er étage avec ascenseur, sur l&rsquo;arrière de l&#8230;|Studio avec balcon et parking vendu occupé situé impasse de la papeterie 13005 Marseille.Ce studio, au 1er étage avec ascenseur, sur l&rsquo;arrière de l&#8230;|Studio avec balcon et parking vendu occupé situé impasse de la papeterie 13005 Marseille.Ce studio, au 1er étage avec ascenseur, sur l&rsquo;arrière de l&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre Baille/timone, Marseille, France",
+  "seoDescription": "Studio avec balcon et parking vendu occupé situé impasse de la papeterie 13005 Marseille.Ce studio, au 1er étage avec ascenseur, sur l&rsquo;arrière de l&#8230;"
 }

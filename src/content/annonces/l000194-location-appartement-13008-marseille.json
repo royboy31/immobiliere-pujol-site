@@ -1,6 +1,6 @@
 {
   "id": 53792,
-  "title": "LO29970001_229A|LO29970001_2D2A|LO29970001_38E3|LO29970001_4B24|LO29970001_598C|LO29970001_F30|LO29970001_62.JPG",
+  "title": "LO29970001_62.JPG",
   "slug": "l000194-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000194-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "PERIER",
-  "prix": 480.0,
-  "charges": 50.0,
+  "prix": 480,
+  "charges": 50,
   "honoraires": "268.45",
   "garantie": "860",
   "surface": 20.65,

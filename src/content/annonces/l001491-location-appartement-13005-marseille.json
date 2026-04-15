@@ -1,6 +1,6 @@
 {
   "id": 87062,
-  "title": "LO34070005_DEFB|LO34070005_DEFB.JPG|LO34070005_C91.JPG|LO34070005_1D64.JPG|LO34070005_3410.JPG|LO34070005_484C.JPG|LO34070005_6A3F.JPG|LO34070005_D62B.JPG|LO34070005_16EC.jpg",
+  "title": "LO34070005_DEFB.JPG",
   "slug": "l001491-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001491-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "BAILLE/CONCEPTION",
-  "prix": 730.0,
-  "charges": 70.0,
+  "prix": 730,
+  "charges": 70,
   "honoraires": "572.13",
   "garantie": "1320",
   "surface": 44.01,

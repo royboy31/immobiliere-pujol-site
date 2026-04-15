@@ -1,5 +1,5 @@
 ---
-title: "avis client gestion locative marseille equipe pujol|avis-client-transaction-gestion-locative-marseille|avis-client-gestion-locative|avis-client-gestion-locative-marseille-2|avis-client-gestion-locative-marseille"
+title: "avis client gestion locative marseille equipe pujol"
 slug: "avis-clients-gestion-locative-marseille"
 date: "2019-08-29 13:58:51"
 excerpt: "Née en 2001, l’Immobilière Pujol a fait de la gestion locative l’un de ses coeurs de métier : pour évaluer le plus objectivement notre prestation, nous avons recours à Opinion System (institut indépendant certifié ISO 9001, 20252 et NF Z74-501). Cette page internet permet à nos clients de nous noter"

@@ -1,6 +1,6 @@
 {
   "id": 226846,
-  "title": "LO01080001_35A4|LO01080001_35A4.JPG|LO01080001_42F4.JPG|LO01080001_949B.JPG|LO01080001_D667.JPG|LO01080001_244E.JPG|LO01080001_5B9.JPG|LO01080001_F925.JPG|LO01080001_EE85.JPG|LO01080001_E2BD.JPG",
+  "title": "LO01080001_35A4.JPG",
   "slug": "l002054-location-local-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002054-location-local-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "CHARTREUX",
-  "prix": 670.0,
-  "charges": 70.0,
+  "prix": 670,
+  "charges": 70,
   "honoraires": "864",
   "garantie": "1800",
   "surface": 123.87,

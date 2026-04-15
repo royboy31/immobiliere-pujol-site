@@ -1,6 +1,6 @@
 {
   "id": 89700,
-  "title": "LO34070025_514C17520071|LO34070025_7E3E.JPG",
+  "title": "LO34070025_514C17520071",
   "slug": "l001742-location-parking-box-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001742-location-parking-box-13005-marseille/",
   "status": "closed",
@@ -12,8 +12,8 @@
   "adresse": "7/9 Rue Rousseau Bt B 10/12 Rue Jean Prunel Bt A, Conception/st Pierre, 13005, MARSEILLE, France",
   "codePostal": "13005",
   "ville": "MARSEILLE",
-  "prix": 140.0,
-  "charges": 20.0,
+  "prix": 140,
+  "charges": 20,
   "honoraires": "150",
   "garantie": "120",
   "surface": 12.5,

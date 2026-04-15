@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "LES OLIVES|LES OLIVES|LES OLIVES",
   "honoraires": "6.50|6.50|6.50",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "14|14|14",
   "nbEtages": "18|18|18",
@@ -31,6 +31,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Les Olives, Marseille, France|Appartement 3 pièces à vendre Les Olives, Marseille, France|Appartement 3 pièces à vendre Les Olives, Marseille, France",
-  "seoDescription": "EXCLUSIVITE &#8211; T3 de 68m² avec balcon, situé 23 rue du Professeur Arnaud, résidence Fondacle, 13013 Marseille.Au 14ème étage avec ascenseur, cet appar&#8230;|EXCLUSIVITE &#8211; T3 de 68m² avec balcon, situé 23 rue du Professeur Arnaud, résidence Fondacle, 13013 Marseille.Au 14ème étage avec ascenseur, cet appar&#8230;|EXCLUSIVITE &#8211; T3 de 68m² avec balcon, situé 23 rue du Professeur Arnaud, résidence Fondacle, 13013 Marseille.Au 14ème étage avec ascenseur, cet appar&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Les Olives, Marseille, France",
+  "seoDescription": "EXCLUSIVITE &#8211; T3 de 68m² avec balcon, situé 23 rue du Professeur Arnaud, résidence Fondacle, 13013 Marseille.Au 14ème étage avec ascenseur, cet appar&#8230;"
 }

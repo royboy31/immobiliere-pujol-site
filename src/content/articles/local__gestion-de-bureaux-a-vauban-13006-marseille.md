@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bureaux A Vauban 13006 Marseille"
 slug: "local/gestion-de-bureaux-a-vauban-13006-marseille"
 date: "2024-01-04 13:17:29"
 ---

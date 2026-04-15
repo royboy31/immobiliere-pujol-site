@@ -1,11 +1,11 @@
 ---
-title: "vieux-port-mairie2|image-20170327-3288-18ifsu7|NX-43682|117622|unnamed|prix  vente T2 joliette marseille"
+title: "vieux-port-mairie2"
 slug: "quel-est-le-prix-de-limmobilier-ancien-dans-le-13002-du-1er-aout-2019-au-31-juillet-2020"
 date: "2020-11-30 14:22:29"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/vieux-port-mairie2-scaled.jpg"
 seoTitle: "Prix de l&#039;immobilier dans le 13002 entre 2019 et 2020"
-seoDescription: "Comparatif des prix de l&#039;immobilier ancien dans le 13002, détaillé par quartier et par type de bien immobilier. Exclusivité Immobilière Pujol !"
+seoDescription: "Comparatif des prix de l'immobilier ancien dans le 13002, détaillé par quartier et par type de bien immobilier. Exclusivité Immobilière Pujol !"
 ---
 
 <p>Depuis de nombreuses années, un nouveau Marseille se construit dans le le 2ème arrondissement à travers de nombreux projets : piétonisation du Vieux- Port, réhabilitation des immeubles de la rue de la République, création des esplanades derrières et à coté de l'Hôtel de Ville, création des Docks, des Terrasse du Port, du Mucem...</p>

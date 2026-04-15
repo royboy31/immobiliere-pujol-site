@@ -1,6 +1,6 @@
 {
   "id": 229269,
-  "title": "B000487_17C7|B000487_17C7.jpg|B000487_F2C7.jpg|B000487_7A8.jpg|B000487_2034.jpg|B000487_1034.jpg|B000487_2EFA.jpg|B000487_38A0.jpg",
+  "title": "B000487_17C7.jpg",
   "slug": "v000487-vente-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/v000487-vente-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "Marseille",
   "quartier": "SAINT JEROME",
-  "prix": 129000.0,
-  "charges": 94.0,
+  "prix": 129000,
+  "charges": 94,
   "honoraires": "0.00",
   "surface": 40.53,
   "surfaceTerrain": 40.53,

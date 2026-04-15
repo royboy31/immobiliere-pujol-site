@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Mazargues 13009 Marseille"
 slug: "local/gestion-de-bien-a-mazargues-13009-marseille"
 date: "2023-05-09 14:53:20"
 ---

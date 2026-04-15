@@ -1,11 +1,11 @@
 ---
-title: "Eviter les degats des eaux en entretenant les toitures|Risques lies aux charpentes en copropriete|administration des immeubles et entretien des toitures|Administration de copropriete marseillaise les toitures avec chien assis|Exemple de solin||Calendrite de toit entourée en rouge|Eviter les degats des eaux en entretenant les toitures|Souches de cheminee risque de ruissellement d eau|Avant/Après d'une cheminée infiltrante|Tuiles bâties cassées|Avant Après tabatière abîmée"
+title: "Eviter les degats des eaux en entretenant les toitures"
 slug: "infiltrations-et-degats-des-eaux-par-vos-toitures-quels-sont-les-points-faibles-les-risques-des-toitures-marseillaises"
 date: "2021-12-01 12:55:39"
 categories: ["Mon quartier, ma ville Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/11/Eviter-les-degats-des-eaux-en-entretenant-les-toitures-1-scaled.jpg"
 seoTitle: "Quel rôle joue le syndic dans la lutte contre les infiltrations ?"
-seoDescription: "Comment votre administrateur de copropriété peut-il lutter contre les infiltrations ? Découvrez à quel point l&#039;entretien des toitures est crucial !"
+seoDescription: "Comment votre administrateur de copropriété peut-il lutter contre les infiltrations ? Découvrez à quel point l'entretien des toitures est crucial !"
 ---
 
 <p>Les récentes trombes d'eau que nous avons subies nous ont donné l'idée de faire ce post pour aborder le sujet toiture.</p>

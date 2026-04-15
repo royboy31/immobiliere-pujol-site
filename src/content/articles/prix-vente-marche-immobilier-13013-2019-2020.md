@@ -1,5 +1,5 @@
 ---
-title: "Photo 13e arrondissement marseille|1|2|3|4|5|6|7|8|9|la croix rouge|saint jerome|le rose|saint mitre|chateau gombert|saint just bis|saint just|les olives"
+title: "Photo 13e arrondissement marseille"
 slug: "prix-vente-marche-immobilier-13013-2019-2020"
 date: "2021-06-22 06:22:25"
 categories: ["Prix au m2 par arrondissement à Marseille"]

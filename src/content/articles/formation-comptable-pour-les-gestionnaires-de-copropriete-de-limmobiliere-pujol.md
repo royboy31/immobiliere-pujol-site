@@ -1,5 +1,5 @@
 ---
-title: "PU-1175|formation comptable SRU|formation comptable SRU|formation comptable SRU|PU-0534"
+title: "PU-1175"
 slug: "formation-comptable-pour-les-gestionnaires-de-copropriete-de-limmobiliere-pujol"
 date: "2019-05-08 09:11:53"
 categories: ["Avant/après", "Mes conseils pour investir en immobilier à Marseille"]

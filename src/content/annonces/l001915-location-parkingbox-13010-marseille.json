@@ -14,7 +14,7 @@
   "quartier": "CAPELETTE|CAPELETTE|CAPELETTE",
   "honoraires": "150.00|150.00|150.00",
   "garantie": "110|110|110",
-  "surface": 0.0,
+  "surface": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -37,8 +37,8 @@
   "contactAAfficher": "alexandralopez@immobiliere-pujol.fr|alexandralopez@immobiliere-pujol.fr|alexandralopez@immobiliere-pujol.fr",
   "telephoneAAfficher": "04 91 37 38 34|04 91 37 38 34|04 91 37 38 34",
   "emailAAfficher": "sabinemanset@immobiliere-pujol.fr|sabinemanset@immobiliere-pujol.fr|sabinemanset@immobiliere-pujol.fr",
-  "seoTitle": "Quartier Capelette, dans résidence fermée et sécurisée, nous vous proposons à la location un box fermé, Résidence Villa St Jean, 63 bd St Jean 13010  Marseille.Disponible immediatementIMPORTANT…|Quartier Capelette, dans résidence fermée et sécurisée, nous vous proposons à la location un box fermé, Résidence Villa St Jean, 63 bd St Jean 13010  Marseille.Disponible immediatementIMPORTANT…|Quartier Capelette, dans résidence fermée et sécurisée, nous vous proposons à la location un box fermé, Résidence Villa St Jean, 63 bd St Jean 13010  Marseille.Disponible immediatementIMPORTANT…",
-  "seoDescription": "Parking/Box à louer, 63 Boulevard Saint Jean, Capelette, 13010, MARSEILLE, France|Parking/Box à louer, 63 Boulevard Saint Jean, Capelette, 13010, MARSEILLE, France|Parking/Box à louer, 63 Boulevard Saint Jean, Capelette, 13010, MARSEILLE, France",
+  "seoTitle": "Quartier Capelette, dans résidence fermée et sécurisée, nous vous proposons à la location un box fermé, Résidence Villa St Jean, 63 bd St Jean 13010  Marseille.Disponible immediatementIMPORTANT…",
+  "seoDescription": "Parking/Box à louer, 63 Boulevard Saint Jean, Capelette, 13010, MARSEILLE, France",
   "photos": [
     "https://www.immobiliere-pujol.fr/content/uploads/2022/10/LO04300017_6BA912430013.png"
   ]

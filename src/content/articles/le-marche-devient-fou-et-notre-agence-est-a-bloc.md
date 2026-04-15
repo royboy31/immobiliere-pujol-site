@@ -1,5 +1,5 @@
 ---
-title: "marche immobilier marseille 2021|PROJET immobilier marseille"
+title: "marche immobilier marseille 2021"
 slug: "le-marche-devient-fou-et-notre-agence-est-a-bloc"
 date: "2021-06-16 17:10:15"
 categories: ["Le marché immobilier à marseille"]

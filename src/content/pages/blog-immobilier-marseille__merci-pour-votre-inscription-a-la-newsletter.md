@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Blog sur le marché immobilier à Marseille"
 slug: "blog-immobilier-marseille/merci-pour-votre-inscription-a-la-newsletter"
 date: "2019-07-30 09:36:02"
 seoTitle: "Blog sur le marché immobilier à Marseille"

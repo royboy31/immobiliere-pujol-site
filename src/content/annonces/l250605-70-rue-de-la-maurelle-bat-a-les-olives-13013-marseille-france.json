@@ -1,6 +1,6 @@
 {
   "id": 1228845,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250605-70-rue-de-la-maurelle-bat-a-les-olives-13013-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250605-70-rue-de-la-maurelle-bat-a-les-olives-13013-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "17 Rue De Crimée, 13003, Marseille 3eme Arrondissement, France",
-  "prix": 435.0,
-  "charges": 45.0,
+  "prix": 435,
+  "charges": 45,
   "honoraires": "284",
   "garantie": "390",
   "surface": 21.85,

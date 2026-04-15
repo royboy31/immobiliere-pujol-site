@@ -1,11 +1,11 @@
 ---
-title: "gestion des prix du gaz en copropriete|courbe prix gaz copro gerees syndic pujol marseille"
+title: "gestion des prix du gaz en copropriete"
 slug: "impact-des-negociations-des-prix-du-gaz-sur-budget-de-la-copropriete"
 date: "2023-12-02 07:11:17"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/11/IP-7026-111019.jpg"
 seoTitle: "Comment votre syndic aurait du gérer la hausse des prix du gaz"
-seoDescription: "Découvrez comment l&#039;immobilière Pujol, syndic à Marseille a géré et fait face à l&#039;augmentation des tarifs du gaz entre 2021 et 2023 pour ses copropriétés"
+seoDescription: "Découvrez comment l'immobilière Pujol, syndic à Marseille a géré et fait face à l'augmentation des tarifs du gaz entre 2021 et 2023 pour ses copropriétés"
 ---
 
 <h2>Gestion efficace des dépenses énergétiques en copropriété : Comment notre stratégie a protégé nos copropriétaires face à la flambée des prix du gaz de 2021 à 2023</h2>

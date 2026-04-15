@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Biens A Saint Giniez 13008 Marseille"
 slug: "local/ladministrateur-de-biens-a-saint-giniez-13008-marseille"
 date: "2023-05-09 15:16:26"
 ---

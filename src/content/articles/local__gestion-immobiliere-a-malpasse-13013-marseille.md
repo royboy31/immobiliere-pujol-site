@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Malpasse 13013 Marseille"
 slug: "local/gestion-immobiliere-a-malpasse-13013-marseille"
 date: "2023-05-09 14:48:11"
 ---

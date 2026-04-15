@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Saint Giniez 13008 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-locative-a-saint-giniez-13008-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 14:32:28"
 ---

@@ -1,11 +1,11 @@
 ---
-title: "Syndic à Marseille|Syndic à Marseille"
+title: "Syndic à Marseille"
 slug: "a-nos-gestionnaires-et-clients-en-syndic-de-copropriete"
 date: "2023-01-02 10:41:05"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/01/PUJ-8969.jpg"
 seoTitle: "Merci aux gestionnaires et clients en syndic de copropriété"
-seoDescription: "Dans un contexte de plus en plus difficile, il faut savoir dire merci à nos équipes et aux clients qui comprennent l&#039;enjeu de notre métier..."
+seoDescription: "Dans un contexte de plus en plus difficile, il faut savoir dire merci à nos équipes et aux clients qui comprennent l'enjeu de notre métier..."
 ---
 
 <p>Chaque année, je me dis que je vais féliciter les gestionnaires de copropriétés de ma société et ceux de mes confrères. Chaque année je ne le fais pas, ou pas assez.</p>

@@ -1,12 +1,12 @@
 ---
-title: "Estimation de loyer marseille|1|2|3|Appartement à louer Marseille 13006|appartement à louer Marseille 6ème"
+title: "Estimation de loyer marseille"
 slug: "le-marche-de-la-location-dappartement-a-marseille-13006-3eme-trim-2020"
 date: "2021-01-13 05:33:23"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: ["prix au m2"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/09/location-meuble-13006-scaled.jpg"
 seoTitle: "La location d&#039;appartement à Marseille dans le 13006"
-seoDescription: "Dans le 6ème arrondissement de Marseille, on observe une explosion de la demande de location d&#039;appartement T2 par rapport à 2019 : 42% des recherches en 2020 contre 33% en 2019."
+seoDescription: "Dans le 6ème arrondissement de Marseille, on observe une explosion de la demande de location d'appartement T2 par rapport à 2019 : 42% des recherches en 2020 contre 33% en 2019."
 ---
 
 <h2>Offre et demande de location d'appartements dans le 6ème arrondissement de Marseille</h2>

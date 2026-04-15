@@ -1,11 +1,11 @@
 ---
-title: "marche location marseille|marche location marseille|prix des loyers a marseille"
+title: "marche location marseille"
 slug: "etude-sur-le-marche-de-la-location-a-marseille-en-2022"
 date: "2023-05-24 14:38:35"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/05/marche-location-marseille-scaled.jpg"
 seoTitle: "Analyse du marché de la location à Marseille"
-seoDescription: "Cet article analyse l&#039;année 2022 en termes de locations à Marseille. Quels sont les loyers par arrondissement? Quels sont les délais de relocation ou d&#039;occupation? Quels sont les quartiers les plus recherchés par les locataires?"
+seoDescription: "Cet article analyse l'année 2022 en termes de locations à Marseille. Quels sont les loyers par arrondissement? Quels sont les délais de relocation ou d'occupation? Quels sont les quartiers les plus recherchés par les locataires?"
 ---
 
 <p><img class="alignnone size-medium wp-image-641554" src="https://www.immobiliere-pujol.fr/content/uploads/2023/05/marche-location-marseille-800x453.jpg" alt="" width="800" height="453" /></p>

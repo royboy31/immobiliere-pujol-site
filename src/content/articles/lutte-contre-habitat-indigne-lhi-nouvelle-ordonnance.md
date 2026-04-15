@@ -1,5 +1,5 @@
 ---
-title: "résumé webinar lutte habitation indigne|procédure urgence lutte contre habitat indigne"
+title: "résumé webinar lutte habitation indigne"
 slug: "lutte-contre-habitat-indigne-lhi-nouvelle-ordonnance"
 date: "2020-12-05 08:14:17"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

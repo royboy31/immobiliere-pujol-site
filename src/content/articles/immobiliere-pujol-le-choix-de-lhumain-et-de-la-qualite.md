@@ -1,5 +1,5 @@
 ---
-title: "professionnels immobilier marseille|stephane pujol immobilier marseille|Professionnel immobilier marseille"
+title: "professionnels immobilier marseille"
 slug: "immobiliere-pujol-le-choix-de-lhumain-et-de-la-qualite"
 date: "2024-03-12 08:41:24"
 categories: ["Le marché immobilier à marseille"]

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Malpasse 13013 Marseille Lexpertise De Lagence Immobiliere Pujol 2"
 slug: "local/gestion-de-bien-a-malpasse-13013-marseille-lexpertise-de-lagence-immobiliere-pujol-2"
 date: "2023-05-09 15:12:10"
 ---

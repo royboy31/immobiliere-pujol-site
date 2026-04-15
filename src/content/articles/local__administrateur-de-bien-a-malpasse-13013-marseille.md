@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Administrateur De Bien A Malpasse 13013 Marseille"
 slug: "local/administrateur-de-bien-a-malpasse-13013-marseille"
 date: "2024-05-13 13:09:06"
 ---

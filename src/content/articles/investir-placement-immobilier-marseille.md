@@ -1,5 +1,5 @@
 ---
-title: "placement immobilier marseille|travaux rénovation marseille"
+title: "placement immobilier marseille"
 slug: "investir-placement-immobilier-marseille"
 date: "2020-12-19 18:02:54"
 categories: ["Le marché immobilier à marseille"]

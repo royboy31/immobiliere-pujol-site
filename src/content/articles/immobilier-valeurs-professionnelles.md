@@ -1,5 +1,5 @@
 ---
-title: "benoit-marin-vicente|Citations Pujol|citation"
+title: "benoit-marin-vicente"
 slug: "immobilier-valeurs-professionnelles"
 date: "2020-10-16 12:35:35"
 categories: ["L'équipe", "Mes conseils pour investir en immobilier à Marseille"]

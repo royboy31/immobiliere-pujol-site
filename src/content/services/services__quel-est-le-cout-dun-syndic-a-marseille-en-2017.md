@@ -1,7 +1,7 @@
 ---
-title: "Quel est le coût d&rsquo;un syndic à Marseille ? &#8211; Immobilière Pujol"
+title: "Quel est le coût d'un syndic à Marseille ? – Immobilière Pujol"
 slug: "services/quel-est-le-cout-dun-syndic-a-marseille-en-2017"
-seoDescription: "Le coût d&#039;un syndic de copropriété est une dépense. Consultez l&#039;équipe de syndic, parmi les plus recommandée par ses clients. Recevez un devis en 24h"
+seoDescription: "Le coût d'un syndic de copropriété est une dépense. Consultez l'équipe de syndic, parmi les plus recommandée par ses clients. Recevez un devis en 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

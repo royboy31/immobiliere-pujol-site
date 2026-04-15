@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A La Barasse 13011 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-dappartements-a-la-barasse-13011-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 15:31:56"
 ---

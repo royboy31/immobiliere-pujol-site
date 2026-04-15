@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative Une Solution Cle En Main Pour Les Proprietaires"
 slug: "local/gestion-locative-une-solution-cle-en-main-pour-les-proprietaires"
 date: "2023-05-09 14:32:22"
 ---

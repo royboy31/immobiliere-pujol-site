@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "BRETEUIL|BRETEUIL|BRETEUIL",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -38,6 +38,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 1 pièce à vendre Breteuil, Marseille, France|Appartement 1 pièce à vendre Breteuil, Marseille, France|Appartement 1 pièce à vendre Breteuil, Marseille, France",
-  "seoDescription": "Studio de 45m² avec mezzanine de 12m², situé rue sylvabelle 13006 Marseille.En rez-de-chaussé d&rsquo;un immeuble ancien bien entretenu, ce studio se compo&#8230;|Studio de 45m² avec mezzanine de 12m², situé rue sylvabelle 13006 Marseille.En rez-de-chaussé d&rsquo;un immeuble ancien bien entretenu, ce studio se compo&#8230;|Studio de 45m² avec mezzanine de 12m², situé rue sylvabelle 13006 Marseille.En rez-de-chaussé d&rsquo;un immeuble ancien bien entretenu, ce studio se compo&#8230;"
+  "seoTitle": "Appartement 1 pièce à vendre Breteuil, Marseille, France",
+  "seoDescription": "Studio de 45m² avec mezzanine de 12m², situé rue sylvabelle 13006 Marseille.En rez-de-chaussé d&rsquo;un immeuble ancien bien entretenu, ce studio se compo&#8230;"
 }

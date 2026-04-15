@@ -1,6 +1,6 @@
 {
   "id": 54709,
-  "title": "LO00580001_1DD0.JPG|LO00580001_24CF|LO00580001_ACCF|LO00580001_27B5.JPG|LO00580001_12F.JPG|LO00580001_465A.JPG|LO00580001_536B.JPG|LO00580001_365C.JPG",
+  "title": "LO00580001_1DD0.JPG",
   "slug": "l001726-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001726-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "CAMAS",
-  "prix": 530.0,
-  "charges": 30.0,
+  "prix": 530,
+  "charges": 30,
   "honoraires": "618.41",
   "garantie": "500",
   "surface": 47.57,

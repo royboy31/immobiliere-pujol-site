@@ -1,5 +1,5 @@
 ---
-title: "marche immo marseille|Investissement à Marseille la crise qu'on nous annoncé"
+title: "marche immo marseille"
 slug: "cette-crise-immobiliere-que-lon-nous-annonce-et-qui-nest-pas-encore-arrivee"
 date: "2022-12-13 09:06:13"
 categories: ["Le marché immobilier à marseille"]

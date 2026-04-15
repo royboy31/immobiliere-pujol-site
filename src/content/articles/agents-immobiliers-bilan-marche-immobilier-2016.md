@@ -4,8 +4,8 @@ slug: "agents-immobiliers-bilan-marche-immobilier-2016"
 date: "2017-01-10 17:02:19"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/vieux-port-marseille-au-petit-matin.jpg"
-seoTitle: "Quand les agents immobiliers ne se plaignent pas - Immobilière Pujol|Quand les agents immobiliers ne se plaignent pas - Immobilière Pujol"
-seoDescription: "Bilan du marché immobilier à Marseille au dernier trimestre de l'année 2016 : Les loyers à Marseille sont de 12,3€ le m soit une hausse de 1,9% ... D'où le marché immobilier à Marseille ne semble pas aussi fort qu’ailleurs.|Bilan du marché immobilier à Marseille au dernier trimestre de l'année 2016 : Les loyers à Marseille sont de 12,3€ le m soit une hausse de 1,9% ... D'où le marché immobilier à Marseille ne semble pas aussi fort qu’ailleurs."
+seoTitle: "Quand les agents immobiliers ne se plaignent pas - Immobilière Pujol"
+seoDescription: "Bilan du marché immobilier à Marseille au dernier trimestre de l'année 2016 : Les loyers à Marseille sont de 12,3€ le m soit une hausse de 1,9% ... D'où le marché immobilier à Marseille ne semble pas aussi fort qu’ailleurs."
 ---
 
 <strong>2016, une bonne année de location, mais sans dynamique...</strong>

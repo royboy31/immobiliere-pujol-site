@@ -1,5 +1,5 @@
 ---
-title: "gestion des impayes syndic marseille|cb057cdf-6251-4b6f-a221-c41c521f9bf1"
+title: "gestion des impayes syndic marseille"
 slug: "charges-impayees-en-copropriete-quand-le-tribunal-de-marseille-dit-stop"
 date: "2025-12-02 13:28:36"
 categories: ["Le marché immobilier à marseille"]

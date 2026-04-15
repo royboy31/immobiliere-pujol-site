@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Page 1"
 slug: "page-1"
 date: "2017-10-13 12:53:07"
 ---

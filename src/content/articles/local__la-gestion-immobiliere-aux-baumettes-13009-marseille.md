@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/La Gestion Immobiliere Aux Baumettes 13009 Marseille"
 slug: "local/la-gestion-immobiliere-aux-baumettes-13009-marseille"
 date: "2024-06-18 08:14:06"
 ---

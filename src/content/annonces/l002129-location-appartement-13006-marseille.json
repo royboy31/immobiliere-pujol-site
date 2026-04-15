@@ -1,6 +1,6 @@
 {
   "id": 229768,
-  "title": "LO37340001_9FC4|LO37340001_9FC4.JPG|LO37340001_6FD8.JPG|LO37340001_28A8.JPG|LO37340001_4BD2.JPG|LO37340001_5597.JPG|LO37340001_6027.JPG|LO37340001_8D06.JPG|LO37340001_AFE2.JPG",
+  "title": "LO37340001_9FC4.JPG",
   "slug": "l002129-location-appartement-13006-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002129-location-appartement-13006-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13006",
   "ville": "MARSEILLE",
   "quartier": "CANTINI/TOULON",
-  "prix": 650.0,
-  "charges": 50.0,
+  "prix": 650,
+  "charges": 50,
   "honoraires": "360",
   "garantie": "600",
   "surface": 65.72,

@@ -1,12 +1,12 @@
 ---
-title: "1-2|1-4|1-8"
+title: "1-2"
 slug: "10-plus-belles-maisons-a-vente-a-marseille-environs"
 date: "2017-03-13 06:42:09"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 tags: ["Achat maison marseille", "acheter maison marseille", "plus belles maisons marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/1-2.jpg"
-seoTitle: "Les 10 plus belles maisons de Marseille - L'immobilier à Marseille|Les 10 plus belles maisons de Marseille - L'immobilier à Marseille"
-seoDescription: "Vous voulez acheter une maison à Marseille ? Voici les 10 plus belles maisons à la vente en ce moment, de quoi vous informez de ce qui se vend de mieux !|Vous voulez acheter une maison à Marseille ? Voici les 10 plus belles maisons à la vente en ce moment, de quoi vous informez de ce qui se vend de mieux !"
+seoTitle: "Les 10 plus belles maisons de Marseille - L'immobilier à Marseille"
+seoDescription: "Vous voulez acheter une maison à Marseille ? Voici les 10 plus belles maisons à la vente en ce moment, de quoi vous informez de ce qui se vend de mieux !"
 ---
 
 <span style="font-weight: 400;">Moi qui ne suis pas du tout </span><i><span style="font-weight: 400;">people </span></i><span style="font-weight: 400;">et pas au courant de l’actualité de ces gens dont je me fiche complètement, j’ai visionné une vidéo concernant la vente de la maison de Johnny depp pour 23 millions d’euros : </span>

@@ -12,7 +12,7 @@
   "codePostal": "13012|13012|13012",
   "ville": "MARSEILLE|MARSEILLE|MARSEILLE",
   "quartier": "SAINT BARNABE|SAINT BARNABE|SAINT BARNABE",
-  "charges": 0.0,
+  "charges": 0,
   "honoraires": "914.55|914.55|914.55",
   "garantie": "802|802|802",
   "nbSallesBain": 0,
@@ -37,8 +37,8 @@
   "contactAAfficher": "anaisbarotto@immobiliere-pujol.fr|anaisbarotto@immobiliere-pujol.fr|anaisbarotto@immobiliere-pujol.fr",
   "telephoneAAfficher": "04.91.37.38.32|04.91.37.38.32|04.91.37.38.32",
   "emailAAfficher": "corinne@immobiliere-pujol.fr|corinne@immobiliere-pujol.fr|corinne@immobiliere-pujol.fr",
-  "seoTitle": "SAINT BARNABE – Appartement Type 2 de 70m² climatisé. Il se situe au 67 Rue Elzeard Rougier 13012 Marseille.Cet appartement atypique situé dans une maison individuelle se compose au rez-de-chauss…|SAINT BARNABE – Appartement Type 2 de 70m² climatisé. Il se situe au 67 Rue Elzeard Rougier 13012 Marseille.Cet appartement atypique situé dans une maison individuelle se compose au rez-de-chauss…|SAINT BARNABE – Appartement Type 2 de 70m² climatisé. Il se situe au 67 Rue Elzeard Rougier 13012 Marseille.Cet appartement atypique situé dans une maison individuelle se compose au rez-de-chauss…",
-  "seoDescription": "Appartement T2 à louer, 67 Rue Elzeard Rougier, Saint Barnabe, 13012, MARSEILLE, France|Appartement T2 à louer, 67 Rue Elzeard Rougier, Saint Barnabe, 13012, MARSEILLE, France|Appartement T2 à louer, 67 Rue Elzeard Rougier, Saint Barnabe, 13012, MARSEILLE, France",
+  "seoTitle": "SAINT BARNABE – Appartement Type 2 de 70m² climatisé. Il se situe au 67 Rue Elzeard Rougier 13012 Marseille.Cet appartement atypique situé dans une maison individuelle se compose au rez-de-chauss…",
+  "seoDescription": "Appartement T2 à louer, 67 Rue Elzeard Rougier, Saint Barnabe, 13012, MARSEILLE, France",
   "photos": [
     "https://www.immobiliere-pujol.fr/content/uploads/2024/10/LO36430001_207217441760-scaled.jpg"
   ]

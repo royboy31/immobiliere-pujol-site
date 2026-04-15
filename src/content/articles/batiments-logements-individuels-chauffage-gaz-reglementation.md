@@ -1,12 +1,12 @@
 ---
-title: "batiments logements individuels chauffage au gaz|chauffage gaz bientôt interdit|ma prime rénov c'est quoi"
+title: "batiments logements individuels chauffage au gaz"
 slug: "batiments-logements-individuels-chauffage-gaz-reglementation"
 date: "2021-02-09 14:12:13"
 excerpt: "En novembre 2020, le ministère de la transition écologique a annoncé, avec la nouvelle réglementation environnementale, un objectif de réduction de 30% des besoins énergétiques des habitations et de leur émission de CO2. \n\nEn précisant l’interdiction dès l’été 2021 du chauffage au gaz dans les maiso"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/02/Blog-Immobiliere-Pujol-header.png"
 seoTitle: "Bâtiments et logements individuels : le chauffage au gaz, c’est fini ?"
-seoDescription: "En novembre 2020, le ministère de la transition écologique a annoncé, avec la nouvelle réglementation, dont l&#039;interdiction du chauffage au gaz."
+seoDescription: "En novembre 2020, le ministère de la transition écologique a annoncé, avec la nouvelle réglementation, dont l'interdiction du chauffage au gaz."
 ---
 
 <p><span data-contrast="auto">En novembre 2020, le ministère de la transition écologique a annoncé</span><span data-contrast="auto">,</span><span data-contrast="auto"> </span><span data-contrast="auto">avec la nouvelle réglementation environnementale, un objectif de réduction de 30% des besoins énergétiques des habitations</span><span data-contrast="auto"> et de leur émission de CO2</span><span data-contrast="auto">.</span><span data-contrast="auto"> </span></p>

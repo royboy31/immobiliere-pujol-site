@@ -1,5 +1,5 @@
 ---
-title: "investir a marseille|dossier marché location marseille|contactez-nous immobiliere pujol|dossier marché location"
+title: "investir a marseille"
 slug: "investir-dans-limmobilier-a-marseille-en-2021-comment-le-marche-evolue-t-il"
 date: "2021-06-23 08:24:49"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

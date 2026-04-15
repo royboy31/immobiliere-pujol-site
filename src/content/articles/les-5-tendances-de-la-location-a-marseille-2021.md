@@ -1,5 +1,5 @@
 ---
-title: "|Téléchargez votre dossier sur les tendances de l'immobilier|EVOLUTION DES PRIX DES LOYERS A MARSEILLE|Delais pour louer son bien a Marseille|offre de biens à la location|Télécharger le dossier"
+title: "Téléchargez votre dossier sur les tendances de l'immobilier"
 slug: "les-5-tendances-de-la-location-a-marseille-2021"
 date: "2021-12-16 09:20:54"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]

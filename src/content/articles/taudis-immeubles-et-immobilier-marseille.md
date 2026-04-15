@@ -1,5 +1,5 @@
 ---
-title: "vente appartement 13006 marseille|cni caroline"
+title: "vente appartement 13006 marseille"
 slug: "taudis-immeubles-et-immobilier-marseille"
 date: "2019-02-27 00:35:44"
 categories: ["Mon quartier, ma ville Marseille"]

@@ -1,5 +1,5 @@
 ---
-title: "Une relation personnalisée en gestion locative &#8211; Immobilière Pujol"
+title: "Une relation personnalisée en gestion locative – Immobilière Pujol"
 slug: "services/une-relation-personnalisee"
 seoDescription: "Notre équipe de location et de gestion est la plus recommandée à Marseille par ses clients. Gestion locative à partir de 4% HT , Assurance loyers impayés à 1,8% TTC."
 ---

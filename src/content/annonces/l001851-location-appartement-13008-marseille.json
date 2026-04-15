@@ -1,6 +1,6 @@
 {
   "id": 54291,
-  "title": "LO35810001_3C98.jpg|LO35810001_2EA2|LO35810001_4C71.jpg|LO35810001_5D05.jpg|LO35810001_8E.jpg|LO35810001_1EB9.jpg",
+  "title": "LO35810001_3C98.jpg",
   "slug": "l001851-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001851-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "PRADO/PERIER",
-  "prix": 900.0,
-  "charges": 150.0,
+  "prix": 900,
+  "charges": 150,
   "honoraires": "390",
   "garantie": "750",
   "surface": 90.3,

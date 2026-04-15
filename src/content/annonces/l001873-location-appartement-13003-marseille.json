@@ -1,6 +1,6 @@
 {
   "id": 52316,
-  "title": "LO35890001_CF2D|LO35890001_9C85|LO35890001_AE51|LO35890001_B64E|LO35890001_C240|LO35890001_DAB2|LO35890001_E982",
+  "title": "LO35890001_CF2D",
   "slug": "l001873-location-appartement-13003-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001873-location-appartement-13003-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13003",
   "ville": "MARSEILLE",
   "quartier": "NATIONAL",
-  "prix": 460.0,
-  "charges": 40.0,
+  "prix": 460,
+  "charges": 40,
   "honoraires": "716.82",
   "garantie": "420",
   "surface": 55.14,

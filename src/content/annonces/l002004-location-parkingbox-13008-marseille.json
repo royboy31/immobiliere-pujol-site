@@ -12,7 +12,7 @@
   "codePostal": "13008|13008|13008",
   "ville": "MARSEILLE|MARSEILLE|MARSEILLE",
   "quartier": "-1|-1|-1",
-  "charges": 0.0,
+  "charges": 0,
   "honoraires": "0",
   "garantie": "0",
   "nbChambres": 0,
@@ -37,6 +37,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04.91.37.33.60|04.91.37.33.60|04.91.37.33.60",
   "emailAAfficher": "anais@immobiliere-pujol.fr|anais@immobiliere-pujol.fr|anais@immobiliere-pujol.fr",
-  "seoTitle": "Parking/Box 0 emplacement à louer 78 Avenue Jules Cantini, -1, Marseille, France|Parking/Box 0 emplacement à louer 78 Avenue Jules Cantini, -1, Marseille, France|Parking/Box 0 emplacement à louer 78 Avenue Jules Cantini, -1, Marseille, France",
-  "seoDescription": "PARKING 73|PARKING 73|PARKING 73"
+  "seoTitle": "Parking/Box 0 emplacement à louer 78 Avenue Jules Cantini, -1, Marseille, France",
+  "seoDescription": "PARKING 73"
 }

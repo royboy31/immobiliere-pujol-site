@@ -1,6 +1,6 @@
 {
   "id": 229881,
-  "title": "LO37400001_CD22|LO37400001_CD22.jpg|LO37400001_5E2D.jpg|LO37400001_68EC.jpg|LO37400001_55CF.jpg|LO37400001_4B7E.jpg|LO37400001_438D.jpg|LO37400001_3B7E.jpg|LO37400001_2D25.jpg",
+  "title": "LO37400001_CD22.jpg",
   "slug": "l002136-location-appartement-13008-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002136-location-appartement-13008-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13008",
   "ville": "MARSEILLE",
   "quartier": "POINTE ROUGE",
-  "prix": 1200.0,
-  "charges": 240.0,
+  "prix": 1200,
+  "charges": 240,
   "honoraires": "360",
   "garantie": "960",
   "surface": 87.73,

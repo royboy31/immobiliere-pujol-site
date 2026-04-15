@@ -14,7 +14,7 @@
   "quartier": "CHAVE|CHAVE|CHAVE",
   "honoraires": "0",
   "garantie": "101|101|101",
-  "surface": 0.0,
+  "surface": 0,
   "nbChambres": 0,
   "nbSallesBain": 0,
   "nbSallesEau": 0,
@@ -37,6 +37,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "04 91 37 38 34|04 91 37 38 34|04 91 37 38 34",
   "emailAAfficher": "sabinemanset@immobiliere-pujol.fr|sabinemanset@immobiliere-pujol.fr|sabinemanset@immobiliere-pujol.fr",
-  "seoTitle": "Parking/Box 0 emplacement à louer 26 Rue Horace Bertin, Chave, Marseille, France|Parking/Box 0 emplacement à louer 26 Rue Horace Bertin, Chave, Marseille, France|Parking/Box 0 emplacement à louer 26 Rue Horace Bertin, Chave, Marseille, France",
-  "seoDescription": "Dans une résidence fermée, située bd Chave, côté Plaine, location d&rsquo;un emplacement de parking. Entrée voiture côté rue Horace BertinAttention hauteur&#8230;|Dans une résidence fermée, située bd Chave, côté Plaine, location d&rsquo;un emplacement de parking. Entrée voiture côté rue Horace BertinAttention hauteur&#8230;|Dans une résidence fermée, située bd Chave, côté Plaine, location d&rsquo;un emplacement de parking. Entrée voiture côté rue Horace BertinAttention hauteur&#8230;"
+  "seoTitle": "Parking/Box 0 emplacement à louer 26 Rue Horace Bertin, Chave, Marseille, France",
+  "seoDescription": "Dans une résidence fermée, située bd Chave, côté Plaine, location d&rsquo;un emplacement de parking. Entrée voiture côté rue Horace BertinAttention hauteur&#8230;"
 }

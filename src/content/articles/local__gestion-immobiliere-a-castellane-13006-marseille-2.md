@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere A Castellane 13006 Marseille 2"
 slug: "local/gestion-immobiliere-a-castellane-13006-marseille-2"
 date: "2023-05-09 15:40:54"
 ---

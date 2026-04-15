@@ -1,6 +1,6 @@
 {
   "id": 228270,
-  "title": "L002091_B77F.jpg|L002091_8958.jpg|L002091_7B4D.jpg|L002091_AD8B.jpg|L002091_CB94.jpg|L002091_73EA.jpg|L002091_495C.jpg|L002091_6AF0.jpg|L002091_60BD.jpg",
+  "title": "L002091_B77F.jpg",
   "slug": "l002091-location-appartement-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002091-location-appartement-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "Marseille",
   "quartier": "BLANCARDE.",
-  "prix": 881.0,
-  "charges": 98.0,
+  "prix": 881,
+  "charges": 98,
   "garantie": "783",
   "surface": 62.2,
   "surfaceTerrain": 62.2,

@@ -1,5 +1,5 @@
 ---
-title: "Evolution du marché de la location entre 2014 et 2018 dans le 13001 à Marseille|Evolution du marché de la location entre 2014 et 2018 dans le 13001 à Marseille|Evolution du marché de la location entre 2014 et 2018 dans le 13001 à Marseille"
+title: "Evolution du marché de la location entre 2014 et 2018 dans le 13001 à Marseille"
 slug: "evolution-des-loyers-dans-le-13001-a-marseille-entre-2014-et-2018-2"
 date: "2019-06-13 08:58:52"
 categories: ["Prix au m2 par arrondissement à Marseille"]

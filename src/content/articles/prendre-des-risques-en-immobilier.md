@@ -4,8 +4,8 @@ slug: "prendre-des-risques-en-immobilier"
 date: "2014-04-27 07:22:59"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/7K0A0046.jpg"
-seoTitle: "Toujours des gagnants et des perdants dans l'immobilier|Toujours des gagnants et des perdants dans l'immobilier"
-seoDescription: "Il fallait acheter pour s’enrichir dans l’immobilier ces trente dernières années. Maintenant c’est fini mais pas complètement..|Il fallait acheter pour s’enrichir dans l’immobilier ces trente dernières années. Maintenant c’est fini mais pas complètement.."
+seoTitle: "Toujours des gagnants et des perdants dans l'immobilier"
+seoDescription: "Il fallait acheter pour s’enrichir dans l’immobilier ces trente dernières années. Maintenant c’est fini mais pas complètement.."
 ---
 
 <div>Ceux qui ont acheté de l’immobilier depuis 40 ans sans jamais vendre ont eu raison.

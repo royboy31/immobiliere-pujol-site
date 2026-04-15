@@ -5,7 +5,7 @@ date: "2023-06-13 11:48:14"
 categories: ["Le marché immobilier à marseille", "Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/06/PU-1791-scaled.jpg"
 seoTitle: "Carnet Information du logement"
-seoDescription: "nouveau document à remettre à votre acquéreur en cas de vente d&#039;un bien rénové ou neuf. Que doit contenir le CIL? que dit la loi?"
+seoDescription: "nouveau document à remettre à votre acquéreur en cas de vente d'un bien rénové ou neuf. Que doit contenir le CIL? que dit la loi?"
 ---
 
 <h2>Pourquoi un CIL?</h2>

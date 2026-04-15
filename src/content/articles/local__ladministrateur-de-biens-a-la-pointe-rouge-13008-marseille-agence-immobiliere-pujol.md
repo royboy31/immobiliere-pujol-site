@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Ladministrateur De Biens A La Pointe Rouge 13008 Marseille Agence Immobiliere Pujol"
 slug: "local/ladministrateur-de-biens-a-la-pointe-rouge-13008-marseille-agence-immobiliere-pujol"
 date: "2023-05-09 15:16:13"
 ---

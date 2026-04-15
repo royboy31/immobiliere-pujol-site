@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Menpenti 13012 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-dappartements-a-menpenti-13012-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2024-01-04 13:17:29"
 ---

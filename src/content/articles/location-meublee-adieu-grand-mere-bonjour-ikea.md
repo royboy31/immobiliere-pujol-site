@@ -1,5 +1,5 @@
 ---
-title: "comment decorer une location meublé|location meuble marseille|location meublé moderne marseille|LOCATION MEUBLEE MARSEILLE|LOCATION APPARTEMENT MEUBLE 13006|comment decorer votre location meublee|Carte marseille prix au m2 2023"
+title: "comment decorer une location meublé"
 slug: "location-meublee-adieu-grand-mere-bonjour-ikea"
 date: "2023-12-11 13:33:32"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Immobiliere Aux Accates 13011 Marseille"
 slug: "local/gestion-immobiliere-aux-accates-13011-marseille"
 date: "2023-06-29 10:30:36"
 ---

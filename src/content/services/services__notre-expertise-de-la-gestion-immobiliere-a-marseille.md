@@ -1,7 +1,7 @@
 ---
-title: "Comment choisir son administrateur de biens à Marseille? &#8211; Immobilière Pujol"
+title: "Comment choisir son administrateur de biens à Marseille? – Immobilière Pujol"
 slug: "services/notre-expertise-de-la-gestion-immobiliere-a-marseille"
-seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences immobilières. Nous louons et gérons vos biens comme si c&#039;était les nôtres, c&#039;est ça la différence ! Obtenez un devis sans engagement en 24H"
+seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences immobilières. Nous louons et gérons vos biens comme si c'était les nôtres, c'est ça la différence ! Obtenez un devis sans engagement en 24H"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

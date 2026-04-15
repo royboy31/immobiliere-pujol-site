@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements Aux Caillols 13012 Marseille"
 slug: "local/gestion-dappartements-aux-caillols-13012-marseille"
 date: "2024-01-04 13:17:28"
 ---

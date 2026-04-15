@@ -5,7 +5,7 @@ date: "2016-02-20 05:53:40"
 categories: ["Le marché immobilier à marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille.jpg"
 seoTitle: "Le marché de la location et de la transaction fin 2015 - Immobilière Pujol"
-seoDescription: "L'année 2015 a été bonne tant au niveau location que transaction pour notre agence immobilière à Marseille. Nos résultats|L'année 2015 a été bonne tant au niveau location que transaction pour notre agence immobilière à Marseille. Nos résultats"
+seoDescription: "L'année 2015 a été bonne tant au niveau location que transaction pour notre agence immobilière à Marseille. Nos résultats"
 ---
 
 <h2><strong>Une fin d’année 2015 qui se termine bien</strong></h2>

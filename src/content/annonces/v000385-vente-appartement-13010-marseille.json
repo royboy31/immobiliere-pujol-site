@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "SAINT LOUP|SAINT LOUP|SAINT LOUP",
   "honoraires": "7.50|7.50|7.50",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "1|1|1",
   "nbEtages": "4|4|4",
@@ -33,6 +33,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Saint Loup, Marseille, France|Appartement 3 pièces à vendre Saint Loup, Marseille, France|Appartement 3 pièces à vendre Saint Loup, Marseille, France",
-  "seoDescription": "T3 de 50m² avec balcon situé résidence Les Marroniers, 123 bd Romain Rolland 13010 Marseille.Au 1er étage sans ascenseur, cet appartement se compose: d&#8230;|T3 de 50m² avec balcon situé résidence Les Marroniers, 123 bd Romain Rolland 13010 Marseille.Au 1er étage sans ascenseur, cet appartement se compose: d&#8230;|T3 de 50m² avec balcon situé résidence Les Marroniers, 123 bd Romain Rolland 13010 Marseille.Au 1er étage sans ascenseur, cet appartement se compose: d&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Saint Loup, Marseille, France",
+  "seoDescription": "T3 de 50m² avec balcon situé résidence Les Marroniers, 123 bd Romain Rolland 13010 Marseille.Au 1er étage sans ascenseur, cet appartement se compose: d&#8230;"
 }

@@ -1,5 +1,5 @@
 ---
-title: "MARSEILLE - PALAIS DE LONGCHAMP -|gare-train-blancarde-1|Palais Longchamp2|EPSON DSC picture|pavillon-de-partage-des-eaux-des-chutes-lavie-marseille-6|Les prix au m² de l'immobilier ancien dans le  4e arrondissement de Marseille par quartier|Les prix au m2 des appartements anciens  par type dans le 13 004|Les prix au m² des appartements anciens vendus dans  le quartier Cinq Avenue|Les prix au m² des appartements anciens vendus dans  Les Chartreux|Les prix au m² des appartements anciens vendus dans  le quartier Chutes Lavie"
+title: "MARSEILLE - PALAIS DE LONGCHAMP -"
 slug: "prix-vente-immobilier-ancien-13004-2019-2020"
 date: "2021-01-15 14:20:28"
 categories: ["Prix au m2 par arrondissement à Marseille"]

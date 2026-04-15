@@ -1,12 +1,12 @@
 ---
-title: "marseille-1348711_1920|le-marche-des-loyers-a-marseille-depuis-2010"
+title: "marseille-1348711_1920"
 slug: "analyse-marche-immobilier-marseille-2017"
 date: "2017-04-17 14:20:07"
 categories: ["Le marché immobilier à marseille"]
 tags: ["agence immobiliere marseille", "analyse immobiliere", "analyse marche immobilier", "immobilière pujol", "marché immobilier"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-1348711_1920.jpg"
-seoTitle: "Analyse du marché immobilier à Marseille debut 2017- Immobilière Pujol|Analyse du marché immobilier à Marseille debut 2017- Immobilière Pujol"
-seoDescription: "Tout va bien mais la puissance de la demande ne semble pas aussi forte qu’attendue dans cette phase de marché.C'est un début d'année sans entrain !|Tout va bien mais la puissance de la demande ne semble pas aussi forte qu’attendue dans cette phase de marché.C'est un début d'année sans entrain !"
+seoTitle: "Analyse du marché immobilier à Marseille debut 2017- Immobilière Pujol"
+seoDescription: "Tout va bien mais la puissance de la demande ne semble pas aussi forte qu’attendue dans cette phase de marché.C'est un début d'année sans entrain !"
 ---
 
 Jusque là tout va bien. Mais on ne sent pas l'entrain ou la puissance d'un nouveau cycle. La demande ne nous semble pas aussi forte qu'habituellement dans cette phase de retournement du marché.

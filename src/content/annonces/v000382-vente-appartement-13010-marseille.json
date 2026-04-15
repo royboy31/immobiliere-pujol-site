@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CAPELETTE|CAPELETTE|CAPELETTE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "2|2|2",
   "nbEtages": "6|6|6",
@@ -33,6 +33,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Capelette, Marseille, France|Appartement 3 pièces à vendre Capelette, Marseille, France|Appartement 3 pièces à vendre Capelette, Marseille, France",
-  "seoDescription": "EXCLUSIVITE appartement de type 3 récent de 61m² avec parking, garage et terrasse situé au 2e étage dans une rése=idence récente à la Capelette à côté des &#8230;|EXCLUSIVITE appartement de type 3 récent de 61m² avec parking, garage et terrasse situé au 2e étage dans une rése=idence récente à la Capelette à côté des &#8230;|EXCLUSIVITE appartement de type 3 récent de 61m² avec parking, garage et terrasse situé au 2e étage dans une rése=idence récente à la Capelette à côté des &#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Capelette, Marseille, France",
+  "seoDescription": "EXCLUSIVITE appartement de type 3 récent de 61m² avec parking, garage et terrasse situé au 2e étage dans une rése=idence récente à la Capelette à côté des &#8230;"
 }

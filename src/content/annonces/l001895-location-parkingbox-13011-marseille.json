@@ -12,7 +12,7 @@
   "codePostal": "13011|13011|13011",
   "ville": "MARSEILLE|MARSEILLE|MARSEILLE",
   "quartier": "VALBARELLE|VALBARELLE|VALBARELLE",
-  "charges": 0.0,
+  "charges": 0,
   "honoraires": "100|100|100",
   "garantie": "90|90|90",
   "nbChambres": 0,
@@ -37,8 +37,8 @@
   "contactAAfficher": "nicole@immobiliere-pujol.fr|nicole@immobiliere-pujol.fr|nicole@immobiliere-pujol.fr",
   "telephoneAAfficher": "04.91.37.38.21|04.91.37.38.21|04.91.37.38.21",
   "emailAAfficher": "nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr|nicolearnoux@immobiliere-pujol.fr",
-  "seoTitle": "Quartier de la Valbarelle, nous vous proposons à la location un garage portant le n°5 situé sis 12, Avenue Vincent Andreu à Marseille 11ème.IMMOBILIERE PUJOL 04 91 37 38 21…|Quartier de la Valbarelle, nous vous proposons à la location un garage portant le n°5 situé sis 12, Avenue Vincent Andreu à Marseille 11ème.IMMOBILIERE PUJOL 04 91 37 38 21…|Quartier de la Valbarelle, nous vous proposons à la location un garage portant le n°5 situé sis 12, Avenue Vincent Andreu à Marseille 11ème.IMMOBILIERE PUJOL 04 91 37 38 21…",
-  "seoDescription": "Parking/Box à louer, 12 Avenue Vincent Andreu, Valbarelle, 13011, Marseille, France|Parking/Box à louer, 12 Avenue Vincent Andreu, Valbarelle, 13011, Marseille, France|Parking/Box à louer, 12 Avenue Vincent Andreu, Valbarelle, 13011, Marseille, France",
+  "seoTitle": "Quartier de la Valbarelle, nous vous proposons à la location un garage portant le n°5 situé sis 12, Avenue Vincent Andreu à Marseille 11ème.IMMOBILIERE PUJOL 04 91 37 38 21…",
+  "seoDescription": "Parking/Box à louer, 12 Avenue Vincent Andreu, Valbarelle, 13011, Marseille, France",
   "photos": [
     "https://www.immobiliere-pujol.fr/content/uploads/2019/02/LO10060005_2A2C.jpg"
   ]

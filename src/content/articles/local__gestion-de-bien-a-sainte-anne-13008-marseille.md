@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien A Sainte Anne 13008 Marseille"
 slug: "local/gestion-de-bien-a-sainte-anne-13008-marseille"
 date: "2023-05-09 14:52:32"
 ---

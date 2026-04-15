@@ -1,6 +1,6 @@
 {
   "id": 1117453,
-  "title": "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "mbvap20009657-13005-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/mbvap20009657-13005-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "V",
   "termine": "Terminé",
   "adresse": "13005, Marseille, France",
-  "prix": 125000.0,
-  "charges": 90.0,
+  "prix": 125000,
+  "charges": 90,
   "honoraires": "0.00",
   "garantie": "0",
   "surface": 27.34,

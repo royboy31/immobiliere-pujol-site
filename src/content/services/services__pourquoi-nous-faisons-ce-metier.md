@@ -1,7 +1,7 @@
 ---
-title: "Pour quoi nous faisons ce métier? &#8211; Immobilière Pujol"
+title: "Pour quoi nous faisons ce métier? – Immobilière Pujol"
 slug: "services/pourquoi-nous-faisons-ce-metier"
-seoDescription: "Les valeurs de l&#039;agence Immobilière Pujol , syndic, gestion locative, loctaion , vente de biens immobiliers"
+seoDescription: "Les valeurs de l'agence Immobilière Pujol , syndic, gestion locative, loctaion , vente de biens immobiliers"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

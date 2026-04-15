@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Locative A Saint Barnabe 13012 Marseille Lexpertise De Lagence Immobiliere Pujol"
 slug: "local/gestion-locative-a-saint-barnabe-13012-marseille-lexpertise-de-lagence-immobiliere-pujol"
 date: "2023-05-09 14:37:46"
 ---

@@ -1,6 +1,6 @@
 {
   "id": 229684,
-  "title": "LO25000005_1A79|LO25000005_1A79.JPG|LO25000005_819.JPG|LO25000005_F924.JPG|LO25000005_3C2B.JPG|LO25000005_4FE3.JPG|LO25000005_EC52.JPG|LO25000005_DDDA.JPG|LO25000005_C119.JPG",
+  "title": "LO25000005_1A79.JPG",
   "slug": "l002122-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002122-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "REFORMES",
-  "prix": 740.0,
-  "charges": 75.0,
+  "prix": 740,
+  "charges": 75,
   "honoraires": "869.18",
   "garantie": "665",
   "surface": 66.86,

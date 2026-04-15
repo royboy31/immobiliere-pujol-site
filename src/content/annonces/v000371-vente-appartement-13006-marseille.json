@@ -12,7 +12,7 @@
   "codePostal": "13006|13006|13006",
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CASTELLANE|CASTELLANE|CASTELLANE",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "3|3|3",
   "nbEtages": "0",
@@ -34,6 +34,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Castellane, Marseille, France|Appartement 2 pièces à vendre Castellane, Marseille, France|Appartement 2 pièces à vendre Castellane, Marseille, France",
-  "seoDescription": "A 2 pas de Castellane, type 2 récent avec jolie terrasse situé au 3e étage avec ascenseur dans une résidence semi récente. L&rsquo;appartement fait 30m² et&#8230;|A 2 pas de Castellane, type 2 récent avec jolie terrasse situé au 3e étage avec ascenseur dans une résidence semi récente. L&rsquo;appartement fait 30m² et&#8230;|A 2 pas de Castellane, type 2 récent avec jolie terrasse situé au 3e étage avec ascenseur dans une résidence semi récente. L&rsquo;appartement fait 30m² et&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Castellane, Marseille, France",
+  "seoDescription": "A 2 pas de Castellane, type 2 récent avec jolie terrasse situé au 3e étage avec ascenseur dans une résidence semi récente. L&rsquo;appartement fait 30m² et&#8230;"
 }

@@ -1,5 +1,5 @@
 ---
-title: "IP-7104-111019|gel des loyer MARSEILLE|0_0007"
+title: "IP-7104-111019"
 slug: "gel-des-loyers-a-marseille"
 date: "2022-06-17 08:10:43"
 categories: ["Le marché immobilier à marseille"]

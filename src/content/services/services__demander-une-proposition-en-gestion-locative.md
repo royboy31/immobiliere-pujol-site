@@ -1,7 +1,7 @@
 ---
-title: "Demander une proposition en gestion locative &#8211; Immobilière Pujol"
+title: "Demander une proposition en gestion locative – Immobilière Pujol"
 slug: "services/demander-une-proposition-en-gestion-locative"
-seoDescription: "Nos propositions démarrent à 4% ht du montant des loyers. Notre assurance loyers impayés à 1,8% TTC. Recevez une proposition d&#039;une agence parmi les plus recommandée à Marseille"
+seoDescription: "Nos propositions démarrent à 4% ht du montant des loyers. Notre assurance loyers impayés à 1,8% TTC. Recevez une proposition d'une agence parmi les plus recommandée à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

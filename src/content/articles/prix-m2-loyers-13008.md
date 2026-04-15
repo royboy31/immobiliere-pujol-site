@@ -1,11 +1,11 @@
 ---
-title: "Cathédrale_de_la_Major_de_Marseille_et_tour_CMA_CGM|8 ème arrondissement loyer 2018"
+title: "Cathédrale_de_la_Major_de_Marseille_et_tour_CMA_CGM"
 slug: "prix-m2-loyers-13008"
 date: "2020-02-04 11:00:00"
 categories: ["Prix au m2 par arrondissement à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Cathédrale_de_la_Major_de_Marseille_et_tour_CMA_CGM.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13008 en 2019"
-seoDescription: "Le prix moyen (en €/m2) est de 13,6 dans le 13008.   La durée d&#039;occupation moyenne, est de 47 mois"
+seoDescription: "Le prix moyen (en €/m2) est de 13,6 dans le 13008.   La durée d'occupation moyenne, est de 47 mois"
 ---
 
 <!-- wp:tadv/classic-paragraph -->

@@ -1,5 +1,5 @@
 ---
-title: "avis client locataires marseille|avis-client-locataires-marseille|avis-client-locataires-marseille-2"
+title: "avis client locataires marseille"
 slug: "les-avis-clients-des-locataires-de-limmobiliere-pujol"
 date: "2019-08-07 14:10:10"
 excerpt: "Nos locataires trouveront en Opinion System une plateforme dédiée où laisser un commentaire et évaluer nos prestations. Nous voulons être transparents envers le marché : cette plateforme est une façon certifiée de nous juger (institut indépendant certifié ISO 9001, 20252 et NF Z74-501)."

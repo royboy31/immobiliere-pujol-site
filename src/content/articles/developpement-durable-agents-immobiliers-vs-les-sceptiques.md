@@ -1,5 +1,5 @@
 ---
-title: "developpement durable immobilier|renovation-energetique-france-marseille|agents-immobiliers-ademe|immoreno|invitation-agents-immobiliers-ademe"
+title: "developpement durable immobilier"
 slug: "developpement-durable-agents-immobiliers-vs-les-sceptiques"
 date: "2019-11-03 16:41:42"
 excerpt: "Malheureusement, mes contraintes professionnelles m’empêchent de participer à la réunion du 5 novembre 2019 autour du plan “bâtiments durables”, organisée par l’ADEME (Agence de l'Environnement et de la Maîtrise de l'Énergie). En revanche, je voulais partager quelques réflexions sur le développement"

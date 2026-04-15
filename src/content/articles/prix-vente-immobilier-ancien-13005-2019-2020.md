@@ -1,10 +1,10 @@
 ---
-title: "article_0302-MAR02-TIMONE|baille-marseille|_IGP0512DxO|hopital-conception-marseille|_IGP0706DxO|prix m2 immobilier ancien marseille 13005|prix m2 appartement ancien marseille 13005|prix m2 baille marseille|prix m2 le camas marseille|prix m2 la conception marseille|prix m2 saint pierre marseille"
+title: "article_0302-MAR02-TIMONE"
 slug: "prix-vente-immobilier-ancien-13005-2019-2020"
 date: "2021-01-25 17:23:24"
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/article_0302-MAR02-TIMONE.jpg"
 seoTitle: "Prix de vente de l&#039;immobilier ancien dans le 13005 en 2020"
-seoDescription: "Exclusivité Immobilière Pujol : les prix de vente des appartements dans l&#039;ancien dans le 13005, détaillés par quartier et par type de biens immobiliers."
+seoDescription: "Exclusivité Immobilière Pujol : les prix de vente des appartements dans l'ancien dans le 13005, détaillés par quartier et par type de biens immobiliers."
 ---
 
 <p><span style="font-family: georgia, palatino, serif;">Nous publions les références sur les prix de vente dans l'immobilier ancien dans le <a href="https://fr.wikipedia.org/wiki/5e_arrondissement_de_Marseille">13005,</a> au m², quartier par quartier (pour la période du 1er Octobre 2019 au 30 Septembre 2020).</span></p>

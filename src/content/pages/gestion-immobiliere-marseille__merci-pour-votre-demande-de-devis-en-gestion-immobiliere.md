@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Devis en gestion locative à Marseille"
 slug: "gestion-immobiliere-marseille/merci-pour-votre-demande-de-devis-en-gestion-immobiliere"
 date: "2019-07-30 09:33:12"
 seoTitle: "Devis en gestion locative à Marseille"

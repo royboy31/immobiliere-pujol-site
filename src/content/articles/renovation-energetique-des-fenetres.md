@@ -5,7 +5,7 @@ date: "2023-03-14 10:58:27"
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/0be3321ac526d4edcc6c9974d0e45.jpg"
 seoTitle: "Comment bien choisir et rénover ses fenêtres?"
-seoDescription: "Quels sont les critères à vérifier pour réussir la rénovation énergétique de vos fenêtres? Cet article vous explique ce qu&#039;est le coefficient Uw et son importance dans le changement de vos fenêtres."
+seoDescription: "Quels sont les critères à vérifier pour réussir la rénovation énergétique de vos fenêtres? Cet article vous explique ce qu'est le coefficient Uw et son importance dans le changement de vos fenêtres."
 ---
 
 <h1>La rénovation énergétique des fenêtres</h1>

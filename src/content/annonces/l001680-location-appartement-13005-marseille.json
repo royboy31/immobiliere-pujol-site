@@ -1,6 +1,6 @@
 {
   "id": 88967,
-  "title": "LO34900001_F6516085984|LO34900001_E819|LO34900001_6E81.JPG|LO34900001_A625.JPG|LO34900001_AF59.JPG|LO34900001_BA14.JPG|LO34900001_C53C.JPG|LO34900001_D0F0.JPG",
+  "title": "LO34900001_F6516085984",
   "slug": "l001680-location-appartement-13005-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001680-location-appartement-13005-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13005",
   "ville": "MARSEILLE",
   "quartier": "BAILLE/AV. TOULON",
-  "prix": 680.0,
-  "charges": 100.0,
+  "prix": 680,
+  "charges": 100,
   "honoraires": "555.88",
   "garantie": "1160",
   "surface": 42.76,

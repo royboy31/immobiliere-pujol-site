@@ -1,6 +1,6 @@
 {
   "id": 54131,
-  "title": "LO12680002_64FC14372008|LO12680002_1F0|LO12680002_C399|LO12680002_CDAC|LO12680002_D86B|LO12680002_E349|LO12680002_EC09|LO12680002_ED8B|LO12680002_F7BE",
+  "title": "LO12680002_64FC14372008",
   "slug": "l000711-location-appartement-13001-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l000711-location-appartement-13001-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13001",
   "ville": "MARSEILLE",
   "quartier": "REFORMES/CANEBIERE",
-  "prix": 760.0,
-  "charges": 50.0,
+  "prix": 760,
+  "charges": 50,
   "honoraires": "1170.26",
   "garantie": "710",
   "surface": 90.02,

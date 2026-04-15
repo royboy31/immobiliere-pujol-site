@@ -1,5 +1,5 @@
 ---
-title: "20200526_120821|besoin piece en plus deconfiement|deconfiement besoin une plus grabde cave|deconfinement changer dair|deconfinement avoir plus de place|deconfinement serie|deconfinement serie|deconfinement changer dair|deconfionement je veux changer de voisins|deconfinement serie1|deconfinement serie 2|DECONFINEMENT SERIE 3"
+title: "20200526_120821"
 slug: "liberez-le-confine-qui-est-en-vous-changez-dappart"
 date: "2020-06-04 14:57:59"
 categories: ["Le marché immobilier à marseille"]

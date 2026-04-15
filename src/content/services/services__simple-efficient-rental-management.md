@@ -1,7 +1,7 @@
 ---
-title: "Simple and efficient rental management &#8211; Immobilière Pujol"
+title: "Simple and efficient rental management – Immobilière Pujol"
 slug: "services/simple-efficient-rental-management"
-seoDescription: "Rental management is a full-time job! And it&#039;s one that requires the skills of a whole team of professionals. Whether you have one apartment to manage or a whole series, Immobilière Pujol offers you a personalized solution and supports you at every stage. We operate in Marseille and the surrounding…"
+seoDescription: "Rental management is a full-time job! And it's one that requires the skills of a whole team of professionals. Whether you have one apartment to manage or a whole series, Immobilière Pujol offers you a personalized solution and supports you at every stage. We operate in Marseille and the surrounding…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

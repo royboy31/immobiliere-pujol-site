@@ -1,11 +1,11 @@
 ---
-title: "marche noaille 13001 marseille|1er arrondissement loyer 2018"
+title: "marche noaille 13001 marseille"
 slug: "les-prix-au-m2-des-loyers-dans-le-13001-en-2019"
 date: "2020-01-26 06:08:35"
 categories: ["Prix au m2 par arrondissement à Marseille>Immobilier Arrondissement 13001"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/01/marche-noaille-13001-marseille.jpg"
 seoTitle: "Le prix moyen des loyers du 13001 est de 11,9€ le m  en 2019"
-seoDescription: "Le prix moyen est de 11,9€ le m dans le 13001 en 2019. La durée d&#039;occupation est de 54 mois."
+seoDescription: "Le prix moyen est de 11,9€ le m dans le 13001 en 2019. La durée d'occupation est de 54 mois."
 ---
 
 <!-- wp:tadv/classic-paragraph -->

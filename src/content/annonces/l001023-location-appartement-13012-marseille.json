@@ -1,6 +1,6 @@
 {
   "id": 88580,
-  "title": "LO01800001_8B9614364928|LO01800001_4617|LO01800001_7C92|LO01800001_8C0E|LO01800001_9C25|LO01800001_A673|LO01800001_B275|LO01800001_BD6|LO01800001_C328",
+  "title": "LO01800001_8B9614364928",
   "slug": "l001023-location-appartement-13012-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001023-location-appartement-13012-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13012",
   "ville": "MARSEILLE",
   "quartier": "SAINT BARNABE",
-  "prix": 1110.0,
-  "charges": 110.0,
+  "prix": 1110,
+  "charges": 110,
   "honoraires": "859.04",
   "garantie": "1000",
   "surface": 66.08,

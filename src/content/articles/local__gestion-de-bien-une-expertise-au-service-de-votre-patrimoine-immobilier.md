@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion De Bien Une Expertise Au Service De Votre Patrimoine Immobilier"
 slug: "local/gestion-de-bien-une-expertise-au-service-de-votre-patrimoine-immobilier"
 date: "2023-05-09 14:51:20"
 ---

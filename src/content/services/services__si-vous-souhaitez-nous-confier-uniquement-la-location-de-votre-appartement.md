@@ -1,7 +1,7 @@
 ---
-title: "Le coût d&rsquo;une commission de location (sans gestion locative) &#8211; Immobilière Pujol"
+title: "Le coût d'une commission de location (sans gestion locative) – Immobilière Pujol"
 slug: "services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement"
-seoDescription: "Quel est le coût d&#039;une commission de location à Marseille? Obtenez un devis en 24H par l&#039;agence de location la plus recommandée à Marseille"
+seoDescription: "Quel est le coût d'une commission de location à Marseille? Obtenez un devis en 24H par l'agence de location la plus recommandée à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

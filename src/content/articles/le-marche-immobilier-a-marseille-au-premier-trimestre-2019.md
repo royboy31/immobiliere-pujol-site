@@ -1,5 +1,5 @@
 ---
-title: "marseille immobilier vente location|vente immobilier marseille|location immobilier marseille|location marseille|immobiliere pujol"
+title: "marseille immobilier vente location"
 slug: "le-marche-immobilier-a-marseille-au-premier-trimestre-2019"
 date: "2019-05-01 16:53:24"
 categories: ["Le marché immobilier à marseille"]

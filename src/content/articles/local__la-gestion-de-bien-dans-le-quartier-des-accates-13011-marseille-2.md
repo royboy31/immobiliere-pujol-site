@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/La Gestion De Bien Dans Le Quartier Des Accates 13011 Marseille 2"
 slug: "local/la-gestion-de-bien-dans-le-quartier-des-accates-13011-marseille-2"
 date: "2023-06-29 10:30:36"
 ---

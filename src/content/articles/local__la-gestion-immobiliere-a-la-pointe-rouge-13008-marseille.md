@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/La Gestion Immobiliere A La Pointe Rouge 13008 Marseille"
 slug: "local/la-gestion-immobiliere-a-la-pointe-rouge-13008-marseille"
 date: "2023-05-09 15:42:07"
 ---

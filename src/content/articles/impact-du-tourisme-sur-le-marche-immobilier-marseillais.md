@@ -1,5 +1,5 @@
 ---
-title: "impact tourisme sur prix immobilier marseille|location saisonniere marseille"
+title: "impact tourisme sur prix immobilier marseille"
 slug: "impact-du-tourisme-sur-le-marche-immobilier-marseillais"
 date: "2023-09-08 06:04:49"
 categories: ["Le marché immobilier à marseille"]

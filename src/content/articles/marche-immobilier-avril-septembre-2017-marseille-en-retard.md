@@ -5,8 +5,8 @@ date: "2017-09-18 06:42:52"
 categories: ["Le marché immobilier à marseille", "Mon quartier, ma ville Marseille"]
 tags: ["immobilier", "investir a marseille", "marché immobilier", "marseille"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-665952_1920-min.jpg"
-seoTitle: "Le marché immobilier à Marseille entre avril et septembre 2017|Le marché immobilier à Marseille entre avril et septembre 2017"
-seoDescription: "Globalement notre marché est bon, les agents immobilier ont le sourire, mais nous sentons la fragilité. Marseille est toujours en retard. Les objectifs du gouvernement semblent être de faire baisser les loyers et les prix pour rendre notre pays compétitif.|Globalement notre marché est bon, les agents immobilier ont le sourire, mais nous sentons la fragilité. Marseille est toujours en retard. Les objectifs du gouvernement semblent être de faire baisser les loyers et les prix pour rendre notre pays compétitif."
+seoTitle: "Le marché immobilier à Marseille entre avril et septembre 2017"
+seoDescription: "Globalement notre marché est bon, les agents immobilier ont le sourire, mais nous sentons la fragilité. Marseille est toujours en retard. Les objectifs du gouvernement semblent être de faire baisser les loyers et les prix pour rendre notre pays compétitif."
 ---
 
 <p>Globalement notre marché est bon, les agents immobiliers ont le sourire, mais nous sentons la fragilité.</p>

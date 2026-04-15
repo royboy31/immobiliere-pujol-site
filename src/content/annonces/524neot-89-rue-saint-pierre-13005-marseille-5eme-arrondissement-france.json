@@ -1,6 +1,6 @@
 {
   "id": 1366242,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "524neot-89-rue-saint-pierre-13005-marseille-5eme-arrondissement-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/524neot-89-rue-saint-pierre-13005-marseille-5eme-arrondissement-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "89 Rue Saint Pierre, 13005, Marseille 5eme Arrondissement, France",
-  "prix": 500.0,
-  "charges": 15.0,
+  "prix": 500,
+  "charges": 15,
   "honoraires": "261.8",
   "garantie": "970",
   "surface": 17.69,

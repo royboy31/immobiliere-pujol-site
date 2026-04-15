@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A La Timone 13010 Marseille"
 slug: "local/gestion-dappartements-a-la-timone-13010-marseille"
 date: "2023-05-09 15:31:37"
 ---

@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Local/Gestion Dappartements A Vauban 13006 Marseille"
 slug: "local/gestion-dappartements-a-vauban-13006-marseille"
 date: "2023-05-09 15:24:53"
 ---

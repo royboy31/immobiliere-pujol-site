@@ -1,6 +1,6 @@
 {
   "id": 88355,
-  "title": "LO01410003_D01609452512|LO01410003_1681|LO01410003_1E5F|LO01410003_560|LO01410003_99F0|LO01410003_E94",
+  "title": "LO01410003_D01609452512",
   "slug": "l001616-location-appartement-13007-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l001616-location-appartement-13007-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13007",
   "ville": "MARSEILLE",
   "quartier": "CATALANS",
-  "prix": 590.0,
-  "charges": 140.0,
+  "prix": 590,
+  "charges": 140,
   "honoraires": "503.75",
   "garantie": "450",
   "surface": 38.75,

@@ -1,5 +1,5 @@
 ---
-title: "avis client coproprietaires marseille|avis-client-copropriétaires-marseille|avis-client-copropriétaires-marseille-2"
+title: "avis client coproprietaires marseille"
 slug: "avis-clients-coproprietaires-marseille"
 date: "2019-08-27 08:32:32"
 excerpt: "De très nombreux copropriétaires nous ont fait parvenir leurs critiques via avisclient.org. Au total, une centaine d’avis qui nous permettent de connaître nos points forts et les axes sur lesquels s’améliorer. L’agence Immobilière Pujol a obtenu une note globale de 9.3/10, ce qui en fait l’une des a"

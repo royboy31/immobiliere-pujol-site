@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "VIEUX PORT|VIEUX PORT|VIEUX PORT",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesBain": 0,
   "etage": "3|3|3",
   "nbEtages": "4|4|4",
@@ -35,6 +35,6 @@
   "contactAAfficher": "Benoit MARIN VICENTE|Benoit MARIN VICENTE|Benoit MARIN VICENTE",
   "telephoneAAfficher": "04.91.37.38.25|04.91.37.38.25|04.91.37.38.25",
   "emailAAfficher": "benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr|benoit@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 3 pièces à vendre Vieux Port, Marseille, France|Appartement 3 pièces à vendre Vieux Port, Marseille, France|Appartement 3 pièces à vendre Vieux Port, Marseille, France",
-  "seoDescription": "EXCLUSIVITE Appartement avec cachet de type 2/3 de 51m² situé en centre ville et à proximité du Vieux Port, rue du jeune anacharsis.Au 3ème étage sans asce&#8230;|EXCLUSIVITE Appartement avec cachet de type 2/3 de 51m² situé en centre ville et à proximité du Vieux Port, rue du jeune anacharsis.Au 3ème étage sans asce&#8230;|EXCLUSIVITE Appartement avec cachet de type 2/3 de 51m² situé en centre ville et à proximité du Vieux Port, rue du jeune anacharsis.Au 3ème étage sans asce&#8230;"
+  "seoTitle": "Appartement 3 pièces à vendre Vieux Port, Marseille, France",
+  "seoDescription": "EXCLUSIVITE Appartement avec cachet de type 2/3 de 51m² situé en centre ville et à proximité du Vieux Port, rue du jeune anacharsis.Au 3ème étage sans asce&#8230;"
 }

@@ -1,7 +1,7 @@
 ---
-title: "Prix de l&rsquo;immobilier à Marseille &#8211; Immobilière Pujol"
+title: "Prix de l'immobilier à Marseille – Immobilière Pujol"
 slug: "services/demander-une-estimation-de-prix-de-vente"
-seoDescription: "La valeur d&#039;un bien immobilier dépend de plusieurs facteurs : du type de marché dans lequel il se trouve  des prix du quartier/de l&#039;arrondissement des derniers biens vendus dans le secteur des biens concurrents en vente au moment de vendre de son état, de son confort, de sa situation géographique,…"
+seoDescription: "La valeur d'un bien immobilier dépend de plusieurs facteurs : du type de marché dans lequel il se trouve  des prix du quartier/de l'arrondissement des derniers biens vendus dans le secteur des biens concurrents en vente au moment de vendre de son état, de son confort, de sa situation géographique,…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

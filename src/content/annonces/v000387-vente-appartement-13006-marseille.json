@@ -13,7 +13,7 @@
   "ville": "Marseille|Marseille|Marseille",
   "quartier": "CASTELLANE|CASTELLANE|CASTELLANE",
   "honoraires": "0.00|0.00|0.00",
-  "surfaceTerrain": 0.0,
+  "surfaceTerrain": 0,
   "nbSallesEau": 0,
   "etage": "2|2|2",
   "nbEtages": "0",
@@ -31,6 +31,6 @@
   "contactAAfficher": "IMMOBILIERE PUJOL|IMMOBILIERE PUJOL|IMMOBILIERE PUJOL",
   "telephoneAAfficher": "0679027229|0679027229|0679027229",
   "emailAAfficher": "carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr|carolinepujol@immobiliere-pujol.fr",
-  "seoTitle": "Appartement 2 pièces à vendre Castellane, Marseille, France|Appartement 2 pièces à vendre Castellane, Marseille, France|Appartement 2 pièces à vendre Castellane, Marseille, France",
-  "seoDescription": "EXCLUSIVITE Appartement de type 2 lumineux de 44m² situé au 2e étage dans un immeuble ancien bien entretenu rue Pierre Dupré à côté de toutes les commodité&#8230;|EXCLUSIVITE Appartement de type 2 lumineux de 44m² situé au 2e étage dans un immeuble ancien bien entretenu rue Pierre Dupré à côté de toutes les commodité&#8230;|EXCLUSIVITE Appartement de type 2 lumineux de 44m² situé au 2e étage dans un immeuble ancien bien entretenu rue Pierre Dupré à côté de toutes les commodité&#8230;"
+  "seoTitle": "Appartement 2 pièces à vendre Castellane, Marseille, France",
+  "seoDescription": "EXCLUSIVITE Appartement de type 2 lumineux de 44m² situé au 2e étage dans un immeuble ancien bien entretenu rue Pierre Dupré à côté de toutes les commodité&#8230;"
 }

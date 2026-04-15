@@ -1,6 +1,6 @@
 {
   "id": 226877,
-  "title": "LO36810004_128A|LO36810004_128A.JPG|LO36810004_2F79.JPG|LO36810004_48DE.JPG|LO36810004_4BE.JPG|LO36810004_A45A.JPG|LO36810004_C2C0.JPG|LO36810004_D956.JPG|LO36810004_F04A.JPG",
+  "title": "LO36810004_128A.JPG",
   "slug": "l002062-location-bureaux-13004-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002062-location-bureaux-13004-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13004",
   "ville": "MARSEILLE",
   "quartier": "SEBASTOPOL",
-  "prix": 945.0,
-  "charges": 45.0,
+  "prix": 945,
+  "charges": 45,
   "honoraires": "1896.00",
   "garantie": "2700",
   "surface": 146.48,

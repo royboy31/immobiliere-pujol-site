@@ -1,6 +1,6 @@
 {
   "id": 228311,
-  "title": "LO37040001_B6F|LO37040001_B6F.JPG|LO37040001_62F6.JPG|LO37040001_3FDC.JPG|LO37040001_E893.JPG|LO37040001_A80F.JPG|LO37040001_66FD.JPG|LO37040001_812D.JPG",
+  "title": "LO37040001_62F6.JPG",
   "slug": "l002092-location-appartement-13013-marseille",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l002092-location-appartement-13013-marseille/",
   "status": "closed",
@@ -13,8 +13,8 @@
   "codePostal": "13013",
   "ville": "MARSEILLE",
   "quartier": "CHATEAU GOMBERT",
-  "prix": 705.0,
-  "charges": 85.0,
+  "prix": 705,
+  "charges": 85,
   "honoraires": "609.70",
   "garantie": "620",
   "surface": 46.9,

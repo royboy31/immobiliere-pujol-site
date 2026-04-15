@@ -1,6 +1,6 @@
 {
   "id": 1141446,
-  "title": "|||||||||||||||||||||||||||||||||||||||||||||||||||||",
+  "title": "",
   "slug": "l250469-3-boulevard-paul-doumer-vauban-13006-marseille-france",
   "permalink": "https://www.immobiliere-pujol.fr/annonces/l250469-3-boulevard-paul-doumer-vauban-13006-marseille-france/",
   "status": "closed",
@@ -9,8 +9,8 @@
   "typeAnnonce": "L",
   "termine": "Terminé",
   "adresse": "176 Avenue Jules Cantini, 13008, Marseille 8eme Arrondissement, France",
-  "prix": 950.0,
-  "charges": 125.0,
+  "prix": 950,
+  "charges": 125,
   "honoraires": "555.1",
   "surface": 42.71,
   "surfaceTerrain": 42.71,
