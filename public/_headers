@@ -1,0 +1,4 @@
+# STAGING — X-Robots-Tag on all pages as extra protection
+# Remove this file at go-live
+/*
+  X-Robots-Tag: noindex, nofollow
