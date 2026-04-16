@@ -1,23 +1,55 @@
 ---
+export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// All listings page with filter system
+import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+
+const annonces = await fetchUbiflowAnnonces();
+const ventes = annonces.filter(a => a.type === 'V');
+const locations = annonces.filter(a => a.type === 'L');
 ---
 
 <BaseLayout
   title="Annonces immobilières à Marseille – Immobilière Pujol"
   description="Découvrez toutes nos annonces immobilières de location et de vente à Marseille."
 >
-  <section class="ads-archive">
-    <div class="ads-archive__search">
-      <!-- Filter bar: type, rooms, price range, arrondissement -->
-    </div>
-    <div class="ads-archive__results">
-      <div class="ads-archive__list">
-        <!-- Property cards -->
-      </div>
-      <div class="ads-archive__map">
-        <!-- Leaflet map -->
-      </div>
+  <section class="annonces-listing">
+    <header class="annonces-listing__header">
+      <h1>Nos annonces immobilières</h1>
+      <p>{annonces.length} annonces disponibles ({ventes.length} ventes, {locations.length} locations)</p>
+      <nav class="annonces-listing__filters">
+        <a href="/annonces/" class="active">Toutes ({annonces.length})</a>
+        <a href="/annonces/locations/">Locations ({locations.length})</a>
+        <a href="/annonces/ventes/">Ventes ({ventes.length})</a>
+      </nav>
+    </header>
+
+    <div class="annonces-listing__grid">
+      {annonces.map((annonce) => (
+        <a href={`/annonces/${annonce.slug}/`} class="annonce-card">
+          <div class="annonce-card__image">
+            {annonce.photos[0] ? (
+              <img src={annonce.photos[0]} alt={annonce.titre} loading="lazy" width="400" height="267" />
+            ) : (
+              <div class="annonce-card__placeholder">Pas de photo</div>
+            )}
+            <span class:list={['annonce-card__badge', annonce.type === 'V' ? 'badge--vente' : 'badge--location']}>
+              {annonce.type === 'V' ? 'Vente' : 'Location'}
+            </span>
+          </div>
+          <div class="annonce-card__content">
+            <h2 class="annonce-card__title">{annonce.titre}</h2>
+            <p class="annonce-card__price">{formatPrice(annonce)}</p>
+            <div class="annonce-card__details">
+              {annonce.libelleType && <span>{annonce.libelleType}</span>}
+              {annonce.surface && <span>{annonce.surface} m²</span>}
+              {annonce.nbPieces && <span>{annonce.nbPieces} pièce{annonce.nbPieces > 1 ? 's' : ''}</span>}
+              {annonce.quartier && <span>{annonce.quartier}</span>}
+              <span>{annonce.codePostal} {annonce.ville}</span>
+            </div>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>
+

@@ -1,0 +1,172 @@
+// ============================================
+// ANNONCE CARD (listing grids)
+// ============================================
+.annonce-card {
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    color: inherit;
+  }
+
+  &__image {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+    background: $color-bg-alt;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: $space-3;
+    left: $space-3;
+    color: $white;
+    padding: $space-1 $space-3;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+  }
+
+  &__content {
+    padding: $space-4;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $color-text-heading;
+    margin-bottom: $space-2;
+    line-height: $line-height-tight;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__price {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    margin-bottom: $space-2;
+  }
+
+  &__details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    font-size: $font-size-xs;
+    color: $color-text-light;
+
+    span {
+      background: $color-bg-alt;
+      padding: $space-1 $space-2;
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+// ============================================
+// SERVICE CARD
+// ============================================
+.service-card {
+  background: $white;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  transition: box-shadow $transition-base, transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+
+  &__image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content {
+    padding: $space-6;
+  }
+
+  &__title {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $space-2;
+  }
+
+  &__excerpt {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+    line-height: $line-height-relaxed;
+  }
+}
+
+// ============================================
+// EXPERT CARD
+// ============================================
+.expert-card {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+
+  &__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: $radius-full;
+    overflow: hidden;
+    margin: 0 auto $space-4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-heading;
+    margin-bottom: $space-1;
+  }
+
+  &__role {
+    font-size: $font-size-sm;
+    color: $color-text-light;
+  }
+}
+
+// ============================================
+// BADGE COLORS
+// ============================================
+.badge--location { background: $color-location; }
+.badge--vente { background: $color-vente; }

@@ -1,10 +1,12 @@
 ---
-title: "Vente par son syndic pujol"
+title: "Confier la vente à une autre agence que votre syndic?"
 slug: "vente-par-son-syndic-avantages"
-date: "2025-06-13 12:34:54"
+date: "2025-06-13"
+excerpt: "C’est un peu comme envoyer un inconnu à votre place à un dîner de famille 😯 🤔Imaginez un instant Vous êtes invité à un grand dîner de famille. Impossible d’y..."
 categories: ["Le marché immobilier à marseille"]
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/06/iStock-1444023770.jpg"
-seoTitle: "Pourquoi confiez votre bien à vendre à votre syndic?"
+tags: []
+featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/06/iStock-1444023770-1200x800.jpg"
+seoTitle: "Confier la vente à une autre agence que votre syndic?"
 seoDescription: "C'est comme dire à un inconnu de vous remplacer à votre diner de famille, alors que votre syndic fait parti de votre famille. Vous ne nous suivez pas? lisez l'article"
 ---
 
@@ -15,10 +17,10 @@ seoDescription: "C'est comme dire à un inconnu de vous remplacer à votre diner
 <h3 class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">🥴 </span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Drôle de stratégie, non ?</span></h3>
 <p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Et pourtant, c’est un peu ce que vous faites quand vous confiez la vente de votre appartement à une agence extérieure…qui ne connait pas la copropriété, alors que nous, </span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">on fait déjà partie de la famille</span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">.</span></p>
 <h3 class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">🧐 On connaît l’immeuble comme si on y habitait :</span></h3>
-<p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">On gère la copro et parfois depuis longtemps, on sait qui fait quoi, où, comment et depuis quand, on a les documents, les diagnostics, les PV d’AG, et même la liste des travaux votés... et ceux qui vont faire débat à la prochaine réunion!</span></p>
+<p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">On gère la copro et parfois depuis longtemps, on sait qui fait quoi, où, comment et depuis quand, on a les documents, les diagnostics, les PV d’AG, et même la liste des travaux votés&#8230; et ceux qui vont faire débat à la prochaine réunion!</span></p>
 <h3 class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">🏃‍♂️ Pendant ce temps-là, l’agent “extérieur” </span></h3>
 <p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Cherche la cave (qui n’est plus accessible depuis 1984),</span> <span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">tente de comprendre les appels de fonds ,  découvre qu’il y a une cour, </span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">demande au vendeur si “les charges comprennent le chauffage ou pas ?” car il ne sait pas lire les décomptes de charges , demande au vendeur les PV et les parcoure en diagonale</span></p>
-<p><img class="wp-image-1089628 alignnone" src="https://www.immobiliere-pujol.fr/content/uploads/2025/06/iStock-1444023770-800x533.jpg" alt="" width="641" height="427" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-1089628 alignnone" src="/content/uploads/2025/06/iStock-1444023770-800x533.jpg" alt="" width="641" height="427" srcset="/content/uploads/2025/06/iStock-1444023770-800x533.jpg 800w, /content/uploads/2025/06/iStock-1444023770-768x512.jpg 768w, /content/uploads/2025/06/iStock-1444023770-1536x1024.jpg 1536w, /content/uploads/2025/06/iStock-1444023770-2048x1365.jpg 2048w, /content/uploads/2025/06/iStock-1444023770-600x400.jpg 600w, /content/uploads/2025/06/iStock-1444023770-1200x800.jpg 1200w" sizes="auto, (max-width: 641px) 100vw, 641px" /></p>
 <p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none" style="font-size: 14pt;">🤫</span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Pssst: nous on le sait déjà tout ça et en plus on comprend tout et on a tout sur notre ordinateur .</span></p>
 <h3 class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">📣 </span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Vendre avec nous, c’est prendre un raccourci</span></h3>
 <p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Pas besoin de reconstituer l’historique.</span></p>
@@ -36,4 +38,24 @@ seoDescription: "C'est comme dire à un inconnu de vous remplacer à votre diner
 <h2 class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">📞 </span><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Alors, prêts à vendre… sans stress ?</span></h2>
 <p class="cvGsUA direction-ltr align-start para-style-body"><span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Contactez le directeur des ventes de l’Immobilière Pujol</span></p>
 <p><strong>Benoit Marin Vicent au <span class="OYPEnA font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">06 37 56 68 51 </span></strong></p>
-<p><img class="alignnone  wp-image-731392" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/benoit3-753x800.jpg" alt="" width="417" height="443" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-731392" src="/content/uploads/2017/11/benoit3-753x800.jpg" alt="" width="417" height="443" srcset="/content/uploads/2017/11/benoit3-753x800.jpg 753w, /content/uploads/2017/11/benoit3-768x816.jpg 768w, /content/uploads/2017/11/benoit3-565x600.jpg 565w, /content/uploads/2017/11/benoit3.jpg 1067w" sizes="auto, (max-width: 417px) 100vw, 417px" /></p>
+      </div>
+      <!-- SHARE -->
+      <div class="post__share">
+        <ul class="social__list">
+	<li class="social__link social__link--facebook">
+		<a onclick="socialPopup('https://www.facebook.com/sharer/sharer.php?u=')" rel="noopener" target="_blank" title="Partagez sur Facebook">
+			<svg class="social__icon social__icon--facebook"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--twitter">
+		<a onclick="socialPopup('https://twitter.com/intent/tweet?url=&hashtags=immobilier, marseille')" rel="noopener" target="_blank" title="Partagez sur Twitter">
+			<svg class="social__icon social__icon--twitter" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--linkedin">
+		<a onclick="socialPopup('https://plus.google.com/share?url=')" rel="noopener" target="_blank" title="Partagez sur Google">
+			<svg class="social__icon social__icon--google"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.331 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.122-4.822 4.728-4.822 1.485 0 2.479.633 3.045 1.178l2.073-1.994c-1.33-1.245-3.056-1.995-5.115-1.995C3.412 4.365 0 7.785 0 12s3.414 7.635 7.635 7.635c4.41 0 7.332-3.098 7.332-7.461 0-.501-.054-.885-.12-1.265H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.184v2.184h2.189V13.09H24"/></svg>
+		</a>
+	</li>
+</ul>

@@ -1,20 +1,53 @@
 ---
+export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-// Rental listings archive — /annonces/locations/
+import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+
+const allAnnonces = await fetchUbiflowAnnonces();
+const annonces = allAnnonces.filter(a => a.type === 'L');
+const totalVentes = allAnnonces.filter(a => a.type === 'V').length;
 ---
 
 <BaseLayout
   title="Location appartement Marseille – Immobilière Pujol"
   description="Découvrez toutes nos annonces de location d'appartements et maisons à Marseille."
 >
-  <section class="ads-archive ads-archive--locations">
-    <h1>Nos annonces de location à Marseille</h1>
-    <div class="ads-archive__search">
-      <!-- Filter bar pre-filtered to type=location -->
-    </div>
-    <div class="ads-archive__results">
-      <div class="ads-archive__list"></div>
-      <div class="ads-archive__map"></div>
+  <section class="annonces-listing">
+    <header class="annonces-listing__header">
+      <h1>Nos annonces de location à Marseille</h1>
+      <p>{annonces.length} locations disponibles</p>
+      <nav class="annonces-listing__filters">
+        <a href="/annonces/">Toutes ({allAnnonces.length})</a>
+        <a href="/annonces/locations/" class="active">Locations ({annonces.length})</a>
+        <a href="/annonces/ventes/">Ventes ({totalVentes})</a>
+      </nav>
+    </header>
+
+    <div class="annonces-listing__grid">
+      {annonces.map((annonce) => (
+        <a href={`/annonces/${annonce.slug}/`} class="annonce-card">
+          <div class="annonce-card__image">
+            {annonce.photos[0] ? (
+              <img src={annonce.photos[0]} alt={annonce.titre} loading="lazy" width="400" height="267" />
+            ) : (
+              <div class="annonce-card__placeholder">Pas de photo</div>
+            )}
+            <span class="annonce-card__badge badge--location">Location</span>
+          </div>
+          <div class="annonce-card__content">
+            <h2 class="annonce-card__title">{annonce.titre}</h2>
+            <p class="annonce-card__price">{formatPrice(annonce)}</p>
+            <div class="annonce-card__details">
+              {annonce.libelleType && <span>{annonce.libelleType}</span>}
+              {annonce.surface && <span>{annonce.surface} m²</span>}
+              {annonce.nbPieces && <span>{annonce.nbPieces} pièce{annonce.nbPieces > 1 ? 's' : ''}</span>}
+              {annonce.quartier && <span>{annonce.quartier}</span>}
+              <span>{annonce.codePostal} {annonce.ville}</span>
+            </div>
+          </div>
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>
+

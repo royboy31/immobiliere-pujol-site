@@ -7,7 +7,9 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   site: 'https://www.immobiliere-pujol.fr',
   integrations: [react()],
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: 'passthrough',
+  }),
   // Astro 6: output defaults to 'static'. SSR pages opt-in with `export const prerender = false`
   // Annonce pages will use SSR (prerender = false), everything else is static.
   trailingSlash: 'always',

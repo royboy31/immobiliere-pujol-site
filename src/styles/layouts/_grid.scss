@@ -1,0 +1,42 @@
+// ============================================
+// CONTAINERS
+// ============================================
+.container {
+  margin: 0 auto;
+  width: 100%;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
+
+  &--sm { max-width: $container-sm; }
+  &--md { max-width: $container-md; }
+  &--lg { max-width: $container-lg; }
+  &--xl { max-width: $container-xl; }
+}
+
+// ============================================
+// GRIDS
+// ============================================
+.grid {
+  display: grid;
+  gap: $space-6;
+
+  &--2 { grid-template-columns: repeat(2, 1fr); }
+  &--3 { grid-template-columns: repeat(3, 1fr); }
+  &--4 { grid-template-columns: repeat(4, 1fr); }
+
+  &--auto {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  @media (max-width: $bp-tablet) {
+    &--2, &--3, &--4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: $bp-tablet) and (max-width: $bp-desktop) {
+    &--3, &--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

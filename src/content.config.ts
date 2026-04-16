@@ -87,6 +87,20 @@ const pages = defineCollection({
   }),
 });
 
+// Arrondissement taxonomy pages (65 JSON files)
+const arrondissements = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/arrondissements' }),
+  schema: z.object({
+    id: z.number(),
+    name: z.string(),
+    slug: z.string(),
+    count: z.number(),
+    zipContent: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+  }),
+});
+
 // Property listings (5,259 JSON files) — historical data, will move to D1 in Gate 2
 const annonces = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/annonces' }),
@@ -158,6 +172,7 @@ const annonces = defineCollection({
 
 export const collections = {
   annonces,
+  arrondissements,
   articles,
   services,
   serviceImmobilier,

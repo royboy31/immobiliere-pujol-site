@@ -11,6 +11,21 @@
 
 /*
 *
-* Components (to be added during migration)
+* Components
 *
 */
+@import 'components/buttons';
+@import 'components/navigation';
+@import 'components/cards';
+@import 'components/gallery';
+@import 'components/badges';
+@import 'components/forms';
+
+/*
+*
+* Layouts
+*
+*/
+@import 'layouts/grid';
+@import 'layouts/listing';
+@import 'layouts/single';

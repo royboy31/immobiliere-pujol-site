@@ -1,0 +1,38 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const serviceList = services
+  .filter(s => s.data.slug !== 'services')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout
+  title="Nos Services – Immobilière Pujol"
+  description="Découvrez tous les services immobiliers de l'Immobilière Pujol à Marseille : gestion locative, syndic, vente, location."
+>
+  <section class="annonces-listing">
+    <header class="annonces-listing__header">
+      <h1>Nos Services</h1>
+      <p>{serviceList.length} services</p>
+    </header>
+
+    <div class="annonces-listing__grid">
+      {serviceList.map((service) => {
+        const slug = service.data.slug.replace(/^services\//, '');
+        return (
+          <a href={`/services/${slug}/`} class="annonce-card">
+            <div class="annonce-card__content">
+              <h2 class="annonce-card__title">{service.data.title}</h2>
+              {service.data.seoDescription && (
+                <p class="annonce-card__details">{service.data.seoDescription}</p>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

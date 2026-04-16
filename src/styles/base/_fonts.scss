@@ -1,52 +1,67 @@
-$main-font : "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-
 html {
-	font-family: $main-font;
-	font-size: 62.5%; /* 62.5% of 16px = 10px */
-	color: $text-color;
-
-	@media screen and (max-width: 30rem) {
-		font-size: 50%;
-	}
-
-	body {
-		font-size: 5rem;
-	}
+  font-family: $font-family;
+  font-size: 100%;
+  color: $color-text;
+  line-height: $line-height-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-p, blockquote, * {
-	font-weight: 300;
+body {
+  font-size: $font-size-base;
+  font-weight: $font-weight-light;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  color: $color-text-heading;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  margin-bottom: $space-4;
+}
+
+h1 { font-size: $font-size-2xl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+h4 { font-size: $font-size-md; }
+h5 { font-size: $font-size-base; }
+h6 { font-size: $font-size-sm; }
+
+@media (min-width: $bp-desktop) {
+  h1 { font-size: $font-size-3xl; }
+  h2 { font-size: $font-size-2xl; }
+  h3 { font-size: $font-size-xl; }
+}
+
+p {
+  margin-bottom: $space-4;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-light;
+}
+
+strong, b { font-weight: $font-weight-medium; }
 
 blockquote {
-	font-style: italic;
-	margin-bottom: 1rem; margin-top: 1rem;
-	line-height: 130%;
+  font-style: italic;
+  margin: $space-4 0;
+  padding-left: $space-6;
+  border-left: 3px solid $color-primary;
+  line-height: $line-height-relaxed;
 }
 
-strong {
-	font-weight: 500;
+a {
+  color: $color-link;
+  transition: color $transition-fast;
+
+  &:hover { color: $color-link-hover; }
 }
 
-h1 {
-	font-size: 1.5rem;
-
-	@media screen and (min-width: 975px) {
-		font-size: 2rem;
-	}
-}
-
-.bold {
-	font-weight: 700;
-}
-
-.center {
-	text-align: center;
-}
+small, .text-sm { font-size: $font-size-sm; }
+.text-xs { font-size: $font-size-xs; }
+.text-muted { color: $color-text-muted; }
+.text-light { color: $color-text-light; }
 
 sup {
-	position: relative;
-	top: -5px;
-	font-size: 62.5%;
+  position: relative;
+  top: -0.4em;
+  font-size: 75%;
 }

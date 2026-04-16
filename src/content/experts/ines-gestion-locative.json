@@ -1,8 +1,11 @@
 {
-  "title": "Inès - Gestion locative",
+  "title": "Inès – Gestion locative",
   "slug": "ines-gestion-locative",
-  "photo": "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Ines.jpeg",
-  "phone": "0491373360",
+  "fonction": "Gestion locative",
+  "description": "",
+  "photo": "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Ines-533x800.jpg",
   "email": "ines@immobiliere-pujol.fr",
-  "facebook": "https://www.facebook.com/agenceimmobiliere.fr/"
+  "phone": "0491373360",
+  "seoTitle": "Inès – Gestion locative",
+  "seoDescription": ""
 }

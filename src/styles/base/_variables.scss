@@ -1,55 +1,158 @@
-$ease-out : cubic-bezier(.19,.68,.27,1);
+$ease-out: cubic-bezier(.19, .68, .27, 1);
 
+// ============================================
+// BRAND COLORS
+// ============================================
+$green:           #B2C54F;
+$green-dark:      #8fa33d;
+$orange:          #FD7F24;
+$orange-dark:     #e06a10;
+$darkblue:        #55666f;
+$grey:            #7e7e7d;
+$light-grey:      #f5f5f4;
+$lightest-grey:   #fbfbfa;
+$dark-grey:       #55666f;
+$black:           #000000;
+$white:           #ffffff;
+$red-google:      #DC4E41;
+$blue-facebook:   #3B5998;
+$blue-twitter:    #1DA1F2;
 
-/*
-*
-* DIRECT VARIABLES
-*
-*/
-$darkblue			: #55666f;
-$green			  : #B2C54F;
-$orange			  : #FD7F24;
-$grey			    : #7e7e7d;
-$light-grey		: #f5f5f4;
-$lightest-grey: #fbfbfa;
-$dark-grey    : #55666f;
-$black		  	: #000000;
-$red-google		: #DC4E41;
-$blue-facebook: #3B5998;
-$blue-twitter	: #1DA1F2;
+// ============================================
+// SEMANTIC COLORS
+// ============================================
+$color-primary:       $green;
+$color-primary-dark:  $green-dark;
+$color-secondary:     $orange;
+$color-secondary-dark: $orange-dark;
+$color-text:          #495057;
+$color-text-light:    #6c757d;
+$color-text-heading:  #212529;
+$color-text-muted:    #adb5bd;
+$color-link:          $green;
+$color-link-hover:    $green-dark;
 
+$color-bg:            $white;
+$color-bg-alt:        $light-grey;
+$color-bg-subtle:     $lightest-grey;
+$color-border:        #dee2e6;
+$color-border-light:  #e9ecef;
 
-/*
-*
-* RELATIVE VARIABLES
-*
-*/
-$button-background 	: $green;
-$link-color 		: $green;
-$text-color			: $grey;
-$input-focus-color	: $green;
-$label-color		: lighten($grey, 15%);
-$input-color		: lighten($grey, 35%);
-$subnav-background	: lighten($green, 35%);
-$subnav-color		: white;
+$color-success:       #28a745;
+$color-error:         #dc3545;
+
+// Annonce-specific
+$color-location:      $green;
+$color-vente:         $orange;
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+$font-family:     "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-weight-light:   300;
+$font-weight-normal:  400;
+$font-weight-medium:  500;
+$font-weight-semibold: 600;
+$font-weight-bold:    700;
+
+$font-size-xs:    0.75rem;   // 12px
+$font-size-sm:    0.875rem;  // 14px
+$font-size-base:  1rem;      // 16px
+$font-size-md:    1.125rem;  // 18px
+$font-size-lg:    1.25rem;   // 20px
+$font-size-xl:    1.5rem;    // 24px
+$font-size-2xl:   2rem;      // 32px
+$font-size-3xl:   2.5rem;    // 40px
+
+$line-height-tight:   1.2;
+$line-height-base:    1.5;
+$line-height-relaxed: 1.7;
+
+// ============================================
+// SPACING SCALE
+// ============================================
+$space-1:   0.25rem;   // 4px
+$space-2:   0.5rem;    // 8px
+$space-3:   0.75rem;   // 12px
+$space-4:   1rem;      // 16px
+$space-5:   1.25rem;   // 20px
+$space-6:   1.5rem;    // 24px
+$space-8:   2rem;      // 32px
+$space-10:  2.5rem;    // 40px
+$space-12:  3rem;      // 48px
+$space-16:  4rem;      // 64px
+$space-20:  5rem;      // 80px
+
+// ============================================
+// LAYOUT
+// ============================================
+$container-sm:    768px;
+$container-md:    1000px;
+$container-lg:    1200px;
+$container-xl:    1440px;
+$container-padding: $space-6;
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+$bp-mobile:   480px;
+$bp-tablet:   768px;
+$bp-desktop:  1024px;
+$bp-wide:     1200px;
+$bp-ultra:    1440px;
+
+// ============================================
+// BORDERS & RADIUS
+// ============================================
+$radius-sm:   4px;
+$radius-md:   8px;
+$radius-lg:   12px;
+$radius-full: 50%;
+
+// ============================================
+// SHADOWS
+// ============================================
+$shadow-sm:   0 1px 3px rgba($black, 0.08);
+$shadow-md:   0 4px 12px rgba($black, 0.1);
+$shadow-lg:   0 8px 24px rgba($black, 0.12);
+
+// ============================================
+// TRANSITIONS
+// ============================================
+$transition-fast:   0.15s ease;
+$transition-base:   0.2s ease;
+$transition-slow:   0.3s $ease-out;
+
+// ============================================
+// Z-INDEX SCALE
+// ============================================
+$z-dropdown:  100;
+$z-sticky:    200;
+$z-overlay:   300;
+$z-modal:     400;
+
+// ============================================
+// LEGACY ALIASES (backward compat with existing markup)
+// ============================================
+$button-background:   $color-primary;
+$link-color:          $color-link;
+$text-color:          $grey;
+$input-focus-color:   $color-primary;
+$label-color:         lighten($grey, 15%);
+$input-color:         lighten($grey, 35%);
+$subnav-background:   lighten($green, 35%);
+$subnav-color:        $white;
 $action-border-color: lighten($grey, 40%);
-$hero-overlay		: rgba($black, 0.5);
-
-$border-color		: lighten($grey, 40%);
-
+$hero-overlay:        rgba($black, 0.5);
+$border-color:        lighten($grey, 40%);
 $floating-nav-border: lighten($grey, 40%);
-
-$news-background 	: $lightest-grey;
-$blogs-background 	: white;
-
-$burger-color		: $grey;
-
-$section-background	: $light-grey;
-
-$floating-item		: $light-grey;
-
-$tag-background		: darken($light-grey, 0%);
-
-$google				: $red-google;
-$facebook			: $blue-facebook;
-$twitter			: $blue-twitter;
+$news-background:     $lightest-grey;
+$blogs-background:    $white;
+$burger-color:        $grey;
+$section-background:  $light-grey;
+$floating-item:       $light-grey;
+$tag-background:      darken($light-grey, 0%);
+$google:              $red-google;
+$facebook:            $blue-facebook;
+$twitter:             $blue-twitter;
+$main-font:           $font-family;

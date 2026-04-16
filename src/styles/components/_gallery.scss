@@ -1,0 +1,75 @@
+// ============================================
+// PHOTO GALLERY (annonce detail)
+// ============================================
+.gallery {
+  &__main {
+    border-radius: $radius-md;
+    overflow: hidden;
+    margin-bottom: $space-4;
+
+    img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__thumbs {
+    display: flex;
+    gap: $space-2;
+    overflow-x: auto;
+    padding-bottom: $space-2;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: $color-bg-alt;
+      border-radius: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $color-border;
+      border-radius: 2px;
+    }
+  }
+
+  &__thumb {
+    border: 2px solid transparent;
+    border-radius: $radius-sm;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    flex-shrink: 0;
+    transition: border-color $transition-fast;
+
+    &:hover,
+    &:focus,
+    &.active {
+      border-color: $color-primary;
+    }
+
+    img {
+      width: 100px;
+      height: 67px;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__count {
+    color: $color-text-light;
+    font-size: $font-size-xs;
+    margin-top: $space-2;
+  }
+
+  &__empty {
+    background: $color-bg-alt;
+    border-radius: $radius-md;
+    padding: $space-16 $space-8;
+    text-align: center;
+    color: $color-text-muted;
+  }
+}

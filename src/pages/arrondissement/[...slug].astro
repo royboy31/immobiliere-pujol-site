@@ -1,23 +1,49 @@
 ---
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
-// Arrondissement taxonomy — /arrondissement/{name}/{type}/
 export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Load from taxonomy data
-  return [];
+  const arrondissements = await getCollection('arrondissements');
+  return arrondissements.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
 };
 
-const { slug } = Astro.params;
+interface Props {
+  entry: any;
+}
+
+const { entry } = Astro.props;
+const { name, slug, count, zipContent, seoTitle, seoDescription } = entry.data;
+
+const title = seoTitle || `${name} – Annonces immobilières | Immobilière Pujol`;
+const description = seoDescription || `Découvrez nos annonces immobilières dans le ${name}. ${count} biens disponibles à la location et à la vente.`;
 ---
 
-<BaseLayout title="Arrondissement – Immobilière Pujol">
-  <section class="ads-archive ads-archive--arrondissement">
-    <h1></h1>
-    <div class="ads-archive__results">
-      <div class="ads-archive__list"></div>
-      <div class="ads-archive__map"></div>
+<BaseLayout title={title} description={description}>
+  <section class="arrondissement">
+    <header class="arrondissement__header">
+      <h1>{name}</h1>
+      <p class="arrondissement__count">{count} annonces dans ce secteur</p>
+    </header>
+
+    {zipContent && (
+      <div class="arrondissement__description">
+        <Fragment set:html={zipContent} />
+      </div>
+    )}
+
+    <div class="arrondissement__listings">
+      <h2>Annonces dans le {name}</h2>
+      <p>Les annonces pour ce secteur seront bientôt disponibles avec nos filtres avancés.</p>
+      <div class="arrondissement__cta">
+        <a href="/annonces/" class="btn btn--primary">Voir toutes les annonces</a>
+        <a href="/annonces/locations/" class="btn btn--secondary">Locations</a>
+        <a href="/annonces/ventes/" class="btn btn--secondary">Ventes</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

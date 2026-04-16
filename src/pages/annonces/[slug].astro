@@ -1,53 +1,245 @@
 ---
-export const prerender = true;
+export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import type { GetStaticPaths } from 'astro';
+import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
 
-// Single property listing — /annonces/{slug}/
-// Handles all 4 URL patterns: L-prefix, neot, numeric, ubiflow refs
+const { slug } = Astro.params;
+const annonces = await fetchUbiflowAnnonces();
+const annonce = annonces.find(a => a.slug === slug);
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Load from content collection or API
-  return [];
-};
-
-interface Props {
-  annonce: any;
+if (!annonce) {
+  return Astro.redirect('/annonces/');
 }
 
-const { annonce } = Astro.props;
+const title = `${annonce.titre} – Immobilière Pujol`;
+const description = annonce.description.substring(0, 160);
+const priceDisplay = formatPrice(annonce);
 ---
 
-<BaseLayout
-  title={`${annonce?.title || 'Annonce'} – Immobilière Pujol`}
-  description={annonce?.excerpt || ''}
->
-  <article class="ad-single">
-    <section class="ad-single__gallery">
-      <!-- Swiper/slideshow for property photos -->
+<BaseLayout title={title} description={description}>
+  <article class="annonce-single">
+    <!-- Photo gallery -->
+    <section class="annonce-single__gallery">
+      {annonce.photos.length > 0 ? (
+        <div class="gallery">
+          <div class="gallery__main">
+            <img src={annonce.photos[0]} alt={annonce.titre} id="main-photo" />
+          </div>
+          {annonce.photos.length > 1 && (
+            <div class="gallery__thumbs">
+              {annonce.photos.map((photo, i) => (
+                <button class="gallery__thumb" data-index={i} data-src={photo}>
+                  <img src={photo} alt={`Photo ${i + 1}`} loading="lazy" width="120" height="80" />
+                </button>
+              ))}
+            </div>
+          )}
+          <p class="gallery__count">{annonce.photos.length} photo{annonce.photos.length > 1 ? 's' : ''}</p>
+        </div>
+      ) : (
+        <div class="gallery__empty">Pas de photos disponibles</div>
+      )}
     </section>
 
-    <section class="ad-single__content">
-      <div class="ad-single__info">
-        <h1>{annonce?.title}</h1>
-        <!-- Price, surface, rooms, location -->
+    <!-- Main info -->
+    <section class="annonce-single__info">
+      <div class="annonce-single__header">
+        <h1>{annonce.titre}</h1>
+        <div class="annonce-single__price-block">
+          <span class="annonce-single__price">{priceDisplay}</span>
+          <span class:list={['annonce-single__badge', annonce.type === 'V' ? 'badge--vente' : 'badge--location']}>
+            {annonce.type === 'V' ? 'Vente' : 'Location'}
+          </span>
+        </div>
       </div>
 
-      <div class="ad-single__description">
-        <!-- Full property description -->
+      <div class="annonce-single__location">
+        <p>{annonce.adresse && `${annonce.adresse}, `}{annonce.codePostal} {annonce.ville}</p>
+        {annonce.quartier && <p>Quartier : {annonce.quartier}</p>}
       </div>
 
-      <div class="ad-single__details">
-        <!-- DPE, heating, floor, parking, etc. -->
-      </div>
-
-      <div class="ad-single__contact">
-        <!-- Contact form (Gravity Form #2 for location, #13 for vente) -->
+      <!-- Key figures -->
+      <div class="annonce-single__key-figures">
+        {annonce.surface && (
+          <div class="key-figure">
+            <span class="key-figure__value">{annonce.surface} m²</span>
+            <span class="key-figure__label">Surface</span>
+          </div>
+        )}
+        {annonce.nbPieces && (
+          <div class="key-figure">
+            <span class="key-figure__value">{annonce.nbPieces}</span>
+            <span class="key-figure__label">Pièce{annonce.nbPieces > 1 ? 's' : ''}</span>
+          </div>
+        )}
+        {annonce.nbChambres && (
+          <div class="key-figure">
+            <span class="key-figure__value">{annonce.nbChambres}</span>
+            <span class="key-figure__label">Chambre{annonce.nbChambres > 1 ? 's' : ''}</span>
+          </div>
+        )}
+        {annonce.etage && (
+          <div class="key-figure">
+            <span class="key-figure__value">{annonce.etage}{annonce.nbEtages ? `/${annonce.nbEtages}` : ''}</span>
+            <span class="key-figure__label">Étage</span>
+          </div>
+        )}
       </div>
     </section>
 
-    <section class="ad-single__map">
-      <!-- Leaflet map with property location -->
+    <!-- Description -->
+    <section class="annonce-single__description">
+      <h2>Description</h2>
+      <div class="description-text">
+        {annonce.description.split('\n').map(line => (
+          line.trim() ? <p>{line.trim()}</p> : null
+        ))}
+      </div>
     </section>
+
+    <!-- Property details -->
+    <section class="annonce-single__details">
+      <h2>Caractéristiques</h2>
+      <div class="details-grid">
+        <div class="details-group">
+          <h3>Général</h3>
+          <dl>
+            {annonce.libelleType && <><dt>Type</dt><dd>{annonce.libelleType}</dd></>}
+            {annonce.surface && <><dt>Surface</dt><dd>{annonce.surface} m²</dd></>}
+            {annonce.surfaceHabitable && annonce.surfaceHabitable !== annonce.surface && <><dt>Surface habitable</dt><dd>{annonce.surfaceHabitable} m²</dd></>}
+            {annonce.surfaceTerrain && <><dt>Surface terrain</dt><dd>{annonce.surfaceTerrain} m²</dd></>}
+            {annonce.nbPieces && <><dt>Pièces</dt><dd>{annonce.nbPieces}</dd></>}
+            {annonce.nbChambres && <><dt>Chambres</dt><dd>{annonce.nbChambres}</dd></>}
+            {annonce.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{annonce.nbSallesDeBain}</dd></>}
+            {annonce.nbWC && <><dt>WC</dt><dd>{annonce.nbWC}</dd></>}
+            {annonce.exposition && <><dt>Exposition</dt><dd>{annonce.exposition}</dd></>}
+            {annonce.cuisine && <><dt>Cuisine</dt><dd>{annonce.cuisine}</dd></>}
+            {annonce.anneeConstruction && <><dt>Année construction</dt><dd>{annonce.anneeConstruction}</dd></>}
+          </dl>
+        </div>
+
+        <div class="details-group">
+          <h3>Équipements</h3>
+          <ul class="features-list">
+            {annonce.ascenseur && <li>Ascenseur</li>}
+            {annonce.terrasse && <li>Terrasse{annonce.surfaceTerrasse ? ` (${annonce.surfaceTerrasse} m²)` : ''}</li>}
+            {annonce.balcon && <li>Balcon</li>}
+            {annonce.garage && <li>Garage</li>}
+            {annonce.parking && <li>Parking</li>}
+            {annonce.cave && <li>Cave</li>}
+            {annonce.interphone && <li>Interphone</li>}
+            {annonce.vueSurMer && <li>Vue sur mer</li>}
+          </ul>
+        </div>
+
+        <div class="details-group">
+          <h3>Chauffage</h3>
+          <dl>
+            {annonce.typeChauffage && <><dt>Type</dt><dd>{annonce.typeChauffage}</dd></>}
+            {annonce.chauffageEnergie && <><dt>Énergie</dt><dd>{annonce.chauffageEnergie}</dd></>}
+          </dl>
+        </div>
+
+        {annonce.type === 'L' && (
+          <div class="details-group">
+            <h3>Location</h3>
+            <dl>
+              {annonce.loyer && <><dt>Loyer HC</dt><dd>{annonce.loyer} €</dd></>}
+              {annonce.loyerCC && <><dt>Loyer CC</dt><dd>{annonce.loyerCC} €/mois</dd></>}
+              {annonce.charges && <><dt>Charges</dt><dd>{annonce.charges} €/mois</dd></>}
+              {annonce.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{annonce.depotGarantie} €</dd></>}
+            </dl>
+          </div>
+        )}
+
+        {annonce.type === 'V' && (
+          <div class="details-group">
+            <h3>Vente</h3>
+            <dl>
+              {annonce.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(annonce.prix)} €</dd></>}
+              {annonce.prixHorsHonoraires && annonce.prixHorsHonoraires !== annonce.prix && <><dt>Prix hors honoraires</dt><dd>{new Intl.NumberFormat('fr-FR').format(annonce.prixHorsHonoraires)} €</dd></>}
+              {annonce.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
+            </dl>
+          </div>
+        )}
+
+        {annonce.copropriete && (
+          <div class="details-group">
+            <h3>Copropriété</h3>
+            <dl>
+              {annonce.alurNbLots && <><dt>Nombre de lots</dt><dd>{annonce.alurNbLots}</dd></>}
+              {annonce.chargesCopropriete && <><dt>Charges mensuelles</dt><dd>{annonce.chargesCopropriete} €</dd></>}
+            </dl>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- DPE -->
+    {(annonce.dpeEtiquetteConso || annonce.dpeEtiquetteGes) && (
+      <section class="annonce-single__dpe">
+        <h2>Diagnostics de performance</h2>
+        <div class="dpe-badges">
+          {annonce.dpeEtiquetteConso && (
+            <div class="dpe-badge">
+              <span class="dpe-badge__label">DPE</span>
+              <span class:list={['dpe-badge__value', `dpe-${annonce.dpeEtiquetteConso.toLowerCase()}`]}>
+                {annonce.dpeEtiquetteConso}
+              </span>
+              {annonce.dpeValeurConso && <span class="dpe-badge__kwh">{annonce.dpeValeurConso} kWh/m²/an</span>}
+            </div>
+          )}
+          {annonce.dpeEtiquetteGes && (
+            <div class="dpe-badge">
+              <span class="dpe-badge__label">GES</span>
+              <span class:list={['dpe-badge__value', `ges-${annonce.dpeEtiquetteGes.toLowerCase()}`]}>
+                {annonce.dpeEtiquetteGes}
+              </span>
+            </div>
+          )}
+        </div>
+        {annonce.dpeEstimationMin && annonce.dpeEstimationMax && (
+          <p class="dpe-estimation">Estimation dépenses annuelles : {annonce.dpeEstimationMin} € à {annonce.dpeEstimationMax} €</p>
+        )}
+      </section>
+    )}
+
+    <!-- Contact -->
+    <section class="annonce-single__contact">
+      <h2>Intéressé par ce bien ?</h2>
+      <div class="contact-info">
+        {annonce.contactAAfficher && <p><strong>{annonce.contactAAfficher}</strong></p>}
+        {annonce.telephoneAAfficher && (
+          <a href={`tel:${annonce.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
+            Appeler : {annonce.telephoneAAfficher}
+          </a>
+        )}
+        {annonce.emailAAfficher && (
+          <a href={`mailto:${annonce.emailAAfficher}?subject=Annonce ${annonce.reference} - ${annonce.titre}`} class="btn btn--secondary">
+            Envoyer un email
+          </a>
+        )}
+      </div>
+      <p class="contact-ref">Référence : {annonce.reference}</p>
+      {annonce.mandatNumero && <p class="contact-ref">Mandat n° {annonce.mandatNumero}</p>}
+    </section>
+
+    <nav class="annonce-single__nav">
+      <a href="/annonces/">← Retour aux annonces</a>
+      {annonce.type === 'L' && <a href="/annonces/locations/">Voir toutes les locations</a>}
+      {annonce.type === 'V' && <a href="/annonces/ventes/">Voir toutes les ventes</a>}
+    </nav>
   </article>
 </BaseLayout>
+
+<script>
+  // Simple gallery thumbnail click handler
+  document.querySelectorAll('.gallery__thumb').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = (btn as HTMLElement).dataset.src;
+      const mainPhoto = document.getElementById('main-photo') as HTMLImageElement;
+      if (src && mainPhoto) mainPhoto.src = src;
+    });
+  });
+</script>
+

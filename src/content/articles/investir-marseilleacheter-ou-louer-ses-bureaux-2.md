@@ -1,15 +1,17 @@
 ---
-title: "Strétagie-de-commercialisation-pour-louer-vite"
+title: "Un patron qui n'achète pas ses bureaux est un patron qui n'a rien compris !"
 slug: "investir-marseilleacheter-ou-louer-ses-bureaux-2"
-date: "2016-12-01 17:09:30"
+date: "2016-12-01"
+excerpt: "Beaucoup de dirigeants se demandent s’il faut acheter ou louer ses bureaux. Pour moi, la réponse ne fait aucun doute. Dès que vous disposez d’une certaine..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Strétagie-de-commercialisation-pour-louer-vite.jpg"
-seoTitle: "Faut-il acheter ou louer ses bureaux ? - L'immobilier à Marseille"
-seoDescription: "Beaucoup de dirigeants se demandent s’il est plus pertinent de louer ou d’acheter ses bureaux. Pour moi, la réponse ne fait aucun doute ! ACHETEZ !"
+tags: []
+featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Strétagie-de-commercialisation-pour-louer-vite-1200x750.jpg"
+seoTitle: "Un patron qui n'achète pas ses bureaux est un patron qui n'a rien compris !"
+seoDescription: "Beaucoup de dirigeants se demandent s’il faut acheter ou louer ses bureaux. Pour moi, la réponse ne fait aucun doute. Dès que vous disposez d’une certaine visibilité sur la pérennité de votre entreprise: l’heure est venue d’acheter. C’est particulièrement vrai pour les métiers de services. Aujourd’hui, le monde change très…"
 ---
 
 Beaucoup de dirigeants se demandent s’il faut <strong>acheter ou louer ses bureaux</strong>. Pour moi, la réponse ne fait aucun doute. Dès que vous disposez d’une certaine visibilité sur la pérennité de votre entreprise: l’heure est venue d’acheter.
-C’est particulièrement vrai pour les métiers de services. Aujourd’hui, le monde change très vite et <a href="https://www.immobiliere-pujol.fr/limmobilier-papa-cest-fini/">l’économie devient de plus en plus instable</a>. Votre activité peut disparaître rapidement. Le fait de posséder vos locaux vous permet de vous constituer un patrimoine personnel avec le meilleur locataire dont vous pouviez rêver. Un locataire qui paiera à temps ses mensualités, n’endommagera pas les lieux mais au contraire, aura à cœur de les embellir : et dans ce cas, ce locataire c’est Vous !
+C’est particulièrement vrai pour les métiers de services. Aujourd’hui, le monde change très vite et <a href="/limmobilier-papa-cest-fini/">l’économie devient de plus en plus instable</a>. Votre activité peut disparaître rapidement. Le fait de posséder vos locaux vous permet de vous constituer un patrimoine personnel avec le meilleur locataire dont vous pouviez rêver. Un locataire qui paiera à temps ses mensualités, n’endommagera pas les lieux mais au contraire, aura à cœur de les embellir : et dans ce cas, ce locataire c’est Vous !
 <h2><strong>Anticipez avec une surface plus grande : doublez la mise !</strong></h2>
 Au moment d’acheter, il est important de vous projeter et d’acheter une s
 urface plus importante que celle dans laquelle vous êtes actuellement installés. Je conseille généralement d’acquérir le double des besoins que vous avez identifié. L’extension de votre entreprise ne constituera ainsi pas un problème.
@@ -21,23 +23,43 @@ De même, les travaux de rénovation effectué par l’entreprise du dirigeant c
 <h2><strong>Toujours privilégiez l’achat par une SCI</strong></h2>
 Je conseille d’acheter par le biais d’une <strong>Société civile immobilière</strong> (SCI). C’est toujours une bonne solution par rapport à l’achat en direct. Cette structure juridique permet d’optimiser la gestion de votre patrimoine, tant sur le plan fiscal que successoral. Elle simplifie ainsi l’entrée d’un associé dans l’entreprise ou la transmission de parts au conjoint et aux enfants. La SCI permet également d’obtenir un abattement pour les contribuables soumis à l’impôt sur la fortune. La constitution d’une SCI s’avère peu onéreuse, quelques centaines d’euros, mais elle requiert un certain formalisme (entre 300€ si vous le faites vous-même et 1500€ quand vous passez par un notaire).
 <h2><strong>Actuellement, le marché de l’immobilier d’entreprise est difficile</strong></h2>
-Les grandes entreprises acceptent de payer le prix fort pour s’installer à La Joliette, ce qui <a href="https://www.immobiliere-pujol.fr/prix-m2-loyers-13002/">tire les prix de ce quartier vers le haut</a>. Par contre ces milliers de m2 construits ont déséquilibré le marché des bureaux de la ville. Il y a clairement sur-offre sauf à considérer que les bureaux offerts ne correspondent pas à la demande.
+Les grandes entreprises acceptent de payer le prix fort pour s’installer à La Joliette, ce qui <a href="/prix-m2-loyers-13002/">tire les prix de ce quartier vers le haut</a>. Par contre ces milliers de m2 construits ont déséquilibré le marché des bureaux de la ville. Il y a clairement sur-offre sauf à considérer que les bureaux offerts ne correspondent pas à la demande.
 Vous l’avez compris, la vérité est entre les deux et il est toujours possible de faire de bonnes affaires.
 <h2><strong>Témoignages</strong></h2>
 <strong>Aurore Sun, Spark Relations Publics</strong>
-<strong><img class="size-medium wp-image-40525 alignright" src="https://www.immobiliere-pujol.fr/content/uploads/2016/12/Portrait-AS_dec2016-200x300.jpg" alt="une patronne qui a achete ses bureaux" width="200" height="300" />"Des bureaux qui me ressemblent"</strong>
+<strong><img loading="lazy" decoding="async" class="size-medium wp-image-40525 alignright" src="/content/uploads/2016/12/Portrait-AS_dec2016-200x300.jpg" alt="une patronne qui a achete ses bureaux" width="200" height="300" />« Des bureaux qui me ressemblent »</strong>
 Des locaux chaleureux, de la pierre de taille, des couleurs vives, des touches de déco originales… il fait bon travailler chez Spark. Des bureaux qui ressemblent à l’image de la dirigeante de cette entreprise de relations publics, Aurore Sun, une femme de caractère au rire facile. Ces bureaux idéalement situés sur le Vieux-Port, Aurore Sun les a acquis à l’automne 2015, après plusieurs mois de recherche.
 « Pour une société comme la mienne, l’emplacement est stratégique. C’est la raison pour laquelle j’ai choisi de m’implanter sur le Vieux-Port de Marseille dès la création de Spark. Au départ, je disposais d’un simple bureau de 25 mètres carré. Lorsque j’ai recruté une salariée, il m’a fallu pousser les murs : j’ai donc déménagé dans le même secteur, toujours en location. Je versais alors 850 euros de loyer, une dépense à fonds perdus. J’ai vite pris conscience qu’un remboursement de crédit ne s’avérerait pas forcément plus onéreux que ce loyer. C’est la raison principale qui m’a poussé à acquérir mes propres bureaux.
 Au fil du temps, je me crée un patrimoine, ce qui s’avère important lorsque l’on possède une entreprise de services puisque nous ne pouvons pas miser sur notre outil industriel. En étant propriétaire, j’ai pu transformer mes locaux pour les façonner à mon image. Le fait que je possède mes propres bureaux rassure mes clients et constitue un réel facteur différenciant face aux petites entreprises concurrentes. Au moment de l’achat, j’ai été prévoyante et choisi une surface supérieure à mes besoins actuels afin d’anticiper une croissance de mon entreprise. En attendant, je loue un de mes espaces de travail pour 300 euros par mois, ce qui me permet de payer les charges. Quant au coin mezzanine, elle me sert de zone de stockage mais me permet également de loger, à l’occasion, des amis en visite à Marseille.
 Au moment d’acquérir des bureaux, il est important de se faire conseiller par des experts en ce domaine. Ainsi, en ce qui me concerne, déterminer le modèle juridique à privilégier pour l’achat ne s’est pas avéré évident. Mais une chose est certaine : je ne regrette pas du tout d’être aujourd’hui propriétaire ! »
 <strong>Arnaud Lutin, dirigeant de Marsatwork</strong>
-<strong>"Nous avons privilégié la location"</strong>
+<strong>« Nous avons privilégié la location »</strong>
 « Marsatwork, agence de communication marseillaise, vient d’emménager dans ses nouveaux locaux, en ce mois de novembre 2016. Lorsque nous avons dû quitter les précédents, cours Pierre Puget, nous avons fait le choix de privilégier la location. Nous avons en effet estimé que, dans notre situation, une acquisition n’apportait pas de réels bénéfices. Il était important pour nous de demeurer dans l’hypercentre de Marseille, aussi bien pour nos collaborateurs, qui peuvent venir à pied ou en transports en commun, que pour nos clients. Nous sommes désormais situés rue Grignan, en face du musée Cantini. De quoi être inspirés ! Les locaux, refaits à neuf, correspondent tout à fait à nos attentes. Nos 35 collaborateurs ont trouvé leur place, dans l’un des trois open-spaces ou dans un bureau. »
 <strong>Fatiha Ferrad, dirigeante de Sesame Ergonomie</strong>
-<strong>"Nous sommes installés dans un espace de coworking"</strong>
+<strong>« Nous sommes installés dans un espace de coworking »</strong>
 « Sesame Ergonomie est un cabinet d’information conseil en ergonomie. Nous accompagnons des entreprises dans leurs projets de déménagement et dans l’organisation des espaces de travail. Depuis l’ouverture de notre cabinet, il y a un an et demi, les sept collaborateurs marseillais sont installés dans un espace collaboratif, La Bo[a]te coworking, situé sur le Vieux-Port. Pour environ 300 euros par mois et par collaborateur, nous disposons d’un poste de travail et d’espaces partagés. Le principal atout du coworking réside dans les synergies qu’il favorise. Le fait de rencontrer des personnes qui exercent des métiers complètement différents est une vraie richesse humaine mais aussi professionnelles. Nous avons ainsi initié des projets collaboratifs tels qu’un catalogue de formations partagées. Nous avons tous beaucoup apprécié cette période. Cependant, l’heure est venue pour nous de nous installer dans nos propres locaux. Nous cherchons donc à acquérir des locaux d’environ 150 m<sup>²</sup>. Nous prévoyons des bureaux bien entendu mais aussi une salle de relaxation et une salle de sports. Nous passons de plus en plus de temps au travail : il est nécessaire de favoriser le bien-être.  Mon autre conseil pour les entreprises consiste à bien tenir compte des habitudes de chaque génération, qui ne travaillent vraiment pas de la même façon. »
 <strong>Ludovic Perez, dirigeant de Quai 13</strong>
-<strong>"Un choix gagnant en achetant"</strong>
+<strong>« Un choix gagnant en achetant »</strong>
 « Mon agence de communication emploie une quinzaine de collaborateurs. Il y a six ans, j’ai fait le choix de quitter les locaux que nous louions afin d’en acquérir. Je souhaitais en effet me constituer un patrimoine immobilier qui apporte une assise à la valorisation de mon entreprise. Par ailleurs, le coût d’une acquisition n’était quasiment pas plus onéreux que la location. Dans de telles conditions, il n’y a pas à hésiter ! J’ai beaucoup réfléchi à mes attentes, aux besoins de mon entreprise. Je souhaitais demeurer dans le XVI<sup>e </sup>arrondissement de Marseille où se situaient déjà mes précédents locaux. A l’époque, je m’y étais installé pour profiter des avantages fiscaux de la zone franche urbaine.
 Par ailleurs, il s’agit d’un quartier facile d’accès, qui bénéficie de la proximité de l’autoroute. Mes collaborateurs résidant aussi bien à Aix-en-Provence qu’à Cabriès, il était important de leur faciliter le quotidien. Au final, j’ai trouvé une vieille bâtisse avec un terrain libre. J’ai fait construire un bâtiment, une construction classique avec un bardage tout en bois et un aménagement intérieur correspondant à notre mode de fonctionnement.
 La bâtisse est louée à une autre entreprise, ce qui me permet de réduire considérablement le coût du crédit. Au final, j’ai le sentiment d’avoir fait un choix gagnant en achetant mes bureaux.»
+      </div>
+      <!-- SHARE -->
+      <div class="post__share">
+        <ul class="social__list">
+	<li class="social__link social__link--facebook">
+		<a onclick="socialPopup('https://www.facebook.com/sharer/sharer.php?u=')" rel="noopener" target="_blank" title="Partagez sur Facebook">
+			<svg class="social__icon social__icon--facebook"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--twitter">
+		<a onclick="socialPopup('https://twitter.com/intent/tweet?url=&hashtags=immobilier, marseille')" rel="noopener" target="_blank" title="Partagez sur Twitter">
+			<svg class="social__icon social__icon--twitter" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--linkedin">
+		<a onclick="socialPopup('https://plus.google.com/share?url=')" rel="noopener" target="_blank" title="Partagez sur Google">
+			<svg class="social__icon social__icon--google"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.331 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.122-4.822 4.728-4.822 1.485 0 2.479.633 3.045 1.178l2.073-1.994c-1.33-1.245-3.056-1.995-5.115-1.995C3.412 4.365 0 7.785 0 12s3.414 7.635 7.635 7.635c4.41 0 7.332-3.098 7.332-7.461 0-.501-.054-.885-.12-1.265H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.184v2.184h2.189V13.09H24"/></svg>
+		</a>
+	</li>
+</ul>

@@ -1,44 +1,64 @@
 ---
-title: "PU-1175"
+title: "Support de formation comptable pour les gestionnaires de copropriété de l'Immobiliere Pujol"
 slug: "formation-comptable-pour-les-gestionnaires-de-copropriete-de-limmobiliere-pujol"
-date: "2019-05-08 09:11:53"
-categories: ["Avant/après", "Mes conseils pour investir en immobilier à Marseille"]
-tags: ["formation", "Immobilier neuf marseille", "Solidarité de Renouvellement Urbain", "sru"]
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/PU-1175-scaled.jpg"
-seoTitle: "Formation comptable pour les gestionnaires - Immobilière Pujol"
-seoDescription: "Formationde janvier 2019 pour nos gestionnaires de copropriété à la loi de Solidarité de Renouvellement Urbain (SRU) a été promulguée le 13 décembre 2000"
+date: "2000-12-13"
+excerpt: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de..."
+categories: ["Mes conseils pour investir en immobilier à Marseille", "Avant/après"]
+tags: []
+featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/PU-1175-1200x750.jpg"
+seoTitle: "Support de formation comptable pour les gestionnaires de copropriété de l’Immobiliere Pujol"
+seoDescription: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de Solidarité de Renouvellement Urbain (SRU). Elle a été promulguée le 13 décembre 2000. Cette loi définit que “les comptes du syndicat, le budget…"
 ---
 
-<!-- wp:paragraph -->
 <p>En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de Solidarité de Renouvellement Urbain (SRU). Elle a été promulguée le 13 décembre 2000. Cette loi définit que “les comptes du syndicat, le budget prévisionnel, les charges, les produits de l’exercice, la situation de trésorerie et les annexes au budget prévisionnel” seront établis selon des règles comptables fixées par décret.</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
-<h2>Mise en application</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Son décret est sorti le 14 mars 2005 (près de 5 ans pour sortir) et a été mis en application au 1er janvier 2007. Depuis plus de 11 ans, la tenue comptable des syndicats de copropriétaires est donc soumise à l’application de ce décret. Il y a donc un plan comptable - avec des intitulés et des numéros de compte classique.</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
-<h2>Une complexité intrinsèque...</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Ce décret a été mis en application dans la douleur, en raison de sa complexité, qui a demandé plusieurs années d’apprentissage et de pratique. Et certains confrères n'ont pas encore fait le tour de la question avec encore certains comptes de copropriétés qui ne respectent pas complètement le formalisme sur des points de détails.</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
-<h2>Une formation nécessaire même pour nos gestionnaires</h2>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
+
+
+<h2 class="wp-block-heading">Mise en application</h2>
+
+
+<p>Son décret est sorti le 14 mars 2005 (près de 5 ans pour sortir) et a été mis en application au 1er janvier 2007. Depuis plus de 11 ans, la tenue comptable des syndicats de copropriétaires est donc soumise à l’application de ce décret. Il y a donc un plan comptable &#8211; avec des intitulés et des numéros de compte classique.</p>
+
+
+<h2 class="wp-block-heading">Une complexité intrinsèque&#8230;</h2>
+
+
+<p>Ce décret a été mis en application dans la douleur, en raison de sa complexité, qui a demandé plusieurs années d’apprentissage et de pratique. Et certains confrères n&rsquo;ont pas encore fait le tour de la question avec encore certains comptes de copropriétés qui ne respectent pas complètement le formalisme sur des points de détails.</p>
+
+
+<h2 class="wp-block-heading">Une formation nécessaire même pour nos gestionnaires</h2>
+
+
 <p>Nous mettons à disposition quelques supports de formation pour nos clients, qui ont tout intérêt à comprendre ce décret comptable. </p>
-<!-- /wp:paragraph -->
-<!-- wp:heading -->
-<h2>Supports de formation</h2>
-<!-- /wp:heading -->
-<!-- wp:image {"id":234853} -->
-<figure class="wp-block-image"><img class="wp-image-234853" src="https://www.immobiliere-pujol.fr/content/uploads/2019/04/3.png" alt="formation comptable SRU" /></figure>
-<!-- /wp:image -->
-<!-- wp:image {"id":234852} -->
-<figure class="wp-block-image"><img class="wp-image-234852" src="https://www.immobiliere-pujol.fr/content/uploads/2019/04/2.png" alt="" /></figure>
-<!-- /wp:image -->
-<!-- wp:image {"id":234853} -->
-<figure class="wp-block-image"><img class="wp-image-234853" src="https://www.immobiliere-pujol.fr/content/uploads/2019/04/3.png" alt="formation, comptable, decret" /></figure>
-<!-- /wp:image -->
+
+
+<h2 class="wp-block-heading">Supports de formation</h2>
+
+
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="/content/uploads/2019/04/3.png" alt="formation comptable SRU" srcset="/content/uploads/2019/04/3.png 852w, /content/uploads/2019/04/3-768x544.png 768w, /content/uploads/2019/04/3-600x425.png 600w, /content/uploads/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
+
+
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="863" height="610" class="wp-image-234852" src="/content/uploads/2019/04/2.png" alt="" srcset="/content/uploads/2019/04/2.png 863w, /content/uploads/2019/04/2-768x543.png 768w, /content/uploads/2019/04/2-600x424.png 600w, /content/uploads/2019/04/2-800x565.png 800w" sizes="auto, (max-width: 863px) 100vw, 863px" /></figure>
+
+
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="/content/uploads/2019/04/3.png" alt="formation, comptable, decret" srcset="/content/uploads/2019/04/3.png 852w, /content/uploads/2019/04/3-768x544.png 768w, /content/uploads/2019/04/3-600x425.png 600w, /content/uploads/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
+
+      </div>
+      <!-- SHARE -->
+      <div class="post__share">
+        <ul class="social__list">
+	<li class="social__link social__link--facebook">
+		<a onclick="socialPopup('https://www.facebook.com/sharer/sharer.php?u=')" rel="noopener" target="_blank" title="Partagez sur Facebook">
+			<svg class="social__icon social__icon--facebook"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--twitter">
+		<a onclick="socialPopup('https://twitter.com/intent/tweet?url=&hashtags=immobilier, marseille')" rel="noopener" target="_blank" title="Partagez sur Twitter">
+			<svg class="social__icon social__icon--twitter" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/></svg>
+		</a>
+	</li>
+	<li class="social__link social__link--linkedin">
+		<a onclick="socialPopup('https://plus.google.com/share?url=')" rel="noopener" target="_blank" title="Partagez sur Google">
+			<svg class="social__icon social__icon--google"  role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.635 10.909v2.619h4.335c-.173 1.125-1.31 3.295-4.331 3.295-2.604 0-4.731-2.16-4.731-4.823 0-2.662 2.122-4.822 4.728-4.822 1.485 0 2.479.633 3.045 1.178l2.073-1.994c-1.33-1.245-3.056-1.995-5.115-1.995C3.412 4.365 0 7.785 0 12s3.414 7.635 7.635 7.635c4.41 0 7.332-3.098 7.332-7.461 0-.501-.054-.885-.12-1.265H7.635zm16.365 0h-2.183V8.726h-2.183v2.183h-2.182v2.181h2.184v2.184h2.189V13.09H24"/></svg>
+		</a>
+	</li>
+</ul>

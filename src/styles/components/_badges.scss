@@ -1,0 +1,79 @@
+// ============================================
+// DPE / GES BADGES
+// ============================================
+.dpe-badges {
+  display: flex;
+  gap: $space-8;
+}
+
+.dpe-badge {
+  text-align: center;
+
+  &__label {
+    display: block;
+    font-size: $font-size-xs;
+    color: $color-text-light;
+    margin-bottom: $space-1;
+  }
+
+  &__value {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: $radius-full;
+    color: $white;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-lg;
+  }
+
+  &__kwh {
+    display: block;
+    font-size: $font-size-xs;
+    color: $color-text-light;
+    margin-top: $space-1;
+  }
+}
+
+// DPE energy classes
+.dpe-a { background: #319834; }
+.dpe-b { background: #33cc31; }
+.dpe-c { background: #cbfc33; color: $color-text-heading; }
+.dpe-d { background: #fbfe06; color: $color-text-heading; }
+.dpe-e { background: #fbcc04; color: $color-text-heading; }
+.dpe-f { background: #fc9935; }
+.dpe-g { background: #fc1b1d; }
+
+// GES classes
+.ges-a { background: #f2e6ff; color: $color-text-heading; }
+.ges-b { background: #dab8ff; color: $color-text-heading; }
+.ges-c { background: #c28aff; }
+.ges-d { background: #a95dff; }
+.ges-e { background: #9030ff; }
+.ges-f { background: #7700e6; }
+.ges-g { background: #5c00b3; }
+
+// ============================================
+// GENERIC TAG
+// ============================================
+.tag {
+  display: inline-block;
+  padding: $space-1 $space-3;
+  background: $color-bg-alt;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-text;
+  text-decoration: none;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $color-primary;
+    color: $white;
+  }
+
+  &--small {
+    font-size: $font-size-xs;
+    padding: $space-1 $space-2;
+  }
+}
