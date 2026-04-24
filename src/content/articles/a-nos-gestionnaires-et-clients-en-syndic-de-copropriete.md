@@ -5,7 +5,7 @@ date: "2023-01-02"
 excerpt: "Chaque année, je me dis que je vais féliciter les gestionnaires de copropriétés de ma société et ceux de mes confrères. Chaque année je ne le fais pas, ou pas..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/01/PUJ-8969-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/PUJ-8969-1200x800.jpg"
 seoTitle: "A nos gestionnaires et clients en syndic de copropriété"
 seoDescription: "Dans un contexte de plus en plus difficile, il faut savoir dire merci à nos équipes et aux clients qui comprennent l'enjeu de notre métier..."
 ---

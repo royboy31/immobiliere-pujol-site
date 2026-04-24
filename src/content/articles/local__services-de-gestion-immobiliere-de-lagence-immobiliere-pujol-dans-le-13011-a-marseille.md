@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière est un ensemble de services destinés à faciliter la vie des propriétaires de biens immobiliers en leur permettant de déléguer la gestion..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Services de gestion immobilière de l’agence immobilière Pujol dans le 13011 à Marseille"
 seoDescription: ""
 ---

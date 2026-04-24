@@ -5,7 +5,7 @@ date: "2020-02-01"
 excerpt: "Les données chiffrées des loyers dans le 13012 en 2019 Prix moyen (en €/m2) : 13,2 Croissance entre 2017 et 2018 (en %) : 5,0 Durée d’occupation moyenne (en..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Saint-Julien455-1200x781.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Marseille-Saint-Julien455-1200x781.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13012 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13012.  La durée d'occupation moyenne est de 50 mois."
 ---
@@ -19,10 +19,10 @@ seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13012.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 12,5</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p style="text-align: center;"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291202" src="/content/uploads/2017/01/12-ème-arrondissement-loyer-2018-800x286.png" alt="" width="800" height="286" srcset="/content/uploads/2017/01/12-ème-arrondissement-loyer-2018-800x286.png 800w, /content/uploads/2017/01/12-ème-arrondissement-loyer-2018-768x274.png 768w, /content/uploads/2017/01/12-ème-arrondissement-loyer-2018-600x214.png 600w, /content/uploads/2017/01/12-ème-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p style="text-align: center;"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291202" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/12-%C3%A8me-arrondissement-loyer-2018-800x286.png" alt="" width="800" height="286" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/12-%C3%A8me-arrondissement-loyer-2018-800x286.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/12-%C3%A8me-arrondissement-loyer-2018-768x274.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/12-%C3%A8me-arrondissement-loyer-2018-600x214.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/12-%C3%A8me-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 12e arrondissement</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8538" src="/content/uploads/2017/01/carte-du-12e-arrondissement-de-Marseille-300x222.jpg" alt="" width="300" height="222" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8538" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/carte-du-12e-arrondissement-de-Marseille-300x222.jpg" alt="" width="300" height="222" /></p>
 <p>Le 12ème arrondissement de Marseille est un arrondissement à la périphérie de la ville.</p>
 <p>Il se trouve à Est de Marseille, bordé au Sud par le 11ème arrondissement et proche de l’autoroute A50 qui relie Marseille à Aubagne.</p>
 <p>C’est un très vaste arrondissement qui s’est développé tardivement, en tout cas, beaucoup plus tardivement que les arrondissements centraux de Marseille.</p>

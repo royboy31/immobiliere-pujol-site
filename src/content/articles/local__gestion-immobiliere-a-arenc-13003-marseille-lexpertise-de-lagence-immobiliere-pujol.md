@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière est un service proposé par les agences immobilières pour faciliter la vie des propriétaires bailleurs. À l’agence immobilière Pujol,..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à Arenc, 13003 Marseille : l’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

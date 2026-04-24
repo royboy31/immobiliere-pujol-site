@@ -15,10 +15,10 @@ seoDescription: "Louer avec des sécurités, avec une garantie de trouver un bon
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/avis-immobiliere-pujol.png" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/avis-immobiliere-pujol.png" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/avis-immobiliere-pujol-600x300.png" 
-      <img src="/content/uploads/2018/06/avis-immobiliere-pujol.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol-600x300.png" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -31,7 +31,7 @@ seoDescription: "Louer avec des sécurités, avec une garantie de trouver un bon
 <p>Vous souhaitez mettre votre bien en location ? Vous êtes à la recherche d’une agence immobilière fiable, expérimentée et efficace ? Alors, vous êtes sur le bon site. Pour un service de location immobilière Marseille de qualité : vous pouvez faire confiance à immobilière Pujol.</p>
 
 
-<figure id="attachment_224905" aria-describedby="caption-attachment-224905" style="width: 800px" class="wp-caption alignnone"><a href="/content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic.png"><img loading="lazy" decoding="async" class="wp-image-224905 size-medium" title="Location immobilière Marseille" src="/content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-800x447.png" alt="Location immobilière Marseille" width="800" height="447" srcset="/content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-800x447.png 800w, /content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-768x430.png 768w, /content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-600x336.png 600w, /content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-1200x671.png 1200w, /content/uploads/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic.png 1797w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-224905" class="wp-caption-text">L&rsquo;acceuil à l&rsquo;agence pour la location immobilière Marseille</figcaption></figure>
+<figure id="attachment_224905" aria-describedby="caption-attachment-224905" style="width: 800px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic.png"><img loading="lazy" decoding="async" class="wp-image-224905 size-medium" title="Location immobilière Marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-800x447.png" alt="Location immobilière Marseille" width="800" height="447" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-800x447.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-768x430.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-600x336.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic-1200x671.png 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/devenir-client-de-limmobiliere-pujol-en-syndic.png 1797w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-224905" class="wp-caption-text">L&rsquo;acceuil à l&rsquo;agence pour la location immobilière Marseille</figcaption></figure>
 <h2>Qu’est-ce que l&rsquo;agence immobilière Pujol ?</h2>
 <p>Nous sommes une agence immobilière de location, active sur Marseille, depuis 2002. Notre objectifs :</p>
 

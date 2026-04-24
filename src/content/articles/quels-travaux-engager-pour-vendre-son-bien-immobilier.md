@@ -5,7 +5,7 @@ date: "2018-05-10"
 excerpt: "Quand j’ai commencé mon métier, je pensais qu’il ne fallait pas engager des travaux avant de vendre… pour laisser l’acquéreur libre d’engager ses travaux. À..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO37470001_65F.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/LO37470001_65F.jpg"
 seoTitle: "Quels travaux engager pour vendre son bien immobilier"
 seoDescription: "Quand j’ai commencé mon métier, je pensais qu’il ne fallait pas engager des travaux avant de vendre… pour laisser l’acquéreur libre d'engager ses travaux.  À moins que l’appartement soit véritablement repoussant (saleté, dégât des eaux, mauvais ressenti…), je conseillais à mes clients de n’entreprendre aucune rénovation. Cette idée, peut-être vraie…"
 ---

@@ -5,7 +5,7 @@ date: "2020-05-13"
 excerpt: "Alors que tout le monde se demande ce qu’il va se passer sur le marché Immobilier en général et à Marseille, voici ce que nous pouvons dire 3 jours après le..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/color-1229859_1920-1200x847.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/color-1229859_1920-1200x847.jpg"
 seoTitle: "J+3 post confinement  : bilan immobilier plutôt explosif"
 seoDescription: "3 jours après le confinement, que se passe-t-il sur le marché de l'Immobilier à Marseille. 1er point par l'Immobilière Pujol Marseille"
 ---

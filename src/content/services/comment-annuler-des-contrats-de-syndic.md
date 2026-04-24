@@ -15,10 +15,10 @@ seoDescription: "Résilier le contrat de votre syndic de copropriété et change
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/Quels-honoraires-de-syndic-1200x900.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/Quels-honoraires-de-syndic-800x600.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/Quels-honoraires-de-syndic-600x450.jpg" 
-      <img src="/content/uploads/2017/11/Quels-honoraires-de-syndic-1200x900.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Quels-honoraires-de-syndic-1200x900.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Quels-honoraires-de-syndic-800x600.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Quels-honoraires-de-syndic-600x450.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Quels-honoraires-de-syndic-1200x900.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -71,7 +71,7 @@ En revanche, il faut que la cause soit légitime et que cette révocation soit m
 <p>La loi ALUR incite vivement le conseil syndical à mettre en concurrence son syndic. En pratique, aucune sanction ne sera appliquée si ce n’est pas fait.</p>
 <p>Il existe deux grands types de syndics : les grands groupes et les syndics indépendants. Les grands noms séduisent car ils possèdent un label et une identité bien visible. Mais en pratique, leurs gestionnaires ont des centaines de lots à gérer et très peu de temps pour développer une relation équilibrée avec les copropriétaires. <br />
 Cherchez donc aussi du côté des indépendants qui ont bonne presse et de bons avis clients</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-387076" src="/content/uploads/2017/10/meilleur-syndic-copropriete-marseille.jpg" alt="" width="458" height="367" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-387076" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/meilleur-syndic-copropriete-marseille.jpg" alt="" width="458" height="367" /></p>
 <p>Faites venir le candidat syndic pour qu’il visite l’immeuble.<br />
 Demandez-lui ensuite un devis et comparez-le au syndic actuel.</p>
 <p>Une fois que vous avez au moins un nouveau devis, vous pouvez comparer les offres sur la base du cahier des charges.</p>
@@ -90,7 +90,7 @@ Si le projet de révocation totalise 1/3 des voix, l’assemblée peut procéder
 <p>Cette procédure est réservée au cas les plus graves. C’est une procédure complexe, longue et onéreuse.</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
                 </section>
             </div>
 

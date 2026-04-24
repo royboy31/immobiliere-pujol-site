@@ -5,7 +5,7 @@ date: "2019-02-27"
 excerpt: "Nous lisons partout qu’il faut préserver tous nos immeubles, toutes nos façades. Je ne vous cache pas que cela me rend assez perplexe. Quand j’ai lu qu’Auguste..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/10/PU-1596-Copy.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1596-Copy.jpg"
 seoTitle: "Marseille doit balancer ses taudis et détruire certains de ses immeubles…"
 seoDescription: "Nous lisons partout qu'il faut préserver tous nos immeubles, toutes nos façades. Je ne vous cache pas que cela me rend assez perplexe. Quand j'ai lu qu'Auguste Lafon, un de mes confrères disait la même chose au titre de l'UNPI,cela m'a conforté à faire cet article. Il est évident que…"
 ---

@@ -4,7 +4,7 @@
 
 import { XMLParser } from 'fast-xml-parser';
 
-const UBIFLOW_URL = 'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=582af2a64933ff9a127b9986513d7edb39646979&DIFFUSEUR=DIFFUSION_PRIVEE_AGENCE&ANNONCEUR=ag132582';
+const UBIFLOW_URL = 'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
 
 export interface UbiflowAnnonce {
   id: string;

@@ -20,10 +20,10 @@ seoDescription: "Bien louer à Marseille : ce que l'immobilière Pujol, agence l
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/10/exposio_0001-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/10/exposio_0001-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/10/exposio_0001-600x400.jpg" 
-      <img src="/content/uploads/2018/10/exposio_0001-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -59,7 +59,7 @@ seoDescription: "Bien louer à Marseille : ce que l'immobilière Pujol, agence l
 </li>
 </ul>
 <p>Nous mettons un soin particulier à rédiger nos annonces et à valoriser visuellement celle-ci par un reportage photo de qualité HDR ainsi qu&rsquo;une <a href="https://tour.previsite.com/49EA97EE-A746-7C51-FBAF-72C324636633?lead_capture=false" target="_blank" rel="noopener">visite virtuelle</a> systématique. </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-385829" src="/content/uploads/2018/10/shoootin-photo-1-Copy.jpg" alt="" width="585" height="390" srcset="/content/uploads/2018/10/shoootin-photo-1-Copy.jpg 640w, /content/uploads/2018/10/shoootin-photo-1-Copy-600x400.jpg 600w" sizes="auto, (max-width: 585px) 100vw, 585px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-385829" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/shoootin-photo-1-Copy.jpg" alt="" width="585" height="390" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/shoootin-photo-1-Copy.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/shoootin-photo-1-Copy-600x400.jpg 600w" sizes="auto, (max-width: 585px) 100vw, 585px" /></p>
 <p>&nbsp;</p>
 <ul>
 	<li class="hero__title">

@@ -157,7 +157,7 @@ Je l’espère…Sur le marché il y a<strong> 20% de maisons et d’appartement
 
 &nbsp;
 <h2><span style="color: #ff6600;"><em><strong>Bureaux et commerce  : Un marché morose</strong></em></span></h2>
-<a href="/content/uploads/2016/02/marseille-rue-republique-un-mauvais-marché.jpg" rel="attachment wp-att-7623"><img loading="lazy" decoding="async" class=" wp-image-7623 alignleft" src="/content/uploads/2016/02/marseille-rue-republique-un-mauvais-marché.jpg" alt="le marché immbilier" width="407" height="229" /></a>
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/02/marseille-rue-republique-un-mauvais-march%C3%A9.jpg" rel="attachment wp-att-7623"><img loading="lazy" decoding="async" class=" wp-image-7623 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/02/marseille-rue-republique-un-mauvais-march%C3%A9.jpg" alt="le marché immbilier" width="407" height="229" /></a>
 
 Pour les bureaux, mais surtout pour les commerces, le marché n&rsquo;est pas bon.
 

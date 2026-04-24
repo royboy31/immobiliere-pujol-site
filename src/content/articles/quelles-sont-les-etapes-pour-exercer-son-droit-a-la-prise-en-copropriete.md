@@ -5,7 +5,7 @@ date: "2022-03-01"
 excerpt: "76 % des propriétaires français de véhicules électriques interrogés lors d’une étude d’OpinionWay ont déclaré avoir fait face à un problème de charge ces 6..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/02/recharger-sa-voiture-electrique-1-1200x674.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/02/recharger-sa-voiture-electrique-1-1200x674.jpg"
 seoTitle: "Comment exercer son droit à la prise pour son véhicule électrique ?"
 seoDescription: "76 % des propriétaires français de véhicules électriques interrogés lors d'une étude d'OpinionWay ont déclaré avoir fait face à un problème de charge ces 6 derniers mois ! Pour plus de ⅔ des français, l’absence d’infrastructures performantes de recharge est le frein principal au développement de l'écomobilité dans l’Hexagone.  …"
 ---

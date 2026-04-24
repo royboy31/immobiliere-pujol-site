@@ -5,7 +5,7 @@ date: "2025-06-09"
 excerpt: "Depuis 2023, les appartements les plus énergivores – classés F ou G au DPE – ne sont plus les bienvenus sur le marché locatif. Si vous êtes propriétaire..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/06/2025-06-05-18-44-482-1-43620001-26614-0001-3-1200x799.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/2025-06-05-18-44-482-1-43620001-26614-0001-3-1200x799.jpg"
 seoTitle: "Appartements à louer avec un DPE E,F ou G  : vendre ou rénover?"
 seoDescription: "Votre appartements loué est une passoire énergétique : faut-il vendre ou rénover ? Découvrez les enjeux locatifs, décotes, aides fiscales & techniques pour bien agir."
 ---

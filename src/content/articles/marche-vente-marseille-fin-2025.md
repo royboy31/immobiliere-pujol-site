@@ -5,7 +5,7 @@ date: "2025-12-04"
 excerpt: "Pourquoi un « vrai » expert est votre meilleur atout Un marché immobilier, c’est comme la Méditerranée : parfois calme, parfois… plus mouvementé. Ces dernières..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/12/photo_cc2cc3ad608053028ac4b7e5c87c15c0-1-1200x800.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/photo_cc2cc3ad608053028ac4b7e5c87c15c0-1-1200x800.png"
 seoTitle: "Le marché immobilier à Marseille fin 2025 : entre tensions et opportunités, pourquoi les vendeurs ont plus que jamais besoin d’un expert"
 seoDescription: "Le marché immobilier marseillais évolue : entre frilosité des investisseurs et retour des primo-accédants, découvrez pourquoi une expertise pluridisciplinaire sécurise désormais chaque vente."
 ---
@@ -52,7 +52,7 @@ Ces difficultés du marché sont la meilleure preuve que le rôle de l&rsquo;age
 <h3> </h3>
 <h3>Prêt à sécuriser votre projet immobilier à Marseille ?</h3>
 <p><b>Contactez-moi dès aujourd&rsquo;hui</b> pour une estimation et un plan de commercialisation précis et  sécurisé de votre appartement ou immeuble à Marseille. </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191929" src="/content/uploads/2025/09/Design-sans-titre-5.jpg" alt="" width="202" height="202" srcset="/content/uploads/2025/09/Design-sans-titre-5.jpg 500w, /content/uploads/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 202px) 100vw, 202px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191929" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg" alt="" width="202" height="202" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg 500w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 202px) 100vw, 202px" /></p>
 <p>Benoit Marin Vicente<br />
 <strong>Directeur des ventes</strong> <br />
 benoit@immobilIere-pujol.fr<br />

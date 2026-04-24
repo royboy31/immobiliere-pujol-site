@@ -15,10 +15,10 @@ seoDescription: "Obtenez un devis et un tarif pour la gestion de votre copropri�
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2021/01/P-3303-051218-2-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2021/01/P-3303-051218-2-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2021/01/P-3303-051218-2-600x400.jpg" 
-      <img src="/content/uploads/2021/01/P-3303-051218-2-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -31,7 +31,7 @@ seoDescription: "Obtenez un devis et un tarif pour la gestion de votre copropri�
 <p>Nous vous remercions pour votre consultation.<br />
 Nous allons prendre contact avec vous .</p>
 <p>Pour suivre l&rsquo;actualité immobilière, vous pouvez lire les articles de notre <strong><a href="/blog-immobilier-marseille/">blog</a></strong></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-390382" src="/content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg" alt="" width="236" height="71" srcset="/content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg 800w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-768x230.jpg 768w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-600x180.jpg 600w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1.jpg 1180w" sizes="auto, (max-width: 236px) 100vw, 236px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-390382" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg" alt="" width="236" height="71" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1.jpg 1180w" sizes="auto, (max-width: 236px) 100vw, 236px" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

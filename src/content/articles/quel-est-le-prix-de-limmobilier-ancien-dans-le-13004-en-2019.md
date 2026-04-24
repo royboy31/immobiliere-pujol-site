@@ -5,7 +5,7 @@ date: "2020-02-14"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison des..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/02/longchamp-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/longchamp-marseille.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13004 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13004 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 – 456 appartements  au prix médian* de 2 050€ le m² .</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235661" src="/content/uploads/2019/05/13004-2-776x1200.jpg" alt="prix au m2 de l'ancien dans le 4eme arrondissement de Marseille en 2018" width="176" height="272" srcset="/content/uploads/2019/05/13004-2-776x1200.jpg 776w, /content/uploads/2019/05/13004-2-768x1188.jpeg 768w, /content/uploads/2019/05/13004-2-388x600.jpg 388w, /content/uploads/2019/05/13004-2-517x800.jpg 517w, /content/uploads/2019/05/13004-2.jpeg 1324w" sizes="auto, (max-width: 176px) 100vw, 176px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235661" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2-776x1200.jpg" alt="prix au m2 de l'ancien dans le 4eme arrondissement de Marseille en 2018" width="176" height="272" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2-776x1200.jpg 776w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2-768x1188.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2-388x600.jpg 388w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2-517x800.jpg 517w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-2.jpeg 1324w" sizes="auto, (max-width: 176px) 100vw, 176px" />
 <figcaption>Immeuble 13004</figcaption>
 </figure>
 </div>

@@ -5,7 +5,7 @@ date: "2020-02-16"
 excerpt: "Les prix de vente au m² de l’immobilier ancien dans le 13007 : comparatif quartier par quartier en 2019 En 2019, il s’est vendu dans le 7ème arrondissement de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13007-en-2019-2.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13007-en-2019-2.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13007 en 2019 (ventes) ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13007 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -15,7 +15,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 247 appartements au prix médian* de 3 270€ le m².</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235448" src="/content/uploads/2019/05/13007.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13007 en 2018" width="198" height="149" srcset="/content/uploads/2019/05/13007.jpeg 640w, /content/uploads/2019/05/13007-200x150.jpeg 200w, /content/uploads/2019/05/13007-600x450.jpg 600w" sizes="auto, (max-width: 198px) 100vw, 198px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235448" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13007 en 2018" width="198" height="149" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007.jpeg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007-200x150.jpeg 200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007-600x450.jpg 600w" sizes="auto, (max-width: 198px) 100vw, 198px" />
 <figcaption>Corniche Kennedy</figcaption>
 </figure>
 </div>

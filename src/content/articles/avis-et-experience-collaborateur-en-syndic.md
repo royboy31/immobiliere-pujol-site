@@ -5,7 +5,7 @@ date: "2018-05-31"
 excerpt: "En copropriété (mais cela aussi vrai dans d’autres métiers) former, intéresser et conserver un collaborateur est devenu un défi. C’est même plus difficile que..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/avis-immobiliere-pujol.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png"
 seoTitle: "Immobilière Pujol : avis et expérience collaborateur en syndic"
 seoDescription: "En copropriété (mais cela aussi vrai dans d’autres métiers) former, intéresser et conserver un collaborateur est devenu un défi. C’est même plus difficile que d’élargir son portefeuille client. Nos clients sont en attente d’une prestation de service, mais nos métiers ont de véritables problèmes pour délivrer la qualité attendue. Toutes…"
 ---

@@ -5,7 +5,7 @@ date: "2024-05-13"
 excerpt: "La gestion de bien est un ensemble de services proposés par une agence immobilière pour faciliter la vie des propriétaires et optimiser la rentabilité de leurs..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien dans le quartier Thiers, 13006 – Marseille"
 seoDescription: ""
 ---

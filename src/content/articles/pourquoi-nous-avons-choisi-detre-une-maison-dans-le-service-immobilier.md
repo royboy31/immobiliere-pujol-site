@@ -5,7 +5,7 @@ date: "2026-03-24"
 excerpt: "Bâtir une maison. La semaine dernière, nous avons célébré les 24 ans de notre société. Au fil des année nous sommes devenus une MAISON avec toute la symbolique..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2026/03/maison-pujol-immobilier-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille.jpg"
 seoTitle: "Pourquoi nous avons choisi d’être une MAISON dans le service immobilier?"
 seoDescription: "Découvrez comment l'immobilière Pujol cultive la fierté du travail bien fait et forme les talents de demain pour offrir un service de proximité authentique."
 ---
@@ -36,7 +36,7 @@ Et nous sommes heureux de fêter notre 24e anniversaire ensemble.</p>
 </div>
 <div dir="ltr"> </div>
 </div>
-<div dir="ltr"><img loading="lazy" decoding="async" class=" wp-image-1415010 aligncenter" src="/content/uploads/2026/03/maison-pujol-immobilier-marseille-760x800.jpg" alt="" width="675" height="711" srcset="/content/uploads/2026/03/maison-pujol-immobilier-marseille-760x800.jpg 760w, /content/uploads/2026/03/maison-pujol-immobilier-marseille-768x808.jpg 768w, /content/uploads/2026/03/maison-pujol-immobilier-marseille-570x600.jpg 570w, /content/uploads/2026/03/maison-pujol-immobilier-marseille.jpg 781w" sizes="auto, (max-width: 675px) 100vw, 675px" /></div>
+<div dir="ltr"><img loading="lazy" decoding="async" class=" wp-image-1415010 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille-760x800.jpg" alt="" width="675" height="711" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille-760x800.jpg 760w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille-768x808.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille-570x600.jpg 570w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/maison-pujol-immobilier-marseille.jpg 781w" sizes="auto, (max-width: 675px) 100vw, 675px" /></div>
 </div>
 <div class="update-components-image update-components-image--single-image feed-shared-update-v2__content">
 <div class="update-components-image__container-wrapper relative">

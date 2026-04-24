@@ -5,7 +5,7 @@ date: "2024-05-13"
 excerpt: "La gestion de bien est un service essentiel pour les propriétaires qui souhaitent louer leur bien immobilier sans avoir à se soucier des aspects..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien à Menpenti, 13012 – Marseille : l’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

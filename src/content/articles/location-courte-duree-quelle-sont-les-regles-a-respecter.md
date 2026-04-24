@@ -5,7 +5,7 @@ date: "2021-01-27"
 excerpt: "En matière de location meublée touristique, l’idée communément admise est que la législation est compliquée. Il serait plus juste de dire qu’il n’y a pas un..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/web-home-staging_0003-caroline-semac-pujol_-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/web-home-staging_0003-caroline-semac-pujol_-1200x800.jpg"
 seoTitle: "Location courte durée : quelles règlementations et lois pour les propriétaires ?"
 seoDescription: "Que faut-il savoir quand on veut louer en courte durée ou via la plateforme Airbnb?"
 ---
@@ -17,13 +17,13 @@ seoDescription: "Que faut-il savoir quand on veut louer en courte durée ou via 
 <p>Il reste le sujet des locations de courte durée légales mais qui causent néanmoins des troubles de voisinage.  </p>
 <p>Comme pour n’importe quels troubles, il appartient alors au <a href="/service-immobilier/syndic-de-copropriete-a-marseille/">syndic</a> et au conseil syndical de faire respecter le règlement de copropriété et de rappeler au propriétaire qu’il est juridiquement et financièrement responsable des problèmes causés par ses locataires quels qu’ils soient.</p>
 <p>Voici quelques éléments pour vous aider à vous y retrouver.</p>
-<p><img loading="lazy" decoding="async" class="aligncenter" src="/content/uploads/2021/01/web-home-staging_0003-caroline-semac-pujol_-800x533.jpg" alt="location courte durée loi" width="800" height="533" /></p>
+<p><img loading="lazy" decoding="async" class="aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/web-home-staging_0003-caroline-semac-pujol_-800x533.jpg" alt="location courte durée loi" width="800" height="533" /></p>
 <h2>La réglementation en matière de location courte durée : deux cas de figure</h2>
 <h3>#1 Vous mettez votre résidence principale en location courte durée moins de 120 jours par an sur une plateforme comme Airbnb</h3>
 <p>Dans ce cas le logement reste à <strong>usage d’habitation</strong> et vous n’avez en principe pas de formalités particulières à accomplir.</p>
 <p>Cependant, dans les villes de plus de 200 000 habitants qui l’ont décidé, les bailleurs doivent obligatoirement demander à la mairie un numéro d’enregistrement à faire figurer sur toutes leurs annonces. Pour l’instant Marseille ne fait pas partie de ces villes.</p>
 <p>Les communes concernées sont également en droit d’obtenir une fois par an des plateformes des informations sur les logements loués sur leur périmètre afin de procéder à des vérifications.</p>
-<p><img loading="lazy" decoding="async" class="aligncenter" src="/content/uploads/2021/01/web-home-staging_0004-caroline-semac-pujol_-800x533.jpg" alt="location  courte durée réglementations et lois" width="800" height="533" /></p>
+<p><img loading="lazy" decoding="async" class="aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/web-home-staging_0004-caroline-semac-pujol_-800x533.jpg" alt="location  courte durée réglementations et lois" width="800" height="533" /></p>
 <h3>#2 Vous mettez en location courte durée un logement de un ville de plus de 200 000 habitants qui n&rsquo;est pas votre résidence principale et/ou vous le louez plus de 120 jours par an sur une plateforme comme Airbnb</h3>
 <p>Le logement devient alors un local à <strong>usage commercial</strong>. Dans le cas d’un logement en copropriété, plusieurs règles à respecter :</p>
 <h3>Le règlement de copropriété</h3>
@@ -34,11 +34,11 @@ seoDescription: "Que faut-il savoir quand on veut louer en courte durée ou via 
 <p>Attention car même en ayant obtenu des copropriétaires l’autorisation de changement d’usage, louer votre logement sans avoir obtenu ce numéro vous expose à des poursuites.</p>
 <p>A noter également que vous devrez le cas échéant signaler le changement d’usage à l’administration fiscale. Les profits tirés de toutes les locations de courte durée doivent par ailleurs être déclarés annuellement par les plateformes aux services des impôts sous peine d’une amende égale à 5 % des sommes non déclarées. Ces revenus seront préremplis dans votre déclaration fiscale.</p>
 <p>Depuis le 1er janvier 2021 les plateformes doivent aussi indiquer si l’annonce émane d’un <a href="https://www.service-public.fr/professionnels-entreprises/vosdroits/F32805" target="_blank" rel="noopener noreferrer">loueur en meublé professionnel</a> ou d’un particulier.</p>
-<p><img loading="lazy" decoding="async" class="aligncenter" src="/content/uploads/2021/01/web-home-staging_0012-caroline-semac-pujol_-800x533.jpg" alt="législation location courte durée Marseille" width="800" height="533" /></p>
+<p><img loading="lazy" decoding="async" class="aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/web-home-staging_0012-caroline-semac-pujol_-800x533.jpg" alt="législation location courte durée Marseille" width="800" height="533" /></p>
 <h3>Les sanctions à l&rsquo;encontre des loueurs de meublés courte durée</h3>
 <p>Outre l’obligation de faire cesser son activité de location meublée touristique, des sanctions financières peuvent s’appliquer au bailleur en cas de non respect des règles. La <a href="https://www.cohesion-territoires.gouv.fr/loi-portant-evolution-du-logement-de-lamenagement-et-du-numerique-elan" target="_blank" rel="noopener noreferrer">loi Elan</a> inflige ainsi 5 000 euros d’amende aux propriétaires qui louent sans numéro d’enregistrement obligatoire.</p>
 <p>Ceux qui dépassent la durée de 120 jours de location par an d’une résidence principale à usage d’habitation risquent quant à eux une amende de 10 000 euros. Les plateformes peuvent elles aussi être sanctionnées par des amendes : jusqu’à 50 000 euros si elles continuent à publier des annonces pour une résidence principale qui a déjà été louée 120 jours dans l’année.</p>
-<p><img loading="lazy" decoding="async" class="aligncenter" src="/content/uploads/2021/01/web-home-staging_0017-caroline-semac-pujol_-800x533.jpg" alt="louer logement courte durée réglementation marseille" width="800" height="533" /></p>
+<p><img loading="lazy" decoding="async" class="aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/web-home-staging_0017-caroline-semac-pujol_-800x533.jpg" alt="louer logement courte durée réglementation marseille" width="800" height="533" /></p>
 <p><strong><em>A retenir</em></strong></p>
 <ul>
 	<li><em>La location meublée touristique en France est encadrée par plusieurs textes de lois.</em></li>

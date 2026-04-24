@@ -5,7 +5,7 @@ date: "2017-01-10"
 excerpt: "2016, une bonne année de location, mais sans dynamique… Les loyers à Marseille sont fin 2016 de 12,3€ le m soit une hausse de 1,9%. Pour notre part, nous..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/vieux-port-marseille-au-petit-matin-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vieux-port-marseille-au-petit-matin-1200x900.jpg"
 seoTitle: "Quand les agents immobiliers ne se plaignent pas : un bon trimestre mais…"
 seoDescription: "2016, une bonne année de location, mais sans dynamique... Les loyers à Marseille sont fin 2016 de 12,3€ le m soit une hausse de 1,9%. Pour notre part, nous estimons qu’il n’y ni hausse ni baisse des loyers et que cette petite hausse est surtout le fait des travaux d’amélioration…"
 ---

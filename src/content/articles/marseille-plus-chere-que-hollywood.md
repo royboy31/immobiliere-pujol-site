@@ -5,7 +5,7 @@ date: "2019-07-26"
 excerpt: "Voici la question que je m’étais posée il y a huit ans : Marseille est elle plus chère que Hollywood ? La conclusion était alors aussi incroyable que nette: le..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/07/sans-titre-6947-050619-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/sans-titre-6947-050619-1200x750.jpg"
 seoTitle: "Marseille plus chère que Hollywood?"
 seoDescription: "Voici la question que je m'étais posée il y a huit ans : Marseille est elle plus chère que Hollywood ? La conclusion était alors aussi incroyable que nette: le marché de l’immobilier marseillais était plus cher que ce prestigieux marché américain. Nous avions bien évidemment justifié cette différence de…"
 ---
@@ -26,7 +26,7 @@ seoDescription: "Voici la question que je m'étais posée il y a huit ans : Mars
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="1200" height="742" src="/content/uploads/2019/07/1-1200x742.png" alt="Marseille plus chère que Hollywood?" class="wp-image-244290" srcset="/content/uploads/2019/07/1-1200x742.png 1200w, /content/uploads/2019/07/1-768x475.png 768w, /content/uploads/2019/07/1-600x371.png 600w, /content/uploads/2019/07/1-800x495.png 800w, /content/uploads/2019/07/1.png 1310w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /><figcaption>Appartement Hollywood</figcaption></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="1200" height="742" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1-1200x742.png" alt="Marseille plus chère que Hollywood?" class="wp-image-244290" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1-1200x742.png 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1-768x475.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1-600x371.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1-800x495.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/1.png 1310w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /><figcaption>Appartement Hollywood</figcaption></figure>
 
 
 
@@ -34,7 +34,7 @@ seoDescription: "Voici la question que je m'étais posée il y a huit ans : Mars
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="756" height="569" src="/content/uploads/2019/07/3.png" alt="Marseille plus chère que Hollywood ?" class="wp-image-244291" srcset="/content/uploads/2019/07/3.png 756w, /content/uploads/2019/07/3-600x452.png 600w" sizes="auto, (max-width: 756px) 100vw, 756px" /><figcaption>Appartement Marseille &#8211; 13006</figcaption></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="756" height="569" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/3.png" alt="Marseille plus chère que Hollywood ?" class="wp-image-244291" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/3.png 756w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/3-600x452.png 600w" sizes="auto, (max-width: 756px) 100vw, 756px" /><figcaption>Appartement Marseille &#8211; 13006</figcaption></figure>
 
 
 
@@ -50,7 +50,7 @@ seoDescription: "Voici la question que je m'étais posée il y a huit ans : Mars
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="1157" height="682" src="/content/uploads/2019/07/6.png" alt="Marseille plus chère que Hollywood?" class="wp-image-244292" srcset="/content/uploads/2019/07/6.png 1157w, /content/uploads/2019/07/6-768x453.png 768w, /content/uploads/2019/07/6-600x354.png 600w, /content/uploads/2019/07/6-800x472.png 800w" sizes="auto, (max-width: 1157px) 100vw, 1157px" /><figcaption>Studio Hollywood</figcaption></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="1157" height="682" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/6.png" alt="Marseille plus chère que Hollywood?" class="wp-image-244292" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/6.png 1157w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/6-768x453.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/6-600x354.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/6-800x472.png 800w" sizes="auto, (max-width: 1157px) 100vw, 1157px" /><figcaption>Studio Hollywood</figcaption></figure>
 
 
 
@@ -58,7 +58,7 @@ seoDescription: "Voici la question que je m'étais posée il y a huit ans : Mars
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="558" height="421" src="/content/uploads/2019/07/7.png" alt="Marseille plus chère que Hollywood ?" class="wp-image-244293"/><figcaption>Appartement Marseille</figcaption></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="558" height="421" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/7.png" alt="Marseille plus chère que Hollywood ?" class="wp-image-244293"/><figcaption>Appartement Marseille</figcaption></figure>
 
 
 

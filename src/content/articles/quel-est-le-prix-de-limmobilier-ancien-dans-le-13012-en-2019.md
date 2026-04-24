@@ -5,7 +5,7 @@ date: "2020-02-22"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13012-en-2019-1200x405.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13012-en-2019-1200x405.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13012 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13012 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -16,7 +16,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 333 appartements au prix médian* de 2 610€ le m². Nous avions également fait de telles comparaison de prix en 2015: voici à titre d&rsquo;information, la tendance des <a href="/prix-m%C2%B2-lancien-13012-marseille-2015/">prix de l&rsquo;ancien dans le 13012 </a>en 2015.</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235427" src="/content/uploads/2019/05/13012-1.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13012" width="218" height="153" srcset="/content/uploads/2019/05/13012-1.jpeg 947w, /content/uploads/2019/05/13012-1-768x538.jpeg 768w, /content/uploads/2019/05/13012-1-600x420.jpg 600w, /content/uploads/2019/05/13012-1-800x560.jpg 800w" sizes="auto, (max-width: 218px) 100vw, 218px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235427" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-1.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13012" width="218" height="153" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-1.jpeg 947w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-1-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-1-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-1-800x560.jpg 800w" sizes="auto, (max-width: 218px) 100vw, 218px" />
 <figcaption>Château de la Moline 13012</figcaption>
 </figure>
 </div>

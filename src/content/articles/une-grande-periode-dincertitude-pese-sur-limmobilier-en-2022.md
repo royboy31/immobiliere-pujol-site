@@ -5,7 +5,7 @@ date: "2022-01-14"
 excerpt: "Nous n’allons pas jouer les Cassandre car tous ces articles qui font des prévisions nous laissent perplexes. Comment peut-on aujourd’hui prétendre pouvoir..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/01/Immobilier-a-Marseille-quelles-incertitudes-pour-2022-1200x680.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/01/Immobilier-a-Marseille-quelles-incertitudes-pour-2022-1200x680.jpg"
 seoTitle: "Beaucoup d’incertitudes pèsent sur l’immobilier en 2022"
 seoDescription: "Qui est capable d'anticiper les conséquences profondes du Covid ? du construire mieux ? Notre article ne se veut pas alarmiste ! Il faut rester bien informé."
 ---

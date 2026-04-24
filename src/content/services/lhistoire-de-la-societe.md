@@ -15,10 +15,10 @@ seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/P-3152-051218-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/P-3152-051218-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/P-3152-051218-600x375.jpg" 
-      <img src="/content/uploads/2017/10/P-3152-051218-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3152-051218-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3152-051218-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3152-051218-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3152-051218-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -70,7 +70,7 @@ seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée 
 <p>Cette même année, mon fils aîné a vu le jour, une naissance plutôt difficile et sans oxygène qui m’a fait croire qu’il serait handicapé.</p>
 <p>Cet événement a déclenché en 2002, l’achat d’un cabinet immobilier de 4 personnes, une grosse société pour moi à l’époque.</p>
 <p>Je l’ai acheté, car je croyais qu’il fallait 30 000 francs par mois pour s’occuper d’un enfant handicapé et ne pas trop sacrifier sa vie professionnelle et familiale.</p>
-<p><img decoding="async" src="/content/uploads/2017/01/20170212_210100.jpg" /></p>
+<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/20170212_210100.jpg" /></p>
 <p>À cette époque, je faisais des trous dans les murs et rien n’aurait pu m’arrêter.</p>
 <p>Pas grand-chose ne m’a été épargné dans ce premier achat de société : incendie, trahison, vol de clients et j’en passe…</p>
 <p>Mais cela n’a rien changé à la force et à <strong>la détermination que j’avais en moi</strong>.</p>
@@ -80,7 +80,7 @@ seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée 
 <p>Depuis, wouah… quel chemin !</p>
 <p>De ces bureaux miteux du 126 Cours Lieutaud non climatisés et pas repeints depuis 30 ans, nous avons construit, nous avons grandi et nous avons déménagé deux fois pour être aujourd’hui dans ces beaux locaux de la rue Jean Fiolle, plus agréables et confortables, pour nous, mais aussi pour nos clients.</p>
 <p>Moi qui ne voulais pas diriger plus de 15 personnes, car je pensais que c’était ma limite, j’ai dû apprendre à manager une équipe plus grande ; aujourd’hui, <strong>nous sommes 55 personnes et nous sommes toujours en croissance</strong>.</p>
-<h2>On ne badine pas avec ses valeurs<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-379271" style="font-size: 16px;" src="/content/uploads/2017/10/P-3313-051218-Copie-800x533.jpg" alt="" width="800" height="533" srcset="/content/uploads/2017/10/P-3313-051218-Copie-800x533.jpg 800w, /content/uploads/2017/10/P-3313-051218-Copie-768x512.jpg 768w, /content/uploads/2017/10/P-3313-051218-Copie-1536x1024.jpg 1536w, /content/uploads/2017/10/P-3313-051218-Copie-2048x1365.jpg 2048w, /content/uploads/2017/10/P-3313-051218-Copie-600x400.jpg 600w, /content/uploads/2017/10/P-3313-051218-Copie-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></h2>
+<h2>On ne badine pas avec ses valeurs<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-379271" style="font-size: 16px;" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-800x533.jpg" alt="" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-1536x1024.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-2048x1365.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3313-051218-Copie-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></h2>
 <p>Depuis, une équipe est née, une belle équipe avec ses hauts et ses bas comme dans une famille, comme dans un couple.</p>
 <p>Mais <strong>nous n’avons jamais transigé avec nos valeurs</strong>.</p>
 <p>Nous avons toujours fait confiance à notre instinct pour recruter, prendre ou laisser un client.</p>

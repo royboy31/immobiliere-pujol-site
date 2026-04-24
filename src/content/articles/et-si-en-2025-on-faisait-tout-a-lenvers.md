@@ -5,12 +5,12 @@ date: "2025-01-02"
 excerpt: "Place aux anti-vœux, ces résolutions décalées, absurdes, et volontairement contre-productives, parce qu’après tout, qui a dit qu’il fallait être parfait pour..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/01/carte-voeux-2024-1200x851.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-1200x851.jpg"
 seoTitle: "Et si en 2025, on faisait tout à l’envers ?"
 seoDescription: "  Place aux anti-vœux, ces résolutions décalées, absurdes, et volontairement contre-productives, parce  qu’après tout, qui a dit qu’il fallait être parfait pour réussir son année ? Voici 12 mois d’anti-résolutions pour pimenter notre année. Découvrez comment 2025 pourrait devenir votre année la plus désorganisée, imprévisible et pleine d'aventures!   Janvier :…"
 ---
 
-<p><img loading="lazy" decoding="async" class="wp-image-953351 aligncenter" src="/content/uploads/2025/01/carte-voeux-2024-800x568.jpg" alt="" width="471" height="334" srcset="/content/uploads/2025/01/carte-voeux-2024-800x568.jpg 800w, /content/uploads/2025/01/carte-voeux-2024-768x545.jpg 768w, /content/uploads/2025/01/carte-voeux-2024-1536x1090.jpg 1536w, /content/uploads/2025/01/carte-voeux-2024-600x426.jpg 600w, /content/uploads/2025/01/carte-voeux-2024-1200x851.jpg 1200w, /content/uploads/2025/01/carte-voeux-2024.jpg 1748w" sizes="auto, (max-width: 471px) 100vw, 471px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-953351 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-800x568.jpg" alt="" width="471" height="334" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-800x568.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-768x545.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-1536x1090.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-600x426.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024-1200x851.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/carte-voeux-2024.jpg 1748w" sizes="auto, (max-width: 471px) 100vw, 471px" /></p>
 <p>&nbsp;</p>
 <p>Place aux <strong>anti-vœux</strong>, ces résolutions décalées, absurdes, et volontairement contre-productives, parce  qu’après tout, qui a dit qu’il fallait être parfait pour réussir son année ?</p>
 <p>Voici 12 mois d’anti-résolutions pour pimenter notre année.</p>

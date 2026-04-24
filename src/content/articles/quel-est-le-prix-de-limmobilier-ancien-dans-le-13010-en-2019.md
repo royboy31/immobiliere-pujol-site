@@ -5,7 +5,7 @@ date: "2020-02-19"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians en 2019 dans le 13010 . Voici..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13010-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13010-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13010 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13010 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -16,7 +16,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <p>En 2019, il s’est vendu dans le <a href="https://fr.wikipedia.org/wiki/10e_arrondissement_de_Marseille" target="_blank" rel="noreferrer noopener" aria-label="10e arrondissement de Marseille (opens in a new tab)">10e arrondissement de Marseille</a>:<br />291 appartements au prix médian* de 1 990€ le m².</p>
 <p> </p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235434" src="/content/uploads/2019/05/13010-2.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13010" width="193" height="120" srcset="/content/uploads/2019/05/13010-2.jpeg 645w, /content/uploads/2019/05/13010-2-600x372.jpg 600w" sizes="auto, (max-width: 193px) 100vw, 193px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235434" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13010" width="193" height="120" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2.jpeg 645w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2-600x372.jpg 600w" sizes="auto, (max-width: 193px) 100vw, 193px" />
 <figcaption>Avenue de la Capelette 13010</figcaption>
 </figure>
 </div>

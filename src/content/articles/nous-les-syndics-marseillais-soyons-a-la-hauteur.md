@@ -5,7 +5,7 @@ date: "2018-11-17"
 excerpt: "Lundi 5 au matin, nous avons tous été pris d’effroi. Au fur et à mesure, nous avons compris que le pire avait bien eu lieu. Nous qui gérons et entretenons ces..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/11/IMG_20181123_171904-1001x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/11/IMG_20181123_171904-1001x1200.jpg"
 seoTitle: "Nous les syndics marseillais, soyons à la hauteur"
 seoDescription: "Lundi 5 au matin, nous avons tous été pris d’effroi. Au fur et à mesure, nous avons compris que le pire avait bien eu lieu. Nous qui gérons et entretenons ces immeubles du centre-ville, nous dont c’est le métier nous avons pris cette nouvelle en pleine gueule, car nous n’imaginions…"
 ---

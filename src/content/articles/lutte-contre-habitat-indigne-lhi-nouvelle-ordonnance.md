@@ -5,7 +5,7 @@ date: "2020-12-05"
 excerpt: "La lutte contre l’habitat indigne est un sujet de préoccupation majeur dans la politique de l’habitat, et particulièrement à Marseille, où les logements..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/p1-1200x686.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/p1-1200x686.jpg"
 seoTitle: "Lutte contre l’Habitat Indigne : ce qu’il faut retenir de la nouvelle ordonnance."
 seoDescription: "La lutte contre l’habitat indigne est un sujet de préoccupation majeur dans la politique de l’habitat, et particulièrement à Marseille, où les logements insalubres et indécents sont malheureusement trop nombreux. La lutte contre l'habitat indigne recouvre toutes les situations de logements exposant leurs occupants ou des tiers à des risques…"
 ---
@@ -93,7 +93,7 @@ seoDescription: "La lutte contre l’habitat indigne est un sujet de préoccupat
 </ul>
 <p>Pour la gestion locative, il n&rsquo;y a pas de suspension de loyer en cas d&rsquo;obligation de faire des travaux pour le plomb ou si la mesure a été prise à l&rsquo;encontre du locataire (par exemple, en cas de surpopulation).</p>
 <h2>Le cas de la procédure d’urgence</h2>
-<p><img loading="lazy" decoding="async" class="wp-image-378822 aligncenter" src="/content/uploads/2020/11/apports-800x373.jpg" alt="procédure urgence lutte contre habitat indigne" width="705" height="329" srcset="/content/uploads/2020/11/apports-800x373.jpg 800w, /content/uploads/2020/11/apports-768x358.jpg 768w, /content/uploads/2020/11/apports-1536x716.jpg 1536w, /content/uploads/2020/11/apports-2048x955.jpg 2048w, /content/uploads/2020/11/apports-600x280.jpg 600w, /content/uploads/2020/11/apports-1200x559.jpg 1200w" sizes="auto, (max-width: 705px) 100vw, 705px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-378822 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-800x373.jpg" alt="procédure urgence lutte contre habitat indigne" width="705" height="329" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-800x373.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-768x358.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-1536x716.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-2048x955.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-600x280.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/apports-1200x559.jpg 1200w" sizes="auto, (max-width: 705px) 100vw, 705px" /></p>
 <p>Avant, quand le maire intervenait en extrême urgence en cas d&rsquo;atteinte à la sécurité des personnes et des occupants, les frais nécessaires à la suppression du péril grave et imminent étaient supportés par la commune qui devait reloger les occupants sans recouvrement possible.</p>
 <p>Désormais, Il n&rsquo;y a plus de procédure d&rsquo;extrême urgence mais seulement une procédure d&rsquo;urgence. Tout cela est rendu possible du fait que la désignation d&rsquo;un expert soit devenue facultative.</p>
 <p>Le maire peut donc prendre par arrêté de péril imminent (et pour rappel non-contradictoire pour celui-ci) les mesures indispensables pour faire cesser ce danger dans un délai qu’il fixe. La protection des occupants commence donc dès l&rsquo;arrêté.</p>

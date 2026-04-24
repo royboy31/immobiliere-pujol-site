@@ -15,10 +15,10 @@ seoDescription: "Déclarer le week-end et les jours fériés votre sinistres que
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2020/09/PU-0705-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2020/09/PU-0705-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2020/09/PU-0705-600x375.jpg" 
-      <img src="/content/uploads/2020/09/PU-0705-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/PU-0705-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/PU-0705-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/PU-0705-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/PU-0705-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -31,7 +31,7 @@ seoDescription: "Déclarer le week-end et les jours fériés votre sinistres que
 <p>&nbsp;</p>
 <p>Votre déclaration d&rsquo;un sinistre a bien été envoyée <br />
 Nous allons prendrons contact avec vous dès que possible. </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="260" height="78" srcset="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 260px) 100vw, 260px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="260" height="78" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 260px) 100vw, 260px" /></p>
 
       </div>
       <!-- SHARE -->

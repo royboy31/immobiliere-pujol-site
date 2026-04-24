@@ -5,7 +5,7 @@ date: "2019-06-13"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13013.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13013.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13013 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison quartier par quartier des prix au m2 de l'immobilier ancien dans le 13013 en 2018. En 2018, il s’est vendu dans le 13013 :297 appartements au…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "La fourchette des transactions est établie par les notaires de
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13010-1.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13013" class="wp-image-235432" width="89" height="134" srcset="/content/uploads/2019/05/13010-1.jpeg 533w, /content/uploads/2019/05/13010-1-400x600.jpg 400w" sizes="auto, (max-width: 89px) 100vw, 89px" /><figcaption>Savons de Marseille</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-1.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13013" class="wp-image-235432" width="89" height="134" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-1.jpeg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-1-400x600.jpg 400w" sizes="auto, (max-width: 89px) 100vw, 89px" /><figcaption>Savons de Marseille</figcaption></figure></div>
 
 
 

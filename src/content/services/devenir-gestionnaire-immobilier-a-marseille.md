@@ -15,10 +15,10 @@ seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/retouche-photo-gerance-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/retouche-photo-gerance-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/retouche-photo-gerance-600x400.jpg" 
-      <img src="/content/uploads/2018/06/retouche-photo-gerance-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/retouche-photo-gerance-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/retouche-photo-gerance-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/retouche-photo-gerance-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/retouche-photo-gerance-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -58,7 +58,7 @@ seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les
 <h3>Le métier de gestionnaire en gestion locative</h3>
 </li>
 </ul>
-<p><img loading="lazy" decoding="async" class=" wp-image-387664 alignleft" src="/content/uploads/2018/06/P-3068-051218-Copy.jpg" alt="" width="280" height="420" />L’Immobilière Pujol propose des <strong>emplois de cadre en CDI</strong>, avec une bonne rémunération fixe et un intéressement basé sur les résultats. Le temps de travail hebdomadaire est de <strong>39 heures</strong>. Nous gérons des immeubles résidentiels, mais aussi des bureaux et des immeubles tertiaires.</p>
+<p><img loading="lazy" decoding="async" class=" wp-image-387664 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/P-3068-051218-Copy.jpg" alt="" width="280" height="420" />L’Immobilière Pujol propose des <strong>emplois de cadre en CDI</strong>, avec une bonne rémunération fixe et un intéressement basé sur les résultats. Le temps de travail hebdomadaire est de <strong>39 heures</strong>. Nous gérons des immeubles résidentiels, mais aussi des bureaux et des immeubles tertiaires.</p>
 <p>La gestion immobilière est un métier de proximité et de relations.</p>
 <p>Nous recrutons aussi des CDD en alternance, mais rarement en intérim. Nous aimons former et accompagner nos gestionnaires, leur faire confiance et leur confier des portefeuilles client pour mettre en pratique leurs enseignements : cela nécessite du temps.</p>
 <p>Nous n’exigeons aucun diplôme particulier ; nous cherchons avant tout des personnes compétentes, dotées d’une grande vivacité d’esprit, curieuses, volontaires et rigoureuses dans toutes ses actions. Nos gestionnaires immobiliers ont souvent un Bac+5.</p>
@@ -73,7 +73,7 @@ seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les
 <h3>Le métier de syndic de copropriété</h3>
 </li>
 </ul>
-<p>Les conditions de travail sont les mêmes que pour le gestionnaire locatif. <img loading="lazy" decoding="async" class="wp-image-1198031 alignleft" src="/content/uploads/2018/06/PI-1259-170919-558x800.jpg" alt="" width="312" height="447" srcset="/content/uploads/2018/06/PI-1259-170919-558x800.jpg 558w, /content/uploads/2018/06/PI-1259-170919-768x1102.jpg 768w, /content/uploads/2018/06/PI-1259-170919-1071x1536.jpg 1071w, /content/uploads/2018/06/PI-1259-170919-418x600.jpg 418w, /content/uploads/2018/06/PI-1259-170919-837x1200.jpg 837w, /content/uploads/2018/06/PI-1259-170919.jpg 1227w" sizes="auto, (max-width: 312px) 100vw, 312px" /></p>
+<p>Les conditions de travail sont les mêmes que pour le gestionnaire locatif. <img loading="lazy" decoding="async" class="wp-image-1198031 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-558x800.jpg" alt="" width="312" height="447" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-558x800.jpg 558w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-768x1102.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-1071x1536.jpg 1071w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-418x600.jpg 418w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919-837x1200.jpg 837w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PI-1259-170919.jpg 1227w" sizes="auto, (max-width: 312px) 100vw, 312px" /></p>
 <p><a href="/service/comment-faire-baisser-le-cout-un-syndic-a-marseillle/">Le gestionnaire de copropriété</a> gère toutes les facettes des immeubles qui lui sont confiés :</p>
 <ul>
 	<li>Situation comptable et juridique — <em>optimisation de charges</em></li>
@@ -90,7 +90,7 @@ Si une connaissance du droit et des techniques terrain est appréciée, c’est 
 <h3>Le métier de la transaction immobilière</h3>
 </li>
 </ul>
-<p><img loading="lazy" decoding="async" class=" wp-image-1198032 alignleft" src="/content/uploads/2018/06/PUJ-3307-534x800.jpg" alt="" width="273" height="409" srcset="/content/uploads/2018/06/PUJ-3307-534x800.jpg 534w, /content/uploads/2018/06/PUJ-3307-768x1152.jpg 768w, /content/uploads/2018/06/PUJ-3307-1024x1536.jpg 1024w, /content/uploads/2018/06/PUJ-3307-400x600.jpg 400w, /content/uploads/2018/06/PUJ-3307-800x1200.jpg 800w, /content/uploads/2018/06/PUJ-3307.jpg 1067w" sizes="auto, (max-width: 273px) 100vw, 273px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-1198032 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-534x800.jpg" alt="" width="273" height="409" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-534x800.jpg 534w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-768x1152.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-1024x1536.jpg 1024w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307-800x1200.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/PUJ-3307.jpg 1067w" sizes="auto, (max-width: 273px) 100vw, 273px" /></p>
 <p>En ce qui concerne la vente de biens immobiliers, nous travaillons avec des commerciaux qui bénéficient d’un fixe important et un pourcentage sur les transactions qu’ils réalisent.</p>
 <p>Cette rémunération fixe est un gage de sérénité pour nos commerciaux : ils ne sont pas obligés de conclure X ventes par mois au risque sinon de perdre leur poste. <br />
 Nous ne fonctionnons pas comme cela dans notre société car même en transaction, nous voulons une équipe stable. </p>

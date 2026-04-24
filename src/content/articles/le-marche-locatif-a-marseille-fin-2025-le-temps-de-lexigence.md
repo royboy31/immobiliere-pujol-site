@@ -5,7 +5,7 @@ date: "2025-12-08"
 excerpt: "« Le marché est ultra-tendu », « Il y a 50 dossiers par appartement mis en publicité…” Voilà ce qu’on lit et entend partout en cette fin de 2025. Si la tension..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/12/exposio_133326073-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/exposio_133326073-1200x800.jpg"
 seoTitle: "Le marché locatif à Marseille fin 2025 : Le temps de l’exigence"
 seoDescription: "Un marché tendu qui n'annule pas l'exigence des locataires . Un marché dynamique, mais sélectif."
 ---

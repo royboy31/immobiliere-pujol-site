@@ -5,7 +5,7 @@ date: "2024-03-17"
 excerpt: "La rénovation d’une façade avec en prime le changement des garde-corps est un moment difficile tant pour les propriétaires que pour le syndic car il est..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/03/procedure-en-copropriete.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/procedure-en-copropriete.jpg"
 seoTitle: "Copropriété : vote de travaux de renovation de façade avec changement des gardes-corps : article 24 ou 25 ?"
 seoDescription: "Les travaux peuvent être votés selon l'article 24 ou 25 en assemblée générale. Jugement rendu suite à la contestation des modalités de vote par des copropriétaires à Marseille"
 ---

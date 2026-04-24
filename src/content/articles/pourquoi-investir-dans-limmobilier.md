@@ -5,7 +5,7 @@ date: "2016-10-28"
 excerpt: "Ces derniers temps, c’est la question quotidienne à laquelle je réponds. Soit ce sont des jeunes qui veulent investir pour leur retraite, soit ce sont des..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/service-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/service-1.jpg"
 seoTitle: "Pourquoi investir dans l’immobilier ?"
 seoDescription: "Ces derniers temps, c'est la question quotidienne à laquelle je réponds. Soit ce sont des jeunes qui veulent investir pour leur retraite, soit ce sont des propriétaires mécontents des placements bancaires ou boursiers de leur banque, soit ce sont des investisseurs qui n'ont plus confiance en rien... C’est  un large…"
 ---

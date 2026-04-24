@@ -15,10 +15,10 @@ seoDescription: "L'équipe gestion locative de l'immobilière vous donne une est
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2021/01/P-3303-051218-2-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2021/01/P-3303-051218-2-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2021/01/P-3303-051218-2-600x400.jpg" 
-      <img src="/content/uploads/2021/01/P-3303-051218-2-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/P-3303-051218-2-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -32,7 +32,7 @@ seoDescription: "L'équipe gestion locative de l'immobilière vous donne une est
 <p>Votre demande d&rsquo;estimation de loyer a été bien été envoyée à notre équipe.</p>
 <p>Nous allons prendre contact  avec vous dans les meilleurs délais.</p>
 <p>&nbsp;</p>
-<p>.<img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="267" height="80" srcset="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 267px) 100vw, 267px" /></p>
+<p>.<img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="267" height="80" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 267px) 100vw, 267px" /></p>
 
       </div>
       <!-- SHARE -->

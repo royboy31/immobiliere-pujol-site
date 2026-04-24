@@ -15,10 +15,10 @@ seoDescription: "    Bonjour, Pour pouvoir être recontacté et prendre un ren
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2026/01/P-4782-050117-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2026/01/P-4782-050117-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2026/01/P-4782-050117-600x400.jpg" 
-      <img src="/content/uploads/2026/01/P-4782-050117-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/P-4782-050117-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/P-4782-050117-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/P-4782-050117-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/P-4782-050117-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -31,12 +31,12 @@ seoDescription: "    Bonjour, Pour pouvoir être recontacté et prendre un ren
 <p>&nbsp;</p>
 <p><span style="color: #000000; font-size: 14pt;"><b>Bonjour,</b></span></p>
 <p><span style="color: #000000; font-size: 14pt;"><b>Pour pouvoir être recontacté et prendre un rendez-vous pour une visite, merci de compléter une fiche de renseignements en cliquant sur le bouton ci-après  : </b></span></p>
-<p><a href="https://zfrmz.eu/GF1aQAVhDitMhvcbHLSD" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="size-full wp-image-1366287 aligncenter" src="/content/uploads/2026/02/remplir-la-fiche-de-renseignement.png" alt="" width="337" height="76" /></a></p>
+<p><a href="https://zfrmz.eu/GF1aQAVhDitMhvcbHLSD" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="size-full wp-image-1366287 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/remplir-la-fiche-de-renseignement.png" alt="" width="337" height="76" /></a></p>
 <p><span style="color: #000000; font-size: 14pt;">Ces renseignements nous permettent de vérifier en amont que votre dossier est recevable selon les exigences du propriétaire et éviter pour vous un déplacement inutile. </span></p>
 <p><span style="color: #000000; font-size: 14pt;">Après réception de votre fiche, vous serez recontacté par le gestionnaire du bien concerné par votre demande. </span></p>
 <p><span style="font-size: 14pt; color: #000000;">Le service Location <br />
 www.immobiliere-pujol.fr</span></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="264" height="79" srcset="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 264px) 100vw, 264px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="264" height="79" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 264px) 100vw, 264px" /></p>
 <p>&nbsp;</p>
 <h6><span style="font-family: arial, helvetica, sans-serif;"><span style="font-size: xx-small;">Immobilière Pujol &#8211; 7 rue du Dr Fiolle 13006 Marseille &#8211; </span><span style="color: #000000; font-size: xx-small;"><a title="/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/" href="/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/" target="_blank" rel="noopener">Mentions légales</a> et <a title="/politique-de-confidentialite/" href="/politique-de-confidentialite/" target="_blank" rel="noopener">Politique de confidentialité</a><br />
 <br />

@@ -5,7 +5,7 @@ date: "2017-03-22"
 excerpt: "Les prix au m² dans le 13006 en 2016, se sont établis entre 2350€ et 2720€/m² selon les quartiers et les types d’appartements. Ils traduisent une hausse..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13006", "Arrondissements Marseille", "Arrondissement 13006 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/quartier-de-marseille-13006.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/quartier-de-marseille-13006.jpg"
 seoTitle: "Le prix de l’immobilier ancien en 2017 dans le 6ème à Marseille"
 seoDescription: "Les prix au m²  dans le 13006 en 2016, se sont établis entre  2350€ et  2720€/m² selon les quartiers et les types d'appartements. Ils traduisent une hausse régulière depuis que nous tenons ces statistiques (+1,4% par rapport à l'année dernière) Il y a eu 420 ventes conclues dans le 6ème. C'est…"
 ---

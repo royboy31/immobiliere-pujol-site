@@ -5,7 +5,7 @@ date: "2020-05-08"
 excerpt: "Nous ne faisons pas de plan pour le après 11 mai car chaque semaine suffit à sa peine. Nous sommes déjà satisfaits de faire des locations et de conclure des..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/immobilier-et-coronavirus-1200x802.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/immobilier-et-coronavirus-1200x802.jpg"
 seoTitle: "Ce que le confinement a changé, va changer ou accélérer pour notre agence"
 seoDescription: "Propriétaire ou locataire, vendez ou louez votre appartement à Marseille  en toute sérénité et sécurité avec l'Immobilière Pujol"
 ---
@@ -21,7 +21,7 @@ Nous ne faisons pas de plan pour le après 11 mai car chaque semaine suffit à s
 <p>Depuis longtemps, nous avons fait le choix de nous nous concentrer sur les <strong>bons appartements</strong>, dans <strong>les bons immeubles</strong> et avec <strong>les bons clients</strong> qui reconnaissent l’importance de la qualité.</p>
 <p>Nous ne faisons plus de réunions inutiles et chacun vient au bureau avec l’intention de faire une tâche ou de tenir un rendez vous et plus comme une habitude.</p>
 <p>Notre équipe souhaite ne plus travailler que sur rendez-vous car beaucoup de ses membres privilégient désormais le télétravail.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-339844 alignright" src="/content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-800x533.jpg" alt="" width="270" height="180" srcset="/content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-800x533.jpg 800w, /content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-768x512.jpg 768w, /content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-600x400.jpg 600w, /content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-1200x800.jpg 1200w, /content/uploads/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10.jpg 1500w" sizes="auto, (max-width: 270px) 100vw, 270px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-339844 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-800x533.jpg" alt="" width="270" height="180" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/photo_d477469cd0195e7b2efe0f287e63787a-10.jpg 1500w" sizes="auto, (max-width: 270px) 100vw, 270px" /></p>
 <p>Nous avons encore approfondi les changements de nos outils et surtout de nos process pour les mener à distance et avec la fluidité qui permet d&rsquo;être réactif.</p>
 <p>Nous nous spécialisons encore plus dans les appartements dans lesquels il fait bon vivre, les immeubles et les copropriétés de qualité tant par leur occupation que par leur qualité d’entretien.</p>
 <p>Les immeubles pompes à fric de placements non respectueux n’ont jamais été et ne seront pas pour nous.</p>

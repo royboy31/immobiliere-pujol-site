@@ -5,7 +5,7 @@ date: "2017-12-30"
 excerpt: "C’est la fin de l’année donc l’heure des bilans et des nouveaux projets. Pour cela notre matière qu’est l’immobilier permet toujours de construire des projets..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/12/marseille-398881_1920-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/marseille-398881_1920-1200x800.jpg"
 seoTitle: "Investir à Marseille pour dans 20 ans : où investir et quoi acheter ?"
 seoDescription: "C'est la fin de l'année donc l'heure des bilans et des nouveaux projets. Pour cela notre matière qu'est l'immobilier permet toujours de construire des projets innovants et entrepreneuriaux même si notre gouvernement le considère étonnamment comme improductif. N'oubliez pas que l'immobilier c'est du long terme, voire du très long terme,…"
 ---
@@ -65,7 +65,7 @@ Vous pouvez donc probablement faire le pari que dans un grand nombre de rue du c
 
 Il n’y a également aucun doute à avoir sur les grands centres commerciaux de Marseille et leur rôle important dans l’animation et la dynamique qu&rsquo;ils apportent.
 <h2>L’obsolescence immobilière c&rsquo;est quoi? voilà un diagramme multi-dimension</h2>
-<figure id="attachment_227476" aria-describedby="caption-attachment-227476" style="width: 800px" class="wp-caption aligncenter"><img loading="lazy" decoding="async" class="wp-image-227476 size-medium" src="/content/uploads/2017/12/ou-investir-marseille-800x463.jpg" alt="" width="800" height="463" srcset="/content/uploads/2017/12/ou-investir-marseille-800x463.jpg 800w, /content/uploads/2017/12/ou-investir-marseille-768x444.jpg 768w, /content/uploads/2017/12/ou-investir-marseille-600x347.jpg 600w, /content/uploads/2017/12/ou-investir-marseille.jpg 1086w" sizes="auto, (max-width: 800px) 100vw, 800px" /><figcaption id="caption-attachment-227476" class="wp-caption-text">Source : « Une nouvelle approche de l’obsolescence immobilière » &#8211; Jean Carassus, Directeur du mastère spécialisé Immobilier &amp; Bâtiment Durables, Ecole des Ponts ParisTech.</figcaption></figure>
+<figure id="attachment_227476" aria-describedby="caption-attachment-227476" style="width: 800px" class="wp-caption aligncenter"><img loading="lazy" decoding="async" class="wp-image-227476 size-medium" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/ou-investir-marseille-800x463.jpg" alt="" width="800" height="463" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/ou-investir-marseille-800x463.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/ou-investir-marseille-768x444.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/ou-investir-marseille-600x347.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/ou-investir-marseille.jpg 1086w" sizes="auto, (max-width: 800px) 100vw, 800px" /><figcaption id="caption-attachment-227476" class="wp-caption-text">Source : « Une nouvelle approche de l’obsolescence immobilière » &#8211; Jean Carassus, Directeur du mastère spécialisé Immobilier &amp; Bâtiment Durables, Ecole des Ponts ParisTech.</figcaption></figure>
 
 &nbsp;
 

@@ -5,13 +5,13 @@ date: "2023-05-02"
 excerpt: "La question de l’équipement en bornes de recharge pour les véhicules électriques agite depuis quelque temps déjà les copropriétés qui possèdent un parking..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/05/borne-recharge-voiture-copropriete-1200x804.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-1200x804.jpg"
 seoTitle: "Recharge des véhicules électriques en copropriété : Quelles solutions?"
 seoDescription: "Réponses d'un gestionnaire de copropriété à Marseille à toutes les questions que les copropriétaires se posent sur la pose de bornes individuelles de recharges pour les véhicules électriques (IRVE)"
 ---
 
 <p><br />
-<img loading="lazy" decoding="async" class="wp-image-632911 aligncenter" src="/content/uploads/2023/05/borne-recharge-voiture-copropriete-800x536.jpg" alt="" width="628" height="421" srcset="/content/uploads/2023/05/borne-recharge-voiture-copropriete-800x536.jpg 800w, /content/uploads/2023/05/borne-recharge-voiture-copropriete-768x515.jpg 768w, /content/uploads/2023/05/borne-recharge-voiture-copropriete-1536x1030.jpg 1536w, /content/uploads/2023/05/borne-recharge-voiture-copropriete-2048x1373.jpg 2048w, /content/uploads/2023/05/borne-recharge-voiture-copropriete-600x402.jpg 600w, /content/uploads/2023/05/borne-recharge-voiture-copropriete-1200x804.jpg 1200w" sizes="auto, (max-width: 628px) 100vw, 628px" /></p>
+<img loading="lazy" decoding="async" class="wp-image-632911 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-800x536.jpg" alt="" width="628" height="421" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-800x536.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-768x515.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-1536x1030.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-2048x1373.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-600x402.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/borne-recharge-voiture-copropriete-1200x804.jpg 1200w" sizes="auto, (max-width: 628px) 100vw, 628px" /></p>
 <p>La question de l’équipement en bornes de recharge pour les véhicules électriques agite depuis quelque temps déjà les copropriétés qui possèdent un parking souterrain. Et une fois de plus, il n’est pas facile de s’y retrouver.</p>
 <p><br />
 Toujours soucieuse de répondre à vos questions, l’Immobilière Pujol a demandé à son responsable technique Bertrand Guibaud quelques éclaircissements sur les solutions proposées à ce jour en terme de Infrastructure de Recharge de Véhicule Électrique (IRVE ). </p>
@@ -40,7 +40,7 @@ C’est a priori la solution la plus simple : l’utilisateur fait réaliser un 
 <p><br />
 Inconvénients :<br />
 Sauf dans certains immeubles neufs, les compteurs électriques communs ne sont pas configurés pour accueillir ces branchements supplémentaires. Au-delà de deux à trois raccordements, l’alimentation électrique générale de la copropriété va commencer à dysfonctionner. Les utilisateurs de ces lignes privatives seront en outre seuls responsables de leur bon fonctionnement et de leur entretien, ce qui risque de générer des différends en cas de problème de comptage, de coupures, etc.</p>
-<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632574" src="/content/uploads/2023/05/Le-raccordement-a-un-compteur-dedie-aux-bornes-de-recharge.png" alt="" width="273" height="302" /></h3>
+<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632574" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/Le-raccordement-a-un-compteur-dedie-aux-bornes-de-recharge.png" alt="" width="273" height="302" /></h3>
 <h3>2.Borne de recharge de véhicules électriques : le raccordement à un compteur dédié aux bornes de recharge</h3>
 <p><br />
 Cette infrastructure peut être réalisée soit par la copropriété, soit par un prestataire.</p>
@@ -50,7 +50,7 @@ Si elle est réalisée par la copropriété, cette dernière deviendra alors pro
 <p><br />
 Inconvénients :<br />
 Si elle est réalisée par la copropriété, cette dernière devra en assurer le financement et la gestion. Si elle est réalisée par un prestataire, il en restera propriétaire pour au moins cinq ans, sans toujours offrir à la copropriété la possibilité de racheter l’infrastructure à l’issue de cette période.</p>
-<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632575" src="/content/uploads/2023/05/Le-raccordement-a-une-colonne-electrique-dediee.png" alt="" width="280" height="261" /></h3>
+<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632575" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/Le-raccordement-a-une-colonne-electrique-dediee.png" alt="" width="280" height="261" /></h3>
 <h3><br />
 3. Borne de recharge de véhicules électriques : le raccordement à une colonne électrique dédiée</h3>
 <p><br />
@@ -59,7 +59,7 @@ Le raccordement et la maintenance jusqu’au compteur Linky sont assurés par le
 <p><br />
 Inconvénients :<br />
 Si, tout comme les prestataires privés, Enedis peut désormais préfinancer le coût de l’infrastructure, les règles de calcul de ce coût pour la copropriété ne sont pas encore connues. Par ailleurs, le système de compteurs individuels ne permet pas un pilotage énergétique global de l’infrastructure.</p>
-<h2><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632577" src="/content/uploads/2023/05/Le-raccordement-au-compteur-electrique-de-la-copropriete.png" alt="" width="262" height="291" /></h2>
+<h2><img loading="lazy" decoding="async" class="alignnone size-full wp-image-632577" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/Le-raccordement-au-compteur-electrique-de-la-copropriete.png" alt="" width="262" height="291" /></h2>
 <h2>Comment comparer le coût de chaque solution pour les copropriétaires souhaitant se raccorder et pour les autres ?</h2>
 <p><br />
 Tant que nous ne connaissons pas les règles de calcul d’Enedis pour la troisième solution, il est impossible d’effectuer cette comparaison. <br />
@@ -67,7 +67,7 @@ Pour les copropriétés qui n’ont pas encore entamé d’étude, rien ne les e
 <p>&nbsp;</p>
 <p><strong>À retenir</strong></p>
 <p>Il existe trois principales configurations possibles pour installer des bornes de recharge électrique individuelles en copropriété. Le choix doit se faire à l’aune des avantages et des inconvénients de chaque solution, en prenant bien en compte l’investissement et les obligations qui vont en découler pour la copropriété.</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="/content/uploads/2023/05/bertrand-769x800.jpg" alt="" width="153" height="160" srcset="/content/uploads/2023/05/bertrand-769x800.jpg 769w, /content/uploads/2023/05/bertrand-768x799.jpg 768w, /content/uploads/2023/05/bertrand-577x600.jpg 577w, /content/uploads/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 153px) 100vw, 153px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg" alt="" width="153" height="160" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg 769w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-768x799.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-577x600.jpg 577w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 153px) 100vw, 153px" /></p>
 <p>Bertrand Guibaud, Immobilière Pujol</p>
       </div>
       <!-- SHARE -->

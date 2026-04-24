@@ -5,7 +5,7 @@ date: "2020-02-24"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quels sont les prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13014-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13014-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13014 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13014 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -16,7 +16,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 161 appartements au prix médian* de 1 350€ le m².</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignleft"><img loading="lazy" decoding="async" width="178" height="178" class="wp-image-235541" src="/content/uploads/2019/05/OxUE_TjX.jpeg" alt="les prix au m2 de l'immobilier ancien dans le 13014 en 2018" srcset="/content/uploads/2019/05/OxUE_TjX.jpeg 178w, /content/uploads/2019/05/OxUE_TjX-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" />
+<figure class="alignleft"><img loading="lazy" decoding="async" width="178" height="178" class="wp-image-235541" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX.jpeg" alt="les prix au m2 de l'immobilier ancien dans le 13014 en 2018" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX.jpeg 178w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" />
 <figcaption>13014</figcaption>
 </figure>
 </div>

@@ -5,7 +5,7 @@ date: "2020-02-14"
 excerpt: "Nous avons dressé un comparatif quartier par quartier des prix au m2 de l’immobilier ancien dans le 13003 En 2019, il s’est vendu dans le 3e arrondissement de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13003-2019-1200x761.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13003-2019-1200x761.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13003 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13003 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -15,7 +15,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <p>En 2019, il s’est vendu dans le <a href="https://fr.wikipedia.org/wiki/3e_arrondissement_de_Marseille">3e arrondissement de Marseille</a>:<br />196 appartements  au prix médian* de 1 270€ le m² .</p>
 <p> </p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235548" src="/content/uploads/2019/05/garage-belle-de-mai-13002-1-1.jpg" alt="Les prix au m2 de l'immobilier ancien dans le 13003" width="262" height="173" srcset="/content/uploads/2019/05/garage-belle-de-mai-13002-1-1.jpg 604w, /content/uploads/2019/05/garage-belle-de-mai-13002-1-1-600x397.jpg 600w" sizes="auto, (max-width: 262px) 100vw, 262px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235548" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/garage-belle-de-mai-13002-1-1.jpg" alt="Les prix au m2 de l'immobilier ancien dans le 13003" width="262" height="173" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/garage-belle-de-mai-13002-1-1.jpg 604w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/garage-belle-de-mai-13002-1-1-600x397.jpg 600w" sizes="auto, (max-width: 262px) 100vw, 262px" />
 <figcaption>Garage Belle de Mai 13003</figcaption>
 </figure>
 </div>

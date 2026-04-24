@@ -20,10 +20,10 @@ seoDescription: "Voilà les coût des charges de copropriété à Marseille à p
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/Un-audit-et-un-controle-des-charges-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/Un-audit-et-un-controle-des-charges-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/Un-audit-et-un-controle-des-charges-600x375.jpg" 
-      <img src="/content/uploads/2017/11/Un-audit-et-un-controle-des-charges-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Un-audit-et-un-controle-des-charges-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Un-audit-et-un-controle-des-charges-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Un-audit-et-un-controle-des-charges-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Un-audit-et-un-controle-des-charges-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -61,7 +61,7 @@ Chez Immobilière Pujol,  les contrats d&rsquo;énergie sont renégociés chaqu
 <p>Le contrat P2 consiste à procéder au réglage des brûleurs, des courbes de température, <a href="/services/le-cout-des-travaux-la-mise-en-concurrence-et-levaluation-de-nos-prestataires-dans-nos-coproprietes/">entretenir la chaufferie</a> (au fioul ou au gaz), faire les réglages et le ramonage des conduits . Ce contrat coûte autour de 50 € TTC  par an et par appartement</p>
 <p>Garantir le remplacement en cas de casse est le contrat P3. Le tarif du P3 est fonction de la qualité technique de la chaufferie et de la vétusté des équipements  le P3 varie de 35 à 80 TTC / logement</p>
 <h2>Quel est le coût du nettoyage en copropriété?</h2>
-<p><img decoding="async" src="/content/uploads/2016/12/PU-0543.jpg" /></p>
+<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/PU-0543.jpg" /></p>
 <p>Une prestation de nettoyage doit osciller entre <b>20 et 24€ HT/ heure</b>.</p>
 <p>Payer plus cher n’est en aucun cas une garantie de qualité .<br />
 Chez Immobilière Pujol, nous assurons un suivi qualitatif de l’entretien, pour vérifier que le travail est fait et éviter toute surévaluation de la prestation.</p>
@@ -78,7 +78,7 @@ Tous les contrats sont des contrats unis dont la rédaction est favorable au syn
 </p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
                 </section>
             </div>
 

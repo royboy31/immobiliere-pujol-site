@@ -5,7 +5,7 @@ date: "2022-06-23"
 excerpt: "Dernièrement, mon confrère et ami, Floris VAN LIDTH de VUE sur VERT nous a partagé son billet d’humeur du passage du printemps à l’été. Nous ne pouvons que..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/06/Du_printemps_a_lete-1200x429.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/Du_printemps_a_lete-1200x429.png"
 seoTitle: "Chiche"
 seoDescription: "Floris VAN LIDTH vue sur vert"
 ---
@@ -13,7 +13,7 @@ seoDescription: "Floris VAN LIDTH vue sur vert"
 <p>Dernièrement, mon confrère et ami, <strong>Floris VAN LIDTH de</strong> <span style="color: #000000;"><strong>VUE sur VERT</strong> </span>nous a partagé son billet d&rsquo;humeur du passage du printemps à l&rsquo;été.<br />
 Nous ne pouvons que partager  la vision de Floris et avions à coeur de vous faire lire ce texte:</p>
 <p>&nbsp;</p>
-<h1><img loading="lazy" decoding="async" class="wp-image-518709 alignleft" style="font-size: 16px;" src="/content/uploads/2022/06/IMG_4086_2-1-800x733.jpg" alt="" width="290" height="266" srcset="/content/uploads/2022/06/IMG_4086_2-1-800x733.jpg 800w, /content/uploads/2022/06/IMG_4086_2-1-768x703.jpg 768w, /content/uploads/2022/06/IMG_4086_2-1-1536x1407.jpg 1536w, /content/uploads/2022/06/IMG_4086_2-1-600x550.jpg 600w, /content/uploads/2022/06/IMG_4086_2-1-1200x1099.jpg 1200w, /content/uploads/2022/06/IMG_4086_2-1.jpg 1951w" sizes="auto, (max-width: 290px) 100vw, 290px" /></h1>
+<h1><img loading="lazy" decoding="async" class="wp-image-518709 alignleft" style="font-size: 16px;" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-800x733.jpg" alt="" width="290" height="266" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-800x733.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-768x703.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-1536x1407.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-600x550.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1-1200x1099.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IMG_4086_2-1.jpg 1951w" sizes="auto, (max-width: 290px) 100vw, 290px" /></h1>
 <p><strong>Solstress d’été</strong></p>
 <p>Le logo de Vue sur Vert change parfois aux solstices et aux équinoxes selon une demande que j’avais faite à Manu Perrin-Houdon*, graphiste au sein du collectif des Poulets Bicyclettes, et concepteur du logo, et qui en a donc réalisé 4 versions différentes, selon les 4 saisons.</p>
 <p>Mais cette année, au moment de passer du printemps à l’été et de modifier le logo dans ma signature mail et sur mon site, je m’aperçois que je le fais cette fois-ci avec une sorte de stress et de sentiment de décalage entre cette mini-action numérique et le réel.</p>
@@ -32,7 +32,7 @@ Nous ne pouvons que partager  la vision de Floris et avions à coeur de vous fa
 <p>Une trêve de fraîcheur !</p>
 <p>Trêve de plaisanterie, non vraiment, y a plus de saison !</p>
 <p>Floris VAN LIDTH</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-553000 aligncenter" src="/content/uploads/2022/06/Logo-VueSurVert-2020RVB-printemps.png" alt="" width="561" height="418" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-553000 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/Logo-VueSurVert-2020RVB-printemps.png" alt="" width="561" height="418" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

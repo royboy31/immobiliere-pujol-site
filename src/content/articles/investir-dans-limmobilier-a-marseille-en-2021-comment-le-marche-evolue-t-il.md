@@ -5,7 +5,7 @@ date: "2021-06-23"
 excerpt: "En tant que professionnel de l’immobilier et connaissant ma ville et ses particularités, je suis souvent invité à donner mon avis sur l’évolution des prix de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/06/exposio_0001_1-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/06/exposio_0001_1-1200x800.jpg"
 seoTitle: "Investir dans l’immobilier à Marseille en 2021 : comment le marché évolue-t-il ?"
 seoDescription: "En tant que professionnel de l’immobilier et connaissant ma ville et ses particularités, je suis souvent invité à donner mon avis sur l’évolution des prix de l’immobilier à Marseille. Les derniers mois que nous avons traversés ont été lourds d’incertitudes. Economiquement, tous les marchés sentent bien qu’il y a un…"
 ---
@@ -35,7 +35,7 @@ Ce que nous aimons dans notre métier, en tout premier lieu, c’est la relation
 <h2><span style="font-family: georgia, palatino, serif;">Alors faut-il investir à Marseille en 2021 ?</span></h2>
 <p>La réponse est forcément oui, mais à condition d’être très bien accompagné et par quelqu’un qui connaît très bien la ville et ses quartiers. Notre équipe réalise d&rsquo;ailleurs une <strong>étude tous les ans sur les prix du marché et l&rsquo;évolution des tendances de la location</strong> que vous pouvez télécharger <a href="https://gestion-locative.immobiliere-pujol.fr/zoom-sur-le-marche-de-la-location-en-2021-a-marseille/?_ga=2.168118373.534023559.1624260215-783968854.1616668868" target="_blank" rel="noopener">ici</a>.<br />
 Les marchés évoluent, Marseille n’évolue pas comme les autres grandes villes. </p>
-<p><a href="/contact-immobiliere-pujol/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone  wp-image-416733" src="/content/uploads/2021/06/contactez-nous-noir.jpg" alt="" width="200" height="45" /></a> </p>
+<p><a href="/contact-immobiliere-pujol/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone  wp-image-416733" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/06/contactez-nous-noir.jpg" alt="" width="200" height="45" /></a> </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
       </div>

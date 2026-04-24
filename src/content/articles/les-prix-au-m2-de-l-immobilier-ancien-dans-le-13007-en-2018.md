@@ -5,7 +5,7 @@ date: "2019-06-04"
 excerpt: "Les prix au m2 de l’immobilier ancien dans le 13007 : comparatif quartier par quartier. En 2018, il s’est vendu dans le 7ème arrondissement de Marseille:253..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/prix-de-limmobilier-ancien-13007.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-de-limmobilier-ancien-13007.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13007 en 2018"
 seoDescription: "Les prix au m2 de l'immobilier ancien dans le 13007 : comparatif quartier par quartier. En 2018, il s’est vendu dans le 7ème arrondissement de Marseille:253 appartements au prix médian* de 3 070€ le m². Corniche Kennedy *Prix médian (sources notaires) : la moitié des transactions ont été signées à un…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Les prix au m2 de l'immobilier ancien dans le 13007 : comparati
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13007.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13007 en 2018" class="wp-image-235448" width="198" height="149" srcset="/content/uploads/2019/05/13007.jpeg 640w, /content/uploads/2019/05/13007-200x150.jpeg 200w, /content/uploads/2019/05/13007-600x450.jpg 600w" sizes="auto, (max-width: 198px) 100vw, 198px" /><figcaption>Corniche Kennedy</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13007 en 2018" class="wp-image-235448" width="198" height="149" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007.jpeg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007-200x150.jpeg 200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007-600x450.jpg 600w" sizes="auto, (max-width: 198px) 100vw, 198px" /><figcaption>Corniche Kennedy</figcaption></figure></div>
 
 
 

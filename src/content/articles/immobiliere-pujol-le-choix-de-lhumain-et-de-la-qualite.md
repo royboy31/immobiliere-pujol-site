@@ -5,7 +5,7 @@ date: "2024-03-12"
 excerpt: "Tous ceux qui me connaissent ont été surpris que je me lance dans ce métier. Si j’y suis rentré, c’était parce que je savais à l’époque qu’il était facile..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/03/PUJ-3477-Recupere-1-800x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/PUJ-3477-Recupere-1-800x1200.jpg"
 seoTitle: "Immobilière Pujol  :  le choix de l’humain et de la qualité"
 seoDescription: "Mettez votre confiance dans Immobilière Pujol à Marseille, une agence immobilière fondée par Stéphane Pujol, alliant tradition et innovation depuis plus de 20 ans. Découvrez notre engagement envers la qualité du service, notre culture du travail et notre accompagnement tant pour nos clients que pour nos collaborateurs. Expérimentez une approche unique qui conjugue excellence, transparence et maîtrise, pour des solutions immobilières sur mesure"
 ---
@@ -32,7 +32,7 @@ Cela vous paraît évident comme raison d’être mais beaucoup de nos confrère
 <p>Cela nécessite de la confiance et une grosse capacité d’analyse avec surtout beaucoup, beaucoup de travail et d&rsquo;engagement.</p>
 <p>Ce n’est pas l’outil qui fait le bon administrateur de biens, le bon syndic ou le bon conseiller de vente immobilier, c’est notre capacité à accompagner et à faire progresser nos équipes et nos clients.<br />
 Parfois malgré eux, souvent avec eux, mais toujours à côté d’eux.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-755698 alignleft" src="/content/uploads/2024/03/stepha-800x780.jpg" alt="" width="171" height="166" srcset="/content/uploads/2024/03/stepha-800x780.jpg 800w, /content/uploads/2024/03/stepha-768x749.jpg 768w, /content/uploads/2024/03/stepha-600x585.jpg 600w, /content/uploads/2024/03/stepha-1200x1170.jpg 1200w, /content/uploads/2024/03/stepha.jpg 1240w" sizes="auto, (max-width: 171px) 100vw, 171px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-755698 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha-800x780.jpg" alt="" width="171" height="166" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha-800x780.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha-768x749.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha-600x585.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha-1200x1170.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/stepha.jpg 1240w" sizes="auto, (max-width: 171px) 100vw, 171px" /></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

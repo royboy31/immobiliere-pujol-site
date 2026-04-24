@@ -2,39 +2,190 @@
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+import { findExpertByEmail } from '../../lib/experts';
+import ExpertCard from '../../components/experts/ExpertCard.astro';
+import { getClosedAnnonce, formatClosedPrice, typeLabel, type ClosedAnnonce } from '../../lib/closed-annonces';
+import { buildRealEstateListing } from '../../lib/schemas';
 
 const { slug } = Astro.params;
-const annonces = await fetchUbiflowAnnonces();
-const annonce = annonces.find(a => a.slug === slug);
 
-if (!annonce) {
+// 1. Try active feed first.
+const annonces = await fetchUbiflowAnnonces();
+const active = slug ? annonces.find(a => a.slug === slug) : undefined;
+
+// 2. Fallback: closed annonce loaded from the static assets layer.
+let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
+try {
+  const { env } = await import('cloudflare:workers');
+  assets = (env as any)?.ASSETS;
+} catch {
+  // Not running under wrangler (e.g. astro dev) — fall back to plain fetch.
+}
+const closed = active ? null : await getClosedAnnonce(slug ?? '', assets, new URL(Astro.url.origin));
+
+if (!active && !closed) {
   return Astro.redirect('/annonces/');
 }
 
-const title = `${annonce.titre} – Immobilière Pujol`;
-const description = annonce.description.substring(0, 160);
-const priceDisplay = formatPrice(annonce);
+// Normalize to a common render model.
+type View = {
+  titre: string;
+  description: string;
+  type: 'V' | 'L' | string;
+  reference: string;
+  priceDisplay: string;
+  photos: string[];
+  adresse?: string;
+  codePostal?: string;
+  ville?: string;
+  quartier?: string;
+  surface?: number | null;
+  nbPieces?: number | null;
+  nbChambres?: number | null;
+  nbSallesDeBain?: number | null;
+  nbWC?: number | null;
+  etage?: string | number;
+  nbEtages?: string | number;
+  typeChauffage?: string;
+  cuisine?: string;
+  dpeEtiquetteConso?: string;
+  dpeEtiquetteGes?: string;
+  loyer?: number | null;
+  loyerCC?: number | null;
+  charges?: number | null;
+  depotGarantie?: number | null;
+  prix?: number | null;
+  honorairesChargeAcquereur?: boolean;
+  isClosed: boolean;
+  related: ClosedAnnonce['related'];
+  expertEmail?: string | null;
+};
+
+let view: View;
+let expert: ReturnType<typeof findExpertByEmail> = null;
+
+if (active) {
+  expert = findExpertByEmail(active.emailAAfficher);
+  view = {
+    titre: active.titre,
+    description: active.description,
+    type: active.type,
+    reference: active.reference,
+    priceDisplay: formatPrice(active),
+    photos: active.photos,
+    adresse: active.adresse,
+    codePostal: active.codePostal,
+    ville: active.ville,
+    quartier: (active as any).quartier,
+    surface: (active as any).surface,
+    nbPieces: (active as any).nbPieces,
+    nbChambres: (active as any).nbChambres,
+    nbSallesDeBain: (active as any).nbSallesDeBain,
+    nbWC: (active as any).nbWC,
+    etage: (active as any).etage,
+    nbEtages: (active as any).nbEtages,
+    typeChauffage: (active as any).typeChauffage,
+    cuisine: (active as any).cuisine,
+    dpeEtiquetteConso: (active as any).dpeEtiquetteConso,
+    dpeEtiquetteGes: (active as any).dpeEtiquetteGes,
+    loyer: (active as any).loyer,
+    loyerCC: (active as any).loyerCC,
+    charges: (active as any).charges,
+    depotGarantie: (active as any).depotGarantie,
+    prix: active.prix,
+    honorairesChargeAcquereur: (active as any).honorairesChargeAcquereur,
+    isClosed: false,
+    related: [],
+    expertEmail: active.emailAAfficher,
+  };
+} else {
+  const c = closed!;
+  expert = findExpertByEmail(c.emailAAfficher);
+  // Don't use c.seoTitle — it's almost always a truncated description, not a real title.
+  const pieces = c.nbPieces ? ` ${c.nbPieces} pièce${c.nbPieces > 1 ? 's' : ''}` : '';
+  const surface = c.surface ? ` de ${c.surface} m²` : '';
+  const where = [c.ville, c.codePostal ? `(${c.codePostal})` : ''].filter(Boolean).join(' ');
+  const action = c.typeAnnonce === 'V' ? 'à vendre' : 'à louer';
+  const synthesizedTitle = `Appartement${pieces}${surface} ${action}${where ? ' à ' + where : ''}`.trim();
+  view = {
+    titre: synthesizedTitle,
+    description: c.descriptif ?? '',
+    type: c.typeAnnonce || 'V',
+    reference: c.referenceAgence ?? c.slug,
+    priceDisplay: formatClosedPrice(c),
+    photos: c.photos ?? [],
+    adresse: c.adresse,
+    codePostal: c.codePostal,
+    ville: c.ville,
+    quartier: c.quartier,
+    surface: c.surface ?? null,
+    nbPieces: c.nbPieces ?? null,
+    nbChambres: c.nbChambres ?? null,
+    nbSallesDeBain: c.nbSallesBain ?? null,
+    nbWC: c.nbWC ?? null,
+    etage: c.etage,
+    nbEtages: c.nbEtages,
+    typeChauffage: c.typeChauffage,
+    cuisine: c.cuisine,
+    dpeEtiquetteConso: c.dpeNote,
+    dpeEtiquetteGes: c.gesNote,
+    loyerCC: c.loyerCC ?? null,
+    charges: c.charges ?? null,
+    prix: c.prix ?? null,
+    isClosed: true,
+    related: c.related ?? [],
+    expertEmail: c.emailAAfficher,
+  };
+}
+
+const pageTitle = `${view.titre} – Immobilière Pujol`;
+const pageDescription = view.description ? view.description.substring(0, 160) : pageTitle;
+
+const annonceUrl = new URL(`/annonces/${slug}/`, Astro.site).toString();
+const listingSchema = buildRealEstateListing({
+  titre: view.titre,
+  description: view.description,
+  slug: slug ?? '',
+  type: view.type,
+  prix: view.prix ?? null,
+  loyerCC: view.loyerCC ?? null,
+  surface: view.surface ?? null,
+  nbPieces: view.nbPieces ?? null,
+  adresse: view.adresse,
+  codePostal: view.codePostal,
+  ville: view.ville,
+  photos: view.photos,
+}, annonceUrl);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]}>
   <article class="annonce-single">
+    {view.isClosed && (
+      <div class="annonce-single__closed-banner">
+        <p>
+          <strong>{typeLabel({ typeAnnonce: view.type } as ClosedAnnonce)} clôturée</strong> — cette annonce n'est plus disponible.
+          <a href="/annonces/">Voir nos annonces actuelles</a>.
+        </p>
+      </div>
+    )}
+
     <!-- Photo gallery -->
     <section class="annonce-single__gallery">
-      {annonce.photos.length > 0 ? (
+      {view.photos.length > 0 ? (
         <div class="gallery">
           <div class="gallery__main">
-            <img src={annonce.photos[0]} alt={annonce.titre} id="main-photo" />
+            <img src={view.photos[0]} alt={view.titre} id="main-photo" loading="eager" />
           </div>
-          {annonce.photos.length > 1 && (
+          {view.photos.length > 1 && (
             <div class="gallery__thumbs">
-              {annonce.photos.map((photo, i) => (
+              {view.photos.map((photo, i) => (
                 <button class="gallery__thumb" data-index={i} data-src={photo}>
                   <img src={photo} alt={`Photo ${i + 1}`} loading="lazy" width="120" height="80" />
                 </button>
               ))}
             </div>
           )}
-          <p class="gallery__count">{annonce.photos.length} photo{annonce.photos.length > 1 ? 's' : ''}</p>
+          <p class="gallery__count">{view.photos.length} photo{view.photos.length > 1 ? 's' : ''}</p>
         </div>
       ) : (
         <div class="gallery__empty">Pas de photos disponibles</div>
@@ -44,43 +195,43 @@ const priceDisplay = formatPrice(annonce);
     <!-- Main info -->
     <section class="annonce-single__info">
       <div class="annonce-single__header">
-        <h1>{annonce.titre}</h1>
+        <h1>{view.titre}</h1>
         <div class="annonce-single__price-block">
-          <span class="annonce-single__price">{priceDisplay}</span>
-          <span class:list={['annonce-single__badge', annonce.type === 'V' ? 'badge--vente' : 'badge--location']}>
-            {annonce.type === 'V' ? 'Vente' : 'Location'}
+          {view.priceDisplay && <span class="annonce-single__price">{view.priceDisplay}</span>}
+          <span class:list={['annonce-single__badge', view.type === 'V' ? 'badge--vente' : 'badge--location']}>
+            {view.type === 'V' ? 'Vente' : 'Location'}
           </span>
         </div>
       </div>
 
       <div class="annonce-single__location">
-        <p>{annonce.adresse && `${annonce.adresse}, `}{annonce.codePostal} {annonce.ville}</p>
-        {annonce.quartier && <p>Quartier : {annonce.quartier}</p>}
+        <p>{view.adresse && `${view.adresse}, `}{view.codePostal} {view.ville}</p>
+        {view.quartier && <p>Quartier : {view.quartier}</p>}
       </div>
 
       <!-- Key figures -->
       <div class="annonce-single__key-figures">
-        {annonce.surface && (
+        {view.surface && (
           <div class="key-figure">
-            <span class="key-figure__value">{annonce.surface} m²</span>
+            <span class="key-figure__value">{view.surface} m²</span>
             <span class="key-figure__label">Surface</span>
           </div>
         )}
-        {annonce.nbPieces && (
+        {view.nbPieces && (
           <div class="key-figure">
-            <span class="key-figure__value">{annonce.nbPieces}</span>
-            <span class="key-figure__label">Pièce{annonce.nbPieces > 1 ? 's' : ''}</span>
+            <span class="key-figure__value">{view.nbPieces}</span>
+            <span class="key-figure__label">Pièce{view.nbPieces > 1 ? 's' : ''}</span>
           </div>
         )}
-        {annonce.nbChambres && (
+        {view.nbChambres && (
           <div class="key-figure">
-            <span class="key-figure__value">{annonce.nbChambres}</span>
-            <span class="key-figure__label">Chambre{annonce.nbChambres > 1 ? 's' : ''}</span>
+            <span class="key-figure__value">{view.nbChambres}</span>
+            <span class="key-figure__label">Chambre{view.nbChambres > 1 ? 's' : ''}</span>
           </div>
         )}
-        {annonce.etage && (
+        {view.etage && (
           <div class="key-figure">
-            <span class="key-figure__value">{annonce.etage}{annonce.nbEtages ? `/${annonce.nbEtages}` : ''}</span>
+            <span class="key-figure__value">{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</span>
             <span class="key-figure__label">Étage</span>
           </div>
         )}
@@ -88,14 +239,12 @@ const priceDisplay = formatPrice(annonce);
     </section>
 
     <!-- Description -->
-    <section class="annonce-single__description">
-      <h2>Description</h2>
-      <div class="description-text">
-        {annonce.description.split('\n').map(line => (
-          line.trim() ? <p>{line.trim()}</p> : null
-        ))}
-      </div>
-    </section>
+    {view.description && (
+      <section class="annonce-single__description">
+        <h2>Description</h2>
+        <div class="description-text" set:html={view.description.replace(/\n/g, '<br/>')}></div>
+      </section>
+    )}
 
     <!-- Property details -->
     <section class="annonce-single__details">
@@ -104,71 +253,42 @@ const priceDisplay = formatPrice(annonce);
         <div class="details-group">
           <h3>Général</h3>
           <dl>
-            {annonce.libelleType && <><dt>Type</dt><dd>{annonce.libelleType}</dd></>}
-            {annonce.surface && <><dt>Surface</dt><dd>{annonce.surface} m²</dd></>}
-            {annonce.surfaceHabitable && annonce.surfaceHabitable !== annonce.surface && <><dt>Surface habitable</dt><dd>{annonce.surfaceHabitable} m²</dd></>}
-            {annonce.surfaceTerrain && <><dt>Surface terrain</dt><dd>{annonce.surfaceTerrain} m²</dd></>}
-            {annonce.nbPieces && <><dt>Pièces</dt><dd>{annonce.nbPieces}</dd></>}
-            {annonce.nbChambres && <><dt>Chambres</dt><dd>{annonce.nbChambres}</dd></>}
-            {annonce.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{annonce.nbSallesDeBain}</dd></>}
-            {annonce.nbWC && <><dt>WC</dt><dd>{annonce.nbWC}</dd></>}
-            {annonce.exposition && <><dt>Exposition</dt><dd>{annonce.exposition}</dd></>}
-            {annonce.cuisine && <><dt>Cuisine</dt><dd>{annonce.cuisine}</dd></>}
-            {annonce.anneeConstruction && <><dt>Année construction</dt><dd>{annonce.anneeConstruction}</dd></>}
+            {view.surface && <><dt>Surface</dt><dd>{view.surface} m²</dd></>}
+            {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
+            {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
+            {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
+            {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
+            {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
           </dl>
         </div>
 
-        <div class="details-group">
-          <h3>Équipements</h3>
-          <ul class="features-list">
-            {annonce.ascenseur && <li>Ascenseur</li>}
-            {annonce.terrasse && <li>Terrasse{annonce.surfaceTerrasse ? ` (${annonce.surfaceTerrasse} m²)` : ''}</li>}
-            {annonce.balcon && <li>Balcon</li>}
-            {annonce.garage && <li>Garage</li>}
-            {annonce.parking && <li>Parking</li>}
-            {annonce.cave && <li>Cave</li>}
-            {annonce.interphone && <li>Interphone</li>}
-            {annonce.vueSurMer && <li>Vue sur mer</li>}
-          </ul>
-        </div>
+        {view.typeChauffage && (
+          <div class="details-group">
+            <h3>Chauffage</h3>
+            <dl>
+              <dt>Type</dt><dd>{view.typeChauffage}</dd>
+            </dl>
+          </div>
+        )}
 
-        <div class="details-group">
-          <h3>Chauffage</h3>
-          <dl>
-            {annonce.typeChauffage && <><dt>Type</dt><dd>{annonce.typeChauffage}</dd></>}
-            {annonce.chauffageEnergie && <><dt>Énergie</dt><dd>{annonce.chauffageEnergie}</dd></>}
-          </dl>
-        </div>
-
-        {annonce.type === 'L' && (
+        {view.type === 'L' && (
           <div class="details-group">
             <h3>Location</h3>
             <dl>
-              {annonce.loyer && <><dt>Loyer HC</dt><dd>{annonce.loyer} €</dd></>}
-              {annonce.loyerCC && <><dt>Loyer CC</dt><dd>{annonce.loyerCC} €/mois</dd></>}
-              {annonce.charges && <><dt>Charges</dt><dd>{annonce.charges} €/mois</dd></>}
-              {annonce.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{annonce.depotGarantie} €</dd></>}
+              {view.loyer && <><dt>Loyer HC</dt><dd>{view.loyer} €</dd></>}
+              {view.loyerCC && <><dt>Loyer CC</dt><dd>{view.loyerCC} €/mois</dd></>}
+              {view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
+              {view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
             </dl>
           </div>
         )}
 
-        {annonce.type === 'V' && (
+        {view.type === 'V' && view.prix && (
           <div class="details-group">
             <h3>Vente</h3>
             <dl>
-              {annonce.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(annonce.prix)} €</dd></>}
-              {annonce.prixHorsHonoraires && annonce.prixHorsHonoraires !== annonce.prix && <><dt>Prix hors honoraires</dt><dd>{new Intl.NumberFormat('fr-FR').format(annonce.prixHorsHonoraires)} €</dd></>}
-              {annonce.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
-            </dl>
-          </div>
-        )}
-
-        {annonce.copropriete && (
-          <div class="details-group">
-            <h3>Copropriété</h3>
-            <dl>
-              {annonce.alurNbLots && <><dt>Nombre de lots</dt><dd>{annonce.alurNbLots}</dd></>}
-              {annonce.chargesCopropriete && <><dt>Charges mensuelles</dt><dd>{annonce.chargesCopropriete} €</dd></>}
+              <dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd>
+              {view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
             </dl>
           </div>
         )}
@@ -176,64 +296,127 @@ const priceDisplay = formatPrice(annonce);
     </section>
 
     <!-- DPE -->
-    {(annonce.dpeEtiquetteConso || annonce.dpeEtiquetteGes) && (
+    {(view.dpeEtiquetteConso || view.dpeEtiquetteGes) && (
       <section class="annonce-single__dpe">
         <h2>Diagnostics de performance</h2>
         <div class="dpe-badges">
-          {annonce.dpeEtiquetteConso && (
+          {view.dpeEtiquetteConso && (
             <div class="dpe-badge">
               <span class="dpe-badge__label">DPE</span>
-              <span class:list={['dpe-badge__value', `dpe-${annonce.dpeEtiquetteConso.toLowerCase()}`]}>
-                {annonce.dpeEtiquetteConso}
+              <span class:list={['dpe-badge__value', `dpe-${view.dpeEtiquetteConso.toLowerCase()}`]}>
+                {view.dpeEtiquetteConso}
               </span>
-              {annonce.dpeValeurConso && <span class="dpe-badge__kwh">{annonce.dpeValeurConso} kWh/m²/an</span>}
             </div>
           )}
-          {annonce.dpeEtiquetteGes && (
+          {view.dpeEtiquetteGes && (
             <div class="dpe-badge">
               <span class="dpe-badge__label">GES</span>
-              <span class:list={['dpe-badge__value', `ges-${annonce.dpeEtiquetteGes.toLowerCase()}`]}>
-                {annonce.dpeEtiquetteGes}
+              <span class:list={['dpe-badge__value', `ges-${view.dpeEtiquetteGes.toLowerCase()}`]}>
+                {view.dpeEtiquetteGes}
               </span>
             </div>
           )}
         </div>
-        {annonce.dpeEstimationMin && annonce.dpeEstimationMax && (
-          <p class="dpe-estimation">Estimation dépenses annuelles : {annonce.dpeEstimationMin} € à {annonce.dpeEstimationMax} €</p>
-        )}
       </section>
     )}
 
-    <!-- Contact -->
-    <section class="annonce-single__contact">
-      <h2>Intéressé par ce bien ?</h2>
-      <div class="contact-info">
-        {annonce.contactAAfficher && <p><strong>{annonce.contactAAfficher}</strong></p>}
-        {annonce.telephoneAAfficher && (
-          <a href={`tel:${annonce.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
-            Appeler : {annonce.telephoneAAfficher}
-          </a>
-        )}
-        {annonce.emailAAfficher && (
-          <a href={`mailto:${annonce.emailAAfficher}?subject=Annonce ${annonce.reference} - ${annonce.titre}`} class="btn btn--secondary">
-            Envoyer un email
-          </a>
-        )}
-      </div>
-      <p class="contact-ref">Référence : {annonce.reference}</p>
-      {annonce.mandatNumero && <p class="contact-ref">Mandat n° {annonce.mandatNumero}</p>}
-    </section>
+    {!view.isClosed && (
+      <section class="annonce-single__contact">
+        <h2>Intéressé par ce bien ?</h2>
+        <div class="contact-info">
+          {active!.contactAAfficher && !expert && <p><strong>{active!.contactAAfficher}</strong></p>}
+          {active!.telephoneAAfficher && (
+            <a href={`tel:${active!.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
+              Appeler : {active!.telephoneAAfficher}
+            </a>
+          )}
+          {active!.emailAAfficher && (
+            <a href={`mailto:${active!.emailAAfficher}?subject=Annonce ${view.reference} - ${view.titre}`} class="btn btn--secondary">
+              Envoyer un email
+            </a>
+          )}
+        </div>
+        <p class="contact-ref">Référence : {view.reference}</p>
+      </section>
+    )}
+
+    {view.isClosed && (
+      <section class="annonce-single__closed-cta">
+        <h2>Cette annonce est clôturée</h2>
+        <p>Consultez nos annonces disponibles ou contactez-nous pour un bien similaire.</p>
+        <div class="closed-cta__buttons">
+          <a href="/annonces/" class="btn btn--primary">Voir les annonces actuelles</a>
+          <a href="/contact-immobiliere-pujol/" class="btn btn--secondary">Nous contacter</a>
+        </div>
+        <p class="contact-ref">Référence : {view.reference}</p>
+      </section>
+    )}
+
+    {expert && <ExpertCard expert={expert} />}
+
+    {view.isClosed && view.related && view.related.length > 0 && (
+      <section class="annonce-single__related">
+        <h2>Autres biens dans le {view.codePostal || 'secteur'}</h2>
+        <ul class="related-links">
+          {view.related.map(r => (
+            <li>
+              <a href={`/annonces/${r.slug}/`}>
+                {r.type === 'V' ? 'Vente' : 'Location'} — {r.title}
+                {r.prix ? ` — ${new Intl.NumberFormat('fr-FR').format(r.prix)} €` : ''}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
     <nav class="annonce-single__nav">
       <a href="/annonces/">← Retour aux annonces</a>
-      {annonce.type === 'L' && <a href="/annonces/locations/">Voir toutes les locations</a>}
-      {annonce.type === 'V' && <a href="/annonces/ventes/">Voir toutes les ventes</a>}
+      {view.type === 'L' && <a href="/annonces/locations/">Voir toutes les locations</a>}
+      {view.type === 'V' && <a href="/annonces/ventes/">Voir toutes les ventes</a>}
     </nav>
   </article>
 </BaseLayout>
 
+<style>
+  .annonce-single__closed-banner {
+    background: #fef3c7;
+    border-left: 4px solid #d97706;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+  }
+  .annonce-single__closed-banner p { margin: 0; }
+  .annonce-single__closed-banner a { margin-left: 0.5rem; }
+
+  .annonce-single__closed-cta {
+    background: #f3f4f6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .closed-cta__buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+  }
+
+  .annonce-single__related { margin-top: 2.5rem; }
+  .related-links {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.5rem 1rem;
+  }
+  .related-links li { margin: 0; }
+  .related-links a { font-size: 0.9rem; line-height: 1.4; }
+</style>
+
 <script>
-  // Simple gallery thumbnail click handler
   document.querySelectorAll('.gallery__thumb').forEach(btn => {
     btn.addEventListener('click', () => {
       const src = (btn as HTMLElement).dataset.src;
@@ -242,4 +425,3 @@ const priceDisplay = formatPrice(annonce);
     });
   });
 </script>
-

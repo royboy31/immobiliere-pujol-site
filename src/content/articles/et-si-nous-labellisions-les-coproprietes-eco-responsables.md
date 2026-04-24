@@ -5,7 +5,7 @@ date: "2020-11-18"
 excerpt: "Si vous avez lu mes précédents articles, vous l’avez compris : je ne suis pas un militant écolo. En revanche, je suis engagé dans une pratique responsable et..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/09/montagne-aride.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/montagne-aride.jpg"
 seoTitle: "Et si nous labellisions les copropriétés éco-responsables ?"
 seoDescription: "Si vous avez lu mes précédents articles, vous le savez : je ne suis pas un militant écolo. Mais, je suis engagé dans une pratique responsable de notre métier. Et labelliser les corpopriétés éco-responsables serait un premier pas."
 ---

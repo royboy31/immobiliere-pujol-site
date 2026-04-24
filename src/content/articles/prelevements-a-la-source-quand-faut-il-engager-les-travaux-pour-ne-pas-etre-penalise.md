@@ -5,7 +5,7 @@ date: "2017-10-18"
 excerpt: "Faut-il engager les travaux en 2017, 2018, 2019 ou attendre 2020 ? Pour ne pas être impacté par l’usine à gaz montée pour les propriétaires bailleurs, faut-il..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/05/LO37340001_28A8.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/LO37340001_28A8.jpg"
 seoTitle: "Prélèvements à la source : quand faut-il engager les travaux pour ne pas être pénalisé ?"
 seoDescription: "Faut-il engager les travaux en 2017, 2018, 2019 ou attendre 2020 ? Pour ne pas être impacté par l’usine à gaz montée pour les propriétaires bailleurs, faut-il décaler les travaux à 2020 ? Telles sont les questions que mes clients nous posent. Le contexte Revenons un peu en arrière. Cela fait…"
 ---
@@ -31,7 +31,7 @@ Et en 2019, vous ne pourrez déduire que 50% des travaux engagés en 2019.
 
 Donc, soit vous êtes en mesure d’engager les travaux en 2017, soit vous aurez intérêt à engager les travaux en 2020 : voilà la grande idée à retenir. En revanche, si vous êtes obligé d’engager des travaux en 2018 ou 2019, qu’ils génèrent ou pas un déficit fiscal : lisez mon prochain article qui paraît demain.
 Vous pouvez vous arrêter là si vous n’êtes pas contraint de faire des travaux en 2018, en 2019… et uniquement lire les changements sur les modalités d’imposition de vos revenus des prochaines années.
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54988" src="/content/uploads/2017/10/credit-squeeze-522549_1920.jpg" alt="" width="1920" height="1465" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54988" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/credit-squeeze-522549_1920.jpg" alt="" width="1920" height="1465" />
 <h2>Modalités d&rsquo;imposition à venir</h2>
 Rappel des modalités de la future imposition et des échéances :
 <u>Exemple</u> : couple marié
@@ -101,7 +101,7 @@ Le prélèvement est calculé en appliquant un <strong>taux d’imposition uniq
 &#8211;        des impôts et des revenus N-1 pour les acomptes de septembre à décembre 2019, soit un taux de 11.199 € / 75.000 € = 14,93%
 Le taux est calculé abstraction faite des réductions et crédits d’impôt (et de l’abattement de 10% pour frais professionnels).
 Les prélèvements sociaux (17,2%) sont également prélevés à la source.
-<img loading="lazy" decoding="async" class="aligncenter wp-image-54986 " src="/content/uploads/2017/10/imposition-travaux-immobilier.png" alt="imposition travaux immobiliers" width="386" height="152" />
+<img loading="lazy" decoding="async" class="aligncenter wp-image-54986 " src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/imposition-travaux-immobilier.png" alt="imposition travaux immobiliers" width="386" height="152" />
 <ul>
  	<li><em>Paiement de l’acompte :</em></li>
 </ul>

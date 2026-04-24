@@ -5,7 +5,7 @@ date: "2023-03-14"
 excerpt: "En 2022 et 2023, le tarif réglementé de l’électricité et du gaz aurait dû augmenter dans des proportions faramineuses, jusqu’à +400%. Un bouclier tarifaire a..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/PXL_20221018_155218650-1-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/PXL_20221018_155218650-1-1200x900.jpg"
 seoTitle: "Point sur les prix de l’énergie au 1er trimestre 2023"
 seoDescription: "Quels seront les tarifs de l'énergie en 2023? Le bouclier tarifaire sera-t-il toujours actif? Quelles conséquence à titre individuel et collectif?"
 ---

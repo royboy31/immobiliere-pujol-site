@@ -5,7 +5,7 @@ date: "2017-02-18"
 excerpt: "La phase pré contentieuse La phase pré contentieuse est la phase au cours de laquelle nous allons relancer amiablement le locataire pour l’emmener à régler...."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/PU-0677-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0677-1200x750.jpg"
 seoTitle: "Procédures en cas d’impayés : la phase pré contentieuse & la phase contentieuse"
 seoDescription: "La phase pré contentieuse La phase pré contentieuse est la phase au cours de laquelle nous allons relancer amiablement le locataire pour l’emmener à régler. Nous procédons le plus souvent selon au schéma suivant : Le 15 du mois, relance simple (et/ou RAR) par courrier / ou par mail, rappelant au…"
 ---
@@ -23,7 +23,7 @@ A ce stade, la plupart des impayés sont réglés à la fin du mois, mais il peu
 
 Quand tout ce travail est effectué et que le locataire n’a toujours pas réglé, ou qu’aucun accord amiable n’a pu être trouvé, il reste la voie contentieuse à proprement dite.
 <h2>La phase contentieuse</h2>
-1) Si nous ne voulons  pas nécessairement résilier le bail, et si on veut éviter des honoraires d’avocat,  nous déposons une requête en injonction de payer au greffe du tribunal de situation de l’immeuble, qui devra contenir le bail, le décompte, et tout justificatif des sommes dues.  Le juge qui  estime la requête justifiée rend une ordonnance valant injonction de payer qu’il nous communique. Nous la faisons  signifier au locataire par huissier de justice. Le locataire a un mois pour contester par la voie de l’opposition auprès du tribunal. Passé ce délai d’un mois, l’huissier fait apposer par le tribunal la formule exécutoire sur l’ordonnance. Il peut ensuite faire les actes de recouvrement forcé (saisies comptes bancaires, saisies salaires, saisie meubles, etc…) pour récupérer les impayés.   <img loading="lazy" decoding="async" class=" wp-image-40698 alignright" src="/content/uploads/2017/02/PU-0251-1.jpg" alt="procédures loyers impayés" width="330" height="207" />
+1) Si nous ne voulons  pas nécessairement résilier le bail, et si on veut éviter des honoraires d’avocat,  nous déposons une requête en injonction de payer au greffe du tribunal de situation de l’immeuble, qui devra contenir le bail, le décompte, et tout justificatif des sommes dues.  Le juge qui  estime la requête justifiée rend une ordonnance valant injonction de payer qu’il nous communique. Nous la faisons  signifier au locataire par huissier de justice. Le locataire a un mois pour contester par la voie de l’opposition auprès du tribunal. Passé ce délai d’un mois, l’huissier fait apposer par le tribunal la formule exécutoire sur l’ordonnance. Il peut ensuite faire les actes de recouvrement forcé (saisies comptes bancaires, saisies salaires, saisie meubles, etc…) pour récupérer les impayés.   <img loading="lazy" decoding="async" class=" wp-image-40698 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/02/PU-0251-1.jpg" alt="procédures loyers impayés" width="330" height="207" />
 
 Cette procédure  est ici évoquée, mais nous ne la préconisons que pour des cas bien précis : Impayé en fin de bail après la sortie du locataire, ou litige sur une somme en particulier ( une régularisation de charges, taxe ordures ménagères impayée) alors que le reste des loyers est réglé.
 

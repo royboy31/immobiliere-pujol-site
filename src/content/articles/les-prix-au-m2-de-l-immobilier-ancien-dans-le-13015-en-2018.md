@@ -5,7 +5,7 @@ date: "2019-06-01"
 excerpt: "Quels sont les prix au m2 de l’immobilier ancien à Marseille dans le 13015 en 2018 ? En 2018, il s’est vendu dans le 15ème arrondissement de Marseille :193..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13015.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg"
 seoTitle: "Immobilier ancien à Marseille : les prix au m2 dans le 13015, en 2018"
 seoDescription: "Quels sont les prix au m2 de l'immobilier ancien à Marseille dans le 13015 en 2018 ? En 2018, il s’est vendu dans le 15ème arrondissement de Marseille :193 appartements au prix médian* de 1 280€ le m². Cet arrondissement est en pleine mutation. L'un des projets phare de cet…"
 ---
@@ -22,7 +22,7 @@ seoDescription: "Quels sont les prix au m2 de l'immobilier ancien à Marseille d
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13015.jpeg" alt="Le prix au m2 de l'ancien dans le 15eme arrondissement de Marseille en 2018" class="wp-image-235454" width="206" height="144" srcset="/content/uploads/2019/05/13015.jpeg 1000w, /content/uploads/2019/05/13015-768x538.jpeg 768w, /content/uploads/2019/05/13015-600x420.jpg 600w, /content/uploads/2019/05/13015-800x560.jpg 800w" sizes="auto, (max-width: 206px) 100vw, 206px" /><figcaption>Le Grand Littoral, 13015</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg" alt="Le prix au m2 de l'ancien dans le 15eme arrondissement de Marseille en 2018" class="wp-image-235454" width="206" height="144" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg 1000w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-800x560.jpg 800w" sizes="auto, (max-width: 206px) 100vw, 206px" /><figcaption>Le Grand Littoral, 13015</figcaption></figure></div>
 
 
 

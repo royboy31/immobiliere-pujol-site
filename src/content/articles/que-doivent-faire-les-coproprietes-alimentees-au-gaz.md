@@ -5,7 +5,7 @@ date: "2022-03-07"
 excerpt: "J’ai commencé cet article avant l’invasion de l’Ukraine… J’avais déjà comme objectif de donner des éléments de réponse à la question, à laquelle mes..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/03/hausse-prix-du-gaz-2022-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/hausse-prix-du-gaz-2022-1200x900.jpg"
 seoTitle: "Que doivent faire les copropriétés alimentées au gaz ?"
 seoDescription: "Invasion de l'Ukraine, sanctions envers la Russie, électrification de notre économie : la suppression du gaz est une question à se poser !"
 ---
@@ -19,7 +19,7 @@ seoDescription: "Invasion de l'Ukraine, sanctions envers la Russie, électrifica
 <h2>La crise gazière à son comble </h2>
 <p>Le gouvernement a récemment levé un bouclier tarifaire afin de contrôler la hausse des prix de l&rsquo;énergie. Le tarif <span class="JsGRdQ">réglementé du gaz a ainsi été gelé et ne devra pas dépasser le niveau d’Octobre 2021</span><span class="JsGRdQ">. (Sans blocage, les tarifs auraient été multipliés par 3, 4 ou 5 selon la référence qui est prise).</span></p>
 <p>Cette mesure a été annoncée avant l&rsquo;attaque de l&rsquo;Ukraine par la Russie. Si les prix resteront gelés comme le confirme Bruno Lemaire la question de l&rsquo;approvisionnement en gaz peut toutefois se poser. </p>
-<p><img loading="lazy" decoding="async" class="wp-image-487443 aligncenter" src="/content/uploads/2022/03/crise-gaz.png" alt="hausse prix du gaz" width="588" height="401" srcset="/content/uploads/2022/03/crise-gaz.png 700w, /content/uploads/2022/03/crise-gaz-600x409.png 600w" sizes="auto, (max-width: 588px) 100vw, 588px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-487443 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/crise-gaz.png" alt="hausse prix du gaz" width="588" height="401" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/crise-gaz.png 700w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/crise-gaz-600x409.png 600w" sizes="auto, (max-width: 588px) 100vw, 588px" /></p>
 <p>Nos copropriétés bénéficient d&rsquo;un prix en ce moment de 16€ HT par Mwh. Les premières estimations  nous laissent penser que le prix que nous pourrions négocier en ce moment serait à 80€ Ht par Mwh, voir 100€ HT par Mwh&#8230;(prix avant le déclenchement de l&rsquo;invasion de l&rsquo;Ukraine). Un plafonnement a heureusement été mis en place pour l&rsquo;année 2022 à 65€ht par Mwh selon nos informations. Comme la fourniture du gaz représente souvent 20 à 25% des charges, une multiplication par 3 ou 4 ou 5 de ce poste mènera à un doublement des charges pour les immeubles qui sont alimenté en chauffage collectif au gaz. Reste à espérer que les prix se calmeront en 2023 (au delà du plafonnement décidé par notre gouvernement) afin d&rsquo;éviter une envolée durable des charges de copropriété .</p>
 <p>Une alternative au gaz traditionnel existe : il s’agit du biogaz ! Un carburant produit à partir de déchets organiques issus du processus de méthanisation. Mais sa faible production est aujourd’hui incompatible avec les besoins actuels.</p>
 <p>&nbsp;</p>

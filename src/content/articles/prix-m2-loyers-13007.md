@@ -5,7 +5,7 @@ date: "2020-02-02"
 excerpt: "Les données chiffrées des loyers dans le 13007 en 2019 Prix moyen (en €/m2) : 13,2 Croissance entre 2017 et 2018 : 5,7 Durée d’occupation moyenne (en mois) :..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille_France_entry_of_port_with_Fort_Saint-Nicolas_Fort_Saint-Jean_and_Palais_du_Pharo-1200x797.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Marseille_France_entry_of_port_with_Fort_Saint-Nicolas_Fort_Saint-Jean_and_Palais_du_Pharo-1200x797.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13007 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13007.  La durée d'occupation moyenne est de 50 mois."
 ---
@@ -19,10 +19,10 @@ seoDescription: "Le prix moyen (en €/m2) est de 13,2 dans le 13007.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 12,3</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291185" src="/content/uploads/2017/01/7-ème-arrondissement-loyer-2018-800x281.png" alt="" width="800" height="281" srcset="/content/uploads/2017/01/7-ème-arrondissement-loyer-2018-800x281.png 800w, /content/uploads/2017/01/7-ème-arrondissement-loyer-2018-768x270.png 768w, /content/uploads/2017/01/7-ème-arrondissement-loyer-2018-600x211.png 600w, /content/uploads/2017/01/7-ème-arrondissement-loyer-2018.png 1042w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291185" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/7-%C3%A8me-arrondissement-loyer-2018-800x281.png" alt="" width="800" height="281" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/7-%C3%A8me-arrondissement-loyer-2018-800x281.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/7-%C3%A8me-arrondissement-loyer-2018-768x270.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/7-%C3%A8me-arrondissement-loyer-2018-600x211.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/7-%C3%A8me-arrondissement-loyer-2018.png 1042w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 7e arrondissement</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8520" src="/content/uploads/2017/01/Plan-du-7ème-arrondissement-de-Marseille-296x300.png" alt="7e arrondissement de marseille" width="296" height="300" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8520" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/Plan-du-7%C3%A8me-arrondissement-de-Marseille-296x300.png" alt="7e arrondissement de marseille" width="296" height="300" /></p>
 <p>Le 7eme est l’un des arrondissements phare de notre ville.<br />Un peu préservé, un peu populaire mais surtout très agréable à vivre.</p>
 <p>C’est LE quartier avec celui du 8eme arrondissement qui bénéficie de la vue sur mer…anciennement des pêcheurs, des employés municipaux et des riches familles Marseillaises.</p>
 <p>Le septième arrondissement de Marseille c’est 7 quartiers historiques et officiels :</p>

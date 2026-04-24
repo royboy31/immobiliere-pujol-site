@@ -5,7 +5,7 @@ date: "2025-03-18"
 excerpt: "« Ah non, mon syndic ne peut pas vendre mon appartement ! » Vraiment ? 🤔 Soyons honnêtes. Quand il s’agit de vendre un bien immobilier, beaucoup de..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/03/votre-syndic-votre-meilleur-vendeur-851x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/votre-syndic-votre-meilleur-vendeur-851x1200.jpg"
 seoTitle: "« Ah non, mon syndic ne peut pas vendre mon appartement ! » Vraiment ?"
 seoDescription: "Découvrez pourquoi votre syndic est votre meilleur partenaire pour vendre votre appartement."
 ---

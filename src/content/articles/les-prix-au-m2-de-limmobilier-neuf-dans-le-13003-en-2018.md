@@ -5,7 +5,7 @@ date: "2019-06-03"
 excerpt: "Voici une étude sur les prix au m2 de l’immobilier neuf dans le 13003 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13003-1.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13003-1.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13003 en 2018"
 seoDescription: "Voici une étude sur les prix au m2 de l'immobilier neuf dans le 13003 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 3ème arrondissement de Marseille:109 appartements au…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici une étude sur les prix au m2 de l'immobilier neuf dans l
 
 
 
-<div class="wp-block-image"><figure class="alignleft"><img loading="lazy" decoding="async" width="630" height="400" src="/content/uploads/2019/05/13003.jpeg" alt="prix immobilier neuf 13003 en 2018" class="wp-image-235603" srcset="/content/uploads/2019/05/13003.jpeg 630w, /content/uploads/2019/05/13003-600x381.jpg 600w" sizes="auto, (max-width: 630px) 100vw, 630px" /></figure></div>
+<div class="wp-block-image"><figure class="alignleft"><img loading="lazy" decoding="async" width="630" height="400" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13003.jpeg" alt="prix immobilier neuf 13003 en 2018" class="wp-image-235603" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13003.jpeg 630w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13003-600x381.jpg 600w" sizes="auto, (max-width: 630px) 100vw, 630px" /></figure></div>
 
 
 

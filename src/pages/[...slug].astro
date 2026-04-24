@@ -1,7 +1,8 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 
 // Catch-all route for root-level URLs:
 // - Blog posts (891 articles)
@@ -32,7 +33,9 @@ interface Props {
 }
 
 const { entry, type } = Astro.props;
-const { Content } = await render(entry);
+// Bodies are pure HTML (scraped from WP). Render raw to avoid markdown turning
+// 4-space-indented HTML into syntax-highlighted code blocks.
+const rawBody = (entry as any).body ?? '';
 
 // Detect prix-au-m2 category for special template
 const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
@@ -41,20 +44,46 @@ const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
 
 const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
 const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
+
+const pageUrl = new URL(`/${entry.data.slug}/`, Astro.site).toString();
+const pageSchemas: any[] = [];
+if (type === 'article') {
+  pageSchemas.push(buildArticle(entry.data, pageUrl));
+  // /local/{slug}/ articles are area-targeted service pages — also emit LocalBusiness.
+  if ((entry.data.slug || '').startsWith('local/')) {
+    pageSchemas.push(buildLocalBusiness({
+      pageUrl,
+      pageTitle: entry.data.title,
+      slug: entry.data.slug,
+    }));
+  }
+}
+
+// PriceHubble property estimation widget integration. The scraped body already
+// contains <iframe id="fisher-widget"></iframe>; we load the widget script and
+// init the widget here (set:html strips <script> tags so they must live outside).
+const isEstimationPage = entry.data.slug === 'estimez-le-prix-de-vente-de-votre-bien-en-2mn';
+
+// Most scraped bodies start with a WP hero section that already contains the
+// H1 and a featured image. Skip our own content__header when the body has one
+// to avoid a duplicate <h1>.
+const bodyHasOwnH1 = /<h1\b/i.test(rawBody);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schemas={pageSchemas}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2 }]}>
-    <header class="content__header">
-      <h1>{entry.data.title}</h1>
-      {type === 'article' && entry.data.date && (
-        <time datetime={entry.data.date}>
-          {new Date(entry.data.date).toLocaleDateString('fr-FR', {
-            year: 'numeric', month: 'long', day: 'numeric'
-          })}
-        </time>
-      )}
-    </header>
+    {!bodyHasOwnH1 && (
+      <header class="content__header">
+        <h1>{entry.data.title}</h1>
+        {type === 'article' && entry.data.date && (
+          <time datetime={entry.data.date}>
+            {new Date(entry.data.date).toLocaleDateString('fr-FR', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            })}
+          </time>
+        )}
+      </header>
+    )}
 
     {type === 'article' && isPrixM2 && (
       <aside class="content__sidebar content__sidebar--prix-m2">
@@ -66,9 +95,57 @@ const description = entry.data.seoDescription?.split('|')[0] || entry.data.excer
       </aside>
     )}
 
-    <div class="content__body">
-      <Content />
-    </div>
+    <div class="content__body" set:html={rawBody}></div>
+
+    {isEstimationPage && (
+      <>
+        <script is:inline src="https://fisher.pricehubble.com/widget.js"></script>
+        <script is:inline set:html={`(function initFisher(){
+  if (typeof FisherWidget === 'undefined') { return setTimeout(initFisher, 50); }
+  FisherWidget.init({
+    apiKey: '88b99291539f45ea8194a26d0fe7902b',
+    iframe: '#fisher-widget',
+    lang: 'fr',
+    activeColor: '00733c',
+    buttonColor: '00733c',
+    textColor: '212529',
+    consentGranted: true,
+  });
+})();`} />
+      </>
+    )}
+  </article>
+</BaseLayout>
+
+{isEstimationPage && (
+  <style is:global>
+    /* Estimation page — give the PriceHubble widget a clean card shell. The
+       widget content is inside an iframe (cross-origin) so we can only style
+       the wrapper + iframe element itself. */
+    .content__body {
+      background: #f6f7f9;
+    }
+    .content__body .post__content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 4rem;
+    }
+    #fisher-widget {
+      display: block;
+      width: 100%;
+      min-height: 820px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+      overflow: hidden;
+    }
+    @media (max-width: 720px) {
+      #fisher-widget { min-height: 1200px; border-radius: 8px; }
+      .content__body .post__content { padding: 1.25rem .5rem 2.5rem; }
+    }
+  </style>
+)}
 
     {type === 'article' && entry.data.categories && (
       <footer class="content__footer">

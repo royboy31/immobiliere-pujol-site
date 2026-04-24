@@ -15,10 +15,10 @@ seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/10/exposio_0001-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/10/exposio_0001-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/10/exposio_0001-600x400.jpg" 
-      <img src="/content/uploads/2018/10/exposio_0001-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0001-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -73,13 +73,13 @@ seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de 
 	<li>Mise en valeur avec de <a href="/photos-montrent-qualite-appartements-a-louer/">belles photos immobilières</a>  et une <a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9?lead_capture=false" target="_blank" rel="noopener">visite virtuelle</a> car la première impression est la plus importante</li>
 	<li>Descriptif du bien complet et fidèle à la réalité sur les annonces. </li>
 </ol>
-<h1><img loading="lazy" decoding="async" class="alignnone size-full wp-image-385837" src="/content/uploads/2018/10/louer-meuble-luxe-castellane-Copy.jpg" alt="" width="640" height="427" srcset="/content/uploads/2018/10/louer-meuble-luxe-castellane-Copy.jpg 640w, /content/uploads/2018/10/louer-meuble-luxe-castellane-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></h1>
+<h1><img loading="lazy" decoding="async" class="alignnone size-full wp-image-385837" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy.jpg" alt="" width="640" height="427" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></h1>
 <ul>
 	<li class="hero__title">
 <h2>Nos délais pour louer les biens immobiliers qui nous sont confiés</h2>
 </li>
 </ul>
-<p><img decoding="async" src="/content/uploads/2016/12/temps-de-mise-en-location.png" /></p>
+<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/temps-de-mise-en-location.png" /></p>
 <ul>
 	<li><strong>80% des appartements loués en moins de 43 jours</strong></li>
 	<li>70% des locations d&rsquo;appartements sont faites en moins de 35 jours</li>

@@ -5,7 +5,7 @@ date: "2019-02-10"
 excerpt: "J’ai attendu avant d’écrire et publier cet article, par respect pour les victimes, leurs familles et tous ceux qui ont été délogés, qui ont dû quitter leur..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/02/lost-places-3138931_1920-1200x799.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/lost-places-3138931_1920-1200x799.jpg"
 seoTitle: "Évacuations à Marseille : marchands de sommeil, propriétaires négligents et nous les professionnels"
 seoDescription: "J’ai attendu avant d’écrire et publier cet article, par respect pour les victimes, leurs familles et tous ceux qui ont été délogés, qui ont dû quitter leur appartement en dix minutes… toutes les personnes qui sont dans la détresse et dans l’attente d’un \"chez eux\". Depuis le drame du 5…"
 ---

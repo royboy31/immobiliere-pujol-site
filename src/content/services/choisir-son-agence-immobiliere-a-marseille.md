@@ -20,10 +20,10 @@ seoDescription: "Vous avez décidé de vendre . Une première décision importan
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/web-home-staging_0011-marseille-Copy.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/web-home-staging_0011-marseille-Copy.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/web-home-staging_0011-marseille-Copy-600x400.jpg" 
-      <img src="/content/uploads/2017/10/web-home-staging_0011-marseille-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0011-marseille-Copy.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0011-marseille-Copy.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0011-marseille-Copy-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0011-marseille-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -62,7 +62,7 @@ seoDescription: "Vous avez décidé de vendre . Une première décision importan
 	<li>qui saura établir avec vous une relation agréable et de confiance.</li>
 </ul>
 <p>Notre équipe transaction a ces compétence et nous nous engageons à vous apporter cette qualité de service.<br />
-<img loading="lazy" decoding="async" class="wp-image-233608 alignleft" src="/content/uploads/2017/10/P-3021-051218-Copy.jpg" alt="" width="184" height="276" /></p>
+<img loading="lazy" decoding="async" class="wp-image-233608 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-3021-051218-Copy.jpg" alt="" width="184" height="276" /></p>
 <p><span style="font-size: 12pt;"><strong>Notre délai moyen de vente est de 45 jours</strong> , un chiffre bien inférieur à la moyenne nationale qui est de 105 jours. </span></p>
 <p>N&rsquo;hésitez pas à nous contacter au <br />
 04 91 37 33 55 ou via le formulaire ci-dessous . </p>

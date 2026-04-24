@@ -5,7 +5,7 @@ date: "2020-02-15"
 excerpt: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS dans le 13006 pour 2019 En..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13006-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13006-1.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13006 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13006 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -16,7 +16,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 383 appartements au prix médian* de 2 730€ le m².</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright"><img loading="lazy" decoding="async" class="alignnone  wp-image-342784" src="/content/uploads/2020/02/20180414_170220-800x600.jpg" alt="" width="375" height="282" srcset="/content/uploads/2020/02/20180414_170220-800x600.jpg 800w, /content/uploads/2020/02/20180414_170220-768x576.jpg 768w, /content/uploads/2020/02/20180414_170220-1536x1152.jpg 1536w, /content/uploads/2020/02/20180414_170220-2048x1536.jpg 2048w, /content/uploads/2020/02/20180414_170220-600x450.jpg 600w, /content/uploads/2020/02/20180414_170220-1200x900.jpg 1200w" sizes="auto, (max-width: 375px) 100vw, 375px" /></figure>
+<figure class="alignright"><img loading="lazy" decoding="async" class="alignnone  wp-image-342784" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-800x600.jpg" alt="" width="375" height="282" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-1536x1152.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-2048x1536.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/02/20180414_170220-1200x900.jpg 1200w" sizes="auto, (max-width: 375px) 100vw, 375px" /></figure>
 </div>
 <p>&nbsp;</p>
 <p><em>*Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</em></p>

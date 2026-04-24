@@ -5,7 +5,7 @@ date: "2023-12-12"
 excerpt: "L’administrateur de bien est un professionnel de l’immobilier chargé de gérer les biens immobiliers pour le compte de leurs propriétaires. À l’agence..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Administrateur de bien à Montredon, 13008 Marseille"
 seoDescription: ""
 ---

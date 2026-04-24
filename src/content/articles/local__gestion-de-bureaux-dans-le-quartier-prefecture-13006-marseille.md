@@ -5,7 +5,7 @@ date: "2024-01-04"
 excerpt: "La gestion de bureaux est un service clé proposé par l’agence immobilière Pujol, spécialisée dans la prise en charge de tous les aspects liés à la location et..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bureaux dans le quartier Préfecture, 13006 Marseille"
 seoDescription: ""
 ---

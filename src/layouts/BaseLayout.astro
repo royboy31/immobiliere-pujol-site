@@ -1,6 +1,7 @@
 ---
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import { buildRealEstateAgent, autoBreadcrumb } from '../lib/schemas';
 import '../styles/theme.scss';
 
 interface Props {
@@ -9,6 +10,10 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  /** Page-specific JSON-LD schemas (Article, WebSite, RealEstateListing, etc.). */
+  schemas?: any[];
+  /** Disable the auto-generated BreadcrumbList schema. */
+  breadcrumb?: boolean;
 }
 
 const {
@@ -17,6 +22,8 @@ const {
   ogImage = "/images/og-default.jpg",
   canonical,
   noindex = false,
+  schemas: pageSchemas = [],
+  breadcrumb = true,
 } = Astro.props;
 
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
@@ -24,6 +31,26 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 // STAGING: block all indexing until go-live.
 // Set ALLOW_INDEXING=true in Cloudflare env vars when ready for production.
 const shouldNoindex = noindex || !import.meta.env.ALLOW_INDEXING;
+
+// GTM & analytics: only fire in production (when we allow indexing).
+// Staging must never pollute live stats.
+// GTM_ID can be overridden per environment if needed.
+const gtmId = import.meta.env.GTM_ID || 'GTM-WNFF3V';
+const loadAnalytics = !shouldNoindex;
+
+// Always emit the enriched RealEstateAgent on every page. Pages can add their
+// own schemas (Article, WebSite, RealEstateListing, BreadcrumbList) via
+// the `schemas` prop. An automatic BreadcrumbList is generated from the URL
+// unless `breadcrumb={false}` or the page already provides one.
+const breadcrumbSchema = breadcrumb
+  ? autoBreadcrumb(Astro.url.pathname, title.split('–')[0].trim())
+  : null;
+
+const allSchemas: any[] = [buildRealEstateAgent()];
+if (breadcrumbSchema) allSchemas.push(breadcrumbSchema);
+for (const s of pageSchemas) {
+  if (s) allSchemas.push(s);
+}
 ---
 
 <!DOCTYPE html>
@@ -54,36 +81,25 @@ const shouldNoindex = noindex || !import.meta.env.ALLOW_INDEXING;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Google Tag Manager -->
-    <script is:inline>{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WNFF3V');`}</script>
+    {loadAnalytics ? (
+      <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${gtmId}');`} />
+    ) : (
+      <!-- Analytics disabled (staging / noindex). Enable by setting ALLOW_INDEXING in env. -->
+    )}
 
-    <!-- Schema.org -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "RealEstateAgent",
-      "name": "Immobilière Pujol",
-      "url": "https://www.immobiliere-pujol.fr",
-      "telephone": "+33 04 91 37 38 39",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Marseille",
-        "addressCountry": "FR"
-      },
-      "sameAs": [
-        "https://www.facebook.com/agenceimmobiliere.fr/",
-        "https://www.linkedin.com/company/immobiliere-pujol/about/",
-        "https://twitter.com/stephanepujol"
-      ]
-    })} />
+    <!-- Schema.org JSON-LD -->
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNFF3V"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {loadAnalytics && (
+      <noscript set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`} />
+    )}
 
     <Header />
     <main>

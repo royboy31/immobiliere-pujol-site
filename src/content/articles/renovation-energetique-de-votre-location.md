@@ -5,7 +5,7 @@ date: "2023-03-15"
 excerpt: "La rénovation d’un appartement à louer oblige désormais de se poser plus questions quant au choix des travaux à réaliser et des types de matériaux à choisir..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/exposio_0001-1-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/exposio_0001-1-1200x800.jpg"
 seoTitle: "Rénovation énergétique de votre location"
 seoDescription: "Travaux de rénovation locatif doivent désormais rimer avec rénovation énergétique du logement à louer. Quels travaux prioriser? Quels matériaux choisir? Cet article vous livre un cas concret de rénovation."
 ---
@@ -16,13 +16,13 @@ Dans cet article, nous vous présentons l’accompagnement de Monsieur L dans so
 <h3><br />
 PHASE 1: Etat des lieux de l’appartement et réalisation d’un DPE avant travaux</h3>
 <p>Appartement de type 1 situé au 4eme et dernier étage sous combles non isolées ayant 3 murs en façade extérieur. En mauvais état, chauffage au gaz avec diagnostic de Performance Énergétique en classe G . Appartement inlouable.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-615189" src="/content/uploads/2023/03/analyse-dpe-avant-travaux-1.jpg" alt="" width="593" height="338" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-615189" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/analyse-dpe-avant-travaux-1.jpg" alt="" width="593" height="338" /></p>
 <p>&nbsp;</p>
 <p>A ce stade, même si le propriétaire avait effectué des travaux purement esthétiques comme la rénovation des peintures, de la cuisine et de la salle de bain, son appartement serait resté en classe G et n’aurait pas pu être loué.</p>
 <p>&nbsp;</p>
 <h3>PHASE 2 : Analyse du DPE en détail et réflexion sur les travaux à entreprendre pour rendre le logement louable et moins énergivore</h3>
 <p>L’analyse du DPE a permis de pointer la mauvaise isolation de l’appartement qui faisait l’objet des plus grosses déperditions de chaleur par les murs et par les plafonds. Le deuxième poste de déperdition de chaleur se faisait par la ventilation naturelle du logement.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-615187" src="/content/uploads/2023/03/analyse-dpe-avant-travaux.jpg" alt="" width="743" height="333" srcset="/content/uploads/2023/03/analyse-dpe-avant-travaux.jpg 743w, /content/uploads/2023/03/analyse-dpe-avant-travaux-600x269.jpg 600w" sizes="auto, (max-width: 743px) 100vw, 743px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-615187" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/analyse-dpe-avant-travaux.jpg" alt="" width="743" height="333" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/analyse-dpe-avant-travaux.jpg 743w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/analyse-dpe-avant-travaux-600x269.jpg 600w" sizes="auto, (max-width: 743px) 100vw, 743px" /></p>
 <h3> </h3>
 <h3>PHASE 3 : Décider des travaux à entreprendre</h3>
 <p>Afin d’améliorer l&rsquo;étiquette énergétique de ce logement et compte tenue de certaines contraintes, il a été conseillé au client les travaux suivants : <br />
@@ -51,7 +51,7 @@ Afin d’optimiser la surface et le loyer un espace nuit séparé a été créé
 <p><iframe loading="lazy" class="juxtapose" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=ffd51b7c-bf70-11ed-b5bd-6595d9b17862" width="100%" height="768" frameborder="0"></iframe></p>
 <p><iframe loading="lazy" class="juxtapose" src="https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=192b8386-bf71-11ed-b5bd-6595d9b17862" width="100%" height="768" frameborder="0"></iframe></p>
 <p>Si vous aussi vous souhaitez être accompagné dans les travaux à réaliser pour combiner meilleur rendement énergétique et financier de votre investissement locatif, n&rsquo;hésitez pas à me contacter. </p>
-<p><img loading="lazy" decoding="async" class="wp-image-615191 alignleft" src="/content/uploads/2023/03/CARO-e.jpg" alt="" width="131" height="132" srcset="/content/uploads/2023/03/CARO-e.jpg 576w, /content/uploads/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 131px) 100vw, 131px" />       </p>
+<p><img loading="lazy" decoding="async" class="wp-image-615191 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg" alt="" width="131" height="132" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg 576w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 131px) 100vw, 131px" />       </p>
 <p>Caroline PUJOL<br />
 06 79 02 72 29  <br />
  carolinepujol@immobiliere-pujol.fr</p>

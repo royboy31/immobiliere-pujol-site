@@ -5,13 +5,13 @@ date: "2022-12-16"
 excerpt: "LES ÉCO-GESTES à adopter chez soi Avec le froid et les fêtes, nous augmentons notre consommation électrique. Cette année, avec la hausse des prix de l’énergie,..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/web-home-staging_0005-caroline-semac_bons-enfants--1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/web-home-staging_0005-caroline-semac_bons-enfants--1200x800.jpg"
 seoTitle: "Les éco-gestes pour réduire nos consommations d’énergie"
 seoDescription: "LES ÉCO-GESTES à adopter chez soi  Avec le froid et les fêtes, nous augmentons notre consommation électrique. Cette année,  avec la hausse des prix de l'énergie, nous serons tous appelés à faire des efforts pour réduire nos consommations d’énergie. En instaurant de nouveaux gestes dans vos habitudes, vous pourrez contribuer…"
 ---
 
 <h2><b>LES ÉCO-GESTES à adopter chez soi </b></h2>
-<p><img loading="lazy" decoding="async" class="wp-image-583108 aligncenter" src="/content/uploads/2022/12/eco-gestes-chez-soi.jpg" alt="" width="340" height="328" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-583108 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/eco-gestes-chez-soi.jpg" alt="" width="340" height="328" /></p>
 <p><span style="font-weight: 400;">Avec le froid et les fêtes, nous augmentons notre consommation électrique. Cette année,  avec la hausse des prix de l&rsquo;énergie, nous serons tous appelés à faire des efforts pour réduire nos consommations d’énergie.</span></p>
 <p><span style="font-weight: 400;">En instaurant de nouveaux gestes dans vos habitudes, vous pourrez contribuer à un approvisionnement électrique stable sur l’ensemble du territoire français et réduire vos factures d’électricité. </span></p>
 <h3><b>Comment réduire sa facture d&rsquo;électricité liée au</b><b> chauffage ?</b></h3>
@@ -37,7 +37,7 @@ seoDescription: "LES ÉCO-GESTES à adopter chez soi  Avec le froid et les fêt
 </ul>
 <p>&nbsp;</p>
 <h2>Les ECO GESTES à adopter au bureau</h2>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-583109 aligncenter" src="/content/uploads/2022/12/eco-geste-au-bureau.jpg" alt="" width="404" height="218" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-583109 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/eco-geste-au-bureau.jpg" alt="" width="404" height="218" /></p>
 <p>&nbsp;</p>
 <p>Nous avons de plus en plus recours aux appareils numériques alors  l&rsquo;idée est d&rsquo;en prendre soin pour éviter de les changer trop souvent et d&rsquo;économiser les batteries donc :<br />
 &#8211; On évite les charges inutiles comme pendant la nuit ou on consomme plus que nécessaire,<br />

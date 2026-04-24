@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "La gestion immobilière est un service proposé par l’agence immobilière Pujol, qui consiste à prendre en charge l’ensemble des tâches liées à la location et..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à Vaufrèges, 13009 Marseille"
 seoDescription: ""
 ---

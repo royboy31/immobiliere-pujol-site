@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion d’appartements est un service clé proposé par l’agence immobilière Pujol, qui couvre toutes les étapes du processus de location, de la recherche de..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion d’appartements dans le quartier du Cabot, 13009 Marseille"
 seoDescription: ""
 ---

@@ -15,10 +15,10 @@ seoDescription: "Immobilière Pujol en syndic est une agence recommandée par se
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg" 
-      <img src="/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg" 
+      <img src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -31,7 +31,7 @@ seoDescription: "Immobilière Pujol en syndic est une agence recommandée par se
 <p>Il est très important, en tant que propriétaire, de trouver une agence qui défende réellement vos intérêts. Chez Immobilière Pujol – syndic de copropriété Marseille – nous prenons le temps de traiter chaque dossier avec toute notre attention.</p>
 
 
-<figure id="attachment_225167" aria-describedby="caption-attachment-225167" style="width: 800px" class="wp-caption alignnone"><a href="/content/uploads/2017/11/reunion-syndic2.jpg"><img loading="lazy" decoding="async" class="wp-image-225167 size-medium" title="syndic de copropriété Marseille" src="/content/uploads/2017/11/reunion-syndic2-800x600.jpg" alt="syndic de copropriété Marseille" width="800" height="600" srcset="/content/uploads/2017/11/reunion-syndic2-800x600.jpg 800w, /content/uploads/2017/11/reunion-syndic2-768x576.jpg 768w, /content/uploads/2017/11/reunion-syndic2-200x150.jpg 200w, /content/uploads/2017/11/reunion-syndic2-600x450.jpg 600w, /content/uploads/2017/11/reunion-syndic2-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225167" class="wp-caption-text">Réunion de syndic de copropriété Marseille chez Immobilière Pujol</figcaption></figure>
+<figure id="attachment_225167" aria-describedby="caption-attachment-225167" style="width: 800px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2.jpg"><img loading="lazy" decoding="async" class="wp-image-225167 size-medium" title="syndic de copropriété Marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-800x600.jpg" alt="syndic de copropriété Marseille" width="800" height="600" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-200x150.jpg 200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225167" class="wp-caption-text">Réunion de syndic de copropriété Marseille chez Immobilière Pujol</figcaption></figure>
 <h2>Qu’est-ce qu’immobilière Pujol ?</h2>
 <p>Nous sommes un syndic de copropriété localisé à Marseille. Selon notre vision des choses, il est essentiel de ne pas se limiter à la mise en vente ou en location pour aider les propriétaires.</p>
 <p>C’est pour cela que nous proposons également un syndic de copropriété, qui a pour objectif de :</p>

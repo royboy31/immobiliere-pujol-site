@@ -1,0 +1,120 @@
+---
+import { getAdminEnv, getAdminPath } from '../lib/admin-auth';
+
+interface Props {
+  title: string;
+  section?: 'experts' | 'articles' | 'pages' | 'home';
+  hideSidebar?: boolean;
+}
+
+const { title, section = 'home', hideSidebar = false } = Astro.props;
+const env = await getAdminEnv();
+const adminPath = getAdminPath(env);
+const base = `/${adminPath}`;
+const adminEmail = (Astro.locals as any).adminEmail ?? '';
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{title} – Admin Pujol</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --sidebar: #1e293b;
+      --sidebar-active: #334155;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #00733c;
+      --danger: #dc2626;
+      --card: #ffffff;
+      --card-border: #e5e7eb;
+      --body-bg: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--body-bg); font-family: -apple-system, "Segoe UI", Roboto, sans-serif; color: #111; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; cursor: pointer; }
+    .admin-shell { display: flex; min-height: 100vh; }
+    .admin-sidebar {
+      width: 240px; flex-shrink: 0;
+      background: var(--bg); color: var(--text);
+      display: flex; flex-direction: column;
+    }
+    .admin-sidebar__brand {
+      padding: 1.25rem 1rem; font-weight: 700; font-size: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .admin-sidebar__nav { flex: 1; padding: 1rem 0.5rem; display: flex; flex-direction: column; gap: 0.25rem; }
+    .admin-sidebar__nav a {
+      color: var(--muted); padding: 0.65rem 0.8rem; border-radius: 6px;
+      font-size: 0.9rem; display: flex; align-items: center; gap: 0.6rem;
+    }
+    .admin-sidebar__nav a:hover { color: #fff; background: var(--sidebar); text-decoration: none; }
+    .admin-sidebar__nav a.is-active { color: #fff; background: var(--sidebar-active); }
+    .admin-sidebar__nav span.count { margin-left: auto; opacity: 0.7; font-size: 0.75rem; }
+    .admin-sidebar__user {
+      padding: 0.75rem 1rem; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.8rem;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .admin-sidebar__user .email { color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+    .admin-sidebar__user form { margin: 0; }
+    .admin-sidebar__user button {
+      background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.35rem 0.6rem; border-radius: 4px; width: 100%; font-size: 0.8rem;
+    }
+    .admin-sidebar__user button:hover { background: var(--sidebar); }
+    .admin-main { flex: 1; min-width: 0; padding: 1.5rem 2rem; }
+    h1 { margin: 0 0 1.25rem; font-size: 1.6rem; }
+    h2 { margin: 1.5rem 0 0.75rem; font-size: 1.2rem; }
+    .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem; }
+    .btn {
+      display: inline-block; padding: 0.5rem 0.95rem; border-radius: 6px;
+      border: 1px solid transparent; font-size: 0.9rem; font-weight: 500;
+    }
+    .btn--primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn--primary:hover { opacity: 0.9; text-decoration: none; color: #fff; }
+    .btn--ghost { background: transparent; color: #111; border-color: var(--card-border); }
+    .btn--ghost:hover { background: #f1f5f9; text-decoration: none; }
+    .btn--danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+    input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+      display: block; width: 100%; padding: 0.55rem 0.7rem; border: 1px solid var(--card-border);
+      border-radius: 6px; font: inherit;
+    }
+    textarea { min-height: 140px; font-family: ui-monospace, Menlo, monospace; font-size: 0.9rem; }
+    label { display: block; margin-bottom: 1rem; font-size: 0.9rem; font-weight: 500; }
+    label input, label textarea { margin-top: 0.35rem; font-weight: 400; }
+    .toolbar { display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: center; }
+    .toolbar .spacer { flex: 1; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  </style>
+</head>
+<body>
+<div class="admin-shell">
+  {!hideSidebar && (
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">Immo Pujol · Admin</div>
+      <nav class="admin-sidebar__nav">
+        <a href={`${base}/`} class:list={[{ 'is-active': section === 'home' }]}>Tableau de bord</a>
+        <a href={`${base}/experts/`} class:list={[{ 'is-active': section === 'experts' }]}>Experts</a>
+        <a href={`${base}/articles/`} class:list={[{ 'is-active': section === 'articles' }]}>Articles de blog</a>
+        <a href={`${base}/pages/`} class:list={[{ 'is-active': section === 'pages' }]}>Pages légales</a>
+      </nav>
+      <div class="admin-sidebar__user">
+        <span class="email">{adminEmail || 'anonyme'}</span>
+        <form method="POST" action={`/api/${adminPath}/auth/logout`}>
+          <button type="submit">Déconnexion</button>
+        </form>
+      </div>
+    </aside>
+  )}
+  <main class="admin-main">
+    <slot />
+  </main>
+</div>
+</body>
+</html>

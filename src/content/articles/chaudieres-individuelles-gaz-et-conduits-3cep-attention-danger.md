@@ -5,13 +5,13 @@ date: "2025-03-19"
 excerpt: "Un problème récurrent dans les immeubles récents Les chaudières individuelles gaz reliées à des conduits 3CEP sont présentes dans de nombreuses copropriétés..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/03/exposio_0002-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-1200x800.jpg"
 seoTitle: "Chaudières individuelles gaz et conduits 3CEP : attention danger"
 seoDescription: "Les conduits 3CEP installés dans certaine copropriétés présentent un risque d’intoxication au monoxyde de carbone. Découvrez comment sécuriser votre installation."
 ---
 
 <h2><b>Un problème récurrent dans les immeubles récents</b></h2>
-<p><span style="font-weight: 400;"><img loading="lazy" decoding="async" class=" wp-image-1013545 alignleft" src="/content/uploads/2025/03/exposio_0002-800x533.jpg" alt="" width="362" height="241" srcset="/content/uploads/2025/03/exposio_0002-800x533.jpg 800w, /content/uploads/2025/03/exposio_0002-768x512.jpg 768w, /content/uploads/2025/03/exposio_0002-600x400.jpg 600w, /content/uploads/2025/03/exposio_0002-1200x800.jpg 1200w, /content/uploads/2025/03/exposio_0002.jpg 1500w" sizes="auto, (max-width: 362px) 100vw, 362px" />Les chaudières individuelles gaz reliées à des conduits 3CEP sont présentes dans de nombreuses copropriétés récentes . On trouve ces installations depuis les années 2000. <br />
+<p><span style="font-weight: 400;"><img loading="lazy" decoding="async" class=" wp-image-1013545 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-800x533.jpg" alt="" width="362" height="241" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/03/exposio_0002.jpg 1500w" sizes="auto, (max-width: 362px) 100vw, 362px" />Les chaudières individuelles gaz reliées à des conduits 3CEP sont présentes dans de nombreuses copropriétés récentes . On trouve ces installations depuis les années 2000. <br />
 Conçus pour optimiser l’évacuation des fumées et l’apport d’air frais, ces conduits verticaux et collectifs sont dédiés au raccordement des chaudières individuelles gaz étanches à condensation s de chaque appartement.<br />
 Plusieurs chaudières individuelles sont raccordées au  même conduit.<br />
 Ce système présente néanmoins un risque important en cas de défaut d’installation, de maintenance ou en cas de retrait d&rsquo;une chaudière individuelle par un résident/artisan non averti. <br />

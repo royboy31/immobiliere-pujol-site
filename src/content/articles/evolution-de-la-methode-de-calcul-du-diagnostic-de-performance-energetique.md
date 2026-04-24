@@ -5,7 +5,7 @@ date: "2025-09-09"
 excerpt: "Le DPE change… et ça va faire du bien aux logements électriques ! À partir du 1er janvier 2026, la méthode de calcul du Diagnostic de Performance Énergétique..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/07/photo_66f9b192fd34b3fb2f93bf86057b9ecc-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/07/photo_66f9b192fd34b3fb2f93bf86057b9ecc-1200x800.jpg"
 seoTitle: "Evolution  de la méthode de calcul du diagnostic de performance énergétique"
 seoDescription: "DPE 2026 : les logements électriques moins pénalisés . Découvrez ce qui change et testez votre bien avec notre simulateur.”"
 ---

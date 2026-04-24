@@ -1,39 +1,130 @@
 ---
-export const prerender = true;
+export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
 
-export async function getStaticPaths() {
-  const experts = await getCollection('experts');
-  return experts.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+// Switched from prerender to SSR so we can pull the live Ubiflow feed for each
+// expert and merge with the static closed-listings index built at compile time.
+// NOTE: do NOT use getCollection('experts') here — it pulls the entire
+// content data layer (annonces included) into the Worker bundle and blows the
+// 3 MiB limit. Use import.meta.glob scoped to just the experts directory.
+
+type ExpertData = {
+  title: string;
+  slug: string;
+  fonction?: string;
+  description?: string;
+  photo?: string;
+  email?: string;
+  phone?: string;
+  linkedin?: string;
+  facebook?: string;
+  instagram?: string;
+};
+const expertModules = import.meta.glob<ExpertData>(
+  '../../content/experts/*.json',
+  { eager: true, import: 'default' },
+);
+const allExperts = Object.values(expertModules);
+
+const { slug } = Astro.params;
+const expert = allExperts.find((e) => e.slug === slug);
+if (!expert) return new Response('Not found', { status: 404 });
+
+const expertEmail = (expert.email || '')
+  .split('|')[0]
+  .trim()
+  .replace(/!+$/, '')
+  .toLowerCase();
+const displayName = expert.title.split('|').pop()?.trim() || expert.title;
+
+// Active annonces: fetch live feed and match by emailAAfficher
+let activeListings: Array<{
+  slug: string; titre: string; type: string; prix: string;
+  photo: string | null; surface: number | null; nbPieces: number | null;
+  codePostal: string; ville: string;
+}> = [];
+try {
+  const annonces = await fetchUbiflowAnnonces();
+  activeListings = annonces
+    .filter((a) => {
+      const em = (a.emailAAfficher || '').split('|')[0].trim().replace(/!+$/, '').toLowerCase();
+      return expertEmail && em === expertEmail;
+    })
+    .map((a) => ({
+      slug: a.slug,
+      titre: a.titre || `${a.libelleType || ''} ${a.codePostal || ''}`.trim(),
+      type: a.type,
+      prix: formatPrice(a),
+      photo: a.photos?.[0] ?? null,
+      surface: (a as any).surface ?? null,
+      nbPieces: (a as any).nbPieces ?? null,
+      codePostal: a.codePostal ?? '',
+      ville: a.ville ?? '',
+    }));
+} catch (e) {
+  // Feed unavailable — continue with just the historical listings.
 }
 
-const { entry } = Astro.props;
-const expert = entry.data;
+// Historical listings from the build-time index (via CF ASSETS binding).
+let historyTotalCount = 0;
+let historyListings: Array<{
+  slug: string; title: string; type: string; status: string;
+  prix: number | null; surface: number | null; nbPieces: number | null;
+  codePostal: string; ville: string; photo: string | null;
+}> = [];
+try {
+  let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
+  try {
+    const { env } = await import('cloudflare:workers');
+    assets = (env as any)?.ASSETS;
+  } catch {}
+  const base = new URL(`/_data/expert-listings/${slug}.json`, Astro.url.origin);
+  const req = new Request(base.toString());
+  const resp = assets ? await assets.fetch(req) : await fetch(base.toString());
+  if (resp && resp.ok) {
+    const payload = (await resp.json()) as any;
+    historyTotalCount = payload.totalCount ?? (payload.listings?.length ?? 0);
+    historyListings = payload.listings ?? [];
+  }
+} catch (e) {}
+
+// Filter out any slugs that are in the active list so we don't duplicate.
+const activeSlugs = new Set(activeListings.map((a) => a.slug));
+const closedOnly = historyListings.filter((l) => !activeSlugs.has(l.slug));
+
+const pageTitle = `${displayName} – Immobilière Pujol`;
+const pageDesc = expert.description
+  ? expert.description.replace(/<[^>]+>/g, '').slice(0, 160)
+  : `Profil de ${displayName} chez Immobilière Pujol. Biens gérés, actuellement disponibles et historique.`;
 ---
 
-<BaseLayout
-  title={`${expert.title.split('|').pop()?.trim() || expert.title} – Immobilière Pujol`}
-  description={expert.description || `Découvrez le profil de ${expert.title.split('|').pop()?.trim()} chez Immobilière Pujol`}
->
+<BaseLayout title={pageTitle} description={pageDesc}>
   <article class="expert-single">
     <div class="expert-single__header">
       {expert.photo && (
         <img
           src={expert.photo}
-          alt={expert.title.split('|').pop()?.trim()}
+          alt={displayName}
           class="expert-single__photo"
           loading="lazy"
+          width="200"
+          height="260"
         />
       )}
       <div class="expert-single__info">
-        <h1>{expert.title.split('|').pop()?.trim()}</h1>
+        <h1>{displayName}</h1>
         {expert.fonction && <p class="expert-single__role">{expert.fonction}</p>}
-        {expert.phone && <a href={`tel:${expert.phone}`} class="expert-single__phone">{expert.phone}</a>}
-        {expert.email && <a href={`mailto:${expert.email}`} class="expert-single__email">{expert.email}</a>}
+        {expert.phone && (
+          <a href={`tel:${expert.phone.replace(/\s/g, '')}`} class="expert-single__phone">
+            {expert.phone}
+          </a>
+        )}
+        {expert.email && (
+          <a href={`mailto:${expert.email}`} class="expert-single__email">
+            {expert.email}
+          </a>
+        )}
         <div class="expert-single__social">
           {expert.linkedin && <a href={expert.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
           {expert.facebook && <a href={expert.facebook} target="_blank" rel="noopener">Facebook</a>}
@@ -46,10 +137,136 @@ const expert = entry.data;
       <div class="expert-single__description" set:html={expert.description} />
     )}
 
-    <section class="expert-single__listings">
-      <h2>Biens gérés</h2>
-      <!-- Populated from D1 in Gate 2 — expert's active + sold/rented listings -->
-      <p>Chargement des annonces...</p>
-    </section>
+    {activeListings.length > 0 && (
+      <section class="expert-single__listings expert-single__listings--active">
+        <h2>Biens actuellement disponibles ({activeListings.length})</h2>
+        <div class="listings-grid">
+          {activeListings.map((l) => (
+            <a href={`/annonces/${l.slug}/`} class="listing-card">
+              {l.photo ? (
+                <img src={l.photo} alt={l.titre} loading="lazy" width="280" height="190" />
+              ) : (
+                <div class="listing-card__noimg">Pas de photo</div>
+              )}
+              <div class="listing-card__body">
+                <span class:list={['listing-card__tag', l.type === 'V' ? 'tag--vente' : 'tag--loc']}>
+                  {l.type === 'V' ? 'Vente' : 'Location'}
+                </span>
+                <h3>{l.titre}</h3>
+                <p class="listing-card__price">{l.prix}</p>
+                <p class="listing-card__meta">
+                  {l.surface && <span>{l.surface} m²</span>}
+                  {l.nbPieces && <span>{l.nbPieces} pièce{l.nbPieces > 1 ? 's' : ''}</span>}
+                  {l.codePostal && <span>{l.codePostal} {l.ville}</span>}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {closedOnly.length > 0 && (
+      <section class="expert-single__listings expert-single__listings--history">
+        <h2>Historique des biens gérés ({historyTotalCount})</h2>
+        <p class="expert-single__history-note">
+          Biens dont {displayName.split(' ')[0]} a assuré la vente ou la gestion locative.
+        </p>
+        <div class="listings-grid">
+          {closedOnly.slice(0, 24).map((l) => (
+            <a href={`/annonces/${l.slug}/`} class="listing-card listing-card--closed">
+              {l.photo ? (
+                <img src={l.photo} alt={l.title} loading="lazy" width="280" height="190" />
+              ) : (
+                <div class="listing-card__noimg">Pas de photo</div>
+              )}
+              <div class="listing-card__body">
+                <span class:list={['listing-card__tag', l.type === 'V' ? 'tag--vente' : 'tag--loc']}>
+                  {l.type === 'V' ? 'Vendu' : 'Loué'}
+                </span>
+                <h3>{l.title}</h3>
+                {l.prix && <p class="listing-card__price">{new Intl.NumberFormat('fr-FR').format(l.prix)} €</p>}
+                <p class="listing-card__meta">
+                  {l.surface && <span>{l.surface} m²</span>}
+                  {l.nbPieces && <span>{l.nbPieces} pièce{l.nbPieces > 1 ? 's' : ''}</span>}
+                  {l.codePostal && <span>{l.codePostal} {l.ville}</span>}
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+        {historyTotalCount > 24 && (
+          <p class="expert-single__history-more">
+            … et {historyTotalCount - 24} autres biens gérés par {displayName.split(' ')[0]}.
+          </p>
+        )}
+      </section>
+    )}
+
+    {activeListings.length === 0 && closedOnly.length === 0 && (
+      <section class="expert-single__listings expert-single__listings--empty">
+        <p>Aucun bien n'est actuellement associé à ce profil.</p>
+      </section>
+    )}
   </article>
 </BaseLayout>
+
+<style>
+  .expert-single { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+  .expert-single__header { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem; }
+  .expert-single__photo { width: 200px; height: 260px; object-fit: cover; border-radius: 8px; }
+  .expert-single__info h1 { margin: 0 0 .25rem; }
+  .expert-single__role { color: #555; margin: 0 0 .5rem; }
+  .expert-single__phone, .expert-single__email { display: block; margin-top: .25rem; }
+  .expert-single__social { margin-top: .5rem; display: flex; gap: .75rem; }
+  .expert-single__description { color: #333; margin: 1rem 0 2rem; }
+  .expert-single__listings { margin-top: 2.5rem; }
+  .expert-single__history-note { color: #666; margin: -.25rem 0 1rem; }
+  .expert-single__history-more { margin-top: 1rem; color: #666; font-style: italic; }
+  .listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .listing-card {
+    display: block;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .listing-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+  .listing-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
+  .listing-card__noimg {
+    width: 100%; height: 190px; background: #f3f4f6;
+    display: flex; align-items: center; justify-content: center;
+    color: #9ca3af; font-size: .9rem;
+  }
+  .listing-card__body { padding: .75rem 1rem 1rem; }
+  .listing-card__tag {
+    display: inline-block;
+    padding: .15rem .6rem;
+    border-radius: 4px;
+    font-size: .75rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    background: #eef2ff;
+    color: #3730a3;
+  }
+  .listing-card__tag.tag--vente { background: #dcfce7; color: #166534; }
+  .listing-card__tag.tag--loc { background: #fef3c7; color: #92400e; }
+  .listing-card h3 { font-size: .95rem; line-height: 1.35; margin: 0 0 .4rem; font-weight: 600; }
+  .listing-card__price { margin: 0 0 .25rem; font-weight: 700; color: #111; }
+  .listing-card__meta { margin: 0; font-size: .85rem; color: #555; display: flex; gap: .75rem; flex-wrap: wrap; }
+  .listing-card--closed { opacity: .85; }
+  .listing-card--closed img { filter: grayscale(.2); }
+  @media (max-width: 600px) {
+    .expert-single__header { flex-direction: column; align-items: center; text-align: center; }
+    .expert-single__photo { width: 160px; height: 210px; }
+    .listings-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .listing-card img, .listing-card__noimg { height: 140px; }
+  }
+</style>

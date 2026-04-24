@@ -5,7 +5,7 @@ date: "2022-12-13"
 excerpt: "Quel est l’état du marché immobilier à Marseille fin 2022? Les constats : • Le marché de l’immobilier vit en ce moment une phase difficile et pour cause : les..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/2015-04-09-11.29.21-1200x675.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/2015-04-09-11.29.21-1200x675.jpg"
 seoTitle: "Cette crise immobilière annoncée mais qui n’est pas encore arrivée"
 seoDescription: "Etat du marché immobilier à  Marseille fin 2022. Baisse ou pas baisse?"
 ---

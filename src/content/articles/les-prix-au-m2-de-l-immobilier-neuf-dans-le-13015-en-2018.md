@@ -5,7 +5,7 @@ date: "2019-05-15"
 excerpt: "Voici une comparaison par type d’appartement et par quartier des prix au m2 de l’immobilier neuf dans le 13015 en 2018. La fourchette des transactions est..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13015-2.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-2.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13015 en 2018"
 seoDescription: "Voici une comparaison par type d'appartement et par quartier des prix au m2 de l'immobilier neuf dans le 13015 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 15eme…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici une comparaison par type d'appartement et par quartier de
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13015-1.jpeg" alt="prix au m2 de l'immobilier neuf dans le 13015 en 2018" class="wp-image-235623" width="120" height="84" srcset="/content/uploads/2019/05/13015-1.jpeg 1000w, /content/uploads/2019/05/13015-1-768x538.jpeg 768w, /content/uploads/2019/05/13015-1-600x420.jpg 600w, /content/uploads/2019/05/13015-1-800x560.jpg 800w" sizes="auto, (max-width: 120px) 100vw, 120px" /><figcaption>13015</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-1.jpeg" alt="prix au m2 de l'immobilier neuf dans le 13015 en 2018" class="wp-image-235623" width="120" height="84" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-1.jpeg 1000w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-1-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-1-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-1-800x560.jpg 800w" sizes="auto, (max-width: 120px) 100vw, 120px" /><figcaption>13015</figcaption></figure></div>
 
 
 

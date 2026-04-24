@@ -5,7 +5,7 @@ date: "2023-06-29"
 excerpt: "La gestion locative est un service proposé par les agences immobilières pour assurer la gestion optimale des biens immobiliers des propriétaires bailleurs. À..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion locative à Saint-Tronc, 13011 Marseille : l’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

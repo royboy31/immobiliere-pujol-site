@@ -5,7 +5,7 @@ date: "2020-02-13"
 excerpt: "Voici un comparatif quartier par quartier des prix au m² de l’immobilier ancien dans le 13002 en 2019 Quartier du Panier Marseille 13002 *Prix médian (sources..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13002-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13002-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13002 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13002 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -35,7 +35,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <div data-block="a36ad977-9364-44da-ac1e-fd4fe2a99b53">
 <div class="editor-rich-text block-editor-rich-text">
 <p> </p>
-<p><img decoding="async" src="/content/uploads/2019/05/7-Balcon-au-Panier-WEB.jpg" alt="prix au m2 de l'immobilier ancien dans le 13002" /></p>
+<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/7-Balcon-au-Panier-WEB.jpg" alt="prix au m2 de l'immobilier ancien dans le 13002" /></p>
 <p><em>*Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</em> Voici une comparaison quartier par quartier des prix au m² de l&rsquo;immobilier ancien dans le 13002.</p>
 </div>
 </div>

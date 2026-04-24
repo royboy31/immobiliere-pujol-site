@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "À l’agence immobilière Pujol, nous comprenons l’importance d’une gestion efficace et personnalisée de votre patrimoine immobilier. En tant qu’administrateur de..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "L’administrateur de biens : un partenaire clé pour la gestion de votre patrimoine immobilier"
 seoDescription: ""
 ---

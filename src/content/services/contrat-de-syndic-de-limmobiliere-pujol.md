@@ -15,10 +15,10 @@ seoDescription: "Notre équipe de syndic est l'une des plus mieux évaluez par s
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg" 
-      <img src="/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg" 
+      <img src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -579,7 +579,7 @@ Les parties élisent domicile aux fins des présentes, aux adresses ci-dessous :
 <p><b>Pour le syndicat,</b></p>
 <p>A son adresse,</p>
 <p><br />
-<img loading="lazy" decoding="async" class="size-full wp-image-284171 alignright" src="/content/uploads/2017/12/logo-immobiliere-pujol.png" alt="logo immobiliere pujol" width="274" height="109" /><br />
+<img loading="lazy" decoding="async" class="size-full wp-image-284171 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/logo-immobiliere-pujol.png" alt="logo immobiliere pujol" width="274" height="109" /><br />
 <br />
 </p>
 <p><i>(1) Dans la limite de trois ans maximum (article 28 du décret du 17 mars 1967). </i></p>
@@ -749,7 +749,7 @@ VI-28° contrôle d&rsquo;activité du personnel du syndicat.</p>
 	<li>Constitution et suivi d&rsquo;un dossier de subvention au profit du syndicat,</li>
 	<li>Immatriculation initiale du syndicat.</li>
 </ol>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-284171 aligncenter" src="/content/uploads/2017/12/logo-immobiliere-pujol.png" alt="logo immobiliere pujol" width="274" height="109" /></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-284171 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/logo-immobiliere-pujol.png" alt="logo immobiliere pujol" width="274" height="109" /></p>
                 </section>
             </div>
 

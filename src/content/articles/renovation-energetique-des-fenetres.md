@@ -5,7 +5,7 @@ date: "2023-03-14"
 excerpt: "La rénovation énergétique des fenêtres Vos fenêtres sont anciennes et thermiquement peu performantes et vous souhaitez les changer? Entre le choix du cadre ou..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/0be3321ac526d4edcc6c9974d0e45-1200x799.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/0be3321ac526d4edcc6c9974d0e45-1200x799.jpg"
 seoTitle: "Rénovation des fenêtres : comment bien les choisir ?"
 seoDescription: "Quels sont les critères à vérifier pour réussir la rénovation énergétique de vos fenêtres? Cet article vous explique ce qu'est le coefficient Uw et son importance dans le changement de vos fenêtres."
 ---
@@ -46,7 +46,7 @@ Les fenêtres avec des indices Uw très bas sont plus onéreuses. Priorisez-les 
 <p>Le double vitrage est le plus répandu offrant le meilleur compromis entre isolation, apport solaire et prix.</p>
 <p>Le triple vitrage, plus onéreux, est utilisé de manière plus spécifique dans les logements en zone très froide ou en altitude.</p>
 <h3>Vous souhaitez être accompagné dans les travaux de rénovation énergétique de votre appartement loué? N&rsquo;hésitez pas à me contacter</h3>
-<p><img loading="lazy" decoding="async" class=" wp-image-615191 alignleft" src="/content/uploads/2023/03/CARO-e.jpg" alt="" width="119" height="120" srcset="/content/uploads/2023/03/CARO-e.jpg 576w, /content/uploads/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 119px) 100vw, 119px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-615191 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg" alt="" width="119" height="120" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg 576w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 119px) 100vw, 119px" /></p>
 <p>Caroline PUJOL<br />
 06 79 02 72 29<br />
 carolinepujol@immobiliere-pujol.fr</p>

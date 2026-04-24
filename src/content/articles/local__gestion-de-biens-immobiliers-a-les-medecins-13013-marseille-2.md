@@ -5,7 +5,7 @@ date: "2024-05-13"
 excerpt: "La gestion de biens immobiliers est un service essentiel pour les propriétaires qui souhaitent tirer le meilleur parti de leur investissement immobilier. À..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de biens immobiliers à Les Médecins, 13013 Marseille"
 seoDescription: ""
 ---

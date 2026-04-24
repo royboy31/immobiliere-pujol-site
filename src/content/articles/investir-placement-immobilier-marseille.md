@@ -5,7 +5,7 @@ date: "2020-12-19"
 excerpt: "Nous l’avons abordé récemment dans l’article « Est-ce un bon moment pour acheter un appartement ou une maison ? » : l’immobilier de placement à Marseille n’a..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/Untitled-1200x780.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/Untitled-1200x780.jpg"
 seoTitle: "Placement immobilier à Marseille : Pourquoi investir n’a jamais été aussi fiable et rentable"
 seoDescription: "L’immobilier de placement à Marseille n’a jamais rapporté autant si vous êtes dans la phase d’emprunt."
 ---
@@ -31,7 +31,7 @@ seoDescription: "L’immobilier de placement à Marseille n’a jamais rapporté
 <p>Il y aura toujours des jeunes actifs ou des étudiants en demande locative pour venir investir les grandes métropoles. Et que dire des anciens ! La demande des retraités et des séniors pour vivre en centre-ville, à proximité des services et des distractions, sera toujours là. Idem pour les travailleurs. </p>
 <p>Les grandes villes sont et resteront nécessaires car elles centralisent les hommes, les compétences, les lieux de décisions, et les fonds. </p>
 <h2>Investir à Marseille : des travaux de rénovation en Perspective </h2>
-<p><img loading="lazy" decoding="async" class=" wp-image-378272 aligncenter" src="/content/uploads/2020/11/girlfriends-2213259_640.jpg" alt="travaux rénovation marseille" width="494" height="342" srcset="/content/uploads/2020/11/girlfriends-2213259_640.jpg 640w, /content/uploads/2020/11/girlfriends-2213259_640-600x415.jpg 600w" sizes="auto, (max-width: 494px) 100vw, 494px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-378272 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/girlfriends-2213259_640.jpg" alt="travaux rénovation marseille" width="494" height="342" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/girlfriends-2213259_640.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/girlfriends-2213259_640-600x415.jpg 600w" sizes="auto, (max-width: 494px) 100vw, 494px" /></p>
 <p><strong>La nouvelle municipalité de Marseille a été élue sur un programme pour arrêter ou diminuer les constructions et rénover notre ville.  </strong></p>
 <p>Je pense que les élu(e)s mesurent mal les besoins des locataires et des propriétaires, qui obligeront à poursuivre l’effort de construction et à amplifier les rénovations. Ces blocages vont aggraver le manque de biens de qualité et assécher le marché du neuf. Comme rénover prend 2 à 5 ans (voire 10 à 15 ans quand l’état et les collectivités locales s’en mêlent), les prix ne vont pas baisser pour des biens en centre-ville et de qualité. </p>
 <p>En plus de cela, <strong>Marseille est en retard sur la qualité de l’offre</strong>. Elle est trop restreinte et de mauvaise qualité car nous n’avons pas assez entretenu notre patrimoine (sans parler de la qualité des constructions anciennes&#8230;). </p>

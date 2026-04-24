@@ -15,8 +15,8 @@ seoDescription: "Confirmez votre demande de devis à l'Immobilière Pujol, agenc
     
 	</div>
 		<!-- Background video -->
-  <video class="hero__video" loop autoplay muted poster="/content/uploads/2017/12/fiscalite-des-sci-a-choisir-2-1200x707.jpg">
-    <source src="/content/uploads/2017/11/signature_pujol.mp4" type="video/mp4">
+  <video class="hero__video" loop autoplay muted poster="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/fiscalite-des-sci-a-choisir-2-1200x707.jpg">
+    <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/signature_pujol.mp4" type="video/mp4">
     Your browser doesn't support HTML5 video tag.
   </video>
 	</section>
@@ -29,7 +29,7 @@ seoDescription: "Confirmez votre demande de devis à l'Immobilière Pujol, agenc
 <p>Nous vous remercions pour votre demande .</p>
 <p>Notre équipe va vous contacter dans les 24 heures .</p>
 <p>A très bientôt,</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="244" height="73" srcset="/content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, /content/uploads/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 244px) 100vw, 244px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-365839" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg" alt="" width="244" height="73" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/logo-immobilier-Pujol-h-RVB.jpg 1180w" sizes="auto, (max-width: 244px) 100vw, 244px" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

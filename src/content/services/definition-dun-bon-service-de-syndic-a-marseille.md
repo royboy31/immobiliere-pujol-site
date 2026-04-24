@@ -20,10 +20,10 @@ seoDescription: "Une copropriété bien géré, c'est un bon service syndic et u
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/PU-1325-e1482396349689.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/PU-1325-e1482396349689-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/PU-1325-e1482396349689-600x375.jpg" 
-      <img src="/content/uploads/2017/11/PU-1325-e1482396349689.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1325-e1482396349689.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1325-e1482396349689-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1325-e1482396349689-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1325-e1482396349689.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -83,7 +83,7 @@ Pour cette raison, vous devez <a href="/service/definition-de-syndic-professionn
 <h4> </h4>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
                 </section>
             </div>
 

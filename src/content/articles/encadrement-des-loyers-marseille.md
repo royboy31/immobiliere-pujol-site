@@ -5,7 +5,7 @@ date: "2022-12-11"
 excerpt: "La Métropole Aix-Marseille Provence, sur demande de la mairie de Marseille a décidé de mettre en place l’encadrement des loyers avec un objectif théorique..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/0_0004-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/0_0004-1200x800.jpg"
 seoTitle: "Encadrement des loyers à Marseille : que faut-il craindre ?"
 seoDescription: "Encadrement des loyers ou simple gesticulation politique qui ne servira à rien .  On vous explique pourquoi ici"
 ---
@@ -17,7 +17,7 @@ seoDescription: "Encadrement des loyers ou simple gesticulation politique qui ne
 <p><br />
 L’évolution des loyers à Marseille est raisonnable depuis 25 ans (inférieure à l’inflation), malheureusement toujours trop chers pour certains revenus. Marseille compte parmi les villes les moins aisées de France, vous le savez (26% de ses habitants sont sous le seuil de pauvreté).</p>
 <p><em>Les prix des loyers à Marseille entre 2014 et 2022 (source clameur)</em></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-582731" src="/content/uploads/2022/12/CHIFFRES-800x602.jpg" alt="" width="593" height="447" srcset="/content/uploads/2022/12/CHIFFRES-800x602.jpg 800w, /content/uploads/2022/12/CHIFFRES-768x578.jpg 768w, /content/uploads/2022/12/CHIFFRES-1536x1157.jpg 1536w, /content/uploads/2022/12/CHIFFRES-2048x1542.jpg 2048w, /content/uploads/2022/12/CHIFFRES-600x452.jpg 600w, /content/uploads/2022/12/CHIFFRES-1200x904.jpg 1200w" sizes="auto, (max-width: 593px) 100vw, 593px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-582731" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-800x602.jpg" alt="" width="593" height="447" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-800x602.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-768x578.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-1536x1157.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-2048x1542.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-600x452.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/CHIFFRES-1200x904.jpg 1200w" sizes="auto, (max-width: 593px) 100vw, 593px" /></p>
 <p>La mesure d’encadrement des loyers est une gesticulation politique qui n’aura aucun effet pour régler le soucis des locataires qui ont des difficultés à se loger. Ces tentatives se déroulent à Marseille, en France, mais également dans d’autres pays.</p>
 <p>Ils croient que faire baisser les prix de certains logements (les plus beaux et les mieux entretenus) aura une utilité sociale&#8230;</p>
 <p>Ils croient qu&rsquo;en pénalisant ceux qui investissent dans leur logement pour en faire des lieux dans lequel il faut bon vivre solutionnera les véritables problèmes.<br />

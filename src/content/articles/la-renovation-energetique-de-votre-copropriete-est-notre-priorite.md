@@ -5,7 +5,7 @@ date: "2025-09-11"
 excerpt: "Pourquoi nous avons décidé de faire de la rénovation énergétique notre priorité n°1 et pourquoi ça change tout pour les copropriétés. Chez Immobilière Pujol,..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/09/IMG_0318-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/IMG_0318-1200x900.jpg"
 seoTitle: "La rénovation énergétique de votre copropriété est notre priorité travaux"
 seoDescription: "Chez Immobilière Pujol à Marseille, nous faisons de la rénovation énergétique la priorité n°1 de nos copropriétés, pour valoriser les biens et améliorer votre confort."
 ---
@@ -71,7 +71,7 @@ C’est un véritable levier d’action : pour améliorer durablement les logeme
 <p><span style="font-weight: 400;">C’est notre façon de faire bouger les lignes — concrètement, immeuble par immeuble, projet après projet.</span></p>
 <p>&nbsp;</p>
 <p>Stéphane Pujol </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191898" src="/content/uploads/2025/09/stephane.jpg" alt="" width="149" height="147" srcset="/content/uploads/2025/09/stephane.jpg 182w, /content/uploads/2025/09/stephane-100x100.jpg 100w" sizes="auto, (max-width: 149px) 100vw, 149px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191898" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/stephane.jpg" alt="" width="149" height="147" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/stephane.jpg 182w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/stephane-100x100.jpg 100w" sizes="auto, (max-width: 149px) 100vw, 149px" /></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
       </div>

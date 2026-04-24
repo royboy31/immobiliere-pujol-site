@@ -5,7 +5,7 @@ date: "2023-12-08"
 excerpt: "Entre les copropriétés neuves qui freinent des quatre fers dès que l’on parle de procédure judiciaire et celles qui y voient une solution à tous leurs maux, le..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/11/GODCHOT-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1.jpg"
 seoTitle: "Procédure contre un promoteur pour la valeur verte d’un immeuble : Les coulisses d’un bras de fer entre une copropriété neuve déterminée et son promoteur"
 seoDescription: "Découvrez le récit d'une copropriété marseillaise confrontée à des malfaçons et promesses non tenues dans des logements neufs. Ce récit met en lumière la victoire obtenue devant le Tribunal judiciaire de Marseille, reconnaissant les préjudices liés à la performance énergétique."
 ---
@@ -18,7 +18,7 @@ Et ce, encore moins lorsque la résidence était ornée des labels Bâtiment Bas
 <p><br />
 Voici donc le récit des événements que nous relate Marie-Jeanne Willing, gestionnaire de la copropriété concernée par la procédure et juriste chez Immobilière Pujol, au cours d&rsquo;une interview réalisée par Claire Chamarat qui ont conduit à ce jugement et qui fera date.</p>
 <h4><br />
-<img loading="lazy" decoding="async" class="wp-image-719770 alignleft" src="/content/uploads/2023/11/mj-732x800.jpg" alt="" width="265" height="289" srcset="/content/uploads/2023/11/mj-732x800.jpg 732w, /content/uploads/2023/11/mj-768x839.jpg 768w, /content/uploads/2023/11/mj-549x600.jpg 549w, /content/uploads/2023/11/mj.jpg 972w" sizes="auto, (max-width: 265px) 100vw, 265px" />Comment cette affaire a-t-elle démarré ?</h4>
+<img loading="lazy" decoding="async" class="wp-image-719770 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/mj-732x800.jpg" alt="" width="265" height="289" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/mj-732x800.jpg 732w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/mj-768x839.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/mj-549x600.jpg 549w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/mj.jpg 972w" sizes="auto, (max-width: 265px) 100vw, 265px" />Comment cette affaire a-t-elle démarré ?</h4>
 <p>Au début, il y a eu la litanie malheureusement habituelle des malfaçons, avec les 150 réserves relevées dans les parties communes de cette copropriété marseillaise de deux bâtiments et 103 logements livrés en 2015. <br />
 Puis l’attitude courante d’un premier syndic qui a fait traîner les réclamations des copropriétaires pour ménager le promoteur. Cela a conduit le conseil syndical à prendre les devants et à assigner la société civile de construction vente (SCCV) en 2016 pour obtenir la réparation des désordres apparents et apparus la première année.</p>
 <p>&nbsp;</p>
@@ -58,9 +58,9 @@ Comment expliquez-vous la frilosité de certains syndics à engager des procédu
 Pourtant quand on gagne, on récupère tous les fonds engagés : honoraires d’avocat, de syndic, frais d’expertises, frais de procédure&#8230;<br />
 Il faut communiquer davantage sur ce genre de victoires, parce qu’elles sont valorisantes à la fois pour les copropriétaires et pour les syndics.</p>
 <h3>Montant des indemnisations perçues par la copropriété et par les copropriétaires engagés dans la procédure</h3>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-720426" src="/content/uploads/2023/12/indeminsation-800x450.jpg" alt="" width="800" height="450" srcset="/content/uploads/2023/12/indeminsation-800x450.jpg 800w, /content/uploads/2023/12/indeminsation-768x432.jpg 768w, /content/uploads/2023/12/indeminsation-600x338.jpg 600w, /content/uploads/2023/12/indeminsation-1200x675.jpg 1200w, /content/uploads/2023/12/indeminsation.jpg 1280w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-720426" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation-800x450.jpg" alt="" width="800" height="450" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation-800x450.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation-768x432.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation-600x338.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation-1200x675.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/12/indeminsation.jpg 1280w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>&nbsp;</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-719771" src="/content/uploads/2023/11/GODCHOT-1-800x477.jpg" alt="" width="800" height="477" srcset="/content/uploads/2023/11/GODCHOT-1-800x477.jpg 800w, /content/uploads/2023/11/GODCHOT-1-768x458.jpg 768w, /content/uploads/2023/11/GODCHOT-1-600x358.jpg 600w, /content/uploads/2023/11/GODCHOT-1.jpg 1140w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-719771" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1-800x477.jpg" alt="" width="800" height="477" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1-800x477.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1-768x458.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1-600x358.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/GODCHOT-1.jpg 1140w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

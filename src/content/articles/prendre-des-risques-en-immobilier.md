@@ -5,7 +5,7 @@ date: "2014-04-27"
 excerpt: "Ceux qui ont acheté de l’immobilier depuis 40 ans sans jamais vendre ont eu raison. Outrageusement raison contre l’avis de beaucoup de spécialistes. Et acheter..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/7K0A0046-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/7K0A0046-1200x800.jpg"
 seoTitle: "Le monde de l’immobilier appartient à ceux qui prennent des risques"
 seoDescription: "Ceux qui ont acheté de l’immobilier depuis 40 ans sans jamais vendre ont eu raison. Outrageusement raison contre l’avis de beaucoup de spécialistes. Et acheter de l’immobilier est à la portée de tout un chacun. Pour cette raison, l’immobilier est le pilier des patrimoines et demeurera le placement préféré des…"
 ---
@@ -21,7 +21,7 @@ Locataires, habitants d’Hlm, et ceux qui n’ont pas eu de situation financiè
 <div></div>
 <h3><span style="font-size: medium;">Qu’en sera-t-il demain si comme tout le monde le prédit, l’immobilier va baisser ? Tous perdants ?</span></h3>
 <div> Non, car le marché de l’immobilier fait toujours des gagnants et des perdants. Il y a et il y aura toujours de bonnes idées, de bonnes affaires. Elles seront certainement complexes, compliquées à découvrir et à mettre en œ</div>
-<a href="/content/uploads/2014/04/7K0A0046.jpg"><img loading="lazy" decoding="async" class="wp-image-5391 alignright" style="border: 2px solid black; margin: 5px;" src="/content/uploads/2014/04/7K0A0046.jpg" alt="7K0A0046" width="432" height="288" /></a>uvre mais elles sont là tous les matins et tous les jours.
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2014/04/7K0A0046.jpg"><img loading="lazy" decoding="async" class="wp-image-5391 alignright" style="border: 2px solid black; margin: 5px;" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2014/04/7K0A0046.jpg" alt="7K0A0046" width="432" height="288" /></a>uvre mais elles sont là tous les matins et tous les jours.
 <div></div>
 <div style="text-align: left;">Nous aimons les histoires d’entrepreneurs qui prennent le risque d’investir car ce sont eux qui écriront l’histoire de demain et qui auront eu raison contre les spécialistes qui se trompent souvent.</div>
 <div style="text-align: left;"></div>

@@ -5,7 +5,7 @@ date: "2023-12-12"
 excerpt: "La gestion de bien est un service proposé par les agences immobilières, qui consiste à prendre en charge l’ensemble des aspects administratifs, financiers et..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien à Saint-Menet, 13019 – Marseille : L’expertise de l’agence immobilière Pujol à votre service"
 seoDescription: ""
 ---

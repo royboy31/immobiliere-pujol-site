@@ -5,7 +5,7 @@ date: "2025-12-03"
 excerpt: "Le Diagnostic de Performance Énergétique (DPE) collectif et le Projet de Plan Pluriannuel de Travaux (PPPT) ne sont pas de simples formalités. À Marseille, ils..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/12/PUJ-6817-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/PUJ-6817-1200x750.jpg"
 seoTitle: "DPE Collectif en copropriété : ce que nous apprend le parc immobilier Marseillais"
 seoDescription: "Point sur les DPE collectifs : notes des immeubles, travaux à anticiper, typologies les plus concernées"
 ---

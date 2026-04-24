@@ -15,10 +15,10 @@ seoDescription: "Contactez l'agence de location la plus recommandée par ses cli
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/agence-immobilière.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/agence-immobilière.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/agence-immobilière-600x375.jpg" 
-      <img src="/content/uploads/2017/11/agence-immobilière.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/agence-immobilière.jpg" 
+      <source media="(min-width: 600px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/agence-immobilière.jpg" 
+      <source media="(min-width: 320px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/agence-immobilière-600x375.jpg" 
+      <img src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/agence-immobilière.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -121,7 +121,7 @@ Vous avez des difficultés pour évaluer la plus-value que ces travaux vont appo
 </ul>
 <p>La visite virtuelle permet de réaliser une première visite en ligne et se rendre compte du quartier, de la rue, de l&rsquo;immeuble et des parties communes. <br />
 Exemple de <a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9" target="_blank" rel="noopener">visite virtuelle</a> </p>
-<p><a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-385387" src="/content/uploads/2018/10/exposio_0002-800x533.jpg" alt="location appartement meuble marseille" width="301" height="201" srcset="/content/uploads/2018/10/exposio_0002-800x533.jpg 800w, /content/uploads/2018/10/exposio_0002-768x512.jpg 768w, /content/uploads/2018/10/exposio_0002-600x400.jpg 600w, /content/uploads/2018/10/exposio_0002-1200x800.jpg 1200w, /content/uploads/2018/10/exposio_0002.jpg 1500w" sizes="auto, (max-width: 301px) 100vw, 301px" /></a></p>
+<p><a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-385387" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-800x533.jpg" alt="location appartement meuble marseille" width="301" height="201" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002.jpg 1500w" sizes="auto, (max-width: 301px) 100vw, 301px" /></a></p>
 <ul>
 	<li>
 <h3>La relation avec les locataires</h3>

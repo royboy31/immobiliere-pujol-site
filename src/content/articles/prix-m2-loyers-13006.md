@@ -5,7 +5,7 @@ date: "2020-01-31"
 excerpt: "Les données chiffrées du prix des loyers en 2019 dans le 13006 Prix moyen (en €/m2) : 13,4 Croissance entre 2017 et 2018 : 5,7 Durée d’occupation moyenne (en..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13006-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/13006-1.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13006 en 2019"
 seoDescription: "Le prix moyen des loyers (en €/m2) est de 13,4 dans le 13006.  La durée d'occupation est de 50,9€ mois"
 ---
@@ -19,7 +19,7 @@ seoDescription: "Le prix moyen des loyers (en €/m2) est de 13,4 dans le 13006.
 <p><strong>Loyer médian</strong> (en €/m2) : 12,4</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291183" src="/content/uploads/2018/01/6-ème-arrondissement-loyer-2018-800x287.png" alt="" width="800" height="287" srcset="/content/uploads/2018/01/6-ème-arrondissement-loyer-2018-800x287.png 800w, /content/uploads/2018/01/6-ème-arrondissement-loyer-2018-768x276.png 768w, /content/uploads/2018/01/6-ème-arrondissement-loyer-2018-600x215.png 600w, /content/uploads/2018/01/6-ème-arrondissement-loyer-2018.png 1045w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291183" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/6-%C3%A8me-arrondissement-loyer-2018-800x287.png" alt="" width="800" height="287" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/6-%C3%A8me-arrondissement-loyer-2018-800x287.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/6-%C3%A8me-arrondissement-loyer-2018-768x276.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/6-%C3%A8me-arrondissement-loyer-2018-600x215.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/6-%C3%A8me-arrondissement-loyer-2018.png 1045w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 6e arrondissement</h2>
 <p>Le 6ème arrondissement de Marseille est notre quartier. Nous le connaissons bien pour y avoir de nombreux clients.</p>

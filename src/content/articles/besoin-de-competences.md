@@ -5,7 +5,7 @@ date: "2022-02-24"
 excerpt: "De Ketele, docteur en psychopédagogie écrit en 2007 « Les mondes de l’action ont besoin de former l’Homme aux défis du complexe et donc d’une approche centrée..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/02/recrutement-agence-immobiliere-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/02/recrutement-agence-immobiliere-1200x750.jpg"
 seoTitle: "Besoin de compétences"
 seoDescription: "Le métier de gestionnaire va nécessiter plus de compétences qualifiées pour appréhender et faire face à la complexité de la gestion d'immeubles !"
 ---

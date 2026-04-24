@@ -5,7 +5,7 @@ date: "1989-07-06"
 excerpt: "Les baux concernés par le gel des loyers en France métropole Il s’agit des baux de logement loué à titre de résidence principale, nu ou meublé, régis par la..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/06/IP-7104-111019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/IP-7104-111019.jpg"
 seoTitle: "Gel des Loyers à Marseille"
 seoDescription: "Les baux concernés par le gel des loyers en France métropole Il s’agit des baux de logement loué à titre de résidence principale, nu ou meublé, régis par la loi du 6 juillet 1989. Le gel des loyers s’appliquera  aux baux en cours. Les loyers des logements classés en catégorie…"
 ---
@@ -24,7 +24,7 @@ A compter du 25 août 2022, les loyers des logements classés F et G seront gel�
 <p>A compter du 1er juillet 2024 le dispositif s’appliquera en Guadeloupe, en Martinique, en Guyane, à La Réunion et à Mayotte.</p>
 <p>Pour pouvoir augmenter le loyer le bailleur devra faire des travaux de rénovation énergétique pour faire progresser l’étiquette en veillant toutefois au calendrier d’interdiction de louer, qui est progressif dans le temps. </p>
 <p>Fondement juridique : article 159 loi n°2021-1104 du 22 août 2021 Climat et résilience</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-517018" src="/content/uploads/2022/06/Image1.jpg" alt="" width="606" height="331" srcset="/content/uploads/2022/06/Image1.jpg 606w, /content/uploads/2022/06/Image1-600x328.jpg 600w" sizes="auto, (max-width: 606px) 100vw, 606px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-517018" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/Image1.jpg" alt="" width="606" height="331" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/Image1.jpg 606w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/Image1-600x328.jpg 600w" sizes="auto, (max-width: 606px) 100vw, 606px" /></p>
 <p>&nbsp;</p>
 <h2>Faut-il fournir un nouveau DPE en cas de tacite reconduction du bail en cours ?</h2>
 <p>De plus en plus de locataires dont le bail est en cours demandent au bailleur ou à son mandataire un DPE à jour. <br />

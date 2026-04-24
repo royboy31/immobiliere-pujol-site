@@ -5,7 +5,7 @@ date: "2019-10-30"
 excerpt: "Une simplification de la gestion des « petites copropriété » (Loi Elan – Ordonnance du 30 octobre 2019) Le statut de la copropriété et ses règles édictées par..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/06/habiter-quartier-noaille-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/habiter-quartier-noaille-marseille.jpg"
 seoTitle: "La loi Elan a simplifié le casse tête de la gestion des petites copropriétés"
 seoDescription: "La gestion des petites copropriétés est un problème. La loi Elan a un peu simplifié la gestion des petites copropriétés"
 ---

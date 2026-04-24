@@ -5,7 +5,7 @@ date: "2020-07-31"
 excerpt: "Depuis de nombreuses années, un nouveau Marseille se construit dans le le 2ème arrondissement à travers de nombreux projets : piétonisation du Vieux- Port,..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/11/vieux-port-mairie2-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/vieux-port-mairie2-1200x900.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13002 du 1er Août 2019 au 31 Juillet 2020 ?"
 seoDescription: "Comparatif des prix de l'immobilier ancien dans le 13002, détaillé par quartier et par type de bien immobilier. Exclusivité Immobilière Pujol !"
 ---
@@ -110,7 +110,7 @@ Pour les investisseurs intéressés par ce quartier, il ne faut pas perdre de vu
 <p>&nbsp;</p>
 <hr />
 <h2 style="text-align: center;">Les prix au m² quartier de la <span style="color: #ff6600;">JOLIETTE</span></h2>
-<h3 style="text-align: center;"><img loading="lazy" decoding="async" class=" wp-image-378327 alignright" src="/content/uploads/2020/11/image-20170327-3288-18ifsu7-800x600.jpg" alt="" width="244" height="183" srcset="/content/uploads/2020/11/image-20170327-3288-18ifsu7-800x600.jpg 800w, /content/uploads/2020/11/image-20170327-3288-18ifsu7-768x576.jpg 768w, /content/uploads/2020/11/image-20170327-3288-18ifsu7-600x450.jpg 600w, /content/uploads/2020/11/image-20170327-3288-18ifsu7.jpg 926w" sizes="auto, (max-width: 244px) 100vw, 244px" /></h3>
+<h3 style="text-align: center;"><img loading="lazy" decoding="async" class=" wp-image-378327 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/image-20170327-3288-18ifsu7-800x600.jpg" alt="" width="244" height="183" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/image-20170327-3288-18ifsu7-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/image-20170327-3288-18ifsu7-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/image-20170327-3288-18ifsu7-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/image-20170327-3288-18ifsu7.jpg 926w" sizes="auto, (max-width: 244px) 100vw, 244px" /></h3>
 <p><strong>La Joliette est le quartier qui a enregistré le plus de transactions ces derniers mois (86 ventes) MAIS avec le prix au m² le moins élevé (2 340 €/m²). <br />
 <br />
 </strong>Dans  ce secteur, les prix au m² n&rsquo;évoluent pas en fonction du nombre de pièces. Pour 86 transactions réalisées, la superficie moyenne des biens vendus dans ce secteur (54 m²) est plus importante que celle des autres quartiers du 13002.</p>
@@ -186,14 +186,14 @@ Pour les investisseurs intéressés par ce quartier, il ne faut pas perdre de vu
 <tbody>
 <tr>
 <td style="width: 50%;"><a href="/annonces/mnvap30003603-ecoles-commerces-l2-a7-13002-marseille-france/" target="_blank" rel="noopener noreferrer">Vendu appartement Type 3 rue de Forbin 13002</a></td>
-<td style="width: 31.0555%;"><img loading="lazy" decoding="async" class="alignnone  wp-image-379851" src="/content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-800x533.jpg" alt="" width="212" height="141" srcset="/content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-800x533.jpg 800w, /content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-768x512.jpg 768w, /content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-600x400.jpg 600w, /content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-1200x800.jpg 1200w, /content/uploads/2020/11/photo_86dee4f3f385c3f881af926eb001b23c.jpg 1500w" sizes="auto, (max-width: 212px) 100vw, 212px" /></td>
+<td style="width: 31.0555%;"><img loading="lazy" decoding="async" class="alignnone  wp-image-379851" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-800x533.jpg" alt="" width="212" height="141" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/photo_86dee4f3f385c3f881af926eb001b23c.jpg 1500w" sizes="auto, (max-width: 212px) 100vw, 212px" /></td>
 </tr>
 </tbody>
 </table>
 <div class="editor-block-list__block-edit block-editor-block-list__block-edit">
 <hr />
 <h2 style="text-align: center;">Le prix au m² quartier <span style="color: #ff6600;">GRANDS CARMES</span></h2>
-<img loading="lazy" decoding="async" class=" wp-image-378329 alignright" src="/content/uploads/2020/11/117622.jpg" alt="" width="320" height="164" />
+<img loading="lazy" decoding="async" class=" wp-image-378329 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/117622.jpg" alt="" width="320" height="164" />
 <p>Les Grands Carmes, communément appelé Le Panier, est le quartier situé géographiquement entre le secteur de l&rsquo;Hôtel de Ville et de la Joliette. <br />
 Aux Grands Carmes, il y a eu 61 transactions réalisées pour un prix au m² de 2 830 €, pour des appartements d&rsquo;une superficie d&rsquo;environ 47 m².</p>
 <div class="editor-block-list__block-edit block-editor-block-list__block-edit">
@@ -257,7 +257,7 @@ Aux Grands Carmes, il y a eu 61 transactions réalisées pour un prix au m² de 
 </div>
 <hr />
 <h2 style="text-align: center;">Le prix au m² quartier <span style="color: #ff6600;">HOTEL DE VILLE</span></h2>
-<img loading="lazy" decoding="async" class=" wp-image-378330 alignright" src="/content/uploads/2020/11/unnamed-1.jpg" alt="" width="213" height="160" />
+<img loading="lazy" decoding="async" class=" wp-image-378330 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/11/unnamed-1.jpg" alt="" width="213" height="160" />
 <p>Le quartier de l&rsquo;Hôtel de Ville est celui qui a le prix au m² le plus élevé dans le 13002 : 3 340 € &#8211; Il y a eu 62 ventes réalisées pour des appartements d&rsquo;une superficie moyenne de 43 m². Dans ce secteur, les biens immobiliers qui sont à la vente sur le Vieux Port ont des prix parfois exceptionnellement élevés du fait de l&#8217;emplacement et de la vue lorsque ces derniers donnent directement sur le port.</p>
 <p>&nbsp;</p>
 <div class="editor-block-list__block-edit block-editor-block-list__block-edit">

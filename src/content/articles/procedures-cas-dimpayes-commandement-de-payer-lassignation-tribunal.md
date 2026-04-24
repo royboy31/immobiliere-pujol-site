@@ -5,14 +5,14 @@ date: "2017-02-18"
 excerpt: "Concrètement nous demandons à un huissier de justice de délivrer un commandement de payer les loyers (le cas échéant de produire son attestation d’assurance..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/20170212_212353-1200x799.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/20170212_212353-1200x799.jpg"
 seoTitle: "Procédures en cas d’impayés : le commandement de payer & l’assignation au tribunal"
 seoDescription: "Concrètement nous  demandons à un huissier de justice de délivrer un commandement de payer les loyers (le cas échéant de produire son attestation d’assurance habitation) qui va viser la clause résolutoire prévue dans le bail. Pour se faire, nous  lui communiquons le bail (et les éventuels renouvellements intervenus) et un…"
 ---
 
 Concrètement nous  demandons à un huissier de justice de délivrer un commandement de payer les loyers (le cas échéant de produire son attestation d’assurance habitation) qui va viser la clause résolutoire prévue dans le bail. Pour se faire, nous  lui communiquons le bail (et les éventuels renouvellements intervenus) et un décompte des sommes dues.
 
-<img loading="lazy" decoding="async" class="size-full wp-image-51770 alignright" src="/content/uploads/2017/02/phase-contentieuse-gestion-locative.jpg" alt="saisir un huissier pour dette locative a marseille" width="243" height="208" />En matière de baux d’habitation (y compris les meublés) la clause résolutoire opère au terme d’un délai de 2 mois. Cela signifie qu’à  compter du jour de délivrance du commandement de payer au locataire, un délai de 2 mois est ouvert pour permettre au locataire de régulariser le montant du commandement (1 mois pour produire l’attestation d’assurance).
+<img loading="lazy" decoding="async" class="size-full wp-image-51770 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/02/phase-contentieuse-gestion-locative.jpg" alt="saisir un huissier pour dette locative a marseille" width="243" height="208" />En matière de baux d’habitation (y compris les meublés) la clause résolutoire opère au terme d’un délai de 2 mois. Cela signifie qu’à  compter du jour de délivrance du commandement de payer au locataire, un délai de 2 mois est ouvert pour permettre au locataire de régulariser le montant du commandement (1 mois pour produire l’attestation d’assurance).
 
 Peu avant le terme de ce délai, si le locataire ou les garants n’ont pas soldé le montant du commandement, nous leur adressons un courrier (simple ou recommandé) proposant de régler amiablement le litige et fixer un échéancier. Cette démarche est un préalable obligatoire avant toute assignation en justice  qui ne serait pas commandée par l’urgence ou l’ordre public.
 <h2><strong>L’assignation au tribunal</strong></h2>
@@ -25,7 +25,7 @@ Le délai de 2 mois ouvert par le commandement de payer passé, nous adressons l
 </ul>
 L’avocat rédige et transmet notre demande à l’huissier, qui délivre l’assignation et obligatoirement informe (dénonce) dans le même temps la Préfecture,  de l’ouverture d’une procédure d’expulsion contre notre locataire.
 <h2>L&rsquo;audience</h2>
-<img loading="lazy" decoding="async" class="size-full wp-image-51771 alignright" src="/content/uploads/2017/02/avocat-saisir-tribunal-contentieux-gestion-locative.jpg" alt="saisir avocat justice pour dette locative" width="275" height="183" />La date d’audience est fixée au moins 2 mois après la date de cette dénonce à la Préfecture. Le jour de l’audience, les parties sont entendues, et le résultat est connu un mois après. D’ici découle deux types d’Ordonnance de Référé :
+<img loading="lazy" decoding="async" class="size-full wp-image-51771 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/02/avocat-saisir-tribunal-contentieux-gestion-locative.jpg" alt="saisir avocat justice pour dette locative" width="275" height="183" />La date d’audience est fixée au moins 2 mois après la date de cette dénonce à la Préfecture. Le jour de l’audience, les parties sont entendues, et le résultat est connu un mois après. D’ici découle deux types d’Ordonnance de Référé :
 <ul>
  	<li>Soit le Juge maintient l’existence du bail et la subordonne au respect d’un échéancier qu’il donne au locataire et au garant pour régler la dette. A ce moment-là, il faudra s’assurer que la décision est bien respectée et que l’échéancier est honoré.</li>
 </ul>

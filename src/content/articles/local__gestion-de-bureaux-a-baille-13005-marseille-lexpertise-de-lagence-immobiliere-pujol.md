@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière est un service indispensable pour les propriétaires de biens immobiliers, notamment les bureaux. À l’agence immobilière Pujol, nous vous..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bureaux à Baille, 13005, Marseille : l’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

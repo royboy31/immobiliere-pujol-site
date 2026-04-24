@@ -1,0 +1,34 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+const localArticles = articles
+  .filter((a) => (a.data.slug || '').startsWith('local/'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout
+  title="Biens locaux et gestion locative à Marseille – Immobilière Pujol"
+  description={`Guide complet de nos ${localArticles.length} pages de gestion locative et biens immobiliers par quartier de Marseille.`}
+>
+  <section class="blog-archive blog-archive--local">
+    <h1>Gestion locative et biens à Marseille</h1>
+    <p class="blog-archive__count">{localArticles.length} quartiers / biens couverts</p>
+
+    <div class="blog-archive__grid">
+      {localArticles.map((a) => (
+        <article class="blog-card">
+          {a.data.featuredImage && (
+            <img src={a.data.featuredImage} alt={a.data.title} loading="lazy" />
+          )}
+          <h2>
+            <a href={`/${a.data.slug}/`}>{a.data.title}</a>
+          </h2>
+          {a.data.excerpt && <p>{a.data.excerpt}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

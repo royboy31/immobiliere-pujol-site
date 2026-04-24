@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "L’agence immobilière Pujol : votre partenaire de confiance À l’agence immobilière Pujol, nous sommes spécialisés dans la gestion immobilière dans le quartier..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Services de gestion immobilière à Les Trois-Lucs, 13012 Marseille"
 seoDescription: ""
 ---

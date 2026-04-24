@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "L’administrateur de bien est un professionnel de l’immobilier qui prend en charge la gestion locative de biens immobiliers pour le compte de propriétaires. À..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à Vauban, 13006 Marseille : L’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

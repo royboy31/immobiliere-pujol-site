@@ -5,7 +5,7 @@ date: "2023-09-08"
 excerpt: "Le choix d’orienter notre ville comme une destination touristique n’est pas récent. Autant je m’en réjouis en tant qu’agent immobilier, autant les conséquences..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/PUJ-4755-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/PUJ-4755-1200x800.jpg"
 seoTitle: "L’impact du tourisme sur le marché immobilier marseillais"
 seoDescription: "Le tourisme a indéniablement changé et fait évoluer le marché immobilier Marseillais que se soit au niveau des prix de vente, des prix de location mais également au niveau de la vie en copropriété. Plus de détails dans cet article"
 ---

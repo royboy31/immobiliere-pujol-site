@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion de bureau est un service essentiel pour les propriétaires d’espaces professionnels qui souhaitent optimiser la rentabilité de leur investissement..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bureau à Montolivet, 13012 Marseille : L’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

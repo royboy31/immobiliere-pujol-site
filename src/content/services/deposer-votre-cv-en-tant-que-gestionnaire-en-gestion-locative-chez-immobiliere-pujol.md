@@ -15,10 +15,10 @@ seoDescription: "Déposez votre candidature pour un poste de gestion locative ch
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2019/02/PU-0262-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2019/02/PU-0262-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2019/02/PU-0262-600x375.jpg" 
-      <img src="/content/uploads/2019/02/PU-0262-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PU-0262-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PU-0262-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PU-0262-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PU-0262-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -51,7 +51,7 @@ seoDescription: "Déposez votre candidature pour un poste de gestion locative ch
 <p>Nous recrutons des personnalités qui savent ce que service et engagement signifient.</p>
 <h2>Horaires</h2>
 <p>Ce sont des postes de cadre à 39h, avec possibilité de faire du télétravail un jour par semaine.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-229858" src="/content/uploads/2018/06/avis-immobiliere-pujol.png" alt="avis immobiliere pujol" width="641" height="320" srcset="/content/uploads/2018/06/avis-immobiliere-pujol.png 641w, /content/uploads/2018/06/avis-immobiliere-pujol-600x300.png 600w" sizes="auto, (max-width: 641px) 100vw, 641px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-229858" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png" alt="avis immobiliere pujol" width="641" height="320" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol.png 641w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/avis-immobiliere-pujol-600x300.png 600w" sizes="auto, (max-width: 641px) 100vw, 641px" /></p>
 <h2>Salaire</h2>
 <p>Le salaire dépend de l&rsquo;expérience du candidat. Nous formons des jeunes pour prendre ces postes.</p>
 <p>Pour toute candidature, veuillez envoyer un cv et une lettre de motivation à stephanepujol@immobiliere-pujol.fr</p>

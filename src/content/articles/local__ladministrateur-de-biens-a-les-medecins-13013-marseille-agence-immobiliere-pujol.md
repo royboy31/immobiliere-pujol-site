@@ -5,7 +5,7 @@ date: "2024-05-13"
 excerpt: "L’administration de biens est un service proposé par certaines agences immobilières, dont l’agence immobilière Pujol, pour aider les propriétaires à gérer..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "L’administrateur de biens à Les Médecins, 13013 Marseille : Agence immobilière Pujol"
 seoDescription: ""
 ---

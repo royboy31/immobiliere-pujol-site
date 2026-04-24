@@ -5,7 +5,7 @@ date: "2019-03-13"
 excerpt: "Voilà 24 ans que je fais ce métier. Et durant tout ce temps, j’ai pu voir de nombreuses aides, qui ont été annulées, en moyenne, dans les 24 mois qui ont suivi..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Faire-des-travaux-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Faire-des-travaux-1200x750.jpg"
 seoTitle: "Les avantages et subventions pour l’écorénovation"
 seoDescription: "Voilà 24 ans que je fais ce métier. Et durant tout ce temps, j’ai pu voir de nombreuses aides, qui ont été annulées, en moyenne, dans les 24 mois qui ont suivi leur lancement. Autant d’initiatives gouvernementales pour sensibiliser les propriétaires à l’écorénovation, autant d'échecs relatifs. Récemment, le CITE a…"
 ---

@@ -5,7 +5,7 @@ date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13013 à Marseille entre 2014 et 2018. Il se compose de 11 quartiers : Château Gombert, La Croix Rouge, La..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/13013-1.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-1.jpeg"
 seoTitle: "Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13013 à Marseille entre 2014 et 2018. Il se compose de 11 quartiers : Château Gombert, La Croix Rouge, La Rose, les Médecins, Les Mourets, Les Olives, Malpassé, Palama, St Jérôme, St Just ainsi que St Mitre. Situé dans les quartiers…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13013 à M
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/06/13013-2.jpeg" alt="Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018" class="wp-image-235892" width="190" height="133" srcset="/content/uploads/2019/06/13013-2.jpeg 1000w, /content/uploads/2019/06/13013-2-768x538.jpeg 768w, /content/uploads/2019/06/13013-2-600x420.jpg 600w, /content/uploads/2019/06/13013-2-800x560.jpg 800w" sizes="auto, (max-width: 190px) 100vw, 190px" /></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-2.jpeg" alt="Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018" class="wp-image-235892" width="190" height="133" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-2.jpeg 1000w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-2-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-2-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-2-800x560.jpg 800w" sizes="auto, (max-width: 190px) 100vw, 190px" /></figure></div>
 
 
 
@@ -38,7 +38,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13013 à M
 
 
 
-<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="/content/uploads/2019/06/13013.png" alt="Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018" class="wp-image-235889"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013.png" alt="Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018" class="wp-image-235889"/></figure></div>
 
       </div>
       <!-- SHARE -->

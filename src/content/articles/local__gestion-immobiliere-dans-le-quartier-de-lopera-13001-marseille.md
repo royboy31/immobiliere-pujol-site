@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière est un ensemble de services proposés par une agence immobilière pour faciliter la vie des propriétaires de biens locatifs. À l’agence..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière dans le quartier de l’Opéra, 13001 – Marseille"
 seoDescription: ""
 ---

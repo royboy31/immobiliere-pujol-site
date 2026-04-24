@@ -5,7 +5,7 @@ date: "2018-01-22"
 excerpt: "Une de mes amies se révoltait contre la mairie et 13 habitat qui procédaient à des expulsions de squatter en pleine année scolaire. Le débat s’est donc engagé..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/Squat-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/Squat-marseille.jpg"
 seoTitle: "Le squat à Marseille, un problème de plus pour les quartiers difficiles"
 seoDescription: "Une de mes amies se révoltait contre la mairie et 13 habitat qui procédaient à des expulsions de squatter en pleine année scolaire. Le débat s’est donc engagé sur Facebook entre le droit de la propriété et l’humanisme. Le sujet est difficile. Je suis très favorable, comme chacun à ce…"
 ---
@@ -26,7 +26,7 @@ Combien vaut cet appartement muré ? Combien valent les appartements de l’éta
 Bref, le squat organisé dans cet immeuble prive les propriétaires de tout droit. Le bien ne vous appartient plus et la loi n’offre aucune solution à cette déshérence.
 <h2>Les conséquences pour mes clients :</h2>
 Quand un squatter s’approprie votre bien en cassant la porte ou la fenêtre et le volet ou le mur pour pouvoir y rentrer, vous n’avez que deux jours pour le sortir…deux jours, ce n’est pas beaucoup pour s’en rendre compte. Évidemment, c’est au propriétaire coupable d’avoir laissé sans surveillance son appartement de faire les démarches et d’en assumer le coût. Souvent 2000€ (frais d’huissier, d’avocat, remise en état de la porte…)
-<h2><img loading="lazy" decoding="async" class="size-medium wp-image-227552 alignright" src="/content/uploads/2018/01/barre-immeuble-marseille-800x414.jpg" alt="barre d'immeuble squater a marseille" width="800" height="414" srcset="/content/uploads/2018/01/barre-immeuble-marseille-800x414.jpg 800w, /content/uploads/2018/01/barre-immeuble-marseille-768x398.jpg 768w, /content/uploads/2018/01/barre-immeuble-marseille-600x311.jpg 600w, /content/uploads/2018/01/barre-immeuble-marseille.jpg 869w" sizes="auto, (max-width: 800px) 100vw, 800px" /></h2>
+<h2><img loading="lazy" decoding="async" class="size-medium wp-image-227552 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/barre-immeuble-marseille-800x414.jpg" alt="barre d'immeuble squater a marseille" width="800" height="414" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/barre-immeuble-marseille-800x414.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/barre-immeuble-marseille-768x398.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/barre-immeuble-marseille-600x311.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/barre-immeuble-marseille.jpg 869w" sizes="auto, (max-width: 800px) 100vw, 800px" /></h2>
 Quand le squatter est resté 48h, il bénéficie d’un droit d’occupation sans aucune contrepartie ni durée …et ce tant qu’ils occupent l’appartement.
 
 Le squatter peut même tout casser, tout défoncer, rester sans rien payer. Il aura même droit à des allocations logement pour son futur logement. Oui, c’est notre système d’allocation qui ne lie pas allocation et comportement responsable ou respectueux du bien d&rsquo;autrui.

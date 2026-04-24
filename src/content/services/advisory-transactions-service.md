@@ -15,10 +15,10 @@ seoDescription: "We support you in your investment plans and help you better dis
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/02/real-estate-marseille-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/02/real-estate-marseille-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/02/real-estate-marseille-600x400.jpg" 
-      <img src="/content/uploads/2018/02/real-estate-marseille-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/real-estate-marseille-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/real-estate-marseille-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/real-estate-marseille-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/real-estate-marseille-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -56,7 +56,7 @@ We start by estimating the value of the property for sale, in line with current 
 
 We draw the attention of our portfolio of buyers to the property and publish the advertisement both on paper and online. We organize the viewings and keep you up to date on all developments.
 
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-227973" src="/content/uploads/2018/02/IMG_5308-ConvertImage-800x533.jpg" alt="real estate marseille" width="800" height="533" srcset="/content/uploads/2018/02/IMG_5308-ConvertImage-800x533.jpg 800w, /content/uploads/2018/02/IMG_5308-ConvertImage-768x512.jpg 768w, /content/uploads/2018/02/IMG_5308-ConvertImage-600x400.jpg 600w, /content/uploads/2018/02/IMG_5308-ConvertImage-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-227973" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/IMG_5308-ConvertImage-800x533.jpg" alt="real estate marseille" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/IMG_5308-ConvertImage-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/IMG_5308-ConvertImage-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/IMG_5308-ConvertImage-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/IMG_5308-ConvertImage-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 
 Once a purchaser has been found, we prepare the preliminary sale agreement for signature. Lastly, we oversee the financing arrangements for the property and conclude the sale through a notary.
 
@@ -79,7 +79,7 @@ We consider each purchase as a major lifetime event because we know how importan
 <h2>Works management</h2>
 Buying and selling often involve works to improve or renovate a property. We have worked for years with competent and reasonably priced service providers, who can provide fast, reliable, and affordable solutions to all your renovation needs.
 
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-225191" src="/content/uploads/2017/11/un-bon-syndic-à-marseille-800x500.jpg" alt="real estate marseille" width="800" height="500" srcset="/content/uploads/2017/11/un-bon-syndic-à-marseille-800x500.jpg 800w, /content/uploads/2017/11/un-bon-syndic-à-marseille-768x480.jpg 768w, /content/uploads/2017/11/un-bon-syndic-à-marseille-600x375.jpg 600w, /content/uploads/2017/11/un-bon-syndic-à-marseille-1200x750.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-225191" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/un-bon-syndic-à-marseille-800x500.jpg" alt="real estate marseille" width="800" height="500" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/un-bon-syndic-à-marseille-800x500.jpg 800w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/un-bon-syndic-à-marseille-768x480.jpg 768w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/un-bon-syndic-à-marseille-600x375.jpg 600w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/un-bon-syndic-à-marseille-1200x750.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 
 The long duration of our working relations with our architects, tradesmen and decorators is a guarantee of quality.
 <p align="CENTER"><a href="/contact/"><span style="color: #0563c1;"><span style="font-family: Calibri, serif;"><span style="font-size: large;"><span lang="en-US"><b>Contact us, without commitment</b></span></span></span></span></a></p>

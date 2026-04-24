@@ -5,7 +5,7 @@ date: "2019-07-09"
 excerpt: "Avec la canicule et les chaleurs actuelles, nous sentons bien notre dépendance à l’eau et la nécessité de réduire au mieux notre consommation d’eau. Un..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/07/comment-reduire-sa-consommation-deau.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/comment-reduire-sa-consommation-deau.jpg"
 seoTitle: "Réduire sa consommation d’eau : de la maison au mode de vie !"
 seoDescription: "Avec la canicule et les chaleurs actuelles, nous sentons bien notre dépendance à l’eau et la nécessité de réduire au mieux notre consommation d'eau. Un Français consomme en moyenne 1.9 million de litres d’eau chaque année. On sait que les changements climatiques ont déjà commencé à réduire les niveaux de…"
 ---
@@ -72,7 +72,7 @@ seoDescription: "Avec la canicule et les chaleurs actuelles, nous sentons bien n
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="480" height="1200" src="/content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-480x1200.png" alt="" class="wp-image-244283" srcset="/content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-480x1200.png 480w, /content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-768x1920.png 768w, /content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-240x600.png 240w, /content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-320x800.png 320w, /content/uploads/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU.png 800w" sizes="auto, (max-width: 480px) 100vw, 480px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="480" height="1200" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-480x1200.png" alt="" class="wp-image-244283" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-480x1200.png 480w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-768x1920.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-240x600.png 240w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU-320x800.png 320w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/5-astuces-pour-reduire-sa-consommation-dEAU.png 800w" sizes="auto, (max-width: 480px) 100vw, 480px" /></figure>
 
 
 

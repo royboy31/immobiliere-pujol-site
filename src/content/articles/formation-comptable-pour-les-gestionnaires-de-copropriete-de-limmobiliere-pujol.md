@@ -5,7 +5,7 @@ date: "2000-12-13"
 excerpt: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Avant/après"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/PU-1175-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/PU-1175-1200x750.jpg"
 seoTitle: "Support de formation comptable pour les gestionnaires de copropriété de l’Immobiliere Pujol"
 seoDescription: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de Solidarité de Renouvellement Urbain (SRU). Elle a été promulguée le 13 décembre 2000. Cette loi définit que “les comptes du syndicat, le budget…"
 ---
@@ -34,13 +34,13 @@ seoDescription: "En janvier 2019, nous avons organisé une formation pour nos é
 <h2 class="wp-block-heading">Supports de formation</h2>
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="/content/uploads/2019/04/3.png" alt="formation comptable SRU" srcset="/content/uploads/2019/04/3.png 852w, /content/uploads/2019/04/3-768x544.png 768w, /content/uploads/2019/04/3-600x425.png 600w, /content/uploads/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3.png" alt="formation comptable SRU" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3.png 852w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-768x544.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-600x425.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="863" height="610" class="wp-image-234852" src="/content/uploads/2019/04/2.png" alt="" srcset="/content/uploads/2019/04/2.png 863w, /content/uploads/2019/04/2-768x543.png 768w, /content/uploads/2019/04/2-600x424.png 600w, /content/uploads/2019/04/2-800x565.png 800w" sizes="auto, (max-width: 863px) 100vw, 863px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="863" height="610" class="wp-image-234852" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/2.png" alt="" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/2.png 863w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/2-768x543.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/2-600x424.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/2-800x565.png 800w" sizes="auto, (max-width: 863px) 100vw, 863px" /></figure>
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="/content/uploads/2019/04/3.png" alt="formation, comptable, decret" srcset="/content/uploads/2019/04/3.png 852w, /content/uploads/2019/04/3-768x544.png 768w, /content/uploads/2019/04/3-600x425.png 600w, /content/uploads/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="852" height="604" class="wp-image-234853" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3.png" alt="formation, comptable, decret" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3.png 852w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-768x544.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-600x425.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/3-800x567.png 800w" sizes="auto, (max-width: 852px) 100vw, 852px" /></figure>
 
       </div>
       <!-- SHARE -->

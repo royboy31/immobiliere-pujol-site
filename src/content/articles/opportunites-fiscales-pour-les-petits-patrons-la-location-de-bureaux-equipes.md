@@ -5,7 +5,7 @@ date: "2017-12-22"
 excerpt: "A mon avis, tout entrepreneur, tout patron, tout commerçant et tout indépendant doit (à partir du moment où il a une visibilité sur l’exploitation de son..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/12/comment-acheter-bureau-1200x675.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/comment-acheter-bureau-1200x675.jpg"
 seoTitle: "Opportunités fiscales pour les petits patrons: la location de bureaux équipés"
 seoDescription: "A mon avis, tout entrepreneur, tout patron, tout commerçant et tout indépendant doit (à partir du moment où il a une visibilité sur l’exploitation de son activité) acheter ses bureaux, investir dans son outil de travail ou son local quand il est commerçant. Au premier rang de ces outils, la…"
 ---

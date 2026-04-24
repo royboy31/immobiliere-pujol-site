@@ -5,7 +5,7 @@ date: "2020-07-19"
 excerpt: "Acheter ou attendre : loupez-vous une opportunité ? Impossible de répondre à cette question de manière tranchée ou simpliste, car il y a trop de facteurs à..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/07/20200706_171733-1-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/07/20200706_171733-1-1200x900.jpg"
 seoTitle: "Est-ce un bon moment pour acheter un appartement ou une maison ?"
 seoDescription: "Acheter ou attendre : loupez-vous une opportunité ? Impossible de répondre à cette question de manière tranchée ou simpliste, car il y a trop de facteurs à analyser. Pour rajouter à cette complexité, les quartiers évoluent dans différentes directions.Personne n’a encore suffisamment de recul pour comprendre les tendances récentes post-confinement…"
 ---

@@ -20,10 +20,10 @@ seoDescription: "Votre appartement loué en moins de 35 jours chez Immobilière 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/PU-1698-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/PU-1698-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/PU-1698-600x375.jpg" 
-      <img src="/content/uploads/2017/10/PU-1698-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -56,7 +56,7 @@ seoDescription: "Votre appartement loué en moins de 35 jours chez Immobilière 
                     <h2>Une mise en ligne rapide de l&rsquo;annonce de location</h2>
 <p>Une agence immobilière doit être évaluée sous plusieurs angles. <br />
 L&rsquo;un des critères d&rsquo;évaluation d&rsquo;une agence de location est sa rapidité d&rsquo;exécution et de mise en location .</p>
-<p><img loading="lazy" decoding="async" class="wp-image-385387 alignleft" src="/content/uploads/2018/10/exposio_0002-800x533.jpg" alt="location appartement meuble marseille" width="350" height="233" srcset="/content/uploads/2018/10/exposio_0002-800x533.jpg 800w, /content/uploads/2018/10/exposio_0002-768x512.jpg 768w, /content/uploads/2018/10/exposio_0002-600x400.jpg 600w, /content/uploads/2018/10/exposio_0002-1200x800.jpg 1200w, /content/uploads/2018/10/exposio_0002.jpg 1500w" sizes="auto, (max-width: 350px) 100vw, 350px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-385387 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-800x533.jpg" alt="location appartement meuble marseille" width="350" height="233" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/exposio_0002.jpg 1500w" sizes="auto, (max-width: 350px) 100vw, 350px" /></p>
 <p>Chez Immobilière Pujol dans les 24 heures suivant l’aval du propriétaire, nous publions l’annonce sur les moteurs de recherche et portails immobiliers.</p>
 <p><br />
 Notre annonce contient<strong> un descriptif précis du bien</strong>, <strong>des photos représentatives et convaincantes</strong> pour les candidats locataires ainsi qu&rsquo;une<strong><a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9" target="_blank" rel="noopener"> visite virtuelle de votre bien</a>.</strong></p>

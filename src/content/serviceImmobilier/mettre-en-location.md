@@ -1,7 +1,7 @@
 ---
 title: "Mettre en location"
 slug: "mettre-en-location"
-heroVideo: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/Ma-video3.mp4"
+heroVideo: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4"
 seoTitle: "Mettre en location"
 seoDescription: "Soyez bien conseillé pour mieux louer"
 ---
@@ -16,8 +16,8 @@ seoDescription: "Soyez bien conseillé pour mieux louer"
     
 	</div>
 		<!-- Background video -->
-  <video class="hero__video" loop autoplay muted poster="/content/uploads/2021/01/location-meuble-wifi-castellane-1200x802.jpg">
-    <source src="/content/uploads/2021/01/Ma-video3.mp4" type="video/mp4">
+  <video class="hero__video" loop autoplay muted poster="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/location-meuble-wifi-castellane-1200x802.jpg">
+    <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4" type="video/mp4">
     Your browser doesn't support HTML5 video tag.
   </video>
 	</section>

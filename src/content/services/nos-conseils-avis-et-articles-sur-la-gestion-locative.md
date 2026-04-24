@@ -64,7 +64,7 @@ seoDescription: "Guider vos choix immobiliers La raison d'être de notre agence 
 <p>Découvrez <a href="/service/pourquoi-nous-faisons-ce-metier/">le « why » de l&rsquo;équipe</a>.</p>
 <h2>Le blog immobilier, notre vision sans concession</h2>
 <p><strong>Le blog immobilier</strong> est pour nous un moyen de clarifier notre vision et de toucher un large public. Nous pouvons interagir ensuite via les commentaires, par mail, par téléphone et pourquoi pas en face-à-face si vous êtes dans la région de Marseille.</p>
-<p><img decoding="async" src="/content/uploads/2017/01/PU-0521.jpg" />Le blog est divisé en 4 grandes sections :</p>
+<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/PU-0521.jpg" />Le blog est divisé en 4 grandes sections :</p>
 <ul>
 	<li><strong>Les prix par quartier</strong> (Marseille), pour vous informer sur l&rsquo;évolution des loyers et des tendances immobilières.</li>
 </ul>

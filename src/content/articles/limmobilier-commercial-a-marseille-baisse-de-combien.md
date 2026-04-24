@@ -5,7 +5,7 @@ date: "2016-11-25"
 excerpt: "C’est une des grandes questions à laquelle nous sommes confrontés. Un de mes clients qui étaient focalisés sur ces commerces de pied d’immeubles en..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-665952_1920-min-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/marseille-665952_1920-min-1200x900.jpg"
 seoTitle: "L’immobilier commercial à Marseille : en baisse de combien ?"
 seoDescription: "C’est une des grandes questions à laquelle nous sommes confrontés. Un de mes clients qui étaient focalisés sur ces commerces de pied d’immeubles en centre-ville me challenge et me teste régulièrement sur ce point. Nous avons vécu un âge d’or de l’immobilier commercial en centre-ville, âge d’or qui semble révolu au…"
 ---
@@ -21,8 +21,8 @@ En préambule, n’oubliez pas qu’en 10 ans le nombre d’enseignes a doublé 
 
 Voici quelques sources et data (pdf) :
 <ul>
- 	<li><a href="/content/uploads/2016/11/ANF-SFAF-27072016-Analyst-presentation.pdf">Analyse du rapport annuel sur les commerces ANF Metamorphose 2016</a></li>
- 	<li><a href="/content/uploads/2016/11/ANF-SFAF-27072016-Analyst-presentation.pdf">Analyse du rapport annuel sur les commerces ANF Metamorphose </a><a href="/content/uploads/2016/11/ANF-Immobilier-DDR-2015.pdf">2015</a></li>
+ 	<li><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/11/ANF-SFAF-27072016-Analyst-presentation.pdf">Analyse du rapport annuel sur les commerces ANF Metamorphose 2016</a></li>
+ 	<li><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/11/ANF-SFAF-27072016-Analyst-presentation.pdf">Analyse du rapport annuel sur les commerces ANF Metamorphose </a><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/11/ANF-Immobilier-DDR-2015.pdf">2015</a></li>
 </ul>
 Ces experts ont constaté une suroffre qui est &#8211; selon eux &#8211; temporaire avec :
 <ul>

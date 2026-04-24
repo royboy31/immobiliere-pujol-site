@@ -5,13 +5,13 @@ date: "2020-02-23"
 excerpt: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS en 2019 dans le 13013 En..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13013-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13013-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13013 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13013 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
 
 <h4><strong>LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS  en 2019 dans le 13013<br /></strong></h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="/content/uploads/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2019, il y a eu 334 ventes dans le 13013 au prix médian* arrondissement de 2 000€ le m² .<br /><br /><i><br />*Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</i></p>
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2019, il y a eu 334 ventes dans le 13013 au prix médian* arrondissement de 2 000€ le m² .<br /><br /><i><br />*Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</i></p>
 <p> </p>
 <h4><strong>LES PRIX AU M² DES APPARTEMENTS ANCIENS VENDUS DANS LE 13ÈME ARRONDISSEMENT DE MARSEILLE PAR QUARTIER en 2019</strong></h4>
 <div class="gmail_default">

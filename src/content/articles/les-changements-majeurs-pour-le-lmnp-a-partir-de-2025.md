@@ -5,7 +5,7 @@ date: "2025-01-03"
 excerpt: "Le statut de Loueur en Meublé Non Professionnel (LMNP), très prisé des investisseurs immobiliers pour sa fiscalité avantageuse, va subir une réforme importante..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/12/LMNP-EN-2025-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/LMNP-EN-2025-1200x800.jpg"
 seoTitle: "Les changements majeurs pour le LMNP à partir de 2025"
 seoDescription: "Découvrez les impacts de la réforme du statut LMNP en 2025 : amortissements réintégrés, plus-values alourdies et stratégies pour optimiser vos investissements locatifs."
 ---
@@ -56,7 +56,7 @@ Ce changement impactera principalement le traitement fiscal des amortissements e
 </ul>
 <p>En conclusion, la réforme du LMNP à partir de 2025. Si le statut reste avantageux pour l’optimisation des revenus locatifs, son attrait pour la revente à long terme sera nettement réduit. Il est essentiel pour les propriétaires d’anticiper ces changements et de revoir leur stratégie patrimoniale en conséquence.</p>
 <p>Si vous avez des questions ou souhaitez un accompagnement sur mesure pour vos investissements, n’hésitez pas à contacter notre expert. </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-933200" src="/content/uploads/2024/12/signature-norbert-800x261.jpg" alt="" width="437" height="143" srcset="/content/uploads/2024/12/signature-norbert-800x261.jpg 800w, /content/uploads/2024/12/signature-norbert-768x251.jpg 768w, /content/uploads/2024/12/signature-norbert-1536x502.jpg 1536w, /content/uploads/2024/12/signature-norbert-2048x669.jpg 2048w, /content/uploads/2024/12/signature-norbert-600x196.jpg 600w, /content/uploads/2024/12/signature-norbert-1200x392.jpg 1200w" sizes="auto, (max-width: 437px) 100vw, 437px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-933200" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-800x261.jpg" alt="" width="437" height="143" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-800x261.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-768x251.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-1536x502.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-2048x669.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-600x196.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/12/signature-norbert-1200x392.jpg 1200w" sizes="auto, (max-width: 437px) 100vw, 437px" /></p>
 <p>&nbsp;</p>
       </div>
       <!-- SHARE -->

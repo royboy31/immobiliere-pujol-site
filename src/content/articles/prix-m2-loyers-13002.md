@@ -5,7 +5,7 @@ date: "2019-01-27"
 excerpt: "Les données chiffrées du marché locatif en 2019 Prix moyen (en €/m2) : 12,4 Croissance entre 2017 et 2018 : 6 Durée d’occupation moyenne (en mois) : 45,1 Taux..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO30010003_949A.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/LO30010003_949A.jpg"
 seoTitle: "Les prix au m2 des loyers  dans le 13002 en 2019"
 seoDescription: "Le prix moyen des loyers (en €/m2) est de 12,4 dans le 13002
 La durée d'occupation moyenne est 45 mois"
@@ -20,10 +20,10 @@ La durée d'occupation moyenne est 45 mois"
 <p><strong>Loyer médian</strong> (en €/m2) : 12</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291168" src="/content/uploads/2017/01/2-ème-arrondissement-loyer-2018-800x281.png" alt="" width="800" height="281" srcset="/content/uploads/2017/01/2-ème-arrondissement-loyer-2018-800x281.png 800w, /content/uploads/2017/01/2-ème-arrondissement-loyer-2018-768x269.png 768w, /content/uploads/2017/01/2-ème-arrondissement-loyer-2018-600x211.png 600w, /content/uploads/2017/01/2-ème-arrondissement-loyer-2018.png 1043w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291168" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/2-%C3%A8me-arrondissement-loyer-2018-800x281.png" alt="" width="800" height="281" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/2-%C3%A8me-arrondissement-loyer-2018-800x281.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/2-%C3%A8me-arrondissement-loyer-2018-768x269.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/2-%C3%A8me-arrondissement-loyer-2018-600x211.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/2-%C3%A8me-arrondissement-loyer-2018.png 1043w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2>Les caractéristiques du 2e arrondissement</h2>
-<p>Le 2e arrondissement de Marseille est situé au nord du Vieux-Port. Il est divisé en quatre quartiers officiels :<br /><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8494" src="/content/uploads/2017/01/13002-300x280.jpg" alt="" width="300" height="280" /><br />Arenc<br />Les Grands Carmes<br />L’Hôtel de Ville<br />La Joliette<br />Il est au cœur de l’opération de rénovation urbaine Euroméditerranée. Cette opération est dans les esprits depuis 20 ans et constitue pour Marseille le principal défi de rénovation structurante.</p>
+<p>Le 2e arrondissement de Marseille est situé au nord du Vieux-Port. Il est divisé en quatre quartiers officiels :<br /><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8494" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13002-300x280.jpg" alt="" width="300" height="280" /><br />Arenc<br />Les Grands Carmes<br />L’Hôtel de Ville<br />La Joliette<br />Il est au cœur de l’opération de rénovation urbaine Euroméditerranée. Cette opération est dans les esprits depuis 20 ans et constitue pour Marseille le principal défi de rénovation structurante.</p>
 <p>Le 2e arrondissement recouvre la partie la plus ancienne de Marseille, au nord du Vieux-Port avec le quartier du Panier. Il reste cependant peu de la ville du Moyen Âge : une partie a été détruite lors du percement de la rue de la République au 19e siècle puis le Panier a été détruit à la fin de la 2ème guerre mondiale.</p>
 <p>C’est un quartier majoritairement pauvre qui a dans son sein des poches de richesses très fortes. A coté des immeubles neufs qui abritent les multi-nationales et l’élite de notre économie pour les entreprises, des immeubles Pouillons avec vue sur le port à 7000€ le m, vous trouvez des taudis toujours pas rénové dans des immeubles anciens.</p>
 <p>Les touristes ont débarqué dans cet arrondissement et ont changé complètement sa physionomie. Espérons que cela va durer et que les Terrasses su Port qui sont le phare commercial de ce quartier saura drainer richesses et entreprises.</p>

@@ -5,7 +5,7 @@ date: "2023-12-12"
 excerpt: "La gestion d’appartement est un service clé proposé par l’agence immobilière Pujol, qui couvre tous les aspects de la location et de l’entretien de votre bien..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion d’appartements dans le quartier Préfecture, 13006 Marseille"
 seoDescription: ""
 ---

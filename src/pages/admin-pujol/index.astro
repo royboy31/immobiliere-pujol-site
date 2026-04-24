@@ -1,0 +1,26 @@
+---
+export const prerender = false;
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+type Expert = { slug: string; title: string };
+const expertMods = import.meta.glob<Expert>('../../content/experts/*.json', { eager: true, import: 'default' });
+const expertCount = Object.keys(expertMods).length;
+---
+
+<AdminLayout title="Tableau de bord" section="home">
+  <h1>Tableau de bord</h1>
+  <div class="grid">
+    <a class="card" href="./experts/" style="color:inherit;">
+      <h2 style="margin:0 0 0.25rem;">Experts</h2>
+      <p style="margin:0; color:#555;">{expertCount} profil{expertCount > 1 ? 's' : ''} — modifier, ajouter, retirer</p>
+    </a>
+    <a class="card" href="./articles/" style="color:inherit;">
+      <h2 style="margin:0 0 0.25rem;">Articles de blog</h2>
+      <p style="margin:0; color:#555;">Publier un nouvel article ou éditer un existant</p>
+    </a>
+    <a class="card" href="./pages/" style="color:inherit;">
+      <h2 style="margin:0 0 0.25rem;">Pages légales</h2>
+      <p style="margin:0; color:#555;">Mentions légales, politique de confidentialité, etc.</p>
+    </a>
+  </div>
+</AdminLayout>

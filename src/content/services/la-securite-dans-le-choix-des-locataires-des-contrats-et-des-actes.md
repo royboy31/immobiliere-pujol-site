@@ -15,10 +15,10 @@ seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un b
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/location-meible-standing-13006-Copy.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/location-meible-standing-13006-Copy.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/location-meible-standing-13006-Copy-600x400.jpg" 
-      <img src="/content/uploads/2018/06/location-meible-standing-13006-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/location-meible-standing-13006-Copy.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/location-meible-standing-13006-Copy.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/location-meible-standing-13006-Copy-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/location-meible-standing-13006-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -70,7 +70,7 @@ seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un b
 </tr>
 </tbody>
 </table>
-<p><img loading="lazy" decoding="async" class="alignleft" src="/content/uploads/2016/12/admin-ajax.jpg" alt="garantir un proprietaire de ses loyers a marseille" width="242" height="215" /></p>
+<p><img loading="lazy" decoding="async" class="alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/admin-ajax.jpg" alt="garantir un proprietaire de ses loyers a marseille" width="242" height="215" /></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>Sécuriser votre location, c&rsquo;est nous déléguer la mise en location en tout ou partie afin de vous protéger juridiquement et d&rsquo;éviter les loyers impayés.<br />

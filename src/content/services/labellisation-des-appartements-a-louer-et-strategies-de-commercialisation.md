@@ -15,10 +15,10 @@ seoDescription: "Découvrez nos stratégies de commercialisation qui valorisent 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/location-meuble-luxe-13006-Copy.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/location-meuble-luxe-13006-Copy.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/location-meuble-luxe-13006-Copy-600x400.jpg" 
-      <img src="/content/uploads/2017/10/location-meuble-luxe-13006-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -54,7 +54,7 @@ seoDescription: "Découvrez nos stratégies de commercialisation qui valorisent 
                     <h3 class="contextual__title">Labellisation Des Appartements À Louer Et Stratégies De Commercialisation</h3>
                     <p>La labellisation des appartements est une question stratégique. <strong>Par la labellisation, nous valorisons</strong> les appartements qui ne présentent aucun défaut et qui présentent des signes distinctifs (leur emplacement, une jolie rénovation,  une vue exceptionnelle&#8230;). Ces appartements labellisés ont un charme particulier et plaisent. Nous souhaitons donc les valoriser et les mettre en avant.</p>
 <h2>Pourquoi labelliser un appartement ?</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-801380" src="/content/uploads/2017/10/location-meuble-luxe-13006-Copy.jpg" alt="" width="640" height="427" srcset="/content/uploads/2017/10/location-meuble-luxe-13006-Copy.jpg 640w, /content/uploads/2017/10/location-meuble-luxe-13006-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-801380" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy.jpg" alt="" width="640" height="427" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></p>
 <p>&nbsp;</p>
 <ul>
 	<li><strong>Notre stratégie de commercialisation pour valoriser l’investissement de nos propriétaires</strong>: les propriétaires qui font de belles rénovations avec des matériaux nobles ou de qualité ajoutent de la valeur à leur bien et méritent cette labellisation.</li>

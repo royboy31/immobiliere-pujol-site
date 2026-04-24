@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière de bureaux est un service proposé par l’agence immobilière Pujol, spécialisée dans la gestion locative de biens immobiliers..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière de bureaux à Les Trois-Lucs, 13012 Marseille"
 seoDescription: ""
 ---

@@ -5,7 +5,7 @@ date: "2026-03-25"
 excerpt: "Après 31 ans d’exercice en tant que syndic, administrateur de biens et agent immobilier, je constate que nos fédérations professionnelles demeurent dans un..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2026/03/ORDRE-DES-SYNDIC-MARSEILLAIS-1200x670.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-DES-SYNDIC-MARSEILLAIS-1200x670.jpg"
 seoTitle: "Pour un Ordre professionnel : dépasser la Loi Hoguet"
 seoDescription: "71 professionnels indépendants se mobilisent pour demander la création d'une autorité ordinale pour garantir l'expertise et la déontologie du métier de syndic."
 ---
@@ -27,7 +27,7 @@ seoDescription: "71 professionnels indépendants se mobilisent pour demander la 
 <p><span style="font-weight: 400;">Qui porte l’intérêt général au sein des copropriétés lorsque les copropriétaires n’en ont pas conscience ? <br />
 Pour l’éco-rénovation, les résultats ne sont évidemment pas à la hauteur des enjeux.</span></p>
 <p><span style="font-weight: 400;">Notre quotidien n&rsquo;est plus celui d&rsquo;un simple comptable assaisonné de juridique et de technique; nous sommes les chefs d&rsquo;orchestre de la bonne gestion des copropriétés quand nous pouvons tenir ce rôle, ce qui n’est pas toujours le cas.</span></p>
-<p><img loading="lazy" decoding="async" class="wp-image-1416198 alignleft" src="/content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-800x446.jpg" alt="" width="379" height="212" srcset="/content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-800x446.jpg 800w, /content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-768x429.jpg 768w, /content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-1536x857.jpg 1536w, /content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-600x335.jpg 600w, /content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE-1200x670.jpg 1200w, /content/uploads/2026/03/ORDRE-SYNDIC-MARSEILLE.jpg 2048w" sizes="auto, (max-width: 379px) 100vw, 379px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-1416198 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-800x446.jpg" alt="" width="379" height="212" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-800x446.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-768x429.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-1536x857.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-600x335.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE-1200x670.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/03/ORDRE-SYNDIC-MARSEILLE.jpg 2048w" sizes="auto, (max-width: 379px) 100vw, 379px" /></p>
 <p>&nbsp;</p>
 <ul>
 	<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Un Ordre nous donnerait la <strong>légitimité et l&rsquo;autorité nécessaires pour imposer des travaux complexes</strong> et arbitrer les intérêts divergents au sein des assemblées générales.</span></li>

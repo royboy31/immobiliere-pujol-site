@@ -5,7 +5,7 @@ date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13011 à Marseille entre 2014 et 2018. Le 11ème arrondissement est divisé en 11 quartiers : Eoures, La..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/13011.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13011.jpeg"
 seoTitle: "Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13011 à Marseille entre 2014 et 2018. Le 11ème arrondissement est divisé en 11 quartiers : Eoures, La Barasse, La Millière, La Pomme, La Treille, La Valbarelle, La Valentine, Les Accates, Les Camoins, St Marcel et St Menet. Situé à l’est de la ville,…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13011 à M
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/06/IMG_1990-1200x900.jpg" alt="Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018" class="wp-image-235880" width="235" height="176" srcset="/content/uploads/2019/06/IMG_1990-1200x900.jpg 1200w, /content/uploads/2019/06/IMG_1990-768x576.jpg 768w, /content/uploads/2019/06/IMG_1990-600x450.jpg 600w, /content/uploads/2019/06/IMG_1990-800x600.jpg 800w, /content/uploads/2019/06/IMG_1990.jpg 2016w" sizes="auto, (max-width: 235px) 100vw, 235px" /></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990-1200x900.jpg" alt="Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018" class="wp-image-235880" width="235" height="176" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990-1200x900.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_1990.jpg 2016w" sizes="auto, (max-width: 235px) 100vw, 235px" /></figure></div>
 
 
 
@@ -30,7 +30,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13011 à M
 
 
 
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/06/13011.png" alt="Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018" class="wp-image-235878" width="391" height="284"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13011.png" alt="Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018" class="wp-image-235878" width="391" height="284"/></figure></div>
 
       </div>
       <!-- SHARE -->

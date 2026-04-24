@@ -15,10 +15,10 @@ seoDescription: "Vous avez besoin d'aide en gestion locative ou en location à M
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille-600x287.png" 
-      <img src="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille-600x287.png" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -32,7 +32,7 @@ seoDescription: "Vous avez besoin d'aide en gestion locative ou en location à M
 <p>Alors, vous êtes sur le bon site. Notre société de gestion locative s’occupe de toutes les facettes de la gestion locative, toujours selon vos besoins.</p>
 
 
-<figure id="attachment_229571" aria-describedby="caption-attachment-229571" style="width: 800px" class="wp-caption alignnone"><a href="/content/uploads/2017/10/devis-gestion-locative-1.jpg"><img loading="lazy" decoding="async" class="wp-image-229571 size-full" title="Gestion locative Marseille" src="/content/uploads/2017/10/devis-gestion-locative-1.jpg" alt="Gestion locative Marseille" width="800" height="533" srcset="/content/uploads/2017/10/devis-gestion-locative-1.jpg 800w, /content/uploads/2017/10/devis-gestion-locative-1-768x512.jpg 768w, /content/uploads/2017/10/devis-gestion-locative-1-600x400.jpg 600w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-229571" class="wp-caption-text">Gestion locative Marseille avec l&rsquo;agence Immobilière Pujol</figcaption></figure>
+<figure id="attachment_229571" aria-describedby="caption-attachment-229571" style="width: 800px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-gestion-locative-1.jpg"><img loading="lazy" decoding="async" class="wp-image-229571 size-full" title="Gestion locative Marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-gestion-locative-1.jpg" alt="Gestion locative Marseille" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-gestion-locative-1.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-gestion-locative-1-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-gestion-locative-1-600x400.jpg 600w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-229571" class="wp-caption-text">Gestion locative Marseille avec l&rsquo;agence Immobilière Pujol</figcaption></figure>
 <p></p>
 
 <h2>Qu’est-ce qu’immobilière Pujol ?</h2>

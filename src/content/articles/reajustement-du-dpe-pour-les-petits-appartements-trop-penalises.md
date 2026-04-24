@@ -5,7 +5,7 @@ date: "2024-03-15"
 excerpt: "La loi climat et résilience avait introduit en juillet 2021 un nouveau calcul pour les diagnostics de performance énergétique (DPE) obligatoires en location..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/03/dpe-gel-des-loyers.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/dpe-gel-des-loyers.jpg"
 seoTitle: "Réajustement du DPE pour les petits appartements trop pénalisés"
 seoDescription: "Un correctif sera apporté au DPE des petits logements de moins de 40m² pour échapper selon le cas au statut de passoire thermique."
 ---
@@ -41,7 +41,7 @@ Blocage des loyers des logements classés F et G et impossibilité : <br />
 <p>Pour plus de détails sur l&rsquo;interdiction de location et le gel des loyers des passoires énergétiques :<br />
 <a href="https://www.ecologie.gouv.fr/interdiction-location-et-gel-des-loyers-des-passoires-energetiques">https://www.ecologie.gouv.fr/interdiction-location-et-gel-des-loyers-des-passoires-energetiques</a></p>
 <p><br />
-<span style="font-family: helvetica, arial, sans-serif;"><strong><img loading="lazy" decoding="async" class=" wp-image-615191 alignleft" src="/content/uploads/2023/03/CARO-e.jpg" alt="" width="133" height="134" srcset="/content/uploads/2023/03/CARO-e.jpg 576w, /content/uploads/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 133px) 100vw, 133px" /></strong></span></p>
+<span style="font-family: helvetica, arial, sans-serif;"><strong><img loading="lazy" decoding="async" class=" wp-image-615191 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg" alt="" width="133" height="134" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e.jpg 576w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/CARO-e-100x100.jpg 100w" sizes="auto, (max-width: 133px) 100vw, 133px" /></strong></span></p>
 <p><span style="font-family: helvetica, arial, sans-serif;"><strong>Tout ceci est compliqué pour vous et vous ne savez pas quels travaux prioriser ?</strong></span><br />
 <span style="font-family: helvetica, arial, sans-serif;"><strong>N&rsquo;hésitez pas à nous contacter pour avoir des conseils sur les travaux à entreprendre et faire gérer votre bien en toute sérénité. </strong></span><br />
 Caroline PUJOL &#8211; 06 79 02 72 29</p>

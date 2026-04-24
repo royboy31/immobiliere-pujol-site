@@ -5,7 +5,7 @@ date: "2020-02-11"
 excerpt: "Les prix médians* sont établis par les notaires de France sur les transactions réalisées. Voici un comparatif quartier par quartier des prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13001"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13001-en-2019-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13001-en-2019-1200x900.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13001 en 2019 ?"
 seoDescription: "Les prix médians* sont établis par les notaires de France sur les transactions réalisées. Voici un comparatif quartier par quartier des prix au m2 de l'immobilier ancien dans le 13001 en 2019.   Le nombre de vente réalisées dans le 13001 pour l'année 2019 : 278 pour un prix médian…"
 ---

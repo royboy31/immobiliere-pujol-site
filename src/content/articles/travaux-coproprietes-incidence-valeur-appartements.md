@@ -5,7 +5,7 @@ date: "2016-05-31"
 excerpt: "Est-ce que la valeur des appartements va augmenter avec tous ces travaux réalisés dans la copropriété? C’est la question que m’a posée la présidente du conseil..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Faire-des-travaux-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Faire-des-travaux-1200x750.jpg"
 seoTitle: "Travaux dans les copropriétés : quelle incidence sur la valeur des appartements"
 seoDescription: "Est-ce que la valeur des appartements va augmenter avec tous ces travaux réalisés dans la copropriété? C'est la question que m’a posée la présidente du conseil syndical d'un immeuble lors de la réception des travaux importants de ravalement de façade. J’avoue qu'elle m’avait saisi à froid. Je n'étais pas préparé à…"
 ---
@@ -17,7 +17,7 @@ Pourtant cette question a continué à me trotter dans la tête.
 Ce week-end, j&rsquo;ai préparé leur prochaine assemblée, d’où cet article sur l’obsolescence des immeubles des années 70.
 J&rsquo;avais déjà parlé de cette copropriété dans un précédent article. Lors du vote de ces fameux travaux pour un montant de 900 000€, j&rsquo;avais en effet été très surpris que cette somme soit votée car en général les réunions dans cette copropriété se passaient comme dans un « village gaulois » ou personne n&rsquo;était d&rsquo;accord.
 <h3><strong>Les travaux ont permis une baisse des charges de 5% et de 20% des charges de chauffage</strong></h3>
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-224790" src="/content/uploads/2017/11/FullSizeRender-22-768x800.jpg" alt="" width="768" height="800" srcset="/content/uploads/2017/11/FullSizeRender-22-768x800.jpg 768w, /content/uploads/2017/11/FullSizeRender-22-576x600.jpg 576w, /content/uploads/2017/11/FullSizeRender-22-1151x1200.jpg 1151w, /content/uploads/2017/11/FullSizeRender-22.jpg 1228w" sizes="auto, (max-width: 768px) 100vw, 768px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-224790" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/FullSizeRender-22-768x800.jpg" alt="" width="768" height="800" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/FullSizeRender-22-768x800.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/FullSizeRender-22-576x600.jpg 576w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/FullSizeRender-22-1151x1200.jpg 1151w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/FullSizeRender-22.jpg 1228w" sizes="auto, (max-width: 768px) 100vw, 768px" />
 
 Ravalement avec isolation de la façade
 
@@ -59,13 +59,13 @@ Pour répondre à ma présidente, j’ai fait quelques recherches pour connaitre
 J’ai retenu 2 cartes de l&rsquo;étude qu&rsquo;a publiée l&rsquo;association <em>dinamic</em> en 2015.
 Celle de l&rsquo;Impact de l’étiquette énergie en pourcentage du prix équivalent au prix du bien de référence classé D
 
-<a href="/content/uploads/2016/05/carte-prix-immobilier-selon-classe-dpe.png" rel="attachment wp-att-7796"><img loading="lazy" decoding="async" class="wp-image-7796 size-full" src="/content/uploads/2016/05/carte-prix-immobilier-selon-classe-dpe.png" alt="travaux copropriété" width="508" height="459" /></a> Evolution des prix selon les travaux
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/05/carte-prix-immobilier-selon-classe-dpe.png" rel="attachment wp-att-7796"><img loading="lazy" decoding="async" class="wp-image-7796 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/05/carte-prix-immobilier-selon-classe-dpe.png" alt="travaux copropriété" width="508" height="459" /></a> Evolution des prix selon les travaux
 
 &nbsp;
 
 ET l’impact sur le prix des appartements :
 
-<a href="/content/uploads/2016/05/carte-prix-appartements-selon-dpe-valeur-verte.png" rel="attachment wp-att-7797"><img loading="lazy" decoding="async" class="wp-image-7797 size-full" src="/content/uploads/2016/05/carte-prix-appartements-selon-dpe-valeur-verte.png" alt="valeur verte" width="508" height="473" /></a> Evolution des prix des appartements selon leur valeur verte
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/05/carte-prix-appartements-selon-dpe-valeur-verte.png" rel="attachment wp-att-7797"><img loading="lazy" decoding="async" class="wp-image-7797 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/05/carte-prix-appartements-selon-dpe-valeur-verte.png" alt="valeur verte" width="508" height="473" /></a> Evolution des prix des appartements selon leur valeur verte
 
 <i>En zone climatique H3 (la notre), une maison dont l’étiquette est C se vend en moyenne 4% plus cher qu’une maison dont l’étiquette est D, toutes choses égales par ailleurs (dans la limite de l’information disponible dans les bases notariales).</i>
 

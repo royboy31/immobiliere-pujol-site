@@ -5,7 +5,7 @@ date: "2011-09-28"
 excerpt: "Vous souhaitez vendre votre appartement ou votre maison? A quel profil de vendeur ressemblez-vous le plus? Vous souhaitez vous investir activement dans la..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/PU-1653-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1653-1200x750.jpg"
 seoTitle: "Dis moi quel type de vendeur tu es, je te dirai quel agent immobilier il te faut…"
 seoDescription: "Vous souhaitez vendre votre appartement ou votre maison? A quel profil de vendeur ressemblez-vous le plus? Vous souhaitez vous investir activement dans la vente de votre bien ou au contraire préférez déléguer et faire confiance à un professionnel de l'immobilier? En lisant ce qui suit, peut-être saurez -vous mieux quel…"
 ---
@@ -35,7 +35,7 @@ Vous serez aussi les clients des grands réseaux immobiliers qui recrutent chaqu
 
 Si vous avez ce profil, vous ne serez pas un de mes clients car nous préférons travailler avec des vendeurs qui nous font confiance.
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-226473" src="/content/uploads/2011/09/PU-1653-300x188.jpg" alt="" width="300" height="188" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-226473" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2011/09/PU-1653-300x188.jpg" alt="" width="300" height="188" />
 <h2><strong>Le profil de vendeur n°2: celui qui a besoin d&rsquo;un agent immobilier et en qui il a confiance</strong></h2>
 <ul>
  	<li>a une idée du prix de vente de son appartement, mais attend l’avis et la confirmation de la part d’un agent immobilier. Il est prêt à modifier son estimation de prix.</li>

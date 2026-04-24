@@ -5,7 +5,7 @@ date: "2019-09-16"
 excerpt: "Dans mon dernier article trimestriel sur le marché immobilier à Marseille, j’ai montré l’évolution de l’offre de location à Marseille : baisse comprise entre..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/04/LO38580001_F88D.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/LO38580001_F88D.jpg"
 seoTitle: "Pourquoi il y a-t-il de moins en moins d’offre de location à Marseille ?"
 seoDescription: "Dans mon dernier article trimestriel sur le marché immobilier à Marseille, j’ai montré l’évolution de l’offre de location à Marseille : baisse comprise entre 1500 et 3000 appartements pour la seule ville de Marseille. La baisse est encore plus forte pour les grands appartements T4 (-19% en 3 ans) ou…"
 ---

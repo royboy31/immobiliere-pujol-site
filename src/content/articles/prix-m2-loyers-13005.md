@@ -5,7 +5,7 @@ date: "2020-01-30"
 excerpt: "Les données chiffrées du prix des loyers dans le 13005 en 2019 Prix moyen (en €/m2) : 13,8 Croissance entre 2017 et 2018 : 4,4 Durée d’occupation moyenne (en..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-2-1200x627.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/marseille-2-1200x627.png"
 seoTitle: "Les prix au m2 des loyers dans le 13005 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 13,8 dans le 13005.  La durée d'occupation est de 46 mois"
 ---
@@ -19,10 +19,10 @@ seoDescription: "Le prix moyen (en €/m2) est de 13,8 dans le 13005.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 12,7</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix des loyers selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291179" src="/content/uploads/2017/01/5-ème-arrondissement-loyer-2018-800x290.png" alt="" width="800" height="290" srcset="/content/uploads/2017/01/5-ème-arrondissement-loyer-2018-800x290.png 800w, /content/uploads/2017/01/5-ème-arrondissement-loyer-2018-768x278.png 768w, /content/uploads/2017/01/5-ème-arrondissement-loyer-2018-600x217.png 600w, /content/uploads/2017/01/5-ème-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291179" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/5-%C3%A8me-arrondissement-loyer-2018-800x290.png" alt="" width="800" height="290" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/5-%C3%A8me-arrondissement-loyer-2018-800x290.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/5-%C3%A8me-arrondissement-loyer-2018-768x278.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/5-%C3%A8me-arrondissement-loyer-2018-600x217.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/5-%C3%A8me-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 5e arrondissement</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8512" src="/content/uploads/2017/01/les-quartiers-du-13005-marseille-300x226.png" alt="" width="300" height="226" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8512" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/les-quartiers-du-13005-marseille-300x226.png" alt="" width="300" height="226" /></p>
 <p>Le cinquième arrondissement de Marseille se compose des quartiers :</p>
 <ul>
 <li><strong>Saint-Pierre</strong></li>

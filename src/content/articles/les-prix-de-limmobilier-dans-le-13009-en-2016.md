@@ -5,13 +5,13 @@ date: "2016-03-30"
 excerpt: "PRIX MÉDIANS DES APPARTEMENTS NEUFS VENDUS EN 2016 DANS LE 13009 En 2016, ce sont 174 appartements neufs qui se sont vendus dans le 9eme arrondissement de..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13009", "Arrondissements Marseille", "Arrondissement 13009 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13009-carte.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/13009-carte.png"
 seoTitle: "Les prix de l’immobilier dans le 13009 en 2016"
 seoDescription: "PRIX MÉDIANS DES APPARTEMENTS NEUFS VENDUS EN 2016 DANS LE 13009 En 2016, ce sont 174 appartements neufs qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 4610€ le m². *Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur…"
 ---
 
 <h4>PRIX MÉDIANS DES APPARTEMENTS NEUFS VENDUS EN 2016 DANS LE 13009</h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52848 alignleft" src="/content/uploads/2017/03/MG_3761DxO-1-300x200.jpg" alt="" width="300" height="200" />En 2016, ce sont 174 appartements neufs qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 4610€ le m².<br />
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52848 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/MG_3761DxO-1-300x200.jpg" alt="" width="300" height="200" />En 2016, ce sont 174 appartements neufs qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 4610€ le m².<br />
 <i><br />
 *Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</i></p>
 <p>&nbsp;</p>

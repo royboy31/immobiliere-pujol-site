@@ -5,13 +5,13 @@ date: "2016-03-10"
 excerpt: "Prix médians des appartements anciens vendus en 2016 dans le 13009 En 2016, ce sont 420 appartements anciens qui se sont vendus dans le 9eme arrondissement de..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13009", "Arrondissements Marseille", "Arrondissement 13009 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Mazargues57.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Marseille-Mazargues57.jpg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13009 en 2016"
 seoDescription: "Prix médians des appartements anciens vendus en 2016 dans le 13009 En 2016, ce sont 420 appartements anciens qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 2270€ le m². C'est dans le quartier de Sormiou que les prix ont été les plus élevés à…"
 ---
 
 <h4> <span style="font-size: 12pt;"><span style="color: #ff6600;">Prix médians des appartements anciens vendus en 2016 dans le 13009</span></span></h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52848 alignleft" src="/content/uploads/2017/03/MG_3761DxO-1-300x200.jpg" alt="" width="300" height="200" />En 2016, ce sont 420 appartements anciens qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 2270€ le m². C&rsquo;est dans le quartier de Sormiou que les prix ont été les plus élevés à 3020€ le m² et les moins élevés l&rsquo;ont été dans le quartier de Ste Marguerite à 1890€ le m².<br />
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52848 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/MG_3761DxO-1-300x200.jpg" alt="" width="300" height="200" />En 2016, ce sont 420 appartements anciens qui se sont vendus dans le 9eme arrondissement de Marseille au prix médian* de 2270€ le m². C&rsquo;est dans le quartier de Sormiou que les prix ont été les plus élevés à 3020€ le m² et les moins élevés l&rsquo;ont été dans le quartier de Ste Marguerite à 1890€ le m².<br />
 <i><br />
 *Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</i></p>
 <table border="1" width="536">

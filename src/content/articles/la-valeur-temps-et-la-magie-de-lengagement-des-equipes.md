@@ -5,7 +5,7 @@ date: "2024-06-19"
 excerpt: "Qu’est ce qui définit un syndic de copropriété de qualité ? La majeure partie des personnes que je rencontre dans le cadre d’un recrutement ne sont pas fières..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/06/meilleur-syndic-marseille-1-2-1200x793.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/meilleur-syndic-marseille-1-2-1200x793.jpg"
 seoTitle: "La valeur temps et la magie de l’engagement des équipes"
 seoDescription: "Découvrez dans cet article la différence de vision entre un indépendant engagé et un grand groupe pour un service syndic de meilleurs qualité et pour attirer des talents"
 ---
@@ -36,7 +36,7 @@ Ils ont perdu leur valeur, le sens du service, et parfois la noblesse de nos mé
 <p>Forts de nos engagements, nous grandissons et donc, nous recrutons. <br />
 Si vous avez envie de nous tester, adressez-moi votre CV  : stephanepujol@immobiliere-pujol.fr</p>
 <p>Stéphane Pujol </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-755697" src="/content/uploads/2024/03/retouche-photo-3-568x800.jpg" alt="" width="148" height="209" srcset="/content/uploads/2024/03/retouche-photo-3-568x800.jpg 568w, /content/uploads/2024/03/retouche-photo-3-768x1083.jpg 768w, /content/uploads/2024/03/retouche-photo-3-1090x1536.jpg 1090w, /content/uploads/2024/03/retouche-photo-3-426x600.jpg 426w, /content/uploads/2024/03/retouche-photo-3-851x1200.jpg 851w, /content/uploads/2024/03/retouche-photo-3.jpg 1240w" sizes="auto, (max-width: 148px) 100vw, 148px" /> </p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-755697" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-568x800.jpg" alt="" width="148" height="209" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-568x800.jpg 568w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-768x1083.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-1090x1536.jpg 1090w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-426x600.jpg 426w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3-851x1200.jpg 851w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-3.jpg 1240w" sizes="auto, (max-width: 148px) 100vw, 148px" /> </p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

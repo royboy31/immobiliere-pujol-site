@@ -5,7 +5,7 @@ date: "2023-12-02"
 excerpt: "Gestion efficace des dépenses énergétiques en copropriété : Comment notre stratégie a protégé nos copropriétaires face à la flambée des prix du gaz de 2021 à..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/11/IP-7026-111019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019.jpg"
 seoTitle: "Prix du gaz :  impact des négociations sur le budget de nos copropriétés"
 seoDescription: "Découvrez comment l'immobilière Pujol, syndic à Marseille a géré et fait face à l'augmentation des tarifs du gaz entre 2021 et 2023 pour ses copropriétés"
 ---
@@ -15,7 +15,7 @@ seoDescription: "Découvrez comment l'immobilière Pujol, syndic à Marseille a 
 <p>Les tarifs qui oscillaient entre 30-40€/MwH avant 2021 ont atteint 180-200 voire 220€/MwH pour la période 2021-2023.</p>
 <p>Le bouclier tarifaire mis en place par le gouvernement a permis de limiter le reste à charge à hauteur de 65.90€/MwH en 2022, 78.50€/MwH en 2023.</p>
 <p>Ils ont raison d&rsquo;être mécontents, néanmoins nous sommes fiers du travail que nous avons fait sur ce sujet, des négociations faites par le passé et celles encore négociées cette année.</p>
-<p><img loading="lazy" decoding="async" class=" wp-image-719794 alignleft" src="/content/uploads/2023/11/IP-7026-111019-533x800.jpg" alt="" width="273" height="410" srcset="/content/uploads/2023/11/IP-7026-111019-533x800.jpg 533w, /content/uploads/2023/11/IP-7026-111019-768x1152.jpg 768w, /content/uploads/2023/11/IP-7026-111019-400x600.jpg 400w, /content/uploads/2023/11/IP-7026-111019.jpg 800w" sizes="auto, (max-width: 273px) 100vw, 273px" />Avant 2020 nous avions négocié des tarifs à 18€HT/MwH, tarif fixe, bloqué.<br />
+<p><img loading="lazy" decoding="async" class=" wp-image-719794 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019-533x800.jpg" alt="" width="273" height="410" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019-533x800.jpg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019-768x1152.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/IP-7026-111019.jpg 800w" sizes="auto, (max-width: 273px) 100vw, 273px" />Avant 2020 nous avions négocié des tarifs à 18€HT/MwH, tarif fixe, bloqué.<br />
 Ces tarifs bas sont arrivés à terme en juin 2022, presque au pire moment du niveau haut des tarifs de gaz marché.<br />
 Pendant plusieurs années, nos copropriétés ont pu donc bénéficier de charges de chauffage allégées et de ce tarif ultra-compétitifs. Ils l’ont oublié et la hausse a été d’autant plus difficile à accepter que l’écart entre ce tarif négocié et le prix après bouclier fixé par le gouvernement à 65.90€HT/MwH a été 3.6 fois plus important. </p>
 <p>Il est certain que ceux qui avaient laissé courir des prix à 50 ou 60 €HT/MwH avant 2022 n’ont eu à faire subir à leurs copropriétaires qu’une légère augmentation de ce poste.</p>
@@ -24,7 +24,7 @@ Pendant plusieurs années, nos copropriétés ont pu donc bénéficier de charge
 <p>En 2023 nous avons négocié un tarif fixe à 58€/Mwh sur 2 ans. Ce prix était le meilleur au moment où nous l&rsquo;avons négocié. Car l&rsquo;aléa dans ce type de négociation est le moment où vous faites l&rsquo;appel d&rsquo;offre.</p>
 <p> <br />
 La courbe ci-dessous présente l&rsquo;évolution du prix du gaz payé par les copropriétés que nous gérons sur la période 2018-2023 :</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-719791" src="/content/uploads/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille.jpg" alt="" width="706" height="381" srcset="/content/uploads/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille.jpg 706w, /content/uploads/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille-600x324.jpg 600w" sizes="auto, (max-width: 706px) 100vw, 706px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-719791" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille.jpg" alt="" width="706" height="381" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille.jpg 706w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/courbe-prix-gaz-copro-gerees-syndic-pujol-marseille-600x324.jpg 600w" sizes="auto, (max-width: 706px) 100vw, 706px" /></p>
 <p>Donc malgré la hausse des prix, nos copropriétaires sont sortis gagnants grâce à notre gestion attentive. Ils comprennent parfaitement le travail qui a été fourni par nos équipes. D’autant que cela s’est accompagné d’un effort collectif des occupants sur la baisse des températures des chaudières gaz pour optimiser les dépenses d’énergie.<br />
 Les copropriétés qui étaient à 22° sont désormais chauffées à 20°C. <br />
 Les copropriétés qui étaient en moyenne à 20° sont désormais chauffées à 19°C.</p>

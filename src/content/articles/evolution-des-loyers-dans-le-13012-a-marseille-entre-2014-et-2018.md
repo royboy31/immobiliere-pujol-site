@@ -5,7 +5,7 @@ date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13012 à Marseille entre 2014 et 2018. Cet arrondissement situé en périphérie de la ville est divisé en 7..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/IMG_2012-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2012-1200x900.jpg"
 seoTitle: "Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13012 à Marseille entre 2014 et 2018. Cet arrondissement situé en périphérie de la ville est divisé en 7 quartiers différents : la Fourragère, les Caillols, les Trois Lucs, Montolivet, Saint Barnabé, Saint Jean du Désert et Saint Julien. Le 12e…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13012 à M
 
 
 
-<div class="wp-block-image"><figure class="alignright"><img loading="lazy" decoding="async" width="1200" height="900" src="/content/uploads/2019/06/IMG_2026-1200x900.jpg" alt="Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018" class="wp-image-235885" srcset="/content/uploads/2019/06/IMG_2026-1200x900.jpg 1200w, /content/uploads/2019/06/IMG_2026-768x576.jpg 768w, /content/uploads/2019/06/IMG_2026-600x450.jpg 600w, /content/uploads/2019/06/IMG_2026-800x600.jpg 800w, /content/uploads/2019/06/IMG_2026.jpg 2016w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure></div>
+<div class="wp-block-image"><figure class="alignright"><img loading="lazy" decoding="async" width="1200" height="900" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026-1200x900.jpg" alt="Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018" class="wp-image-235885" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026-1200x900.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2026.jpg 2016w" sizes="auto, (max-width: 1200px) 100vw, 1200px" /></figure></div>
 
 
 
@@ -34,7 +34,7 @@ seoDescription: "Voici une étude sur l'évolution des loyers dans le 13012 à M
 
 
 
-<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="/content/uploads/2019/06/13012.png" alt="Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018" class="wp-image-235883"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13012.png" alt="Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018" class="wp-image-235883"/></figure></div>
 
       </div>
       <!-- SHARE -->

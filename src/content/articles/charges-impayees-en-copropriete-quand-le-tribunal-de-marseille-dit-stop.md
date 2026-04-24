@@ -5,7 +5,7 @@ date: "2025-12-02"
 excerpt: "Les impayés : le poison lent de la copropriété À Marseille, on aime la convivialité, mais les voisins parlent rarement entre eux des impayés de charges. Quand..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1200x900.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1200x900.png"
 seoTitle: "Charges impayées en copropriété : quand le tribunal de Marseille dit « Stop »"
 seoDescription: "Les impayés de charges fragilisent votre copropriété à Marseille : travaux bloqués, hausse des charges, perte de valeur. Découvrez comment les prévenir."
 ---
@@ -48,7 +48,7 @@ Il crée un </span><b>« trou dans la caisse »</b><span style="font-weight: 4
 </ul>
 <p><span style="font-weight: 400;">Votre immeuble à Marseille est un bien commun précieux. Il mérite d&rsquo;être géré avec rigueur, humanité et détermination.</span></p>
 <p><span style="font-weight: 400;">Dans notre équipe, c&rsquo;est notre duo juridique et contentieux qui veille au grain !</span></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1263616" src="/content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-800x600.png" alt="" width="541" height="406" srcset="/content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-800x600.png 800w, /content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-768x576.png 768w, /content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1536x1152.png 1536w, /content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-600x450.png 600w, /content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1200x900.png 1200w, /content/uploads/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1.png 1547w" sizes="auto, (max-width: 541px) 100vw, 541px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1263616" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-800x600.png" alt="" width="541" height="406" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-800x600.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-768x576.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1536x1152.png 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-600x450.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1-1200x900.png 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/cb057cdf-6251-4b6f-a221-c41c521f9bf1.png 1547w" sizes="auto, (max-width: 541px) 100vw, 541px" /></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">Si le taux d&rsquo;impayés est une source d&rsquo;inquiétude dans votre copropriété et que vous cherchez un Syndic qui agit avec la fermeté du Tribunal de Marseille, </span><b><a href="/contact-immobiliere-pujol/">contactez-nous</a> pour</b><span style="font-weight: 400;"> remettre votre copropriété sur de bons rails financiers !</span></p>
       </div>

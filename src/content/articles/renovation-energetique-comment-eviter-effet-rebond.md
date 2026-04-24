@@ -5,7 +5,7 @@ date: "2023-03-14"
 excerpt: "L’effet rebond en rénovation? C’est un constat qui a été fait sur de nombreuses rénovations énergétiques selon lequel les économies d’énergie étaient bien en..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/Effet-rebond-suite-a-une-renovation.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/Effet-rebond-suite-a-une-renovation.png"
 seoTitle: "Rénovation énergétique : comment éviter l’effet rebond ?"
 seoDescription: "L’effet rebond en rénovation? C’est un constat qui a été fait sur de nombreuses rénovations énergétiques selon lequel les économies d’énergie étaient bien en deçà de celles espérées grâce aux travaux.  Et la raison est plus humaine que technique car l'économie d'énergie peut inciter à en dépenser plus, ce qui…"
 ---
@@ -27,7 +27,7 @@ Sans maîtrise, pas de contrôle.</p>
 <h4>4/ Communiquer au sein du logement et du bâtiment :</h4>
 <p>Sans communication sur les économies d’énergie à faire au sein du logement et du bâtiment rénové pas d’économies. Il nous faut apprendre les comportements qui vont induire des économies, mettre en avant les économies réalisées ou au contraire les surdépenses d’énergie.</p>
 <p>Et une dernière recommandation : vanter les mérites du bon gros pull en laine tricoté spécialement pour nous par notre chère grand-mère !</p>
-<p><img loading="lazy" decoding="async" class="wp-image-615197 alignleft" src="/content/uploads/2023/03/bon-gestionnaire-copropriete-marseille-800x744.jpg" alt="" width="142" height="132" srcset="/content/uploads/2023/03/bon-gestionnaire-copropriete-marseille-800x744.jpg 800w, /content/uploads/2023/03/bon-gestionnaire-copropriete-marseille-768x714.jpg 768w, /content/uploads/2023/03/bon-gestionnaire-copropriete-marseille-600x558.jpg 600w, /content/uploads/2023/03/bon-gestionnaire-copropriete-marseille.jpg 1065w" sizes="auto, (max-width: 142px) 100vw, 142px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-615197 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/bon-gestionnaire-copropriete-marseille-800x744.jpg" alt="" width="142" height="132" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/bon-gestionnaire-copropriete-marseille-800x744.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/bon-gestionnaire-copropriete-marseille-768x714.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/bon-gestionnaire-copropriete-marseille-600x558.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/bon-gestionnaire-copropriete-marseille.jpg 1065w" sizes="auto, (max-width: 142px) 100vw, 142px" /></p>
 <p>Bertrand Guibaud </p>
 <p>Gestionnaire de copropriété chez Immobilière Pujol </p>
 <p>&nbsp;</p>

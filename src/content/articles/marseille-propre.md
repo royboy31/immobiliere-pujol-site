@@ -5,7 +5,7 @@ date: "2018-05-22"
 excerpt: "J’adore ma ville. J’y ai créé des entreprises et y vis avec ma famille. Je n’ai jamais imaginé vivre ailleurs. Je lis tous les livres qui sont publiés et qui..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/05/la-propreté-a-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/la-propret%C3%A9-a-marseille.jpg"
 seoTitle: "Marseille propre…"
 seoDescription: "J’adore ma ville. J’y ai créé des entreprises et y vis avec ma famille. Je n’ai jamais imaginé vivre ailleurs. Je lis tous les livres qui sont publiés et qui parlent de près ou de loin de Marseille. Je m’inscris dans tous les groupes Facebook ou Twitter qui en parlent…"
 ---
@@ -27,7 +27,7 @@ seoDescription: "J’adore ma ville. J’y ai créé des entreprises et y vis av
 <p>Je n’en parlerai pas, car il suffit de voter à chaque élection pour les plus compétents, ceux qui semblent le plus conscients des enjeux, et qui vont vraiment gérer ce service.</p>
 <h1>Mais de nos comportements !</h1>
 <p>Je ne parlerai que de nous, les habitants de Marseille car je ne gère pas les rues de ma ville mais <a href="/service/comment-faire-baisser-le-cout-un-syndic-a-marseillle/">les parties communes de nos copropriétés</a> et que peu ou prou nous sommes confrontés aux mêmes problématiques.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229675" src="/content/uploads/2018/05/marseille-propre-600x800.jpg" alt="proprete marseille" width="600" height="800" srcset="/content/uploads/2018/05/marseille-propre-600x800.jpg 600w, /content/uploads/2018/05/marseille-propre-450x600.jpg 450w, /content/uploads/2018/05/marseille-propre.jpg 720w" sizes="auto, (max-width: 600px) 100vw, 600px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229675" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-600x800.jpg" alt="proprete marseille" width="600" height="800" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-600x800.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-450x600.jpg 450w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre.jpg 720w" sizes="auto, (max-width: 600px) 100vw, 600px" /></p>
 <p>Et pour moi il y a deux problèmes :</p>
 <ul>
 	<li>La perte du sentiment du bien collectif ou du bien public</li>
@@ -43,7 +43,7 @@ seoDescription: "J’adore ma ville. J’y ai créé des entreprises et y vis av
 <p>Il faut le dire clairement, 99,90% des dépôts dans les rues commis par les entrepreneurs, les bricoleurs, les déménageurs improvisés ne sont jamais sanctionnés.</p>
 <p>Comme pour la vitesse sur la route, tant qu’il n’y a pas de sanction, il ne se passera rien et les services arroseront le désert de la fainéantise marseillaise.</p>
 <p>D’un autre côté, on ne peut mettre un policier dans chaque rue. Tout comme en copropriété, nous ne pouvons saisir le tribunal pour chaque dépôt d’ordures ou de meubles dans les parties communes.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229674" src="/content/uploads/2018/05/marseille-propre-2-451x800.jpg" alt="salete marseille" width="451" height="800" srcset="/content/uploads/2018/05/marseille-propre-2-451x800.jpg 451w, /content/uploads/2018/05/marseille-propre-2-338x600.jpg 338w, /content/uploads/2018/05/marseille-propre-2.jpg 541w" sizes="auto, (max-width: 451px) 100vw, 451px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229674" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-2-451x800.jpg" alt="salete marseille" width="451" height="800" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-2-451x800.jpg 451w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-2-338x600.jpg 338w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-propre-2.jpg 541w" sizes="auto, (max-width: 451px) 100vw, 451px" /></p>
 <p>Il n’y a rien entre le laisser-faire individualiste et la sanction avec la procédure ou l’amende. Pour cela, c’est chacun d’entre nous qui doit prendre sa part.</p>
 <h1>Il nous revient à nous de prendre en charge cette situation</h1>
 <p>Bien sûr que la mairie/métropole va faire des discours, jurer leur grand dieu qu’ils s’en occupent, mettre un peu plus de moyens, mettre un peu plus de caméras (je ne suis pas certain qu’elle les exploitera pour cela), bien sûr qu’ils vont gesticuler pour montrer la police de la propreté, peut-être même augmenter le montant des amendes, mais cela ne changera pas grand chose.</p>
@@ -53,7 +53,7 @@ seoDescription: "J’adore ma ville. J’y ai créé des entreprises et y vis av
 <p>Les choses ont beaucoup progressé depuis 1 à 2 ans et les réseaux sociaux ne font à mon avis que renforcer ou plutôt contraindre la volonté des politiques mais il faut transformer cet essai pour faire sortir <a href="/grand-centre-ville-se-refait-une-beaute/">notre ville de sa saleté</a>. Cela va encore prendre du temps.</p>
 <h1>Il faudra du temps</h1>
 <p>Le temps que les consciences et l’éducation progressent.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229676" src="/content/uploads/2018/05/marseille-sale-600x800.jpg" alt="salete marseile" width="600" height="800" srcset="/content/uploads/2018/05/marseille-sale-600x800.jpg 600w, /content/uploads/2018/05/marseille-sale-450x600.jpg 450w, /content/uploads/2018/05/marseille-sale.jpg 720w" sizes="auto, (max-width: 600px) 100vw, 600px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-229676" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-sale-600x800.jpg" alt="salete marseile" width="600" height="800" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-sale-600x800.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-sale-450x600.jpg 450w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/marseille-sale.jpg 720w" sizes="auto, (max-width: 600px) 100vw, 600px" /></p>
 <p>Le temps que les amendes pleuvent,</p>
 <p>En attendant cette éducation par l’amende ou l’éducation dans les familles, bravo à ces héros du quotidien qui permettront d’attendre le changement des comportements ceux qui agissent :</p>
 <p><a href="https://www.facebook.com/jyslemarseillais.sayag">https://www.facebook.com/jyslemarseillais.sayag</a></p>

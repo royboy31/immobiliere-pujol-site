@@ -20,10 +20,10 @@ seoDescription: "Parce qu'un loyer correctement fixé attire les bons locataires
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/09/location-meuble-13006-1200x801.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/09/location-meuble-13006-800x534.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/09/location-meuble-13006-600x401.jpg" 
-      <img src="/content/uploads/2018/09/location-meuble-13006-1200x801.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/location-meuble-13006-1200x801.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/location-meuble-13006-800x534.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/location-meuble-13006-600x401.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/location-meuble-13006-1200x801.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -75,7 +75,7 @@ Une chose sensée est à retenir : un prix raisonnable qui reflète l’état de
 <p>La valorisation de votre bien immobilier est essentielle.</p>
 <p><strong>La valeur du loyer d&rsquo;un appartement augmente</strong> s&rsquo;il est propre, bien placé, bien équipé et meublé pour les petites surfaces, s&rsquo;il est joliment rénové ou décoré, avec des finitions et des détails soignés, si les espaces sont ouverts et aérés, s&rsquo;il a une belle vue ou une vue dégagée, s&rsquo;il dispose d&rsquo;un stationnement, s&rsquo;il est à côté des commerces et bien desservi par les transports en commun …</p>
 <p>Si vous souhaitez augmenter le prix de votre loyer et générer une pérennité de vos revenus, notre équipe saura vous apporter tous les conseils nécessaires pour <a href="/aavant-apres-renovation-dun-appartement-pour-de-la-location-meublee/" target="_blank" rel="noopener">valoriser votre patrimoine</a>.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-386403" src="/content/uploads/2018/09/avant-apres-66-ENFANTS-800x378.jpg" alt="" width="800" height="378" srcset="/content/uploads/2018/09/avant-apres-66-ENFANTS-800x378.jpg 800w, /content/uploads/2018/09/avant-apres-66-ENFANTS-768x363.jpg 768w, /content/uploads/2018/09/avant-apres-66-ENFANTS-1536x726.jpg 1536w, /content/uploads/2018/09/avant-apres-66-ENFANTS-600x284.jpg 600w, /content/uploads/2018/09/avant-apres-66-ENFANTS-1200x567.jpg 1200w, /content/uploads/2018/09/avant-apres-66-ENFANTS.jpg 1696w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-386403" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-800x378.jpg" alt="" width="800" height="378" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-800x378.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-768x363.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-1536x726.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-600x284.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS-1200x567.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/09/avant-apres-66-ENFANTS.jpg 1696w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <h2>L’offre et la demande en location</h2>
 <p>Certains appartements ne se louent pas ou difficilement en raison des fluctuations du marché immobilier sur Marseille et de l&rsquo;état de confort de l&rsquo;appartement.</p>
 <p><b>Il ne sert à rien de lutter contre le marché</b>.</p>
@@ -85,7 +85,7 @@ Une chose sensée est à retenir : un prix raisonnable qui reflète l’état de
 <p><strong>La notion de saisonnalité du marché</strong></p>
 <p><a href="/a-periode-de-lannee-faut-acheter-vendre-louer/">Le nombre des locations varie en fonction des saisons et les prix de mise en location</a> doivent être évalués en fonction du mois.<br />
 Sur le graphique ci-après, l’été est la saison la plus propice aux locations, avec un pic au mois d’août.</p>
-<p><img loading="lazy" decoding="async" class="aligncenter wp-image-8227 size-full" title="calculer le prix loyer marseille" src="/content/uploads/2016/12/évolution-du-prix-du-loyer.png" alt="evaluer le prix du loyer a marseille" width="643" height="309" /></p>
+<p><img loading="lazy" decoding="async" class="aligncenter wp-image-8227 size-full" title="calculer le prix loyer marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/%C3%A9volution-du-prix-du-loyer.png" alt="evaluer le prix du loyer a marseille" width="643" height="309" /></p>
 <p>Pourquoi y a-t-il plus de déménagements et de demandes entre mai et août ? Parce qu’il est plus aisé de déménager quand l&rsquo;on est en congés et parce que les enfants ne changent pas d&rsquo;école en cours d&rsquo;année.</p>
 <p><b>Le prix du loyer n’est jamais figé.<br />
 </b>Chez Immobilière Pujol, nous développons depuis plus de 10 ans des outils statistiques pour rendre compte de ces fluctuations de prix à nos clients et positionner le bien dans le marché au moment de la location.<br />

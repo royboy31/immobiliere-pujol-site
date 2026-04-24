@@ -5,7 +5,7 @@ date: "2019-01-28"
 excerpt: "Les données chiffrées Prix moyen (en €/m2) : 11,6 Croissance entre 2017 et 2018 : 7,9 Durée d’occupation moyenne (en mois) : 54,7 Taux de mobilité résidentiel..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/01/13003-300x287.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13003-300x287.jpg"
 seoTitle: "Les prix au m2 des loyers en 2019 dans le 13003"
 seoDescription: "Le prix moyen (en €/m2) est de 11,6 dans le 13003.  La durée d'occupation est de 54 mois."
 ---
@@ -19,10 +19,10 @@ seoDescription: "Le prix moyen (en €/m2) est de 11,6 dans le 13003.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 11,8</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291173" src="/content/uploads/2017/01/3-ème-arrondissement-loyer-2018-800x287.png" alt="" width="800" height="287" srcset="/content/uploads/2017/01/3-ème-arrondissement-loyer-2018-800x287.png 800w, /content/uploads/2017/01/3-ème-arrondissement-loyer-2018-768x275.png 768w, /content/uploads/2017/01/3-ème-arrondissement-loyer-2018-600x215.png 600w, /content/uploads/2017/01/3-ème-arrondissement-loyer-2018.png 1049w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291173" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/3-%C3%A8me-arrondissement-loyer-2018-800x287.png" alt="" width="800" height="287" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/3-%C3%A8me-arrondissement-loyer-2018-800x287.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/3-%C3%A8me-arrondissement-loyer-2018-768x275.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/3-%C3%A8me-arrondissement-loyer-2018-600x215.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/3-%C3%A8me-arrondissement-loyer-2018.png 1049w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 3e arrondissement</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8497" src="/content/uploads/2017/01/13003-300x287.jpg" alt="3e arrondissement de marseille" width="300" height="287" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8497" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13003-300x287.jpg" alt="3e arrondissement de marseille" width="300" height="287" /></p>
 <p>Le 3<sup>ème</sup> arrondissement se compose de 4 quartiers :</p>
 <ul>
 <li><strong>La Belle de Mai</strong></li>

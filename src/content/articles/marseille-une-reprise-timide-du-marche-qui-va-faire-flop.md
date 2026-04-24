@@ -5,7 +5,7 @@ date: "2024-06-25"
 excerpt: "La situation du marché à Marseille Si l’on a constaté un regain d’activité lié à une légère baisse des taux (passés d’environ 4,2% à 3,5%) et à la période de..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/06/PUJ-6817-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/PUJ-6817-1200x750.jpg"
 seoTitle: "Marseille : une reprise timide du marché qui va faire flop"
 seoDescription: "Découvrez l'analyse du marché immobilier actuel : regain d'activité lié à la baisse des taux, déséquilibre entre acheteurs et vendeurs, et prévisions pour un retour à la normale."
 ---

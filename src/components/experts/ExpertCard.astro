@@ -1,0 +1,106 @@
+---
+import type { Expert } from '../../lib/experts';
+
+interface Props {
+  expert: Expert;
+  heading?: string;
+}
+
+const { expert, heading = 'Expert en charge de ce bien' } = Astro.props;
+const displayName = expert.title.split('|').pop()?.trim() ?? expert.title;
+---
+
+<aside class="expert-card">
+  <h2 class="expert-card__heading">{heading}</h2>
+  <div class="expert-card__body">
+    {expert.photo && (
+      <a href={`/experts/${expert.slug}/`} class="expert-card__photo-link">
+        <img
+          src={expert.photo}
+          alt={displayName}
+          class="expert-card__photo"
+          loading="lazy"
+          width="120"
+          height="160"
+        />
+      </a>
+    )}
+    <div class="expert-card__info">
+      <a href={`/experts/${expert.slug}/`} class="expert-card__name">
+        <strong>{displayName}</strong>
+      </a>
+      {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
+      <div class="expert-card__contact">
+        {expert.phone && (
+          <a href={`tel:${expert.phone.replace(/\s/g, '')}`} class="expert-card__phone">
+            {expert.phone}
+          </a>
+        )}
+        {expert.email && (
+          <a href={`mailto:${expert.email}`} class="expert-card__email">
+            {expert.email}
+          </a>
+        )}
+      </div>
+      <a href={`/experts/${expert.slug}/`} class="expert-card__more">
+        Voir le profil
+      </a>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .expert-card {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .expert-card__heading {
+    margin: 0 0 1rem;
+    font-size: 1.125rem;
+  }
+  .expert-card__body {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .expert-card__photo {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+  }
+  .expert-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .expert-card__name {
+    font-size: 1.05rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .expert-card__fonction {
+    margin: 0;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  .expert-card__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+  }
+  .expert-card__more {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 480px) {
+    .expert-card__body { flex-direction: column; align-items: center; text-align: center; }
+    .expert-card__contact { align-items: center; }
+  }
+</style>

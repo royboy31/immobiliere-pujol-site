@@ -5,7 +5,7 @@ date: "2022-06-16"
 excerpt: "Le marché immobilier devrait connaître dans le mois qui arrive, une probable baisse liée à la hausse des taux d’intérêts, à la hausse des apports demandés par..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/06/exposio_0003-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/06/exposio_0003-1200x800.jpg"
 seoTitle: "Prêt immobilier : Les changements à venir en 2022"
 seoDescription: "Le marché immobilier devrait connaître dans le mois qui arrive, une probable baisse liée à la hausse des taux d'intérêts, à la hausse des apports demandés par les banques ainsi qu’au durcissement des conditions d’attribution d’un prêt immobilier. Un taux d'effort qui augmente mais pas forcément positif pour les emprunteurs…"
 ---

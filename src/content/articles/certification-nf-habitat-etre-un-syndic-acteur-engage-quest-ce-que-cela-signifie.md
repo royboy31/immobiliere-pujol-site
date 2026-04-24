@@ -5,14 +5,14 @@ date: "2021-01-08"
 excerpt: "Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l’occasion de travailler avec nous, vous le savez : nous sommes très engagés et..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/immobiliere-pujol-nf-habitat-marseille-1200x640.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/immobiliere-pujol-nf-habitat-marseille-1200x640.jpg"
 seoTitle: "Certification NF Habitat – Être un syndic « acteur engagé » qu’est-ce que cela signifie ?"
 seoDescription: "Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l'occasion de travailler avec nous, vous le savez : nous sommes très engagés et investis dans notre métier."
 ---
 
 <p>Depuis le temps que nous écrivons sur le sujet, et pour ceux qui ont eu l&rsquo;occasion de travailler avec nous, vous le savez : <strong>nous sommes très engagés et investis dans notre métier.</strong> <br />
 Nous avons à cœur de l&rsquo;exercer avec honnêteté et excellence, et c&rsquo;est sans doute ce qui nous distingue le mieux en tant que syndic de copropriété. Nous avons déjà été distingués par la rédaction du magazine Le Point comme <a href="https://www.lepoint.fr/immobilier/exclusif-le-palmares-des-meilleurs-et-des-pires-syndics-17-09-2020-2392440_31.php">meilleur syndic de France</a>, palmarès basé sur les avis des clients.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-386030 aligncenter" src="/content/uploads/2021/01/meilleur-syndic-de-marseille.jpg" alt="meilleur syndic de marseille" width="594" height="371" srcset="/content/uploads/2021/01/meilleur-syndic-de-marseille.jpg 800w, /content/uploads/2021/01/meilleur-syndic-de-marseille-768x480.jpg 768w, /content/uploads/2021/01/meilleur-syndic-de-marseille-600x375.jpg 600w" sizes="auto, (max-width: 594px) 100vw, 594px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-386030 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleur-syndic-de-marseille.jpg" alt="meilleur syndic de marseille" width="594" height="371" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleur-syndic-de-marseille.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleur-syndic-de-marseille-768x480.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleur-syndic-de-marseille-600x375.jpg 600w" sizes="auto, (max-width: 594px) 100vw, 594px" /></p>
 <p>Il était donc à la fois naturel et important pour nous de formaliser cette reconnaissance par une certification complète et sérieuse, et c&rsquo;est ce que nous avons fait avec l&rsquo;organisme indépendant CERQUAL Qualitel Certification pour l&rsquo;obtention de la norme NF Habitat*.</p>
 <h2>Que garantit la norme NF Habitat pour un syndic?</h2>
 <p>Avec la certification NF Habitat, nous nous engageons à offrir des services d&rsquo;une qualité reconnue, basée sur des aspects concrets et objectifs. En synthèse, voici les éléments qui sont audités par l&rsquo;organisme et pour lesquels nous avons été en mesure de démontrer la maîtrise :</p>
@@ -37,7 +37,7 @@ La politique de l&rsquo;Immobilière Pujol est axée sur la qualité des prestat
 	<li>Faire valider par un tiers la qualité des prestations</li>
 	<li>S’appuyer sur le référentiel pour structurer davantage le système de management et les procédures internes, afin de les adapter au nombre croissant de collaborateurs.</li>
 </ul>
-<p><img loading="lazy" decoding="async" class="wp-image-386034 aligncenter" src="/content/uploads/2021/01/immobiliere-pujol-NF-habitat.jpg" alt="immobilière pujol NF habitat" width="582" height="364" srcset="/content/uploads/2021/01/immobiliere-pujol-NF-habitat.jpg 800w, /content/uploads/2021/01/immobiliere-pujol-NF-habitat-768x480.jpg 768w, /content/uploads/2021/01/immobiliere-pujol-NF-habitat-600x375.jpg 600w" sizes="auto, (max-width: 582px) 100vw, 582px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-386034 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/immobiliere-pujol-NF-habitat.jpg" alt="immobilière pujol NF habitat" width="582" height="364" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/immobiliere-pujol-NF-habitat.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/immobiliere-pujol-NF-habitat-768x480.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/immobiliere-pujol-NF-habitat-600x375.jpg 600w" sizes="auto, (max-width: 582px) 100vw, 582px" /></p>
 <h2>Des conclusions qui mettent en avant nos efforts et notre travail en tant que Syndic à Marseille</h2>
 <p>La lecture du compte rendu de l&rsquo;audit a été pour toute l&rsquo;équipe Syndic au sein de l&rsquo;agence une véritable récompense des efforts engagés. <br />
 L&rsquo;organisme a immédiatement noté que l’audit avait été soigneusement préparé et que l&rsquo;équipe avait soigneusement identifié toutes les procédures et documents face aux exigences du référentiel.</p>

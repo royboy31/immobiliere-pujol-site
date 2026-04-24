@@ -5,12 +5,12 @@ date: "2022-03-02"
 excerpt: "J’ai décidé d’être entrepreneur à l’âge de 12 ans. Etudes, lectures, premières expériences professionnelles : j’ai tout mis en œuvre pour atteindre mon..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/03/agence-immobliere-pujol-avis-1200x726.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/agence-immobliere-pujol-avis-1200x726.png"
 seoTitle: "L’immobilière Pujol fête ses 20 ans !"
 seoDescription: "  J'ai décidé d'être entrepreneur à l’âge de 12 ans. Etudes, lectures, premières expériences professionnelles : j'ai tout mis en œuvre pour atteindre mon objectif. Je m'y suis attelé pendant des années, puis le \"je\" est soudain devenu \"NOUS\".   Tout commence il y a 20 ans quand nous avons…"
 ---
 
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-487798" src="/content/uploads/2022/03/stephane-pujol.png" alt="blog immobiliere pujol" width="683" height="228" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-487798" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/03/stephane-pujol.png" alt="blog immobiliere pujol" width="683" height="228" /></p>
 <p>&nbsp;</p>
 <p class="_04xlpA direction-ltr align-justify para-style-body"><strong><span class="JsGRdQ">J&rsquo;ai décidé d&rsquo;être entrepreneur à l’âge de 12 ans. Etudes, lectures, premières expériences professionnelles : j&rsquo;ai tout mis en œuvre pour atteindre mon objectif. Je m&rsquo;y suis attelé pendant des années, puis le « je » est soudain devenu « NOUS ». </span></strong></p>
 <p>&nbsp;</p>

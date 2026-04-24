@@ -20,10 +20,10 @@ seoDescription: "Chaque membre de l'équipe réalise entre 30 ventes et 40 vente
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/PU-1596-Copy.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/PU-1596-Copy.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/PU-1596-Copy-600x375.jpg" 
-      <img src="/content/uploads/2017/10/PU-1596-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1596-Copy.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1596-Copy.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1596-Copy-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1596-Copy.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -56,7 +56,7 @@ Pourquoi?<br />
 &#8211; Pour vous offrir le meilleur de nos services et un accompagnement personnalisé,<br />
 &#8211; Pour défendre le prix de votre bien en premier et pas nos honoraires comme dans un mandat simple. </p>
 <h3>Comment s&rsquo;expliquent nos résultats ?</h3>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-379263" src="/content/uploads/2017/10/location-meuble-luxe-13006-800x533.jpg" alt="" width="453" height="302" srcset="/content/uploads/2017/10/location-meuble-luxe-13006-800x533.jpg 800w, /content/uploads/2017/10/location-meuble-luxe-13006-768x512.jpg 768w, /content/uploads/2017/10/location-meuble-luxe-13006-1536x1024.jpg 1536w, /content/uploads/2017/10/location-meuble-luxe-13006-2048x1365.jpg 2048w, /content/uploads/2017/10/location-meuble-luxe-13006-600x400.jpg 600w, /content/uploads/2017/10/location-meuble-luxe-13006-1200x800.jpg 1200w" sizes="auto, (max-width: 453px) 100vw, 453px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-379263" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-800x533.jpg" alt="" width="453" height="302" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-1536x1024.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-2048x1365.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-1200x800.jpg 1200w" sizes="auto, (max-width: 453px) 100vw, 453px" /></p>
 <p>Nous travaillons sur des biens immobiliers dont les prix correspondent aux prix du marché.<br />
 Autrement dit, qui ne sont pas surévalués mais pas sous-évalués non plus : <b>le juste prix</b> est décisif dans la réussite d’une commercialisation immobilière.<br />
 Et donc, nous ne travaillons qu’avec des <strong>clients qui ont confiance</strong> <strong>en notre expertise et nos conseils.</strong></p>

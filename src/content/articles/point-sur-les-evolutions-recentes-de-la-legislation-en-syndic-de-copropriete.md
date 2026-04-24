@@ -5,7 +5,7 @@ date: "2020-05-31"
 excerpt: "Grâce à un webinar de l’Unis, syndicat professionnel dont nous sommes membre, Christophe Ballery qui a rejoint notre équipe depuis quelques mois a rédigé une..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/revendication_640x480.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/revendication_640x480.jpg"
 seoTitle: "Point sur les évolutions récentes de la législation en syndic de copropriété"
 seoDescription: "MERCI AU COVID d'avoir accélérer l'évolution de notre législation en syndic de copropriété. Point sur cette évolution"
 ---

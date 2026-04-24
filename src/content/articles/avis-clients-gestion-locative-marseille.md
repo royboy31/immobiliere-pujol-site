@@ -5,7 +5,7 @@ date: "2019-08-29"
 excerpt: "Obtenir des avis clients en gestion locative à Marseille n’est pas facile. Née en 2001, l’Immobilière Pujol a fait de la gestion locative l’un de ses cœurs de..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/08/avis-client-gestion-locative-marseille-equipe-pujol.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-gestion-locative-marseille-equipe-pujol.jpg"
 seoTitle: "Les avis clients d’Immobilière Pujol en gestion locative à Marseille"
 seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locative l’un de ses coeurs de métier : pour évaluer le plus objectivement notre prestation, nous avons recours à Opinion System (institut indépendant certifié ISO 9001, 20252 et NF Z74-501). Cette page internet permet à nos clients de nous noter…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locat
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="459" height="218" src="/content/uploads/2019/08/avis-client-locataires-marseille.png" alt="avis client gestion locative locataires marseille" class="wp-image-257209"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="459" height="218" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-locataires-marseille.png" alt="avis client gestion locative locataires marseille" class="wp-image-257209"/></figure>
 
 
 
@@ -22,7 +22,7 @@ seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locat
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="484" height="607" src="/content/uploads/2019/09/avis-client-gestion-locative-marseille.png" alt="avis client gestion locative marseille" class="wp-image-259352" srcset="/content/uploads/2019/09/avis-client-gestion-locative-marseille.png 484w, /content/uploads/2019/09/avis-client-gestion-locative-marseille-478x600.png 478w" sizes="auto, (max-width: 484px) 100vw, 484px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="484" height="607" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-locative-marseille.png" alt="avis client gestion locative marseille" class="wp-image-259352" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-locative-marseille.png 484w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-locative-marseille-478x600.png 478w" sizes="auto, (max-width: 484px) 100vw, 484px" /></figure>
 
 
 
@@ -34,31 +34,31 @@ seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locat
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="611" height="142" src="/content/uploads/2019/08/avis-client-3.png" alt="avis client gestion locative" class="wp-image-257520" srcset="/content/uploads/2019/08/avis-client-3.png 611w, /content/uploads/2019/08/avis-client-3-600x139.png 600w" sizes="auto, (max-width: 611px) 100vw, 611px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="611" height="142" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-3.png" alt="avis client gestion locative" class="wp-image-257520" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-3.png 611w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-3-600x139.png 600w" sizes="auto, (max-width: 611px) 100vw, 611px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="610" height="123" src="/content/uploads/2019/08/avis-client-4.png" alt="avis client gestion locative" class="wp-image-257519" srcset="/content/uploads/2019/08/avis-client-4.png 610w, /content/uploads/2019/08/avis-client-4-600x121.png 600w" sizes="auto, (max-width: 610px) 100vw, 610px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="610" height="123" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-4.png" alt="avis client gestion locative" class="wp-image-257519" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-4.png 610w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-4-600x121.png 600w" sizes="auto, (max-width: 610px) 100vw, 610px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="629" height="140" src="/content/uploads/2019/08/avis-client-17.png" alt="avis client gestion locative" class="wp-image-257506" srcset="/content/uploads/2019/08/avis-client-17.png 629w, /content/uploads/2019/08/avis-client-17-600x134.png 600w" sizes="auto, (max-width: 629px) 100vw, 629px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="629" height="140" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-17.png" alt="avis client gestion locative" class="wp-image-257506" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-17.png 629w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-17-600x134.png 600w" sizes="auto, (max-width: 629px) 100vw, 629px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="637" height="181" src="/content/uploads/2019/08/avis-client-22.png" alt="avis client gestion locative" class="wp-image-257501" srcset="/content/uploads/2019/08/avis-client-22.png 637w, /content/uploads/2019/08/avis-client-22-600x170.png 600w" sizes="auto, (max-width: 637px) 100vw, 637px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="637" height="181" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-22.png" alt="avis client gestion locative" class="wp-image-257501" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-22.png 637w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-22-600x170.png 600w" sizes="auto, (max-width: 637px) 100vw, 637px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="645" height="186" src="/content/uploads/2019/08/avis-client-19.png" alt="avis client gestion locative" class="wp-image-257504" srcset="/content/uploads/2019/08/avis-client-19.png 645w, /content/uploads/2019/08/avis-client-19-600x173.png 600w" sizes="auto, (max-width: 645px) 100vw, 645px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="645" height="186" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-19.png" alt="avis client gestion locative" class="wp-image-257504" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-19.png 645w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-19-600x173.png 600w" sizes="auto, (max-width: 645px) 100vw, 645px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="612" height="103" src="/content/uploads/2019/08/avis-client-23.png" alt="avis client gestion locative" class="wp-image-257500" srcset="/content/uploads/2019/08/avis-client-23.png 612w, /content/uploads/2019/08/avis-client-23-600x101.png 600w" sizes="auto, (max-width: 612px) 100vw, 612px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="612" height="103" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-23.png" alt="avis client gestion locative" class="wp-image-257500" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-23.png 612w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-23-600x101.png 600w" sizes="auto, (max-width: 612px) 100vw, 612px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="614" height="98" src="/content/uploads/2019/08/avis-client-21.png" alt="avis client gestion locative" class="wp-image-257502" srcset="/content/uploads/2019/08/avis-client-21.png 614w, /content/uploads/2019/08/avis-client-21-600x96.png 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="614" height="98" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-21.png" alt="avis client gestion locative" class="wp-image-257502" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-21.png 614w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-21-600x96.png 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></figure>
 
 
 
@@ -66,7 +66,7 @@ seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locat
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="583" height="216" src="/content/uploads/2019/08/avis-client-gestion-locative-marseille-2.png" alt="avis client gestion locative marseille" class="wp-image-257195"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="583" height="216" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-gestion-locative-marseille-2.png" alt="avis client gestion locative marseille" class="wp-image-257195"/></figure>
 
 
 
@@ -88,7 +88,7 @@ https://youtu.be/8N8v7I26x0w
 
 
 
-<p style="text-align:center"><a href="/content/uploads/2018/03/bareme-HONORAIRES-IMMOBILIERE-PUJOL-2018.pdf">Consulter le barème des prestations de Gestion et Location</a></p>
+<p style="text-align:center"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/03/bareme-HONORAIRES-IMMOBILIERE-PUJOL-2018.pdf">Consulter le barème des prestations de Gestion et Location</a></p>
 
 
 

@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "Qu’est-ce que la gestion de bureaux ? La gestion de bureaux est un service proposé par les agences immobilières pour accompagner les propriétaires de biens..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bureaux à La Barasse, 13011 – Marseille : l’expertise de l’agence immobilière Pujol à votre service"
 seoDescription: ""
 ---

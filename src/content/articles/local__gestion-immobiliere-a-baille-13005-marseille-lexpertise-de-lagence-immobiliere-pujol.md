@@ -5,7 +5,7 @@ date: "2024-06-10"
 excerpt: "La gestion immobilière est un ensemble de services destinés à faciliter la vie des propriétaires en leur assurant une gestion optimale de leurs biens locatifs...."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à Baille, 13005, Marseille : l’expertise de l’agence immobilière Pujol"
 seoDescription: ""
 ---

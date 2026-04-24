@@ -15,10 +15,10 @@ seoDescription: "Notre équipe de location et de gestion est la plus recommandé
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/PU-1698-2-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/PU-1698-2-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/PU-1698-2-600x375.jpg" 
-      <img src="/content/uploads/2017/10/PU-1698-2-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-2-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-2-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-2-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1698-2-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -59,7 +59,7 @@ seoDescription: "Notre équipe de location et de gestion est la plus recommandé
 <p>Chaque client a face à lui des <strong>personnes responsables et dédiées</strong> : un gestionnaire et un comptable .<br />
 Ce binôme est entourée en cas de nécessité d&rsquo;un responsable juridique et contentieux, d&rsquo;un expert en valorisation immobilière et décoration, d&rsquo;artisans qualifiés pour les travaux et réparations. Chaque bien fait l&rsquo;objet d&rsquo;un plan de commercialisation. </p>
 <p>Tous nos clients ont le numéro de téléphone portable et l&rsquo;adresse mail de leur gestionnaire et comptable, pour une réponse rapide </p>
-<h2><img loading="lazy" decoding="async" class="alignnone  wp-image-386012" src="/content/uploads/2017/10/PU-1490-800x500.jpg" alt="" width="512" height="320" srcset="/content/uploads/2017/10/PU-1490-800x500.jpg 800w, /content/uploads/2017/10/PU-1490-768x480.jpg 768w, /content/uploads/2017/10/PU-1490-1536x960.jpg 1536w, /content/uploads/2017/10/PU-1490-2048x1280.jpg 2048w, /content/uploads/2017/10/PU-1490-600x375.jpg 600w, /content/uploads/2017/10/PU-1490-1200x750.jpg 1200w" sizes="auto, (max-width: 512px) 100vw, 512px" /></h2>
+<h2><img loading="lazy" decoding="async" class="alignnone  wp-image-386012" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-800x500.jpg" alt="" width="512" height="320" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-800x500.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-768x480.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-1536x960.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-2048x1280.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-600x375.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-1490-1200x750.jpg 1200w" sizes="auto, (max-width: 512px) 100vw, 512px" /></h2>
 <h2>Nous sommes à vos côtés pour éclairer vos choix immobiliers</h2>
 <p>Quelle que soit votre situation, nous répondons à vos questions pour mieux guider vos choix :</p>
 <ul>

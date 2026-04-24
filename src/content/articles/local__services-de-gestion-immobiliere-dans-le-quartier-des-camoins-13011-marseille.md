@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "L’agence immobilière Pujol, spécialisée dans la gestion immobilière, propose ses services aux propriétaires du quartier des Camoins, situé dans le 13011..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Services de gestion immobilière dans le quartier des Camoins, 13011 Marseille"
 seoDescription: ""
 ---

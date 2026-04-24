@@ -5,7 +5,7 @@ date: "2019-03-20"
 excerpt: "Sans surprise les prix au m2 de l’immobilier ancien dans le 13008 sont les plus élevés de la ville : 3 210 €/m². Avec un record de 510 ventes. Sur l’année..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/03/port-pointe-rouge-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/03/port-pointe-rouge-marseille.jpg"
 seoTitle: "Ventes à Marseille : les prix au m2 de l’immobilier ancien dans le 13008 en 2018"
 seoDescription: "Sans surprise les prix au m2 de l'immobilier ancien dans le 13008 sont les plus élevés de la ville : 3 210 €/m². Avec un record de 510 ventes. Sur l'année 2018, le 8ème arrondissement de Marseille reste le leader des prix au m2 de l'immobilier ancien toutes catégories. Nous…"
 ---

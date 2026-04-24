@@ -5,7 +5,7 @@ date: "2019-05-13"
 excerpt: "Certains quartiers de Marseille – pas tous – voient leurs prix monter: + 10% par rapport à l’année dernière. Tous nos indicateurs le démontrent : le nombre..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/web-home-staging_0002-caroline-semac-Daumier--1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/web-home-staging_0002-caroline-semac-Daumier--1200x800.jpg"
 seoTitle: "Marseille : les prix immobilier augmentent de plus de 10% !"
 seoDescription: "Certains quartiers de Marseille - pas tous - voient leurs prix monter: + 10% par rapport à l'année dernière. Tous nos indicateurs le démontrent : le nombre d'offres de biens à vendre baisse : - 25% d'appartementsles délais de ventes : - 20 jours avec un délai moyen de 25…"
 ---
@@ -22,7 +22,7 @@ seoDescription: "Certains quartiers de Marseille - pas tous - voient leurs prix 
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="691" height="427" src="/content/uploads/2019/05/nombre-dappartement-a-la-vente-a-marseille.png" alt="" class="wp-image-235039" srcset="/content/uploads/2019/05/nombre-dappartement-a-la-vente-a-marseille.png 691w, /content/uploads/2019/05/nombre-dappartement-a-la-vente-a-marseille-600x371.png 600w" sizes="auto, (max-width: 691px) 100vw, 691px" /><figcaption>Nombre de biens offerts à la vente depuis 2013 à Marseille</figcaption></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="691" height="427" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/nombre-dappartement-a-la-vente-a-marseille.png" alt="" class="wp-image-235039" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/nombre-dappartement-a-la-vente-a-marseille.png 691w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/nombre-dappartement-a-la-vente-a-marseille-600x371.png 600w" sizes="auto, (max-width: 691px) 100vw, 691px" /><figcaption>Nombre de biens offerts à la vente depuis 2013 à Marseille</figcaption></figure>
 
 
 

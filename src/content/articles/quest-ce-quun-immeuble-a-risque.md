@@ -5,7 +5,7 @@ date: "2019-02-07"
 excerpt: "De toute évidence, un immeuble à risque est un immeuble ancien. Mais on ne peut pas généraliser : tous les immeubles anciens ne sont pas à risque… et..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/01/site-1549064_1280-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/site-1549064_1280-1200x800.jpg"
 seoTitle: "Qu’est-ce qu’un immeuble à risque ?"
 seoDescription: "De toute évidence, un immeuble à risque est un immeuble ancien. Mais on ne peut pas généraliser : tous les immeubles anciens ne sont pas à risque… et heureusement d'ailleurs, sinon nos centres-ville deviendraient des pièges. La catastrophe de la rue d'Aubagne est et demeurera exceptionnelle. Elle doit le rester.…"
 ---
@@ -21,7 +21,7 @@ Elle doit le rester.</p>
 
 
 <div class="wp-block-image">
-<figure class="alignleft is-resized"><img loading="lazy" decoding="async" class="wp-image-233652" src="/content/uploads/2019/01/Immeuble-a-risque-marseille-e1549314159353.jpeg" alt="copropriete avec risque marseille" width="336" height="448" srcset="/content/uploads/2019/01/Immeuble-a-risque-marseille-e1549314159353.jpeg 480w, /content/uploads/2019/01/Immeuble-a-risque-marseille-e1549314159353-450x600.jpg 450w" sizes="auto, (max-width: 336px) 100vw, 336px" /></figure>
+<figure class="alignleft is-resized"><img loading="lazy" decoding="async" class="wp-image-233652" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/Immeuble-a-risque-marseille-e1549314159353.jpeg" alt="copropriete avec risque marseille" width="336" height="448" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/Immeuble-a-risque-marseille-e1549314159353.jpeg 480w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/Immeuble-a-risque-marseille-e1549314159353-450x600.jpg 450w" sizes="auto, (max-width: 336px) 100vw, 336px" /></figure>
 </div>
 
 
@@ -88,7 +88,7 @@ Résultat: le syndic qui est présenté contre nous a créé sa société il y a
 
 
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-233653" src="/content/uploads/2019/02/facade-a-risque-marseille-e1549314213410.jpeg" alt="facade de copropriete avec risque marseille" width="320" height="426" srcset="/content/uploads/2019/02/facade-a-risque-marseille-e1549314213410.jpeg 480w, /content/uploads/2019/02/facade-a-risque-marseille-e1549314213410-450x600.jpg 450w" sizes="auto, (max-width: 320px) 100vw, 320px" /></figure>
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-233653" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/facade-a-risque-marseille-e1549314213410.jpeg" alt="facade de copropriete avec risque marseille" width="320" height="426" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/facade-a-risque-marseille-e1549314213410.jpeg 480w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/facade-a-risque-marseille-e1549314213410-450x600.jpg 450w" sizes="auto, (max-width: 320px) 100vw, 320px" /></figure>
 </div>
 
 

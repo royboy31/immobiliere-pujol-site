@@ -5,7 +5,7 @@ date: "2017-03-13"
 excerpt: "Moi qui ne suis pas du tout people et pas au courant de l’actualité de ces gens dont je me fiche complètement, j’ai visionné une vidéo concernant la vente de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/1-2.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-2.jpg"
 seoTitle: "Les 10 plus belles maisons à la vente à Marseille et ses environs"
 seoDescription: "Moi qui ne suis pas du tout people et pas au courant de l’actualité de ces gens dont je me fiche complètement, j’ai visionné une vidéo concernant la vente de la maison de Johnny depp pour 23 millions d’euros :  J’ai beaucoup aimé et j’ai donc fait mes recherches sur…"
 ---
@@ -17,7 +17,7 @@ seoDescription: "Moi qui ne suis pas du tout people et pas au courant de l’act
 <span style="font-weight: 400;">J’ai beaucoup aimé et j’ai donc fait mes recherches sur ces mêmes types de maison à Marseille. Mais je savais que nous ne jouions pas dans la même cour de récréation&#8230;</span>
 
 <span style="font-weight: 400;">Quoi qu&rsquo;il en soit cela m&rsquo;a donné envie d&rsquo;aller voir et de sélectionner les 10 plus belles maisons à vendre en ce moment à Marseille.</span>
-<h2>Maison 1 <img loading="lazy" decoding="async" class="alignright wp-image-40087 size-medium" src="/content/uploads/2017/03/26-241x300.png" width="241" height="300" /></h2>
+<h2>Maison 1 <img loading="lazy" decoding="async" class="alignright wp-image-40087 size-medium" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/26-241x300.png" width="241" height="300" /></h2>
 <span style="font-weight: 400;"><strong>Prix de vente</strong> : 4 800 000 € </span>
 
 <strong>Surface</strong> : 450 m2
@@ -58,7 +58,7 @@ Des éléments de déco donnent du charme : les motifs grecs de la piscine, les
 
 <strong>Mon avis</strong> : beaucoup de vert, sur la terrasse, tout autour de la piscine et quand on regarde à l’horizon (dernière photo) ; ambiance intimiste : pas de vis-à-vis, on a vu sur les toits des autres. J’aime beaucoup la façade de la maison et le patio intérieur organisé autour de la piscine. Il manque les photos des chambres et de la salle de bain. Très grand salon avec deux espaces : un coin télé et un coin lecture (au fond sur la photo). Cette maison est sans doute très calme.
 <h2>Maison 5</h2>
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-222051" src="/content/uploads/2017/11/1-4.jpg" alt="" width="509" height="402" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-222051" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-4.jpg" alt="" width="509" height="402" />
 <strong>Prix de vente</strong> : 2 180 000€
 
 <strong>Surface</strong> : 357 m2
@@ -92,7 +92,7 @@ Des éléments de déco donnent du charme : les motifs grecs de la piscine, les
 <strong>Prix au m2</strong> : 3595€
 
 <strong>Mon avis</strong> : selon moi, c’est peut-être le meilleur rapport qualité/prix de cette liste. Je pense même que cette maison est sous-cotée. A mon avis c’est une maison d’architecte ou de passionnés en architecture. Clients et architectes se sont fait plaisir mais probablement sans penser à la revente.  Les fauteuils et sofas en cuir, c’est pas mon truc mais la déco est globalement très bien (la cuisine et la piscine sont top!). Cette maison est centrée sur elle-même : pas de vue mer, pas de vis-à-vis; et les photos soulignent “l’étroitesse” de cette maison.
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-222060" src="/content/uploads/2017/11/1-8-800x432.jpg" alt="" width="800" height="432" srcset="/content/uploads/2017/11/1-8-800x432.jpg 800w, /content/uploads/2017/11/1-8-768x415.jpg 768w, /content/uploads/2017/11/1-8-600x324.jpg 600w, /content/uploads/2017/11/1-8.jpg 833w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-222060" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-8-800x432.jpg" alt="" width="800" height="432" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-8-800x432.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-8-768x415.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-8-600x324.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-8.jpg 833w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 <strong>Prix de vente</strong> : 2 495 000 €
 
 <strong>Surface</strong> : 350 m2

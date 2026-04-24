@@ -5,7 +5,7 @@ date: "2017-04-17"
 excerpt: "Jusque là tout va bien. Mais on ne sent pas l’entrain ou la puissance d’un nouveau cycle. La demande ne nous semble pas aussi forte qu’habituellement dans..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-1348711_1920-1200x727.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/marseille-1348711_1920-1200x727.jpg"
 seoTitle: "Un marche immobilier à Marseille de début d’année sans entrain"
 seoDescription: "Jusque là tout va bien. Mais on ne sent pas l'entrain ou la puissance d'un nouveau cycle. La demande ne nous semble pas aussi forte qu'habituellement dans cette phase de retournement du marché. La Location Nous avons conclu 96 locations, ce qui est un bon chiffre pour ce trimestre habituellement…"
 ---
@@ -14,14 +14,14 @@ Jusque là tout va bien. Mais on ne sent pas l&rsquo;entrain ou la puissance d&r
 <h2>La Location</h2>
 Nous avons conclu <strong>96 locations</strong>, ce qui est un bon chiffre pour ce trimestre habituellement assez creux. Les prix des loyers moyens sont à 12,3€ le m. Soit une grande stabilité depuis 7 ans (graphique). Marseille n&rsquo;a pas encore rattrapé le niveau des loyers d&rsquo;avant crise, mais s&rsquo;en rapproche désormais.
 
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-222862" src="/content/uploads/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-800x463.png" alt="" width="800" height="463" srcset="/content/uploads/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-800x463.png 800w, /content/uploads/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-768x445.png 768w, /content/uploads/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-600x347.png 600w, /content/uploads/2017/11/le-marche-des-loyers-a-marseille-depuis-2010.png 1104w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-222862" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-800x463.png" alt="" width="800" height="463" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-800x463.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-768x445.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-marche-des-loyers-a-marseille-depuis-2010-600x347.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-marche-des-loyers-a-marseille-depuis-2010.png 1104w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 
 Certaines statistiques semblent montrer des loyers à la hausse. Ce n&rsquo;est pas notre cas.  Lors des relocations, nous continuons de corriger et de subir la baisse passée.
 
 Les relocations sans travaux d’amélioration se font souvent à la baisse. Les délais de relocation augmentent chez nous par rapport à 2015 et 2016…ce qui n&rsquo;est pas bon signe:+ 7 jours de délais moyens
 
 &nbsp;
-<h2><img loading="lazy" decoding="async" class=" wp-image-52855 alignright" src="/content/uploads/2017/04/prix-au-m2-marseille.png" alt="prix au m2 marseille" width="312" height="823" /></h2>
+<h2><img loading="lazy" decoding="async" class=" wp-image-52855 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/04/prix-au-m2-marseille.png" alt="prix au m2 marseille" width="312" height="823" /></h2>
 <h2>Côté marché de la transaction</h2>
 Oui il s’est réveillé depuis quelques mois et nous avons signé 10 compromis de vente ce trimestre.
 
@@ -51,11 +51,11 @@ Ne tenez pas compte des statistiques du 13002, 1316 car il faudrait une analyse 
 
 Au global le marché est en légère croissance :
 
-<img loading="lazy" decoding="async" class="alignnone wp-image-52856" src="/content/uploads/2017/04/agence-imobiliere-marseille.png" alt="agence immobiliere marseille" width="732" height="488" />
+<img loading="lazy" decoding="async" class="alignnone wp-image-52856" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/04/agence-imobiliere-marseille.png" alt="agence immobiliere marseille" width="732" height="488" />
 
 Mais là aussi, les délais de vente s’allongent un peu, preuve que le marché n’est pas au beau fixe :
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-52857" src="/content/uploads/2017/04/agence-immobiliere-sur-marseille.png" alt="delais de vente immobiliere pujol" width="1200" height="800" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-52857" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/04/agence-immobiliere-sur-marseille.png" alt="delais de vente immobiliere pujol" width="1200" height="800" />
 <h2>Côté bureaux et commerces</h2>
 Toujours difficile coté bureau, mais il y a de l’animation liée à la croissance économique des entreprises et aux projets numériques des entreprises. Heureusement… car le marché du commerce continue de s’enfoncer.
 

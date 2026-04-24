@@ -5,7 +5,7 @@ date: "2019-06-14"
 excerpt: "Vous découvrirez dans cet article une comparaison des loyers dans le 13006 à Marseille entre 2014 et 2018. Le 6eme arrondissement de Marseille est l’un des..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/13006-1.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-1.jpeg"
 seoTitle: "Les loyers dans le 13006 à Marseille entre 2014 et 2018"
 seoDescription: "Vous découvrirez dans cet article une comparaison des loyers dans le 13006 à Marseille entre 2014 et 2018. Le 6eme arrondissement de Marseille est l’un des plus prisés de la ville. Il constitue avec le 1er arrondissement «  l’hypercentre » de la ville Situé en plein centre ville, le 13006 est…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Vous découvrirez dans cet article une comparaison des loyers d
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/06/13006-1.jpeg" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235849" width="316" height="237" srcset="/content/uploads/2019/06/13006-1.jpeg 640w, /content/uploads/2019/06/13006-1-600x450.jpg 600w" sizes="auto, (max-width: 316px) 100vw, 316px" /></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-1.jpeg" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235849" width="316" height="237" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-1.jpeg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-1-600x450.jpg 600w" sizes="auto, (max-width: 316px) 100vw, 316px" /></figure></div>
 
 
 
@@ -26,7 +26,7 @@ seoDescription: "Vous découvrirez dans cet article une comparaison des loyers d
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/06/13006-3.jpeg" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235850" width="298" height="397" srcset="/content/uploads/2019/06/13006-3.jpeg 480w, /content/uploads/2019/06/13006-3-450x600.jpg 450w" sizes="auto, (max-width: 298px) 100vw, 298px" /></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-3.jpeg" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235850" width="298" height="397" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-3.jpeg 480w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006-3-450x600.jpg 450w" sizes="auto, (max-width: 298px) 100vw, 298px" /></figure></div>
 
 
 
@@ -46,7 +46,7 @@ seoDescription: "Vous découvrirez dans cet article une comparaison des loyers d
 
 
 
-<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="/content/uploads/2019/06/13006.png" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235851"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="454" height="329" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13006.png" alt="Les loyers dans le 13006 à Marseille entre 2014 et 2018" class="wp-image-235851"/></figure></div>
 
       </div>
       <!-- SHARE -->

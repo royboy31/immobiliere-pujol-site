@@ -18,7 +18,7 @@ seoDescription: "Voici une brève étude des prix au m2 de l'immobilier neuf dan
 
 
 
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13002.jpeg" alt="prix au m2 neuf 2018 13002" class="wp-image-235458" width="685" height="451"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13002.jpeg" alt="prix au m2 neuf 2018 13002" class="wp-image-235458" width="685" height="451"/></figure></div>
 
 
 

@@ -5,7 +5,7 @@ date: "2018-06-12"
 excerpt: "Le prêt collectif en copropriété : bonne ou mauvaise idée ? Dans le cadre des ravalements imposés par la ville de Marseille, de nombreux copropriétaires nous..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/06/LO37400001_68EC.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/LO37400001_68EC.jpg"
 seoTitle: "Le prêt collectif en copropriété"
 seoDescription: "Le prêt collectif en copropriété : bonne ou mauvaise idée ? Dans le cadre des ravalements imposés par la ville de Marseille, de nombreux copropriétaires nous sollicitent pour bénéficier d’un prêt collectif. Certains de mes gestionnaires y sont favorables, ce qui n’est pas mon cas. D’où des échanges au sein de notre…"
 ---

@@ -5,7 +5,7 @@ date: "2023-01-04"
 excerpt: "Nous sommes le 04/01/2023, et c’est l’heure des résolutions. On le sait, la plupart ne seront pas tenues, mais cela nous aidera à avancer car en faisant le..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/01/1-1200x851.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-1200x851.png"
 seoTitle: "2023 : Qui dit nouvelle année, dit bonnes résolutions !"
 seoDescription: "Les résolutions et conseils de Stéphane Pujol, entrepreneur , pour la nouvelle année qui démarre... A lire et à partager sans modération !"
 ---
@@ -47,7 +47,7 @@ Stéphane Pujol <br />
 <br />
 </span></strong></p>
 
-<figure id="attachment_591609" aria-describedby="caption-attachment-591609" style="width: 800px" class="wp-caption alignnone"><img loading="lazy" decoding="async" class="size-medium wp-image-591609" src="/content/uploads/2023/01/1-800x568.png" alt="Immobilière Pujol Syndic de copropriété" width="800" height="568" srcset="/content/uploads/2023/01/1-800x568.png 800w, /content/uploads/2023/01/1-768x545.png 768w, /content/uploads/2023/01/1-1536x1090.png 1536w, /content/uploads/2023/01/1-600x426.png 600w, /content/uploads/2023/01/1-1200x851.png 1200w, /content/uploads/2023/01/1.png 1748w" sizes="auto, (max-width: 800px) 100vw, 800px" /><figcaption id="caption-attachment-591609" class="wp-caption-text">Vente d&rsquo;appartement et maison à Marseille</figcaption></figure>
+<figure id="attachment_591609" aria-describedby="caption-attachment-591609" style="width: 800px" class="wp-caption alignnone"><img loading="lazy" decoding="async" class="size-medium wp-image-591609" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-800x568.png" alt="Immobilière Pujol Syndic de copropriété" width="800" height="568" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-800x568.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-768x545.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-1536x1090.png 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-600x426.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1-1200x851.png 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/01/1.png 1748w" sizes="auto, (max-width: 800px) 100vw, 800px" /><figcaption id="caption-attachment-591609" class="wp-caption-text">Vente d&rsquo;appartement et maison à Marseille</figcaption></figure>
       </div>
       <!-- SHARE -->
       <div class="post__share">

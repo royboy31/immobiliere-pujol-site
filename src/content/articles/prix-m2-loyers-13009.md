@@ -5,7 +5,7 @@ date: "2020-02-05"
 excerpt: "Les données chiffrées des loyers dans le 13009 en 2019 Prix moyen (en €/m2) : 12,7 Croissance entre 2017 et 2018 : 6,0 Durée d’occupation moyenne (en mois) :..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Mazargues57.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Marseille-Mazargues57.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13009 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 13,9 dans le 13009.  La durée d'occupation moyenne est de 49 mois."
 ---
@@ -20,7 +20,7 @@ seoDescription: "Le prix moyen (en €/m2) est de 13,9 dans le 13009.  La durée
 <p>Source : www.clameur.fr</p>
 <p> </p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291192" src="/content/uploads/2017/01/9-ème-arrondissement-loyer-2018-800x286.png" alt="" width="800" height="286" srcset="/content/uploads/2017/01/9-ème-arrondissement-loyer-2018-800x286.png 800w, /content/uploads/2017/01/9-ème-arrondissement-loyer-2018-768x274.png 768w, /content/uploads/2017/01/9-ème-arrondissement-loyer-2018-600x214.png 600w, /content/uploads/2017/01/9-ème-arrondissement-loyer-2018.png 1045w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291192" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/9-%C3%A8me-arrondissement-loyer-2018-800x286.png" alt="" width="800" height="286" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/9-%C3%A8me-arrondissement-loyer-2018-800x286.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/9-%C3%A8me-arrondissement-loyer-2018-768x274.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/9-%C3%A8me-arrondissement-loyer-2018-600x214.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/9-%C3%A8me-arrondissement-loyer-2018.png 1045w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 9e arrondissement</h2>
 <p>Le 9<sup>ème</sup> arrondissement se compose de 9 quartiers :</p>

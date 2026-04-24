@@ -5,14 +5,14 @@ date: "2016-03-10"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians . En 2016, il s’est vendu..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13008", "Arrondissements Marseille", "Arrondissement 13008 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/investissement-bureaux-13008-marseille1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/investissement-bureaux-13008-marseille1.jpg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13008 en 2016"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians . En 2016, il s'est vendu dans le 13008 : - 512 appartements  au prix médian* arrondissement de  3090€ le m² . - 44 maisons au prix médian de…"
 ---
 
 <h4><strong>La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians .<br />
 </strong></h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="/content/uploads/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s&rsquo;est vendu dans le 13008 :<br />
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s&rsquo;est vendu dans le 13008 :<br />
 &#8211; 512 appartements  au prix médian* arrondissement de  3090€ le m² .<br />
 &#8211; 44 maisons au prix médian de 527500€ pour une surface de 120m² et 300m² de terrain.<br />
 <i><br />

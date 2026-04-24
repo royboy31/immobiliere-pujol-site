@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion de bien est un service professionnel proposé par l’agence immobilière Pujol, qui consiste à prendre en charge l’administration et la gestion..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien à St Mitre, 13013 – Marseille"
 seoDescription: ""
 ---

@@ -5,7 +5,7 @@ date: "2019-05-19"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quels sont les prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13014-1200x900-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13014-1200x900-1.jpg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13014 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quels sont les prix au m2 de l'immobilier ancien à Marseille dans le 13014 en 2018 ? En 2018, il s’est vendu dans le 14e arrondissement de Marseille:172 appartements…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "La fourchette des transactions est établie par les notaires de
 
 
 
-<div class="wp-block-image"><figure class="alignleft"><img loading="lazy" decoding="async" width="178" height="178" src="/content/uploads/2019/05/OxUE_TjX.jpeg" alt="les prix au m2 de l'immobilier ancien dans le 13014 en 2018" class="wp-image-235541" srcset="/content/uploads/2019/05/OxUE_TjX.jpeg 178w, /content/uploads/2019/05/OxUE_TjX-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" /><figcaption>13014</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft"><img loading="lazy" decoding="async" width="178" height="178" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX.jpeg" alt="les prix au m2 de l'immobilier ancien dans le 13014 en 2018" class="wp-image-235541" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX.jpeg 178w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/OxUE_TjX-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" /><figcaption>13014</figcaption></figure></div>
 
 
 

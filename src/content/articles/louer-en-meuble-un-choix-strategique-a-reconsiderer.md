@@ -5,7 +5,7 @@ date: "2024-09-17"
 excerpt: "Ces dernières années, nous avons observé une montée en puissance des biens meublés dans l’offre locative à Marseille. Aujourd’hui, 74 % des nouveaux..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/09/louer-vide-ou-meuble-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/09/louer-vide-ou-meuble-1200x800.jpg"
 seoTitle: "Louer en meublé : un choix stratégique à reconsidérer ?"
 seoDescription: "Découvrez l'évolution de la location meublée à Marseille : aujourd'hui, 35 % du marché immobilier adopte ce format pratique, attirant principalement étudiants et jeunes actifs. Malgré des loyers plus élevés et des avantages fiscaux, la gestion requiert vigilance en raison d'une rotation plus fréquente des locataires. En périphérie, la demande est limitée, conseillant aux propriétaires d'évaluer soigneusement leur stratégie locative. Pour des conseils personnalisés, contactez-nous."
 ---
@@ -44,7 +44,7 @@ Si l&rsquo;avantage fiscal de l&rsquo;amortissement des meublés venait à être
 <p>La location meublée reste une option intéressante pour certains types de biens , dans certains quartiers et pour des locataires jeunes. Il est donc essentiel de bien étudier son marché et de ne pas se laisser guider uniquement par l’aspect fiscal surtout si celui-ci devait changer dans les mois qui arrivent.<br />
 <br />
 Si vous envisagez d’investir ou d’adapter votre stratégie locative, nos équipes se tiennent à votre disposition pour vous accompagner et vous conseiller. </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-607292" src="/content/uploads/2023/02/caroline-800x359.jpg" alt="" width="428" height="192" srcset="/content/uploads/2023/02/caroline-800x359.jpg 800w, /content/uploads/2023/02/caroline-768x344.jpg 768w, /content/uploads/2023/02/caroline-600x269.jpg 600w, /content/uploads/2023/02/caroline-1200x538.jpg 1200w, /content/uploads/2023/02/caroline.jpg 1456w" sizes="auto, (max-width: 428px) 100vw, 428px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-607292" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline-800x359.jpg" alt="" width="428" height="192" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline-800x359.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline-768x344.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline-600x269.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline-1200x538.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/02/caroline.jpg 1456w" sizes="auto, (max-width: 428px) 100vw, 428px" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

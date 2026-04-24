@@ -5,7 +5,7 @@ date: "2019-02-23"
 excerpt: "Sur l’année c’est un total de 407 ventes qui ont été signées dans cet arrondissement. Soit -3,09 % par rapport aux ventes réalisées l’année précédente. Le prix..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/02/B000550_AE4411075718.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/B000550_AE4411075718.jpg"
 seoTitle: "Le prix de l’immobilier ancien en 2018 dans le 6ème à Marseille"
 seoDescription: "Sur l'année c'est un total de 407 ventes qui ont été signées dans cet arrondissement. Soit -3,09 % par rapport aux ventes réalisées l'année précédente. Le prix au m² oscille entre 2 530 € et 2 680 € selon les quartiers et type d'appartements. L'immobilier ancien a la faveur des…"
 ---

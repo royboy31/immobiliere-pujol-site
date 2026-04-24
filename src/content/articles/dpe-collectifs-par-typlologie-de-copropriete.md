@@ -5,7 +5,7 @@ date: "2024-06-05"
 excerpt: "Devant la nouvelle obligation de réaliser un Diagnostic de Performances Energétiques (DPE) collectif, en copropriété, nous avons décidé de prendre de l’avance..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/06/IP-7042-111019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/IP-7042-111019.jpg"
 seoTitle: "DPE collectif  : les résultats par typologie des copropriétés que nous gérons et nos enseignements"
 seoDescription: "Les DPE collectifs deviennent obligatoires en copropriétés. Voici le résultat de ces DPE par âge et type de copropriété. Quelles conséquences sur les travaux de rénovation énergétiques?"
 ---
@@ -62,11 +62,11 @@ Réaliser une Isolation Thermique par l’Extérieur (ITE) est inconcevable en c
 </p>
 <h3>Conclusions ?</h3>
 <p>Si les copropriétaires doivent faire des efforts pour la réalisation de travaux de rénovation énergétique, les pouvoirs publics français doivent également proposer des solutions adaptées et réalistes et/ou modifier les normes actuelles (dans les périmètres soumis à visa des Architectes des bâtiments de France notamment) afin de faciliter l’amélioration de la notation énergétique des petites copropriétés de centre-ville. Sinon, rien ne se passera d&rsquo;efficace dans notre centre-ville.</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="/content/uploads/2023/05/bertrand-769x800.jpg" alt="" width="148" height="154" srcset="/content/uploads/2023/05/bertrand-769x800.jpg 769w, /content/uploads/2023/05/bertrand-768x799.jpg 768w, /content/uploads/2023/05/bertrand-577x600.jpg 577w, /content/uploads/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 148px) 100vw, 148px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg" alt="" width="148" height="154" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg 769w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-768x799.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-577x600.jpg 577w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 148px) 100vw, 148px" /></p>
 <p><strong>Bertrand Guibaud</strong><br />
 <strong>Directeur Technique </strong><br />
 bertrand@immobiliere-pujol.fr</p>
-<p><img loading="lazy" decoding="async" class=" wp-image-798615 alignleft" src="/content/uploads/2024/06/logo-.fond-transparent-800x240.png" alt="" width="130" height="39" srcset="/content/uploads/2024/06/logo-.fond-transparent-800x240.png 800w, /content/uploads/2024/06/logo-.fond-transparent-768x230.png 768w, /content/uploads/2024/06/logo-.fond-transparent-600x180.png 600w, /content/uploads/2024/06/logo-.fond-transparent.png 1180w" sizes="auto, (max-width: 130px) 100vw, 130px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-798615 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/logo-.fond-transparent-800x240.png" alt="" width="130" height="39" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/logo-.fond-transparent-800x240.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/logo-.fond-transparent-768x230.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/logo-.fond-transparent-600x180.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/06/logo-.fond-transparent.png 1180w" sizes="auto, (max-width: 130px) 100vw, 130px" /></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

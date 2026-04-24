@@ -5,7 +5,7 @@ date: "2019-05-15"
 excerpt: "Voici un comparatif des prix au m2 de l’immobilier neuf dans le 13012 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Arrondissement 13012 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/03/LO30010006_BF07.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/03/LO30010006_BF07.jpg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13012 en 2018"
 seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le 13012 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 12ème arrondissement de Marseille:106 appartements au prix…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13012-3.jpeg" alt="Les prix au m2 de l'immobilier neuf dans le 13012 en 2018" class="wp-image-235626" width="160" height="112" srcset="/content/uploads/2019/05/13012-3.jpeg 1000w, /content/uploads/2019/05/13012-3-768x538.jpeg 768w, /content/uploads/2019/05/13012-3-600x420.jpg 600w, /content/uploads/2019/05/13012-3-800x560.jpg 800w" sizes="auto, (max-width: 160px) 100vw, 160px" /><figcaption>13012</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-3.jpeg" alt="Les prix au m2 de l'immobilier neuf dans le 13012 en 2018" class="wp-image-235626" width="160" height="112" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-3.jpeg 1000w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-3-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-3-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-3-800x560.jpg 800w" sizes="auto, (max-width: 160px) 100vw, 160px" /><figcaption>13012</figcaption></figure></div>
 
 
 

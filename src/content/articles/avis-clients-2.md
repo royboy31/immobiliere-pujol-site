@@ -5,7 +5,7 @@ date: "2017-10-23"
 excerpt: "Pour l’Immobilière Pujol, les avis clients sont importants. Nous choisissons bien nos restaurants grâce à ces avis quand nous sommes dans une ville étrangère...."
 categories: ["Mon quartier, ma ville Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/PU-0567-1-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0567-1-1200x750.jpg"
 seoTitle: "Les avis clients de l’Immobilière Pujol"
 seoDescription: "Pour l'Immobilière Pujol, les avis clients sont importants. Nous choisissons bien nos restaurants grâce à ces avis quand nous sommes dans une ville étrangère. Et même dans une ville que nous connaissons, nous demandons à nos amis, mais aussi à Google. Avoir des avis clients est à la tendance et…"
 ---
@@ -43,13 +43,13 @@ seoDescription: "Pour l'Immobilière Pujol, les avis clients sont importants. No
 
 <h2>Avis Google</h2>
 <p>Sur <a href="https://www.google.fr/search?source=hp&amp;q=avis+immobiliere+pujol&amp;oq=avis+immobiliere+pujol&amp;gs_l=psy-ab.3..0i22i30k1.20.3781.0.4014.20.18.0.0.0.0.216.1832.2j10j1.13.0....0...1.1.64.psy-ab..7.13.1831...0j0i131k1j0i22i10i30k1.0.RObqhhh3IwQ">Google Avis</a>, nous recueillons une note de<strong> 4,2/5</strong> pour un total de <strong>99 votes</strong>. Voici quelques avis récents :
-<img loading="lazy" decoding="async" class="alignnone wp-image-54881 size-full" src="/content/uploads/2017/09/1.png" alt="agence immobiliere pujol avis" width="705" height="386" />
-<img loading="lazy" decoding="async" class="alignnone wp-image-54884 size-full" src="/content/uploads/2017/09/4.png" alt="immobiliere pujol avis marseille" width="528" height="214" />
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54885" src="/content/uploads/2017/09/2.jpg.png" alt="immobiliere pujol avis" width="624" height="223" /><img loading="lazy" decoding="async" class="alignnone wp-image-54883 size-full" src="/content/uploads/2017/09/3.png" alt="avis immobiliere pujol marseille" width="654" height="245" /></p>
+<img loading="lazy" decoding="async" class="alignnone wp-image-54881 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/1.png" alt="agence immobiliere pujol avis" width="705" height="386" />
+<img loading="lazy" decoding="async" class="alignnone wp-image-54884 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/4.png" alt="immobiliere pujol avis marseille" width="528" height="214" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54885" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/2.jpg.png" alt="immobiliere pujol avis" width="624" height="223" /><img loading="lazy" decoding="async" class="alignnone wp-image-54883 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/3.png" alt="avis immobiliere pujol marseille" width="654" height="245" /></p>
 
 <h2>Sur Yelp !</h2>
 <p>Parce que notre implication ne date pas que d’hier ou d’avant-hier, mais bien depuis toujours, nous retranscrivons ici des <a href="https://www.yelp.fr/biz/immobili%C3%A8re-pujol-marseille-4">avis client publiés sur Yelp en 2010 et 2011</a> :
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54886" src="/content/uploads/2017/09/5.png" alt="immobiliere pujol avis" width="652" height="242" /> <img loading="lazy" decoding="async" class="alignnone size-full wp-image-54887" src="/content/uploads/2017/09/6.png" alt="immobiliere pujol avis" width="642" height="166" /> <img loading="lazy" decoding="async" class="alignnone size-full wp-image-54888" src="/content/uploads/2017/09/7.png" alt="immobiliere pujol avis" width="638" height="239" /></p>
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-54886" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/5.png" alt="immobiliere pujol avis" width="652" height="242" /> <img loading="lazy" decoding="async" class="alignnone size-full wp-image-54887" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/6.png" alt="immobiliere pujol avis" width="642" height="166" /> <img loading="lazy" decoding="async" class="alignnone size-full wp-image-54888" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/09/7.png" alt="immobiliere pujol avis" width="638" height="239" /></p>
 
 <h1>Le blog immobilière Pujol</h1>
 <p>Parce que nous sommes une agence à taille humaine, toujours soucieuse de faire mieux, nous avons créé un blog d’informations pratiques sur le marché immobilier.</p>

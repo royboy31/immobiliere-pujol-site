@@ -5,7 +5,7 @@ date: "2020-10-28"
 excerpt: "Depuis que j’exerce mon métier à mon compte, j’ai la « liberté » de travailler en accord avec mes engagements. Je ne suis pas un militant écolo au sens..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/09/renovation-immeuble-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/renovation-immeuble-marseille.jpg"
 seoTitle: "Gestion immobilière : peut-on faire de l’écogestion ou éco-rénovation ?"
 seoDescription: "Depuis que j'exerce mon métier à mon compte, j'ai la \"liberté\" de travailler en accord avec mes engagements. Je ne suis pas un militant écolo au sens politique du terme, mais je suis conscient de l'évolution du monde qui m'entoure et j'agis en personne responsable. Avec tous les collaborateurs d'Immobilière…"
 ---

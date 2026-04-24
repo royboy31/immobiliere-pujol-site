@@ -5,7 +5,7 @@ date: "2020-02-07"
 excerpt: "Les données chiffrées des loyers en 2019 dans le 13013 Prix moyen (en €/m2) : 12,2 Croissance entre 2017 et 2018 (en %): 0,6 Durée d’occupation moyenne (en..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Chateau-Gombert-1200x399.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Chateau-Gombert-1200x399.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13013 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 12,2 dans le 13013.  La durée d'occupation moyenne est de 50 mois"
 ---
@@ -19,10 +19,10 @@ seoDescription: "Le prix moyen (en €/m2) est de 12,2 dans le 13013.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 11,6</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291205" src="/content/uploads/2017/01/13-ème-arrondissement-loyer-2018-800x288.png" alt="" width="800" height="288" srcset="/content/uploads/2017/01/13-ème-arrondissement-loyer-2018-800x288.png 800w, /content/uploads/2017/01/13-ème-arrondissement-loyer-2018-768x276.png 768w, /content/uploads/2017/01/13-ème-arrondissement-loyer-2018-600x216.png 600w, /content/uploads/2017/01/13-ème-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291205" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13-%C3%A8me-arrondissement-loyer-2018-800x288.png" alt="" width="800" height="288" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13-%C3%A8me-arrondissement-loyer-2018-800x288.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13-%C3%A8me-arrondissement-loyer-2018-768x276.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13-%C3%A8me-arrondissement-loyer-2018-600x216.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13-%C3%A8me-arrondissement-loyer-2018.png 1050w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 <h2 style="text-align: left;">Les caractéristiques du 13e arrondissement</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8541" src="/content/uploads/2017/01/carte-du-13013-marseille-300x231.jpg" alt="13e arrondissement marseille" width="300" height="231" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8541" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/carte-du-13013-marseille-300x231.jpg" alt="13e arrondissement marseille" width="300" height="231" /></p>
 <p>Le 13ème arrondissement de Marseille est situé au Nord/Nord-Est du centre de Marseille. Il est bordé au Sud par le 2ème, le 4ème et le 5ème arrondissement. Le 13<sup>ème</sup> arrondissement se compose de 11 quartiers :</p>
 <ul>
 <li><strong>Château Gombert</strong></li>

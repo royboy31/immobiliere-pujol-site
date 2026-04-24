@@ -15,10 +15,10 @@ seoDescription: "Vous souhaitez un accompagnement personnalisé Vous cherchez à
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-600x400.jpg" 
-      <img src="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-600x400.jpg" 
+      <img src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -32,7 +32,7 @@ seoDescription: "Vous souhaitez un accompagnement personnalisé Vous cherchez à
 <p>Vous désirez trouver une agence à votre écoute et attentive à vos besoins ?</p>
 <p>Alors, découvrez les services d’Immobilière Pujol – agence de location Marseille – qui vous accompagne tout au long du processus de location.</p>
 
-<figure id="attachment_225020" aria-describedby="caption-attachment-225020" style="width: 800px" class="wp-caption alignnone"><a href="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille.jpg"><img loading="lazy" decoding="async" class="wp-image-225020 size-medium" title="agence de location Marseille" src="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg" alt="agence de location Marseille" width="800" height="533" srcset="/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg 800w, /content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-768x512.jpg 768w, /content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-600x400.jpg 600w, /content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225020" class="wp-caption-text">Agence de location Marseille</figcaption></figure>
+<figure id="attachment_225020" aria-describedby="caption-attachment-225020" style="width: 800px" class="wp-caption alignnone"><a href="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille.jpg"><img loading="lazy" decoding="async" class="wp-image-225020 size-medium" title="agence de location Marseille" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg" alt="agence de location Marseille" width="800" height="533" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-800x533.jpg 800w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-768x512.jpg 768w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-600x400.jpg 600w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225020" class="wp-caption-text">Agence de location Marseille</figcaption></figure>
 
 <h2>Qui est l’immobilière Pujol ?</h2>
 <p>En 2002, notre fondateur, Stéphane a décidé de créer une agence de location plus à l’écoute des besoins de ses clients et plus transparente que les agences immobilières classiques.</p>

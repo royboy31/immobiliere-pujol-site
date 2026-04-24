@@ -15,10 +15,10 @@ seoDescription: "La mauvaise qualité coûte chère. Faites gérer votre copropr
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/PU-0583.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/PU-0583-800x499.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/PU-0583-600x374.jpg" 
-      <img src="/content/uploads/2017/11/PU-0583.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0583.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0583-800x499.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0583-600x374.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0583.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -59,7 +59,7 @@ Pour cette raison, se renseigner sur le professionnalisme, tester des fournisseu
 <p>&nbsp;</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
 <p>&nbsp;</p>
 <h2> </h2>
                 </section>

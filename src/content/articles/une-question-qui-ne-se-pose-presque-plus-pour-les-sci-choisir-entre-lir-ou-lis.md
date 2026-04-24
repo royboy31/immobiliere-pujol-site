@@ -5,7 +5,7 @@ date: "2017-12-24"
 excerpt: "Choisir de soumettre sa sci à l’impôt sur les sociétés (IS) ou rester à l’impôt sur le revenu (IR) était une question récurrente. C’est aujourd’hui un dossier..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/12/fiscalite-des-sci-a-choisir-2-1200x707.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/fiscalite-des-sci-a-choisir-2-1200x707.jpg"
 seoTitle: "Une question qui ne se pose presque plus pour les SCI? choisir entre l’IR ou l’IS"
 seoDescription: "Choisir de soumettre sa sci à l'impôt sur les sociétés (IS) ou rester à l'impôt sur le revenu (IR) était une question récurrente. C'est aujourd'hui un dossier classé par les fiscalistes, les banquiers et tous ceux qui gèrent les patrimoines. Ils sont depuis plusieurs années unanimes à préconiser les sci…"
 ---

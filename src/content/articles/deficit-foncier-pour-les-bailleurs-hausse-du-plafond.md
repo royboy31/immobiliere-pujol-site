@@ -5,7 +5,7 @@ date: "2023-09-18"
 excerpt: "Depuis 1993, la législation française encourage l’investissement locatif en offrant un dispositif fiscal appelé « Déficit Foncier« . Ce mécanisme permet aux..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/location-meuble-wifi-castellane-1200x802.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/location-meuble-wifi-castellane-1200x802.jpg"
 seoTitle: "Déficit Foncier pour les bailleurs : hausse du plafond"
 seoDescription: "Une aide supplémentaire accordée aux propriétaires bailleurs qui pourront déduire plus de facture travaux pour améliorer la classe énergétique de leur location. En savoir plus sur les modalités."
 ---
@@ -50,7 +50,7 @@ L&rsquo;immobilière Pujol réalise depuis de nombreuses années des chantiers d
 Si vous souhaitez être accompagné par notre équipe location et travaux sur la rénovation énergétique et esthétique  de votre appartement, contactez <a href="/experts/caroline-pujol/" target="_blank" rel="noopener">Caroline PUJOL </a>spécialisée dans ces sujets .<br />
 <br />
 </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-687787" src="/content/uploads/2023/09/signature-caro-1-800x249.jpg" alt="" width="418" height="130" srcset="/content/uploads/2023/09/signature-caro-1-800x249.jpg 800w, /content/uploads/2023/09/signature-caro-1-768x239.jpg 768w, /content/uploads/2023/09/signature-caro-1-1536x478.jpg 1536w, /content/uploads/2023/09/signature-caro-1-2048x637.jpg 2048w, /content/uploads/2023/09/signature-caro-1-600x187.jpg 600w, /content/uploads/2023/09/signature-caro-1-1200x373.jpg 1200w" sizes="auto, (max-width: 418px) 100vw, 418px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-687787" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-800x249.jpg" alt="" width="418" height="130" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-800x249.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-768x239.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-1536x478.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-2048x637.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-600x187.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/signature-caro-1-1200x373.jpg 1200w" sizes="auto, (max-width: 418px) 100vw, 418px" /></p>
 <p>&nbsp;</p>
 <p><br />
 .</p>

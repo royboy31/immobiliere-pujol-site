@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière de bureaux est un service clé proposé par l’agence immobilière Pujol à Marseille, dans le district 13010. Ce service englobe la prise en..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "La gestion immobilière de bureaux à Marseille 13010 avec l’agence immobilière Pujol"
 seoDescription: ""
 ---

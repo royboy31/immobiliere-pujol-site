@@ -5,7 +5,7 @@ date: "2018-01-21"
 excerpt: "Quand vous ne pouvez plus ouvrir une porte avec la bonne clef ou qu’un voisin vous appelle en disant qu’il y a un voleur qui occupe l’appartement vide…ce n’est..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/procédure-de-squat.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/proc%C3%A9dure-de-squat.jpeg"
 seoTitle: "Quoi faire quand vous êtes squattés: La procédure d’expulsion des squats"
 seoDescription: "Quand vous ne pouvez plus ouvrir une porte avec la bonne clef ou qu’un voisin vous appelle en disant qu’il y a un voleur qui occupe l’appartement vide…ce n’est pas bon signe. Vous êtes déjà dans la procédure d'expulsion des squats sans le savoir Donc après avoir vérifié la réalité…"
 ---

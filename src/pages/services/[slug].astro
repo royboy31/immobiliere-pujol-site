@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -18,7 +18,8 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+// Body is raw HTML; bypass markdown processing.
+const rawBody = (entry as any).body ?? '';
 
 const title = entry.data.seoTitle || `${entry.data.title} – Immobilière Pujol`;
 const description = entry.data.seoDescription || '';
@@ -38,9 +39,7 @@ const description = entry.data.seoDescription || '';
       <h1>{entry.data.title}</h1>
     </section>
 
-    <section class="service-single__content">
-      <Content />
-    </section>
+    <section class="service-single__content" set:html={rawBody}></section>
 
     {entry.data.relatedForm && (
       <section class="service-single__form" id="form">

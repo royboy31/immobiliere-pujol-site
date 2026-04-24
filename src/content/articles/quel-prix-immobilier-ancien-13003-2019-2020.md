@@ -5,7 +5,7 @@ date: "2021-01-10"
 excerpt: "Cet article va vous donner les références sur les prix de vente au m² dans le 3ème arrondissement de Marseille, dans l’ancien, quartier par quartier (pour la..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/Caserne_du_Muy-1200x583.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Caserne_du_Muy-1200x583.jpg"
 seoTitle: "Prix de vente au m² de l’immobilier ancien dans le 13003 en 2019/2020 ?"
 seoDescription: "Dans cet article, retrouvez les statistiques des ventes dans le 13003 : nombre et prix par quartier avec des comparaisons sur les années précédentes"
 ---
@@ -83,7 +83,7 @@ seoDescription: "Dans cet article, retrouvez les statistiques des ventes dans le
 </figure>
 <p>&nbsp;</p>
 <h4><span style="font-family: georgia, palatino, serif;">LES PRIX AU M² DES APPARTEMENTS ANCIENS VENDUS DANS LE QUARTIER <strong>BELLE DE MAI</strong></span></h4>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-384210 alignleft" src="/content/uploads/2020/12/telechargement.jpeg" alt="" width="275" height="183" /></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-384210 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/12/telechargement.jpeg" alt="" width="275" height="183" /></p>
 <p><span style="font-family: georgia, palatino, serif;">86 ventes pour un prix médian de 1 430€/m².</span></p>
 <figure class="wp-block-table">
 <table>
@@ -123,7 +123,7 @@ seoDescription: "Dans cet article, retrouvez les statistiques des ventes dans le
 <p>&nbsp;</p>
 <h4><span style="font-family: georgia, palatino, serif;">LES PRIX AU M² DES APPARTEMENTS ANCIENS VENDUS DANS LE QUARTIER DE <strong>SAINT LAZARE</strong></span></h4>
 <p>&nbsp;</p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-384211 alignleft" src="/content/uploads/2020/12/telechargement-1.jpeg" alt="" width="190" height="265" /></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-384211 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/12/telechargement-1.jpeg" alt="" width="190" height="265" /></p>
 <p>&nbsp;</p>
 <p><span style="font-family: georgia, palatino, serif;">28 ventes pour un prix médian de 1 660€/m2.</span></p>
 <figure class="wp-block-table">
@@ -159,7 +159,7 @@ seoDescription: "Dans cet article, retrouvez les statistiques des ventes dans le
 </figure>
 <p>&nbsp;</p>
 <h4><span style="font-family: georgia, palatino, serif;">LES PRIX AU M² DES APPARTEMENTS ANCIENS VENDUS DANS LE QUARTIER DE <strong>LA VILETTE</strong></span></h4>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-384212 alignleft" src="/content/uploads/2020/12/telechargement-3.jpeg" alt="" width="251" height="201" /></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-384212 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/12/telechargement-3.jpeg" alt="" width="251" height="201" /></p>
 <p><span style="font-family: georgia, palatino, serif;">37 ventes pour un prix médian de 1 860€/m².</span></p>
 <figure class="wp-block-table">
 <table style="width: 49.5721%; height: 105px;">

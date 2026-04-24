@@ -1,30 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+import { buildWebSite } from '../lib/schemas';
+
+// Home content was scraped from live into src/content/pages/home.md.
+// We render its body directly (HTML), same pattern as other pages.
+const entry = await getEntry('pages', 'home');
+const rawBody = entry ? (entry as any).body ?? '' : '';
+const seoTitle = entry?.data.seoTitle || "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
+const seoDescription = entry?.data.seoDescription || '';
 ---
 
 <BaseLayout
-  title="Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients"
-  description="Gestion locative, syndic de copropriété, vente de biens immobilier. Immobilière Pujol l'agence immobilière LA PLUS RECOMMANDÉE PAR SES CLIENTS"
+  title={seoTitle}
+  description={seoDescription}
+  schemas={[buildWebSite()]}
+  breadcrumb={false}
 >
-  <section class="hero">
-    <h1>Nous croyons que l'immobilier est fait de belles expériences</h1>
-  </section>
-
-  <section class="services">
-    <h2>Nos Services</h2>
-  </section>
-
-  <section class="experts">
-    <h2>Nos experts</h2>
-  </section>
-
-  <section class="blog">
-    <h2>En direct de notre blog</h2>
-  </section>
-
-  <section class="reviews">
-  </section>
-
-  <section class="newsletter">
-  </section>
+  <div class="home-content" set:html={rawBody}></div>
 </BaseLayout>

@@ -5,7 +5,7 @@ date: "2023-09-19"
 excerpt: "Notre objectif en tant que syndic est de réduire en permanence les charges dans les copropriétés que nous gérons. C’est une des missions prévues par la loi..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/IMG_0319-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/IMG_0319-1200x900.jpg"
 seoTitle: "La gestion des contrats d’électricité en copropriété"
 seoDescription: "Chez Immobilière Pujol Marseille,  nous nous engageons en tant que syndic à négocier le meilleur prix d'électricité pour votre copropriété et à faire baisser vos charges. En savoir plus sur nos méthodes."
 ---
@@ -22,7 +22,7 @@ seoDescription: "Chez Immobilière Pujol Marseille,  nous nous engageons en tant
 <div>Les nouveaux compteurs  LINKY permettent à chacun de vérifier l’adéquation de la puissance souscrite avec celle réellement utilisée (PUISS MAX SOUTIR sur le compteur). </div>
 <div>Vous pourrez ainsi économiser quelques euros en vérifiant rapidement sur votre compteur.</div>
 <div> </div>
-<div><img loading="lazy" decoding="async" class="alignnone size-full wp-image-687810" src="/content/uploads/2023/09/linky.jpg" alt="" width="427" height="114" /></div>
+<div><img loading="lazy" decoding="async" class="alignnone size-full wp-image-687810" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/linky.jpg" alt="" width="427" height="114" /></div>
 <div> </div>
 <div> </div>
 <h3><strong>Négociation des contrats électriques de 36KVA et +</strong></h3>
@@ -55,9 +55,9 @@ Le passage en prix réglementé à ramener le tarif à 228€/MwH. Même sur une
 <div>La loi prévoit que le syndic mette en concurrence tous les contrats souscrits par les syndicats qui sont confiés au syndic.</div>
 <div><strong>Nous faisons ce travail, qui n’est pas rémunéré car nous considérons, comme nos clients, que cela est une gestion “en bon père de famille”, ce que nous souhaitons être. </strong></div>
 <div> </div>
-<div><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="/content/uploads/2023/05/bertrand-769x800.jpg" alt="" width="129" height="134" srcset="/content/uploads/2023/05/bertrand-769x800.jpg 769w, /content/uploads/2023/05/bertrand-768x799.jpg 768w, /content/uploads/2023/05/bertrand-577x600.jpg 577w, /content/uploads/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 129px) 100vw, 129px" /> Bertrand GUIBAUD &#8211; Directeur technique et Responsable copropriétés</div>
+<div><img loading="lazy" decoding="async" class="alignnone  wp-image-632909" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg" alt="" width="129" height="134" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg 769w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-768x799.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-577x600.jpg 577w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 129px) 100vw, 129px" /> Bertrand GUIBAUD &#8211; Directeur technique et Responsable copropriétés</div>
 <div> </div>
-<div><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-687813 alignleft" src="/content/uploads/2023/09/devis-syndic.jpg" alt="" width="241" height="63" /></a></div>
+<div><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-687813 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/devis-syndic.jpg" alt="" width="241" height="63" /></a></div>
       </div>
       <!-- SHARE -->
       <div class="post__share">

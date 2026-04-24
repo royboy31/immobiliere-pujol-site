@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion immobilière est un service essentiel pour les propriétaires souhaitant optimiser la rentabilité de leurs biens locatifs tout en minimisant les..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à Chutes-Lavie, 13004 Marseille"
 seoDescription: ""
 ---

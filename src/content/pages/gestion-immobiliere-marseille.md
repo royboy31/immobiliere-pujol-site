@@ -15,10 +15,10 @@ seoDescription: "Faire confiance à une agence de gestion immobilière à Marsei
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille-600x287.png" 
-      <img src="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille-600x287.png" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -30,7 +30,7 @@ seoDescription: "Faire confiance à une agence de gestion immobilière à Marsei
         <h1>Gestion immobilière Marseille – Pour la location et les copropriétés</h1>
 <p>Vous cherchez une agence expérimentée dans la gestion locative et aussi de copropriété ? Vous avez besoin de trouver une équipe qualifiée et de confiance ?</p>
 <p>Dans ce cas, bienvenue chez immobilière Pujol – gestion immobilière Marseille – où vous trouverez des solutions sur mesure pour la gestion de vos biens.</p>
-<p><a href="/content/uploads/2017/10/P-4875-050117.jpg"><img loading="lazy" decoding="async" class="alignnone wp-image-230556 size-medium" title="gestion immobilière Marseille" src="/content/uploads/2017/10/P-4875-050117-800x533.jpg" alt="gestion immobilière Marseille" width="800" height="533" srcset="/content/uploads/2017/10/P-4875-050117-800x533.jpg 800w, /content/uploads/2017/10/P-4875-050117-768x512.jpg 768w, /content/uploads/2017/10/P-4875-050117-600x400.jpg 600w, /content/uploads/2017/10/P-4875-050117-1200x800.jpg 1200w, /content/uploads/2017/10/P-4875-050117.jpg 1400w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117.jpg"><img loading="lazy" decoding="async" class="alignnone wp-image-230556 size-medium" title="gestion immobilière Marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117-800x533.jpg" alt="gestion immobilière Marseille" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/P-4875-050117.jpg 1400w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a></p>
 
 <h2>Qu’est-ce qu’immobilière Pujol ?</h2>
 <p>Immobilière Pujol, c’est avant tout une agence de gestion immobilière :</p>

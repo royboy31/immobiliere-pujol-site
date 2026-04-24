@@ -5,7 +5,7 @@ date: "2016-11-22"
 excerpt: "Bilan au 31/10/2016 Fin octobre, j’étais de retour au port si je puis dire après quelques jours de congé. J’ai profité de ces quelques jours de tranquillité..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/investissement-bureaux-13008-marseille-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/investissement-bureaux-13008-marseille-1.jpg"
 seoTitle: "Le marché immobilier à Marseille : un trimestre de bascule ?"
 seoDescription: "Bilan au 31/10/2016 Fin octobre, j'étais de retour au port si je puis dire après quelques jours de congé. J'ai profité de ces quelques jours de tranquillité pour faire le bilan du trimestre passé, avant d'affronter le marché et ses circonvolutions. Celui de la location est bon, mais moins franc que l’année dernière, c’est…"
 ---
@@ -36,7 +36,7 @@ Nous avons conclu <strong>11 ventes  ce trimestre et signé  7 compromis</stro
 <h2><strong>Bureaux et commerces : la chute libre ! </strong></h2>
 Là c’est dur dur sur les deux marchés. Le loyer moyen des bureaux de seconde main est à <strong>125 €/m²/an</strong>, en nette baisse. Un de mes confrères m’affirmait que les baisses des loyers avaient été entre 20 et 30%. Les locataires sont en position de force et en profitent.
 
-Cette moyenne masque des <a href="/content/uploads/2016/11/4a7298ea23cf0510a6bc67361e3c9486.pdf">valeurs très contrastées</a> :
+Cette moyenne masque des <a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/11/4a7298ea23cf0510a6bc67361e3c9486.pdf">valeurs très contrastées</a> :
 <ul>
  	<li><strong>Le secteur nord  et la vallée  de  l’Huveaune</strong> : les prises à bail se sont réalisées à des loyers parfois/souvent inférieurs à 100 €/m²/an</li>
  	<li><strong>Le Sud et l’Est </strong>affichent des valeurs proches de la moyenne 120€/m²/an</li>

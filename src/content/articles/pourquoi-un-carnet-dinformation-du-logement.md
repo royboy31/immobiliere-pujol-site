@@ -5,7 +5,7 @@ date: "2023-06-13"
 excerpt: "Pourquoi un CIL? Le carnet d’information du logement ou CIL est un document qui rassemble des informations sur les caractéristiques, les équipements et les..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/06/PU-1791-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/06/PU-1791-1200x750.jpg"
 seoTitle: "Pourquoi un Carnet d’Information du Logement ?"
 seoDescription: "nouveau document à remettre à votre acquéreur en cas de vente d'un bien rénové ou neuf. Que doit contenir le CIL? que dit la loi?"
 ---

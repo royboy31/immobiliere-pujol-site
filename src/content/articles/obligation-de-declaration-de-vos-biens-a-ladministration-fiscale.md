@@ -5,7 +5,7 @@ date: "2023-03-13"
 excerpt: "La taxe d’habitation est supprimée pour les résidences principales à partir de 2023. Les propriétaires de résidences secondaires et de logements locatifs..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/03/declaration-des-logement-sur-impot.gouv_-3.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/03/declaration-des-logement-sur-impot.gouv_-3.jpg"
 seoTitle: "Obligation de déclaration de vos biens à l’administration fiscale"
 seoDescription: "Qui est concerné par la déclaration des logements dans son espace impôts.gouv? comment déclarer ses logements? Qui doit déclarer les logements? .."
 ---

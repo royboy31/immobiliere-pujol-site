@@ -5,7 +5,7 @@ date: "2016-02-06"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians . * Le prix médian : la..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13006", "Arrondissements Marseille", "Arrondissement 13006 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13006-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/13006-1.jpg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13006 en 2016"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians . * Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de…"
 ---

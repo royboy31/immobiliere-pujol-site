@@ -5,7 +5,7 @@ date: "2020-01-14"
 excerpt: "Les attentes en gestion locative sont différentes qu’en syndic. Un gestionnaire locatif doit être passionné pour la gestion de patrimoine immobilier et avoir..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/05/P-4788-050117-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-4788-050117-1200x800.jpg"
 seoTitle: "Le métier de gestionnaire locatif"
 seoDescription: "Un métier passionnant où il est question de service, de relation client et d'organisation"
 ---
@@ -13,7 +13,7 @@ seoDescription: "Un métier passionnant où il est question de service, de relat
 <p>Les attentes en gestion locative sont différentes qu’en syndic. <br />
 Un gestionnaire locatif doit être passionné pour la gestion de patrimoine immobilier et avoir une attache « marseillaise » forte.</p>
 <p>Le gestionnaire doit d&rsquo;une part prendre en compte les contraintes et les attentes financières des clients pour optimiser au mieux la gestion de ses biens immobiliers et d&rsquo;autre part connaître la ville, pour sentir le marché, donner des conseils avisés sur la rénovation, le positionnement du loyer et l&rsquo;évolution du bien à long terme.</p>
-<p><img loading="lazy" decoding="async" class=" wp-image-387675 alignleft" src="/content/uploads/2018/05/P-3049-051218-533x800.jpg" alt="" width="254" height="381" srcset="/content/uploads/2018/05/P-3049-051218-533x800.jpg 533w, /content/uploads/2018/05/P-3049-051218-768x1152.jpg 768w, /content/uploads/2018/05/P-3049-051218-1024x1536.jpg 1024w, /content/uploads/2018/05/P-3049-051218-1365x2048.jpg 1365w, /content/uploads/2018/05/P-3049-051218-400x600.jpg 400w, /content/uploads/2018/05/P-3049-051218-800x1200.jpg 800w, /content/uploads/2018/05/P-3049-051218-scaled.jpg 1706w" sizes="auto, (max-width: 254px) 100vw, 254px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-387675 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-533x800.jpg" alt="" width="254" height="381" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-533x800.jpg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-768x1152.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-1024x1536.jpg 1024w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-1365x2048.jpg 1365w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-800x1200.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-3049-051218-scaled.jpg 1706w" sizes="auto, (max-width: 254px) 100vw, 254px" /></p>
 <h2>L’expérience collaborateur</h2>
 <p>Nous avions rédigé un post sur les <a href="/avis-clients-2/">avis clients de l&rsquo;immobilière Pujol</a> qui mentionnait qu&rsquo;un collaborateur qui se sentait en confiance permettait de développer une relation de qualité avec ses clients et que tel était notre recherche.</p>
 <p>En gestion locative, tout est dans la relation : autrement dit, le collaborateur doit faire attention aux petits détails et personnaliser au maximum la relation client. Cette attention crée un climat de confiance entre le client et son prestataire. C’est ce qui fait la qualité de notre service.</p>

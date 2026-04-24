@@ -5,7 +5,7 @@ date: "2016-11-19"
 excerpt: "Si comme moi vous n’avez plus une grande confiance dans le système économique et politique, que vous considérez que seuls les citoyens qui ont une compétence..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/LO36080003_43FF.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/LO36080003_43FF.jpg"
 seoTitle: "L’achat d’immobilier d’habitation : l’investissement le plus sûr"
 seoDescription: "Si comme moi vous n’avez plus une grande confiance dans le système économique et politique, que vous considérez que seuls les citoyens qui ont une compétence et un boulot s’en sortiront, le seul investissement qui vous rassurera complètement est l’achat d'immobilier d’habitation en France et à l’étranger. Quel était l’actif…"
 ---

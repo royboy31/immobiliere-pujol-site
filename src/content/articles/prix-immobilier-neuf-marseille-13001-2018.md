@@ -5,7 +5,7 @@ date: "2019-06-25"
 excerpt: "Voici un comparatif des prix au m2 de l’immobilier neuf dans le 13001 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13001"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13001-1.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13001-1.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13001 en 2018"
 seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le 13001 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Vieux Port de Marseille En 2018, il s’est vendu dans le 1er arrondissement de…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13001.jpeg" alt="prix-immobilier-neuf-marseille-13001-2018" class="wp-image-235456" width="169" height="253" srcset="/content/uploads/2019/05/13001.jpeg 533w, /content/uploads/2019/05/13001-400x600.jpg 400w" sizes="auto, (max-width: 169px) 100vw, 169px" /><figcaption>Vieux Port de Marseille</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13001.jpeg" alt="prix-immobilier-neuf-marseille-13001-2018" class="wp-image-235456" width="169" height="253" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13001.jpeg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13001-400x600.jpg 400w" sizes="auto, (max-width: 169px) 100vw, 169px" /><figcaption>Vieux Port de Marseille</figcaption></figure></div>
 
 
 

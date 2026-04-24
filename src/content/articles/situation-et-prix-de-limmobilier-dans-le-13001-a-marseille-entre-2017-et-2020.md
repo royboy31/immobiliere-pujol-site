@@ -5,7 +5,7 @@ date: "2020-05-18"
 excerpt: "Le 1er arrondissement de Marseille comprend les quartiers de Belsunce, du Chapitre, de Noailles, de l’Opéra, de Thiers et de Saint-Charles L’arrondissement a..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/poissons-1200x675.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/poissons-1200x675.jpg"
 seoTitle: "Situation et prix de l’immobilier dans le 13001 à Marseille entre 2017 et 2020"
 seoDescription: "Le 1er arrondissement de Marseille comprend les quartiers de Belsunce, du Chapitre, de Noailles, de l'Opéra, de Thiers  et de Saint-Charles L'arrondissement a globalement eu une belle dynamique ces 3 dernières année par sa proximité avec le centre ville, le Port, la gare et toutes ses commodités.  Il reste néanmoins…"
 ---

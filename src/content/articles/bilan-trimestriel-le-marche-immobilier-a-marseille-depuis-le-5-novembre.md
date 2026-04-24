@@ -5,7 +5,7 @@ date: "2019-01-13"
 excerpt: "Depuis le 5 novembre, les intervenants sont figés. Comme si l’horizon s’était bouché sur les vieux immeubles du centre. Cette catastrophe a touché tous les..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/02/operation-grand-centre-ville-marseille2-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/operation-grand-centre-ville-marseille2-1200x900.jpg"
 seoTitle: "Bilan trimestriel : le marché immobilier à Marseille depuis le 5 novembre…"
 seoDescription: "Depuis le 5 novembre, les intervenants sont figés. Comme si l'horizon s'était bouché sur les vieux immeubles du centre. Cette catastrophe a touché tous les marseillais, même si tous nos immeubles ne sont pas en mauvais état. Les projets, les rénovations sont stoppées. Seuls les urgences sont traitées. Il y…"
 ---

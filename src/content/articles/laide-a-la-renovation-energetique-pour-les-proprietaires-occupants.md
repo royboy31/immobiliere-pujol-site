@@ -5,7 +5,7 @@ date: "2021-03-15"
 excerpt: "Lancée le 1er janvier 2020, MaPrimeRénov’ remplace le crédit d’impôt pour la transition énergétique (CITE) et les aides de l’Agence nationale de l’Habitat..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/03/PU-1791-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/PU-1791-1200x750.jpg"
 seoTitle: "L’aide à la rénovation énergétique pour les propriétaires occupants"
 seoDescription: "Quelles sont les aides à la rénovation énergétique en 2021 pour les propriétaires bailleurs?"
 ---
@@ -27,15 +27,15 @@ A partir de 2023 un propriétaire bailleur, ne pourra plus louer un logement qui
 	<li>Pas de plafond de revenus pour les propriétaires mais, le montant de l’aide dépendra du type de travaux effectué et du seuil de revenus des ménages classés dans le tableau ci dessous.</li>
 </ul>
 <p>Les aides sont explicitées par des codes couleurs allant du bleu pour les foyers les plus modestes au rose pour les plus aisés :</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396671" src="/content/uploads/2021/03/plafonds_de_ressources-ma_prime_renov-1.jpg" alt="" width="542" height="270" /><br />
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396671" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/plafonds_de_ressources-ma_prime_renov-1.jpg" alt="" width="542" height="270" /><br />
 <br />
 </p>
 <h3>Quel montant d&rsquo;aide pour quels travaux et pour quel revenu fiscal?</h3>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396672" src="/content/uploads/2021/03/aide-maprimerenov-bleu.jpg" alt="" width="719" height="694" srcset="/content/uploads/2021/03/aide-maprimerenov-bleu.jpg 719w, /content/uploads/2021/03/aide-maprimerenov-bleu-600x579.jpg 600w" sizes="auto, (max-width: 719px) 100vw, 719px" /></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-396675" src="/content/uploads/2021/03/aide-maprimerenov-jaune-1.jpg" alt="" width="690" height="730" srcset="/content/uploads/2021/03/aide-maprimerenov-jaune-1.jpg 665w, /content/uploads/2021/03/aide-maprimerenov-jaune-1-567x600.jpg 567w" sizes="auto, (max-width: 690px) 100vw, 690px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396672" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-bleu.jpg" alt="" width="719" height="694" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-bleu.jpg 719w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-bleu-600x579.jpg 600w" sizes="auto, (max-width: 719px) 100vw, 719px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-396675" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-jaune-1.jpg" alt="" width="690" height="730" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-jaune-1.jpg 665w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-jaune-1-567x600.jpg 567w" sizes="auto, (max-width: 690px) 100vw, 690px" /></p>
 <p>&nbsp;</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396676" src="/content/uploads/2021/03/aide-maprimerenov-violet.jpg" alt="" width="670" height="725" srcset="/content/uploads/2021/03/aide-maprimerenov-violet.jpg 670w, /content/uploads/2021/03/aide-maprimerenov-violet-554x600.jpg 554w" sizes="auto, (max-width: 670px) 100vw, 670px" /></p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396677" src="/content/uploads/2021/03/aide-maprimerenov-ROSE.jpg" alt="" width="691" height="724" srcset="/content/uploads/2021/03/aide-maprimerenov-ROSE.jpg 691w, /content/uploads/2021/03/aide-maprimerenov-ROSE-573x600.jpg 573w" sizes="auto, (max-width: 691px) 100vw, 691px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396676" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-violet.jpg" alt="" width="670" height="725" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-violet.jpg 670w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-violet-554x600.jpg 554w" sizes="auto, (max-width: 670px) 100vw, 670px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-396677" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-ROSE.jpg" alt="" width="691" height="724" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-ROSE.jpg 691w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aide-maprimerenov-ROSE-573x600.jpg 573w" sizes="auto, (max-width: 691px) 100vw, 691px" /></p>
 <h4> </h4>
 <h4>LEXIQUE</h4>
 <ul>
@@ -46,7 +46,7 @@ A partir de 2023 un propriétaire bailleur, ne pourra plus louer un logement qui
 	<li>CEE = certificat d&rsquo;économie d&rsquo;énergie.</li>
 </ul>
 <p>&nbsp;</p>
-<p style="text-align: center;"><a href="/content/uploads/2021/03/aides-maprimerenov-2021.pdf">TELECHARGER LE FICHIER DETAILLE DES AIDES MAPRIMERENOV</a></p>
+<p style="text-align: center;"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/03/aides-maprimerenov-2021.pdf">TELECHARGER LE FICHIER DETAILLE DES AIDES MAPRIMERENOV</a></p>
 <p style="text-align: center;">Site internet : <a href="https://www.economie.gouv.fr/particuliers/prime-renovation-energetique#">https://www.economie.gouv.fr/particuliers/prime-renovation-energetique#</a></p>
 <p>&nbsp;</p>
       </div>

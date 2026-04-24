@@ -5,7 +5,7 @@ date: "2019-08-07"
 excerpt: "Opinion System est la plateforme dédiée aux avis clients des locataires de l’Immobilière Pujol. Cela leur permet d’échanger et d’évaluer les prestations de..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/08/avis-client-locataires-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-locataires-marseille.jpg"
 seoTitle: "Les avis clients des locataires de l’immobilière Pujol"
 seoDescription: "Nos locataires trouveront en Opinion System une plateforme dédiée où laisser un commentaire et évaluer nos prestations. Nous voulons être transparents envers le marché : cette plateforme est une façon certifiée de nous juger (institut indépendant certifié ISO 9001, 20252 et NF Z74-501)."
 ---
@@ -14,7 +14,7 @@ seoDescription: "Nos locataires trouveront en Opinion System une plateforme déd
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="459" height="218" src="/content/uploads/2019/08/avis-client-locataires-marseille.png" alt="avis client locataires marseille" class="wp-image-257209"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="459" height="218" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-locataires-marseille.png" alt="avis client locataires marseille" class="wp-image-257209"/></figure>
 
 
 
@@ -22,7 +22,7 @@ seoDescription: "Nos locataires trouveront en Opinion System une plateforme déd
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="430" height="423" src="/content/uploads/2019/08/avis-client-locataires-marseille-2.png" alt="avis client locataires marseille" class="wp-image-257210"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="430" height="423" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-locataires-marseille-2.png" alt="avis client locataires marseille" class="wp-image-257210"/></figure>
 
 
 
@@ -34,51 +34,51 @@ seoDescription: "Nos locataires trouveront en Opinion System une plateforme déd
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="621" height="148" src="/content/uploads/2019/08/avis-client-6.png" alt="avis client locataire" class="wp-image-257517" srcset="/content/uploads/2019/08/avis-client-6.png 621w, /content/uploads/2019/08/avis-client-6-600x143.png 600w" sizes="auto, (max-width: 621px) 100vw, 621px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="621" height="148" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-6.png" alt="avis client locataire" class="wp-image-257517" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-6.png 621w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-6-600x143.png 600w" sizes="auto, (max-width: 621px) 100vw, 621px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="610" height="119" src="/content/uploads/2019/08/avis-client-2.png" alt="avis client locataire" class="wp-image-257521" srcset="/content/uploads/2019/08/avis-client-2.png 610w, /content/uploads/2019/08/avis-client-2-600x117.png 600w" sizes="auto, (max-width: 610px) 100vw, 610px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="610" height="119" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-2.png" alt="avis client locataire" class="wp-image-257521" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-2.png 610w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-2-600x117.png 600w" sizes="auto, (max-width: 610px) 100vw, 610px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="621" height="154" src="/content/uploads/2019/08/avis-client-9.png" alt="avis client locataire locataire" class="wp-image-257514" srcset="/content/uploads/2019/08/avis-client-9.png 621w, /content/uploads/2019/08/avis-client-9-600x149.png 600w" sizes="auto, (max-width: 621px) 100vw, 621px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="621" height="154" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-9.png" alt="avis client locataire locataire" class="wp-image-257514" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-9.png 621w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-9-600x149.png 600w" sizes="auto, (max-width: 621px) 100vw, 621px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="623" height="167" src="/content/uploads/2019/08/avis-client-7.png" alt="avis client locataire locataire" class="wp-image-257516" srcset="/content/uploads/2019/08/avis-client-7.png 623w, /content/uploads/2019/08/avis-client-7-600x161.png 600w" sizes="auto, (max-width: 623px) 100vw, 623px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="623" height="167" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-7.png" alt="avis client locataire locataire" class="wp-image-257516" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-7.png 623w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-7-600x161.png 600w" sizes="auto, (max-width: 623px) 100vw, 623px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="121" src="/content/uploads/2019/08/avis-client-20.png" alt="avis client locataire" class="wp-image-257503" srcset="/content/uploads/2019/08/avis-client-20.png 633w, /content/uploads/2019/08/avis-client-20-600x115.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="121" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-20.png" alt="avis client locataire" class="wp-image-257503" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-20.png 633w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-20-600x115.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="629" height="182" src="/content/uploads/2019/08/avis-client-24.png" alt="avis client  locataires" class="wp-image-257499" srcset="/content/uploads/2019/08/avis-client-24.png 629w, /content/uploads/2019/08/avis-client-24-600x174.png 600w" sizes="auto, (max-width: 629px) 100vw, 629px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="629" height="182" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-24.png" alt="avis client  locataires" class="wp-image-257499" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-24.png 629w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-24-600x174.png 600w" sizes="auto, (max-width: 629px) 100vw, 629px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="650" height="131" src="/content/uploads/2019/08/avis-client-26.png" alt="avis client  locataire" class="wp-image-257497" srcset="/content/uploads/2019/08/avis-client-26.png 650w, /content/uploads/2019/08/avis-client-26-600x121.png 600w" sizes="auto, (max-width: 650px) 100vw, 650px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="650" height="131" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-26.png" alt="avis client  locataire" class="wp-image-257497" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-26.png 650w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-26-600x121.png 600w" sizes="auto, (max-width: 650px) 100vw, 650px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="625" height="123" src="/content/uploads/2019/08/avis-client-25.png" alt="avis client locataire" class="wp-image-257498" srcset="/content/uploads/2019/08/avis-client-25.png 625w, /content/uploads/2019/08/avis-client-25-600x118.png 600w" sizes="auto, (max-width: 625px) 100vw, 625px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="625" height="123" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-25.png" alt="avis client locataire" class="wp-image-257498" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-25.png 625w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-25-600x118.png 600w" sizes="auto, (max-width: 625px) 100vw, 625px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="622" height="118" src="/content/uploads/2019/08/avis-client-28.png" alt="avis client locataire" class="wp-image-257495" srcset="/content/uploads/2019/08/avis-client-28.png 622w, /content/uploads/2019/08/avis-client-28-600x114.png 600w" sizes="auto, (max-width: 622px) 100vw, 622px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="622" height="118" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-28.png" alt="avis client locataire" class="wp-image-257495" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-28.png 622w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-28-600x114.png 600w" sizes="auto, (max-width: 622px) 100vw, 622px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="640" height="195" src="/content/uploads/2019/08/avis-client-31.png" alt="avis client locataire" class="wp-image-257492" srcset="/content/uploads/2019/08/avis-client-31.png 640w, /content/uploads/2019/08/avis-client-31-600x183.png 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="640" height="195" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-31.png" alt="avis client locataire" class="wp-image-257492" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-31.png 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-31-600x183.png 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="643" height="119" src="/content/uploads/2019/08/avis-client-33.png" alt="avis client locataire" class="wp-image-257490" srcset="/content/uploads/2019/08/avis-client-33.png 643w, /content/uploads/2019/08/avis-client-33-600x111.png 600w" sizes="auto, (max-width: 643px) 100vw, 643px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="643" height="119" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-33.png" alt="avis client locataire" class="wp-image-257490" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-33.png 643w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-33-600x111.png 600w" sizes="auto, (max-width: 643px) 100vw, 643px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="635" height="156" src="/content/uploads/2019/08/avis-client-34.png" alt="avis client locataire" class="wp-image-257488" srcset="/content/uploads/2019/08/avis-client-34.png 635w, /content/uploads/2019/08/avis-client-34-600x147.png 600w" sizes="auto, (max-width: 635px) 100vw, 635px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="635" height="156" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-34.png" alt="avis client locataire" class="wp-image-257488" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-34.png 635w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-34-600x147.png 600w" sizes="auto, (max-width: 635px) 100vw, 635px" /></figure>
 
 
 
@@ -86,7 +86,7 @@ seoDescription: "Nos locataires trouveront en Opinion System une plateforme déd
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="583" height="216" src="/content/uploads/2019/08/avis-client-gestion-locative-marseille-2.png" alt="avis client gestion locative marseille" class="wp-image-257195"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="583" height="216" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-gestion-locative-marseille-2.png" alt="avis client gestion locative marseille" class="wp-image-257195"/></figure>
 
 
 

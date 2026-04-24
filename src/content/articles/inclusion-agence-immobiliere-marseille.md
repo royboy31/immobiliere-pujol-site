@@ -5,7 +5,7 @@ date: "2024-07-11"
 excerpt: "Il y a quelques mois, chez Immobilière Pujol, nous avons accueilli Gizem au sein de l’équipe comptable. Gizem est sourde de naissance, un handicap qui en..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/07/PUJ-3322-800x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-800x1200.jpg"
 seoTitle: "L’inspirante histoire de Gizem,  une de nos comptables copropriétés pas tout à fait comme les autres"
 seoDescription: "Découvrez l'histoire inspirante de Gizem et son intégration réussie chez Immobiliere Pujol en tant que comptable copropriété malgré sa surdité."
 ---
@@ -20,7 +20,7 @@ seoDescription: "Découvrez l'histoire inspirante de Gizem et son intégration r
 <p><span style="font-weight: 400;">Très sincèrement, aujourd’hui, j’ai plaisir à voir Gizem échanger et rire avec les uns et les autres et cela montre en effet que nous avons réussi son intégration. »</span></p>
 <p>&nbsp;</p>
 <p><span style="font-weight: 400;">Nous avons posé quelques questions à Gizem sur son parcours et ses expériences.</span></p>
-<h3><img loading="lazy" decoding="async" class="wp-image-817096 alignleft" src="/content/uploads/2024/07/PUJ-3322-534x800.jpg" alt="" width="260" height="390" srcset="/content/uploads/2024/07/PUJ-3322-534x800.jpg 534w, /content/uploads/2024/07/PUJ-3322-768x1152.jpg 768w, /content/uploads/2024/07/PUJ-3322-1024x1536.jpg 1024w, /content/uploads/2024/07/PUJ-3322-400x600.jpg 400w, /content/uploads/2024/07/PUJ-3322-800x1200.jpg 800w, /content/uploads/2024/07/PUJ-3322.jpg 1067w" sizes="auto, (max-width: 260px) 100vw, 260px" /><b>Qui es-tu ?<br />
+<h3><img loading="lazy" decoding="async" class="wp-image-817096 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-534x800.jpg" alt="" width="260" height="390" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-534x800.jpg 534w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-768x1152.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-1024x1536.jpg 1024w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322-800x1200.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/PUJ-3322.jpg 1067w" sizes="auto, (max-width: 260px) 100vw, 260px" /><b>Qui es-tu ?<br />
 </b><b> Peux-tu nous parler de toi et de ton parcours en quelques phrases ?</b></h3>
 <p><span style="font-weight: 400;">Je m&rsquo;appelle Gizem, j’ai 31 ans. Je suis d’origine turque et je suis née à Bordeaux. <br />
 </span><span style="font-weight: 400;">Je suis sourde de naissance, mes parents l’ont appris peu après.<br />

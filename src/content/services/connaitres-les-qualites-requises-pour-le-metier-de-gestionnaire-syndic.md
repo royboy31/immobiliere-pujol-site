@@ -20,10 +20,10 @@ seoDescription: "Un bon syndic, c'est de bons gestionnaires de copropriété. Bi
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/IMG_9527-1-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/IMG_9527-1-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/IMG_9527-1-600x400.jpg" 
-      <img src="/content/uploads/2017/11/IMG_9527-1-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/IMG_9527-1-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/IMG_9527-1-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/IMG_9527-1-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/IMG_9527-1-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -96,7 +96,7 @@ Ce sont bien les hommes qui travaillent au quotidien qui font la différence e
 	<li><strong>Les fournisseurs</strong></li>
 </ul>
 <p>Ils font la différence et le bien être dans les copropriétés.</p>
-<p><img loading="lazy" decoding="async" class=" wp-image-387071 alignleft" src="/content/uploads/2013/10/KRI.jpg" alt="" width="201" height="183" />Les syndics qui ne gèrent aujourd’hui que les urgences sont à fuire.<br />
+<p><img loading="lazy" decoding="async" class=" wp-image-387071 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2013/10/KRI.jpg" alt="" width="201" height="183" />Les syndics qui ne gèrent aujourd’hui que les urgences sont à fuire.<br />
 Ce sont des pompiers du quotidien.<br />
 Ce n&rsquo;est pas un bon signe et nous refusons cette logique, car à terme c’est la qualité de service et nos équipes qui en pâtissent.</p>
 <p><a href="/le-metier-de-syndic-a-marseille-vu-de-l-interieur/">Le témoignage de Kristel</a> &#8211; notre collaboratrice &#8211; illustre bien toute la difficulté de nos métiers.</p>
@@ -104,7 +104,7 @@ Ce n&rsquo;est pas un bon signe et nous refusons cette logique, car à terme c�
 <p>&nbsp;</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
 <p>&nbsp;</p>
                 </section>
             </div>

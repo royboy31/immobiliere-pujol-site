@@ -32,7 +32,7 @@ seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux.
                     <p>Vous avez décidé de gagner du temps et d&rsquo;avoir recours aux services d&rsquo;un agent immobilier à Marseille pour gérer et louer vos biens?<br />
 Voici les informations qu’un propriétaire doit transmettre quand il souhaite nous confier la gestion de son bien.</p>
 <h2>Le titre de propriété</h2>
-<p><img loading="lazy" decoding="async" class="alignnone" src="/content/uploads/2016/12/notaire-e1485859999235.jpg" alt="attestation notariee propriete" width="274" height="191" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/notaire-e1485859999235.jpg" alt="attestation notariee propriete" width="274" height="191" /></p>
 <p><strong>Un titre de propriété</strong> est nécessaire  :</p>
 <p>&#8211; Pour identifier le propriétaire à Marseille. La personne a-t-elle acheté en nom propre ou à travers une Société Civile Immobilière ou a-t-il a démembré son bien</p>
 <p>&#8211; pour identifier les lots de copropriétés détenus.</p>

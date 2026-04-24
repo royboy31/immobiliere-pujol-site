@@ -20,10 +20,10 @@ seoDescription: "Les moyennes des charges de copropriété à Marseille. Consult
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/PU-1290-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/PU-1290-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/PU-1290-600x375.jpg" 
-      <img src="/content/uploads/2017/11/PU-1290-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1290-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1290-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1290-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1290-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -70,7 +70,7 @@ Des frais généraux sont engagés par tous les copropriétaires car ils concern
 </ul>
 <p>Sans surprise, les charges sont 2 fois plus élevées à Paris qu’à Marseille, Lyon ou encore Bordeaux. La capitale oblige chaque copropriétaire à débourser chaque année environ 2000€ (en moyenne : 40€ le m2).</p>
 
-<figure id="attachment_229209" aria-describedby="caption-attachment-229209" style="width: 560px" class="wp-caption aligncenter"><img loading="lazy" decoding="async" class="wp-image-229209 size-full" src="/content/uploads/2017/10/charges-de-copropriété-en-france.png" alt="moyenne des charges de copropriété en france" width="560" height="504" /><figcaption id="caption-attachment-229209" class="wp-caption-text"><strong><em>                       La moyenne des charges de copropriétés en France</em></strong></figcaption></figure>
+<figure id="attachment_229209" aria-describedby="caption-attachment-229209" style="width: 560px" class="wp-caption aligncenter"><img loading="lazy" decoding="async" class="wp-image-229209 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/charges-de-copropri%C3%A9t%C3%A9-en-france.png" alt="moyenne des charges de copropriété en france" width="560" height="504" /><figcaption id="caption-attachment-229209" class="wp-caption-text"><strong><em>                       La moyenne des charges de copropriétés en France</em></strong></figcaption></figure>
 
 <p>La moyenne avoisine plutôt les 25€/m² en Province.<br />
 Mais il s’agit ici d’un indicateur : les charges de copropriété varient énormément selon la ville et le type d’immeuble (voir nos résultats ci-après).</p>
@@ -92,7 +92,7 @@ On renseigne ces provisions sur la ligne 229 du formulaire 2044 de déclaration 
 </ul>
 <p>Les retards de paiement et les impayés fragilisent la copropriété. Pour éviter les déficits de trésorerie à répétition et couvrir les frais et travaux à temps, le syndic de copropriété peut engager une action en justice contre le ou les mauvais payeurs (art. 55 du décret du 17.3.67). Le conseil syndical devrait toujours participer au suivi des comptes et faire un point trimestriel avec son syndic.</p>
 <p>Si le mauvais payeur est de bonne foi, il convient de fixer un échéancier de paiement : aucun frais de relance ne lui sera imputé s’il respecte ses échéances.</p>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-224894 aligncenter" src="/content/uploads/2017/11/conseil-syndical-800x533.jpg" alt="charges de copropriétés impayés" width="800" height="533" srcset="/content/uploads/2017/11/conseil-syndical-800x533.jpg 800w, /content/uploads/2017/11/conseil-syndical-768x512.jpg 768w, /content/uploads/2017/11/conseil-syndical-600x400.jpg 600w, /content/uploads/2017/11/conseil-syndical-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-224894 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/conseil-syndical-800x533.jpg" alt="charges de copropriétés impayés" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/conseil-syndical-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/conseil-syndical-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/conseil-syndical-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/conseil-syndical-1200x800.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>Devant un copropriétaire de mauvaise foi, il faut engager une solution amiable, avant toute action judiciaire. Si les lettres de relances simples et recommandées ne suffisent pas à obtenir le paiement des charges, le syndic initie la phase précontentieuse par une mise en demeure. Le mauvais payeur versera à la copropriété des intérêts de retard calculés au taux légal (ce retard commence dès la mise en demeure). Beaucoup d’impayés se règle à ce stade.</p>
 <p>Nota : le mauvais payeur doit supporter les dépenses de recouvrement « nécessaires exposées par le syndicat » (art. 10-1-a de la loi du 10.7.65 modifiée).</p>
 <p>Si la situation persiste malgré la mise ne demeure, le syndic ira devant le TI (impayés de 4 000 € à 10 000 €) ou le TGI (impayés qui dépassent les 10 000 €). Le juge pourra fixer l’échéancier des règlements.</p>
@@ -117,7 +117,7 @@ On renseigne ces provisions sur la ligne 229 du formulaire 2044 de déclaration 
 <p>Comment calculer le paiement des charges entre les copropriétaires ? <br />
 Ce sujet est trop souvent source de litiges.</p>
 <p>Les charges générales sont réparties selon la quote-part de chaque copropriétaire. Cette quote-part des parties communes dépend de la superficie du lot, de sa consistance, de l’étage et de son exposition.</p>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-224959 aligncenter" src="/content/uploads/2017/11/la-complexité-en-syndic-800x600.jpg" alt="calcul des charges de copropriétés" width="800" height="600" srcset="/content/uploads/2017/11/la-complexité-en-syndic-800x600.jpg 800w, /content/uploads/2017/11/la-complexité-en-syndic-768x576.jpg 768w, /content/uploads/2017/11/la-complexité-en-syndic-200x150.jpg 200w, /content/uploads/2017/11/la-complexité-en-syndic-600x450.jpg 600w, /content/uploads/2017/11/la-complexité-en-syndic-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-224959 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-800x600.jpg" alt="calcul des charges de copropriétés" width="800" height="600" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-800x600.jpg 800w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-768x576.jpg 768w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-200x150.jpg 200w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-600x450.jpg 600w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/la-complexité-en-syndic-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>S’il existe une partie commune particulière, comme par exemple une allée qui dessert seulement un lot, les charges peuvent être affectées au seul lot concerné.</p>
 <p>Quant aux charges spécifiques, Si un équipement n&rsquo;est pas utile à un lot, aucune charge ne peut lui être imputée. La répartition des dépenses d’ascenseur tient compte de l&rsquo;étage chacun, les étages élevés payant plus que les étages inférieurs.</p>
 <h2>Le prix des charges de copropriété dans les immeubles gérés par l&rsquo;Immobilière Pujol </h2>
@@ -150,7 +150,7 @@ Si vous voulez <a href="/optimisez-vos-charges-de-chauffage-au-gaz/">optimiser v
 <p>Soit pour <strong>un T2 de 50m2 </strong>un coût moyen de<strong> 53€ par an</strong>.</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
                 </section>
             </div>
 

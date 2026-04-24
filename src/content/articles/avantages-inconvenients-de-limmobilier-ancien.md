@@ -5,7 +5,7 @@ date: "2016-11-12"
 excerpt: "Que vous investissiez dans l’immobilier ancien ou l’immobilier neuf, il y aura toujours des avantages et des inconvénients. Pesez donc bien le pour et le..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/MG_4686DxO-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/MG_4686DxO-1200x800.jpg"
 seoTitle: "Avantages & inconvénients de l’immobilier ancien"
 seoDescription: "Que vous investissiez dans l'immobilier ancien ou l'immobilier neuf, il y aura toujours des avantages et des inconvénients. Pesez donc bien le pour et le contre, car l'option qui s'avère la plus intéressante à première vue n'est peut-être pas celle qui vous correspond. En cas de doutes, n'hésitez pas à…"
 ---

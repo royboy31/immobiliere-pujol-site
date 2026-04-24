@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion de bien est un service proposé par les agences immobilières, qui consiste à prendre en charge la gestion locative d’un bien immobilier pour le..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien à Pont-de-Vivaux, 13013 – Marseille"
 seoDescription: ""
 ---

@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "L’agence immobilière Pujol, située dans le quartier La Conception, 13005 Marseille, vous propose ses services de gestion immobilière. La gestion immobilière..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion immobilière à La Conception, 13005 Marseille"
 seoDescription: ""
 ---

@@ -5,7 +5,7 @@ date: "2025-06-06"
 excerpt: "Dans cet immeuble du XVIII e siècle situé 35 cours Franklin Roosevelt dans le 1 er arrondissement de Marseille, il y a presque 200 000 € de travaux (5..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/06/3ba60e06109b972-1-1-1200x615.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-1200x615.jpg"
 seoTitle: "S’engager quand on est gestionnaire syndic: entre péril et impayés sur une petite copropriété"
 seoDescription: "Quand un copropriétaire défaillant bloque les travaux d'une copropriété en péril, la Ville de Marseille intervient. Une histoire de péril… et de persévérance du syndic."
 ---
@@ -13,7 +13,7 @@ seoDescription: "Quand un copropriétaire défaillant bloque les travaux d'une c
 <p>Dans cet immeuble du XVIII e siècle situé 35 cours Franklin Roosevelt dans le 1 er arrondissement de Marseille, il y a presque 200 000 € de travaux (5 copropriétaires) à effectuer pour sortir la copropriété du péril et la remettre en état.<br />
 Aileen Orain gère cette copropriété un peu particulière.</p>
 <p><strong>Elle nous explique comment elle a relevé ce défi, de la remise en état de l&rsquo;immeuble face à l’inaction de certains, et avec trois autres immeubles mitoyens impliqués</strong>.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1083508" src="/content/uploads/2025/06/3ba60e06109b972-1-1-800x410.jpg" alt="" width="800" height="410" srcset="/content/uploads/2025/06/3ba60e06109b972-1-1-800x410.jpg 800w, /content/uploads/2025/06/3ba60e06109b972-1-1-768x394.jpg 768w, /content/uploads/2025/06/3ba60e06109b972-1-1-600x308.jpg 600w, /content/uploads/2025/06/3ba60e06109b972-1-1-1200x615.jpg 1200w, /content/uploads/2025/06/3ba60e06109b972-1-1.jpg 1280w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1083508" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-800x410.jpg" alt="" width="800" height="410" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-800x410.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-768x394.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-600x308.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1-1200x615.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/3ba60e06109b972-1-1.jpg 1280w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>&nbsp;</p>
 <p><br />
 <em><span style="color: #ff6600;"><span style="font-size: 14pt;">Chronologie des événements</span><br />
@@ -100,7 +100,7 @@ Une fois qu’on y arrive, en tant que syndic on est contents que nos clients so
 On est fier de nous aussi. <br />
 C’est un succès qui se mérite et beaucoup de personnes ne se rendent pas compte de la difficulté de notre métier de syndic.<br />
 Mais il est passionnant !</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1083502" src="/content/uploads/2025/06/Vignette-affichage-immeuble-Publication-Instagram.png" alt="" width="175" height="171" /><br />
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1083502" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/Vignette-affichage-immeuble-Publication-Instagram.png" alt="" width="175" height="171" /><br />
 Aileen Orain &#8211; Gestionnaire Copropriéts<br />
 <em>(Interviewée par Claire Chamarat &#8211; <a href="https://www.solidcom.fr/" target="_blank" rel="noopener">Solidcom</a> )</em></p>
 <p>&nbsp;</p>

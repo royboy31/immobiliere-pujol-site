@@ -1,0 +1,155 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// WP category URLs — two flavors:
+//   /categorie/{slug}/               (flat)
+//   /categorie/{parent}/{child}/     (nested)
+//
+// We generate both. Parent/child pairs are taken from the live sitemap audit
+// (migration/full-audit.csv, extracted once). For each child slug we also
+// accept it on the flat path for robustness.
+
+export async function getStaticPaths() {
+  const slugify = (s: string): string =>
+    s.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+
+  // Live nested URLs (from audit). Each entry: [parentSlug, childSlug, matchAgainstCategoryNameRegex].
+  const NESTED: Array<{parent: string; child: string; match: RegExp; title: string}> = [
+    // arrondissements-marseille / arrondissement-N-marseille  (16)
+    ...Array.from({length: 16}, (_, i) => {
+      const n = String(13001 + i);
+      return {
+        parent: 'arrondissements-marseille',
+        child: `arrondissement-${n}-marseille`,
+        match: new RegExp(`arrondissement\\s*${n}\\s*marseille`, 'i'),
+        title: `Arrondissement ${n} Marseille`,
+      };
+    }),
+    // prix-immo-arrondissement children (ordinal form: 1er-, 2eme-, ..., 13eme-, + 13015 edge case)
+    ...[['1er', '13001'], ['2eme', '13002'], ['3eme', '13003'], ['4eme', '13004'], ['5eme', '13005'],
+        ['6eme', '13006'], ['7eme', '13007'], ['8eme', '13008'], ['9eme', '13009'], ['10eme', '13010'],
+        ['11eme', '13011'], ['12eme', '13012'], ['13eme', '13013']].map(([ord, cp]) => ({
+      parent: 'prix-immo-arrondissement',
+      child: `${ord}-arrondissement`,
+      match: new RegExp(`immobilier\\s*arrondissement\\s*${cp}`, 'i'),
+      title: `Prix au m² — ${ord} arrondissement`,
+    })),
+    { parent: 'prix-immo-arrondissement', child: '13015', match: /immobilier\s*arrondissement\s*13015/i, title: 'Prix au m² — 13015' },
+    { parent: 'prix-immo-arrondissement', child: 'immobilier-arrondissement-13014', match: /immobilier\s*arrondissement\s*13014/i, title: 'Prix au m² — 13014' },
+    { parent: 'prix-immo-arrondissement', child: 'immobilier-arrondissement-13016', match: /immobilier\s*arrondissement\s*13016/i, title: 'Prix au m² — 13016' },
+  ];
+
+  // Parent/standalone category URLs where WP's slug doesn't match our name-slugify.
+  // Each entry: { slug: URL segment, match: RegExp over category name, title }
+  const ORPHAN_PARENTS: Array<{slug: string; match: RegExp; title: string}> = [
+    { slug: 'avant_apres', match: /avant[\s-_\/]*apr[eè]s/i, title: 'Avant / Après' },
+    { slug: 'lequipe', match: /l['']?[eé]quipe/i, title: "L'équipe" },
+    { slug: 'programme-neufs-marseille', match: /(immobilier\s*neuf|programmes?\s*neufs?)/i, title: 'Programmes neufs à Marseille' },
+    { slug: 'actu-immobiliere', match: /(le\s*march[eé]\s*immobilier|actualit[eé]\s*immobili[eè]re)/i, title: 'Actualité immobilière' },
+    { slug: 'investir-marseille', match: /(investir|mes\s*conseils)/i, title: 'Investir à Marseille' },
+    { slug: 'mon-quartier-ma-ville', match: /mon\s*quartier/i, title: 'Mon quartier, ma ville' },
+    { slug: 'prix-immo-arrondissement', match: /prix\s*au\s*m2?\s*par\s*arrondissement/i, title: 'Prix au m² par arrondissement' },
+  ];
+
+  const articles = await getCollection('articles');
+
+  // Flat buckets: slug → { title, articles } from slugified category names.
+  const flat = new Map<string, { title: string; articles: typeof articles }>();
+  for (const a of articles) {
+    const cats = (a.data.categories || []) as string[];
+    for (const cat of cats) {
+      const s = slugify(cat);
+      if (!flat.has(s)) flat.set(s, { title: cat, articles: [] });
+      flat.get(s)!.articles.push(a);
+    }
+  }
+
+  const paths: { params: { slug: string | undefined }; props: any }[] = [];
+  const emitted = new Set<string>();
+
+  // Flat paths for every category we see
+  for (const [slug, b] of flat) {
+    if (!emitted.has(slug)) {
+      paths.push({ params: { slug }, props: { title: b.title, articles: b.articles } });
+      emitted.add(slug);
+    }
+  }
+
+  // Nested paths (known from audit) — match articles by regex against category names
+  for (const n of NESTED) {
+    const matching = articles.filter((a) =>
+      (a.data.categories || []).some((c: string) => n.match.test(c))
+    );
+    const nestedSlug = `${n.parent}/${n.child}`;
+    if (!emitted.has(nestedSlug)) {
+      paths.push({ params: { slug: nestedSlug }, props: { title: n.title, articles: matching } });
+      emitted.add(nestedSlug);
+    }
+    // Also ensure the flat child slug exists
+    if (!emitted.has(n.child)) {
+      paths.push({ params: { slug: n.child }, props: { title: n.title, articles: matching } });
+      emitted.add(n.child);
+    }
+  }
+
+  // Orphan parents: explicit slugs where WP's slug ≠ our slugified category name
+  for (const op of ORPHAN_PARENTS) {
+    if (emitted.has(op.slug)) continue;
+    const matching = articles.filter((a) =>
+      (a.data.categories || []).some((c: string) => op.match.test(c))
+    );
+    paths.push({ params: { slug: op.slug }, props: { title: op.title, articles: matching } });
+    emitted.add(op.slug);
+  }
+
+  return paths;
+}
+
+interface Props {
+  title: string;
+  articles: any[];
+}
+
+const { title, articles } = Astro.props;
+const sortedArticles = [...articles].sort((a: any, b: any) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+});
+---
+
+<BaseLayout
+  title={`${title} – Immobilière Pujol`}
+  description={`Articles dans la catégorie : ${title}`}
+>
+  <section class="blog-archive blog-archive--category">
+    <h1>{title}</h1>
+    <p class="blog-archive__count">{sortedArticles.length} article{sortedArticles.length > 1 ? 's' : ''}</p>
+
+    <div class="blog-archive__grid">
+      {sortedArticles.map((article: any) => (
+        <article class="blog-card">
+          {article.data.featuredImage && (
+            <img src={article.data.featuredImage} alt={article.data.title} loading="lazy" />
+          )}
+          <h2>
+            <a href={`/${article.data.slug}/`}>{article.data.title}</a>
+          </h2>
+          {article.data.excerpt && <p>{article.data.excerpt}</p>}
+          {article.data.date && (
+            <time datetime={article.data.date}>
+              {new Date(article.data.date).toLocaleDateString('fr-FR', {
+                year: 'numeric', month: 'long', day: 'numeric'
+              })}
+            </time>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

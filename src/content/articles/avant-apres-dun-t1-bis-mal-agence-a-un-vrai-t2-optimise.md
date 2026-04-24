@@ -5,7 +5,7 @@ date: "2025-06-12"
 excerpt: "Comment transformer un appartement sans toucher à sa surface mais en changeant tout son potentiel ? C’est exactement ce qui a été fait ici, à Marseille, dans..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/06/amenagement-virtuel-location-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille.jpg"
 seoTitle: "Avant / Après : d’un T1 bis mal agencé à un vrai T2 optimisé"
 seoDescription: "Comment réagencer un appartement à louer sans toucher à sa surface mais en changeant tout son potentiel locatif? Découvrez le avant/après réalisé par Immobilière Pujol Marseille"
 ---
@@ -30,7 +30,7 @@ La nouvelle chambre a été créé en prenant l’ancienne petite pièce bureua 
 &#8211; La cuisine est désormais plus spacieuse et totalement ouverte (10,31 m² également), mieux connectée à l’entrée et à la pièce de vie. La nouvelle cuisine a pris la place de l’ancienne salle de bains , bien trop grande dans cet appartement. <br />
 &#8211; La salle d’eau a été repositionnée pour plus de cohérence en prenant une partie sur l’ancienne cuisine côté couloir. </p>
 <p>Voici les étapes sur le plan pour plus de clarté </p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1085807" src="/content/uploads/2025/06/renovation-location-marseille.jpg" alt="" width="648" height="216" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1085807" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/renovation-location-marseille.jpg" alt="" width="648" height="216" /></p>
 <p>Nous avons ainsi transformé un grand T1 bis un peu vieillot en un T2 moderne, parfaitement adapté au marché locatif actuel.</p>
 <h2>Un accompagnement de A à Z</h2>
 <p><strong>Ce projet illustre ce que nous aimons 💚 faire pour nos clients : comprendre leur bien, leur histoire, et leur apporter une solution complète.</strong> <br />
@@ -38,9 +38,9 @@ Dans ce projet, le Dpe avant travaux était déjà bon, car le double vitrage é
 Dans un souci de performance énergétique, le cumulus a été changé par un chauffe-eau thermodynamique , les anciens chauffages « grilladou »par des convecteur programmables à inertie et  une VMC hygroréglable a été installée. La pose d’une climatisation/chauffage n’a pas été possible dans cet appartement sur rue .<br />
 <br />
 Nous aimons accompagner nos clients sur ce type de rénovation car cela crée de la valeur patrimoniale durable – et de la sérénité pour nos propriétaires. Tous les jours , nous sommes aussi entoutés d&rsquo;artisans fiables et de qualité en qui nous avons confiance depuis des années. </p>
-<p><img loading="lazy" decoding="async" class="size-full wp-image-1085871 aligncenter" src="/content/uploads/2025/06/signatures-mail-pujol-1.jpg" alt="" width="600" height="200" /></p>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1085876 aligncenter" src="/content/uploads/2025/06/signatures-mail-pujol-3.jpg" alt="" width="600" height="200" /></p>
-<p style="text-align: center;"><img loading="lazy" decoding="async" class="size-medium wp-image-1085872 aligncenter" src="/content/uploads/2025/06/amenagement-virtuel-location-marseille-800x483.jpg" alt="" width="800" height="483" srcset="/content/uploads/2025/06/amenagement-virtuel-location-marseille-800x483.jpg 800w, /content/uploads/2025/06/amenagement-virtuel-location-marseille-768x464.jpg 768w, /content/uploads/2025/06/amenagement-virtuel-location-marseille-600x363.jpg 600w, /content/uploads/2025/06/amenagement-virtuel-location-marseille.jpg 973w" sizes="auto, (max-width: 800px) 100vw, 800px" /><span style="font-size: 10pt;"><strong>Aménagement virtuel réalisé pour la publicité pour une meilleure projestion des locataires</strong></span></p>
+<p><img loading="lazy" decoding="async" class="size-full wp-image-1085871 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/signatures-mail-pujol-1.jpg" alt="" width="600" height="200" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1085876 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/signatures-mail-pujol-3.jpg" alt="" width="600" height="200" /></p>
+<p style="text-align: center;"><img loading="lazy" decoding="async" class="size-medium wp-image-1085872 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille-800x483.jpg" alt="" width="800" height="483" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille-800x483.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille-768x464.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille-600x363.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/06/amenagement-virtuel-location-marseille.jpg 973w" sizes="auto, (max-width: 800px) 100vw, 800px" /><span style="font-size: 10pt;"><strong>Aménagement virtuel réalisé pour la publicité pour une meilleure projestion des locataires</strong></span></p>
 <p>📸 Le résultat est à découvrir ici en vidéo 👉 https://www.youtube.com/watch?v=6C4EXJUCBY4</p>
 <p>Cet appartement a été loué en moins d&rsquo;une semaine  </p>
 <p><iframe loading="lazy" src="//www.youtube.com/embed/6C4EXJUCBY4" width="560" height="314" allowfullscreen="allowfullscreen"></iframe></p>

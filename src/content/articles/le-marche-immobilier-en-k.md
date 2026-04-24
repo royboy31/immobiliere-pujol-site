@@ -5,7 +5,7 @@ date: "2021-10-14"
 excerpt: "Cette expression de « marché en K » ne vient pas de moi mais vient, comme souvent, des U.S. . C’est un symbole que je cherchais depuis longtemps pour décrire..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/09/FireShot-Pro-Screen-Capture-333-aucun-objet-stephanepujol@immobiliere-pujol_fr-Messagerie-Immobiliere-Pujol-mail_google_com.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/09/FireShot-Pro-Screen-Capture-333-aucun-objet-stephanepujol%40immobiliere-pujol_fr-Messagerie-Immobiliere-Pujol-mail_google_com.png"
 seoTitle: "Le marché immobilier Marseillais est désormais en K mais pas KO du tout"
 seoDescription: "Les marchés évoluent de manière hétérogène : un marché avec des prix hauts et bas, même dans les arrondissements les plus chics : pourquoi?"
 ---

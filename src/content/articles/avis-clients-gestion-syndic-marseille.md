@@ -5,7 +5,7 @@ date: "2019-08-03"
 excerpt: "Les avis client de notre gestion de syndic à Marseille sont certifiés depuis 2017, sur la plateforme “Opinion System” car nous sommes engagés dans une démarche..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/08/avis-client-syndic-marseille-pujol.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-syndic-marseille-pujol.jpg"
 seoTitle: "Les avis clients sur notre gestion de syndic de l’Immobilière Pujol à Marseille"
 seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démarche qualité proposée par “Opinion System”. Cet organisme est certifié ISO 20252 : c’est une façon pour nous de démontrer notre bonne foi et notre transparence."
 ---
@@ -14,7 +14,7 @@ seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démar
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="554" height="298" src="/content/uploads/2019/08/avis-client-syndic-marseille-1.png" alt="avis client syndic marseille" class="wp-image-257185"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="554" height="298" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-syndic-marseille-1.png" alt="avis client syndic marseille" class="wp-image-257185"/></figure>
 
 
 
@@ -22,11 +22,11 @@ seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démar
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="418" height="244" src="/content/uploads/2019/08/avis-client-syndic-marseille-2.png" alt="avis client syndic marseille" class="wp-image-257186"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="418" height="244" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-syndic-marseille-2.png" alt="avis client syndic marseille" class="wp-image-257186"/></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="495" height="638" src="/content/uploads/2019/09/avis-client-gestion-de-syndic-marseille.png" alt="avis client gestion de syndic marseille" class="wp-image-259371" srcset="/content/uploads/2019/09/avis-client-gestion-de-syndic-marseille.png 495w, /content/uploads/2019/09/avis-client-gestion-de-syndic-marseille-466x600.png 466w" sizes="auto, (max-width: 495px) 100vw, 495px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="495" height="638" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-de-syndic-marseille.png" alt="avis client gestion de syndic marseille" class="wp-image-259371" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-de-syndic-marseille.png 495w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-gestion-de-syndic-marseille-466x600.png 466w" sizes="auto, (max-width: 495px) 100vw, 495px" /></figure>
 
 
 
@@ -34,7 +34,7 @@ seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démar
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="548" height="104" src="/content/uploads/2019/08/avis-client-syndic-marseille-3.png" alt="avis client syndic marseille" class="wp-image-257187"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="548" height="104" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-syndic-marseille-3.png" alt="avis client syndic marseille" class="wp-image-257187"/></figure>
 
 
 
@@ -54,47 +54,47 @@ seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démar
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="640" height="139" src="/content/uploads/2019/08/avis-client-8-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257515" srcset="/content/uploads/2019/08/avis-client-8-syndic.png 640w, /content/uploads/2019/08/avis-client-8-syndic-600x130.png 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="640" height="139" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-8-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257515" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-8-syndic.png 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-8-syndic-600x130.png 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="143" src="/content/uploads/2019/08/avis-client-10-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257513" srcset="/content/uploads/2019/08/avis-client-10-syndic.png 633w, /content/uploads/2019/08/avis-client-10-syndic-600x136.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="143" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-10-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257513" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-10-syndic.png 633w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-10-syndic-600x136.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="613" height="264" src="/content/uploads/2019/08/avis-client-immobiliere-pujol.png" alt="avis client syndic" class="wp-image-257522" srcset="/content/uploads/2019/08/avis-client-immobiliere-pujol.png 613w, /content/uploads/2019/08/avis-client-immobiliere-pujol-600x258.png 600w" sizes="auto, (max-width: 613px) 100vw, 613px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="613" height="264" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-immobiliere-pujol.png" alt="avis client syndic" class="wp-image-257522" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-immobiliere-pujol.png 613w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-immobiliere-pujol-600x258.png 600w" sizes="auto, (max-width: 613px) 100vw, 613px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="622" height="115" src="/content/uploads/2019/08/avis-client-13-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257510" srcset="/content/uploads/2019/08/avis-client-13-syndic.png 622w, /content/uploads/2019/08/avis-client-13-syndic-600x111.png 600w" sizes="auto, (max-width: 622px) 100vw, 622px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="622" height="115" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-13-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257510" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-13-syndic.png 622w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-13-syndic-600x111.png 600w" sizes="auto, (max-width: 622px) 100vw, 622px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="614" height="300" src="/content/uploads/2019/08/avis-client-12-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257511" srcset="/content/uploads/2019/08/avis-client-12-syndic.png 614w, /content/uploads/2019/08/avis-client-12-syndic-600x293.png 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="614" height="300" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-12-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257511" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-12-syndic.png 614w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-12-syndic-600x293.png 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="642" height="206" src="/content/uploads/2019/08/avis-client-11-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257512" srcset="/content/uploads/2019/08/avis-client-11-syndic.png 642w, /content/uploads/2019/08/avis-client-11-syndic-600x193.png 600w" sizes="auto, (max-width: 642px) 100vw, 642px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="642" height="206" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-11-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257512" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-11-syndic.png 642w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-11-syndic-600x193.png 600w" sizes="auto, (max-width: 642px) 100vw, 642px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="618" height="124" src="/content/uploads/2019/08/avis-client-16-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257507" srcset="/content/uploads/2019/08/avis-client-16-syndic.png 618w, /content/uploads/2019/08/avis-client-16-syndic-600x120.png 600w" sizes="auto, (max-width: 618px) 100vw, 618px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="618" height="124" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-16-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257507" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-16-syndic.png 618w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-16-syndic-600x120.png 600w" sizes="auto, (max-width: 618px) 100vw, 618px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="110" src="/content/uploads/2019/08/avis-client-15-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257508" srcset="/content/uploads/2019/08/avis-client-15-syndic.png 633w, /content/uploads/2019/08/avis-client-15-syndic-600x104.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="633" height="110" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-15-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257508" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-15-syndic.png 633w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-15-syndic-600x104.png 600w" sizes="auto, (max-width: 633px) 100vw, 633px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="647" height="182" src="/content/uploads/2019/08/avis-client-30-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257493" srcset="/content/uploads/2019/08/avis-client-30-syndic.png 647w, /content/uploads/2019/08/avis-client-30-syndic-600x169.png 600w" sizes="auto, (max-width: 647px) 100vw, 647px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="647" height="182" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-30-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257493" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-30-syndic.png 647w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-30-syndic-600x169.png 600w" sizes="auto, (max-width: 647px) 100vw, 647px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="634" height="137" src="/content/uploads/2019/08/avis-client-18.png" alt="avis client gestion de syndic" class="wp-image-257505" srcset="/content/uploads/2019/08/avis-client-18.png 634w, /content/uploads/2019/08/avis-client-18-600x130.png 600w" sizes="auto, (max-width: 634px) 100vw, 634px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="634" height="137" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-18.png" alt="avis client gestion de syndic" class="wp-image-257505" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-18.png 634w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-18-600x130.png 600w" sizes="auto, (max-width: 634px) 100vw, 634px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="645" height="117" src="/content/uploads/2019/08/avis-client-39-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257483" srcset="/content/uploads/2019/08/avis-client-39-syndic.png 645w, /content/uploads/2019/08/avis-client-39-syndic-600x109.png 600w" sizes="auto, (max-width: 645px) 100vw, 645px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="645" height="117" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-39-syndic.png" alt="avis client gestion de  syndic" class="wp-image-257483" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-39-syndic.png 645w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-39-syndic-600x109.png 600w" sizes="auto, (max-width: 645px) 100vw, 645px" /></figure>
 
 
 

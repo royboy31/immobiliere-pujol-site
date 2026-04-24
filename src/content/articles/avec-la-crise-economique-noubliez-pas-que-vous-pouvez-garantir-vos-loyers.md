@@ -5,7 +5,7 @@ date: "2020-05-21"
 excerpt: "A ce jour, personne ne mesure encore les conséquences de la crise économique sur le niveau des loyers ni sur le taux de recouvrement de ces loyers. Pour cela,..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/05/PUJ-3154-031219-1200x791.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3154-031219-1200x791.jpg"
 seoTitle: "Notre garantie des loyers impayés règle les propriétaires le mois où le locataire a une difficulté"
 seoDescription: "Va-t-il y avoir une crise des loyers? Personne ne le sait encore mais vous pouvez toujours vous rassurer en optant pour la garantie de loyers impayés"
 ---
@@ -17,7 +17,7 @@ seoDescription: "Va-t-il y avoir une crise des loyers? Personne ne le sait encor
 <p>Environ 10% d&rsquo;encaissement en moins pour les appartements</p>
 <p>L&rsquo;avenir dira si ce ne sont que des décalages ou des pertes.</p>
 <h2>Garantissez vos loyers à Marseille </h2>
-<p><img loading="lazy" decoding="async" class=" wp-image-342856 alignleft" src="/content/uploads/2020/05/PUJ-3253-031219-800x527.jpg" alt="" width="320" height="211" srcset="/content/uploads/2020/05/PUJ-3253-031219-800x527.jpg 800w, /content/uploads/2020/05/PUJ-3253-031219-768x506.jpg 768w, /content/uploads/2020/05/PUJ-3253-031219-1536x1012.jpg 1536w, /content/uploads/2020/05/PUJ-3253-031219-600x395.jpg 600w, /content/uploads/2020/05/PUJ-3253-031219-1200x791.jpg 1200w, /content/uploads/2020/05/PUJ-3253-031219.jpg 1760w" sizes="auto, (max-width: 320px) 100vw, 320px" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-342856 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-800x527.jpg" alt="" width="320" height="211" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-800x527.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-768x506.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-1536x1012.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-600x395.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219-1200x791.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/05/PUJ-3253-031219.jpg 1760w" sizes="auto, (max-width: 320px) 100vw, 320px" /></p>
 <p>34% des propriétaires bailleurs craignent un non paiement de leur locataire.</p>
 <p>Pour lutter contre cette crainte, nous vous rappelons que vous avez la possibilité de garantir vos loyers auprès de nos services au taux de 1,8% TTC.</p>
 <p>Cette garantie est probablement la plus compétitive du marché et la plus complète en terme de garantie. </p>

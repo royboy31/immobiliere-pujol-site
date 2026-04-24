@@ -5,7 +5,7 @@ date: "2024-05-13"
 excerpt: "Qu’est-ce qu’un administrateur de biens ? Un administrateur de biens est un professionnel de l’immobilier qui prend en charge la gestion locative de biens..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "L’administrateur de biens à Vaufrèges, 13009 Marseille"
 seoDescription: ""
 ---

@@ -15,10 +15,10 @@ seoDescription: "Faite estimer votre appartement par un professionnel, plus rée
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2-600x400.jpg" 
-      <img src="/content/uploads/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/photo_fc4a0d7fecc0a33031e7940a5fbc830b-2.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -34,7 +34,7 @@ Nous allons prendre contact avec vous pour affiner votre demande. <br />
 <br />
 L&rsquo;équipe transactions</p>
 <p>&nbsp;</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-390382" src="/content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg" alt="" width="280" height="84" srcset="/content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg 800w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-768x230.jpg 768w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1-600x180.jpg 600w, /content/uploads/2021/01/logo-immobilier-Pujol-h-RVB-1.jpg 1180w" sizes="auto, (max-width: 280px) 100vw, 280px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-390382" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg" alt="" width="280" height="84" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-800x240.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-768x230.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1-600x180.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/logo-immobilier-Pujol-h-RVB-1.jpg 1180w" sizes="auto, (max-width: 280px) 100vw, 280px" /></p>
 
       </div>
       <!-- SHARE -->

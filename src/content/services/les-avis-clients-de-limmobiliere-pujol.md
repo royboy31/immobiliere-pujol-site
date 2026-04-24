@@ -15,10 +15,10 @@ seoDescription: "Voir tous les avis clients de l'agence Pujol immobilier à Mars
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2019/02/avis-positif-immobiliere-pujol.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2019/02/avis-positif-immobiliere-pujol-800x572.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2019/02/avis-positif-immobiliere-pujol-600x429.jpg" 
-      <img src="/content/uploads/2019/02/avis-positif-immobiliere-pujol.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/avis-positif-immobiliere-pujol.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/avis-positif-immobiliere-pujol-800x572.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/avis-positif-immobiliere-pujol-600x429.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/avis-positif-immobiliere-pujol.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -42,7 +42,7 @@ seoDescription: "Voir tous les avis clients de l'agence Pujol immobilier à Mars
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
                     <h3 class="contextual__title">Les Avis Clients De L'immobilière Pujol</h3>
-                    <p><img loading="lazy" decoding="async" class="wp-image-385835 aligncenter" src="/content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol--800x257.jpg" alt="" width="664" height="214" srcset="/content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol--800x257.jpg 800w, /content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol--768x247.jpg 768w, /content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol--600x193.jpg 600w, /content/uploads/2019/02/note-avis-clients-google-immobiuliere-pujol-.jpg 818w" sizes="auto, (max-width: 664px) 100vw, 664px" /></p>
+                    <p><img loading="lazy" decoding="async" class="wp-image-385835 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/note-avis-clients-google-immobiuliere-pujol--800x257.jpg" alt="" width="664" height="214" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/note-avis-clients-google-immobiuliere-pujol--800x257.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/note-avis-clients-google-immobiuliere-pujol--768x247.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/note-avis-clients-google-immobiuliere-pujol--600x193.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/note-avis-clients-google-immobiuliere-pujol-.jpg 818w" sizes="auto, (max-width: 664px) 100vw, 664px" /></p>
 <p>Les avis des clients de l&rsquo;Immobilière Pujol sont un des indicateurs de la qualité de service que nous <span style="font-size: 16px;">délivrons. </span></p>
 <ol>
 	<li>

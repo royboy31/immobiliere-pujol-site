@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "La gestion immobilière est un ensemble de services destinés à faciliter la vie des propriétaires bailleurs et à optimiser la rentabilité de leurs biens..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Agence immobilière Pujol : votre partenaire en gestion immobilière à Saint-Jean du Désert, 13012 Marseille"
 seoDescription: ""
 ---

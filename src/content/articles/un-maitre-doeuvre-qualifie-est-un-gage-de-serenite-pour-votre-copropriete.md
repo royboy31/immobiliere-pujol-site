@@ -5,7 +5,7 @@ date: "2024-09-19"
 excerpt: "« Votre syndic ne sait pas tout « C’est brutal et réducteur mais un syndic n’est ni architecte ni bureau d’études. Il n’est pas plus maçon que plombier. Il a..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2024/09/bonne-gestion-copropriete-marseille--1200x675.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/09/bonne-gestion-copropriete-marseille--1200x675.jpg"
 seoTitle: "Un maitre d’oeuvre qualifié est un gage de sérénité pour votre copropriété"
 seoDescription: "Même si le syndic gère l’entretien et les travaux d’une copropriété, il n’est pas expert dans tous les domaines. Découvrez pourquoi il est essentiel de faire appel à des spécialistes pour évaluer précisément l’état des bâtiments, éviter des coûts inutiles et garantir la sécurité des résidents."
 ---
@@ -47,7 +47,7 @@ Voici des exemples vécus dans des copropriétés que nous gérons qui nous l&rs
 <p>Dans une copropriété récente, l’ascensoriste avait relevé un défaut et produit un devis pour un changement complet de l’armoire et de l’alimentation électrique pour une mise en conformité. <br />
 <span style="color: #ff9900;">♥</span> L’intervention d’un BET a permis de contester la nécessité de tels travaux (chiffrés autour de 6000€) et de proposer une solution adaptative qui s’est révélée bien plus économique que de tout remplacer (1500€ environ).</p>
 <p style="text-align: center;"><span style="color: #ff9900; font-size: 24pt;"><strong>∼</strong></span></p>
-<p><img loading="lazy" decoding="async" class="wp-image-632909 alignleft" src="/content/uploads/2023/05/bertrand-769x800.jpg" alt="" width="173" height="180" srcset="/content/uploads/2023/05/bertrand-769x800.jpg 769w, /content/uploads/2023/05/bertrand-768x799.jpg 768w, /content/uploads/2023/05/bertrand-577x600.jpg 577w, /content/uploads/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 173px) 100vw, 173px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-632909 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg" alt="" width="173" height="180" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-769x800.jpg 769w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-768x799.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand-577x600.jpg 577w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/05/bertrand.jpg 894w" sizes="auto, (max-width: 173px) 100vw, 173px" /></p>
 <p style="text-align: left;">Même si le syndic gère l’entretien et les travaux d’une copropriété, il n’est pas expert dans tous les domaines.  Bénéficier de l’expérience, du savoir faire d’un sachant permet d’anticiper les défauts, de contrôler le travail des prestataires, d’éviter de payer les conséquences des manquements dans l’entretien et dans l’exploitation des installations, et de faire réaliser des travaux inutiles ou trop coûteux.<br />
 Faire l’économie de la compétence est un calcul court termiste et peut se révéler au final plus coûteux à moyen ou long terme.</p>
 <p><strong>Bertrand GUIBAUD &#8211; Directeur technique chez Immobilière Pujol</strong></p>

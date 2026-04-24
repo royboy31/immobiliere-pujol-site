@@ -5,7 +5,7 @@ date: "2023-09-13"
 excerpt: "Le marché immobilier à Marseille est en pleine transition. Après une période de forte hausse des prix, le marché se stabilise et commence à ralentir. Cette..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2023/09/immobilier-marseille-2023-2024-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/immobilier-marseille-2023-2024-1200x900.jpg"
 seoTitle: "L’immobilier à Marseille : un marché en grande transition"
 seoDescription: "Le marché immobilier marseillais est dans une phase de transition que ce soit en transaction ou en location. A quoi faut-il s'attendre fin 2023 et en 2024? L'immobilière Pujol vous livre son analyse"
 ---
@@ -60,7 +60,7 @@ Après la phase de transition dans laquelle nous sommes et à la condition de ne
 La seule chose qui pourrait changer dans notre ville c’est qu’elle fasse fuir les nouveaux habitants à cause de la violence, de l’agressivité, de l’incivisme et de sa saleté.<br />
 <br />
 <strong>Si vous souhaitez en savoir plus sur l&rsquo;immobilier à Marseille, être accompagné pour la vente ou la gestion locative de votre bien, n&rsquo;hésitez pas à nous contacter. Nous serons ravis de vous accompagner dans votre projet immobilier.</strong></p>
-<p><a href="/contact-immobiliere-pujol/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-686139 aligncenter" src="/content/uploads/2023/09/contactez-nous.jpg" alt="" width="342" height="77" /></a></p>
+<p><a href="/contact-immobiliere-pujol/" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-686139 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/09/contactez-nous.jpg" alt="" width="342" height="77" /></a></p>
       </div>
       <!-- SHARE -->
       <div class="post__share">

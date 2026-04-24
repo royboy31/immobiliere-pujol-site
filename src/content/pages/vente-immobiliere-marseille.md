@@ -15,10 +15,10 @@ seoDescription: "Une formule qui vous avantage Vous cherchez à vendre votre bie
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/vente-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/vente-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/vente-600x375.jpg" 
-      <img src="/content/uploads/2017/11/vente-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -32,7 +32,7 @@ seoDescription: "Une formule qui vous avantage Vous cherchez à vendre votre bie
 <p>Grâce à immobilière Pujol – vente immobilière Marseille – vous pourrez vendre votre maison ou appartement au meilleur prix et dans les meilleures conditions.</p>
 
 
-<figure id="attachment_225196" aria-describedby="caption-attachment-225196" style="width: 800px" class="wp-caption alignnone"><a href="/content/uploads/2017/11/vente.jpg"><img loading="lazy" decoding="async" class="wp-image-225196 size-medium" title="vente immobilière Marseille" src="/content/uploads/2017/11/vente-800x500.jpg" alt="Vente immobilière Marseille" width="800" height="500" srcset="/content/uploads/2017/11/vente-800x500.jpg 800w, /content/uploads/2017/11/vente-768x480.jpg 768w, /content/uploads/2017/11/vente-600x375.jpg 600w, /content/uploads/2017/11/vente-1200x750.jpg 1200w, /content/uploads/2017/11/vente.jpg 1801w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225196" class="wp-caption-text">vente immobilière Marseille avec l&rsquo;agence immobilière Pujol</figcaption></figure>
+<figure id="attachment_225196" aria-describedby="caption-attachment-225196" style="width: 800px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente.jpg"><img loading="lazy" decoding="async" class="wp-image-225196 size-medium" title="vente immobilière Marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-800x500.jpg" alt="Vente immobilière Marseille" width="800" height="500" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-800x500.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-768x480.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-600x375.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-1200x750.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente.jpg 1801w" sizes="auto, (max-width: 800px) 100vw, 800px" /></a><figcaption id="caption-attachment-225196" class="wp-caption-text">vente immobilière Marseille avec l&rsquo;agence immobilière Pujol</figcaption></figure>
 <h2>Qu’est-ce que l&rsquo;agence immobilière Pujol ?</h2>
 <p>Nous sommes une agence immobilière, localisée à Marseille. Nous savons que la vente d’un bien est souvent un événement stressant, notre objectif est donc de faire en sorte que vous puissiez vous libérer de tout ce qui attrait à :</p>
 

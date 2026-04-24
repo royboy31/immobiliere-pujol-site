@@ -5,7 +5,7 @@ date: "2022-04-06"
 excerpt: "Le prix du gaz ne cesse d’augmenter mais l’électricité subit, elle aussi, une hausse importante suite à l’effondrement sans précédent de la production..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/hausse-prix-electricite-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/hausse-prix-electricite-1200x800.jpg"
 seoTitle: "Crise énergétique : comment réduire sa facture d’électricité ?"
 seoDescription: "En moyenne, un foyer français compte 73 appareils électriques ? Or : l’heure est à l’économie d’énergie !"
 ---

@@ -5,7 +5,7 @@ date: "2022-09-19"
 excerpt: "La Loi Climat et Résilience du 22 août 2021, dans son article à l’article 171, a rendu obligatoire, le Projet de Plan Pluriannuel de Travaux pour les..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/09/20220630_114410-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/20220630_114410-1200x900.jpg"
 seoTitle: "PPPT en copropriété. Quésako?"
 seoDescription: "Le PPPT ou Projet de plan pluri annuel de travaux vise à lister les travaux nécessaires pour la rénovation énergétique d'une copropriété"
 ---
@@ -21,7 +21,7 @@ Ce PPPT sera établi suite à une analyse du bâti, des équipements de l’imme
 <h3>Quelles sont les copropriétés concernées par le PPPT?</h3>
 <p>Il concerne tous les immeubles en copropriété,  dont la destination est partielle ou totale en habitation, ayant été construit il y a plus de 15 ans . <br />
 Une fois établi, le PPPT sera soumis à l’assemblée générale des copropriétaires et devra être renouvelé tous les 10 ans.</p>
-<h3><img loading="lazy" decoding="async" class=" wp-image-552996 alignright" src="/content/uploads/2022/09/echafaudage2-800x600.jpg" alt="travaux economie energie copropriete" width="332" height="249" srcset="/content/uploads/2022/09/echafaudage2-800x600.jpg 800w, /content/uploads/2022/09/echafaudage2-768x576.jpg 768w, /content/uploads/2022/09/echafaudage2-1536x1152.jpg 1536w, /content/uploads/2022/09/echafaudage2-2048x1536.jpg 2048w, /content/uploads/2022/09/echafaudage2-600x450.jpg 600w, /content/uploads/2022/09/echafaudage2-1200x900.jpg 1200w" sizes="auto, (max-width: 332px) 100vw, 332px" />Comment le PPPT va-t-il être mise en place?</h3>
+<h3><img loading="lazy" decoding="async" class=" wp-image-552996 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-800x600.jpg" alt="travaux economie energie copropriete" width="332" height="249" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-1536x1152.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-2048x1536.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/echafaudage2-1200x900.jpg 1200w" sizes="auto, (max-width: 332px) 100vw, 332px" />Comment le PPPT va-t-il être mise en place?</h3>
 <p>Les modalités du PPPT seront mises à l&rsquo;ordre du jour de l&rsquo;assemblée générale des copropriétaires<br />
 Elles sont alors votées à la majorité des voix exprimées des copropriétaires présents, représentés ou ayant voté par correspondance.<br />
 Le PPPT devra ensuite être présenté à la première assemblée générale des copropriétaires qui suit son élaboration ou sa révision pour faire voter les travaux préconisés. <br />

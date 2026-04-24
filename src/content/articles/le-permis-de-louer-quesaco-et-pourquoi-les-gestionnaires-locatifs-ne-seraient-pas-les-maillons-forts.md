@@ -5,7 +5,7 @@ date: "2019-05-04"
 excerpt: "Et pourquoi les gestionnaires locatifs ne seraient pas les maillons forts ? Objectif : lutter contre l’habitat indigne Cette lutte contre l’habitat indigne est..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/permis-de-louer-immobiliere-pujol-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/permis-de-louer-immobiliere-pujol-1200x800.jpg"
 seoTitle: "Le permis de louer, quésaco?"
 seoDescription: "Et pourquoi les gestionnaires locatifs ne seraient pas les maillons forts ? Objectif : lutter contre l'habitat indigne Cette lutte contre l'habitat indigne est difficile et nous ne faisons pas partie des naïfs qui pensent qu'une solution simple existe. Le permis de louer a été créé dans le cadre de…"
 ---

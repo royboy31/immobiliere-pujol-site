@@ -5,7 +5,7 @@ date: "2021-09-30"
 excerpt: "En 2020, de nombreux syndics ou administrateurs de biens indépendants ont vendu leur structure à des grands groupes immobiliers. J’ai l’impression que cette..."
 categories: ["Mon quartier, ma ville Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/06/Blog-Immobiliere-Pujol-header-2.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/06/Blog-Immobiliere-Pujol-header-2.jpg"
 seoTitle: "Vente des syndics indépendants : une menace pour la qualité de service ?"
 seoDescription: "Quelles conséquences vont avoir les nombreuses ventes de syndic indépendants en 2020 sur le marché immobilier et la gestion des copropriétés ?"
 ---

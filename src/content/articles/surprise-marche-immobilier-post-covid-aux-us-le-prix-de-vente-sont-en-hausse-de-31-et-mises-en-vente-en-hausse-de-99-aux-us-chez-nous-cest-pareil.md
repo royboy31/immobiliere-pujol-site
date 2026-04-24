@@ -5,7 +5,7 @@ date: "2020-06-18"
 excerpt: "Surprenant ! Oui, les prix de l’immobilier aux états unis post-covid sont montés de 3,1% et les prix des mises en vente de 9,9% Beaucoup de commentateurs aux..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/06/PUJ-3211-031219-1-1200x791.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-1200x791.jpg"
 seoTitle: "Allons nous avoir comme au US une hausse des prix de l’immobilier post covid??"
 seoDescription: "Étonnant : En période post-covid, le prix de vente sont en hausse de 3,1 % et les prix des mises à vente des biens immobilier sont en hausse de 9,9% aux US"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Étonnant : En période post-covid, le prix de vente sont en ha
  Oui, les prix de l&rsquo;immobilier aux états unis post-covid  sont montés de 3,1% et les prix des mises en vente de 9,9% </p>
 <p>Beaucoup de commentateurs aux US comme chez nous, s’attendaient à une baisse des prix de l&rsquo;immobilier et c’est une hausse qui est en cours.</p>
 <p>Les prix des mises en vente sont en hausse de 9,9% et les prix des biens vendus sont en hausse de 3,1%. A croire qu&rsquo;il a suffit de ré-ouvrir nos agences pour que les clients affluent, comme si c&rsquo;était une saison Open Bar.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-347598 alignright" src="/content/uploads/2020/06/free-open-bar.jpg" alt="Reprise de l'immobilier open bar" width="346" height="259" srcset="/content/uploads/2020/06/free-open-bar.jpg 640w, /content/uploads/2020/06/free-open-bar-600x450.jpg 600w" sizes="auto, (max-width: 346px) 100vw, 346px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-347598 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/free-open-bar.jpg" alt="Reprise de l'immobilier open bar" width="346" height="259" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/free-open-bar.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/free-open-bar-600x450.jpg 600w" sizes="auto, (max-width: 346px) 100vw, 346px" /></p>
 <p>Ces records obtenus ces dernières semaines ont évidemment comme origine une offre faible et des taux d’intérêts encore très bas.</p>
 <p>Les crédits sont ouverts pour ceux qui ont un bon boulot.</p>
 <p>Ce qui se passe aux US, arrive souvent également chez nous car les mouvements sociétaux, les envies convergent dans la même direction.</p>
@@ -31,7 +31,7 @@ http://investors.redfin.com/news-releases/news-release-details/homebuying-demand
 &#8211; Retour à la campagne (périphérie ou campagne lointaine)<br />
 &#8211; Direction vers le sud pour les dans les états où il y a moins d’impôts sur l’immobilier.</p>
 <p>Ce qui est certain c&rsquo;est que les mouvements entre les régions seront encore plus forts.</p>
-<h2><img loading="lazy" decoding="async" class=" wp-image-348514 alignleft" src="/content/uploads/2020/06/PUJ-3211-031219-1-800x527.jpg" alt="" width="291" height="192" srcset="/content/uploads/2020/06/PUJ-3211-031219-1-800x527.jpg 800w, /content/uploads/2020/06/PUJ-3211-031219-1-768x506.jpg 768w, /content/uploads/2020/06/PUJ-3211-031219-1-1536x1012.jpg 1536w, /content/uploads/2020/06/PUJ-3211-031219-1-600x395.jpg 600w, /content/uploads/2020/06/PUJ-3211-031219-1-1200x791.jpg 1200w, /content/uploads/2020/06/PUJ-3211-031219-1.jpg 1760w" sizes="auto, (max-width: 291px) 100vw, 291px" />Ils veulent de l’espace, du calme, du confort..</h2>
+<h2><img loading="lazy" decoding="async" class=" wp-image-348514 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-800x527.jpg" alt="" width="291" height="192" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-800x527.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-768x506.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-1536x1012.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-600x395.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1-1200x791.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/06/PUJ-3211-031219-1.jpg 1760w" sizes="auto, (max-width: 291px) 100vw, 291px" />Ils veulent de l’espace, du calme, du confort..</h2>
 <p>Les gens pensent qu&rsquo;une 2eme vague de confinement est possible et ils cherchent donc du confort rapidement.<br />
 Avez de tels acheteurs, les mise à prix des biens va augmenter de plus de 10% dans certaines régions.</p>
 <p>Evidemment, cela ne concerne pas toute la population mais ceux qui peuvent choisir leur lieu de travail.<br />

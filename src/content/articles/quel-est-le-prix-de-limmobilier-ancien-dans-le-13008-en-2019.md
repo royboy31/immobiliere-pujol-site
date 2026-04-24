@@ -5,7 +5,7 @@ date: "2020-02-16"
 excerpt: "Sans surprise les prix au m2 de l’immobilier ancien dans le 13008 sont parmis les plus élevés de la ville : 3 260 €/m². Avec 444 ventes. Sur l’année 2019, le..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13008.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13008.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13008 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13008 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---

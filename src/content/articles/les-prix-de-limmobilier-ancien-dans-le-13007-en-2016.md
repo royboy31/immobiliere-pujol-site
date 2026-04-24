@@ -5,14 +5,14 @@ date: "2016-03-30"
 excerpt: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2016, il s’est vendu..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13007", "Arrondissements Marseille", "Arrondissement 13007 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/le-balcon-des-auffes-13007-marseille.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/le-balcon-des-auffes-13007-marseille.jpeg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13007 en 2016"
 seoDescription: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2016, il s’est vendu dans le 13007 : – 242 appartements  au prix médian* arrondissement de  2780€ le m² . – 33 maisons au prix médian de…"
 ---
 
 <h4><strong>LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS .<br />
 </strong></h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="/content/uploads/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s’est vendu dans le 13007 :<br />
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s’est vendu dans le 13007 :<br />
 – 242 appartements  au prix médian* arrondissement de  2780€ le m² .<br />
 – 33 maisons au prix médian de 480000€ pour une surface de 114m² et 170m² de terrain.<br />
 <i><br />

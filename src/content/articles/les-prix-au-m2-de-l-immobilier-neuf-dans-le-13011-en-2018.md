@@ -5,7 +5,7 @@ date: "2019-05-15"
 excerpt: "Voici un comparatif des prix au m2 de l’immobilier neuf dans le 13011 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13011-1-1-900x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011-1-1-900x1200.jpg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13011 en 2018"
 seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le 13011 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 11eme arrondissement de Marseille:101 appartements au prix…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici un comparatif des prix au m2 de l'immobilier neuf dans le
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13011-1.jpeg" alt="prix au m2 de l'immobilier neuf dans le 13011 en 2018" class="wp-image-235618" width="78" height="116" srcset="/content/uploads/2019/05/13011-1.jpeg 533w, /content/uploads/2019/05/13011-1-400x600.jpg 400w" sizes="auto, (max-width: 78px) 100vw, 78px" /></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011-1.jpeg" alt="prix au m2 de l'immobilier neuf dans le 13011 en 2018" class="wp-image-235618" width="78" height="116" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011-1.jpeg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011-1-400x600.jpg 400w" sizes="auto, (max-width: 78px) 100vw, 78px" /></figure></div>
 
 
 

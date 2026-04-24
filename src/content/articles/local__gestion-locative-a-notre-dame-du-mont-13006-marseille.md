@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion locative est un service proposé par les agences immobilières pour faciliter la vie des propriétaires bailleurs en prenant en charge l’ensemble des..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion locative à Notre-Dame-du-Mont, 13006 Marseille"
 seoDescription: ""
 ---

@@ -5,7 +5,7 @@ date: "2020-02-05"
 excerpt: "Les données chiffrées Prix moyen (en €/m2) : 12,4 Croissance entre 2017 et 2018 (en %) : 5,9 Durée d’occupation moyenne (en mois) : 47,8 Taux de mobilité..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/photo-marseille.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/01/photo-marseille.jpeg"
 seoTitle: "Les prix au m2 des loyers dans le 13010 en 2019"
 seoDescription: "Le prix moyen (en €/m2) est de 12,4 dans le 13010.  La durée d'occupation moyenne est de 47 mois."
 ---
@@ -19,9 +19,9 @@ seoDescription: "Le prix moyen (en €/m2) est de 12,4 dans le 13010.  La durée
 <p><strong>Loyer médian</strong> (en €/m2) : 11,6</p>
 <p>Source : www.clameur.fr</p>
 <h2>Les prix selon les surfaces</h2>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291196" src="/content/uploads/2017/01/10-ème-arrondissement-loer-2018-800x286.png" alt="" width="800" height="286" srcset="/content/uploads/2017/01/10-ème-arrondissement-loer-2018-800x286.png 800w, /content/uploads/2017/01/10-ème-arrondissement-loer-2018-768x274.png 768w, /content/uploads/2017/01/10-ème-arrondissement-loer-2018-600x214.png 600w, /content/uploads/2017/01/10-ème-arrondissement-loer-2018.png 1047w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-291196" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/10-%C3%A8me-arrondissement-loer-2018-800x286.png" alt="" width="800" height="286" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/10-%C3%A8me-arrondissement-loer-2018-800x286.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/10-%C3%A8me-arrondissement-loer-2018-768x274.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/10-%C3%A8me-arrondissement-loer-2018-600x214.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/10-%C3%A8me-arrondissement-loer-2018.png 1047w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p style="text-align: center;">Source : www.clameur.fr</p>
-<h2 style="text-align: left;"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8532" src="/content/uploads/2017/01/Plan-du-10ème-arrondissement-de-Marseille-1-300x229.png" alt="10e arrondissement marseille" width="300" height="229" /></h2>
+<h2 style="text-align: left;"><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8532" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/Plan-du-10%C3%A8me-arrondissement-de-Marseille-1-300x229.png" alt="10e arrondissement marseille" width="300" height="229" /></h2>
 <div>
 <div>
 <div>

@@ -5,7 +5,7 @@ date: "2019-08-06"
 excerpt: "Il m’arrive parfois de lire des articles sur les arnaques des résidence avec service. Ils sont rares. Alors quand j’ai lu un article de l’Express du 6 Août..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/08/residence-tourisme-lmnp-1200x783.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/residence-tourisme-lmnp-1200x783.jpg"
 seoTitle: "Les résidences avec service sont elles une arnaque ?"
 seoDescription: "Il m'arrive parfois de lire des articles sur les arnaques des résidence avec service. Ils sont rares. Alors quand j'ai lu un article de l’Express du 6 Août 2019 qui fait la promotion de ces résidences, je n'ai pu m’empêcher de faire un post sur Linkedin pour mettre en garde…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Il m'arrive parfois de lire des articles sur les arnaques des r
 
 
 
-<ul class="wp-block-gallery columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex"><li class="blocks-gallery-item"><figure><img loading="lazy" decoding="async" width="624" height="833" src="/content/uploads/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service.png" alt="Se faire avoir en achetant une résidence avec service" data-id="260591" data-link="/arnaque-residence-service/ne-vous-faites-pas-avoir-residence-avec-service/" class="wp-image-260591" srcset="/content/uploads/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service.png 624w, /content/uploads/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service-449x600.png 449w, /content/uploads/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service-599x800.png 599w" sizes="auto, (max-width: 624px) 100vw, 624px" /></figure></li></ul>
+<ul class="wp-block-gallery columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex"><li class="blocks-gallery-item"><figure><img loading="lazy" decoding="async" width="624" height="833" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service.png" alt="Se faire avoir en achetant une résidence avec service" data-id="260591" data-link="/arnaque-residence-service/ne-vous-faites-pas-avoir-residence-avec-service/" class="wp-image-260591" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service.png 624w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service-449x600.png 449w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/Ne-vous-faites-pas-avoir-residence-avec-service-599x800.png 599w" sizes="auto, (max-width: 624px) 100vw, 624px" /></figure></li></ul>
 
 
 

@@ -15,10 +15,10 @@ seoDescription: ""
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2023/08/PUJ-5368-copie-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2023/08/PUJ-5368-copie-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2023/08/PUJ-5368-copie-600x375.jpg" 
-      <img src="/content/uploads/2023/08/PUJ-5368-copie-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/08/PUJ-5368-copie-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/08/PUJ-5368-copie-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/08/PUJ-5368-copie-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/08/PUJ-5368-copie-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -44,9 +44,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2026/02/Retouche-Photo-8-568x800.png" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2026/02/Retouche-Photo-8-426x600.png" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2026/02/Retouche-Photo-8-568x800.png" loading="lazy" alt="Clara RODITIS" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/Retouche-Photo-8-568x800.png" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/Retouche-Photo-8-426x600.png" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/Retouche-Photo-8-568x800.png" loading="lazy" alt="Clara RODITIS" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -84,9 +84,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-584x800.png" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-438x600.png" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-584x800.png" loading="lazy" alt="Thibault Arnoux - Ventes immobilière 13012 et 13013 Marseille" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-584x800.png" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-438x600.png" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/10/Gemini_Generated_Image_le3j9ule3j9ule3j-584x800.png" loading="lazy" alt="Thibault Arnoux - Ventes immobilière 13012 et 13013 Marseille" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -124,9 +124,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2025/07/lola.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2025/07/lola.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2025/07/lola.jpg" loading="lazy" alt="Lola Der Tomassian" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/07/lola.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/07/lola.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/07/lola.jpg" loading="lazy" alt="Lola Der Tomassian" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -164,9 +164,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2025/01/IMG_0242-697x800.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2025/01/IMG_0242-522x600.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2025/01/IMG_0242-697x800.jpg" loading="lazy" alt="Julien Ghiandai - Gestion locative" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/IMG_0242-697x800.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/IMG_0242-522x600.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/01/IMG_0242-697x800.jpg" loading="lazy" alt="Julien Ghiandai - Gestion locative" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -204,9 +204,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2024/07/anais-533x800.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2024/07/anais-400x600.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2024/07/anais-533x800.jpg" loading="lazy" alt="Anais Barotto - Gestion locative Appartements/bureaux/locaux" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/anais-533x800.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/anais-400x600.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/07/anais-533x800.jpg" loading="lazy" alt="Anais Barotto - Gestion locative Appartements/bureaux/locaux" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -244,9 +244,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2024/03/retouche-photo-2-568x800.png" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2024/03/retouche-photo-2-426x600.png" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2024/03/retouche-photo-2-568x800.png" loading="lazy" alt="Julia Lauron - Ventes de Biens Immobiliers" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-2-568x800.png" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-2-426x600.png" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2024/03/retouche-photo-2-568x800.png" loading="lazy" alt="Julia Lauron - Ventes de Biens Immobiliers" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -284,9 +284,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2023/11/gaelle-site-800x729.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2023/11/gaelle-site-600x547.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2023/11/gaelle-site-800x729.jpg" loading="lazy" alt="Gaelle Lapert - Commerciale en gestion locative" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/gaelle-site-800x729.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/gaelle-site-600x547.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2023/11/gaelle-site-800x729.jpg" loading="lazy" alt="Gaelle Lapert - Commerciale en gestion locative" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -324,9 +324,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2022/08/PUJ-8761-534x800.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2022/08/PUJ-8761-400x600.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2022/08/PUJ-8761-534x800.jpg" loading="lazy" alt="Florian Massoni - Gestionnaire locatif" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/08/PUJ-8761-534x800.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/08/PUJ-8761-400x600.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/08/PUJ-8761-534x800.jpg" loading="lazy" alt="Florian Massoni - Gestionnaire locatif" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -364,9 +364,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2022/02/Emeline-PELLIN-Syndic-de-copropriete-800x701.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2022/02/Emeline-PELLIN-Syndic-de-copropriete-600x526.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2022/02/Emeline-PELLIN-Syndic-de-copropriete-800x701.jpg" loading="lazy" alt="Emeline Pellin - Syndic de copropriétés" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/02/Emeline-PELLIN-Syndic-de-copropriete-800x701.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/02/Emeline-PELLIN-Syndic-de-copropriete-600x526.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/02/Emeline-PELLIN-Syndic-de-copropriete-800x701.jpg" loading="lazy" alt="Emeline Pellin - Syndic de copropriétés" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     
@@ -404,9 +404,9 @@ seoDescription: ""
 
           <div class="expert__thumbnail objectFitContainer">
         <picture>
-          <source src="/content/uploads/2021/08/Alexandra-COHEN-gestion-locative-800x709.jpg" media="(min-width: 1000px)" srcset>
-                      <source src="/content/uploads/2021/08/Alexandra-COHEN-gestion-locative-600x531.jpg" media="(min-width: 320px)" srcset>
-                    <img src="/content/uploads/2021/08/Alexandra-COHEN-gestion-locative-800x709.jpg" loading="lazy" alt="Alexandra Lopez - Gestion locative" class="objectFitChild expert__thumbnail--img">
+          <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/08/Alexandra-COHEN-gestion-locative-800x709.jpg" media="(min-width: 1000px)" srcset>
+                      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/08/Alexandra-COHEN-gestion-locative-600x531.jpg" media="(min-width: 320px)" srcset>
+                    <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/08/Alexandra-COHEN-gestion-locative-800x709.jpg" loading="lazy" alt="Alexandra Lopez - Gestion locative" class="objectFitChild expert__thumbnail--img">
         </picture>
       </div>
     

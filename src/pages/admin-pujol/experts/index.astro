@@ -1,0 +1,36 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+
+type Expert = { slug: string; title: string; fonction?: string; photo?: string; email?: string; phone?: string };
+const expertMods = import.meta.glob<Expert>('../../../content/experts/*.json', { eager: true, import: 'default' });
+const experts = Object.values(expertMods).sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+---
+
+<AdminLayout title="Experts" section="experts">
+  <div class="toolbar">
+    <h1 style="margin:0;">Experts ({experts.length})</h1>
+    <span class="spacer"></span>
+    <a href="./new/" class="btn btn--primary">+ Nouvel expert</a>
+  </div>
+
+  <div class="grid">
+    {experts.map((e) => {
+      const displayName = (e.title || '').split('|').pop()?.trim() || e.title;
+      return (
+        <a class="card" href={`./${e.slug}/edit/`} style="color:inherit; display:flex; gap:.9rem; align-items:flex-start;">
+          {e.photo ? (
+            <img src={e.photo} alt={displayName} width="64" height="80" style="object-fit:cover; border-radius:6px; flex-shrink:0;" />
+          ) : (
+            <div style="width:64px; height:80px; background:#e5e7eb; border-radius:6px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.75rem;">photo</div>
+          )}
+          <div style="min-width:0;">
+            <strong style="display:block;">{displayName}</strong>
+            <small style="color:#555; display:block;">{e.fonction || '—'}</small>
+            <small style="color:#888; display:block; margin-top:.25rem; word-break:break-all;">{e.email || 'pas d\'email'}</small>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</AdminLayout>

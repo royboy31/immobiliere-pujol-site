@@ -5,7 +5,7 @@ date: "2022-09-20"
 excerpt: "La valeur verte d’un logement, définie « l’augmentation de valeur engendrée par une meilleure performance énergétique et environnementale d’un bien immobilier..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/09/VALEUR-VERTE-LOGEMENTS.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/VALEUR-VERTE-LOGEMENTS.jpg"
 seoTitle: "La valeur verte des logements"
 seoDescription: "Impact de l'étiquette énergie sur le prix d'un appartement . Les mauvaises notes E,  F et G font-elles baisser le prix de vente?"
 ---
@@ -16,7 +16,7 @@ seoDescription: "Impact de l'étiquette énergie sur le prix d'un appartement . 
 <ul>
 	<li class="_04xlpA direction-ltr align-justify para-style-body"><strong><span class="JsGRdQ">La performance énergétique d’un bien a une influence constatée sur son prix de vente.</span></strong></li>
 </ul>
-<p><img loading="lazy" decoding="async" class="wp-image-553335 aligncenter" src="/content/uploads/2022/09/impact-dpe-sur-prix-de-vente-800x720.jpg" alt="" width="533" height="480" srcset="/content/uploads/2022/09/impact-dpe-sur-prix-de-vente-800x720.jpg 800w, /content/uploads/2022/09/impact-dpe-sur-prix-de-vente-768x692.jpg 768w, /content/uploads/2022/09/impact-dpe-sur-prix-de-vente-600x540.jpg 600w, /content/uploads/2022/09/impact-dpe-sur-prix-de-vente.jpg 854w" sizes="auto, (max-width: 533px) 100vw, 533px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-553335 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/impact-dpe-sur-prix-de-vente-800x720.jpg" alt="" width="533" height="480" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/impact-dpe-sur-prix-de-vente-800x720.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/impact-dpe-sur-prix-de-vente-768x692.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/impact-dpe-sur-prix-de-vente-600x540.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/impact-dpe-sur-prix-de-vente.jpg 854w" sizes="auto, (max-width: 533px) 100vw, 533px" /></p>
 <p>&nbsp;</p>
 <ul>
 	<li class="_04xlpA direction-ltr align-justify para-style-body"><strong><span class="JsGRdQ">La valeur verte impacte davantage le prix des petits logements.</span></strong></li>
@@ -30,8 +30,8 @@ seoDescription: "Impact de l'étiquette énergie sur le prix d'un appartement . 
 	<li class="_04xlpA direction-ltr align-justify para-style-body"><span class="JsGRdQ"><strong>Des fortes disparités sont constatées entre les régions. </strong><br />
 </span></li>
 </ul>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-553336" src="/content/uploads/2022/09/repartition-des-dpe-des-logements-vendus-en-2020.jpg" alt="" width="694" height="336" srcset="/content/uploads/2022/09/repartition-des-dpe-des-logements-vendus-en-2020.jpg 694w, /content/uploads/2022/09/repartition-des-dpe-des-logements-vendus-en-2020-600x290.jpg 600w" sizes="auto, (max-width: 694px) 100vw, 694px" /></p>
-<p>Pour pour de détail, voir la dernière étude complète de 2020 / <a href="/content/uploads/2022/09/Etude-sur-la-valeur-verte-des-logements-en-2020.pdf">Etude sur la valeur verte des logements en 2020</a></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-553336" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/repartition-des-dpe-des-logements-vendus-en-2020.jpg" alt="" width="694" height="336" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/repartition-des-dpe-des-logements-vendus-en-2020.jpg 694w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/repartition-des-dpe-des-logements-vendus-en-2020-600x290.jpg 600w" sizes="auto, (max-width: 694px) 100vw, 694px" /></p>
+<p>Pour pour de détail, voir la dernière étude complète de 2020 / <a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/09/Etude-sur-la-valeur-verte-des-logements-en-2020.pdf">Etude sur la valeur verte des logements en 2020</a></p>
 <hr />
 <p>Rénover ne suffit pas ou plus et il ne s&rsquo;agit plus de faire simplement de la déco.  Il faut le faire en ayant pour objectif d&rsquo;améliorer la performance énergétique de votre logement et en choisissant les types de travaux, les installations et les matériaux qui vous le permettront. Beaucoup d&rsquo;artisans ne sont pas encore formés à cela . <br />
 Nous oui car nous louons, vendons et entretenons des patrimoines immobiliers. C&rsquo;est pourquoi nos équipes syndic et gestion locative sont désormais formées aux travaux de rénovation énergétique .<br />

@@ -20,10 +20,10 @@ seoDescription: "Changez de syndic de copropriété à Marseille est facile. Il 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/PU-1331-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/PU-1331-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/PU-1331-600x375.jpg" 
-      <img src="/content/uploads/2017/11/PU-1331-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1331-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1331-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1331-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1331-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -105,7 +105,7 @@ Utilisez le bouche-à-oreille pour savoir qui est <a href="/service/connaitres-l
 <h2>Comment notifier le syndic en place ?</h2>
 <p>Si c’est une démarche du conseil syndical, faites-le juste avant la vérification des comptes par lettre recommandée.<br />
 Le conseil doit proposer un syndic qu’il soutient, après avoir fait l’appel d’offres et comparé les devis. Idéalement il doit justifier son choix dans la convocation puis devant l’assemblée.</p>
-<p>Télécharger ici un <a href="/content/uploads/2021/01/lettre-pour-nouveau-contrat-syndic-a-lordre-du-jour-assemblee-generale.pdf" target="_blank" rel="noopener">modèle de courrier à l’attention du syndic actuel</a></p>
+<p>Télécharger ici un <a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/lettre-pour-nouveau-contrat-syndic-a-lordre-du-jour-assemblee-generale.pdf" target="_blank" rel="noopener">modèle de courrier à l’attention du syndic actuel</a></p>
 <h2>Comment sensibiliser les copropriétaires au changement de syndic?</h2>
 <p>Environ un mois avant l’assemblée générale, allez voir chaque copropriétaire pour s’assurer de sa participation lors du vote. <br />
 Le jour J, il faudra 50% d’avis favorables plus une voix pour que le changement de syndic soit acté.</p>
@@ -123,11 +123,11 @@ Si le syndic en place recueille une majorité d’avis défavorables, alors l’
 	<li>L’ensemble des pièces justificatives sous deux mois. Une copie sera remise au conseil syndical.</li>
 </ul>
 <p>&nbsp;</p>
-<p><a href="https://www.capital.fr/immobilier/copropriete-les-meilleurs-et-les-pires-syndics-en-france-selon-leurs-clients-1380745" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone size-full wp-image-387076" src="/content/uploads/2017/10/meilleur-syndic-copropriete-marseille.jpg" alt="" width="539" height="432" /></a></p>
+<p><a href="https://www.capital.fr/immobilier/copropriete-les-meilleurs-et-les-pires-syndics-en-france-selon-leurs-clients-1380745" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone size-full wp-image-387076" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/meilleur-syndic-copropriete-marseille.jpg" alt="" width="539" height="432" /></a></p>
 <p>&nbsp;</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
 <p>&nbsp;</p>
                 </section>
             </div>

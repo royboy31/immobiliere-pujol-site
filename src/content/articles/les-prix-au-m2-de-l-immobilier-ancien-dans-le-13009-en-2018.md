@@ -5,7 +5,7 @@ date: "2019-05-30"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quel est le prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/TrLt0xEQ.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/TrLt0xEQ.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13009 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians.  Quel est le prix au m2 de l'immobilier ancien dans le 13009 en 2018. En 2018, il s’est vendu dans le 9ème arrondissement de Marseille, 363 appartements au prix…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "La fourchette des transactions est établie par les notaires de
 
 
 
-<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/mazargues-13009.jpg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" class="wp-image-235442" width="225" height="149"/><figcaption>Rue principale Mazargues 13009</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/mazargues-13009.jpg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" class="wp-image-235442" width="225" height="149"/><figcaption>Rue principale Mazargues 13009</figcaption></figure></div>
 
 
 
@@ -26,7 +26,7 @@ seoDescription: "La fourchette des transactions est établie par les notaires de
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13009.jpeg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" class="wp-image-235451" width="103" height="156" srcset="/content/uploads/2019/05/13009.jpeg 666w, /content/uploads/2019/05/13009-400x600.jpg 400w, /content/uploads/2019/05/13009-533x800.jpg 533w" sizes="auto, (max-width: 103px) 100vw, 103px" /><figcaption>Obélisque</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009.jpeg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" class="wp-image-235451" width="103" height="156" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009.jpeg 666w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009-533x800.jpg 533w" sizes="auto, (max-width: 103px) 100vw, 103px" /><figcaption>Obélisque</figcaption></figure></div>
 
 
 

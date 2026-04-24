@@ -5,7 +5,7 @@ date: "2019-11-10"
 excerpt: "Une nouvelle rafale d’injonction de ravalement va être lancée fin novembre et début décembre Nous pouvons nous en réjouir à long terme pour notre ville, mais..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/11/FireShot-Capture-121-.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/11/FireShot-Capture-121-.png"
 seoTitle: "Les rues et boulevard concernés par la nouvelle campagne de ravalement à Marseille novembre et décembre 2019"
 seoDescription: "Les rues et boulevard concernés par la nouvelle campagne de ravalement à Marseille Injonction en novembre et décembre 2019"
 ---

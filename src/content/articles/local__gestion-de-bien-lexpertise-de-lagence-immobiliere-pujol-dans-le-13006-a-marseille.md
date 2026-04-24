@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "La gestion de bien est un service proposé par les agences immobilières pour assurer la gestion optimale des biens immobiliers de leurs clients. À l’agence..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Gestion de bien : l’expertise de l’agence immobilière Pujol dans le 13006 à Marseille"
 seoDescription: ""
 ---

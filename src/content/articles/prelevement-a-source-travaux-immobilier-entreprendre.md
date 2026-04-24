@@ -5,7 +5,7 @@ date: "2017-10-19"
 excerpt: "Le prélèvement à la source pour ceux qui auront l’obligation de faire des travaux immobiliers en 2018 et 2019 : Quels travaux faire ? Faut-il engager des..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/roofers-2681351_1920-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/roofers-2681351_1920-1200x800.jpg"
 seoTitle: "Prélèvement à la source : quels travaux immobilier entreprendre ?"
 seoDescription: "Le prélèvement à la source pour ceux qui auront l’obligation de faire des travaux immobiliers en 2018 et 2019 : Quels travaux faire ? Faut-il engager des travaux lourds ou se contenter de travaux d’entretien ? Eh bien oui, ce prélèvement à la source nous oblige à nous questionner sur l'ampleur des travaux…"
 ---

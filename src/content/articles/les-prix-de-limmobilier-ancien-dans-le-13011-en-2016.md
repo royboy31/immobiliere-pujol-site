@@ -5,14 +5,14 @@ date: "2016-03-30"
 excerpt: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2016, il s’est vendu..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13011", "Arrondissements Marseille", "Arrondissement 13011 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/La_Treille-village32.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/La_Treille-village32.jpg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13011 en 2016"
 seoDescription: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2016, il s’est vendu dans le 13011 : – 153 appartements  au prix médian* arrondissement de  1910€ le m² . – 118 maisons au prix médian de…"
 ---
 
 <h4><strong>LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS .<br />
 </strong></h4>
-<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="/content/uploads/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s’est vendu dans le 13011 :<br />
+<p><img loading="lazy" decoding="async" class="size-medium wp-image-52850 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/03/20170313_125055-Copy-300x225.jpg" alt="" width="300" height="225" />En 2016, il s’est vendu dans le 13011 :<br />
 – 153 appartements  au prix médian* arrondissement de  1910€ le m² .<br />
 – 118 maisons au prix médian de 287600€ pour une surface de 98m² et 430m² de terrain.<br />
 <i><br />

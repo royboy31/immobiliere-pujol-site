@@ -15,10 +15,10 @@ seoDescription: "Découvrez notre carte professionnelle, nos assurances, nos gar
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2021/01/PUJOL3.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2021/01/PUJOL3-800x534.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2021/01/PUJOL3-600x400.jpg" 
-      <img src="/content/uploads/2021/01/PUJOL3.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/PUJOL3.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/PUJOL3-800x534.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/PUJOL3-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/PUJOL3.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -54,30 +54,30 @@ seoDescription: "Découvrez notre carte professionnelle, nos assurances, nos gar
 </ul>
 <div> </div>
 <h4>2. NOS TARIFS, NOS HONORAIRES</h4>
-<p><a href="/content/uploads/2025/12/Bareme-gestion-location-PUJOL-au-01_01_2026-1.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du  01/01/2026 en gestion locative</a></p>
-<p><a href="/content/uploads/2026/04/BAREMES-SYNDIC-IMMO-PUJOL-01012026.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du 1er Janvier 2026 en syndic</a></p>
-<p><a href="/content/uploads/2025/02/BAREME-TRANSACTION-PUJOL-AU-01-01-2025-1.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du 01/01/2025 en ventes</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/Bareme-gestion-location-PUJOL-au-01_01_2026-1.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du  01/01/2026 en gestion locative</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/04/BAREMES-SYNDIC-IMMO-PUJOL-01012026.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du 1er Janvier 2026 en syndic</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/BAREME-TRANSACTION-PUJOL-AU-01-01-2025-1.pdf" target="_blank" rel="noopener">Les tarifs immobilière Pujol à partir du 01/01/2025 en ventes</a></p>
 <h4>3. CARTE PROFESSIONNELLE</h4>
 <p>Carte professionnelle gestion et transaction n° d’identification CPI 1310 2015 000 000 284</p>
-<p>La <a href="/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">carte professionnelle immobilière </a></p>
-<p><a href="/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">Pujol en gestion immobilière transaction et syndic immobilière Pujol</a></p>
+<p>La <a href="https://www.immobiliere-pujol.fr/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">carte professionnelle immobilière </a></p>
+<p><a href="https://www.immobiliere-pujol.fr/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">Pujol en gestion immobilière transaction et syndic immobilière Pujol</a></p>
 <p>Non-détention de fonds « L&rsquo;immobilière Pujol ne doit recevoir ni détenir d&rsquo;autres fonds, effets ou valeurs que ceux représentatifs de sa rémunération ou de sa commission ».</p>
 <h4>4. GARANTIE FINANCIÈRE</h4>
 <h4>Gestion locative : 4,4 millions d&rsquo;euros</h4>
-<p><a href="/content/uploads/2026/02/GESTION-GFC.pdf" target="_blank" rel="noopener">Attestation garantie financière gestion locative 2026 Immobilière Pujol</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/GESTION-GFC.pdf" target="_blank" rel="noopener">Attestation garantie financière gestion locative 2026 Immobilière Pujol</a></p>
 <p><strong>Garantie financière syndic de copropriété:</strong> 25 millions d&rsquo;euros</p>
-<p><a href="/content/uploads/2026/02/GFC-SYNDIC.pdf" target="_blank" rel="noopener">Attestation garantie financière syndic de copropriété 2026 Immobilière Pujol</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/GFC-SYNDIC.pdf" target="_blank" rel="noopener">Attestation garantie financière syndic de copropriété 2026 Immobilière Pujol</a></p>
 <p><strong>Garantie financière Transaction  :</strong> 110 000€</p>
-<p><a href="/content/uploads/2026/02/GFC-TRANSACTION.pdf" target="_blank" rel="noopener">Attestation garantie financière transaction 2026 Immobilière Pujol</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/02/GFC-TRANSACTION.pdf" target="_blank" rel="noopener">Attestation garantie financière transaction 2026 Immobilière Pujol</a></p>
 <h4>5. ASSURANCE PROFESSIONNELLE</h4>
 <p><strong>Assurance professionnelle</strong> : MMA</p>
-<p><a href="/content/uploads/2026/01/410131-ATTESTATION-RCP-2026-ATTESTATION-DASSURANCE-RESPONSABILITE-CIVILE-PROFESSIONNELLE.pdf" target="_blank" rel="noopener">Attestation assurance professionnelle Immobilière Pujol 2026</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/410131-ATTESTATION-RCP-2026-ATTESTATION-DASSURANCE-RESPONSABILITE-CIVILE-PROFESSIONNELLE.pdf" target="_blank" rel="noopener">Attestation assurance professionnelle Immobilière Pujol 2026</a></p>
 <p>L’agence immobilière Pujol ne doit recevoir ni détenir d&rsquo;autres fonds, effets ou valeurs que ceux représentatifs de sa rémunération ou de sa commission.</p>
 <h4>6. INTERMÉDIAIRE D’ASSURANCE</h4>
 <p>L’Immobilière Pujol est enregistrée à L’Orias (intermédiaire d’assurance) sous le numéro 13001918</p>
-<p><a href="/content/uploads/2026/01/410131-ATTESTATION-RC-ORIAS-2026-resp-civile-INTERMEDIAIRE-EN-ASSURANCE.pdf" target="_blank" rel="noopener">Attestation d&rsquo;assurance responsabilité civile professionnelle &#8211; intermédiaire d&rsquo;assurance </a></p>
-<p><a href="/content/uploads/2026/01/410131-ATTESTATION-GF-ORIAS-2026-garantie.pdf" target="_blank" rel="noopener">Atttestation de garantie </a></p>
-<p><a href="/content/uploads/2026/01/ORIAS-attestation-inscription.pdf" target="_blank" rel="noopener">Attestation inscription</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/410131-ATTESTATION-RC-ORIAS-2026-resp-civile-INTERMEDIAIRE-EN-ASSURANCE.pdf" target="_blank" rel="noopener">Attestation d&rsquo;assurance responsabilité civile professionnelle &#8211; intermédiaire d&rsquo;assurance </a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/410131-ATTESTATION-GF-ORIAS-2026-garantie.pdf" target="_blank" rel="noopener">Atttestation de garantie </a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2026/01/ORIAS-attestation-inscription.pdf" target="_blank" rel="noopener">Attestation inscription</a></p>
 <h4>7. NOM DU MÉDIATEUR EN CAS DE LITIGE</h4>
 <p>En application de l’ordonnance n°2015-1033 du 20 août 2015 relative au règlement extrajudiciaire des litiges de consommation et du décret n° 2015-1382 du 30 octobre 2015, en cas de litige entre le professionnel et le consommateur, ceux-ci s’efforceront de trouver une solution amiable.</p>
 <p>À défaut d’accord amiable, le consommateur peut saisir gratuitement le médiateur de la consommation dont relève le professionnel, à savoir l’Association des Médiateurs Européens (AME CONSO), dans un délai d’un an à compter de la réclamation écrite adressée au professionnel.</p>

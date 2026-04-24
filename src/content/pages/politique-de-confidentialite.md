@@ -15,10 +15,10 @@ seoDescription: "La politique de confidentialité de Immobilière Pujol à Marse
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille-600x287.png" 
-      <img src="/content/uploads/2018/06/Devenir-gestionnaire-Immobilier-à-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille-600x287.png" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/Devenir-gestionnaire-Immobilier-%C3%A0-Marseille.png" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>

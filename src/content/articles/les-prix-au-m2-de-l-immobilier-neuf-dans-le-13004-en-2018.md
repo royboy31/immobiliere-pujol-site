@@ -5,7 +5,7 @@ date: "2019-07-10"
 excerpt: "Vous trouverez dans cet article une étude sur les prix au m2 de l’immobilier neuf dans le 13004 en 2018. La fourchette des transactions est établie par les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13004-1.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-1.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13004 en 2018"
 seoDescription: "Vous trouverez dans cet article une étude sur les prix au m2 de l'immobilier neuf dans le 13004 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians.En 2018, il s’est vendu dans le 4ème arrondissement de…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Vous trouverez dans cet article une étude sur les prix au m2 d
 
 
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235446" src="/content/uploads/2019/05/13004.jpeg" alt="immobilier neuf 13004" width="299" height="224" srcset="/content/uploads/2019/05/13004.jpeg 640w, /content/uploads/2019/05/13004-200x150.jpeg 200w, /content/uploads/2019/05/13004-600x450.jpg 600w" sizes="auto, (max-width: 299px) 100vw, 299px" /></figure>
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235446" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004.jpeg" alt="immobilier neuf 13004" width="299" height="224" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004.jpeg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-200x150.jpeg 200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-600x450.jpg 600w" sizes="auto, (max-width: 299px) 100vw, 299px" /></figure>
 </div>
 
 

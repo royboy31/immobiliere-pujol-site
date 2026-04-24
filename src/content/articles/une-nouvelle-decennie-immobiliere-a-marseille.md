@@ -5,7 +5,7 @@ date: "2020-01-26"
 excerpt: "Durant la décennie de 2010 à 2019 Les taux d’intérêt se sont effondrés, La rentabilité de l’épargne a plongé (sauf pour les actions).Les hausses d’impôts de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/01/2020-dans-limmobiliere-Marseille-ancien-et-neuf2-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/01/2020-dans-limmobiliere-Marseille-ancien-et-neuf2-1.jpg"
 seoTitle: "Une nouvelle décennie immobilière à Marseille"
 seoDescription: "L'épargne sans risque n'existe plus. Soyez entreprenant, raisonné et pragmatique pour cette décennie d'investissement immobilier"
 ---

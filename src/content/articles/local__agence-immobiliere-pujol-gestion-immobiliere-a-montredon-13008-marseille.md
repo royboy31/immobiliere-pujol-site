@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "L’agence immobilière Pujol est spécialisée dans la gestion immobilière à Montredon, un quartier du 13008 à Marseille. La gestion immobilière englobe un..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Agence immobilière Pujol : Gestion immobilière à Montredon, 13008, Marseille"
 seoDescription: ""
 ---

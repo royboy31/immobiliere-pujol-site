@@ -5,7 +5,7 @@ date: "2020-02-25"
 excerpt: "Quels sont les prix au m2 de l’immobilier ancien à Marseille dans le 13015 en 2019 ? En 2019, il s’est vendu dans le 15ème arrondissement de Marseille : 200..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13015-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13015-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13015 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13015 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <p>Cet arrondissement est en pleine mutation. L&rsquo;un des projets phare de cet arrondissement ? Le futur parc des Aygalades, véritable « coulée verte » en plein Marseille. Ce futur parc de 14ha sera sûrement tout aussi beau que la <a href="https://www.tourisme-marseille.com/fiche/cascade-des-aygalades-rue-augustin-roux-13015-marseille/">cascade des Aygalades Marseill</a>e qui se situe, elle aussi dans le 15ème arrondissement de Marseille.</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235454" src="/content/uploads/2019/05/13015.jpeg" alt="Le prix au m2 de l'ancien dans le 15eme arrondissement de Marseille en 2018" width="206" height="144" srcset="/content/uploads/2019/05/13015.jpeg 1000w, /content/uploads/2019/05/13015-768x538.jpeg 768w, /content/uploads/2019/05/13015-600x420.jpg 600w, /content/uploads/2019/05/13015-800x560.jpg 800w" sizes="auto, (max-width: 206px) 100vw, 206px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235454" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg" alt="Le prix au m2 de l'ancien dans le 15eme arrondissement de Marseille en 2018" width="206" height="144" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg 1000w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-800x560.jpg 800w" sizes="auto, (max-width: 206px) 100vw, 206px" />
 <figcaption>Le Grand Littoral, 13015</figcaption>
 </figure>
 </div>

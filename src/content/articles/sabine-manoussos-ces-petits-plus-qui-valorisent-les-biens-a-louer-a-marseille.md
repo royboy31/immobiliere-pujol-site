@@ -5,13 +5,13 @@ date: "2021-04-23"
 excerpt: "Sabine Manoussos connaît très bien le marché locatif à Marseille. Responsable de notre service gestion location depuis 11 ans, avec 450 biens mis en location..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/04/sabine-article-gestion-locative.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/sabine-article-gestion-locative.jpg"
 seoTitle: "Sabine Manoussos : Ces petits « plus » qui valorisent les biens à louer à Marseille"
 seoDescription: "Ces petits \"plus\" qui valorisent les biens à louer à Marseille par Sabine Manoussos responsable de la location chez Immobilière Pujol"
 ---
 
 <p>Sabine Manoussos connaît très bien le <a href="/service-immobilier/mettre-en-location/" target="_blank" rel="noopener">marché locatif à Marseille</a>. Responsable de notre service gestion location depuis 11 ans, avec <strong>450 biens mis en location chaque année</strong>, elle porte un regard expert et sans compromis sur la situation de la ville, ses atouts, et ses spécificités. Elle nous livre ici ses réflexions sur le marché et son évolution probable dans les années à venir.</p>
-<p style="text-align: center;"><img loading="lazy" decoding="async" class="alignnone wp-image-403537" src="/content/uploads/2021/04/sabine-1.jpg" alt="sabine gestionnaire locative immobilière pujol" width="337" height="507" srcset="/content/uploads/2021/04/sabine-1.jpg 533w, /content/uploads/2021/04/sabine-1-400x600.jpg 400w" sizes="auto, (max-width: 337px) 100vw, 337px" /></p>
+<p style="text-align: center;"><img loading="lazy" decoding="async" class="alignnone wp-image-403537" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/sabine-1.jpg" alt="sabine gestionnaire locative immobilière pujol" width="337" height="507" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/sabine-1.jpg 533w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/sabine-1-400x600.jpg 400w" sizes="auto, (max-width: 337px) 100vw, 337px" /></p>
 <h2>À Marseille, quelle est l’influence de l’emplacement sur la valeur locative d’un bien ?</h2>
 <p>&nbsp;</p>
 <p>« Marseille est assez spéciale en la matière. Traditionnellement, dans les grandes villes, l’hypercentre est très demandé et les loyers y sont supérieurs aux quartiers en périphérie. Chez nous c’est très différent. L’attractivité du centre-ville n’est pas vraiment celle attendue. Il faut dire que certains quartiers sont quasiment laissés à l’abandon, et l’insalubrité y côtoie l’insécurité.</p>
@@ -23,7 +23,7 @@ seoDescription: "Ces petits \"plus\" qui valorisent les biens à louer à Marsei
 <p>« Il n’y a plus rien à louer à Marseille, donc tout se loue ou presque ! En tout cas des logements bien entretenus trouvent toujours preneur, et à un prix correct. Mais comme il y a pénurie, certains propriétaires ne font plus d’effort. Résultat : un patrimoine qui a tendance à se dégrader. </p>
 <p>Chez Immobilière Pujol, nous luttons contre ces phénomènes et nous encourageons les propriétaires à entretenir leurs biens. C’est vertueux pour tout le monde ! Un patrimoine entretenu et <a href="/annonces/l002502-51-rue-jean-fiolle-castellane-13006-marseille-france/" target="_blank" rel="noopener">un appartement mis en valeur</a>, c’est évidemment plus rentable. »</p>
 <p>&nbsp;</p>
-<p style="text-align: center;"><img loading="lazy" decoding="async" class="aligncenter wp-image-403525" src="/content/uploads/2021/04/evolution-offre-locative-marseille.png" alt="total offre locative à Marseille" width="537" height="268" /><em>Source : données Immobilière Pujol</em></p>
+<p style="text-align: center;"><img loading="lazy" decoding="async" class="aligncenter wp-image-403525" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/evolution-offre-locative-marseille.png" alt="total offre locative à Marseille" width="537" height="268" /><em>Source : données Immobilière Pujol</em></p>
 <p>&nbsp;</p>
 <h2>Qu’est-ce qui explique cette pénurie ?</h2>
 <p>« Déjà un constat : <a href="/location-courte-duree-quelle-sont-les-regles-a-respecter/" target="_blank" rel="noopener">Marseille manque de logements</a>. La fracture s’agrandit sans cesse entre d’un côté des logements qui ne sont pas en état d’être loués – en tout cas pas chez nous – et les logements sélectifs trop peu nombreux pour satisfaire la demande.</p>
@@ -55,7 +55,7 @@ seoDescription: "Ces petits \"plus\" qui valorisent les biens à louer à Marsei
 	<li>L’espace optimisé, meublé, mais pas trop, pour rendre justice aux volumes.</li>
 	<li>La décoration, que nous assurons pour mettre en valeur les biens.</li>
 </ul>
-<p><img loading="lazy" decoding="async" class=" wp-image-403526 aligncenter" src="/content/uploads/2021/04/exemple-mise-en-valeur-imobilier-pujol.jpg" alt="exemple mise en valeur d'appartement immobilière pujol" width="465" height="311" /></p>
+<p><img loading="lazy" decoding="async" class=" wp-image-403526 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/04/exemple-mise-en-valeur-imobilier-pujol.jpg" alt="exemple mise en valeur d'appartement immobilière pujol" width="465" height="311" /></p>
 <p style="text-align: center;"><a href="/annonces/l002502-51-rue-jean-fiolle-castellane-13006-marseille-france/" target="_blank" rel="noopener"><em>Exemple de mise en valeur réalisée pour un appartement rue Jean Fiolle, dans le 6e</em></a></p>
 <p>&nbsp;</p>
 <p>Évidemment il faut aussi que les annonces soient visibles et que les photos soient de belle qualité. Nous avons un service dédié pour cela. Nous nous chargeons également de faire des <a href="about:blank">visites virtuelles</a>, qui sont devenues un vrai plus pour les futurs locataires. Ces visites sont très appréciées pour la vision globale du bien et de l&rsquo;immeuble et le gain de temps, la visite en physique en général ne fait que confirmer le grand intérêt suscité en virtuel</p>

@@ -15,10 +15,10 @@ seoDescription: "Property management is not for everyone. It's exciting work, bu
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2018/02/property-management.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2018/02/property-management-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2018/02/property-management-600x375.jpg" 
-      <img src="/content/uploads/2018/02/property-management.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/property-management.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/property-management-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/property-management-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/property-management.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -54,7 +54,7 @@ We manage all aspects of co-ownership properties: reception staff, cleaners, ref
 
 We undertake technical and security audits, budgeting and cost management, attend the meetings of the co-owners and always help to reach the best possible solution.
 
-<img loading="lazy" decoding="async" class="size-medium wp-image-225192 aligncenter" src="/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" alt="property management in marseille" width="800" height="500" srcset="/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg 800w, /content/uploads/2017/11/Un-syndic-de-copropriété-768x480.jpg 768w, /content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg 600w, /content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="size-medium wp-image-225192 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg" alt="property management in marseille" width="800" height="500" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-800x500.jpg 800w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-768x480.jpg 768w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-600x375.jpg 600w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/Un-syndic-de-copropriété-1200x750.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 
 Our property management agreements spell out clearly our responsibilities, the applicable fees and the artisans or companies who will be involved in the property. Each mandate can be adapted to meet the specific needs of your co-ownership.
 
@@ -67,7 +67,7 @@ Services account for about 20% of expenses. We spend much of our management time
 Each building has its own particular system of charges and we adapt our management to each particular case.
 <h2>Our fees</h2>
 Our fees are reviewed annually in the context of the general assemblies, in order to meet new customer needs and changes in legislation. We practice participatory management so as to involve each co-owner in the affairs of the building.
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-225463" src="/content/uploads/2017/11/reunion-syndic2-1-800x600.jpg" alt="property management agency marseille" width="800" height="600" srcset="/content/uploads/2017/11/reunion-syndic2-1-800x600.jpg 800w, /content/uploads/2017/11/reunion-syndic2-1-768x576.jpg 768w, /content/uploads/2017/11/reunion-syndic2-1-200x150.jpg 200w, /content/uploads/2017/11/reunion-syndic2-1-600x450.jpg 600w, /content/uploads/2017/11/reunion-syndic2-1-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-225463" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-800x600.jpg" alt="property management agency marseille" width="800" height="600" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-800x600.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-768x576.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-200x150.jpg 200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-600x450.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/reunion-syndic2-1-1200x900.jpg 1200w" sizes="auto, (max-width: 800px) 100vw, 800px" />
 Our most recent offers :
 
 &#8211; Building with 5 lots: €1.300, including taxes

@@ -5,7 +5,7 @@ date: "2017-06-12"
 excerpt: "J’aime le 6e arrondissement de Marseille : vous le savez. Castellane est mon quartier préféré, celui où j’investis et fais investir mes clients sans l’ombre..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille", "Arrondissements Marseille", "Arrondissement 13006 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/B000396_BA10.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/B000396_BA10.jpg"
 seoTitle: "Acheter à Castellane dans le 13006 pour 150 000 à 200 000€ ?"
 seoDescription: "J’aime le 6e arrondissement de Marseille : vous le savez. Castellane est mon quartier préféré, celui où j’investis et fais investir mes clients sans l’ombre d’une hésitation. Je vous propose de passer en revue ce qui s’y vend entre 150 000€ et 200 000€. Il y a en a pour…"
 ---
@@ -18,13 +18,13 @@ seoDescription: "J’aime le 6e arrondissement de Marseille : vous le savez. Cas
 
 <span style="font-weight: 400;">Pour plus d’information sur les prix immobilier du 13006, consultez <a href="/prix-statistiques-immobilier-13006-marseille-2016/">nos pages spécialisées</a>. </span><span style="font-weight: 400;">J’ai sélectionné 4 annonces assez représentatives de ce que vous pouvez y trouver.</span>
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53160" src="/content/uploads/2017/05/acheter-un-appartement-a-marseille.png" alt="acheter un appartement a marseille" width="695" height="692" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53160" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/05/acheter-un-appartement-a-marseille.png" alt="acheter un appartement a marseille" width="695" height="692" />
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53157" src="/content/uploads/2017/05/acheter-un-appartement-a-castellane.png" alt="acheter un appartement a castellane" width="718" height="694" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53157" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/05/acheter-un-appartement-a-castellane.png" alt="acheter un appartement a castellane" width="718" height="694" />
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53159" src="/content/uploads/2017/05/investir-dans-immobilier-marseille.png" alt="investir dans immobilier marseille" width="685" height="685" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53159" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/05/investir-dans-immobilier-marseille.png" alt="investir dans immobilier marseille" width="685" height="685" />
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53156" src="/content/uploads/2017/05/acheter-un-appartement-13006.png" alt="acheter un appartement 13006" width="670" height="682" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53156" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/05/acheter-un-appartement-13006.png" alt="acheter un appartement 13006" width="670" height="682" />
 
 <span style="font-weight: 400;">Beaucoup d’appartements sont anciens et à rénover. Acheter dans le quartier à 2000€ voire 2200€ quand tout est à refaire est à mon avis une opportunité (1er appartement de la liste).</span>
 
@@ -34,7 +34,7 @@ seoDescription: "J’aime le 6e arrondissement de Marseille : vous le savez. Cas
 <h2><span style="font-weight: 400;">Pour le neuf</span></h2>
 <span style="font-weight: 400;">Vous trouverez un unique<strong> programme de Nexity</strong> : la City. Ce type de programme étant très rare, il a eu du succès et les prix se sont envolés durant sa commercialisation. C’est un beau programme à la place de l&rsquo;hôpital Ambroise Paré qui va booster davantage le quartier. Le seul souci est que la grille a été majorée de 20% entre son lancement et les prix actuels. A ce prix, vous ne réaliserez que des moins values&#8230;</span>
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53158" src="/content/uploads/2017/05/acheter-un-appartement-neuf-marseille.png" alt="acheter un appartement neuf marseille" width="632" height="581" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-53158" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/05/acheter-un-appartement-neuf-marseille.png" alt="acheter un appartement neuf marseille" width="632" height="581" />
 
 <a href="https://www.nexity.fr/neuf/87__87043"><span style="font-weight: 400;">https://www.nexity.fr/neuf/87__87043</span></a>
 

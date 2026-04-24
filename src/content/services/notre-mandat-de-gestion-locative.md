@@ -20,10 +20,10 @@ seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/mandat-de-location-à-marseille-1200x900.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/mandat-de-location-à-marseille-800x600.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/mandat-de-location-à-marseille-600x450.jpg" 
-      <img src="/content/uploads/2017/11/mandat-de-location-à-marseille-1200x900.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/mandat-de-location-à-marseille-1200x900.jpg" 
+      <source media="(min-width: 600px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/mandat-de-location-à-marseille-800x600.jpg" 
+      <source media="(min-width: 320px)" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/mandat-de-location-à-marseille-600x450.jpg" 
+      <img src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/mandat-de-location-à-marseille-1200x900.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -34,7 +34,7 @@ seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
                     <h3 class="contextual__title">Notre Mandat De Gestion Locative</h3>
-                    <p><img loading="lazy" decoding="async" class="size-medium wp-image-39871 aligncenter" src="/content/uploads/2017/01/logo-immobilier-Pujol-h-RVB-300x90.jpg" alt="" width="300" height="90" /></p>
+                    <p><img loading="lazy" decoding="async" class="size-medium wp-image-39871 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/logo-immobilier-Pujol-h-RVB-300x90.jpg" alt="" width="300" height="90" /></p>
 <p><strong>MANDAT DE GERANCE PERSONNE PHYSIQUE N°</strong></p>
 <p><em>Articles 1984 et suivants du Code civil</em><br />
 <em>loi n° 70-9 du 2 janvier 1970 et décret d’application n° 72-678 du 20 juillet 1972</em></p>

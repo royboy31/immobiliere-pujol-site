@@ -1,7 +1,7 @@
 ---
 title: "Notre agence immobilière"
 slug: "agence-immobiliere-pujol"
-heroVideo: "https://www.immobiliere-pujol.fr/content/uploads/2021/01/meilleure-agence-immobiliere-marseille.mp4"
+heroVideo: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleure-agence-immobiliere-marseille.mp4"
 ctaText: "Contacter l'agence"
 seoTitle: "Notre agence immobilière"
 seoDescription: "Qui est l'agence Immobilière Pujol? Une belle équipe de professionnels qui vous accompagnera avec plaisir dans votre projet immobilier"
@@ -22,7 +22,7 @@ seoDescription: "Qui est l'agence Immobilière Pujol? Une belle équipe de profe
 	</div>
 		<!-- Background video -->
   <video class="hero__video" loop autoplay muted >
-    <source src="/content/uploads/2021/01/meilleure-agence-immobiliere-marseille.mp4" type="video/mp4">
+    <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleure-agence-immobiliere-marseille.mp4" type="video/mp4">
     Your browser doesn't support HTML5 video tag.
   </video>
 	</section>

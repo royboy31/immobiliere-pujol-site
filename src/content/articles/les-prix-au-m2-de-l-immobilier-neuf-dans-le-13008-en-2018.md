@@ -5,7 +5,7 @@ date: "2019-06-12"
 excerpt: "Voici une comparaison des prix au m2 de l’immobilier neuf dans le 13008 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/13008-3.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-3.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13008 en 2018"
 seoDescription: "Voici une comparaison des prix au m2 de l'immobilier neuf dans le 13008 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 8ème arrondissement de Marseille:64 appartements au prix…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "Voici une comparaison des prix au m2 de l'immobilier neuf dans 
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13008-2.jpeg" alt="Les prix au m2 de l'immobilier neuf dans le 13008 en 2018" class="wp-image-235464" width="235" height="165" srcset="/content/uploads/2019/05/13008-2.jpeg 949w, /content/uploads/2019/05/13008-2-768x538.jpeg 768w, /content/uploads/2019/05/13008-2-600x420.jpg 600w, /content/uploads/2019/05/13008-2-800x561.jpg 800w" sizes="auto, (max-width: 235px) 100vw, 235px" /><figcaption>Les Goudes, 13008</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-2.jpeg" alt="Les prix au m2 de l'immobilier neuf dans le 13008 en 2018" class="wp-image-235464" width="235" height="165" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-2.jpeg 949w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-2-768x538.jpeg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-2-600x420.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13008-2-800x561.jpg 800w" sizes="auto, (max-width: 235px) 100vw, 235px" /><figcaption>Les Goudes, 13008</figcaption></figure></div>
 
 
 

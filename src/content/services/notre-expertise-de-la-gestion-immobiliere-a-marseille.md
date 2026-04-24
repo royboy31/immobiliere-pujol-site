@@ -15,10 +15,10 @@ seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences im
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/caro.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/caro-698x800.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/caro-524x600.jpg" 
-      <img src="/content/uploads/2017/10/caro.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/caro.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/caro-698x800.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/caro-524x600.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/caro.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -64,7 +64,7 @@ seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences im
 	<li>Une agence qui vous permettra de faire tout autre chose que de la gestion immobilière.</li>
 </ul>
 <p>Bref, une agence qui fera en sorte que votre expérience immobilière soit réussie, qui y croit et met tout en oeuvre pour le faire.</p>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-386018" src="/content/uploads/2017/10/belle-experience-immobiliere-800x154.jpg" alt="" width="800" height="154" srcset="/content/uploads/2017/10/belle-experience-immobiliere-800x154.jpg 800w, /content/uploads/2017/10/belle-experience-immobiliere-768x147.jpg 768w, /content/uploads/2017/10/belle-experience-immobiliere-1536x295.jpg 1536w, /content/uploads/2017/10/belle-experience-immobiliere-600x115.jpg 600w, /content/uploads/2017/10/belle-experience-immobiliere-1200x230.jpg 1200w, /content/uploads/2017/10/belle-experience-immobiliere.jpg 2000w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-386018" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-800x154.jpg" alt="" width="800" height="154" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-800x154.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-768x147.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-1536x295.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-600x115.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere-1200x230.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/belle-experience-immobiliere.jpg 2000w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <h2>Un administrateur de biens immobiliers qui vous garantit des loyers et des revenus réguliers</h2>
 <p>La capacité d&rsquo;une agence à vous garantir les loyers et des revenus réguliers est un critère de choix.</p>
 <p>Chez Immobilière Pujol, vous bénéficiez de notre capacité à vous protéger de toute difficulté. </p>

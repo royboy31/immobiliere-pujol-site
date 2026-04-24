@@ -15,10 +15,10 @@ seoDescription: "Ce blog est un espace d'information et de communication pour no
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2019/02/vinced-photo-immo-pujol-facade-27-1200x800.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2019/02/vinced-photo-immo-pujol-facade-27-800x533.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2019/02/vinced-photo-immo-pujol-facade-27-600x400.jpg" 
-      <img src="/content/uploads/2019/02/vinced-photo-immo-pujol-facade-27-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/vinced-photo-immo-pujol-facade-27-1200x800.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/vinced-photo-immo-pujol-facade-27-800x533.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/vinced-photo-immo-pujol-facade-27-600x400.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/vinced-photo-immo-pujol-facade-27-1200x800.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -45,7 +45,7 @@ seoDescription: "Ce blog est un espace d'information et de communication pour no
                     <p><a href="/blog/"><strong>Ce blog</strong></a> est un espace d&rsquo;information et de communication pour nos clients et nos futurs clients.</p>
 <p>Nous le tenons <strong>depuis la création de la société </strong> au gré du temps et des ressources que nous pouvons y consacrer et au gré de nos envies.</p>
 <p>C&rsquo;est aussi<strong> un espace de liberté, d&rsquo;avis et de coups de gueule</strong> de notre équipe qui y participe.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-382039 alignleft" src="/content/uploads/2019/02/PI-1348-170919-558x800.jpg" alt="" width="275" height="394" srcset="/content/uploads/2019/02/PI-1348-170919-558x800.jpg 558w, /content/uploads/2019/02/PI-1348-170919-768x1102.jpg 768w, /content/uploads/2019/02/PI-1348-170919-1071x1536.jpg 1071w, /content/uploads/2019/02/PI-1348-170919-418x600.jpg 418w, /content/uploads/2019/02/PI-1348-170919-837x1200.jpg 837w, /content/uploads/2019/02/PI-1348-170919.jpg 1227w" sizes="auto, (max-width: 275px) 100vw, 275px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-382039 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-558x800.jpg" alt="" width="275" height="394" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-558x800.jpg 558w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-768x1102.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-1071x1536.jpg 1071w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-418x600.jpg 418w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919-837x1200.jpg 837w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/PI-1348-170919.jpg 1227w" sizes="auto, (max-width: 275px) 100vw, 275px" /></p>
 <h2>Les catégories du blog</h2>
 <p>Vous y trouverez 4 catégories:</p>
 <ul>

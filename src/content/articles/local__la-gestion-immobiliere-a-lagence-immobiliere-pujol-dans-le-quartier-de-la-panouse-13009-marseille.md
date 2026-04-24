@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "La gestion immobilière est un service proposé par l’agence immobilière Pujol, qui consiste à prendre en charge la gestion de biens immobiliers pour le compte..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "La gestion immobilière à l’agence immobilière Pujol dans le quartier de La Panouse, 13009 Marseille"
 seoDescription: ""
 ---

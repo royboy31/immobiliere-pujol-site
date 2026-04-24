@@ -15,10 +15,10 @@ seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujo
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/10/PU-0747-1200x750.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/10/PU-0747-800x500.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/10/PU-0747-600x375.jpg" 
-      <img src="/content/uploads/2017/10/PU-0747-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-1200x750.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-800x500.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-600x375.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-1200x750.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -63,7 +63,7 @@ seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujo
 <p><strong>Pourquoi je fais ce métier?  Pour partager cette vision, qui est le fruit de mon vécu</strong>.</p>
 <p>Les lectures, expériences, analyses, découvertes et échanges avec mes clients, mes prestataires et les lecteurs qui suivent <a href="/blog/" target="_blank" rel="noopener noreferrer">mon blog  </a>m’ont permis de développer une culture forte en matière de services immobiliers et d’économie immobilière.</p>
 <p>Il est essentiel pour moi de communiquer ce qui me semble juste, du moins ce qui est le plus proche possible de la réalité.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-379268 aligncenter" src="/content/uploads/2017/10/PI-1348-170919-558x800.jpg" alt="" width="352" height="505" srcset="/content/uploads/2017/10/PI-1348-170919-558x800.jpg 558w, /content/uploads/2017/10/PI-1348-170919-768x1102.jpg 768w, /content/uploads/2017/10/PI-1348-170919-1071x1536.jpg 1071w, /content/uploads/2017/10/PI-1348-170919-418x600.jpg 418w, /content/uploads/2017/10/PI-1348-170919-837x1200.jpg 837w, /content/uploads/2017/10/PI-1348-170919.jpg 1227w" sizes="auto, (max-width: 352px) 100vw, 352px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-379268 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-558x800.jpg" alt="" width="352" height="505" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-558x800.jpg 558w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-768x1102.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-1071x1536.jpg 1071w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-418x600.jpg 418w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919-837x1200.jpg 837w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PI-1348-170919.jpg 1227w" sizes="auto, (max-width: 352px) 100vw, 352px" /></p>
 <p>J’espère ainsi éviter à mes clients  des erreurs de jugement et des prises de décisions qui peuvent coûter cher.</p>
 <p>Il est pour moi difficilement acceptable de voir des personnes surpayer un appartement neuf pour déménager 3 ans plus tard en perdant des milliers d’euros ou des moins jeunes tomber dans les filets de marchands de rêves.</p>
 <p>J’espère éviter à une large audience des pertes qui représentent souvent des années d’économies et de privation.</p>

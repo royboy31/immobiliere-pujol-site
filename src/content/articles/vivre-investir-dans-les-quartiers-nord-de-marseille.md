@@ -5,7 +5,7 @@ date: "2017-06-15"
 excerpt: "Choisir de vivre ou d’investir dans les quartiers nord de Marseille qui ont si mauvaise réputation… Ici les problèmes de sécurité, de civilité et de propreté..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/vivre-quartier-territoire-nord-marseille-e1497252687975.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vivre-quartier-territoire-nord-marseille-e1497252687975.jpg"
 seoTitle: "Vivre dans les Quartiers Nord de Marseille : bien choisir son secteur pour investir"
 seoDescription: "Choisir de vivre ou d'investir dans les quartiers nord de Marseille qui ont si mauvaise réputation... Ici les problèmes de sécurité, de civilité et de propreté sont criants, mais ils ne doivent pas résumer à eux seuls ces quartiers. Bien sûr que les prix vont de 600€ le m pour…"
 ---
@@ -55,7 +55,7 @@ Ces grands ensembles ingérables, avec des chauffages collectifs, ces tours infe
 
 Qui sait si dans 10 ou 15 ans, <strong>ce problème politique réglé, ces tours détruites, des projets d’école de qualité bâtis</strong>, ces quartiers ne deviendraient pas des quartiers d’avenir? D&rsquo;ici là il faut tenir&#8230;
 
-<img loading="lazy" decoding="async" class="alignnone size-full wp-image-226663" src="/content/uploads/2017/06/grand-littoral-300x116.jpg" alt="" width="300" height="116" />
+<img loading="lazy" decoding="async" class="alignnone size-full wp-image-226663" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/06/grand-littoral-300x116.jpg" alt="" width="300" height="116" />
 <h2>Témoignage de Pierre-François Duwat, directeur de Grand Littoral</h2>
 « Les quartiers nord souffrent d’une image très négative. Je ne prétends pas que cette réputation soit totalement infondée, cependant, il convient d’amender l’image véhiculée par les médias. Certains secteurs de ce périmètre sont agréables à vivre. C’est notamment le cas de l’Estaque, qui possède une vraie dynamique de village et bénéficie, en outre, de la présence permanente de la mer, mais aussi de Saint-Antoine, un quartier où les habitants se connaissent, se saluent, loin de l’anonymat de certains quartiers. Le maintien des commerces de proximité constitue également un atout.
 Grand Littoral fait partie intégrante de la vie de ces quartiers et s’intègre dans le tissu socio-économique. Les habitants qui jouaient sur ce terrain vague il y a 25 ans font leurs courses, voire travaillent dans ce centre commercial, le plus grand de la région.

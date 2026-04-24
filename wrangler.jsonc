@@ -12,12 +12,12 @@
 	"observability": {
 		"enabled": true
 	},
-	// D1 + R2 bindings — uncomment when creating the resources in Gate 2:
-	//   npx wrangler d1 create pujol-annonces
-	//   npx wrangler r2 bucket create pujol-photos
-	// Then paste the database_id and re-enable.
-	//
-	// "d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "PASTE_ID_HERE" }],
-	// "r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }]
-	"vars": {}
+	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }],
+	"vars": {
+		"UPLOAD_TOKEN": "pujol-r2-upload-4c3e8f9d1b2a",
+		"ADMIN_EMAILS": "roy@perelweb.studio,carolinepujol@immobiliere-pujol.fr",
+		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$zDBk3btyW9Vd0qPWmGtPqw$LPAVzYrrQw0GlsWzTlK0f6Bdmt--U9uLNbZ0p8bMV5s",
+		"ADMIN_SESSION_SECRET": "zgSxSQYzhMeUaYHhZbnRKgJ2SN8W28qj0m7vM1tDyvyScVLSbnhPIkTU5r8igeY_",
+		"ADMIN_PATH": "admin-pujol"
+	}
 }

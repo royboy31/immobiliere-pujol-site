@@ -5,7 +5,7 @@ date: "2020-07-15"
 excerpt: "Nous louons et gérons des appartements depuis plus de 20 ans. Au fil du temps, nos clients propriétaires et locataires ont évolué. Le confort mais aussi la..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/07/shoootin-photo-9-Copy.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/07/shoootin-photo-9-Copy.jpg"
 seoTitle: "Avant/Après  : Rénover et meubler joliment pour mieux louer"
 seoDescription: "Nous louons et gérons des appartements depuis plus de 20 ans. Au fil du temps, nos clients propriétaires et locataires ont évolué. Le confort mais aussi la décoration des appartements présentés à la location sont devenus des conditions de valorisation des loyers et de choix des candidats. Un appartement propre…"
 ---
@@ -19,7 +19,7 @@ Aujourd&rsquo;hui l&rsquo;Immobilière Pujol, se dote d&rsquo;une nouvelle offre
 Dans cet article, nous vous conseillons dans vos travaux de rénovation pour coller au mieux aux attentes des locataires et pour cela nous vous présentons notre dernière réalisation : <br />
 Un appartement de type 1 à rénover de 31m² près de la place Castellane transformé en un meublé de type 2. <br />
 Cet appartement était loué vide 480€ charges comprises. Grâce à cette rénovation, il est  présent loué 850€ wifi et charges locatives inclus.</p>
-<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-355132" src="/content/uploads/2020/07/shoootin-photo-2-Copy.jpg" alt="" width="640" height="427" srcset="/content/uploads/2020/07/shoootin-photo-2-Copy.jpg 640w, /content/uploads/2020/07/shoootin-photo-2-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /><br />
+<h3><img loading="lazy" decoding="async" class="alignnone size-full wp-image-355132" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/07/shoootin-photo-2-Copy.jpg" alt="" width="640" height="427" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/07/shoootin-photo-2-Copy.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/07/shoootin-photo-2-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /><br />
 <br />
 <span style="font-family: 'book antiqua', palatino, serif;">Créez une chambre ou un coin nuit dans vos locations</span></h3>
 <p><br />

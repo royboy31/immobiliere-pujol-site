@@ -5,7 +5,7 @@ date: "2020-02-14"
 excerpt: "Le 5eme arrondissement de Marseille est toujours le secteur très dynamique malgré les constructions qui s’y accumulent depuis des années et des périodes de..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-ancien-dans-le-13005-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-ancien-dans-le-13005-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13005 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13005 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---

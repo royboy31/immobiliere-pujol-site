@@ -5,7 +5,7 @@ date: "2019-07-25"
 excerpt: "Un marché sur sa lancée Comme chaque trimestre, nous dressons un bilan du marché immobilier à Marseille : location, vente… Vous trouverez les données chiffrées..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/photo_fd0d7681c563d1b8c5c5809ce3400d40-28-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/photo_fd0d7681c563d1b8c5c5809ce3400d40-28-1200x800.jpg"
 seoTitle: "Le marché immobilier à Marseille au 2e trimestre 2019"
 seoDescription: "Comme chaque trimestre, nous dressons un bilan du marché immobilier à Marseille : location, vente…"
 ---
@@ -54,7 +54,7 @@ seoDescription: "Comme chaque trimestre, nous dressons un bilan du marché immob
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="593" height="347" src="/content/uploads/2019/07/analayse-marché-immobilier-marseille.png" alt="analayse-marché-immobilier-marseille" class="wp-image-244326"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="593" height="347" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/analayse-march%C3%A9-immobilier-marseille.png" alt="analayse-marché-immobilier-marseille" class="wp-image-244326"/></figure>
 
 
 
@@ -75,7 +75,7 @@ seoDescription: "Comme chaque trimestre, nous dressons un bilan du marché immob
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="613" height="366" src="/content/uploads/2019/07/evolution-des-prix-dans-le-13001-marseille.png" alt="evolution-des-prix-dans-le-13001-marseille" class="wp-image-244327" srcset="/content/uploads/2019/07/evolution-des-prix-dans-le-13001-marseille.png 613w, /content/uploads/2019/07/evolution-des-prix-dans-le-13001-marseille-600x358.png 600w" sizes="auto, (max-width: 613px) 100vw, 613px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="613" height="366" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/evolution-des-prix-dans-le-13001-marseille.png" alt="evolution-des-prix-dans-le-13001-marseille" class="wp-image-244327" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/evolution-des-prix-dans-le-13001-marseille.png 613w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/evolution-des-prix-dans-le-13001-marseille-600x358.png 600w" sizes="auto, (max-width: 613px) 100vw, 613px" /></figure>
 
 
 
@@ -83,7 +83,7 @@ seoDescription: "Comme chaque trimestre, nous dressons un bilan du marché immob
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="602" height="329" src="/content/uploads/2019/07/prix-appartement-neuf-dans-le-13001-marseille.png" alt="" class="wp-image-244328" srcset="/content/uploads/2019/07/prix-appartement-neuf-dans-le-13001-marseille.png 602w, /content/uploads/2019/07/prix-appartement-neuf-dans-le-13001-marseille-600x328.png 600w" sizes="auto, (max-width: 602px) 100vw, 602px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="602" height="329" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/prix-appartement-neuf-dans-le-13001-marseille.png" alt="" class="wp-image-244328" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/prix-appartement-neuf-dans-le-13001-marseille.png 602w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/prix-appartement-neuf-dans-le-13001-marseille-600x328.png 600w" sizes="auto, (max-width: 602px) 100vw, 602px" /></figure>
 
 
 

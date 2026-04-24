@@ -15,10 +15,10 @@ seoDescription: "Evaluez les honoraires de gestion d'un syndic de copropriété 
     
 	</div>
 	    <picture class="hero__image ">
-      <source media="(min-width: 1100px)" srcset="/content/uploads/2017/11/PU-0504-e1482147018365.jpg" 
-      <source media="(min-width: 600px)" srcset="/content/uploads/2017/11/PU-0504-e1482147018365-800x499.jpg" 
-      <source media="(min-width: 320px)" srcset="/content/uploads/2017/11/PU-0504-e1482147018365-600x374.jpg" 
-      <img src="/content/uploads/2017/11/PU-0504-e1482147018365.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
+      <source media="(min-width: 1100px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0504-e1482147018365.jpg" 
+      <source media="(min-width: 600px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0504-e1482147018365-800x499.jpg" 
+      <source media="(min-width: 320px)" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0504-e1482147018365-600x374.jpg" 
+      <img src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0504-e1482147018365.jpg" loading="lazy"  alt="Immobilière pujol | Nous croyons que l’immobilier est fait de belles expériences">
     </picture>
 
 	</section>
@@ -67,7 +67,7 @@ Certains confrères sont à la recherche de parts de marché, là où d&rsquo;au
 <p>Le coût de gestion des honoraires de syndic dépend à 60% de la masse salariale, 25% des frais généraux, 15% servant à rémunérer les investissements, la direction et les bénéfices. Ces derniers sont souvent voisin de 3 à 5% du chiffre d&rsquo;affaire.</p>
 <p><span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Vous souhaitez changer de syndic de copropriétés à Marseille? </span></span><br />
 <span style="font-family: impact, sans-serif;"><span style="font-size: 14pt;">Contactez-nous pour un devis gratuit.</span></span></p>
-<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="/content/uploads/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
+<h2><a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="alignnone wp-image-387065" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/devis-syndic-1.jpg" alt="" width="279" height="73" /></a></h2>
                 </section>
             </div>
 

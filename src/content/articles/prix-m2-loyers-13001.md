@@ -5,7 +5,7 @@ date: "2017-01-17"
 excerpt: "Les données chiffrées Prix moyen (en €/m2) : 11,2 Croissance entre 2015 et 2016 : 2,8 Durée d’occupation moyenne (en mois) : 54,6 Taux de mobilité résidentiel..."
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13001", "Arrondissements Marseille", "Arrondissement 13001 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/comment-mettre-en-location-appartement-marseille-1200x783.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/comment-mettre-en-location-appartement-marseille-1200x783.jpg"
 seoTitle: "Les prix au m2 des loyers dans le 13001"
 seoDescription: "Les données chiffrées Prix moyen (en €/m2) : 11,2 Croissance entre 2015 et 2016 : 2,8 Durée d'occupation moyenne (en mois) : 54,6 Taux de mobilité résidentiel (en %) : 22 Part des logements reloués après travaux (en %) : 16,5 Loyer médian (en €/m2) : 10,4 Source : www.clameur.fr Les…"
 ---
@@ -24,11 +24,11 @@ seoDescription: "Les données chiffrées Prix moyen (en €/m2) : 11,2 Croissanc
 <strong>Loyer médian</strong> (en €/m2) : 10,4
 
 Source : www.clameur.fr
-<h2>Les prix selon les surfaces<img loading="lazy" decoding="async" class="aligncenter wp-image-8490 size-full" src="/content/uploads/2017/01/13001-tableau.png" alt="prix au m2 marseille 13001" width="700" height="255" /></h2>
+<h2>Les prix selon les surfaces<img loading="lazy" decoding="async" class="aligncenter wp-image-8490 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13001-tableau.png" alt="prix au m2 marseille 13001" width="700" height="255" /></h2>
 <p style="text-align: center;">Source : www.clameur.fr</p>
 
 <h2 style="text-align: left;">Les caractéristiques du 1er arrondissement</h2>
-<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8488" src="/content/uploads/2017/01/13001-300x291.jpg" alt="prix au m2 13001" width="300" height="291" />Le 1er arrondissement est composé des quartiers :
+<img loading="lazy" decoding="async" class="alignnone size-medium wp-image-8488" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/13001-300x291.jpg" alt="prix au m2 13001" width="300" height="291" />Le 1er arrondissement est composé des quartiers :
 <ul>
  	<li><strong>Belsunce</strong></li>
  	<li><strong>Le Chapître</strong></li>

@@ -5,7 +5,7 @@ date: "2019-05-01"
 excerpt: "Le marché est très bon, que ce soit en location ou en transaction. La dynamique est saine. Faisons le point en détail sur l’état de ce marché… La location à..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/04/harbor-4073053_1280-1200x850.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/harbor-4073053_1280-1200x850.jpg"
 seoTitle: "Le marché immobilier à Marseille au premier trimestre 2019"
 seoDescription: "Le marché est très bon, que ce soit en location ou en transaction. La dynamique est saine. Faisons le point en détail sur l’état de ce marché... La location à Marseille Les prix à la location sont de 12,80 euros le m2. Cela fait 15 ans que les loyers étaient…"
 ---
@@ -26,7 +26,7 @@ seoDescription: "Le marché est très bon, que ce soit en location ou en transac
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="893" height="97" src="/content/uploads/2019/04/immobiliere-pujol.png" alt="" class="wp-image-234796" srcset="/content/uploads/2019/04/immobiliere-pujol.png 893w, /content/uploads/2019/04/immobiliere-pujol-768x83.png 768w, /content/uploads/2019/04/immobiliere-pujol-600x65.png 600w, /content/uploads/2019/04/immobiliere-pujol-800x87.png 800w" sizes="auto, (max-width: 893px) 100vw, 893px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="893" height="97" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/immobiliere-pujol.png" alt="" class="wp-image-234796" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/immobiliere-pujol.png 893w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/immobiliere-pujol-768x83.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/immobiliere-pujol-600x65.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/immobiliere-pujol-800x87.png 800w" sizes="auto, (max-width: 893px) 100vw, 893px" /></figure>
 
 
 
@@ -50,7 +50,7 @@ seoDescription: "Le marché est très bon, que ce soit en location ou en transac
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="813" height="451" src="/content/uploads/2019/04/location.png" alt="location immobilier marseille" class="wp-image-234699" srcset="/content/uploads/2019/04/location.png 813w, /content/uploads/2019/04/location-768x426.png 768w, /content/uploads/2019/04/location-600x333.png 600w, /content/uploads/2019/04/location-800x444.png 800w" sizes="auto, (max-width: 813px) 100vw, 813px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="813" height="451" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/location.png" alt="location immobilier marseille" class="wp-image-234699" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/location.png 813w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/location-768x426.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/location-600x333.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/location-800x444.png 800w" sizes="auto, (max-width: 813px) 100vw, 813px" /></figure>
 
 
 
@@ -90,7 +90,7 @@ seoDescription: "Le marché est très bon, que ce soit en location ou en transac
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="691" height="427" src="/content/uploads/2019/04/vente.png" alt="vente immobilier marseille" class="wp-image-234698" srcset="/content/uploads/2019/04/vente.png 691w, /content/uploads/2019/04/vente-600x371.png 600w" sizes="auto, (max-width: 691px) 100vw, 691px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="691" height="427" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/vente.png" alt="vente immobilier marseille" class="wp-image-234698" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/vente.png 691w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/vente-600x371.png 600w" sizes="auto, (max-width: 691px) 100vw, 691px" /></figure>
 
 
 

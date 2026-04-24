@@ -1,24 +1,22 @@
 ---
-export const prerender = true;
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import type { GetStaticPaths } from 'astro';
+// Legacy /biens/... URL preservation. On live WP these are JS-driven filter
+// pages that all redirect client-side to /annonces/{type}/ with a fragment
+// like #nb_pieces=appartement-t2. We do a clean server-side 301 to the same
+// annonces page (without the fragment — fragment-driven filtering can be
+// added to the annonces page itself later).
 
-// Property type taxonomy — /biens/{name}/{type}/
-// Uses rest params to handle nested paths like /biens/loues/, /biens/louer/appartement-2-pieces/
-export const getStaticPaths: GetStaticPaths = async () => {
-  // TODO: Load from taxonomy data
-  return [];
-};
+export const prerender = false;
 
 const { slug } = Astro.params;
----
+const segs = (slug ?? '').split('/').filter(Boolean);
+const action = segs[0] ?? '';
 
-<BaseLayout title="Biens – Immobilière Pujol">
-  <section class="ads-archive ads-archive--taxonomy">
-    <h1></h1>
-    <div class="ads-archive__results">
-      <div class="ads-archive__list"></div>
-      <div class="ads-archive__map"></div>
-    </div>
-  </section>
-</BaseLayout>
+let target = '/annonces/';
+if (action === 'louer' || action === 'loues') {
+  target = '/annonces/locations/';
+} else if (action === 'acheter' || action === 'vendre' || action === 'vendus') {
+  target = '/annonces/ventes/';
+}
+
+return Astro.redirect(target, 301);
+---

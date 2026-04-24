@@ -5,7 +5,7 @@ date: "2018-08-31"
 excerpt: "Les avis clients de l’Immobilière Pujol, sont déposés sur plusieurs plateformes. Nos clients vendeurs et acheteurs reconnaissent généralement notre capacité de..."
 categories: ["Mon quartier, ma ville Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/08/photo_a1617e89e15a1df4f93bdd71e4c83325-7-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/photo_a1617e89e15a1df4f93bdd71e4c83325-7-1200x800.jpg"
 seoTitle: "Les avis clients de immobilière Pujol : pour les ventes d’appartements à Marseille :"
 seoDescription: "Pour les ventes réalisées par l’agence Pujol, plus de soixante avis client ont été déposés sur la plateforme. Nos clients nous remercient généralement pour notre capacité de conseil et notre rapidité d'exécution. Certains appartements, en vente depuis un an, ont pu trouver acheteur en l’espace d’un mois, après notre reprise…"
 ---
@@ -14,7 +14,7 @@ seoDescription: "Pour les ventes réalisées par l’agence Pujol, plus de soixa
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="554" height="356" src="/content/uploads/2019/08/avis-client-transaction-gestion-locative-marseille.png" alt="avis client vente transaction marseille" class="wp-image-257192"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="554" height="356" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-transaction-gestion-locative-marseille.png" alt="avis client vente transaction marseille" class="wp-image-257192"/></figure>
 
 
 
@@ -22,7 +22,7 @@ seoDescription: "Pour les ventes réalisées par l’agence Pujol, plus de soixa
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="542" height="632" src="/content/uploads/2019/09/avis-client-vente-appartement-marseille.png" alt="" class="wp-image-259356" srcset="/content/uploads/2019/09/avis-client-vente-appartement-marseille.png 542w, /content/uploads/2019/09/avis-client-vente-appartement-marseille-515x600.png 515w" sizes="auto, (max-width: 542px) 100vw, 542px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="542" height="632" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement-marseille.png" alt="" class="wp-image-259356" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement-marseille.png 542w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement-marseille-515x600.png 515w" sizes="auto, (max-width: 542px) 100vw, 542px" /></figure>
 
 
 
@@ -38,23 +38,23 @@ seoDescription: "Pour les ventes réalisées par l’agence Pujol, plus de soixa
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="605" height="332" src="/content/uploads/2019/09/avis-client-vente-dappartement-marseille.png" alt="vente appartement marseille avis client" class="wp-image-259358" srcset="/content/uploads/2019/09/avis-client-vente-dappartement-marseille.png 605w, /content/uploads/2019/09/avis-client-vente-dappartement-marseille-600x329.png 600w" sizes="auto, (max-width: 605px) 100vw, 605px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="605" height="332" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-dappartement-marseille.png" alt="vente appartement marseille avis client" class="wp-image-259358" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-dappartement-marseille.png 605w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-dappartement-marseille-600x329.png 600w" sizes="auto, (max-width: 605px) 100vw, 605px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="597" height="118" src="/content/uploads/2019/09/avis-client-transaction.png" alt="vente appartement marseille avis client" class="wp-image-259359"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="597" height="118" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-transaction.png" alt="vente appartement marseille avis client" class="wp-image-259359"/></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="592" height="100" src="/content/uploads/2019/09/avis-client.png" alt="vente appartement marseille avis client" class="wp-image-259360"/></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="592" height="100" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client.png" alt="vente appartement marseille avis client" class="wp-image-259360"/></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="601" height="96" src="/content/uploads/2019/09/avis-client-vente-appartement.png" alt="vente appartement marseille avis client" class="wp-image-259361" srcset="/content/uploads/2019/09/avis-client-vente-appartement.png 601w, /content/uploads/2019/09/avis-client-vente-appartement-600x96.png 600w" sizes="auto, (max-width: 601px) 100vw, 601px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="601" height="96" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement.png" alt="vente appartement marseille avis client" class="wp-image-259361" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement.png 601w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-vente-appartement-600x96.png 600w" sizes="auto, (max-width: 601px) 100vw, 601px" /></figure>
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="678" height="102" src="/content/uploads/2019/09/avis-client-sur-la-vente-dappartement-a-marseille.png" alt="vente appartement marseille avis client" class="wp-image-259362" srcset="/content/uploads/2019/09/avis-client-sur-la-vente-dappartement-a-marseille.png 678w, /content/uploads/2019/09/avis-client-sur-la-vente-dappartement-a-marseille-600x90.png 600w" sizes="auto, (max-width: 678px) 100vw, 678px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="678" height="102" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-sur-la-vente-dappartement-a-marseille.png" alt="vente appartement marseille avis client" class="wp-image-259362" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-sur-la-vente-dappartement-a-marseille.png 678w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/09/avis-client-sur-la-vente-dappartement-a-marseille-600x90.png 600w" sizes="auto, (max-width: 678px) 100vw, 678px" /></figure>
 
 
 

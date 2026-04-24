@@ -5,7 +5,7 @@ date: "2016-10-19"
 excerpt: "Quand nous parlons déco dans l’immobilier, c’est pour mieux vendre. Et comme chez nous c’est chacun son rôle, ce domaine est plutôt réservé à Caroline, mon..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Decoration-dun-appartement-pour-mieux-louer-et-vendre.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/Decoration-dun-appartement-pour-mieux-louer-et-vendre.jpg"
 seoTitle: "5 conseils déco pour vendre son appartement ou sa maison"
 seoDescription: "Quand nous parlons déco dans l'immobilier, c'est pour mieux vendre. Et comme chez nous c'est chacun son rôle, ce domaine est plutôt réservé à Caroline,  mon épouse qui a rédigé cet article (et qui dirige le service transaction). Pour ma part, j'ose à peine donner mon avis... Le but ici…"
 ---
@@ -46,7 +46,7 @@ Le salon est sans doute la pièce la plus importante, celle où l&rsquo;on reço
 <h2></h2>
 <h2>Du design élégant</h2>
 Les autres pièces ne sont pas à négliger ! La cuisine et la salle de bain doivent <strong>allier l&rsquo;utile à l&rsquo;agréable, la fonctionnalité au design</strong>.
-Si vous êtes en panne d&rsquo;inspiration, je vous recommande de faire un tour sur Pinterest et de taper « idées déco » dans le champ de recherche : vous trouverez des photos d&rsquo;intérieur splendides qui vous donneront envie d&#8217;embellir votre bien. Suivez-nous sur <a href="/content/uploads/2016/10/immobilierpujol">Pinterest</a> : vous trouverez de quoi vous inspirer !
+Si vous êtes en panne d&rsquo;inspiration, je vous recommande de faire un tour sur Pinterest et de taper « idées déco » dans le champ de recherche : vous trouverez des photos d&rsquo;intérieur splendides qui vous donneront envie d&#8217;embellir votre bien. Suivez-nous sur <a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/10/immobilierpujol">Pinterest</a> : vous trouverez de quoi vous inspirer !
 
 Les professionnels du home-staging l&rsquo;ont bien compris : <strong>la plupart des achats se font sur un « coup de cœur »</strong>. L&rsquo;essentiel est que l&rsquo;acheteur se projette au premier coup d’œil et qu&rsquo;il constate qu&rsquo;il aura peu de travaux à faire. En somme, il faut moderniser votre appartement et le décorer de façon élégante et assez neutre.
 

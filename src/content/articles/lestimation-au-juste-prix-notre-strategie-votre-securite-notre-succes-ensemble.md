@@ -5,7 +5,7 @@ date: "2025-09-15"
 excerpt: "Vendre son appartement ou sa maison est un moment important et nous le comprenons. Et parce qu’un logement est souvent chargé d’affect, il est tentant de “se..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/09/PU-1698-1-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/PU-1698-1-1200x750.jpg"
 seoTitle: "L’Estimation au JUSTE PRIX: Notre stratégie, votre sécurité, notre succès ensemble"
 seoDescription: "Découvrez comment l’estimation au juste prix accélère la vente, attire les bons acheteurs et maximise vos intérêts."
 ---
@@ -83,7 +83,7 @@ Ce n’est ni de la chance ni un slogan : c’est le résultat d’une méthode 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p class="cvGsUA direction-ltr align-center para-style-body"><strong><span style="color: #bac22f; font-size: 18pt;"><span class="a_GcMg font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none">Besoin d’un regard franc sur le positionnement de votre bien ? </span></span></strong><strong><span class="a_GcMg font-feature-liga-off font-feature-clig-off font-feature-calt-off text-decoration-none text-strikethrough-none" style="color: #bac22f; font-size: 18pt;">Faisons le point, simplement.</span></strong></p>
-<p data-start="5350" data-end="5569"><img loading="lazy" decoding="async" class="wp-image-1191929 alignleft" src="/content/uploads/2025/09/Design-sans-titre-5.jpg" alt="" width="211" height="211" srcset="/content/uploads/2025/09/Design-sans-titre-5.jpg 500w, /content/uploads/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 211px) 100vw, 211px" /></p>
+<p data-start="5350" data-end="5569"><img loading="lazy" decoding="async" class="wp-image-1191929 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg" alt="" width="211" height="211" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg 500w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 211px) 100vw, 211px" /></p>
 <p data-start="5350" data-end="5569"> </p>
 <p data-start="5350" data-end="5569"> </p>
 <p data-start="5350" data-end="5569"><strong>BENOIT MARIN VICENTE</strong><br />

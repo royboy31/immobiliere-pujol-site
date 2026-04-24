@@ -5,7 +5,7 @@ date: "2022-01-19"
 excerpt: "Connaissez-vous cette satisfaction si particulière que l’on ressent quand plusieurs éléments complexes s’imbriquent et offrent une belle synthèse de ce qu’on..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2021/12/penurie-de-logement-et-logement-chers-1200x900.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/12/penurie-de-logement-et-logement-chers-1200x900.jpg"
 seoTitle: "La pénurie de logement : le plus grand défi de notre époque ?"
 seoDescription: "Le logement est important pour l'économie globale car il détermine la localisation et l'offre de la ressource la plus importante de toutes : les personnes."
 ---

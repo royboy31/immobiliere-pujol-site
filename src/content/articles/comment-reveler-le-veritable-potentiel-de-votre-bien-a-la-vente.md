@@ -5,7 +5,7 @@ date: "2025-12-01"
 excerpt: "La première impression est tout. Mais que se passe-t-il quand l’histoire de votre bien est difficile à raconter ? Imaginez Monsieur Dubois. Il adore son..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2025/12/b8333a5272fd808-1-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/b8333a5272fd808-1-1.jpg"
 seoTitle: "L’IA notre partenaire pour révéler le potentiel de votre bien à la vente"
 seoDescription: "Valorisez votre bien grâce au désencombrement, au home staging virtuel et à l’IA : une stratégie qui fait partie de la commercialisation de nos biens"
 ---
@@ -44,7 +44,7 @@ La première photo doit être un <b>aimant</b>. <br />
 	<li><strong>Après  :</strong> Nous effaçons tout ce qui encombre l’espace et qui est disgracieux à voir. En quelques clics, la pièce est complètement vidée  (pour les esprits les plus cartésiens ) et nous remeublons avec du mobilier au goût du jour.  <br />
 Nous faisons un « ménage virtuel » pour que les acquéreurs se concentrent uniquement sur les <strong>volumes et la lumière</strong> pas sur les éléments qui ne leur appartiennent pas et qui troublent la scène.</li>
 </ul>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1256179" src="/content/uploads/2025/11/amenagement-virtuel-vente-800x253.jpg" alt="" width="800" height="253" srcset="/content/uploads/2025/11/amenagement-virtuel-vente-800x253.jpg 800w, /content/uploads/2025/11/amenagement-virtuel-vente-768x243.jpg 768w, /content/uploads/2025/11/amenagement-virtuel-vente-600x190.jpg 600w, /content/uploads/2025/11/amenagement-virtuel-vente.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1256179" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/11/amenagement-virtuel-vente-800x253.jpg" alt="" width="800" height="253" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/11/amenagement-virtuel-vente-800x253.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/11/amenagement-virtuel-vente-768x243.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/11/amenagement-virtuel-vente-600x190.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/11/amenagement-virtuel-vente.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>&nbsp;</p>
 <blockquote>
 <h3><strong>La rénovation à imaginer</strong></h3>
@@ -56,17 +56,17 @@ Nous faisons un « ménage virtuel » pour que les acquéreurs se concentrent 
 <strong>En un instant, l&rsquo;appartement fatigué devient un appartement plutpot sympa .<br />
 </strong> Nous montrons aux acheteurs le <strong>résultat final</strong> de leur investissement, transformant l&rsquo;angoisse des travaux en <strong>enthousiasme </strong></li>
 </ul>
-<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1263604" src="/content/uploads/2025/12/avant-apres-pour-article.jpg" alt="" width="718" height="345" srcset="/content/uploads/2025/12/avant-apres-pour-article.jpg 718w, /content/uploads/2025/12/avant-apres-pour-article-600x288.jpg 600w" sizes="auto, (max-width: 718px) 100vw, 718px" /></p>
-<h4><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1263605" src="/content/uploads/2025/12/avant-apres-pour-article-1.jpg" alt="" width="718" height="345" srcset="/content/uploads/2025/12/avant-apres-pour-article-1.jpg 718w, /content/uploads/2025/12/avant-apres-pour-article-1-600x288.jpg 600w" sizes="auto, (max-width: 718px) 100vw, 718px" /></h4>
+<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1263604" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article.jpg" alt="" width="718" height="345" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article.jpg 718w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-600x288.jpg 600w" sizes="auto, (max-width: 718px) 100vw, 718px" /></p>
+<h4><img loading="lazy" decoding="async" class="alignnone size-full wp-image-1263605" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-1.jpg" alt="" width="718" height="345" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-1.jpg 718w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-1-600x288.jpg 600w" sizes="auto, (max-width: 718px) 100vw, 718px" /></h4>
 <h4> </h4>
 <blockquote>
 <h3><strong>La mise en scène </strong></h3>
 </blockquote>
 <ul>
 	<li><strong>Avant :</strong> Un grand séjour avec cuisine ouverte qui paraît difficile à agencer par la présence d’un grand ilôt central .</li>
-	<li><strong>Après  :</strong> Avec notre imagination et avec l’aide de l’IA nous meublons la pièce virtuellement, montrant comment un salon, une table de repas et une cuisine ouverte peuvent cohabiter . Nous ne faisons pas que vendre un bien ; <strong>nous vendons une idée de la vie, un agencement optimal.</strong><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1263608" src="/content/uploads/2025/12/avant-apres-pour-article-2-800x384.jpg" alt="" width="800" height="384" srcset="/content/uploads/2025/12/avant-apres-pour-article-2-800x384.jpg 800w, /content/uploads/2025/12/avant-apres-pour-article-2-768x369.jpg 768w, /content/uploads/2025/12/avant-apres-pour-article-2-600x288.jpg 600w, /content/uploads/2025/12/avant-apres-pour-article-2.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /></li>
+	<li><strong>Après  :</strong> Avec notre imagination et avec l’aide de l’IA nous meublons la pièce virtuellement, montrant comment un salon, une table de repas et une cuisine ouverte peuvent cohabiter . Nous ne faisons pas que vendre un bien ; <strong>nous vendons une idée de la vie, un agencement optimal.</strong><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1263608" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-2-800x384.jpg" alt="" width="800" height="384" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-2-800x384.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-2-768x369.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-2-600x288.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-2.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /></li>
 </ul>
-<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1263607" src="/content/uploads/2025/12/avant-apres-pour-article-3-800x384.jpg" alt="" width="800" height="384" srcset="/content/uploads/2025/12/avant-apres-pour-article-3-800x384.jpg 800w, /content/uploads/2025/12/avant-apres-pour-article-3-768x369.jpg 768w, /content/uploads/2025/12/avant-apres-pour-article-3-600x288.jpg 600w, /content/uploads/2025/12/avant-apres-pour-article-3.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /> </p>
+<p><img loading="lazy" decoding="async" class="alignnone size-medium wp-image-1263607" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-3-800x384.jpg" alt="" width="800" height="384" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-3-800x384.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-3-768x369.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-3-600x288.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/12/avant-apres-pour-article-3.jpg 1091w" sizes="auto, (max-width: 800px) 100vw, 800px" /> </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><strong>Notre engagement est ferme :</strong> Ces transformations se font dans le respect total des <strong>volumes réels, des fenêtres et de la vue existante</strong>.</p>
@@ -83,7 +83,7 @@ Nous faisons un « ménage virtuel » pour que les acquéreurs se concentrent 
 <p><strong>Ne laissez plus les défauts freiner votre vente (ou votre location). </strong></p>
 <p><strong>Confiez-nous votre bien. <br />
 Laissez-nous vous accompagner pour raconter son histoire la plus réussie !</strong></p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191929" src="/content/uploads/2025/09/Design-sans-titre-5.jpg" alt="" width="143" height="143" srcset="/content/uploads/2025/09/Design-sans-titre-5.jpg 500w, /content/uploads/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 143px) 100vw, 143px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-1191929" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg" alt="" width="143" height="143" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5.jpg 500w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/09/Design-sans-titre-5-100x100.jpg 100w" sizes="auto, (max-width: 143px) 100vw, 143px" /></p>
 <p><strong>Benoit Marin Vicente</strong><br />
 Directeur des ventes <br />
 06 37 56 68 51<br />

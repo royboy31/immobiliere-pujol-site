@@ -5,7 +5,7 @@ date: "2023-08-28"
 excerpt: "L’agence immobilière Pujol, située dans le 13013 à Marseille, est spécialisée dans la gestion immobilière. Cette prestation consiste à prendre en charge..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Services de gestion immobilière de l’agence immobilière Pujol dans le 13013 à Marseille"
 seoDescription: ""
 ---

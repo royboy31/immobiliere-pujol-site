@@ -1,7 +1,7 @@
 ---
 title: "Estimez Votre Loyer À Marseille"
 slug: "services/estimer-votre-loyer"
-heroVideo: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/signature_pujol.mp4"
+heroVideo: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/signature_pujol.mp4"
 ctaText: "Demandez-nous une estimation de loyer"
 seoTitle: "Estimez votre loyer à Marseille"
 seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une équipe de professionnels de la location qui conclue 400 baux par an avec de bons locataires"
@@ -22,7 +22,7 @@ seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une
 	</div>
 		<!-- Background video -->
   <video class="hero__video" loop autoplay muted >
-    <source src="/content/uploads/2017/11/signature_pujol.mp4" type="video/mp4">
+    <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/signature_pujol.mp4" type="video/mp4">
     Your browser doesn't support HTML5 video tag.
   </video>
 	</section>

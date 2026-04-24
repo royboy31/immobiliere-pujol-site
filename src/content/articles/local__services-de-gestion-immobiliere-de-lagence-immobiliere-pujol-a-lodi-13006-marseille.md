@@ -5,7 +5,7 @@ date: "2023-05-09"
 excerpt: "Gestion immobilière : définition et services proposés La gestion immobilière est un service proposé par les agences immobilières pour aider les propriétaires à..."
 categories: []
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/04/1585843061716.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/1585843061716.jpeg"
 seoTitle: "Services de gestion immobilière de l’agence immobilière Pujol à Lodi, 13006 Marseille"
 seoDescription: ""
 ---

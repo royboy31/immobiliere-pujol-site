@@ -5,7 +5,7 @@ date: "2020-02-18"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quel est le prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13009-en-2019.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13009-en-2019.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13009 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13009 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -15,7 +15,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <p>En 2019, il s’est vendu dans le <a href="http://www.marseille.fr/vdm/decouvrir-marseille/les111-quartiers/a-la-decouverte-du-9e-arrondissement" target="_blank" rel="noreferrer noopener" aria-label="9ème arrondissement de Marseille (opens in a new tab)">9ème arrondissement de Marseille</a>, 376 appartements au prix médian* de 2 240€ le m². Quel est le prix au m2 de l&rsquo;immobilier ancien dans le 13009 en 2019.</p>
 <p> </p>
 <div class="wp-block-image">
-<figure class="alignleft is-resized"><img loading="lazy" decoding="async" class="wp-image-235442" src="/content/uploads/2019/05/mazargues-13009.jpg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" width="225" height="149" />
+<figure class="alignleft is-resized"><img loading="lazy" decoding="async" class="wp-image-235442" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/mazargues-13009.jpg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" width="225" height="149" />
 <figcaption>Rue principale Mazargues 13009</figcaption>
 </figure>
 </div>
@@ -23,7 +23,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 <p><em>*Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</em></p>
 <p> </p>
 <div class="wp-block-image">
-<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235451" src="/content/uploads/2019/05/13009.jpeg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" width="103" height="156" srcset="/content/uploads/2019/05/13009.jpeg 666w, /content/uploads/2019/05/13009-400x600.jpg 400w, /content/uploads/2019/05/13009-533x800.jpg 533w" sizes="auto, (max-width: 103px) 100vw, 103px" />
+<figure class="alignright is-resized"><img loading="lazy" decoding="async" class="wp-image-235451" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009.jpeg" alt="Immobilier ancien à Marseille : les prix au m2 dans le 13009 en 2018" width="103" height="156" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009.jpeg 666w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009-400x600.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13009-533x800.jpg 533w" sizes="auto, (max-width: 103px) 100vw, 103px" />
 <figcaption>Obélisque</figcaption>
 </figure>
 </div>

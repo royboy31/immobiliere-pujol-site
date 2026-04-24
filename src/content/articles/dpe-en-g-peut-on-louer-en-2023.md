@@ -5,7 +5,7 @@ date: "2022-12-30"
 excerpt: "Les interdictions de location des logements les plus énergivores vont commencer début 2023 pour les appartements dont le DPE les classe en G . La location d’un..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/energie-finale-sur-dpe-1200x1029.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-1200x1029.png"
 seoTitle: "Diagnostic de Performance Energétique en G : allez-vous pouvoir louer en 2023?"
 seoDescription: "En 2023, les biens loués dont le DPE est en G seront louable jusqu'en 2025 sous certaines conditions. Lesquelles? Lisez cet article pour le savoir"
 ---
@@ -21,15 +21,15 @@ La location d&rsquo;un bien immobilier dont le DPE est en G sera encore possible
 <ol>
 	<li>Récupérer l’Energie Finale qui se trouve en page 3</li>
 </ol>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-590511" src="/content/uploads/2022/12/energie-finale-dpe-800x469.png" alt="" width="434" height="254" srcset="/content/uploads/2022/12/energie-finale-dpe-800x469.png 800w, /content/uploads/2022/12/energie-finale-dpe-768x450.png 768w, /content/uploads/2022/12/energie-finale-dpe-600x352.png 600w, /content/uploads/2022/12/energie-finale-dpe.png 965w" sizes="auto, (max-width: 434px) 100vw, 434px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-590511" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-dpe-800x469.png" alt="" width="434" height="254" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-dpe-800x469.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-dpe-768x450.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-dpe-600x352.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-dpe.png 965w" sizes="auto, (max-width: 434px) 100vw, 434px" /></p>
 <p>2. Récupérer la surface habitable du DPE qui se trouve page 1</p>
-<p><img loading="lazy" decoding="async" class="alignnone  wp-image-590512" src="/content/uploads/2022/12/dpe-en-g-en-2023.png" alt="" width="446" height="404" srcset="/content/uploads/2022/12/dpe-en-g-en-2023.png 620w, /content/uploads/2022/12/dpe-en-g-en-2023-600x543.png 600w" sizes="auto, (max-width: 446px) 100vw, 446px" /></p>
+<p><img loading="lazy" decoding="async" class="alignnone  wp-image-590512" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/dpe-en-g-en-2023.png" alt="" width="446" height="404" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/dpe-en-g-en-2023.png 620w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/dpe-en-g-en-2023-600x543.png 600w" sizes="auto, (max-width: 446px) 100vw, 446px" /></p>
 <p>&nbsp;</p>
 <p>3. Diviser l’Energie Finale par la surface habitable du DPE</p>
 <p>Soit  dans notre exemple 5842 kWh divisé par 25.16 m² = 232 kWh /m²/an</p>
 <p>L&rsquo;énergie finale étant inférieure à 450kW/m²/an , ce logement pourra donc faire l’objet d’un nouveau bail jusqu’au 31/12/2024 (sauf si des travaux auront été réalisés entre temps pour améliorer la note et ainsi le louer après le 01/01/2025).</p>
 <p>A compter du 1er janvier 2025, l’étiquette affichée en 1ère page du DPE sera la référence. Depuis décembre 2022, pour aider les propriétaires à s’y retrouver, l’Energie Finale est indiquée sur la 1ère page du DPE en dessous de l’Energie Primaire.</p>
-<p><img loading="lazy" decoding="async" class="wp-image-590518 aligncenter" src="/content/uploads/2022/12/energie-finale-sur-dpe-800x686.png" alt="" width="500" height="429" srcset="/content/uploads/2022/12/energie-finale-sur-dpe-800x686.png 800w, /content/uploads/2022/12/energie-finale-sur-dpe-768x658.png 768w, /content/uploads/2022/12/energie-finale-sur-dpe-1536x1317.png 1536w, /content/uploads/2022/12/energie-finale-sur-dpe-2048x1756.png 2048w, /content/uploads/2022/12/energie-finale-sur-dpe-600x514.png 600w, /content/uploads/2022/12/energie-finale-sur-dpe-1200x1029.png 1200w" sizes="auto, (max-width: 500px) 100vw, 500px" /></p>
+<p><img loading="lazy" decoding="async" class="wp-image-590518 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-800x686.png" alt="" width="500" height="429" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-800x686.png 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-768x658.png 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-1536x1317.png 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-2048x1756.png 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-600x514.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/12/energie-finale-sur-dpe-1200x1029.png 1200w" sizes="auto, (max-width: 500px) 100vw, 500px" /></p>
 <p>&nbsp;</p>
 <p>Pour les DPE édités au courant de l’année 2022, il faudra réaliser ce calcul.</p>
 <p><strong>Vous avez un bien dont l&rsquo;étiquette énergétique est en G et vous ne savez pas quoi faire?  Vendre ? Rénover, mais quels types de travaux effectuer?</strong></p>

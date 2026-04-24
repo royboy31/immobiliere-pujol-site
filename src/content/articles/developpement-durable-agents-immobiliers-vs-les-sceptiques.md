@@ -5,7 +5,7 @@ date: "2019-11-05"
 excerpt: "Malheureusement, mes contraintes professionnelles m’empêchent de participer à la réunion du 5 novembre 2019 autour du plan “bâtiments durables”, organisée par..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/10/developpement-durable-immobilier.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/developpement-durable-immobilier.jpg"
 seoTitle: "Développement durable : agents immobiliers VS  les sceptiques"
 seoDescription: "Je voulais partager quelques réflexions sur le développement durable dans les métiers de l’immobilier et plus particulièrement en gestion de syndic."
 ---
@@ -14,7 +14,7 @@ seoDescription: "Je voulais partager quelques réflexions sur le développement 
 
 
 
-<ul class="wp-block-gallery columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex"><li class="blocks-gallery-item"><figure><img loading="lazy" decoding="async" width="796" height="448" src="/content/uploads/2019/11/invitation-agents-immobiliers-ademe.png" alt="invitation ademe agents immobilier developpement durable" data-id="278366" data-link="/developpement-durable-agents-immobiliers-vs-les-sceptiques/invitation-agents-immobiliers-ademe/" class="wp-image-278366" srcset="/content/uploads/2019/11/invitation-agents-immobiliers-ademe.png 796w, /content/uploads/2019/11/invitation-agents-immobiliers-ademe-600x338.png 600w, /content/uploads/2019/11/invitation-agents-immobiliers-ademe-768x432.png 768w" sizes="auto, (max-width: 796px) 100vw, 796px" /></figure></li></ul>
+<ul class="wp-block-gallery columns-1 is-cropped wp-block-gallery-1 is-layout-flex wp-block-gallery-is-layout-flex"><li class="blocks-gallery-item"><figure><img loading="lazy" decoding="async" width="796" height="448" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/11/invitation-agents-immobiliers-ademe.png" alt="invitation ademe agents immobilier developpement durable" data-id="278366" data-link="/developpement-durable-agents-immobiliers-vs-les-sceptiques/invitation-agents-immobiliers-ademe/" class="wp-image-278366" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/11/invitation-agents-immobiliers-ademe.png 796w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/11/invitation-agents-immobiliers-ademe-600x338.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/11/invitation-agents-immobiliers-ademe-768x432.png 768w" sizes="auto, (max-width: 796px) 100vw, 796px" /></figure></li></ul>
 
 
 
@@ -58,7 +58,7 @@ seoDescription: "Je voulais partager quelques réflexions sur le développement 
 
 
 
-<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="600" height="400" src="/content/uploads/2019/10/renovation-energetique-france-marseille.jpg" alt="developpement durable et climatosceptiques" class="wp-image-276626"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img loading="lazy" decoding="async" width="600" height="400" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/renovation-energetique-france-marseille.jpg" alt="developpement durable et climatosceptiques" class="wp-image-276626"/></figure></div>
 
 
 
@@ -86,7 +86,7 @@ seoDescription: "Je voulais partager quelques réflexions sur le développement 
 
 
 
-<figure class="wp-block-image"><img loading="lazy" decoding="async" width="794" height="442" src="/content/uploads/2019/10/immoreno.png" alt="immoreno" class="wp-image-276657" srcset="/content/uploads/2019/10/immoreno.png 794w, /content/uploads/2019/10/immoreno-600x334.png 600w, /content/uploads/2019/10/immoreno-768x428.png 768w" sizes="auto, (max-width: 794px) 100vw, 794px" /></figure>
+<figure class="wp-block-image"><img loading="lazy" decoding="async" width="794" height="442" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/immoreno.png" alt="immoreno" class="wp-image-276657" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/immoreno.png 794w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/immoreno-600x334.png 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/immoreno-768x428.png 768w" sizes="auto, (max-width: 794px) 100vw, 794px" /></figure>
 
 
 

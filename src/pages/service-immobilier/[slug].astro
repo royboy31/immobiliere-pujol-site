@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('serviceImmobilier');
@@ -12,7 +12,9 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+// The body is pure HTML (scraped from WP); bypass markdown processing so
+// 4-space-indented lines aren't rendered as code blocks.
+const rawBody = (entry as any).body ?? '';
 ---
 
 <BaseLayout
@@ -28,9 +30,7 @@ const { Content } = await render(entry);
       {entry.data.subtitle && <p class="service-landing__subtitle">{entry.data.subtitle}</p>}
     </section>
 
-    <section class="service-landing__content">
-      <Content />
-    </section>
+    <section class="service-landing__content" set:html={rawBody}></section>
 
     <section class="service-landing__cta">
       {entry.data.ctaText && (

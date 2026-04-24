@@ -5,7 +5,7 @@ date: "2020-02-21"
 excerpt: "Quels sont les prix au m2 de l’immobilier ancien dans le 13011 en 2019 ? Voici un comparatif quartier par quartier des prix de l’immobilier ancien dans le..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/prix-de-l-ancien-dans-le-13011-en-2019-1200x474.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/12/prix-de-l-ancien-dans-le-13011-en-2019-1200x474.jpg"
 seoTitle: "Quel est le prix de l’immobilier ancien dans le 13011 en 2019 ?"
 seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 13011 à Marseille, quartier par quartier. Il est composé des prix médians et des prix médians au mètre carré par type de logement."
 ---
@@ -16,7 +16,7 @@ seoDescription: "Voici un comparatif des prix de l'immobilier ancien dans le 130
 166 appartements au prix médian de 2 130€ le m². En 2016, nous avions également réalisé un tel comparatif des <a href="/les-prix-de-limmobilier-ancien-dans-le-13011-en-2016/">prix de l&rsquo;ancien dans le 13011</a>. Nous avions alors comptabilisé 153 ventes pour un prix médian inférieur à celui de 2019: il était de 1 910€ le m2.</p>
 <p>&nbsp;</p>
 <div class="wp-block-image">
-<figure class="alignright"><img loading="lazy" decoding="async" width="178" height="178" class="wp-image-235416" src="/content/uploads/2019/05/13011.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13011 en 2018" srcset="/content/uploads/2019/05/13011.jpeg 178w, /content/uploads/2019/05/13011-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" />
+<figure class="alignright"><img loading="lazy" decoding="async" width="178" height="178" class="wp-image-235416" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011.jpeg" alt="Les prix au m2 de l'immobilier ancien dans le 13011 en 2018" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011.jpeg 178w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13011-100x100.jpeg 100w" sizes="auto, (max-width: 178px) 100vw, 178px" />
 <figcaption>13011</figcaption>
 </figure>
 </div>

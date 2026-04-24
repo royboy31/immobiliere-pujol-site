@@ -38,7 +38,7 @@ Or le locataire solvable et sérieux a le choix et ira vers ces appartements lab
 Les candidats locataires solvables fuient les appartements avec un confort relatif et sommaire : chauffage électrique qui chauffe mal et qui consomme trop, salle de bains aux joints sales, cuisine non fonctionnelle des années 80…<br />
 Ce type d’appartement représente environ 70% de l’offre dans notre ville.</p>
 <h2>Le prix du loyer</h2>
-<p>/content/uploads/2016/12/séjour4-1.jpg</p>
+<p>https://www.immobiliere-pujol.fr/content/uploads/2016/12/séjour4-1.jpg</p>
 <p><a href="/services/comment-nous-estimons-le-prix-de-votre-loyer-sur-marseille/">Déterminer le prix du loyer</a> n’est pas une mince affaire. Il dépend de la surface d’habitation, du quartier, de la saison, des avantages de l’appartement (belle vue, terrasse, espaces ouverts, luminosité, etc.) et de la valeur que vous y ajouterez.<br />
 D’où l’intérêt de <a href="/quelle-rentabilite-des-travaux-de-renovation-locatifs/">faire des travaux pour augmenter la valeur du bien</a>, le prix de mise en location et le profit que vous ferez.</p>
 <h2>La conformité</h2>

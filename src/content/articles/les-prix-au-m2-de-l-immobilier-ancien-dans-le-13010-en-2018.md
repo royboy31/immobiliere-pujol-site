@@ -5,7 +5,7 @@ date: "2019-06-07"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/05/prix-immobilier-ancien-13010.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13010.jpg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13010 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison quartier par quartier des prix au m2 de l'immobilier ancien dans le 13010 en 2018. En 2018, il s’est vendu dans le 10e arrondissement de Marseille:297…"
 ---
@@ -18,7 +18,7 @@ seoDescription: "La fourchette des transactions est établie par les notaires de
 
 
 
-<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="/content/uploads/2019/05/13010-2.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13010" class="wp-image-235434" width="193" height="120" srcset="/content/uploads/2019/05/13010-2.jpeg 645w, /content/uploads/2019/05/13010-2-600x372.jpg 600w" sizes="auto, (max-width: 193px) 100vw, 193px" /><figcaption>Avenue de la Capelette 13010</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignright is-resized"><img loading="lazy" decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2.jpeg" alt="prix au m2 de l'immobilier ancien dans le 13010" class="wp-image-235434" width="193" height="120" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2.jpeg 645w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13010-2-600x372.jpg 600w" sizes="auto, (max-width: 193px) 100vw, 193px" /><figcaption>Avenue de la Capelette 13010</figcaption></figure></div>
 
 
 

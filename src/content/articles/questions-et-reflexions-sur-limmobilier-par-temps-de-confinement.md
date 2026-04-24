@@ -5,7 +5,7 @@ date: "2020-04-28"
 excerpt: "Sans données, il n’y a que des opinions : et il n’y a plus de données Nous avons tous des biais de perception en fonction de ce que nous espérons et ce que..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2020/04/INTERGGOGATION.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2020/04/INTERGGOGATION.jpg"
 seoTitle: "Questions et réflexions sur l’immobilier par temps de confinement"
 seoDescription: "Sans données, il n’y a que des opinions : et il n’y a plus de données Nous avons tous des biais de perception en fonction de ce que nous espérons et ce que nous avons toujours cru. Nous reproduisons les mêmes schémas mentaux. Parler de moyenne en immobilier est pour…"
 ---
