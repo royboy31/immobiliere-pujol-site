@@ -54,47 +54,57 @@ const navItems = [
 ];
 ---
 
-<header class="header">
-  <div class="header__inner">
-    <a href="/" class="header__logo" aria-label="Immobilière Pujol - Accueil">
-      <img src="/images/logo-pujol.svg" alt="Immobilière Pujol" width="200" height="60" />
-    </a>
-
-    <nav class="header__nav" aria-label="Navigation principale">
-      <ul class="nav">
-        {navItems.map((item) => (
-          <li class={`nav__item ${item.children ? 'nav__item--has-children' : ''}`}>
-            <a href={item.href} class="nav__link">{item.label}</a>
-            {item.children && (
-              <ul class="nav__submenu">
-                {item.children.map((child) => (
-                  <li class="nav__submenu-item">
-                    <a href={child.href} class="nav__submenu-link">{child.label}</a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <div class="header__actions">
-      <a href="/annonces/" class="header__action" aria-label="Voir les annonces">
-        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#annonces" /></svg>
-      </a>
-      <a href="/mon-compte/" class="header__action" aria-label="Mon compte">
-        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#account" /></svg>
-      </a>
-      <button class="header__search-toggle" aria-label="Rechercher">
-        <svg class="icon" aria-hidden="true"><use href="/images/icons.svg#search" /></svg>
-      </button>
+<div class="site-topbar">
+  <div class="rating">
+    <img class="g" src="/images/home/google-icon.png" alt="Google" />
+    <div style="display:flex;flex-direction:column;line-height:1.05;gap:1px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span class="score">4.7</span>
+        <img class="stars" src="/images/home/google-stars.png" alt="" />
+      </div>
+      <span class="reviews">2008 avis Google vérifiés</span>
     </div>
+  </div>
+  <div class="right">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6" />
+      <path d="M4 21 C 4 16, 8 14, 12 14 C 16 14, 20 16, 20 21" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+    </svg>
+    <a href="/mon-compte/" class="conn">CONNEXION</a>
+  </div>
+</div>
 
-    <button class="header__burger" aria-label="Menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+<header class="site-header">
+  <a class="logo" href="/" aria-label="Immobilière Pujol - Accueil">
+    <img src="/images/home/pujol-logo.png" alt="Immobilière Pujol" />
+  </a>
+  <ul class="menu" aria-label="Navigation principale">
+    {navItems.map((item) => (
+      <li class="item">
+        <a href={item.href}>
+          {item.label}
+          {item.children && (
+            <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+              <path d="M1 1 L5 5 L9 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" />
+            </svg>
+          )}
+        </a>
+        {item.children && (
+          <ul class="submenu">
+            {item.children.map((child) => (
+              <li><a href={child.href}>{child.label}</a></li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))}
+  </ul>
+  <div class="icons">
+    <a href="/contact-immobiliere-pujol/" aria-label="Nous contacter">
+      <img class="ic-mail" src="/images/home/Vector-mail.svg" alt="" />
+    </a>
+    <button type="button" aria-label="Rechercher">
+      <img class="ic-search" src="/images/home/Vector-search.svg" alt="" />
     </button>
   </div>
 </header>

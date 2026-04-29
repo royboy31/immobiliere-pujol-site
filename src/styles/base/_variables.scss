@@ -132,6 +132,34 @@ $z-overlay:   300;
 $z-modal:     400;
 
 // ============================================
+// DESIGN-SYSTEM TOKENS (Pujol homepage theme)
+// Matches the Claude Design handoff package exactly.
+// ============================================
+$ds-olive:        rgb(178, 192, 78);
+$ds-olive-2:      rgb(166, 179, 82);
+$ds-orange:       rgb(236, 114, 52);
+$ds-orange-2:     rgb(252, 104, 1);
+$ds-yellow:       rgb(253, 179, 59);
+$ds-slate:        rgb(86, 103, 112);
+$ds-slate-2:      rgb(85, 102, 111);
+$ds-ink:          rgb(58, 58, 58);
+$ds-paper:        rgb(238, 243, 239);
+$ds-paper-2:      rgb(239, 238, 237);
+$ds-soft-green:   rgb(225, 236, 227);
+$ds-hairline:     rgba(0, 0, 0, .1);
+$ds-hairline-2:   rgba(0, 0, 0, .28);
+
+$ds-font-helv:    "Helvetica Neue", "HelveticaNeue", Helvetica, Inter, sans-serif;
+$ds-font-noto:    "Noto Sans", sans-serif;
+$ds-font-jakarta: "Plus Jakarta Sans", "Noto Sans", sans-serif;
+$ds-font-script:  "Gistesy", "Sacramento", cursive;
+$ds-font-serif:   "Cormorant Garamond", serif;
+
+// Page max-width for the design grid
+$ds-page-w:       1440px;
+$ds-page-pad:     100px;
+
+// ============================================
 // LEGACY ALIASES (backward compat with existing markup)
 // ============================================
 $button-background:   $color-primary;

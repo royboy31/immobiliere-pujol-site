@@ -1,117 +1,162 @@
 // ============================================
-// HEADER
+// SITE TOPBAR (above main nav — Google rating + connexion)
+// Boxed: constrained to the page max-width and centered.
 // ============================================
-.header {
-  position: sticky;
-  top: 0;
-  z-index: $z-sticky;
+.site-topbar {
+  max-width: $ds-page-w;
+  margin: 0 auto;
+  height: 40px;
+  border-bottom: 1px solid $ds-hairline;
+  display: flex;
+  align-items: center;
+  padding: 0 $ds-page-pad;
+  color: $ds-slate;
+  font-size: 14px;
+  font-family: $ds-font-noto;
   background: $white;
-  border-bottom: 1px solid $color-border-light;
 
-  &__inner {
-    max-width: $container-xl;
-    margin: 0 auto;
+  .rating {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: $space-4 $container-padding;
-  }
+    gap: 10px;
 
-  &__logo {
-    flex-shrink: 0;
-
-    img {
-      height: 40px;
-      width: auto;
+    .g {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      object-fit: cover;
     }
-  }
 
-  &__nav {
-    display: none;
+    .score {
+      font-weight: 700;
+      color: $ds-slate-2;
+      font-family: $ds-font-helv;
+      font-size: 14px;
+      line-height: 1.1;
+    }
 
-    @media (min-width: $bp-desktop) {
+    .stars {
+      height: 12px;
       display: block;
-      flex: 1;
-      margin: 0 $space-8;
+      margin-top: 2px;
+    }
+
+    .reviews {
+      color: $ds-slate-2;
+      font-family: $ds-font-helv;
+      font-weight: 500;
+      font-size: 10px;
     }
   }
 
-  &__actions {
+  .right {
+    margin-left: auto;
     display: flex;
     align-items: center;
-    gap: $space-4;
-  }
+    gap: 10px;
+    font-size: 14px;
+    color: $ds-slate-2;
 
-  &__action {
-    color: $color-text-light;
-    transition: color $transition-fast;
-
-    &:hover { color: $color-primary; }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  &__search-toggle {
-    background: none;
-    border: none;
-    color: $color-text-light;
-    cursor: pointer;
-    padding: $space-1;
-
-    &:hover { color: $color-primary; }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  &__burger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 28px;
-    height: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-
-    @media (min-width: $bp-desktop) {
-      display: none;
-    }
-
-    span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: $color-text-light;
-      transition: all $transition-base;
+    .conn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 1px;
+      font-family: $ds-font-noto;
+      font-weight: 500;
+      text-transform: uppercase;
     }
   }
 }
 
 // ============================================
-// MAIN NAVIGATION
+// SITE HEADER (logo + nav + icons)
+// Boxed: constrained to the page max-width and centered.
 // ============================================
-.nav {
+.site-header {
+  max-width: $ds-page-w;
+  margin: 0 auto;
+  height: 90px;
   display: flex;
   align-items: center;
-  gap: $space-1;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  padding: 0 $ds-page-pad;
+  background: $white;
+  position: relative;
+  z-index: 50;
 
-  &__item {
-    position: relative;
+  .logo img {
+    height: 55px;
+    width: auto;
+    display: block;
+  }
 
-    &--has-children {
-      &:hover .nav__submenu,
-      &:focus-within .nav__submenu {
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin: 0 auto;
+    color: $ds-slate-2;
+    font-family: $ds-font-noto;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    list-style: none;
+    padding: 0;
+
+    .item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+
+      > a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: inherit;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .submenu {
+        position: absolute;
+        top: 100%;
+        left: -16px;
+        min-width: 280px;
+        background: $white;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        padding: 12px 0;
+        list-style: none;
+        margin: 8px 0 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-6px);
+        transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+        z-index: $z-dropdown;
+        text-transform: none;
+        letter-spacing: 0;
+        line-height: 1.5;
+
+        a {
+          display: block;
+          padding: 8px 22px;
+          font-size: 13px;
+          color: $ds-ink;
+
+          &:hover {
+            background: $ds-paper;
+            color: $ds-olive-2;
+          }
+        }
+      }
+
+      &:hover .submenu,
+      &:focus-within .submenu {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
@@ -119,124 +164,91 @@
     }
   }
 
-  &__link {
-    display: block;
-    padding: $space-3 $space-4;
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    color: $color-text;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color $transition-fast;
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    color: $ds-slate-2;
 
-    &:hover {
-      color: $color-primary;
+    a, button {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      color: inherit;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
     }
-  }
 
-  &__submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 280px;
-    background: $white;
-    border: 1px solid $color-border-light;
-    border-radius: $radius-md;
-    box-shadow: $shadow-md;
-    padding: $space-2 0;
-    list-style: none;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: all $transition-base;
-    z-index: $z-dropdown;
-  }
-
-  &__submenu-link {
-    display: block;
-    padding: $space-2 $space-6;
-    font-size: $font-size-sm;
-    color: $color-text;
-    text-decoration: none;
-    transition: all $transition-fast;
-
-    &:hover {
-      background: $color-bg-alt;
-      color: $color-primary;
+    img {
+      filter: invert(38%) sepia(7%) saturate(840%) hue-rotate(165deg) brightness(95%);
     }
+
+    .ic-mail { width: 25px; height: 19px; }
+    .ic-search { width: 23px; height: 23px; }
   }
 }
 
 // ============================================
-// FOOTER
+// SITE FOOTER
+// Full-bleed black background; content boxed at max 1240 px wide via
+// max(100px, calc(50% - 620px)) horizontal padding.
 // ============================================
-.footer {
-  margin-top: $space-16;
+.site-footer {
+  background: $black;
+  color: $white;
+  padding: 60px unquote("max(100px, calc(50% - 620px))") 30px;
+  position: relative;
+  overflow: hidden;
+  font-family: $ds-font-noto;
 
-  &__cta {
+  &::before {
+    content: "";
+    position: absolute;
+    right: -80px;
+    bottom: -80px;
+    width: 700px;
+    height: 700px;
+    background: url('/images/home/pujol-bg.png') right center/contain no-repeat;
+    opacity: .15;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 30px;
     position: relative;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      display: block;
-    }
-
-    &-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba($black, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      p {
-        color: $white;
-        font-size: $font-size-lg;
-        font-weight: $font-weight-semibold;
-        letter-spacing: 0.05em;
-        text-align: center;
-        padding: 0 $space-6;
-      }
-    }
+    z-index: 2;
   }
 
-  &__content {
-    background: $color-text-heading;
-    color: rgba($white, 0.7);
-    padding: $space-12 $container-padding;
-  }
-
-  &__inner {
-    max-width: $container-lg;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: $space-8;
-  }
-
-  &__links {
-    h3 {
+  .col {
+    h4 {
+      font-family: $ds-font-jakarta;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 1px;
       color: $white;
-      font-size: $font-size-sm;
-      font-weight: $font-weight-semibold;
+      margin: 0 0 22px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: $space-4;
     }
-  }
 
-  &__columns {
-    display: flex;
-    gap: $space-12;
+    p, a, li {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 30px;
+      color: $white;
+    }
 
-    @media (max-width: $bp-tablet) {
-      flex-direction: column;
-      gap: $space-4;
+    a {
+      text-decoration: none;
+      transition: opacity $transition-fast;
+
+      &:hover { opacity: 0.7; }
     }
 
     ul {
@@ -244,24 +256,66 @@
       padding: 0;
       margin: 0;
     }
+  }
 
-    li {
-      margin-bottom: $space-2;
-    }
+  .logo-foot {
+    display: block;
+    margin-bottom: 28px;
 
-    a {
-      font-size: $font-size-sm;
-      color: rgba($white, 0.6);
-      text-decoration: none;
-      transition: color $transition-fast;
-
-      &:hover { color: $white; }
+    img {
+      width: 280px;
+      height: auto;
+      display: block;
     }
   }
 
-  &__contact {
-    .btn {
-      margin-top: $space-4;
+  .socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    width: 280px;
+    justify-content: center;
+  }
+
+  .soc {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.5px solid $green;
+    color: $green;
+    display: grid;
+    place-items: center;
+    transition: background $transition-fast, color $transition-fast, border-color $transition-fast;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    &:hover {
+      background: $green;
+      border-color: $green;
+      color: $white;
+      opacity: 1;
+    }
+  }
+
+  .bot {
+    padding-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    line-height: 1;
+    position: relative;
+    z-index: 2;
+
+    a {
+      color: $white;
+      text-decoration: underline;
     }
   }
 }

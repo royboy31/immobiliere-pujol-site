@@ -60,10 +60,12 @@ a {
 *{
   -webkit-appearance: none;
 }
-footer, header{
+footer{
   max-width: 100vw;
-  /* overflow-x: hidden; */
   overflow: hidden;
+}
+header{
+  max-width: 100vw;
 }
 main{
   max-width: 100vw;

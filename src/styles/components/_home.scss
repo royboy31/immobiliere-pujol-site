@@ -1,0 +1,1032 @@
+// ============================================
+// HOMEPAGE — Pujol Immobilier design theme
+// 1440px fixed-width grid; sections flow vertically.
+// ============================================
+
+.home-page {
+  position: relative;
+  width: 100%;
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
+
+  img { display: block; max-width: 100%; }
+}
+
+// Hero is full-bleed (outside .home-page) so it can span the viewport.
+.hero { width: 100%; }
+
+// Inside-section side padding helper — keeps content at max 1240 px wide
+// while letting the section bg span the full viewport.
+// On viewports < 1440 it falls back to a fixed 100 px gutter.
+// Wrapped in unquote() to prevent Sass from evaluating the calc() expression.
+$ds-side-pad: unquote("max(100px, calc(50% - 620px))");
+
+// Shared section title style
+.ds-sec-title {
+  font-family: $ds-font-helv;
+  font-weight: 300;
+  font-size: 50px;
+  text-align: center;
+  color: $black;
+  line-height: .9467;
+  margin: 0;
+
+  b { font-weight: 700; }
+}
+
+// =========================================
+// HERO — autoplaying video bg with a black overlay
+// =========================================
+.hero {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  height: 760px;
+  // Static fallback while the video loads / if it fails to play.
+  background:
+    linear-gradient(rgba(15, 25, 42, .35), rgba(15, 25, 42, .45)),
+    url('/images/home/hero-bg.jpg') center/cover no-repeat;
+  color: $white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 0 $ds-page-pad;
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // Lift the search panel above the overlay too.
+  .hero-search {
+    position: relative;
+    z-index: 2;
+  }
+
+  h1 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 65px;
+    line-height: 60px;
+    text-align: center;
+    max-width: 980px;
+    margin: 0;
+    letter-spacing: -.3px;
+    color: $white;
+
+    b { font-weight: 700; }
+  }
+}
+
+// hero search
+.hero-search {
+  position: relative;
+  width: 1080px;
+
+  &__tabs {
+    display: flex;
+    width: 660px;
+    margin: 0 auto;
+    background: rgba(20, 30, 48, .55);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    padding: 6px;
+    color: $white;
+  }
+
+  &__pill {
+    flex: 1;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 13px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    line-height: 1;
+    border-radius: 999px;
+    cursor: pointer;
+    color: $white;
+    letter-spacing: .6px;
+    transition: all .2s;
+    border: 0;
+    background: transparent;
+
+    &.is-active {
+      background: $white;
+      color: $black;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+    }
+  }
+
+  &__bar {
+    margin-top: 22px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: $ds-paper;
+    border-radius: 60px;
+    padding: 0 14px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
+  }
+
+  &__pane {
+    display: none;
+    width: 100%;
+
+    &.is-active {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+  }
+
+  .seg {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: $black;
+    height: 62px;
+    padding: 0 26px;
+    font-size: 14px;
+    background: $white;
+    border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+    min-width: 200px;
+
+    &.first { padding: 0 24px 0 28px; }
+
+    .lbl {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+
+      b {
+        font-weight: 700;
+        font-size: 13px;
+        color: $black;
+        letter-spacing: .8px;
+      }
+
+      span {
+        font-size: 11px;
+        color: #8b8b8b;
+        font-weight: 400;
+        margin-top: 2px;
+      }
+    }
+
+    > b {
+      font-weight: 700;
+      font-size: 13px;
+      color: $black;
+      letter-spacing: .8px;
+    }
+  }
+
+  .input {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 28px;
+    color: #7c7c7c;
+    font-size: 15px;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    background: $white;
+    border-radius: 999px;
+    height: 62px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+    min-width: 0;
+    border: 0;
+    outline: 0;
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    svg { flex: none; }
+  }
+
+  .cta {
+    height: 62px;
+    padding: 0 30px;
+    border-radius: 999px;
+    background: $ds-olive;
+    color: $black;
+    display: grid;
+    place-items: center;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+    border: 0;
+    cursor: pointer;
+    letter-spacing: .6px;
+    white-space: nowrap;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+    text-decoration: none;
+  }
+}
+
+// =========================================
+// SERVICES
+// =========================================
+.services {
+  background: $ds-paper;
+  padding: 90px $ds-side-pad 70px;
+
+  .ds-sec-title { margin-bottom: 50px; }
+
+  &__row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+}
+
+.svc-card {
+  background: $white;
+  border-radius: 24px;
+  padding: 24px 30px;
+  width: 382px;
+  height: 118px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: transform $transition-base;
+
+  &:hover { transform: translateY(-2px); }
+
+  .ic {
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    flex: none;
+
+    img { width: 62px; height: 62px; object-fit: contain; }
+  }
+
+  .lbl {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.15;
+    color: $black;
+    flex: 1;
+
+    .city {
+      font-weight: 400;
+      font-size: 15px;
+      color: $black;
+      display: block;
+      margin-top: 2px;
+    }
+  }
+
+  .arr {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    color: $ds-olive;
+  }
+}
+
+// =========================================
+// LISTINGS
+// =========================================
+.listings {
+  background: $ds-paper;
+  padding: 30px $ds-side-pad 110px;
+
+  .ds-sec-title { margin-bottom: 40px; }
+
+  // Two side-by-side carousels (left = vente, right = location).
+  &__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    min-width: 0; // let flex/grid children shrink properly
+  }
+
+  // Horizontal scroll track — 2 cards visible at a time, snap-mandatory.
+  &__track {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 4px; // breathing room for any focus rings
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+
+    > .listing-card {
+      flex: 0 0 calc((100% - 24px) / 2);
+      scroll-snap-align: start;
+    }
+  }
+
+  // Pagination dots (clickable buttons).
+  &__dots {
+    display: flex;
+    gap: 10px;
+
+    .d {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, .18);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color $transition-fast;
+    }
+  }
+
+  // Active-dot color matches the carousel's brand color.
+  &__col--vente .listings__dots .d.on { background: $ds-orange; }
+  &__col--loc .listings__dots .d.on { background: $ds-olive; }
+}
+
+.listing-card {
+  background: $white;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform $transition-base;
+
+  &:hover { transform: translateY(-3px); }
+
+  .photo {
+    height: 200px;
+    background: #d9d9d9 center/cover no-repeat;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: $ds-olive;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    letter-spacing: .4px;
+    line-height: 1;
+
+    &--vente { background: $ds-orange; }
+  }
+
+  .body {
+    padding: 18px 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .title {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.25;
+    color: $black;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 64px;
+  }
+
+  .price {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1;
+    color: $ds-orange;
+    margin-top: 4px;
+  }
+
+  &--location .price { color: $ds-olive-2; }
+
+  .meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 0;
+  }
+
+  .pill-tag {
+    background: #f0f0f0;
+    border: 0;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    font-weight: 400;
+    color: $black;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .loc {
+    display: flex;
+    gap: 8px;
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    font-weight: 400;
+    color: #666;
+    align-items: center;
+
+    .a { font-weight: 400; color: #666; }
+  }
+}
+
+.btn-pill-cta {
+  border-radius: 999px;
+  padding: 18px 44px;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: .4px;
+  border: 0;
+  cursor: pointer;
+  color: $white;
+  text-decoration: none;
+
+  &--vente { background: $ds-orange; }
+  &--loc { background: $ds-olive; color: $black; }
+}
+
+// =========================================
+// EXPERTS
+// =========================================
+.experts {
+  padding: 90px $ds-side-pad 30px;
+  background: $white;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: 1;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__arrows {
+    display: flex;
+    gap: 14px;
+  }
+
+  // Horizontal scroll carousel — 4 experts visible, arrows scroll by one page.
+  &__row {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+
+    > .expert {
+      flex: 0 0 calc((100% - 90px) / 4); // 4 cards + 3 * 30px gaps
+      scroll-snap-align: start;
+    }
+  }
+}
+
+.arrow-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid $ds-olive;
+  color: $ds-olive;
+  display: grid;
+  place-items: center;
+  background: $white;
+  cursor: pointer;
+
+  &:hover {
+    background: $ds-olive;
+    color: $white;
+  }
+}
+
+.expert {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+
+  // The design PNGs already have the oval + colored background baked in.
+  // Lock to a fixed aspect ratio so all four photos take the same height
+  // and the names below them line up horizontally.
+  .ph {
+    width: 100%;
+    aspect-ratio: 230 / 307;
+    display: block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .name {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.1;
+    margin: 22px 0 8px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  .role {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #666;
+    max-width: 240px;
+  }
+}
+
+// =========================================
+// ABOUT + STATS / TESTIMONIALS
+// =========================================
+.about {
+  padding: 0 0 0 $ds-side-pad;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: center;
+  background: $white;
+
+  .left h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: .9467;
+    margin: 0 0 28px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  .left p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.55;
+    color: $ds-ink;
+    max-width: 560px;
+    margin: 0 0 18px;
+  }
+
+  .right { position: relative; display: block; }
+  .right .photo { width: 100%; height: auto; display: block; }
+}
+
+.about-stats {
+  display: flex;
+  gap: 90px;
+  align-items: center;
+  padding: 0 $ds-side-pad 80px;
+  background: $white;
+
+  .stat-num {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 110px;
+    line-height: .9467;
+    color: $black;
+
+    .small { font-size: 60px; font-weight: 300; }
+  }
+
+  .stat-stars {
+    display: flex;
+    gap: 6px;
+    margin: 14px 0 10px;
+
+    svg { width: 38px; height: 38px; color: $ds-yellow; }
+  }
+
+  .stat-reviews {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 18px;
+    color: $black;
+
+    img { width: 28px; height: 28px; }
+  }
+
+  .stat-title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: .9467;
+    color: $black;
+    margin: 18px 0 14px;
+
+    b { font-weight: 700; }
+  }
+
+  .stat-sub {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: $ds-ink;
+    max-width: 520px;
+    margin: 0;
+  }
+}
+
+// Vertical marquee — viewport with a fixed height clips the column,
+// the column itself animates upward forever. Items are duplicated in HTML
+// so the loop wraps seamlessly when translateY hits -50%.
+.testi-viewport {
+  position: relative;
+  width: 580px;
+  height: 580px;
+  overflow: hidden;
+  // Soft fade at the top and bottom so reviews glide in/out cleanly.
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 40px,
+    #000 calc(100% - 40px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 40px,
+    #000 calc(100% - 40px),
+    transparent 100%
+  );
+}
+
+.testi-col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  animation: testi-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.testi-viewport:hover .testi-col {
+  animation-play-state: paused;
+}
+
+@keyframes testi-scroll {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testi-col { animation: none; }
+}
+
+.testi {
+  background: $ds-soft-green;
+  border-radius: 24px;
+  padding: 28px 36px 30px;
+  width: 580px;
+  position: relative;
+
+  .stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 18px;
+
+    svg { width: 14px; height: 14px; color: $ds-yellow; }
+  }
+
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: $black;
+    margin: 0 0 22px;
+    max-width: 460px;
+  }
+
+  h4 {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1;
+    color: $black;
+    margin: 0;
+  }
+
+  .g {
+    position: absolute;
+    right: 30px;
+    bottom: 28px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// =========================================
+// BLOG — full-bleed bg, boxed head, horizontal-scroll carousel
+// =========================================
+.blog {
+  padding: 60px 0;
+  background: #f1f1f1;
+
+  &__head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin: 0 0 40px;
+    padding: 0 $ds-side-pad;
+  }
+
+  &__script {
+    font-family: $ds-font-script;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: .9;
+    color: $black;
+    margin-bottom: 6px;
+  }
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  // Carousel: scroll track spans the full viewport so cards extend off
+  // the right edge of the boxed content area; first card is left-aligned
+  // with the rest of the page via scroll-padding.
+  &__grid {
+    display: flex;
+    gap: 26px;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 0;
+    padding: 0 0 14px;
+
+    // Hide native scrollbar (carousel is arrow-driven).
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+
+    > .post {
+      flex: 0 0 calc((100% - 78px) / 4);
+      max-width: 320px;
+      min-width: 260px;
+      scroll-snap-align: start;
+    }
+  }
+}
+
+.post {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  .img {
+    width: 100%;
+    height: 200px;
+    border-radius: 24px;
+    background: #ddd center/cover no-repeat;
+    position: relative;
+  }
+
+  .img .play {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+
+    img {
+      width: 34px;
+      height: auto;
+      opacity: .95;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .3));
+    }
+  }
+
+  .meta {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 14px;
+    font-size: 13px;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: .02em;
+  }
+
+  h3 {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.25;
+    margin: 0 0 18px;
+    color: $black;
+  }
+
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #5b5b5b;
+    margin: 0;
+    max-width: 300px;
+  }
+
+  &--peek { width: 280px; }
+}
+
+// =========================================
+// NEWSLETTER (split-bg overlapping blog/footer)
+// =========================================
+.news-wrap {
+  position: relative;
+  z-index: 5;
+  padding: 0 $ds-side-pad;
+  background: linear-gradient(to bottom, #f1f1f1 0%, #f1f1f1 50%, #000 50%, #000 100%);
+}
+
+.news {
+  position: relative;
+  background: $ds-olive;
+  border-radius: 40px;
+  padding: 54px 70px 60px;
+  overflow: hidden;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1;
+    margin: 0;
+    color: $black;
+    max-width: 700px;
+
+    b { font-weight: 700; }
+  }
+
+  .form {
+    margin-top: 36px;
+    border-bottom: 1px solid $ds-hairline-2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+
+    input {
+      background: transparent;
+      border: 0;
+      outline: 0;
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.03;
+      color: rgba(0, 0, 0, .64);
+      flex: 1;
+      padding: 6px 0;
+    }
+  }
+
+  .submit {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: transparent;
+    color: $black;
+    border: 1.5px solid $black;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .agree {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    align-items: flex-start;
+  }
+
+  .check {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid $black;
+    flex: none;
+    margin-top: 2px;
+    background: transparent;
+    border-radius: 2px;
+  }
+
+  .agree-label {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    color: $black;
+    margin: 0;
+  }
+
+  .legal {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 1.55;
+    color: $black;
+    margin: 18px 0 0;
+    max-width: 980px;
+  }
+}
