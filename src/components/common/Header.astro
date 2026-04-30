@@ -74,11 +74,11 @@ const navItems = [
   </div>
 </div>
 
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <a class="logo" href="/" aria-label="Immobilière Pujol - Accueil">
     <img src="/images/home/pujol-logo.png" alt="Immobilière Pujol" />
   </a>
-  <ul class="menu" aria-label="Navigation principale">
+  <ul class="menu" id="primaryMenu" aria-label="Navigation principale">
     {navItems.map((item) => (
       <li class="item">
         <a href={item.href}>
@@ -106,5 +106,36 @@ const navItems = [
     <button type="button" aria-label="Rechercher">
       <img class="ic-search" src="/images/home/Vector-search.svg" alt="" />
     </button>
+    <button type="button" class="nav-burger" id="navBurger" aria-controls="primaryMenu" aria-expanded="false" aria-label="Ouvrir le menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<script>
+  (function () {
+    const header = document.getElementById('siteHeader');
+    const burger = document.getElementById('navBurger');
+    if (!header || !burger) return;
+
+    burger.addEventListener('click', () => {
+      const open = header.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+
+    // Mobile-only: tapping a parent item with children toggles its submenu
+    // (instead of immediately navigating). The link still works on desktop.
+    header.querySelectorAll<HTMLLIElement>('.menu .item').forEach((item) => {
+      const link = item.querySelector<HTMLAnchorElement>(':scope > a');
+      const sub = item.querySelector<HTMLUListElement>(':scope > .submenu');
+      if (!link || !sub) return;
+      link.addEventListener('click', (e) => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          e.preventDefault();
+          item.classList.toggle('is-open');
+        }
+      });
+    });
+  })();
+</script>

@@ -239,7 +239,10 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     height: 62px;
     padding: 0 30px;
     border-radius: 999px;
-    background: $ds-olive;
+    background-color: transparent;
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
     color: $black;
     display: grid;
     place-items: center;
@@ -247,12 +250,18 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     font-weight: 700;
     font-size: 13px;
     line-height: 1;
-    border: 0;
+    border: 1px solid $ds-olive;
     cursor: pointer;
     letter-spacing: .6px;
     white-space: nowrap;
     box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
     text-decoration: none;
+    transition: background-position 0.4s ease, color 0.3s ease;
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-olive;
+    }
   }
 }
 
@@ -503,13 +512,35 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   align-items: center;
   justify-content: center;
   letter-spacing: .4px;
-  border: 0;
+  border: 1px solid transparent;
   cursor: pointer;
   color: $white;
   text-decoration: none;
+  background-color: transparent;
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position 0.4s ease, color 0.3s ease, border-color 0.2s ease;
 
-  &--vente { background: $ds-orange; }
-  &--loc { background: $ds-olive; color: $black; }
+  &--vente {
+    background-image: linear-gradient(to top, transparent 50%, $ds-orange 50%);
+    border-color: $ds-orange;
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-orange;
+    }
+  }
+
+  &--loc {
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    color: $black;
+    border-color: $ds-olive;
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-olive;
+    }
+  }
 }
 
 // =========================================
@@ -569,11 +600,15 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   color: $ds-olive;
   display: grid;
   place-items: center;
-  background: $white;
+  background-color: $white;
+  background-image: linear-gradient(to top, $ds-olive 50%, transparent 50%);
+  background-size: 100% 200%;
+  background-position: 0 0;
   cursor: pointer;
+  transition: background-position 0.4s ease, color 0.3s ease;
 
   &:hover {
-    background: $ds-olive;
+    background-position: 0 100%;
     color: $white;
   }
 }
@@ -976,9 +1011,13 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       font-weight: 300;
       font-size: 18px;
       line-height: 1.03;
-      color: rgba(0, 0, 0, .64);
+      color: $black;
       flex: 1;
       padding: 6px 0;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, .64);
+      }
     }
   }
 
@@ -986,12 +1025,20 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: transparent;
+    background-color: transparent;
+    background-image: linear-gradient(to top, $black 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
     color: $black;
     border: 1.5px solid $black;
     display: grid;
     place-items: center;
     cursor: pointer;
+    transition: background-position 0.4s ease;
+
+    &:hover {
+      background-position: 0 100%;
+    }
   }
 
   .agree {
@@ -1029,4 +1076,260 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     margin: 18px 0 0;
     max-width: 980px;
   }
+}
+
+// =========================================
+// RESPONSIVE — tablet & mobile
+// Desktop layout is fixed-width 1440 grid; below `$bp-tablet`
+// we collapse rows, shrink type, and unlock fixed widths.
+// =========================================
+@media (max-width: $bp-tablet) {
+  $mobile-pad: 20px;
+
+  .ds-sec-title { font-size: 32px; }
+
+  // ----- HERO -----
+  .hero {
+    height: auto;
+    min-height: 540px;
+    padding: 90px $mobile-pad 40px;
+    gap: 40px;
+
+    h1 {
+      font-size: 32px;
+      line-height: 1.1;
+      max-width: 100%;
+    }
+  }
+
+  .hero-search {
+    width: 100%;
+
+    &__tabs {
+      width: 100%;
+      flex-direction: column;
+      gap: 6px;
+      padding: 6px;
+      border-radius: 24px;
+    }
+
+    &__pill {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 12px;
+    }
+
+    &__bar {
+      height: auto;
+      flex-direction: column;
+      padding: 12px;
+      gap: 10px;
+      border-radius: 24px;
+    }
+
+    &__pane.is-active {
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .seg,
+    .input,
+    .cta {
+      width: 100%;
+      height: 56px;
+      min-width: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+    }
+
+    .seg { padding: 0 22px; }
+    .input { padding: 0 20px; font-size: 14px; }
+    .cta { padding: 0 24px; }
+  }
+
+  // ----- SERVICES -----
+  .services {
+    padding: 60px $mobile-pad 50px;
+
+    .ds-sec-title { margin-bottom: 30px; }
+
+    &__row {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  .svc-card {
+    width: 100%;
+    height: auto;
+    padding: 18px 20px;
+    gap: 16px;
+
+    .ic {
+      width: 48px;
+      height: 48px;
+      img { width: 48px; height: 48px; }
+    }
+    .lbl { font-size: 16px; }
+  }
+
+  // ----- LISTINGS -----
+  .listings {
+    padding: 20px $mobile-pad 70px;
+
+    .ds-sec-title { margin-bottom: 28px; }
+
+    &__cols {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    &__col { gap: 22px; }
+
+    // One full card visible per scroll on mobile (with a small peek for affordance)
+    &__track > .listing-card {
+      flex: 0 0 86%;
+    }
+  }
+
+  .listing-card {
+    .photo { height: 180px; }
+    .price { font-size: 22px; }
+    .title { font-size: 16px; min-height: 0; }
+  }
+
+  .btn-pill-cta {
+    padding: 14px 28px;
+    font-size: 12px;
+  }
+
+  // ----- EXPERTS -----
+  .experts {
+    padding: 60px $mobile-pad 20px;
+
+    &__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    h2 { font-size: 38px; }
+
+    &__row > .expert {
+      flex: 0 0 70%;
+    }
+  }
+
+  .expert {
+    .name { font-size: 18px; margin: 16px 0 6px; }
+    .role { font-size: 13px; max-width: 100%; }
+  }
+
+  // ----- ABOUT + STATS / TESTIMONIALS -----
+  .about {
+    grid-template-columns: 1fr;
+    padding: 0 $mobile-pad;
+    gap: 24px;
+
+    .left h2 { font-size: 38px; margin: 0 0 18px; }
+    .left p { font-size: 16px; max-width: 100%; }
+  }
+
+  .about-stats {
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px $mobile-pad 60px;
+    align-items: flex-start;
+
+    .stat-num {
+      font-size: 72px;
+      .small { font-size: 40px; }
+    }
+    .stat-stars svg { width: 28px; height: 28px; }
+    .stat-title { font-size: 38px; margin: 14px 0 10px; }
+    .stat-sub { font-size: 16px; max-width: 100%; }
+  }
+
+  .testi-viewport {
+    width: 100%;
+    max-width: 100%;
+    height: 460px;
+  }
+
+  .testi {
+    width: 100%;
+    padding: 22px 24px 26px;
+
+    p { max-width: 100%; }
+  }
+
+  // ----- BLOG -----
+  .blog {
+    padding: 50px 0;
+
+    &__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 0 $mobile-pad;
+      margin: 0 0 28px;
+    }
+
+    h2 { font-size: 32px; }
+    &__script { font-size: 36px; }
+
+    &__grid {
+      padding: 0 $mobile-pad 14px;
+      scroll-padding-left: $mobile-pad;
+      gap: 18px;
+
+      > .post {
+        flex: 0 0 80%;
+        max-width: 80%;
+        min-width: 0;
+      }
+    }
+  }
+
+  .post {
+    .img { height: 180px; border-radius: 18px; }
+    h3 { font-size: 18px; margin: 0 0 12px; }
+    p { font-size: 14px; max-width: 100%; }
+  }
+
+  // ----- NEWSLETTER -----
+  .news-wrap {
+    padding: 0 $mobile-pad;
+  }
+
+  .news {
+    padding: 32px 24px 36px;
+    border-radius: 28px;
+
+    h2 { font-size: 32px; }
+
+    .form {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+
+      input { font-size: 16px; }
+
+      .submit { align-self: flex-end; }
+    }
+
+    .legal { max-width: 100%; }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .hero h1 { font-size: 28px; }
+  .ds-sec-title { font-size: 28px; }
+  .experts h2,
+  .about .left h2,
+  .about-stats .stat-title { font-size: 32px; }
+  .news h2 { font-size: 28px; }
+  .about-stats .stat-num { font-size: 60px; }
+  .blog h2 { font-size: 28px; }
 }

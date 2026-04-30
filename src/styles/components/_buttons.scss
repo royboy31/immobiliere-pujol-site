@@ -8,18 +8,20 @@
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  transition: all $transition-base;
+  background-color: transparent;
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position 0.4s ease, color 0.3s ease, border-color 0.2s ease;
   line-height: 1.5;
 
   &--primary {
-    background: $color-primary;
+    background-image: linear-gradient(to top, transparent 50%, $color-primary 50%);
     color: $white;
     border-color: $color-primary;
 
     &:hover {
-      background: $color-primary-dark;
-      border-color: $color-primary-dark;
-      color: $white;
+      background-position: 0 100%;
+      color: $color-primary;
     }
   }
 
@@ -36,24 +38,23 @@
   }
 
   &--orange {
-    background: $color-secondary;
+    background-image: linear-gradient(to top, transparent 50%, $color-secondary 50%);
     color: $white;
     border-color: $color-secondary;
 
     &:hover {
-      background: $color-secondary-dark;
-      border-color: $color-secondary-dark;
-      color: $white;
+      background-position: 0 100%;
+      color: $color-secondary;
     }
   }
 
   &--outline {
-    background: transparent;
+    background-image: linear-gradient(to top, $color-primary 50%, transparent 50%);
     color: $color-primary;
     border-color: $color-primary;
 
     &:hover {
-      background: $color-primary;
+      background-position: 0 100%;
       color: $white;
     }
   }

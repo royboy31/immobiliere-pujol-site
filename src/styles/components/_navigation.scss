@@ -187,6 +187,31 @@
     .ic-mail { width: 25px; height: 19px; }
     .ic-search { width: 23px; height: 23px; }
   }
+
+  // Mobile hamburger — hidden on desktop, shown via media query below.
+  .nav-burger {
+    display: none;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: $ds-slate-2;
+      border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease;
+      transform-origin: center;
+    }
+  }
 }
 
 // ============================================
@@ -319,3 +344,169 @@
     }
   }
 }
+
+// =========================================
+// RESPONSIVE — header / topbar / footer
+// =========================================
+@media (max-width: $bp-tablet) {
+  // ----- TOPBAR -----
+  .site-topbar {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 12px;
+
+    .rating {
+      gap: 8px;
+
+      .g { width: 18px; height: 18px; }
+      .score { font-size: 12px; }
+      .stars { height: 10px; }
+      .reviews { display: none; }
+    }
+
+    .right .conn { font-size: 11px; letter-spacing: .6px; }
+  }
+
+  // ----- HEADER -----
+  .site-header {
+    height: 78px;
+    padding: 0 16px;
+    justify-content: space-between;
+
+    .logo img { height: 52px; }
+
+    // Hide the desktop nav until the burger toggles `.is-open`.
+    .menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 8px 16px 24px;
+      background: $white;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, .12);
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+      z-index: $z-dropdown;
+    }
+
+    &.is-open .menu { display: flex; }
+
+    .menu .item {
+      display: block;
+      padding: 12px 4px;
+      border-bottom: 1px solid $ds-hairline;
+
+      > a {
+        justify-content: space-between;
+        width: 100%;
+        font-size: 14px;
+        padding: 4px 0;
+      }
+
+      // Submenus collapse inline; expanded only when the item is tapped open.
+      .submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease;
+
+        a { padding: 8px 0 8px 14px; font-size: 13px; }
+      }
+
+      &.is-open {
+        .submenu { max-height: 600px; padding: 6px 0 4px; }
+        > a svg { transform: rotate(180deg); }
+      }
+
+      > a svg { transition: transform .2s ease; }
+    }
+
+    .icons {
+      gap: 14px;
+      margin-left: auto;
+    }
+    .icons .ic-mail,
+    .icons .ic-search { display: none; }
+
+    .nav-burger { display: inline-flex; }
+
+    // Burger lines morph into an X when the menu is open.
+    &.is-open .nav-burger {
+      span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; }
+      span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+  }
+
+  // ----- FOOTER -----
+  .site-footer {
+    padding: 50px 20px 28px;
+    text-align: center;
+
+    &::before {
+      width: 360px;
+      height: 360px;
+      right: -60px;
+      bottom: -60px;
+      opacity: .12;
+    }
+
+    .top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 24px;
+      text-align: center;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h4 { margin: 0 0 12px; }
+      p, a, li { line-height: 26px; font-size: 14px; }
+      ul { width: 100%; }
+      li { text-align: center; }
+    }
+
+    .logo-foot {
+      margin-bottom: 20px;
+      img { width: 220px; margin: 0 auto; }
+    }
+
+    .socials {
+      width: 100%;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .bot {
+      padding-top: 24px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .site-topbar {
+    .right .conn { display: none; }
+  }
+
+  .site-header .logo img { height: 46px; }
+}
+
