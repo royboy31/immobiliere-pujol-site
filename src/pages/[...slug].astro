@@ -125,38 +125,6 @@ const bodyHasOwnH1 = /<h1\b/i.test(rawBody);
 })();`} />
       </>
     )}
-  </article>
-</BaseLayout>
-
-{isEstimationPage && (
-  <style is:global>
-    /* Estimation page — give the PriceHubble widget a clean card shell. The
-       widget content is inside an iframe (cross-origin) so we can only style
-       the wrapper + iframe element itself. */
-    .content__body {
-      background: #f6f7f9;
-    }
-    .content__body .post__content {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 2.5rem 1rem 4rem;
-    }
-    #fisher-widget {
-      display: block;
-      width: 100%;
-      min-height: 820px;
-      border: 0;
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
-      overflow: hidden;
-    }
-    @media (max-width: 720px) {
-      #fisher-widget { min-height: 1200px; border-radius: 8px; }
-      .content__body .post__content { padding: 1.25rem .5rem 2.5rem; }
-    }
-  </style>
-)}
 
     {type === 'article' && entry.data.categories && (
       <footer class="content__footer">
@@ -183,4 +151,34 @@ const bodyHasOwnH1 = /<h1\b/i.test(rawBody);
       </footer>
     )}
   </article>
+
+  {isEstimationPage && (
+    <style is:global>
+      /* Estimation page — give the PriceHubble widget a clean card shell. The
+         widget content is inside an iframe (cross-origin) so we can only style
+         the wrapper + iframe element itself. */
+      .content__body {
+        background: #f6f7f9;
+      }
+      .content__body .post__content {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2.5rem 1rem 4rem;
+      }
+      #fisher-widget {
+        display: block;
+        width: 100%;
+        min-height: 820px;
+        border: 0;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+        overflow: hidden;
+      }
+      @media (max-width: 720px) {
+        #fisher-widget { min-height: 1200px; border-radius: 8px; }
+        .content__body .post__content { padding: 1.25rem .5rem 2.5rem; }
+      }
+    </style>
+  )}
 </BaseLayout>
