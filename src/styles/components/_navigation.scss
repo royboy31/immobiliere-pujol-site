@@ -186,30 +186,31 @@
 
     .ic-mail { width: 25px; height: 19px; }
     .ic-search { width: 23px; height: 23px; }
-  }
 
-  // Mobile hamburger — hidden on desktop, shown via media query below.
-  .nav-burger {
-    display: none;
-    width: 36px;
-    height: 36px;
-    background: transparent;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    // Mobile hamburger — hidden on desktop, shown via media query below.
+    // Nested inside .icons so the selector beats `.icons button { display: inline-flex }`.
+    .nav-burger {
+      display: none;
+      width: 36px;
+      height: 36px;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
 
-    span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: $ds-slate-2;
-      border-radius: 2px;
-      transition: transform .25s ease, opacity .2s ease;
-      transform-origin: center;
+      span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: $ds-slate-2;
+        border-radius: 2px;
+        transition: transform .25s ease, opacity .2s ease;
+        transform-origin: center;
+      }
     }
   }
 }
@@ -438,14 +439,15 @@
     .icons {
       gap: 14px;
       margin-left: auto;
-    }
-    .icons .ic-mail,
-    .icons .ic-search { display: none; }
 
-    .nav-burger { display: inline-flex; }
+      .ic-mail,
+      .ic-search { display: none; }
+
+      .nav-burger { display: inline-flex; }
+    }
 
     // Burger lines morph into an X when the menu is open.
-    &.is-open .nav-burger {
+    &.is-open .icons .nav-burger {
       span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
       span:nth-child(2) { opacity: 0; }
       span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
