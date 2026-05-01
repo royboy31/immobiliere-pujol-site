@@ -376,26 +376,16 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     }
   }
 
-  // Pagination dots (clickable buttons).
-  &__dots {
+  // Prev/next arrow pair, centered under the carousel.
+  &__arrows {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 
-    .d {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, .18);
-      border: 0;
-      padding: 0;
-      cursor: pointer;
-      transition: background-color $transition-fast;
+    .arrow-btn {
+      width: 44px;
+      height: 44px;
     }
   }
-
-  // Active-dot color matches the carousel's brand color.
-  &__col--vente .listings__dots .d.on { background: $ds-orange; }
-  &__col--loc .listings__dots .d.on { background: $ds-olive; }
 }
 
 .listing-card {
@@ -778,25 +768,25 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   );
 }
 
+.testi-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.testi-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: none;
+}
+
 .testi-col {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  animation: testi-scroll 40s linear infinite;
   will-change: transform;
-}
-
-.testi-viewport:hover .testi-col {
-  animation-play-state: paused;
-}
-
-@keyframes testi-scroll {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .testi-col { animation: none; }
 }
 
 .testi {

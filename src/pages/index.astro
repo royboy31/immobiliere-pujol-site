@@ -63,7 +63,6 @@ function buildCard(a: typeof allAnnonces[number]) {
 }
 const venteCards = ventes.map(buildCard);
 const locationCards = locations.map(buildCard);
-const PAGES = 4; // dots per carousel
 
 // ---------- EXPERTS ----------
 // Hard-coded from the Claude Design handoff (expert1–4.png have the
@@ -308,10 +307,13 @@ const STAR_PATH =
                 </a>
               ))}
             </div>
-            <div class="listings__dots">
-              {Array.from({ length: PAGES }).map((_, i) => (
-                <button type="button" class={`d ${i === 0 ? 'on' : ''}`} data-page={i} aria-label={`Page ${i + 1}`}></button>
-              ))}
+            <div class="listings__arrows">
+              <button type="button" class="arrow-btn" data-listings-prev aria-label="Annonces précédentes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg>
+              </button>
+              <button type="button" class="arrow-btn" data-listings-next aria-label="Annonces suivantes">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg>
+              </button>
             </div>
             <a class={`btn-pill-cta btn-pill-cta--${col.kind}`} href={col.ctaHref}>{col.ctaText}</a>
           </div>
@@ -323,8 +325,9 @@ const STAR_PATH =
       (function () {
         document.querySelectorAll<HTMLElement>('.listings__col').forEach((col) => {
           const track = col.querySelector<HTMLElement>('.listings__track');
-          const dots = col.querySelectorAll<HTMLButtonElement>('.listings__dots .d');
-          if (!track || !dots.length) return;
+          const prev = col.querySelector<HTMLButtonElement>('[data-listings-prev]');
+          const next = col.querySelector<HTMLButtonElement>('[data-listings-next]');
+          if (!track || !prev || !next) return;
 
           const cardsPerPage = 2;
 
@@ -336,22 +339,8 @@ const STAR_PATH =
             return (card.offsetWidth + gap) * cardsPerPage;
           }
 
-          dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-              track!.scrollTo({ left: step() * i, behavior: 'smooth' });
-            });
-          });
-
-          let raf = 0;
-          track.addEventListener('scroll', () => {
-            cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(() => {
-              const s = step();
-              const idx = s > 0 ? Math.round(track!.scrollLeft / s) : 0;
-              const clamped = Math.max(0, Math.min(dots.length - 1, idx));
-              dots.forEach((d, i) => d.classList.toggle('on', i === clamped));
-            });
-          });
+          prev.addEventListener('click', () => track!.scrollBy({ left: -step(), behavior: 'smooth' }));
+          next.addEventListener('click', () => track!.scrollBy({ left:  step(), behavior: 'smooth' }));
         });
       })();
     </script>
@@ -411,20 +400,30 @@ const STAR_PATH =
 
     {/* ============= STATS + TESTIMONIALS ============= */}
     <section class="about-stats">
-      <div class="testi-viewport">
-        <div class="testi-col" id="testiCol">
-          {reviewLoop.map((r) => (
-            <div class="testi">
-              <div class="stars">
-                {Array.from({ length: r.rating }).map(() => (
-                  <svg viewBox="0 0 20 20" fill="currentColor"><path d={STAR_PATH} /></svg>
-                ))}
+      <div class="testi-stage">
+        <div class="testi-viewport" id="testiViewport">
+          <div class="testi-col" id="testiCol">
+            {reviewLoop.map((r) => (
+              <div class="testi">
+                <div class="stars">
+                  {Array.from({ length: r.rating }).map(() => (
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d={STAR_PATH} /></svg>
+                  ))}
+                </div>
+                <p>{r.text}</p>
+                <h4>{r.author}</h4>
+                <img class="g" src="/images/home/google-g.png" alt="" />
               </div>
-              <p>{r.text}</p>
-              <h4>{r.author}</h4>
-              <img class="g" src="/images/home/google-g.png" alt="" />
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+        <div class="testi-arrows">
+          <button class="arrow-btn" id="testiPrev" type="button" aria-label="Avis précédent">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 15 L12 9 L18 15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg>
+          </button>
+          <button class="arrow-btn" id="testiNext" type="button" aria-label="Avis suivant">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 9 L12 15 L18 9" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg>
+          </button>
         </div>
       </div>
 
@@ -440,6 +439,44 @@ const STAR_PATH =
         <p class="stat-sub">La satisfaction de nos clients est notre plus belle réussite. Merci pour votre confiance et vos avis qui nous motivent chaque jour.</p>
       </div>
     </section>
+
+    <script>
+      (function () {
+        const col = document.getElementById('testiCol');
+        const prev = document.getElementById('testiPrev');
+        const next = document.getElementById('testiNext');
+        if (!col || !prev || !next) return;
+
+        // Reviews are duplicated in the DOM so wrap-around feels seamless
+        // when the user steps past the halfway mark (== one full set).
+        let offset = 0;
+
+        function step(): number {
+          const card = col!.querySelector<HTMLElement>('.testi');
+          if (!card) return 0;
+          const styles = getComputedStyle(col!);
+          const gap = parseFloat(styles.rowGap || styles.gap || '0') || 0;
+          return card.offsetHeight + gap;
+        }
+
+        function loopMax(): number {
+          return col!.scrollHeight / 2;
+        }
+
+        function nudge(direction: 1 | -1) {
+          const s = step();
+          const max = loopMax();
+          if (s <= 0 || max <= 0) return;
+          offset = ((offset + s * direction) % max + max) % max;
+          col!.style.transition = 'transform 0.45s cubic-bezier(.19,.68,.27,1)';
+          col!.style.transform = `translateY(${-offset}px)`;
+          setTimeout(() => { col!.style.transition = ''; }, 500);
+        }
+
+        prev.addEventListener('click', () => nudge(-1));
+        next.addEventListener('click', () => nudge(1));
+      })();
+    </script>
 
     {/* ============= BLOG ============= */}
     <section class="blog">
