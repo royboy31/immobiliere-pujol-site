@@ -1,22 +1,22 @@
 ---
-// Navigation structure from WordPress menu export
+// Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
 const navItems = [
   {
     label: 'Mise en location',
     href: '/service-immobilier/mettre-en-location/',
     children: [
-      { label: 'Nos conseils et services en location', href: '/services/nos-conseils-en-location/' },
-      { label: 'Estimation de loyer', href: '/services/estimation-de-loyer/' },
-      { label: 'Nos annonces de location', href: '/annonces/locations/' },
+      { label: 'Nos conseils et services en location', href: '/service-immobilier/mettre-en-location/' },
+      { label: 'Estimation de loyer', href: '/service-immobilier/mettre-en-location/#form' },
+      { label: 'Nos annonces de location', href: '/annonces/location/' },
     ],
   },
   {
     label: 'Gestion locative',
     href: '/service-immobilier/gestion-locative/',
     children: [
-      { label: 'Nos conseils et services en gestion', href: '/services/conseils-gestion-locative/' },
-      { label: 'Etude du marché locatif à Marseille', href: '/services/etude-marche-locatif/' },
-      { label: 'Obtenir un devis de Gestion Locative', href: '/services/devis-gestion-locative-marseille/' },
+      { label: 'Nos conseils et services en gestion', href: '/service-immobilier/gestion-locative/' },
+      { label: 'Etude du marché locatif à Marseille', href: '/services/etude-sur-le-marche-de-la-location-a-marseille/' },
+      { label: 'Obtenir un devis de Gestion Locative', href: '/service/devis-gestion-locative-marseille/' },
       { label: 'Contacter notre expert en gestion locative', href: '/services/contacter-un-conseiller-en-gestion-locative/' },
     ],
   },
@@ -24,32 +24,32 @@ const navItems = [
     label: 'Vendre',
     href: '/service-immobilier/vendre/',
     children: [
-      { label: 'Nos conseils et services pour vendre', href: '/services/conseils-pour-vendre/' },
-      { label: 'Estimation de prix de vente', href: '/services/estimation-prix-de-vente/' },
-      { label: 'Nos annonces en vente', href: '/annonces/ventes/' },
+      { label: 'Nos conseils et services pour vendre', href: '/service-immobilier/vendre/' },
+      { label: 'Estimation de prix de vente', href: '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/' },
+      { label: 'Nos annonces en vente', href: '/annonces/vente/' },
     ],
   },
   {
     label: 'Syndic',
     href: '/service-immobilier/syndic-de-copropriete-a-marseille/',
     children: [
-      { label: 'Nos conseils et services en syndic', href: '/services/conseils-syndic/' },
-      { label: 'Obtenir un devis en Syndic', href: '/services/devis-syndic/' },
+      { label: 'Nos conseils et services en syndic', href: '/service-immobilier/syndic-de-copropriete-a-marseille/' },
+      { label: 'Obtenir un devis en Syndic', href: '/service-immobilier/syndic-de-copropriete-a-marseille/#form' },
     ],
   },
   {
     label: "L'agence",
     href: '/service-immobilier/agence-immobiliere-pujol/',
     children: [
-      { label: 'Qui sommes-nous?', href: '/services/pourquoi-nous-faisons-ce-metier/' },
-      { label: 'Les avis de nos clients', href: '/services/avis-clients/' },
-      { label: 'Immobilière Pujol in english', href: '/services/immobiliere-pujol-in-english/' },
-      { label: 'Candidater chez nous', href: '/services/candidater/' },
+      { label: 'Qui sommes-nous?', href: '/service-immobilier/agence-immobiliere-pujol/#une-relation-personnalisee' },
+      { label: 'Les avis de nos clients', href: '/services/avis-clients-immobiliere-pujol-marseille/' },
+      { label: 'Immobilière Pujol in english', href: '/service-immobilier/agence-immobiliere-pujol/#limmobiliere-pujol-en-anglais' },
+      { label: 'Candidater chez nous', href: '/service-immobilier/agence-immobiliere-pujol/#candidature-immobilier-marseille' },
     ],
   },
   {
     label: 'Le blog',
-    href: '/blog/',
+    href: '/blog-immobilier-marseille/',
   },
 ];
 ---

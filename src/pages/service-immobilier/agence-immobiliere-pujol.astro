@@ -1,0 +1,266 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+// Pull SEO + media from the markdown so editors keep one source of truth.
+const entry = await getEntry('serviceImmobilier', 'agence-immobiliere-pujol');
+const seoTitle = entry?.data.seoTitle || "Notre agence immobilière – Immobilière Pujol";
+const seoDescription = entry?.data.seoDescription || '';
+const heroVideo =
+  entry?.data.heroVideo ||
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleure-agence-immobiliere-marseille.mp4';
+const heroPoster = '/images/home/hero-bg.jpg';
+const ctaText = entry?.data.ctaText || "Contacter l'agence";
+
+// Sidebar nav order is preserved exactly as on the legacy page (1, 2, 4, 5, 3).
+const toc = [
+  { id: 'service-immobilier-a-marseille',           label: '1. Nous' },
+  { id: 'candidature-immobilier-marseille',         label: '2. Vous' },
+  { id: 'limmobiliere-pujol-en-anglais',            label: "4 L'Immobilière Pujol in english" },
+  { id: 'blog-marche-immobilier-marseille',         label: "5. Le blog de l'agence" },
+  { id: 'avis-clients-agence-immobiliere-marseille-pujol', label: '3. Avis de nos clients' },
+];
+
+// All section content + article links from the legacy markdown body.
+// Every URL is preserved exactly.
+const sections = [
+  {
+    id: 'service-immobilier-a-marseille',
+    title: '1. Nous',
+    paragraphs: [
+      "Nous sommes une entreprise indépendante crée en 2002.",
+      "Nous avons fait le choix de la qualité et du service pour nos clients et nos collaborateurs à qui nous donnons un confort de travail et des outils efficaces.",
+      "Nous avons construit au fil des années une agence immobilière qui a développé des solutions innovantes, pour prendre soin de ses clients, les sécuriser dans leurs choix et leurs projets.",
+      "Nous sommes une agence immobilière engagée, responsable, qui cultive les bonnes valeurs et dans laquelle l'humain est au coeur de nos préoccupations.",
+    ],
+    articles: [
+      { href: '/services/lhistoire-de-la-societe/',                              label: "L'histoire de la société" },
+      { href: '/services/la-mission-de-immobiliere-pujol/',                      label: "La mission de l'Immobilière Pujol" },
+      { href: '/services/la-team-pujol/',                                        label: "La team Pujol" },
+      { href: '/services/pourquoi-nous-faisons-ce-metier/',                      label: "Pour quoi nous faisons ce métier?" },
+      { href: '/services/nos-conseils-avis-et-articles-sur-la-gestion-locative/', label: "Nos conseils, avis et articles : Le Blog de l'agence" },
+      { href: '/services/le-mot-de-stephane/',                                   label: "Le mot de Stéphane Pujol" },
+    ],
+  },
+  {
+    id: 'candidature-immobilier-marseille',
+    title: '2. Vous',
+    paragraphs: [
+      "Si vous cherchez à travailler dans l'immobilier, nous offrons un cadre épanouissant et reconnaissant.",
+      "Rejoignez nous, candidatez.",
+    ],
+    articles: [
+      { href: '/services/deposer-votre-cv-en-tant-que-gestionnaire-en-gestion-locative-chez-immobiliere-pujol/',                            label: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol" },
+      { href: '/services/candidater-au-poste-de-gestionnaire-en-syndic-de-copropriete-au-sein-de-immobiliere-pujol/',                       label: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol" },
+      { href: '/services/devenir-gestionnaire-immobilier-a-marseille/',                                                                     label: "Devenir un collaborateur de l'Immobilière Pujol" },
+    ],
+  },
+  {
+    id: 'limmobiliere-pujol-en-anglais',
+    title: "4 L'Immobilière Pujol in english",
+    paragraphs: [
+      "We speak english for our clients who wants to invest or sell or live in Marseille",
+    ],
+    articles: [
+      { href: '/services/advisory-transactions-service/',          label: "Our advisory and transactions service" },
+      { href: '/services/property-management-question-expertise/', label: "Property management, a question of expertise" },
+      { href: '/services/simple-efficient-rental-management/',     label: "Simple and efficient rental management" },
+    ],
+  },
+  {
+    id: 'blog-marche-immobilier-marseille',
+    title: "5. Le blog de l'agence",
+    paragraphs: [],
+    articles: [
+      { href: '/services/le-blog-de-limmobiliere-pujol/', label: "Le blog de l'immobilière Pujol" },
+    ],
+  },
+  {
+    id: 'avis-clients-agence-immobiliere-marseille-pujol',
+    title: '3. Avis de nos clients',
+    paragraphs: [
+      "Nos clients nous recommandent pour le service, notre proximité et notre réactivité.",
+    ],
+    articles: [
+      { href: '/services/les-avis-clients-de-limmobiliere-pujol/', label: "Les avis clients de l'Immobilière Pujol" },
+    ],
+  },
+];
+
+// Form objet options preserved from the original Gravity Forms select.
+const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic', 'Autre'];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <video class="svc-hero__video" autoplay muted loop playsinline preload="auto" poster={heroPoster}>
+      <source src={heroVideo} type="video/mp4" />
+    </video>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1>Notre <b>agence immobilière</b></h1>
+      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= TOC + SECTIONS ============= */}
+    <section class="svc-toc-section">
+      <div class="svc-toc-section__inner">
+
+        <aside class="svc-toc">
+          <h4 class="svc-toc__title">Notre agence immobilière</h4>
+          <ul class="svc-toc__list">
+            {toc.map((t) => (
+              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="svc-content">
+          {sections.map((s) => (
+            <section class="svc-section" id={s.id}>
+              <h3 class="svc-section__title">
+                {s.title.includes('.') ? (
+                  <>
+                    <span class="num">{s.title.split('.')[0]}.</span>
+                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
+                  </>
+                ) : (
+                  <b>{s.title}</b>
+                )}
+              </h3>
+
+              {s.paragraphs.map((p) => (
+                <p class="svc-section__lead">{p}</p>
+              ))}
+
+              {s.articles.length > 0 && (
+                <ul class="svc-articles">
+                  {s.articles.map((a) => (
+                    <li>
+                      <a class="svc-article-link" href={a.href}>
+                        <span>{a.label}</span>
+                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="/service-immobilier/agence-immobiliere-pujol/#gf_4"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Prenez contact <b>avec nous</b></h2>
+        <p class="svc-form__lead">Remplissez ce formulaire et nous prendrons contact avec vous dans les 24 heures</p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_6.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_6.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_2" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_4" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Objet de votre demande *</span>
+            <select name="input_10" required>
+              {formObjects.map((o) => (
+                <option value={o}>{o}</option>
+              ))}
+            </select>
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Décrivez votre demande *</span>
+            <textarea name="input_3" rows="6" placeholder="Décrivez votre demande" required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input type="checkbox" name="input_9.1" value="J'accepte le traitement de mes données dans le cadre de ma demande" required />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter notre <a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>Company<input type="text" name="input_11" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="4" />
+        <input type="hidden" name="is_submit_4" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  {/* Smooth-scroll TOC: highlight the active section as it enters the viewport. */}
+  <script>
+    (function () {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.svc-toc__link');
+      const sections = document.querySelectorAll<HTMLElement>('.svc-section');
+      if (!links.length || !sections.length) return;
+
+      const byId = new Map<string, HTMLAnchorElement>();
+      links.forEach((l) => {
+        const id = l.getAttribute('href')?.replace('#', '');
+        if (id) byId.set(id, l);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const link = byId.get(e.target.id);
+              if (link) link.classList.add('is-active');
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => io.observe(s));
+    })();
+  </script>
+</BaseLayout>

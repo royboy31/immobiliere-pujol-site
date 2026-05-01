@@ -13,6 +13,7 @@ export default defineConfig({
   // Astro 6: output defaults to 'static'. SSR pages opt-in with `export const prerender = false`
   // Annonce pages will use SSR (prerender = false), everything else is static.
   trailingSlash: 'always',
+  server: { host: true },
   // Legacy 301 redirects preserved from live WP (checked against live host).
   redirects: {
     '/blog/': '/blog-immobilier-marseille/',

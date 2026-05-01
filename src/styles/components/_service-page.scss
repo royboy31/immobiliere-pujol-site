@@ -1,0 +1,1626 @@
+// ============================================
+// SERVICE LANDING — Pujol theme (matches home page)
+// Used by: /service-immobilier/agence-immobiliere-pujol/
+// Tokens come from base/_variables.scss ($ds-*).
+// ============================================
+
+$ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
+
+.svc-page {
+  position: relative;
+  width: 100%;
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
+}
+
+// =========================================
+// HERO — full-bleed video background, h1 + curtain CTA
+// =========================================
+.svc-hero {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  height: 600px;
+  background:
+    linear-gradient(rgba(15, 25, 42, .35), rgba(15, 25, 42, .45)),
+    url('/images/home/hero-bg.jpg') center/cover no-repeat;
+  color: $white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 $ds-side-pad-svc;
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 44px;
+  }
+
+  h1 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 65px;
+    line-height: 60px;
+    text-align: center;
+    max-width: 980px;
+    margin: 0;
+    letter-spacing: -.3px;
+    color: $white;
+
+    b { font-weight: 700; }
+  }
+
+  &__sub {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .92);
+    text-align: center;
+    max-width: 760px;
+    margin: -20px 0 0;
+  }
+
+  &__cta {
+    height: 62px;
+    padding: 0 36px;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    color: $white;
+    display: grid;
+    place-items: center;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+    border: 1px solid $ds-olive;
+    cursor: pointer;
+    letter-spacing: .6px;
+    white-space: nowrap;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-position 0.4s ease, color 0.3s ease;
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-olive;
+    }
+  }
+}
+
+// =========================================
+// TOC SECTION — sticky sidebar + sectioned content
+// =========================================
+.svc-toc-section {
+  background: $ds-paper;
+  padding: 90px $ds-side-pad-svc 110px;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+}
+
+.svc-toc {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  background: $white;
+  border-radius: 24px;
+  padding: 30px 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+
+  &__parent {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: color $transition-fast;
+
+    &:hover { color: $ds-olive-2; }
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid $ds-hairline;
+    color: $black;
+  }
+
+  &__section-label {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    margin: 0 0 14px;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.3;
+    color: $ds-ink;
+    text-decoration: none;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover { background: $ds-soft-green; color: $black; }
+
+    &.is-active {
+      background: $ds-olive;
+      color: $black;
+      font-weight: 700;
+    }
+  }
+}
+
+// =========================================
+// CONTENT — sections of arrow-link cards
+// =========================================
+.svc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  min-width: 0;
+}
+
+.svc-section {
+  scroll-margin-top: 100px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 1;
+    margin: 0 0 24px;
+    color: $black;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    .num { font-weight: 300; color: $ds-olive-2; }
+    b    { font-weight: 700; }
+  }
+
+  &__lead {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: $ds-ink;
+    margin: 0 0 14px;
+    max-width: 720px;
+
+    &:last-of-type { margin-bottom: 30px; }
+  }
+}
+
+.svc-articles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.svc-article-link {
+  background: $white;
+  border-radius: 18px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  text-decoration: none;
+  color: $black;
+  font-family: $ds-font-noto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+  transition: transform $transition-base, box-shadow $transition-base, color $transition-base;
+
+  span { flex: 1; }
+  svg  { color: $ds-olive; flex: none; transition: transform $transition-base; }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+    color: $ds-olive-2;
+    svg { transform: translateX(4px); }
+  }
+}
+
+// =========================================
+// ARTICLE BODY — typography for HTML pulled from markdown
+// (used by /services/[slug] pages)
+// =========================================
+.svc-content--article { gap: 24px; }
+
+.svc-article-body {
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.7;
+  color: $ds-ink;
+  max-width: 760px;
+
+  > *:first-child { margin-top: 0; }
+  > *:last-child  { margin-bottom: 0; }
+
+  p {
+    margin: 0 0 18px;
+  }
+
+  strong, b { font-weight: 700; color: $black; }
+  em        { font-style: italic; }
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.15;
+    color: $black;
+    margin: 44px 0 18px;
+
+    b, strong { font-weight: 700; }
+  }
+
+  h3 {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.25;
+    color: $black;
+    margin: 36px 0 14px;
+  }
+
+  h4 {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    color: $black;
+    margin: 28px 0 12px;
+
+    em { font-weight: 400; color: $ds-olive-2; }
+  }
+
+  ul, ol {
+    margin: 0 0 22px;
+    padding-left: 22px;
+
+    li {
+      margin: 0 0 8px;
+    }
+  }
+
+  ul li::marker { color: $ds-olive-2; }
+
+  a {
+    color: $ds-olive-2;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color $transition-fast;
+
+    &:hover { color: $black; }
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 18px;
+    margin: 28px 0;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+  }
+
+  // The legacy markdown sometimes nests an <img> inside an <h2> — neutralize.
+  h2 img {
+    display: block;
+    margin-top: 18px;
+    border-radius: 18px;
+  }
+
+  blockquote {
+    margin: 24px 0;
+    padding: 16px 22px;
+    border-left: 3px solid $ds-olive;
+    background: $ds-soft-green;
+    border-radius: 0 14px 14px 0;
+    font-style: italic;
+    color: $black;
+  }
+}
+
+// =========================================
+// VALUES — card grid for key values / pillars
+// (used by /services/pourquoi-nous-faisons-ce-metier/)
+// =========================================
+.svc-values {
+  margin-top: 56px;
+  scroll-margin-top: 100px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.15;
+    color: $black;
+    margin: 0 0 32px;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.svc-value-card {
+  position: relative;
+  background: $white;
+  border-radius: 22px;
+  padding: 28px 28px 30px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  border-top: 3px solid $ds-olive;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, .1);
+  }
+
+  &__num {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 1.5px;
+    color: $ds-olive-2;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: $black;
+    margin: 0;
+  }
+
+  &__desc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    color: $ds-ink;
+    margin: 0;
+  }
+}
+
+// =========================================
+// TEAM — lead block + masonry photo gallery
+// (used by /services/la-team-pujol/)
+// =========================================
+.svc-team-lead {
+  text-align: center;
+  margin: 0 auto 36px;
+  max-width: 720px;
+
+  &__headline {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: 1.05;
+    color: $black;
+    margin: 0 0 14px;
+    letter-spacing: -.3px;
+
+    b { font-weight: 700; }
+  }
+
+  &__subline {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: $ds-ink;
+    margin: 0;
+  }
+}
+
+.svc-team-gallery {
+  column-count: 3;
+  column-gap: 16px;
+
+  &__item {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0 0 16px;
+    width: 100%;
+    display: block;
+    cursor: zoom-in;
+    break-inside: avoid;
+    border-radius: 18px;
+    overflow: hidden;
+    background: $ds-paper-2;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.6s $ease-out;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .14);
+
+      img { transform: scale(1.04); }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $ds-olive;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// =========================================
+// BLOG LANDING — editorial layout
+// (used by /services/le-blog-de-limmobiliere-pujol/)
+// =========================================
+.svc-blog-manifesto {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin: 0 0 72px;
+
+  &__quote {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1.1;
+    color: $black;
+    margin: 0 0 28px;
+    letter-spacing: -.4px;
+    position: relative;
+    padding-left: 22px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 3px;
+      background: $ds-olive;
+      border-radius: 2px;
+    }
+  }
+
+  &__para {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: $ds-ink;
+    margin: 0 0 14px;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  &__portrait {
+    margin: 0;
+    transform: rotate(2deg);
+    transition: transform $transition-base;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, .14);
+    }
+
+    figcaption {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 13px;
+      color: $ds-olive-2;
+      text-align: center;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    &:hover { transform: rotate(0); }
+  }
+}
+
+.svc-blog-pillars {
+  margin: 0 0 72px;
+
+  &__head {
+    text-align: center;
+    margin: 0 0 32px;
+
+    h2 {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 36px;
+      line-height: 1.1;
+      color: $black;
+      margin: 0 0 8px;
+
+      b { font-weight: 700; }
+    }
+
+    p {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 16px;
+      color: $ds-ink;
+      margin: 0;
+    }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.svc-pillar-card {
+  position: relative;
+
+  > a {
+    display: block;
+    background: $white;
+    border-radius: 22px;
+    padding: 30px 28px 26px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+    border: 1px solid transparent;
+    transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+    height: 100%;
+  }
+
+  &__num {
+    display: inline-block;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: $ds-olive-2;
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    color: $black;
+    margin: 0 0 8px;
+  }
+
+  &__tagline {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    color: $ds-ink;
+    margin: 0 0 22px;
+  }
+
+  &__count {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $black;
+    background: $ds-soft-green;
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: 28px;
+    bottom: 28px;
+    color: $ds-olive;
+    transition: transform $transition-base;
+  }
+
+  > a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .12);
+    border-color: $ds-olive;
+
+    .svc-pillar-card__arrow { transform: translateX(4px); }
+  }
+}
+
+.svc-blog-latest {
+  margin: 0 0 72px;
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    margin: 0 0 28px;
+
+    h2 {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 32px;
+      line-height: 1.1;
+      color: $black;
+      margin: 0;
+
+      b { font-weight: 700; }
+    }
+  }
+
+  &__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: $black;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      color: $ds-olive-2;
+      svg { transform: translateX(4px); }
+    }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+.svc-post-card {
+  > a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: $white;
+    border-radius: 18px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+    transition: transform $transition-base, box-shadow $transition-base;
+  }
+
+  &__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: $ds-paper-2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s $ease-out;
+    }
+  }
+
+  &__body {
+    padding: 18px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+  }
+
+  &__cat {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.3;
+    color: $black;
+    margin: 0;
+  }
+
+  &__excerpt {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ds-ink;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__date {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 12px;
+    color: $grey;
+    margin-top: 6px;
+  }
+
+  > a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .12);
+
+    .svc-post-card__media img { transform: scale(1.05); }
+  }
+}
+
+.svc-blog-cta {
+  background: $black;
+  border-radius: 28px;
+  padding: 56px 56px;
+  color: $white;
+  margin: 0 0 16px;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.1;
+    color: $white;
+    margin: 0 0 8px;
+
+    b { font-weight: 700; color: $ds-olive; }
+  }
+
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, .85);
+    margin: 0;
+    max-width: 540px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 32px;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: linear-gradient(to top, $ds-olive 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    border: 1.5px solid $ds-olive;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-position 0.4s ease, color 0.3s ease;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      background-position: 0 100%;
+      color: $black;
+      svg { transform: translateX(4px); }
+    }
+  }
+}
+
+// =========================================
+// REVIEWS LANDING — rating headline + platform cards + video grid
+// (used by /services/les-avis-clients-de-limmobiliere-pujol/)
+// =========================================
+.svc-reviews-hero {
+  text-align: center;
+  margin: 0 0 56px;
+  padding: 40px 32px;
+  background: $ds-soft-green;
+  border-radius: 26px;
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    background: $white;
+    border-radius: 999px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+    color: $ds-olive-2;
+    margin-bottom: 24px;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.05;
+      gap: 2px;
+    }
+  }
+
+  &__rating {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 18px;
+    color: $black;
+  }
+
+  &__total {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 11px;
+    color: $ds-ink;
+  }
+
+  &__headline {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.1;
+    color: $black;
+    margin: 0 0 14px;
+    letter-spacing: -.3px;
+
+    b { font-weight: 700; }
+  }
+
+  &__subline {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $ds-ink;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+}
+
+.svc-review-platforms {
+  margin: 0 0 56px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.1;
+    color: $black;
+    margin: 0 0 24px;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.svc-platform-card {
+  > a {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: $white;
+    border-radius: 20px;
+    padding: 26px 26px 22px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+    border: 1px solid transparent;
+    transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: $ds-paper-2;
+    color: $ds-ink;
+    margin-bottom: 16px;
+  }
+
+  &__name {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.25;
+    color: $black;
+    margin: 0 0 6px;
+  }
+
+  &__tagline {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ds-ink;
+    margin: 0 0 18px;
+    flex: 1;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+
+    svg { transition: transform $transition-base; }
+  }
+
+  // Per-platform accent for the logo tile.
+  &--google      &__logo { background: rgba(66, 133, 244, .08); }
+  &--immodvisor  &__logo { background: rgba(178, 192, 78, .14); color: $ds-olive-2; }
+  &--youtube     &__logo { background: rgba(255, 0, 0, .08); }
+  &--pagesjaunes &__logo { background: rgba(255, 203, 5, .14); }
+  &--os-vente    &__logo,
+  &--os-syndic   &__logo,
+  &--os-gestion  &__logo { background: $ds-soft-green; color: $ds-olive-2; }
+
+  > a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .12);
+    border-color: $ds-olive;
+
+    .svc-platform-card__cta svg { transform: translateX(4px); }
+  }
+}
+
+.svc-review-videos {
+  margin: 0 0 48px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.1;
+    color: $black;
+    margin: 0 0 24px;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+.svc-review-video {
+  &__frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 18px;
+    overflow: hidden;
+    background: $black;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .12);
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+}
+
+.svc-reviews-closing {
+  font-family: $ds-font-helv;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.3;
+  color: $black;
+  text-align: center;
+  font-style: italic;
+  margin: 32px auto 0;
+  max-width: 720px;
+
+  span {
+    color: $ds-olive;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.4em;
+    line-height: 0;
+    vertical-align: -.2em;
+    margin: 0 6px;
+  }
+}
+
+// =========================================
+// LIGHTBOX — full-screen image viewer with prev/next
+// =========================================
+.svc-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 40px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__stage {
+    position: relative;
+    max-width: min(1200px, 92vw);
+    max-height: 86vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+      animation: svc-lightbox-pop .25s $ease-out both;
+    }
+  }
+
+  &__counter {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(255, 255, 255, .8);
+    letter-spacing: 1px;
+  }
+
+  &__close,
+  &__nav {
+    appearance: none;
+    border: 0;
+    background: rgba(255, 255, 255, .12);
+    color: $white;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background-color .2s ease, transform .2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, .22);
+      transform: scale(1.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $ds-olive;
+      outline-offset: 2px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:hover { transform: translateY(-50%) scale(1.05); }
+
+    &--prev { left: 24px; }
+    &--next { right: 24px; }
+  }
+}
+
+@keyframes svc-lightbox-pop {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+// =========================================
+// FORM — olive card on white, mirrors home newsletter treatment
+// =========================================
+.svc-form-wrap {
+  background: $white;
+  padding: 90px $ds-side-pad-svc 100px;
+}
+
+.svc-form {
+  position: relative;
+  background: $ds-olive;
+  border-radius: 40px;
+  padding: 60px 70px 64px;
+  scroll-margin-top: 80px;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1;
+    margin: 0 0 14px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__lead {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: $black;
+    margin: 0 0 36px;
+    max-width: 720px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+  }
+}
+
+.svc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--full { grid-column: 1 / -1; }
+
+  > span {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $black;
+  }
+
+  input,
+  select,
+  textarea {
+    background: rgba(255, 255, 255, .9);
+    border: 0;
+    border-radius: 999px;
+    padding: 0 22px;
+    height: 52px;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 15px;
+    color: $black;
+    outline: 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+    transition: box-shadow $transition-base, background-color $transition-base;
+
+    &::placeholder { color: rgba(0, 0, 0, .45); }
+
+    &:focus {
+      background: $white;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
+    }
+  }
+
+  textarea {
+    border-radius: 22px;
+    height: auto;
+    padding: 16px 22px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1 L6 6 L11 1' stroke='%23000' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 22px center;
+    padding-right: 50px;
+  }
+}
+
+.svc-form__agree {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 26px 0 0;
+
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid $black;
+    flex: none;
+    margin-top: 3px;
+    background: transparent;
+    border-radius: 2px;
+    accent-color: $black;
+  }
+
+  span {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    color: $black;
+  }
+}
+
+.svc-form__legal {
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 1.55;
+  color: $black;
+  margin: 18px 0 0;
+  max-width: 980px;
+
+  a { color: $black; text-decoration: underline; }
+}
+
+.svc-form__submit {
+  margin-top: 32px;
+  height: 56px;
+  padding: 0 38px;
+  border-radius: 999px;
+  background-color: transparent;
+  background-image: linear-gradient(to top, $black 50%, transparent 50%);
+  background-size: 100% 200%;
+  background-position: 0 0;
+  color: $black;
+  border: 1.5px solid $black;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-position 0.4s ease, color 0.3s ease;
+
+  svg { color: currentColor; }
+
+  &:hover {
+    background-position: 0 100%;
+    color: $white;
+  }
+}
+
+// =========================================
+// RESPONSIVE
+// =========================================
+@media (max-width: $bp-tablet) {
+  $mobile-pad: 20px;
+
+  .svc-hero {
+    height: auto;
+    min-height: 460px;
+    padding: 80px $mobile-pad 60px;
+
+    h1 { font-size: 32px; line-height: 1.1; max-width: 100%; }
+    &__inner { gap: 28px; }
+    &__cta { height: 52px; padding: 0 28px; }
+  }
+
+  .svc-toc-section {
+    padding: 50px 0 70px;
+
+    &__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 0 $mobile-pad;
+    }
+  }
+
+  .svc-toc {
+    position: relative;
+    top: 0;
+    padding: 22px 20px;
+
+    &__title { font-size: 18px; margin-bottom: 16px; padding-bottom: 14px; }
+    &__list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    &__link { padding: 8px 14px; font-size: 13px; }
+  }
+
+  .svc-content { gap: 48px; }
+
+  .svc-section {
+    &__title { font-size: 32px; gap: 8px; }
+    &__lead  { font-size: 16px; }
+  }
+
+  .svc-article-link {
+    padding: 14px 18px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+
+  .svc-article-body {
+    font-size: 16px;
+    line-height: 1.65;
+
+    h2 { font-size: 26px; margin-top: 32px; }
+    h3 { font-size: 20px; margin-top: 28px; }
+    img { border-radius: 14px; margin: 22px 0; }
+  }
+
+  .svc-values {
+    margin-top: 40px;
+
+    &__title { font-size: 26px; margin-bottom: 22px; }
+    &__grid  { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .svc-team-lead {
+    margin-bottom: 28px;
+
+    &__headline { font-size: 30px; }
+    &__subline  { font-size: 16px; }
+  }
+
+  .svc-blog-manifesto {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 48px;
+
+    &__quote { font-size: 26px; padding-left: 16px; }
+    &__para  { font-size: 15px; }
+    &__portrait {
+      transform: none;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+  }
+
+  .svc-blog-pillars {
+    margin-bottom: 48px;
+
+    &__head h2 { font-size: 26px; }
+    &__head p  { font-size: 14px; }
+    &__grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .svc-pillar-card {
+    > a { padding: 22px 22px 20px; }
+    &__title  { font-size: 19px; }
+    &__tagline { font-size: 14px; margin-bottom: 16px; }
+    &__arrow  { right: 22px; bottom: 22px; }
+  }
+
+  .svc-blog-latest {
+    margin-bottom: 48px;
+
+    &__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 22px;
+      h2 { font-size: 24px; }
+    }
+    &__grid { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .svc-blog-cta {
+    padding: 36px 24px;
+    border-radius: 22px;
+
+    &__inner {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+    h2 { font-size: 26px; }
+    p  { font-size: 15px; }
+    &__btn {
+      width: 100%;
+      justify-content: center;
+      height: 50px;
+    }
+  }
+
+  .svc-reviews-hero {
+    padding: 32px 22px;
+    margin-bottom: 36px;
+
+    &__headline { font-size: 24px; }
+    &__subline  { font-size: 14px; }
+  }
+
+  .svc-review-platforms {
+    margin-bottom: 36px;
+
+    &__title { font-size: 24px; margin-bottom: 18px; }
+    &__grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .svc-platform-card > a { padding: 22px 22px 20px; }
+
+  .svc-review-videos {
+    &__title { font-size: 24px; }
+    &__grid  { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .svc-reviews-closing { font-size: 19px; }
+
+  .svc-team-gallery {
+    column-count: 2;
+    column-gap: 12px;
+
+    &__item { margin-bottom: 12px; border-radius: 14px; }
+  }
+
+  .svc-lightbox {
+    padding: 16px;
+
+    &__close { top: 14px; right: 14px; width: 42px; height: 42px; }
+    &__nav   { width: 42px; height: 42px; }
+    &__nav--prev { left: 12px; }
+    &__nav--next { right: 12px; }
+    &__stage img { max-height: 76vh; }
+  }
+
+  .svc-value-card {
+    padding: 22px 22px 24px;
+
+    &__title { font-size: 18px; }
+    &__desc  { font-size: 14px; }
+  }
+
+  .svc-form-wrap { padding: 60px $mobile-pad 70px; }
+
+  .svc-form {
+    padding: 36px 24px 40px;
+    border-radius: 28px;
+
+    h2 { font-size: 32px; }
+    &__lead { font-size: 16px; margin-bottom: 24px; }
+    &__grid { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .svc-field {
+    input, select { height: 48px; padding: 0 18px; }
+    textarea { padding: 14px 18px; }
+    select { padding-right: 44px; }
+  }
+
+  .svc-form__submit {
+    height: 50px;
+    padding: 0 28px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .svc-hero h1 { font-size: 28px; }
+  .svc-section__title { font-size: 28px; }
+  .svc-form h2 { font-size: 28px; }
+  .svc-team-lead__headline { font-size: 26px; }
+  .svc-team-gallery { column-count: 1; }
+}
