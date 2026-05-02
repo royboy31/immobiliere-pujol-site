@@ -1,11 +1,12 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+import { getActiveAnnonces, formatDbPrice } from '../../lib/db-annonces';
 
-const allAnnonces = await fetchUbiflowAnnonces();
-const annonces = allAnnonces.filter(a => a.type === 'L');
-const totalVentes = allAnnonces.filter(a => a.type === 'V').length;
+const { env } = await import('cloudflare:workers');
+const allAnnonces = await getActiveAnnonces((env as any).DB);
+const annonces = allAnnonces.filter(a => a.type_annonce === 'L');
+const totalVentes = allAnnonces.filter(a => a.type_annonce === 'V').length;
 ---
 
 <BaseLayout
@@ -36,13 +37,13 @@ const totalVentes = allAnnonces.filter(a => a.type === 'V').length;
           </div>
           <div class="annonce-card__content">
             <h2 class="annonce-card__title">{annonce.titre}</h2>
-            <p class="annonce-card__price">{formatPrice(annonce)}</p>
+            <p class="annonce-card__price">{formatDbPrice(annonce)}</p>
             <div class="annonce-card__details">
-              {annonce.libelleType && <span>{annonce.libelleType}</span>}
+              {annonce.type_bien && <span>{annonce.type_bien}</span>}
               {annonce.surface && <span>{annonce.surface} m²</span>}
-              {annonce.nbPieces && <span>{annonce.nbPieces} pièce{annonce.nbPieces > 1 ? 's' : ''}</span>}
+              {annonce.nb_pieces && <span>{annonce.nb_pieces} pièce{annonce.nb_pieces > 1 ? 's' : ''}</span>}
               {annonce.quartier && <span>{annonce.quartier}</span>}
-              <span>{annonce.codePostal} {annonce.ville}</span>
+              <span>{annonce.code_postal} {annonce.ville}</span>
             </div>
           </div>
         </a>
