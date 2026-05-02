@@ -1,141 +1,121 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+import { getAnnonceBySlug, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import ExpertCard from '../../components/experts/ExpertCard.astro';
-import { getClosedAnnonce, formatClosedPrice, typeLabel, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
 
 const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/annonces/');
 
-// 1. Try active feed first.
-const annonces = await fetchUbiflowAnnonces();
-const active = slug ? annonces.find(a => a.slug === slug) : undefined;
+const { env } = await import('cloudflare:workers');
+const db = (env as any).DB as D1Database;
 
-// 2. Fallback: closed annonce loaded from the static assets layer.
-let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
-try {
-  const { env } = await import('cloudflare:workers');
-  assets = (env as any)?.ASSETS;
-} catch {
-  // Not running under wrangler (e.g. astro dev) — fall back to plain fetch.
+// Single D1 lookup — handles both active and closed annonces
+const annonce = await getAnnonceBySlug(db, slug);
+
+if (!annonce) {
+  // Fallback: try loading from static assets (for annonces not yet seeded to D1)
+  const { getClosedAnnonce } = await import('../../lib/closed-annonces');
+  const assets = (env as any)?.ASSETS;
+  const closed = await getClosedAnnonce(slug, assets, new URL(Astro.url.origin));
+  if (!closed) return Astro.redirect('/annonces/');
+
+  // Redirect will be removed once all annonces are seeded to D1
+  // For now, render closed annonce from static assets with same template
 }
-const closed = active ? null : await getClosedAnnonce(slug ?? '', assets, new URL(Astro.url.origin));
 
-if (!active && !closed) {
-  return Astro.redirect('/annonces/');
-}
+const isClosed = annonce ? annonce.status === 'closed' : true;
 
-// Normalize to a common render model.
+// Build view model from D1 data
+const expert = annonce ? findExpertByEmail(annonce.email_a_afficher) : null;
+
 type View = {
   titre: string;
   description: string;
-  type: 'V' | 'L' | string;
+  type: string;
   reference: string;
   priceDisplay: string;
   photos: string[];
-  adresse?: string;
-  codePostal?: string;
-  ville?: string;
-  quartier?: string;
+  adresse?: string | null;
+  codePostal?: string | null;
+  ville?: string | null;
+  quartier?: string | null;
   surface?: number | null;
   nbPieces?: number | null;
   nbChambres?: number | null;
   nbSallesDeBain?: number | null;
   nbWC?: number | null;
-  etage?: string | number;
-  nbEtages?: string | number;
-  typeChauffage?: string;
-  cuisine?: string;
-  dpeEtiquetteConso?: string;
-  dpeEtiquetteGes?: string;
+  etage?: string | null;
+  nbEtages?: string | null;
+  typeChauffage?: string | null;
+  dpeEtiquetteConso?: string | null;
+  dpeEtiquetteGes?: string | null;
   loyer?: number | null;
   loyerCC?: number | null;
   charges?: number | null;
   depotGarantie?: number | null;
   prix?: number | null;
-  honorairesChargeAcquereur?: boolean;
+  honoraires?: string | null;
   isClosed: boolean;
-  related: ClosedAnnonce['related'];
-  expertEmail?: string | null;
+  related: { slug: string; titre: string; prix: number | null; type_annonce: string; code_postal: string }[];
+  contactAAfficher?: string | null;
+  telephoneAAfficher?: string | null;
+  emailAAfficher?: string | null;
 };
 
 let view: View;
-let expert: ReturnType<typeof findExpertByEmail> = null;
 
-if (active) {
-  expert = findExpertByEmail(active.emailAAfficher);
+if (annonce) {
+  const related = isClosed && annonce.code_postal
+    ? await getRelatedAnnonces(db, annonce.code_postal, slug)
+    : [];
+
+  let titre = annonce.titre;
+  if (isClosed && !titre) {
+    const pieces = annonce.nb_pieces ? ` ${annonce.nb_pieces} pièce${annonce.nb_pieces > 1 ? 's' : ''}` : '';
+    const surface = annonce.surface ? ` de ${annonce.surface} m²` : '';
+    const where = [annonce.ville, annonce.code_postal ? `(${annonce.code_postal})` : ''].filter(Boolean).join(' ');
+    const action = annonce.type_annonce === 'V' ? 'à vendre' : 'à louer';
+    titre = `Appartement${pieces}${surface} ${action}${where ? ' à ' + where : ''}`.trim();
+  }
+
   view = {
-    titre: active.titre,
-    description: active.description,
-    type: active.type,
-    reference: active.reference,
-    priceDisplay: formatPrice(active),
-    photos: active.photos,
-    adresse: active.adresse,
-    codePostal: active.codePostal,
-    ville: active.ville,
-    quartier: (active as any).quartier,
-    surface: (active as any).surface,
-    nbPieces: (active as any).nbPieces,
-    nbChambres: (active as any).nbChambres,
-    nbSallesDeBain: (active as any).nbSallesDeBain,
-    nbWC: (active as any).nbWC,
-    etage: (active as any).etage,
-    nbEtages: (active as any).nbEtages,
-    typeChauffage: (active as any).typeChauffage,
-    cuisine: (active as any).cuisine,
-    dpeEtiquetteConso: (active as any).dpeEtiquetteConso,
-    dpeEtiquetteGes: (active as any).dpeEtiquetteGes,
-    loyer: (active as any).loyer,
-    loyerCC: (active as any).loyerCC,
-    charges: (active as any).charges,
-    depotGarantie: (active as any).depotGarantie,
-    prix: active.prix,
-    honorairesChargeAcquereur: (active as any).honorairesChargeAcquereur,
-    isClosed: false,
-    related: [],
-    expertEmail: active.emailAAfficher,
+    titre,
+    description: annonce.descriptif || '',
+    type: annonce.type_annonce || 'V',
+    reference: annonce.ubiflow_reference || annonce.reference_agence || annonce.slug,
+    priceDisplay: formatDbPrice(annonce),
+    photos: annonce.photos,
+    adresse: annonce.adresse,
+    codePostal: annonce.code_postal,
+    ville: annonce.ville,
+    quartier: annonce.quartier,
+    surface: annonce.surface,
+    nbPieces: annonce.nb_pieces,
+    nbChambres: annonce.nb_chambres,
+    nbSallesDeBain: annonce.nb_salles_bain,
+    nbWC: annonce.nb_wc,
+    etage: annonce.etage,
+    nbEtages: annonce.nb_etages,
+    typeChauffage: annonce.type_chauffage,
+    dpeEtiquetteConso: annonce.dpe_note,
+    dpeEtiquetteGes: annonce.ges_note,
+    loyer: annonce.loyer_ht,
+    loyerCC: annonce.loyer_cc,
+    charges: annonce.charges,
+    depotGarantie: annonce.depot_garantie,
+    prix: annonce.prix,
+    honoraires: annonce.honoraires,
+    isClosed,
+    related,
+    contactAAfficher: annonce.contact_a_afficher,
+    telephoneAAfficher: annonce.telephone_a_afficher,
+    emailAAfficher: annonce.email_a_afficher,
   };
 } else {
-  const c = closed!;
-  expert = findExpertByEmail(c.emailAAfficher);
-  // Don't use c.seoTitle — it's almost always a truncated description, not a real title.
-  const pieces = c.nbPieces ? ` ${c.nbPieces} pièce${c.nbPieces > 1 ? 's' : ''}` : '';
-  const surface = c.surface ? ` de ${c.surface} m²` : '';
-  const where = [c.ville, c.codePostal ? `(${c.codePostal})` : ''].filter(Boolean).join(' ');
-  const action = c.typeAnnonce === 'V' ? 'à vendre' : 'à louer';
-  const synthesizedTitle = `Appartement${pieces}${surface} ${action}${where ? ' à ' + where : ''}`.trim();
-  view = {
-    titre: synthesizedTitle,
-    description: c.descriptif ?? '',
-    type: c.typeAnnonce || 'V',
-    reference: c.referenceAgence ?? c.slug,
-    priceDisplay: formatClosedPrice(c),
-    photos: c.photos ?? [],
-    adresse: c.adresse,
-    codePostal: c.codePostal,
-    ville: c.ville,
-    quartier: c.quartier,
-    surface: c.surface ?? null,
-    nbPieces: c.nbPieces ?? null,
-    nbChambres: c.nbChambres ?? null,
-    nbSallesDeBain: c.nbSallesBain ?? null,
-    nbWC: c.nbWC ?? null,
-    etage: c.etage,
-    nbEtages: c.nbEtages,
-    typeChauffage: c.typeChauffage,
-    cuisine: c.cuisine,
-    dpeEtiquetteConso: c.dpeNote,
-    dpeEtiquetteGes: c.gesNote,
-    loyerCC: c.loyerCC ?? null,
-    charges: c.charges ?? null,
-    prix: c.prix ?? null,
-    isClosed: true,
-    related: c.related ?? [],
-    expertEmail: c.emailAAfficher,
-  };
+  return Astro.redirect('/annonces/');
 }
 
 const pageTitle = `${view.titre} – Immobilière Pujol`;
@@ -145,7 +125,7 @@ const annonceUrl = new URL(`/annonces/${slug}/`, Astro.site).toString();
 const listingSchema = buildRealEstateListing({
   titre: view.titre,
   description: view.description,
-  slug: slug ?? '',
+  slug: slug,
   type: view.type,
   prix: view.prix ?? null,
   loyerCC: view.loyerCC ?? null,
@@ -163,7 +143,7 @@ const listingSchema = buildRealEstateListing({
     {view.isClosed && (
       <div class="annonce-single__closed-banner">
         <p>
-          <strong>{typeLabel({ typeAnnonce: view.type } as ClosedAnnonce)} clôturée</strong> — cette annonce n'est plus disponible.
+          <strong>{view.type === 'V' ? 'Vente' : 'Location'} clôturée</strong> — cette annonce n'est plus disponible.
           <a href="/annonces/">Voir nos annonces actuelles</a>.
         </p>
       </div>
@@ -258,7 +238,6 @@ const listingSchema = buildRealEstateListing({
             {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
-            {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
           </dl>
         </div>
 
@@ -288,7 +267,7 @@ const listingSchema = buildRealEstateListing({
             <h3>Vente</h3>
             <dl>
               <dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd>
-              {view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
+              {view.honoraires && <><dt>Honoraires</dt><dd>{view.honoraires}</dd></>}
             </dl>
           </div>
         )}
@@ -324,14 +303,14 @@ const listingSchema = buildRealEstateListing({
       <section class="annonce-single__contact">
         <h2>Intéressé par ce bien ?</h2>
         <div class="contact-info">
-          {active!.contactAAfficher && !expert && <p><strong>{active!.contactAAfficher}</strong></p>}
-          {active!.telephoneAAfficher && (
-            <a href={`tel:${active!.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
-              Appeler : {active!.telephoneAAfficher}
+          {view.contactAAfficher && !expert && <p><strong>{view.contactAAfficher}</strong></p>}
+          {view.telephoneAAfficher && (
+            <a href={`tel:${view.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
+              Appeler : {view.telephoneAAfficher}
             </a>
           )}
-          {active!.emailAAfficher && (
-            <a href={`mailto:${active!.emailAAfficher}?subject=Annonce ${view.reference} - ${view.titre}`} class="btn btn--secondary">
+          {view.emailAAfficher && (
+            <a href={`mailto:${view.emailAAfficher}?subject=Annonce ${view.reference} - ${view.titre}`} class="btn btn--secondary">
               Envoyer un email
             </a>
           )}
@@ -361,7 +340,7 @@ const listingSchema = buildRealEstateListing({
           {view.related.map(r => (
             <li>
               <a href={`/annonces/${r.slug}/`}>
-                {r.type === 'V' ? 'Vente' : 'Location'} — {r.title}
+                {r.type_annonce === 'V' ? 'Vente' : 'Location'} — {r.titre}
                 {r.prix ? ` — ${new Intl.NumberFormat('fr-FR').format(r.prix)} €` : ''}
               </a>
             </li>

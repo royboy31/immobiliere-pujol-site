@@ -1,0 +1,155 @@
+// D1 query layer for annonces
+// Replaces fetchUbiflowAnnonces() (live XML) and getClosedAnnonce() (static JSON)
+
+export interface DbAnnonce {
+  id: number;
+  slug: string;
+  status: string;
+  type_annonce: string;
+  type_bien: string;
+  titre: string;
+  descriptif: string;
+  reference_agence: string;
+  ubiflow_reference: string;
+  adresse: string;
+  code_postal: string;
+  ville: string;
+  quartier: string;
+  latitude: number | null;
+  longitude: number | null;
+  prix: number | null;
+  loyer_cc: number | null;
+  loyer_ht: number | null;
+  charges: number | null;
+  depot_garantie: number | null;
+  honoraires: string | null;
+  surface: number | null;
+  surface_terrain: number | null;
+  nb_pieces: number | null;
+  nb_chambres: number | null;
+  nb_salles_bain: number | null;
+  nb_wc: number | null;
+  etage: string | null;
+  nb_etages: string | null;
+  ascenseur: number;
+  cave: number;
+  terrasse: number;
+  parking: string | null;
+  garage: string | null;
+  interphone: number;
+  dpe_note: string | null;
+  dpe_valeur: string | null;
+  ges_note: string | null;
+  type_chauffage: string | null;
+  contact_a_afficher: string | null;
+  telephone_a_afficher: string | null;
+  email_a_afficher: string | null;
+  mandat_numero: string | null;
+  mandat_type: string | null;
+  source: string;
+  date_fermeture: string | null;
+}
+
+export interface DbPhoto {
+  url: string;
+  position: number;
+  source: string;
+}
+
+/**
+ * Get all active annonces (replaces fetchUbiflowAnnonces)
+ */
+export async function getActiveAnnonces(db: D1Database): Promise<(DbAnnonce & { photos: string[] })[]> {
+  const annonces = await db
+    .prepare("SELECT * FROM annonces WHERE status = 'active' ORDER BY date_creation DESC")
+    .all<DbAnnonce>();
+
+  // Batch-load photos for all active annonces
+  const ids = annonces.results.map(a => a.id);
+  if (ids.length === 0) return [];
+
+  const photosResult = await db
+    .prepare(
+      `SELECT annonce_id, url, position FROM annonces_photos
+       WHERE annonce_id IN (${ids.map(() => '?').join(',')})
+       ORDER BY position ASC`,
+    )
+    .bind(...ids)
+    .all<{ annonce_id: number; url: string; position: number }>();
+
+  // Group photos by annonce_id
+  const photoMap = new Map<number, string[]>();
+  for (const p of photosResult.results) {
+    const list = photoMap.get(p.annonce_id) || [];
+    list.push(p.url);
+    photoMap.set(p.annonce_id, list);
+  }
+
+  return annonces.results.map(a => ({
+    ...a,
+    photos: photoMap.get(a.id) || [],
+  }));
+}
+
+/**
+ * Get a single annonce by slug (active or closed)
+ */
+export async function getAnnonceBySlug(
+  db: D1Database,
+  slug: string,
+): Promise<(DbAnnonce & { photos: string[] }) | null> {
+  const annonce = await db
+    .prepare('SELECT * FROM annonces WHERE slug = ?')
+    .bind(slug)
+    .first<DbAnnonce>();
+
+  if (!annonce) return null;
+
+  const photos = await db
+    .prepare('SELECT url, position FROM annonces_photos WHERE annonce_id = ? ORDER BY position ASC')
+    .bind(annonce.id)
+    .all<{ url: string; position: number }>();
+
+  return {
+    ...annonce,
+    photos: photos.results.map(p => p.url),
+  };
+}
+
+/**
+ * Get related annonces (same arrondissement/code_postal, active, different slug)
+ */
+export async function getRelatedAnnonces(
+  db: D1Database,
+  codePostal: string,
+  excludeSlug: string,
+  limit = 5,
+): Promise<{ slug: string; titre: string; prix: number | null; type_annonce: string; code_postal: string }[]> {
+  const results = await db
+    .prepare(
+      `SELECT slug, titre, prix, type_annonce, code_postal
+       FROM annonces
+       WHERE code_postal = ? AND slug != ? AND status = 'active'
+       ORDER BY date_creation DESC
+       LIMIT ?`,
+    )
+    .bind(codePostal, excludeSlug, limit)
+    .all<{ slug: string; titre: string; prix: number | null; type_annonce: string; code_postal: string }>();
+
+  return results.results;
+}
+
+/**
+ * Format price for display (mirrors ubiflow.ts formatPrice)
+ */
+export function formatDbPrice(a: DbAnnonce): string {
+  const fmt = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  if (a.type_annonce === 'V' && a.prix) {
+    return fmt.format(a.prix);
+  }
+  if (a.type_annonce === 'L') {
+    const loyer = a.loyer_cc ?? a.prix;
+    if (loyer) return fmt.format(loyer) + '/mois';
+  }
+  return 'Prix sur demande';
+}

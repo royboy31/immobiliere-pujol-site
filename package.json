@@ -10,7 +10,8 @@
     "build": "node scripts/copy-closed-annonces.mjs && node scripts/build-expert-listings.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "generate-types": "wrangler types"
+    "generate-types": "wrangler types",
+    "deploy:cron": "cd workers/cron-sync && npm install && npx wrangler deploy"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
@@ -29,5 +30,8 @@
   },
   "overrides": {
     "vite": "^7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260501.1"
   }
 }

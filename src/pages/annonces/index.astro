@@ -1,11 +1,13 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
+import { getActiveAnnonces, formatDbPrice } from '../../lib/db-annonces';
 
-const annonces = await fetchUbiflowAnnonces();
-const ventes = annonces.filter(a => a.type === 'V');
-const locations = annonces.filter(a => a.type === 'L');
+const { env } = await import('cloudflare:workers');
+const allAnnonces = await getActiveAnnonces((env as any).DB);
+const annonces = allAnnonces;
+const ventes = annonces.filter(a => a.type_annonce === 'V');
+const locations = annonces.filter(a => a.type_annonce === 'L');
 ---
 
 <BaseLayout
@@ -15,9 +17,9 @@ const locations = annonces.filter(a => a.type === 'L');
   <section class="annonces-listing">
     <header class="annonces-listing__header">
       <h1>Nos annonces immobilières</h1>
-      <p>{annonces.length} annonces disponibles ({ventes.length} ventes, {locations.length} locations)</p>
+      <p>{allAnnonces.length} annonces disponibles ({ventes.length} ventes, {locations.length} locations)</p>
       <nav class="annonces-listing__filters">
-        <a href="/annonces/" class="active">Toutes ({annonces.length})</a>
+        <a href="/annonces/" class="active">Toutes ({allAnnonces.length})</a>
         <a href="/annonces/locations/">Locations ({locations.length})</a>
         <a href="/annonces/ventes/">Ventes ({ventes.length})</a>
       </nav>
@@ -32,19 +34,19 @@ const locations = annonces.filter(a => a.type === 'L');
             ) : (
               <div class="annonce-card__placeholder">Pas de photo</div>
             )}
-            <span class:list={['annonce-card__badge', annonce.type === 'V' ? 'badge--vente' : 'badge--location']}>
-              {annonce.type === 'V' ? 'Vente' : 'Location'}
+            <span class:list={['annonce-card__badge', annonce.type_annonce === 'V' ? 'badge--vente' : 'badge--location']}>
+              {annonce.type_annonce === 'V' ? 'Vente' : 'Location'}
             </span>
           </div>
           <div class="annonce-card__content">
             <h2 class="annonce-card__title">{annonce.titre}</h2>
-            <p class="annonce-card__price">{formatPrice(annonce)}</p>
+            <p class="annonce-card__price">{formatDbPrice(annonce)}</p>
             <div class="annonce-card__details">
-              {annonce.libelleType && <span>{annonce.libelleType}</span>}
+              {annonce.type_bien && <span>{annonce.type_bien}</span>}
               {annonce.surface && <span>{annonce.surface} m²</span>}
-              {annonce.nbPieces && <span>{annonce.nbPieces} pièce{annonce.nbPieces > 1 ? 's' : ''}</span>}
+              {annonce.nb_pieces && <span>{annonce.nb_pieces} pièce{annonce.nb_pieces > 1 ? 's' : ''}</span>}
               {annonce.quartier && <span>{annonce.quartier}</span>}
-              <span>{annonce.codePostal} {annonce.ville}</span>
+              <span>{annonce.code_postal} {annonce.ville}</span>
             </div>
           </div>
         </a>
