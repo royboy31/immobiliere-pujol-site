@@ -1,0 +1,143 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('pages', 'estimez-le-prix-de-vente-de-votre-bien-en-2mn');
+const seoTitle =
+  entry?.data.seoTitle ||
+  'Estimez le prix de vente de votre bien à Marseille en 2mn – Immobilière Pujol';
+const seoDescription =
+  entry?.data.seoDescription ||
+  "Estimation gratuite et instantanée du prix de vente de votre bien à Marseille — propulsé par PriceHubble et complété par l'expertise d'un conseiller Immobilière Pujol.";
+const ctaText = "Lancer l'estimation";
+const heroCatch = "Une estimation immédiate, gratuite, en moins de 2 minutes.";
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/shoootin-photo-9-1200x801.jpg';
+const heroSources = [
+  {
+    media: '(min-width: 1100px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/shoootin-photo-9-1200x801.jpg',
+  },
+  {
+    media: '(min-width: 600px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/shoootin-photo-9-800x534.jpg',
+  },
+  {
+    media: '(min-width: 320px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2022/04/shoootin-photo-9-600x401.jpg',
+  },
+];
+
+// Three-step explainer for the widget — replaces the legacy bare iframe page.
+const steps = [
+  {
+    num: '01',
+    title: 'Renseignez votre bien',
+    desc: "Adresse, type de bien, surface, nombre de pièces, étage… 2 minutes suffisent pour décrire votre appartement, maison ou local commercial.",
+  },
+  {
+    num: '02',
+    title: 'Recevez votre estimation',
+    desc: "Un prix de marché basé sur les données récentes de transactions à Marseille, calculé par notre partenaire PriceHubble.",
+  },
+  {
+    num: '03',
+    title: "Affinez avec un expert",
+    desc: "Un conseiller de l'Immobilière Pujol vous rappelle pour valider l'estimation et répondre à vos questions, sans engagement.",
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      {heroSources.map((s) => (
+        <source media={s.media} srcset={s.srcset} />
+      ))}
+      <img src={heroImg} alt="Estimation gratuite du prix de vente de votre bien à Marseille" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1>Estimez le prix de vente <br /><b>de votre bien à Marseille</b></h1>
+      <p class="svc-hero__sub">{heroCatch}</p>
+      <a class="svc-hero__cta" href="#fisher-widget">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= STEPS ============= */}
+    <section class="svc-toc-section svc-toc-section--prose svc-toc-section--center">
+      <div class="svc-toc-section__inner svc-toc-section__inner--single">
+        <div class="svc-article-body svc-article-body--center">
+          <h2>Comment <b>ça marche</b> ?</h2>
+          <p>
+            Notre outil d'estimation s'appuie sur des millions de transactions et caractérise
+            chaque bien à partir de sa fiche. Vous obtenez une fourchette de prix de marché en
+            quelques secondes, sans avoir à laisser vos coordonnées.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="svc-steps-section">
+      <div class="svc-steps-section__inner">
+        <ol class="svc-steps">
+          {steps.map((s) => (
+            <li class="svc-step-card">
+              <span class="svc-step-card__num">{s.num}</span>
+              <h3 class="svc-step-card__title">{s.title}</h3>
+              <p class="svc-step-card__desc">{s.desc}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= ESTIMATION WIDGET ============= */}
+    <section class="svc-estim-wrap" id="fisher-widget-section">
+      <div class="svc-estim-wrap__inner">
+        <header class="svc-estim-wrap__head">
+          <h2><b>Lancez votre estimation</b></h2>
+          <p>
+            Le calcul est instantané et anonyme. Vous pouvez rester sur cette page pour comparer
+            plusieurs scénarios.
+          </p>
+        </header>
+
+        <div class="svc-estim-card">
+          <iframe id="fisher-widget" title="Estimation du prix de vente"></iframe>
+        </div>
+
+        <p class="svc-estim-wrap__note">
+          Les estimations sont fournies à titre indicatif. Pour une estimation précise tenant
+          compte de l'état et des spécificités de votre bien,
+          {' '}<a href="/service-immobilier/vendre/#form">contactez nos conseillers</a>.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  {/* PriceHubble widget — initialised with the Pujol brand colors. */}
+  <script is:inline src="https://fisher.pricehubble.com/widget.js"></script>
+  <script is:inline set:html={`(function initFisher(){
+    if (typeof FisherWidget === 'undefined') { return setTimeout(initFisher, 50); }
+    FisherWidget.init({
+      apiKey: '88b99291539f45ea8194a26d0fe7902b',
+      iframe: '#fisher-widget',
+      lang: 'fr',
+      activeColor: 'B2C04E',
+      buttonColor: 'B2C04E',
+      textColor: '111111',
+      consentGranted: true,
+    });
+  })();`} />
+</BaseLayout>

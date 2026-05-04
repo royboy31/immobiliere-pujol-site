@@ -10,19 +10,29 @@ import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 // - PriceHubble estimation page
 // - Contact page
 
+// Slugs handled by their own dedicated .astro file in /src/pages/. They must
+// be skipped here to avoid duplicate static-route generation.
+const DEDICATED = new Set([
+  'estimez-le-prix-de-vente-de-votre-bien-en-2mn',
+]);
+
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
   const pages = await getCollection('pages');
 
-  const articlePaths = articles.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry, type: 'article' as const },
-  }));
+  const articlePaths = articles
+    .filter((entry) => !DEDICATED.has(entry.data.slug))
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: { entry, type: 'article' as const },
+    }));
 
-  const pagePaths = pages.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry, type: 'page' as const },
-  }));
+  const pagePaths = pages
+    .filter((entry) => !DEDICATED.has(entry.data.slug))
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: { entry, type: 'page' as const },
+    }));
 
   return [...articlePaths, ...pagePaths];
 }

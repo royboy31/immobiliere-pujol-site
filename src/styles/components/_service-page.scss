@@ -40,12 +40,20 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     height: 100%;
     object-fit: cover;
     z-index: 0;
+
+    // When __video is a <picture>, force the inner <img> to fill the hero.
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   &__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, .45);
+    background: linear-gradient(rgba(15, 25, 42, .35), rgba(15, 25, 42, .55));
     z-index: 1;
     pointer-events: none;
   }
@@ -122,11 +130,32 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   background: $ds-paper;
   padding: 90px $ds-side-pad-svc 110px;
 
+  &--prose {
+    background: $white;
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
   &__inner {
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 80px;
     align-items: start;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  &__inner--single {
+    grid-template-columns: minmax(0, 820px);
+    justify-content: center;
+  }
+
+  &--center .svc-article-body--center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    p { margin-left: auto; margin-right: auto; }
   }
 }
 
@@ -333,6 +362,8 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     em { font-weight: 400; color: $ds-olive-2; }
   }
 
+  // Re-enable native bullets / numbers — the global reset (`ol, ul { list-style: none }`)
+  // strips them, but inside the article body we want them back.
   ul, ol {
     margin: 0 0 22px;
     padding-left: 22px;
@@ -342,7 +373,12 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     }
   }
 
-  ul li::marker { color: $ds-olive-2; }
+  ul { list-style: disc; }
+  ol { list-style: decimal; }
+  ul ul { list-style: circle; }
+  ul ul ul { list-style: square; }
+
+  li::marker { color: $ds-olive-2; }
 
   a {
     color: $ds-olive-2;
@@ -355,11 +391,21 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 
   img {
     display: block;
+    width: 100%;
     max-width: 100%;
     height: auto;
     border-radius: 18px;
     margin: 28px 0;
     box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+
+    // Neutralize legacy WP alignment classes — content images should fill width.
+    &.alignleft,
+    &.alignright,
+    &.aligncenter {
+      float: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   // The legacy markdown sometimes nests an <img> inside an <h2> — neutralize.
@@ -377,6 +423,156 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     border-radius: 0 14px 14px 0;
     font-style: italic;
     color: $black;
+  }
+
+  // Indicator card grid — generated from "intro: + bullet list" patterns in
+  // the legacy markdown. Uses the same numbered-card aesthetic as the values
+  // grid on the about page (.svc-value-card).
+  .svc-indicators-intro {
+    margin: 24px 0 12px;
+    font-weight: 700;
+    color: $black;
+  }
+
+  .svc-indicators {
+    list-style: none;
+    margin: 0 0 32px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .svc-indicator-card {
+    position: relative;
+    background: $white;
+    border-radius: 18px;
+    padding: 22px 24px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+    border-top: 3px solid $ds-olive;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform $transition-base, box-shadow $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .08);
+    }
+
+    &__num {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 1.4px;
+      color: $ds-olive-2;
+    }
+
+    &__text {
+      margin: 0;
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.45;
+      color: $ds-ink;
+    }
+  }
+
+  // "Pour aller plus loin" related-article callout — replaces the legacy
+  // single-cell bordered table from the WP editor.
+  &__related {
+    margin: 28px 0 32px;
+    padding: 22px 26px 24px;
+    background: $ds-soft-green;
+    border-left: 3px solid $ds-olive;
+    border-radius: 0 18px 18px 0;
+  }
+
+  &__related-label {
+    display: inline-block;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    margin-bottom: 8px;
+  }
+
+  &__related-body {
+    p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    a {
+      font-weight: 700;
+      color: $black;
+      text-decoration: none;
+      border-bottom: 1.5px solid $ds-olive;
+      padding-bottom: 1px;
+      transition: color $transition-fast, border-color $transition-fast;
+
+      &:hover {
+        color: $ds-olive-2;
+        border-bottom-color: $ds-olive-2;
+      }
+    }
+  }
+
+  // Inline CTA built from a legacy "image button" — see [slug].astro post-processing.
+  // The `a.svc-article-body__cta` form is needed to outweigh the `.svc-article-body a`
+  // rule above, which otherwise paints the label olive and underlines it.
+  &__cta-wrap {
+    margin: 28px 0 32px;
+    padding: 0;
+  }
+
+  // Lead-in paragraph immediately before the CTA — promote to a bold prompt.
+  p:has(+ &__cta-wrap) {
+    font-weight: 700;
+    color: $black;
+    font-size: 20px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+
+  a.svc-article-body__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 32px;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    border: 1.5px solid $ds-olive;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-position 0.4s ease, color 0.3s ease;
+
+    svg {
+      color: currentColor;
+      transition: transform $transition-base;
+    }
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-olive-2;
+
+      svg { transform: translateX(4px); }
+    }
   }
 }
 
@@ -1243,6 +1439,163 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 }
 
 // =========================================
+// ESTIMATION PAGE — three-step explainer + branded PriceHubble widget shell
+// (used by /estimez-le-prix-de-vente-de-votre-bien-en-2mn/)
+// =========================================
+.svc-steps-section {
+  background: $ds-paper;
+  padding: 20px $ds-side-pad-svc 80px;
+
+  &__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+}
+
+.svc-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  counter-reset: svc-step;
+}
+
+.svc-step-card {
+  position: relative;
+  background: $white;
+  border-radius: 22px;
+  padding: 30px 28px 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  border-top: 3px solid $ds-olive;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .1);
+  }
+
+  &__num {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: $ds-olive-2;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    color: $black;
+    margin: 0;
+  }
+
+  &__desc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.55;
+    color: $ds-ink;
+    margin: 0;
+  }
+}
+
+.svc-estim-wrap {
+  background: $white;
+  padding: 60px $ds-side-pad-svc 100px;
+
+  &__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  &__head {
+    text-align: center;
+    margin: 0 0 32px;
+
+    h2 {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 38px;
+      line-height: 1.1;
+      color: $black;
+      margin: 0 0 10px;
+      letter-spacing: -.3px;
+
+      b { font-weight: 700; }
+    }
+
+    p {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.55;
+      color: $ds-ink;
+      margin: 0 auto;
+      max-width: 640px;
+    }
+  }
+
+  &__note {
+    margin: 22px auto 0;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.55;
+    color: $ds-ink;
+    text-align: center;
+    max-width: 720px;
+
+    a {
+      color: $ds-olive-2;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color $transition-fast;
+
+      &:hover { color: $black; }
+    }
+  }
+}
+
+// PriceHubble iframe shell — the inner content is cross-origin so we can only
+// style the wrapper. The card spans the section's full width while the iframe
+// itself is sized to the widget's natural form width and centered, so the
+// left-anchored widget DOM sits visually centered inside the card.
+.svc-estim-card {
+  background: $white;
+  border-radius: 28px;
+  padding: 32px 18px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, .08), 0 1px 0 rgba(0, 0, 0, .04);
+  border: 1px solid rgba(0, 0, 0, .04);
+  display: flex;
+  justify-content: center;
+
+  > iframe {
+    display: block;
+    width: 100%;
+    max-width: 540px;
+    min-height: 480px;
+    border: 0;
+    border-radius: 18px;
+    background: $white;
+    overflow: hidden;
+    margin: 0 auto;
+
+    // Cross-origin iframe contents are unreachable via CSS, so we scale the
+    // whole frame to enlarge what PriceHubble renders. `zoom` is a layout-aware
+    // resize (the iframe's bounding box grows too, so following content stays
+    // pushed down as the widget auto-resizes its height).
+    zoom: 1.2;
+  }
+}
+
+// =========================================
 // FORM — olive card on white, mirrors home newsletter treatment
 // =========================================
 .svc-form-wrap {
@@ -1590,6 +1943,36 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 
     &__title { font-size: 18px; }
     &__desc  { font-size: 14px; }
+  }
+
+  .svc-steps-section {
+    padding: 10px $mobile-pad 50px;
+  }
+  .svc-steps {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .svc-step-card {
+    padding: 22px 22px 24px;
+    &__title { font-size: 18px; }
+    &__desc  { font-size: 14px; }
+  }
+  .svc-estim-wrap {
+    padding: 40px $mobile-pad 70px;
+
+    &__head {
+      h2 { font-size: 28px; }
+      p  { font-size: 15px; }
+    }
+  }
+  .svc-estim-card {
+    padding: 10px;
+    border-radius: 20px;
+
+    > iframe {
+      min-height: 1200px;
+      border-radius: 14px;
+    }
   }
 
   .svc-form-wrap { padding: 60px $mobile-pad 70px; }

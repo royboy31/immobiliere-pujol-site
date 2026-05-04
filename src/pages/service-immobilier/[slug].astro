@@ -3,12 +3,22 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+// Slugs that have a dedicated .astro page in this directory must be excluded
+// here, otherwise Astro builds two pages for the same route.
+const DEDICATED = new Set([
+  'agence-immobiliere-pujol',
+  'syndic-de-copropriete-a-marseille',
+  'vendre',
+]);
+
 export async function getStaticPaths() {
   const entries = await getCollection('serviceImmobilier');
-  return entries.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+  return entries
+    .filter((entry) => !DEDICATED.has(entry.data.slug))
+    .map((entry) => ({
+      params: { slug: entry.data.slug },
+      props: { entry },
+    }));
 }
 
 const { entry } = Astro.props;

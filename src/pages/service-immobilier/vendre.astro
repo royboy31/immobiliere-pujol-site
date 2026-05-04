@@ -1,0 +1,291 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('serviceImmobilier', 'vendre');
+const seoTitle = entry?.data.seoTitle || 'Vendre – Immobilière Pujol';
+const seoDescription =
+  entry?.data.seoDescription ||
+  'Vendre votre bien immobilier à Marseille avec un partenaire reconnu : 100% des clients nous recommandent.';
+const ctaText = entry?.data.ctaText || 'Demander une estimation de prix de vente';
+const heroCatch = 'Faire de la vente un événement rassurant';
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/web-home-staging_0007-marseille-Copy.jpg';
+const heroSources = [
+  {
+    media: '(min-width: 1100px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/web-home-staging_0007-marseille-Copy.jpg',
+  },
+  {
+    media: '(min-width: 600px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/web-home-staging_0007-marseille-Copy.jpg',
+  },
+  {
+    media: '(min-width: 320px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/web-home-staging_0007-marseille-Copy-600x400.jpg',
+  },
+];
+
+// Sidebar nav order preserved exactly as on the legacy page (1, 2, 3, 4).
+const toc = [
+  { id: 'conseils-vente-immobiliere',     label: '1. Nos conseils pour vendre' },
+  { id: 'objectifs-ventes-immobilieres',  label: '2. Nos objectifs et ce que nous ferons pour vendre votre bien' },
+  { id: 'nos-engagements',                label: '3. Nos engagements' },
+  { id: 'resultats-ventes-immobilieres',  label: '4. Nos résultats en vente' },
+];
+
+// All section content + article links from the legacy markdown body.
+// Every URL is preserved exactly.
+const sections = [
+  {
+    id: 'conseils-vente-immobiliere',
+    title: '1. Nos conseils pour vendre',
+    paragraphs: [
+      "Ne vous inquiétez plus, vous n'êtes pas tout seul. Vendre un bien immobilier est un événement dans sa vie. Et comme tout le monde, vous souhaitez trouver un acquéreur qui sera prêt, motivé et qui aura la capacité financière d'acheter votre bien dans les meilleures conditions.",
+    ],
+    articles: [
+      { href: '/services/vous-avez-decide-de-vendre/',                  label: 'Vous avez décidé de vendre' },
+      { href: '/services/demander-une-estimation-de-prix-de-vente/',    label: "Prix de l'immobilier à Marseille" },
+    ],
+  },
+  {
+    id: 'objectifs-ventes-immobilieres',
+    title: '2. Nos objectifs et ce que nous ferons pour vendre votre bien',
+    paragraphs: [
+      "Chaque année, nous réalisons de nombreuses ventes d'appartements, maisons ou immeubles à usage d'habitation ainsi que des transactions de bureaux et de locaux commerciaux à Marseille.",
+      "Quelle est notre méthode et quels sont nos objectifs pour vendre rapidement votre bien ?",
+    ],
+    articles: [
+      { href: '/services/nos-objectifs-pour-vendre-votre-bien-immobilier/', label: 'Nos actions pour vendre votre bien immobilier' },
+    ],
+  },
+  {
+    id: 'nos-engagements',
+    title: '3. Nos engagements',
+    paragraphs: [
+      'Avant de voir le panneau "Vendu" sur votre maison ou votre appartement, une première décision importante doit être prise.',
+      'Vous devez choisir le bon agent Immobilier.',
+      "En effet, la vente de votre bien nécessite plus qu'un panneau sur votre maison ou des papiers dans les boites aux lettres.",
+    ],
+    articles: [
+      { href: '/services/choisir-son-agence-immobiliere-a-marseille/', label: 'Choisir son agence immobilière à Marseille' },
+    ],
+  },
+  {
+    id: 'resultats-ventes-immobilieres',
+    title: '4. Nos résultats en vente',
+    paragraphs: [
+      "Notre délai pour vendre est en moyenne de 45 jours. La moyenne du secteur immobilier à Marseille oscille entre 88 et 105 jours.",
+      "Dans 70% des cas, nous travaillons en exclusivité avec des propriétaires qui souhaitent déléguer totalement la vente de leur bien à un ou plusieurs agents immobiliers (même si ce n'est pas toujours la meilleure décision à prendre de multiplier les agences !)",
+    ],
+    articles: [
+      { href: '/services/nos-resultats-en-vente/', label: 'Nos résultats en vente' },
+    ],
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      {heroSources.map((s) => (
+        <source media={s.media} srcset={s.srcset} />
+      ))}
+      <img src={heroImg} alt="Vendre votre bien immobilier à Marseille avec l'Immobilière Pujol" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1><b>Vendre</b><br />à Marseille</h1>
+      <p class="svc-hero__sub">{heroCatch}</p>
+      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= TOC + SECTIONS ============= */}
+    <section class="svc-toc-section">
+      <div class="svc-toc-section__inner">
+
+        <aside class="svc-toc">
+          <h4 class="svc-toc__title">Vendre</h4>
+          <ul class="svc-toc__list">
+            {toc.map((t) => (
+              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="svc-content">
+          {sections.map((s) => (
+            <section class="svc-section" id={s.id}>
+              <h3 class="svc-section__title">
+                {s.title.includes('.') ? (
+                  <>
+                    <span class="num">{s.title.split('.')[0]}.</span>
+                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
+                  </>
+                ) : (
+                  <b>{s.title}</b>
+                )}
+              </h3>
+
+              {s.paragraphs.map((p) => (
+                <p class="svc-section__lead">{p}</p>
+              ))}
+
+              {s.articles.length > 0 && (
+                <ul class="svc-articles">
+                  {s.articles.map((a) => (
+                    <li>
+                      <a class="svc-article-link" href={a.href}>
+                        <span>{a.label}</span>
+                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============= LONG-FORM CONTENT ============= */}
+    <section class="svc-toc-section svc-toc-section--prose">
+      <div class="svc-toc-section__inner svc-toc-section__inner--single">
+        <div class="svc-article-body">
+          <h2><b>Vendre</b> à Marseille</h2>
+          <p>
+            Nous vendons chaque année plus de 80 appartements, sans compter les maisons individuelles,
+            bureaux et locaux commerciaux. Nous vendons très souvent plus rapidement que la moyenne
+            grâce à une forte valorisation des biens immobiliers qui nous sont confiés et une
+            stratégie de commercialisation adaptée.
+          </p>
+          <p>100% de nos clients nous recommandent.</p>
+          <p>
+            Voir tous les
+            {' '}<a href="https://www.opinionsystem.fr/fr-fr/certificate/4429" target="_blank" rel="noopener">avis clients de l'Immobilière Pujol sur notre service de vente</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="/service-immobilier/vendre/#gf_9"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Demander une <b>estimation</b></h2>
+        <p class="svc-form__lead">
+          Remplissez ce formulaire et nous prenons contact avec vous dans les 24 heures pour
+          estimer le prix de vente de votre bien.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_1.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_1.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_2" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_3" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Votre message *</span>
+            <textarea name="input_10" rows="6" placeholder="Votre message" required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_14.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+          dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+          connaître et exercer vos droits, notamment de retrait de votre consentement à
+          l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+          {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>X/Twitter<input type="text" name="input_15" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="9" />
+        <input type="hidden" name="is_submit_9" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  {/* Smooth-scroll TOC: highlight the active section as it enters the viewport. */}
+  <script>
+    (function () {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.svc-toc__link');
+      const sections = document.querySelectorAll<HTMLElement>('.svc-section');
+      if (!links.length || !sections.length) return;
+
+      const byId = new Map<string, HTMLAnchorElement>();
+      links.forEach((l) => {
+        const id = l.getAttribute('href')?.replace('#', '');
+        if (id) byId.set(id, l);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const link = byId.get(e.target.id);
+              if (link) link.classList.add('is-active');
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => io.observe(s));
+    })();
+  </script>
+</BaseLayout>

@@ -1,0 +1,383 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('serviceImmobilier', 'syndic-de-copropriete-a-marseille');
+const seoTitle = entry?.data.seoTitle || 'Syndic de copropriété à Marseille';
+const seoDescription =
+  entry?.data.seoDescription ||
+  'Immobilière Pujol est Le syndic le plus recommandé à Marseille par ses clients';
+const ctaText = entry?.data.ctaText || 'Demander un devis à notre service syndic';
+const heroCatch = "Etre accompagné par un syndic engagé et recommandé";
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg';
+const heroSources = [
+  {
+    media: '(min-width: 1100px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg',
+  },
+  {
+    media: '(min-width: 600px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-800x533.jpg',
+  },
+  {
+    media: '(min-width: 320px)',
+    srcset:
+      'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-600x400.jpg',
+  },
+];
+
+// Sidebar nav order preserved exactly as on the legacy page (1, 2, 3, 4).
+const toc = [
+  {
+    id: 'contrats-renegocier',
+    label: '1. Comment baisser les charges des syndics de copropriétés à Marseille ?',
+  },
+  {
+    id: 'audit-charges-syndic',
+    label: '2. Quel montant de charges vous devez payer à Marseille au syndic de copropriété ?',
+  },
+  {
+    id: 'honoraires-syndic',
+    label: '3. Ce que nous faisons pour être un bon syndic de copropriété à Marseille',
+  },
+  {
+    id: 'prix-m2-charges',
+    label: '4. Combien coûte un syndic de copropriété à Marseille ? Combien nous rapportons ?',
+  },
+];
+
+// All section content + article links from the legacy markdown body.
+// Every URL is preserved exactly.
+const sections = [
+  {
+    id: 'contrats-renegocier',
+    title: '1. Comment baisser les charges des syndics de copropriétés à Marseille ?',
+    paragraphs: [
+      "Pour assurer le meilleur rapport qualité/prix à nos clients, nous évaluons les contrats et renégocions le coût des prestations.",
+      "Nous obtenons ainsi une économie sur les principaux postes de dépenses de 5 à 15% pour toute nouvelle copropriété que nous prenons.",
+    ],
+    leadStrong:
+      "L'Immobilière Pujol est le Syndic le plus recommandé à Marseille et spécialiste de la gestion des copropriétés.",
+    articles: [
+      {
+        href: '/services/les-contrats-a-renegocier-des-economies-toujours-possibles-faites-baisser-vos-charges/',
+        label: 'Comment négocier les contrats de la copropriété?',
+      },
+      {
+        href: '/services/le-cout-des-travaux-la-mise-en-concurrence-et-levaluation-de-nos-prestataires-dans-nos-coproprietes/',
+        label: 'Mettre en place des procédures pour contrôler le coût des travaux',
+      },
+    ],
+  },
+  {
+    id: 'audit-charges-syndic',
+    title: '2. Quel montant de charges vous devez payer à Marseille au syndic de copropriété ?',
+    paragraphs: [
+      "Si nos clients nous recommandent, c'est que nos gestionnaires servent avec un nombre limité de copropriétaires. Nous privilégions la qualité à la quantité : nous ne chargeons pas nos équipes et leur laissons le temps de construire une relation harmonieuse avec chacun.",
+    ],
+    articles: [
+      {
+        href: '/services/le-prix-au-m2-des-charges-de-nos-immeubles-a-marseille/',
+        label: 'Les charges de copropriété : définition et prix',
+      },
+      {
+        href: '/services/bien-se-renseigner-sur-les-couts-de-syndic-de-copropriete-a-marseille/',
+        label: 'De quoi dépend le niveau des charges de copropriété?',
+      },
+      {
+        href: '/services/formulaire-vous-voulez-un-service-de-qualite-des-charges-optimisees/',
+        label: 'Qualité des services et des travaux = tranquillité = pérennité en copropriété',
+      },
+    ],
+  },
+  {
+    id: 'honoraires-syndic',
+    title: '3. Ce que nous faisons pour être un bon syndic de copropriété à Marseille',
+    paragraphs: [
+      "Le calcul de nos honoraires de syndic, à Marseille, suit deux principes simples : être attentifs à nos clients et suivre les dossiers de chaque immeuble.",
+    ],
+    articles: [
+      {
+        href: '/services/definition-de-syndic-professionnel-le-gestionnaire-de-copropriete-a-marseille/',
+        label: 'Comment évaluer son syndic?',
+      },
+      {
+        href: '/services/definition-dun-bon-service-de-syndic-a-marseille/',
+        label: 'Comment établir un cahier des charges de contrat de syndic?',
+      },
+      {
+        href: '/services/connaitres-les-qualites-requises-pour-le-metier-de-gestionnaire-syndic/',
+        label: 'Comment identifier un bon gestionnaire de copropriétés?',
+      },
+      {
+        href: '/services/comment-changer-de-syndic-a-marseille/',
+        label: 'Comment changer de syndic de copropriété à Marseille?',
+      },
+      {
+        href: '/services/comment-annuler-des-contrats-de-syndic/',
+        label: 'Comment résilier un contrat de syndic en cours de mandat?',
+      },
+    ],
+  },
+  {
+    id: 'prix-m2-charges',
+    title: '4. Combien coûte un syndic de copropriété à Marseille ? Combien nous rapportons ?',
+    paragraphs: [
+      "Nos résultats se mesurent sur tous les postes de charges : prime d'assurances, montant du poste chauffage collectif, qualité des clauses des contrats, etc.",
+    ],
+    articles: [
+      {
+        href: '/services/combien-coute-syndic-copropriete/',
+        label: 'Combien coûte un syndic de copropriété à Marseille?',
+      },
+      {
+        href: '/services/comment-faire-baisser-le-cout-un-syndic-a-marseillle/',
+        label: 'Combien rapporte un bon syndic de copropriété ?',
+      },
+      {
+        href: '/services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/',
+        label: 'Estimation des honoraires du syndic pour la gestion de votre copropriété à Marseille ?',
+      },
+      {
+        href: '/services/comment-calculer-le-cout-de-gestion-de-copropriete/',
+        label: 'Comment calculer les honoraires du syndic pour la gestion de votre copropriété ?',
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      {heroSources.map((s) => (
+        <source media={s.media} srcset={s.srcset} />
+      ))}
+      <img src={heroImg} alt="Immobilière Pujol — façade de l'agence à Marseille" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1><b>Syndic de copropriété</b><br />à Marseille</h1>
+      <p class="svc-hero__sub">{heroCatch}</p>
+      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= TOC + SECTIONS ============= */}
+    <section class="svc-toc-section">
+      <div class="svc-toc-section__inner">
+
+        <aside class="svc-toc">
+          <h4 class="svc-toc__title">Syndic de copropriété à Marseille</h4>
+          <ul class="svc-toc__list">
+            {toc.map((t) => (
+              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="svc-content">
+          {sections.map((s) => (
+            <section class="svc-section" id={s.id}>
+              <h3 class="svc-section__title">
+                {s.title.includes('.') ? (
+                  <>
+                    <span class="num">{s.title.split('.')[0]}.</span>
+                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
+                  </>
+                ) : (
+                  <b>{s.title}</b>
+                )}
+              </h3>
+
+              {s.paragraphs.map((p) => (
+                <p class="svc-section__lead">{p}</p>
+              ))}
+
+              {s.leadStrong && (
+                <p class="svc-section__lead"><strong>{s.leadStrong}</strong></p>
+              )}
+
+              {s.articles.length > 0 && (
+                <ul class="svc-articles">
+                  {s.articles.map((a) => (
+                    <li>
+                      <a class="svc-article-link" href={a.href}>
+                        <span>{a.label}</span>
+                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============= LONG-FORM CONTENT ============= */}
+    <section class="svc-toc-section svc-toc-section--prose">
+      <div class="svc-toc-section__inner svc-toc-section__inner--single">
+        <div class="svc-article-body">
+          <h2>Syndic de copropriété <b>à Marseille</b></h2>
+          <p>
+            Audit de vos charges, renégociation des contrats, honoraires de syndic au plus juste…
+            Vous avez certainement de nombreuses questions pour mieux gérer votre copropriété.
+            Notre équipe d'experts vous aide à y répondre.
+          </p>
+          <h3>Notre rôle de syndic de copropriété à Marseille</h3>
+          <p>
+            L'Immobilière Pujol a des années d'expérience dans la gestion d'immeubles en tant que
+            syndic professionnel à Marseille. Nous connaissons bien la ville, ses immeubles
+            anciens, ainsi que les problématiques diverses des copropriétaires.
+          </p>
+          <p>
+            Notre mission principale consiste à administrer les parties communes et faire respecter
+            les décisions prises en assemblées générales, dans le cadre des obligations fixées par
+            la loi. L'écoute et la proximité sont essentielles pour faire un bon syndic : seul un
+            syndic indépendant est à même d'apporter l'attention et la qualité de service attendu.
+          </p>
+          <p>
+            Le conseil syndical a un rôle important dans cette relation, puisqu'il facilite la
+            remontée d'informations à l'égard des copropriétaires et contrôle l'action du syndic.
+          </p>
+          <p>
+            Un syndic ne se cantonne pas à la gestion courante : si la conservation de l'immeuble
+            est importante, il doit aussi valoriser le patrimoine immobilier… il est force de
+            propositions et propose les travaux urgents ou importants (ravalement de façades,
+            tuyauteries, cages d'escalier…). En tant qu'expert, le syndic assure un contrôle strict
+            des dépenses budgétaires.
+          </p>
+          <p>
+            La gestion d'une copropriété est un métier compliqué et éprouvant : confiez-le à des
+            professionnels passionnés et expérimentés.
+          </p>
+          <p>
+            N'hésitez pas à consulter les
+            {' '}<a href="/services/avis-clients-immobiliere-pujol-marseille/">avis de nos clients en syndic à Marseille</a>{' '}
+            qui sont les meilleurs ambassadeurs de nos services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="/service-immobilier/syndic-de-copropriete-a-marseille/#gf_6"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Obtenez votre devis de <b>syndic en 24h</b></h2>
+        <p class="svc-form__lead">
+          Pour un devis ou simplement des réponses à vos questions, remplissez le formulaire. Nous
+          prenons contact avec vous dans les 24 heures.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_1.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_1.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_2" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_3" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Votre message</span>
+            <textarea name="input_6" rows="6" placeholder="Votre message"></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_7.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+          dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+          connaître et exercer vos droits, notamment de retrait de votre consentement à
+          l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+          {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>Company<input type="text" name="input_9" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="6" />
+        <input type="hidden" name="is_submit_6" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  {/* Smooth-scroll TOC: highlight the active section as it enters the viewport. */}
+  <script>
+    (function () {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.svc-toc__link');
+      const sections = document.querySelectorAll<HTMLElement>('.svc-section');
+      if (!links.length || !sections.length) return;
+
+      const byId = new Map<string, HTMLAnchorElement>();
+      links.forEach((l) => {
+        const id = l.getAttribute('href')?.replace('#', '');
+        if (id) byId.set(id, l);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const link = byId.get(e.target.id);
+              if (link) link.classList.add('is-active');
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => io.observe(s));
+    })();
+  </script>
+</BaseLayout>
