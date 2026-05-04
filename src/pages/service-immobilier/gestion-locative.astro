@@ -1,0 +1,412 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('serviceImmobilier', 'gestion-locative');
+const seoTitle = entry?.data.seoTitle || 'Gestion Locative à Marseille – Immobilière Pujol';
+const seoDescription =
+  entry?.data.seoDescription ||
+  "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients. L'Immobilière Pujol vous accompagne avec plaisir dans votre projet immobilier à Marseille.";
+const ctaText = entry?.data.ctaText || 'Obtenez un devis de gestion locative';
+const heroCatch = 'Comment choisir votre agence de gestion locative ?';
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-1200x800.jpg';
+const heroSources = [
+  {
+    media: '(min-width: 1100px)',
+    srcset: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-1200x800.jpg',
+  },
+  {
+    media: '(min-width: 600px)',
+    srcset: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-800x533.jpg',
+  },
+  {
+    media: '(min-width: 320px)',
+    srcset: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-600x400.jpg',
+  },
+];
+
+// Sidebar nav order preserved exactly as on the legacy page (1, 2, 3, 4, 5, 6).
+const toc = [
+  { id: 'cout-gestion-locative',                                  label: '1. Combien cela coûte de faire gérer son bien ?' },
+  { id: 'nos-plus-en-gestion-locative',                           label: '2. Comment choisir son locataire ?' },
+  { id: 'notre-offre-dassurance-loyers-impayes-pno-vacances-locatives', label: '3. Comment évaluer le loyer à Marseille ?' },
+  { id: 'nos-resultats-en-gestion-locative',                      label: '4. Faut-il prendre une Garantie des Loyers Impayés (GLI) ?' },
+  { id: 'contacter-un-conseiller-en-gestion-locative',            label: '5. Contacter un conseiller en gestion locative' },
+  { id: 'tout-savoir-sur-le-marche-de-la-location-a-marseille',   label: '6. Tout savoir sur le marché de la location à Marseille' },
+];
+
+// All section content + article links from the legacy markdown body.
+// Every URL is preserved exactly.
+const sections = [
+  {
+    id: 'cout-gestion-locative',
+    title: '1. Combien cela coûte de faire gérer son bien ?',
+    paragraphs: [
+      "Le coût d'une gestion locative est de 25€ à 35€ (en tenant compte de la déductibilité fiscale) par mois pour un service et une sécurité juridique.",
+    ],
+    articles: [
+      { href: '/services/quels-tarifs-gestion-immobiliere-marseille/',                       label: 'Les tarifs et coûts de la gestion locative à Marseille' },
+      { href: '/services/une-relation-personnalisee/',                                        label: 'Une relation personnalisée en gestion locative' },
+      { href: '/services/notre-expertise-de-la-gestion-immobiliere-a-marseille/',             label: 'Comment choisir son administrateur de biens à Marseille ?' },
+      { href: '/services/nos-plus-en-gestion-immobiliere-et-location-dappartements/',         label: "Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous ?" },
+      { href: '/services/le-cout-de-la-gestion-locative/',                                    label: "Combien coûte la gestion locative d'un bien ?" },
+    ],
+  },
+  {
+    id: 'nos-plus-en-gestion-locative',
+    title: '2. Comment choisir son locataire ?',
+    paragraphs: [
+      "Choisir son locataire à Marseille est l'étape la plus importante pour réussir la gestion et s'assurer des revenus réguliers.",
+    ],
+    articles: [
+      { href: '/services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix/', label: "Location d'appartements à Marseille : nos résultats et nos tarifs !" },
+      { href: '/services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes/',        label: 'Choisir le bon locataire et sécuriser vos contrats : les tarifs' },
+      { href: '/services/eviter-les-litiges-avec-vos-locataires-a-marseille/',                        label: 'Comment diminuer les risques de litiges avec vos locataires à Marseille' },
+      { href: '/services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille/',            label: "Comment vérifier la solvabilité d'un locataire ?" },
+      { href: '/services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque/',    label: 'Comment choisir son locataire pour une gestion immobilière sans risques ?' },
+    ],
+  },
+  {
+    id: 'notre-offre-dassurance-loyers-impayes-pno-vacances-locatives',
+    title: '3. Comment évaluer le loyer à Marseille ?',
+    paragraphs: [
+      "Positionner un loyer est difficile car les loyers peuvent varier d'un maximum de 10% selon le marché. Pour cette raison, nous réalisons des études de positionnement du loyer dans son marché toutes les 3 semaines.",
+    ],
+    articles: [
+      { href: '/services/estimer-votre-loyer/',                                                       label: 'Estimez votre loyer à Marseille' },
+      { href: '/services/comment-nous-estimons-le-prix-de-votre-loyer-sur-marseille/',                label: "Comment estimer le prix d'un loyer à Marseille ?" },
+      { href: '/services/labellisation-des-appartements-a-louer-et-strategies-de-commercialisation/', label: 'Labellisation des appartements à louer et stratégies de commercialisation' },
+      { href: '/services/ce-que-nous-ferons-pour-louer-rapidement-votre-appartement/',                label: 'Ce que nous ferons pour louer rapidement votre appartement à Marseille' },
+    ],
+  },
+  {
+    id: 'nos-resultats-en-gestion-locative',
+    title: '4. Faut-il prendre une Garantie des Loyers Impayés (GLI) ?',
+    paragraphs: [
+      "Si nous faisons bien notre sélection du profil du locataire, souscrire une assurance des loyers impayés n'est pas nécessaire. Mais il faut que vos finances vous permettent de faire face à des décalages de trésorerie.",
+      "N'oubliez pas non plus qu'un accident de la vie peut remettre en question l'équilibre financier de votre locataire.",
+    ],
+    articles: [
+      { href: '/services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives/', label: 'Quelles sont les assurances locatives et pourquoi les souscrire ?' },
+      { href: '/services/notre-garantie-de-loyers-impayes/',                              label: 'Notre assurance garantie loyers impayés au taux de 1,8% TTC' },
+    ],
+  },
+  {
+    id: 'contacter-un-conseiller-en-gestion-locative',
+    title: '5. Contacter un conseiller en gestion locative',
+    paragraphs: [
+      "Vous avez des questions et souhaitez vous entretenir avec un conseiller en gestion locative ?",
+    ],
+    articles: [
+      { href: '/services/contacter-un-conseiller-en-gestion-locative/', label: 'Contacter un expert en gestion locative' },
+    ],
+  },
+  {
+    id: 'tout-savoir-sur-le-marche-de-la-location-a-marseille',
+    title: '6. Tout savoir sur le marché de la location à Marseille',
+    paragraphs: [
+      "Accédez à une analyse approfondie du marché de la location à Marseille, avec des données actualisées, des tendances clés et des conseils pratiques pour optimiser vos investissements immobiliers.",
+      "Ce dossier est une ressource essentielle pour les propriétaires bailleurs et investisseurs.",
+      "Recevez-le gratuitement afin de prendre des décisions éclairées.",
+    ],
+    articles: [
+      { href: '/services/etude-sur-le-marche-de-la-location-a-marseille/', label: 'Étude sur le marché de la location à Marseille' },
+    ],
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      {heroSources.map((s) => (
+        <source media={s.media} srcset={s.srcset} />
+      ))}
+      <img src={heroImg} alt="Gestion locative à Marseille — Immobilière Pujol" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1><b>Gestion Locative</b><br />à Marseille</h1>
+      <p class="svc-hero__sub">{heroCatch}</p>
+      <p class="svc-hero__sub">Gestion locative à partir de 4,5% TTC — Assurance loyers impayés à 1,8% TTC</p>
+      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= TOC + SECTIONS ============= */}
+    <section class="svc-toc-section">
+      <div class="svc-toc-section__inner">
+
+        <aside class="svc-toc">
+          <h4 class="svc-toc__title">Gestion Locative à Marseille</h4>
+          <ul class="svc-toc__list">
+            {toc.map((t) => (
+              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="svc-content">
+          {sections.map((s) => (
+            <section class="svc-section" id={s.id}>
+              <h3 class="svc-section__title">
+                {s.title.includes('.') ? (
+                  <>
+                    <span class="num">{s.title.split('.')[0]}.</span>
+                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
+                  </>
+                ) : (
+                  <b>{s.title}</b>
+                )}
+              </h3>
+
+              {s.paragraphs.map((p) => (
+                <p class="svc-section__lead">{p}</p>
+              ))}
+
+              {s.articles.length > 0 && (
+                <ul class="svc-articles">
+                  {s.articles.map((a) => (
+                    <li>
+                      <a class="svc-article-link" href={a.href}>
+                        <span>{a.label}</span>
+                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============= LONG-FORM CONTENT ============= */}
+    <section class="svc-toc-section svc-toc-section--prose">
+      <div class="svc-toc-section__inner svc-toc-section__inner--single">
+        <div class="svc-article-body">
+          <h2><b>Gestion Locative</b> à Marseille</h2>
+          <p>
+            Vous avez un appartement à louer ? Vous recherchez une agence spécialisée en gestion
+            locative à Marseille ?
+          </p>
+
+          <h2>Pourquoi choisir une agence de gestion immobilière ?</h2>
+
+          <h3>Pour éviter des erreurs qui coûtent cher</h3>
+          <p>
+            La complexité juridique, les choix de travaux, les difficultés relationnelles, la
+            rédaction des engagements et des états des lieux sont autant de pièges qui coûtent
+            cher si vous faites une erreur.
+          </p>
+          <p>
+            Coûts financier en frais d'avocat ou d'huissier pour gérer les litiges, frais de
+            travaux si vous avez mal évalué votre locataire, énervement garanti pour tenter de
+            rattraper le coup.
+          </p>
+          <p>
+            Notre expertise consiste à gérer ces difficultés pour votre compte en satisfaisant
+            toutes les parties, en appliquant la réglementation qui protège, en assumant notre
+            devoir de conseil.
+          </p>
+
+          <h3>Pour être juridiquement protégé</h3>
+          <p>
+            Les garanties de nos contrats (clauses évolutives des baux, rédaction des états des
+            lieux, garanties de loyers impayés pour les appartements, assurance propriétaire non
+            occupant…) vous sécurisent dans vos choix, vos projets.
+          </p>
+          <p>
+            Notre offre de gestion locative à Marseille est probablement la plus compétitive de
+            notre ville
+            ({' '}<a href="/service/le-cout-de-la-gestion-locative/">consultez le prix de notre gestion locative</a>).
+          </p>
+
+          <h3>Pour vous concentrer sur ce qui est important pour vous</h3>
+          <p>
+            Votre temps est précieux et chacun son métier. La location et la gestion locative en
+            est un. Par l'expérience et l'expertise, notre équipe va plus vite, loue plus cher et
+            trouve de meilleurs locataires. Alors pourquoi s'en priver — d'autant que nos
+            honoraires sont en plus déductibles de vos impôts ?
+          </p>
+
+          <h2>Pourquoi choisir l'Immobilière Pujol pour gérer votre location ?</h2>
+
+          <h3>Des gestionnaires à votre écoute, des conseillers qui vous répondent</h3>
+          <p>
+            L'<a href="/service-immobilier/agence-immobiliere-pujol/" target="_blank" rel="noopener">Immobilière Pujol est une PME familiale et indépendante</a>.
+            Nous sommes proches de nos clients, avons le sourire et nous leur accordons le temps
+            nécessaire pour bien comprendre leur projet immobilier et les conseiller au mieux.
+            C'est là notre force sur les grands groupes immobiliers : nous ne surchargeons pas
+            nos équipes afin de garantir un service de qualité à chaque client.
+          </p>
+
+          <h3>Des méthodes de travail qui nous permettent de louer mieux et plus vite</h3>
+          <p>
+            Notre société a l'obsession du mieux faire sans cesse et plus vite. Nos clients
+            bénéficient de cette innovation permanente. Mettre en location un appartement, c'est
+            valoriser votre patrimoine, diffuser et augmenter sa visibilité quand il s'agit de
+            trouver un locataire. Fort de notre expérience, nous maîtrisons parfaitement le
+            processus de mise en location, à commencer par
+            {' '}<a href="/aavant-apres-renovation-dun-appartement-pour-de-la-location-meublee/" target="_blank" rel="noopener">les conseils de valorisation immobilière</a>,
+            la prise de
+            {' '}<a href="/photos-montrent-qualite-appartements-a-louer/" target="_blank" rel="noopener">photos immobilières professionnelles</a>,
+            {' '}<a href="https://tour.previsite.com/4BD3493D-B5AF-9C47-59D4-68499E03C495?lead_capture=false" target="_blank" rel="noopener">la visite virtuelle</a>,
+            la rédaction des annonces et la diffusion large sur internet. Nous rédigeons des
+            annonces avec des descriptifs complets et attractifs pour les meilleurs candidats
+            locataires. Cette étape est essentielle, car elle conditionne toutes les autres.
+            S'en suivent les entretiens des candidats et l'étude de leur solvabilité.
+          </p>
+
+          <h3>Une agence immobilière recommandée par ses clients</h3>
+          <p>
+            Nos clients sont nos meilleurs ambassadeurs. Consultez leur avis sur nos différentes
+            plateformes de recueil d'opinions :
+            {' '}<a href="/services/les-avis-clients-de-limmobiliere-pujol/" target="_blank" rel="noopener">avis de nos clients</a>.
+          </p>
+
+          <h2>Ce que nous allons gérer pour vous</h2>
+          <p>Notre objectif : <strong>sécuriser</strong> vos revenus et vous faire gagner en <strong>sérénité</strong>.</p>
+
+          <h3>1 — Location ou relocation de votre bien immobilier</h3>
+          <p>
+            Nous vous accompagnons pour la première mise en location de votre bien s'il est neuf
+            ou pour sa relocation : étude de marché, prix du loyer, travaux de valorisation,
+            reportage photos, réalisation des annonces, promotion du bien, étude des dossiers
+            locataires, entretiens, état des lieux, mise en place du contrat de location…
+          </p>
+
+          <h3>2 — La gestion locative de votre bien</h3>
+          <p>
+            Nous assurons la gestion courante du bien sur la base d'un mandat de gestion. Nous
+            pouvons ainsi gérer la perception des loyers mensuels, la commande et le suivi des
+            éventuels travaux de rafraîchissement, la relation avec le locataire et avec le
+            syndic de la copropriété (paiement des charges, assemblées générales…).
+          </p>
+          <p>
+            Cette gestion vous donne accès en temps réel dans votre espace client à votre compte,
+            au compte du locataire et à tous les documents que vous pouvez télécharger 24h/24 et
+            7 jours/7.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="/service-immobilier/gestion-locative/#gf_1"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Vous souhaitez louer et <b>faire gérer</b></h2>
+        <p class="svc-form__lead">
+          Contactez-nous pour obtenir des réponses ou un devis. Nous prenons contact avec vous
+          dans les 24 heures.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_2.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_2.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_8" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_4" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Votre message *</span>
+            <textarea name="input_3" rows="6" placeholder="Votre message" required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_5.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+          dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+          connaître et exercer vos droits, notamment de retrait de votre consentement à
+          l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+          {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>Instagram<input type="text" name="input_9" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="1" />
+        <input type="hidden" name="is_submit_1" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER VOTRE DEMANDE</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  {/* Smooth-scroll TOC: highlight the active section as it enters the viewport. */}
+  <script>
+    (function () {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.svc-toc__link');
+      const sections = document.querySelectorAll<HTMLElement>('.svc-section');
+      if (!links.length || !sections.length) return;
+
+      const byId = new Map<string, HTMLAnchorElement>();
+      links.forEach((l) => {
+        const id = l.getAttribute('href')?.replace('#', '');
+        if (id) byId.set(id, l);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const link = byId.get(e.target.id);
+              if (link) link.classList.add('is-active');
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => io.observe(s));
+    })();
+  </script>
+</BaseLayout>

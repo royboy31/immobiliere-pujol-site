@@ -22,6 +22,9 @@ export default defineConfig({
     '/location/': '/location-courte-duree-quelle-sont-les-regles-a-respecter/',
     '/syndic/': '/syndic-de-copro-ecologie/',
     '/gestion/': '/local/gestion-dappartement-a-carpiagne-13009-marseille/',
+    // Singular `/service/...` was used in some legacy WP links — forward
+    // every single-segment sub-path to the canonical plural `/services/[slug]`.
+    '/service/[slug]': '/services/[slug]',
   },
   vite: {
     css: {

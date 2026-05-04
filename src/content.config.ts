@@ -32,6 +32,7 @@ const services = defineCollection({
     formTitle: z.string().optional(),
     formSubtitle: z.string().optional(),
     btnText: z.string().optional(),
+    ctaText: z.string().optional(),
     taxonomy: z.string().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),

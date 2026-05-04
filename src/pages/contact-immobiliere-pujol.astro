@@ -1,0 +1,276 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = "Contacter l'Immobilière Pujol – Marseille";
+const seoDescription =
+  "L'équipe Immobilière Pujol vous reçoit au 49 rue Jean Fiolle, 13006 Marseille. Téléphone 04 91 81 26 26 — un conseiller vous répond sous 24 heures.";
+
+// Canonical contact info (mirrors src/components/common/Footer.astro).
+const contact = {
+  address: '49 rue Jean Fiolle, 13006 Marseille',
+  addressLine1: '49 rue Jean Fiolle',
+  addressLine2: '13006 Marseille',
+  mapHref:
+    'https://maps.google.com/?q=Immobili%C3%A8re+Pujol+49+rue+Jean+Fiolle+13006+Marseille',
+  mapEmbed:
+    'https://www.google.com/maps?q=49+rue+Jean+Fiolle+13006+Marseille&output=embed',
+  phone: '04 91 81 26 26',
+  phoneHref: 'tel:+33491812626',
+  email: 'contact@immobiliere-pujol.fr',
+  emailHref: 'mailto:contact@immobiliere-pujol.fr',
+  hours: 'Lun – Ven : 9h – 12h30 / 14h – 18h30',
+};
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg';
+
+const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic', 'Autre'];
+
+// Quick-link cards driving the most common direct contact paths.
+const quickLinks = [
+  {
+    title: "Vendre un bien",
+    desc: "Estimer la valeur de marché et lancer la commercialisation.",
+    href: '/service-immobilier/vendre/#form',
+    cta: 'Demander une estimation',
+  },
+  {
+    title: "Mettre en location",
+    desc: "Confier la mise en location et / ou la gestion à notre équipe.",
+    href: '/service-immobilier/gestion-locative/#form',
+    cta: 'Demander un devis',
+  },
+  {
+    title: "Service syndic",
+    desc: "Repenser la gestion de votre copropriété avec un syndic recommandé.",
+    href: '/service-immobilier/syndic-de-copropriete-a-marseille/#form',
+    cta: 'Demander un devis syndic',
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      <img src={heroImg} alt="Façade de l'agence Immobilière Pujol à Marseille" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1><b>Contacter</b><br />l'Immobilière Pujol</h1>
+      <p class="svc-hero__sub">
+        Un conseiller vous répond dans les 24 heures, en agence ou par téléphone.
+      </p>
+      <a class="svc-hero__cta" href="#form">Nous écrire</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= INFO CARDS ============= */}
+    <section class="contact-info">
+      <div class="contact-info__inner">
+        <h2 class="ds-sec-title">Toutes les façons de <b>nous joindre</b></h2>
+
+        <ul class="contact-info__grid">
+          <li class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                <circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+            </span>
+            <h3 class="contact-card__title">Adresse</h3>
+            <p class="contact-card__body">
+              {contact.addressLine1}<br />
+              {contact.addressLine2}
+            </p>
+            <a class="contact-card__cta" href={contact.mapHref} target="_blank" rel="noopener">
+              Itinéraire
+              <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+
+          <li class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 7a2 2 0 0 1 1-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="contact-card__title">Téléphone</h3>
+            <p class="contact-card__body">{contact.phone}</p>
+            <a class="contact-card__cta" href={contact.phoneHref}>
+              Appeler
+              <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+
+          <li class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
+                <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <h3 class="contact-card__title">Email</h3>
+            <p class="contact-card__body">{contact.email}</p>
+            <a class="contact-card__cta" href={contact.emailHref}>
+              Écrire
+              <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </li>
+
+          <li class="contact-card">
+            <span class="contact-card__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
+                <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h3 class="contact-card__title">Horaires</h3>
+            <p class="contact-card__body">
+              Lundi – Vendredi<br />
+              9h – 12h30 / 14h – 18h30
+            </p>
+            <span class="contact-card__cta contact-card__cta--mute">
+              Sur rendez-vous le samedi
+            </span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ============= FORM + MAP ============= */}
+    <section class="contact-split" id="form">
+      <div class="contact-split__inner">
+
+        <form
+          class="svc-form contact-split__form"
+          method="post"
+          action="/contact-immobiliere-pujol/#gf_4"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          <h2>Prenez contact <b>avec nous</b></h2>
+          <p class="svc-form__lead">
+            Remplissez ce formulaire et nous prendrons contact avec vous dans les 24 heures.
+          </p>
+
+          <div class="svc-form__grid">
+            <label class="svc-field">
+              <span>Prénom *</span>
+              <input type="text" name="input_6.3" placeholder="Prénom" required />
+            </label>
+
+            <label class="svc-field">
+              <span>Nom *</span>
+              <input type="text" name="input_6.6" placeholder="Nom" required />
+            </label>
+
+            <label class="svc-field">
+              <span>Email *</span>
+              <input type="email" name="input_2" placeholder="Email" required />
+            </label>
+
+            <label class="svc-field">
+              <span>Téléphone *</span>
+              <input type="tel" name="input_4" placeholder="Téléphone" required />
+            </label>
+
+            <label class="svc-field svc-field--full">
+              <span>Objet de votre demande *</span>
+              <select name="input_10" required>
+                {formObjects.map((o) => (
+                  <option value={o}>{o}</option>
+                ))}
+              </select>
+            </label>
+
+            <label class="svc-field svc-field--full">
+              <span>Décrivez votre demande *</span>
+              <textarea name="input_3" rows="6" placeholder="Décrivez votre demande" required></textarea>
+            </label>
+          </div>
+
+          <label class="svc-form__agree">
+            <input
+              type="checkbox"
+              name="input_9.1"
+              value="J'accepte le traitement de mes données dans le cadre de ma demande"
+              required
+            />
+            <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+          </label>
+
+          <p class="svc-form__legal">
+            En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+            dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+            connaître et exercer vos droits, notamment de retrait de votre consentement à
+            l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+            {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+          </p>
+
+          {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+          <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+            <label>Company<input type="text" name="input_11" tabindex="-1" autocomplete="new-password" /></label>
+          </div>
+          <input type="hidden" name="gform_submit" value="4" />
+          <input type="hidden" name="is_submit_4" value="1" />
+
+          <button class="svc-form__submit" type="submit">
+            <span>ENVOYER</span>
+            <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+              <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+
+        <aside class="contact-split__map">
+          <iframe
+            src={contact.mapEmbed}
+            title="Carte — Immobilière Pujol, 49 rue Jean Fiolle, 13006 Marseille"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <a class="contact-split__map-cta" href={contact.mapHref} target="_blank" rel="noopener">
+            Ouvrir dans Google Maps
+            <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+              <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    {/* ============= QUICK-LINKS ============= */}
+    <section class="contact-quick">
+      <div class="contact-quick__inner">
+        <h2 class="ds-sec-title">Vous savez déjà <b>ce que vous cherchez ?</b></h2>
+        <ul class="contact-quick__grid">
+          {quickLinks.map((q) => (
+            <li class="contact-quick-card">
+              <h3 class="contact-quick-card__title">{q.title}</h3>
+              <p class="contact-quick-card__desc">{q.desc}</p>
+              <a class="contact-quick-card__cta" href={q.href}>
+                <span>{q.cta}</span>
+                <svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                  <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

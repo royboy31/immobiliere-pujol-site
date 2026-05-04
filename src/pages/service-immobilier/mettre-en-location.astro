@@ -1,0 +1,242 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('serviceImmobilier', 'mettre-en-location');
+const seoTitle = entry?.data.seoTitle || 'Mettre en location – Immobilière Pujol';
+const seoDescription = entry?.data.seoDescription || 'Soyez bien conseillé pour mieux louer';
+const ctaText = 'Demander un devis de mise en location';
+const heroCatch = 'Sécuriser votre location et vos revenus immobiliers';
+const heroSub = 'Soyez bien conseillé pour mieux louer';
+
+const heroVideo =
+  entry?.data.heroVideo ||
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4';
+const heroPoster =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/location-meuble-wifi-castellane-1200x802.jpg';
+
+// Sidebar nav order preserved exactly as on the legacy page (1, 2, 3).
+const toc = [
+  { id: '1-pourquoi-nous-choisir',                 label: '1. Pourquoi nous choisir' },
+  { id: '2-comment-nous-louons',                   label: '2. Comment nous louons' },
+  { id: '3-notre-service-location-cest-aussi',     label: "3. Notre service location c'est aussi" },
+];
+
+// All section content + article links from the legacy markdown body.
+// Every URL is preserved exactly.
+const sections = [
+  {
+    id: '1-pourquoi-nous-choisir',
+    title: '1. Pourquoi nous choisir',
+    paragraphs: [
+      "C'est un élément clé pour garantir la rapidité de mise en location de votre appartement : louer au bon prix est le premier argument que vous devez contrôler.",
+    ],
+    articles: [
+      { href: '/services/nos-resultats-pour-la-mise-en-location/',          label: 'Nos résultats pour la mise en location à Marseille' },
+      { href: '/services/lagence-de-location-immobiliere-pujol-a-marseille/', label: "L'agence de location immobilière Pujol à Marseille" },
+      { href: '/services/recevez-votre-devis-de-location-en-24h/',           label: "Recevez votre devis de location d'appartements à Marseille en 24h" },
+    ],
+  },
+  {
+    id: '2-comment-nous-louons',
+    title: '2. Comment nous louons',
+    paragraphs: [],
+    articles: [
+      { href: '/services/nos-prestations-de-mise-en-location/',                                       label: 'Mise en location à Marseille : ce que nous allons faire pour vous' },
+      { href: '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/', label: "Le coût d'une commission de location (sans gestion locative)" },
+      { href: '/services/comment-mettre-en-location-un-appartement/',                                  label: 'Comment mettre en location un appartement ?' },
+    ],
+  },
+  {
+    id: '3-notre-service-location-cest-aussi',
+    title: "3. Notre service location c'est aussi",
+    paragraphs: [
+      "Louer vite à un locataire solvable et respectueux du bien qui lui est confié est l'objectif de notre équipe de location. Car se tromper dans le choix des locataires peut coûter cher.",
+    ],
+    articles: [
+      { href: '/services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix/', label: "Location d'appartements à Marseille : nos résultats et nos tarifs !" },
+      { href: '/services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes/',        label: 'Choisir le bon locataire et sécuriser vos contrats : les tarifs' },
+      { href: '/services/agence-location-appartement-marseille/',                                     label: 'Une agence pour la location de votre appartement à Marseille' },
+      { href: '/services/devis-gestion-locative-marseille/',                                          label: 'Obtenir un devis pour la gestion locative de vos biens immobiliers' },
+    ],
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <video class="svc-hero__video" autoplay muted loop playsinline preload="auto" poster={heroPoster}>
+      <source src={heroVideo} type="video/mp4" />
+    </video>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1><b>Mettre</b> en location</h1>
+      <p class="svc-hero__sub">{heroCatch}</p>
+      <p class="svc-hero__sub">{heroSub}</p>
+      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= TOC + SECTIONS ============= */}
+    <section class="svc-toc-section">
+      <div class="svc-toc-section__inner">
+
+        <aside class="svc-toc">
+          <h4 class="svc-toc__title">Mettre en location</h4>
+          <ul class="svc-toc__list">
+            {toc.map((t) => (
+              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
+            ))}
+          </ul>
+        </aside>
+
+        <div class="svc-content">
+          {sections.map((s) => (
+            <section class="svc-section" id={s.id}>
+              <h3 class="svc-section__title">
+                {s.title.includes('.') ? (
+                  <>
+                    <span class="num">{s.title.split('.')[0]}.</span>
+                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
+                  </>
+                ) : (
+                  <b>{s.title}</b>
+                )}
+              </h3>
+
+              {s.paragraphs.map((p) => (
+                <p class="svc-section__lead">{p}</p>
+              ))}
+
+              {s.articles.length > 0 && (
+                <ul class="svc-articles">
+                  {s.articles.map((a) => (
+                    <li>
+                      <a class="svc-article-link" href={a.href}>
+                        <span>{a.label}</span>
+                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="/service-immobilier/mettre-en-location/#gf_8"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Demander un <b>devis de location</b></h2>
+        <p class="svc-form__lead">
+          Remplissez ce formulaire et nous prenons contact avec vous dans les 24 heures.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_1.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_1.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_2" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_3" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Votre message *</span>
+            <textarea name="input_11" rows="6" placeholder="Votre message" required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_12.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+          dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+          connaître et exercer vos droits, notamment de retrait de votre consentement à
+          l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+          {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>Name<input type="text" name="input_14" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="8" />
+        <input type="hidden" name="is_submit_8" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+
+  {/* Smooth-scroll TOC: highlight the active section as it enters the viewport. */}
+  <script>
+    (function () {
+      const links = document.querySelectorAll<HTMLAnchorElement>('.svc-toc__link');
+      const sections = document.querySelectorAll<HTMLElement>('.svc-section');
+      if (!links.length || !sections.length) return;
+
+      const byId = new Map<string, HTMLAnchorElement>();
+      links.forEach((l) => {
+        const id = l.getAttribute('href')?.replace('#', '');
+        if (id) byId.set(id, l);
+      });
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              links.forEach((l) => l.classList.remove('is-active'));
+              const link = byId.get(e.target.id);
+              if (link) link.classList.add('is-active');
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      );
+      sections.forEach((s) => io.observe(s));
+    })();
+  </script>
+</BaseLayout>

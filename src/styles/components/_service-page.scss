@@ -577,6 +577,145 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 }
 
 // =========================================
+// EXPERT CARD — side-by-side portrait + contact details
+// (used by /services/contacter-un-conseiller-en-gestion-locative/)
+// =========================================
+.svc-expert {
+  display: grid;
+  grid-template-columns: minmax(0, 360px) 1fr;
+  gap: 48px;
+  align-items: start;
+  background: $white;
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+
+  &__photo {
+    margin: 0;
+    aspect-ratio: 4 / 5;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  &__name {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1.05;
+    color: $black;
+    margin: 0;
+    letter-spacing: -.3px;
+
+    b { font-weight: 700; }
+  }
+
+  &__role {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    margin: 0 0 6px;
+  }
+
+  &__pitch {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $ds-ink;
+    margin: 0;
+  }
+
+  &__contact {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+
+    li {
+      background: transparent;
+      border: 1.5px solid $ds-olive;
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color $transition-fast, transform $transition-base;
+
+      &:hover {
+        border-color: $ds-olive-2;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  &__label {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+  }
+
+  &__value {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    color: $black;
+    text-decoration: none;
+    transition: color $transition-fast;
+    word-break: break-word;
+
+    &:hover { color: $ds-olive-2; }
+  }
+
+  &__qr {
+    margin: 12px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 18px;
+    border-radius: 16px;
+    border: 1.5px solid $ds-olive;
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      flex: none;
+      background: $white;
+    }
+
+    figcaption {
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.45;
+      color: $ds-ink;
+      margin: 0;
+    }
+  }
+}
+
+// =========================================
 // VALUES — card grid for key values / pillars
 // (used by /services/pourquoi-nous-faisons-ce-metier/)
 // =========================================
@@ -1596,6 +1735,286 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 }
 
 // =========================================
+// CONTACT PAGE — info cards + split form+map + quick-links
+// (used by /contact-immobiliere-pujol/)
+// =========================================
+.contact-info {
+  background: $ds-paper;
+  padding: 90px $ds-side-pad-svc 70px;
+
+  &__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .ds-sec-title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 1.05;
+    text-align: center;
+    color: $black;
+    margin: 0 0 48px;
+    letter-spacing: -.3px;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.contact-card {
+  background: $white;
+  border-radius: 24px;
+  padding: 30px 28px 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  border-top: 3px solid $ds-olive;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .1);
+  }
+
+  &__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: $ds-soft-green;
+    color: $ds-olive-2;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    color: $black;
+    margin: 0;
+    letter-spacing: .2px;
+  }
+
+  &__body {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.5;
+    color: $ds-ink;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    text-decoration: none;
+    margin-top: 4px;
+    transition: color $transition-fast;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      color: $black;
+      svg { transform: translateX(4px); }
+    }
+
+    &--mute {
+      color: $ds-ink;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      font-size: 13px;
+    }
+  }
+}
+
+.contact-split {
+  background: $white;
+  padding: 80px $ds-side-pad-svc 90px;
+
+  &__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: stretch;
+  }
+
+  &__form {
+    margin: 0;
+    height: 100%;
+  }
+
+  &__map {
+    position: relative;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .08);
+    background: $ds-paper-2;
+    min-height: 520px;
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: saturate(.92);
+    }
+  }
+
+  &__map-cta {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: $white;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .14);
+    transition: color $transition-fast, background-color $transition-fast;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      background: $ds-olive;
+      color: $black;
+      svg { transform: translateX(4px); }
+    }
+  }
+}
+
+.contact-quick {
+  background: $ds-paper;
+  padding: 70px $ds-side-pad-svc 110px;
+
+  &__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .ds-sec-title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 42px;
+    line-height: 1.05;
+    text-align: center;
+    color: $black;
+    margin: 0 0 40px;
+    letter-spacing: -.3px;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.contact-quick-card {
+  background: $white;
+  border-radius: 22px;
+  padding: 30px 30px 28px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, .1);
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.2;
+    color: $black;
+    margin: 0;
+  }
+
+  &__desc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.55;
+    color: $ds-ink;
+    margin: 0;
+    flex: 1;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    align-self: flex-start;
+    height: 50px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    border: 1.5px solid $ds-olive;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-position 0.4s ease, color 0.3s ease;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      background-position: 0 100%;
+      color: $ds-olive-2;
+      svg { transform: translateX(4px); }
+    }
+  }
+}
+
+// =========================================
 // FORM — olive card on white, mirrors home newsletter treatment
 // =========================================
 .svc-form-wrap {
@@ -1824,6 +2243,29 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     img { border-radius: 14px; margin: 22px 0; }
   }
 
+  .svc-expert {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px;
+    border-radius: 20px;
+
+    &__photo {
+      aspect-ratio: 4 / 5;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    &__name { font-size: 28px; }
+    &__contact { grid-template-columns: 1fr; gap: 10px; }
+    &__qr {
+      flex-direction: column;
+      text-align: center;
+      gap: 14px;
+
+      img { width: 220px; height: 220px; }
+    }
+  }
+
   .svc-values {
     margin-top: 40px;
 
@@ -1972,6 +2414,60 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     > iframe {
       min-height: 1200px;
       border-radius: 14px;
+    }
+  }
+
+  .contact-info {
+    padding: 60px $mobile-pad 50px;
+
+    .ds-sec-title { font-size: 30px; margin-bottom: 28px; }
+    &__grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .contact-card {
+    padding: 22px 22px 20px;
+
+    &__title { font-size: 17px; }
+    &__body  { font-size: 14px; }
+  }
+
+  .contact-split {
+    padding: 50px $mobile-pad 60px;
+
+    &__inner {
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    &__map {
+      min-height: 320px;
+      border-radius: 22px;
+    }
+
+    &__map-cta {
+      left: 12px;
+      bottom: 12px;
+      padding: 9px 14px;
+      font-size: 11px;
+    }
+  }
+
+  .contact-quick {
+    padding: 50px $mobile-pad 70px;
+
+    .ds-sec-title { font-size: 28px; margin-bottom: 22px; }
+    &__grid { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  .contact-quick-card {
+    padding: 22px 22px 22px;
+
+    &__title { font-size: 19px; }
+    &__cta {
+      height: 46px;
+      padding: 0 20px;
+      width: 100%;
+      justify-content: center;
     }
   }
 

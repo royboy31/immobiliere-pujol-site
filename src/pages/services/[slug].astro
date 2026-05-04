@@ -443,6 +443,40 @@ if (
   bodyHtml = '';
 }
 
+// Page-specific enhancement: render the "Contacter un conseiller en gestion
+// locative" page as a side-by-side expert card (portrait left, contact details
+// right) instead of a stack of centred legacy paragraphs.
+type ContactExpert = {
+  name: string;
+  role: string;
+  photo: string;
+  pitch: string[];
+  phone: string;
+  phoneHref: string;
+  email: string;
+  qrSrc: string;
+  qrCaption: string;
+};
+let contactExpert: ContactExpert | null = null;
+
+if (slug === 'contacter-un-conseiller-en-gestion-locative') {
+  contactExpert = {
+    name: 'Gaëlle Lapert',
+    role: 'Directrice commerciale Gestion Locative — Immobilière Pujol',
+    photo: '/images/home/gaelle-pujol.png',
+    pitch: [
+      "Bonjour, vous souhaitez avoir des renseignements et obtenir une proposition personnalisée pour la gestion locative de vos biens à Marseille — que ce soit dans le neuf ou dans l'ancien, pour une location vide ou meublée, pour des bureaux ou des locaux commerciaux ?",
+      "Contactez-moi, je répondrai avec plaisir à toutes vos questions.",
+    ],
+    phone: '06 08 87 20 05',
+    phoneHref: 'tel:+33608872005',
+    email: 'gaelle@immobiliere-pujol.fr',
+    qrSrc: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/QR-CODES.jpg',
+    qrCaption: 'Scannez ce QR code pour réserver un rendez-vous téléphonique avec Gaëlle.',
+  };
+  bodyHtml = '';
+}
+
 // Build the sidebar list: parent header, section label, then siblings + current page.
 const sidebarItems = [
   ...siblings.map((s) => ({ ...s, current: false })),
@@ -460,7 +494,7 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
     <div class="svc-hero__inner">
       <h1>{entry.data.title}</h1>
       {heroSub && <p class="svc-hero__sub">{heroSub}</p>}
-      <a class="svc-hero__cta" href="#form">Contacter l'agence</a>
+      <a class="svc-hero__cta" href="#form">{entry.data.ctaText || "Contacter l'agence"}</a>
     </div>
   </section>
 
@@ -789,6 +823,33 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
                 })();
               </script>
             </>
+          ) : contactExpert ? (
+            <section class="svc-expert" aria-labelledby="svc-expert-name">
+              <div class="svc-expert__photo">
+                <img src={contactExpert.photo} alt={contactExpert.name} loading="eager" />
+              </div>
+              <div class="svc-expert__body">
+                <h2 class="svc-expert__name" id="svc-expert-name">{contactExpert.name}</h2>
+                <p class="svc-expert__role">{contactExpert.role}</p>
+                {contactExpert.pitch.map((p) => (
+                  <p class="svc-expert__pitch">{p}</p>
+                ))}
+                <ul class="svc-expert__contact">
+                  <li>
+                    <span class="svc-expert__label">Téléphone</span>
+                    <a class="svc-expert__value" href={contactExpert.phoneHref}>{contactExpert.phone}</a>
+                  </li>
+                  <li>
+                    <span class="svc-expert__label">Email</span>
+                    <a class="svc-expert__value" href={`mailto:${contactExpert.email}`}>{contactExpert.email}</a>
+                  </li>
+                </ul>
+                <figure class="svc-expert__qr">
+                  <img src={contactExpert.qrSrc} alt="QR code de prise de rendez-vous" loading="lazy" />
+                  <figcaption>{contactExpert.qrCaption}</figcaption>
+                </figure>
+              </div>
+            </section>
           ) : (
             <article class="svc-article-body" set:html={bodyHtml}></article>
           )}
