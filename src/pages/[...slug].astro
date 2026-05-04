@@ -10,13 +10,13 @@ import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 // - PriceHubble estimation page
 // - Contact page
 
-// Slugs handled by their own dedicated .astro file in /src/pages/. They must
-// be skipped here to avoid duplicate static-route generation.
-const DEDICATED = new Set([
-  'estimez-le-prix-de-vente-de-votre-bien-en-2mn',
-]);
-
 export async function getStaticPaths() {
+  // Slugs handled by their own dedicated .astro file in /src/pages/. Must be
+  // skipped here to avoid duplicate static-route generation. Defined inside
+  // getStaticPaths because Astro hoists this function into an isolated scope.
+  const DEDICATED = new Set([
+    'estimez-le-prix-de-vente-de-votre-bien-en-2mn',
+  ]);
   const articles = await getCollection('articles');
   const pages = await getCollection('pages');
 

@@ -3,15 +3,16 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Slugs that have a dedicated .astro page in this directory must be excluded
-// here, otherwise Astro builds two pages for the same route.
-const DEDICATED = new Set([
-  'agence-immobiliere-pujol',
-  'syndic-de-copropriete-a-marseille',
-  'vendre',
-]);
-
 export async function getStaticPaths() {
+  // Slugs that have a dedicated .astro page in this directory must be
+  // excluded here, otherwise Astro builds two pages for the same route.
+  // Defined inside getStaticPaths because Astro hoists this function into an
+  // isolated scope at build time.
+  const DEDICATED = new Set([
+    'agence-immobiliere-pujol',
+    'syndic-de-copropriete-a-marseille',
+    'vendre',
+  ]);
   const entries = await getCollection('serviceImmobilier');
   return entries
     .filter((entry) => !DEDICATED.has(entry.data.slug))
