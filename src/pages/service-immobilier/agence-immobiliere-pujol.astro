@@ -113,7 +113,7 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
       <div class="svc-toc-section__inner">
 
         <aside class="svc-toc">
-          <h4 class="svc-toc__title">Notre agence immobilière</h4>
+          <p class="svc-toc__title">Notre agence immobilière</p>
           <ul class="svc-toc__list">
             {toc.map((t) => (
               <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
@@ -124,7 +124,7 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
         <div class="svc-content">
           {sections.map((s) => (
             <section class="svc-section" id={s.id}>
-              <h3 class="svc-section__title">
+              <h2 class="svc-section__title">
                 {s.title.includes('.') ? (
                   <>
                     <span class="num">{s.title.split('.')[0]}.</span>
@@ -133,7 +133,7 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
                 ) : (
                   <b>{s.title}</b>
                 )}
-              </h3>
+              </h2>
 
               {s.paragraphs.map((p) => (
                 <p class="svc-section__lead">{p}</p>

@@ -5,9 +5,10 @@ const LOGO_URL = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/lo
 const PUBLISHER_NAME = 'Agence Immobilière Pujol';
 
 const SAME_AS = [
-  'https://www.facebook.com/agenceimmobiliere.fr/',
-  'https://www.linkedin.com/company/immobiliere-pujol/about/',
-  'https://twitter.com/stephanepujol',
+  'https://www.facebook.com/immobilierepujol/',
+  'https://www.instagram.com/immobiliere_pujol/',
+  'https://www.linkedin.com/company/immobiliere-pujol/',
+  'https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA',
 ];
 
 // Opening hours — mirrored from the live schema.

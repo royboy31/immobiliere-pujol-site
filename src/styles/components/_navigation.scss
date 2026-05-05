@@ -253,7 +253,7 @@
   .col {
     min-width: 0;
 
-    h4 {
+    h3 {
       font-family: $ds-font-jakarta;
       font-weight: 700;
       font-size: 13px;
@@ -594,7 +594,7 @@
       padding-bottom: 28px;
     }
 
-    .col h4 { margin: 0 0 14px; }
+    .col h3 { margin: 0 0 14px; }
     .col--brand,
     .col--contact { grid-column: 1 / -1; }
 

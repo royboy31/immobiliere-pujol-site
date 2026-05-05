@@ -814,7 +814,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     max-width: 460px;
   }
 
-  h4 {
+  &__author {
     font-family: $ds-font-noto;
     font-weight: 700;
     font-size: 17px;

@@ -145,7 +145,7 @@ const sections = [
       <div class="svc-toc-section__inner">
 
         <aside class="svc-toc">
-          <h4 class="svc-toc__title">Gestion Locative à Marseille</h4>
+          <p class="svc-toc__title">Gestion Locative à Marseille</p>
           <ul class="svc-toc__list">
             {toc.map((t) => (
               <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
@@ -156,7 +156,7 @@ const sections = [
         <div class="svc-content">
           {sections.map((s) => (
             <section class="svc-section" id={s.id}>
-              <h3 class="svc-section__title">
+              <h2 class="svc-section__title">
                 {s.title.includes('.') ? (
                   <>
                     <span class="num">{s.title.split('.')[0]}.</span>
@@ -165,7 +165,7 @@ const sections = [
                 ) : (
                   <b>{s.title}</b>
                 )}
-              </h3>
+              </h2>
 
               {s.paragraphs.map((p) => (
                 <p class="svc-section__lead">{p}</p>
