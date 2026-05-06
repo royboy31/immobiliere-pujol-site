@@ -40,8 +40,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 // =========================================
 .hero {
   position: relative;
-  z-index: 0;
-  isolation: isolate;
+  z-index: 10;
   height: 760px;
   // Static fallback while the video loads / if it fails to play.
   background:
