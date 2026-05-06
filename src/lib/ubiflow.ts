@@ -62,6 +62,7 @@ export interface UbiflowAnnonce {
   dpeEtiquetteGes: string;
   dpeEstimationMin: string;
   dpeEstimationMax: string;
+  dpeValeurGes: string;
   photos: string[];
   visiteVirtuelle: string;
   mandatNumero: string;
@@ -106,7 +107,14 @@ function generateSlug(annonce: Partial<UbiflowAnnonce>): string {
 function parseAnnonce(raw: any): UbiflowAnnonce {
   const bien = raw.bien || {};
   const prestation = raw.prestation || {};
-  const diagnostics = raw.diagnostics || {};
+  // The Ubiflow feed nests the diagnostics block inside <bien> as
+  // <bien><diagnostiques>… (French spelling). Older fixtures used a flat
+  // <diagnostics> on the annonce root — accept both for back-compat.
+  const diagnostics =
+    bien.diagnostiques ||
+    raw.diagnostiques ||
+    raw.diagnostics ||
+    {};
 
   // Photos can be a single string or an array
   const photosRaw = raw.photos?.photo;
@@ -175,6 +183,7 @@ function parseAnnonce(raw: any): UbiflowAnnonce {
     dpeEtiquetteGes: str(diagnostics.dpe_etiquette_ges),
     dpeEstimationMin: str(diagnostics.dpe_estimation_min),
     dpeEstimationMax: str(diagnostics.dpe_estimation_max),
+    dpeValeurGes: str(diagnostics.dpe_valeur_ges),
     photos,
     visiteVirtuelle: str(raw.visite_virtuelle),
     mandatNumero: str(prestation.mandat_numero),

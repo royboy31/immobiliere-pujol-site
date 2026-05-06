@@ -622,17 +622,17 @@
     gap: 8px;
     padding: 10px 18px;
     border-radius: 999px;
-    background: $ds-orange;
-    color: $white;
+    background: $white;
+    color: $black;
     font-family: $ds-font-noto;
     font-weight: 700;
     font-size: 12px;
     letter-spacing: .4px;
     text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
     transition: transform .2s ease, background-color .2s ease;
 
-    &:hover { transform: translateY(-1px); background: $ds-orange-2; }
+    &:hover { transform: translateY(-1px); background: $ds-paper; }
   }
 
   &__thumbs {
@@ -928,7 +928,33 @@
   }
 }
 
-// ----- DPE / GES visual scale -----
+// ----- Official DPE / GES diagram (SVG) -----
+.dpe-diagram {
+  margin: 0;
+  display: block;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__none {
+    margin: 0;
+    padding: 14px 16px;
+    background: $ds-paper;
+    border-radius: 12px;
+    font-size: 13px;
+    color: $ds-ink;
+  }
+}
+
+// Lightbox renders the same SVG bigger; remove the cell padding on hover state.
+.lightbox__html .dpe-diagram svg {
+  max-height: 70vh;
+}
+
+// ----- Legacy DPE staircase scale (kept for back-compat) -----
 .dpe-scale {
   margin: 0;
 

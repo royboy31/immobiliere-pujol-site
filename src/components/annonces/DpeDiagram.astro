@@ -1,0 +1,152 @@
+---
+// Official-format French DPE / GES energy diagram, rendered as SVG so we can
+// show the property's actual numeric value inside the pointer instead of just
+// the letter. Matches the legally-mandated layout: 7 staircase arrows in the
+// brand color sequence, "Logement économe / énergivore" labels, side pointer.
+
+interface Props {
+  /** "DPE" (energy consumption) or "GES" (CO2 emissions). */
+  kind: 'DPE' | 'GES';
+  /** Class letter A..G. Empty / "NS" / unknown shows a non-applicable note. */
+  letter?: string;
+  /** Numeric value (kWh/m²/an for DPE, kg CO2/m²/an for GES). Optional. */
+  value?: string | number | null;
+}
+
+const { kind, letter, value } = Astro.props;
+const norm = (letter || '').trim().toUpperCase();
+const validLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'] as const;
+type Letter = typeof validLetters[number];
+const active = (validLetters as readonly string[]).includes(norm) ? (norm as Letter) : null;
+
+// Official 2024 French thresholds.
+const dpeRows = [
+  { letter: 'A' as Letter, label: '≤ 70',     color: '#00a651' },
+  { letter: 'B' as Letter, label: '71 à 110', color: '#50b848' },
+  { letter: 'C' as Letter, label: '111 à 180',color: '#c5d92d' },
+  { letter: 'D' as Letter, label: '181 à 250',color: '#fff200' },
+  { letter: 'E' as Letter, label: '251 à 330',color: '#fdb913' },
+  { letter: 'F' as Letter, label: '331 à 420',color: '#f7941d' },
+  { letter: 'G' as Letter, label: '> 420',    color: '#ed1c24' },
+];
+const gesRows = [
+  { letter: 'A' as Letter, label: '≤ 5',     color: '#a4d8e2' },
+  { letter: 'B' as Letter, label: '6 à 10',  color: '#84bdd1' },
+  { letter: 'C' as Letter, label: '11 à 20', color: '#7c9fc8' },
+  { letter: 'D' as Letter, label: '21 à 35', color: '#7d7eb8' },
+  { letter: 'E' as Letter, label: '36 à 55', color: '#7e5fa6' },
+  { letter: 'F' as Letter, label: '56 à 80', color: '#693c91' },
+  { letter: 'G' as Letter, label: '> 80',    color: '#3b1e6e' },
+];
+const rows = kind === 'DPE' ? dpeRows : gesRows;
+const unit = kind === 'DPE' ? 'kWh/m²/an' : 'kg CO₂/m²/an';
+const title = kind === 'DPE' ? 'Performance énergétique' : 'Émissions de gaz à effet de serre';
+
+// Layout constants (in SVG user units). We aim for ~16:11 final aspect.
+const W = 560;
+const H = 380;
+const padL = 18;
+const labelColW = 86;     // left label column for ranges
+const barX = padL + labelColW;
+const rowH = 30;
+const rowGap = 4;
+const firstRowY = 78;
+
+// Bar widths grow A → G (staircase). G fits the chart width minus pointer area.
+const minBarW = 110;
+const maxBarW = 360;
+const widthStep = (maxBarW - minBarW) / 6;
+
+// Side pointer dimensions (only rendered when we have a valid letter).
+const pointerW = 130;
+const pointerH = 80;
+const pointerTipW = 16;
+const pointerX = W - padL - pointerW;
+const activeIdx = active ? validLetters.indexOf(active) : -1;
+const pointerCenterY = firstRowY + activeIdx * (rowH + rowGap) + rowH / 2;
+const pointerY = pointerCenterY - pointerH / 2;
+
+// Display value: use the prop if provided, else fall back to the row label
+// (so we still show meaningful numbers even when only the letter is known).
+const displayValue = value != null && String(value).trim() !== ''
+  ? String(value).trim()
+  : active ? rows[activeIdx].label.replace(/à /g, '–').replace('≤ ', '').replace('> ', '') : '';
+---
+
+<figure class={`dpe-diagram dpe-diagram--${kind.toLowerCase()}`}>
+  {active ? (
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${title} — classe ${active}`}>
+      <text x={W / 2} y={28} text-anchor="middle"
+            font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="22" fill="#000">
+        {title.toUpperCase()}
+      </text>
+      <text x={barX + 4} y={62} font-family="Helvetica, Arial, sans-serif" font-style="italic"
+            font-size="13" fill="#000">
+        Logement économe
+      </text>
+      <text x={barX + 4} y={firstRowY + 7 * (rowH + rowGap) + 18}
+            font-family="Helvetica, Arial, sans-serif" font-style="italic" font-size="13" fill="#000">
+        Logement énergivore
+      </text>
+
+      {rows.map((r, i) => {
+        const y = firstRowY + i * (rowH + rowGap);
+        const w = minBarW + i * widthStep;
+        const tipX = barX + w;
+        const tipPoint = tipX + 14;
+
+        // Build the arrow shape: a rectangle with a triangular tip on the right.
+        const path = `M ${barX} ${y}
+                      H ${tipX}
+                      L ${tipPoint} ${y + rowH / 2}
+                      L ${tipX} ${y + rowH}
+                      H ${barX} Z`;
+
+        const isActive = r.letter === active;
+        const textColor = ['#fff200'].includes(r.color) ? '#000' : '#fff';
+
+        return (
+          <g class={isActive ? 'is-active' : ''}>
+            <text x={padL + labelColW - 4} y={y + rowH / 2 + 5}
+                  text-anchor="end" font-family="Helvetica, Arial, sans-serif"
+                  font-size="12" font-weight="600" fill="#000">
+              {r.label}
+            </text>
+            <path d={path} fill={r.color} />
+            <text x={tipX - 16} y={y + rowH / 2 + 6} text-anchor="end"
+                  font-family="Helvetica, Arial, sans-serif" font-weight="700"
+                  font-size="16" fill={textColor}>
+              {r.letter}
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Left-pointing pointer at the active row */}
+      <g>
+        <path d={`M ${pointerX + pointerTipW} ${pointerY}
+                  H ${pointerX + pointerW}
+                  V ${pointerY + pointerH}
+                  H ${pointerX + pointerTipW}
+                  L ${pointerX} ${pointerY + pointerH / 2} Z`}
+              fill="#000" />
+        <text x={pointerX + pointerTipW + (pointerW - pointerTipW) / 2}
+              y={pointerY + pointerH / 2 + (displayValue ? -2 : 6)}
+              text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+              font-weight="700" font-size={displayValue ? 26 : 30} fill="#fff">
+          {active}
+        </text>
+        {displayValue && (
+          <text x={pointerX + pointerTipW + (pointerW - pointerTipW) / 2}
+                y={pointerY + pointerH / 2 + 22}
+                text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+                font-weight="400" font-size="11" fill="#fff">
+            {displayValue} {unit}
+          </text>
+        )}
+      </g>
+    </svg>
+  ) : (
+    <p class="dpe-diagram__none">{kind} non applicable / non communiqué</p>
+  )}
+</figure>

@@ -57,6 +57,8 @@ type View = {
   prix?: number | null;
   honorairesChargeAcquereur?: boolean;
   visiteVirtuelle?: string;
+  dpeValeurConso?: string;
+  dpeValeurGes?: string;
   isClosed: boolean;
   related: ClosedAnnonce['related'];
 };
@@ -88,6 +90,8 @@ if (active) {
     cuisine: (active as any).cuisine,
     dpeEtiquetteConso: (active as any).dpeEtiquetteConso,
     dpeEtiquetteGes: (active as any).dpeEtiquetteGes,
+    dpeValeurConso: (active as any).dpeValeurConso,
+    dpeValeurGes: (active as any).dpeValeurGes,
     loyer: (active as any).loyer,
     loyerCC: (active as any).loyerCC,
     charges: (active as any).charges,

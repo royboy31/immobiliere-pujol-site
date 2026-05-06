@@ -1,6 +1,6 @@
 ---
 import AnnonceHero from './AnnonceHero.astro';
-import DpeScale from './DpeScale.astro';
+import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
 import Lightbox from './Lightbox.astro';
 import ExpertCard from '../experts/ExpertCard.astro';
@@ -31,6 +31,8 @@ interface View {
   cuisine?: string;
   dpeEtiquetteConso?: string;
   dpeEtiquetteGes?: string;
+  dpeValeurConso?: string;
+  dpeValeurGes?: string;
   loyer?: number | null;
   loyerCC?: number | null;
   charges?: number | null;
@@ -168,28 +170,16 @@ const hasDetails = !!(
         <a class="annonce-perf__cell"
            href="#"
            data-lightbox-group="dpe"
-           data-lightbox-html="#dpe-scale-conso"
-           data-lightbox-caption="Diagnostic de performance énergétique"
-           aria-label="Agrandir le DPE">
-          <span id="dpe-scale-conso"><DpeScale kind="DPE" letter={view.dpeEtiquetteConso} /></span>
-          <span class="annonce-perf__expand" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M3 9 V3 H9 M21 9 V3 H15 M3 15 V21 H9 M21 15 V21 H15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
-            </svg>
-          </span>
+           data-lightbox-html="#dpe-diagram-conso"
+           data-lightbox-caption="Diagnostic de performance énergétique">
+          <span id="dpe-diagram-conso"><DpeDiagram kind="DPE" letter={view.dpeEtiquetteConso} value={view.dpeValeurConso} /></span>
         </a>
         <a class="annonce-perf__cell"
            href="#"
            data-lightbox-group="dpe"
-           data-lightbox-html="#dpe-scale-ges"
-           data-lightbox-caption="Émissions de gaz à effet de serre"
-           aria-label="Agrandir le GES">
-          <span id="dpe-scale-ges"><DpeScale kind="GES" letter={view.dpeEtiquetteGes} /></span>
-          <span class="annonce-perf__expand" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-              <path d="M3 9 V3 H9 M21 9 V3 H15 M3 15 V21 H9 M21 15 V21 H15" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
-            </svg>
-          </span>
+           data-lightbox-html="#dpe-diagram-ges"
+           data-lightbox-caption="Émissions de gaz à effet de serre">
+          <span id="dpe-diagram-ges"><DpeDiagram kind="GES" letter={view.dpeEtiquetteGes} value={view.dpeValeurGes} /></span>
         </a>
       </div>
     </section>
