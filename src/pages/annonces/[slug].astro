@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAnnonceBySlug, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
+import { getAnnonceBySlug, getActiveAnnonces, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
@@ -133,6 +133,72 @@ if (annonce) {
   return Astro.redirect('/annonces/');
 }
 
+// Load active annonces for "Biens similaires" pool
+const activeAnnonces = await getActiveAnnonces(db);
+const pool = activeAnnonces.map(a => ({
+  id: String(a.id),
+  reference: a.ubiflow_reference || a.reference_agence || '',
+  titre: a.titre || '',
+  description: a.descriptif || '',
+  dateSaisie: '',
+  contactAAfficher: a.contact_a_afficher || '',
+  emailAAfficher: a.email_a_afficher || '',
+  telephoneAAfficher: a.telephone_a_afficher || '',
+  type: (a.type_annonce || 'V') as 'V' | 'L',
+  prix: a.prix,
+  prixHorsHonoraires: null,
+  loyer: a.loyer_ht,
+  loyerCC: a.loyer_cc,
+  charges: a.charges,
+  depotGarantie: a.depot_garantie,
+  honorairesChargeAcquereur: false,
+  devise: 'EUR',
+  libelleType: a.type_bien || '',
+  codePostal: a.code_postal || '',
+  adresse: a.adresse || '',
+  ville: a.ville || '',
+  quartier: a.quartier || '',
+  latitude: a.latitude,
+  longitude: a.longitude,
+  surface: a.surface,
+  surfaceHabitable: null,
+  surfaceTerrain: a.surface_terrain,
+  surfaceTerrasse: null,
+  nbPieces: a.nb_pieces,
+  nbChambres: a.nb_chambres,
+  nbSallesDeBain: a.nb_salles_bain,
+  nbWC: a.nb_wc,
+  etage: a.etage || '',
+  nbEtages: a.nb_etages || '',
+  exposition: '',
+  cuisine: '',
+  typeChauffage: a.type_chauffage || '',
+  chauffageEnergie: '',
+  ascenseur: !!a.ascenseur,
+  terrasse: !!a.terrasse,
+  balcon: false,
+  garage: !!a.garage,
+  parking: !!a.parking,
+  cave: !!a.cave,
+  interphone: !!a.interphone,
+  copropriete: false,
+  chargesCopropriete: null,
+  alurNbLots: null,
+  anneeConstruction: '',
+  vueSurMer: false,
+  dpeValeurConso: a.dpe_valeur || '',
+  dpeEtiquetteConso: a.dpe_note || '',
+  dpeEtiquetteGes: a.ges_note || '',
+  dpeEstimationMin: '',
+  dpeEstimationMax: '',
+  dpeValeurGes: '',
+  photos: a.photos,
+  visiteVirtuelle: '',
+  mandatNumero: a.mandat_numero || '',
+  mandatType: a.mandat_type || '',
+  slug: a.slug,
+}));
+
 const pageTitle = `${view.titre} – Immobilière Pujol`;
 const pageDescription = view.description ? view.description.substring(0, 160) : pageTitle;
 
@@ -161,7 +227,7 @@ const listingSchema = buildRealEstateListing({
       contactPhone={view.telephoneAAfficher}
       contactEmail={view.emailAAfficher}
       expert={expert}
-      pool={[]}
+      pool={pool}
       currentSlug={slug ?? ''}
     />
   ) : (
@@ -169,7 +235,7 @@ const listingSchema = buildRealEstateListing({
       view={view}
       expert={expert}
       related={view.related}
-      pool={[]}
+      pool={pool}
       currentSlug={slug ?? ''}
     />
   )}
