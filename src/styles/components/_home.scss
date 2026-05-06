@@ -51,9 +51,9 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 80px;
-  padding: 0 $ds-page-pad 60px;
+  padding: 160px $ds-page-pad 100px;
 
   &__video {
     position: absolute;
