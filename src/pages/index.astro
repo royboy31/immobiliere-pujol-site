@@ -183,15 +183,19 @@ const STAR_PATH =
         <div class="hero-search__bar" id="heroSearch">
           {/* ESTIMATION EN LIGNE */}
           <div class="hero-search__pane is-active" data-pane="estim">
-            <div class="seg first">
-              <span style="font-weight:700;font-size:13px;letter-spacing:.8px">VALEUR LOCATIVE</span>
+            <div class="seg first seg--dropdown" data-dropdown="estim-type">
+              <div class="lbl"><b>VALEUR LOCATIVE</b><span id="estimTypeLabel">Vente, location...</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+              <ul class="seg__menu" id="estimTypeMenu">
+                <li data-value="vente" data-href="/services/demander-une-estimation-de-prix-de-vente/">Estimation prix de vente</li>
+                <li data-value="loyer" data-href="/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/">Estimation de loyer</li>
+              </ul>
             </div>
             <div class="input">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#666" stroke-width="1.6" /><path d="M16 16 L21 21" stroke="#666" stroke-width="1.6" stroke-linecap="round" /></svg>
               <input type="text" id="estimInput" placeholder="Indiquez une adresse, un lieu, un métro..." autocomplete="off" />
             </div>
-            <a href="/services/estimation-prix-de-vente/" class="cta">ESTIMATION EN LIGNE</a>
+            <a href="/services/demander-une-estimation-de-prix-de-vente/" class="cta" id="estimCta">ESTIMATION EN LIGNE</a>
           </div>
 
           {/* VOIR LES BIENS À LOUER */}
@@ -273,6 +277,7 @@ const STAR_PATH =
         const tabs = document.querySelectorAll('#heroTabs .hero-search__pill');
         const panes = document.querySelectorAll('#heroSearch .hero-search__pane');
         const resultsEl = document.getElementById('heroResults')!;
+        const estimCta = document.getElementById('estimCta') as HTMLAnchorElement;
 
         // State
         let louerType = '';
@@ -297,7 +302,10 @@ const STAR_PATH =
 
         // --- Dropdown menus ---
         document.querySelectorAll('.seg--dropdown').forEach((seg) => {
+          // Toggle menu on click
           seg.addEventListener('click', (e) => {
+            // Don't toggle if clicking a menu item (handled below)
+            if ((e.target as HTMLElement).closest('.seg__menu')) return;
             e.stopPropagation();
             const menu = seg.querySelector('.seg__menu') as HTMLElement;
             const wasOpen = menu.classList.contains('is-open');
@@ -305,21 +313,31 @@ const STAR_PATH =
             if (!wasOpen) menu.classList.add('is-open');
           });
 
+          // Menu item selection
           seg.querySelectorAll('.seg__menu li').forEach((li) => {
             li.addEventListener('click', (e) => {
               e.stopPropagation();
-              const value = (li as HTMLElement).dataset.value || '';
+              const el = li as HTMLElement;
+              const value = el.dataset.value || '';
               const text = li.textContent || '';
+              const href = el.dataset.href || '';
               const dropdownId = (seg as HTMLElement).dataset.dropdown || '';
 
-              // Update state and label
-              if (dropdownId === 'louer-type') {
+              // Estimation tab — update CTA link
+              if (dropdownId === 'estim-type') {
+                document.getElementById('estimTypeLabel')!.textContent = text;
+                if (href) estimCta.href = href;
+              }
+              // Louer tab
+              else if (dropdownId === 'louer-type') {
                 louerType = value;
                 document.getElementById('louerTypeLabel')!.textContent = value || 'Appartement, maison...';
               } else if (dropdownId === 'louer-budget') {
                 louerBudget = value;
                 document.getElementById('louerBudgetLabel')!.textContent = value ? text : 'Loyer mensuel';
-              } else if (dropdownId === 'vendre-type') {
+              }
+              // Vendre tab
+              else if (dropdownId === 'vendre-type') {
                 vendreType = value;
                 document.getElementById('vendreTypeLabel')!.textContent = value || 'Appartement, maison...';
               } else if (dropdownId === 'vendre-budget') {
@@ -328,14 +346,20 @@ const STAR_PATH =
               }
 
               closeAllMenus();
-              // Trigger search on selection
+
+              // Trigger search for louer/vendre tabs
               if (dropdownId.startsWith('louer')) doSearch('L');
-              else doSearch('V');
+              else if (dropdownId.startsWith('vendre')) doSearch('V');
             });
           });
         });
 
         // --- Text inputs with debounce ---
+        document.getElementById('estimInput')!.addEventListener('input', () => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => doSearch('all'), 300);
+        });
+
         document.getElementById('louerQuery')!.addEventListener('input', () => {
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => doSearch('L'), 300);
@@ -351,25 +375,33 @@ const STAR_PATH =
         document.getElementById('vendreSearch')!.addEventListener('click', () => doSearch('V'));
 
         // --- AJAX search ---
-        async function doSearch(type: 'L' | 'V') {
+        async function doSearch(type: 'L' | 'V' | 'all') {
           const params = new URLSearchParams();
-          params.set('type', type);
 
-          if (type === 'L') {
-            if (louerType) params.set('type_bien', louerType);
-            if (louerBudget) params.set('budget', louerBudget);
-            const q = (document.getElementById('louerQuery') as HTMLInputElement).value.trim();
+          if (type === 'all') {
+            // Estimation tab — search across all types
+            const q = (document.getElementById('estimInput') as HTMLInputElement).value.trim();
             if (q) params.set('q', q);
+            else { closeResults(); return; }
           } else {
-            if (vendreType) params.set('type_bien', vendreType);
-            if (vendreBudget) params.set('budget', vendreBudget);
-            const q = (document.getElementById('vendreQuery') as HTMLInputElement).value.trim();
-            if (q) params.set('q', q);
+            params.set('type', type);
+            if (type === 'L') {
+              if (louerType) params.set('type_bien', louerType);
+              if (louerBudget) params.set('budget', louerBudget);
+              const q = (document.getElementById('louerQuery') as HTMLInputElement).value.trim();
+              if (q) params.set('q', q);
+            } else {
+              if (vendreType) params.set('type_bien', vendreType);
+              if (vendreBudget) params.set('budget', vendreBudget);
+              const q = (document.getElementById('vendreQuery') as HTMLInputElement).value.trim();
+              if (q) params.set('q', q);
+            }
           }
 
           try {
             const res = await fetch(`/api/search?${params.toString()}`);
             const data = await res.json();
+            console.log('[hero-search]', type, data);
             renderResults(data.results || []);
           } catch (err) {
             console.error('Search failed:', err);
