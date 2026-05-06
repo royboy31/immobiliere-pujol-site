@@ -1,0 +1,242 @@
+---
+import type { KindOption } from '../../lib/annonces-filter';
+
+interface Props {
+  kinds: KindOption[];
+  arrondissements: { code: string; count: number }[];
+  /** Type of bien column the page is locked to: 'V' | 'L' | '' (all). */
+  scope?: 'V' | 'L' | '';
+}
+
+const { kinds, arrondissements, scope = '' } = Astro.props;
+
+const piecesOptions = [
+  { value: '1', label: 'Studio / 1 pièce' },
+  { value: '2', label: '2 pièces' },
+  { value: '3', label: '3 pièces' },
+  { value: '4+', label: '4 pièces et +' },
+];
+
+// Suggest budget caps depending on scope so the placeholder is meaningful.
+const budgetPlaceholder = scope === 'V' ? '500 000 €' : '1500 €/mois';
+---
+
+<form class="annonces-filter" id="annoncesFilter" data-scope={scope} novalidate>
+  <div class="annonces-filter__bar">
+    <label class="annonces-filter__seg">
+      <span class="lbl">TYPE DE BIEN</span>
+      <select name="kind">
+        <option value="">Tous</option>
+        {kinds.map((k) => (
+          <option value={k.value}>{k.label} ({k.count})</option>
+        ))}
+      </select>
+    </label>
+
+    <label class="annonces-filter__seg">
+      <span class="lbl">PIÈCES</span>
+      <select name="pieces">
+        <option value="">Toutes</option>
+        {piecesOptions.map((p) => (
+          <option value={p.value}>{p.label}</option>
+        ))}
+      </select>
+    </label>
+
+    <label class="annonces-filter__seg annonces-filter__seg--budget">
+      <span class="lbl">BUDGET MAX</span>
+      <input
+        type="number"
+        name="budget"
+        inputmode="numeric"
+        min="0"
+        step="100"
+        placeholder={budgetPlaceholder}
+      />
+    </label>
+
+    <button type="button" class="annonces-filter__more" id="filterMoreToggle" aria-expanded="false">
+      <span>Plus de filtres</span>
+      <svg width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+        <path d="M1 1 L6 6 L11 1" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <button type="reset" class="annonces-filter__reset" aria-label="Réinitialiser les filtres">
+      Effacer
+    </button>
+  </div>
+
+  <div class="annonces-filter__panel" id="filterPanel" hidden>
+    {arrondissements.length > 0 && (
+      <fieldset class="annonces-filter__group">
+        <legend>Arrondissements</legend>
+        <div class="annonces-filter__chips">
+          {arrondissements.map((a) => (
+            <label class="annonces-filter__chip">
+              <input type="checkbox" name="cp" value={a.code} />
+              <span>{a.code} <em>({a.count})</em></span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    )}
+
+    <fieldset class="annonces-filter__group">
+      <legend>Critères</legend>
+      <div class="annonces-filter__chips">
+        <label class="annonces-filter__chip">
+          <input type="checkbox" name="amenity" value="parking" />
+          <span>Avec parking / garage</span>
+        </label>
+        <label class="annonces-filter__chip">
+          <input type="checkbox" name="amenity" value="exterieur" />
+          <span>Avec extérieur</span>
+        </label>
+        <label class="annonces-filter__chip">
+          <input type="checkbox" name="amenity" value="meuble" />
+          <span>Meublé</span>
+        </label>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="annonces-filter__status" id="filterStatus" aria-live="polite"></div>
+</form>
+
+<script>
+  (function () {
+    const form = document.getElementById('annoncesFilter') as HTMLFormElement | null;
+    const moreBtn = document.getElementById('filterMoreToggle') as HTMLButtonElement | null;
+    const panel = document.getElementById('filterPanel') as HTMLElement | null;
+    const status = document.getElementById('filterStatus');
+    if (!form) return;
+
+    // Collapsible "Plus de filtres" panel.
+    moreBtn?.addEventListener('click', () => {
+      const open = moreBtn.getAttribute('aria-expanded') === 'true';
+      moreBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      if (panel) panel.hidden = open;
+    });
+
+    // ----- URL <-> form sync -----
+    const params = new URLSearchParams(window.location.search);
+
+    function setSelect(name: string, val: string) {
+      const el = form!.elements.namedItem(name) as HTMLSelectElement | HTMLInputElement | null;
+      if (!el || !val) return;
+      el.value = val;
+    }
+    setSelect('kind', params.get('kind') || '');
+    setSelect('pieces', params.get('pieces') || '');
+    setSelect('budget', params.get('budget') || '');
+
+    const cps = (params.get('cp') || '').split(',').filter(Boolean);
+    form.querySelectorAll<HTMLInputElement>('input[name="cp"]').forEach((cb) => {
+      cb.checked = cps.includes(cb.value);
+    });
+    const amenities = (params.get('amenity') || '').split(',').filter(Boolean);
+    form.querySelectorAll<HTMLInputElement>('input[name="amenity"]').forEach((cb) => {
+      cb.checked = amenities.includes(cb.value);
+    });
+
+    // Open the panel by default when arrondissements / amenities are pre-set
+    // so the user can see what's filtering the list.
+    if ((cps.length > 0 || amenities.length > 0) && moreBtn && panel) {
+      moreBtn.setAttribute('aria-expanded', 'true');
+      panel.hidden = false;
+    }
+
+    // ----- Filtering -----
+    function readState() {
+      const fd = new FormData(form!);
+      const kind = (fd.get('kind') as string) || '';
+      const pieces = (fd.get('pieces') as string) || '';
+      const budgetRaw = (fd.get('budget') as string) || '';
+      const budget = budgetRaw ? Number(budgetRaw) : 0;
+      const checkedCps = Array.from(
+        form!.querySelectorAll<HTMLInputElement>('input[name="cp"]:checked'),
+      ).map((c) => c.value);
+      const checkedAmen = Array.from(
+        form!.querySelectorAll<HTMLInputElement>('input[name="amenity"]:checked'),
+      ).map((c) => c.value);
+      return { kind, pieces, budget, cps: checkedCps, amenities: checkedAmen };
+    }
+
+    function applyFilters() {
+      const { kind, pieces, budget, cps, amenities } = readState();
+      const cards = document.querySelectorAll<HTMLElement>('.annonce-card-item');
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const cardKind = card.dataset.kind || '';
+        const cardPieces = card.dataset.pieces || '';
+        const cardCp = card.dataset.cp || '';
+        const cardPrice = Number(card.dataset.price || 0);
+        const cardParking = card.dataset.parking === '1';
+        const cardExt = card.dataset.exterieur === '1';
+        const cardMeuble = card.dataset.meuble === '1';
+
+        let ok = true;
+        if (kind && cardKind !== kind) ok = false;
+        if (ok && pieces) {
+          if (pieces === '4+') {
+            const n = Number(cardPieces.replace('+', ''));
+            if (!(n >= 4)) ok = false;
+          } else if (cardPieces !== pieces) ok = false;
+        }
+        if (ok && budget && cardPrice > 0 && cardPrice > budget) ok = false;
+        if (ok && cps.length && !cps.includes(cardCp)) ok = false;
+        if (ok && amenities.length) {
+          if (amenities.includes('parking') && !cardParking) ok = false;
+          if (ok && amenities.includes('exterieur') && !cardExt) ok = false;
+          if (ok && amenities.includes('meuble') && !cardMeuble) ok = false;
+        }
+
+        card.classList.toggle('is-hidden', !ok);
+        if (ok) visible++;
+      });
+
+      // Toggle empty state if any.
+      const grid = document.querySelector<HTMLElement>('.annonces-grid');
+      const empty = document.querySelector<HTMLElement>('.annonces-empty--filter');
+      if (grid && empty) {
+        const noResults = visible === 0;
+        empty.hidden = !noResults;
+        grid.hidden = noResults;
+      }
+
+      if (status) {
+        status.textContent = visible === cards.length
+          ? `${cards.length} biens`
+          : `${visible} bien${visible > 1 ? 's' : ''} sur ${cards.length}`;
+      }
+
+      // Sync URL params.
+      const next = new URLSearchParams();
+      if (kind) next.set('kind', kind);
+      if (pieces) next.set('pieces', pieces);
+      if (budget) next.set('budget', String(budget));
+      if (cps.length) next.set('cp', cps.join(','));
+      if (amenities.length) next.set('amenity', amenities.join(','));
+      const qs = next.toString();
+      const newUrl = window.location.pathname + (qs ? `?${qs}` : '');
+      window.history.replaceState({}, '', newUrl);
+    }
+
+    form.addEventListener('change', applyFilters);
+    form.addEventListener('input', (e) => {
+      // Only react live on text inputs (budget); selects fire 'change'.
+      if ((e.target as HTMLElement).tagName === 'INPUT' &&
+          (e.target as HTMLInputElement).type === 'number') {
+        applyFilters();
+      }
+    });
+    form.addEventListener('reset', () => {
+      // Run after the native reset so values are cleared first.
+      setTimeout(applyFilters, 0);
+    });
+
+    applyFilters();
+  })();
+</script>

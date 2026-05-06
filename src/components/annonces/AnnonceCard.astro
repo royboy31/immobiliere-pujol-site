@@ -1,0 +1,147 @@
+---
+import type { UbiflowAnnonce } from '../../lib/ubiflow';
+import { formatPrice } from '../../lib/ubiflow';
+import {
+  classifyKind,
+  filterPrice,
+  hasExterieur,
+  hasParking,
+  isMeuble,
+  piecesBucket,
+} from '../../lib/annonces-filter';
+
+interface Props {
+  annonce: UbiflowAnnonce;
+}
+
+const { annonce } = Astro.props;
+const isVente = annonce.type === 'V';
+
+// Show up to 4 photos in the in-card carousel.
+const slides = (annonce.photos ?? []).slice(0, 4);
+
+const title = annonce.titre || annonce.libelleType || `${isVente ? 'Bien' : 'Bien'} à ${isVente ? 'vendre' : 'louer'}`;
+const price = formatPrice(annonce);
+const href = `/annonces/${annonce.slug}/`;
+
+const pills: string[] = [];
+if (annonce.nbPieces) pills.push(`T${annonce.nbPieces}`);
+if (annonce.surface) pills.push(`${Math.round(annonce.surface)} m²`);
+if (annonce.nbChambres) pills.push(`${annonce.nbChambres} ch.`);
+
+const cpVille = `${annonce.codePostal || ''} ${annonce.ville || ''}`.trim();
+
+// Filter metadata used by the FilterBar client script.
+const kind = classifyKind(annonce.libelleType);
+const pieces = piecesBucket(annonce.nbPieces ?? null);
+const price4Filter = filterPrice(annonce);
+---
+
+<article
+  class={`listing-card ${isVente ? '' : 'listing-card--location'} annonce-card-item`}
+  data-type={annonce.type}
+  data-kind={kind}
+  data-cp={annonce.codePostal || ''}
+  data-pieces={pieces}
+  data-price={price4Filter}
+  data-parking={hasParking(annonce) ? '1' : '0'}
+  data-exterieur={hasExterieur(annonce) ? '1' : '0'}
+  data-meuble={isMeuble(annonce) ? '1' : '0'}
+>
+  <div class="lc-photos" data-lc-photos>
+    <a class="lc-photos__link" href={href} aria-label={title}>
+      {slides.length > 0 ? (
+        <ul class="lc-track" data-lc-track>
+          {slides.map((p, i) => (
+            <li
+              class="lc-slide"
+              style={`background-image:url('${p}')`}
+              role="img"
+              aria-label={`${title} – photo ${i + 1}`}
+            ></li>
+          ))}
+        </ul>
+      ) : (
+        <div class="lc-empty">Pas de photo</div>
+      )}
+    </a>
+
+    {slides.length > 1 && (
+      <>
+        <button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev aria-label="Photo précédente">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+          </svg>
+        </button>
+        <button class="lc-arrow lc-arrow--next" type="button" data-lc-next aria-label="Photo suivante">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+          </svg>
+        </button>
+        <div class="lc-dots" data-lc-dots>
+          {slides.map((_, i) => (
+            <span class={`lc-dot ${i === 0 ? 'is-active' : ''}`}></span>
+          ))}
+        </div>
+      </>
+    )}
+
+    <span class={`badge ${isVente ? 'badge--vente' : ''}`}>{isVente ? 'VENTE' : 'LOCATION'}</span>
+  </div>
+
+  <a class="body" href={href}>
+    <div class="title">{title}</div>
+    <div class="price">{price}</div>
+    {pills.length > 0 && (
+      <div class="meta">
+        {pills.map((p) => <span class="pill-tag">{p}</span>)}
+      </div>
+    )}
+    {(annonce.quartier || cpVille) && (
+      <div class="loc">
+        {annonce.quartier && <span class="a">{annonce.quartier}</span>}
+        {cpVille && <span>{cpVille}</span>}
+      </div>
+    )}
+  </a>
+</article>
+
+<script>
+  // One handler wires every .lc-photos on the page (Astro hoists the script).
+  document.querySelectorAll<HTMLElement>('[data-lc-photos]').forEach((root) => {
+    if (root.dataset.lcWired === '1') return;
+    root.dataset.lcWired = '1';
+
+    const track = root.querySelector<HTMLElement>('[data-lc-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-lc-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-lc-next]');
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-lc-dots] .lc-dot'));
+    if (!track) return;
+
+    function step(direction: 1 | -1) {
+      track!.scrollBy({ left: direction * track!.clientWidth, behavior: 'smooth' });
+    }
+
+    prev?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      step(-1);
+    });
+    next?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      step(1);
+    });
+
+    if (dots.length) {
+      let raf = 0;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const i = Math.round(track.scrollLeft / track.clientWidth);
+          dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
+        });
+      }, { passive: true });
+    }
+  });
+</script>

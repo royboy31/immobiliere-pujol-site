@@ -3,9 +3,10 @@ export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
 import { findExpertByEmail } from '../../lib/experts';
-import ExpertCard from '../../components/experts/ExpertCard.astro';
-import { getClosedAnnonce, formatClosedPrice, typeLabel, type ClosedAnnonce } from '../../lib/closed-annonces';
+import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
+import AnnonceLive from '../../components/annonces/AnnonceLive.astro';
+import AnnonceClosed from '../../components/annonces/AnnonceClosed.astro';
 
 const { slug } = Astro.params;
 
@@ -27,7 +28,6 @@ if (!active && !closed) {
   return Astro.redirect('/annonces/');
 }
 
-// Normalize to a common render model.
 type View = {
   titre: string;
   description: string;
@@ -56,9 +56,9 @@ type View = {
   depotGarantie?: number | null;
   prix?: number | null;
   honorairesChargeAcquereur?: boolean;
+  visiteVirtuelle?: string;
   isClosed: boolean;
   related: ClosedAnnonce['related'];
-  expertEmail?: string | null;
 };
 
 let view: View;
@@ -94,9 +94,9 @@ if (active) {
     depotGarantie: (active as any).depotGarantie,
     prix: active.prix,
     honorairesChargeAcquereur: (active as any).honorairesChargeAcquereur,
+    visiteVirtuelle: (active as any).visiteVirtuelle,
     isClosed: false,
     related: [],
-    expertEmail: active.emailAAfficher,
   };
 } else {
   const c = closed!;
@@ -134,7 +134,6 @@ if (active) {
     prix: c.prix ?? null,
     isClosed: true,
     related: c.related ?? [],
-    expertEmail: c.emailAAfficher,
   };
 }
 
@@ -159,269 +158,23 @@ const listingSchema = buildRealEstateListing({
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]}>
-  <article class="annonce-single">
-    {view.isClosed && (
-      <div class="annonce-single__closed-banner">
-        <p>
-          <strong>{typeLabel({ typeAnnonce: view.type } as ClosedAnnonce)} clôturée</strong> — cette annonce n'est plus disponible.
-          <a href="/annonces/">Voir nos annonces actuelles</a>.
-        </p>
-      </div>
-    )}
-
-    <!-- Photo gallery -->
-    <section class="annonce-single__gallery">
-      {view.photos.length > 0 ? (
-        <div class="gallery">
-          <div class="gallery__main">
-            <img src={view.photos[0]} alt={view.titre} id="main-photo" loading="eager" />
-          </div>
-          {view.photos.length > 1 && (
-            <div class="gallery__thumbs">
-              {view.photos.map((photo, i) => (
-                <button class="gallery__thumb" data-index={i} data-src={photo}>
-                  <img src={photo} alt={`Photo ${i + 1}`} loading="lazy" width="120" height="80" />
-                </button>
-              ))}
-            </div>
-          )}
-          <p class="gallery__count">{view.photos.length} photo{view.photos.length > 1 ? 's' : ''}</p>
-        </div>
-      ) : (
-        <div class="gallery__empty">Pas de photos disponibles</div>
-      )}
-    </section>
-
-    <!-- Main info -->
-    <section class="annonce-single__info">
-      <div class="annonce-single__header">
-        <h1>{view.titre}</h1>
-        <div class="annonce-single__price-block">
-          {view.priceDisplay && <span class="annonce-single__price">{view.priceDisplay}</span>}
-          <span class:list={['annonce-single__badge', view.type === 'V' ? 'badge--vente' : 'badge--location']}>
-            {view.type === 'V' ? 'Vente' : 'Location'}
-          </span>
-        </div>
-      </div>
-
-      <div class="annonce-single__location">
-        <p>{view.adresse && `${view.adresse}, `}{view.codePostal} {view.ville}</p>
-        {view.quartier && <p>Quartier : {view.quartier}</p>}
-      </div>
-
-      <!-- Key figures -->
-      <div class="annonce-single__key-figures">
-        {view.surface && (
-          <div class="key-figure">
-            <span class="key-figure__value">{view.surface} m²</span>
-            <span class="key-figure__label">Surface</span>
-          </div>
-        )}
-        {view.nbPieces && (
-          <div class="key-figure">
-            <span class="key-figure__value">{view.nbPieces}</span>
-            <span class="key-figure__label">Pièce{view.nbPieces > 1 ? 's' : ''}</span>
-          </div>
-        )}
-        {view.nbChambres && (
-          <div class="key-figure">
-            <span class="key-figure__value">{view.nbChambres}</span>
-            <span class="key-figure__label">Chambre{view.nbChambres > 1 ? 's' : ''}</span>
-          </div>
-        )}
-        {view.etage && (
-          <div class="key-figure">
-            <span class="key-figure__value">{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</span>
-            <span class="key-figure__label">Étage</span>
-          </div>
-        )}
-      </div>
-    </section>
-
-    <!-- Description -->
-    {view.description && (
-      <section class="annonce-single__description">
-        <h2>Description</h2>
-        <div class="description-text" set:html={view.description.replace(/\n/g, '<br/>')}></div>
-      </section>
-    )}
-
-    <!-- Property details -->
-    <section class="annonce-single__details">
-      <h2>Caractéristiques</h2>
-      <div class="details-grid">
-        <div class="details-group">
-          <h3>Général</h3>
-          <dl>
-            {view.surface && <><dt>Surface</dt><dd>{view.surface} m²</dd></>}
-            {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
-            {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
-            {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
-            {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
-            {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
-          </dl>
-        </div>
-
-        {view.typeChauffage && (
-          <div class="details-group">
-            <h3>Chauffage</h3>
-            <dl>
-              <dt>Type</dt><dd>{view.typeChauffage}</dd>
-            </dl>
-          </div>
-        )}
-
-        {view.type === 'L' && (
-          <div class="details-group">
-            <h3>Location</h3>
-            <dl>
-              {view.loyer && <><dt>Loyer HC</dt><dd>{view.loyer} €</dd></>}
-              {view.loyerCC && <><dt>Loyer CC</dt><dd>{view.loyerCC} €/mois</dd></>}
-              {view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
-              {view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
-            </dl>
-          </div>
-        )}
-
-        {view.type === 'V' && view.prix && (
-          <div class="details-group">
-            <h3>Vente</h3>
-            <dl>
-              <dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd>
-              {view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
-            </dl>
-          </div>
-        )}
-      </div>
-    </section>
-
-    <!-- DPE -->
-    {(view.dpeEtiquetteConso || view.dpeEtiquetteGes) && (
-      <section class="annonce-single__dpe">
-        <h2>Diagnostics de performance</h2>
-        <div class="dpe-badges">
-          {view.dpeEtiquetteConso && (
-            <div class="dpe-badge">
-              <span class="dpe-badge__label">DPE</span>
-              <span class:list={['dpe-badge__value', `dpe-${view.dpeEtiquetteConso.toLowerCase()}`]}>
-                {view.dpeEtiquetteConso}
-              </span>
-            </div>
-          )}
-          {view.dpeEtiquetteGes && (
-            <div class="dpe-badge">
-              <span class="dpe-badge__label">GES</span>
-              <span class:list={['dpe-badge__value', `ges-${view.dpeEtiquetteGes.toLowerCase()}`]}>
-                {view.dpeEtiquetteGes}
-              </span>
-            </div>
-          )}
-        </div>
-      </section>
-    )}
-
-    {!view.isClosed && (
-      <section class="annonce-single__contact">
-        <h2>Intéressé par ce bien ?</h2>
-        <div class="contact-info">
-          {active!.contactAAfficher && !expert && <p><strong>{active!.contactAAfficher}</strong></p>}
-          {active!.telephoneAAfficher && (
-            <a href={`tel:${active!.telephoneAAfficher.replace(/\s/g, '')}`} class="btn btn--primary">
-              Appeler : {active!.telephoneAAfficher}
-            </a>
-          )}
-          {active!.emailAAfficher && (
-            <a href={`mailto:${active!.emailAAfficher}?subject=Annonce ${view.reference} - ${view.titre}`} class="btn btn--secondary">
-              Envoyer un email
-            </a>
-          )}
-        </div>
-        <p class="contact-ref">Référence : {view.reference}</p>
-      </section>
-    )}
-
-    {view.isClosed && (
-      <section class="annonce-single__closed-cta">
-        <h2>Cette annonce est clôturée</h2>
-        <p>Consultez nos annonces disponibles ou contactez-nous pour un bien similaire.</p>
-        <div class="closed-cta__buttons">
-          <a href="/annonces/" class="btn btn--primary">Voir les annonces actuelles</a>
-          <a href="/contact-immobiliere-pujol/" class="btn btn--secondary">Nous contacter</a>
-        </div>
-        <p class="contact-ref">Référence : {view.reference}</p>
-      </section>
-    )}
-
-    {expert && <ExpertCard expert={expert} />}
-
-    {view.isClosed && view.related && view.related.length > 0 && (
-      <section class="annonce-single__related">
-        <h2>Autres biens dans le {view.codePostal || 'secteur'}</h2>
-        <ul class="related-links">
-          {view.related.map(r => (
-            <li>
-              <a href={`/annonces/${r.slug}/`}>
-                {r.type === 'V' ? 'Vente' : 'Location'} — {r.title}
-                {r.prix ? ` — ${new Intl.NumberFormat('fr-FR').format(r.prix)} €` : ''}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <nav class="annonce-single__nav">
-      <a href="/annonces/">← Retour aux annonces</a>
-      {view.type === 'L' && <a href="/annonces/locations/">Voir toutes les locations</a>}
-      {view.type === 'V' && <a href="/annonces/ventes/">Voir toutes les ventes</a>}
-    </nav>
-  </article>
+  {active ? (
+    <AnnonceLive
+      view={view}
+      contactName={active.contactAAfficher}
+      contactPhone={active.telephoneAAfficher}
+      contactEmail={active.emailAAfficher}
+      expert={expert}
+      pool={annonces}
+      currentSlug={slug ?? ''}
+    />
+  ) : (
+    <AnnonceClosed
+      view={view}
+      expert={expert}
+      related={view.related}
+      pool={annonces}
+      currentSlug={slug ?? ''}
+    />
+  )}
 </BaseLayout>
-
-<style>
-  .annonce-single__closed-banner {
-    background: #fef3c7;
-    border-left: 4px solid #d97706;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    border-radius: 4px;
-  }
-  .annonce-single__closed-banner p { margin: 0; }
-  .annonce-single__closed-banner a { margin-left: 0.5rem; }
-
-  .annonce-single__closed-cta {
-    background: #f3f4f6;
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin: 2rem 0;
-    text-align: center;
-  }
-  .closed-cta__buttons {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    margin: 1rem 0;
-    flex-wrap: wrap;
-  }
-
-  .annonce-single__related { margin-top: 2.5rem; }
-  .related-links {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 0.5rem 1rem;
-  }
-  .related-links li { margin: 0; }
-  .related-links a { font-size: 0.9rem; line-height: 1.4; }
-</style>
-
-<script>
-  document.querySelectorAll('.gallery__thumb').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const src = (btn as HTMLElement).dataset.src;
-      const mainPhoto = document.getElementById('main-photo') as HTMLImageElement;
-      if (src && mainPhoto) mainPhoto.src = src;
-    });
-  });
-</script>

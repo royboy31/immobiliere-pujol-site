@@ -1,0 +1,273 @@
+---
+// 2-column hero.
+// LEFT: main media (video if present, else lead photo) → thumbnail strip → <slot name="left-below" /> (description).
+// RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
+
+interface View {
+  titre: string;
+  type: 'V' | 'L' | string;
+  reference: string;
+  priceDisplay: string;
+  photos: string[];
+  visiteVirtuelle?: string;
+  adresse?: string;
+  codePostal?: string;
+  ville?: string;
+  quartier?: string;
+  surface?: number | null;
+  nbPieces?: number | null;
+  nbChambres?: number | null;
+  nbSallesDeBain?: number | null;
+  etage?: string | number;
+  nbEtages?: string | number;
+  isClosed: boolean;
+}
+
+interface Props {
+  view: View;
+}
+
+const { view } = Astro.props;
+const isLocation = view.type === 'L';
+const priceModifier = isLocation ? 'annonce-hero__price--location' : '';
+const badgeModifier = view.isClosed
+  ? 'annonce-hero__badge--closed'
+  : isLocation
+    ? 'annonce-hero__badge--location'
+    : '';
+
+const photos = view.photos ?? [];
+const lead = photos[0];
+const thumbs = photos.slice(1, 5); // up to 4 thumbs visible
+const remaining = Math.max(0, photos.length - 5);
+
+// YouTube embed detection — extracts the 11-char ID from common URL patterns.
+const tour = (view.visiteVirtuelle || '').trim();
+const ytMatch = tour.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|watch\?v=))([A-Za-z0-9_-]{11})/);
+const ytId = ytMatch?.[1];
+const hasInlineVideo = !!ytId;
+const hasExternalTour = !!tour && !hasInlineVideo;
+---
+
+<section class="annonce-hero">
+  <div class="annonce-hero__left">
+    <div class="annonce-hero__main">
+      {hasInlineVideo ? (
+        <iframe
+          class="annonce-hero__iframe"
+          src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0`}
+          title={`${view.titre} – visite virtuelle`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      ) : photos.length > 0 ? (
+        <div class="annonce-hero__slider lc-photos lc-photos--hero" data-lc-photos>
+          <ul class="lc-track" data-lc-track>
+            {photos.map((p, i) => (
+              <li
+                class="lc-slide"
+                style={`background-image:url('${p}')`}
+                role="img"
+                aria-label={`${view.titre} – photo ${i + 1}`}
+              ></li>
+            ))}
+          </ul>
+
+          {photos.length > 1 && (
+            <>
+              <button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev aria-label="Photo précédente">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+                </svg>
+              </button>
+              <button class="lc-arrow lc-arrow--next" type="button" data-lc-next aria-label="Photo suivante">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+                </svg>
+              </button>
+              <div class="lc-dots" data-lc-dots>
+                {photos.map((_, i) => (
+                  <span class={`lc-dot ${i === 0 ? 'is-active' : ''}`}></span>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        <div class="annonce-hero__main-empty">Pas de photo disponible</div>
+      )}
+
+      {hasExternalTour && (
+        <a class="annonce-hero__tour-cta" href={tour} target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 4 a8 8 0 1 0 0 16 a8 8 0 0 0 0 -16 z M12 8 a4 4 0 1 1 0 8 a4 4 0 0 1 0 -8 z" />
+          </svg>
+          VISITE VIRTUELLE
+        </a>
+      )}
+
+      {photos.length > 1 && (
+        <span class="annonce-hero__photos-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" fill="none" />
+            <circle cx="9" cy="11" r="1.5" fill="currentColor" />
+            <path d="M3 17 L9 12 L13 16 L17 13 L21 17" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {photos.length} photos
+        </span>
+      )}
+
+      {/* Hidden anchor for the lead photo so the lightbox group still starts at photo 1
+          when the user clicks any thumbnail. */}
+      {lead && (
+        <a
+          class="annonce-hero__hidden"
+          href={lead}
+          data-lightbox-group="annonce"
+          data-lightbox-src={lead}
+          data-lightbox-caption={`${view.titre} – photo 1`}
+          aria-hidden="true"
+        ></a>
+      )}
+    </div>
+
+    {thumbs.length > 0 && (
+      <ul class="annonce-hero__thumbs">
+        {thumbs.map((p, i) => {
+          const idx = i + 1; // photos[1..4]
+          const isLast = i === thumbs.length - 1;
+          const showMore = isLast && remaining > 0;
+          return (
+            <li>
+              <a
+                class={`annonce-hero__thumb ${showMore ? 'annonce-hero__thumb--more' : ''}`}
+                href={p}
+                data-lightbox-group="annonce"
+                data-lightbox-src={p}
+                data-lightbox-caption={`${view.titre} – photo ${idx + 1}`}
+                aria-label={`Photo ${idx + 1}`}
+                style={`background-image:url('${p}')`}
+                data-more={showMore ? `+${remaining}` : undefined}
+              ></a>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+
+    {/* Hidden anchors so the lightbox group still includes photos beyond the visible 5. */}
+    {photos.slice(5).map((p, i) => (
+      <a
+        class="annonce-hero__hidden"
+        href={p}
+        data-lightbox-group="annonce"
+        data-lightbox-src={p}
+        data-lightbox-caption={`${view.titre} – photo ${i + 6}`}
+        aria-hidden="true"
+      ></a>
+    ))}
+
+    <slot name="left-below" />
+  </div>
+
+  <aside class="annonce-hero__right">
+    <div class="annonce-hero__info">
+      <div class="annonce-hero__head-row">
+        <span class={`annonce-hero__badge ${badgeModifier}`}>
+          {view.isClosed ? 'Bien clôturé' : (isLocation ? 'Location' : 'Vente')}
+        </span>
+        <span class="annonce-hero__ref">Réf. {view.reference}</span>
+      </div>
+
+      <h1 class="annonce-hero__title">{view.titre}</h1>
+
+      <p class="annonce-hero__loc">
+        {view.adresse && `${view.adresse}, `}{view.codePostal} {view.ville}
+        {view.quartier && <> — {view.quartier}</>}
+      </p>
+
+      {view.priceDisplay && (
+        <div class={`annonce-hero__price ${priceModifier}`}>{view.priceDisplay}</div>
+      )}
+
+      <ul class="annonce-hero__stats">
+        {view.surface && (
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 3 H21 V21 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+              <path d="M3 9 H7 M3 15 H7 M9 3 V7 M15 3 V7 M21 9 H17 M21 15 H17 M9 21 V17 M15 21 V17" stroke="currentColor" stroke-width="1.2" />
+            </svg>
+            <strong>{view.surface}</strong> m²
+          </li>
+        )}
+        {view.nbPieces && (
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 11 L12 4 L21 11 V20 H14 V14 H10 V20 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" />
+            </svg>
+            <strong>{view.nbPieces}</strong> pièce{view.nbPieces > 1 ? 's' : ''}
+          </li>
+        )}
+        {view.nbChambres && (
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 18 V11 a3 3 0 0 1 3 -3 H10 a3 3 0 0 1 3 3 V18 M13 11 a3 3 0 0 1 3 -3 H18 a3 3 0 0 1 3 3 V18 M3 18 H21 V21" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+            </svg>
+            <strong>{view.nbChambres}</strong> chambre{view.nbChambres > 1 ? 's' : ''}
+          </li>
+        )}
+        {view.etage !== undefined && view.etage !== '' && view.etage !== null && (
+          <li>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 20 H10 V14 H16 V8 H22 M2 20 V4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            </svg>
+            Étage <strong>{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</strong>
+          </li>
+        )}
+      </ul>
+    </div>
+
+    <slot name="action" />
+    <slot name="action-below" />
+  </aside>
+</section>
+
+<script>
+  // The "X photos" pill opens the lightbox starting from the first photo.
+  document.querySelectorAll<HTMLButtonElement>('[data-lightbox-open-first]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const first = document.querySelector<HTMLElement>('[data-lightbox-group="annonce"]');
+      first?.click();
+    });
+  });
+
+  // Carousel wiring for any .lc-photos on the page (hero + listing cards).
+  // Per-element flag keeps it idempotent if AnnonceCard's hoisted script also runs.
+  document.querySelectorAll<HTMLElement>('[data-lc-photos]').forEach((root) => {
+    if (root.dataset.lcWired === '1') return;
+    root.dataset.lcWired = '1';
+
+    const track = root.querySelector<HTMLElement>('[data-lc-track]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-lc-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-lc-next]');
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-lc-dots] .lc-dot'));
+    if (!track) return;
+
+    const step = (d: 1 | -1) => track.scrollBy({ left: d * track.clientWidth, behavior: 'smooth' });
+
+    prev?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); step(-1); });
+    next?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); step(1); });
+
+    if (dots.length) {
+      let raf = 0;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const i = Math.round(track.scrollLeft / track.clientWidth);
+          dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
+        });
+      }, { passive: true });
+    }
+  });
+</script>

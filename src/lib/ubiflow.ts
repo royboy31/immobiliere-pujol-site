@@ -63,6 +63,7 @@ export interface UbiflowAnnonce {
   dpeEstimationMin: string;
   dpeEstimationMax: string;
   photos: string[];
+  visiteVirtuelle: string;
   mandatNumero: string;
   mandatType: string;
   slug: string;
@@ -175,6 +176,7 @@ function parseAnnonce(raw: any): UbiflowAnnonce {
     dpeEstimationMin: str(diagnostics.dpe_estimation_min),
     dpeEstimationMax: str(diagnostics.dpe_estimation_max),
     photos,
+    visiteVirtuelle: str(raw.visite_virtuelle),
     mandatNumero: str(prestation.mandat_numero),
     mandatType: str(prestation.mandat_type),
     slug: '',

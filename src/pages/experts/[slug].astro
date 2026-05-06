@@ -1,13 +1,8 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces, formatPrice } from '../../lib/ubiflow';
-
-// Switched from prerender to SSR so we can pull the live Ubiflow feed for each
-// expert and merge with the static closed-listings index built at compile time.
-// NOTE: do NOT use getCollection('experts') here — it pulls the entire
-// content data layer (annonces included) into the Worker bundle and blows the
-// 3 MiB limit. Use import.meta.glob scoped to just the experts directory.
+import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
+import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 
 type ExpertData = {
   title: string;
@@ -36,37 +31,23 @@ const expertEmail = (expert.email || '')
   .trim()
   .replace(/!+$/, '')
   .toLowerCase();
-const displayName = expert.title.split('|').pop()?.trim() || expert.title;
+const displayName = expert.title.split('|').pop()?.split('–')[0]?.trim() || expert.title;
+const nameParts = displayName.split(/\s+/);
+const firstName = nameParts[0] || displayName;
+const lastName = nameParts.slice(1).join(' ');
 
-// Active annonces: fetch live feed and match by emailAAfficher
-let activeListings: Array<{
-  slug: string; titre: string; type: string; prix: string;
-  photo: string | null; surface: number | null; nbPieces: number | null;
-  codePostal: string; ville: string;
-}> = [];
+// Active annonces — full UbiflowAnnonce shape so we can reuse <AnnonceCard>.
+let activeAnnonces: Awaited<ReturnType<typeof fetchUbiflowAnnonces>> = [];
 try {
   const annonces = await fetchUbiflowAnnonces();
-  activeListings = annonces
-    .filter((a) => {
-      const em = (a.emailAAfficher || '').split('|')[0].trim().replace(/!+$/, '').toLowerCase();
-      return expertEmail && em === expertEmail;
-    })
-    .map((a) => ({
-      slug: a.slug,
-      titre: a.titre || `${a.libelleType || ''} ${a.codePostal || ''}`.trim(),
-      type: a.type,
-      prix: formatPrice(a),
-      photo: a.photos?.[0] ?? null,
-      surface: (a as any).surface ?? null,
-      nbPieces: (a as any).nbPieces ?? null,
-      codePostal: a.codePostal ?? '',
-      ville: a.ville ?? '',
-    }));
+  activeAnnonces = annonces.filter((a) => {
+    const em = (a.emailAAfficher || '').split('|')[0].trim().replace(/!+$/, '').toLowerCase();
+    return expertEmail && em === expertEmail;
+  });
 } catch (e) {
   // Feed unavailable — continue with just the historical listings.
 }
 
-// Historical listings from the build-time index (via CF ASSETS binding).
 let historyTotalCount = 0;
 let historyListings: Array<{
   slug: string; title: string; type: string; status: string;
@@ -89,184 +70,213 @@ try {
   }
 } catch (e) {}
 
-// Filter out any slugs that are in the active list so we don't duplicate.
-const activeSlugs = new Set(activeListings.map((a) => a.slug));
+const activeSlugs = new Set(activeAnnonces.map((a) => a.slug));
 const closedOnly = historyListings.filter((l) => !activeSlugs.has(l.slug));
+const closedVisible = closedOnly.slice(0, 12);
 
-const pageTitle = `${displayName} – Immobilière Pujol`;
 const pageDesc = expert.description
-  ? expert.description.replace(/<[^>]+>/g, '').slice(0, 160)
+  ? expert.description.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160)
   : `Profil de ${displayName} chez Immobilière Pujol. Biens gérés, actuellement disponibles et historique.`;
+const pageTitle = `${displayName} – Immobilière Pujol`;
+
+const phoneClean = (expert.phone || '').replace(/\s/g, '');
+const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
+const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc}>
-  <article class="expert-single">
-    <div class="expert-single__header">
-      {expert.photo && (
-        <img
-          src={expert.photo}
-          alt={displayName}
-          class="expert-single__photo"
-          loading="lazy"
-          width="200"
-          height="260"
-        />
-      )}
-      <div class="expert-single__info">
-        <h1>{displayName}</h1>
-        {expert.fonction && <p class="expert-single__role">{expert.fonction}</p>}
-        {expert.phone && (
-          <a href={`tel:${expert.phone.replace(/\s/g, '')}`} class="expert-single__phone">
-            {expert.phone}
-          </a>
+  <article class="expert-page">
+    <a href="/experts/" class="annonce-back annonce-back--floating">
+      <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+        <path d="M21 7 H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Retour aux experts
+    </a>
+
+    {/* 2-col body — title + description on the left, sticky info card on the right */}
+    <section class="expert-body">
+      <div class="expert-body__main">
+        <header class="expert-body__title">
+          <span class="expert-body__overline">Votre conseiller</span>
+          <h1 class="expert-body__name">
+            {firstName}{lastName && <> <b>{lastName}</b></>}
+          </h1>
+          {expert.fonction && (
+            <span class="expert-body__role-pill">{expert.fonction}</span>
+          )}
+        </header>
+
+        {expert.description ? (
+          <>
+            <h2 class="expert-body__heading">À propos de <b>{firstName}</b></h2>
+            <div class="expert-bio-content" set:html={expert.description}></div>
+          </>
+        ) : (
+          <p class="expert-body__empty">Pas de description disponible pour cet expert.</p>
         )}
-        {expert.email && (
-          <a href={`mailto:${expert.email}`} class="expert-single__email">
-            {expert.email}
-          </a>
-        )}
-        <div class="expert-single__social">
-          {expert.linkedin && <a href={expert.linkedin} target="_blank" rel="noopener">LinkedIn</a>}
-          {expert.facebook && <a href={expert.facebook} target="_blank" rel="noopener">Facebook</a>}
-          {expert.instagram && <a href={expert.instagram} target="_blank" rel="noopener">Instagram</a>}
-        </div>
       </div>
-    </div>
 
-    {expert.description && (
-      <div class="expert-single__description" set:html={expert.description} />
-    )}
+      <aside class="expert-body__side">
+        <div class="expert-info-card">
+          <div class="expert-info-card__photo-wrap">
+            {expert.photo ? (
+              <img src={expert.photo} alt={displayName} class="expert-info-card__photo" loading="eager" />
+            ) : (
+              <div class="expert-info-card__photo expert-info-card__photo--empty">{firstName.charAt(0)}</div>
+            )}
+          </div>
 
-    {activeListings.length > 0 && (
-      <section class="expert-single__listings expert-single__listings--active">
-        <h2>Biens actuellement disponibles ({activeListings.length})</h2>
-        <div class="listings-grid">
-          {activeListings.map((l) => (
-            <a href={`/annonces/${l.slug}/`} class="listing-card">
-              {l.photo ? (
-                <img src={l.photo} alt={l.titre} loading="lazy" width="280" height="190" />
-              ) : (
-                <div class="listing-card__noimg">Pas de photo</div>
+          <div class="expert-info-card__body">
+            <h3 class="expert-info-card__name">
+              {firstName}{lastName && <> <b>{lastName}</b></>}
+            </h3>
+            {expert.fonction && <p class="expert-info-card__role">{expert.fonction}</p>}
+
+            <div class="expert-info-card__ctas">
+              {expert.phone && (
+                <a href={`tel:${phoneClean}`} class="btn-pill btn-pill--olive">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 4 L9 4 L11 9 L8 11 a12 12 0 0 0 5 5 L15 13 L20 15 L20 19 a1 1 0 0 1 -1 1 A16 16 0 0 1 4 5 a1 1 0 0 1 1 -1 z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+                  </svg>
+                  APPELER {expert.phone}
+                </a>
               )}
-              <div class="listing-card__body">
-                <span class:list={['listing-card__tag', l.type === 'V' ? 'tag--vente' : 'tag--loc']}>
-                  {l.type === 'V' ? 'Vente' : 'Location'}
-                </span>
-                <h3>{l.titre}</h3>
-                <p class="listing-card__price">{l.prix}</p>
-                <p class="listing-card__meta">
-                  {l.surface && <span>{l.surface} m²</span>}
-                  {l.nbPieces && <span>{l.nbPieces} pièce{l.nbPieces > 1 ? 's' : ''}</span>}
-                  {l.codePostal && <span>{l.codePostal} {l.ville}</span>}
-                </p>
+              {expert.email && (
+                <a href={mailtoLink} class="btn-pill btn-pill--ghost">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" fill="none" />
+                    <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  ENVOYER UN EMAIL
+                </a>
+              )}
+            </div>
+
+            {hasSocial && (
+              <div class="expert-info-card__social">
+                <span class="expert-info-card__social-label">Suivez {firstName}</span>
+                <div class="expert-info-card__social-row">
+                  {expert.linkedin && (
+                    <a href={expert.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4 H8 V20 H4 z M14 9 a5 5 0 0 1 5 5 V20 H15 V14 a1 1 0 0 0 -2 0 V20 H9 V9 H13 V11 a3 3 0 0 1 3 -2 z M6 7 a2 2 0 1 0 0 -4 a2 2 0 0 0 0 4 z" /></svg>
+                    </a>
+                  )}
+                  {expert.facebook && (
+                    <a href={expert.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 4 H17 V8 H14 a1 1 0 0 0 -1 1 V11 H17 L16 15 H13 V21 H9 V15 H7 V11 H9 V9 a5 5 0 0 1 5 -5 z" /></svg>
+                    </a>
+                  )}
+                  {expert.instagram && (
+                    <a href={expert.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+                    </a>
+                  )}
+                </div>
               </div>
-            </a>
-          ))}
+            )}
+          </div>
+        </div>
+
+        {/* Quick stats card under the photo card */}
+        {(activeAnnonces.length > 0 || historyTotalCount > 0) && (
+          <div class="expert-quickstats">
+            <div class="expert-quickstats__cell">
+              <span class="expert-quickstats__num">{activeAnnonces.length}</span>
+              <span class="expert-quickstats__lbl">Disponibles</span>
+            </div>
+            <div class="expert-quickstats__cell">
+              <span class="expert-quickstats__num">{historyTotalCount}</span>
+              <span class="expert-quickstats__lbl">Accompagnés</span>
+            </div>
+          </div>
+        )}
+      </aside>
+    </section>
+
+    {activeAnnonces.length > 0 && (
+      <section class="expert-listings expert-listings--active">
+        <header class="expert-listings__head">
+          <span class="expert-listings__overline">Disponible</span>
+          <h2 class="expert-listings__title">
+            Les biens en charge de <b>{firstName}</b>
+          </h2>
+          <p class="expert-listings__sub">{activeAnnonces.length} bien{activeAnnonces.length > 1 ? 's' : ''} actuellement à la vente ou à la location.</p>
+        </header>
+        <div class="annonces-grid">
+          {activeAnnonces.map((a) => <AnnonceCard annonce={a} />)}
         </div>
       </section>
     )}
 
-    {closedOnly.length > 0 && (
-      <section class="expert-single__listings expert-single__listings--history">
-        <h2>Historique des biens gérés ({historyTotalCount})</h2>
-        <p class="expert-single__history-note">
-          Biens dont {displayName.split(' ')[0]} a assuré la vente ou la gestion locative.
-        </p>
-        <div class="listings-grid">
-          {closedOnly.slice(0, 24).map((l) => (
-            <a href={`/annonces/${l.slug}/`} class="listing-card listing-card--closed">
-              {l.photo ? (
-                <img src={l.photo} alt={l.title} loading="lazy" width="280" height="190" />
-              ) : (
-                <div class="listing-card__noimg">Pas de photo</div>
-              )}
-              <div class="listing-card__body">
-                <span class:list={['listing-card__tag', l.type === 'V' ? 'tag--vente' : 'tag--loc']}>
+    {closedVisible.length > 0 && (
+      <section class="expert-listings expert-listings--closed">
+        <header class="expert-listings__head">
+          <span class="expert-listings__overline">Historique</span>
+          <h2 class="expert-listings__title">
+            Les biens déjà <b>accompagnés</b>
+          </h2>
+          <p class="expert-listings__sub">
+            {historyTotalCount} biens vendus ou loués grâce à {firstName}.
+          </p>
+        </header>
+        <div class="expert-history-grid">
+          {closedVisible.map((l) => (
+            <a href={`/annonces/${l.slug}/`} class="expert-history-card">
+              <div
+                class="expert-history-card__photo"
+                style={l.photo ? `background-image:url('${l.photo}')` : undefined}
+              >
+                <span class={`expert-history-card__tag ${l.type === 'V' ? 'is-vente' : 'is-location'}`}>
                   {l.type === 'V' ? 'Vendu' : 'Loué'}
                 </span>
-                <h3>{l.title}</h3>
-                {l.prix && <p class="listing-card__price">{new Intl.NumberFormat('fr-FR').format(l.prix)} €</p>}
-                <p class="listing-card__meta">
+              </div>
+              <div class="expert-history-card__body">
+                <div class="expert-history-card__title">{l.title}</div>
+                <div class="expert-history-card__meta">
                   {l.surface && <span>{l.surface} m²</span>}
-                  {l.nbPieces && <span>{l.nbPieces} pièce{l.nbPieces > 1 ? 's' : ''}</span>}
-                  {l.codePostal && <span>{l.codePostal} {l.ville}</span>}
-                </p>
+                  {l.nbPieces && <span>T{l.nbPieces}</span>}
+                  {l.codePostal && <span>{l.codePostal}</span>}
+                </div>
+                {l.prix && (
+                  <div class={`expert-history-card__price ${l.type === 'L' ? 'is-location' : ''}`}>
+                    {new Intl.NumberFormat('fr-FR').format(l.prix)} €{l.type === 'L' ? '/mois' : ''}
+                  </div>
+                )}
               </div>
             </a>
           ))}
         </div>
-        {historyTotalCount > 24 && (
-          <p class="expert-single__history-more">
-            … et {historyTotalCount - 24} autres biens gérés par {displayName.split(' ')[0]}.
+        {historyTotalCount > closedVisible.length && (
+          <p class="expert-listings__more">
+            … et {historyTotalCount - closedVisible.length} autres biens accompagnés par {firstName}.
           </p>
         )}
       </section>
     )}
 
-    {activeListings.length === 0 && closedOnly.length === 0 && (
-      <section class="expert-single__listings expert-single__listings--empty">
+    {activeAnnonces.length === 0 && closedOnly.length === 0 && (
+      <section class="expert-listings expert-listings--empty">
         <p>Aucun bien n'est actuellement associé à ce profil.</p>
       </section>
     )}
+
+    <section class="expert-final-cta">
+      <h2 class="expert-final-cta__title">
+        Un projet en tête ? <br />
+        <b>Parlons-en avec {firstName}.</b>
+      </h2>
+      <div class="expert-final-cta__row">
+        {expert.phone && (
+          <a href={`tel:${phoneClean}`} class="btn-pill btn-pill--olive">
+            APPELER {expert.phone}
+          </a>
+        )}
+        {expert.email && (
+          <a href={mailtoLink} class="btn-pill btn-pill--ghost">
+            ENVOYER UN EMAIL
+          </a>
+        )}
+      </div>
+    </section>
   </article>
 </BaseLayout>
-
-<style>
-  .expert-single { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-  .expert-single__header { display: flex; gap: 1.5rem; align-items: flex-start; margin-bottom: 2rem; }
-  .expert-single__photo { width: 200px; height: 260px; object-fit: cover; border-radius: 8px; }
-  .expert-single__info h1 { margin: 0 0 .25rem; }
-  .expert-single__role { color: #555; margin: 0 0 .5rem; }
-  .expert-single__phone, .expert-single__email { display: block; margin-top: .25rem; }
-  .expert-single__social { margin-top: .5rem; display: flex; gap: .75rem; }
-  .expert-single__description { color: #333; margin: 1rem 0 2rem; }
-  .expert-single__listings { margin-top: 2.5rem; }
-  .expert-single__history-note { color: #666; margin: -.25rem 0 1rem; }
-  .expert-single__history-more { margin-top: 1rem; color: #666; font-style: italic; }
-  .listings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-  .listing-card {
-    display: block;
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    transition: transform .15s, box-shadow .15s;
-  }
-  .listing-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
-  .listing-card img { width: 100%; height: 190px; object-fit: cover; display: block; }
-  .listing-card__noimg {
-    width: 100%; height: 190px; background: #f3f4f6;
-    display: flex; align-items: center; justify-content: center;
-    color: #9ca3af; font-size: .9rem;
-  }
-  .listing-card__body { padding: .75rem 1rem 1rem; }
-  .listing-card__tag {
-    display: inline-block;
-    padding: .15rem .6rem;
-    border-radius: 4px;
-    font-size: .75rem;
-    font-weight: 600;
-    margin-bottom: .5rem;
-    background: #eef2ff;
-    color: #3730a3;
-  }
-  .listing-card__tag.tag--vente { background: #dcfce7; color: #166534; }
-  .listing-card__tag.tag--loc { background: #fef3c7; color: #92400e; }
-  .listing-card h3 { font-size: .95rem; line-height: 1.35; margin: 0 0 .4rem; font-weight: 600; }
-  .listing-card__price { margin: 0 0 .25rem; font-weight: 700; color: #111; }
-  .listing-card__meta { margin: 0; font-size: .85rem; color: #555; display: flex; gap: .75rem; flex-wrap: wrap; }
-  .listing-card--closed { opacity: .85; }
-  .listing-card--closed img { filter: grayscale(.2); }
-  @media (max-width: 600px) {
-    .expert-single__header { flex-direction: column; align-items: center; text-align: center; }
-    .expert-single__photo { width: 160px; height: 210px; }
-    .listings-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
-    .listing-card img, .listing-card__noimg { height: 140px; }
-  }
-</style>

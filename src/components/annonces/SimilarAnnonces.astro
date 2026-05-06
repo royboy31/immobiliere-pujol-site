@@ -1,0 +1,44 @@
+---
+import type { UbiflowAnnonce } from '../../lib/ubiflow';
+import AnnonceCard from './AnnonceCard.astro';
+
+interface Props {
+  /** All currently active annonces (already fetched once at page level). */
+  pool: UbiflowAnnonce[];
+  /** Slug of the current annonce — excluded from suggestions. */
+  currentSlug: string;
+  /** Same type to bias the match (V or L); empty to mix. */
+  type?: 'V' | 'L' | string;
+  /** Postal code preferred for similarity. */
+  codePostal?: string;
+  /** Max cards to show. */
+  max?: number;
+}
+
+const { pool, currentSlug, type, codePostal, max = 3 } = Astro.props;
+
+// Score function: same type +3, same CP +5, same first 3 of CP +2.
+function score(a: UbiflowAnnonce): number {
+  let s = 0;
+  if (type && a.type === type) s += 3;
+  if (codePostal && a.codePostal === codePostal) s += 5;
+  if (codePostal && a.codePostal && a.codePostal.slice(0, 3) === codePostal.slice(0, 3)) s += 2;
+  return s;
+}
+
+const candidates = pool
+  .filter((a) => a.slug !== currentSlug && (a.photos?.length ?? 0) > 0)
+  .map((a) => ({ a, s: score(a) }))
+  .sort((x, y) => y.s - x.s)
+  .map((x) => x.a)
+  .slice(0, max);
+---
+
+{candidates.length > 0 && (
+  <section class="annonce-similar">
+    <h2 class="annonce-similar__title">Biens <b>similaires</b></h2>
+    <div class="annonce-similar__grid">
+      {candidates.map((a) => <AnnonceCard annonce={a} />)}
+    </div>
+  </section>
+)}
