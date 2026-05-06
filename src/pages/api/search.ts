@@ -84,8 +84,11 @@ export const GET: APIRoute = async ({ request }) => {
         )
         .bind(...ids)
         .all<{ annonce_id: number; url: string }>();
+      const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
       for (const p of photos.results) {
-        photoMap.set(p.annonce_id, p.url);
+        // Relative paths (from Ubiflow sync) need R2 base URL; full URLs (WordPress) are kept as-is
+        const url = p.url.startsWith('http') ? p.url : `${R2_PUBLIC}/${p.url}`;
+        photoMap.set(p.annonce_id, url);
       }
     }
 
