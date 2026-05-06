@@ -15,8 +15,15 @@ export const GET: APIRoute = async ({ request }) => {
   const budget = url.searchParams.get('budget');
   const q = url.searchParams.get('q');
 
+  // Allow ?source= filter for debugging
+  const sourceFilter = url.searchParams.get('source');
   const conditions: string[] = ["status = 'active'"];
   const bindings: any[] = [];
+
+  if (sourceFilter && (sourceFilter === 'ubiflow' || sourceFilter === 'wordpress')) {
+    conditions.push('source = ?');
+    bindings.push(sourceFilter);
+  }
 
   if (type) {
     conditions.push('type_annonce = ?');
