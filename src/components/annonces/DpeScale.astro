@@ -1,0 +1,62 @@
+---
+interface Props {
+  /** "DPE" or "GES" */
+  kind: 'DPE' | 'GES';
+  /** Letter grade A..G or empty/NS for non-applicable. */
+  letter?: string;
+  /** Optional numeric value with unit, displayed under the title. */
+  value?: string;
+}
+
+const { kind, letter, value } = Astro.props;
+const norm = (letter || '').trim().toUpperCase();
+const valid = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const active = valid.includes(norm) ? norm : '';
+const rows = valid.map((l) => ({ letter: l, active: l === active }));
+
+const title = kind === 'DPE'
+  ? "Diagnostic de performance énergétique"
+  : "Émissions de gaz à effet de serre";
+const subtitle = kind === 'DPE'
+  ? "Consommation d'énergie"
+  : "Émissions de CO₂";
+
+// Color stack for each letter row (matches the official French DPE chart).
+const palette: Record<string, string> = {
+  A: '#00a651',
+  B: '#50b848',
+  C: '#c5d92d',
+  D: '#fff200',
+  E: '#fdb913',
+  F: '#f7941d',
+  G: '#ed1c24',
+};
+
+// Each row's relative width forms the staircase shape (A short, G long).
+const widths: Record<string, number> = {
+  A: 28, B: 38, C: 48, D: 58, E: 68, F: 78, G: 88,
+};
+---
+
+<figure class={`dpe-scale dpe-scale--${kind.toLowerCase()}`} data-dpe={active || 'ns'}>
+  <figcaption class="dpe-scale__head">
+    <span class="dpe-scale__title">{title}</span>
+    <span class="dpe-scale__sub">{subtitle}</span>
+    {value && <span class="dpe-scale__value">{value}</span>}
+  </figcaption>
+
+  {active ? (
+    <ol class="dpe-scale__bars">
+      {rows.map((r) => (
+        <li
+          class={`dpe-scale__row ${r.active ? 'is-active' : ''}`}
+          style={`--w:${widths[r.letter]}%;--c:${palette[r.letter]}`}
+        >
+          <span class="dpe-scale__bar"><span class="lbl">{r.letter}</span></span>
+        </li>
+      ))}
+    </ol>
+  ) : (
+    <p class="dpe-scale__none">{kind} non applicable / non communiqué</p>
+  )}
+</figure>

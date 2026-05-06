@@ -1,0 +1,562 @@
+// ============================================
+// EXPERT DETAIL PAGE — mirrors the annonce detail layout: slim title,
+// 2-column body (description left / sticky info card right), listings,
+// closing slate CTA. All Pujol DS tokens.
+// ============================================
+.expert-page {
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
+}
+
+// =========================================
+// 2-COL BODY: title + description on the left, sticky info card on the right.
+// Right column top-aligns with the left's first row (title block).
+// =========================================
+.expert-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  padding: 30px $ds-side-pad 70px;
+  align-items: start;
+  background: $white;
+
+  &__main {
+    min-width: 0;
+  }
+
+  // Title block at the top of the left column.
+  &__title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  &__overline {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $ds-olive;
+    align-self: flex-start;
+  }
+
+  &__name {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: .95;
+    margin: 0;
+    color: $black;
+    letter-spacing: -.5px;
+
+    b { font-weight: 700; }
+  }
+
+  &__role-pill {
+    align-self: flex-start;
+    margin-top: 6px;
+    display: inline-flex;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: $ds-olive;
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+  }
+
+  &__heading {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1;
+    margin: 0 0 20px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__empty {
+    color: $ds-ink;
+    font-style: italic;
+  }
+
+  &__side {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+// Bio content styling (rich CMS HTML).
+.expert-bio-content {
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  color: $ds-ink;
+
+  h1, h2, h3, h4 {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    color: $black;
+    margin: 30px 0 12px;
+    line-height: 1.15;
+  }
+  h4 {
+    font-size: 14px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive;
+    font-family: $ds-font-noto;
+    margin-top: 0;
+  }
+  h3 { font-size: 22px; }
+  h2 { font-size: 26px; }
+  h1 { font-size: 30px; }
+
+  p { margin: 0 0 14px; }
+  p:empty { display: none; }
+  strong { color: $black; font-weight: 700; }
+  em, i { color: $black; }
+  a { color: $ds-olive-2; }
+
+  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  li { margin: 0 0 6px; }
+
+  iframe {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    border-radius: 18px;
+    margin: 22px 0;
+    display: block;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .12);
+  }
+}
+
+// =========================================
+// EXPERT INFO CARD (sticky right column)
+// =========================================
+.expert-info-card {
+  background: $white;
+  border: 1px solid $ds-hairline;
+  border-radius: 24px;
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__photo-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: $ds-paper;
+    flex: none;
+  }
+
+  &__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    &--empty {
+      display: grid;
+      place-items: center;
+      background: $ds-paper;
+      color: $ds-olive;
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 56px;
+      line-height: 1;
+    }
+  }
+
+  &__body {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  &__name {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.05;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__role {
+    margin: 0;
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    line-height: 1.4;
+    color: $ds-ink;
+  }
+
+  &__ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+
+    .btn-pill {
+      width: 100%;
+      padding: 14px 18px;
+      justify-content: center;
+
+      svg { flex: none; }
+    }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-top: 16px;
+    margin-top: 6px;
+    border-top: 1px solid $ds-hairline;
+  }
+
+  &__social-label {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .6px;
+    color: $ds-ink;
+    text-transform: uppercase;
+  }
+
+  &__social-row {
+    display: flex;
+    gap: 8px;
+
+    a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid $ds-hairline;
+      background: $white;
+      color: $ds-ink;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+
+      &:hover {
+        background: $ds-olive;
+        color: $white;
+        border-color: $ds-olive;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+// Quick-stats card stacked under the info card.
+.expert-quickstats {
+  background: $ds-paper;
+  border-radius: 24px;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    & + & { border-left: 1px solid $ds-hairline; }
+  }
+
+  &__num {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1;
+    color: $black;
+  }
+
+  &__cell:first-child &__num { color: $ds-olive; }
+
+  &__lbl {
+    font-family: $ds-font-noto;
+    font-size: 12px;
+    color: $ds-ink;
+    margin-top: 4px;
+    letter-spacing: .3px;
+  }
+}
+
+// =========================================
+// LISTINGS SECTIONS
+// =========================================
+.expert-listings {
+  padding: 70px $ds-side-pad;
+
+  // Active = light green (paper) bg, closed = white bg with grey-bordered cards.
+  &--active {
+    background: $ds-paper;
+    border-top: 1px solid $ds-hairline;
+  }
+
+  &--closed {
+    background: $white;
+    border-top: 1px solid $ds-hairline;
+  }
+
+  &--empty { padding: 30px $ds-side-pad 80px; color: $ds-ink; background: $white; }
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 28px;
+  }
+
+  &__overline {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $ds-olive;
+    align-self: flex-start;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: .95;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__sub {
+    margin: 6px 0 0;
+    font-family: $ds-font-noto;
+    font-size: 15px;
+    color: $ds-ink;
+  }
+
+  &__more {
+    margin: 30px 0 0;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    color: $ds-ink;
+    font-style: italic;
+    text-align: center;
+  }
+}
+
+.expert-history-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.expert-history-card {
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid $ds-hairline;
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  }
+
+  &__photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: #d9d9d9 center/cover no-repeat;
+  }
+
+  &__tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: $ds-slate;
+    color: $white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .4px;
+
+    &.is-vente { background: $ds-orange; }
+    &.is-location { background: $ds-olive; }
+  }
+
+  &__body {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__title {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.35;
+    color: $black;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 38px;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+    color: $ds-ink;
+  }
+
+  &__price {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 16px;
+    color: $ds-orange;
+    margin-top: 2px;
+
+    &.is-location { color: $ds-olive-2; }
+  }
+}
+
+// =========================================
+// FINAL CTA
+// =========================================
+.expert-final-cta {
+  background: $ds-slate;
+  color: $white;
+  padding: 80px $ds-side-pad;
+  text-align: center;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 46px;
+    line-height: 1;
+    margin: 0 0 26px;
+    color: $white;
+
+    b { font-weight: 700; color: $ds-olive; }
+  }
+
+  &__row {
+    display: inline-flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  // Override ghost button on the dark slate bg.
+  .btn-pill--ghost {
+    border-color: rgba(255, 255, 255, .55);
+    color: $white;
+
+    &:hover {
+      background: $white;
+      color: $black;
+      border-color: $white;
+    }
+  }
+}
+
+// =========================================
+// RESPONSIVE
+// =========================================
+@media (max-width: $bp-tablet) {
+  $mobile-pad: 20px;
+
+  .expert-body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px $mobile-pad 50px;
+
+    &__title { gap: 6px; margin-bottom: 18px; }
+    &__name { font-size: 38px; }
+    &__heading { font-size: 26px; }
+
+    &__side {
+      position: static;
+      top: auto;
+      gap: 14px;
+      order: -1; // photo card first on mobile, before description + title
+    }
+  }
+
+  .expert-info-card {
+    border-radius: 20px;
+    padding: 22px 20px 20px;
+
+    &__photo-wrap { width: 130px; height: 130px; }
+    &__body { gap: 10px; }
+    &__name { font-size: 22px; }
+  }
+
+  .expert-quickstats {
+    border-radius: 20px;
+    padding: 14px 18px;
+
+    &__num { font-size: 28px; }
+  }
+
+  .expert-listings {
+    padding: 50px $mobile-pad;
+
+    &__overline { font-size: 32px; }
+    &__title { font-size: 32px; }
+    &__sub { font-size: 14px; }
+  }
+
+  .expert-history-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .expert-history-card__title { font-size: 13px; }
+
+  .expert-final-cta {
+    padding: 60px $mobile-pad;
+    &__title { font-size: 30px; }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .expert-history-grid { grid-template-columns: 1fr; }
+}

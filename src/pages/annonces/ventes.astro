@@ -1,54 +1,59 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getActiveAnnonces, formatDbPrice } from '../../lib/db-annonces';
+import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
+import { buildArrondissements, buildKindOptions } from '../../lib/annonces-filter';
+import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
+import FilterBar from '../../components/annonces/FilterBar.astro';
 
-const { env } = await import('cloudflare:workers');
-const allAnnonces = await getActiveAnnonces((env as any).DB);
-const annonces = allAnnonces.filter(a => a.type_annonce === 'V');
-const totalLocations = allAnnonces.filter(a => a.type_annonce === 'L').length;
+const allAnnonces = await fetchUbiflowAnnonces();
+const annonces = allAnnonces.filter(a => a.type === 'V');
+const locations = allAnnonces.filter(a => a.type === 'L');
+
+const kinds = buildKindOptions(annonces);
+const arrondissements = buildArrondissements(annonces);
 ---
 
 <BaseLayout
   title="Vente appartement Marseille – Immobilière Pujol"
   description="Découvrez toutes nos annonces de vente d'appartements et maisons à Marseille."
 >
-  <section class="annonces-listing">
-    <header class="annonces-listing__header">
-      <h1>Nos annonces en vente à Marseille</h1>
-      <p>{annonces.length} biens en vente</p>
-      <nav class="annonces-listing__filters">
-        <a href="/annonces/">Toutes ({allAnnonces.length})</a>
-        <a href="/annonces/locations/">Locations ({totalLocations})</a>
-        <a href="/annonces/ventes/" class="active">Ventes ({annonces.length})</a>
+  <div class="annonces-page">
+    <section class="annonces-hero">
+      <h1>Nos <b>ventes</b> à Marseille</h1>
+      <p class="annonces-hero__sub">
+        {annonces.length} biens à vendre — appartements, maisons et programmes neufs sélectionnés par notre équipe.
+      </p>
+      <nav class="annonces-pills">
+        <a href="/annonces/">Toutes <span class="count">({allAnnonces.length})</span></a>
+        <a href="/annonces/locations/" data-kind="loc">Locations <span class="count">({locations.length})</span></a>
+        <a href="/annonces/ventes/" class="is-active" data-kind="vente">Ventes <span class="count">({annonces.length})</span></a>
       </nav>
-    </header>
+    </section>
 
-    <div class="annonces-listing__grid">
-      {annonces.map((annonce) => (
-        <a href={`/annonces/${annonce.slug}/`} class="annonce-card">
-          <div class="annonce-card__image">
-            {annonce.photos[0] ? (
-              <img src={annonce.photos[0]} alt={annonce.titre} loading="lazy" width="400" height="267" />
-            ) : (
-              <div class="annonce-card__placeholder">Pas de photo</div>
-            )}
-            <span class="annonce-card__badge badge--vente">Vente</span>
+    <section class="annonces-filter-section">
+      <FilterBar kinds={kinds} arrondissements={arrondissements} scope="V" />
+    </section>
+
+    <section class="annonces-grid-section">
+      {annonces.length > 0 ? (
+        <>
+          <div class="annonces-grid">
+            {annonces.map((a) => <AnnonceCard annonce={a} />)}
           </div>
-          <div class="annonce-card__content">
-            <h2 class="annonce-card__title">{annonce.titre}</h2>
-            <p class="annonce-card__price">{formatDbPrice(annonce)}</p>
-            <div class="annonce-card__details">
-              {annonce.type_bien && <span>{annonce.type_bien}</span>}
-              {annonce.surface && <span>{annonce.surface} m²</span>}
-              {annonce.nb_pieces && <span>{annonce.nb_pieces} pièce{annonce.nb_pieces > 1 ? 's' : ''}</span>}
-              {annonce.quartier && <span>{annonce.quartier}</span>}
-              <span>{annonce.code_postal} {annonce.ville}</span>
-            </div>
+          <div class="annonces-empty annonces-empty--filter" hidden>
+            <h2>Aucun bien <b>ne correspond</b></h2>
+            <p>Essayez d'élargir vos critères ou contactez notre équipe pour un projet sur mesure.</p>
+            <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--olive">NOUS CONTACTER</a>
           </div>
-        </a>
-      ))}
-    </div>
-  </section>
+        </>
+      ) : (
+        <div class="annonces-empty">
+          <h2>Aucune <b>vente</b> pour le moment</h2>
+          <p>Vous cherchez un bien à acheter ? Faites-nous part de votre projet et nous vous tiendrons informé.</p>
+          <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--olive">NOUS CONTACTER</a>
+        </div>
+      )}
+    </section>
+  </div>
 </BaseLayout>
-

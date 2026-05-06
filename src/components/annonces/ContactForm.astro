@@ -1,0 +1,90 @@
+---
+interface Props {
+  reference: string;
+  titre: string;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+  type: 'V' | 'L' | string;
+}
+
+const { reference, titre, contactEmail, contactPhone, type } = Astro.props;
+const isLocation = type === 'L';
+---
+
+<form class="annonce-contact" data-annonce-contact-form
+      data-contact-email={contactEmail || ''}
+      data-contact-ref={reference}
+      data-contact-title={titre}>
+  <h3 class="annonce-contact__title">On vous <b>rappelle</b></h3>
+  <p class="annonce-contact__sub">
+    Laissez vos coordonnées et notre équipe vous recontacte dans la journée pour organiser une visite.
+  </p>
+
+  <label class="annonce-contact__field">
+    <span class="lbl">Prénom Nom</span>
+    <input type="text" name="name" autocomplete="name" required />
+  </label>
+
+  <label class="annonce-contact__field">
+    <span class="lbl">Email</span>
+    <input type="email" name="email" autocomplete="email" required />
+  </label>
+
+  <label class="annonce-contact__field">
+    <span class="lbl">Téléphone</span>
+    <input type="tel" name="phone" autocomplete="tel" required />
+  </label>
+
+  <label class="annonce-contact__field">
+    <span class="lbl">Votre message</span>
+    <textarea name="message" rows="3" required>Bonjour, je suis intéressé(e) par l'annonce {reference}. Pouvez-vous me recontacter ?</textarea>
+  </label>
+
+  <label class="annonce-contact__agree">
+    <input type="checkbox" name="agree" required />
+    <span>J'accepte que mes données soient utilisées pour traiter ma demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
+  </label>
+
+  <button type="submit" class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'} annonce-contact__submit`}>
+    ÊTRE RECONTACTÉ
+  </button>
+
+  {contactPhone && (
+    <a href={`tel:${contactPhone.replace(/\s/g, '')}`} class="annonce-contact__phone">
+      ou appeler directement {contactPhone}
+    </a>
+  )}
+
+  <p class="annonce-contact__ref">Référence : {reference}</p>
+</form>
+
+<script>
+  // For now the form opens the user's email client with the message pre-filled.
+  // Swap to a real /api/contact-annonce endpoint once the worker route exists.
+  document.querySelectorAll<HTMLFormElement>('[data-annonce-contact-form]').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const fd = new FormData(form);
+      const to = (form.dataset.contactEmail || '').trim();
+      const ref = form.dataset.contactRef || '';
+      const title = form.dataset.contactTitle || '';
+      const subject = `Demande de contact – Annonce ${ref}`;
+      const body = [
+        `Annonce : ${title} (${ref})`,
+        '',
+        `Nom : ${fd.get('name') || ''}`,
+        `Email : ${fd.get('email') || ''}`,
+        `Téléphone : ${fd.get('phone') || ''}`,
+        '',
+        'Message :',
+        String(fd.get('message') || ''),
+      ].join('\n');
+
+      const params = new URLSearchParams({ subject, body });
+      const target = to || 'contact@immobiliere-pujol.fr';
+      window.location.href = `mailto:${target}?${params.toString()}`;
+    });
+  });
+</script>

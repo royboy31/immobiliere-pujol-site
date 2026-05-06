@@ -1,0 +1,65 @@
+---
+// Main column inside the body grid: description, characteristics, DPE.
+// Used by both live + closed templates. Drop into <div class="annonce-body__main">.
+
+interface View {
+  description: string;
+  type: 'V' | 'L' | string;
+  surface?: number | null;
+  nbPieces?: number | null;
+  nbChambres?: number | null;
+  nbSallesDeBain?: number | null;
+  nbWC?: number | null;
+  cuisine?: string;
+  typeChauffage?: string;
+  loyer?: number | null;
+  loyerCC?: number | null;
+  charges?: number | null;
+  depotGarantie?: number | null;
+  prix?: number | null;
+  honorairesChargeAcquereur?: boolean;
+  dpeEtiquetteConso?: string;
+  dpeEtiquetteGes?: string;
+}
+
+interface Props {
+  view: View;
+}
+
+const { view } = Astro.props;
+
+const hasDetails = !!(
+  view.surface || view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
+  view.nbWC || view.cuisine || view.typeChauffage || view.loyer || view.loyerCC ||
+  view.charges || view.depotGarantie || (view.type === 'V' && view.prix)
+);
+---
+
+{view.description && (
+  <section>
+    <h2>Description</h2>
+    <div class="annonce-desc" set:html={view.description.replace(/\n/g, '<br/>')}></div>
+  </section>
+)}
+
+{hasDetails && (
+  <section class="annonce-details">
+    <h2>Caractéristiques</h2>
+    <dl>
+      {view.surface && <><dt>Surface</dt><dd>{view.surface} m²</dd></>}
+      {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
+      {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
+      {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
+      {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
+      {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
+      {view.typeChauffage && <><dt>Chauffage</dt><dd>{view.typeChauffage}</dd></>}
+      {view.type === 'L' && view.loyer && <><dt>Loyer HC</dt><dd>{view.loyer} €</dd></>}
+      {view.type === 'L' && view.loyerCC && <><dt>Loyer CC</dt><dd>{view.loyerCC} €/mois</dd></>}
+      {view.type === 'L' && view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
+      {view.type === 'L' && view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
+      {view.type === 'V' && view.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd></>}
+      {view.type === 'V' && view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
+    </dl>
+  </section>
+)}
+

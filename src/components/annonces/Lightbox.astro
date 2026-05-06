@@ -1,0 +1,135 @@
+---
+// Singleton lightbox mounted once per page. Any clickable element with
+// `data-lightbox-group="X"` and `data-lightbox-src="..."` opens this overlay.
+// Multiple groups can coexist on the page (e.g. "photos" + "dpe").
+---
+
+<dialog class="lightbox" id="lightbox" aria-label="Galerie de photos">
+  <button class="lightbox__close" type="button" data-lightbox-close aria-label="Fermer">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+  </button>
+  <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Précédent">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+    </svg>
+  </button>
+  <figure class="lightbox__stage">
+    <img class="lightbox__img" alt="" hidden />
+    <div class="lightbox__html" data-lightbox-html-mount hidden></div>
+    <figcaption class="lightbox__caption" data-lightbox-caption></figcaption>
+  </figure>
+  <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Suivant">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+    </svg>
+  </button>
+  <div class="lightbox__counter" data-lightbox-counter></div>
+</dialog>
+
+<script>
+  (function () {
+    const dlg = document.getElementById('lightbox') as HTMLDialogElement | null;
+    if (!dlg) return;
+    const img = dlg.querySelector<HTMLImageElement>('.lightbox__img');
+    const htmlMount = dlg.querySelector<HTMLElement>('[data-lightbox-html-mount]');
+    const caption = dlg.querySelector<HTMLElement>('[data-lightbox-caption]');
+    const counter = dlg.querySelector<HTMLElement>('[data-lightbox-counter]');
+    const closeBtn = dlg.querySelector<HTMLButtonElement>('[data-lightbox-close]');
+    const prevBtn = dlg.querySelector<HTMLButtonElement>('[data-lightbox-prev]');
+    const nextBtn = dlg.querySelector<HTMLButtonElement>('[data-lightbox-next]');
+
+    type Item = { src?: string; html?: string; caption?: string };
+    let group: Item[] = [];
+    let index = 0;
+
+    function render() {
+      if (!group[index]) return;
+      const item = group[index];
+      if (item.html) {
+        if (img) img.hidden = true;
+        if (htmlMount) {
+          htmlMount.hidden = false;
+          htmlMount.innerHTML = item.html;
+        }
+      } else {
+        if (htmlMount) { htmlMount.hidden = true; htmlMount.innerHTML = ''; }
+        if (img && item.src) {
+          img.src = item.src;
+          img.hidden = false;
+        }
+      }
+      if (caption) caption.textContent = item.caption || '';
+      if (counter) counter.textContent = `${index + 1} / ${group.length}`;
+      const single = group.length <= 1;
+      if (prevBtn) prevBtn.hidden = single;
+      if (nextBtn) nextBtn.hidden = single;
+    }
+
+    function open(g: typeof group, i: number) {
+      group = g;
+      index = i;
+      render();
+      // <dialog>.showModal locks scroll + handles backdrop. Fallback to .show
+      // if the API isn't available (older Safari).
+      if (typeof (dlg as any).showModal === 'function') (dlg as any).showModal();
+      else dlg.setAttribute('open', '');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      if (typeof (dlg as any).close === 'function') (dlg as any).close();
+      else dlg.removeAttribute('open');
+      document.body.style.overflow = '';
+    }
+
+    function move(d: 1 | -1) {
+      if (!group.length) return;
+      index = (index + d + group.length) % group.length;
+      render();
+    }
+
+    closeBtn?.addEventListener('click', close);
+    prevBtn?.addEventListener('click', move.bind(null, -1));
+    nextBtn?.addEventListener('click', move.bind(null, 1));
+
+    // Close on backdrop click (anywhere outside <figure>).
+    dlg.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target === dlg) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!dlg.hasAttribute('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') move(-1);
+      if (e.key === 'ArrowRight') move(1);
+    });
+
+    // Wire all triggers on the page. Triggers are grouped by data-lightbox-group;
+    // clicking one opens the dialog with all siblings of the same group.
+    // - data-lightbox-src="..."     → image
+    // - data-lightbox-html="#id"    → clones contents of that element
+    document.querySelectorAll<HTMLElement>('[data-lightbox-src], [data-lightbox-html]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const groupName = el.dataset.lightboxGroup || '';
+        const selector = groupName
+          ? `[data-lightbox-group="${groupName}"]`
+          : '[data-lightbox-src]:not([data-lightbox-group]),[data-lightbox-html]:not([data-lightbox-group])';
+        const all = Array.from(document.querySelectorAll<HTMLElement>(selector));
+        const items: Item[] = all.map((n) => {
+          const htmlSel = n.dataset.lightboxHtml;
+          if (htmlSel) {
+            const src = document.querySelector(htmlSel);
+            return { html: src ? src.outerHTML : '', caption: n.dataset.lightboxCaption };
+          }
+          return { src: n.dataset.lightboxSrc, caption: n.dataset.lightboxCaption };
+        });
+        const i = all.indexOf(el);
+        open(items, Math.max(0, i));
+      });
+    });
+  })();
+</script>

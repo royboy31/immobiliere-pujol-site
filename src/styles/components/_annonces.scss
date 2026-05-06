@@ -1,0 +1,2023 @@
+// ============================================
+// ANNONCES — listing + single, Pujol design system
+// ============================================
+
+// ---------- Listing page ----------
+.annonces-page {
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
+}
+
+.annonces-hero {
+  background: $ds-paper;
+  padding: 90px $ds-side-pad 70px;
+  text-align: center;
+
+  h1 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: .9467;
+    margin: 0 0 18px;
+    color: $black;
+    text-align: center;
+
+    b { font-weight: 700; }
+  }
+
+  .annonces-hero__sub {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.55;
+    color: $ds-ink;
+    max-width: 640px;
+    margin: 0 auto 36px;
+  }
+}
+
+.annonces-pills {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: 1.5px solid $black;
+    background-color: transparent;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .6px;
+    text-decoration: none;
+    // Curtain-fill: gradient is twice as tall as the pill; the visible window
+    // sits on the transparent bottom half at rest and slides UP to reveal the
+    // colored top half on hover.
+    background-image: linear-gradient(to top, transparent 50%, $black 50%);
+    background-size: 100% 200%;
+    background-position: 0 100%;
+    transition: background-position .4s ease, color .3s ease, border-color .2s ease;
+
+    .count {
+      font-weight: 400;
+      color: rgba(0, 0, 0, .55);
+      font-size: 12px;
+      letter-spacing: .2px;
+      transition: color .3s ease;
+    }
+
+    // Default (Toutes): black border, curtain-fills black on hover/active
+    &:hover {
+      background-position: 0 0;
+      color: $white;
+      .count { color: rgba(255, 255, 255, .85); }
+    }
+
+    &.is-active {
+      background-color: $black;
+      background-image: none;
+      color: $white;
+      .count { color: rgba(255, 255, 255, .85); }
+    }
+
+    // Locations: olive border + olive curtain-fill on hover/active
+    &[data-kind="loc"] {
+      border-color: $ds-olive;
+      background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+
+      &.is-active {
+        background-color: $ds-olive;
+        background-image: none;
+      }
+    }
+
+    // Ventes: orange border + orange curtain-fill on hover/active
+    &[data-kind="vente"] {
+      border-color: $ds-orange;
+      background-image: linear-gradient(to top, transparent 50%, $ds-orange 50%);
+
+      &.is-active {
+        background-color: $ds-orange;
+        background-image: none;
+      }
+    }
+  }
+}
+
+// ============================================
+// FILTER BAR (between hero pills and grid)
+// ============================================
+.annonces-filter-section {
+  background: $ds-paper;
+  padding: 0 $ds-side-pad 30px;
+}
+
+.annonces-filter {
+  background: $white;
+  border-radius: 32px;
+  padding: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+
+  &__bar {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr auto auto;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  &__seg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: $ds-paper;
+    border-radius: 999px;
+    padding: 10px 22px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color .2s ease;
+
+    &:focus-within { border-color: $ds-olive; }
+
+    .lbl {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .8px;
+      color: $black;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    select,
+    input {
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 14px;
+      color: $ds-ink;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      padding: 0;
+      width: 100%;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    select {
+      // Native arrow + a stand-in chevron via background-image
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1 L6 6 L11 1' stroke='%23000' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 0 center;
+      padding-right: 18px;
+    }
+  }
+
+  &__more,
+  &__reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 22px;
+    height: auto;
+    border-radius: 999px;
+    border: 1.5px solid $black;
+    background: transparent;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+
+    &:hover {
+      background: $black;
+      color: $white;
+      border-color: $black;
+    }
+
+    svg { transition: transform .2s ease; }
+  }
+
+  &__more[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+
+  &__reset {
+    border-color: rgba(0, 0, 0, .25);
+    color: $ds-ink;
+    font-weight: 400;
+
+    &:hover {
+      background: transparent;
+      color: $black;
+      border-color: $black;
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px 6px 6px;
+    margin-top: 12px;
+    border-top: 1px solid $ds-hairline;
+
+    &[hidden] { display: none; }
+  }
+
+  &__group {
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+    legend {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .6px;
+      color: $ds-ink;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding: 0;
+    }
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0, 0, 0, .15);
+      background: transparent;
+      color: $black;
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: .2px;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+
+      em {
+        font-style: normal;
+        color: rgba(0, 0, 0, .5);
+        font-size: 12px;
+      }
+    }
+
+    &:hover span {
+      border-color: $ds-olive;
+    }
+
+    input:checked + span {
+      background: $ds-olive;
+      border-color: $ds-olive;
+      color: $white;
+      em { color: rgba(255, 255, 255, .85); }
+    }
+
+    input:focus-visible + span {
+      box-shadow: 0 0 0 3px rgba(178, 192, 78, .25);
+    }
+  }
+
+  &__status {
+    margin-top: 12px;
+    padding-left: 22px;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 13px;
+    color: $ds-ink;
+  }
+}
+
+// Hide cards filtered out client-side without disturbing the grid layout.
+.annonce-card-item.is-hidden { display: none; }
+
+// Hero variant of the listing-card carousel: bigger arrows that stay visible
+// (a hero deserves obvious affordances), bigger dot indicator pill.
+.lc-photos--hero {
+  .lc-arrow {
+    width: 44px;
+    height: 44px;
+    opacity: 1;
+    background: rgba(255, 255, 255, .92);
+
+    svg { width: 18px; height: 18px; }
+
+    &--prev { left: 16px; }
+    &--next { right: 16px; }
+  }
+
+  .lc-dots {
+    bottom: 16px;
+    padding: 6px 12px;
+
+    .lc-dot { width: 7px; height: 7px; }
+  }
+}
+
+// Hero stays touch-friendly: even on touch devices we keep arrows visible.
+@media (hover: none) {
+  .lc-photos--hero .lc-arrow { display: grid; }
+}
+
+.annonces-grid-section {
+  background: $ds-paper;
+  padding: 0 $ds-side-pad 110px;
+}
+
+.annonces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+
+  // Reuse .listing-card from _home.scss; only tweak the photo height for grid use.
+  .listing-card .photo { height: 240px; }
+  .listing-card .title { min-height: 44px; }
+}
+
+// ============================================
+// LISTING-CARD MINI CAROUSEL
+// (used by the AnnonceCard component on listing pages)
+// ============================================
+.lc-photos {
+  position: relative;
+  height: 240px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #d9d9d9;
+
+  &__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.lc-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.lc-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.lc-empty {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: $ds-font-noto;
+  font-size: 13px;
+  color: #777;
+}
+
+// The body wrapper is now an <a> on the new card structure — strip default
+// link styling so inner .title / .price etc. inherit cleanly.
+.annonce-card-item > .body {
+  text-decoration: none;
+  color: inherit;
+}
+
+.lc-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, .92);
+  color: $black;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+  transition: opacity .2s ease, background-color .2s ease, transform .15s ease;
+
+  &--prev { left: 10px; }
+  &--next { right: 10px; }
+
+  &:hover { background: $white; transform: translateY(-50%) scale(1.05); }
+  &:focus-visible { outline: 2px solid $ds-olive; outline-offset: 2px; }
+}
+
+// Show arrows on card hover (desktop) and always on touch devices that have
+// no hover.
+.lc-photos:hover .lc-arrow,
+.lc-photos:focus-within .lc-arrow {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .lc-arrow { display: none; }
+}
+
+.lc-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+  pointer-events: none;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, .35);
+  border-radius: 999px;
+}
+
+.lc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .55);
+  transition: background .2s ease, transform .2s ease;
+
+  &.is-active {
+    background: $white;
+    transform: scale(1.25);
+  }
+}
+
+.annonces-empty {
+  background: $white;
+  border-radius: 24px;
+  padding: 60px 40px;
+  text-align: center;
+  font-family: $ds-font-noto;
+  color: $ds-ink;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    margin: 0 0 12px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  p { margin: 0 0 24px; font-size: 16px; }
+}
+
+// ============================================
+// SINGLE ANNONCE — new layout (above-fold hero + sections below)
+// ============================================
+.annonce-page {
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
+}
+
+.annonce-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .6px;
+  color: $black;
+  text-decoration: none;
+  margin-bottom: 28px;
+
+  svg { transition: transform .2s ease; }
+  &:hover svg { transform: translateX(-3px); }
+
+  &--floating {
+    display: inline-flex;
+    margin: 30px $ds-side-pad 18px;
+  }
+}
+
+// 2-column hero. Left column stacks: main media → thumb strip → description.
+// Right column is sticky and stacks: info card → form/CTA → expert.
+.annonce-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 36px;
+  padding: 0 $ds-side-pad 60px;
+  align-items: start;
+
+  &__left {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__main {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #d9d9d9;
+  }
+
+  &__main-empty {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: $ds-ink;
+    font-family: $ds-font-noto;
+    background: $ds-paper;
+  }
+
+  // Big-image carousel: reuse .lc-photos plumbing but override sizes so it
+  // fills the hero main slot and shows larger persistent arrows.
+  &__slider.lc-photos.lc-photos--hero {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    border-radius: 24px;
+  }
+
+  &__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  &__photos-pill {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .65);
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .4px;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+  }
+
+  &__tour-cta {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: $white;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .4px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+    transition: transform .2s ease, background-color .2s ease;
+
+    &:hover { transform: translateY(-1px); background: $ds-paper; }
+  }
+
+  &__thumbs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  &__thumb {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #d9d9d9 center/cover no-repeat;
+    cursor: zoom-in;
+    text-decoration: none;
+    transition: transform .25s ease;
+
+    &:hover { transform: translateY(-2px); }
+
+    &--more::after {
+      content: attr(data-more);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, .55);
+      color: $white;
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: .4px;
+    }
+  }
+
+  &__hidden { display: none; }
+
+  &__right {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-self: start;
+  }
+
+  // Every direct child of the sticky right rail renders as a brand rounded
+  // box. Nested components (expert card, contact form, closed CTA) are
+  // overridden below to drop their inner border and slot in cleanly.
+  &__info {
+    background: $white;
+    border-radius: 24px;
+    padding: 26px 24px;
+    border: 1px solid $ds-hairline;
+  }
+
+  &__head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: $ds-orange;
+    color: $white;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+
+    &--location { background: $ds-olive; }
+    &--closed   { background: $ds-slate; }
+  }
+
+  &__ref {
+    font-size: 12px;
+    color: $ds-ink;
+    letter-spacing: .3px;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.05;
+    margin: 0 0 10px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__loc {
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ds-ink;
+  }
+
+  &__price {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    color: $ds-orange;
+    margin-bottom: 22px;
+
+    b { font-weight: 700; }
+
+    &--location { color: $ds-olive-2; }
+  }
+
+  &__stats {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 18px 0;
+    border-top: 1px solid $ds-hairline;
+    border-bottom: 1px solid $ds-hairline;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: $ds-ink;
+    }
+
+    svg { color: $ds-olive; flex: none; }
+
+    strong {
+      font-family: $ds-font-helv;
+      font-weight: 700;
+      color: $black;
+      font-size: 18px;
+      margin-right: 2px;
+    }
+  }
+}
+
+// ----- Description block (left column under thumbs) -----
+.annonce-desc-block {
+  margin-top: 12px;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1;
+    margin: 0 0 14px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  .annonce-desc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $ds-ink;
+
+    p { margin: 0 0 14px; }
+  }
+}
+
+// ----- Caractéristiques section below the hero -----
+.annonce-detail {
+  padding: 10px $ds-side-pad 20px;
+
+  &__main {
+    max-width: 920px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+
+    h2 {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 30px;
+      line-height: 1;
+      margin: 0 0 16px;
+      color: $black;
+
+      b { font-weight: 700; }
+    }
+  }
+}
+
+.annonce-details-dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 60px;
+  margin: 0;
+
+  dt {
+    font-weight: 700;
+    font-size: 13px;
+    padding: 12px 0;
+    border-bottom: 1px solid $ds-hairline;
+    color: $black;
+  }
+
+  dd {
+    font-weight: 400;
+    font-size: 13px;
+    padding: 12px 0;
+    border-bottom: 1px solid $ds-hairline;
+    color: $ds-ink;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+// ----- Performance énergétique -----
+.annonce-perf {
+  padding: 30px $ds-side-pad 50px;
+  background: $white;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 6px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__hint {
+    margin: 0 0 22px;
+    font-size: 13px;
+    color: $ds-ink;
+    opacity: .8;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    max-width: 920px;
+  }
+
+  &__cell {
+    display: block;
+    position: relative;
+    background: $white;
+    border: 1px solid $ds-hairline;
+    border-radius: 20px;
+    padding: 22px 24px;
+    text-decoration: none;
+    color: $black;
+    cursor: zoom-in;
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+      border-color: $ds-olive;
+    }
+
+    > span:first-child { display: block; }
+  }
+
+  &__expand {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: $ds-paper;
+    color: $ds-ink;
+    transition: background-color .2s ease, color .2s ease;
+  }
+
+  &__cell:hover &__expand {
+    background: $ds-olive;
+    color: $white;
+  }
+}
+
+// ----- Official DPE / GES diagram (SVG) -----
+.dpe-diagram {
+  margin: 0;
+  display: block;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  &__none {
+    margin: 0;
+    padding: 14px 16px;
+    background: $ds-paper;
+    border-radius: 12px;
+    font-size: 13px;
+    color: $ds-ink;
+  }
+}
+
+// Lightbox renders the same SVG bigger; remove the cell padding on hover state.
+.lightbox__html .dpe-diagram svg {
+  max-height: 70vh;
+}
+
+// ----- Legacy DPE staircase scale (kept for back-compat) -----
+.dpe-scale {
+  margin: 0;
+
+  &__head {
+    margin-bottom: 14px;
+  }
+
+  &__title {
+    display: block;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .4px;
+    color: $black;
+  }
+
+  &__sub {
+    display: block;
+    font-size: 12px;
+    color: $ds-ink;
+    opacity: .75;
+    margin-top: 2px;
+  }
+
+  &__value {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 14px;
+    color: $black;
+  }
+
+  &__bars {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    width: var(--w);
+    height: 24px;
+    transition: filter .2s ease, transform .2s ease;
+  }
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    width: 100%;
+    height: 100%;
+    background: var(--c);
+    color: $white;
+    border-radius: 0 12px 12px 0;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 14px;
+
+    .lbl { display: inline-block; }
+  }
+
+  &__row.is-active {
+    transform: scale(1.08);
+    transform-origin: left center;
+
+    .dpe-scale__bar {
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+      font-size: 16px;
+    }
+  }
+
+  &__row:not(.is-active) {
+    opacity: .55;
+  }
+
+  &__none {
+    margin: 0;
+    padding: 14px 16px;
+    background: $ds-paper;
+    border-radius: 12px;
+    font-size: 13px;
+    color: $ds-ink;
+  }
+
+  // Yellow row: dark text for legibility (yellow on white).
+  &__row[style*="#fff200"] .dpe-scale__bar { color: $black; }
+}
+
+// ----- Contact form (own rounded box in the sticky right rail) -----
+.annonce-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: $white;
+  border: 1px solid $ds-hairline;
+  border-radius: 24px;
+  padding: 24px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1;
+    margin: 0 0 6px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__sub {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: $ds-ink;
+    line-height: 1.5;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .lbl {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .4px;
+      color: $ds-ink;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      padding: 10px 14px;
+      border: 1px solid $ds-hairline;
+      border-radius: 14px;
+      background: $ds-paper;
+      font-family: $ds-font-noto;
+      font-size: 14px;
+      color: $black;
+      outline: 0;
+      width: 100%;
+      transition: border-color .2s ease, background-color .2s ease;
+      resize: vertical;
+
+      &:focus {
+        border-color: $ds-olive;
+        background: $white;
+      }
+    }
+
+    textarea { min-height: 80px; line-height: 1.4; }
+  }
+
+  &__agree {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: $ds-ink;
+    line-height: 1.4;
+    margin-top: 4px;
+
+    input { flex: none; margin-top: 2px; }
+    a { color: inherit; text-decoration: underline; }
+  }
+
+  &__submit {
+    margin-top: 8px;
+    width: 100%;
+    padding: 14px 20px;
+  }
+
+  &__phone {
+    text-align: center;
+    font-size: 12px;
+    color: $ds-ink;
+    text-decoration: none;
+    margin-top: 6px;
+
+    &:hover { color: $black; text-decoration: underline; }
+  }
+
+  &__ref {
+    margin: 12px 0 0;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(0, 0, 0, .55);
+    letter-spacing: .3px;
+  }
+}
+
+// Reskin the imported ExpertCard when it's slotted into the hero right rail.
+// Bumped specificity (3 classes) beats Astro's scoped 0-0-2 selector.
+.annonce-page .annonce-hero__right .expert-card {
+  margin: 0;
+  padding: 22px 22px 24px;
+  border: 1px solid $ds-hairline;
+  border-radius: 24px;
+  background: $white;
+}
+.annonce-page .annonce-hero__right .expert-card__heading {
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: $ds-ink;
+  margin: 0 0 14px;
+}
+
+// ----- Similar listings -----
+.annonce-similar {
+  background: $ds-paper;
+  padding: 60px $ds-side-pad 80px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    margin: 0 0 28px;
+    color: $black;
+    text-align: center;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+}
+
+.annonce-expert-wrap {
+  padding: 30px $ds-side-pad 60px;
+  background: $white;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+// ============================================
+// LIGHTBOX
+// ============================================
+.lightbox {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+
+  &::backdrop { background: rgba(0, 0, 0, .85); }
+
+  &[open] {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px;
+    grid-template-rows: 1fr 60px;
+    align-items: center;
+    justify-items: center;
+    gap: 14px;
+    padding: 30px;
+    background: rgba(0, 0, 0, .92);
+    color: $white;
+  }
+
+  &__close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255, 255, 255, .15);
+    color: $white;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color .2s ease;
+
+    &:hover { background: rgba(255, 255, 255, .25); }
+  }
+
+  &__nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255, 255, 255, .15);
+    color: $white;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    grid-row: 1;
+    transition: background-color .2s ease;
+
+    &--prev { grid-column: 1; }
+    &--next { grid-column: 3; }
+    &:hover { background: rgba(255, 255, 255, .3); }
+  }
+
+  &__stage {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  &__img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, .04);
+  }
+
+  &__html {
+    background: $white;
+    border-radius: 18px;
+    padding: 40px;
+    color: $black;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow: auto;
+
+    .dpe-scale__row { height: 36px; }
+    .dpe-scale__bar { font-size: 18px; }
+    .dpe-scale__row.is-active .dpe-scale__bar { font-size: 20px; }
+    .dpe-scale__title { font-size: 18px; }
+    .dpe-scale__sub { font-size: 14px; }
+  }
+
+  &__caption {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .85);
+    text-align: center;
+  }
+
+  &__counter {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    color: rgba(255, 255, 255, .7);
+    letter-spacing: .4px;
+  }
+}
+
+.annonce-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 28px;
+
+  .annonce-head__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: .9467;
+    margin: 0 0 14px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  .annonce-head__loc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    color: $ds-ink;
+    margin: 0;
+  }
+
+  .annonce-head__price-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .annonce-head__price {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 1;
+    color: $ds-orange;
+
+    b { font-weight: 700; }
+
+    &--location { color: $ds-olive-2; }
+  }
+
+  .annonce-head__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: $ds-orange;
+    color: $white;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+
+    &--location { background: $ds-olive; }
+    &--closed   { background: $ds-slate; }
+  }
+}
+
+// ---------- Gallery ----------
+.annonce-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  margin-bottom: 50px;
+
+  &__main {
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #d9d9d9;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__side {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+  }
+
+  &__thumb {
+    border-radius: 24px;
+    overflow: hidden;
+    background: #d9d9d9;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 4 / 3;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    &--more::after {
+      content: attr(data-more);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(0, 0, 0, .55);
+      color: $white;
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: .4px;
+    }
+  }
+
+  &__empty {
+    background: $ds-paper;
+    border-radius: 24px;
+    padding: 80px;
+    text-align: center;
+    font-family: $ds-font-noto;
+    color: $ds-ink;
+  }
+}
+
+// ---------- Key figures (under gallery) ----------
+.annonce-keyfigs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 50px;
+
+  .kf {
+    background: $ds-paper;
+    border-radius: 24px;
+    padding: 26px 20px;
+    text-align: center;
+
+    &__val {
+      display: block;
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 38px;
+      line-height: 1;
+      color: $black;
+
+      b { font-weight: 700; }
+    }
+
+    &__lbl {
+      display: block;
+      margin-top: 10px;
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 13px;
+      color: $ds-ink;
+      letter-spacing: .3px;
+    }
+  }
+}
+
+// ---------- Body grid (description + side rail) ----------
+.annonce-body {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 60px;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  &__side {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 18px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  .annonce-desc {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.6;
+    color: $ds-ink;
+
+    p { margin: 0 0 14px; }
+  }
+
+  .annonce-details dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 0;
+  }
+
+  .annonce-details dt {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid $ds-hairline;
+    color: $black;
+  }
+
+  .annonce-details dd {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid $ds-hairline;
+    color: $ds-ink;
+    margin: 0;
+    text-align: right;
+  }
+}
+
+// ---------- DPE / GES badges ----------
+.annonce-dpe {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+
+  &__badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: $ds-paper;
+    border-radius: 24px;
+    padding: 18px 24px;
+
+    .lbl {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .6px;
+      color: $ds-ink;
+    }
+
+    .val {
+      font-family: $ds-font-helv;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1;
+      padding: 8px 18px;
+      border-radius: 8px;
+      color: $white;
+      background: #888;
+    }
+
+    .dpe-a, .ges-a { background: #00a651; }
+    .dpe-b, .ges-b { background: #50b848; }
+    .dpe-c, .ges-c { background: #c5d92d; }
+    .dpe-d, .ges-d { background: #fff200; color: $black; }
+    .dpe-e, .ges-e { background: #fdb913; }
+    .dpe-f, .ges-f { background: #f7941d; }
+    .dpe-g, .ges-g { background: #ed1c24; }
+  }
+}
+
+// ---------- Side rail card (contact / closed CTA) ----------
+.annonce-cta-card {
+  background: $ds-paper;
+  border-radius: 32px;
+  padding: 32px 28px;
+
+  &--closed { background: $ds-slate; color: $white; }
+
+  h3 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.05;
+    margin: 0 0 14px;
+    color: inherit;
+
+    b { font-weight: 700; }
+  }
+
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 22px;
+    color: inherit;
+    opacity: .95;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__ref {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid $ds-hairline;
+    font-size: 12px;
+    letter-spacing: .4px;
+    color: inherit;
+    opacity: .8;
+  }
+
+  &--closed &__ref { border-top-color: rgba(255, 255, 255, .25); }
+}
+
+// Pill button for the side rail and closed CTA section.
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .6px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background-color: transparent;
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position .4s ease, color .3s ease, border-color .2s ease;
+
+  &--olive {
+    background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+    border-color: $ds-olive;
+    color: $black;
+    &:hover { background-position: 0 100%; color: $ds-olive; }
+  }
+
+  &--orange {
+    background-image: linear-gradient(to top, transparent 50%, $ds-orange 50%);
+    border-color: $ds-orange;
+    color: $white;
+    &:hover { background-position: 0 100%; color: $ds-orange; }
+  }
+
+  &--white {
+    background-image: linear-gradient(to top, transparent 50%, $white 50%);
+    border-color: $white;
+    color: $black;
+    &:hover { background-position: 0 100%; color: $white; }
+  }
+
+  // White outline on dark surfaces — outlined at rest, filled white on hover.
+  &--white-outline {
+    background: transparent;
+    background-image: none;
+    border: 1.5px solid rgba(255, 255, 255, .55);
+    color: $white;
+    transition: background-color .25s ease, color .2s ease, border-color .2s ease;
+    &:hover { background: $white; color: $black; border-color: $white; }
+  }
+
+  &--ghost {
+    background: transparent;
+    background-image: none;
+    border: 1.5px solid rgba(0, 0, 0, .4);
+    color: $black;
+    transition: background-color .25s ease, color .2s ease, border-color .2s ease;
+    &:hover { background: $black; color: $white; border-color: $black; }
+  }
+}
+
+// ============================================
+// CLOSED-ANNONCE LAYOUT
+// ============================================
+.annonce-closed-banner {
+  background: $ds-orange;
+  color: $white;
+  padding: 16px $ds-side-pad;
+  text-align: center;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .4px;
+
+  a {
+    color: $white;
+    text-decoration: underline;
+    margin-left: 8px;
+    font-weight: 400;
+  }
+}
+
+// Hero CTA section that replaces "contact" on closed pages.
+.annonce-closed-hero {
+  background: $ds-paper;
+  border-radius: 40px;
+  padding: 60px 50px;
+  text-align: center;
+  margin-bottom: 50px;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 42px;
+    line-height: 1;
+    margin: 0 0 16px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: $ds-ink;
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+
+  &__cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+}
+
+// Service callout cards (for closed page)
+.annonce-services {
+  margin-bottom: 60px;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 24px;
+    color: $black;
+    text-align: center;
+
+    b { font-weight: 700; }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+.annonce-svc-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: $white;
+  border: 1px solid $ds-hairline;
+  border-radius: 24px;
+  padding: 22px 26px;
+  text-decoration: none;
+  color: $black;
+  transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: $ds-olive;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .06);
+  }
+
+  .ic {
+    width: 54px;
+    height: 54px;
+    flex: none;
+    display: grid;
+    place-items: center;
+    img { width: 54px; height: 54px; object-fit: contain; }
+  }
+
+  .lbl {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    flex: 1;
+
+    .city { display: block; font-weight: 400; font-size: 14px; color: $ds-ink; margin-top: 2px; }
+  }
+
+  .arr { color: $ds-olive; }
+}
+
+// Related properties grid (closed page)
+.annonce-related {
+  background: $ds-paper;
+  padding: 80px $ds-side-pad;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: .9467;
+    margin: 0 0 32px;
+    color: $black;
+    text-align: center;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 36px;
+
+    .listing-card .photo { height: 200px; }
+    .listing-card .title { min-height: 0; -webkit-line-clamp: 2; }
+  }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+@media (max-width: $bp-tablet) {
+  $mobile-pad: 20px;
+
+  .annonces-hero {
+    padding: 60px $mobile-pad 40px;
+    h1 { font-size: 32px; }
+    .annonces-hero__sub { font-size: 16px; margin-bottom: 26px; }
+  }
+
+  .annonces-pills a {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+
+  .annonces-filter-section { padding: 0 $mobile-pad 24px; }
+
+  .annonces-filter {
+    border-radius: 24px;
+    padding: 14px;
+
+    &__bar {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    &__seg { padding: 10px 18px; }
+
+    &__more,
+    &__reset {
+      padding: 14px 22px;
+      width: 100%;
+    }
+
+    &__panel { gap: 14px; padding-top: 18px; }
+    &__chips { gap: 6px; }
+    &__chip span { padding: 7px 14px; font-size: 12px; }
+  }
+
+  .annonces-grid-section { padding: 0 $mobile-pad 70px; }
+
+  .annonces-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+
+    .listing-card .photo { height: 200px; }
+  }
+
+  .annonce-back--floating { margin: 20px $mobile-pad 12px; }
+
+  .annonce-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 0 $mobile-pad 36px;
+
+    // Flatten the two columns so we can interleave with `order:`.
+    &__left,
+    &__right {
+      display: contents;
+    }
+
+    &__main { aspect-ratio: 4 / 3; order: 1; }
+    &__thumbs { gap: 8px; order: 2; }
+    &__thumb { border-radius: 12px; }
+
+    &__info {
+      padding: 22px 20px;
+      border-radius: 24px;
+      order: 3;
+    }
+
+    &__title { font-size: 24px; }
+    &__price { font-size: 30px; }
+    &__stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
+
+  // Reorder the rest of the slotted content so the form lands right under the
+  // info card and the expert card stays just under the form.
+  .annonce-hero .annonce-desc-block:not(.annonce-chars-block) { order: 4; }
+  .annonce-hero .annonce-chars-block { order: 5; }
+  .annonce-hero .annonce-contact { order: 6; }
+  .annonce-hero .annonce-cta-card { order: 6; }
+  .annonce-page .annonce-hero .expert-card { order: 7; }
+
+  .annonce-desc-block {
+    margin-top: 8px;
+    h2 { font-size: 22px; }
+  }
+
+  .annonce-detail {
+    padding: 10px $mobile-pad 20px;
+
+    &__main {
+      gap: 24px;
+      h2 { font-size: 24px; }
+
+      .annonce-details dl { grid-template-columns: 1fr; column-gap: 0; }
+      .annonce-details dt { padding-bottom: 4px; border-bottom: 0; }
+      .annonce-details dd { text-align: left; padding-top: 4px; }
+    }
+  }
+
+  .annonce-perf {
+    padding: 20px $mobile-pad 40px;
+
+    &__title { font-size: 24px; }
+    &__grid { grid-template-columns: 1fr; gap: 14px; }
+    &__cell { padding: 18px; }
+  }
+
+  .annonce-similar {
+    padding: 40px $mobile-pad 60px;
+
+    &__title { font-size: 28px; margin-bottom: 22px; }
+    &__grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  .annonce-expert-wrap { padding: 20px $mobile-pad 40px; }
+
+  .annonce-cta-card { padding: 24px 22px; border-radius: 24px; }
+
+  .lightbox[open] {
+    grid-template-columns: 50px 1fr 50px;
+    padding: 14px;
+  }
+  .lightbox__close { top: 14px; right: 14px; width: 38px; height: 38px; }
+  .lightbox__html { padding: 22px; }
+
+  .annonce-closed-banner { padding: 12px $mobile-pad; font-size: 13px; }
+
+  .annonce-closed-hero {
+    border-radius: 28px;
+    padding: 40px 24px;
+    margin-bottom: 36px;
+
+    h2 { font-size: 28px; }
+    p { font-size: 15px; }
+  }
+
+  .annonce-services {
+    margin-bottom: 40px;
+    &__row { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  .annonce-svc-card { padding: 18px 20px; }
+
+  .annonce-related {
+    padding: 50px $mobile-pad;
+
+    &__title { font-size: 32px; margin-bottom: 24px; }
+    &__grid { grid-template-columns: 1fr; gap: 18px; }
+  }
+}
