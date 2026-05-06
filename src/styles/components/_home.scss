@@ -41,7 +41,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 .hero {
   position: relative;
   z-index: 10;
-  height: 760px;
+  min-height: 760px;
   // Static fallback while the video loads / if it fails to play.
   background:
     linear-gradient(rgba(15, 25, 42, .35), rgba(15, 25, 42, .45)),
@@ -53,7 +53,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   align-items: center;
   justify-content: center;
   gap: 80px;
-  padding: 0 $ds-page-pad;
+  padding: 0 $ds-page-pad 60px;
 
   &__video {
     position: absolute;
