@@ -1,6 +1,13 @@
 // D1 query layer for annonces
 // Replaces fetchUbiflowAnnonces() (live XML) and getClosedAnnonce() (static JSON)
 
+const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
+
+/** Relative paths (from Ubiflow/R2 sync) need the R2 base URL; full URLs are kept as-is. */
+function resolvePhotoUrl(url: string): string {
+  return url.startsWith('http') ? url : `${R2_PUBLIC}/${url}`;
+}
+
 export interface DbAnnonce {
   id: number;
   slug: string;
@@ -81,7 +88,7 @@ export async function getActiveAnnonces(db: D1Database): Promise<(DbAnnonce & { 
   const photoMap = new Map<number, string[]>();
   for (const p of photosResult.results) {
     const list = photoMap.get(p.annonce_id) || [];
-    list.push(p.url);
+    list.push(resolvePhotoUrl(p.url));
     photoMap.set(p.annonce_id, list);
   }
 
@@ -112,7 +119,7 @@ export async function getAnnonceBySlug(
 
   return {
     ...annonce,
-    photos: photos.results.map(p => p.url),
+    photos: photos.results.map(p => resolvePhotoUrl(p.url)),
   };
 }
 
