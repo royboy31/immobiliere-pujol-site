@@ -47,17 +47,24 @@ export const GET: APIRoute = async ({ request }) => {
     bindings.push(like, like, like, like);
   }
 
+  const where = conditions.join(' AND ');
+
+  const countSql = `SELECT COUNT(*) as total FROM annonces WHERE ${where}`;
   const sql = `
     SELECT id, slug, type_annonce, type_bien, titre, ville, quartier, code_postal,
            prix, loyer_cc, surface, nb_pieces, nb_chambres
     FROM annonces
-    WHERE ${conditions.join(' AND ')}
+    WHERE ${where}
     ORDER BY date_creation DESC
     LIMIT 20
   `;
 
   try {
-    const results = await db.prepare(sql).bind(...bindings).all();
+    const [countResult, results] = await Promise.all([
+      db.prepare(countSql).bind(...bindings).first<{ total: number }>(),
+      db.prepare(sql).bind(...bindings).all(),
+    ]);
+    const total = countResult?.total ?? 0;
 
     // Fetch first photo for each result
     const ids = results.results.map((a: any) => a.id);
@@ -80,7 +87,7 @@ export const GET: APIRoute = async ({ request }) => {
       photo: photoMap.get(a.id) || null,
     }));
 
-    return new Response(JSON.stringify({ count: data.length, results: data }), {
+    return new Response(JSON.stringify({ total, count: data.length, results: data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
