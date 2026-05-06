@@ -189,45 +189,82 @@ const STAR_PATH =
             </div>
             <div class="input">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#666" stroke-width="1.6" /><path d="M16 16 L21 21" stroke="#666" stroke-width="1.6" stroke-linecap="round" /></svg>
-              <span>Indiquez une adresse, un lieu, un métro...</span>
+              <input type="text" id="estimInput" placeholder="Indiquez une adresse, un lieu, un métro..." autocomplete="off" />
             </div>
             <a href="/services/estimation-prix-de-vente/" class="cta">ESTIMATION EN LIGNE</a>
           </div>
 
           {/* VOIR LES BIENS À LOUER */}
           <div class="hero-search__pane" data-pane="louer">
-            <div class="seg first">
-              <div class="lbl"><b>TYPE DE BIEN</b><span>Appartement, maison...</span></div>
+            <div class="seg first seg--dropdown" data-dropdown="louer-type">
+              <div class="lbl"><b>TYPE DE BIEN</b><span id="louerTypeLabel">Appartement, maison...</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+              <ul class="seg__menu" id="louerTypeMenu">
+                <li data-value="">Tous</li>
+                <li data-value="Appartement">Appartement</li>
+                <li data-value="Maison">Maison</li>
+                <li data-value="Local commercial">Local commercial</li>
+                <li data-value="Bureau">Bureau</li>
+                <li data-value="Parking">Parking</li>
+              </ul>
             </div>
-            <div class="seg">
-              <div class="lbl"><b>BUDGET MAX</b><span>Loyer mensuel</span></div>
+            <div class="seg seg--dropdown" data-dropdown="louer-budget">
+              <div class="lbl"><b>BUDGET MAX</b><span id="louerBudgetLabel">Loyer mensuel</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+              <ul class="seg__menu" id="louerBudgetMenu">
+                <li data-value="">Pas de max</li>
+                <li data-value="500">500 €</li>
+                <li data-value="750">750 €</li>
+                <li data-value="1000">1 000 €</li>
+                <li data-value="1500">1 500 €</li>
+                <li data-value="2000">2 000 €</li>
+                <li data-value="3000">3 000 €</li>
+              </ul>
             </div>
             <div class="input">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#666" stroke-width="1.6" /><path d="M16 16 L21 21" stroke="#666" stroke-width="1.6" stroke-linecap="round" /></svg>
-              <span>Indiquez une ville, un quartier...</span>
+              <input type="text" id="louerQuery" placeholder="Indiquez une ville, un quartier..." autocomplete="off" />
             </div>
-            <a href="/annonces/locations/" class="cta">RECHERCHER</a>
+            <button type="button" class="cta" id="louerSearch">RECHERCHER</button>
           </div>
 
           {/* VOIR LES BIENS À VENDRE */}
           <div class="hero-search__pane" data-pane="vendre">
-            <div class="seg first">
-              <div class="lbl"><b>TYPE DE BIEN</b><span>Appartement, maison...</span></div>
+            <div class="seg first seg--dropdown" data-dropdown="vendre-type">
+              <div class="lbl"><b>TYPE DE BIEN</b><span id="vendreTypeLabel">Appartement, maison...</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+              <ul class="seg__menu" id="vendreTypeMenu">
+                <li data-value="">Tous</li>
+                <li data-value="Appartement">Appartement</li>
+                <li data-value="Maison">Maison</li>
+                <li data-value="Local commercial">Local commercial</li>
+                <li data-value="Terrain">Terrain</li>
+                <li data-value="Immeuble">Immeuble</li>
+              </ul>
             </div>
-            <div class="seg">
-              <div class="lbl"><b>BUDGET MAX</b><span>Prix d'achat</span></div>
+            <div class="seg seg--dropdown" data-dropdown="vendre-budget">
+              <div class="lbl"><b>BUDGET MAX</b><span id="vendreBudgetLabel">Prix d'achat</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+              <ul class="seg__menu" id="vendreBudgetMenu">
+                <li data-value="">Pas de max</li>
+                <li data-value="100000">100 000 €</li>
+                <li data-value="200000">200 000 €</li>
+                <li data-value="300000">300 000 €</li>
+                <li data-value="500000">500 000 €</li>
+                <li data-value="750000">750 000 €</li>
+                <li data-value="1000000">1 000 000 €</li>
+              </ul>
             </div>
             <div class="input">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#666" stroke-width="1.6" /><path d="M16 16 L21 21" stroke="#666" stroke-width="1.6" stroke-linecap="round" /></svg>
-              <span>Indiquez une ville, un quartier...</span>
+              <input type="text" id="vendreQuery" placeholder="Indiquez une ville, un quartier..." autocomplete="off" />
             </div>
-            <a href="/annonces/ventes/" class="cta">RECHERCHER</a>
+            <button type="button" class="cta" id="vendreSearch">RECHERCHER</button>
           </div>
         </div>
+
+        {/* Results dropdown */}
+        <div class="hero-search__results" id="heroResults"></div>
       </div>
     </section>
 
@@ -235,6 +272,16 @@ const STAR_PATH =
       (function () {
         const tabs = document.querySelectorAll('#heroTabs .hero-search__pill');
         const panes = document.querySelectorAll('#heroSearch .hero-search__pane');
+        const resultsEl = document.getElementById('heroResults')!;
+
+        // State
+        let louerType = '';
+        let louerBudget = '';
+        let vendreType = '';
+        let vendreBudget = '';
+        let debounceTimer: ReturnType<typeof setTimeout>;
+
+        // --- Tab switching ---
         tabs.forEach((t) =>
           t.addEventListener('click', () => {
             tabs.forEach((x) => x.classList.remove('is-active'));
@@ -243,8 +290,142 @@ const STAR_PATH =
             panes.forEach((p) =>
               p.classList.toggle('is-active', (p as HTMLElement).dataset.pane === which)
             );
+            closeResults();
+            closeAllMenus();
           })
         );
+
+        // --- Dropdown menus ---
+        document.querySelectorAll('.seg--dropdown').forEach((seg) => {
+          seg.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const menu = seg.querySelector('.seg__menu') as HTMLElement;
+            const wasOpen = menu.classList.contains('is-open');
+            closeAllMenus();
+            if (!wasOpen) menu.classList.add('is-open');
+          });
+
+          seg.querySelectorAll('.seg__menu li').forEach((li) => {
+            li.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const value = (li as HTMLElement).dataset.value || '';
+              const text = li.textContent || '';
+              const dropdownId = (seg as HTMLElement).dataset.dropdown || '';
+
+              // Update state and label
+              if (dropdownId === 'louer-type') {
+                louerType = value;
+                document.getElementById('louerTypeLabel')!.textContent = value || 'Appartement, maison...';
+              } else if (dropdownId === 'louer-budget') {
+                louerBudget = value;
+                document.getElementById('louerBudgetLabel')!.textContent = value ? text : 'Loyer mensuel';
+              } else if (dropdownId === 'vendre-type') {
+                vendreType = value;
+                document.getElementById('vendreTypeLabel')!.textContent = value || 'Appartement, maison...';
+              } else if (dropdownId === 'vendre-budget') {
+                vendreBudget = value;
+                document.getElementById('vendreBudgetLabel')!.textContent = value ? text : "Prix d'achat";
+              }
+
+              closeAllMenus();
+              // Trigger search on selection
+              if (dropdownId.startsWith('louer')) doSearch('L');
+              else doSearch('V');
+            });
+          });
+        });
+
+        // --- Text inputs with debounce ---
+        document.getElementById('louerQuery')!.addEventListener('input', () => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => doSearch('L'), 300);
+        });
+
+        document.getElementById('vendreQuery')!.addEventListener('input', () => {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => doSearch('V'), 300);
+        });
+
+        // --- Search buttons ---
+        document.getElementById('louerSearch')!.addEventListener('click', () => doSearch('L'));
+        document.getElementById('vendreSearch')!.addEventListener('click', () => doSearch('V'));
+
+        // --- AJAX search ---
+        async function doSearch(type: 'L' | 'V') {
+          const params = new URLSearchParams();
+          params.set('type', type);
+
+          if (type === 'L') {
+            if (louerType) params.set('type_bien', louerType);
+            if (louerBudget) params.set('budget', louerBudget);
+            const q = (document.getElementById('louerQuery') as HTMLInputElement).value.trim();
+            if (q) params.set('q', q);
+          } else {
+            if (vendreType) params.set('type_bien', vendreType);
+            if (vendreBudget) params.set('budget', vendreBudget);
+            const q = (document.getElementById('vendreQuery') as HTMLInputElement).value.trim();
+            if (q) params.set('q', q);
+          }
+
+          try {
+            const res = await fetch(`/api/search?${params.toString()}`);
+            const data = await res.json();
+            renderResults(data.results || []);
+          } catch (err) {
+            console.error('Search failed:', err);
+            resultsEl.innerHTML = '<div class="hero-search__no-results">Erreur de recherche</div>';
+            resultsEl.classList.add('is-open');
+          }
+        }
+
+        // --- Render results dropdown ---
+        function renderResults(results: any[]) {
+          if (results.length === 0) {
+            resultsEl.innerHTML = '<div class="hero-search__no-results">Aucun bien trouvé</div>';
+            resultsEl.classList.add('is-open');
+            return;
+          }
+
+          const fmt = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+          resultsEl.innerHTML = results.map((a) => {
+            const price = a.type_annonce === 'V'
+              ? (a.prix ? fmt.format(a.prix) : 'Prix sur demande')
+              : (a.loyer_cc ? fmt.format(a.loyer_cc) + '/mois' : 'Prix sur demande');
+            const details = [
+              a.type_bien,
+              a.surface ? a.surface + ' m²' : null,
+              a.nb_pieces ? a.nb_pieces + ' p.' : null,
+            ].filter(Boolean).join(' · ');
+
+            return `<a class="hero-search__result" href="/annonces/${a.slug}/">
+              <div class="hero-search__result-img">${a.photo ? `<img src="${a.photo}" alt="" loading="lazy" />` : ''}</div>
+              <div class="hero-search__result-info">
+                <div class="hero-search__result-title">${a.titre || details}</div>
+                <div class="hero-search__result-details">${details} — ${a.ville || ''} ${a.code_postal || ''}</div>
+              </div>
+              <div class="hero-search__result-price">${price}</div>
+            </a>`;
+          }).join('');
+          resultsEl.classList.add('is-open');
+        }
+
+        // --- Helpers ---
+        function closeAllMenus() {
+          document.querySelectorAll('.seg__menu.is-open').forEach((m) => m.classList.remove('is-open'));
+        }
+
+        function closeResults() {
+          resultsEl.classList.remove('is-open');
+          resultsEl.innerHTML = '';
+        }
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+          if (!(e.target as HTMLElement).closest('.hero-search')) {
+            closeAllMenus();
+            closeResults();
+          }
+        });
       })();
     </script>
 
