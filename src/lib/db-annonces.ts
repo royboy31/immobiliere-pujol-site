@@ -147,6 +147,55 @@ export async function getRelatedAnnonces(
 }
 
 /**
+ * Get a small pool of similar active annonces with photos for "Biens similaires".
+ * Prefers same type + code_postal, falls back to any active annonce.
+ */
+export async function getSimilarPool(
+  db: D1Database,
+  excludeSlug: string,
+  type: string,
+  codePostal: string | null,
+  limit = 6,
+): Promise<(DbAnnonce & { photos: string[] })[]> {
+  const annonces = await db
+    .prepare(
+      `SELECT * FROM annonces
+       WHERE slug != ? AND status = 'active'
+       ORDER BY
+         CASE WHEN type_annonce = ? THEN 0 ELSE 1 END,
+         CASE WHEN code_postal = ? THEN 0 ELSE 1 END,
+         date_creation DESC
+       LIMIT ?`,
+    )
+    .bind(excludeSlug, type, codePostal || '', limit)
+    .all<DbAnnonce>();
+
+  const ids = annonces.results.map(a => a.id);
+  if (ids.length === 0) return [];
+
+  const photosResult = await db
+    .prepare(
+      `SELECT annonce_id, url, position FROM annonces_photos
+       WHERE annonce_id IN (${ids.map(() => '?').join(',')})
+       ORDER BY position ASC`,
+    )
+    .bind(...ids)
+    .all<{ annonce_id: number; url: string; position: number }>();
+
+  const photoMap = new Map<number, string[]>();
+  for (const p of photosResult.results) {
+    const list = photoMap.get(p.annonce_id) || [];
+    list.push(resolvePhotoUrl(p.url));
+    photoMap.set(p.annonce_id, list);
+  }
+
+  return annonces.results.map(a => ({
+    ...a,
+    photos: photoMap.get(a.id) || [],
+  }));
+}
+
+/**
  * Format price for display (mirrors ubiflow.ts formatPrice)
  */
 export function formatDbPrice(a: DbAnnonce): string {

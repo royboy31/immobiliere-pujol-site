@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAnnonceBySlug, getActiveAnnonces, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
+import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
@@ -133,9 +133,9 @@ if (annonce) {
   return Astro.redirect('/annonces/');
 }
 
-// Load active annonces for "Biens similaires" pool
-const activeAnnonces = await getActiveAnnonces(db);
-const pool = activeAnnonces.map(a => ({
+// Load a small set of similar annonces for "Biens similaires"
+const similarAnnonces = await getSimilarPool(db, slug, view.type, view.codePostal ?? null);
+const pool = similarAnnonces.map(a => ({
   id: String(a.id),
   reference: a.ubiflow_reference || a.reference_agence || '',
   titre: a.titre || '',
