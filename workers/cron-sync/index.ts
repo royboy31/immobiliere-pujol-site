@@ -67,6 +67,7 @@ interface ParsedAnnonce {
   dpeEtiquetteConso: string;
   dpeValeurConso: string;
   dpeEtiquetteGes: string;
+  dpeValeurGes: string;
   mandatNumero: string;
   mandatType: string;
   photos: string[];
@@ -92,7 +93,7 @@ function generateSlug(a: Partial<ParsedAnnonce>): string {
 function parseAnnonce(raw: any): ParsedAnnonce {
   const bien = raw.bien || {};
   const prestation = raw.prestation || {};
-  const diagnostics = raw.diagnostics || {};
+  const diagnostics = bien.diagnostiques || raw.diagnostiques || raw.diagnostics || {};
   const photosRaw = raw.photos?.photo;
   let photos: string[] = [];
   if (Array.isArray(photosRaw)) photos = photosRaw.map((p: any) => str(p)).filter(Boolean);
@@ -138,6 +139,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     dpeEtiquetteConso: str(diagnostics.dpe_etiquette_conso),
     dpeValeurConso: str(diagnostics.dpe_valeur_conso),
     dpeEtiquetteGes: str(diagnostics.dpe_etiquette_ges),
+    dpeValeurGes: str(diagnostics.dpe_valeur_ges),
     mandatNumero: str(prestation.mandat_numero),
     mandatType: str(prestation.mandat_type),
     photos,
@@ -198,13 +200,13 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
       etage, nb_etages, ascenseur, cave, terrasse,
       parking, garage, interphone,
-      dpe_note, dpe_valeur, ges_note, type_chauffage,
+      dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
       mandat_numero, mandat_type,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'ubiflow',?,?
+      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'ubiflow',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', ubiflow_annonce_id=excluded.ubiflow_annonce_id,
@@ -223,7 +225,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
       parking=excluded.parking, garage=excluded.garage, interphone=excluded.interphone,
       dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
-      ges_note=excluded.ges_note, type_chauffage=excluded.type_chauffage,
+      ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur, type_chauffage=excluded.type_chauffage,
       titre=excluded.titre, descriptif=excluded.descriptif,
       contact_a_afficher=excluded.contact_a_afficher,
       telephone_a_afficher=excluded.telephone_a_afficher,
@@ -241,7 +243,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.etage || null, a.nbEtages || null,
     a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
     a.parking ? '1' : null, a.garage ? '1' : null, a.interphone ? 1 : 0,
-    a.dpeEtiquetteConso || null, a.dpeValeurConso || null, a.dpeEtiquetteGes || null,
+    a.dpeEtiquetteConso || null, a.dpeValeurConso || null, a.dpeEtiquetteGes || null, a.dpeValeurGes || null,
     a.typeChauffage || null,
     a.titre, a.description,
     a.contactAAfficher, a.telephoneAAfficher, a.emailAAfficher,

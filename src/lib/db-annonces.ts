@@ -47,6 +47,7 @@ export interface DbAnnonce {
   dpe_note: string | null;
   dpe_valeur: string | null;
   ges_note: string | null;
+  ges_valeur: string | null;
   type_chauffage: string | null;
   contact_a_afficher: string | null;
   telephone_a_afficher: string | null;
