@@ -15,9 +15,9 @@ const isLocation = type === 'L';
       data-contact-email={contactEmail || ''}
       data-contact-ref={reference}
       data-contact-title={titre}>
-  <h3 class="annonce-contact__title">On vous <b>rappelle</b></h3>
+  <h3 class="annonce-contact__title">Laissez-nous vos <b>coordonnées</b></h3>
   <p class="annonce-contact__sub">
-    Laissez vos coordonnées et notre équipe vous recontacte dans la journée pour organiser une visite.
+    Pour organiser une visite ou recevoir plus d'informations sur cette annonce.
   </p>
 
   <label class="annonce-contact__field">
@@ -46,7 +46,7 @@ const isLocation = type === 'L';
   </label>
 
   <button type="submit" class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'} annonce-contact__submit`}>
-    ÊTRE RECONTACTÉ
+    ENVOYER MA DEMANDE
   </button>
 
   {contactPhone && (

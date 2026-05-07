@@ -28,12 +28,8 @@ const agence = [
 const contact = {
   address: '49 rue Jean Fiolle, 13006 Marseille',
   mapHref: 'https://maps.google.com/?q=Immobili%C3%A8re+Pujol+49+rue+Jean+Fiolle+13006+Marseille',
-  phone: '04 91 81 26 26',
-  phoneHref: 'tel:+33491812626',
-  email: 'contact@immobiliere-pujol.fr',
-  emailHref: 'mailto:contact@immobiliere-pujol.fr',
   contactHref: '/contact-immobiliere-pujol/',
-  hours: 'Lun – Ven : 9h – 12h30 / 14h – 18h30',
+  hours: 'Lun – Ven : 9h – 12h / 14h – 18h',
 };
 
 const legal = [
@@ -118,23 +114,6 @@ const year = new Date().getFullYear();
             </svg>
           </span>
           <a href={contact.mapHref} target="_blank" rel="noopener noreferrer">{contact.address}</a>
-        </li>
-        <li>
-          <span class="ic" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.34 12.34 0 0 0 .67 2.7 2 2 0 0 1-.45 2.11L8.09 9.78a16 16 0 0 0 6 6l1.25-1.24a2 2 0 0 1 2.11-.45 12.34 12.34 0 0 0 2.7.67A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <a href={contact.phoneHref}>{contact.phone}</a>
-        </li>
-        <li>
-          <span class="ic" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
-              <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-            </svg>
-          </span>
-          <a href={contact.emailHref}>{contact.email}</a>
         </li>
         <li>
           <span class="ic" aria-hidden="true">

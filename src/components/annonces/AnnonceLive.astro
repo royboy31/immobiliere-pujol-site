@@ -16,6 +16,7 @@ interface View {
   priceDisplay: string;
   photos: string[];
   visiteVirtuelle?: string;
+  tourEmbedAllowed?: boolean;
   adresse?: string;
   codePostal?: string;
   ville?: string;
@@ -27,6 +28,7 @@ interface View {
   nbWC?: number | null;
   etage?: string | number;
   nbEtages?: string | number;
+  meuble?: number | null;
   typeChauffage?: string;
   cuisine?: string;
   dpeEtiquetteConso?: string;
@@ -38,6 +40,7 @@ interface View {
   charges?: number | null;
   depotGarantie?: number | null;
   prix?: number | null;
+  honoraires?: string | null;
   honorairesChargeAcquereur?: boolean;
   isClosed: boolean;
 }
@@ -54,11 +57,17 @@ interface Props {
 
 const { view, contactPhone, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
-const hasDetails = !!(
-  view.surface || view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
-  view.nbWC || view.cuisine || view.typeChauffage || view.loyer || view.loyerCC ||
-  view.charges || view.depotGarantie || (view.type === 'V' && view.prix)
+const hasMeuble = view.meuble === 0 || view.meuble === 1;
+const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
+
+const hasTechDetails = !!(
+  view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
+  view.nbWC || view.cuisine || hasEtage || hasMeuble || view.typeChauffage
 );
+
+const hasFinanceDetails =
+  (view.type === 'L' && !!(view.loyer || view.loyerCC || view.charges || view.depotGarantie || view.honoraires)) ||
+  (view.type === 'V' && !!(view.prix || view.honoraires || view.honorairesChargeAcquereur));
 ---
 
 <article class="annonce-page">
@@ -78,22 +87,33 @@ const hasDetails = !!(
         </section>
       )}
 
-      {hasDetails && (
+      {hasTechDetails && (
         <section class="annonce-desc-block annonce-chars-block">
-          <h2>Caractéristiques</h2>
+          <h2>Caractéristiques techniques</h2>
           <dl class="annonce-details-dl">
-            {view.surface && <><dt>Surface</dt><dd>{view.surface} m²</dd></>}
             {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
             {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
+            {hasEtage && <><dt>Étage</dt><dd>{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</dd></>}
+            {hasMeuble && <><dt>Meublé</dt><dd>{view.meuble ? 'Oui' : 'Non'}</dd></>}
             {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
             {view.typeChauffage && <><dt>Chauffage</dt><dd>{view.typeChauffage}</dd></>}
-            {view.type === 'L' && view.loyer && <><dt>Loyer HC</dt><dd>{view.loyer} €</dd></>}
-            {view.type === 'L' && view.loyerCC && <><dt>Loyer CC</dt><dd>{view.loyerCC} €/mois</dd></>}
-            {view.type === 'L' && view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
+          </dl>
+        </section>
+      )}
+
+      {hasFinanceDetails && (
+        <section class="annonce-desc-block annonce-chars-block">
+          <h2>Aspects financiers</h2>
+          <dl class="annonce-details-dl">
+            {view.type === 'L' && view.loyerCC && <><dt>Loyer charges comprises</dt><dd>{view.loyerCC} €/mois</dd></>}
+            {view.type === 'L' && !view.loyerCC && view.loyer && <><dt>Loyer hors charges</dt><dd>{view.loyer} €/mois</dd></>}
+            {view.type === 'L' && view.charges && <><dt>dont charges</dt><dd>{view.charges} €/mois</dd></>}
+            {view.type === 'L' && view.honoraires && <><dt>Honoraires</dt><dd>{view.honoraires}</dd></>}
             {view.type === 'L' && view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
             {view.type === 'V' && view.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd></>}
+            {view.type === 'V' && view.honoraires && <><dt>Honoraires</dt><dd>{view.honoraires}</dd></>}
             {view.type === 'V' && view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
           </dl>
         </section>

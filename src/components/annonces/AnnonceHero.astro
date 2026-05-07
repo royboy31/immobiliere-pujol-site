@@ -10,6 +10,7 @@ interface View {
   priceDisplay: string;
   photos: string[];
   visiteVirtuelle?: string;
+  tourEmbedAllowed?: boolean;
   adresse?: string;
   codePostal?: string;
   ville?: string;
@@ -42,10 +43,13 @@ const thumbs = photos.slice(1, 5); // up to 4 thumbs visible
 const remaining = Math.max(0, photos.length - 5);
 
 // YouTube embed detection — extracts the 11-char ID from common URL patterns.
+// Inline embed only kicks in when the URL was set explicitly via the structured
+// `url_visite_virtuelle` field; description-extracted URLs always render as the
+// CTA button so we don't hijack the photo gallery for ~1800 annonces.
 const tour = (view.visiteVirtuelle || '').trim();
 const ytMatch = tour.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|watch\?v=))([A-Za-z0-9_-]{11})/);
 const ytId = ytMatch?.[1];
-const hasInlineVideo = !!ytId;
+const hasInlineVideo = !!ytId && view.tourEmbedAllowed !== false;
 const hasExternalTour = !!tour && !hasInlineVideo;
 ---
 
@@ -96,15 +100,6 @@ const hasExternalTour = !!tour && !hasInlineVideo;
         </div>
       ) : (
         <div class="annonce-hero__main-empty">Pas de photo disponible</div>
-      )}
-
-      {hasExternalTour && (
-        <a class="annonce-hero__tour-cta" href={tour} target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 4 a8 8 0 1 0 0 16 a8 8 0 0 0 0 -16 z M12 8 a4 4 0 1 1 0 8 a4 4 0 0 1 0 -8 z" />
-          </svg>
-          VISITE VIRTUELLE
-        </a>
       )}
 
       {photos.length > 1 && (
@@ -167,6 +162,19 @@ const hasExternalTour = !!tour && !hasInlineVideo;
         aria-hidden="true"
       ></a>
     ))}
+
+    {hasExternalTour && (
+      <a class="btn-pill-cta btn-pill-cta--loc annonce-hero__tour-cta" href={tour} target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 7 L8 4 L16 7 L21 4 V17 L16 20 L8 17 L3 20 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none" />
+          <path d="M8 4 V17 M16 7 V20" stroke="currentColor" stroke-width="1.7" />
+        </svg>
+        VOIR LE BIEN EN VISITE VIRTUELLE
+        <svg width="14" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    )}
 
     <slot name="left-below" />
   </div>

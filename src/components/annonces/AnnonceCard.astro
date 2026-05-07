@@ -28,6 +28,8 @@ const pills: string[] = [];
 if (annonce.nbPieces) pills.push(`T${annonce.nbPieces}`);
 if (annonce.surface) pills.push(`${Math.round(annonce.surface)} m²`);
 if (annonce.nbChambres) pills.push(`${annonce.nbChambres} ch.`);
+if (!isVente && isMeuble(annonce)) pills.push('Meublé');
+if (!isVente && annonce.depotGarantie) pills.push(`Dépôt ${Math.round(annonce.depotGarantie)} €`);
 
 const cpVille = `${annonce.codePostal || ''} ${annonce.ville || ''}`.trim();
 
