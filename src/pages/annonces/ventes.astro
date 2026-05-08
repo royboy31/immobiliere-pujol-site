@@ -1,12 +1,15 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
+import { getActiveAnnonces, dbToUbiflow } from '../../lib/db-annonces';
 import { buildArrondissements, buildKindOptions } from '../../lib/annonces-filter';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
 
-const allAnnonces = await fetchUbiflowAnnonces();
+const { env } = await import('cloudflare:workers');
+const db = (env as any).DB as D1Database;
+const allDb = await getActiveAnnonces(db);
+const allAnnonces = allDb.map(dbToUbiflow);
 const annonces = allAnnonces.filter(a => a.type === 'V');
 const locations = allAnnonces.filter(a => a.type === 'L');
 
