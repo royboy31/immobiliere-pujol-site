@@ -10,6 +10,8 @@ const UBIFLOW_URL =
 interface Env {
   DB: D1Database;
   PHOTOS: R2Bucket;
+  GITHUB_TOKEN: string;
+  GITHUB_REPO: string; // "owner/repo"
 }
 
 // ── XML parsing (inlined from src/lib/ubiflow.ts to keep this worker self-contained) ──
@@ -160,6 +162,38 @@ async function fetchFeed(): Promise<ParsedAnnonce[]> {
   if (!rawList) return [];
   const list = Array.isArray(rawList) ? rawList : [rawList];
   return list.map(parseAnnonce);
+}
+
+// ── Trigger site redeploy via GitHub Actions workflow_dispatch ──
+
+async function triggerRedeploy(env: Env): Promise<boolean> {
+  if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
+    console.log('[cron-sync] No GITHUB_TOKEN/GITHUB_REPO — skipping redeploy trigger');
+    return false;
+  }
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/deploy.yml/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'pujol-cron-sync',
+        },
+        body: JSON.stringify({ ref: 'main' }),
+      }
+    );
+    if (resp.ok || resp.status === 204) {
+      console.log('[cron-sync] Redeploy triggered successfully');
+      return true;
+    }
+    console.error(`[cron-sync] Redeploy trigger failed: ${resp.status} ${await resp.text()}`);
+    return false;
+  } catch (e: any) {
+    console.error(`[cron-sync] Redeploy trigger error: ${e.message}`);
+    return false;
+  }
 }
 
 // ── Sync logic (batched to stay within Worker subrequest limits) ──
@@ -691,6 +725,11 @@ export default {
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
-    ctx.waitUntil(runSync(env));
+    ctx.waitUntil(
+      runSync(env).then((stats) => {
+        // Trigger redeploy so homepage picks up fresh D1 data
+        if (stats.errors === 0) return triggerRedeploy(env);
+      })
+    );
   },
 };
