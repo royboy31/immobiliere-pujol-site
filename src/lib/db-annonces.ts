@@ -30,6 +30,7 @@ export interface DbAnnonce {
   charges: number | null;
   depot_garantie: number | null;
   honoraires: string | null;
+  honoraires_etat_des_lieux: number | null;
   surface: number | null;
   surface_terrain: number | null;
   nb_pieces: number | null;

@@ -78,7 +78,7 @@ async function upsertAnnonce(
           adresse = ?, code_postal = ?, ville = ?, quartier = ?,
           latitude = ?, longitude = ?,
           prix = ?, loyer_cc = ?, charges = ?, depot_garantie = ?,
-          honoraires = ?,
+          honoraires = ?, honoraires_etat_des_lieux = ?,
           surface = ?, surface_terrain = ?,
           nb_pieces = ?, nb_chambres = ?, nb_salles_bain = ?, nb_wc = ?,
           etage = ?, nb_etages = ?,
@@ -89,6 +89,7 @@ async function upsertAnnonce(
           titre = ?, descriptif = ?,
           contact_a_afficher = ?, telephone_a_afficher = ?, email_a_afficher = ?,
           mandat_numero = ?, mandat_type = ?,
+          url_visite_virtuelle = ?,
           date_modification = ?, source = 'ubiflow',
           date_fermeture = NULL,
           updated_at = ?
@@ -101,6 +102,7 @@ async function upsertAnnonce(
         annonce.latitude, annonce.longitude,
         annonce.prix, annonce.loyerCC, annonce.charges, annonce.depotGarantie,
         annonce.fraisAgence != null ? String(annonce.fraisAgence) : null,
+        annonce.honorairesEtatDesLieux,
         annonce.surface, annonce.surfaceTerrain,
         annonce.nbPieces, annonce.nbChambres, annonce.nbSallesDeBain, annonce.nbWC,
         annonce.etage || null, annonce.nbEtages || null,
@@ -113,6 +115,7 @@ async function upsertAnnonce(
         annonce.titre, annonce.description,
         annonce.contactAAfficher, annonce.telephoneAAfficher, annonce.emailAAfficher,
         annonce.mandatNumero || null, annonce.mandatType || null,
+        annonce.visiteVirtuelle || null,
         now, now,
         existing.id,
       )
@@ -139,7 +142,7 @@ async function upsertAnnonce(
           adresse, code_postal, ville, quartier,
           latitude, longitude,
           prix, loyer_cc, charges, depot_garantie,
-          honoraires,
+          honoraires, honoraires_etat_des_lieux,
           surface, surface_terrain,
           nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
           etage, nb_etages,
@@ -150,6 +153,7 @@ async function upsertAnnonce(
           titre, descriptif,
           contact_a_afficher, telephone_a_afficher, email_a_afficher,
           mandat_numero, mandat_type,
+          url_visite_virtuelle,
           date_creation, date_modification, source,
           created_at, updated_at
         ) VALUES (
@@ -159,7 +163,7 @@ async function upsertAnnonce(
           ?, ?, ?, ?,
           ?, ?,
           ?, ?, ?, ?,
-          ?,
+          ?, ?,
           ?, ?,
           ?, ?, ?, ?,
           ?, ?,
@@ -170,6 +174,7 @@ async function upsertAnnonce(
           ?, ?,
           ?, ?, ?,
           ?, ?,
+          ?,
           ?, ?, 'ubiflow',
           ?, ?
         )`,
@@ -182,6 +187,7 @@ async function upsertAnnonce(
         annonce.latitude, annonce.longitude,
         annonce.prix, annonce.loyerCC, annonce.charges, annonce.depotGarantie,
         annonce.fraisAgence != null ? String(annonce.fraisAgence) : null,
+        annonce.honorairesEtatDesLieux,
         annonce.surface, annonce.surfaceTerrain,
         annonce.nbPieces, annonce.nbChambres, annonce.nbSallesDeBain, annonce.nbWC,
         annonce.etage || null, annonce.nbEtages || null,
@@ -194,6 +200,7 @@ async function upsertAnnonce(
         annonce.titre, annonce.description,
         annonce.contactAAfficher, annonce.telephoneAAfficher, annonce.emailAAfficher,
         annonce.mandatNumero || null, annonce.mandatType || null,
+        annonce.visiteVirtuelle || null,
         now, now,
         now, now,
       )

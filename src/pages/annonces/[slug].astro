@@ -63,6 +63,7 @@ type View = {
   depotGarantie?: number | null;
   prix?: number | null;
   honoraires?: string | null;
+  honorairesEtatDesLieux?: number | null;
   honorairesChargeAcquereur?: boolean;
   visiteVirtuelle?: string;
   tourEmbedAllowed?: boolean;
@@ -150,6 +151,7 @@ if (annonce) {
     depotGarantie: annonce.depot_garantie,
     prix: annonce.prix,
     honoraires: annonce.honoraires,
+    honorairesEtatDesLieux: annonce.honoraires_etat_des_lieux,
     honorairesChargeAcquereur: false,
     visiteVirtuelle:
       dedupePipes(annonce.url_visite_virtuelle) ||
@@ -265,7 +267,6 @@ const listingSchema = buildRealEstateListing({
     <AnnonceLive
       view={view}
       contactName={view.contactAAfficher}
-      contactPhone={view.telephoneAAfficher}
       contactEmail={view.emailAAfficher}
       expert={expert}
       pool={pool}

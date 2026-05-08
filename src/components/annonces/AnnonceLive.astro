@@ -44,6 +44,7 @@ interface View {
   depotGarantie?: number | null;
   prix?: number | null;
   honoraires?: string | null;
+  honorairesEtatDesLieux?: number | null;
   honorairesChargeAcquereur?: boolean;
   isClosed: boolean;
 }
@@ -51,14 +52,13 @@ interface View {
 interface Props {
   view: View;
   contactName?: string | null;
-  contactPhone?: string | null;
   contactEmail?: string | null;
   expert?: Expert | null;
   pool?: UbiflowAnnonce[];
   currentSlug?: string;
 }
 
-const { view, contactPhone, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
+const { view, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
 const hasMeuble = view.meuble === 0 || view.meuble === 1;
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
@@ -72,12 +72,15 @@ const hasTechDetails = !!(
 // instead of a number, so parse and only show when numeric.
 const honorairesNum = view.honoraires != null ? parseFloat(String(view.honoraires)) : NaN;
 const hasHonoraires = Number.isFinite(honorairesNum) && honorairesNum > 0;
-const honorairesFmt = hasHonoraires
-  ? new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(honorairesNum)
-  : '';
+const fmtEur = new Intl.NumberFormat('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+const honorairesFmt = hasHonoraires ? fmtEur.format(honorairesNum) : '';
+
+const etatDesLieuxNum = view.honorairesEtatDesLieux ?? NaN;
+const hasEtatDesLieux = Number.isFinite(etatDesLieuxNum) && etatDesLieuxNum > 0;
+const etatDesLieuxFmt = hasEtatDesLieux ? fmtEur.format(etatDesLieuxNum) : '';
 
 const hasFinanceDetails =
-  (view.type === 'L' && !!(view.loyer || view.loyerCC || view.charges || view.depotGarantie || hasHonoraires)) ||
+  (view.type === 'L' && !!(view.loyer || view.loyerCC || view.charges || view.depotGarantie || hasHonoraires || hasEtatDesLieux)) ||
   (view.type === 'V' && !!(view.prix || hasHonoraires || view.honorairesChargeAcquereur));
 ---
 
@@ -122,6 +125,7 @@ const hasFinanceDetails =
             {view.type === 'L' && !view.loyerCC && view.loyer && <><dt>Loyer hors charges</dt><dd>{view.loyer} €/mois</dd></>}
             {view.type === 'L' && view.charges && <><dt>dont charges</dt><dd>{view.charges} €/mois</dd></>}
             {view.type === 'L' && hasHonoraires && <><dt>Honoraires d'agence (TTC)</dt><dd>{honorairesFmt} €</dd></>}
+            {view.type === 'L' && hasEtatDesLieux && <><dt>Honoraires état des lieux</dt><dd>{etatDesLieuxFmt} €</dd></>}
             {view.type === 'L' && view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
             {view.type === 'V' && view.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd></>}
             {view.type === 'V' && hasHonoraires && <><dt>Honoraires d'agence (TTC)</dt><dd>{honorairesFmt} €</dd></>}
@@ -136,7 +140,6 @@ const hasFinanceDetails =
       reference={view.reference}
       titre={view.titre}
       contactEmail={contactEmail}
-      contactPhone={contactPhone}
       type={view.type}
     />
 

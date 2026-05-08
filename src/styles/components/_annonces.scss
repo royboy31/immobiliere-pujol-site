@@ -1207,16 +1207,6 @@
     padding: 14px 20px;
   }
 
-  &__phone {
-    text-align: center;
-    font-size: 12px;
-    color: $ds-ink;
-    text-decoration: none;
-    margin-top: 6px;
-
-    &:hover { color: $black; text-decoration: underline; }
-  }
-
   &__ref {
     margin: 12px 0 0;
     text-align: center;
