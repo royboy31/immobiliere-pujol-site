@@ -725,16 +725,33 @@ export default {
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
-    ctx.waitUntil(
-      runSync(env).then((stats) => {
-        // Only redeploy when listings actually changed (new, closed, or feed size changed)
-        const changed = stats.inserted > 0 || stats.closed > 0;
-        if (stats.errors === 0 && changed) {
-          console.log(`[cron-sync] Changes detected (ins=${stats.inserted} closed=${stats.closed}), triggering redeploy`);
-          return triggerRedeploy(env);
+    ctx.waitUntil((async () => {
+      let changed = false;
+
+      // 1. Ubiflow XML sync
+      const stats = await runSync(env);
+      if (stats.inserted > 0 || stats.closed > 0) changed = true;
+
+      // 2. LBI zip import (if zip exists in R2)
+      try {
+        const lbiResult = await runLbiImport(env);
+        if ('error' in lbiResult) {
+          console.log(`[cron-sync] LBI skipped: ${lbiResult.error}`);
+        } else if (lbiResult.upserted > 0) {
+          console.log(`[cron-sync] LBI imported ${lbiResult.upserted} annonces`);
+          changed = true;
         }
+      } catch (e: any) {
+        console.error(`[cron-sync] LBI import error: ${e.message}`);
+      }
+
+      // 3. Trigger redeploy only if something changed
+      if (changed) {
+        console.log('[cron-sync] Changes detected, triggering redeploy');
+        await triggerRedeploy(env);
+      } else {
         console.log('[cron-sync] No listing changes, skipping redeploy');
-      })
-    );
+      }
+    })());
   },
 };
