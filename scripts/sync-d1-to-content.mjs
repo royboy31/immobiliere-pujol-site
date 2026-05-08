@@ -56,9 +56,29 @@ for (const a of allAnnonces) {
     refMap.set(ref, a);
   }
 }
-const annonces = [...refMap.values()];
-const deduped = allAnnonces.length - annonces.length;
-if (deduped > 0) console.log(`  Deduplicated ${deduped} cross-source duplicates`);
+const afterRefDedup = [...refMap.values()];
+const refDeduped = allAnnonces.length - afterRefDedup.length;
+if (refDeduped > 0) console.log(`  Deduplicated ${refDeduped} by reference`);
+
+// Second pass: same address + price + surface + type = same property
+// Only dedup within same source to avoid false positives
+const addrMap = new Map();
+for (const a of afterRefDedup) {
+  const addr = (a.adresse || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  // Only dedup if we have a real address to compare
+  if (addr && a.prix && a.surface) {
+    const key = `${a.type_annonce}|${a.code_postal}|${addr}|${a.prix}|${a.surface}`;
+    if (!addrMap.has(key)) {
+      addrMap.set(key, a);
+    }
+  } else {
+    // No address or price — keep by slug
+    addrMap.set(a.slug, a);
+  }
+}
+const annonces = [...addrMap.values()];
+const addrDeduped = afterRefDedup.length - annonces.length;
+if (addrDeduped > 0) console.log(`  Deduplicated ${addrDeduped} by address+price`);
 
 if (annonces.length === 0) {
   console.log('⚠️  No active annonces in D1, skipping content sync');
@@ -160,10 +180,13 @@ console.log(`✅ Wrote ${written} annonce JSON files from D1`);
 // Match by reference prefix (everything before the first dash-digit sequence)
 
 const d1Refs = new Set();
-for (const a of annonces) {
+for (const a of allAnnonces) {
   // Extract the reference part (e.g. "226neot", "mbvap160009787")
   const ref = a.slug.split('-')[0];
   if (ref) d1Refs.add(ref);
+  // Also add the actual reference value
+  const fullRef = (a.reference_agence || a.ubiflow_reference || '').toLowerCase();
+  if (fullRef) d1Refs.add(fullRef);
 }
 
 const wpFiles = readdirSync(ANNONCES_DIR).filter(f => !f.endsWith('_d1sync.json') && f.endsWith('.json'));
