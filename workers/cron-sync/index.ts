@@ -727,8 +727,13 @@ export default {
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
     ctx.waitUntil(
       runSync(env).then((stats) => {
-        // Trigger redeploy so homepage picks up fresh D1 data
-        if (stats.errors === 0) return triggerRedeploy(env);
+        // Only redeploy when listings actually changed (new, closed, or feed size changed)
+        const changed = stats.inserted > 0 || stats.closed > 0;
+        if (stats.errors === 0 && changed) {
+          console.log(`[cron-sync] Changes detected (ins=${stats.inserted} closed=${stats.closed}), triggering redeploy`);
+          return triggerRedeploy(env);
+        }
+        console.log('[cron-sync] No listing changes, skipping redeploy');
       })
     );
   },
