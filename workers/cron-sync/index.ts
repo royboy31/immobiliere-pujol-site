@@ -42,6 +42,7 @@ interface ParsedAnnonce {
   charges: number | null;
   depotGarantie: number | null;
   honorairesChargeAcquereur: boolean;
+  fraisAgence: number | null;
   libelleType: string;
   codePostal: string;
   adresse: string;
@@ -114,6 +115,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     charges: num(prestation.charges),
     depotGarantie: num(prestation.depot_garantie),
     honorairesChargeAcquereur: bool(prestation.honoraires_charge_acquereur),
+    fraisAgence: num(prestation.frais_agence),
     libelleType: str(bien.libelle_type),
     codePostal: str(bien.code_postal),
     adresse: str(bien.adresse),
@@ -237,7 +239,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.slug, a.id, a.reference, a.type, a.libelleType,
     a.adresse, a.codePostal, a.ville, a.quartier, a.latitude, a.longitude,
     a.prix, a.loyerCC, a.charges, a.depotGarantie,
-    a.honorairesChargeAcquereur ? 'Charge acquéreur' : null,
+    a.fraisAgence != null ? String(a.fraisAgence) : null,
     a.surface, a.surfaceTerrain,
     a.nbPieces, a.nbChambres, a.nbSallesDeBain, a.nbWC,
     a.etage || null, a.nbEtages || null,
