@@ -4,7 +4,7 @@
 // Runs as part of `npm run build` before `astro build`.
 
 import { execSync } from 'child_process';
-import { writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'fs';
+import { writeFileSync, readFileSync, mkdirSync, readdirSync, unlinkSync } from 'fs';
 import path from 'path';
 
 const ANNONCES_DIR = path.resolve('src/content/annonces');
@@ -136,3 +136,35 @@ for (const a of annonces) {
 }
 
 console.log(`✅ Wrote ${written} annonce JSON files from D1`);
+
+// ── Mark overlapping WordPress files as closed (don't delete) ──
+// D1 slugs use shorter format (e.g. "226neot-63-bd-saint-jean-13010-marseille-10")
+// WP files use longer format (e.g. "226neot-63-boulevard-saint-jean-13010-marseille-10eme-arrondissement-france")
+// Match by reference prefix (everything before the first dash-digit sequence)
+
+const d1Refs = new Set();
+for (const a of annonces) {
+  // Extract the reference part (e.g. "226neot", "mbvap160009787")
+  const ref = a.slug.split('-')[0];
+  if (ref) d1Refs.add(ref);
+}
+
+const wpFiles = readdirSync(ANNONCES_DIR).filter(f => !f.endsWith('_d1sync.json') && f.endsWith('.json'));
+let patched = 0;
+
+for (const f of wpFiles) {
+  const ref = f.split('-')[0];
+  if (!d1Refs.has(ref)) continue;
+
+  const filePath = path.join(ANNONCES_DIR, f);
+  try {
+    const data = JSON.parse(readFileSync(filePath, 'utf-8'));
+    if (data.status === 'publish') {
+      data.status = 'closed';
+      writeFileSync(filePath, JSON.stringify(data, null, 2));
+      patched++;
+    }
+  } catch { /* skip unreadable files */ }
+}
+
+if (patched > 0) console.log(`🔒 Marked ${patched} overlapping WordPress files as closed`);
