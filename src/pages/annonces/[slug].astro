@@ -67,6 +67,8 @@ type View = {
   visiteVirtuelle?: string;
   tourEmbedAllowed?: boolean;
   isClosed: boolean;
+  latitude?: number | null;
+  longitude?: number | null;
   related: { slug: string; title: string; prix: number | null; type: string; cp: string }[];
   contactAAfficher?: string | null;
   telephoneAAfficher?: string | null;
@@ -154,6 +156,8 @@ if (annonce) {
       extractTourUrl(annonce.descriptif),
     tourEmbedAllowed: !!dedupePipes(annonce.url_visite_virtuelle),
     isClosed,
+    latitude: annonce.latitude,
+    longitude: annonce.longitude,
     related: related.map(r => ({
       slug: r.slug,
       title: r.titre,

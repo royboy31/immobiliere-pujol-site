@@ -46,3 +46,16 @@ export function findExpertByEmail(rawEmail: string | undefined | null): Expert |
   if (!rawEmail) return null;
   return getExpertMap().get(normalizeEmail(rawEmail)) ?? null;
 }
+
+export type ExpertType = 'rental' | 'sales' | 'other';
+
+// Classify expert by fonction so the page can theme rentals (green) vs sales (orange).
+// Rental wins ties because "gestion locative" appears alongside "vente" in mixed roles
+// (e.g. Caroline Pujol — "Vente, rénovation et gestion de biens immobiliers").
+export function getExpertType(expert: Pick<Expert, 'fonction'>): ExpertType {
+  const f = (expert.fonction || '').toLowerCase();
+  if (!f) return 'other';
+  if (/locati|locatif|location|loueur|loue/.test(f)) return 'rental';
+  if (/vente|transaction/.test(f)) return 'sales';
+  return 'other';
+}

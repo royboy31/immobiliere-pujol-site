@@ -1,5 +1,6 @@
 ---
 import AnnonceHero from './AnnonceHero.astro';
+import AnnonceMap from './AnnonceMap.astro';
 import ContactForm from './ContactForm.astro';
 import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
@@ -21,6 +22,8 @@ interface View {
   codePostal?: string;
   ville?: string;
   quartier?: string;
+  latitude?: number | null;
+  longitude?: number | null;
   surface?: number | null;
   nbPieces?: number | null;
   nbChambres?: number | null;
@@ -129,7 +132,18 @@ const hasFinanceDetails =
       type={view.type}
     />
 
-    {expert && <ExpertCard slot="action-below" expert={expert} />}
+    <Fragment slot="action-below">
+      {expert && <ExpertCard expert={expert} />}
+      <AnnonceMap
+        variant="sidebar"
+        adresse={view.adresse}
+        codePostal={view.codePostal}
+        ville={view.ville}
+        quartier={view.quartier}
+        latitude={view.latitude}
+        longitude={view.longitude}
+      />
+    </Fragment>
   </AnnonceHero>
 
   {(view.dpeEtiquetteConso || view.dpeEtiquetteGes) && (
