@@ -27,8 +27,8 @@ function queryD1(sql) {
 // ── Fetch only the fields we need (avoid giant descriptif blowing up the buffer) ──
 
 console.log('📡 Fetching active annonces from D1...');
-const annonces = queryD1(`
-  SELECT id, slug, type_annonce, type_bien, titre, descriptif,
+const allAnnonces = queryD1(`
+  SELECT id, slug, source, type_annonce, type_bien, titre, descriptif,
     reference_agence, ubiflow_reference,
     adresse, code_postal, ville, quartier,
     prix, loyer_cc, charges, honoraires,
@@ -41,7 +41,24 @@ const annonces = queryD1(`
     date_creation
   FROM annonces WHERE status = 'active' ORDER BY date_creation DESC
 `);
-console.log(`  Found ${annonces.length} active annonces`);
+console.log(`  Found ${allAnnonces.length} active annonces`);
+
+// ── Deduplicate across sources (ubiflow > lbi > wordpress) ──
+// Same property can exist in multiple sources with different slugs but
+// the same reference (e.g. "mbvap160009824"). Keep the best source.
+const SOURCE_PRIORITY = { ubiflow: 0, lbi: 1, wordpress: 2 };
+const refMap = new Map(); // reference → best annonce
+for (const a of allAnnonces) {
+  const ref = (a.reference_agence || a.ubiflow_reference || '').toLowerCase();
+  if (!ref) { refMap.set(a.slug, a); continue; } // no ref, keep by slug
+  const existing = refMap.get(ref);
+  if (!existing || (SOURCE_PRIORITY[a.source] ?? 9) < (SOURCE_PRIORITY[existing.source] ?? 9)) {
+    refMap.set(ref, a);
+  }
+}
+const annonces = [...refMap.values()];
+const deduped = allAnnonces.length - annonces.length;
+if (deduped > 0) console.log(`  Deduplicated ${deduped} cross-source duplicates`);
 
 if (annonces.length === 0) {
   console.log('⚠️  No active annonces in D1, skipping content sync');
