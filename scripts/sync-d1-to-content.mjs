@@ -85,49 +85,50 @@ for (const a of annonces) {
   const photoUrls = photoMap.get(a.id) || [];
   if (photoUrls.length === 0) continue; // homepage requires photos
 
+  // Build JSON object — omit null values (zod schema uses .optional(), rejects null)
   const json = {
     id: a.id,
     title: a.titre || '',
     slug: a.slug,
     status: 'publish',
     date: a.date_creation || new Date().toISOString(),
-    referenceAgence: a.reference_agence || a.ubiflow_reference || '',
     typeAnnonce: a.type_annonce || '',
     typeBien: a.type_bien || '',
-    adresse: a.adresse || '',
-    codePostal: a.code_postal || '',
-    ville: a.ville || '',
-    quartier: a.quartier || '',
-    prix: a.prix,
-    loyerCC: a.loyer_cc,
-    charges: a.charges,
-    honoraires: a.honoraires || '',
-    surface: a.surface,
-    surfaceTerrain: a.surface_terrain,
-    nbPieces: a.nb_pieces,
-    nbChambres: a.nb_chambres,
-    nbSallesBain: a.nb_salles_bain,
-    nbWC: a.nb_wc,
-    etage: a.etage || '',
-    nbEtages: a.nb_etages || '',
-    ascenseur: a.ascenseur === 1,
-    cave: a.cave === 1,
-    terrasse: a.terrasse === 1,
-    parking: a.parking || '',
-    garage: a.garage || '',
-    interphone: a.interphone === 1,
-    dpeNote: a.dpe_note || '',
-    dpeValeur: a.dpe_valeur || '',
-    gesNote: a.ges_note || '',
-    gesValeur: a.ges_valeur || '',
-    typeChauffage: a.type_chauffage || '',
-    libelle: a.titre || '',
-    descriptif: a.descriptif || '',
     photos: photoUrls,
-    contactAAfficher: a.contact_a_afficher || '',
-    telephoneAAfficher: a.telephone_a_afficher || '',
-    emailAAfficher: a.email_a_afficher || '',
   };
+  // Optional string fields
+  const strFields = {
+    referenceAgence: a.reference_agence || a.ubiflow_reference,
+    adresse: a.adresse, codePostal: a.code_postal, ville: a.ville,
+    quartier: a.quartier, honoraires: a.honoraires,
+    etage: a.etage, nbEtages: a.nb_etages,
+    parking: a.parking, garage: a.garage,
+    dpeNote: a.dpe_note, dpeValeur: a.dpe_valeur,
+    gesNote: a.ges_note, gesValeur: a.ges_valeur,
+    typeChauffage: a.type_chauffage,
+    libelle: a.titre, descriptif: a.descriptif,
+    contactAAfficher: a.contact_a_afficher,
+    telephoneAAfficher: a.telephone_a_afficher,
+    emailAAfficher: a.email_a_afficher,
+  };
+  for (const [k, v] of Object.entries(strFields)) {
+    if (v != null && v !== '') json[k] = String(v);
+  }
+  // Optional number fields
+  const numFields = {
+    prix: a.prix, loyerCC: a.loyer_cc, charges: a.charges,
+    surface: a.surface, surfaceTerrain: a.surface_terrain,
+    nbPieces: a.nb_pieces, nbChambres: a.nb_chambres,
+    nbSallesBain: a.nb_salles_bain, nbWC: a.nb_wc,
+  };
+  for (const [k, v] of Object.entries(numFields)) {
+    if (v != null) json[k] = v;
+  }
+  // Optional boolean fields
+  if (a.ascenseur === 1) json.ascenseur = true;
+  if (a.cave === 1) json.cave = true;
+  if (a.terrasse === 1) json.terrasse = true;
+  if (a.interphone === 1) json.interphone = true;
 
   const filename = `${a.slug}_d1sync.json`;
   writeFileSync(path.join(ANNONCES_DIR, filename), JSON.stringify(json, null, 2));
