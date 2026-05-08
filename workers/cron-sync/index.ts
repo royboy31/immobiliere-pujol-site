@@ -461,7 +461,7 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
 
     const a: LbiAnnonce = {
       reference: f[1] || '',
-      typeAnnonce: f[2] === 'Vente' ? 'V' : 'L',
+      typeAnnonce: f[2].toLowerCase() === 'vente' ? 'V' : 'L',
       typeBien: f[3] || '',
       codePostal: f[4] || '',
       ville: f[5] || '',
