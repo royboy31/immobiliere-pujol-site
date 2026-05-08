@@ -2,6 +2,7 @@
 // Deployed as a separate worker alongside the main Astro site
 
 import { XMLParser } from 'fast-xml-parser';
+import { unzipSync, strFromU8 } from 'fflate';
 
 const UBIFLOW_URL =
   'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
@@ -405,6 +406,291 @@ async function runSync(env: Env) {
   return stats;
 }
 
+// ── LBI zip import (La Boîte Immo) ──
+// Reads zip from R2 (lbi/import.zip), extracts Annonces.csv, parses, imports to D1 + R2
+
+const LBI_DELIMITER = '!#';
+
+interface LbiAnnonce {
+  reference: string;
+  typeAnnonce: 'V' | 'L';
+  typeBien: string;
+  codePostal: string;
+  ville: string;
+  prix: number | null;
+  surface: number | null;
+  surfaceTerrain: number | null;
+  nbPieces: number | null;
+  nbChambres: number | null;
+  nbSallesBain: number | null;
+  nbWC: number | null;
+  titre: string;
+  descriptif: string;
+  etage: string | null;
+  nbEtages: string | null;
+  ascenseur: boolean;
+  cave: boolean;
+  terrasse: boolean;
+  parking: boolean;
+  balcon: boolean;
+  interphone: boolean;
+  contactNom: string | null;
+  telephone: string | null;
+  email: string | null;
+  mandatNumero: string | null;
+  dpeValeur: string | null;
+  dpeNote: string | null;
+  gesValeur: string | null;
+  gesNote: string | null;
+  photos: string[];
+  slug: string;
+}
+
+function parseLbiCsv(raw: string): LbiAnnonce[] {
+  const lines = raw.trim().split('\n');
+  const annonces: LbiAnnonce[] = [];
+
+  for (const line of lines) {
+    const f = line.split(LBI_DELIMITER).map(v => v.replace(/^"|"$/g, ''));
+
+    // Collect photo URLs from fields 84-170
+    const photos: string[] = [];
+    for (let i = 84; i <= 170 && i < f.length; i++) {
+      if (f[i] && f[i].startsWith('http')) photos.push(f[i]);
+    }
+
+    const a: LbiAnnonce = {
+      reference: f[1] || '',
+      typeAnnonce: f[2] === 'Vente' ? 'V' : 'L',
+      typeBien: f[3] || '',
+      codePostal: f[4] || '',
+      ville: f[5] || '',
+      prix: parseFloat(f[10]) || null,
+      surface: parseFloat(f[15]) || null,
+      surfaceTerrain: parseFloat(f[16]) || null,
+      nbPieces: parseInt(f[17]) || null,
+      nbChambres: parseInt(f[18]) || null,
+      titre: f[19] || '',
+      descriptif: f[20] || '',
+      etage: f[23] || null,
+      nbEtages: f[24] || null,
+      nbSallesBain: parseInt(f[28]) || null,
+      nbWC: parseInt(f[30]) || null,
+      cave: f[35] === 'OUI',
+      terrasse: f[36] === 'OUI',
+      parking: !!(f[38] && f[38] !== '0'),
+      balcon: f[40] === 'OUI',
+      ascenseur: f[41] === 'OUI',
+      interphone: f[82] === 'OUI',
+      telephone: f[104]?.trim() || null,
+      contactNom: f[105]?.trim() || null,
+      email: f[106]?.trim() || null,
+      mandatNumero: f[111]?.trim() || null,
+      dpeValeur: f[175]?.trim() || null,
+      dpeNote: f[176]?.trim() || null,
+      gesValeur: f[177]?.trim() || null,
+      gesNote: f[178]?.trim() || null,
+      photos,
+      slug: '',
+    };
+
+    // Generate slug (same pattern as ubiflow)
+    const parts: string[] = [];
+    if (a.reference) parts.push(a.reference.toLowerCase());
+    if (a.codePostal) parts.push(a.codePostal);
+    if (a.ville) parts.push(a.ville);
+    a.slug = parts
+      .join(' ')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .substring(0, 120);
+
+    annonces.push(a);
+  }
+
+  return annonces;
+}
+
+async function uploadLbiPhotos(
+  bucket: R2Bucket,
+  a: LbiAnnonce,
+  stats: { photosUploaded: number; photosSkipped: number }
+): Promise<string[]> {
+  const r2Keys: string[] = [];
+  for (let i = 0; i < a.photos.length; i++) {
+    const key = `annonces/${a.slug}/${i}.jpg`;
+    try {
+      const head = await bucket.head(key);
+      if (head) {
+        r2Keys.push(key);
+        stats.photosSkipped++;
+        continue;
+      }
+      const resp = await fetch(a.photos[i]);
+      if (!resp.ok) { r2Keys.push(a.photos[i]); continue; }
+      const blob = await resp.arrayBuffer();
+      await bucket.put(key, blob, {
+        httpMetadata: { contentType: resp.headers.get('content-type') || 'image/jpeg' },
+      });
+      r2Keys.push(key);
+      stats.photosUploaded++;
+    } catch {
+      r2Keys.push(a.photos[i]); // fallback to external URL
+    }
+  }
+  return r2Keys;
+}
+
+function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1PreparedStatement {
+  return db.prepare(
+    `INSERT INTO annonces (
+      slug, status, reference_agence,
+      type_annonce, type_bien,
+      code_postal, ville,
+      prix,
+      surface, surface_terrain,
+      nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
+      etage, nb_etages, ascenseur, cave, terrasse,
+      parking, interphone, balcon,
+      dpe_note, dpe_valeur, ges_note, ges_valeur,
+      titre, descriptif,
+      contact_a_afficher, telephone_a_afficher, email_a_afficher,
+      mandat_numero,
+      date_creation, date_modification, source, created_at, updated_at
+    ) VALUES (
+      ?,'active',?, ?,?, ?,?, ?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?, ?,?, ?,?,?, ?, ?,?,'lbi',?,?
+    )
+    ON CONFLICT(slug) DO UPDATE SET
+      status='active', reference_agence=excluded.reference_agence,
+      type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
+      code_postal=excluded.code_postal, ville=excluded.ville,
+      prix=excluded.prix,
+      surface=excluded.surface, surface_terrain=excluded.surface_terrain,
+      nb_pieces=excluded.nb_pieces, nb_chambres=excluded.nb_chambres,
+      nb_salles_bain=excluded.nb_salles_bain, nb_wc=excluded.nb_wc,
+      etage=excluded.etage, nb_etages=excluded.nb_etages,
+      ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
+      parking=excluded.parking, interphone=excluded.interphone, balcon=excluded.balcon,
+      dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
+      ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur,
+      titre=excluded.titre, descriptif=excluded.descriptif,
+      contact_a_afficher=excluded.contact_a_afficher,
+      telephone_a_afficher=excluded.telephone_a_afficher,
+      email_a_afficher=excluded.email_a_afficher,
+      mandat_numero=excluded.mandat_numero,
+      date_modification=excluded.date_modification, source='lbi',
+      date_fermeture=NULL, updated_at=excluded.updated_at`
+  ).bind(
+    a.slug, a.reference, a.typeAnnonce, a.typeBien,
+    a.codePostal, a.ville,
+    a.prix,
+    a.surface, a.surfaceTerrain,
+    a.nbPieces, a.nbChambres, a.nbSallesBain, a.nbWC,
+    a.etage, a.nbEtages,
+    a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
+    a.parking ? '1' : null, a.interphone ? 1 : 0, a.balcon ? 1 : 0,
+    a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur,
+    a.titre, a.descriptif,
+    a.contactNom, a.telephone, a.email,
+    a.mandatNumero,
+    now, now, now, now
+  );
+}
+
+async function runLbiImport(env: Env) {
+  const stats = {
+    annoncesInZip: 0, upserted: 0, photosUploaded: 0, photosSkipped: 0,
+    errors: 0, errorDetails: [] as string[],
+  };
+
+  try {
+    // 1. Read zip from R2
+    const zipObj = await env.PHOTOS.get('lbi/import.zip');
+    if (!zipObj) {
+      return { error: 'No zip found at lbi/import.zip in R2. Upload first with: wrangler r2 object put pujol-photos/lbi/import.zip --file=1_immopujol.zip' };
+    }
+    const zipBuffer = await zipObj.arrayBuffer();
+
+    // 2. Extract Annonces.csv from zip
+    const unzipped = unzipSync(new Uint8Array(zipBuffer));
+    const csvBytes = unzipped['Annonces.csv'];
+    if (!csvBytes) {
+      return { error: 'Annonces.csv not found in zip. Files found: ' + Object.keys(unzipped).join(', ') };
+    }
+
+    // Decode as latin1 (LBI uses ISO-8859-1)
+    const csvText = new TextDecoder('iso-8859-1').decode(csvBytes);
+    const annonces = parseLbiCsv(csvText);
+    stats.annoncesInZip = annonces.length;
+    console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
+
+    // 3. Upload photos to R2
+    const photoMap = new Map<string, string[]>();
+    for (const a of annonces) {
+      try {
+        const keys = await uploadLbiPhotos(env.PHOTOS, a, stats);
+        photoMap.set(a.slug, keys);
+        console.log(`[lbi-import] ${a.reference}: ${keys.length} photos`);
+      } catch (e: any) {
+        stats.errors++;
+        stats.errorDetails.push(`${a.slug} photos: ${e.message}`);
+        photoMap.set(a.slug, a.photos);
+      }
+    }
+
+    // 4. Batch upsert annonces into D1
+    const now = new Date().toISOString();
+    const upsertStmts = annonces.map(a => buildLbiUpsertStmt(env.DB, a, now));
+    for (let i = 0; i < upsertStmts.length; i += 100) {
+      const results = await env.DB.batch(upsertStmts.slice(i, i + 100));
+      for (const r of results) {
+        if (r.meta.changes > 0) stats.upserted++;
+      }
+    }
+
+    // 5. Link photos — get IDs, delete old, insert new
+    const slugLookups = annonces.map(a =>
+      env.DB.prepare('SELECT id, slug FROM annonces WHERE slug = ?').bind(a.slug)
+    );
+    const slugResults = await env.DB.batch(slugLookups);
+    const slugToId = new Map<string, number>();
+    for (const r of slugResults) {
+      const row = (r.results as any[])[0];
+      if (row) slugToId.set(row.slug, row.id);
+    }
+
+    const photoStmts: D1PreparedStatement[] = [];
+    for (const a of annonces) {
+      const annonceId = slugToId.get(a.slug);
+      if (!annonceId) continue;
+      const keys = photoMap.get(a.slug) || [];
+      photoStmts.push(
+        env.DB.prepare('DELETE FROM annonces_photos WHERE annonce_id = ?').bind(annonceId)
+      );
+      for (let i = 0; i < keys.length; i++) {
+        photoStmts.push(
+          env.DB.prepare('INSERT INTO annonces_photos (annonce_id, url, position, source) VALUES (?,?,?,?)')
+            .bind(annonceId, keys[i], i, 'r2')
+        );
+      }
+    }
+    for (let i = 0; i < photoStmts.length; i += 100) {
+      await env.DB.batch(photoStmts.slice(i, i + 100));
+    }
+
+    console.log('[lbi-import] Done:', JSON.stringify(stats));
+  } catch (e: any) {
+    stats.errors++;
+    stats.errorDetails.push(`FATAL: ${e.message}`);
+    console.error('[lbi-import] Fatal:', e);
+  }
+
+  return stats;
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -427,7 +713,15 @@ export default {
       });
     }
 
-    return new Response('pujol-cron-sync: /sync to trigger, /status to check logs', { status: 200 });
+    // LBI zip import: GET /import-lbi
+    if (url.pathname === '/import-lbi') {
+      const result = await runLbiImport(env);
+      return new Response(JSON.stringify(result, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('pujol-cron-sync: /sync, /status, /import-lbi', { status: 200 });
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
