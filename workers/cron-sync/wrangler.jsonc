@@ -4,5 +4,10 @@
 	"main": "index.ts",
 	"triggers": { "crons": ["0 * * * *"] },
 	"d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "109fb417-c984-4c08-90b2-2a10ae1bc279" }],
-	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }]
+	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }],
+	"vars": {
+		"GITHUB_REPO": "royboy31/immobiliere-pujol-site"
+	}
+	// GITHUB_TOKEN must be set as a secret:
+	// wrangler secret put GITHUB_TOKEN --config workers/cron-sync/wrangler.jsonc
 }
