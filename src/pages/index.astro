@@ -1,11 +1,8 @@
 ---
-export const prerender = false;
-
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection, getEntry } from 'astro:content';
 import { buildWebSite } from '../lib/schemas';
 import { fetchGoogleReviews } from '../lib/google-reviews';
-import { getActiveAnnonces, type DbAnnonce } from '../lib/db-annonces';
 
 // ---------- SEO from CMS page entry ----------
 const pageEntry = await getEntry('pages', 'home');
@@ -14,43 +11,47 @@ const seoTitle =
   "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
 const seoDescription = pageEntry?.data.seoDescription || '';
 
-// ---------- LISTINGS (live from D1) ----------
-const { env } = await import('cloudflare:workers');
-const db = (env as any).DB as D1Database;
-const allAnnonces = await getActiveAnnonces(db);
+// ---------- LISTINGS ----------
+const allAnnonces = await getCollection('annonces', ({ data }) =>
+  data.status === 'publish' && Array.isArray(data.photos) && data.photos.length > 0
+);
+allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
 
-const ventes = allAnnonces.filter((a) => a.type_annonce === 'V').slice(0, 8);
-const locations = allAnnonces.filter((a) => a.type_annonce === 'L').slice(0, 8);
+const ventes = allAnnonces.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
+const locations = allAnnonces.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
 
-// Build a display card from a D1 annonce row.
-function fmtPrice(n?: number | null) {
+// Build a display card from a raw annonce.
+function fmtPrice(n?: number) {
   if (n == null) return '';
   return new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(n);
 }
-function buildCard(a: DbAnnonce & { photos: string[] }) {
-  const isVente = a.type_annonce === 'V';
-  const photo = a.photos[0] || '';
+function buildCard(a: typeof allAnnonces[number]) {
+  const d = a.data;
+  const isVente = d.typeAnnonce === 'V';
+  const photo = (d.photos || [])[0] || '';
   const title =
-    (a.descriptif && a.descriptif.replace(/<[^>]+>/g, '').trim().slice(0, 90)) ||
-    a.titre ||
-    `${a.type_bien || 'Bien'} ${a.nb_pieces ? 'T' + a.nb_pieces : ''}`.trim();
+    (d.descriptif && d.descriptif.replace(/<[^>]+>/g, '').trim().slice(0, 90)) ||
+    d.libelle ||
+    d.title ||
+    `${d.typeBien || 'Bien'} ${d.nbPieces ? 'T' + d.nbPieces : ''}`.trim();
   const price = isVente
-    ? `${fmtPrice(a.prix)} €`
-    : `${fmtPrice(a.loyer_cc ?? a.prix)} €/mois`;
+    ? `${fmtPrice(d.prix)} €`
+    : `${fmtPrice(d.loyerCC ?? d.prix)} €/mois`;
   const pills: string[] = [];
-  if (a.nb_pieces) pills.push(`T${a.nb_pieces}`);
-  if (a.surface) pills.push(`${Math.round(a.surface)} m²`);
-  if (a.nb_pieces) pills.push(`${a.nb_pieces} pièces`);
-  let quartier = a.quartier || '';
+  if (d.nbPieces) pills.push(`T${d.nbPieces}`);
+  if (d.surface) pills.push(`${Math.round(d.surface)} m²`);
+  if (d.nbPieces) pills.push(`${d.nbPieces} pièces`);
+  // Location: prefer quartier + codePostal + ville, fall back to parsing adresse.
+  let quartier = d.quartier || '';
   let cpVille = '';
-  if (a.code_postal || a.ville) {
-    cpVille = `${a.code_postal || ''} ${a.ville || ''}`.trim();
-  } else if (a.adresse) {
-    const m = a.adresse.match(/(\d{5})[, ]+([^,]+)/);
+  if (d.codePostal || d.ville) {
+    cpVille = `${d.codePostal || ''} ${d.ville || ''}`.trim();
+  } else if (d.adresse) {
+    const m = d.adresse.match(/(\d{5})[, ]+([^,]+)/);
     if (m) cpVille = `${m[1]} ${m[2].trim()}`;
   }
   return {
-    href: `/annonces/${a.slug}/`,
+    href: `/annonces/${a.id}/`,
     photo,
     isVente,
     title,
