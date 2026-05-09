@@ -3,11 +3,10 @@ interface Props {
   reference: string;
   titre: string;
   contactEmail?: string | null;
-  contactPhone?: string | null;
   type: 'V' | 'L' | string;
 }
 
-const { reference, titre, contactEmail, contactPhone, type } = Astro.props;
+const { reference, titre, contactEmail, type } = Astro.props;
 const isLocation = type === 'L';
 ---
 
@@ -48,12 +47,6 @@ const isLocation = type === 'L';
   <button type="submit" class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'} annonce-contact__submit`}>
     ENVOYER MA DEMANDE
   </button>
-
-  {contactPhone && (
-    <a href={`tel:${contactPhone.replace(/\s/g, '')}`} class="annonce-contact__phone">
-      ou appeler directement {contactPhone}
-    </a>
-  )}
 
   <p class="annonce-contact__ref">Référence : {reference}</p>
 </form>

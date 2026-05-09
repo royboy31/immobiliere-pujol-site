@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS annonces (
   loyer_ht REAL,                      -- Rent excluding charges
   charges REAL,
   honoraires TEXT,
+  honoraires_etat_des_lieux REAL,
   garantie TEXT,
   depot_garantie REAL,
 
