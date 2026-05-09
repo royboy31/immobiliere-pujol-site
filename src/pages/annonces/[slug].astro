@@ -17,21 +17,20 @@ const db = (env as any).DB as D1Database;
 // Single D1 lookup — handles both active and closed annonces
 const annonce = await getAnnonceBySlug(db, slug);
 
+let closedAsset: ClosedAnnonce | null = null;
+
 if (!annonce) {
   // Fallback: try loading from static assets (for annonces not yet seeded to D1)
-  const { getClosedAnnonce } = await import('../../lib/closed-annonces');
   const assets = (env as any)?.ASSETS;
-  const closed = await getClosedAnnonce(slug, assets, new URL(Astro.url.origin));
-  if (!closed) return Astro.redirect('/annonces/');
-
-  // Redirect will be removed once all annonces are seeded to D1
-  // For now, render closed annonce from static assets with same template
+  closedAsset = await getClosedAnnonce(slug, assets, new URL(Astro.url.origin));
+  if (!closedAsset) return Astro.redirect('/annonces/');
 }
 
 const isClosed = annonce ? annonce.status === 'closed' : true;
 
-// Build view model from D1 data
-const expert = annonce ? findExpertByEmail(annonce.email_a_afficher) : null;
+const expert = annonce
+  ? findExpertByEmail(annonce.email_a_afficher)
+  : closedAsset ? findExpertByEmail(closedAsset.emailAAfficher) : null;
 
 type View = {
   titre: string;
@@ -170,6 +169,56 @@ if (annonce) {
     contactAAfficher: annonce.contact_a_afficher,
     telephoneAAfficher: annonce.telephone_a_afficher,
     emailAAfficher: annonce.email_a_afficher,
+  };
+} else if (closedAsset) {
+  const ca = closedAsset;
+  view = {
+    titre: ca.seoTitle || ca.descriptif?.substring(0, 60) || 'Annonce clôturée',
+    description: ca.descriptif || '',
+    type: ca.typeAnnonce || 'V',
+    reference: ca.referenceAgence || ca.slug,
+    priceDisplay: formatClosedPrice(ca),
+    photos: ca.photos || [],
+    adresse: ca.adresse,
+    codePostal: ca.codePostal,
+    ville: ca.ville,
+    quartier: ca.quartier,
+    surface: ca.surface,
+    nbPieces: ca.nbPieces,
+    nbChambres: ca.nbChambres,
+    nbSallesDeBain: ca.nbSallesBain,
+    nbWC: ca.nbWC,
+    etage: ca.etage != null ? String(ca.etage) : null,
+    nbEtages: ca.nbEtages != null ? String(ca.nbEtages) : null,
+    meuble: null,
+    typeChauffage: ca.typeChauffage,
+    dpeEtiquetteConso: ca.dpeNote,
+    dpeEtiquetteGes: ca.gesNote,
+    dpeValeurConso: null,
+    dpeValeurGes: null,
+    loyer: null,
+    loyerCC: ca.loyerCC,
+    charges: ca.charges,
+    depotGarantie: null,
+    prix: ca.prix,
+    honoraires: ca.honoraires,
+    honorairesEtatDesLieux: null,
+    honorairesChargeAcquereur: false,
+    visiteVirtuelle: '',
+    tourEmbedAllowed: false,
+    isClosed: true,
+    latitude: null,
+    longitude: null,
+    related: (ca.related || []).map(r => ({
+      slug: r.slug,
+      title: r.title,
+      prix: r.prix,
+      type: r.type,
+      cp: r.cp,
+    })),
+    contactAAfficher: ca.contactAAfficher,
+    telephoneAAfficher: ca.telephoneAAfficher,
+    emailAAfficher: ca.emailAAfficher,
   };
 } else {
   return Astro.redirect('/annonces/');
