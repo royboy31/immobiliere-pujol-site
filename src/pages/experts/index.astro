@@ -1,8 +1,39 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { getExpertType } from '../../lib/experts';
 
 const experts = await getCollection('experts');
+
+// Title is stored as "First [Last] – Role". The role comes back via `fonction`,
+// so we only need the name half here.
+function splitName(title: string): { first: string; last: string } {
+  const cleaned = (title || '').split('|').pop()?.trim() || '';
+  const namePart = cleaned.split(/\s+[–-]\s+/)[0].trim();
+  const parts = namePart.split(/\s+/);
+  return {
+    first: parts[0] || namePart,
+    last: parts.slice(1).join(' '),
+  };
+}
+
+const items = experts.map((entry) => {
+  const e = entry.data;
+  const { first, last } = splitName(e.title);
+  return {
+    slug: e.slug,
+    photo: e.photo,
+    fonction: e.fonction,
+    type: getExpertType(e),
+    first,
+    last,
+  };
+});
+
+// Order: rentals, then sales, then everyone else — keeps the green/orange
+// blocks visually grouped instead of scattered randomly.
+const typeOrder: Record<string, number> = { rental: 0, sales: 1, other: 2 };
+items.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
 ---
 
 <BaseLayout
@@ -10,21 +41,35 @@ const experts = await getCollection('experts');
   description="Découvrez l'équipe d'experts immobiliers de l'Immobilière Pujol à Marseille."
 >
   <section class="experts-archive">
-    <h1>Nos experts</h1>
+    <div class="experts-archive__head">
+      <span class="experts-archive__overline">L'équipe</span>
+      <h1 class="ds-sec-title">Toutes nos <b>expertises immobilières</b></h1>
+      <p class="experts-archive__lede">
+        Vente, location, gestion locative, syndic — chacun·e à son métier, tous engagés à vos côtés à Marseille.
+      </p>
+      <div class="experts-archive__legend">
+        <span class="experts-archive__chip experts-archive__chip--rental">Location</span>
+        <span class="experts-archive__chip experts-archive__chip--sales">Vente</span>
+        <span class="experts-archive__chip experts-archive__chip--other">Autres expertises</span>
+      </div>
+    </div>
+
     <div class="experts-archive__grid">
-      {experts.map((entry) => {
-        const expert = entry.data;
-        const displayName = expert.title.split('|').pop()?.trim() || expert.title;
-        return (
-          <a href={`/experts/${expert.slug}/`} class="expert-card">
-            {expert.photo && (
-              <img src={expert.photo} alt={displayName} loading="lazy" class="expert-card__photo" />
+      {items.map((p) => (
+        <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type}`}>
+          <div class="expert-tile__ph">
+            {p.photo ? (
+              <img src={p.photo} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />
+            ) : (
+              <span class="expert-tile__ph-empty" aria-hidden="true">{p.first.charAt(0)}</span>
             )}
-            <h2 class="expert-card__name">{displayName}</h2>
-            {expert.fonction && <p class="expert-card__role">{expert.fonction}</p>}
-          </a>
-        );
-      })}
+          </div>
+          <div class="expert-tile__name">
+            {p.first}{p.last && <> <b>{p.last}</b></>}
+          </div>
+          {p.fonction && <div class="expert-tile__role">{p.fonction}</div>}
+        </a>
+      ))}
     </div>
   </section>
 </BaseLayout>

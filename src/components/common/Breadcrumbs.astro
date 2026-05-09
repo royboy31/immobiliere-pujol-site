@@ -1,0 +1,55 @@
+---
+// Auto-generated breadcrumb trail derived from the current URL.
+// Mirrors the autoBreadcrumb() schema builder so the visible nav and JSON-LD
+// stay aligned. Skips render on the home page (no useful trail).
+
+interface Props {
+  pageTitle: string;
+  pathname: string;
+}
+
+const { pageTitle, pathname } = Astro.props;
+
+const segs = pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+
+// Pretty-print URL slugs into readable labels. Drops slug refs (long uuid-ish
+// trailing IDs) and capitalizes first letters.
+function prettifySegment(seg: string): string {
+  return seg
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+type Crumb = { label: string; href: string | null };
+
+const crumbs: Crumb[] = [{ label: 'Accueil', href: '/' }];
+let acc = '';
+for (let i = 0; i < segs.length - 1; i++) {
+  acc += '/' + segs[i];
+  crumbs.push({ label: prettifySegment(segs[i]), href: acc + '/' });
+}
+// Last crumb: the current page (no link).
+const lastLabel = segs.length > 0 ? pageTitle : '';
+if (lastLabel) crumbs.push({ label: lastLabel, href: null });
+
+const showTrail = segs.length > 0;
+---
+
+{showTrail && (
+  <nav class="breadcrumbs" aria-label="Fil d'Ariane">
+    <ol class="breadcrumbs__list">
+      {crumbs.map((c, i) => (
+        <li class="breadcrumbs__item">
+          {c.href ? (
+            <a href={c.href} class="breadcrumbs__link">{c.label}</a>
+          ) : (
+            <span class="breadcrumbs__current" aria-current="page">{c.label}</span>
+          )}
+          {i < crumbs.length - 1 && (
+            <span class="breadcrumbs__sep" aria-hidden="true">›</span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+)}

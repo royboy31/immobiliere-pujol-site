@@ -1,0 +1,67 @@
+---
+// Map block for listing detail pages. Uses the Google Maps `output=embed` URL
+// (no API key needed for the basic embed). Falls back to an address-based query
+// when coordinates are missing.
+
+interface Props {
+  adresse?: string | null;
+  codePostal?: string | null;
+  ville?: string | null;
+  quartier?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  /** "sidebar" trims the section padding so the map can sit inside the sticky right column. */
+  variant?: 'section' | 'sidebar';
+}
+
+const {
+  adresse,
+  codePostal,
+  ville,
+  quartier,
+  latitude,
+  longitude,
+  variant = 'section',
+} = Astro.props;
+
+const hasCoords = typeof latitude === 'number' && typeof longitude === 'number';
+const addressLine = [adresse, codePostal, ville].filter(Boolean).join(', ').trim();
+const displayLine = [adresse, [codePostal, ville].filter(Boolean).join(' ')]
+  .filter(Boolean)
+  .join(' – ');
+
+// Show the map only when we have either coordinates or a recognizable address
+// (street + city/CP). Bare quartier-only strings produce noisy map results.
+const queryString = hasCoords
+  ? `${latitude},${longitude}`
+  : addressLine || (ville ? `${quartier ? quartier + ', ' : ''}${ville}` : '');
+
+if (!queryString) return null;
+
+const encoded = encodeURIComponent(queryString);
+const embedSrc = `https://www.google.com/maps?q=${encoded}&output=embed`;
+const externalHref = `https://maps.google.com/?q=${encoded}`;
+---
+
+<section class={`annonce-map annonce-map--${variant}`}>
+  <div class="annonce-map__head">
+    <h2 class="annonce-map__title">Localisation <b>du bien</b></h2>
+    {displayLine && <p class="annonce-map__addr">{displayLine}</p>}
+  </div>
+  <div class="annonce-map__embed-wrap">
+    <iframe
+      class="annonce-map__embed"
+      src={embedSrc}
+      title={`Localisation – ${displayLine || 'bien'}`}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+  <a class="annonce-map__cta" href={externalHref} target="_blank" rel="noopener">
+    Ouvrir dans Google Maps
+    <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+      <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </a>
+</section>

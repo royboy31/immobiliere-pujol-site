@@ -613,26 +613,11 @@
   }
 
   &__tour-cta {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: $white;
-    color: $black;
-    font-family: $ds-font-noto;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: .4px;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
-    transition: transform .2s ease, background-color .2s ease;
+    width: 100%;
+    margin-top: 16px;
+    gap: 12px;
 
-    &:hover { transform: translateY(-1px); background: $ds-paper; }
+    svg { flex-shrink: 0; }
   }
 
   &__thumbs {
@@ -854,6 +839,96 @@
     color: $ds-ink;
     margin: 0;
     text-align: right;
+  }
+}
+
+// ----- Localisation map block -----
+.annonce-map {
+  background: $white;
+
+  &--section {
+    padding: 30px $ds-side-pad 40px;
+  }
+
+  // Sidebar variant: sits inside the sticky right column under the contact form
+  // and expert card. Wraps everything in a card frame so it reads like the
+  // surrounding info card.
+  &--sidebar {
+    padding: 18px;
+    border: 1px solid $ds-hairline;
+    border-radius: 18px;
+    background: $white;
+  }
+
+  &__head {
+    margin-bottom: 18px;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1;
+    margin: 0 0 6px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__addr {
+    margin: 0;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    color: $ds-ink;
+  }
+
+  &__embed-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid $ds-hairline;
+    background: $ds-paper;
+  }
+
+  &__embed {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  &__cta {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: $ds-ink;
+    text-decoration: none;
+    transition: color .15s ease;
+
+    &:hover { color: $ds-olive-2; }
+  }
+
+  // Sidebar variant overrides — tighter typography and squarer map.
+  &--sidebar &__head { margin-bottom: 12px; }
+  &--sidebar &__title { font-size: 20px; }
+  &--sidebar &__addr { font-size: 13px; }
+  &--sidebar &__embed-wrap {
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+  }
+  &--sidebar &__cta {
+    margin-top: 12px;
+    font-size: 12px;
   }
 }
 
@@ -1132,16 +1207,6 @@
     padding: 14px 20px;
   }
 
-  &__phone {
-    text-align: center;
-    font-size: 12px;
-    color: $ds-ink;
-    text-decoration: none;
-    margin-top: 6px;
-
-    &:hover { color: $black; text-decoration: underline; }
-  }
-
   &__ref {
     margin: 12px 0 0;
     text-align: center;
@@ -1221,7 +1286,7 @@
   &[open] {
     display: grid;
     grid-template-columns: 60px 1fr 60px;
-    grid-template-rows: 1fr 60px;
+    grid-template-rows: 1fr;
     align-items: center;
     justify-items: center;
     gap: 14px;
@@ -1270,15 +1335,18 @@
     grid-column: 2;
     grid-row: 1;
     margin: 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
     max-width: 100%;
     max-height: 100%;
   }
 
   &__img {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 78vh;
     object-fit: contain;
     border-radius: 18px;
     background: rgba(255, 255, 255, .04);
@@ -1290,7 +1358,7 @@
     padding: 40px;
     color: $black;
     max-width: 90vw;
-    max-height: 80vh;
+    max-height: 78vh;
     overflow: auto;
 
     .dpe-scale__row { height: 36px; }
@@ -1301,13 +1369,11 @@
   }
 
   &__caption {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: start;
     font-family: $ds-font-noto;
     font-size: 14px;
     color: rgba(255, 255, 255, .85);
     text-align: center;
+    max-width: 80ch;
   }
 
   &__counter {

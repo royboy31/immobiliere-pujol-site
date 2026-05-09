@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const seoTitle = "Contacter l'Immobilière Pujol – Marseille";
 const seoDescription =
-  "L'équipe Immobilière Pujol vous reçoit au 49 rue Jean Fiolle, 13006 Marseille. Téléphone 04 91 81 26 26 — un conseiller vous répond sous 24 heures.";
+  "L'équipe Immobilière Pujol vous reçoit au 49 rue Jean Fiolle, 13006 Marseille — un conseiller vous répond sous 24 heures.";
 
 // Canonical contact info (mirrors src/components/common/Footer.astro).
 const contact = {
@@ -15,11 +15,7 @@ const contact = {
     'https://maps.google.com/?q=Immobili%C3%A8re+Pujol+49+rue+Jean+Fiolle+13006+Marseille',
   mapEmbed:
     'https://www.google.com/maps?q=49+rue+Jean+Fiolle+13006+Marseille&output=embed',
-  phone: '04 91 81 26 26',
-  phoneHref: 'tel:+33491812626',
-  email: 'contact@immobiliere-pujol.fr',
-  emailHref: 'mailto:contact@immobiliere-pujol.fr',
-  hours: 'Lun – Ven : 9h – 12h30 / 14h – 18h30',
+  hours: 'Lun – Ven : 9h – 12h / 14h – 18h',
 };
 
 const heroImg =
@@ -36,7 +32,7 @@ const quickLinks = [
     cta: 'Demander une estimation',
   },
   {
-    title: "Mettre en location",
+    title: "Mise en location",
     desc: "Confier la mise en location et / ou la gestion à notre équipe.",
     href: '/service-immobilier/gestion-locative/#form',
     cta: 'Demander un devis',
@@ -98,39 +94,6 @@ const quickLinks = [
           <li class="contact-card">
             <span class="contact-card__icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A14 14 0 0 1 4 7a2 2 0 0 1 1-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
-              </svg>
-            </span>
-            <h3 class="contact-card__title">Téléphone</h3>
-            <p class="contact-card__body">{contact.phone}</p>
-            <a class="contact-card__cta" href={contact.phoneHref}>
-              Appeler
-              <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </li>
-
-          <li class="contact-card">
-            <span class="contact-card__icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
-                <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round" />
-              </svg>
-            </span>
-            <h3 class="contact-card__title">Email</h3>
-            <p class="contact-card__body">{contact.email}</p>
-            <a class="contact-card__cta" href={contact.emailHref}>
-              Écrire
-              <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-          </li>
-
-          <li class="contact-card">
-            <span class="contact-card__icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" />
                 <path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
               </svg>
@@ -138,11 +101,8 @@ const quickLinks = [
             <h3 class="contact-card__title">Horaires</h3>
             <p class="contact-card__body">
               Lundi – Vendredi<br />
-              9h – 12h30 / 14h – 18h30
+              9h – 12h / 14h – 18h
             </p>
-            <span class="contact-card__cta contact-card__cta--mute">
-              Sur rendez-vous le samedi
-            </span>
           </li>
         </ul>
       </div>

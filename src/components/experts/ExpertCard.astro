@@ -7,7 +7,11 @@ interface Props {
 }
 
 const { expert, heading = 'Expert en charge de ce bien' } = Astro.props;
-const displayName = expert.title.split('|').pop()?.trim() ?? expert.title;
+// Expert titles are stored as "Name – Role" (em dash or hyphen, surrounded by spaces).
+// Take only the name half so it doesn't duplicate the role rendered separately as `fonction`.
+const displayName = (expert.title.split('|').pop() ?? expert.title)
+  .split(/\s+[–\-]\s+/)[0]
+  .trim();
 ---
 
 <aside class="expert-card">
@@ -30,21 +34,13 @@ const displayName = expert.title.split('|').pop()?.trim() ?? expert.title;
         <strong>{displayName}</strong>
       </a>
       {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
-      <div class="expert-card__contact">
-        {expert.phone && (
-          <a href={`tel:${expert.phone.replace(/\s/g, '')}`} class="expert-card__phone">
-            {expert.phone}
-          </a>
-        )}
-        {expert.email && (
+      {expert.email && (
+        <div class="expert-card__contact">
           <a href={`mailto:${expert.email}`} class="expert-card__email">
             {expert.email}
           </a>
-        )}
-      </div>
-      <a href={`/experts/${expert.slug}/`} class="expert-card__more">
-        Voir le profil
-      </a>
+        </div>
+      )}
     </div>
   </div>
 </aside>
@@ -94,10 +90,6 @@ const displayName = expert.title.split('|').pop()?.trim() ?? expert.title;
     gap: 0.2rem;
     font-size: 0.9rem;
     margin-top: 0.4rem;
-  }
-  .expert-card__more {
-    margin-top: 0.6rem;
-    font-size: 0.9rem;
   }
   @media (max-width: 480px) {
     .expert-card__body { flex-direction: column; align-items: center; text-align: center; }

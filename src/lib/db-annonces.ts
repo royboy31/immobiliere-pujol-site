@@ -30,6 +30,7 @@ export interface DbAnnonce {
   charges: number | null;
   depot_garantie: number | null;
   honoraires: string | null;
+  honoraires_etat_des_lieux: number | null;
   surface: number | null;
   surface_terrain: number | null;
   nb_pieces: number | null;
@@ -38,12 +39,14 @@ export interface DbAnnonce {
   nb_wc: number | null;
   etage: string | null;
   nb_etages: string | null;
+  meuble: number;
   ascenseur: number;
   cave: number;
   terrasse: number;
   parking: string | null;
   garage: string | null;
   interphone: number;
+  url_visite_virtuelle: string | null;
   dpe_note: string | null;
   dpe_valeur: string | null;
   ges_note: string | null;
@@ -196,6 +199,27 @@ export async function getSimilarPool(
     ...a,
     photos: photoMap.get(a.id) || [],
   }));
+}
+
+/**
+ * Scan a description for the first virtual-tour URL we recognise.
+ * Used as a fallback when `url_visite_virtuelle` isn't populated — agents
+ * frequently paste the tour link directly into the descriptif text.
+ */
+export function extractTourUrl(description: string | null | undefined): string {
+  if (!description) return '';
+  const patterns = [
+    /https?:\/\/(?:www\.|my\.)?matterport\.com\/show\/\?[^\s<>"'|]+/i,
+    /https?:\/\/(?:[^\s<>"'|/]+\.)?previsite\.com\/[^\s<>"'|]+/i,
+    /https?:\/\/youtu\.be\/[^\s<>"'|]+/i,
+    /https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?[^\s<>"'|]*v=[A-Za-z0-9_-]+[^\s<>"'|]*|embed\/[A-Za-z0-9_-]+[^\s<>"'|]*)/i,
+    /https?:\/\/(?:www\.|player\.)?vimeo\.com\/[^\s<>"'|]+/i,
+  ];
+  for (const re of patterns) {
+    const m = description.match(re);
+    if (m) return m[0].replace(/[.,;:)]+$/, ''); // strip trailing punctuation
+  }
+  return '';
 }
 
 /**
