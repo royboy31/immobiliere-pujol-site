@@ -175,14 +175,14 @@ const STAR_PATH =
 
     <div class="hero-search">
       <div class="hero-search__tabs" id="heroTabs">
-        <button class="hero-search__pill is-active" data-tab="estim" type="button">ESTIMATION EN LIGNE</button>
-        <button class="hero-search__pill" data-tab="louer" type="button">VOIR LES BIENS À LOUER</button>
+        <button class="hero-search__pill is-active" data-tab="louer" type="button">VOIR LES BIENS À LOUER</button>
         <button class="hero-search__pill" data-tab="vendre" type="button">VOIR LES BIENS À VENDRE</button>
+        <a class="hero-search__pill hero-search__pill--estim" href="/estimez-le-prix-de-vente-de-votre-bien-en-2mn/#fisher-widget-section">ESTIMATION EN LIGNE</a>
       </div>
 
         <div class="hero-search__bar" id="heroSearch">
           {/* ESTIMATION EN LIGNE */}
-          <div class="hero-search__pane is-active" data-pane="estim">
+          <div class="hero-search__pane" data-pane="estim">
             <div class="seg first seg--dropdown" data-dropdown="estim-type">
               <div class="lbl"><b>VALEUR LOCATIVE</b><span id="estimTypeLabel">Vente, location...</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
@@ -199,7 +199,7 @@ const STAR_PATH =
           </div>
 
           {/* VOIR LES BIENS À LOUER */}
-          <div class="hero-search__pane" data-pane="louer">
+          <div class="hero-search__pane is-active" data-pane="louer">
             <div class="seg first seg--dropdown" data-dropdown="louer-type">
               <div class="lbl"><b>TYPE DE BIEN</b><span id="louerTypeLabel">Appartement, maison...</span></div>
               <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
