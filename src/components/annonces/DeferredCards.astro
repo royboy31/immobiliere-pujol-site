@@ -11,7 +11,7 @@ const { scope } = Astro.props;
   const grid=document.getElementById('annonces-grid');
   if(!grid)return;
   try{
-    const r=await fetch('/_data/active.json');
+    const r=await fetch('/_data/cards.json');
     if(!r.ok)return;
     let all=await r.json();
     if(scope)all=all.filter(a=>a.type===scope);

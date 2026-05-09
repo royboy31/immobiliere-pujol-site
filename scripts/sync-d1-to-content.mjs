@@ -211,17 +211,17 @@ if (patched > 0) console.log(`🔒 Marked ${patched} overlapping WordPress files
 
 // ── Download active.json from R2 for client-side deferred loading ──
 
-const R2_JSON_URL = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/active.json';
+const R2_CARDS_URL = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/cards.json';
 const DATA_DIR = path.resolve('public/_data');
 try {
-  const resp = await fetch(R2_JSON_URL);
+  const resp = await fetch(R2_CARDS_URL);
   if (resp.ok) {
     mkdirSync(DATA_DIR, { recursive: true });
-    writeFileSync(path.join(DATA_DIR, 'active.json'), Buffer.from(await resp.arrayBuffer()));
-    console.log(`📦 Downloaded active.json for deferred card loading`);
+    writeFileSync(path.join(DATA_DIR, 'cards.json'), Buffer.from(await resp.arrayBuffer()));
+    console.log(`📦 Downloaded cards.json for deferred card loading`);
   } else {
-    console.warn(`⚠️  Could not fetch active.json: ${resp.status}`);
+    console.warn(`⚠️  Could not fetch cards.json: ${resp.status}`);
   }
 } catch (e) {
-  console.warn(`⚠️  Could not fetch active.json: ${e.message}`);
+  console.warn(`⚠️  Could not fetch cards.json: ${e.message}`);
 }

@@ -802,7 +802,22 @@ async function writeActiveJson(env: Env): Promise<number> {
     httpMetadata: { contentType: 'application/json' },
   });
 
-  console.log(`[cron-sync] Wrote active.json with ${json.length} annonces`);
+  // Slim version with only card-rendering fields (~80% smaller)
+  const cards = json.map(a => ({
+    type: a.type, slug: a.slug, titre: a.titre, libelleType: a.libelleType,
+    prix: a.prix, loyerCC: a.loyerCC, loyer: a.loyer,
+    depotGarantie: a.depotGarantie, surface: a.surface,
+    nbPieces: a.nbPieces, nbChambres: a.nbChambres,
+    codePostal: a.codePostal, ville: a.ville, quartier: a.quartier,
+    photos: a.photos.slice(0, 4),
+    meuble: a.meuble, parking: a.parking, garage: a.garage,
+    terrasse: a.terrasse, balcon: a.balcon,
+  }));
+  await env.PHOTOS.put('annonces/cards.json', JSON.stringify(cards), {
+    httpMetadata: { contentType: 'application/json' },
+  });
+
+  console.log(`[cron-sync] Wrote active.json + cards.json with ${json.length} annonces`);
   return json.length;
 }
 
