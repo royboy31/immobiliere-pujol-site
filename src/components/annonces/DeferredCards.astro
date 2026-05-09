@@ -1,0 +1,76 @@
+---
+interface Props {
+  /** 'V' | 'L' | '' (all) */
+  scope: string;
+}
+const { scope } = Astro.props;
+---
+
+<script define:vars={{ scope }}>
+(async()=>{
+  const grid=document.getElementById('annonces-grid');
+  if(!grid)return;
+  try{
+    const r=await fetch('https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/active.json');
+    if(!r.ok)return;
+    let all=await r.json();
+    if(scope)all=all.filter(a=>a.type===scope);
+    const rest=all.slice(20);
+    if(!rest.length)return;
+    const fmt=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
+    const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const clsKind=l=>{const s=(l||'').toLowerCase();if(/(appartement|studio|loft|duplex|triplex|^[tf]\d)/.test(s))return'appartement';if(/(maison|villa|propri)/.test(s))return'maison';if(/(parking|garage|box|stationnement)/.test(s))return'parking';if(/(local|commerce|boutique|bureau|atelier|entrep)/.test(s))return'local';if(/terrain/.test(s))return'terrain';return'autre'};
+    const isMbl=a=>{if(a.meuble)return true;return/meubl[ée]/i.test((a.libelleType||'')+' '+(a.titre||''))};
+    const fp=a=>a.type==='V'?(a.prix||0):(a.loyerCC||a.loyer||0);
+    const pb=n=>{if(!n)return'';return n>=4?'4+':String(n)};
+    const arrowL='<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+    const arrowR='<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+    const frag=document.createDocumentFragment();
+    for(const a of rest){
+      const isV=a.type==='V';
+      const slides=(a.photos||[]).slice(0,4);
+      const title=a.titre||a.libelleType||(isV?'Bien à vendre':'Bien à louer');
+      let price='Prix sur demande';
+      if(isV&&a.prix)price=fmt(a.prix);
+      else if(!isV){const l=a.loyerCC||a.loyer;if(l)price=fmt(l)+'/mois';}
+      const href='/annonces/'+a.slug+'/';
+      const pills=[];
+      if(a.nbPieces)pills.push('T'+a.nbPieces);
+      if(a.surface)pills.push(Math.round(a.surface)+' m²');
+      if(a.nbChambres)pills.push(a.nbChambres+' ch.');
+      if(!isV&&isMbl(a))pills.push('Meublé');
+      if(!isV&&a.depotGarantie)pills.push('Dépôt '+Math.round(a.depotGarantie)+' €');
+      const cp=(a.codePostal||'')+' '+(a.ville||'');
+      const kind=clsKind(a.libelleType);
+      const el=document.createElement('article');
+      el.className='listing-card '+(isV?'':'listing-card--location ')+' annonce-card-item';
+      el.dataset.type=a.type;el.dataset.kind=kind;el.dataset.cp=a.codePostal||'';
+      el.dataset.pieces=pb(a.nbPieces);el.dataset.price=String(fp(a));
+      el.dataset.parking=(a.parking||a.garage)?'1':'0';
+      el.dataset.exterieur=(a.terrasse||a.balcon)?'1':'0';
+      el.dataset.meuble=isMbl(a)?'1':'0';
+      const slidesHtml=slides.length?'<ul class="lc-track" data-lc-track>'+slides.map((p,i)=>'<li class="lc-slide" style="background-image:url(\''+p+'\')" role="img" aria-label="'+esc(title)+' – photo '+(i+1)+'"></li>').join('')+'</ul>':'<div class="lc-empty">Pas de photo</div>';
+      const arrows=slides.length>1?'<button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev>'+arrowL+'</button><button class="lc-arrow lc-arrow--next" type="button" data-lc-next>'+arrowR+'</button><div class="lc-dots" data-lc-dots>'+slides.map((_,i)=>'<span class="lc-dot'+(i===0?' is-active':'')+'"></span>').join('')+'</div>':'';
+      const pillsHtml=pills.length?'<div class="meta">'+pills.map(p=>'<span class="pill-tag">'+esc(p)+'</span>').join('')+'</div>':'';
+      const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+(cp.trim()?'<span>'+esc(cp.trim())+'</span>':'')+'</div>':'';
+      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span></div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div><div class="price">'+esc(price)+'</div>'+pillsHtml+locHtml+'</a>';
+      frag.appendChild(el);
+    }
+    grid.appendChild(frag);
+    // Wire carousels for new cards
+    grid.querySelectorAll('[data-lc-photos]').forEach(root=>{
+      if(root.dataset.lcWired==='1')return;
+      root.dataset.lcWired='1';
+      const track=root.querySelector('[data-lc-track]');
+      const prev=root.querySelector('[data-lc-prev]');
+      const next=root.querySelector('[data-lc-next]');
+      const dots=[...root.querySelectorAll('[data-lc-dots] .lc-dot')];
+      if(!track)return;
+      const step=d=>{track.scrollBy({left:d*track.clientWidth,behavior:'smooth'})};
+      prev?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();step(-1)});
+      next?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();step(1)});
+      if(dots.length){let raf=0;track.addEventListener('scroll',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{const i=Math.round(track.scrollLeft/track.clientWidth);dots.forEach((d,j)=>d.classList.toggle('is-active',j===i))})},{passive:true})}
+    });
+  }catch(e){console.error('[deferred]',e)}
+})();
+</script>

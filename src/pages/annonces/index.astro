@@ -5,6 +5,7 @@ import { fetchActiveListings } from '../../lib/r2-annonces';
 import { buildArrondissements, buildKindOptions } from '../../lib/annonces-filter';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
+import DeferredCards from '../../components/annonces/DeferredCards.astro';
 
 const annonces = await fetchActiveListings();
 const ventes = annonces.filter(a => a.type === 'V');
@@ -41,11 +42,6 @@ const arrondissements = buildArrondissements(annonces);
           <div class="annonces-grid" id="annonces-grid">
             {annonces.slice(0, 20).map((a) => <AnnonceCard annonce={a} />)}
           </div>
-          {annonces.length > 20 && (
-            <template id="deferred-cards">
-              {annonces.slice(20).map((a) => <AnnonceCard annonce={a} />)}
-            </template>
-          )}
           <div class="annonces-empty annonces-empty--filter" hidden>
             <h2>Aucun bien <b>ne correspond</b></h2>
             <p>Essayez d'élargir vos critères ou contactez notre équipe pour un projet sur mesure.</p>
@@ -60,8 +56,6 @@ const arrondissements = buildArrondissements(annonces);
         </div>
       )}
     </section>
-    <script>
-      {const t=document.getElementById('deferred-cards');if(t instanceof HTMLTemplateElement){const g=document.getElementById('annonces-grid');if(g){g.appendChild(t.content);t.remove()}}}
-    </script>
+    <DeferredCards scope="" />
   </div>
 </BaseLayout>
