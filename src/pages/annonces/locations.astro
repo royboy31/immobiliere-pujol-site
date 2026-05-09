@@ -38,9 +38,14 @@ const arrondissements = buildArrondissements(annonces);
     <section class="annonces-grid-section">
       {annonces.length > 0 ? (
         <>
-          <div class="annonces-grid">
-            {annonces.map((a) => <AnnonceCard annonce={a} />)}
+          <div class="annonces-grid" id="annonces-grid">
+            {annonces.slice(0, 20).map((a) => <AnnonceCard annonce={a} />)}
           </div>
+          {annonces.length > 20 && (
+            <template id="deferred-cards">
+              {annonces.slice(20).map((a) => <AnnonceCard annonce={a} />)}
+            </template>
+          )}
           <div class="annonces-empty annonces-empty--filter" hidden>
             <h2>Aucun bien <b>ne correspond</b></h2>
             <p>Essayez d'élargir vos critères ou contactez notre équipe pour un projet sur mesure.</p>
@@ -55,5 +60,8 @@ const arrondissements = buildArrondissements(annonces);
         </div>
       )}
     </section>
+    <script>
+      {const t=document.getElementById('deferred-cards');if(t instanceof HTMLTemplateElement){const g=document.getElementById('annonces-grid');if(g){g.appendChild(t.content);t.remove()}}}
+    </script>
   </div>
 </BaseLayout>
