@@ -111,10 +111,22 @@ export async function getAnnonceBySlug(
   db: D1Database,
   slug: string,
 ): Promise<(DbAnnonce & { photos: string[] }) | null> {
-  const annonce = await db
+  let annonce = await db
     .prepare('SELECT * FROM annonces WHERE slug = ?')
     .bind(slug)
     .first<DbAnnonce>();
+
+  // Fallback: old WordPress slugs are longer than D1 slugs but share the
+  // same reference prefix (e.g. "920neot"). Try a prefix match.
+  if (!annonce) {
+    const prefix = slug.split('-')[0];
+    if (prefix && prefix.length >= 3) {
+      annonce = await db
+        .prepare("SELECT * FROM annonces WHERE slug LIKE ? || '%' LIMIT 1")
+        .bind(prefix)
+        .first<DbAnnonce>();
+    }
+  }
 
   if (!annonce) return null;
 

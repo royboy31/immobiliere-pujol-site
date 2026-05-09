@@ -17,6 +17,11 @@ const db = (env as any).DB as D1Database;
 // Single D1 lookup — handles both active and closed annonces
 const annonce = await getAnnonceBySlug(db, slug);
 
+// If found via prefix match (old WP slug → shorter D1 slug), redirect to canonical URL
+if (annonce && annonce.slug !== slug) {
+  return Astro.redirect(`/annonces/${annonce.slug}/`, 301);
+}
+
 let closedAsset: ClosedAnnonce | null = null;
 
 if (!annonce) {
