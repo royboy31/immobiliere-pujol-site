@@ -693,6 +693,119 @@ async function runLbiImport(env: Env) {
   return stats;
 }
 
+// ── Write active.json snapshot to R2 ──
+// Listing pages (prerendered) fetch this JSON at build time instead of querying D1.
+
+const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
+
+function resolvePhotoUrl(url: string): string {
+  return url.startsWith('http') ? url : `${R2_PUBLIC}/${url}`;
+}
+
+async function writeActiveJson(env: Env): Promise<number> {
+  const annonces = await env.DB
+    .prepare("SELECT * FROM annonces WHERE status = 'active' ORDER BY date_creation DESC")
+    .all<Record<string, any>>();
+
+  if (annonces.results.length === 0) {
+    await env.PHOTOS.put('annonces/active.json', '[]', {
+      httpMetadata: { contentType: 'application/json' },
+    });
+    return 0;
+  }
+
+  const ids = annonces.results.map(a => a.id as number);
+  const photoMap = new Map<number, string[]>();
+  for (let i = 0; i < ids.length; i += 50) {
+    const batch = ids.slice(i, i + 50);
+    const photos = await env.DB
+      .prepare(
+        `SELECT annonce_id, url, position FROM annonces_photos
+         WHERE annonce_id IN (${batch.map(() => '?').join(',')})
+         ORDER BY position ASC`
+      )
+      .bind(...batch)
+      .all<{ annonce_id: number; url: string; position: number }>();
+    for (const p of photos.results) {
+      const list = photoMap.get(p.annonce_id) || [];
+      list.push(resolvePhotoUrl(p.url));
+      photoMap.set(p.annonce_id, list);
+    }
+  }
+
+  const json = annonces.results.map(a => ({
+    id: String(a.id),
+    reference: a.reference_agence || a.ubiflow_reference || '',
+    titre: a.titre || '',
+    description: a.descriptif || '',
+    dateSaisie: '',
+    contactAAfficher: a.contact_a_afficher || '',
+    emailAAfficher: a.email_a_afficher || '',
+    telephoneAAfficher: a.telephone_a_afficher || '',
+    type: (a.type_annonce || 'L') as 'V' | 'L',
+    prix: a.prix ?? null,
+    prixHorsHonoraires: null,
+    loyer: null,
+    loyerCC: a.loyer_cc ?? null,
+    charges: a.charges ?? null,
+    depotGarantie: a.depot_garantie ?? null,
+    honorairesChargeAcquereur: false,
+    devise: 'EUR',
+    libelleType: a.type_bien || '',
+    codePostal: a.code_postal || '',
+    adresse: a.adresse || '',
+    ville: a.ville || '',
+    quartier: a.quartier || '',
+    latitude: a.latitude ?? null,
+    longitude: a.longitude ?? null,
+    surface: a.surface ?? null,
+    surfaceHabitable: null,
+    surfaceTerrain: a.surface_terrain ?? null,
+    surfaceTerrasse: null,
+    nbPieces: a.nb_pieces ?? null,
+    nbChambres: a.nb_chambres ?? null,
+    nbSallesDeBain: a.nb_salles_bain ?? null,
+    nbWC: a.nb_wc ?? null,
+    etage: a.etage || '',
+    nbEtages: a.nb_etages || '',
+    exposition: '',
+    cuisine: '',
+    typeChauffage: a.type_chauffage || '',
+    chauffageEnergie: '',
+    ascenseur: !!a.ascenseur,
+    terrasse: !!a.terrasse,
+    balcon: false,
+    garage: !!a.garage,
+    parking: !!a.parking,
+    cave: !!a.cave,
+    interphone: !!a.interphone,
+    copropriete: false,
+    chargesCopropriete: null,
+    alurNbLots: null,
+    anneeConstruction: '',
+    vueSurMer: false,
+    dpeValeurConso: a.dpe_valeur || '',
+    dpeEtiquetteConso: a.dpe_note || '',
+    dpeEtiquetteGes: a.ges_note || '',
+    dpeEstimationMin: '',
+    dpeEstimationMax: '',
+    dpeValeurGes: a.ges_valeur || '',
+    photos: photoMap.get(a.id as number) || [],
+    visiteVirtuelle: a.url_visite_virtuelle || '',
+    mandatNumero: a.mandat_numero || '',
+    mandatType: a.mandat_type || '',
+    slug: a.slug || '',
+    meuble: !!a.meuble,
+  }));
+
+  await env.PHOTOS.put('annonces/active.json', JSON.stringify(json), {
+    httpMetadata: { contentType: 'application/json' },
+  });
+
+  console.log(`[cron-sync] Wrote active.json with ${json.length} annonces`);
+  return json.length;
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -700,7 +813,8 @@ export default {
     // Manual trigger: GET /sync
     if (url.pathname === '/sync') {
       const stats = await runSync(env);
-      return new Response(JSON.stringify(stats, null, 2), {
+      const jsonCount = await writeActiveJson(env);
+      return new Response(JSON.stringify({ ...stats, activeJsonWritten: jsonCount }, null, 2), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
@@ -747,7 +861,14 @@ export default {
         console.error(`[cron-sync] LBI import error: ${e.message}`);
       }
 
-      // 3. Trigger redeploy only if something changed
+      // 3. Write active.json snapshot to R2 (always, so listing pages stay fresh)
+      try {
+        await writeActiveJson(env);
+      } catch (e: any) {
+        console.error(`[cron-sync] Failed to write active.json: ${e.message}`);
+      }
+
+      // 4. Trigger redeploy only if something changed
       if (changed) {
         console.log('[cron-sync] Changes detected, triggering redeploy');
         await triggerRedeploy(env);
