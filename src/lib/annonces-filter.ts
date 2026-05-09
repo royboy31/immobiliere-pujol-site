@@ -19,6 +19,7 @@ export function classifyKind(libelle: string | undefined): Kind {
 }
 
 export function isMeuble(a: UbiflowAnnonce): boolean {
+  if (a.meuble) return true;
   const t = `${a.libelleType || ''} ${a.titre || ''}`.toLowerCase();
   return /meubl[ée]/.test(t);
 }

@@ -1,0 +1,52 @@
+// =========================================
+// BREADCRUMBS — sitewide trail rendered just below the header.
+// Auto-generated from the URL path; the last segment is the current page.
+// =========================================
+.breadcrumbs {
+  background: $ds-paper;
+  border-bottom: 1px solid $ds-hairline;
+  font-family: $ds-font-noto;
+  font-size: 13px;
+  color: $ds-ink;
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 12px $ds-side-pad;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__link {
+    color: $ds-ink;
+    text-decoration: none;
+    transition: color .15s ease;
+
+    &:hover { color: $ds-olive-2; }
+  }
+
+  &__current {
+    color: $black;
+    font-weight: 700;
+  }
+
+  &__sep {
+    color: $ds-ink;
+    opacity: .55;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .breadcrumbs__list {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/copy-closed-annonces.mjs && node scripts/build-expert-listings.mjs && astro build",
+    "build": "node scripts/sync-d1-to-content.mjs && node scripts/copy-closed-annonces.mjs && node scripts/build-expert-listings.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types",

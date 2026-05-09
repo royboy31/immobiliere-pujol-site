@@ -560,3 +560,225 @@
 @media (max-width: $bp-mobile) {
   .expert-history-grid { grid-template-columns: 1fr; }
 }
+
+// =========================================
+// TYPE-BASED THEMING (rental → green, sales → orange)
+// Drives accent colors via a single token; the green/olive defaults from the
+// rules above already cover rentals & "other" (syndic, accueil, etc.).
+// =========================================
+.expert-page {
+  --expert-accent: #{$ds-olive};
+  --expert-accent-2: #{$ds-olive-2};
+  --expert-accent-soft: #{rgba(178, 192, 78, .15)};
+
+  &--sales {
+    --expert-accent: #{$ds-orange};
+    --expert-accent-2: #{$ds-orange-2};
+    --expert-accent-soft: #{rgba(236, 114, 52, .14)};
+  }
+
+  .expert-body__overline,
+  .expert-listings__overline {
+    color: var(--expert-accent);
+  }
+
+  .expert-body__role-pill {
+    background: var(--expert-accent);
+  }
+
+  .expert-info-card__photo--empty { color: var(--expert-accent); }
+
+  .expert-info-card__social-row a:hover {
+    background: var(--expert-accent);
+    border-color: var(--expert-accent);
+  }
+
+  .expert-quickstats__cell:first-child .expert-quickstats__num {
+    color: var(--expert-accent);
+  }
+
+  .expert-final-cta__title b { color: var(--expert-accent); }
+}
+
+// =========================================
+// EXPERTS ARCHIVE — full team grid styled to match the home Experts pattern.
+// Photo sits inside an oval colored pill (olive=rental, orange=sales,
+// slate=other) so the type is visually obvious at a glance.
+// Tokens & rhythm follow the Pujol design system.
+// =========================================
+.experts-archive {
+  padding: 90px $ds-side-pad 110px;
+  background: $white;
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    margin-bottom: 64px;
+  }
+
+  &__overline {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: $ds-olive;
+  }
+
+  // Reuses the home page section title rules. Centered on this page.
+  .ds-sec-title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 50px;
+    line-height: 1;
+    margin: 0;
+    color: $black;
+    letter-spacing: -.4px;
+
+    b { font-weight: 700; }
+  }
+
+  &__lede {
+    margin: 4px auto 0;
+    max-width: 640px;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: $ds-ink;
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+    justify-content: center;
+  }
+
+  &__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $white;
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .85);
+    }
+
+    &--rental { background: $ds-olive; }
+    &--sales  { background: $ds-orange; }
+    &--other  { background: $ds-slate; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 56px 30px;
+  }
+}
+
+.expert-tile {
+  --expert-accent: #{$ds-slate};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .25s ease;
+
+  &:hover { transform: translateY(-3px); }
+  &:hover .expert-tile__ph img { transform: scale(1.02); }
+
+  &--rental { --expert-accent: #{$ds-olive}; }
+  &--sales  { --expert-accent: #{$ds-orange}; }
+
+  &__ph {
+    width: 100%;
+    aspect-ratio: 230 / 307;
+    border-radius: 50% / 38%;
+    overflow: hidden;
+    background: var(--expert-accent);
+    display: grid;
+    place-items: end center;
+    position: relative;
+
+    img {
+      width: 92%;
+      height: 96%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform .35s ease;
+    }
+  }
+
+  &__ph-empty {
+    color: $white;
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1;
+    padding-bottom: 18%;
+  }
+
+  &__name {
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.1;
+    margin: 22px 0 6px;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__role {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #666;
+    max-width: 240px;
+  }
+}
+
+@media (max-width: $bp-tablet) {
+  .experts-archive {
+    padding: 50px 20px 70px;
+
+    &__head { gap: 10px; margin-bottom: 40px; }
+    .ds-sec-title { font-size: 32px; }
+    &__lede { font-size: 15px; }
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 36px 18px;
+    }
+  }
+
+  .expert-tile {
+    &__name { font-size: 18px; margin: 16px 0 6px; }
+    &__role { font-size: 13px; max-width: 100%; }
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .experts-archive__grid { grid-template-columns: repeat(2, 1fr); }
+}

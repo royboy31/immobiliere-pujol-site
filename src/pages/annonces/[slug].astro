@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice } from '../../lib/db-annonces';
+import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
@@ -51,6 +51,7 @@ type View = {
   nbWC?: number | null;
   etage?: string | null;
   nbEtages?: string | null;
+  meuble?: number | null;
   typeChauffage?: string | null;
   dpeEtiquetteConso?: string | null;
   dpeEtiquetteGes?: string | null;
@@ -62,9 +63,13 @@ type View = {
   depotGarantie?: number | null;
   prix?: number | null;
   honoraires?: string | null;
+  honorairesEtatDesLieux?: number | null;
   honorairesChargeAcquereur?: boolean;
   visiteVirtuelle?: string;
+  tourEmbedAllowed?: boolean;
   isClosed: boolean;
+  latitude?: number | null;
+  longitude?: number | null;
   related: { slug: string; title: string; prix: number | null; type: string; cp: string }[];
   contactAAfficher?: string | null;
   telephoneAAfficher?: string | null;
@@ -78,13 +83,42 @@ if (annonce) {
     ? await getRelatedAnnonces(db, annonce.code_postal, slug)
     : [];
 
-  let titre = annonce.titre;
-  if (isClosed && !titre) {
-    const pieces = annonce.nb_pieces ? ` ${annonce.nb_pieces} pièce${annonce.nb_pieces > 1 ? 's' : ''}` : '';
-    const surface = annonce.surface ? ` de ${annonce.surface} m²` : '';
-    const where = [annonce.ville, annonce.code_postal ? `(${annonce.code_postal})` : ''].filter(Boolean).join(' ');
+  // Some legacy fields arrive triple-duplicated, separated by "|" — keep just the first.
+  const dedupePipes = (s: string | null | undefined): string =>
+    s ? s.split('|')[0].trim() : '';
+
+  // Strip the trailing "CP, ville, [country]" from the adresse so it doesn't repeat
+  // the CP/ville we render on the next line.
+  const streetOnly = (adresse: string | null | undefined): string => {
+    if (!adresse) return '';
+    const parts = adresse.split(',').map(p => p.trim()).filter(Boolean);
+    const cpIdx = parts.findIndex(p => /^\d{5}$/.test(p));
+    return (cpIdx >= 0 ? parts.slice(0, cpIdx) : parts).join(', ');
+  };
+
+  // Strip trailing ", France" / ", FR" that some legacy values carry inside fields.
+  const stripCountry = (s: string): string =>
+    s.replace(/\s*,\s*(France|FR|France\.?)\s*$/i, '').trim();
+
+  const cleanAdresse = stripCountry(streetOnly(dedupePipes(annonce.adresse)));
+  const cleanVille = stripCountry(dedupePipes(annonce.ville));
+  const cleanQuartier = dedupePipes(annonce.quartier);
+  // Hide quartier when it's already implied by the street (e.g. street "…, Cabot" + quartier "Cabot").
+  const quartierForDisplay =
+    cleanQuartier && !cleanAdresse.toLowerCase().includes(cleanQuartier.toLowerCase())
+      ? cleanQuartier
+      : null;
+
+  // Use stored titre only when it's human-readable — many legacy rows store a SKU
+  // like "LO33790006_307F". A space is the cheapest "looks like a sentence" check.
+  const storedTitre = dedupePipes(annonce.titre);
+  const titreLooksHuman = storedTitre.includes(' ');
+  let titre = titreLooksHuman ? storedTitre : '';
+  if (!titre) {
+    const baseType = dedupePipes(annonce.libelle) || 'Bien';
     const action = annonce.type_annonce === 'V' ? 'à vendre' : 'à louer';
-    titre = `Appartement${pieces}${surface} ${action}${where ? ' à ' + where : ''}`.trim();
+    const cityHint = cleanVille ? ` à ${cleanVille}` : annonce.code_postal ? ` (${annonce.code_postal})` : '';
+    titre = `${baseType} ${action}${cityHint}`.trim();
   }
 
   view = {
@@ -94,10 +128,10 @@ if (annonce) {
     reference: annonce.ubiflow_reference || annonce.reference_agence || annonce.slug,
     priceDisplay: formatDbPrice(annonce),
     photos: annonce.photos,
-    adresse: annonce.adresse,
+    adresse: cleanAdresse,
     codePostal: annonce.code_postal,
-    ville: annonce.ville,
-    quartier: annonce.quartier,
+    ville: cleanVille,
+    quartier: quartierForDisplay,
     surface: annonce.surface,
     nbPieces: annonce.nb_pieces,
     nbChambres: annonce.nb_chambres,
@@ -105,6 +139,7 @@ if (annonce) {
     nbWC: annonce.nb_wc,
     etage: annonce.etage,
     nbEtages: annonce.nb_etages,
+    meuble: annonce.meuble,
     typeChauffage: annonce.type_chauffage,
     dpeEtiquetteConso: annonce.dpe_note,
     dpeEtiquetteGes: annonce.ges_note,
@@ -116,8 +151,15 @@ if (annonce) {
     depotGarantie: annonce.depot_garantie,
     prix: annonce.prix,
     honoraires: annonce.honoraires,
+    honorairesEtatDesLieux: annonce.honoraires_etat_des_lieux,
     honorairesChargeAcquereur: false,
+    visiteVirtuelle:
+      dedupePipes(annonce.url_visite_virtuelle) ||
+      extractTourUrl(annonce.descriptif),
+    tourEmbedAllowed: !!dedupePipes(annonce.url_visite_virtuelle),
     isClosed,
+    latitude: annonce.latitude,
+    longitude: annonce.longitude,
     related: related.map(r => ({
       slug: r.slug,
       title: r.titre,
@@ -174,6 +216,7 @@ const pool = similarAnnonces.map(a => ({
   cuisine: '',
   typeChauffage: a.type_chauffage || '',
   chauffageEnergie: '',
+  meuble: !!a.meuble,
   ascenseur: !!a.ascenseur,
   terrasse: !!a.terrasse,
   balcon: false,
@@ -224,7 +267,6 @@ const listingSchema = buildRealEstateListing({
     <AnnonceLive
       view={view}
       contactName={view.contactAAfficher}
-      contactPhone={view.telephoneAAfficher}
       contactEmail={view.emailAAfficher}
       expert={expert}
       pool={pool}

@@ -23,6 +23,8 @@ export interface UbiflowAnnonce {
   charges: number | null;
   depotGarantie: number | null;
   honorairesChargeAcquereur: boolean;
+  honorairesEtatDesLieux: number | null;
+  fraisAgence: number | null;
   devise: string;
   libelleType: string;
   codePostal: string;
@@ -45,6 +47,7 @@ export interface UbiflowAnnonce {
   cuisine: string;
   typeChauffage: string;
   chauffageEnergie: string;
+  meuble: boolean;
   ascenseur: boolean;
   terrasse: boolean;
   balcon: boolean;
@@ -144,6 +147,8 @@ function parseAnnonce(raw: any): UbiflowAnnonce {
     charges: num(prestation.charges),
     depotGarantie: num(prestation.depot_garantie),
     honorairesChargeAcquereur: bool(prestation.honoraires_charge_acquereur),
+    honorairesEtatDesLieux: num(prestation.honoraires_etat_des_lieux),
+    fraisAgence: num(prestation.frais_agence),
     devise: str(prestation.devise) || 'EUR',
     libelleType: str(bien.libelle_type),
     codePostal: str(bien.code_postal),
@@ -166,6 +171,7 @@ function parseAnnonce(raw: any): UbiflowAnnonce {
     cuisine: str(bien.cuisine) || str(bien.type_cuisine),
     typeChauffage: str(bien.type_chauffage),
     chauffageEnergie: str(bien.chauffage_energie),
+    meuble: bool(bien.meuble) || bool(bien.meuble_oui_non),
     ascenseur: bool(bien.ascenseur),
     terrasse: bool(bien.terrasse),
     balcon: bool(bien.balcon),

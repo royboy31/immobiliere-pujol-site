@@ -4,6 +4,8 @@ dist/
 .astro/
 # generated at build time by scripts/copy-closed-annonces.mjs
 public/_data/
+# generated at build time by scripts/sync-d1-to-content.mjs
+src/content/annonces/*_d1sync.json
 
 # dependencies
 node_modules/
