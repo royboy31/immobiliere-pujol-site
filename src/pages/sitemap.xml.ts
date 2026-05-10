@@ -10,13 +10,14 @@ const SITE = 'https://www.immobiliere-pujol.fr';
 const R2_ACTIVE = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/active.json';
 
 // ── Resolve static content slugs at build time (module-level) ──
+// NOTE: annonces collection is excluded — too large (5k+ files, 36MB).
+// Active annonces are fetched live from R2 instead.
 const articleSlugs = (await getCollection('articles')).map(e => e.id);
 const pageSlugs = (await getCollection('pages')).map(e => e.id);
 const serviceSlugs = (await getCollection('services')).map(e => e.id);
 const serviceImmoSlugs = (await getCollection('serviceImmobilier')).map(e => e.id);
 const arrondSlugs = (await getCollection('arrondissements')).map(e => e.id);
 const expertSlugs = (await getCollection('experts')).map(e => e.id);
-const annonceSlugs = (await getCollection('annonces')).map(e => e.id.replace(/\.json$/, ''));
 
 function entry(path: string, lastmod?: string, priority?: number, changefreq?: string): string {
   let xml = `  <url>\n    <loc>${SITE}${path}</loc>`;
@@ -47,24 +48,15 @@ export const GET: APIRoute = async () => {
   urls.push(entry('/service-immobilier/syndic-de-copropriete-a-marseille/', undefined, 0.6));
 
   // ── Active annonces (dynamic — fetched from R2 at request time) ──
-  const activeSlugs = new Set<string>();
   try {
     const resp = await fetch(R2_ACTIVE);
     if (resp.ok) {
       const annonces = await resp.json() as Array<{ slug: string }>;
       for (const a of annonces) {
-        activeSlugs.add(a.slug);
         urls.push(entry(`/annonces/${a.slug}/`, today, 0.8, 'daily'));
       }
     }
   } catch { /* skip */ }
-
-  // ── Closed/historical annonces (from static content, baked at build) ──
-  for (const slug of annonceSlugs) {
-    if (!activeSlugs.has(slug)) {
-      urls.push(entry(`/annonces/${slug}/`, undefined, 0.3));
-    }
-  }
 
   // ── Articles ──
   for (const slug of articleSlugs) {
