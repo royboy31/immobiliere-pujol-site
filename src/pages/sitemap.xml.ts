@@ -1,6 +1,7 @@
 // Dynamic sitemap — generates XML at request time.
 // Active annonces fetched from R2 (always up-to-date).
-// Static content slugs resolved via glob imports at build time (no getCollection).
+// All annonce slugs + categories + tags from pre-built static JSON.
+// Other content slugs resolved via glob imports at build time.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
@@ -9,19 +10,19 @@ const SITE = 'https://www.immobiliere-pujol.fr';
 const R2_ACTIVE = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/active.json';
 
 // ── Extract slugs from file paths at build time (lightweight, no content loaded) ──
-function extractSlugs(modules: Record<string, unknown>, prefix: string): string[] {
+function extractSlugs(modules: Record<string, unknown>): string[] {
   return Object.keys(modules).map(path => {
     const file = path.split('/').pop() || '';
     return file.replace(/\.(md|json|mdx)$/, '');
   });
 }
 
-const articleSlugs = extractSlugs(import.meta.glob('/src/content/articles/*.md', { eager: false }), '');
-const pageSlugs = extractSlugs(import.meta.glob('/src/content/pages/*.md', { eager: false }), '');
-const serviceSlugs = extractSlugs(import.meta.glob('/src/content/services/*.md', { eager: false }), '');
-const serviceImmoSlugs = extractSlugs(import.meta.glob('/src/content/serviceImmobilier/*.md', { eager: false }), '');
-const arrondSlugs = extractSlugs(import.meta.glob('/src/content/arrondissements/*.json', { eager: false }), '');
-const expertSlugs = extractSlugs(import.meta.glob('/src/content/experts/*.json', { eager: false }), '');
+const articleSlugs = extractSlugs(import.meta.glob('/src/content/articles/*.md', { eager: false }));
+const pageSlugs = extractSlugs(import.meta.glob('/src/content/pages/*.md', { eager: false }));
+const serviceSlugs = extractSlugs(import.meta.glob('/src/content/services/*.md', { eager: false }));
+const serviceImmoSlugs = extractSlugs(import.meta.glob('/src/content/serviceImmobilier/*.md', { eager: false }));
+const arrondSlugs = extractSlugs(import.meta.glob('/src/content/arrondissements/*.json', { eager: false }));
+const expertSlugs = extractSlugs(import.meta.glob('/src/content/experts/*.json', { eager: false }));
 
 function entry(path: string, lastmod?: string, priority?: number, changefreq?: string): string {
   let xml = `  <url>\n    <loc>${SITE}${path}</loc>`;
@@ -32,7 +33,7 @@ function entry(path: string, lastmod?: string, priority?: number, changefreq?: s
   return xml;
 }
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request }) => {
   const today = new Date().toISOString().split('T')[0];
   const urls: string[] = [];
 
@@ -52,12 +53,40 @@ export const GET: APIRoute = async () => {
   urls.push(entry('/service-immobilier/syndic-de-copropriete-a-marseille/', undefined, 0.6));
 
   // ── Active annonces (dynamic — fetched from R2 at request time) ──
+  const activeSlugs = new Set<string>();
   try {
     const resp = await fetch(R2_ACTIVE);
     if (resp.ok) {
       const annonces = await resp.json() as Array<{ slug: string }>;
       for (const a of annonces) {
+        activeSlugs.add(a.slug);
         urls.push(entry(`/annonces/${a.slug}/`, today, 0.8, 'daily'));
+      }
+    }
+  } catch { /* skip */ }
+
+  // ── All annonce slugs + categories + tags (from pre-built static JSON) ──
+  try {
+    const origin = new URL(request.url).origin;
+    const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);
+    if (resp.ok) {
+      const data = await resp.json() as { annonces: string[]; categories: string[]; tags: string[] };
+
+      // Closed/historical annonces
+      for (const slug of data.annonces) {
+        if (!activeSlugs.has(slug)) {
+          urls.push(entry(`/annonces/${slug}/`, undefined, 0.3));
+        }
+      }
+
+      // Categories
+      for (const slug of data.categories) {
+        urls.push(entry(`/categorie/${slug}/`, undefined, 0.4, 'monthly'));
+      }
+
+      // Tags
+      for (const slug of data.tags) {
+        urls.push(entry(`/tag/${slug}/`, undefined, 0.3, 'monthly'));
       }
     }
   } catch { /* skip */ }
@@ -77,7 +106,7 @@ export const GET: APIRoute = async () => {
     urls.push(entry(`/services/${slug}/`, undefined, 0.5, 'monthly'));
   }
 
-  // ── Service Immobilier (dynamic collection entries) ──
+  // ── Service Immobilier ──
   for (const slug of serviceImmoSlugs) {
     urls.push(entry(`/service-immobilier/${slug}/`, undefined, 0.5, 'monthly'));
   }
