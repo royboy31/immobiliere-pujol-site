@@ -769,29 +769,6 @@
 }
 
 // ----- Description block (left column under thumbs) -----
-.annonce-virtual-tour-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  margin-top: 16px;
-  padding: 16px 24px;
-  background: #8a8a2a;
-  color: #fff;
-  font-family: $ds-font-helv;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: background 0.2s;
-
-  &:hover { background: #7a7a22; }
-
-  svg { flex-shrink: 0; stroke: #fff; }
-}
-
 .annonce-desc-block {
   margin-top: 12px;
 
