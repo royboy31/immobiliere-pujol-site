@@ -163,7 +163,7 @@ async function fetchFeed(): Promise<ParsedAnnonce[]> {
   const rawList = doc?.client?.annonce;
   if (!rawList) return [];
   const list = Array.isArray(rawList) ? rawList : [rawList];
-  return list.map(parseAnnonce);
+  return list.map(parseAnnonce).filter(a => a.type === 'L');
 }
 
 // ── Trigger site redeploy via GitHub Actions workflow_dispatch ──
@@ -510,7 +510,7 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       .replace(/^-|-$/g, '')
       .substring(0, 120);
 
-    annonces.push(a);
+    if (a.typeAnnonce === 'V') annonces.push(a);
   }
 
   return annonces;
