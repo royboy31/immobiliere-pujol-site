@@ -1,23 +1,27 @@
 // Dynamic sitemap — generates XML at request time.
-// Active annonces are fetched from R2 (always up-to-date).
-// Static content slugs are resolved at build time via getCollection.
+// Active annonces fetched from R2 (always up-to-date).
+// Static content slugs resolved via glob imports at build time (no getCollection).
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
 
 const SITE = 'https://www.immobiliere-pujol.fr';
 const R2_ACTIVE = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/active.json';
 
-// ── Resolve static content slugs at build time (module-level) ──
-// NOTE: annonces collection is excluded — too large (5k+ files, 36MB).
-// Active annonces are fetched live from R2 instead.
-const articleSlugs = (await getCollection('articles')).map(e => e.id);
-const pageSlugs = (await getCollection('pages')).map(e => e.id);
-const serviceSlugs = (await getCollection('services')).map(e => e.id);
-const serviceImmoSlugs = (await getCollection('serviceImmobilier')).map(e => e.id);
-const arrondSlugs = (await getCollection('arrondissements')).map(e => e.id);
-const expertSlugs = (await getCollection('experts')).map(e => e.id);
+// ── Extract slugs from file paths at build time (lightweight, no content loaded) ──
+function extractSlugs(modules: Record<string, unknown>, prefix: string): string[] {
+  return Object.keys(modules).map(path => {
+    const file = path.split('/').pop() || '';
+    return file.replace(/\.(md|json|mdx)$/, '');
+  });
+}
+
+const articleSlugs = extractSlugs(import.meta.glob('/src/content/articles/*.md', { eager: false }), '');
+const pageSlugs = extractSlugs(import.meta.glob('/src/content/pages/*.md', { eager: false }), '');
+const serviceSlugs = extractSlugs(import.meta.glob('/src/content/services/*.md', { eager: false }), '');
+const serviceImmoSlugs = extractSlugs(import.meta.glob('/src/content/serviceImmobilier/*.md', { eager: false }), '');
+const arrondSlugs = extractSlugs(import.meta.glob('/src/content/arrondissements/*.json', { eager: false }), '');
+const expertSlugs = extractSlugs(import.meta.glob('/src/content/experts/*.json', { eager: false }), '');
 
 function entry(path: string, lastmod?: string, priority?: number, changefreq?: string): string {
   let xml = `  <url>\n    <loc>${SITE}${path}</loc>`;
