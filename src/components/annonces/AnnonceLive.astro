@@ -62,10 +62,11 @@ const { view, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
 const hasMeuble = view.meuble === 0 || view.meuble === 1;
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
+const hasNbEtages = view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null;
 
 const hasTechDetails = !!(
   view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
-  view.nbWC || view.cuisine || hasEtage || hasMeuble || view.typeChauffage
+  view.nbWC || view.cuisine || hasEtage || hasNbEtages || hasMeuble || view.typeChauffage
 );
 
 // honoraires arrives as a string from D1; legacy rows can carry "Charge acquéreur"
@@ -81,7 +82,7 @@ const etatDesLieuxFmt = hasEtatDesLieux ? fmtEur.format(etatDesLieuxNum) : '';
 
 const hasFinanceDetails =
   (view.type === 'L' && !!(view.loyer || view.loyerCC || view.charges || view.depotGarantie || hasHonoraires || hasEtatDesLieux)) ||
-  (view.type === 'V' && !!(view.prix || hasHonoraires || view.honorairesChargeAcquereur));
+  (view.type === 'V' && !!(view.prix || view.charges || hasHonoraires || view.honorairesChargeAcquereur));
 ---
 
 <article class="annonce-page">
@@ -109,7 +110,8 @@ const hasFinanceDetails =
             {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
-            {hasEtage && <><dt>Étage</dt><dd>{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</dd></>}
+            {hasEtage && <><dt>Étage</dt><dd>{view.etage}</dd></>}
+            {hasNbEtages && <><dt>Nombre d'étage</dt><dd>{view.nbEtages}</dd></>}
             {hasMeuble && <><dt>Meublé</dt><dd>{view.meuble ? 'Oui' : 'Non'}</dd></>}
             {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
             {view.typeChauffage && <><dt>Chauffage</dt><dd>{view.typeChauffage}</dd></>}
@@ -128,6 +130,7 @@ const hasFinanceDetails =
             {view.type === 'L' && hasEtatDesLieux && <><dt>Honoraires état des lieux</dt><dd>{etatDesLieuxFmt} €</dd></>}
             {view.type === 'L' && view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
             {view.type === 'V' && view.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd></>}
+            {view.type === 'V' && view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
             {view.type === 'V' && hasHonoraires && <><dt>Honoraires d'agence (TTC)</dt><dd>{honorairesFmt} €</dd></>}
             {view.type === 'V' && view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
           </dl>
