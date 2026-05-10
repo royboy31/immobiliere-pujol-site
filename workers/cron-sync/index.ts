@@ -74,6 +74,7 @@ interface ParsedAnnonce {
   dpeValeurGes: string;
   mandatNumero: string;
   mandatType: string;
+  visiteVirtuelle: string;
   photos: string[];
   slug: string;
 }
@@ -147,6 +148,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     dpeValeurGes: str(diagnostics.dpe_valeur_ges),
     mandatNumero: str(prestation.mandat_numero),
     mandatType: str(prestation.mandat_type),
+    visiteVirtuelle: str(raw.visite_virtuelle),
     photos,
     slug: '',
   };
@@ -240,10 +242,10 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
-      mandat_numero, mandat_type,
+      mandat_numero, mandat_type, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'ubiflow',?,?
+      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', ubiflow_annonce_id=excluded.ubiflow_annonce_id,
@@ -268,6 +270,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       telephone_a_afficher=excluded.telephone_a_afficher,
       email_a_afficher=excluded.email_a_afficher,
       mandat_numero=excluded.mandat_numero, mandat_type=excluded.mandat_type,
+      url_visite_virtuelle=excluded.url_visite_virtuelle,
       date_modification=excluded.date_modification, source='ubiflow',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
@@ -284,7 +287,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.typeChauffage || null,
     a.titre, a.description,
     a.contactAAfficher, a.telephoneAAfficher, a.emailAAfficher,
-    a.mandatNumero || null, a.mandatType || null,
+    a.mandatNumero || null, a.mandatType || null, a.visiteVirtuelle || null,
     now, now, now, now
   );
 }
@@ -460,6 +463,7 @@ interface LbiAnnonce {
   dpeNote: string | null;
   gesValeur: string | null;
   gesNote: string | null;
+  visiteVirtuelle: string | null;
   photos: string[];
   slug: string;
 }
@@ -510,6 +514,7 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       dpeNote: f[176]?.trim() || null,
       gesValeur: f[177]?.trim() || null,
       gesNote: f[178]?.trim() || null,
+      visiteVirtuelle: (f[103]?.trim().split(/\s*,\s*/)[0]) || null,
       photos,
       slug: '',
     };
@@ -578,10 +583,10 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
-      mandat_numero,
+      mandat_numero, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?, ?,?,'lbi',?,?
+      ?,'active',?, ?,?, ?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', reference_agence=excluded.reference_agence,
@@ -600,7 +605,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       contact_a_afficher=excluded.contact_a_afficher,
       telephone_a_afficher=excluded.telephone_a_afficher,
       email_a_afficher=excluded.email_a_afficher,
-      mandat_numero=excluded.mandat_numero,
+      mandat_numero=excluded.mandat_numero, url_visite_virtuelle=excluded.url_visite_virtuelle,
       date_modification=excluded.date_modification, source='lbi',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
@@ -615,7 +620,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
     a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur, a.typeChauffage,
     a.titre, a.descriptif,
     a.contactNom, a.telephone, a.email,
-    a.mandatNumero,
+    a.mandatNumero, a.visiteVirtuelle,
     now, now, now, now
   );
 }
