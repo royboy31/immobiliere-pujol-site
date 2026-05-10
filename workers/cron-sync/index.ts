@@ -413,6 +413,20 @@ async function runSync(env: Env) {
 
 const LBI_DELIMITER = '!#';
 
+const LBI_CHAUFFAGE: Record<string, string> = {
+  '4096': 'Collectif',
+  '4608': 'Collectif électrique',
+  '4736': 'Collectif électrique radiateur',
+  '4864': 'Collectif gaz',
+  '6144': 'Collectif gaz',
+  '8192': 'Individuel',
+  '8704': 'Individuel gaz',
+  '8832': 'Individuel fioul',
+  '9216': 'Individuel électrique',
+  '10240': 'Individuel électrique',
+  '10368': 'Individuel électrique radiateur',
+};
+
 interface LbiAnnonce {
   reference: string;
   typeAnnonce: 'V' | 'L';
@@ -439,6 +453,8 @@ interface LbiAnnonce {
   contactNom: string | null;
   telephone: string | null;
   email: string | null;
+  charges: number | null;
+  typeChauffage: string | null;
   mandatNumero: string | null;
   dpeValeur: string | null;
   dpeNote: string | null;
@@ -484,6 +500,8 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       balcon: f[40] === 'OUI',
       ascenseur: f[41] === 'OUI',
       interphone: f[82] === 'OUI',
+      charges: parseFloat(f[22]) || null,
+      typeChauffage: LBI_CHAUFFAGE[f[32]] || f[32] || null,
       telephone: f[104]?.trim() || null,
       contactNom: f[105]?.trim() || null,
       email: f[106]?.trim() || null,
@@ -552,24 +570,24 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       slug, status, reference_agence,
       type_annonce, type_bien,
       code_postal, ville,
-      prix,
+      prix, charges,
       surface, surface_terrain,
       nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
       etage, nb_etages, ascenseur, cave, terrasse,
       parking, interphone, balcon,
-      dpe_note, dpe_valeur, ges_note, ges_valeur,
+      dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
       mandat_numero,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?, ?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?, ?,?, ?,?,?, ?, ?,?,'lbi',?,?
+      ?,'active',?, ?,?, ?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', reference_agence=excluded.reference_agence,
       type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
       code_postal=excluded.code_postal, ville=excluded.ville,
-      prix=excluded.prix,
+      prix=excluded.prix, charges=excluded.charges,
       surface=excluded.surface, surface_terrain=excluded.surface_terrain,
       nb_pieces=excluded.nb_pieces, nb_chambres=excluded.nb_chambres,
       nb_salles_bain=excluded.nb_salles_bain, nb_wc=excluded.nb_wc,
@@ -577,7 +595,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
       parking=excluded.parking, interphone=excluded.interphone, balcon=excluded.balcon,
       dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
-      ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur,
+      ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur, type_chauffage=excluded.type_chauffage,
       titre=excluded.titre, descriptif=excluded.descriptif,
       contact_a_afficher=excluded.contact_a_afficher,
       telephone_a_afficher=excluded.telephone_a_afficher,
@@ -588,13 +606,13 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
   ).bind(
     a.slug, a.reference, a.typeAnnonce, a.typeBien,
     a.codePostal, a.ville,
-    a.prix,
+    a.prix, a.charges,
     a.surface, a.surfaceTerrain,
     a.nbPieces, a.nbChambres, a.nbSallesBain, a.nbWC,
     a.etage, a.nbEtages,
     a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
     a.parking ? '1' : null, a.interphone ? 1 : 0, a.balcon ? 1 : 0,
-    a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur,
+    a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur, a.typeChauffage,
     a.titre, a.descriptif,
     a.contactNom, a.telephone, a.email,
     a.mandatNumero,
