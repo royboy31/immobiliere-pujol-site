@@ -683,6 +683,30 @@ async function runLbiImport(env: Env) {
       await env.DB.batch(photoStmts.slice(i, i + 100));
     }
 
+    // 6. Close LBI annonces no longer in zip
+    const feedSlugSet = new Set(annonces.map(a => a.slug));
+    const activeLbi = await env.DB
+      .prepare("SELECT id, slug FROM annonces WHERE status = 'active' AND source = 'lbi'")
+      .all<{ id: number; slug: string }>();
+
+    const lbiCloseStmts: D1PreparedStatement[] = [];
+    let lbiClosed = 0;
+    for (const row of activeLbi.results) {
+      if (!feedSlugSet.has(row.slug)) {
+        lbiCloseStmts.push(
+          env.DB.prepare("UPDATE annonces SET status='closed', date_fermeture=?, updated_at=? WHERE id=?")
+            .bind(now, now, row.id)
+        );
+        lbiClosed++;
+      }
+    }
+    if (lbiCloseStmts.length > 0) {
+      for (let i = 0; i < lbiCloseStmts.length; i += 100) {
+        await env.DB.batch(lbiCloseStmts.slice(i, i + 100));
+      }
+    }
+    console.log(`[lbi-import] Closed ${lbiClosed} stale LBI annonces`);
+
     console.log('[lbi-import] Done:', JSON.stringify(stats));
   } catch (e: any) {
     stats.errors++;
