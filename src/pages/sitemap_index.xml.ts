@@ -19,7 +19,8 @@ export const GET: APIRoute = async ({ request }) => {
   } catch { /* skip */ }
 
   const { allSlugs } = await fetchAllAnnonceSlugs(staticSlugs, request.url);
-  const totalAdsPages = adsPageCount(allSlugs.length);
+  // Cap at 8 — matching the number of static ads-sitemapN.xml route files
+  const totalAdsPages = Math.min(adsPageCount(allSlugs.length), 8);
   const today = new Date().toISOString().split('T')[0];
 
   const sitemaps: string[] = [];

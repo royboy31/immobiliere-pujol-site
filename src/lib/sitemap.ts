@@ -85,3 +85,41 @@ export async function fetchAllAnnonceSlugs(
 export function adsPageCount(totalAds: number): number {
   return Math.max(1, Math.ceil(totalAds / ADS_PER_PAGE));
 }
+
+/** Generate ads sitemap XML for a specific page number. */
+export async function generateAdsSitemap(page: number, requestUrl: string): Promise<Response> {
+  // Load static annonce slugs from pre-built JSON
+  const origin = new URL(requestUrl).origin;
+  let staticSlugs: string[] = [];
+  try {
+    const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);
+    if (resp.ok) {
+      const data = (await resp.json()) as { annonces: string[] };
+      staticSlugs = data.annonces;
+    }
+  } catch { /* skip */ }
+
+  const { activeSlugs, allSlugs } = await fetchAllAnnonceSlugs(staticSlugs, requestUrl);
+
+  const start = (page - 1) * ADS_PER_PAGE;
+  const end = start + ADS_PER_PAGE;
+
+  if (start >= allSlugs.length) {
+    return new Response('Not found', { status: 404 });
+  }
+
+  const pageSlugs = allSlugs.slice(start, end);
+  const urls: string[] = [];
+
+  if (page === 1) {
+    urls.push(entry('/annonces/'));
+  }
+
+  for (const slug of pageSlugs) {
+    const activeDate = activeSlugs.get(slug);
+    const lastmod = activeDate || undefined;
+    urls.push(entry(`/annonces/${slug}/`, lastmod));
+  }
+
+  return xmlResponse(wrapUrlset(urls));
+}
