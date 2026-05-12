@@ -58,13 +58,32 @@ for (const f of readdirSync(articlesDir).filter(f => f.endsWith('.md'))) {
   }
 }
 
+// Collect slugs from other content directories (eliminates import.meta.glob in CF Workers)
+function dirSlugs(dir, ext) {
+  const full = join(ROOT, dir);
+  try {
+    return readdirSync(full).filter(f => f.endsWith(ext)).map(f => f.replace(ext, '')).sort();
+  } catch { return []; }
+}
+
+const pages = dirSlugs('src/content/pages', '.md');
+const services = dirSlugs('src/content/services', '.md');
+const experts = dirSlugs('src/content/experts', '.json');
+const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md');
+const arrondissements = dirSlugs('src/content/arrondissements', '.json');
+
 const data = {
   annonces: annonces.sort(),
   categories: [...cats].sort(),
   tags: [...tags].sort(),
   articles: articles.sort((a, b) => a.slug.localeCompare(b.slug)),
+  pages,
+  services,
+  experts,
+  serviceImmobilier,
+  arrondissements,
 };
 
 const outPath = join(ROOT, 'public/_data/sitemap-slugs.json');
 writeFileSync(outPath, JSON.stringify(data));
-console.log(`[gen-sitemap-slugs] annonces: ${data.annonces.length}, categories: ${data.categories.length}, tags: ${data.tags.length}, articles: ${data.articles.length}`);
+console.log(`[gen-sitemap-slugs] annonces: ${data.annonces.length}, categories: ${data.categories.length}, tags: ${data.tags.length}, articles: ${data.articles.length}, pages: ${pages.length}, services: ${services.length}, experts: ${experts.length}, serviceImmo: ${serviceImmobilier.length}, arrond: ${arrondissements.length}`);

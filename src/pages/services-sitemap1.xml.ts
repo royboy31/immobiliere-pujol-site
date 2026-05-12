@@ -1,20 +1,26 @@
 // Services sitemap — matches live WP services-sitemap1.xml
+// Reads slugs from pre-built sitemap-slugs.json (no import.meta.glob needed).
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { entry, extractSlugs, wrapUrlset, xmlResponse } from '../lib/sitemap';
+import { entry, wrapUrlset, xmlResponse } from '../lib/sitemap';
 
-const serviceSlugs = extractSlugs(import.meta.glob('/src/content/services/*.md', { eager: false }));
-
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request }) => {
   const urls: string[] = [];
 
   // Services listing page
   urls.push(entry('/services/'));
 
-  for (const slug of serviceSlugs) {
-    urls.push(entry(`/services/${slug}/`));
-  }
+  try {
+    const origin = new URL(request.url).origin;
+    const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);
+    if (resp.ok) {
+      const data = (await resp.json()) as { services: string[] };
+      for (const slug of data.services) {
+        urls.push(entry(`/services/${slug}/`));
+      }
+    }
+  } catch { /* skip */ }
 
   return xmlResponse(wrapUrlset(urls));
 };

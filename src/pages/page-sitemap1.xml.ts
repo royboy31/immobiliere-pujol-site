@@ -1,15 +1,11 @@
 // Page sitemap — matches live WP page-sitemap1.xml
-// Includes static pages, experts, and service-immobilier pages.
+// Reads slugs from pre-built sitemap-slugs.json (no import.meta.glob needed).
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { entry, extractSlugs, wrapUrlset, xmlResponse } from '../lib/sitemap';
+import { entry, wrapUrlset, xmlResponse } from '../lib/sitemap';
 
-const pageSlugs = extractSlugs(import.meta.glob('/src/content/pages/*.md', { eager: false }));
-const expertSlugs = extractSlugs(import.meta.glob('/src/content/experts/*.json', { eager: false }));
-const serviceImmoSlugs = extractSlugs(import.meta.glob('/src/content/serviceImmobilier/*.md', { eager: false }));
-
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request }) => {
   const urls: string[] = [];
 
   // Core pages (matching live WP page-sitemap)
@@ -23,26 +19,32 @@ export const GET: APIRoute = async () => {
   urls.push(entry('/annonces/ventes/'));
   urls.push(entry('/local/'));
 
-  // Service immobilier pages
-  urls.push(entry('/service-immobilier/agence-immobiliere-pujol/'));
-  urls.push(entry('/service-immobilier/gestion-locative/'));
-  urls.push(entry('/service-immobilier/mettre-en-location/'));
-  urls.push(entry('/service-immobilier/syndic-de-copropriete-a-marseille/'));
-  for (const slug of serviceImmoSlugs) {
-    // Skip the ones already listed above
-    if (['agence-immobiliere-pujol', 'gestion-locative', 'mettre-en-location', 'syndic-de-copropriete-a-marseille'].includes(slug)) continue;
-    urls.push(entry(`/service-immobilier/${slug}/`));
-  }
+  try {
+    const origin = new URL(request.url).origin;
+    const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);
+    if (resp.ok) {
+      const data = (await resp.json()) as {
+        pages: string[];
+        experts: string[];
+        serviceImmobilier: string[];
+      };
 
-  // Content pages
-  for (const slug of pageSlugs) {
-    urls.push(entry(`/${slug}/`));
-  }
+      // Service immobilier pages
+      for (const slug of data.serviceImmobilier) {
+        urls.push(entry(`/service-immobilier/${slug}/`));
+      }
 
-  // Expert individual pages
-  for (const slug of expertSlugs) {
-    urls.push(entry(`/experts/${slug}/`));
-  }
+      // Content pages
+      for (const slug of data.pages) {
+        urls.push(entry(`/${slug}/`));
+      }
+
+      // Expert individual pages
+      for (const slug of data.experts) {
+        urls.push(entry(`/experts/${slug}/`));
+      }
+    }
+  } catch { /* skip */ }
 
   return xmlResponse(wrapUrlset(urls));
 };
