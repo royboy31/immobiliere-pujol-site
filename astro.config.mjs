@@ -65,6 +65,8 @@ export default defineConfig({
     '/annonces/vente/': '/annonces/ventes/',
     // HTML sitemap → XML sitemap index
     '/sitemap/': '/sitemap_index.xml',
+    // RSS feed — WP uses /feed/, Astro file is feed.xml
+    '/feed/': '/feed.xml',
   },
   vite: {
     css: {
