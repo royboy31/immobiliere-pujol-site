@@ -2,8 +2,6 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { GetStaticPaths } from 'astro';
-import { readdirSync, readFileSync } from 'fs';
-import { join } from 'path';
 
 interface QuartierData {
   slug: string;
@@ -16,15 +14,13 @@ interface QuartierData {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Load quartier JSON files directly (avoids content collection overhead)
-  const dir = join(process.cwd(), 'src/content/quartiers');
-  let files: string[] = [];
-  try { files = readdirSync(dir).filter(f => f.endsWith('.json')); } catch { return []; }
+  // Use import.meta.glob (Vite-compatible, no Node.js fs needed)
+  const modules = import.meta.glob<QuartierData>('../../content/quartiers/*.json', { eager: true, import: 'default' });
 
-  return files.map(f => {
-    const data: QuartierData = JSON.parse(readFileSync(join(dir, f), 'utf-8'));
-    return { params: { slug: data.slug }, props: { entry: data } };
-  });
+  return Object.values(modules).map((data) => ({
+    params: { slug: data.slug },
+    props: { entry: data },
+  }));
 };
 
 interface Props {

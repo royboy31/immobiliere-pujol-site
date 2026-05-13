@@ -45,31 +45,9 @@ const tags = [...tagMap.entries()]
   </section>
 </BaseLayout>
 
-<style lang="scss">
-  .tag-list {
-    list-style: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 2rem auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    a {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      background: $color-bg-alt;
-      color: $color-text;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background 0.2s;
-      &:hover { background: darken($color-bg-alt, 5%); }
-    }
-
-    span {
-      color: $color-text-muted;
-      font-size: 0.85em;
-    }
-  }
+<style>
+  .tag-list { list-style: none; padding: 0; max-width: 800px; margin: 2rem auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag-list a { display: inline-block; padding: 0.5rem 1rem; border-radius: 20px; background: #f5f5f4; color: #495057; text-decoration: none; font-size: 0.9rem; transition: background 0.2s; }
+  .tag-list a:hover { background: #ebebea; }
+  .tag-list span { color: #adb5bd; font-size: 0.85em; }
 </style>

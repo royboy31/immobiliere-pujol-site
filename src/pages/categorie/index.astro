@@ -45,30 +45,9 @@ const categories = [...catMap.entries()]
   </section>
 </BaseLayout>
 
-<style lang="scss">
-  .cat-list {
-    list-style: none;
-    padding: 0;
-    max-width: 800px;
-    margin: 2rem auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 0.5rem;
-
-    a {
-      display: block;
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      background: $color-bg-alt;
-      color: $color-text;
-      text-decoration: none;
-      transition: background 0.2s;
-      &:hover { background: darken($color-bg-alt, 5%); }
-    }
-
-    span {
-      color: $color-text-muted;
-      font-size: 0.9em;
-    }
-  }
+<style>
+  .cat-list { list-style: none; padding: 0; max-width: 800px; margin: 2rem auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5rem; }
+  .cat-list a { display: block; padding: 0.75rem 1rem; border-radius: 8px; background: #f5f5f4; color: #495057; text-decoration: none; transition: background 0.2s; }
+  .cat-list a:hover { background: #ebebea; }
+  .cat-list span { color: #adb5bd; font-size: 0.9em; }
 </style>
