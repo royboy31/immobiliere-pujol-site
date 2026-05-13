@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13015-en-2018"
 date: "2019-06-01"
 excerpt: "Quels sont les prix au m2 de l’immobilier ancien à Marseille dans le 13015 en 2018 ? En 2018, il s’est vendu dans le 15ème arrondissement de Marseille :193..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13015","15e arrondissement","ancien","immobilier","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015.jpeg"
 seoTitle: "Immobilier ancien à Marseille : les prix au m2 dans le 13015, en 2018"
 seoDescription: "Quels sont les prix au m2 de l'immobilier ancien à Marseille dans le 13015 en 2018 ? En 2018, il s’est vendu dans le 15ème arrondissement de Marseille :193 appartements au prix médian* de 1 280€ le m². Cet arrondissement est en pleine mutation. L'un des projets phare de cet…"

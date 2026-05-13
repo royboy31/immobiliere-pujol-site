@@ -4,7 +4,7 @@ slug: "10-plus-belles-maisons-a-vente-a-marseille-environs"
 date: "2017-03-13"
 excerpt: "Moi qui ne suis pas du tout people et pas au courant de l’actualité de ces gens dont je me fiche complètement, j’ai visionné une vidéo concernant la vente de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
-tags: []
+tags: ["Achat maison marseille","acheter maison marseille","plus belles maisons marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/1-2.jpg"
 seoTitle: "Les 10 plus belles maisons à la vente à Marseille et ses environs"
 seoDescription: "Moi qui ne suis pas du tout people et pas au courant de l’actualité de ces gens dont je me fiche complètement, j’ai visionné une vidéo concernant la vente de la maison de Johnny depp pour 23 millions d’euros :  J’ai beaucoup aimé et j’ai donc fait mes recherches sur…"

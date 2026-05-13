@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13011-en-2018"
 date: "2019-05-24"
 excerpt: "Quels sont les prix au m2 de l’immobilier ancien dans le 13011 ? Voici un comparatif quartier par quartier des prix de l’immobilier ancien dans le 11ème..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["11e arrondissement","13011","ancien","immobilier","m2","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/IGP0386.jpg"
 seoTitle: "Immobilier ancien à Marseille: les prix au m2 dans le 13011 en 2018"
 seoDescription: "Quels sont les prix au m2 de l'immobilier ancien dans le 13011 ? Voici un comparatif quartier par quartier des prix de l'immobilier ancien dans le 11ème arrondissement de Marseille. En 2018, il s’est vendu dans le 13011 :171 appartements au prix médian de 2 000€ le m². En 2016,…"

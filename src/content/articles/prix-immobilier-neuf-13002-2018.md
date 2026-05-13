@@ -4,7 +4,7 @@ slug: "prix-immobilier-neuf-13002-2018"
 date: "2019-06-28"
 excerpt: "Voici une brève étude des prix au m2 de l’immobilier neuf dans le 13002 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
-tags: []
+tags: ["13002","2e arrondissement","immobilier","marseille","neuf","prix","prix au m2"]
 featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/06/13002-vieille-charité.jpeg"
 seoTitle: "Marseille : Les prix au m2 de l’immobilier neuf dans le 13002 en 2018"
 seoDescription: "Voici une brève étude des prix au m2 de l'immobilier neuf dans le 13002 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Vous pouvez également faire une comparaison avec les prix de l'ancien dans le…"

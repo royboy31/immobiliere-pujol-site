@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13007-en-2018"
 date: "2019-06-12"
 excerpt: "Voici une comparaison par type et par quartier des les prix au m2 de l’immobilier neuf dans le 13007 en 2018. La fourchette des transactions est établie par..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
-tags: []
+tags: ["13007","7e arrondissement","immobilier","marseille","neuf","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13007-2.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13007 en 2018"
 seoDescription: "Les prix au m2 de l'immobilier neuf dans le 13007 en 2018; Le prix médian pour un T2 est de 5510€ le m"

@@ -58,6 +58,13 @@ export default defineConfig({
     '/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/': '/services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/',
     '/service/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/': '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/',
     '/service/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/': '/services/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/',
+    // Mentions légales — flat URL to nested actual page
+    '/mentions-legales-immobiliere-pujol/': '/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/',
+    // Singular annonce type URLs → plural (SEO 301)
+    '/annonces/location/': '/annonces/locations/',
+    '/annonces/vente/': '/annonces/ventes/',
+    // HTML sitemap → XML sitemap index
+    '/sitemap/': '/sitemap_index.xml',
   },
   vite: {
     css: {

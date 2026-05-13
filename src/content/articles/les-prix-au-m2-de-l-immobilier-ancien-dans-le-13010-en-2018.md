@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13010-en-2018"
 date: "2019-06-07"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["10e arrondissement","13010","immobilier ancien","immobilier marseille","marseille","prix au m2","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13010.jpg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13010 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison quartier par quartier des prix au m2 de l'immobilier ancien dans le 13010 en 2018. En 2018, il s’est vendu dans le 10e arrondissement de Marseille:297…"

@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13009-en-2018"
 date: "2019-05-30"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quel est le prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13009","9e arrondissement","immobilier ancien","marseille","prix","prix au m2","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/TrLt0xEQ.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13009 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians.  Quel est le prix au m2 de l'immobilier ancien dans le 13009 en 2018. En 2018, il s’est vendu dans le 9ème arrondissement de Marseille, 363 appartements au prix…"

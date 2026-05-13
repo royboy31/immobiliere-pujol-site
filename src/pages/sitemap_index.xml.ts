@@ -45,6 +45,7 @@ export const GET: APIRoute = async ({ request }) => {
   sm('/category-sitemap1.xml');
   sm('/post_tag-sitemap1.xml');
   sm('/wpcf-code-post-sitemap1.xml');
+  sm('/district_name-sitemap1.xml');
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

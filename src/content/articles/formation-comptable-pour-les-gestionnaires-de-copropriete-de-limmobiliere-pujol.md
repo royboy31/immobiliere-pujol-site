@@ -4,7 +4,7 @@ slug: "formation-comptable-pour-les-gestionnaires-de-copropriete-de-limmobiliere
 date: "2000-12-13"
 excerpt: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Avant/après"]
-tags: []
+tags: ["formation","Immobilier neuf marseille","Solidarité de Renouvellement Urbain","sru"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/PU-1175-1200x750.jpg"
 seoTitle: "Support de formation comptable pour les gestionnaires de copropriété de l’Immobiliere Pujol"
 seoDescription: "En janvier 2019, nous avons organisé une formation pour nos équipes. Le sujet a été une formation comptable pour nos gestionnaires de copropriété sur la loi de Solidarité de Renouvellement Urbain (SRU). Elle a été promulguée le 13 décembre 2000. Cette loi définit que “les comptes du syndicat, le budget…"

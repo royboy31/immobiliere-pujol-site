@@ -1,0 +1,74 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const slugify = (s: string): string =>
+  s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const articles = await getCollection('articles');
+
+const catMap = new Map<string, { name: string; count: number }>();
+for (const a of articles) {
+  for (const cat of (a.data.categories || []) as string[]) {
+    const slug = slugify(cat);
+    if (!catMap.has(slug)) catMap.set(slug, { name: cat, count: 0 });
+    catMap.get(slug)!.count++;
+  }
+}
+
+const categories = [...catMap.entries()]
+  .map(([slug, { name, count }]) => ({ slug, name, count }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+---
+
+<BaseLayout
+  title="Catégories – Immobilière Pujol"
+  description="Toutes les catégories du blog immobilier Marseille."
+>
+  <section class="blog-archive blog-archive--category">
+    <h1>Catégories</h1>
+    <p class="blog-archive__count">{categories.length} catégorie{categories.length > 1 ? 's' : ''}</p>
+
+    <ul class="cat-list">
+      {categories.map(cat => (
+        <li>
+          <a href={`/categorie/${cat.slug}/`}>
+            {cat.name} <span>({cat.count})</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .cat-list {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.5rem;
+
+    a {
+      display: block;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background: $color-bg-alt;
+      color: $color-text;
+      text-decoration: none;
+      transition: background 0.2s;
+      &:hover { background: darken($color-bg-alt, 5%); }
+    }
+
+    span {
+      color: $color-text-muted;
+      font-size: 0.9em;
+    }
+  }
+</style>

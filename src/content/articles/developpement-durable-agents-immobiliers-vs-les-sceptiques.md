@@ -4,7 +4,7 @@ slug: "developpement-durable-agents-immobiliers-vs-les-sceptiques"
 date: "2019-11-05"
 excerpt: "Malheureusement, mes contraintes professionnelles m’empêchent de participer à la réunion du 5 novembre 2019 autour du plan “bâtiments durables”, organisée par..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["ademe","changement climatique","copropriete","developpement durable","immobilier","renovation energetique","syndic","travaux"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/10/developpement-durable-immobilier.jpg"
 seoTitle: "Développement durable : agents immobiliers VS  les sceptiques"
 seoDescription: "Je voulais partager quelques réflexions sur le développement durable dans les métiers de l’immobilier et plus particulièrement en gestion de syndic."

@@ -4,7 +4,7 @@ slug: "marche-immobilier-avril-septembre-2017-marseille-en-retard"
 date: "2017-09-18"
 excerpt: "Globalement notre marché est bon, les agents immobiliers ont le sourire, mais nous sentons la fragilité. 1. Location Nous avons conclu moins de locations que..."
 categories: ["Mon quartier, ma ville Marseille", "Le marché immobilier à marseille"]
-tags: []
+tags: ["immobilier","investir a marseille","marché immobilier","marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/marseille-665952_1920-min-1200x900.jpg"
 seoTitle: "Le marché immobilier entre avril et septembre 2017 : Marseille en retard"
 seoDescription: "Globalement notre marché est bon, les agents immobiliers ont le sourire, mais nous sentons la fragilité. 1. Location Nous avons conclu moins de locations que les deux dernières années. Le prix moyen de nos locations est de 12,25€ le m. Le mois de mai a été bon, juin moyen, juillet…"

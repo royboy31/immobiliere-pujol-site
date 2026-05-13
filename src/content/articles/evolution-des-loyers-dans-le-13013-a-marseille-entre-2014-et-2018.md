@@ -4,7 +4,7 @@ slug: "evolution-des-loyers-dans-le-13013-a-marseille-entre-2014-et-2018"
 date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13013 à Marseille entre 2014 et 2018. Il se compose de 11 quartiers : Château Gombert, La Croix Rouge, La..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13013","13e arrondissement","marseille","prix des loyers a Marseille","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13013-1.jpeg"
 seoTitle: "Évolution des loyers dans le 13013 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13013 à Marseille entre 2014 et 2018. Il se compose de 11 quartiers : Château Gombert, La Croix Rouge, La Rose, les Médecins, Les Mourets, Les Olives, Malpassé, Palama, St Jérôme, St Just ainsi que St Mitre. Situé dans les quartiers…"

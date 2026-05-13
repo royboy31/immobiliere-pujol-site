@@ -4,7 +4,7 @@ slug: "arnaque-residence-service"
 date: "2019-08-06"
 excerpt: "Il m’arrive parfois de lire des articles sur les arnaques des résidence avec service. Ils sont rares. Alors quand j’ai lu un article de l’Express du 6 Août..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["appolonia","arnaque","bail commercial","immobilier","lmnp","residence tourisme"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/residence-tourisme-lmnp-1200x783.jpg"
 seoTitle: "Les résidences avec service sont elles une arnaque ?"
 seoDescription: "Il m'arrive parfois de lire des articles sur les arnaques des résidence avec service. Ils sont rares. Alors quand j'ai lu un article de l’Express du 6 Août 2019 qui fait la promotion de ces résidences, je n'ai pu m’empêcher de faire un post sur Linkedin pour mettre en garde…"

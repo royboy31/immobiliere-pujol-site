@@ -4,7 +4,7 @@ slug: "marseille-les-prix-immobilier-augmentent-de-plus-de-10"
 date: "2019-05-13"
 excerpt: "Certains quartiers de Marseille – pas tous – voient leurs prix monter: + 10% par rapport à l’année dernière. Tous nos indicateurs le démontrent : le nombre..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["croissance","immobilier","marché","marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/web-home-staging_0002-caroline-semac-Daumier--1200x800.jpg"
 seoTitle: "Marseille : les prix immobilier augmentent de plus de 10% !"
 seoDescription: "Certains quartiers de Marseille - pas tous - voient leurs prix monter: + 10% par rapport à l'année dernière. Tous nos indicateurs le démontrent : le nombre d'offres de biens à vendre baisse : - 25% d'appartementsles délais de ventes : - 20 jours avec un délai moyen de 25…"

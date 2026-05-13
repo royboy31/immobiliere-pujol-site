@@ -4,7 +4,7 @@ slug: "le-marche-immobilier-a-marseille-au-premier-trimestre-2019"
 date: "2019-05-01"
 excerpt: "Le marché est très bon, que ce soit en location ou en transaction. La dynamique est saine. Faisons le point en détail sur l’état de ce marché… La location à..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["immobilier","location","marché","marseille","vente"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/04/harbor-4073053_1280-1200x850.jpg"
 seoTitle: "Le marché immobilier à Marseille au premier trimestre 2019"
 seoDescription: "Le marché est très bon, que ce soit en location ou en transaction. La dynamique est saine. Faisons le point en détail sur l’état de ce marché... La location à Marseille Les prix à la location sont de 12,80 euros le m2. Cela fait 15 ans que les loyers étaient…"

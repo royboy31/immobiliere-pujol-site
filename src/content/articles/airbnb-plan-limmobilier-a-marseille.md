@@ -4,7 +4,7 @@ slug: "airbnb-plan-limmobilier-a-marseille"
 date: "2017-01-30"
 excerpt: "Tous les voyageurs connaissent Airbnb : cette plateforme communautaire de location de logements entre particuliers fondée en 2008 totalise aujourd’hui plus de..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["airbnb","marché immobilier marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/LO37470001_94D3.jpg"
 seoTitle: "Airbnb, un bon plan dans l’immobilier à Marseille?"
 seoDescription: "Tous les voyageurs connaissent Airbnb : cette plateforme communautaire de location de logements entre particuliers fondée en 2008 totalise aujourd’hui plus de 1,5 million d’annonces dans 34 000 villes et 192 pays ! Le nom est tiré d'Air Bed & Breakfast, littéralement « matelas pneumatique et petit-déjeuner ». Car le…"

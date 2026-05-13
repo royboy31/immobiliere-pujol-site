@@ -71,6 +71,7 @@ const services = dirSlugs('src/content/services', '.md');
 const experts = dirSlugs('src/content/experts', '.json');
 const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md');
 const arrondissements = dirSlugs('src/content/arrondissements', '.json');
+const quartiers = dirSlugs('src/content/quartiers', '.json');
 
 const data = {
   annonces: annonces.sort(),
@@ -82,8 +83,9 @@ const data = {
   experts,
   serviceImmobilier,
   arrondissements,
+  quartiers,
 };
 
 const outPath = join(ROOT, 'public/_data/sitemap-slugs.json');
 writeFileSync(outPath, JSON.stringify(data));
-console.log(`[gen-sitemap-slugs] annonces: ${data.annonces.length}, categories: ${data.categories.length}, tags: ${data.tags.length}, articles: ${data.articles.length}, pages: ${pages.length}, services: ${services.length}, experts: ${experts.length}, serviceImmo: ${serviceImmobilier.length}, arrond: ${arrondissements.length}`);
+console.log(`[gen-sitemap-slugs] annonces: ${data.annonces.length}, categories: ${data.categories.length}, tags: ${data.tags.length}, articles: ${data.articles.length}, pages: ${pages.length}, services: ${services.length}, experts: ${experts.length}, serviceImmo: ${serviceImmobilier.length}, arrond: ${arrondissements.length}, quartiers: ${quartiers.length}`);

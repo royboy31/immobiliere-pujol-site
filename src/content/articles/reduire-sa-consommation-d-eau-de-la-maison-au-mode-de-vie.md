@@ -4,7 +4,7 @@ slug: "reduire-sa-consommation-d-eau-de-la-maison-au-mode-de-vie"
 date: "2019-07-09"
 excerpt: "Avec la canicule et les chaleurs actuelles, nous sentons bien notre dépendance à l’eau et la nécessité de réduire au mieux notre consommation d’eau. Un..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["bouteille en plastique","douches","eau","envrionnement","oceans","plasyique","pollution","reduire consommation eau","reduire sa consommation","sauver la planete","transition ecologique"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/comment-reduire-sa-consommation-deau.jpg"
 seoTitle: "Réduire sa consommation d’eau : de la maison au mode de vie !"
 seoDescription: "Avec la canicule et les chaleurs actuelles, nous sentons bien notre dépendance à l’eau et la nécessité de réduire au mieux notre consommation d'eau. Un Français consomme en moyenne 1.9 million de litres d’eau chaque année. On sait que les changements climatiques ont déjà commencé à réduire les niveaux de…"

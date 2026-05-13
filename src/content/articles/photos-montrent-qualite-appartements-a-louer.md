@@ -4,7 +4,7 @@ slug: "photos-montrent-qualite-appartements-a-louer"
 date: "2017-02-08"
 excerpt: "La quasi-totalité des premiers contacts avec un bien immobilier se fait par le biais d’internet. Ce qui veut dire par l’annonce. L’analyse et le jugement se..."
 categories: ["Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
-tags: []
+tags: ["acheter un appartement","annonces immobilières marseille","louer un appartement","photos annonces immobilières"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/02/location-meuble-wifi-castellane-1200x802.jpg"
 seoTitle: "Les photos montrent la qualité des appartements à louer ou à vendre"
 seoDescription: "La quasi-totalité des premiers contacts avec un bien immobilier se fait par le biais d’internet. Ce qui veut dire par l’annonce. L'analyse et le jugement se font en 3 ou 4 secondes! Une étude réalisée par l’Institut comportemental et expérimental de l’immobilier, situé à l’université de Dominion, dans la ville…"

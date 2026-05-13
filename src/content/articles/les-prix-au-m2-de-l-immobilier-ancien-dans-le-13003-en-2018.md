@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13003-en-2018"
 date: "2019-05-29"
 excerpt: "Nous avons dressé un comparatif quartier par quartier des prix au m2 de l’immobilier ancien dans le 13003 En 2018, il s’est vendu dans le 3e arrondissement de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13003","3e arrondissement","appartements","immobilier","immobilier ancien","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13003.jpg"
 seoTitle: "Marseille : Les prix au m2 de l’immobilier ancien dans le 13003"
 seoDescription: "Nous avons dressé un comparatif quartier par quartier des prix au m2 de l'immobilier ancien dans le 13003 En 2018, il s’est vendu dans le 3e arrondissement de Marseille:176 appartements  au prix médian* de 1 360€ le m² . Garage Belle de Mai 13003 En termes de prix au m2…"

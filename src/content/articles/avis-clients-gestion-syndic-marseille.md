@@ -4,7 +4,7 @@ slug: "avis-clients-gestion-syndic-marseille"
 date: "2019-08-03"
 excerpt: "Les avis client de notre gestion de syndic à Marseille sont certifiés depuis 2017, sur la plateforme “Opinion System” car nous sommes engagés dans une démarche..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["avis client","gestion de syndic","marseille","syndic"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-syndic-marseille-pujol.jpg"
 seoTitle: "Les avis clients sur notre gestion de syndic de l’Immobilière Pujol à Marseille"
 seoDescription: "Depuis 2017, l’agence Immobilière Pujol adhère à la démarche qualité proposée par “Opinion System”. Cet organisme est certifié ISO 20252 : c’est une façon pour nous de démontrer notre bonne foi et notre transparence."

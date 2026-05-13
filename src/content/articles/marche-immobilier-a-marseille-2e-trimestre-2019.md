@@ -4,7 +4,7 @@ slug: "marche-immobilier-a-marseille-2e-trimestre-2019"
 date: "2019-07-25"
 excerpt: "Un marché sur sa lancée Comme chaque trimestre, nous dressons un bilan du marché immobilier à Marseille : location, vente… Vous trouverez les données chiffrées..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["2019","analyse","analyse marché immobilier marseille","etude","etude marche immobilier marseille","evolution","evolution marche immobilier marseille","immobilier","marché","marché immobilier marseille","marché immobilier marseille 2019","tendance","tendance marché immobilier marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/photo_fd0d7681c563d1b8c5c5809ce3400d40-28-1200x800.jpg"
 seoTitle: "Le marché immobilier à Marseille au 2e trimestre 2019"
 seoDescription: "Comme chaque trimestre, nous dressons un bilan du marché immobilier à Marseille : location, vente…"

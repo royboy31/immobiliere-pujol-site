@@ -4,7 +4,7 @@ slug: "avis-clients-gestion-locative-marseille"
 date: "2019-08-29"
 excerpt: "Obtenir des avis clients en gestion locative à Marseille n’est pas facile. Née en 2001, l’Immobilière Pujol a fait de la gestion locative l’un de ses cœurs de..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["appartement","avis client","bien immobilier","gestion locative","maison","marseille","mise en location"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-gestion-locative-marseille-equipe-pujol.jpg"
 seoTitle: "Les avis clients d’Immobilière Pujol en gestion locative à Marseille"
 seoDescription: "Née en 2001, l’Immobilière Pujol a fait de la gestion locative l’un de ses coeurs de métier : pour évaluer le plus objectivement notre prestation, nous avons recours à Opinion System (institut indépendant certifié ISO 9001, 20252 et NF Z74-501). Cette page internet permet à nos clients de nous noter…"

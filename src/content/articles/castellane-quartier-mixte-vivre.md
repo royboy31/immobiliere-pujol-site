@@ -4,7 +4,7 @@ slug: "castellane-quartier-mixte-vivre"
 date: "2017-01-20"
 excerpt: "Castellane est l’exemple même d’une mixité réussie. Historiquement, ce quartier du sixième arrondissement de Marseille était surtout connu pour être bourgeois...."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
-tags: []
+tags: ["acheter à marseille","castellane","louer à marseille","marseille","ou vivre a marseille","trouver un appartement à marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/castellane.jpg"
 seoTitle: "Castellane, un quartier mixte où il fait bon vivre"
 seoDescription: "Castellane est l’exemple même d’une mixité réussie. Historiquement, ce quartier du sixième arrondissement de Marseille était surtout connu pour être bourgeois. Aujourd’hui encore, il s’agit d’un quartier où il fait bon vivre à Marseille. Les jeunes mais aussi les seniors Il séduit notamment les jeunes qui viennent étudier à Marseille.…"

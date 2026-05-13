@@ -4,7 +4,7 @@ slug: "analyse-du-marche-immobilier-a-marseille-au-premier-trimestre-2018"
 date: "2018-04-11"
 excerpt: "Commençons notre analyse du marché immobilier par dire que le marché se porte bien dans son ensemble, avec des évolutions asymétriques entre location et..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["analyse du marché immobilier","évolution marché immobilier","marché immobilier","marché immobilier 2018","marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/B000504_D54F.jpg"
 seoTitle: "Analyse du marché immobilier : Marseille au 1er trimestre 2018"
 seoDescription: "Commençons notre analyse du marché immobilier par dire que le marché se porte bien dans son ensemble, avec des évolutions asymétriques entre location et transaction. Le marché des transactions est soutenu mais il ne progresse plus. Quant au marché de la location, mou depuis plusieurs mois, il repart. Marché de…"

@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13001-en-2018"
 date: "2019-03-06"
 excerpt: "Les prix médians* sont établis par les notaires de France sur les transactions réalisées. Voici un comparatif quartier par quartier des prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13001","1er arrondissement","ancien","marseille","prix au m2","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/03/13001.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13001 en 2018"
 seoDescription: "Les prix médians* sont établis par les notaires de France sur les transactions réalisées. Voici un comparatif quartier par quartier des prix au m2 de l'immobilier ancien dans le 13001 en 2018. Le nombre de vente réalisées dans le 13001 pour l'année 2018 : 321 pour un prix médian de…"

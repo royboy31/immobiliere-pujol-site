@@ -78,6 +78,9 @@ for (const s of pageSchemas) {
     <link rel="canonical" href={canonicalURL} />
 
     <meta name="robots" content={shouldNoindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="google-site-verification" content="XKAzqnzZ1WGlJqJZvQFkvRvnoawpEcOIgkoIRPAXLgc" />
+
+    <link rel="alternate" type="application/rss+xml" title="Immobilière Pujol" href="/feed/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -90,8 +93,11 @@ for (const s of pageSchemas) {
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@stephanepujol" />
+    <meta name="twitter:creator" content="@stephanepujol" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     {loadAnalytics ? (
       <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

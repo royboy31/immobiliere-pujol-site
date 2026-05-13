@@ -4,7 +4,7 @@ slug: "quest-ce-quun-immeuble-a-risque"
 date: "2019-02-07"
 excerpt: "De toute évidence, un immeuble à risque est un immeuble ancien. Mais on ne peut pas généraliser : tous les immeubles anciens ne sont pas à risque… et..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["copropriete","immeuble","risque","syndic"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/01/site-1549064_1280-1200x800.jpg"
 seoTitle: "Qu’est-ce qu’un immeuble à risque ?"
 seoDescription: "De toute évidence, un immeuble à risque est un immeuble ancien. Mais on ne peut pas généraliser : tous les immeubles anciens ne sont pas à risque… et heureusement d'ailleurs, sinon nos centres-ville deviendraient des pièges. La catastrophe de la rue d'Aubagne est et demeurera exceptionnelle. Elle doit le rester.…"

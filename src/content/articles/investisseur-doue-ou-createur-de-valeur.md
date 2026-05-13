@@ -4,7 +4,7 @@ slug: "investisseur-doue-ou-createur-de-valeur"
 date: "2013-03-03"
 excerpt: "Jusqu’en 2009, il fallait acheter sans être un investisseur doué. Quand on réussi un investissement immobilier ou tout autre investissement, on ne se pose pas..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["investissement immobilier marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/achat-investissement-marseille-e1482142602328.jpg"
 seoTitle: "Comment créer de la valeur en investissant dans l’immobilier même dans un marché baissier?"
 seoDescription: "Jusqu'en 2009, il fallait acheter sans être un investisseur doué. Quand on réussi un investissement immobilier ou tout autre investissement, on ne se pose pas la question du pourquoi j'ai réussi et  comment la valeur a été crée. Depuis 1995, il fallait acheter, le plus possible, le plus tôt possible,…"

@@ -4,7 +4,7 @@ slug: "evolution-des-loyers-dans-le-13012-a-marseille-entre-2014-et-2018"
 date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13012 à Marseille entre 2014 et 2018. Cet arrondissement situé en périphérie de la ville est divisé en 7..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["12e arrondissement","13012","marseille","prix au m2","prix des loyers a Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/IMG_2012-1200x900.jpg"
 seoTitle: "Évolution des loyers dans le 13012 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13012 à Marseille entre 2014 et 2018. Cet arrondissement situé en périphérie de la ville est divisé en 7 quartiers différents : la Fourragère, les Caillols, les Trois Lucs, Montolivet, Saint Barnabé, Saint Jean du Désert et Saint Julien. Le 12e…"
