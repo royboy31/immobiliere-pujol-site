@@ -247,6 +247,12 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       background-position: 0 100%;
       color: $ds-olive;
     }
+
+    &--arrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
 
   // Text inputs inside .input
