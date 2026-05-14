@@ -20,6 +20,73 @@ function extractFromZip(filename) {
   return execSync(cmd, { maxBuffer: 50 * 1024 * 1024 });
 }
 
+// ── Negotiator name → expert email mapping ──
+const NEGOTIATOR_MAP = {
+  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'julia lauron': 'julia@immobiliere-pujol.fr',
+  'thibault arnoux': 'thibault@immobiliere-pujol.fr',
+};
+
+function parseNegotiator(descriptif) {
+  // Pattern: "IMMOBILIERE PUJOL / Name Phone" or "Name Phone" near end
+  const match = descriptif.match(/IMMOBILIERE PUJOL\s*\/\s*([^\d<]+?)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  if (match) {
+    return { name: match[1].trim(), phone: match[2].replace(/\s/g, '') };
+  }
+  // Fallback: look for name + mobile phone pattern in last 300 chars
+  const tail = descriptif.slice(-300);
+  const fallback = tail.match(/([A-ZÀ-Ú][a-zà-ú]+\s+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  if (fallback) {
+    return { name: fallback[1].trim(), phone: fallback[2].replace(/\s/g, '') };
+  }
+  return null;
+}
+
+function negotiatorToEmail(name) {
+  const key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  for (const [pattern, email] of Object.entries(NEGOTIATOR_MAP)) {
+    if (key.includes(pattern) || pattern.includes(key)) return email;
+  }
+  console.warn(`  ⚠ Unknown negotiator: "${name}" — falling back to agency email`);
+  return null;
+}
+
+const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse)';
+
+function parseAddress(descriptif, codePostal, ville) {
+  // Extract the first sentence/segment of the descriptif
+  const firstBlock = descriptif.split(/<br>\s*<br>/)[0].replace(/<br>/g, ' ').trim();
+
+  // Pattern 1: "Number [bis/ter] street-type street-name" (e.g. "139 bd de la Blancarde")
+  const numFirst = firstBlock.match(
+    new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|$)`, 'i')
+  );
+  if (numFirst) {
+    let addr = numFirst[1].trim().replace(/\s+/g, ' ');
+    if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
+    return addr;
+  }
+
+  // Pattern 2: "Street-type Name [Number] CP Ville" (e.g. "Avenue Emmanuel Allard 13011 Marseille")
+  const streetFirst = firstBlock.match(
+    new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
+  );
+  if (streetFirst) {
+    return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
+  }
+
+  // Pattern 3: "place Name" without CP (e.g. "place Castellane Marseille")
+  const placeMatch = firstBlock.match(
+    /(place\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i
+  );
+  if (placeMatch) {
+    return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
+  }
+
+  console.warn(`  ⚠ Could not parse address from descriptif`);
+  return null;
+}
+
 // ── Parse LBI CSV ──
 const DELIMITER = '!#';
 
@@ -64,7 +131,7 @@ function parseLbiCsv(buffer) {
       interphone: f[82] === 'OUI',
       telephone: f[104] || null,
       contactNom: f[105]?.trim() || null,
-      email: f[106] || null,
+      emailAgence: f[106] || null,
       mandatNumero: f[111] || null,
       mandatDate: f[112] || null,
       dpeValeur: f[175] || null,
@@ -73,6 +140,20 @@ function parseLbiCsv(buffer) {
       gesNote: f[178] || null,
       photos,
     };
+
+    // Extract negotiator from descriptif
+    const nego = parseNegotiator(annonce.descriptif || '');
+    if (nego) {
+      annonce.email = negotiatorToEmail(nego.name) || annonce.emailAgence;
+      annonce.contactNom = nego.name;
+      annonce.telephone = nego.phone;
+    } else {
+      annonce.email = annonce.emailAgence;
+      console.warn(`  ⚠ No negotiator found in descriptif for ${annonce.reference}`);
+    }
+
+    // Extract address from descriptif
+    annonce.adresse = parseAddress(annonce.descriptif || '', annonce.codePostal, annonce.ville);
 
     // Generate slug (same logic as cron-sync)
     annonce.slug = generateSlug(annonce);
@@ -139,7 +220,7 @@ function buildUpsertSql(a, photoKeys, now) {
   return `INSERT INTO annonces (
     slug, status, reference_agence,
     type_annonce, type_bien,
-    code_postal, ville,
+    adresse, code_postal, ville,
     prix,
     surface, surface_terrain,
     nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
@@ -153,7 +234,7 @@ function buildUpsertSql(a, photoKeys, now) {
   ) VALUES (
     ${esc(a.slug)}, 'active', ${esc(a.reference)},
     ${esc(a.typeAnnonce)}, ${esc(a.typeBien)},
-    ${esc(a.codePostal)}, ${esc(a.ville)},
+    ${esc(a.adresse)}, ${esc(a.codePostal)}, ${esc(a.ville)},
     ${a.prix || 'NULL'},
     ${a.surface || 'NULL'}, ${a.surfaceTerrain || 'NULL'},
     ${a.nbPieces || 'NULL'}, ${a.nbChambres || 'NULL'}, ${a.nbSallesBain || 'NULL'}, ${a.nbWC || 'NULL'},
@@ -168,6 +249,7 @@ function buildUpsertSql(a, photoKeys, now) {
   ON CONFLICT(slug) DO UPDATE SET
     status='active', reference_agence=excluded.reference_agence,
     type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
+    adresse=excluded.adresse,
     code_postal=excluded.code_postal, ville=excluded.ville,
     prix=excluded.prix,
     surface=excluded.surface, surface_terrain=excluded.surface_terrain,
