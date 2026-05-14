@@ -592,6 +592,14 @@
     border: 0;
   }
 
+  // Video slide (virtual-tour iframe sits inside the gallery as slide 1).
+  // Needs a positioning context so the absolute iframe stays inside this slide
+  // and doesn't overflow into photo slides.
+  .lc-slide--video {
+    position: relative;
+    background: $black;
+  }
+
   &__photos-pill {
     position: absolute;
     bottom: 16px;
