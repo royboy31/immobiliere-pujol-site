@@ -60,9 +60,10 @@ interface Props {
 
 const { view, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
-const hasMeuble = view.meuble === 0 || view.meuble === 1;
+const isSale = view.type === 'V';
+const hasMeuble = !isSale && (view.meuble === 0 || view.meuble === 1);
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
-const hasNbEtages = view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null;
+const hasNbEtages = !isSale && view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null;
 
 const hasTechDetails = !!(
   view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
@@ -98,7 +99,13 @@ const hasFinanceDetails =
       {view.description && (
         <section class="annonce-desc-block">
           <h2>Description</h2>
-          <div class="annonce-desc" set:html={view.description.replace(/\n/g, '<br/>')}></div>
+          <div class="annonce-desc" set:html={
+            view.description
+              .replace(/(<br\s*\/?>)\s*/gi, '</p><p>')
+              .replace(/\n/g, '</p><p>')
+              .replace(/^/, '<p>').replace(/$/, '</p>')
+              .replace(/<p>\s*<\/p>/g, '')
+          }></div>
         </section>
       )}
 
@@ -147,7 +154,7 @@ const hasFinanceDetails =
     />
 
     <Fragment slot="action-below">
-      {expert && <ExpertCard expert={expert} />}
+      {expert && <ExpertCard expert={expert} showPhone={isSale} />}
       <AnnonceMap
         variant="sidebar"
         adresse={view.adresse}

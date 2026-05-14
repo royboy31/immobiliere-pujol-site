@@ -4,9 +4,10 @@ import type { Expert } from '../../lib/experts';
 interface Props {
   expert: Expert;
   heading?: string;
+  showPhone?: boolean;
 }
 
-const { expert, heading = 'Expert en charge de ce bien' } = Astro.props;
+const { expert, heading = 'Expert en charge de ce bien', showPhone = false } = Astro.props;
 // Expert titles are stored as "Name – Role" (em dash or hyphen, surrounded by spaces).
 // Take only the name half so it doesn't duplicate the role rendered separately as `fonction`.
 const displayName = (expert.title.split('|').pop() ?? expert.title)
@@ -34,11 +35,18 @@ const displayName = (expert.title.split('|').pop() ?? expert.title)
         <strong>{displayName}</strong>
       </a>
       {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
-      {expert.email && (
+      {(expert.email || (showPhone && expert.phone)) && (
         <div class="expert-card__contact">
-          <a href={`mailto:${expert.email}`} class="expert-card__email">
-            {expert.email}
-          </a>
+          {expert.email && (
+            <a href={`mailto:${expert.email}`} class="expert-card__email">
+              {expert.email}
+            </a>
+          )}
+          {showPhone && expert.phone && (
+            <a href={`tel:${expert.phone}`} class="expert-card__phone">
+              {expert.phone.replace(/(\d{2})(?=\d)/g, '$1 ')}
+            </a>
+          )}
         </div>
       )}
     </div>
