@@ -463,24 +463,31 @@ function negotiatorToEmail(name: string): string | null {
   return null;
 }
 
-const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse)';
+const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse|square|grand[e]?\\s+rue)';
 
 function parseAddress(descriptif: string, codePostal: string, ville: string): string | null {
-  const firstBlock = descriptif.split(/<br>\s*<br>/)[0].replace(/<br>/g, ' ').trim();
-  const numFirst = firstBlock.match(
-    new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|$)`, 'i')
-  );
-  if (numFirst) {
-    let addr = numFirst[1].trim().replace(/\s+/g, ' ');
-    if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
-    return addr;
+  const clean = descriptif.replace(/<br\s*\/?>/gi, ' ').trim();
+  // Try first block, then full text if not found
+  const blocks = [clean.split(/\s{2,}/)[0], clean];
+  for (const text of blocks) {
+    // Pattern 1: "Number street-type name"
+    const numFirst = text.match(
+      new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|\\s+dans|$)`, 'i')
+    );
+    if (numFirst) {
+      let addr = numFirst[1].trim().replace(/\s+/g, ' ');
+      if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
+      return addr;
+    }
+    // Pattern 2: "Street-type name CP ville"
+    const streetFirst = text.match(
+      new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
+    );
+    if (streetFirst) return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
+    // Pattern 3: "place/square Name"
+    const placeMatch = text.match(/((?:place|square)\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i);
+    if (placeMatch) return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
   }
-  const streetFirst = firstBlock.match(
-    new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
-  );
-  if (streetFirst) return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
-  const placeMatch = firstBlock.match(/(place\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i);
-  if (placeMatch) return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
   return null;
 }
 

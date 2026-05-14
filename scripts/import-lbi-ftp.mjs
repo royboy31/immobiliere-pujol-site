@@ -60,36 +60,36 @@ function negotiatorToEmail(name) {
   return null;
 }
 
-const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse)';
+const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse|square|grand[e]?\\s+rue)';
 
 function parseAddress(descriptif, codePostal, ville) {
-  // Extract the first sentence/segment of the descriptif
-  const firstBlock = descriptif.split(/<br>\s*<br>/)[0].replace(/<br>/g, ' ').trim();
-
-  // Pattern 1: "Number [bis/ter] street-type street-name" (e.g. "139 bd de la Blancarde")
-  const numFirst = firstBlock.match(
-    new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|$)`, 'i')
-  );
-  if (numFirst) {
-    let addr = numFirst[1].trim().replace(/\s+/g, ' ');
-    if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
-    return addr;
-  }
-
-  // Pattern 2: "Street-type Name [Number] CP Ville" (e.g. "Avenue Emmanuel Allard 13011 Marseille")
-  const streetFirst = firstBlock.match(
-    new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
-  );
-  if (streetFirst) {
-    return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
-  }
-
-  // Pattern 3: "place Name" without CP (e.g. "place Castellane Marseille")
-  const placeMatch = firstBlock.match(
-    /(place\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i
-  );
-  if (placeMatch) {
-    return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
+  const clean = descriptif.replace(/<br\s*\/?>/gi, ' ').trim();
+  // Try first block, then full text if not found
+  const blocks = [clean.split(/\s{2,}/)[0], clean];
+  for (const text of blocks) {
+    // Pattern 1: "Number [bis/ter] street-type street-name"
+    const numFirst = text.match(
+      new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|\\s+dans|$)`, 'i')
+    );
+    if (numFirst) {
+      let addr = numFirst[1].trim().replace(/\s+/g, ' ');
+      if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
+      return addr;
+    }
+    // Pattern 2: "Street-type Name CP Ville"
+    const streetFirst = text.match(
+      new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
+    );
+    if (streetFirst) {
+      return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
+    }
+    // Pattern 3: "place/square Name"
+    const placeMatch = text.match(
+      /((?:place|square)\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i
+    );
+    if (placeMatch) {
+      return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
+    }
   }
 
   console.warn(`  ⚠ Could not parse address from descriptif`);
