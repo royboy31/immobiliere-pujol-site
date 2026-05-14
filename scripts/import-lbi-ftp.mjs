@@ -26,17 +26,25 @@ const NEGOTIATOR_MAP = {
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
   'candice loth': 'candice@immobiliere-pujol.fr',
+  'caroline pujol': 'carolinepujol@immobiliere-pujol.fr',
 };
 
 function parseNegotiator(descriptif) {
-  // Pattern: "IMMOBILIERE PUJOL / Name Phone" or "Name Phone" near end
-  const match = descriptif.match(/IMMOBILIERE PUJOL\s*\/\s*([^\d<]+?)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  // Strip <br> tags to normalise line breaks in patterns
+  const clean = descriptif.replace(/<br\s*\/?>/gi, ' ');
+  // Pattern 1: "IMMOBILIERE PUJOL / Name Phone"
+  const match = clean.match(/IMMOBILIERE PUJOL\s*\/\s*([^\d]+?)\s+((?:\d{2}\s*){5})/);
   if (match) {
     return { name: match[1].trim(), phone: match[2].replace(/\s/g, '') };
   }
-  // Fallback: look for name + mobile phone pattern in last 300 chars
-  const tail = descriptif.slice(-300);
-  const fallback = tail.match(/([A-ZÀ-Ú][a-zà-ú]+\s+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  // Pattern 2: "Name IMMOBILIERE PUJOL Phone"
+  const reversed = clean.match(/([A-ZÀ-Ú][a-zà-ú]+[\s\-]+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+IMMOBILIERE PUJOL\s+((?:\d{2}\s*){5})/);
+  if (reversed) {
+    return { name: reversed[1].trim(), phone: reversed[2].replace(/\s/g, '') };
+  }
+  // Pattern 3: fallback — "Name Phone" near end (with or without spaces in phone)
+  const tail = clean.slice(-300);
+  const fallback = tail.match(/([A-ZÀ-Ú][a-zà-ú]+[\s\-]+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+((?:\d{2}\s*){5})/);
   if (fallback) {
     return { name: fallback[1].trim(), phone: fallback[2].replace(/\s/g, '') };
   }
