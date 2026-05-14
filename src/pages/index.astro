@@ -174,22 +174,18 @@ const STAR_PATH =
     </div>
 
     <div class="hero-search">
-      <div class="hero-search__tabs" id="heroTabs">
-        <a class="hero-search__pill" href="/annonces/locations/">VOIR LES BIENS À LOUER</a>
-        <a class="hero-search__pill" href="/annonces/ventes/">VOIR LES BIENS À VENDRE</a>
-      </div>
-
-      <div class="hero-search__bar">
-        <div class="hero-search__pane is-active">
-          <div class="seg first seg--dropdown" data-dropdown="estim-type">
-            <div class="lbl"><b>ESTIMATION</b><span id="estimTypeLabel">Vente ou location</span></div>
-            <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
-            <ul class="seg__menu" id="estimTypeMenu">
-              <li data-value="vente" data-href="/services/demander-une-estimation-de-prix-de-vente/">Estimation prix de vente</li>
-              <li data-value="loyer" data-href="/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/">Estimation de loyer</li>
-            </ul>
-          </div>
-          <a href="/services/demander-une-estimation-de-prix-de-vente/" class="cta" id="estimCta">ESTIMATION EN LIGNE</a>
+      <div class="hero-search__buttons">
+        <a class="cta" href="/annonces/locations/">VOIR LES BIENS À LOUER</a>
+        <a class="cta" href="/annonces/ventes/">VOIR LES BIENS À VENDRE</a>
+        <div class="hero-search__estim">
+          <button class="cta" type="button" id="estimBtn">
+            ESTIMATION EN LIGNE
+            <svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1 L6 6 L11 1" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" /></svg>
+          </button>
+          <ul class="hero-search__estim-menu" id="estimMenu">
+            <li><a href="/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/">Estimation location</a></li>
+            <li><a href="/services/demander-une-estimation-de-prix-de-vente/">Estimation vente</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -197,38 +193,13 @@ const STAR_PATH =
 
     <script>
       (function () {
-        const estimCta = document.getElementById('estimCta') as HTMLAnchorElement;
-
-        // --- Dropdown menus ---
-        document.querySelectorAll('.seg--dropdown').forEach((seg) => {
-          seg.addEventListener('click', (e) => {
-            if ((e.target as HTMLElement).closest('.seg__menu')) return;
-            e.stopPropagation();
-            const menu = seg.querySelector('.seg__menu') as HTMLElement;
-            const wasOpen = menu.classList.contains('is-open');
-            document.querySelectorAll('.seg__menu.is-open').forEach((m) => m.classList.remove('is-open'));
-            if (!wasOpen) menu.classList.add('is-open');
-          });
-
-          seg.querySelectorAll('.seg__menu li').forEach((li) => {
-            li.addEventListener('click', (e) => {
-              e.stopPropagation();
-              const el = li as HTMLElement;
-              const text = li.textContent || '';
-              const href = el.dataset.href || '';
-              document.getElementById('estimTypeLabel')!.textContent = text;
-              if (href) estimCta.href = href;
-              document.querySelectorAll('.seg__menu.is-open').forEach((m) => m.classList.remove('is-open'));
-            });
-          });
+        const btn = document.getElementById('estimBtn')!;
+        const menu = document.getElementById('estimMenu')!;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menu.classList.toggle('is-open');
         });
-
-        // Close on outside click
-        document.addEventListener('click', (e) => {
-          if (!(e.target as HTMLElement).closest('.hero-search')) {
-            document.querySelectorAll('.seg__menu.is-open').forEach((m) => m.classList.remove('is-open'));
-          }
-        });
+        document.addEventListener('click', () => menu.classList.remove('is-open'));
       })();
     </script>
 
