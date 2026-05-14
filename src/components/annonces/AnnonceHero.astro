@@ -1,6 +1,6 @@
 ---
 // 2-column hero.
-// LEFT: main media (video if present, else lead photo) → thumbnail strip → <slot name="left-below" /> (description).
+// LEFT: main media carousel (virtual-tour video as slide 1 when embeddable, then photos) → thumbnail strip → <slot name="left-below" /> (description).
 // RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
 
 interface View {
@@ -39,35 +39,42 @@ const badgeModifier = view.isClosed
 
 const photos = view.photos ?? [];
 const lead = photos[0];
-const thumbs = photos.slice(1, 5); // up to 4 thumbs visible
-const remaining = Math.max(0, photos.length - 5);
 
 // YouTube embed detection — extracts the 11-char ID from common URL patterns.
 // Inline embed only kicks in when the URL was set explicitly via the structured
-// `url_visite_virtuelle` field; description-extracted URLs always render as the
-// CTA button so we don't hijack the photo gallery for ~1800 annonces.
+// `url_visite_virtuelle` field; description-extracted URLs are ignored so we
+// don't hijack the gallery with unverified third-party content.
 const tour = (view.visiteVirtuelle || '').trim();
 const ytMatch = tour.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|watch\?v=))([A-Za-z0-9_-]{11})/);
 const ytId = ytMatch?.[1];
 const hasInlineVideo = !!ytId && view.tourEmbedAllowed !== false;
-const hasExternalTour = !!tour && !hasInlineVideo;
+
+// Slide 1 is the video when present; remaining slides are photos in order.
+// Thumbs skip whatever sits as slide 1 (the lead photo if no video, otherwise nothing).
+const slideCount = (hasInlineVideo ? 1 : 0) + photos.length;
+const thumbsStart = hasInlineVideo ? 0 : 1;
+const thumbs = photos.slice(thumbsStart, thumbsStart + 4);
+const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
 ---
 
 <section class="annonce-hero">
   <div class="annonce-hero__left">
     <div class="annonce-hero__main">
-      {hasInlineVideo ? (
-        <iframe
-          class="annonce-hero__iframe"
-          src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0`}
-          title={`${view.titre} – visite virtuelle`}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe>
-      ) : photos.length > 0 ? (
+      {slideCount > 0 ? (
         <div class="annonce-hero__slider lc-photos lc-photos--hero" data-lc-photos>
           <ul class="lc-track" data-lc-track>
+            {hasInlineVideo && (
+              <li class="lc-slide lc-slide--video" aria-label={`${view.titre} – visite virtuelle`}>
+                <iframe
+                  class="annonce-hero__iframe"
+                  src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0`}
+                  title={`${view.titre} – visite virtuelle`}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen
+                ></iframe>
+              </li>
+            )}
             {photos.map((p, i) => (
               <li
                 class="lc-slide"
@@ -78,20 +85,20 @@ const hasExternalTour = !!tour && !hasInlineVideo;
             ))}
           </ul>
 
-          {photos.length > 1 && (
+          {slideCount > 1 && (
             <>
-              <button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev aria-label="Photo précédente">
+              <button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev aria-label="Précédent">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
                 </svg>
               </button>
-              <button class="lc-arrow lc-arrow--next" type="button" data-lc-next aria-label="Photo suivante">
+              <button class="lc-arrow lc-arrow--next" type="button" data-lc-next aria-label="Suivant">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
                 </svg>
               </button>
               <div class="lc-dots" data-lc-dots>
-                {photos.map((_, i) => (
+                {Array.from({ length: slideCount }).map((_, i) => (
                   <span class={`lc-dot ${i === 0 ? 'is-active' : ''}`}></span>
                 ))}
               </div>
@@ -114,8 +121,9 @@ const hasExternalTour = !!tour && !hasInlineVideo;
       )}
 
       {/* Hidden anchor for the lead photo so the lightbox group still starts at photo 1
-          when the user clicks any thumbnail. */}
-      {lead && (
+          when the user clicks the photos pill. Skipped when a video occupies slide 1,
+          since photos[0] is then already in the visible thumb strip. */}
+      {!hasInlineVideo && lead && (
         <a
           class="annonce-hero__hidden"
           href={lead}
@@ -130,7 +138,7 @@ const hasExternalTour = !!tour && !hasInlineVideo;
     {thumbs.length > 0 && (
       <ul class="annonce-hero__thumbs">
         {thumbs.map((p, i) => {
-          const idx = i + 1; // photos[1..4]
+          const photoIdx = thumbsStart + i; // 0-based index in photos[]
           const isLast = i === thumbs.length - 1;
           const showMore = isLast && remaining > 0;
           return (
@@ -140,8 +148,8 @@ const hasExternalTour = !!tour && !hasInlineVideo;
                 href={p}
                 data-lightbox-group="annonce"
                 data-lightbox-src={p}
-                data-lightbox-caption={`${view.titre} – photo ${idx + 1}`}
-                aria-label={`Photo ${idx + 1}`}
+                data-lightbox-caption={`${view.titre} – photo ${photoIdx + 1}`}
+                aria-label={`Photo ${photoIdx + 1}`}
                 style={`background-image:url('${p}')`}
                 data-more={showMore ? `+${remaining}` : undefined}
               ></a>
@@ -151,30 +159,20 @@ const hasExternalTour = !!tour && !hasInlineVideo;
       </ul>
     )}
 
-    {/* Hidden anchors so the lightbox group still includes photos beyond the visible 5. */}
-    {photos.slice(5).map((p, i) => (
-      <a
-        class="annonce-hero__hidden"
-        href={p}
-        data-lightbox-group="annonce"
-        data-lightbox-src={p}
-        data-lightbox-caption={`${view.titre} – photo ${i + 6}`}
-        aria-hidden="true"
-      ></a>
-    ))}
-
-    {hasExternalTour && (
-      <a class="btn-pill-cta btn-pill-cta--loc annonce-hero__tour-cta" href={tour} target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M3 7 L8 4 L16 7 L21 4 V17 L16 20 L8 17 L3 20 Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" fill="none" />
-          <path d="M8 4 V17 M16 7 V20" stroke="currentColor" stroke-width="1.7" />
-        </svg>
-        VOIR LE BIEN EN VISITE VIRTUELLE
-        <svg width="14" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
-    )}
+    {/* Hidden anchors so the lightbox group still includes photos beyond the visible thumbs. */}
+    {photos.slice(thumbsStart + 4).map((p, i) => {
+      const photoIdx = thumbsStart + 4 + i;
+      return (
+        <a
+          class="annonce-hero__hidden"
+          href={p}
+          data-lightbox-group="annonce"
+          data-lightbox-src={p}
+          data-lightbox-caption={`${view.titre} – photo ${photoIdx + 1}`}
+          aria-hidden="true"
+        ></a>
+      );
+    })}
 
     <slot name="left-below" />
   </div>
