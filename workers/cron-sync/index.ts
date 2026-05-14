@@ -430,6 +430,51 @@ const LBI_CHAUFFAGE: Record<string, string> = {
   '10368': 'Individuel électrique radiateur',
 };
 
+// ── Negotiator name → expert email mapping ──
+const NEGOTIATOR_MAP: Record<string, string> = {
+  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'julia lauron': 'julia@immobiliere-pujol.fr',
+  'thibault arnoux': 'thibault@immobiliere-pujol.fr',
+};
+
+function parseNegotiator(descriptif: string): { name: string; phone: string } | null {
+  const match = descriptif.match(/IMMOBILIERE PUJOL\s*\/\s*([^\d<]+?)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  if (match) return { name: match[1].trim(), phone: match[2].replace(/\s/g, '') };
+  const tail = descriptif.slice(-300);
+  const fallback = tail.match(/([A-ZÀ-Ú][a-zà-ú]+\s+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+(\d{2}\s+\d{2}\s+\d{2}\s+\d{2}\s+\d{2})/);
+  if (fallback) return { name: fallback[1].trim(), phone: fallback[2].replace(/\s/g, '') };
+  return null;
+}
+
+function negotiatorToEmail(name: string): string | null {
+  const key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  for (const [pattern, email] of Object.entries(NEGOTIATOR_MAP)) {
+    if (key.includes(pattern) || pattern.includes(key)) return email;
+  }
+  return null;
+}
+
+const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse)';
+
+function parseAddress(descriptif: string, codePostal: string, ville: string): string | null {
+  const firstBlock = descriptif.split(/<br>\s*<br>/)[0].replace(/<br>/g, ' ').trim();
+  const numFirst = firstBlock.match(
+    new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|$)`, 'i')
+  );
+  if (numFirst) {
+    let addr = numFirst[1].trim().replace(/\s+/g, ' ');
+    if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
+    return addr;
+  }
+  const streetFirst = firstBlock.match(
+    new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
+  );
+  if (streetFirst) return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
+  const placeMatch = firstBlock.match(/(place\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i);
+  if (placeMatch) return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
+  return null;
+}
+
 interface LbiAnnonce {
   reference: string;
   typeAnnonce: 'V' | 'L';
@@ -463,6 +508,7 @@ interface LbiAnnonce {
   dpeNote: string | null;
   gesValeur: string | null;
   gesNote: string | null;
+  adresse: string | null;
   visiteVirtuelle: string | null;
   photos: string[];
   slug: string;
@@ -514,6 +560,7 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       dpeNote: f[176]?.trim() || null,
       gesValeur: f[177]?.trim() || null,
       gesNote: f[178]?.trim() || null,
+      adresse: null,
       visiteVirtuelle: (f[103]?.trim().split(/\s*,\s*/)[0]) || null,
       photos,
       slug: '',
@@ -532,6 +579,17 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '')
       .substring(0, 120);
+
+    // Extract negotiator from descriptif (f[106] is agency email, not negotiator)
+    const nego = parseNegotiator(a.descriptif);
+    if (nego) {
+      a.email = negotiatorToEmail(nego.name) || a.email;
+      a.contactNom = nego.name;
+      a.telephone = nego.phone;
+    }
+
+    // Extract address from descriptif
+    a.adresse = parseAddress(a.descriptif, a.codePostal, a.ville);
 
     if (a.typeAnnonce === 'V') annonces.push(a);
   }
@@ -574,7 +632,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
     `INSERT INTO annonces (
       slug, status, reference_agence,
       type_annonce, type_bien,
-      code_postal, ville,
+      adresse, code_postal, ville,
       prix, charges,
       surface, surface_terrain,
       nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
@@ -586,11 +644,12 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       mandat_numero, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'lbi',?,?
+      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', reference_agence=excluded.reference_agence,
       type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
+      adresse=excluded.adresse,
       code_postal=excluded.code_postal, ville=excluded.ville,
       prix=excluded.prix, charges=excluded.charges,
       surface=excluded.surface, surface_terrain=excluded.surface_terrain,
@@ -610,7 +669,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
     a.slug, a.reference, a.typeAnnonce, a.typeBien,
-    a.codePostal, a.ville,
+    a.adresse, a.codePostal, a.ville,
     a.prix, a.charges,
     a.surface, a.surfaceTerrain,
     a.nbPieces, a.nbChambres, a.nbSallesBain, a.nbWC,
