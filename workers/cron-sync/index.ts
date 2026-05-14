@@ -435,6 +435,7 @@ const NEGOTIATOR_MAP: Record<string, string> = {
   'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
+  'candice loth': 'candice@immobiliere-pujol.fr',
 };
 
 function parseNegotiator(descriptif: string): { name: string; phone: string } | null {
@@ -586,6 +587,9 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       a.email = negotiatorToEmail(nego.name) || a.email;
       a.contactNom = nego.name;
       a.telephone = nego.phone;
+    } else {
+      // No negotiator found — clear agency email so expert card is hidden
+      a.email = null;
     }
 
     // Extract address from descriptif

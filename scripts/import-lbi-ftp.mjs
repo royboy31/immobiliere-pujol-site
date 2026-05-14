@@ -25,6 +25,7 @@ const NEGOTIATOR_MAP = {
   'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
+  'candice loth': 'candice@immobiliere-pujol.fr',
 };
 
 function parseNegotiator(descriptif) {
@@ -148,7 +149,7 @@ function parseLbiCsv(buffer) {
       annonce.contactNom = nego.name;
       annonce.telephone = nego.phone;
     } else {
-      annonce.email = annonce.emailAgence;
+      annonce.email = null; // No negotiator — hide expert card
       console.warn(`  ⚠ No negotiator found in descriptif for ${annonce.reference}`);
     }
 
