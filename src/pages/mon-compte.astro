@@ -1,0 +1,118 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = 'Mon compte — Immobilière Pujol';
+const seoDescription =
+  "Accédez à votre espace client Immobilière Pujol : copropriété, gestion locative, location. Déclarez une urgence en dehors des heures ouvrables.";
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg';
+
+const portals = [
+  {
+    role: 'Copropriétaire',
+    desc: "Suivez votre copropriété, vos appels de fonds et documents.",
+    href: 'https://immobilierepujol.neotimm.com/extranet#/login',
+    cta: 'Accéder à mon espace',
+  },
+  {
+    role: 'Propriétaire — gestion locative',
+    desc: "Loyers encaissés, comptes-rendus, baux : votre bien en un coup d'œil.",
+    href: 'https://immobilierepujol.neotimm.com/extranet#/login',
+    cta: 'Accéder à mon espace',
+  },
+  {
+    role: 'Locataire',
+    desc: "Quittances, paiements, demandes d'intervention — tout depuis votre extranet.",
+    href: 'https://immobilierepujol.neotimm.com/extranet#/login',
+    cta: 'Accéder à mon espace',
+  },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero">
+    <picture class="svc-hero__video">
+      <img src={heroImg} alt="Façade de l'agence Immobilière Pujol à Marseille" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <h1>Mon <b>compte</b></h1>
+      <p class="svc-hero__sub">
+        Accédez à votre espace client pour suivre votre dossier, vos documents et vos demandes.
+      </p>
+      <a class="svc-hero__cta" href="#portals">Choisir mon espace</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= URGENCY BANNER ============= */}
+    <section class="contact-urgency">
+      <div class="contact-urgency__inner">
+        <span class="contact-urgency__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3 L22 20 H2 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M12 10 V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <circle cx="12" cy="17" r="1" fill="currentColor" />
+          </svg>
+        </span>
+        <div class="contact-urgency__body">
+          <h2>Une <b>urgence</b> en dehors des heures ouvrables ?</h2>
+          <p>Dégât des eaux, incident, sinistre — déclarez-le directement à notre équipe d'astreinte.</p>
+        </div>
+        <a class="contact-urgency__cta" href="/declarer-une-urgence/">
+          <span>Déclarer une urgence</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    {/* ============= CLIENT PORTALS ============= */}
+    <section class="account-portals" id="portals">
+      <div class="account-portals__inner">
+        <h2 class="ds-sec-title">Choisissez votre <b>espace client</b></h2>
+        <p class="account-portals__lead">
+          Trois extranets, un seul identifiant : copropriétaires, propriétaires en gestion locative et locataires.
+        </p>
+
+        <ul class="account-portals__grid">
+          {portals.map((p) => (
+            <li class="account-card">
+              <h3 class="account-card__role">{p.role}</h3>
+              <p class="account-card__desc">{p.desc}</p>
+              <a class="account-card__cta" href={p.href} target="_blank" rel="noopener">
+                <span>{p.cta}</span>
+                <svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+                  <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {/* ============= HELP CTA ============= */}
+    <section class="account-help">
+      <div class="account-help__inner">
+        <h2>Besoin d'aide pour <b>vous connecter ?</b></h2>
+        <p>
+          Identifiants oubliés, première connexion ou question sur votre espace : notre équipe vous accompagne.
+        </p>
+        <a class="account-help__cta" href="/contact-immobiliere-pujol/">
+          <span>Nous contacter</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

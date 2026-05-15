@@ -1,0 +1,176 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = "Déclarer une urgence — Immobilière Pujol";
+const seoDescription =
+  "Déclarer un sinistre, un dégât des eaux ou tout incident en dehors des heures ouvrables. Notre équipe d'astreinte vous répond rapidement.";
+
+const heroImg =
+  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/PU-1873-1200x750.jpg';
+
+const profiles = [
+  { value: 'copropriétaire', label: 'Copropriétaire' },
+  { value: 'locataire', label: 'Locataire' },
+  { value: 'propriétaire gestion locative', label: 'Propriétaire — gestion locative' },
+];
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  {/* ============= HERO ============= */}
+  <section class="svc-hero svc-hero--urgency">
+    <picture class="svc-hero__video">
+      <img src={heroImg} alt="Déclarer une urgence — Immobilière Pujol" loading="eager" />
+    </picture>
+    <div class="svc-hero__overlay"></div>
+
+    <div class="svc-hero__inner">
+      <span class="svc-hero__pill">Service d'astreinte</span>
+      <h1>Déclarer une <b>urgence</b></h1>
+      <p class="svc-hero__sub">
+        Dégât des eaux, incident ou sinistre en dehors des heures ouvrables — notre équipe vous répond rapidement.
+      </p>
+      <a class="svc-hero__cta svc-hero__cta--orange" href="#form">Déclarer maintenant</a>
+    </div>
+  </section>
+
+  <div class="svc-page">
+
+    {/* ============= GUIDANCE ============= */}
+    <section class="urgency-intro">
+      <div class="urgency-intro__inner">
+        <h2 class="ds-sec-title">Un incident <b>urgent ?</b></h2>
+        <p class="urgency-intro__lead">
+          Décrivez votre situation aussi précisément que possible. Plus le diagnostic est clair, plus l'intervention est rapide.
+        </p>
+
+        <ul class="urgency-steps">
+          <li>
+            <span class="urgency-steps__num">1</span>
+            <h3>Identifiez-vous</h3>
+            <p>Précisez votre statut (locataire, copropriétaire, propriétaire) pour un traitement adapté.</p>
+          </li>
+          <li>
+            <span class="urgency-steps__num">2</span>
+            <h3>Décrivez le sinistre</h3>
+            <p>Adresse, étage et nature du problème — texte court mais précis sur la cause supposée.</p>
+          </li>
+          <li>
+            <span class="urgency-steps__num">3</span>
+            <h3>Restez joignable</h3>
+            <p>Téléphone et e-mail valides : un conseiller vous rappelle pour organiser l'intervention.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    {/* ============= URGENCY FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form svc-form--urgency"
+        method="post"
+        action="/declarer-une-urgence/#form"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <h2>Décrivez votre <b>urgence</b></h2>
+        <p class="svc-form__lead">
+          Remplissez ce formulaire. Notre équipe d'astreinte vous recontacte au plus vite pour organiser l'intervention.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field svc-field--full">
+            <span>Vous êtes *</span>
+            <select name="input_4" required>
+              {profiles.map((p) => (
+                <option value={p.value}>{p.label}</option>
+              ))}
+            </select>
+          </label>
+
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_1.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_1.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_6" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field">
+            <span>E-mail *</span>
+            <input type="email" name="input_2" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Adresse du bien ou de la copropriété *</span>
+            <input type="text" name="input_5.1" placeholder="Adresse postale" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Ville *</span>
+            <input type="text" name="input_5.3" placeholder="Ville" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Code postal *</span>
+            <input type="text" name="input_5.5" placeholder="Code postal" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Étage du bien concerné</span>
+            <input type="number" name="input_7" placeholder="Étage" />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Description de la demande *</span>
+            <textarea
+              name="input_3"
+              rows="6"
+              placeholder="Décrivez-nous votre problème actuel et, à votre avis, d'où vient le problème."
+              required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_8.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+          dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+          connaître et exercer vos droits, notamment de retrait de votre consentement à
+          l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+          {' '}<a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+        </p>
+
+        {/* Honeypot — mirrors legacy Gravity Forms field. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>LinkedIn<input type="text" name="input_9" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="12" />
+        <input type="hidden" name="is_submit_12" value="1" />
+
+        <button class="svc-form__submit svc-form__submit--orange" type="submit">
+          <span>Envoyer ma déclaration</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+
+  </div>
+</BaseLayout>

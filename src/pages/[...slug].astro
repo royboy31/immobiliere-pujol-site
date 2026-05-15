@@ -17,6 +17,8 @@ export async function getStaticPaths() {
   const DEDICATED = new Set([
     'estimez-le-prix-de-vente-de-votre-bien-en-2mn',
     'contact-immobiliere-pujol',
+    'mon-compte',
+    'declarer-une-urgence',
   ]);
   const articles = await getCollection('articles');
   const pages = await getCollection('pages');
