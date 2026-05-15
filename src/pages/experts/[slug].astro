@@ -80,13 +80,61 @@ const pageDesc = expert.description
   : `Profil de ${displayName} chez Immobilière Pujol. Biens gérés, actuellement disponibles et historique.`;
 const pageTitle = `${displayName} – Immobilière Pujol`;
 
+type ReviewsPayload = {
+  collaboratorId: number;
+  certificateUrl: string | null;
+  rating: {
+    overall: number;
+    count: number;
+    criteres: { label: string; score: number }[];
+  } | null;
+  surveys: {
+    id: number | null;
+    date: string | null;
+    clientName: string;
+    property: string;
+    comment: string;
+    agencyResponse: string | null;
+  }[];
+  fetchedAt: string;
+};
+
+let reviewsPayload: ReviewsPayload | null = null;
+try {
+  let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
+  try {
+    const { env } = await import('cloudflare:workers');
+    assets = (env as any)?.ASSETS;
+  } catch {}
+  const base = new URL(`/_data/reviews/${slug}.json`, Astro.url.origin);
+  const req = new Request(base.toString());
+  const resp = assets ? await assets.fetch(req) : await fetch(base.toString());
+  if (resp && resp.ok) reviewsPayload = await resp.json();
+} catch {}
+
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 const expertType = getExpertType(expert);
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc}>
+<BaseLayout title={pageTitle} description={pageDesc} schemas={
+  reviewsPayload?.rating && reviewsPayload.rating.count > 0
+    ? [{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: displayName,
+        jobTitle: expert.fonction || undefined,
+        worksFor: { '@type': 'RealEstateAgent', name: 'Immobilière Pujol' },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: reviewsPayload.rating.overall,
+          bestRating: 10,
+          ratingCount: reviewsPayload.rating.count,
+        },
+      }]
+    : []
+}>
   <article class={`expert-page expert-page--${expertType}`}>
     <a href="/experts/" class="annonce-back annonce-back--floating">
       <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
@@ -195,6 +243,67 @@ const expertType = getExpertType(expert);
       </aside>
     </section>
 
+    {reviewsPayload?.rating && reviewsPayload.rating.count > 0 && (
+      <section class="expert-reviews">
+        <header class="expert-reviews__head">
+          <span class="expert-reviews__overline">Avis vérifiés</span>
+          <h2 class="expert-reviews__title">
+            Ce que les clients de <b>{firstName}</b> en pensent
+          </h2>
+          <div class="expert-reviews__score">
+            <span class="expert-reviews__num">{reviewsPayload.rating.overall.toFixed(1)}</span>
+            <span class="expert-reviews__den">/ 10</span>
+            <span class="expert-reviews__count">
+              ({reviewsPayload.rating.count} avis vérifié{reviewsPayload.rating.count > 1 ? 's' : ''})
+            </span>
+          </div>
+          {reviewsPayload.certificateUrl && (
+            <a href={reviewsPayload.certificateUrl} target="_blank" rel="noopener" class="expert-reviews__certif">
+              Voir le certificat OpinionSystem
+            </a>
+          )}
+        </header>
+
+        {reviewsPayload.rating.criteres.length > 0 && (
+          <ul class="expert-reviews__criteres">
+            {reviewsPayload.rating.criteres.map((c) => (
+              <li>
+                <span>{c.label}</span>
+                <strong>{c.score.toFixed(1)} / 10</strong>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {reviewsPayload.surveys.length > 0 && (
+          <ul class="expert-reviews__list" id="expert-reviews-list">
+            {reviewsPayload.surveys.map((r, i) => (
+              <li class={`expert-review-card${i >= 6 ? ' expert-review-card--hidden' : ''}`}>
+                <div class="expert-review-card__head">
+                  <span class="expert-review-card__client">{r.clientName}</span>
+                  {r.date && <time>{new Date(r.date).toLocaleDateString('fr-FR')}</time>}
+                </div>
+                {r.property && <p class="expert-review-card__prop">{r.property}</p>}
+                <blockquote>{r.comment}</blockquote>
+                {r.agencyResponse && (
+                  <div class="expert-review-card__reply">
+                    <span>Réponse de l'Immobilière Pujol :</span>
+                    <p>{r.agencyResponse}</p>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {reviewsPayload.surveys.length > 6 && (
+          <button type="button" class="expert-reviews__more" id="expert-reviews-toggle">
+            Voir les {reviewsPayload.surveys.length - 6} autres avis
+          </button>
+        )}
+      </section>
+    )}
+
     {activeAnnonces.length > 0 && (
       <section class="expert-listings expert-listings--active">
         <header class="expert-listings__head">
@@ -281,4 +390,161 @@ const expertType = getExpertType(expert);
       </div>
     </section>
   </article>
+
+  <script>
+    const btn = document.getElementById('expert-reviews-toggle');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const hidden = document.querySelectorAll('.expert-review-card--hidden');
+        hidden.forEach((el) => el.classList.remove('expert-review-card--hidden'));
+        btn.remove();
+      });
+    }
+  </script>
+
+  <style>
+    .expert-reviews {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+    }
+    .expert-reviews__head {
+      margin-bottom: 2rem;
+    }
+    .expert-reviews__overline {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-olive, #6b7c3a);
+      margin-bottom: 0.5rem;
+    }
+    .expert-reviews__title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 0 0 1rem;
+    }
+    .expert-reviews__title b {
+      font-weight: 700;
+    }
+    .expert-reviews__score {
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .expert-reviews__num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-olive, #6b7c3a);
+    }
+    .expert-reviews__den {
+      font-size: 1rem;
+      color: var(--color-muted, #888);
+    }
+    .expert-reviews__count {
+      font-size: 0.875rem;
+      color: var(--color-muted, #888);
+      margin-left: 0.5rem;
+    }
+    .expert-reviews__certif {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--color-olive, #6b7c3a);
+      text-decoration: underline;
+    }
+    .expert-reviews__criteres {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0.75rem;
+    }
+    .expert-reviews__criteres li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--color-border, #e5e5e5);
+      font-size: 0.9rem;
+    }
+    .expert-reviews__criteres li strong {
+      white-space: nowrap;
+      color: var(--color-olive, #6b7c3a);
+    }
+    .expert-reviews__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .expert-review-card {
+      border: 1px solid var(--color-border, #e5e5e5);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .expert-review-card--hidden {
+      display: none;
+    }
+    .expert-review-card__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .expert-review-card__client {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .expert-review-card__head time {
+      font-size: 0.8rem;
+      color: var(--color-muted, #888);
+    }
+    .expert-review-card__prop {
+      font-size: 0.8rem;
+      color: var(--color-muted, #888);
+      margin: 0 0 0.5rem;
+    }
+    .expert-review-card blockquote {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .expert-review-card__reply {
+      margin-top: 0.75rem;
+      padding: 0.75rem;
+      background: var(--color-bg-subtle, #f8f8f6);
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+    .expert-review-card__reply span {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      font-size: 0.8rem;
+    }
+    .expert-review-card__reply p {
+      margin: 0;
+    }
+    .expert-reviews__more {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 0.6rem 1.5rem;
+      background: var(--color-olive, #6b7c3a);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .expert-reviews__more:hover {
+      opacity: 0.9;
+    }
+  </style>
 </BaseLayout>
