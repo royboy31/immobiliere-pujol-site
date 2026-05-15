@@ -102,12 +102,16 @@ type ReviewsPayload = {
 };
 
 let reviewsPayload: ReviewsPayload | null = null;
+let _reviewsDebug = '';
 try {
   const base = new URL(`/_data/reviews/${slug}.json`, Astro.url.origin);
   const req = new Request(base.toString());
   const resp = _assets ? await _assets.fetch(req) : await fetch(base.toString());
+  _reviewsDebug = `status=${resp?.status} ok=${resp?.ok} assets=${!!_assets}`;
   if (resp && resp.ok) reviewsPayload = await resp.json();
-} catch {}
+} catch (e: any) {
+  _reviewsDebug = `error: ${e?.message || e}`;
+}
 
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
@@ -239,6 +243,8 @@ const expertType = getExpertType(expert);
         )}
       </aside>
     </section>
+
+    <!-- DEBUG-REVIEWS: {_reviewsDebug} payload={reviewsPayload ? 'yes' : 'no'} rating={reviewsPayload?.rating ? 'yes' : 'no'} count={reviewsPayload?.rating?.count ?? 'null'} -->
 
     {reviewsPayload?.rating && reviewsPayload.rating.count > 0 && (
       <section class="expert-reviews">
