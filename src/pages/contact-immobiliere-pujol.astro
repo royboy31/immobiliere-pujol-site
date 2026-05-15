@@ -21,7 +21,15 @@ const contact = {
 const heroImg =
   'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg';
 
-const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic', 'Autre'];
+const formObjects = [
+  "Location : vous êtes intéressés par une annonce de location /à la recherche d'un bien à louer ?",
+  'Vente/achat : vous souhaitez vendre /acheter un bien immobilier ?',
+  'Gestion locative : vous souhaitez obtenir une proposition en gestion locative ?',
+  'Client syndic : vous souhaitez joindre le gestionnaire/comptable de votre copropriété ?',
+  'Syndic : vous souhaitez obtenir un devis en syndic pour votre copropriété ?',
+  'Autre (bien détailler votre demande)',
+  'Client : déclarer une urgence le week-end et les jours fériés',
+];
 
 // Quick-link cards driving the most common direct contact paths.
 const quickLinks = [
@@ -105,6 +113,29 @@ const quickLinks = [
             </p>
           </li>
         </ul>
+      </div>
+    </section>
+
+    {/* ============= URGENCY BANNER ============= */}
+    <section class="contact-urgency">
+      <div class="contact-urgency__inner">
+        <span class="contact-urgency__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3 L22 20 H2 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M12 10 V14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            <circle cx="12" cy="17" r="1" fill="currentColor" />
+          </svg>
+        </span>
+        <div class="contact-urgency__body">
+          <h2>Une <b>urgence</b> en dehors des heures ouvrables ?</h2>
+          <p>Dégât des eaux, incident ou sinistre le week-end et les jours fériés — déclarez-le directement à notre équipe.</p>
+        </div>
+        <a class="contact-urgency__cta" href="/declarer-une-urgence/">
+          <span>Déclarer une urgence</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
       </div>
     </section>
 
