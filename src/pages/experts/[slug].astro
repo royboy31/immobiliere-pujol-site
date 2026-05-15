@@ -49,6 +49,13 @@ try {
   // Feed unavailable — continue with just the historical listings.
 }
 
+// Shared ASSETS binding for static data fetches
+let _assets: { fetch: (req: Request) => Promise<Response> } | undefined;
+try {
+  const { env } = await import('cloudflare:workers');
+  _assets = (env as any)?.ASSETS;
+} catch {}
+
 let historyTotalCount = 0;
 let historyListings: Array<{
   slug: string; title: string; type: string; status: string;
@@ -56,14 +63,9 @@ let historyListings: Array<{
   codePostal: string; ville: string; photo: string | null;
 }> = [];
 try {
-  let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
-  try {
-    const { env } = await import('cloudflare:workers');
-    assets = (env as any)?.ASSETS;
-  } catch {}
   const base = new URL(`/_data/expert-listings/${slug}.json`, Astro.url.origin);
   const req = new Request(base.toString());
-  const resp = assets ? await assets.fetch(req) : await fetch(base.toString());
+  const resp = _assets ? await _assets.fetch(req) : await fetch(base.toString());
   if (resp && resp.ok) {
     const payload = (await resp.json()) as any;
     historyTotalCount = payload.totalCount ?? (payload.listings?.length ?? 0);
@@ -101,14 +103,9 @@ type ReviewsPayload = {
 
 let reviewsPayload: ReviewsPayload | null = null;
 try {
-  let assets: { fetch: (req: Request) => Promise<Response> } | undefined;
-  try {
-    const { env } = await import('cloudflare:workers');
-    assets = (env as any)?.ASSETS;
-  } catch {}
   const base = new URL(`/_data/reviews/${slug}.json`, Astro.url.origin);
   const req = new Request(base.toString());
-  const resp = assets ? await assets.fetch(req) : await fetch(base.toString());
+  const resp = _assets ? await _assets.fetch(req) : await fetch(base.toString());
   if (resp && resp.ok) reviewsPayload = await resp.json();
 } catch {}
 
