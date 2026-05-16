@@ -339,10 +339,20 @@ const listingSchema = buildRealEstateListing({
 
 <script define:vars={{ slug, type: view.type }}>
   (function () {
+    // Update back link to point to the actual page the user came from
+    const backLink = document.querySelector('.annonce-back');
+    let backPage = '';
+    try { backPage = localStorage.getItem('annonces-back-page') || ''; } catch {}
+    if (backLink && backPage) {
+      backLink.setAttribute('href', backPage);
+    }
+
     const container = document.getElementById('annonceNavArrows');
     if (!container) return;
 
-    const listPage = type === 'L' ? '/annonces/locations' : '/annonces/ventes';
+    // Try the actual page the user came from first, fall back to type-based
+    const defaultListPage = type === 'L' ? '/annonces/locations' : '/annonces/ventes';
+    const listPage = backPage ? backPage.replace(/\/$/, '') : defaultListPage;
     const listKey = 'annonces-slugs:' + listPage;
 
     let slugs = [];

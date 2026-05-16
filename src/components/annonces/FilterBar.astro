@@ -119,6 +119,9 @@ const budgetPlaceholder = scope === 'V' ? '500 000 €' : '1500 €/mois';
       if (panel) panel.hidden = open;
     });
 
+    // Save which listing page the user is on (for back navigation from detail pages).
+    try { localStorage.setItem('annonces-back-page', window.location.pathname); } catch {}
+
     // ----- URL <-> form sync (with localStorage persistence) -----
     const storageKey = 'annonces-filters:' + window.location.pathname.replace(/\/$/, '');
     const params = new URLSearchParams(window.location.search);
