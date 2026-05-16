@@ -336,3 +336,39 @@ const listingSchema = buildRealEstateListing({
     />
   )}
 </BaseLayout>
+
+<script define:vars={{ slug, type: view.type }}>
+  (function () {
+    const container = document.getElementById('annonceNavArrows');
+    if (!container) return;
+
+    const listPage = type === 'L' ? '/annonces/locations' : '/annonces/ventes';
+    const listKey = 'annonces-slugs:' + listPage;
+
+    let slugs = [];
+    try {
+      const raw = localStorage.getItem(listKey);
+      if (raw) slugs = JSON.parse(raw);
+    } catch {}
+
+    if (!slugs.length) return;
+
+    const idx = slugs.indexOf(slug);
+    if (idx === -1) return;
+
+    const prevSlug = idx > 0 ? slugs[idx - 1] : null;
+    const nextSlug = idx < slugs.length - 1 ? slugs[idx + 1] : null;
+
+    const arrowLeft = '<svg width="14" height="12" viewBox="0 0 22 14" fill="none"><path d="M21 7H2M8 1L2 7l6 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const arrowRight = '<svg width="14" height="12" viewBox="0 0 22 14" fill="none"><path d="M1 7h19M14 1l6 6-6 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    let html = '';
+    if (prevSlug) {
+      html += '<a href="/annonces/' + prevSlug + '/" class="annonce-nav__btn" aria-label="Annonce précédente">' + arrowLeft + ' Préc.</a>';
+    }
+    if (nextSlug) {
+      html += '<a href="/annonces/' + nextSlug + '/" class="annonce-nav__btn" aria-label="Annonce suivante">Suiv. ' + arrowRight + '</a>';
+    }
+    container.innerHTML = html;
+  })();
+</script>

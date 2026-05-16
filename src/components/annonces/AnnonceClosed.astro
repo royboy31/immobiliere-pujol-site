@@ -97,12 +97,15 @@ const hasDetails = !!(
 </div>
 
 <article class="annonce-page">
-  <a href="/annonces/" class="annonce-back annonce-back--floating">
-    <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
-      <path d="M21 7 H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
-    Retour aux annonces
-  </a>
+  <nav class="annonce-nav annonce-nav--floating">
+    <a href={isLocation ? '/annonces/locations/' : '/annonces/ventes/'} class="annonce-back">
+      <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+        <path d="M21 7 H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Retour aux annonces
+    </a>
+    <div class="annonce-nav__arrows" id="annonceNavArrows"></div>
+  </nav>
 
   <AnnonceHero view={view}>
     <Fragment slot="left-below">

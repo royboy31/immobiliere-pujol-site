@@ -44,7 +44,7 @@ const { scope } = Astro.props;
       const kind=clsKind(a.libelleType);
       const el=document.createElement('article');
       el.className='listing-card '+(isV?'':'listing-card--location ')+' annonce-card-item';
-      el.dataset.type=a.type;el.dataset.kind=kind;el.dataset.cp=a.codePostal||'';
+      el.dataset.slug=a.slug;el.dataset.type=a.type;el.dataset.kind=kind;el.dataset.cp=a.codePostal||'';
       el.dataset.pieces=pb(a.nbPieces);el.dataset.price=String(fp(a));
       el.dataset.parking=(a.parking||a.garage)?'1':'0';
       el.dataset.exterieur=(a.terrasse||a.balcon)?'1':'0';

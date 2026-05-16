@@ -119,8 +119,20 @@ const budgetPlaceholder = scope === 'V' ? '500 000 €' : '1500 €/mois';
       if (panel) panel.hidden = open;
     });
 
-    // ----- URL <-> form sync -----
+    // ----- URL <-> form sync (with localStorage persistence) -----
+    const storageKey = 'annonces-filters:' + window.location.pathname.replace(/\/$/, '');
     const params = new URLSearchParams(window.location.search);
+
+    // If URL has no filter params, try restoring from localStorage
+    if (!params.toString()) {
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+          const restored = new URLSearchParams(saved);
+          restored.forEach((v, k) => params.set(k, v));
+        }
+      } catch {}
+    }
 
     function setSelect(name: string, val: string) {
       const el = form!.elements.namedItem(name) as HTMLSelectElement | HTMLInputElement | null;
@@ -222,6 +234,21 @@ const budgetPlaceholder = scope === 'V' ? '500 000 €' : '1500 €/mois';
       const qs = next.toString();
       const newUrl = window.location.pathname + (qs ? `?${qs}` : '');
       window.history.replaceState({}, '', newUrl);
+
+      // Persist to localStorage so filters survive navigation to detail pages.
+      try {
+        if (qs) localStorage.setItem(storageKey, qs);
+        else localStorage.removeItem(storageKey);
+      } catch {}
+
+      // Save visible slug order for prev/next navigation on detail pages.
+      try {
+        const visibleSlugs = Array.from(
+          document.querySelectorAll<HTMLElement>('.annonce-card-item:not(.is-hidden)')
+        ).map(c => c.dataset.slug).filter(Boolean) as string[];
+        const listKey = 'annonces-slugs:' + window.location.pathname.replace(/\/$/, '');
+        localStorage.setItem(listKey, JSON.stringify(visibleSlugs));
+      } catch {}
     }
 
     form.addEventListener('change', applyFilters);

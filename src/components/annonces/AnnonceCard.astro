@@ -41,6 +41,7 @@ const price4Filter = filterPrice(annonce);
 
 <article
   class={`listing-card ${isVente ? '' : 'listing-card--location'} annonce-card-item`}
+  data-slug={annonce.slug}
   data-type={annonce.type}
   data-kind={kind}
   data-cp={annonce.codePostal || ''}
