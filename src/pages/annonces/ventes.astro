@@ -2,13 +2,13 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { fetchActiveListings } from '../../lib/r2-annonces';
-import { buildArrondissements, buildKindOptions } from '../../lib/annonces-filter';
+import { buildArrondissements, buildKindOptions, filterPrice } from '../../lib/annonces-filter';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
 import DeferredCards from '../../components/annonces/DeferredCards.astro';
 
 const allAnnonces = await fetchActiveListings();
-const annonces = allAnnonces.filter(a => a.type === 'V');
+const annonces = allAnnonces.filter(a => a.type === 'V').sort((a, b) => filterPrice(b) - filterPrice(a));
 const locations = allAnnonces.filter(a => a.type === 'L');
 
 const kinds = buildKindOptions(annonces);
