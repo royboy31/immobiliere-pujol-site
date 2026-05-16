@@ -17,7 +17,19 @@ export async function fetchActiveListings(): Promise<UbiflowAnnonce[]> {
       console.error(`[r2-annonces] Failed to fetch active.json: ${resp.status}`);
       return [];
     }
-    return await resp.json() as UbiflowAnnonce[];
+    const all = await resp.json() as UbiflowAnnonce[];
+    // Deduplicate by address + price + surface (same property from multiple sources)
+    const seen = new Map<string, UbiflowAnnonce>();
+    for (const a of all) {
+      const addr = (a.adresse || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      if (addr && a.prix && a.surface) {
+        const key = `${a.type}|${a.codePostal}|${addr}|${a.prix}|${a.surface}`;
+        if (!seen.has(key)) seen.set(key, a);
+      } else {
+        seen.set(a.slug, a);
+      }
+    }
+    return [...seen.values()];
   } catch (e: any) {
     console.error(`[r2-annonces] Error fetching active.json: ${e.message}`);
     return [];

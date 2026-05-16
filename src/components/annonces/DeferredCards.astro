@@ -15,6 +15,10 @@ const { scope } = Astro.props;
     if(!r.ok)return;
     let all=await r.json();
     if(scope)all=all.filter(a=>a.type===scope);
+    // Deduplicate by address+price+surface
+    const seen=new Map();
+    all=all.filter(a=>{const addr=(a.adresse||'').toLowerCase().replace(/[^a-z0-9]/g,'');if(addr&&a.prix&&a.surface){const k=a.type+'|'+(a.codePostal||'')+'|'+addr+'|'+a.prix+'|'+a.surface;if(seen.has(k))return false;seen.set(k,1)}return true});
+    all.sort((a,b)=>{const pa=a.type==='V'?(a.prix||0):(a.loyerCC||a.loyer||0);const pb=b.type==='V'?(b.prix||0):(b.loyerCC||b.loyer||0);return pb-pa});
     const rest=all.slice(20);
     if(!rest.length)return;
     const fmt=v=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
