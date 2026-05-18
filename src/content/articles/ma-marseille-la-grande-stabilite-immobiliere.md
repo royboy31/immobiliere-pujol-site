@@ -4,7 +4,7 @@ slug: "ma-marseille-la-grande-stabilite-immobiliere"
 date: "2018-11-01"
 excerpt: "L’immobilier à Marseille : bilan trimestriel – Octobre 2018 Si j’ai délaissé un peu le blog, c’est pour la simple raison qu’écrire sur le marché a perdu un peu..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["analyse immobiliere","immobilier","marché","marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/LO35920002_CAFA.jpg"
 seoTitle: "Marseille : la grande stabilité immobilière…"
 seoDescription: "L'immobilier à Marseille : bilan trimestriel - Octobre 2018 Si j'ai délaissé un peu le blog, c'est pour la simple raison qu'écrire sur le marché a perdu un peu son intérêt et que le contexte politique qui culpabilise les propriétaires n'est pas très positif. Nous sommes loin de la période…"

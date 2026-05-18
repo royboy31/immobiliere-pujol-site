@@ -562,8 +562,8 @@
       gap: 14px;
       margin-left: auto;
 
-      .ic-mail,
-      .ic-search { display: none; }
+      .ic-mail { display: none; }
+      .ic-search { display: block; width: 20px; height: 20px; }
 
       .nav-burger { display: inline-flex; }
     }

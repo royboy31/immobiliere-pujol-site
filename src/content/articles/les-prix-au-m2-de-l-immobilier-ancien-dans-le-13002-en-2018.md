@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13002-en-2018"
 date: "2019-05-31"
 excerpt: "Voici un comparatif quartier par quartier des prix au m² de l’immobilier ancien dans le 13002 . Quartier du Panier Marseille 13002 *Prix médian (sources..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13002","2e arrondissement","ancien","immobilier","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13002.jpeg"
 seoTitle: "Les prix au m² de l’immobilier ancien dans le 13002 en 2018"
 seoDescription: "Voici un comparatif quartier par quartier des prix au m² de l'immobilier ancien dans le 13002 . Quartier du Panier Marseille 13002 *Prix médian (sources notaires) : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme…"

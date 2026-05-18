@@ -4,7 +4,7 @@ slug: "placement-immobilier-marseille"
 date: "2013-01-13"
 excerpt: "12.01.2013 2012 : le grand craquement de l’investissement 2013 : peu d’acheteurs et peu de vendeurs, qui aura raison ? Les acheteurs? Depuis 18 ans que..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["investissement marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/50-testaniere-1200x900.png"
 seoTitle: "Exit l’investissement immobilier"
 seoDescription: "12.01.2013 2012 : le grand craquement de l’investissement 2013 : peu d'acheteurs et peu de vendeurs, qui aura raison ? Les acheteurs? Depuis 18 ans que j’exerce ce métier, il était d’usage que des investisseurs me demandent si j’avais un bon plan, quand il fallait investir, sur quel type d’appartements, selon quels…"

@@ -75,25 +75,27 @@ export async function getActiveAnnonces(db: D1Database): Promise<(DbAnnonce & { 
     .prepare("SELECT * FROM annonces WHERE status = 'active' ORDER BY date_creation DESC")
     .all<DbAnnonce>();
 
-  // Batch-load photos for all active annonces
+  // Batch-load photos for all active annonces (batch in groups of 50 to stay within D1 binding limits)
   const ids = annonces.results.map(a => a.id);
   if (ids.length === 0) return [];
 
-  const photosResult = await db
-    .prepare(
-      `SELECT annonce_id, url, position FROM annonces_photos
-       WHERE annonce_id IN (${ids.map(() => '?').join(',')})
-       ORDER BY position ASC`,
-    )
-    .bind(...ids)
-    .all<{ annonce_id: number; url: string; position: number }>();
-
-  // Group photos by annonce_id
   const photoMap = new Map<number, string[]>();
-  for (const p of photosResult.results) {
-    const list = photoMap.get(p.annonce_id) || [];
-    list.push(resolvePhotoUrl(p.url));
-    photoMap.set(p.annonce_id, list);
+  for (let i = 0; i < ids.length; i += 50) {
+    const batch = ids.slice(i, i + 50);
+    const photosResult = await db
+      .prepare(
+        `SELECT annonce_id, url, position FROM annonces_photos
+         WHERE annonce_id IN (${batch.map(() => '?').join(',')})
+         ORDER BY position ASC`,
+      )
+      .bind(...batch)
+      .all<{ annonce_id: number; url: string; position: number }>();
+
+    for (const p of photosResult.results) {
+      const list = photoMap.get(p.annonce_id) || [];
+      list.push(resolvePhotoUrl(p.url));
+      photoMap.set(p.annonce_id, list);
+    }
   }
 
   return annonces.results.map(a => ({
@@ -109,10 +111,22 @@ export async function getAnnonceBySlug(
   db: D1Database,
   slug: string,
 ): Promise<(DbAnnonce & { photos: string[] }) | null> {
-  const annonce = await db
+  let annonce = await db
     .prepare('SELECT * FROM annonces WHERE slug = ?')
     .bind(slug)
     .first<DbAnnonce>();
+
+  // Fallback: old WordPress slugs are longer than D1 slugs but share the
+  // same reference prefix (e.g. "920neot"). Try a prefix match.
+  if (!annonce) {
+    const prefix = slug.split('-')[0];
+    if (prefix && prefix.length >= 3) {
+      annonce = await db
+        .prepare("SELECT * FROM annonces WHERE slug LIKE ? || '%' LIMIT 1")
+        .bind(prefix)
+        .first<DbAnnonce>();
+    }
+  }
 
   if (!annonce) return null;
 
@@ -218,6 +232,76 @@ export function extractTourUrl(description: string | null | undefined): string {
     if (m) return m[0].replace(/[.,;:)]+$/, ''); // strip trailing punctuation
   }
   return '';
+}
+
+/**
+ * Map DbAnnonce to UbiflowAnnonce shape so existing components (AnnonceCard, FilterBar) work unchanged.
+ */
+export function dbToUbiflow(a: DbAnnonce & { photos: string[] }) {
+  return {
+    id: String(a.id),
+    reference: a.reference_agence || a.ubiflow_reference || '',
+    titre: a.titre || '',
+    description: a.descriptif || '',
+    dateSaisie: '',
+    contactAAfficher: a.contact_a_afficher || '',
+    emailAAfficher: a.email_a_afficher || '',
+    telephoneAAfficher: a.telephone_a_afficher || '',
+    type: (a.type_annonce || 'L') as 'V' | 'L',
+    prix: a.prix,
+    prixHorsHonoraires: null,
+    loyer: null,
+    loyerCC: a.loyer_cc,
+    charges: a.charges,
+    depotGarantie: a.depot_garantie,
+    honorairesChargeAcquereur: false,
+    devise: 'EUR',
+    libelleType: a.type_bien || '',
+    codePostal: a.code_postal || '',
+    adresse: a.adresse || '',
+    ville: a.ville || '',
+    quartier: a.quartier || '',
+    latitude: a.latitude,
+    longitude: a.longitude,
+    surface: a.surface,
+    surfaceHabitable: null,
+    surfaceTerrain: a.surface_terrain,
+    surfaceTerrasse: null,
+    nbPieces: a.nb_pieces,
+    nbChambres: a.nb_chambres,
+    nbSallesDeBain: a.nb_salles_bain,
+    nbWC: a.nb_wc,
+    etage: a.etage || '',
+    nbEtages: a.nb_etages || '',
+    exposition: '',
+    cuisine: '',
+    typeChauffage: a.type_chauffage || '',
+    chauffageEnergie: '',
+    ascenseur: !!a.ascenseur,
+    terrasse: !!a.terrasse,
+    balcon: false,
+    garage: !!a.garage,
+    parking: !!a.parking,
+    cave: !!a.cave,
+    interphone: !!a.interphone,
+    copropriete: false,
+    chargesCopropriete: null,
+    alurNbLots: null,
+    anneeConstruction: '',
+    vueSurMer: false,
+    dpeValeurConso: a.dpe_valeur || '',
+    dpeEtiquetteConso: a.dpe_note || '',
+    dpeEtiquetteGes: a.ges_note || '',
+    dpeEstimationMin: '',
+    dpeEstimationMax: '',
+    dpeValeurGes: a.ges_valeur || '',
+    photos: a.photos,
+    visiteVirtuelle: a.url_visite_virtuelle || '',
+    mandatNumero: a.mandat_numero || '',
+    mandatType: a.mandat_type || '',
+    slug: a.slug,
+    meuble: !!a.meuble,
+  };
 }
 
 /**

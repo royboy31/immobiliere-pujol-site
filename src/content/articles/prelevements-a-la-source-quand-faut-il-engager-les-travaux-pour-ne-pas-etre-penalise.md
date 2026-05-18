@@ -4,7 +4,7 @@ slug: "prelevements-a-la-source-quand-faut-il-engager-les-travaux-pour-ne-pas-et
 date: "2017-10-18"
 excerpt: "Faut-il engager les travaux en 2017, 2018, 2019 ou attendre 2020 ? Pour ne pas être impacté par l’usine à gaz montée pour les propriétaires bailleurs, faut-il..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["prelevement a la source","travaux immobilier"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/LO37340001_28A8.jpg"
 seoTitle: "Prélèvements à la source : quand faut-il engager les travaux pour ne pas être pénalisé ?"
 seoDescription: "Faut-il engager les travaux en 2017, 2018, 2019 ou attendre 2020 ? Pour ne pas être impacté par l’usine à gaz montée pour les propriétaires bailleurs, faut-il décaler les travaux à 2020 ? Telles sont les questions que mes clients nous posent. Le contexte Revenons un peu en arrière. Cela fait…"

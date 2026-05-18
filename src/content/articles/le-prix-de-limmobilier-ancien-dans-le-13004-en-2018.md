@@ -4,7 +4,7 @@ slug: "le-prix-de-limmobilier-ancien-dans-le-13004-en-2018"
 date: "2019-05-15"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison des..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13004","4e arrondissement","ancien","immobilier","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13004.jpg"
 seoTitle: "Marseille : Les prix au m2 de l’immobilier ancien dans le 13004 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison des prix au m2 de l'immobilier ancien dans le 13004 en 2018. En 2018, il s’est vendu dans le 4e arrondissement de Marseille :– 372 appartements…"

@@ -4,7 +4,7 @@ slug: "analyse-marche-immobilier-marseille-2017"
 date: "2017-04-17"
 excerpt: "Jusque là tout va bien. Mais on ne sent pas l’entrain ou la puissance d’un nouveau cycle. La demande ne nous semble pas aussi forte qu’habituellement dans..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["agence immobiliere marseille","analyse immobiliere","analyse marche immobilier","immobilière pujol","marché immobilier"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/marseille-1348711_1920-1200x727.jpg"
 seoTitle: "Un marche immobilier à Marseille de début d’année sans entrain"
 seoDescription: "Jusque là tout va bien. Mais on ne sent pas l'entrain ou la puissance d'un nouveau cycle. La demande ne nous semble pas aussi forte qu'habituellement dans cette phase de retournement du marché. La Location Nous avons conclu 96 locations, ce qui est un bon chiffre pour ce trimestre habituellement…"

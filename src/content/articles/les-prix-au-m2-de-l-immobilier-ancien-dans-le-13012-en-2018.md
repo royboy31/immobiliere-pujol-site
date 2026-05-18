@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13012-en-2018"
 date: "2019-06-12"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["12e arrondissement","13012","ancien","immobilier ancien","marseille","prix","prix au m2","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13012-2.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13012 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Voici une comparaison quartier par quartier des prix au m2 de l'immobilier ancien dans le 13012. En 2018, il s’est vendu dans le 12eme arrondissement de Marseille:299 appartements au…"

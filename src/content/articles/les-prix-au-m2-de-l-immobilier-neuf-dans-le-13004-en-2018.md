@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13004-en-2018"
 date: "2019-07-10"
 excerpt: "Vous trouverez dans cet article une étude sur les prix au m2 de l’immobilier neuf dans le 13004 en 2018. La fourchette des transactions est établie par les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
-tags: []
+tags: ["13004","4e arrrondissement","immobilier","marseille","neuf","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13004-1.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13004 en 2018"
 seoDescription: "Vous trouverez dans cet article une étude sur les prix au m2 de l'immobilier neuf dans le 13004 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians.En 2018, il s’est vendu dans le 4ème arrondissement de…"

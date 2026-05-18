@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { GetStaticPaths } from 'astro';
+
+interface QuartierData {
+  slug: string;
+  name: string;
+  displayName: string;
+  postalCode?: string;
+  annonceCount?: number;
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // Use import.meta.glob (Vite-compatible, no Node.js fs needed)
+  const modules = import.meta.glob<QuartierData>('../../content/quartiers/*.json', { eager: true, import: 'default' });
+
+  return Object.values(modules).map((data) => ({
+    params: { slug: data.slug },
+    props: { entry: data },
+  }));
+};
+
+interface Props {
+  entry: QuartierData;
+}
+
+const { entry } = Astro.props;
+const { displayName, postalCode, annonceCount, seoTitle, seoDescription } = entry;
+
+const title = seoTitle || `${displayName} – Annonces immobilières | Immobilière Pujol`;
+const description = seoDescription || `Découvrez les biens immobiliers dans le quartier ${displayName} à Marseille. Location et vente d'appartements et maisons.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="arrondissement">
+    <header class="arrondissement__header">
+      <h1>Quartier {displayName}</h1>
+      {postalCode && <p class="arrondissement__zip">{postalCode} Marseille</p>}
+      {(annonceCount ?? 0) > 0 && (
+        <p class="arrondissement__count">{annonceCount} annonce{(annonceCount ?? 0) > 1 ? 's' : ''} dans ce quartier</p>
+      )}
+    </header>
+
+    <div class="arrondissement__description">
+      <p>
+        Retrouvez toutes les annonces immobilières dans le quartier <strong>{displayName}</strong> à Marseille.
+        Que vous cherchiez un appartement à louer ou un bien à acheter, l'Immobilière Pujol vous accompagne
+        dans votre projet immobilier.
+      </p>
+    </div>
+
+    <div class="arrondissement__listings">
+      <h2>Nos annonces à {displayName}</h2>
+      <div class="arrondissement__cta">
+        <a href="/annonces/" class="btn btn--primary">Voir toutes les annonces</a>
+        <a href="/annonces/locations/" class="btn btn--secondary">Locations</a>
+        <a href="/annonces/ventes/" class="btn btn--secondary">Ventes</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

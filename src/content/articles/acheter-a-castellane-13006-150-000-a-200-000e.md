@@ -4,7 +4,7 @@ slug: "acheter-a-castellane-13006-150-000-a-200-000e"
 date: "2017-06-12"
 excerpt: "J’aime le 6e arrondissement de Marseille : vous le savez. Castellane est mon quartier préféré, celui où j’investis et fais investir mes clients sans l’ombre..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille", "Arrondissements Marseille", "Arrondissement 13006 Marseille"]
-tags: []
+tags: ["acheter appartement 13006","acheter appartement ancien","acheter appartement marseille","acheter appartement neuf","acheter un appartement","acheter un appartement castellane","investir immobilier marseille","Programme neuf marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/B000396_BA10.jpg"
 seoTitle: "Acheter à Castellane dans le 13006 pour 150 000 à 200 000€ ?"
 seoDescription: "J’aime le 6e arrondissement de Marseille : vous le savez. Castellane est mon quartier préféré, celui où j’investis et fais investir mes clients sans l’ombre d’une hésitation. Je vous propose de passer en revue ce qui s’y vend entre 150 000€ et 200 000€. Il y a en a pour…"

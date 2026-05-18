@@ -4,7 +4,7 @@ slug: "marseille-plus-chere-que-hollywood"
 date: "2019-07-26"
 excerpt: "Voici la question que je m’étais posée il y a huit ans : Marseille est elle plus chère que Hollywood ? La conclusion était alors aussi incroyable que nette: le..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["hollywood","marseille","prix"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/07/sans-titre-6947-050619-1200x750.jpg"
 seoTitle: "Marseille plus chère que Hollywood?"
 seoDescription: "Voici la question que je m'étais posée il y a huit ans : Marseille est elle plus chère que Hollywood ? La conclusion était alors aussi incroyable que nette: le marché de l’immobilier marseillais était plus cher que ce prestigieux marché américain. Nous avions bien évidemment justifié cette différence de…"

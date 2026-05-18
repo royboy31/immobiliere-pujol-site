@@ -4,7 +4,7 @@ slug: "quelle-agence-immobiliere-choisir-a-marseille"
 date: "2011-09-28"
 excerpt: "Vous souhaitez vendre votre appartement ou votre maison? A quel profil de vendeur ressemblez-vous le plus? Vous souhaitez vous investir activement dans la..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["agence immo marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-1653-1200x750.jpg"
 seoTitle: "Dis moi quel type de vendeur tu es, je te dirai quel agent immobilier il te faut…"
 seoDescription: "Vous souhaitez vendre votre appartement ou votre maison? A quel profil de vendeur ressemblez-vous le plus? Vous souhaitez vous investir activement dans la vente de votre bien ou au contraire préférez déléguer et faire confiance à un professionnel de l'immobilier? En lisant ce qui suit, peut-être saurez -vous mieux quel…"

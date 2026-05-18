@@ -4,7 +4,7 @@ slug: "marseille-les-prix-au-m2-de-l-immobilier-ancien-dans-le-13005-en-2018"
 date: "2019-03-13"
 excerpt: "Le 5eme arrondissement de Marseille est toujours le secteur très dynamique malgré les constructions qui s’y accumulent depuis des années et des périodes de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13005","5eme arrondissement","immobilier ancien","marseille","prix au m2","prix immobilier Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/03/13006-blog-4.jpg"
 seoTitle: "Marseille : les prix au m2 de l’immobilier ancien dans le 13005 en 2018"
 seoDescription: "Le 5eme arrondissement de Marseille est toujours le secteur très dynamique malgré les constructions qui s’y accumulent depuis des années et des périodes de sur-offre qui finissent par s’écouler. Voici un comparatif des prix au m2 de l'immobilier ancien dans le 13005 en 2018. Un total de 390 ventes dans…"

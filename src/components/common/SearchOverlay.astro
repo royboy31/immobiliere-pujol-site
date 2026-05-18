@@ -1,0 +1,245 @@
+---
+// Full-screen search overlay — triggered by the header search icon.
+// Queries /api/search with debounced input + type filters.
+---
+
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Rechercher sur le site">
+  <div class="search-overlay__panel">
+    <!-- Search input bar -->
+    <div class="search-overlay__top">
+      <svg class="search-overlay__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input
+        class="search-overlay__input"
+        id="searchInput"
+        type="text"
+        placeholder="Rechercher un bien, une adresse, un quartier..."
+        autocomplete="off"
+        autofocus
+      />
+      <button class="search-overlay__close" id="searchClose" aria-label="Fermer la recherche">ESC</button>
+    </div>
+
+    <!-- Filter pills -->
+    <div class="search-overlay__filters">
+      <button class="search-overlay__filter is-active" data-type="">Tout</button>
+      <button class="search-overlay__filter" data-type="L">Locations</button>
+      <button class="search-overlay__filter" data-type="V">Ventes</button>
+      <button class="search-overlay__filter" data-type-bien="Appartement">Appartements</button>
+      <button class="search-overlay__filter" data-type-bien="Maison">Maisons</button>
+      <button class="search-overlay__filter" data-type-bien="Parking">Parkings</button>
+      <button class="search-overlay__filter" data-type-bien="Local commercial">Commerces</button>
+    </div>
+
+    <!-- Results area -->
+    <div class="search-overlay__body" id="searchBody">
+      <div class="search-overlay__hint" id="searchHint">
+        <svg class="search-overlay__hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <p>Tapez une adresse, un quartier ou un type de bien pour trouver votre futur logement.</p>
+        <div class="search-overlay__shortcuts">
+          <a href="/annonces/locations/">Toutes les locations</a>
+          <a href="/annonces/ventes/">Toutes les ventes</a>
+          <a href="/annonces/">Tous les biens</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const overlay = document.getElementById('searchOverlay');
+  const input = /** @type {HTMLInputElement} */ (document.getElementById('searchInput'));
+  const body = document.getElementById('searchBody');
+  const hint = document.getElementById('searchHint');
+  const closeBtn = document.getElementById('searchClose');
+  if (!overlay || !input || !body || !hint || !closeBtn) return;
+
+  let debounceTimer;
+  let activeType = '';
+  let activeTypeBien = '';
+  let abortCtrl = null;
+
+  // ---- Open / Close ----
+  function open() {
+    overlay.classList.add('is-active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => input.focus(), 100);
+  }
+
+  function close() {
+    overlay.classList.remove('is-active');
+    document.body.style.overflow = '';
+    input.value = '';
+    activeType = '';
+    activeTypeBien = '';
+    resetFilters();
+    body.innerHTML = '';
+    body.appendChild(hint);
+  }
+
+  // Header search button
+  const searchBtns = document.querySelectorAll('.icons button[aria-label="Rechercher"]');
+  searchBtns.forEach(btn => btn.addEventListener('click', open));
+
+  // Close actions
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-active')) close();
+  });
+
+  // ---- Filters ----
+  function resetFilters() {
+    overlay.querySelectorAll('.search-overlay__filter').forEach(f => f.classList.remove('is-active'));
+    overlay.querySelector('.search-overlay__filter[data-type=""]')?.classList.add('is-active');
+  }
+
+  overlay.querySelectorAll('.search-overlay__filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const el = btn;
+      const type = el.dataset.type;
+      const typeBien = el.dataset.typeBien;
+
+      if (type !== undefined) {
+        // Type filter (Tout / Locations / Ventes)
+        activeType = type;
+        activeTypeBien = '';
+        overlay.querySelectorAll('.search-overlay__filter').forEach(f => f.classList.remove('is-active'));
+        el.classList.add('is-active');
+      } else if (typeBien !== undefined) {
+        // Type bien filter — toggle
+        if (el.classList.contains('is-active')) {
+          el.classList.remove('is-active');
+          activeTypeBien = '';
+        } else {
+          overlay.querySelectorAll('.search-overlay__filter[data-type-bien]').forEach(f => f.classList.remove('is-active'));
+          el.classList.add('is-active');
+          activeTypeBien = typeBien;
+        }
+      }
+      doSearch();
+    });
+  });
+
+  // ---- Search ----
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(doSearch, 300);
+  });
+
+  async function doSearch() {
+    const q = input.value.trim();
+    if (!q && !activeType && !activeTypeBien) {
+      body.innerHTML = '';
+      body.appendChild(hint);
+      return;
+    }
+
+    // Show loading
+    body.innerHTML = `
+      <div class="search-overlay__loading">
+        <div class="search-overlay__loading-spinner"></div>
+        <p>Recherche en cours...</p>
+      </div>`;
+
+    // Abort previous request
+    if (abortCtrl) abortCtrl.abort();
+    abortCtrl = new AbortController();
+
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (activeType) params.set('type', activeType);
+    if (activeTypeBien) params.set('type_bien', activeTypeBien);
+
+    try {
+      const res = await fetch(`/api/search?${params}`, { signal: abortCtrl.signal });
+      const data = await res.json();
+      renderResults(data, q);
+    } catch (e) {
+      if (e.name === 'AbortError') return;
+      body.innerHTML = `
+        <div class="search-overlay__empty">
+          <div class="search-overlay__empty-icon">!</div>
+          <p>Une erreur est survenue. Veuillez réessayer.</p>
+        </div>`;
+    }
+  }
+
+  function renderResults(data, q) {
+    if (data.results.length === 0) {
+      body.innerHTML = `
+        <div class="search-overlay__empty">
+          <div class="search-overlay__empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.4">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="8" y1="8" x2="14" y2="14"/><line x1="14" y1="8" x2="8" y2="14"/>
+            </svg>
+          </div>
+          <p>Aucun résultat trouvé${q ? ` pour <strong>"${escHtml(q)}"</strong>` : ''}.<br>Essayez avec d'autres termes ou filtres.</p>
+        </div>`;
+      return;
+    }
+
+    const status = `<div class="search-overlay__status"><strong>${data.total}</strong> bien${data.total > 1 ? 's' : ''} trouvé${data.total > 1 ? 's' : ''}</div>`;
+
+    const cards = data.results.map((r) => {
+      const isLocation = r.type_annonce === 'L';
+      const badgeClass = isLocation ? 'search-overlay__result-badge--location' : 'search-overlay__result-badge--vente';
+      const badgeLabel = isLocation ? 'Location' : 'Vente';
+      const price = isLocation
+        ? (r.loyer_cc ? `${num(r.loyer_cc)} \u20AC/mois` : (r.prix ? `${num(r.prix)} \u20AC/mois` : ''))
+        : (r.prix ? `${num(r.prix)} \u20AC` : '');
+      const href = `/annonces/${r.slug}/`;
+
+      const img = r.photo
+        ? `<img src="${escHtml(r.photo)}" alt="" loading="lazy" />`
+        : `<span>Pas de photo</span>`;
+
+      const meta = [
+        r.surface ? `${r.surface} m\u00B2` : '',
+        r.nb_pieces ? `${r.nb_pieces} p.` : '',
+        r.nb_chambres ? `${r.nb_chambres} ch.` : '',
+        r.quartier || '',
+      ].filter(Boolean);
+
+      return `
+        <a class="search-overlay__result" href="${href}">
+          <div class="search-overlay__result-img ${!r.photo ? 'search-overlay__result-img--empty' : ''}">${img}</div>
+          <div class="search-overlay__result-body">
+            <span class="search-overlay__result-badge ${badgeClass}">${badgeLabel}</span>
+            <span class="search-overlay__result-title">${escHtml(r.titre || r.type_bien || 'Bien immobilier')}</span>
+            ${price ? `<span class="search-overlay__result-price">${price}</span>` : ''}
+            ${meta.length ? `<div class="search-overlay__result-meta">${meta.map(m => `<span>${escHtml(m)}</span>`).join('')}</div>` : ''}
+          </div>
+        </a>`;
+    }).join('');
+
+    // Build view-all link
+    let viewAllHref = '/annonces/';
+    if (activeType === 'L') viewAllHref = '/annonces/locations/';
+    else if (activeType === 'V') viewAllHref = '/annonces/ventes/';
+
+    const viewAll = data.total > data.count
+      ? `<a class="search-overlay__view-all" href="${viewAllHref}">Voir tous les ${data.total} résultats</a>`
+      : '';
+
+    body.innerHTML = status + `<div class="search-overlay__results">${cards}</div>` + viewAll;
+  }
+
+  function num(n) {
+    return n.toLocaleString('fr-FR');
+  }
+
+  function escHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+})();
+</script>

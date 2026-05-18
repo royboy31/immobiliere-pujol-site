@@ -4,7 +4,7 @@ slug: "__trashed-4"
 date: "2019-05-15"
 excerpt: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2018, il s’est vendu..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13006","6e arrondissement","ancien","immobilier","m2","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-immobilier-ancien-13006.jpg"
 seoTitle: "Les prix de l’immobilier ancien dans le 13006 en 2018"
 seoDescription: "LA FOURCHETTE DES TRANSACTIONS EST ÉTABLIE PAR LES NOTAIRES DE FRANCE SUR LES TRANSACTIONS RÉALISÉES SUR LA BASE DES PRIX MÉDIANS . En 2018, il s’est vendu dans le 13006 :407 appartements au prix médian* de 2 630€ le m². *Prix médian (sources notaires) : la moitié des transactions ont été…"

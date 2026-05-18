@@ -4,7 +4,7 @@ slug: "les-raisons-du-succes-du-dispositif-pinel-marseille"
 date: "2018-03-18"
 excerpt: "Je ne suis pas un grand fan des investissements immobiliers défiscalisés, mais je leur reconnais des avantages qui justifient leur succès. Packagées (donc sans "
 categories: []
-tags: []
+tags: ["dispositif pinel","gestion immobiliere","gestion immobiliere Pinel"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/06/LO33870001_E4D1-600x399.jpg"
 seoTitle: "Les 4 raisons du succès du dispositif Pinel à Marseille"
 seoDescription: "Je ne suis pas un grand fan  des investissements immobiliers défiscalisés, mais je leur reconnais des avantages qui justifient leur succès. Packagées (donc sans rien faire pour le client) et avec une ristourne d'impôt (qui compense en partie le surcoût du neuf), les offres pour investisseurs en Pinel sont légions. Vous…"

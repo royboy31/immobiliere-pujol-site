@@ -520,6 +520,38 @@
   color: $black;
 }
 
+.annonce-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &--floating {
+    margin: 30px $ds-side-pad 18px;
+  }
+
+  &__arrows {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .6px;
+    color: $black;
+    text-decoration: none;
+
+    svg { transition: transform .2s ease; }
+    &:first-child:hover svg { transform: translateX(-3px); }
+    &:last-child:hover svg { transform: translateX(3px); }
+  }
+}
+
 .annonce-back {
   display: inline-flex;
   align-items: center;
@@ -530,15 +562,9 @@
   letter-spacing: .6px;
   color: $black;
   text-decoration: none;
-  margin-bottom: 28px;
 
   svg { transition: transform .2s ease; }
   &:hover svg { transform: translateX(-3px); }
-
-  &--floating {
-    display: inline-flex;
-    margin: 30px $ds-side-pad 18px;
-  }
 }
 
 // 2-column hero. Left column stacks: main media → thumb strip → description.

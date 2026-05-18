@@ -4,7 +4,7 @@ slug: "analyse-que-deviendra-limmobilier"
 date: "2018-04-23"
 excerpt: "Perspective sur les métiers de l’immobilier… Comme chaque dimanche matin, je m’adonne au blog et essaye de mettre nos métiers en perspective. Je vais relayer..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["analyse immobiliere","immobilier"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/04/analyse-immobilier-1200x452.jpg"
 seoTitle: "Analyse : que deviendra l’immobilier ?"
 seoDescription: "Perspective sur les métiers de l’immobilier... Comme chaque dimanche matin, je m’adonne au blog et essaye de mettre nos métiers en perspective. Je vais relayer ce que j’ai entendu au cours des derniers mois et réagir… L’immobilier ne sera plus un actif refuge et stable…un blasphème Les intervenants à la…"

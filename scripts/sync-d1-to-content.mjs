@@ -208,3 +208,20 @@ for (const f of wpFiles) {
 }
 
 if (patched > 0) console.log(`🔒 Marked ${patched} overlapping WordPress files as closed`);
+
+// ── Download active.json from R2 for client-side deferred loading ──
+
+const R2_CARDS_URL = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/cards.json';
+const DATA_DIR = path.resolve('public/_data');
+try {
+  const resp = await fetch(R2_CARDS_URL);
+  if (resp.ok) {
+    mkdirSync(DATA_DIR, { recursive: true });
+    writeFileSync(path.join(DATA_DIR, 'cards.json'), Buffer.from(await resp.arrayBuffer()));
+    console.log(`📦 Downloaded cards.json for deferred card loading`);
+  } else {
+    console.warn(`⚠️  Could not fetch cards.json: ${resp.status}`);
+  }
+} catch (e) {
+  console.warn(`⚠️  Could not fetch cards.json: ${e.message}`);
+}

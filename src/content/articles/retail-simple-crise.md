@@ -4,7 +4,7 @@ slug: "retail-simple-crise"
 date: "2017-04-26"
 excerpt: "J’ai lu un livre “Comment la France a tué ses villes” d’Olivier Razemon, car je crois que nous ne sommes qu’au début qu’un questionnement long sur l’avenir du..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["agence immobilière","commerce","consommateur","crise du retail","habitudes de consommation","immobilier","retail","retail management","service","service client","vente"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/03/risque-financier-dans-limmobilier.jpg"
 seoTitle: "Le retail … une simple crise des centres commerciaux au coeur de Marseille ?"
 seoDescription: "J’ai lu un livre “Comment la France a tué ses villes” d’Olivier Razemon, car je crois que nous ne sommes qu’au début qu’un questionnement long sur l’avenir du commerce dans nos centres-ville Ces centres-villes de ville moyennes sont probablement sans avenir ou dotés d’un avenir limité. Ceux en périphérie de…"

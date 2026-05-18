@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13014-en-2018"
 date: "2019-05-19"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quels sont les prix au m2 de..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13014","14e arrondissement","immobilier","neuf","prix","prix au mé"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13014-1200x900-1.jpg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13014 en 2018"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. Quels sont les prix au m2 de l'immobilier ancien à Marseille dans le 13014 en 2018 ? En 2018, il s’est vendu dans le 14e arrondissement de Marseille:172 appartements…"

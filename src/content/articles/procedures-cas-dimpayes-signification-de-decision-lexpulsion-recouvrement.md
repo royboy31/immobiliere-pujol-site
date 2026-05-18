@@ -4,7 +4,7 @@ slug: "procedures-cas-dimpayes-signification-de-decision-lexpulsion-recouvrement
 date: "2017-02-18"
 excerpt: "La décision du juge une fois connue doit être signifiée par huissier de justice au locataire, colocataire et au garant. Ils ont un délai de 15 de jours pour..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["loyers impayés"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/20170212_212451-1200x750.jpg"
 seoTitle: "Procédures en cas d’impayés : la signification de la décision, l’expulsion & le recouvrement"
 seoDescription: "La décision du juge une fois connue doit être signifiée par huissier de justice au locataire, colocataire et au garant. Ils ont un délai de 15  de jours pour faire appel. Passé ce délai, l’huissier commence les opérations d’expulsions et de recouvrement qu’il mène en parallèle. Concernant le recouvrement L’huissier…"

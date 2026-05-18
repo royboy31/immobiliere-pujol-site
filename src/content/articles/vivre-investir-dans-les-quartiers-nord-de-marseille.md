@@ -4,7 +4,7 @@ slug: "vivre-investir-dans-les-quartiers-nord-de-marseille"
 date: "2017-06-15"
 excerpt: "Choisir de vivre ou d’investir dans les quartiers nord de Marseille qui ont si mauvaise réputation… Ici les problèmes de sécurité, de civilité et de propreté..."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["acheter appartement marseile","conseils investissement immobilier","investir a marseille","investir dans l'immobilier","marseille","quartier difficile marseille","quartiers nord"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vivre-quartier-territoire-nord-marseille-e1497252687975.jpg"
 seoTitle: "Vivre dans les Quartiers Nord de Marseille : bien choisir son secteur pour investir"
 seoDescription: "Choisir de vivre ou d'investir dans les quartiers nord de Marseille qui ont si mauvaise réputation... Ici les problèmes de sécurité, de civilité et de propreté sont criants, mais ils ne doivent pas résumer à eux seuls ces quartiers. Bien sûr que les prix vont de 600€ le m pour…"

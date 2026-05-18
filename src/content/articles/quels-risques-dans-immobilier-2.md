@@ -4,7 +4,7 @@ slug: "quels-risques-dans-immobilier-2"
 date: "2018-03-02"
 excerpt: "Récemment, j’ai passé tout un week-end à rédiger des conclusions pour un litige sur des travaux de parquets dans mes bureaux ! Les parquets s’étaient décollés..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["quel risque dans l'immobilier","risque dans l'immobilier","risque en immobilier","risques immobilier"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/03/risque-immobilier-travaux.jpg"
 seoTitle: "Et vous, comment gérez-vous l’aléa dans l’immobilier ?"
 seoDescription: "Récemment, j’ai passé tout un week-end à rédiger des conclusions pour un litige sur des travaux de parquets dans mes bureaux ! Les parquets s’étaient décollés de plus de 15 cm, moins de 3 mois après leur pose. Nous sommes en procédure depuis 6 ans. Le week-end précendent j’avais déjà travaillé…"

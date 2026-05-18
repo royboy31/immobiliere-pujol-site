@@ -4,7 +4,7 @@ slug: "limmobilier-logement-a-marseille-entre-indecence-et-indignite"
 date: "2019-02-25"
 excerpt: "Je participe depuis quelques semaines à un projet citoyen sur le bâti de nos immeubles. Dans le cadre de ce groupe informel, j’ai été chargé d’expliquer les..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["immobilier","marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/02/immobilier-marseille-1200x800.jpg"
 seoTitle: "Logements à Marseille : entre indécence et indignité…"
 seoDescription: "Je participe depuis quelques semaines à un projet citoyen sur le bâti de nos immeubles. Dans le cadre de ce groupe informel, j’ai été chargé d’expliquer les différences entre les notions d’indécence, d’insalubrité, d’indignité et donner le cadre légal. Cet article reprend le compte rendu que j’ai fait à ce…"

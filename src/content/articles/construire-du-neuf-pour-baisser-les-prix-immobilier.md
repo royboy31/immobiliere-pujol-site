@@ -4,7 +4,7 @@ slug: "construire-du-neuf-pour-baisser-les-prix-immobilier"
 date: "2012-02-11"
 excerpt: "11.02.2012 Les politiques veulent baisser les prix de l’immobilier en construisant du neuf? l’objectif est discutable car cela revient à ruiner les..."
 categories: ["L'immobilier neuf à marseille"]
-tags: []
+tags: ["investissement neuf marseille","Programme immobilier neuf marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/programme-neuf-marseille-cote-7eme-289_TD_05_1_xl-1200x1138.jpg"
 seoTitle: "Construire du neuf toujours du neuf. Et l’existant qu’en font-ils?"
 seoDescription: "11.02.2012 Les politiques veulent baisser les prix de l'immobilier en construisant du neuf? l'objectif est discutable car cela revient à ruiner les propriétaires mais le moyen, lui  est absurde... Que font-ils de l'existant, des immeubles implantés dans nos centres villes qui sont en voie d\"obsolescence? Ces immeubles ne seront jamais…"

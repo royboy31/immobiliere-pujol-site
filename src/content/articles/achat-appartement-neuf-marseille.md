@@ -4,7 +4,7 @@ slug: "achat-appartement-neuf-marseille"
 date: "2018-02-13"
 excerpt: "Ces dernières semaines, deux cas m'ont exaspéré: – un couple de jeunes qui viennent de se marier se sont fait « conseiller » d'acheter un T1 de 30m dans du neuf"
 categories: []
-tags: []
+tags: ["gérer du neuf à marseille","Immobilier neuf marseille","investissement neuf marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/igp0406dxo-1-600x391.jpg"
 seoTitle: "Les règles à savoir quand vous voulez acheter du neuf: faites le accompagné par un avocat et une agence immobilière indépendante"
 seoDescription: "Ces dernières semaines, deux cas m'ont exaspéré: - un couple de jeunes qui viennent de se marier se sont fait \"conseiller\" d'acheter un T1 de 30m dans du neuf pour vivre ensemble. Résultat: 6 mois après leur mariage, ils sont toujours chez leur parent à cause du retard du promoteur.…"

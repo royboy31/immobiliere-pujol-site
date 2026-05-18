@@ -2,6 +2,7 @@
 // Deployed as a separate worker alongside the main Astro site
 
 import { XMLParser } from 'fast-xml-parser';
+import { unzipSync, strFromU8 } from 'fflate';
 
 const UBIFLOW_URL =
   'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
@@ -9,6 +10,8 @@ const UBIFLOW_URL =
 interface Env {
   DB: D1Database;
   PHOTOS: R2Bucket;
+  GITHUB_TOKEN: string;
+  GITHUB_REPO: string; // "owner/repo"
 }
 
 // ── XML parsing (inlined from src/lib/ubiflow.ts to keep this worker self-contained) ──
@@ -71,6 +74,7 @@ interface ParsedAnnonce {
   dpeValeurGes: string;
   mandatNumero: string;
   mandatType: string;
+  visiteVirtuelle: string;
   photos: string[];
   slug: string;
 }
@@ -144,6 +148,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     dpeValeurGes: str(diagnostics.dpe_valeur_ges),
     mandatNumero: str(prestation.mandat_numero),
     mandatType: str(prestation.mandat_type),
+    visiteVirtuelle: str(raw.visite_virtuelle),
     photos,
     slug: '',
   };
@@ -160,7 +165,39 @@ async function fetchFeed(): Promise<ParsedAnnonce[]> {
   const rawList = doc?.client?.annonce;
   if (!rawList) return [];
   const list = Array.isArray(rawList) ? rawList : [rawList];
-  return list.map(parseAnnonce);
+  return list.map(parseAnnonce).filter(a => a.type === 'L');
+}
+
+// ── Trigger site redeploy via GitHub Actions workflow_dispatch ──
+
+async function triggerRedeploy(env: Env): Promise<boolean> {
+  if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
+    console.log('[cron-sync] No GITHUB_TOKEN/GITHUB_REPO — skipping redeploy trigger');
+    return false;
+  }
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/deploy.yml/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'pujol-cron-sync',
+        },
+        body: JSON.stringify({ ref: 'main' }),
+      }
+    );
+    if (resp.ok || resp.status === 204) {
+      console.log('[cron-sync] Redeploy triggered successfully');
+      return true;
+    }
+    console.error(`[cron-sync] Redeploy trigger failed: ${resp.status} ${await resp.text()}`);
+    return false;
+  } catch (e: any) {
+    console.error(`[cron-sync] Redeploy trigger error: ${e.message}`);
+    return false;
+  }
 }
 
 // ── Sync logic (batched to stay within Worker subrequest limits) ──
@@ -205,10 +242,10 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
-      mandat_numero, mandat_type,
+      mandat_numero, mandat_type, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'ubiflow',?,?
+      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', ubiflow_annonce_id=excluded.ubiflow_annonce_id,
@@ -233,6 +270,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       telephone_a_afficher=excluded.telephone_a_afficher,
       email_a_afficher=excluded.email_a_afficher,
       mandat_numero=excluded.mandat_numero, mandat_type=excluded.mandat_type,
+      url_visite_virtuelle=excluded.url_visite_virtuelle,
       date_modification=excluded.date_modification, source='ubiflow',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
@@ -249,7 +287,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.typeChauffage || null,
     a.titre, a.description,
     a.contactAAfficher, a.telephoneAAfficher, a.emailAAfficher,
-    a.mandatNumero || null, a.mandatType || null,
+    a.mandatNumero || null, a.mandatType || null, a.visiteVirtuelle || null,
     now, now, now, now
   );
 }
@@ -373,6 +411,541 @@ async function runSync(env: Env) {
   return stats;
 }
 
+// ── LBI zip import (La Boîte Immo) ──
+// Reads zip from R2 (lbi/import.zip), extracts Annonces.csv, parses, imports to D1 + R2
+
+const LBI_DELIMITER = '!#';
+
+const LBI_CHAUFFAGE: Record<string, string> = {
+  '4096': 'Collectif',
+  '4608': 'Collectif électrique',
+  '4736': 'Collectif électrique radiateur',
+  '4864': 'Collectif gaz',
+  '6144': 'Collectif gaz',
+  '8192': 'Individuel',
+  '8704': 'Individuel gaz',
+  '8832': 'Individuel fioul',
+  '9216': 'Individuel électrique',
+  '10240': 'Individuel électrique',
+  '10368': 'Individuel électrique radiateur',
+};
+
+// ── Negotiator name → expert email mapping ──
+const NEGOTIATOR_MAP: Record<string, string> = {
+  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'julia lauron': 'julia@immobiliere-pujol.fr',
+  'thibault arnoux': 'thibault@immobiliere-pujol.fr',
+  'candice loth': 'candice@immobiliere-pujol.fr',
+  'caroline pujol': 'carolinepujol@immobiliere-pujol.fr',
+};
+
+function parseNegotiator(descriptif: string): { name: string; phone: string } | null {
+  // Strip <br> tags to normalise line breaks in patterns
+  const clean = descriptif.replace(/<br\s*\/?>/gi, ' ');
+  // Pattern 1: "IMMOBILIERE PUJOL / Name Phone"
+  const match = clean.match(/IMMOBILIERE PUJOL\s*\/\s*([^\d]+?)\s+((?:\d{2}\s*){5})/);
+  if (match) return { name: match[1].trim(), phone: match[2].replace(/\s/g, '') };
+  // Pattern 2: "Name IMMOBILIERE PUJOL Phone"
+  const reversed = clean.match(/([A-ZÀ-Ú][a-zà-ú]+[\s\-]+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+IMMOBILIERE PUJOL\s+((?:\d{2}\s*){5})/);
+  if (reversed) return { name: reversed[1].trim(), phone: reversed[2].replace(/\s/g, '') };
+  // Pattern 3: fallback — "Name Phone" near end (with or without spaces in phone)
+  const tail = clean.slice(-300);
+  const fallback = tail.match(/([A-ZÀ-Ú][a-zà-ú]+[\s\-]+[A-ZÀ-Ú][A-Za-zà-ú\-]+)\s+((?:\d{2}\s*){5})/);
+  if (fallback) return { name: fallback[1].trim(), phone: fallback[2].replace(/\s/g, '') };
+  return null;
+}
+
+function negotiatorToEmail(name: string): string | null {
+  const key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  for (const [pattern, email] of Object.entries(NEGOTIATOR_MAP)) {
+    if (key.includes(pattern) || pattern.includes(key)) return email;
+  }
+  return null;
+}
+
+const STREET_TYPES = '(?:rue|boulevard|bd|avenue|av\\.?|place|impasse|chemin|allée|allee|cours|passage|traverse|square|grand[e]?\\s+rue)';
+
+function parseAddress(descriptif: string, codePostal: string, ville: string): string | null {
+  const clean = descriptif.replace(/<br\s*\/?>/gi, ' ').trim();
+  // Try first block, then full text if not found
+  const blocks = [clean.split(/\s{2,}/)[0], clean];
+  for (const text of blocks) {
+    // Pattern 1: "Number street-type name"
+    const numFirst = text.match(
+      new RegExp(`(\\d+[,]?\\s*(?:bis|ter)?\\s*${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40}?)(?:\\s+\\d{5}|\\s+Marseille|[,.]|\\s+dans|$)`, 'i')
+    );
+    if (numFirst) {
+      let addr = numFirst[1].trim().replace(/\s+/g, ' ');
+      if (!addr.includes(codePostal)) addr += `, ${codePostal} ${ville}`;
+      return addr;
+    }
+    // Pattern 2: "Street-type name CP ville"
+    const streetFirst = text.match(
+      new RegExp(`(${STREET_TYPES}\\s+[A-ZÀ-Úa-zà-ú'\\- ]{2,40})\\s+(\\d{5})\\s+(\\w+)`, 'i')
+    );
+    if (streetFirst) return `${streetFirst[1].trim()}, ${streetFirst[2]} ${streetFirst[3]}`;
+    // Pattern 3: "place/square Name"
+    const placeMatch = text.match(/((?:place|square)\s+[A-ZÀ-Úa-zà-ú'\\-]{2,25})/i);
+    if (placeMatch) return `${placeMatch[1].trim()}, ${codePostal} ${ville}`;
+  }
+  return null;
+}
+
+interface LbiAnnonce {
+  reference: string;
+  typeAnnonce: 'V' | 'L';
+  typeBien: string;
+  codePostal: string;
+  ville: string;
+  prix: number | null;
+  surface: number | null;
+  surfaceTerrain: number | null;
+  nbPieces: number | null;
+  nbChambres: number | null;
+  nbSallesBain: number | null;
+  nbWC: number | null;
+  titre: string;
+  descriptif: string;
+  etage: string | null;
+  nbEtages: string | null;
+  ascenseur: boolean;
+  cave: boolean;
+  terrasse: boolean;
+  parking: boolean;
+  balcon: boolean;
+  interphone: boolean;
+  contactNom: string | null;
+  telephone: string | null;
+  email: string | null;
+  charges: number | null;
+  typeChauffage: string | null;
+  mandatNumero: string | null;
+  dpeValeur: string | null;
+  dpeNote: string | null;
+  gesValeur: string | null;
+  gesNote: string | null;
+  adresse: string | null;
+  visiteVirtuelle: string | null;
+  photos: string[];
+  slug: string;
+}
+
+function parseLbiCsv(raw: string): LbiAnnonce[] {
+  const lines = raw.trim().split('\n');
+  const annonces: LbiAnnonce[] = [];
+
+  for (const line of lines) {
+    const f = line.split(LBI_DELIMITER).map(v => v.replace(/^"|"$/g, ''));
+
+    // Collect photo URLs from fields 84-170
+    const photos: string[] = [];
+    for (let i = 84; i <= 170 && i < f.length; i++) {
+      if (f[i] && f[i].startsWith('http')) photos.push(f[i]);
+    }
+
+    const a: LbiAnnonce = {
+      reference: f[1] || '',
+      typeAnnonce: f[2].toLowerCase() === 'vente' ? 'V' : 'L',
+      typeBien: f[3] || '',
+      codePostal: f[4] || '',
+      ville: f[5] || '',
+      prix: parseFloat(f[10]) || null,
+      surface: parseFloat(f[15]) || null,
+      surfaceTerrain: parseFloat(f[16]) || null,
+      nbPieces: parseInt(f[17]) || null,
+      nbChambres: parseInt(f[18]) || null,
+      titre: f[19] || '',
+      descriptif: f[20] || '',
+      etage: f[23] || null,
+      nbEtages: f[24] || null,
+      nbSallesBain: parseInt(f[28]) || null,
+      nbWC: parseInt(f[30]) || null,
+      cave: f[35] === 'OUI',
+      terrasse: f[36] === 'OUI',
+      parking: !!(f[38] && f[38] !== '0'),
+      balcon: f[40] === 'OUI',
+      ascenseur: f[41] === 'OUI',
+      interphone: f[82] === 'OUI',
+      charges: parseFloat(f[22]) || null,
+      typeChauffage: LBI_CHAUFFAGE[f[32]] || f[32] || null,
+      telephone: f[104]?.trim() || null,
+      contactNom: f[105]?.trim() || null,
+      email: f[106]?.trim() || null,
+      mandatNumero: f[111]?.trim() || null,
+      dpeValeur: f[175]?.trim() || null,
+      dpeNote: f[176]?.trim() || null,
+      gesValeur: f[177]?.trim() || null,
+      gesNote: f[178]?.trim() || null,
+      adresse: null,
+      visiteVirtuelle: (f[103]?.trim().split(/\s*,\s*/)[0]) || null,
+      photos,
+      slug: '',
+    };
+
+    // Generate slug (same pattern as ubiflow)
+    const parts: string[] = [];
+    if (a.reference) parts.push(a.reference.toLowerCase());
+    if (a.codePostal) parts.push(a.codePostal);
+    if (a.ville) parts.push(a.ville);
+    a.slug = parts
+      .join(' ')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .substring(0, 120);
+
+    // Extract negotiator from descriptif (f[106] is agency email, not negotiator)
+    const nego = parseNegotiator(a.descriptif);
+    if (nego) {
+      a.email = negotiatorToEmail(nego.name) || a.email;
+      a.contactNom = nego.name;
+      a.telephone = nego.phone;
+    } else {
+      // No negotiator found — clear agency email so expert card is hidden
+      a.email = null;
+    }
+
+    // Extract address from descriptif
+    a.adresse = parseAddress(a.descriptif, a.codePostal, a.ville);
+
+    if (a.typeAnnonce === 'V') annonces.push(a);
+  }
+
+  return annonces;
+}
+
+async function uploadLbiPhotos(
+  bucket: R2Bucket,
+  a: LbiAnnonce,
+  stats: { photosUploaded: number; photosSkipped: number }
+): Promise<string[]> {
+  const r2Keys: string[] = [];
+  for (let i = 0; i < a.photos.length; i++) {
+    const key = `annonces/${a.slug}/${i}.jpg`;
+    try {
+      const head = await bucket.head(key);
+      if (head) {
+        r2Keys.push(key);
+        stats.photosSkipped++;
+        continue;
+      }
+      const resp = await fetch(a.photos[i]);
+      if (!resp.ok) { r2Keys.push(a.photos[i]); continue; }
+      const blob = await resp.arrayBuffer();
+      await bucket.put(key, blob, {
+        httpMetadata: { contentType: resp.headers.get('content-type') || 'image/jpeg' },
+      });
+      r2Keys.push(key);
+      stats.photosUploaded++;
+    } catch {
+      r2Keys.push(a.photos[i]); // fallback to external URL
+    }
+  }
+  return r2Keys;
+}
+
+function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1PreparedStatement {
+  return db.prepare(
+    `INSERT INTO annonces (
+      slug, status, reference_agence,
+      type_annonce, type_bien,
+      adresse, code_postal, ville,
+      prix, charges,
+      surface, surface_terrain,
+      nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
+      etage, nb_etages, ascenseur, cave, terrasse,
+      parking, interphone, balcon,
+      dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
+      titre, descriptif,
+      contact_a_afficher, telephone_a_afficher, email_a_afficher,
+      mandat_numero, url_visite_virtuelle,
+      date_creation, date_modification, source, created_at, updated_at
+    ) VALUES (
+      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'lbi',?,?
+    )
+    ON CONFLICT(slug) DO UPDATE SET
+      status='active', reference_agence=excluded.reference_agence,
+      type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
+      adresse=excluded.adresse,
+      code_postal=excluded.code_postal, ville=excluded.ville,
+      prix=excluded.prix, charges=excluded.charges,
+      surface=excluded.surface, surface_terrain=excluded.surface_terrain,
+      nb_pieces=excluded.nb_pieces, nb_chambres=excluded.nb_chambres,
+      nb_salles_bain=excluded.nb_salles_bain, nb_wc=excluded.nb_wc,
+      etage=excluded.etage, nb_etages=excluded.nb_etages,
+      ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
+      parking=excluded.parking, interphone=excluded.interphone, balcon=excluded.balcon,
+      dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
+      ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur, type_chauffage=excluded.type_chauffage,
+      titre=excluded.titre, descriptif=excluded.descriptif,
+      contact_a_afficher=excluded.contact_a_afficher,
+      telephone_a_afficher=excluded.telephone_a_afficher,
+      email_a_afficher=excluded.email_a_afficher,
+      mandat_numero=excluded.mandat_numero, url_visite_virtuelle=excluded.url_visite_virtuelle,
+      date_modification=excluded.date_modification, source='lbi',
+      date_fermeture=NULL, updated_at=excluded.updated_at`
+  ).bind(
+    a.slug, a.reference, a.typeAnnonce, a.typeBien,
+    a.adresse, a.codePostal, a.ville,
+    a.prix, a.charges,
+    a.surface, a.surfaceTerrain,
+    a.nbPieces, a.nbChambres, a.nbSallesBain, a.nbWC,
+    a.etage, a.nbEtages,
+    a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
+    a.parking ? '1' : null, a.interphone ? 1 : 0, a.balcon ? 1 : 0,
+    a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur, a.typeChauffage,
+    a.titre, a.descriptif,
+    a.contactNom, a.telephone, a.email,
+    a.mandatNumero, a.visiteVirtuelle,
+    now, now, now, now
+  );
+}
+
+async function runLbiImport(env: Env) {
+  const stats = {
+    annoncesInZip: 0, upserted: 0, photosUploaded: 0, photosSkipped: 0,
+    errors: 0, errorDetails: [] as string[],
+  };
+
+  try {
+    // 1. Read zip from R2
+    const zipObj = await env.PHOTOS.get('lbi/import.zip');
+    if (!zipObj) {
+      return { error: 'No zip found at lbi/import.zip in R2. Upload first with: wrangler r2 object put pujol-photos/lbi/import.zip --file=1_immopujol.zip' };
+    }
+    const zipBuffer = await zipObj.arrayBuffer();
+
+    // 2. Extract Annonces.csv from zip
+    const unzipped = unzipSync(new Uint8Array(zipBuffer));
+    const csvBytes = unzipped['Annonces.csv'];
+    if (!csvBytes) {
+      return { error: 'Annonces.csv not found in zip. Files found: ' + Object.keys(unzipped).join(', ') };
+    }
+
+    // Decode as latin1 (LBI uses ISO-8859-1)
+    const csvText = new TextDecoder('iso-8859-1').decode(csvBytes);
+    const annonces = parseLbiCsv(csvText);
+    stats.annoncesInZip = annonces.length;
+    console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
+
+    // 3. Upload photos to R2
+    const photoMap = new Map<string, string[]>();
+    for (const a of annonces) {
+      try {
+        const keys = await uploadLbiPhotos(env.PHOTOS, a, stats);
+        photoMap.set(a.slug, keys);
+        console.log(`[lbi-import] ${a.reference}: ${keys.length} photos`);
+      } catch (e: any) {
+        stats.errors++;
+        stats.errorDetails.push(`${a.slug} photos: ${e.message}`);
+        photoMap.set(a.slug, a.photos);
+      }
+    }
+
+    // 4. Batch upsert annonces into D1
+    const now = new Date().toISOString();
+    const upsertStmts = annonces.map(a => buildLbiUpsertStmt(env.DB, a, now));
+    for (let i = 0; i < upsertStmts.length; i += 100) {
+      const results = await env.DB.batch(upsertStmts.slice(i, i + 100));
+      for (const r of results) {
+        if (r.meta.changes > 0) stats.upserted++;
+      }
+    }
+
+    // 5. Link photos — get IDs, delete old, insert new
+    const slugLookups = annonces.map(a =>
+      env.DB.prepare('SELECT id, slug FROM annonces WHERE slug = ?').bind(a.slug)
+    );
+    const slugResults = await env.DB.batch(slugLookups);
+    const slugToId = new Map<string, number>();
+    for (const r of slugResults) {
+      const row = (r.results as any[])[0];
+      if (row) slugToId.set(row.slug, row.id);
+    }
+
+    const photoStmts: D1PreparedStatement[] = [];
+    for (const a of annonces) {
+      const annonceId = slugToId.get(a.slug);
+      if (!annonceId) continue;
+      const keys = photoMap.get(a.slug) || [];
+      photoStmts.push(
+        env.DB.prepare('DELETE FROM annonces_photos WHERE annonce_id = ?').bind(annonceId)
+      );
+      for (let i = 0; i < keys.length; i++) {
+        photoStmts.push(
+          env.DB.prepare('INSERT INTO annonces_photos (annonce_id, url, position, source) VALUES (?,?,?,?)')
+            .bind(annonceId, keys[i], i, 'r2')
+        );
+      }
+    }
+    for (let i = 0; i < photoStmts.length; i += 100) {
+      await env.DB.batch(photoStmts.slice(i, i + 100));
+    }
+
+    // 6. Close LBI annonces no longer in zip
+    const feedSlugSet = new Set(annonces.map(a => a.slug));
+    const activeLbi = await env.DB
+      .prepare("SELECT id, slug FROM annonces WHERE status = 'active' AND source = 'lbi'")
+      .all<{ id: number; slug: string }>();
+
+    const lbiCloseStmts: D1PreparedStatement[] = [];
+    let lbiClosed = 0;
+    for (const row of activeLbi.results) {
+      if (!feedSlugSet.has(row.slug)) {
+        lbiCloseStmts.push(
+          env.DB.prepare("UPDATE annonces SET status='closed', date_fermeture=?, updated_at=? WHERE id=?")
+            .bind(now, now, row.id)
+        );
+        lbiClosed++;
+      }
+    }
+    if (lbiCloseStmts.length > 0) {
+      for (let i = 0; i < lbiCloseStmts.length; i += 100) {
+        await env.DB.batch(lbiCloseStmts.slice(i, i + 100));
+      }
+    }
+    console.log(`[lbi-import] Closed ${lbiClosed} stale LBI annonces`);
+
+    console.log('[lbi-import] Done:', JSON.stringify(stats));
+  } catch (e: any) {
+    stats.errors++;
+    stats.errorDetails.push(`FATAL: ${e.message}`);
+    console.error('[lbi-import] Fatal:', e);
+  }
+
+  return stats;
+}
+
+// ── Write active.json snapshot to R2 ──
+// Listing pages (prerendered) fetch this JSON at build time instead of querying D1.
+
+const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
+
+function resolvePhotoUrl(url: string): string {
+  return url.startsWith('http') ? url : `${R2_PUBLIC}/${url}`;
+}
+
+async function writeActiveJson(env: Env): Promise<number> {
+  const annonces = await env.DB
+    .prepare("SELECT * FROM annonces WHERE status = 'active' ORDER BY date_creation DESC")
+    .all<Record<string, any>>();
+
+  if (annonces.results.length === 0) {
+    await env.PHOTOS.put('annonces/active.json', '[]', {
+      httpMetadata: { contentType: 'application/json' },
+    });
+    return 0;
+  }
+
+  const ids = annonces.results.map(a => a.id as number);
+  const photoMap = new Map<number, string[]>();
+  for (let i = 0; i < ids.length; i += 50) {
+    const batch = ids.slice(i, i + 50);
+    const photos = await env.DB
+      .prepare(
+        `SELECT annonce_id, url, position FROM annonces_photos
+         WHERE annonce_id IN (${batch.map(() => '?').join(',')})
+         ORDER BY position ASC`
+      )
+      .bind(...batch)
+      .all<{ annonce_id: number; url: string; position: number }>();
+    for (const p of photos.results) {
+      const list = photoMap.get(p.annonce_id) || [];
+      list.push(resolvePhotoUrl(p.url));
+      photoMap.set(p.annonce_id, list);
+    }
+  }
+
+  const json = annonces.results.map(a => ({
+    id: String(a.id),
+    reference: a.reference_agence || a.ubiflow_reference || '',
+    titre: a.titre || '',
+    description: a.descriptif || '',
+    dateSaisie: '',
+    contactAAfficher: a.contact_a_afficher || '',
+    emailAAfficher: a.email_a_afficher || '',
+    telephoneAAfficher: a.telephone_a_afficher || '',
+    type: (a.type_annonce || 'L') as 'V' | 'L',
+    prix: a.prix ?? null,
+    prixHorsHonoraires: null,
+    loyer: null,
+    loyerCC: a.loyer_cc ?? null,
+    charges: a.charges ?? null,
+    depotGarantie: a.depot_garantie ?? null,
+    honorairesChargeAcquereur: false,
+    devise: 'EUR',
+    libelleType: a.type_bien || '',
+    codePostal: a.code_postal || '',
+    adresse: a.adresse || '',
+    ville: a.ville || '',
+    quartier: a.quartier || '',
+    latitude: a.latitude ?? null,
+    longitude: a.longitude ?? null,
+    surface: a.surface ?? null,
+    surfaceHabitable: null,
+    surfaceTerrain: a.surface_terrain ?? null,
+    surfaceTerrasse: null,
+    nbPieces: a.nb_pieces ?? null,
+    nbChambres: a.nb_chambres ?? null,
+    nbSallesDeBain: a.nb_salles_bain ?? null,
+    nbWC: a.nb_wc ?? null,
+    etage: a.etage || '',
+    nbEtages: a.nb_etages || '',
+    exposition: '',
+    cuisine: '',
+    typeChauffage: a.type_chauffage || '',
+    chauffageEnergie: '',
+    ascenseur: !!a.ascenseur,
+    terrasse: !!a.terrasse,
+    balcon: false,
+    garage: !!a.garage,
+    parking: !!a.parking,
+    cave: !!a.cave,
+    interphone: !!a.interphone,
+    copropriete: false,
+    chargesCopropriete: null,
+    alurNbLots: null,
+    anneeConstruction: '',
+    vueSurMer: false,
+    dpeValeurConso: a.dpe_valeur || '',
+    dpeEtiquetteConso: a.dpe_note || '',
+    dpeEtiquetteGes: a.ges_note || '',
+    dpeEstimationMin: '',
+    dpeEstimationMax: '',
+    dpeValeurGes: a.ges_valeur || '',
+    photos: photoMap.get(a.id as number) || [],
+    visiteVirtuelle: a.url_visite_virtuelle || '',
+    mandatNumero: a.mandat_numero || '',
+    mandatType: a.mandat_type || '',
+    slug: a.slug || '',
+    meuble: !!a.meuble,
+  }));
+
+  await env.PHOTOS.put('annonces/active.json', JSON.stringify(json), {
+    httpMetadata: { contentType: 'application/json' },
+  });
+
+  // Slim version with only card-rendering fields (~80% smaller)
+  const cards = json.map(a => ({
+    type: a.type, slug: a.slug, titre: a.titre, libelleType: a.libelleType,
+    prix: a.prix, loyerCC: a.loyerCC, loyer: a.loyer,
+    depotGarantie: a.depotGarantie, surface: a.surface,
+    nbPieces: a.nbPieces, nbChambres: a.nbChambres,
+    codePostal: a.codePostal, ville: a.ville, quartier: a.quartier,
+    photos: a.photos.slice(0, 4),
+    meuble: a.meuble, parking: a.parking, garage: a.garage,
+    terrasse: a.terrasse, balcon: a.balcon,
+  }));
+  await env.PHOTOS.put('annonces/cards.json', JSON.stringify(cards), {
+    httpMetadata: { contentType: 'application/json' },
+  });
+
+  console.log(`[cron-sync] Wrote active.json + cards.json with ${json.length} annonces`);
+  return json.length;
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -380,7 +953,8 @@ export default {
     // Manual trigger: GET /sync
     if (url.pathname === '/sync') {
       const stats = await runSync(env);
-      return new Response(JSON.stringify(stats, null, 2), {
+      const jsonCount = await writeActiveJson(env);
+      return new Response(JSON.stringify({ ...stats, activeJsonWritten: jsonCount }, null, 2), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
@@ -395,10 +969,52 @@ export default {
       });
     }
 
-    return new Response('pujol-cron-sync: /sync to trigger, /status to check logs', { status: 200 });
+    // LBI zip import: GET /import-lbi
+    if (url.pathname === '/import-lbi') {
+      const result = await runLbiImport(env);
+      return new Response(JSON.stringify(result, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('pujol-cron-sync: /sync, /status, /import-lbi', { status: 200 });
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
-    ctx.waitUntil(runSync(env));
+    ctx.waitUntil((async () => {
+      let changed = false;
+
+      // 1. Ubiflow XML sync
+      const stats = await runSync(env);
+      if (stats.inserted > 0 || stats.closed > 0) changed = true;
+
+      // 2. LBI zip import (if zip exists in R2)
+      try {
+        const lbiResult = await runLbiImport(env);
+        if ('error' in lbiResult) {
+          console.log(`[cron-sync] LBI skipped: ${lbiResult.error}`);
+        } else if (lbiResult.upserted > 0) {
+          console.log(`[cron-sync] LBI imported ${lbiResult.upserted} annonces`);
+          changed = true;
+        }
+      } catch (e: any) {
+        console.error(`[cron-sync] LBI import error: ${e.message}`);
+      }
+
+      // 3. Write active.json snapshot to R2 (always, so listing pages stay fresh)
+      try {
+        await writeActiveJson(env);
+      } catch (e: any) {
+        console.error(`[cron-sync] Failed to write active.json: ${e.message}`);
+      }
+
+      // 4. Trigger redeploy only if something changed
+      if (changed) {
+        console.log('[cron-sync] Changes detected, triggering redeploy');
+        await triggerRedeploy(env);
+      } else {
+        console.log('[cron-sync] No listing changes, skipping redeploy');
+      }
+    })());
   },
 };

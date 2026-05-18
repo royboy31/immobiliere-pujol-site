@@ -106,61 +106,46 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   position: relative;
   width: 1080px;
 
-  &__tabs {
+  &__buttons {
     display: flex;
-    width: 660px;
-    margin: 0 auto;
-    background: rgba(20, 30, 48, .55);
-    backdrop-filter: blur(14px);
-    border-radius: 999px;
-    padding: 6px;
-    color: $white;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
-  &__pill {
-    flex: 1;
-    text-align: center;
-    padding: 16px 0;
-    font-size: 13px;
-    font-family: $ds-font-noto;
-    font-weight: 700;
-    line-height: 1;
-    border-radius: 999px;
-    cursor: pointer;
-    color: $white;
-    letter-spacing: .6px;
-    transition: all .2s;
-    border: 0;
-    background: transparent;
-
-    &.is-active {
-      background: $white;
-      color: $black;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
-    }
+  &__estim {
+    position: relative;
   }
 
-  &__bar {
-    margin-top: 22px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: $ds-paper;
-    border-radius: 60px;
-    padding: 0 14px;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, .18);
-    overflow: visible;
-  }
-
-  &__pane {
+  &__estim-menu {
     display: none;
-    width: 100%;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: $white;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .18);
+    padding: 8px 0;
+    list-style: none;
+    margin: 0;
+    z-index: 9999;
+    min-width: 220px;
 
-    &.is-active {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+    &.is-open { display: block; }
+
+    li a {
+      display: block;
+      padding: 14px 28px;
+      font-size: 14px;
+      font-family: $ds-font-noto;
+      font-weight: 600;
+      color: $black;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .15s;
+
+      &:hover { background: rgba(0, 0, 0, .04); }
     }
   }
 
@@ -261,6 +246,12 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     &:hover {
       background-position: 0 100%;
       color: $ds-olive;
+    }
+
+    &--arrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
   }
 
@@ -1225,46 +1216,18 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .hero-search {
     width: 100%;
 
-    &__tabs {
-      width: 100%;
+    &__buttons {
       flex-direction: column;
-      gap: 6px;
-      padding: 6px;
-      border-radius: 24px;
+      align-items: center;
+      gap: 12px;
     }
 
-    &__pill {
-      width: 100%;
-      padding: 12px 0;
-      font-size: 12px;
-    }
-
-    &__bar {
-      height: auto;
-      flex-direction: column;
-      padding: 12px;
-      gap: 10px;
-      border-radius: 24px;
-    }
-
-    &__pane.is-active {
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .seg,
-    .input,
     .cta {
       width: 100%;
       height: 56px;
-      min-width: 0;
+      font-size: 12px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
     }
-
-    .seg { padding: 0 22px; }
-    .input { padding: 0 20px; font-size: 14px; }
-    .cta { padding: 0 24px; }
   }
 
   // ----- SERVICES -----

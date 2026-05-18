@@ -4,7 +4,7 @@ slug: "investir-dans-un-t1-a-marseill"
 date: "2013-02-25"
 excerpt: "24.02.2013 Un investissement à saisir à Marseille Vous avez 30 000€ à investir et la capacité de financer 3300€ en moyenne chaque année pendant 10ans? Si oui,..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["Investissement locatif Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/vente-appartement-marseille1.jpg"
 seoTitle: "De l’intérêt d’investir dans un T1 à saisir à Marseille: un exemple"
 seoDescription: "24.02.2013 Un investissement à saisir à Marseille Vous avez 30 000€ à investir et la capacité de financer 3300€ en moyenne chaque année pendant 10ans? Si oui, je vous propose de faire une plus-value de 32 000€ en 2023 et au-delà de percevoir 350-400€ de revenus net d’impôt par…"

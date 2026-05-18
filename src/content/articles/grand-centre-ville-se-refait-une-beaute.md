@@ -4,7 +4,7 @@ slug: "grand-centre-ville-se-refait-une-beaute"
 date: "2018-02-17"
 excerpt: "Ma famille habite Marseille depuis des générations. Hormis une petite infidélité, j’ai toujours vécu dans le centre de ma ville entre le vieux port et..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["centre ville","marseille","operation grand centre","projet immobilier","ravalement de facade","soleam","suvention","travaux de renovation"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/02/operation-grand-centre-ville-marseille5-1200x900.jpg"
 seoTitle: "Grand Centre-Ville de Marseille : on se refait une beauté"
 seoDescription: "Ma famille habite Marseille depuis des générations. Hormis une petite infidélité, j’ai toujours vécu dans le centre de ma ville entre le vieux port et Castellane. Alors, parlons franchement : notre centre-ville n’est pas à la hauteur de nos attentes. Nous n’entretenons pas nos immeubles. La mairie (hormis Euromediterranée) n’est pas…"

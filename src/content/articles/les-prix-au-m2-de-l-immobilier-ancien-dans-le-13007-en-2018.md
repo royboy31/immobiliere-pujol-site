@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-ancien-dans-le-13007-en-2018"
 date: "2019-06-04"
 excerpt: "Les prix au m2 de l’immobilier ancien dans le 13007 : comparatif quartier par quartier. En 2018, il s’est vendu dans le 7ème arrondissement de Marseille:253..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13007","7e arrondissement","ancien","immobilier","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/prix-de-limmobilier-ancien-13007.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier ancien dans le 13007 en 2018"
 seoDescription: "Les prix au m2 de l'immobilier ancien dans le 13007 : comparatif quartier par quartier. En 2018, il s’est vendu dans le 7ème arrondissement de Marseille:253 appartements au prix médian* de 3 070€ le m². Corniche Kennedy *Prix médian (sources notaires) : la moitié des transactions ont été signées à un…"

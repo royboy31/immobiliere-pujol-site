@@ -4,7 +4,7 @@ slug: "prelevement-a-la-source-2018-maximisez-vos-travaux-ou-nen-faites-rien"
 date: "2018-05-28"
 excerpt: "J’ai communiqué il y a quelques mois sur le prélèvement à la source avec deux articles : quels travaux entreprendre et quand engager les travaux pour ne pas..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["2018","immobilier","prelevement a la source","travaux"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/Capture.png"
 seoTitle: "Prélèvement à la source 2018 : maximisez vos travaux ou n’en faites rien !"
 seoDescription: "J’ai communiqué il y a quelques mois sur le prélèvement à la source avec deux articles :  quels travaux entreprendre et quand engager les travaux pour ne pas être pénalisé. L’article avait suscité pas mal de questions chez mes clients. Je vais juste développer dans ces derniers un point important pour ceux qui…"

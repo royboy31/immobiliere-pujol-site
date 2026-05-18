@@ -60,12 +60,14 @@ interface Props {
 
 const { view, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
-const hasMeuble = view.meuble === 0 || view.meuble === 1;
+const isSale = view.type === 'V';
+const hasMeuble = !isSale && (view.meuble === 0 || view.meuble === 1);
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
+const hasNbEtages = !isSale && view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null;
 
 const hasTechDetails = !!(
   view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
-  view.nbWC || view.cuisine || hasEtage || hasMeuble || view.typeChauffage
+  view.nbWC || view.cuisine || hasEtage || hasNbEtages || hasMeuble || view.typeChauffage
 );
 
 // honoraires arrives as a string from D1; legacy rows can carry "Charge acquéreur"
@@ -81,23 +83,32 @@ const etatDesLieuxFmt = hasEtatDesLieux ? fmtEur.format(etatDesLieuxNum) : '';
 
 const hasFinanceDetails =
   (view.type === 'L' && !!(view.loyer || view.loyerCC || view.charges || view.depotGarantie || hasHonoraires || hasEtatDesLieux)) ||
-  (view.type === 'V' && !!(view.prix || hasHonoraires || view.honorairesChargeAcquereur));
+  (view.type === 'V' && !!(view.prix || view.charges || hasHonoraires || view.honorairesChargeAcquereur));
 ---
 
 <article class="annonce-page">
-  <a href="/annonces/" class="annonce-back annonce-back--floating">
-    <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
-      <path d="M21 7 H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
-    Retour aux annonces
-  </a>
+  <nav class="annonce-nav annonce-nav--floating">
+    <a href={isSale ? '/annonces/ventes/' : '/annonces/locations/'} class="annonce-back">
+      <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+        <path d="M21 7 H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      Retour aux annonces
+    </a>
+    <div class="annonce-nav__arrows" id="annonceNavArrows"></div>
+  </nav>
 
   <AnnonceHero view={view}>
     <Fragment slot="left-below">
       {view.description && (
         <section class="annonce-desc-block">
           <h2>Description</h2>
-          <div class="annonce-desc" set:html={view.description.replace(/\n/g, '<br/>')}></div>
+          <div class="annonce-desc" set:html={
+            view.description
+              .replace(/(<br\s*\/?>)\s*/gi, '</p><p>')
+              .replace(/\n/g, '</p><p>')
+              .replace(/^/, '<p>').replace(/$/, '</p>')
+              .replace(/<p>\s*<\/p>/g, '')
+          }></div>
         </section>
       )}
 
@@ -109,7 +120,8 @@ const hasFinanceDetails =
             {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
-            {hasEtage && <><dt>Étage</dt><dd>{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</dd></>}
+            {hasEtage && <><dt>Étage</dt><dd>{view.etage}</dd></>}
+            {hasNbEtages && <><dt>Nombre d'étage</dt><dd>{view.nbEtages}</dd></>}
             {hasMeuble && <><dt>Meublé</dt><dd>{view.meuble ? 'Oui' : 'Non'}</dd></>}
             {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}
             {view.typeChauffage && <><dt>Chauffage</dt><dd>{view.typeChauffage}</dd></>}
@@ -128,6 +140,7 @@ const hasFinanceDetails =
             {view.type === 'L' && hasEtatDesLieux && <><dt>Honoraires état des lieux</dt><dd>{etatDesLieuxFmt} €</dd></>}
             {view.type === 'L' && view.depotGarantie && <><dt>Dépôt de garantie</dt><dd>{view.depotGarantie} €</dd></>}
             {view.type === 'V' && view.prix && <><dt>Prix</dt><dd>{new Intl.NumberFormat('fr-FR').format(view.prix)} €</dd></>}
+            {view.type === 'V' && view.charges && <><dt>Charges</dt><dd>{view.charges} €/mois</dd></>}
             {view.type === 'V' && hasHonoraires && <><dt>Honoraires d'agence (TTC)</dt><dd>{honorairesFmt} €</dd></>}
             {view.type === 'V' && view.honorairesChargeAcquereur && <><dt>Honoraires</dt><dd>À la charge de l'acquéreur</dd></>}
           </dl>
@@ -144,7 +157,7 @@ const hasFinanceDetails =
     />
 
     <Fragment slot="action-below">
-      {expert && <ExpertCard expert={expert} />}
+      {expert && <ExpertCard expert={expert} showPhone={isSale} />}
       <AnnonceMap
         variant="sidebar"
         adresse={view.adresse}

@@ -4,7 +4,7 @@ slug: "marseille-propre"
 date: "2018-05-22"
 excerpt: "J’adore ma ville. J’y ai créé des entreprises et y vis avec ma famille. Je n’ai jamais imaginé vivre ailleurs. Je lis tous les livres qui sont publiés et qui..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["marseille","propreté","saleté"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/la-propret%C3%A9-a-marseille.jpg"
 seoTitle: "Marseille propre…"
 seoDescription: "J’adore ma ville. J’y ai créé des entreprises et y vis avec ma famille. Je n’ai jamais imaginé vivre ailleurs. Je lis tous les livres qui sont publiés et qui parlent de près ou de loin de Marseille. Je m’inscris dans tous les groupes Facebook ou Twitter qui en parlent…"

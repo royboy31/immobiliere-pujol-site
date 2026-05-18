@@ -1,0 +1,72 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page introuvable – Immobilière Pujol"
+  description="La page que vous recherchez n'existe pas ou a été déplacée."
+  noindex={true}
+  breadcrumb={false}
+>
+  <section class="error-404">
+    <h1>Page introuvable</h1>
+    <p>Désolé, la page que vous recherchez n'existe pas ou a été déplacée.</p>
+
+    <nav class="error-404__links">
+      <h2>Voici quelques liens utiles :</h2>
+      <ul>
+        <li><a href="/">Accueil</a></li>
+        <li><a href="/annonces/">Nos annonces</a></li>
+        <li><a href="/annonces/locations/">Locations</a></li>
+        <li><a href="/annonces/ventes/">Ventes</a></li>
+        <li><a href="/blog-immobilier-marseille/">Le blog</a></li>
+        <li><a href="/contact-immobiliere-pujol/">Contact</a></li>
+      </ul>
+    </nav>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-404 {
+    max-width: 640px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+  .error-404 h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #B2C54F;
+  }
+  .error-404 p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #adb5bd;
+  }
+  .error-404__links {
+    text-align: left;
+    background: #f5f5f4;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+  }
+  .error-404__links h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .error-404__links ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .error-404__links a {
+    color: #B2C54F;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .error-404__links a:hover {
+    text-decoration: underline;
+  }
+</style>

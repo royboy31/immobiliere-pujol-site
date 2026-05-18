@@ -4,7 +4,7 @@ slug: "evolution-des-loyers-dans-le-13011-a-marseille-entre-2014-et-2018"
 date: "2019-06-12"
 excerpt: "Voici une étude sur l’évolution des loyers dans le 13011 à Marseille entre 2014 et 2018. Le 11ème arrondissement est divisé en 11 quartiers : Eoures, La..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["11e arrondissement","13011","marseille","prix au m2","prix des loyers a Marseille"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/06/13011.jpeg"
 seoTitle: "Évolution des loyers dans le 13011 à Marseille entre 2014 et 2018"
 seoDescription: "Voici une étude sur l'évolution des loyers dans le 13011 à Marseille entre 2014 et 2018. Le 11ème arrondissement est divisé en 11 quartiers : Eoures, La Barasse, La Millière, La Pomme, La Treille, La Valbarelle, La Valentine, Les Accates, Les Camoins, St Marcel et St Menet. Situé à l’est de la ville,…"

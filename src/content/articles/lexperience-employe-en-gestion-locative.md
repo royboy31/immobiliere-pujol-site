@@ -4,7 +4,7 @@ slug: "lexperience-employe-en-gestion-locative"
 date: "2020-01-14"
 excerpt: "Les attentes en gestion locative sont différentes qu’en syndic. Un gestionnaire locatif doit être passionné pour la gestion de patrimoine immobilier et avoir..."
 categories: ["Le marché immobilier à marseille"]
-tags: []
+tags: ["gestion locative"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/05/P-4788-050117-1200x800.jpg"
 seoTitle: "Le métier de gestionnaire locatif"
 seoDescription: "Un métier passionnant où il est question de service, de relation client et d'organisation"

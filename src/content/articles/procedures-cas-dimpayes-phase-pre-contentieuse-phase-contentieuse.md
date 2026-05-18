@@ -4,7 +4,7 @@ slug: "procedures-cas-dimpayes-phase-pre-contentieuse-phase-contentieuse"
 date: "2017-02-18"
 excerpt: "La phase pré contentieuse La phase pré contentieuse est la phase au cours de laquelle nous allons relancer amiablement le locataire pour l’emmener à régler...."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["gestion locative","impayés","loyers impayés","marché immobilier","mettre son appartement en location"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/PU-0677-1200x750.jpg"
 seoTitle: "Procédures en cas d’impayés : la phase pré contentieuse & la phase contentieuse"
 seoDescription: "La phase pré contentieuse La phase pré contentieuse est la phase au cours de laquelle nous allons relancer amiablement le locataire pour l’emmener à régler. Nous procédons le plus souvent selon au schéma suivant : Le 15 du mois, relance simple (et/ou RAR) par courrier / ou par mail, rappelant au…"

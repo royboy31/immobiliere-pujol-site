@@ -31,8 +31,26 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   if (typeBien) {
-    conditions.push('type_bien = ?');
-    bindings.push(typeBien);
+    // Map user-facing category to D1 type_bien patterns
+    // D1 stores values like "T3", "Studio", "Maison", "Parking couvert", etc.
+    const typePatterns: Record<string, string[]> = {
+      'Appartement': ['T1','T2','T3','T4','T5','T6','T7','T8','T9','F1','F2','F3','F4','F5','Studio','Duplex%','Triplex%','Loft','Appartement%'],
+      'Maison': ['Maison%','Villa%','Propriété%'],
+      'Parking': ['Parking%','Garage%','Box%','Stationnement%'],
+      'Local commercial': ['Local%','Commerce%','Boutique%','Bureau%','Atelier%','Entrepôt%'],
+      'Bureau': ['Bureau%','Local d\'activité%'],
+      'Terrain': ['Terrain%'],
+      'Immeuble': ['Immeuble%'],
+    };
+    const patterns = typePatterns[typeBien];
+    if (patterns) {
+      const likeClauses = patterns.map(() => 'type_bien LIKE ?').join(' OR ');
+      conditions.push(`(${likeClauses})`);
+      bindings.push(...patterns);
+    } else {
+      conditions.push('type_bien = ?');
+      bindings.push(typeBien);
+    }
   }
 
   if (budget) {

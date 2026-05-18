@@ -1,13 +1,14 @@
 ---
-export const prerender = false;
+export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
-import { buildArrondissements, buildKindOptions } from '../../lib/annonces-filter';
+import { fetchActiveListings } from '../../lib/r2-annonces';
+import { buildArrondissements, buildKindOptions, filterPrice } from '../../lib/annonces-filter';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
+import DeferredCards from '../../components/annonces/DeferredCards.astro';
 
-const allAnnonces = await fetchUbiflowAnnonces();
-const annonces = allAnnonces.filter(a => a.type === 'L');
+const allAnnonces = await fetchActiveListings();
+const annonces = allAnnonces.filter(a => a.type === 'L').sort((a, b) => filterPrice(b) - filterPrice(a));
 const ventes = allAnnonces.filter(a => a.type === 'V');
 
 const kinds = buildKindOptions(annonces);
@@ -38,8 +39,8 @@ const arrondissements = buildArrondissements(annonces);
     <section class="annonces-grid-section">
       {annonces.length > 0 ? (
         <>
-          <div class="annonces-grid">
-            {annonces.map((a) => <AnnonceCard annonce={a} />)}
+          <div class="annonces-grid" id="annonces-grid">
+            {annonces.slice(0, 20).map((a) => <AnnonceCard annonce={a} />)}
           </div>
           <div class="annonces-empty annonces-empty--filter" hidden>
             <h2>Aucun bien <b>ne correspond</b></h2>
@@ -55,5 +56,6 @@ const arrondissements = buildArrondissements(annonces);
         </div>
       )}
     </section>
+    <DeferredCards scope="L" />
   </div>
 </BaseLayout>

@@ -4,7 +4,7 @@ slug: "les-avis-clients-des-locataires-de-limmobiliere-pujol"
 date: "2019-08-07"
 excerpt: "Opinion System est la plateforme dédiée aux avis clients des locataires de l’Immobilière Pujol. Cela leur permet d’échanger et d’évaluer les prestations de..."
 categories: ["Mon quartier, ma ville Marseille"]
-tags: []
+tags: ["appartement","avis client","locataires","location","marseille","studio","t1","t2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/08/avis-client-locataires-marseille.jpg"
 seoTitle: "Les avis clients des locataires de l’immobilière Pujol"
 seoDescription: "Nos locataires trouveront en Opinion System une plateforme dédiée où laisser un commentaire et évaluer nos prestations. Nous voulons être transparents envers le marché : cette plateforme est une façon certifiée de nous juger (institut indépendant certifié ISO 9001, 20252 et NF Z74-501)."

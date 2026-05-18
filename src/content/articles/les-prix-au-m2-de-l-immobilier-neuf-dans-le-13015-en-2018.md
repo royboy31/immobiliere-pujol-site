@@ -4,7 +4,7 @@ slug: "les-prix-au-m2-de-l-immobilier-neuf-dans-le-13015-en-2018"
 date: "2019-05-15"
 excerpt: "Voici une comparaison par type d’appartement et par quartier des prix au m2 de l’immobilier neuf dans le 13015 en 2018. La fourchette des transactions est..."
 categories: ["Prix au m2 par arrondissement à Marseille"]
-tags: []
+tags: ["13015","15e arrondissement","ancien","immobilier","immobilier ancien","marseille","prix","prix au m2"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13015-2.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13015 en 2018"
 seoDescription: "Voici une comparaison par type d'appartement et par quartier des prix au m2 de l'immobilier neuf dans le 13015 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 15eme…"

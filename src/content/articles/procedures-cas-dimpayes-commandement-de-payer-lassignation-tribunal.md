@@ -4,7 +4,7 @@ slug: "procedures-cas-dimpayes-commandement-de-payer-lassignation-tribunal"
 date: "2017-02-18"
 excerpt: "Concrètement nous demandons à un huissier de justice de délivrer un commandement de payer les loyers (le cas échéant de produire son attestation d’assurance..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
-tags: []
+tags: ["loyers impayés"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/20170212_212353-1200x799.jpg"
 seoTitle: "Procédures en cas d’impayés : le commandement de payer & l’assignation au tribunal"
 seoDescription: "Concrètement nous  demandons à un huissier de justice de délivrer un commandement de payer les loyers (le cas échéant de produire son attestation d’assurance habitation) qui va viser la clause résolutoire prévue dans le bail. Pour se faire, nous  lui communiquons le bail (et les éventuels renouvellements intervenus) et un…"

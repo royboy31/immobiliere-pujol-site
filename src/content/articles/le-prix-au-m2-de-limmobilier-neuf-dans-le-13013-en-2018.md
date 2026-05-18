@@ -4,7 +4,7 @@ slug: "le-prix-au-m2-de-limmobilier-neuf-dans-le-13013-en-2018"
 date: "2019-05-15"
 excerpt: "Voici une comparaison des prix au m2 de l’immobilier neuf dans le 13013 en 2018. La fourchette des transactions est établie par les notaires de France sur les..."
 categories: ["Prix au m2 par arrondissement à Marseille", "L'immobilier neuf à marseille"]
-tags: []
+tags: ["13013","13e arrondissement","ancien","immobilier","marseille","prix"]
 featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2019/05/13013-1.jpeg"
 seoTitle: "Les prix au m2 de l’immobilier neuf dans le 13013 en 2018"
 seoDescription: "Voici une comparaison des prix au m2 de l'immobilier neuf dans le 13013 en 2018. La fourchette des transactions est établie par les notaires de France sur les transactions réalisées sur la base des prix médians. En 2018, il s’est vendu dans le 13eme arrondissement de Marseille:133 appartements au prix…"
