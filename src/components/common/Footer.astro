@@ -29,7 +29,7 @@ const contact = {
   address: '7 rue du Docteur Fiolle, 13006 Marseille',
   mapHref: 'https://maps.google.com/?q=Immobili%C3%A8re+Pujol+7+rue+du+Docteur+Fiolle+13006+Marseille',
   contactHref: '/contact-immobiliere-pujol/',
-  hours: 'Lun – Ven : 9h – 12h / 14h – 18h',
+  hours: ['Lun – Jeu : 9h – 12h / 14h – 18h', 'Ven : 9h – 12h / 14h – 17h'],
 };
 
 const legal = [
@@ -122,7 +122,11 @@ const year = new Date().getFullYear();
               <path d="M12 7 V12 L15 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             </svg>
           </span>
-          <span>{contact.hours}</span>
+          <span>
+            {contact.hours.map((line, i) => (
+              <>{i > 0 && <br />}{line}</>
+            ))}
+          </span>
         </li>
       </ul>
       <a class="contact-cta" href={contact.contactHref}>
