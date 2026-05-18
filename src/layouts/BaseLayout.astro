@@ -1,5 +1,6 @@
 ---
 import Header from '../components/common/Header.astro';
+import SearchOverlay from '../components/common/SearchOverlay.astro';
 import Footer from '../components/common/Footer.astro';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
 import { buildRealEstateAgent, autoBreadcrumb } from '../lib/schemas';
@@ -120,6 +121,7 @@ for (const s of pageSchemas) {
     )}
 
     <Header />
+    <SearchOverlay />
     {breadcrumb && (
       <Breadcrumbs pageTitle={title.split('–')[0].trim()} pathname={Astro.url.pathname} />
     )}
