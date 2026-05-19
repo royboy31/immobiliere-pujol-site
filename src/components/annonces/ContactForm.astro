@@ -14,6 +14,8 @@ const isLocation = type === 'L';
       data-contact-email={contactEmail || ''}
       data-contact-ref={reference}
       data-contact-title={titre}>
+  <input type="hidden" name="reference" value={reference} />
+  <input type="hidden" name="title" value={titre} />
   <h3 class="annonce-contact__title">Laissez-nous vos <b>coordonnées</b></h3>
   <p class="annonce-contact__sub">
     Pour organiser une visite ou recevoir plus d'informations sur cette annonce.
@@ -52,32 +54,38 @@ const isLocation = type === 'L';
 </form>
 
 <script>
-  // For now the form opens the user's email client with the message pre-filled.
-  // Swap to a real /api/contact-annonce endpoint once the worker route exists.
   document.querySelectorAll<HTMLFormElement>('[data-annonce-contact-form]').forEach((form) => {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
 
-      const fd = new FormData(form);
-      const to = (form.dataset.contactEmail || '').trim();
-      const ref = form.dataset.contactRef || '';
-      const title = form.dataset.contactTitle || '';
-      const subject = `Demande de contact – Annonce ${ref}`;
-      const body = [
-        `Annonce : ${title} (${ref})`,
-        '',
-        `Nom : ${fd.get('name') || ''}`,
-        `Email : ${fd.get('email') || ''}`,
-        `Téléphone : ${fd.get('phone') || ''}`,
-        '',
-        'Message :',
-        String(fd.get('message') || ''),
-      ].join('\n');
+      const btn = form.querySelector<HTMLButtonElement>('.annonce-contact__submit');
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
 
-      const params = new URLSearchParams({ subject, body });
-      const target = to || 'contact@immobiliere-pujol.fr';
-      window.location.href = `mailto:${target}?${params.toString()}`;
+      try {
+        const res = await fetch('https://pujol-email.kamindudushmantha.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
+        const data = await res.json();
+        if (data.ok) {
+          form.innerHTML = '<div class="annonce-contact__success" style="text-align:center;padding:24px"><h3>Merci !</h3><p>Votre demande a bien été envoyée. Nous vous recontacterons rapidement.</p></div>';
+        } else {
+          showErr(form, data.error || "Une erreur est survenue.");
+          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+        }
+      } catch {
+        showErr(form, "Erreur de connexion. Veuillez réessayer.");
+        if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+      }
     });
   });
+
+  function showErr(form: HTMLFormElement, msg: string) {
+    let el = form.querySelector('.annonce-contact__error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'annonce-contact__error';
+      (el as HTMLElement).style.cssText = 'color:#c0392b;font-weight:600;margin-top:8px;text-align:center';
+      form.querySelector('.annonce-contact__submit')?.insertAdjacentElement('beforebegin', el);
+    }
+    el.textContent = msg;
+  }
 </script>

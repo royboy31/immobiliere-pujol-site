@@ -880,9 +880,10 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
       <form
         class="svc-form"
         method="post"
-        action={`${pagePath}#gf_4`}
+        action="https://pujol-email.kamindudushmantha.workers.dev/contact"
         enctype="multipart/form-data"
         novalidate
+        data-ajax-form
       >
         <h2>Prenez contact <b>avec nous</b></h2>
         <p class="svc-form__lead">Remplissez ce formulaire et nous prendrons contact avec vous dans les 24 heures</p>
@@ -948,4 +949,38 @@ const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic',
     </section>
 
   </div>
+
+  <script>
+    document.querySelectorAll<HTMLFormElement>('[data-ajax-form]').forEach((form) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        const btn = form.querySelector<HTMLButtonElement>('.svc-form__submit');
+        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+          const data = await res.json();
+          if (data.ok) {
+            form.innerHTML = '<div class="svc-form__success"><h2>Merci !</h2><p>Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.</p></div>';
+          } else {
+            showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");
+            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+          }
+        } catch {
+          showError(form, "Erreur de connexion. Veuillez réessayer.");
+          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+        }
+      });
+    });
+    function showError(form: HTMLFormElement, msg: string) {
+      let el = form.querySelector('.svc-form__error');
+      if (!el) {
+        el = document.createElement('p');
+        el.className = 'svc-form__error';
+        (el as HTMLElement).style.cssText = 'color:#c0392b;font-weight:600;margin-top:12px';
+        form.querySelector('.svc-form__submit')?.insertAdjacentElement('beforebegin', el);
+      }
+      el.textContent = msg;
+    }
+  </script>
 </BaseLayout>
