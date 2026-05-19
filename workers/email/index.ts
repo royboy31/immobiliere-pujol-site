@@ -8,6 +8,7 @@ interface Env {
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
 const RECIPIENT = 'kamindudushmantha@gmail.com';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyrEh_gNbjxEMs2O5D6QT5iyGEYF_yoBWzmtZM1i7SDm8YhbPY87vC6IzCYc2tJ1zHm/exec';
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -75,6 +76,22 @@ async function sendEmail(
   }
 }
 
+function now(): string {
+  return new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+}
+
+async function logToSheet(tab: string, row: string[]): Promise<void> {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ tab, row }),
+      redirect: 'follow',
+    });
+  } catch {
+    // Fire-and-forget — don't block the response if Sheets is down
+  }
+}
+
 function buildTable(subject: string, rows: [string, string][]): string {
   const trs = rows
     .filter(([, v]) => v)
@@ -96,6 +113,7 @@ function buildTable(subject: string, rows: [string, string][]): string {
 
 interface FormDef {
   subject: string;
+  tab: string; // Google Sheet tab name
   fields: [string, string][]; // [label, formDataKey]
   honeypot: string;
   emailField: string;
@@ -105,6 +123,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Main contact + Agency + Dynamic service pages
   '4': {
     subject: 'Contact — Immobilière Pujol',
+    tab: 'Contact',
     fields: [
       ['Prénom', 'input_6.3'],
       ['Nom', 'input_6.6'],
@@ -119,6 +138,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Emergency
   '12': {
     subject: '🚨 URGENCE — Immobilière Pujol',
+    tab: 'Urgence',
     fields: [
       ['Profil', 'input_4'],
       ['Prénom', 'input_1.3'],
@@ -137,6 +157,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Vendre
   '9': {
     subject: 'Estimation Vente — Immobilière Pujol',
+    tab: 'Vente',
     fields: [
       ['Prénom', 'input_1.3'],
       ['Nom', 'input_1.6'],
@@ -150,6 +171,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Gestion Locative
   '1': {
     subject: 'Gestion Locative — Immobilière Pujol',
+    tab: 'Gestion Locative',
     fields: [
       ['Prénom', 'input_2.3'],
       ['Nom', 'input_2.6'],
@@ -163,6 +185,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Mettre en Location
   '8': {
     subject: 'Mise en Location — Immobilière Pujol',
+    tab: 'Mise en Location',
     fields: [
       ['Prénom', 'input_1.3'],
       ['Nom', 'input_1.6'],
@@ -176,6 +199,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // Syndic
   '6': {
     subject: 'Syndic — Immobilière Pujol',
+    tab: 'Syndic',
     fields: [
       ['Prénom', 'input_1.3'],
       ['Nom', 'input_1.6'],
@@ -208,11 +232,17 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
   if (filledCount < 2) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
   const replyTo = ((fd.get(def.emailField) as string) || '').trim();
-  return sendEmail(env, {
+  const emailResult = await sendEmail(env, {
     subject: def.subject,
     html: buildTable(def.subject, rows),
     replyTo: replyTo || undefined,
   });
+
+  // Log to Google Sheet (fire-and-forget)
+  const sheetRow = [now(), ...rows.map(([, v]) => v)];
+  logToSheet(def.tab, sheetRow);
+
+  return emailResult;
 }
 
 async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
@@ -226,7 +256,7 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
   if (!name || !email) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
   const subject = `Demande Annonce ${reference || 'N/A'} — Immobilière Pujol`;
-  return sendEmail(env, {
+  const emailResult = await sendEmail(env, {
     subject,
     html: buildTable(subject, [
       ['Annonce', `${title} (${reference})`],
@@ -237,6 +267,10 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
     ]),
     replyTo: email,
   });
+
+  logToSheet('Annonces', [now(), reference, title, name, email, phone, message]);
+
+  return emailResult;
 }
 
 async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
@@ -252,7 +286,11 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
       <p style="color:#888;font-size:12px;margin-top:24px">Envoyé depuis le site immobiliere-pujol.com</p>
     </div>`;
 
-  return sendEmail(env, { subject, html });
+  const emailResult = await sendEmail(env, { subject, html });
+
+  logToSheet('Newsletter', [now(), email]);
+
+  return emailResult;
 }
 
 // ── Worker entry point ──────────────────────────────────────────────────────
