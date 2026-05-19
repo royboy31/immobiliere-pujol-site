@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans l'ancien en 2015 dans le 13009 Marseille"
-slug: "prix-m2-lancien-2015-13009-marseille"
+slug: "prix-m²-lancien-2015-13009-marseille"
 date: "2015-11-02"
 excerpt: "♦ Les prix au m² médians de l'immobilier ancien dans le 13009 (source  notaires)  * Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes. •…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13009", "Arrondissements Marseille", "Arrondissement 13009 Marseille"]

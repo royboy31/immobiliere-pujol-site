@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans l'ancien dans le 13012 Marseille en 2015"
-slug: "prix-m2-lancien-13012-marseille-2015"
+slug: "prix-m²-lancien-13012-marseille-2015"
 date: "2015-11-03"
 excerpt: "2015-Les prix au m² dans l'ancien dans le 13012 arrondissement Les prix des loyers dans le 13012 (sources Clameur)   13012 Studio 15,72 T2 14,05 T3 11,32 T4 10,77   12,97   Les prix au m² de l'ancien vendus en 2015 dans le 13012  (source notaires)  En 2015, ce sont…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13012", "Arrondissements Marseille", "Arrondissement 13012 Marseille"]

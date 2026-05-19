@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² des ventes en 2022 dans le 13001 à Marseille"
-slug: "les-prix-au-m2-des-ventes-en-2022-dans-le-13001-a-marseille"
+slug: "les-prix-au-m²-des-ventes-en-2022-dans-le-13001-a-marseille"
 date: "2023-05-05"
 excerpt: "Vous souhaitez vendre ou acheter dans le 13001 à Marseille? Cet article vous donne les  prix de vente au m² par quartier (biens vendus source notaire)"
 categories: ["Prix au m2 par arrondissement à Marseille", "Le marché immobilier à marseille"]

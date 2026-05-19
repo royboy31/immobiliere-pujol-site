@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans l'ancien en 2015 dans le 13007 Marseille"
-slug: "prix-m2-lancien-2015-13007-marseille"
+slug: "prix-m²-lancien-2015-13007-marseille"
 date: "2015-11-01"
 excerpt: "es prix moyens des loyers dans le 7eme arrondissement  (en €/m2 source clameur)   Prix moyen au m² Studio/T1   T2   T3   T4+         ♦ Les prix de vente dans l’ancien le 13007 (source Notaires)   • Les prix de l'immobilier ancien vendu en 2015 par…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13007", "Arrondissements Marseille", "Arrondissement 13007 Marseille"]

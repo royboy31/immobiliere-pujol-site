@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans le neuf dans le 13010 Marseille"
-slug: "les-prix-au-m2-dans-le-neuf-dans-le-13010-marseille"
+slug: "les-prix-au-m²-dans-le-neuf-dans-le-13010-marseille"
 date: "2015-09-18"
 excerpt: "Les prix médians au m² des appartements neufs en 2014  61 appartements neufs vendus au prix médian de 3913€/m² en hausse de 25% par rapport à 2013 dû auw ventes majoritaires de studios à la Timone qui font monter les prix médian globaux. En effet, 50% des ventes ont été…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13010", "Arrondissements Marseille", "Arrondissement 13010 Marseille"]

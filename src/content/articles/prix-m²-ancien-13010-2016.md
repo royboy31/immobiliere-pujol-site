@@ -1,6 +1,6 @@
 ---
 title: "Les prix de l'immobilier ancien dans le 13010 en 2016"
-slug: "prix-m2-ancien-13010-2016"
+slug: "prix-m²-ancien-13010-2016"
 date: "2016-03-10"
 excerpt: "En 2016, 253 appartements anciens se sont vendus dans le 10e arrondissement de Marseille pour un prix médian* (source notaires) de 2030€ le m². Le 10e est un arrondissement dont les prix sont encore en baisse cette année par rapport à l'année précédente. En 2016, il s'est vendu dans les…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13010", "Arrondissements Marseille", "Arrondissement 13010 Marseille"]

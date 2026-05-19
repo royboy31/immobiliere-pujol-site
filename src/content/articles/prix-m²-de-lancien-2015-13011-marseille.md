@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² de l'ancien en 2015 dans le 13011 Marseille"
-slug: "prix-m2-de-lancien-2015-13011-marseille"
+slug: "prix-m²-de-lancien-2015-13011-marseille"
 date: "2015-10-05"
 excerpt: "Les prix des loyers dans le 11ème arrondissement (13011) Les loyers dans cet arrondissement se portés élevés  en 2014 en moyenne à 12,2€ /m², légèrement en baisse par rapport à 2013.  en €/m² 13011 Studio/ T1 13,74 T2 12,57 T3 10,1 Moyenne 12,14   Les prix au m² de l'ancien en…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13011", "Arrondissements Marseille", "Arrondissement 13011 Marseille"]

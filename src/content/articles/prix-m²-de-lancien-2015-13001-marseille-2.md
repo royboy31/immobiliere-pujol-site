@@ -1,6 +1,6 @@
 ---
 title: "Prix au m² de l'ancien en 2015 dans le 13001 Marseille"
-slug: "prix-m2-de-lancien-2015-13001-marseille-2"
+slug: "prix-m²-de-lancien-2015-13001-marseille-2"
 date: "2015-11-01"
 excerpt: "♦ Les prix des loyers dans le 1er arrondissement  en 2015 (Source clameur)    studio/T1  T2  T3   T4 Prix  des loyer moyen en €/m2         [maxbutton id=\"7\"]    ♦ Les prix au m² des appartements anciens dans le 1er arrondissement de Marseille (source des Notaires)  La fourchette des transactions…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13001", "Arrondissements Marseille", "Arrondissement 13001 Marseille"]

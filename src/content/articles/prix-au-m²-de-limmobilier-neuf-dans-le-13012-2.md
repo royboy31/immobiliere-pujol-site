@@ -1,6 +1,6 @@
 ---
 title: "Prix au m² de l'immobilier neuf dans le 13012"
-slug: "prix-au-m2-de-limmobilier-neuf-dans-le-13012-2"
+slug: "prix-au-m²-de-limmobilier-neuf-dans-le-13012-2"
 date: "2015-10-04"
 excerpt: "Prix de vente des appartements neufs vendus en 2014 dans le 13012  (source notaires) 39 appartements au prix médian de 3981€/m².   Studio T1 T2 T3 T4 Ensemble % ventes 8% 31% 40% 17% 35 Prix médian €/m²   4370 3911 4114 3981 Prix médian   190 000€ 245 500E 362…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13012", "Arrondissements Marseille", "Arrondissement 13012 Marseille"]

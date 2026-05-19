@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² des ventes mi 2023 dans le 13012"
-slug: "les-prix-au-m2-13012-marseille"
+slug: "les-prix-au-m²-13012-marseille"
 date: "2023-09-19"
 excerpt: "Vous souhaitez vendre ou acheter dans le 13012 à Marseille? Cet article vous donne les derniers  prix de vente au m²  en mai 2023 et leur évolution"
 categories: ["Prix au m2 par arrondissement à Marseille", "Le marché immobilier à marseille"]

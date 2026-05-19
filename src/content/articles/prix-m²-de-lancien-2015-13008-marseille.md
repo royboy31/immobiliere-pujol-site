@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² de l'ancien en 2015 dans le 13008 Marseille"
-slug: "prix-m2-de-lancien-2015-13008-marseille"
+slug: "prix-m²-de-lancien-2015-13008-marseille"
 date: "2015-11-04"
 excerpt: "Prix médians des appartements anciens vendus en 2015 dans le 13008 En 2015, le prix médian* dans le 8e arrondissement de Marseille s'est élevé à  2270€ le m² pour des appartements médian à 210 000€ pour 70m². C'est dans le quartier de Périer que les prix ont été les plus élevés…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13008", "Arrondissements Marseille", "Arrondissement 13015 Marseille"]

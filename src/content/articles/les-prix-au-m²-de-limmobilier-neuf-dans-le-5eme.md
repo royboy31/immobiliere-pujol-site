@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² de l’immobilier neuf dans le 5ème"
-slug: "les-prix-au-m2-de-limmobilier-neuf-dans-le-5eme"
+slug: "les-prix-au-m²-de-limmobilier-neuf-dans-le-5eme"
 date: "2016-03-30"
 excerpt: "2015- Les prix au m² de l’immobilier neuf  dans le 5ème arrondissement de Marseille (source Notaires)    studios 2 pièces 3 pièces 4 pièces 5 pièces et plus ventes 20,3 60,8 16,2 2,7   prix au m² 4210 3680 3690   prix médian 110 000 145000 235000   surface habitable…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13005"]

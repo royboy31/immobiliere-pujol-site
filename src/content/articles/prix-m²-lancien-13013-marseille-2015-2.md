@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans l'ancien dans le 13013 Marseille en 2015"
-slug: "prix-m2-lancien-13013-marseille-2015-2"
+slug: "prix-m²-lancien-13013-marseille-2015-2"
 date: "2015-11-05"
 excerpt: "Les prix au m² de l'ancien dans le 13013 en 2015  ( source notaires) En 2015, ce sont  : • 252 appartements ancien , qui se sont vendus dans le 13e arrondissement de Marseille au prix médian* de 2060€/m² en baisse de 0,7% par rapport à 2014. • 175 appartements…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13013", "Arrondissements Marseille", "Arrondissement 13013 Marseille"]

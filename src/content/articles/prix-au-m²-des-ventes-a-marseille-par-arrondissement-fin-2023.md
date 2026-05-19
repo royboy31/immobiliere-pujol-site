@@ -1,6 +1,6 @@
 ---
 title: "Prix au m² des ventes à Marseille par arrondissement  - Fin 2023"
-slug: "prix-au-m2-des-ventes-a-marseille-par-arrondissement-fin-2023"
+slug: "prix-au-m²-des-ventes-a-marseille-par-arrondissement-fin-2023"
 date: "2023-12-14"
 excerpt: "Voici la carte des prix médian constatés ces trois derniers mois à Marseille. Pour affiner cette estimation au quartier et au type de logement, n'hésitez pas à contacter l'équipe commerciale de l'Immobiliere Pujol"
 categories: ["Prix au m2 par arrondissement à Marseille"]

@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² de l'ancien en 2015 dans le 13003 Marseille"
-slug: "prix-m2-de-lancien-2015-13003-marseille"
+slug: "prix-m²-de-lancien-2015-13003-marseille"
 date: "2015-11-01"
 excerpt: "Les prix des loyers dans le 13003 en 2015  (source clameur)   Prix au m² des loyers Studio/T1   T2   T3   T4 +     Prix des appartements anciens vendus en 2015 dans le 13003 La fourchette des transactions est établie par les notaires de France sur les…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13003", "Arrondissements Marseille", "Arrondissement 13015 Marseille"]

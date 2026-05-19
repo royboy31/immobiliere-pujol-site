@@ -1,6 +1,6 @@
 ---
 title: "Les prix de l'immobilier ancien dans le 13001 en 2016"
-slug: "prix-m2-ancien-13001-marseille-2016"
+slug: "prix-m²-ancien-13001-marseille-2016"
 date: "2016-03-10"
 excerpt: "Les prix médians* sont établis par les notaires de France sur les transactions réalisées. En 2016, ce sont 250 appartements anciens qui ont été vendu au prix médian de 2080€/m² , un prix en hausse de 4,5% par rapport à 2015. C'est dans le quartier de Noailles que les prix…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13001", "Arrondissements Marseille", "Arrondissement 13001 Marseille"]

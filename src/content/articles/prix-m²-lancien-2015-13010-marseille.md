@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² dans l'ancien en 2015 dans le 13010 Marseille"
-slug: "prix-m2-lancien-2015-13010-marseille"
+slug: "prix-m²-lancien-2015-13010-marseille"
 date: "2015-11-02"
 excerpt: "♦ Les prix moyens des loyers dans le 10eme arrondissement  (en €/m² source clameur) Le prix des loyers dans le 13010 s’est élevé  en 2014 en moyenne à 12,08€ le m², prix restés stables par rapport à 2013.   13010 Studio/T1  14,62 T2  12,75 T3  10,50 T4   10,45 Total 12,08…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13010", "Arrondissements Marseille", "Arrondissement 13010 Marseille"]

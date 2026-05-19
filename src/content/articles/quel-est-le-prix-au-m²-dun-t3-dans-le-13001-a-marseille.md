@@ -1,6 +1,6 @@
 ---
 title: "Quel est le prix au m² d'un T3 dans le 13001 à Marseille en 2022"
-slug: "quel-est-le-prix-au-m2-dun-t3-dans-le-13001-a-marseille"
+slug: "quel-est-le-prix-au-m²-dun-t3-dans-le-13001-a-marseille"
 date: "2022-12-14"
 excerpt: "Quel est le prix médian d'un T3 dans le 1er arrondissement de Marseille. Cette vidéo sur les prix de l'immobilier à Marseille vous dit tout"
 categories: ["Prix au m2 par arrondissement à Marseille", "Le marché immobilier à marseille"]

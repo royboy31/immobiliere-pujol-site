@@ -1,6 +1,6 @@
 ---
 title: "Prix au m² de l'ancien en 2015 dans le 13002 Marseille"
-slug: "prix-m2-de-lancien-2015-13002-marseille-2"
+slug: "prix-m²-de-lancien-2015-13002-marseille-2"
 date: "2015-11-01"
 excerpt: "Prix au m² des loyers dans le 13002 (source Clameur) Studio/T1 T2 T3 T4 Prix au m²   Prix au m² des appartements anciens vendus dans le 2e arrondissement (source notaire) Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13002", "Arrondissements Marseille", "Arrondissement 13002 Marseille"]

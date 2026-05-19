@@ -1,6 +1,6 @@
 ---
 title: "Prix au m² de l'ancien en 2015 dans le 13004 Marseille"
-slug: "prix-m2-de-lancien-2015-13004-marseille-2"
+slug: "prix-m²-de-lancien-2015-13004-marseille-2"
 date: "2015-11-01"
 excerpt: "Les prix de l'immobilier ancien vendu en 2015 dans les différents quartiers du 13004 (source notaire) La fourchette des transactions est établie par les notaires de France sur les transactions réalisées dans l'ancien.Elle est donnée en prix médian.* * Le prix médian : la moitié des transactions ont été signées à un prix…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13004", "Arrondissements Marseille", "Arrondissement 13004 Marseille"]

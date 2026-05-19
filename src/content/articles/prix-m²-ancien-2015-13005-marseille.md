@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² de l'ancien en 2015 dans le 13005 Marseille"
-slug: "prix-m2-ancien-2015-13005-marseille"
+slug: "prix-m²-ancien-2015-13005-marseille"
 date: "2015-11-01"
 excerpt: "Les prix moyens des loyers dans le 5eme arrondissement  (en €/m² source clameur)     Prix au m² Studio/T1   T2   T3   T4+       ♦ Les prix de vente dans l’ancien le 13005 (source des Notaires)   Les prix médian de l'immobilier ancien dans le 5ème par quartier…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13005", "Arrondissements Marseille", "Arrondissement 13005 Marseille"]

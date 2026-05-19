@@ -1,6 +1,6 @@
 ---
 title: "Les prix au m² des ventes en 2022 dans le 13006 à Marseille"
-slug: "les-prix-au-m2-des-ventes-en-2022-dans-le-13006-a-marseille"
+slug: "les-prix-au-m²-des-ventes-en-2022-dans-le-13006-a-marseille"
 date: "2023-05-11"
 excerpt: "Vous souhaitez vendre ou acheter dans le 13006 à Marseille? Cet article vous donne les derniers  prix de vente au m² par quartier dans tout le 13006 (biens anciens vendus en 2022 source notaire) Le 6eme arrondissement de Marseille est un arrondissement central situé à proximité du centre ville et du Port mais également du secteur des plages.  Il faut partie des secteurs les plus prisés et aisés de Marseille avec les 7e et 8e arrondissement dont il est limitrophe.  Le 6e arrondissement de…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Le marché immobilier à marseille"]

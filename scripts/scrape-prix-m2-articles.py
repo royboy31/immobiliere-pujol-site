@@ -7,7 +7,8 @@ choked on URL-encoding, so they were never imported. They contain 47-62 kB of
 real content each and are part of the SEO pillar François Lamotte built around
 the "prix par arrondissement" category.
 
-Output: one .md per article in src/content/articles/ with ASCII-slug (m2 not m²).
+Output: one .md per article in src/content/articles/ keeping the original
+² character in the slug so backlinks pointing to the live URL keep resolving.
 """
 
 import html
@@ -66,10 +67,11 @@ def encode_url(path):
     return urllib.parse.quote(path, safe="/")
 
 
-def slugify_ascii(path):
-    """Strip leading/trailing slashes and convert ² → 2."""
-    slug = path.strip("/").replace("²", "2")
-    return slug
+def slug_from_path(path):
+    """Strip leading/trailing slashes. We keep the original ² character so the
+    generated URL on staging matches the live URL byte-for-byte and external
+    backlinks pointing to /…m²…/ continue to resolve without redirects."""
+    return path.strip("/")
 
 
 def extract_ld_json(page_html):
@@ -216,7 +218,7 @@ def scrape_one(path, dry_run=False):
     cats, tags = extract_categories_and_tags(page)
     body = extract_post_content(page)
 
-    slug = slugify_ascii(path)
+    slug = slug_from_path(path)
     meta = {
         "title": title,
         "slug": slug,
