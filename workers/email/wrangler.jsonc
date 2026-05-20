@@ -1,0 +1,11 @@
+{
+	"name": "pujol-email",
+	"account_id": "d6d3df04acc98efe34f43e42636a3dfc",
+	"compatibility_date": "2026-04-02",
+	"main": "index.ts",
+	"vars": {
+		"ALLOWED_ORIGIN": "https://immobiliere-pujol-staging.roy-68a.workers.dev"
+	}
+	// MANDRILL_API_KEY must be set as a secret:
+	// wrangler secret put MANDRILL_API_KEY --config workers/email/wrangler.jsonc
+}
