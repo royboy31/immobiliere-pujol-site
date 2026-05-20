@@ -1,0 +1,23 @@
+name: Daily Sync Verification
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # Every day at 07:00 UTC (09:00 Paris)
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run sync verification
+        run: node scripts/sync-verify.mjs
+        env:
+          OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
+          MANDRILL_API_KEY: ${{ secrets.MANDRILL_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

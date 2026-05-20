@@ -97,16 +97,118 @@ function buildTable(subject: string, rows: [string, string][]): string {
     .filter(([, v]) => v)
     .map(
       ([label, value]) =>
-        `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;white-space:nowrap;border-bottom:1px solid #eee">${esc(label)}</td><td style="padding:8px 12px;border-bottom:1px solid #eee">${esc(value).replace(/\n/g, '<br>')}</td></tr>`
+        `<tr>
+          <td style="padding:12px 16px;font-weight:600;color:#55666f;vertical-align:top;white-space:nowrap;width:140px;font-size:14px">${esc(label)}</td>
+          <td style="padding:12px 16px;color:#3a3a3a;font-size:14px;line-height:1.5">${esc(value).replace(/\n/g, '<br>')}</td>
+        </tr>`
     )
     .join('');
 
   return `
-    <div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#0f1a2b;border-bottom:3px solid #b2c04e;padding-bottom:12px">${esc(subject)}</h2>
-      <table style="width:100%;border-collapse:collapse;margin:16px 0">${trs}</table>
-      <p style="color:#888;font-size:12px;margin-top:24px">Envoyé depuis le site immobiliere-pujol.com</p>
-    </div>`;
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#eef3ef;padding:32px 16px">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+
+        <!-- Header -->
+        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="https://immobiliere-pujol-staging.roy-68a.workers.dev/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        </td></tr>
+
+        <!-- Green accent bar -->
+        <tr><td style="background-color:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+
+        <!-- Body -->
+        <tr><td style="background-color:#ffffff;padding:32px">
+
+          <!-- Subject heading -->
+          <h1 style="margin:0 0 8px;font-size:20px;font-weight:700;color:#0f1a2b">${esc(subject)}</h1>
+          <p style="margin:0 0 24px;font-size:13px;color:#7e7e7d">Reçu le ${now()}</p>
+
+          <!-- Data table -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eef3ef;border-radius:6px;overflow:hidden">
+            <tr><td style="background-color:#f8faf5;padding:12px 16px;font-size:12px;font-weight:700;color:#55666f;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #B2C54F">Détails du formulaire</td></tr>
+            <tr><td style="padding:0">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
+                ${trs}
+              </table>
+            </td></tr>
+          </table>
+
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background-color:#0f1a2b;padding:28px 32px;border-radius:0 0 8px 8px">
+
+          <!-- Contact info -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="vertical-align:top;padding-right:16px" width="50%">
+                <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#ffffff">Immobilière Pujol</p>
+                <p style="margin:0;font-size:13px;color:#ffffff;line-height:1.7">
+                  7 rue du Docteur Fiolle<br>
+                  13006 Marseille
+                </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  <strong>Tél.</strong> <a href="tel:+33491373839" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">04 91 37 38 39</span></a><br>
+                  <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
+                </p>
+              </td>
+              <td style="vertical-align:top" width="50%">
+                <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#ffffff">Horaires</p>
+                <p style="margin:0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Lundi – Jeudi<br>
+                  9h – 12h / 14h – 18h<br><br>
+                  Vendredi<br>
+                  9h – 12h / 14h – 17h
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Divider -->
+          <hr style="border:none;border-top:1px solid #2a3a4b;margin:20px 0">
+
+          <!-- Social icons: YouTube, Instagram, Facebook, LinkedIn (same order as website) -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr><td align="center" style="padding-bottom:16px">
+              <!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0"><tr><![endif]-->
+              <!-- YouTube -->
+              <a href="https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/youtube-play.png" alt="YouTube" width="28" height="28" style="display:block;border:0">
+              </a>
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/immobiliere_pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/instagram-new.png" alt="Instagram" width="28" height="28" style="display:block;border:0">
+              </a>
+              <!-- Facebook -->
+              <a href="https://www.facebook.com/immobilierepujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/facebook-new.png" alt="Facebook" width="28" height="28" style="display:block;border:0">
+              </a>
+              <!-- LinkedIn -->
+              <a href="https://www.linkedin.com/company/immobiliere-pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/linkedin.png" alt="LinkedIn" width="28" height="28" style="display:block;border:0">
+              </a>
+              <!--[if mso]></tr></table><![endif]-->
+            </td></tr>
+            <tr><td align="center">
+              <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
+                Agence immobilière indépendante à Marseille depuis 2002.<br>
+                Vente, location, gestion locative et syndic de copropriété.
+              </p>
+            </td></tr>
+          </table>
+
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
 }
 
 // ── Form definitions (Gravity Forms field mappings) ─────────────────────────
@@ -238,9 +340,9 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
     replyTo: replyTo || undefined,
   });
 
-  // Log to Google Sheet (fire-and-forget)
+  // Log to Google Sheet
   const sheetRow = [now(), ...rows.map(([, v]) => v)];
-  logToSheet(def.tab, sheetRow);
+  await logToSheet(def.tab, sheetRow);
 
   return emailResult;
 }
@@ -268,7 +370,7 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
     replyTo: email,
   });
 
-  logToSheet('Annonces', [now(), reference, title, name, email, phone, message]);
+  await logToSheet('Annonces', [now(), reference, title, name, email, phone, message]);
 
   return emailResult;
 }
@@ -278,17 +380,11 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
   if (!email) return { ok: false, error: 'Email requis.' };
 
   const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const html = `
-    <div style="font-family:Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#0f1a2b;border-bottom:3px solid #b2c04e;padding-bottom:12px">Nouvelle inscription newsletter</h2>
-      <p style="font-size:16px">L'adresse suivante souhaite recevoir la newsletter :</p>
-      <p style="font-size:18px;font-weight:600;color:#0f1a2b">${esc(email)}</p>
-      <p style="color:#888;font-size:12px;margin-top:24px">Envoyé depuis le site immobiliere-pujol.com</p>
-    </div>`;
+  const html = buildTable(subject, [['Email', email]]);
 
   const emailResult = await sendEmail(env, { subject, html });
 
-  logToSheet('Newsletter', [now(), email]);
+  await logToSheet('Newsletter', [now(), email]);
 
   return emailResult;
 }
