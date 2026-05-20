@@ -56,19 +56,18 @@
     b { font-weight: 700; }
   }
 
-  &__role-pill {
-    align-self: flex-start;
-    margin-top: 6px;
-    display: inline-flex;
-    padding: 7px 16px;
-    border-radius: 999px;
-    background: $ds-olive;
-    color: $white;
-    font-family: $ds-font-noto;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: .8px;
-    text-transform: uppercase;
+  &__tagline {
+    margin: 14px 0 0;
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.2;
+    color: $ds-ink;
+
+    b {
+      font-weight: 700;
+      color: $black;
+    }
   }
 
   &__heading {
@@ -414,8 +413,8 @@
     font-size: 11px;
     letter-spacing: .4px;
 
-    &.is-vente { background: $ds-orange; }
-    &.is-location { background: $ds-olive; }
+    &.is-vente { background: $ds-olive; }
+    &.is-location { background: $ds-orange; }
   }
 
   &__body {
@@ -450,10 +449,10 @@
     font-family: $ds-font-noto;
     font-weight: 700;
     font-size: 16px;
-    color: $ds-orange;
+    color: $ds-olive-2;
     margin-top: 2px;
 
-    &.is-location { color: $ds-olive-2; }
+    &.is-location { color: $ds-orange; }
   }
 }
 
@@ -510,6 +509,7 @@
 
     &__title { gap: 6px; margin-bottom: 18px; }
     &__name { font-size: 38px; }
+    &__tagline { font-size: 18px; margin-top: 10px; }
     &__heading { font-size: 26px; }
 
     &__side {
@@ -562,16 +562,16 @@
 }
 
 // =========================================
-// TYPE-BASED THEMING (rental → green, sales → orange)
-// Drives accent colors via a single token; the green/olive defaults from the
-// rules above already cover rentals & "other" (syndic, accueil, etc.).
+// TYPE-BASED THEMING (sales → green, rental → orange)
+// Drives accent colors via a single token; the green/olive default covers
+// sales and "other" (syndic, accueil, etc.). Rental experts switch to orange.
 // =========================================
 .expert-page {
   --expert-accent: #{$ds-olive};
   --expert-accent-2: #{$ds-olive-2};
   --expert-accent-soft: #{rgba(178, 192, 78, .15)};
 
-  &--sales {
+  &--rental {
     --expert-accent: #{$ds-orange};
     --expert-accent-2: #{$ds-orange-2};
     --expert-accent-soft: #{rgba(236, 114, 52, .14)};
@@ -582,8 +582,8 @@
     color: var(--expert-accent);
   }
 
-  .expert-body__role-pill {
-    background: var(--expert-accent);
+  .expert-body__tagline b {
+    color: var(--expert-accent);
   }
 
   .expert-info-card__photo--empty { color: var(--expert-accent); }
@@ -681,8 +681,8 @@
       background: rgba(255, 255, 255, .85);
     }
 
-    &--rental { background: $ds-olive; }
-    &--sales  { background: $ds-orange; }
+    &--rental { background: $ds-orange; }
+    &--sales  { background: $ds-olive; }
     &--other  { background: $ds-slate; }
   }
 
@@ -706,8 +706,8 @@
   &:hover { transform: translateY(-3px); }
   &:hover .expert-tile__ph img { transform: scale(1.02); }
 
-  &--rental { --expert-accent: #{$ds-olive}; }
-  &--sales  { --expert-accent: #{$ds-orange}; }
+  &--rental { --expert-accent: #{$ds-orange}; }
+  &--sales  { --expert-accent: #{$ds-olive}; }
 
   &__ph {
     width: 100%;
