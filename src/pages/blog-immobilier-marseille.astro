@@ -1,0 +1,653 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const slugify = (s: string): string =>
+  s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const articles = await getCollection('articles');
+
+const sorted = [...articles].sort((a, b) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+});
+
+const featured = sorted[0];
+const recent = sorted.slice(1, 13);
+
+// Pillars: the 4 evergreen content pillars, hand-picked. Article counts are
+// computed live from the collection so the chip badge stays accurate.
+const pillarDefs = [
+  {
+    slug: 'actu-immobiliere',
+    title: 'Le marché immobilier à Marseille',
+    desc: "Actualité du marché marseillais, analyses et tendances.",
+    match: /(le\s*march[eé]\s*immobilier|actualit[eé]\s*immobili[eè]re)/i,
+    accent: 'olive',
+  },
+  {
+    slug: 'investir-marseille',
+    title: 'Investir en immobilier',
+    desc: "Conseils, stratégies et opportunités pour investir à Marseille.",
+    match: /(investir|mes\s*conseils)/i,
+    accent: 'orange',
+  },
+  {
+    slug: 'programme-neufs-marseille',
+    title: "L'immobilier neuf",
+    desc: "Programmes neufs et VEFA dans tous les arrondissements.",
+    match: /(immobilier\s*neuf|programmes?\s*neufs?)/i,
+    accent: 'slate',
+  },
+  {
+    slug: 'prix-immo-arrondissement',
+    title: 'Prix au m² par arrondissement',
+    desc: "Le prix de l'immobilier ancien et neuf, secteur par secteur.",
+    match: /prix\s*au\s*m2?\s*par\s*arrondissement/i,
+    accent: 'soft-green',
+  },
+  {
+    slug: 'mon-quartier-ma-ville',
+    title: 'Mon quartier, ma ville',
+    desc: "Découvrir Marseille quartier par quartier.",
+    match: /mon\s*quartier/i,
+    accent: 'olive',
+  },
+  {
+    slug: 'avant_apres',
+    title: 'Avant / Après',
+    desc: "Transformations et rénovations remarquables.",
+    match: /avant[\s-_\/]*apr[eè]s/i,
+    accent: 'orange',
+  },
+];
+
+const pillars = pillarDefs.map(p => {
+  const count = articles.filter(a =>
+    (a.data.categories || []).some((c: string) => p.match.test(c))
+  ).length;
+  return { ...p, count };
+});
+
+// Tag cloud — top 30 tags by article count.
+const tagMap = new Map<string, { name: string; count: number }>();
+for (const a of articles) {
+  for (const t of (a.data.tags || []) as string[]) {
+    const slug = slugify(t);
+    if (!tagMap.has(slug)) tagMap.set(slug, { name: t, count: 0 });
+    tagMap.get(slug)!.count++;
+  }
+}
+const topTags = [...tagMap.entries()]
+  .map(([slug, { name, count }]) => ({ slug, name, count }))
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 30);
+
+const fmtDate = (s?: string) =>
+  s ? new Date(s).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
+const featuredCategory =
+  featured && (featured.data.categories || [])[0];
+---
+
+<BaseLayout
+  title="Blog immobilier Marseille – Immobilière Pujol"
+  description="Décrypter le marché immobilier marseillais : prix, conseils, investissement et programmes neufs commentés par l'Immobilière Pujol."
+>
+  <!-- ============= HERO ============= -->
+  <section class="seo-hero blog-hero">
+    <p class="seo-hero__eyebrow">Le blog Pujol</p>
+    <h1>Décrypter <b>l'immobilier à Marseille</b></h1>
+    <p class="seo-hero__sub">
+      L'actualité du marché, des analyses, des conseils pratiques et des points de vue tranchés — par l'équipe de l'Immobilière Pujol.
+    </p>
+    <button class="blog-hero__search" type="button" aria-label="Rechercher un article">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="20" y1="20" x2="16" y2="16" stroke-linecap="round" />
+      </svg>
+      <span>Rechercher un article…</span>
+    </button>
+  </section>
+
+  <!-- ============= FEATURED + NEWSLETTER ============= -->
+  {featured && (
+    <section class="blog-featured">
+      <div class="blog-featured__inner">
+        <article class="blog-featured__card">
+          <a class="blog-featured__media" href={`/${featured.data.slug}/`}>
+            {featured.data.featuredImage && (
+              <img src={featured.data.featuredImage} alt={featured.data.title} loading="eager" />
+            )}
+            <span class="blog-featured__badge">Dernier article</span>
+          </a>
+          <div class="blog-featured__body">
+            {featuredCategory && (
+              <a class="blog-featured__eyebrow" href={`/categorie/${slugify(featuredCategory)}/`}>{featuredCategory}</a>
+            )}
+            <h2 class="blog-featured__title">
+              <a href={`/${featured.data.slug}/`}>{featured.data.title}</a>
+            </h2>
+            {featured.data.excerpt && (
+              <p class="blog-featured__excerpt">{featured.data.excerpt}</p>
+            )}
+            <div class="blog-featured__meta">
+              {featured.data.date && <time datetime={featured.data.date}>{fmtDate(featured.data.date)}</time>}
+              <a class="blog-featured__cta" href={`/${featured.data.slug}/`}>Lire l'article →</a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="blog-news">
+          <p class="blog-news__overline">Newsletter</p>
+          <h2>Recevez nos <b>conseils immobiliers</b></h2>
+          <p class="blog-news__lead">
+            Maximum une fois par mois — des analyses, des chiffres clés et nos coups de cœur immobiliers à Marseille.
+          </p>
+          <form class="blog-news__form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Votre adresse email" aria-label="Adresse email" required />
+            <button type="submit" class="blog-news__submit" aria-label="S'inscrire">
+              <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+                <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          </form>
+          <label class="blog-news__agree">
+            <input type="checkbox" required />
+            <span>J'accepte le traitement de mes données dans le cadre de mon inscription.</span>
+          </label>
+        </aside>
+      </div>
+    </section>
+  )}
+
+  <!-- ============= PILLAR CAROUSEL ============= -->
+  <section class="blog-pillars">
+    <header class="blog-pillars__head">
+      <div>
+        <p class="seo-hero__eyebrow" style="color:rgb(166,179,82);text-align:left;">Thèmes</p>
+        <h2 class="ds-sec-title" style="text-align:left;">Parcourir <b>par sujet</b></h2>
+      </div>
+      <div class="blog-pillars__arrows" aria-hidden="true">
+        <button class="arrow-btn" type="button" data-dir="prev" aria-label="Précédent">
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none"><path d="M21 7H2 M8 1 L2 7 L8 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="arrow-btn" type="button" data-dir="next" aria-label="Suivant">
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="blog-pillars__track" id="blogPillarsTrack">
+      {pillars.map(p => (
+        <a class={`blog-pillar blog-pillar--${p.accent}`} href={`/categorie/${p.slug}/`}>
+          <div class="blog-pillar__top">
+            <span class="blog-pillar__count">{p.count} article{p.count > 1 ? 's' : ''}</span>
+            <span class="blog-pillar__arrow" aria-hidden="true">→</span>
+          </div>
+          <h3 class="blog-pillar__title">{p.title}</h3>
+          <p class="blog-pillar__desc">{p.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============= RECENT ARTICLES GRID ============= -->
+  <section class="seo-archive seo-archive--paper">
+    <h2 class="ds-sec-title">Les derniers <b>articles</b></h2>
+    <div class="seo-card-grid">
+      {recent.map(a => {
+        const cat = (a.data.categories || [])[0];
+        return (
+          <article class={`seo-card ${!a.data.featuredImage ? 'seo-card--text' : ''}`}>
+            {a.data.featuredImage && (
+              <a href={`/${a.data.slug}/`} class="seo-card__media">
+                <img src={a.data.featuredImage} alt={a.data.title} loading="lazy" />
+              </a>
+            )}
+            <div class="seo-card__body">
+              {cat && <span class="seo-card__date" style="color:rgb(178,192,78);">{cat}</span>}
+              <h3 class="seo-card__title">
+                <a href={`/${a.data.slug}/`}>{a.data.title}</a>
+              </h3>
+              {a.data.excerpt && <p class="seo-card__excerpt">{a.data.excerpt}</p>}
+              {a.data.date && (
+                <time class="seo-card__date" datetime={a.data.date}>{fmtDate(a.data.date)}</time>
+              )}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    <div class="blog-grid-cta">
+      <a class="seo-cta" href="/categorie/">Voir toutes les catégories →</a>
+    </div>
+  </section>
+
+  <!-- ============= TAG CLOUD ============= -->
+  <section class="seo-archive">
+    <h2 class="ds-sec-title">Explorer <b>par mot-clé</b></h2>
+    <ul class="seo-tax-grid seo-tax-grid--chips">
+      {topTags.map(t => (
+        <li>
+          <a href={`/tag/${t.slug}/`}>
+            <span class="label">{t.name}</span>
+            <span class="count">{t.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="blog-grid-cta">
+      <a class="seo-cta" href="/tag/">Voir tous les tags →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---- Hero search pill ---- */
+  .blog-hero__search {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 14px 22px 14px 20px;
+    min-width: 360px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 999px;
+    color: rgba(0, 0, 0, .55);
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, color .25s ease, border-color .25s ease;
+  }
+  .blog-hero__search:hover {
+    transform: translateY(-1px);
+    color: #000;
+    border-color: rgb(178, 192, 78);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .12);
+  }
+  .blog-hero__search svg { color: rgb(166, 179, 82); }
+
+  /* ---- Featured + Newsletter row ---- */
+  .blog-featured {
+    background: #fff;
+    padding: 80px max(100px, calc(50% - 620px));
+  }
+  .blog-featured__inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 36px;
+    /* align-items stays at default (stretch) so the grid row picks up the
+       featured card's height — that's the travel distance the sticky
+       newsletter card uses. The card itself opts out via align-self: start
+       so it sizes to its own content. */
+  }
+
+  .blog-featured__card {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .blog-featured__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .08);
+  }
+  .blog-featured__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: rgb(238, 243, 239);
+  }
+  .blog-featured__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .blog-featured__card:hover .blog-featured__media img { transform: scale(1.04); }
+  .blog-featured__badge {
+    position: absolute;
+    top: 18px; left: 18px;
+    background: rgb(178, 192, 78);
+    color: #000;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .blog-featured__body {
+    padding: 30px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+  .blog-featured__eyebrow {
+    align-self: flex-start;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+    text-decoration: none;
+    background: none;
+    background-image: none;
+  }
+  .blog-featured__title {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.1;
+    color: #000;
+    margin: 0;
+  }
+  .blog-featured__title b { font-weight: 700; }
+  .blog-featured__title a { color: inherit; text-decoration: none; }
+  .blog-featured__title a:hover { color: rgb(166, 179, 82); }
+  .blog-featured__excerpt {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgb(58, 58, 58);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .blog-featured__meta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0, 0, 0, .08);
+  }
+  .blog-featured__meta time {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: rgb(58, 58, 58);
+  }
+  .blog-featured__cta {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+    text-decoration: none;
+  }
+  .blog-featured__cta:hover { color: rgb(236, 114, 52); }
+
+  /* ---- Newsletter card ---- */
+  .blog-news {
+    background: rgb(178, 192, 78);
+    border-radius: 28px;
+    padding: 28px 32px 26px;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 40px;
+    align-self: start;
+  }
+  .blog-news__overline {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: rgba(0, 0, 0, .7);
+  }
+  .blog-news h2 {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.05;
+    margin: 0 0 12px;
+  }
+  .blog-news h2 b { font-weight: 700; }
+  .blog-news__lead {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0 0 22px;
+    color: rgba(0, 0, 0, .8);
+  }
+  .blog-news__form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, .28);
+    padding-bottom: 10px;
+  }
+  .blog-news__form input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    color: #000;
+    padding: 6px 0;
+  }
+  .blog-news__form input[type="email"]::placeholder { color: rgba(0, 0, 0, .55); }
+  .blog-news__submit {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    background-image: linear-gradient(to top, #000 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    color: #000;
+    border: 1.5px solid #000;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-position .35s ease, color .25s ease;
+    flex: none;
+  }
+  .blog-news__submit:hover {
+    background-position: 0 100%;
+    color: rgb(178, 192, 78);
+  }
+  .blog-news__agree {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+    align-items: flex-start;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.45;
+    color: rgba(0, 0, 0, .75);
+    cursor: pointer;
+  }
+  .blog-news__agree input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #000;
+    margin-top: 2px;
+    flex: none;
+    accent-color: #000;
+  }
+
+  /* ---- Pillar carousel ---- */
+  .blog-pillars {
+    background: #f7f7f5;
+    padding: 90px 0 80px;
+  }
+  .blog-pillars__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 max(100px, calc(50% - 620px));
+    margin-bottom: 40px;
+  }
+  .blog-pillars__arrows { display: flex; gap: 12px; }
+
+  .blog-pillars__track {
+    display: flex;
+    gap: 26px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: max(100px, calc(50% - 620px));
+    padding: 4px max(100px, calc(50% - 620px)) 14px;
+    scrollbar-width: none;
+  }
+  .blog-pillars__track::-webkit-scrollbar { display: none; }
+
+  .blog-pillar {
+    flex: 0 0 calc((100% - 78px) / 4);
+    min-width: 280px;
+    max-width: 360px;
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 24px;
+    padding: 26px 28px 28px;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+    border: 1px solid rgba(0, 0, 0, .06);
+  }
+  .blog-pillar:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .1);
+  }
+  .blog-pillar--olive       { background: rgb(225, 236, 227); }
+  .blog-pillar--orange      { background: rgb(255, 235, 222); }
+  .blog-pillar--slate       { background: rgb(232, 236, 238); }
+  .blog-pillar--soft-green  { background: rgb(238, 243, 239); }
+
+  .blog-pillar__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .blog-pillar__count {
+    background: rgba(255, 255, 255, .7);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: rgb(58, 58, 58);
+  }
+  .blog-pillar__arrow {
+    font-size: 20px;
+    color: rgb(166, 179, 82);
+    transition: transform .25s ease;
+  }
+  .blog-pillar:hover .blog-pillar__arrow { transform: translateX(4px); }
+  .blog-pillar--orange .blog-pillar__arrow { color: rgb(236, 114, 52); }
+  .blog-pillar--slate  .blog-pillar__arrow { color: rgb(86, 103, 112); }
+
+  .blog-pillar__title {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.1;
+    margin: 0;
+    color: #000;
+  }
+  .blog-pillar__title b { font-weight: 700; }
+  .blog-pillar__desc {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgb(58, 58, 58);
+    margin: 0;
+  }
+
+  /* ---- Grid CTA bar ---- */
+  .blog-grid-cta {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 1024px) {
+    .blog-featured__inner { grid-template-columns: 1fr; }
+    .blog-news { position: static; top: auto; }
+  }
+
+  @media (max-width: 768px) {
+    .blog-hero__search { min-width: 0; width: 100%; max-width: 320px; font-size: 14px; }
+    .blog-featured { padding: 60px 20px; }
+    .blog-featured__inner { gap: 24px; }
+    .blog-featured__body { padding: 24px; }
+    .blog-featured__title { font-size: 26px; }
+    .blog-news { padding: 28px 24px 26px; }
+    .blog-news h2 { font-size: 26px; }
+    .blog-pillars { padding: 60px 0; }
+    .blog-pillars__head { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .blog-pillars__head .ds-sec-title { font-size: 28px; }
+    .blog-pillars__track {
+      padding: 4px 20px 14px;
+      scroll-padding-left: 20px;
+    }
+    .blog-pillar { flex-basis: 80%; max-width: 80%; }
+  }
+</style>
+
+<script>
+  // Pillar carousel arrows — scroll the track by one card width per click.
+  const track = document.getElementById('blogPillarsTrack');
+  if (track) {
+    document.querySelectorAll('.blog-pillars__arrows button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = track.querySelector('.blog-pillar') as HTMLElement | null;
+        const step = card ? card.offsetWidth + 26 : 320;
+        const dir = (btn as HTMLElement).dataset.dir === 'next' ? 1 : -1;
+        track.scrollBy({ left: step * dir, behavior: 'smooth' });
+      });
+    });
+  }
+
+  // Hero search pill — open the site-wide SearchOverlay (delegate to its existing trigger).
+  const heroSearch = document.querySelector('.blog-hero__search');
+  if (heroSearch) {
+    heroSearch.addEventListener('click', () => {
+      const headerBtn = document.querySelector('.icons button[aria-label="Rechercher"]') as HTMLButtonElement | null;
+      headerBtn?.click();
+    });
+  }
+</script>
