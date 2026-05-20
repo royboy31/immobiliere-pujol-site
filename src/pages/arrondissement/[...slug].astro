@@ -24,26 +24,27 @@ const description = seoDescription || `Découvrez nos annonces immobilières dan
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="arrondissement">
-    <header class="arrondissement__header">
-      <h1>{name}</h1>
-      <p class="arrondissement__count">{count} annonces dans ce secteur</p>
-    </header>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Arrondissement Marseille</p>
+    <h1>{name}</h1>
+    <span class="seo-hero__count">{count} annonce{count > 1 ? 's' : ''} dans ce secteur</span>
+  </section>
 
+  <div class="seo-area">
     {zipContent && (
-      <div class="arrondissement__description">
+      <div class="seo-area__intro">
         <Fragment set:html={zipContent} />
       </div>
     )}
 
-    <div class="arrondissement__listings">
-      <h2>Annonces dans le {name}</h2>
-      <p>Les annonces pour ce secteur seront bientôt disponibles avec nos filtres avancés.</p>
-      <div class="arrondissement__cta">
-        <a href="/annonces/" class="btn btn--primary">Voir toutes les annonces</a>
-        <a href="/annonces/locations/" class="btn btn--secondary">Locations</a>
-        <a href="/annonces/ventes/" class="btn btn--secondary">Ventes</a>
+    <section class="seo-area__cta-section">
+      <h2 class="ds-sec-title">Annonces dans <b>le {name}</b></h2>
+      <p>Découvrez tous les biens disponibles à la location et à la vente dans ce secteur.</p>
+      <div class="seo-area__cta-row">
+        <a href="/annonces/" class="seo-cta seo-cta--filled">Voir toutes les annonces</a>
+        <a href="/annonces/locations/" class="seo-cta">Locations</a>
+        <a href="/annonces/ventes/" class="seo-cta seo-cta--vente">Ventes</a>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>

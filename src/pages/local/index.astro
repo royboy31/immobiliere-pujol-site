@@ -13,22 +13,36 @@ const localArticles = articles
   title="Biens locaux et gestion locative à Marseille – Immobilière Pujol"
   description={`Guide complet de nos ${localArticles.length} pages de gestion locative et biens immobiliers par quartier de Marseille.`}
 >
-  <section class="blog-archive blog-archive--local">
-    <h1>Gestion locative et biens à Marseille</h1>
-    <p class="blog-archive__count">{localArticles.length} quartiers / biens couverts</p>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Gestion locative</p>
+    <h1>Biens et quartiers <b>à Marseille</b></h1>
+    <p class="seo-hero__sub">
+      Découvrez notre couverture détaillée des quartiers marseillais : conseils de location, gestion locative et opportunités d'investissement, secteur par secteur.
+    </p>
+    <span class="seo-hero__count">{localArticles.length} quartier{localArticles.length > 1 ? 's' : ''} / bien{localArticles.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <div class="blog-archive__grid">
-      {localArticles.map((a) => (
-        <article class="blog-card">
-          {a.data.featuredImage && (
-            <img src={a.data.featuredImage} alt={a.data.title} loading="lazy" />
-          )}
-          <h2>
-            <a href={`/${a.data.slug}/`}>{a.data.title}</a>
-          </h2>
-          {a.data.excerpt && <p>{a.data.excerpt}</p>}
-        </article>
-      ))}
-    </div>
+  <section class="seo-archive seo-archive--paper">
+    {localArticles.length === 0 ? (
+      <p class="seo-empty">Aucune page locale disponible pour le moment.</p>
+    ) : (
+      <div class="seo-card-grid">
+        {localArticles.map((a) => (
+          <article class={`seo-card ${!a.data.featuredImage ? 'seo-card--text' : ''}`}>
+            {a.data.featuredImage && (
+              <a href={`/${a.data.slug}/`} class="seo-card__media">
+                <img src={a.data.featuredImage} alt={a.data.title} loading="lazy" />
+              </a>
+            )}
+            <div class="seo-card__body">
+              <h2 class="seo-card__title">
+                <a href={`/${a.data.slug}/`}>{a.data.title}</a>
+              </h2>
+              {a.data.excerpt && <p class="seo-card__excerpt">{a.data.excerpt}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </section>
 </BaseLayout>

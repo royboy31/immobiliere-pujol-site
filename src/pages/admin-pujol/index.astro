@@ -5,22 +5,99 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 type Expert = { slug: string; title: string };
 const expertMods = import.meta.glob<Expert>('../../content/experts/*.json', { eager: true, import: 'default' });
 const expertCount = Object.keys(expertMods).length;
+
+const tiles = [
+  {
+    href: './experts/',
+    title: 'Experts',
+    desc: `${expertCount} profil${expertCount > 1 ? 's' : ''} — modifier, ajouter, retirer`,
+    accent: 'olive',
+  },
+  {
+    href: './articles/',
+    title: 'Articles de blog',
+    desc: 'Publier un nouvel article ou éditer un existant',
+    accent: 'orange',
+  },
+  {
+    href: './pages/',
+    title: 'Pages légales',
+    desc: 'Mentions légales, politique de confidentialité, CGV',
+    accent: 'slate',
+  },
+];
 ---
 
 <AdminLayout title="Tableau de bord" section="home">
-  <h1>Tableau de bord</h1>
+  <p class="admin-eyebrow">Tableau de bord</p>
+  <h1>Bienvenue sur <b>l'espace admin</b></h1>
+  <p class="admin-lede">
+    Gérez vos experts, vos articles de blog et vos pages légales depuis un seul endroit.
+  </p>
+
   <div class="grid">
-    <a class="card" href="./experts/" style="color:inherit;">
-      <h2 style="margin:0 0 0.25rem;">Experts</h2>
-      <p style="margin:0; color:#555;">{expertCount} profil{expertCount > 1 ? 's' : ''} — modifier, ajouter, retirer</p>
-    </a>
-    <a class="card" href="./articles/" style="color:inherit;">
-      <h2 style="margin:0 0 0.25rem;">Articles de blog</h2>
-      <p style="margin:0; color:#555;">Publier un nouvel article ou éditer un existant</p>
-    </a>
-    <a class="card" href="./pages/" style="color:inherit;">
-      <h2 style="margin:0 0 0.25rem;">Pages légales</h2>
-      <p style="margin:0; color:#555;">Mentions légales, politique de confidentialité, etc.</p>
-    </a>
+    {tiles.map(t => (
+      <a class={`card tile tile--${t.accent}`} href={t.href}>
+        <span class="tile__arrow" aria-hidden="true">→</span>
+        <h2>{t.title}</h2>
+        <p>{t.desc}</p>
+      </a>
+    ))}
   </div>
 </AdminLayout>
+
+<style>
+  .admin-eyebrow {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+    margin: 0 0 10px;
+  }
+  .admin-lede {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: rgb(58, 58, 58);
+    margin: -16px 0 32px;
+    max-width: 640px;
+  }
+  .tile {
+    position: relative;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    padding: 26px 28px;
+    overflow: hidden;
+  }
+  .tile h2 {
+    margin: 0 0 6px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: #000;
+  }
+  .tile h2 b { font-weight: 700; }
+  .tile p {
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgb(58, 58, 58);
+  }
+  .tile__arrow {
+    position: absolute;
+    top: 22px; right: 24px;
+    font-size: 18px;
+    line-height: 1;
+    color: rgb(166, 179, 82);
+    transition: transform .25s ease, color .25s ease;
+  }
+  .tile:hover .tile__arrow { transform: translateX(4px); }
+  .tile--olive .tile__arrow { color: rgb(166, 179, 82); }
+  .tile--orange .tile__arrow { color: rgb(236, 114, 52); }
+  .tile--slate .tile__arrow { color: rgb(86, 103, 112); }
+</style>

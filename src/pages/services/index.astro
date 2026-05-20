@@ -10,27 +10,34 @@ const serviceList = services
 ---
 
 <BaseLayout
-  title="Nos Services – Immobilière Pujol"
+  title="Nos services immobiliers – Immobilière Pujol"
   description="Découvrez tous les services immobiliers de l'Immobilière Pujol à Marseille : gestion locative, syndic, vente, location."
 >
-  <section class="annonces-listing">
-    <header class="annonces-listing__header">
-      <h1>Nos Services</h1>
-      <p>{serviceList.length} services</p>
-    </header>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">L'Immobilière Pujol</p>
+    <h1>Tous <b>nos services</b></h1>
+    <p class="seo-hero__sub">
+      Location, vente, gestion locative, syndic — découvrez l'ensemble des prestations sur-mesure que nous proposons aux particuliers et copropriétés marseillaises.
+    </p>
+    <span class="seo-hero__count">{serviceList.length} service{serviceList.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <div class="annonces-listing__grid">
+  <section class="seo-archive seo-archive--paper">
+    <div class="seo-card-grid">
       {serviceList.map((service) => {
         const slug = service.data.slug.replace(/^services\//, '');
         return (
-          <a href={`/services/${slug}/`} class="annonce-card">
-            <div class="annonce-card__content">
-              <h2 class="annonce-card__title">{service.data.title}</h2>
+          <article class="seo-card seo-card--text">
+            <div class="seo-card__body">
+              <h2 class="seo-card__title">
+                <a href={`/services/${slug}/`}>{service.data.title}</a>
+              </h2>
               {service.data.seoDescription && (
-                <p class="annonce-card__details">{service.data.seoDescription}</p>
+                <p class="seo-card__excerpt">{service.data.seoDescription}</p>
               )}
+              <span class="seo-card__date">Découvrir →</span>
             </div>
-          </a>
+          </article>
         );
       })}
     </div>

@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 const slugify = (s: string): string =>
   s.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
@@ -29,25 +29,26 @@ const categories = [...catMap.entries()]
   title="Catégories – Immobilière Pujol"
   description="Toutes les catégories du blog immobilier Marseille."
 >
-  <section class="blog-archive blog-archive--category">
-    <h1>Catégories</h1>
-    <p class="blog-archive__count">{categories.length} catégorie{categories.length > 1 ? 's' : ''}</p>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Le blog Pujol</p>
+    <h1>Explorer <b>nos catégories</b></h1>
+    <p class="seo-hero__sub">
+      Parcourez l'ensemble des thématiques abordées par nos experts immobiliers à Marseille — marché, quartiers, conseils et programmes neufs.
+    </p>
+    <span class="seo-hero__count">{categories.length} catégorie{categories.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <ul class="cat-list">
+  <section class="seo-archive">
+    <h2 class="ds-sec-title">Toutes <b>les catégories</b></h2>
+    <ul class="seo-tax-grid">
       {categories.map(cat => (
         <li>
           <a href={`/categorie/${cat.slug}/`}>
-            {cat.name} <span>({cat.count})</span>
+            <span class="label">{cat.name}</span>
+            <span class="count">{cat.count}</span>
           </a>
         </li>
       ))}
     </ul>
   </section>
 </BaseLayout>
-
-<style>
-  .cat-list { list-style: none; padding: 0; max-width: 800px; margin: 2rem auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5rem; }
-  .cat-list a { display: block; padding: 0.75rem 1rem; border-radius: 8px; background: #f5f5f4; color: #495057; text-decoration: none; transition: background 0.2s; }
-  .cat-list a:hover { background: #ebebea; }
-  .cat-list span { color: #adb5bd; font-size: 0.9em; }
-</style>

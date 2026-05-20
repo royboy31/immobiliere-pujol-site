@@ -127,29 +127,40 @@ const sortedArticles = [...articles].sort((a: any, b: any) => {
   title={`${title} – Immobilière Pujol`}
   description={`Articles dans la catégorie : ${title}`}
 >
-  <section class="blog-archive blog-archive--category">
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Catégorie</p>
     <h1>{title}</h1>
-    <p class="blog-archive__count">{sortedArticles.length} article{sortedArticles.length > 1 ? 's' : ''}</p>
+    <span class="seo-hero__count">{sortedArticles.length} article{sortedArticles.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <div class="blog-archive__grid">
-      {sortedArticles.map((article: any) => (
-        <article class="blog-card">
-          {article.data.featuredImage && (
-            <img src={article.data.featuredImage} alt={article.data.title} loading="lazy" />
-          )}
-          <h2>
-            <a href={`/${article.data.slug}/`}>{article.data.title}</a>
-          </h2>
-          {article.data.excerpt && <p>{article.data.excerpt}</p>}
-          {article.data.date && (
-            <time datetime={article.data.date}>
-              {new Date(article.data.date).toLocaleDateString('fr-FR', {
-                year: 'numeric', month: 'long', day: 'numeric'
-              })}
-            </time>
-          )}
-        </article>
-      ))}
-    </div>
+  <section class="seo-archive seo-archive--paper">
+    {sortedArticles.length === 0 ? (
+      <p class="seo-empty">Aucun article publié dans cette catégorie pour le moment.</p>
+    ) : (
+      <div class="seo-card-grid">
+        {sortedArticles.map((article: any) => (
+          <article class={`seo-card ${!article.data.featuredImage ? 'seo-card--text' : ''}`}>
+            {article.data.featuredImage && (
+              <a href={`/${article.data.slug}/`} class="seo-card__media">
+                <img src={article.data.featuredImage} alt={article.data.title} loading="lazy" />
+              </a>
+            )}
+            <div class="seo-card__body">
+              <h2 class="seo-card__title">
+                <a href={`/${article.data.slug}/`}>{article.data.title}</a>
+              </h2>
+              {article.data.excerpt && <p class="seo-card__excerpt">{article.data.excerpt}</p>}
+              {article.data.date && (
+                <time class="seo-card__date" datetime={article.data.date}>
+                  {new Date(article.data.date).toLocaleDateString('fr-FR', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                  })}
+                </time>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </section>
 </BaseLayout>

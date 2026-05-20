@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 const slugify = (s: string): string =>
   s.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
@@ -29,25 +29,26 @@ const tags = [...tagMap.entries()]
   title="Tags – Immobilière Pujol"
   description="Tous les tags du blog immobilier Marseille."
 >
-  <section class="blog-archive blog-archive--tag">
-    <h1>Tags</h1>
-    <p class="blog-archive__count">{tags.length} tag{tags.length > 1 ? 's' : ''}</p>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Le blog Pujol</p>
+    <h1>Tous <b>nos tags</b></h1>
+    <p class="seo-hero__sub">
+      Retrouvez nos articles par mot-clé : quartiers, types de biens, conseils, actualités et tendances du marché marseillais.
+    </p>
+    <span class="seo-hero__count">{tags.length} tag{tags.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <ul class="tag-list">
+  <section class="seo-archive">
+    <h2 class="ds-sec-title">Naviguer <b>par mot-clé</b></h2>
+    <ul class="seo-tax-grid seo-tax-grid--chips">
       {tags.map(t => (
         <li>
           <a href={`/tag/${t.slug}/`}>
-            {t.name} <span>({t.count})</span>
+            <span class="label">{t.name}</span>
+            <span class="count">{t.count}</span>
           </a>
         </li>
       ))}
     </ul>
   </section>
 </BaseLayout>
-
-<style>
-  .tag-list { list-style: none; padding: 0; max-width: 800px; margin: 2rem auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .tag-list a { display: inline-block; padding: 0.5rem 1rem; border-radius: 20px; background: #f5f5f4; color: #495057; text-decoration: none; font-size: 0.9rem; transition: background 0.2s; }
-  .tag-list a:hover { background: #ebebea; }
-  .tag-list span { color: #adb5bd; font-size: 0.85em; }
-</style>

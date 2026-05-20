@@ -1,114 +1,511 @@
 // ============================================
-// ARTICLE / CONTENT SINGLE PAGE
+// ARTICLE / CONTENT SINGLE PAGE — Pujol design
 // ============================================
+$content-side-pad: unquote("max(100px, calc(50% - 620px))");
+$content-prose-max: 780px;
+
 .content {
-  max-width: $container-md;
-  margin: 0 auto;
-  padding: $space-8 $container-padding;
+  background: $white;
+  font-family: $ds-font-noto;
+  color: $black;
 
+  // ----- Hero ---------------------------------------------------------------
+  // Default (no featured image): paper background, centered title.
+  // With featured image: full-bleed cover image + dark overlay + white text.
   &__header {
-    margin-bottom: $space-8;
+    position: relative;
+    background: $ds-paper;
+    padding: 80px $content-side-pad 60px;
+    text-align: center;
+    margin: 0 0 60px;
+    overflow: hidden;
 
-    h1 {
-      margin-bottom: $space-3;
-    }
-
-    time {
-      display: block;
-      font-size: $font-size-sm;
-      color: $color-text-light;
+    @media (max-width: $bp-tablet) {
+      padding: 60px 20px 44px;
+      margin-bottom: 40px;
     }
   }
 
+  &__header-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 100%);
+    z-index: 1;
+  }
+
+  &__header-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .15);
+    border: 1px solid rgba(255, 255, 255, .35);
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .25s ease, color .25s ease;
+
+    &:hover { background: $white; color: $black; }
+  }
+
+  &__header h1 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 54px;
+    line-height: 1.05;
+    color: $black;
+    text-align: center;
+    margin: 0;
+    letter-spacing: -.3px;
+    max-width: 880px;
+
+    b, strong { font-weight: 700; }
+  }
+
+  &__header time {
+    display: inline-block;
+    margin: 4px 0 0;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: $white;
+    border: 1px solid $ds-hairline;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: $ds-ink;
+  }
+
+  // Variant with featured image — invert text colors and drop paper bg
+  &--hero-image {
+    .content__header {
+      background: $black;
+      padding-top: 120px;
+      padding-bottom: 100px;
+      min-height: 460px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .content__header h1 { color: $white; }
+    .content__eyebrow { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .35); color: $white; }
+
+    @media (max-width: $bp-tablet) {
+      .content__header { padding: 80px 20px 70px; min-height: 340px; }
+      .content__header h1 { font-size: 30px; }
+    }
+  }
+
+  // Prix-m² variant — soft green hero accent on paper variant
+  &--prix-m2:not(.content--hero-image) {
+    .content__header { background: $ds-soft-green; }
+  }
+
+  @media (max-width: $bp-tablet) {
+    &__header h1 { font-size: 30px; line-height: 1.1; }
+  }
+
+  // ----- Prose body ---------------------------------------------------------
   &__body {
-    font-size: $font-size-md;
-    line-height: $line-height-relaxed;
-    color: $color-text;
+    max-width: $content-prose-max;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    color: $ds-ink;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 
-    h2 {
-      margin-top: $space-10;
-      margin-bottom: $space-4;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: $ds-font-helv;
+      color: $black;
+      font-weight: 300;
+      line-height: 1.15;
+      margin: 0;
+
+      b, strong { font-weight: 700; }
+      // WP exports often wrap heading text in weight-400 spans — neutralize.
+      span { font-weight: inherit !important; }
     }
 
-    h3 {
-      margin-top: $space-8;
-      margin-bottom: $space-3;
-    }
+    h2 { font-size: 32px; margin: 48px 0 18px; }
+    h3 { font-size: 24px; margin: 36px 0 14px; }
+    h4 { font-size: 20px; margin: 28px 0 12px; font-weight: 700; }
 
     p {
-      margin-bottom: $space-4;
+      margin: 0 0 18px;
+      // Neutralize inline WP weight-400 spans for body copy too.
+      > span[style*="font-weight"] { font-weight: inherit !important; }
     }
 
-    ul, ol {
-      margin: $space-4 0;
-      padding-left: $space-8;
+    > p:first-child {
+      font-size: 20px;
+      line-height: 1.55;
+      color: $black;
     }
 
+    strong, b { font-weight: 700; color: $black; }
+    em, i { font-style: italic; }
+
+    a {
+      color: $ds-olive-2;
+      text-decoration: none;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 1px;
+      transition: color .2s ease, background-size .25s ease;
+      word-break: break-word;
+
+      &:hover {
+        color: $ds-orange;
+        background-size: 100% 2px;
+      }
+    }
+
+    ul, ol { margin: 18px 0 24px; padding-left: 26px; }
     ul { list-style: disc; }
     ol { list-style: decimal; }
-
-    li {
-      margin-bottom: $space-2;
-      line-height: $line-height-relaxed;
-    }
+    li { margin-bottom: 10px; line-height: 1.65; }
 
     img {
       max-width: 100%;
       height: auto;
-      border-radius: $radius-md;
-      margin: $space-6 0;
+      display: block;
+      border-radius: 16px;
+      margin: 24px auto;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
     }
 
-    a {
-      color: $color-link;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-
-      &:hover { color: $color-link-hover; }
+    figure.article-figure {
+      margin: 32px auto;
+      img { margin: 0; }
     }
 
+    // -----------------------------------------------------------------------
+    // PAIRED IMAGE + CAPTION CARD
+    // Server-side wrapper pairs each <img> with the following caption text.
+    // Cards alternate sides; media on left for --left, right for --right.
+    // -----------------------------------------------------------------------
+    .article-pair {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: 32px;
+      align-items: center;
+      background: $white;
+      border: 1px solid $ds-hairline;
+      border-radius: 24px;
+      padding: 24px;
+      margin: 36px 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+
+      &__media {
+        margin: 0;
+        line-height: 0;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+          margin: 0;
+          border-radius: 16px;
+          box-shadow: 0 8px 22px rgba(0, 0, 0, .12);
+        }
+      }
+
+      &__body {
+        font-family: $ds-font-noto;
+        font-weight: 300;
+        font-size: 17px;
+        line-height: 1.6;
+        color: $ds-ink;
+
+        > b:first-child,
+        > strong:first-child {
+          display: inline-block;
+          font-family: $ds-font-helv;
+          font-weight: 700;
+          font-size: 22px;
+          line-height: 1.15;
+          color: $black;
+          margin-bottom: 8px;
+        }
+
+        > br:first-of-type { display: none; }
+
+        p, span { display: block; margin: 0 0 10px; font-weight: inherit !important; }
+        p:last-child, span:last-child { margin-bottom: 0; }
+      }
+
+      &--right {
+        .article-pair__media { order: 2; }
+        .article-pair__body  { order: 1; }
+      }
+
+      @media (max-width: $bp-tablet) {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 18px;
+        margin: 24px 0;
+
+        &--right {
+          .article-pair__media { order: 1; }
+          .article-pair__body  { order: 2; }
+        }
+
+        &__body { font-size: 16px; }
+      }
+    }
+
+    // Any remaining loose images keep simple centered layout.
+    img.alignleft, img.alignright, img.alignnone, img.aligncenter {
+      float: none;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    figure {
+      margin: 32px 0;
+      img { margin: 0; }
+      figcaption {
+        font-size: 14px;
+        color: $color-text-light;
+        text-align: center;
+        margin-top: 12px;
+      }
+    }
+
+    blockquote {
+      margin: 32px 0;
+      padding: 22px 28px;
+      background: $ds-paper;
+      border-left: 4px solid $ds-olive;
+      border-radius: 0 16px 16px 0;
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 22px;
+      line-height: 1.45;
+      color: $black;
+      font-style: normal;
+
+      p:last-child { margin-bottom: 0; }
+    }
+
+    // Tables — WP exports often hard-set inline widths. Force responsive layout.
     table {
-      width: 100%;
+      width: 100% !important;
+      max-width: 100%;
       border-collapse: collapse;
-      margin: $space-6 0;
-      font-size: $font-size-sm;
+      margin: 32px 0;
+      font-size: 15px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+      table-layout: auto;
+      display: block;
+      overflow-x: auto;
+
+      tbody, thead, tfoot { width: 100%; }
 
       th, td {
-        padding: $space-3 $space-4;
-        border: 1px solid $color-border;
-        text-align: left;
+        padding: 12px 16px !important;
+        border-bottom: 1px solid $ds-hairline;
+        border-right: 0 !important;
+        border-left: 0 !important;
+        text-align: left !important;
+        vertical-align: top !important;
+        background: transparent !important;
+        width: auto !important;
+        white-space: normal;
       }
 
-      th {
-        background: $color-bg-alt;
-        font-weight: $font-weight-semibold;
+      th, tr:first-child td {
+        background: $ds-paper !important;
+        font-family: $ds-font-noto;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: $black;
+      }
+
+      tr:last-child td { border-bottom: 0; }
+    }
+
+    iframe, video {
+      display: block;
+      max-width: 100%;
+      margin: 32px auto;
+      border-radius: 16px;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid $ds-hairline;
+      margin: 48px 0;
+    }
+
+    // -----------------------------------------------------------------------
+    // Legacy WP social share block — hidden. The original onclick handlers
+    // reference a `socialPopup()` JS function that doesn't exist in our build,
+    // so the buttons would be non-functional anyway. The SVGs render at intrinsic
+    // viewBox size (300×150 fallback in some browsers) and balloon the layout.
+    // -----------------------------------------------------------------------
+    .post__share,
+    .social__list,
+    .social__link,
+    .social__icon { display: none !important; }
+
+    // Hard cap on any other inline SVG in the body so legacy WP markup can't
+    // blow up the layout.
+    svg {
+      max-width: 100%;
+      max-height: 24px;
+      width: auto;
+      height: auto;
+    }
+
+    @media (max-width: $bp-tablet) {
+      font-size: 16px;
+      padding-bottom: 60px;
+
+      > p:first-child { font-size: 17px; }
+      h2 { font-size: 26px; margin: 36px 0 14px; }
+      h3 { font-size: 20px; margin: 28px 0 12px; }
+
+      img.alignleft, img.alignright {
+        float: none;
+        max-width: 100%;
+        margin: 20px auto;
       }
     }
   }
 
+  // ----- Sidebar (prix-m² articles) ----------------------------------------
   &__sidebar {
-    &--prix-m2 {
-      background: $color-bg-alt;
-      padding: $space-6;
-      border-radius: $radius-md;
-      margin-bottom: $space-8;
+    max-width: $content-prose-max;
+    margin: 0 auto 32px;
+    padding: 0 24px;
 
-      h3 { font-size: $font-size-base; }
+    &--prix-m2 {
+      background: $ds-paper;
+      padding: 22px 26px;
+      border-radius: 20px;
+
+      h2 {
+        font-family: $ds-font-helv;
+        font-weight: 300;
+        font-size: 22px;
+        margin: 0 0 10px;
+        color: $black;
+        b { font-weight: 700; }
+      }
+
+      nav p {
+        margin: 0;
+        font-size: 14px;
+        color: $ds-ink;
+      }
     }
   }
 
+  // ----- Footer (categories / tags) ----------------------------------------
   &__footer {
-    margin-top: $space-10;
-    padding-top: $space-6;
-    border-top: 1px solid $color-border-light;
+    background: $ds-paper;
+    padding: 50px $content-side-pad 70px;
+    margin-top: 40px;
+
+    @media (max-width: $bp-tablet) {
+      padding: 40px 20px 50px;
+    }
   }
 
   &__categories,
   &__tags {
+    max-width: 1240px;
+    margin: 0 auto 18px;
     display: flex;
     flex-wrap: wrap;
-    gap: $space-2;
-    margin-bottom: $space-4;
+    gap: 10px;
+    align-items: center;
+
+    &::before {
+      content: 'Catégories';
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: $ds-olive-2;
+      margin-right: 6px;
+    }
+  }
+
+  &__tags::before { content: 'Tags'; color: $ds-orange-2; }
+}
+
+// Pill chips inside the content footer.
+.content__footer .tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: $white;
+  border: 1px solid $ds-hairline;
+  color: $black;
+  font-family: $ds-font-noto;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .2px;
+  text-decoration: none;
+  transition: border-color .25s ease, color .25s ease, transform .25s ease, background .25s ease;
+
+  &:hover {
+    border-color: $ds-olive;
+    background: $ds-olive;
+    color: $white;
+    transform: translateY(-1px);
+  }
+
+  &--small {
+    font-size: 12px;
+    padding: 6px 12px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: $ds-ink;
+
+    &:hover { background: $ds-orange; border-color: $ds-orange; color: $white; }
   }
 }
 

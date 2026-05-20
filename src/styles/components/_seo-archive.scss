@@ -1,0 +1,399 @@
+// ============================================
+// SEO ARCHIVE PAGES — categorie, tag, local, arrondissement, quartiers
+// Reuses Pujol home-page design tokens (see _home.scss).
+// ============================================
+
+$ds-side-pad-seo: unquote("max(100px, calc(50% - 620px))");
+
+// =========================================
+// COMPACT HERO — paper background, centered title + subtitle
+// Used by every SEO archive entry point.
+// =========================================
+.seo-hero {
+  background: $ds-paper;
+  padding: 70px $ds-side-pad-seo 60px;
+  text-align: center;
+  color: $black;
+
+  &__eyebrow {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 60px;
+    line-height: .9467;
+    color: $black;
+    text-align: center;
+    max-width: 920px;
+    margin: 0 auto;
+
+    b { font-weight: 700; }
+  }
+
+  &__sub {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.55;
+    color: $ds-ink;
+    margin: 20px auto 0;
+    max-width: 720px;
+  }
+
+  &__count {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: $white;
+    border: 1px solid $ds-hairline;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .4px;
+    color: $ds-ink;
+  }
+
+  @media (max-width: $bp-tablet) {
+    padding: 50px 20px 40px;
+
+    h1 { font-size: 36px; }
+    &__sub { font-size: 16px; }
+  }
+}
+
+// =========================================
+// ARCHIVE WRAPPER — neutral page chrome under the hero
+// =========================================
+.seo-archive {
+  background: $white;
+  padding: 70px $ds-side-pad-seo 110px;
+
+  &--paper { background: $ds-paper; }
+
+  .ds-sec-title { margin-bottom: 40px; }
+
+  @media (max-width: $bp-tablet) {
+    padding: 50px 20px 70px;
+  }
+}
+
+// =========================================
+// TAXONOMY GRID — categories / tags as pill cards
+// =========================================
+.seo-tax-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+
+  li { margin: 0; }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    background: $white;
+    border: 1px solid $ds-hairline;
+    border-radius: 999px;
+    color: $black;
+    text-decoration: none;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 15px;
+    transition: border-color .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+
+    .label {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .count {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .4px;
+      color: $ds-ink;
+      background: $ds-paper;
+      border-radius: 999px;
+      padding: 4px 10px;
+      flex: 0 0 auto;
+      transition: background .25s ease, color .25s ease;
+    }
+
+    &:hover {
+      border-color: $ds-olive;
+      color: $ds-olive-2;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
+
+      .count { background: $ds-olive; color: $white; }
+    }
+  }
+
+  // Tag variant — denser inline chips
+  &--chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    grid-template-columns: none;
+
+    a {
+      padding: 10px 18px;
+      font-size: 14px;
+      .count { font-size: 11px; padding: 3px 8px; }
+    }
+  }
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+
+    a { padding: 14px 18px; font-size: 14px; }
+  }
+}
+
+// =========================================
+// ARTICLE CARD GRID — used by category/tag/local archives
+// =========================================
+.seo-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.seo-card {
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid $ds-hairline;
+  transition: transform .3s ease, box-shadow .3s ease;
+
+  &__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: $ds-paper;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+  }
+
+  &__body {
+    padding: 24px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color .25s ease;
+
+      &:hover { color: $ds-olive-2; }
+    }
+  }
+
+  &__excerpt {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.55;
+    color: $ds-ink;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__date {
+    margin-top: auto;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .08);
+
+    .seo-card__media img { transform: scale(1.04); }
+  }
+
+  // Compact variant without a hero image
+  &--text {
+    .seo-card__body { padding-top: 28px; }
+  }
+}
+
+// =========================================
+// EMPTY STATE
+// =========================================
+.seo-empty {
+  text-align: center;
+  padding: 40px 20px;
+  font-family: $ds-font-noto;
+  color: $ds-ink;
+  font-size: 16px;
+}
+
+// =========================================
+// AREA PAGE — arrondissement / quartier hero + CTA stack
+// Composes seo-hero on top, then a paper section with CTAs.
+// =========================================
+.seo-area {
+  background: $white;
+
+  &__intro {
+    padding: 70px $ds-side-pad-seo 30px;
+    max-width: 1240px;
+    margin: 0 auto;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.65;
+    color: $ds-ink;
+
+    p { margin: 0 0 18px; }
+    strong { font-weight: 700; color: $black; }
+
+    ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin: 18px 0;
+    }
+    li { margin-bottom: 6px; }
+  }
+
+  &__cta-section {
+    background: $ds-paper;
+    padding: 70px $ds-side-pad-seo 110px;
+    text-align: center;
+
+    .ds-sec-title { margin-bottom: 16px; }
+
+    p {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 18px;
+      color: $ds-ink;
+      margin: 0 auto 36px;
+      max-width: 640px;
+    }
+  }
+
+  &__cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: $bp-tablet) {
+    &__intro,
+    &__cta-section { padding-left: 20px; padding-right: 20px; }
+    &__intro { font-size: 16px; }
+  }
+}
+
+// =========================================
+// CURTAIN-FILL CTA — pill button reusable across SEO pages
+// =========================================
+.seo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid $ds-olive;
+  color: $black;
+  background-color: transparent;
+  background-image: linear-gradient(to top, transparent 50%, $ds-olive 50%);
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position .4s ease, color .3s ease, transform .25s ease;
+
+  &:hover {
+    background-position: 0 100%;
+    color: $ds-olive;
+    transform: translateY(-1px);
+  }
+
+  &--vente {
+    border-color: $ds-orange;
+    background-image: linear-gradient(to top, transparent 50%, $ds-orange 50%);
+    &:hover { color: $ds-orange; }
+  }
+
+  &--filled {
+    color: $white;
+    background-color: $ds-olive;
+    background-image: linear-gradient(to top, $white 50%, $ds-olive 50%);
+    background-position: 0 0;
+    &:hover { color: $ds-olive; background-position: 0 100%; }
+  }
+
+  &--ghost {
+    border-color: $ds-hairline-2;
+    background-image: linear-gradient(to top, transparent 50%, $black 50%);
+    &:hover { color: $white; }
+  }
+}

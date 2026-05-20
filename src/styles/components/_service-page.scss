@@ -1982,7 +1982,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 // =========================================
 .contact-urgency {
   background: $white;
-  padding: 0 $ds-side-pad-svc 20px;
+  padding: 60px $ds-side-pad-svc;
 
   &__inner {
     max-width: 1240px;
@@ -2887,7 +2887,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 
   .contact-urgency {
-    padding: 0 $mobile-pad 16px;
+    padding: 40px $mobile-pad;
 
     &__inner {
       grid-template-columns: 1fr;

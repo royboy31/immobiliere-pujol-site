@@ -48,7 +48,62 @@ interface Props {
 const { entry, type } = Astro.props;
 // Bodies are pure HTML (scraped from WP). Render raw to avoid markdown turning
 // 4-space-indented HTML into syntax-highlighted code blocks.
-const rawBody = (entry as any).body ?? '';
+let rawBody: string = (entry as any).body ?? '';
+
+// Strip legacy WP share block — the onclick handlers reference a missing
+// `socialPopup()` JS function and the raw SVGs balloon the layout.
+rawBody = rawBody
+  // Wrapper <div class="post__share"> is malformed (no closing </div>);
+  // strip from the opener through the inner </ul>, with optional trailing </div>.
+  .replace(/<!--\s*SHARE\s*-->/gi, '')
+  .replace(/<div\s+class="post__share"[\s\S]*?<\/ul>\s*(<\/div>)?/gi, '')
+  .replace(/<ul\s+class="social__list"[\s\S]*?<\/ul>/gi, '')
+  .replace(/<svg\s+class="social__icon[\s\S]*?<\/svg>/gi, '');
+
+// Wrap each <img> + its trailing text (up to the next img, heading, blockquote,
+// hr, or end of document) into a 2-col card. Sides alternate left/right.
+function wrapImagePairs(html: string): string {
+  const imgRegex = /<img\b[^>]*>/gi;
+  const breakRegex = /<\/?(?:h[1-6]|table|hr|blockquote|figure)\b[^>]*>/i;
+  const imgs: { tag: string; start: number; end: number }[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = imgRegex.exec(html)) !== null) {
+    imgs.push({ tag: m[0], start: m.index, end: m.index + m[0].length });
+  }
+  if (!imgs.length) return html;
+
+  let out = '';
+  let cursor = 0;
+  let pairIndex = 0;
+
+  for (let i = 0; i < imgs.length; i++) {
+    const img = imgs[i];
+    out += html.slice(cursor, img.start);
+
+    const nextStart = i + 1 < imgs.length ? imgs[i + 1].start : html.length;
+    const remaining = html.slice(img.end, nextStart);
+    const blockMatch = breakRegex.exec(remaining);
+    const bodyEnd = blockMatch ? img.end + blockMatch.index : nextStart;
+    const body = html.slice(img.end, bodyEnd);
+
+    // Skip pair-wrapping when there's no meaningful caption text — render image alone.
+    const stripped = body.replace(/<[^>]+>/g, '').replace(/&nbsp;|&#8211;/g, '').trim();
+    if (stripped.length < 6) {
+      out += `<figure class="article-figure">${img.tag}</figure>${body}`;
+      cursor = bodyEnd;
+      continue;
+    }
+
+    const side = pairIndex % 2 === 0 ? 'left' : 'right';
+    out += `<aside class="article-pair article-pair--${side}"><div class="article-pair__media">${img.tag}</div><div class="article-pair__body">${body}</div></aside>`;
+    cursor = bodyEnd;
+    pairIndex++;
+  }
+  out += html.slice(cursor);
+  return out;
+}
+
+rawBody = wrapImagePairs(rawBody);
 
 // Detect prix-au-m2 category for special template
 const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
@@ -81,20 +136,40 @@ const isEstimationPage = entry.data.slug === 'estimez-le-prix-de-vente-de-votre-
 // H1 and a featured image. Skip our own content__header when the body has one
 // to avoid a duplicate <h1>.
 const bodyHasOwnH1 = /<h1\b/i.test(rawBody);
+
+const slugify = (s: string): string =>
+  s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+
+const featuredImage = entry.data.featuredImage as string | undefined;
+const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 ---
 
 <BaseLayout title={title} description={description} schemas={pageSchemas}>
-  <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2 }]}>
+  <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">
-        <h1>{entry.data.title}</h1>
-        {type === 'article' && entry.data.date && (
-          <time datetime={entry.data.date}>
-            {new Date(entry.data.date).toLocaleDateString('fr-FR', {
-              year: 'numeric', month: 'long', day: 'numeric'
-            })}
-          </time>
+        {featuredImage && (
+          <div class="content__header-media">
+            <img src={featuredImage} alt={entry.data.title} loading="eager" />
+            <div class="content__header-overlay"></div>
+          </div>
         )}
+        <div class="content__header-inner">
+          {heroCategory && (
+            <a class="content__eyebrow" href={`/categorie/${slugify(heroCategory)}/`}>{heroCategory}</a>
+          )}
+          <h1>{entry.data.title}</h1>
+          {type === 'article' && entry.data.date && (
+            <time datetime={entry.data.date}>
+              {new Date(entry.data.date).toLocaleDateString('fr-FR', {
+                year: 'numeric', month: 'long', day: 'numeric'
+              })}
+            </time>
+          )}
+        </div>
       </header>
     )}
 
@@ -102,7 +177,6 @@ const bodyHasOwnH1 = /<h1\b/i.test(rawBody);
       <aside class="content__sidebar content__sidebar--prix-m2">
         <h2>Prix au m² par arrondissement</h2>
         <nav>
-          <!-- Populated by component in Gate 1 completion -->
           <p>Sidebar arrondissements — a implementer</p>
         </nav>
       </aside>

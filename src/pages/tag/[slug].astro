@@ -52,22 +52,40 @@ const { tag, articles } = Astro.props;
   title={`${tag} – Immobilière Pujol`}
   description={`Articles sur le thème : ${tag}`}
 >
-  <section class="blog-archive blog-archive--tag">
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Tag</p>
     <h1>{tag}</h1>
-    <p class="blog-archive__count">{articles.length} article{articles.length > 1 ? 's' : ''}</p>
+    <span class="seo-hero__count">{articles.length} article{articles.length > 1 ? 's' : ''}</span>
+  </section>
 
-    <div class="blog-archive__grid">
-      {articles.map((article) => (
-        <article class="blog-card">
-          {article.data.featuredImage && (
-            <img src={article.data.featuredImage} alt={article.data.title} loading="lazy" />
-          )}
-          <h2>
-            <a href={`/${article.data.slug}/`}>{article.data.title}</a>
-          </h2>
-          {article.data.excerpt && <p>{article.data.excerpt}</p>}
-        </article>
-      ))}
-    </div>
+  <section class="seo-archive seo-archive--paper">
+    {articles.length === 0 ? (
+      <p class="seo-empty">Aucun article associé à ce tag pour le moment.</p>
+    ) : (
+      <div class="seo-card-grid">
+        {articles.map((article) => (
+          <article class={`seo-card ${!article.data.featuredImage ? 'seo-card--text' : ''}`}>
+            {article.data.featuredImage && (
+              <a href={`/${article.data.slug}/`} class="seo-card__media">
+                <img src={article.data.featuredImage} alt={article.data.title} loading="lazy" />
+              </a>
+            )}
+            <div class="seo-card__body">
+              <h2 class="seo-card__title">
+                <a href={`/${article.data.slug}/`}>{article.data.title}</a>
+              </h2>
+              {article.data.excerpt && <p class="seo-card__excerpt">{article.data.excerpt}</p>}
+              {article.data.date && (
+                <time class="seo-card__date" datetime={article.data.date}>
+                  {new Date(article.data.date).toLocaleDateString('fr-FR', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                  })}
+                </time>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </section>
 </BaseLayout>

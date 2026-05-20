@@ -10,13 +10,16 @@ const error = Astro.url.searchParams.get('err');
 ---
 
 <AdminLayout title="Connexion" hideSidebar>
-  <div style="max-width: 420px; margin: 6rem auto;">
-    <h1 style="text-align:center; margin-bottom: 2rem;">Admin Immobilière Pujol</h1>
-    <div class="card">
+  <div class="login-page">
+    <div class="login-page__brand">
+      <p class="login-page__eyebrow">Immobilière Pujol</p>
+      <h1>Espace <b>administration</b></h1>
+      <p class="login-page__sub">Connectez-vous pour gérer les contenus du site.</p>
+    </div>
+
+    <div class="card login-page__card">
       {error && (
-        <p style="background:#fee2e2; color:#991b1b; padding:.6rem .8rem; border-radius:6px; margin-bottom:1rem;">
-          Identifiants incorrects
-        </p>
+        <p class="login-page__error">Identifiants incorrects.</p>
       )}
       <form method="POST" action={`/api/${adminPath}/auth/login`}>
         <input type="hidden" name="next" value={next} />
@@ -28,10 +31,65 @@ const error = Astro.url.searchParams.get('err');
           Mot de passe
           <input type="password" name="password" required autocomplete="current-password" />
         </label>
-        <button type="submit" class="btn btn--primary" style="width:100%; margin-top:.5rem;">
+        <button type="submit" class="btn btn--primary login-page__submit">
           Se connecter
         </button>
       </form>
     </div>
   </div>
 </AdminLayout>
+
+<style>
+  .login-page {
+    max-width: 460px;
+    margin: 80px auto;
+    padding: 0 20px;
+  }
+  .login-page__brand {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .login-page__eyebrow {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+    margin: 0 0 10px;
+  }
+  .login-page h1 {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.05;
+    margin: 0 0 12px;
+    color: #000;
+  }
+  .login-page h1 b { font-weight: 700; }
+  .login-page__sub {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgb(58, 58, 58);
+    margin: 0;
+  }
+  .login-page__card {
+    padding: 30px 32px;
+  }
+  .login-page__error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px 16px;
+    border-radius: 10px;
+    margin: 0 0 18px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .login-page__submit {
+    width: 100%;
+    justify-content: center;
+    margin-top: 6px;
+  }
+</style>

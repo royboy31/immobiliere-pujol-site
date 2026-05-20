@@ -10,26 +10,116 @@ const pages = await getCollection('pages');
 const sample = articles[0];
 const sampleKeys = sample ? Object.keys(sample) : [];
 const sampleDataKeys = sample?.data ? Object.keys(sample.data) : [];
+
+const stats = [
+  { label: 'Articles', value: articles.length },
+  { label: 'Services', value: services.length },
+  { label: 'Pages', value: pages.length },
+];
 ---
 
-<BaseLayout title="Debug" noindex={true}>
-  <div style="padding: 2rem; font-family: monospace; white-space: pre-wrap;">
-    <h1>Stats</h1>
-    <p>Articles: {articles.length} | Services: {services.length} | Pages: {pages.length}</p>
+<BaseLayout title="Debug – Immobilière Pujol" noindex={true} breadcrumb={false}>
+  <section class="seo-hero">
+    <p class="seo-hero__eyebrow">Diagnostic</p>
+    <h1>Debug <b>console</b></h1>
+    <p class="seo-hero__sub">
+      Aperçu des collections Astro chargées sur cette instance. Cette page n'est pas indexée.
+    </p>
+  </section>
 
-    <h2>Sample Article — top-level keys</h2>
-    <p>{JSON.stringify(sampleKeys)}</p>
+  <section class="seo-archive">
+    <h2 class="ds-sec-title">Statistiques <b>du contenu</b></h2>
+    <div class="debug-stats">
+      {stats.map(s => (
+        <article class="debug-stat">
+          <span class="debug-stat__value">{s.value}</span>
+          <span class="debug-stat__label">{s.label}</span>
+        </article>
+      ))}
+    </div>
 
-    <h2>Sample Article — data keys</h2>
-    <p>{JSON.stringify(sampleDataKeys)}</p>
+    <h2 class="ds-sec-title" style="margin-top: 60px;">Échantillon <b>d'article</b></h2>
+    <div class="debug-block">
+      <h3>Top-level keys</h3>
+      <pre>{JSON.stringify(sampleKeys, null, 2)}</pre>
 
-    <h2>Sample Article — id</h2>
-    <p>{sample?.id}</p>
+      <h3>Data keys</h3>
+      <pre>{JSON.stringify(sampleDataKeys, null, 2)}</pre>
 
-    <h2>Sample Article — full data</h2>
-    <p>{JSON.stringify(sample?.data, null, 2)}</p>
+      <h3>ID</h3>
+      <pre>{sample?.id}</pre>
 
-    <h2>Sample Article — body exists?</h2>
-    <p>{sample?.body ? 'YES (' + sample.body.length + ' chars)' : 'NO'}</p>
-  </div>
+      <h3>Full data</h3>
+      <pre>{JSON.stringify(sample?.data, null, 2)}</pre>
+
+      <h3>Body</h3>
+      <pre>{sample?.body ? `OK — ${sample.body.length} chars` : 'NO body field'}</pre>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  .debug-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  .debug-stat {
+    background: rgb(238, 243, 239);
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .debug-stat__value {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 1;
+    color: #000;
+  }
+  .debug-stat__label {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+  }
+
+  .debug-block {
+    max-width: 1240px;
+    margin: 30px auto 0;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 20px;
+    padding: 28px 32px;
+  }
+  .debug-block h3 {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: rgb(166, 179, 82);
+    margin: 28px 0 10px;
+  }
+  .debug-block h3:first-child { margin-top: 0; }
+  .debug-block pre {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgb(58, 58, 58);
+    background: rgb(238, 243, 239);
+    padding: 16px 18px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+</style>
