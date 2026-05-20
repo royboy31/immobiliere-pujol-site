@@ -49,7 +49,7 @@ export function findExpertByEmail(rawEmail: string | undefined | null): Expert |
 
 export type ExpertType = 'rental' | 'sales' | 'other';
 
-// Classify expert by fonction so the page can theme rentals (green) vs sales (orange).
+// Classify expert by fonction so the page can theme sales (green) vs rentals (orange).
 // Rental wins ties because "gestion locative" appears alongside "vente" in mixed roles
 // (e.g. Caroline Pujol — "Vente, rénovation et gestion de biens immobiliers").
 export function getExpertType(expert: Pick<Expert, 'fonction'>): ExpertType {

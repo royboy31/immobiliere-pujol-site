@@ -75,7 +75,46 @@ try {
 
 const activeSlugs = new Set(activeAnnonces.map((a) => a.slug));
 const closedOnly = historyListings.filter((l) => !activeSlugs.has(l.slug));
-const closedVisible = closedOnly.slice(0, 12);
+
+const expertType = getExpertType(expert);
+const isSales = expertType === 'sales';
+const isRental = expertType === 'rental';
+
+// Sales experts see only V listings, rental experts see only L. "Other" roles
+// (syndic, accueil, comptable) keep the full mixed list since the distinction
+// doesn't apply to them.
+const activeForType = isSales
+  ? activeAnnonces.filter((a) => a.type === 'V')
+  : isRental
+    ? activeAnnonces.filter((a) => a.type === 'L')
+    : activeAnnonces;
+const closedForType = isSales
+  ? closedOnly.filter((l) => l.type === 'V')
+  : isRental
+    ? closedOnly.filter((l) => l.type === 'L')
+    : closedOnly;
+const closedVisible = closedForType.slice(0, 12);
+
+const activeCount = activeForType.length;
+const activeSub = isSales
+  ? `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la vente.`
+  : isRental
+    ? `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la location.`
+    : `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la vente ou à la location.`;
+const historySub = isSales
+  ? `${historyTotalCount} biens vendus.`
+  : isRental
+    ? `${historyTotalCount} biens loués.`
+    : `${historyTotalCount} biens vendus ou loués.`;
+const quickstatsLabel = isSales ? 'Vendus' : isRental ? 'Loués' : 'Accompagnés';
+const ctaLead = isSales
+  ? 'Un projet de vente à réaliser bientôt ?'
+  : isRental
+    ? 'Un projet de location à concrétiser ?'
+    : 'Un projet en tête ?';
+const ctaTail = isSales || isRental
+  ? `Prenez contact avec ${firstName} pour en discuter.`
+  : `Parlons-en avec ${firstName}.`;
 
 const pageDesc = expert.description
   ? expert.description.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160)
@@ -112,7 +151,6 @@ try {
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
-const expertType = getExpertType(expert);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} schemas={
@@ -149,7 +187,9 @@ const expertType = getExpertType(expert);
             {firstName}{lastName && <> <b>{lastName}</b></>}
           </h1>
           {expert.fonction && (
-            <span class="expert-body__role-pill">{expert.fonction}</span>
+            <p class="expert-body__tagline">
+              C'est votre expert <b>{expert.fonction}</b>.
+            </p>
           )}
         </header>
 
@@ -225,15 +265,15 @@ const expertType = getExpertType(expert);
         </div>
 
         {/* Quick stats card under the photo card */}
-        {(activeAnnonces.length > 0 || historyTotalCount > 0) && (
+        {(activeForType.length > 0 || historyTotalCount > 0) && (
           <div class="expert-quickstats">
             <div class="expert-quickstats__cell">
-              <span class="expert-quickstats__num">{activeAnnonces.length}</span>
+              <span class="expert-quickstats__num">{activeForType.length}</span>
               <span class="expert-quickstats__lbl">Disponibles</span>
             </div>
             <div class="expert-quickstats__cell">
               <span class="expert-quickstats__num">{historyTotalCount}</span>
-              <span class="expert-quickstats__lbl">Accompagnés</span>
+              <span class="expert-quickstats__lbl">{quickstatsLabel}</span>
             </div>
           </div>
         )}
@@ -301,17 +341,23 @@ const expertType = getExpertType(expert);
       </section>
     )}
 
-    {activeAnnonces.length > 0 && (
+    {activeForType.length > 0 && (
       <section class="expert-listings expert-listings--active">
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Disponible</span>
           <h2 class="expert-listings__title">
-            Les biens en charge de <b>{firstName}</b>
+            {isSales ? (
+              <>Les biens en vente proposés par <b>{firstName}</b></>
+            ) : isRental ? (
+              <>Les biens en location proposés par <b>{firstName}</b></>
+            ) : (
+              <>Les biens proposés par <b>{firstName}</b></>
+            )}
           </h2>
-          <p class="expert-listings__sub">{activeAnnonces.length} bien{activeAnnonces.length > 1 ? 's' : ''} actuellement à la vente ou à la location.</p>
+          <p class="expert-listings__sub">{activeSub}</p>
         </header>
         <div class="annonces-grid">
-          {activeAnnonces.map((a) => <AnnonceCard annonce={a} />)}
+          {activeForType.map((a) => <AnnonceCard annonce={a} />)}
         </div>
       </section>
     )}
@@ -321,11 +367,15 @@ const expertType = getExpertType(expert);
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Historique</span>
           <h2 class="expert-listings__title">
-            Les biens déjà <b>accompagnés</b>
+            {isSales ? (
+              <>Les biens <b>vendus par {firstName}</b></>
+            ) : isRental ? (
+              <>Les biens <b>loués par {firstName}</b></>
+            ) : (
+              <>Les biens <b>accompagnés par {firstName}</b></>
+            )}
           </h2>
-          <p class="expert-listings__sub">
-            {historyTotalCount} biens vendus ou loués grâce à {firstName}.
-          </p>
+          <p class="expert-listings__sub">{historySub}</p>
         </header>
         <div class="expert-history-grid">
           {closedVisible.map((l) => (
@@ -356,13 +406,13 @@ const expertType = getExpertType(expert);
         </div>
         {historyTotalCount > closedVisible.length && (
           <p class="expert-listings__more">
-            … et {historyTotalCount - closedVisible.length} autres biens accompagnés par {firstName}.
+            … et {historyTotalCount - closedVisible.length} autres biens {isSales ? 'vendus' : isRental ? 'loués' : 'accompagnés'} par {firstName}.
           </p>
         )}
       </section>
     )}
 
-    {activeAnnonces.length === 0 && closedOnly.length === 0 && (
+    {activeForType.length === 0 && closedForType.length === 0 && (
       <section class="expert-listings expert-listings--empty">
         <p>Aucun bien n'est actuellement associé à ce profil.</p>
       </section>
@@ -370,8 +420,8 @@ const expertType = getExpertType(expert);
 
     <section class="expert-final-cta">
       <h2 class="expert-final-cta__title">
-        Un projet en tête ? <br />
-        <b>Parlons-en avec {firstName}.</b>
+        {ctaLead} <br />
+        <b>{ctaTail}</b>
       </h2>
       <div class="expert-final-cta__row">
         {expert.phone && (
