@@ -53,18 +53,12 @@ async function sendEmail(
   env: Env,
   opts: SendOpts
 ): Promise<{ ok: boolean; error?: string }> {
-  // ⚠️ TEST MODE — remove before go-live
-  const TEST_OVERRIDE = 'kamindudushmantha@gmail.com';
-
   const recipients: { email: string; type: 'to' | 'cc' }[] = [
-    { email: TEST_OVERRIDE || opts.to || 'contact@immobiliere-pujol.fr', type: 'to' },
+    { email: opts.to || 'contact@immobiliere-pujol.fr', type: 'to' },
   ];
-  // In test mode, skip cc to avoid sending to real inboxes
-  if (!TEST_OVERRIDE && opts.cc) {
+  if (opts.cc) {
     recipients.push({ email: opts.cc, type: 'cc' });
   }
-
-  const subjectPrefix = TEST_OVERRIDE ? '[TEST] ' : '';
 
   const payload = {
     key: env.MANDRILL_API_KEY,
@@ -72,7 +66,7 @@ async function sendEmail(
       from_email: opts.fromEmail || 'contact@immobiliere-pujol.fr',
       from_name: opts.fromName || 'Immobilière Pujol',
       to: recipients,
-      subject: `${subjectPrefix}${opts.subject}`,
+      subject: opts.subject,
       html: opts.html,
       tags: ['source=site-public'],
       ...(opts.replyTo ? { headers: { 'Reply-To': opts.replyTo } } : {}),
