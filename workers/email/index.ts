@@ -7,8 +7,8 @@ interface Env {
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
-const RECIPIENT = 'kamindudushmantha@gmail.com';
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyrEh_gNbjxEMs2O5D6QT5iyGEYF_yoBWzmtZM1i7SDm8YhbPY87vC6IzCYc2tJ1zHm/exec';
+const ZOHO_PARSER = 'g9f4fx36@parser.eu.zohocrm.com';
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -17,7 +17,6 @@ function esc(s: string): string {
 }
 
 function cors(origin: string, env: Env): Record<string, string> {
-  // Allow the staging/production origin + localhost for dev
   const allowed = [env.ALLOWED_ORIGIN, 'http://localhost:4321', 'http://localhost:3000'];
   const allow = allowed.includes(origin) ? origin : env.ALLOWED_ORIGIN;
   return {
@@ -40,18 +39,36 @@ function jsonErr(msg: string, status: number, origin: string, env: Env) {
   });
 }
 
+interface SendOpts {
+  subject: string;
+  html: string;
+  replyTo?: string;
+  to?: string;
+  cc?: string;
+  fromEmail?: string;
+  fromName?: string;
+}
+
 async function sendEmail(
   env: Env,
-  opts: { subject: string; html: string; replyTo?: string }
+  opts: SendOpts
 ): Promise<{ ok: boolean; error?: string }> {
+  const recipients: { email: string; type: 'to' | 'cc' }[] = [
+    { email: opts.to || 'contact@immobiliere-pujol.fr', type: 'to' },
+  ];
+  if (opts.cc) {
+    recipients.push({ email: opts.cc, type: 'cc' });
+  }
+
   const payload = {
     key: env.MANDRILL_API_KEY,
     message: {
-      from_email: 'contact@immobiliere-pujol.com',
-      from_name: 'Immobilière Pujol — Site Web',
-      to: [{ email: RECIPIENT, type: 'to' as const }],
+      from_email: opts.fromEmail || 'contact@immobiliere-pujol.fr',
+      from_name: opts.fromName || 'Immobilière Pujol',
+      to: recipients,
       subject: opts.subject,
       html: opts.html,
+      tags: ['source=site-public'],
       ...(opts.replyTo ? { headers: { 'Reply-To': opts.replyTo } } : {}),
     },
   };
@@ -92,6 +109,146 @@ async function logToSheet(tab: string, row: string[]): Promise<void> {
   }
 }
 
+const SITE_URL = 'https://www.immobiliere-pujol.fr';
+const STAGING_URL = 'https://immobiliere-pujol-staging.roy-68a.workers.dev';
+const RGPD_URL = 'https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868';
+
+// ── Unified auto-reply (Caroline 21 mai) ─────────────────────────────────
+// ONE template for ALL forms — simple, branded, same subject line.
+
+const UNIFIED_AUTO_REPLY = {
+  subject: 'Votre demande a bien été reçue — Immobilière Pujol',
+  body: `<p>Nous avons bien reçu votre demande. Elle va être transmise à la personne
+la mieux placée au sein de notre équipe pour vous apporter une réponse.
+Vous aurez un retour sous peu.</p>
+<p>Bien cordialement,</p>`,
+  signoff: "L'équipe Immobilière Pujol",
+};
+
+function buildCustomerEmail(vars: { prénom?: string }): string {
+  const greeting = vars.prénom
+    ? `Bonjour ${esc(vars.prénom)},`
+    : 'Bonjour,';
+
+  return `
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#eef3ef;padding:32px 16px">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+
+        <!-- Header -->
+        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        </td></tr>
+
+        <!-- Green accent bar -->
+        <tr><td style="background-color:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+
+        <!-- Body -->
+        <tr><td style="background-color:#ffffff;padding:32px 32px 24px">
+
+          <p style="margin:0 0 16px;font-size:15px;color:#0f1a2b;font-weight:600">${greeting}</p>
+
+          <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
+            ${UNIFIED_AUTO_REPLY.body}
+          </div>
+
+          <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(UNIFIED_AUTO_REPLY.signoff)}</p>
+
+        </td></tr>
+
+        <!-- RGPD notice -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
+          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
+            Dans le cadre de nos activités, nous traitons vos données personnelles conformément au RGPD et à la loi n°78-17 du 6 janvier 1978.
+            <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">Consulter notre politique de données personnelles</a>.
+            Pour exercer vos droits : <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
+          </p>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background-color:#0f1a2b;padding:28px 32px;border-radius:0 0 8px 8px">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="vertical-align:top;padding-right:16px" width="50%">
+                <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#ffffff">Immobilière Pujol</p>
+                <p style="margin:0;font-size:13px;color:#ffffff;line-height:1.7">
+                  7 rue du Docteur Fiolle<br>
+                  13006 Marseille
+                </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  <strong>Site</strong> <a href="${SITE_URL}" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">www.immobiliere-pujol.fr</span></a><br>
+                  <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
+                </p>
+              </td>
+              <td style="vertical-align:top" width="50%">
+                <p style="margin:0 0 6px;font-size:14px;font-weight:700;color:#ffffff">Horaires</p>
+                <p style="margin:0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Lundi – Jeudi<br>
+                  9h – 12h / 14h – 18h<br><br>
+                  Vendredi<br>
+                  9h – 12h / 14h – 17h
+                </p>
+              </td>
+            </tr>
+          </table>
+          <hr style="border:none;border-top:1px solid #2a3a4b;margin:20px 0">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+            <tr><td align="center" style="padding-bottom:16px">
+              <a href="https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/youtube-play.png" alt="YouTube" width="28" height="28" style="display:block;border:0">
+              </a>
+              <a href="https://www.instagram.com/immobiliere_pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/instagram-new.png" alt="Instagram" width="28" height="28" style="display:block;border:0">
+              </a>
+              <a href="https://www.facebook.com/immobilierepujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/facebook-new.png" alt="Facebook" width="28" height="28" style="display:block;border:0">
+              </a>
+              <a href="https://www.linkedin.com/company/immobiliere-pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
+                <img src="https://img.icons8.com/ios-filled/28/B2C54F/linkedin.png" alt="LinkedIn" width="28" height="28" style="display:block;border:0">
+              </a>
+            </td></tr>
+            <tr><td align="center">
+              <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
+                Agence immobilière indépendante à Marseille depuis 2002.<br>
+                Vente, location, gestion locative et syndic de copropriété.
+              </p>
+            </td></tr>
+          </table>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendAutoReply(
+  env: Env,
+  customerEmail: string,
+  prénom: string,
+  fromEmail?: string,
+  fromName?: string,
+): Promise<void> {
+  if (!customerEmail || !customerEmail.includes('@')) return;
+  try {
+    await sendEmail(env, {
+      subject: UNIFIED_AUTO_REPLY.subject,
+      html: buildCustomerEmail({ prénom }),
+      to: customerEmail,
+      fromEmail: fromEmail || 'contact@immobiliere-pujol.fr',
+      fromName: fromName || 'Immobilière Pujol',
+    });
+  } catch {
+    // Fire-and-forget
+  }
+}
+
 function buildTable(subject: string, rows: [string, string][]): string {
   const trs = rows
     .filter(([, v]) => v)
@@ -115,7 +272,7 @@ function buildTable(subject: string, rows: [string, string][]): string {
 
         <!-- Header -->
         <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
-          <img src="https://immobiliere-pujol-staging.roy-68a.workers.dev/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
         </td></tr>
 
         <!-- Green accent bar -->
@@ -143,7 +300,6 @@ function buildTable(subject: string, rows: [string, string][]): string {
         <!-- Footer -->
         <tr><td style="background-color:#0f1a2b;padding:28px 32px;border-radius:0 0 8px 8px">
 
-          <!-- Contact info -->
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td style="vertical-align:top;padding-right:16px" width="50%">
@@ -169,30 +325,22 @@ function buildTable(subject: string, rows: [string, string][]): string {
             </tr>
           </table>
 
-          <!-- Divider -->
           <hr style="border:none;border-top:1px solid #2a3a4b;margin:20px 0">
 
-          <!-- Social icons: YouTube, Instagram, Facebook, LinkedIn (same order as website) -->
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
             <tr><td align="center" style="padding-bottom:16px">
-              <!--[if mso]><table role="presentation" cellpadding="0" cellspacing="0"><tr><![endif]-->
-              <!-- YouTube -->
               <a href="https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
                 <img src="https://img.icons8.com/ios-filled/28/B2C54F/youtube-play.png" alt="YouTube" width="28" height="28" style="display:block;border:0">
               </a>
-              <!-- Instagram -->
               <a href="https://www.instagram.com/immobiliere_pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
                 <img src="https://img.icons8.com/ios-filled/28/B2C54F/instagram-new.png" alt="Instagram" width="28" height="28" style="display:block;border:0">
               </a>
-              <!-- Facebook -->
               <a href="https://www.facebook.com/immobilierepujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
                 <img src="https://img.icons8.com/ios-filled/28/B2C54F/facebook-new.png" alt="Facebook" width="28" height="28" style="display:block;border:0">
               </a>
-              <!-- LinkedIn -->
               <a href="https://www.linkedin.com/company/immobiliere-pujol/" target="_blank" rel="noopener" style="display:inline-block;margin:0 6px;text-decoration:none">
                 <img src="https://img.icons8.com/ios-filled/28/B2C54F/linkedin.png" alt="LinkedIn" width="28" height="28" style="display:block;border:0">
               </a>
-              <!--[if mso]></tr></table><![endif]-->
             </td></tr>
             <tr><td align="center">
               <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
@@ -211,18 +359,25 @@ function buildTable(subject: string, rows: [string, string][]): string {
 </html>`;
 }
 
-// ── Form definitions (Gravity Forms field mappings) ─────────────────────────
+// ── Form definitions ────────────────────────────────────────────────────────
+// Each form has: field mappings, routing (to/cc), sender identity, and sheet tab.
 
 interface FormDef {
   subject: string;
-  tab: string; // Google Sheet tab name
-  fields: [string, string][]; // [label, formDataKey]
+  tab: string;
+  fields: [string, string][];
   honeypot: string;
   emailField: string;
+  to: string;
+  cc?: string;
+  fromEmail: string;
+  fromName: string;
 }
 
+const D = '@immobiliere-pujol.fr'; // domain shorthand
+
 const FORM_DEFS: Record<string, FormDef> = {
-  // Main contact + Agency + Dynamic service pages
+  // GF 4 — Contact général (routing done dynamically by dropdown, see handleContact)
   '4': {
     subject: 'Contact — Immobilière Pujol',
     tab: 'Contact',
@@ -236,8 +391,11 @@ const FORM_DEFS: Record<string, FormDef> = {
     ],
     honeypot: 'input_11',
     emailField: 'input_2',
+    to: `gabriella${D}`,          // default fallback; overridden by dropdown routing
+    fromEmail: `contact${D}`,
+    fromName: 'Immobilière Pujol',
   },
-  // Emergency
+  // GF 12 — Urgence
   '12': {
     subject: '🚨 URGENCE — Immobilière Pujol',
     tab: 'Urgence',
@@ -255,8 +413,11 @@ const FORM_DEFS: Record<string, FormDef> = {
     ],
     honeypot: 'input_9',
     emailField: 'input_2',
+    to: `stephanepujol${D}`,
+    fromEmail: `stephanepujol${D}`,
+    fromName: "Déclaration d'une urgence (site web)",
   },
-  // Vendre
+  // GF 9 — Vendre (estimation)
   '9': {
     subject: 'Estimation Vente — Immobilière Pujol',
     tab: 'Vente',
@@ -269,8 +430,11 @@ const FORM_DEFS: Record<string, FormDef> = {
     ],
     honeypot: 'input_15',
     emailField: 'input_2',
+    to: `benoit${D}`,
+    fromEmail: `benoit${D}`,
+    fromName: 'Immobilière Pujol — Vente',
   },
-  // Gestion Locative
+  // GF 1 — Gestion Locative (devis)
   '1': {
     subject: 'Gestion Locative — Immobilière Pujol',
     tab: 'Gestion Locative',
@@ -283,36 +447,133 @@ const FORM_DEFS: Record<string, FormDef> = {
     ],
     honeypot: 'input_9',
     emailField: 'input_4',
+    to: `gaelle${D}`,
+    fromEmail: `gaelle${D}`,
+    fromName: 'Immobilière Pujol — Gestion Locative',
   },
-  // Mettre en Location
+  // GF 8 — Estimation de loyer (formerly "Mise en Location")
   '8': {
-    subject: 'Mise en Location — Immobilière Pujol',
-    tab: 'Mise en Location',
+    subject: 'Demander une estimation de loyer — Immobilière Pujol',
+    tab: 'Estimation Loyer',
     fields: [
       ['Prénom', 'input_1.3'],
       ['Nom', 'input_1.6'],
       ['Email', 'input_2'],
       ['Téléphone', 'input_3'],
+      ['Type de bien', 'input_10'],
+      ['Adresse du bien', 'input_5'],
       ['Message', 'input_11'],
     ],
     honeypot: 'input_14',
     emailField: 'input_2',
+    to: `gaelle${D}`,
+    fromEmail: `stephanepujol${D}`,
+    fromName: 'Demande estimation de loyer (site web)',
   },
-  // Syndic
+  // GF 6 — Devis syndic
   '6': {
-    subject: 'Syndic — Immobilière Pujol',
-    tab: 'Syndic',
+    subject: 'Demander un devis en syndic — Immobilière Pujol',
+    tab: 'Devis Syndic',
     fields: [
       ['Prénom', 'input_1.3'],
       ['Nom', 'input_1.6'],
       ['Email', 'input_2'],
       ['Téléphone', 'input_3'],
+      ['Adresse copropriété', 'input_4'],
+      ['Nombre de lots', 'input_5'],
       ['Message', 'input_6'],
     ],
     honeypot: 'input_9',
     emailField: 'input_2',
+    to: `emeline${D}`,
+    cc: `stephanepujol${D}`,
+    fromEmail: `stephanepujol${D}`,
+    fromName: "Demande d'un devis en syndic (site web)",
+  },
+  // GF 7 — Calculer honoraires syndic
+  '7': {
+    subject: 'Calculer vos honoraires de syndic — Immobilière Pujol',
+    tab: 'Honoraires Syndic',
+    fields: [
+      ['Prénom', 'input_7.3'],
+      ['Nom', 'input_7.6'],
+      ['Email', 'input_9'],
+      ['Téléphone', 'input_8'],
+      ['Rôle — Président CS', 'input_11.1'],
+      ['Rôle — Membre CS', 'input_11.2'],
+      ['Rôle — Copropriétaire', 'input_11.3'],
+      ['Adresse', 'input_4.1'],
+      ['Ville', 'input_4.3'],
+      ['Code postal', 'input_4.5'],
+      ['Nombre de lots', 'input_19'],
+      ['Équipements', 'input_20'],
+      ['Procédures / recouvrement', 'input_21'],
+      ['Commentaires', 'input_17'],
+    ],
+    honeypot: 'input_24',
+    emailField: 'input_9',
+    to: `emeline${D}`,
+    cc: `stephanepujol${D}`,
+    fromEmail: `stephanepujol${D}`,
+    fromName: 'Calculer vos honoraires de syndic',
   },
 };
+
+// ── Contact général — dropdown routing ──────────────────────────────────────
+// The "Objet" dropdown value determines where the internal notification goes.
+
+interface DropdownRoute {
+  to: string;
+  fromEmail: string;
+  fromName: string;
+}
+
+const CONTACT_ROUTING: Record<string, DropdownRoute> = {
+  'Location': {
+    // Deflection — no internal notification, auto-reply from florian
+    to: '',
+    fromEmail: `florian${D}`,
+    fromName: 'Immobilière Pujol — Location',
+  },
+  'Vente': {
+    to: `benoit${D}`,
+    fromEmail: `benoit${D}`,
+    fromName: 'Immobilière Pujol — Vente',
+  },
+  'Gestion locative': {
+    to: `gaelle${D}`,
+    fromEmail: `gaelle${D}`,
+    fromName: 'Immobilière Pujol — Gestion Locative',
+  },
+  'Achat': {
+    to: `benoit${D}`,
+    fromEmail: `benoit${D}`,
+    fromName: 'Immobilière Pujol — Vente',
+  },
+  'Syndic': {
+    to: `emeline${D}`,
+    fromEmail: `emeline${D}`,
+    fromName: 'Immobilière Pujol — Syndic',
+  },
+  'Autre': {
+    to: `gabriella${D}`,
+    fromEmail: `contact${D}`,
+    fromName: 'Immobilière Pujol',
+  },
+};
+
+// Match dropdown value to a route — the dropdown text is long, so we match by prefix.
+function resolveContactRoute(objet: string): DropdownRoute {
+  const lower = objet.toLowerCase();
+  if (lower.startsWith('location')) return CONTACT_ROUTING['Location'];
+  if (lower.startsWith('vente') || lower.startsWith('achat')) return CONTACT_ROUTING['Vente'];
+  if (lower.startsWith('gestion')) return CONTACT_ROUTING['Gestion locative'];
+  if (lower.startsWith('client syndic') || lower.startsWith('syndic')) return CONTACT_ROUTING['Syndic'];
+  if (lower.includes('urgence')) {
+    return { to: `stephanepujol${D}`, fromEmail: `stephanepujol${D}`, fromName: 'Immobilière Pujol — Urgence' };
+  }
+  return CONTACT_ROUTING['Autre'];
+}
 
 // ── Route handlers ──────────────────────────────────────────────────────────
 
@@ -334,15 +595,49 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
   if (filledCount < 2) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
   const replyTo = ((fd.get(def.emailField) as string) || '').trim();
+  const prénom = rows.find(([l]) => l === 'Prénom')?.[1] || '';
+
+  // Determine routing — for GF 4, route by dropdown; others use def.to directly.
+  let to = def.to;
+  let cc = def.cc;
+  let fromEmail = def.fromEmail;
+  let fromName = def.fromName;
+
+  if (formId === '4') {
+    const objet = rows.find(([l]) => l === 'Objet')?.[1] || '';
+    const route = resolveContactRoute(objet);
+    fromEmail = route.fromEmail;
+    fromName = route.fromName;
+
+    if (!route.to) {
+      // Location deflection — only send auto-reply, no internal notification
+      if (replyTo) {
+        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName);
+      }
+      await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
+      return { ok: true };
+    }
+
+    to = route.to;
+  }
+
   const emailResult = await sendEmail(env, {
     subject: def.subject,
     html: buildTable(def.subject, rows),
     replyTo: replyTo || undefined,
+    to,
+    cc,
+    fromEmail,
+    fromName,
   });
 
   // Log to Google Sheet
-  const sheetRow = [now(), ...rows.map(([, v]) => v)];
-  await logToSheet(def.tab, sheetRow);
+  await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
+
+  // Send unified auto-reply
+  if (replyTo) {
+    await sendAutoReply(env, replyTo, prénom, fromEmail, fromName);
+  }
 
   return emailResult;
 }
@@ -354,25 +649,78 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
   const message = ((fd.get('message') as string) || '').trim();
   const reference = ((fd.get('reference') as string) || '').trim();
   const title = ((fd.get('title') as string) || '').trim();
+  // New hidden fields from ContactForm.astro
+  const type = ((fd.get('type') as string) || '').trim();
+  const codePostal = ((fd.get('code_postal') as string) || '').trim();
+  const negociateur = ((fd.get('negociateur') as string) || '').trim();
 
   if (!name || !email) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
-  const subject = `Demande Annonce ${reference || 'N/A'} — Immobilière Pujol`;
-  const emailResult = await sendEmail(env, {
-    subject,
-    html: buildTable(subject, [
-      ['Annonce', `${title} (${reference})`],
-      ['Nom', name],
-      ['Email', email],
-      ['Téléphone', phone],
-      ['Message', message],
-    ]),
-    replyTo: email,
-  });
+  const isVente = type === 'V';
+  const subjectPrefix = isVente ? 'Contact Annonce - Vente' : 'Contact Annonce - Location';
+  const subject = `${subjectPrefix} : ${name}`;
 
-  await logToSheet('Annonces', [now(), reference, title, name, email, phone, message]);
+  const tableRows: [string, string][] = [
+    ['Annonce', `${title} (${reference})`],
+    ['Référence', reference],
+    ['Code postal', codePostal],
+    ['Négociateur', negociateur],
+    ['Type', isVente ? 'Vente' : 'Location'],
+    ['Nom', name],
+    ['Email', email],
+    ['Téléphone', phone],
+    ['Message', message],
+  ];
 
-  return emailResult;
+  // Routing per brief:
+  // Vente → negotiator (fallback annonces@) + Zoho parser
+  // Location → Zoho parser only (Phase 1)
+  const fromEmail = isVente ? `annonces${D}` : `annonces${D}`;
+  const fromName = isVente
+    ? `Contact du site web / annonce en vente`
+    : `Contact du site web / annonce en location`;
+
+  if (isVente) {
+    // Send to negotiator (or fallback)
+    const negotiatorEmail = negociateur && negociateur !== 'Immobilière Pujol'
+      ? `annonces${D}`   // Phase 1: no structured negotiator email yet, fallback
+      : `annonces${D}`;
+    await sendEmail(env, {
+      subject,
+      html: buildTable(subject, tableRows),
+      replyTo: email,
+      to: negotiatorEmail,
+      fromEmail,
+      fromName,
+    });
+    // Also send to Zoho parser
+    await sendEmail(env, {
+      subject,
+      html: buildTable(subject, tableRows),
+      replyTo: email,
+      to: ZOHO_PARSER,
+      fromEmail,
+      fromName,
+    });
+  } else {
+    // Location Phase 1 — Zoho parser only
+    await sendEmail(env, {
+      subject,
+      html: buildTable(subject, tableRows),
+      replyTo: email,
+      to: ZOHO_PARSER,
+      fromEmail,
+      fromName,
+    });
+  }
+
+  await logToSheet('Annonces', [now(), reference, title, type, codePostal, negociateur, name, email, phone, message]);
+
+  // Unified auto-reply
+  const prénom = name.split(' ')[0];
+  await sendAutoReply(env, email, prénom, fromEmail, fromName);
+
+  return { ok: true };
 }
 
 async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
@@ -382,7 +730,11 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
   const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
   const html = buildTable(subject, [['Email', email]]);
 
-  const emailResult = await sendEmail(env, { subject, html });
+  const emailResult = await sendEmail(env, {
+    subject,
+    html,
+    to: `contact${D}`,
+  });
 
   await logToSheet('Newsletter', [now(), email]);
 
@@ -405,7 +757,7 @@ export default {
     }
 
     const url = new URL(request.url);
-    const path = url.pathname.replace(/\/+$/, ''); // strip trailing slash
+    const path = url.pathname.replace(/\/+$/, '');
 
     let fd: FormData;
     try {
