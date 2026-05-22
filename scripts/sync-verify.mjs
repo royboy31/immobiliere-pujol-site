@@ -19,7 +19,7 @@ try {
 
 const STAGING = 'https://immobiliere-pujol-staging.roy-68a.workers.dev';
 const CRON_WORKER = 'https://pujol-cron-sync.roy-68a.workers.dev';
-const EMAIL_WORKER = 'https://pujol-email.kamindudushmantha.workers.dev';
+const EMAIL_WORKER = 'https://pujol-email.roy-68a.workers.dev';
 const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
 const UBIFLOW_URL = 'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
 const GH_REPO = 'royboy31/immobiliere-pujol-site';

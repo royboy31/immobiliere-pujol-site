@@ -68,7 +68,7 @@ const isLocation = type === 'L';
       if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
 
       try {
-        const res = await fetch('https://pujol-email.kamindudushmantha.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
+        const res = await fetch('https://pujol-email.roy-68a.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
         const data = await res.json();
         if (data.ok) {
           form.innerHTML = '<div class="annonce-contact__success" style="text-align:center;padding:24px"><h3>Merci !</h3><p>Votre demande a bien été envoyée. Nous vous recontacterons rapidement.</p></div>';
