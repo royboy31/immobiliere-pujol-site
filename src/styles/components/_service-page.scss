@@ -2587,6 +2587,8 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   margin: 26px 0 0;
 
   input[type='checkbox'] {
+    appearance: auto;
+    -webkit-appearance: checkbox;
     width: 18px;
     height: 18px;
     border: 1.5px solid $black;
@@ -2595,6 +2597,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     background: transparent;
     border-radius: 2px;
     accent-color: $black;
+    cursor: pointer;
   }
 
   span {

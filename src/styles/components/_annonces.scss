@@ -1231,7 +1231,15 @@
     line-height: 1.4;
     margin-top: 4px;
 
-    input { flex: none; margin-top: 2px; }
+    input[type='checkbox'] {
+      appearance: auto;
+      -webkit-appearance: checkbox;
+      width: 16px;
+      height: 16px;
+      flex: none;
+      margin-top: 2px;
+      cursor: pointer;
+    }
     a { color: inherit; text-decoration: underline; }
   }
 
@@ -1239,6 +1247,15 @@
     margin-top: 8px;
     width: 100%;
     padding: 14px 20px;
+  }
+
+  &__legal {
+    font-size: 10px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, .55);
+    margin: 0;
+
+    a { color: inherit; text-decoration: underline; }
   }
 
   &__ref {
