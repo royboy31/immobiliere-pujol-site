@@ -606,6 +606,10 @@
     &:hover { color: var(--expert-accent); }
   }
 
+  &--sales .btn-pill--olive {
+    color: $white;
+  }
+
   .expert-bio-content h4 { color: var(--expert-accent); }
   .expert-bio-content a { color: var(--expert-accent-2); }
 }
