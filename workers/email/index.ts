@@ -297,6 +297,16 @@ function buildTable(subject: string, rows: [string, string][]): string {
 
         </td></tr>
 
+        <!-- RGPD notice -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
+          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
+            Dans le cadre de nos activités, nous traitons vos données personnelles conformément au RGPD et à la loi n°78-17 du 6 janvier 1978.
+            <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">Consulter notre politique de données personnelles</a>.
+            Pour exercer vos droits : <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
+          </p>
+        </td></tr>
+
         <!-- Footer -->
         <tr><td style="background-color:#0f1a2b;padding:28px 32px;border-radius:0 0 8px 8px">
 
@@ -397,7 +407,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   },
   // GF 12 — Urgence
   '12': {
-    subject: '🚨 URGENCE — Immobilière Pujol',
+    subject: 'Déclarer une urgence : {nom}',
     tab: 'Urgence',
     fields: [
       ['Profil', 'input_4'],
@@ -453,7 +463,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   },
   // GF 8 — Estimation de loyer (formerly "Mise en Location")
   '8': {
-    subject: 'Demander une estimation de loyer — Immobilière Pujol',
+    subject: 'Demander une estimation de loyer : {nom}',
     tab: 'Estimation Loyer',
     fields: [
       ['Prénom', 'input_1.3'],
@@ -472,7 +482,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   },
   // GF 6 — Devis syndic
   '6': {
-    subject: 'Demander un devis en syndic — Immobilière Pujol',
+    subject: 'Demander un devis en syndic : {nom}',
     tab: 'Devis Syndic',
     fields: [
       ['Prénom', 'input_1.3'],
@@ -492,7 +502,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   },
   // GF 7 — Calculer honoraires syndic
   '7': {
-    subject: 'Calculer vos honoraires de syndic — Immobilière Pujol',
+    subject: 'Calculer vos honoraires de syndic : {nom}',
     tab: 'Honoraires Syndic',
     fields: [
       ['Prénom', 'input_7.3'],
@@ -602,6 +612,11 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
 
   const replyTo = ((fd.get(def.emailField) as string) || '').trim();
   const prénom = rows.find(([l]) => l === 'Prénom')?.[1] || '';
+  const nom = rows.find(([l]) => l === 'Nom')?.[1] || '';
+  const fullName = [prénom, nom].filter(Boolean).join(' ') || 'Client';
+
+  // Resolve {nom} placeholder in subject
+  const subject = def.subject.replace('{nom}', fullName);
 
   // Determine routing — for GF 4, route by dropdown; others use def.to directly.
   let to = def.to;
@@ -628,8 +643,8 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
   }
 
   const emailResult = await sendEmail(env, {
-    subject: def.subject,
-    html: buildTable(def.subject, rows),
+    subject,
+    html: buildTable(subject, rows),
     replyTo: replyTo || undefined,
     to,
     cc,
@@ -722,9 +737,12 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
 
   await logToSheet('Annonces', [now(), reference, title, type, codePostal, negociateur, name, email, phone, message]);
 
-  // Unified auto-reply
+  // Unified auto-reply — for Vente, sender visible = negotiator name (so client identifies interlocutor)
   const prénom = name.split(' ')[0];
-  await sendAutoReply(env, email, prénom, fromEmail, fromName);
+  const replyFromName = isVente && negociateur && negociateur !== 'Immobilière Pujol'
+    ? negociateur
+    : fromName;
+  await sendAutoReply(env, email, prénom, fromEmail, replyFromName);
 
   return { ok: true };
 }
