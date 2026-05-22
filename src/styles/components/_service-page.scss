@@ -2528,35 +2528,54 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
       letter-spacing: .8px;
       text-transform: uppercase;
       color: $black;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
   }
 
   &__checks {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 20px;
+    gap: 8px;
   }
 
   &__check {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
+    background: rgba(255, 255, 255, .9);
+    border-radius: 999px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+    transition: box-shadow $transition-base, background-color $transition-base;
 
+    &:hover {
+      background: $white;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
+    }
+
+    // Override the pill-shaped input styles inherited from the generic rule
     input[type='checkbox'] {
       width: 18px;
       height: 18px;
-      border: 1.5px solid $black;
-      border-radius: 2px;
+      min-height: 0;
+      border: 1.5px solid rgba(0, 0, 0, .35);
+      border-radius: 4px;
       accent-color: $black;
       flex: none;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      appearance: auto;
+      -webkit-appearance: auto;
+      cursor: pointer;
     }
 
     span {
       font-family: $ds-font-noto;
       font-size: 14px;
       color: $black;
+      line-height: 1.3;
     }
   }
 }
