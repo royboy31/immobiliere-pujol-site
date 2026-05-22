@@ -741,6 +741,20 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
   return emailResult;
 }
 
+// ── Sheet header setup (one-shot) ───────────────────────────────────────────
+
+const SHEET_HEADERS: Record<string, string[]> = {
+  'Contact':           ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Objet', 'Message'],
+  'Urgence':           ['Date', 'Profil', 'Prénom', 'Nom', 'Téléphone', 'Email', 'Adresse', 'Ville', 'Code postal', 'Étage', 'Description'],
+  'Vente':             ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Message'],
+  'Gestion Locative':  ['Date', 'Prénom', 'Nom', 'Téléphone', 'Email', 'Message'],
+  'Estimation Loyer':  ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Type de bien', 'Adresse du bien', 'Message'],
+  'Devis Syndic':      ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Adresse copropriété', 'Nombre de lots', 'Message'],
+  'Honoraires Syndic': ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Rôle — Président CS', 'Rôle — Membre CS', 'Rôle — Copropriétaire', 'Adresse', 'Ville', 'Code postal', 'Nombre de lots', 'Équipements', 'Procédures / recouvrement', 'Commentaires'],
+  'Annonces':          ['Date', 'Référence', 'Titre', 'Type (V/L)', 'Code postal', 'Négociateur', 'Nom', 'Email', 'Téléphone', 'Message'],
+  'Newsletter':        ['Date', 'Email'],
+};
+
 // ── Worker entry point ──────────────────────────────────────────────────────
 
 export default {
@@ -752,12 +766,28 @@ export default {
       return new Response(null, { status: 204, headers: cors(origin, env) });
     }
 
+    const url = new URL(request.url);
+    const path = url.pathname.replace(/\/+$/, '');
+
+    // GET /setup-headers — one-shot endpoint to write column headers to all Sheet tabs
+    if (request.method === 'GET' && path === '/setup-headers') {
+      const results: Record<string, string> = {};
+      for (const [tab, headers] of Object.entries(SHEET_HEADERS)) {
+        try {
+          await logToSheet(tab, headers);
+          results[tab] = 'ok';
+        } catch {
+          results[tab] = 'error';
+        }
+      }
+      return new Response(JSON.stringify({ ok: true, results }, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     if (request.method !== 'POST') {
       return jsonErr('Method not allowed', 405, origin, env);
     }
-
-    const url = new URL(request.url);
-    const path = url.pathname.replace(/\/+$/, '');
 
     let fd: FormData;
     try {
