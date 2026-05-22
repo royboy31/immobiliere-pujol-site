@@ -58,7 +58,7 @@ interface Props {
   currentSlug?: string;
 }
 
-const { view, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
+const { view, contactName, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
 const isSale = view.type === 'V';
 const hasMeuble = !isSale && (view.meuble === 0 || view.meuble === 1);
@@ -154,6 +154,8 @@ const hasFinanceDetails =
       titre={view.titre}
       contactEmail={contactEmail}
       type={view.type}
+      codePostal={view.codePostal}
+      negociateur={contactName}
     />
 
     <Fragment slot="action-below">

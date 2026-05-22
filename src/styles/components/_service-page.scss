@@ -2514,6 +2514,51 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     background-position: right 22px center;
     padding-right: 50px;
   }
+
+  &--checkboxes {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    legend {
+      font-family: $ds-font-noto;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: $black;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+
+    input[type='checkbox'] {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid $black;
+      border-radius: 2px;
+      accent-color: $black;
+      flex: none;
+    }
+
+    span {
+      font-family: $ds-font-noto;
+      font-size: 14px;
+      color: $black;
+    }
+  }
 }
 
 .svc-form__agree {

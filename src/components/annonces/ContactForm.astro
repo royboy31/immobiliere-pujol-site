@@ -4,9 +4,11 @@ interface Props {
   titre: string;
   contactEmail?: string | null;
   type: 'V' | 'L' | string;
+  codePostal?: string | null;
+  negociateur?: string | null;
 }
 
-const { reference, titre, contactEmail, type } = Astro.props;
+const { reference, titre, contactEmail, type, codePostal, negociateur } = Astro.props;
 const isLocation = type === 'L';
 ---
 
@@ -16,6 +18,9 @@ const isLocation = type === 'L';
       data-contact-title={titre}>
   <input type="hidden" name="reference" value={reference} />
   <input type="hidden" name="title" value={titre} />
+  <input type="hidden" name="type" value={type} />
+  <input type="hidden" name="code_postal" value={codePostal || ''} />
+  <input type="hidden" name="negociateur" value={negociateur || 'Immobilière Pujol'} />
   <h3 class="annonce-contact__title">Laissez-nous vos <b>coordonnées</b></h3>
   <p class="annonce-contact__sub">
     Pour organiser une visite ou recevoir plus d'informations sur cette annonce.
