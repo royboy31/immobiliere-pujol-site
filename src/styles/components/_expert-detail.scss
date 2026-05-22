@@ -413,8 +413,8 @@
     font-size: 11px;
     letter-spacing: .4px;
 
-    &.is-vente { background: $ds-olive; }
-    &.is-location { background: $ds-orange; }
+    &.is-vente { background: $ds-orange; }
+    &.is-location { background: $ds-olive; }
   }
 
   &__body {
@@ -449,10 +449,10 @@
     font-family: $ds-font-noto;
     font-weight: 700;
     font-size: 16px;
-    color: $ds-olive-2;
+    color: $ds-orange-2;
     margin-top: 2px;
 
-    &.is-location { color: $ds-orange; }
+    &.is-location { color: $ds-olive-2; }
   }
 }
 
@@ -562,16 +562,16 @@
 }
 
 // =========================================
-// TYPE-BASED THEMING (sales → green, rental → orange)
+// TYPE-BASED THEMING (sales → orange, rental → green)
 // Drives accent colors via a single token; the green/olive default covers
-// sales and "other" (syndic, accueil, etc.). Rental experts switch to orange.
+// rental and "other" (syndic, accueil, etc.). Sales experts switch to orange.
 // =========================================
 .expert-page {
   --expert-accent: #{$ds-olive};
   --expert-accent-2: #{$ds-olive-2};
   --expert-accent-soft: #{rgba(178, 192, 78, .15)};
 
-  &--rental {
+  &--sales {
     --expert-accent: #{$ds-orange};
     --expert-accent-2: #{$ds-orange-2};
     --expert-accent-soft: #{rgba(236, 114, 52, .14)};
@@ -681,8 +681,8 @@
       background: rgba(255, 255, 255, .85);
     }
 
-    &--rental { background: $ds-orange; }
-    &--sales  { background: $ds-olive; }
+    &--rental { background: $ds-olive; }
+    &--sales  { background: $ds-orange; }
     &--other  { background: $ds-slate; }
   }
 
@@ -706,8 +706,8 @@
   &:hover { transform: translateY(-3px); }
   &:hover .expert-tile__ph img { transform: scale(1.02); }
 
-  &--rental { --expert-accent: #{$ds-orange}; }
-  &--sales  { --expert-accent: #{$ds-olive}; }
+  &--rental { --expert-accent: #{$ds-olive}; }
+  &--sales  { --expert-accent: #{$ds-orange}; }
 
   &__ph {
     width: 100%;

@@ -346,13 +346,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Disponible</span>
           <h2 class="expert-listings__title">
-            {isSales ? (
-              <>Les biens en vente proposés par <b>{firstName}</b></>
-            ) : isRental ? (
-              <>Les biens en location proposés par <b>{firstName}</b></>
-            ) : (
-              <>Les biens proposés par <b>{firstName}</b></>
-            )}
+            Les biens en charge de <b>{firstName}</b>
           </h2>
           <p class="expert-listings__sub">{activeSub}</p>
         </header>
