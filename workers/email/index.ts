@@ -380,7 +380,7 @@ const FORM_DEFS: Record<string, FormDef> = {
   // GF 4 — Contact général (routing done dynamically by dropdown, see handleContact)
   '4': {
     subject: 'Contact — Immobilière Pujol',
-    tab: 'Contact',
+    tab: 'Contact général',
     fields: [
       ['Prénom', 'input_6.3'],
       ['Nom', 'input_6.6'],
@@ -744,7 +744,7 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
 
 const SHEET_HEADERS: Record<string, string[]> = {
-  'Contact':           ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Objet', 'Message'],
+  'Contact général':   ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Objet', 'Message'],
   'Urgence':           ['Date', 'Profil', 'Prénom', 'Nom', 'Téléphone', 'Email', 'Adresse', 'Ville', 'Code postal', 'Étage', 'Description'],
   'Vente':             ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Message'],
   'Gestion Locative':  ['Date', 'Prénom', 'Nom', 'Téléphone', 'Email', 'Message'],
