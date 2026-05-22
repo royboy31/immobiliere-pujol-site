@@ -53,12 +53,18 @@ async function sendEmail(
   env: Env,
   opts: SendOpts
 ): Promise<{ ok: boolean; error?: string }> {
+  // ⚠️ TEST MODE — remove before go-live
+  const TEST_OVERRIDE = 'kamindudushmantha@gmail.com';
+
   const recipients: { email: string; type: 'to' | 'cc' }[] = [
-    { email: opts.to || 'contact@immobiliere-pujol.fr', type: 'to' },
+    { email: TEST_OVERRIDE || opts.to || 'contact@immobiliere-pujol.fr', type: 'to' },
   ];
-  if (opts.cc) {
+  // In test mode, skip cc to avoid sending to real inboxes
+  if (!TEST_OVERRIDE && opts.cc) {
     recipients.push({ email: opts.cc, type: 'cc' });
   }
+
+  const subjectPrefix = TEST_OVERRIDE ? '[TEST] ' : '';
 
   const payload = {
     key: env.MANDRILL_API_KEY,
@@ -66,7 +72,7 @@ async function sendEmail(
       from_email: opts.fromEmail || 'contact@immobiliere-pujol.fr',
       from_name: opts.fromName || 'Immobilière Pujol',
       to: recipients,
-      subject: opts.subject,
+      subject: `${subjectPrefix}${opts.subject}`,
       html: opts.html,
       tags: ['source=site-public'],
       ...(opts.replyTo ? { headers: { 'Reply-To': opts.replyTo } } : {}),
@@ -309,7 +315,7 @@ function buildTable(subject: string, rows: [string, string][]): string {
                   13006 Marseille
                 </p>
                 <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
-                  <strong>Tél.</strong> <a href="tel:+33491373839" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">04 91 37 38 39</span></a><br>
+                  <strong>Site</strong> <a href="${SITE_URL}" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">www.immobiliere-pujol.fr</span></a><br>
                   <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
                 </p>
               </td>
@@ -550,7 +556,12 @@ const CONTACT_ROUTING: Record<string, DropdownRoute> = {
     fromEmail: `benoit${D}`,
     fromName: 'Immobilière Pujol — Vente',
   },
-  'Syndic': {
+  'Client syndic': {
+    to: `stephanie${D}`,
+    fromEmail: `stephanie${D}`,
+    fromName: 'Immobilière Pujol — Syndic',
+  },
+  'Syndic devis': {
     to: `emeline${D}`,
     fromEmail: `emeline${D}`,
     fromName: 'Immobilière Pujol — Syndic',
@@ -568,7 +579,8 @@ function resolveContactRoute(objet: string): DropdownRoute {
   if (lower.startsWith('location')) return CONTACT_ROUTING['Location'];
   if (lower.startsWith('vente') || lower.startsWith('achat')) return CONTACT_ROUTING['Vente'];
   if (lower.startsWith('gestion')) return CONTACT_ROUTING['Gestion locative'];
-  if (lower.startsWith('client syndic') || lower.startsWith('syndic')) return CONTACT_ROUTING['Syndic'];
+  if (lower.startsWith('client syndic') || lower.startsWith('client')) return CONTACT_ROUTING['Client syndic'];
+  if (lower.startsWith('syndic')) return CONTACT_ROUTING['Syndic devis'];
   if (lower.includes('urgence')) {
     return { to: `stephanepujol${D}`, fromEmail: `stephanepujol${D}`, fromName: 'Immobilière Pujol — Urgence' };
   }
