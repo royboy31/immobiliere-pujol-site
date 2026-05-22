@@ -598,6 +598,16 @@
   }
 
   .expert-final-cta__title b { color: var(--expert-accent); }
+
+  // Buttons & bio accents must follow the expert accent, not hardcoded olive.
+  .btn-pill--olive {
+    background-image: linear-gradient(to top, transparent 50%, var(--expert-accent) 50%);
+    border-color: var(--expert-accent);
+    &:hover { color: var(--expert-accent); }
+  }
+
+  .expert-bio-content h4 { color: var(--expert-accent); }
+  .expert-bio-content a { color: var(--expert-accent-2); }
 }
 
 // =========================================
