@@ -57,7 +57,7 @@ a {
   height: 0;
   overflow: hidden;
 }
-*{
+*:not(input[type='checkbox']) {
   -webkit-appearance: none;
 }
 footer{
