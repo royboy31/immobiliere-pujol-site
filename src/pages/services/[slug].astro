@@ -558,38 +558,31 @@ const CUSTOM_FORMS: Record<string, CustomFormConfig> = {
     ],
   },
 
-  // §6 — Calculer honoraires syndic (GF 7)
+  // §6 — Page "Calculer vos honoraires de syndic" : on garde l'URL pour le SEO mais on
+  // remplace le formulaire calc honoraires (GF 7) par celui du devis syndic (GF 6), avec
+  // un heading dédié. Décision Caroline (WhatsApp groupe Pujol Immo Web, 22/05/2026 12:34) :
+  // "on va supprimer ce formulaire : Calculer vos honoraires de syndic. on aura que le
+  // formulaire de demande de devis en syndic". Routage identique (emeline@ + cc
+  // stephanepujol@), même worker handler (GF 6).
   'quelles-charges-de-copropriete-sont-a-payer-sur-marseille': {
-    gformId: '7',
-    heading: 'Calculer vos honoraires <b>de syndic</b>',
-    lead: "Renseignez les informations ci-dessous pour recevoir une estimation personnalisée de vos honoraires de syndic.",
-    honeypot: 'input_24',
-    submitLabel: 'Envoyer',
-    successMessage: 'Votre demande a bien été envoyée. Nous vous adresserons un mail pour calculer les honoraires de syndic.',
+    gformId: '6',
+    heading: 'Contactez-nous pour calculer vos honoraires <b>et obtenir un devis</b>',
+    lead: 'Renseignez les informations ci-dessous. Nous vous adresserons un devis personnalisé sous 24 heures.',
+    honeypot: 'input_9',
+    submitLabel: 'Demander mon devis',
+    successMessage: 'Votre demande a bien été envoyée. Nous vous recontacterons dans les 24 heures avec un devis personnalisé.',
     fields: [
-      { name: 'input_7.3', label: 'Prénom', type: 'text', placeholder: 'Prénom', required: true },
-      { name: 'input_7.6', label: 'Nom', type: 'text', placeholder: 'Nom', required: true },
-      { name: 'input_9', label: 'E-mail', type: 'email', placeholder: 'Email', required: true },
-      { name: 'input_8', label: 'Téléphone', type: 'tel', placeholder: 'Téléphone', required: true },
-      {
-        name: 'input_11', label: 'Votre rôle dans la copropriété', type: 'checkbox-group', full: true,
-        options: [
-          { value: 'Président du conseil syndical', label: 'Président du conseil syndical' },
-          { value: 'Membre du conseil syndical', label: 'Membre du conseil syndical' },
-          { value: 'Copropriétaire', label: 'Copropriétaire' },
-        ],
-      },
-      { name: 'input_4.1', label: 'Adresse de la copropriété', type: 'text', placeholder: 'Numéro et rue', required: true, full: true },
-      { name: 'input_4.3', label: 'Ville', type: 'text', placeholder: 'Ville', required: true },
-      { name: 'input_4.5', label: 'Code postal', type: 'text', placeholder: 'Code postal', required: true },
-      { name: 'input_19', label: 'Nombre de lots dans votre copropriété', type: 'number', placeholder: 'Nombre de lots', required: false, full: true },
-      { name: 'input_20', label: 'Ascenseur ? nombre ? chaufferie collective ? gaz ? fioul ? gardien concierge ? Espaces verts ? dimension ? Nombre d\'appartements par étage ?', type: 'textarea', placeholder: '', required: false, full: true },
-      { name: 'input_21', label: 'Y a-t-il des procédures dans votre immeuble ? des difficultés de recouvrement ?', type: 'textarea', placeholder: '', required: false, full: true },
-      { name: 'input_17', label: 'Dès réception de vos informations, nous vous adresserons un mail pour être en mesure de calculer les honoraires de syndic. Un point que vous souhaitez nous signaler ?', type: 'textarea', placeholder: 'Vos commentaires', required: false, full: true },
+      { name: 'input_1.3', label: 'Prénom', type: 'text', placeholder: 'Prénom', required: true },
+      { name: 'input_1.6', label: 'Nom', type: 'text', placeholder: 'Nom', required: true },
+      { name: 'input_2', label: 'E-mail', type: 'email', placeholder: 'Email', required: true },
+      { name: 'input_3', label: 'Téléphone', type: 'tel', placeholder: 'Téléphone', required: true },
+      { name: 'input_4', label: 'Adresse de la copropriété concernée par votre demande', type: 'textarea', placeholder: 'Adresse complète', required: true, full: true },
+      { name: 'input_5', label: 'Nombre de lots principaux de la copropriété', type: 'number', placeholder: 'Nombre de lots', required: true, full: true },
+      { name: 'input_6', label: 'Votre message', type: 'textarea', placeholder: 'Votre message', required: false, full: true },
     ],
   },
 
-  // §7 — Devis syndic (GF 6)
+  // §7 — Devis syndic (GF 6) — page dédiée demande de devis.
   'demander-une-proposition-de-syndic': {
     gformId: '6',
     heading: 'Demander un devis <b>en syndic</b>',
