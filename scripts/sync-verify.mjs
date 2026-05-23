@@ -100,10 +100,16 @@ try {
   r2Active = await fetchJson(`${R2_PUBLIC}/annonces/active.json`);
   r2Rentals = r2Active.filter(a => a.type === 'L').length;
   r2Sales = r2Active.filter(a => a.type === 'V').length;
+  const r2UbiflowRentals = r2Active.filter(a => a.type === 'L' && a.source === 'ubiflow').length;
+  const r2LbiSales = r2Active.filter(a => a.source === 'lbi').length;
   report.counts.r2Total = r2Active.length;
   report.counts.r2Rentals = r2Rentals;
   report.counts.r2Sales = r2Sales;
+  report.counts.r2UbiflowRentals = r2UbiflowRentals;
+  report.counts.r2LbiSales = r2LbiSales;
   addCheck('R2 active.json', 'OK', `${r2Active.length} total (${r2Rentals} rentals, ${r2Sales} sales)`);
+  addCheck('R2 Ubiflow rentals', 'OK', `${r2UbiflowRentals} active rentals from Ubiflow`);
+  addCheck('R2 LBI/FTP sales', 'OK', `${r2LbiSales} active sales from LBI/FTP`);
 } catch (err) {
   addCheck('R2 active.json', 'FAIL', err.message);
 }
@@ -198,7 +204,7 @@ console.log('\n── 5. Cron Worker ──');
 
 try {
   const status = await fetchJson(`${CRON_WORKER}/status`);
-  const logs = status.logs || [];
+  const logs = Array.isArray(status) ? status : (status.logs || []);
   if (logs.length > 0) {
     const last = logs[0];
     const ageH = ((Date.now() - new Date(last.started_at).getTime()) / 3600000).toFixed(1);
@@ -217,9 +223,41 @@ try {
   addCheck('Cron worker /status', 'FAIL', err.message);
 }
 
-// ── 6. Email worker ───────────────────────────────────────────────────────
+// ── 6. D1 Inventory (active vs closed by source) ─────────────────────────
 
-console.log('\n── 6. Email Worker ──');
+console.log('\n── 6. D1 Inventory ──');
+
+let d1UbiflowActive = 0, d1UbiflowClosed = 0;
+let d1LbiActive = 0, d1LbiClosed = 0;
+
+try {
+  const rows = await fetchJson(`${CRON_WORKER}/counts`);
+  for (const r of rows) {
+    if (r.source === 'ubiflow' && r.status === 'active') d1UbiflowActive = r.count;
+    if (r.source === 'ubiflow' && r.status === 'closed') d1UbiflowClosed = r.count;
+    if (r.source === 'lbi' && r.status === 'active') d1LbiActive = r.count;
+    if (r.source === 'lbi' && r.status === 'closed') d1LbiClosed = r.count;
+  }
+  const totalActive = d1UbiflowActive + d1LbiActive;
+  const totalClosed = d1UbiflowClosed + d1LbiClosed;
+
+  report.counts.d1UbiflowActive = d1UbiflowActive;
+  report.counts.d1UbiflowClosed = d1UbiflowClosed;
+  report.counts.d1LbiActive = d1LbiActive;
+  report.counts.d1LbiClosed = d1LbiClosed;
+  report.counts.d1TotalActive = totalActive;
+  report.counts.d1TotalClosed = totalClosed;
+
+  addCheck('D1 Ubiflow (rentals)', 'OK', `${d1UbiflowActive} active, ${d1UbiflowClosed} closed`);
+  addCheck('D1 LBI/FTP (sales)', 'OK', `${d1LbiActive} active, ${d1LbiClosed} closed`);
+  addCheck('D1 Grand Total', 'OK', `${totalActive} active listings (${d1UbiflowActive} rentals + ${d1LbiActive} sales), ${totalClosed} closed`);
+} catch (err) {
+  addCheck('D1 inventory counts', 'FAIL', err.message);
+}
+
+// ── 7. Email worker ───────────────────────────────────────────────────────
+
+console.log('\n── 7. Email Worker ──');
 
 try {
   const res = await fetch(`${EMAIL_WORKER}/contact`, {
@@ -236,9 +274,9 @@ try {
   addCheck('Email worker', 'FAIL', err.message);
 }
 
-// ── 7. GitHub Actions (last 24h) ──────────────────────────────────────────
+// ── 8. GitHub Actions (last 24h) ──────────────────────────────────────────
 
-console.log('\n── 7. GitHub Actions (24h) ──');
+console.log('\n── 8. GitHub Actions (24h) ──');
 
 if (GH_TOKEN) {
   const ghHeaders = { Authorization: `Bearer ${GH_TOKEN}` };
@@ -296,9 +334,9 @@ if (GH_TOKEN) {
   console.log('  ⚠️  Skipped — no GH_TOKEN. Run: export GH_TOKEN=$(gh auth token)');
 }
 
-// ── 8. External APIs ──────────────────────────────────────────────────────
+// ── 9. External APIs ──────────────────────────────────────────────────────
 
-console.log('\n── 8. External APIs ──');
+console.log('\n── 9. External APIs ──');
 
 const OS_KEY = process.env.OPINIONSYSTEM_API_KEY || '';
 if (OS_KEY) {
@@ -351,12 +389,17 @@ if (warns > 0) {
 // ── Counts summary table ──────────────────────────────────────────────────
 
 console.log('\n  📊 Counts:');
-console.log(`     Ubiflow feed:  ${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'}L + ${report.counts.ubiflowSales ?? '?'}V)`);
-console.log(`     R2 active:     ${report.counts.r2Total ?? '?'} total (${report.counts.r2Rentals ?? '?'}L + ${report.counts.r2Sales ?? '?'}V)`);
-console.log(`     R2 cards:      ${report.counts.r2Cards ?? '?'}`);
-console.log(`     Site search:   ${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'}L + ${report.counts.siteSales ?? '?'}V)`);
-console.log(`     Deploys 24h:   ${report.counts.deployRuns24h ?? '?'} runs, ${report.counts.deployFailed24h ?? '?'} failed`);
-console.log(`     LBI syncs 24h: ${report.counts.lbiRuns24h ?? '?'} runs, ${report.counts.lbiFailed24h ?? '?'} failed`);
+console.log(`     Ubiflow feed:    ${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'}L + ${report.counts.ubiflowSales ?? '?'}V)`);
+console.log(`     R2 active:       ${report.counts.r2Total ?? '?'} total (${report.counts.r2Rentals ?? '?'}L + ${report.counts.r2Sales ?? '?'}V)`);
+console.log(`       ↳ Ubiflow:     ${report.counts.r2UbiflowRentals ?? '?'} rentals`);
+console.log(`       ↳ LBI/FTP:     ${report.counts.r2LbiSales ?? '?'} sales`);
+console.log(`     R2 cards:        ${report.counts.r2Cards ?? '?'}`);
+console.log(`     D1 Ubiflow:      ${report.counts.d1UbiflowActive ?? '?'} active, ${report.counts.d1UbiflowClosed ?? '?'} closed`);
+console.log(`     D1 LBI/FTP:      ${report.counts.d1LbiActive ?? '?'} active, ${report.counts.d1LbiClosed ?? '?'} closed`);
+console.log(`     D1 Grand Total:  ${report.counts.d1TotalActive ?? '?'} active, ${report.counts.d1TotalClosed ?? '?'} closed`);
+console.log(`     Site search:     ${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'}L + ${report.counts.siteSales ?? '?'}V)`);
+console.log(`     Deploys 24h:     ${report.counts.deployRuns24h ?? '?'} runs, ${report.counts.deployFailed24h ?? '?'} failed`);
+console.log(`     LBI syncs 24h:   ${report.counts.lbiRuns24h ?? '?'} runs, ${report.counts.lbiFailed24h ?? '?'} failed`);
 console.log('');
 
 // ── Send email report ──────────────────────────────────────────────────────
@@ -377,8 +420,19 @@ if (SEND_EMAIL && MANDRILL_KEY) {
 
   const countsHtml = `
     <table style="border-collapse:collapse;margin:16px 0;width:100%">
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #B2C54F;text-transform:uppercase;letter-spacing:0.5px">Active Listings</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow (rentals)</td><td style="padding:6px 12px">${report.counts.d1UbiflowActive ?? '?'} active</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP (sales)</td><td style="padding:6px 12px">${report.counts.d1LbiActive ?? '?'} active</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL ACTIVE</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalActive ?? '?'} listings</td></tr>
+
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #e65100;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Closed Listings</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow closed</td><td style="padding:6px 12px">${report.counts.d1UbiflowClosed ?? '?'}</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP closed</td><td style="padding:6px 12px">${report.counts.d1LbiClosed ?? '?'}</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL CLOSED</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalClosed ?? '?'}</td></tr>
+
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #55666f;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Data Pipeline</td></tr>
       <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow feed</td><td style="padding:6px 12px">${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'}L + ${report.counts.ubiflowSales ?? '?'}V)</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 active</td><td style="padding:6px 12px">${report.counts.r2Total ?? '?'} total (${report.counts.r2Rentals ?? '?'}L + ${report.counts.r2Sales ?? '?'}V)</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 active</td><td style="padding:6px 12px">${report.counts.r2Total ?? '?'} (${report.counts.r2UbiflowRentals ?? '?'} Ubiflow + ${report.counts.r2LbiSales ?? '?'} LBI)</td></tr>
       <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 cards</td><td style="padding:6px 12px">${report.counts.r2Cards ?? '?'}</td></tr>
       <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Site search</td><td style="padding:6px 12px">${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'}L + ${report.counts.siteSales ?? '?'}V)</td></tr>
       <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Deploys (24h)</td><td style="padding:6px 12px">${report.counts.deployRuns24h ?? '?'} runs, ${report.counts.deployFailed24h ?? '?'} failed</td></tr>

@@ -921,6 +921,7 @@ async function writeActiveJson(env: Env): Promise<number> {
     mandatType: a.mandat_type || '',
     slug: a.slug || '',
     meuble: !!a.meuble,
+    source: (a.source || 'ubiflow') as 'ubiflow' | 'lbi',
   }));
 
   await env.PHOTOS.put('annonces/active.json', JSON.stringify(json), {
@@ -977,7 +978,17 @@ export default {
       });
     }
 
-    return new Response('pujol-cron-sync: /sync, /status, /import-lbi', { status: 200 });
+    // Counts: GET /counts — active + closed breakdown by source
+    if (url.pathname === '/counts') {
+      const rows = await env.DB
+        .prepare(`SELECT source, status, COUNT(*) as count FROM annonces GROUP BY source, status ORDER BY source, status`)
+        .all<{ source: string; status: string; count: number }>();
+      return new Response(JSON.stringify(rows.results, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('pujol-cron-sync: /sync, /status, /import-lbi, /counts', { status: 200 });
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
