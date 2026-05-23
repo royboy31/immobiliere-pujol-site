@@ -207,11 +207,13 @@ try {
   const logs = Array.isArray(status) ? status : (status.logs || []);
   if (logs.length > 0) {
     const last = logs[0];
-    const ageH = ((Date.now() - new Date(last.started_at).getTime()) / 3600000).toFixed(1);
-    addCheck('Last cron sync', last.status === 'success' ? 'OK' : 'FAIL',
-      `${last.status} — ${ageH}h ago — feed: ${last.annonces_in_feed ?? '?'}, updated: ${last.updated ?? '?'}, closed: ${last.closed ?? '?'}`);
+    const syncDate = last.sync_date || last.started_at;
+    const ageH = syncDate ? ((Date.now() - new Date(syncDate + 'Z').getTime()) / 3600000).toFixed(1) : '?';
+    const isOk = (last.errors ?? 0) === 0;
+    addCheck('Last cron sync', isOk ? 'OK' : 'FAIL',
+      `${isOk ? 'success' : 'errors'} — ${ageH}h ago — feed: ${last.annonces_in_feed ?? '?'}, updated: ${last.updated ?? '?'}, closed: ${last.closed ?? '?'}`);
 
-    if (parseFloat(ageH) > 3) {
+    if (ageH !== '?' && parseFloat(ageH) > 3) {
       addCheck('Cron freshness', 'WARN', `Last sync was ${ageH}h ago (expected < 2h)`);
     } else {
       addCheck('Cron freshness', 'OK', `${ageH}h ago`);
