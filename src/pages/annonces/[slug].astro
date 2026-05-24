@@ -33,9 +33,11 @@ if (!annonce) {
 
 const isClosed = annonce ? annonce.status === 'closed' : true;
 
+const closedEmail = closedAsset?.emailAAfficher
+  || (closedAsset?.contactAAfficher?.includes('@') ? closedAsset.contactAAfficher : undefined);
 const expert = annonce
   ? findExpertByEmail(annonce.email_a_afficher)
-  : closedAsset ? findExpertByEmail(closedAsset.emailAAfficher) : null;
+  : findExpertByEmail(closedEmail);
 
 type View = {
   titre: string;

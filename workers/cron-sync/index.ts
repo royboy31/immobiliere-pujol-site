@@ -450,7 +450,7 @@ const CONTACT_PHOTO_MAP: Record<string, string> = {
 
 // ── Negotiator name → expert email mapping ──
 const NEGOTIATOR_MAP: Record<string, string> = {
-  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'benoit marin-vicente': 'benoit@immobiliere-pujol.fr',
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
   'candice loth': 'candice@immobiliere-pujol.fr',
