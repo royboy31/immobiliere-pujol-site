@@ -31,6 +31,22 @@ function normEmail(raw) {
   return raw.split('|')[0].trim().replace(/!+$/, '').toLowerCase();
 }
 
+// Extract first name (and optional last name) from expert title like "Julia Lauron – Ventes..."
+function extractName(title) {
+  if (!title) return { first: '', last: '' };
+  const namePart = title.split(/\s*[–—-]\s*/)[0].trim();
+  const words = namePart.split(/\s+/);
+  return {
+    first: words[0]?.toLowerCase() || '',
+    last: words.slice(1).join(' ').toLowerCase(),
+  };
+}
+
+function normName(s) {
+  if (!s) return '';
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
 async function apiFetch(path) {
   const url = `${API_BASE}${path}${path.includes('?') ? '&' : '?'}api_key=${API_KEY}`;
   const resp = await fetch(url);
@@ -104,9 +120,19 @@ async function main() {
     process.exit(0);
   }
   const collabByEmail = new Map();
+  const collabByName = new Map();
   for (const c of collaborators) {
     const email = (c.email || '').trim().toLowerCase();
     if (email) collabByEmail.set(email, c);
+    // Index by normalized "firstname" and "firstname lastname" for fallback
+    const first = normName(c.firstname);
+    const last = normName(c.lastname);
+    if (first) {
+      const fullKey = last ? `${first} ${last}` : first;
+      collabByName.set(fullKey, c);
+      // Also index by first name only (used when expert title has no last name)
+      if (!collabByName.has(first)) collabByName.set(first, c);
+    }
   }
   console.log(`OpinionSystem collaborators: ${collaborators.length}`);
 
@@ -119,8 +145,20 @@ async function main() {
   let matched = 0, totalReviews = 0, skipped = 0, errors = 0;
 
   const tasks = experts.map((expert) => pool(async () => {
-    const collab = collabByEmail.get(expert.email);
+    // Match by email first, then fall back to name matching
+    let collab = collabByEmail.get(expert.email);
+    let matchMethod = 'email';
+    if (!collab) {
+      const { first, last } = extractName(expert.title);
+      // Try full name first, then first name only
+      const fullKey = last ? `${normName(first)} ${normName(last)}` : normName(first);
+      collab = collabByName.get(fullKey) || (last ? collabByName.get(normName(first)) : null);
+      matchMethod = 'name';
+    }
     if (!collab) { skipped++; return; }
+    if (matchMethod === 'name') {
+      console.log(`  ℹ ${expert.slug}: matched by name (${collab.firstname} ${collab.lastname || ''}) — email mismatch`);
+    }
     matched++;
 
     try {
