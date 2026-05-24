@@ -22,6 +22,8 @@ interface View {
   etage?: string | number;
   nbEtages?: string | number;
   isClosed: boolean;
+  saleStatus?: string | null;
+  contactPhoto?: string | null;
 }
 
 interface Props {
@@ -107,6 +109,16 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
         </div>
       ) : (
         <div class="annonce-hero__main-empty">Pas de photo disponible</div>
+      )}
+
+      {view.saleStatus && (
+        <div class="sold-overlay sold-overlay--hero">
+          <span class="sold-overlay__label">Sous promesse</span>
+          {view.contactPhoto && (
+            <img class="sold-overlay__agent" src={view.contactPhoto} alt="" loading="lazy" />
+          )}
+          <img class="sold-overlay__logo" src="/images/home/pujol-logo-white.png" alt="Immobilière Pujol" loading="lazy" />
+        </div>
       )}
 
       {photos.length > 1 && (

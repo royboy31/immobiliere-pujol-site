@@ -57,7 +57,8 @@ const { scope } = Astro.props;
       const arrows=slides.length>1?'<button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev>'+arrowL+'</button><button class="lc-arrow lc-arrow--next" type="button" data-lc-next>'+arrowR+'</button><div class="lc-dots" data-lc-dots>'+slides.map((_,i)=>'<span class="lc-dot'+(i===0?' is-active':'')+'"></span>').join('')+'</div>':'';
       const pillsHtml=pills.length?'<div class="meta">'+pills.map(p=>'<span class="pill-tag">'+esc(p)+'</span>').join('')+'</div>':'';
       const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+(cp.trim()?'<span>'+esc(cp.trim())+'</span>':'')+'</div>':'';
-      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span></div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div><div class="price">'+esc(price)+'</div>'+pillsHtml+locHtml+'</a>';
+      const overlayHtml=a.saleStatus?'<div class="sold-overlay"><span class="sold-overlay__label">Sous promesse</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'<img class="sold-overlay__logo" src="/images/home/pujol-logo-white.png" alt="Immobilière Pujol" loading="lazy"></div>':'';
+      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div><div class="price">'+esc(price)+'</div>'+pillsHtml+locHtml+'</a>';
       frag.appendChild(el);
     }
     grid.appendChild(frag);
