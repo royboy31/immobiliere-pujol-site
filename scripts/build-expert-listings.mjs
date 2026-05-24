@@ -55,13 +55,6 @@ async function main() {
     const email = normEmail(d.emailAAfficher || d.contactAAfficher);
     if (!email || !byEmail.has(email)) continue;
 
-    // Historique = "biens vendus / loués" only. Active listings (status=publish
-    // / termine=Ouverte) belong on the live Ubiflow feed, not in the closed
-    // history. Previously the page subtracted active slugs at render time, but
-    // any annonce missing from a temporarily incomplete Ubiflow feed leaked
-    // into historique. Filter at the source instead.
-    if (d.status !== 'closed') continue;
-
     // Skip garages / parking / box — per Caroline's request, they pollute the
     // historique without commercial interest. Detection: LBI/Hektor slug prefix
     // ljvga (vente-garage) or ljlga (location-garage).
