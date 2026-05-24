@@ -318,7 +318,7 @@ const STAR_PATH =
           <a class="expert" href={e.href}>
             <div class="ph"><img src={e.photo} alt={`${e.first} ${e.last}`.trim()} /></div>
             <div class="name">
-              {e.first && <>{e.first} </>}<b>{e.last}</b>
+              {e.first && <>{e.first}{' '}</>}<b>{e.last}</b>
             </div>
             <div class="role">{e.role}</div>
           </a>
