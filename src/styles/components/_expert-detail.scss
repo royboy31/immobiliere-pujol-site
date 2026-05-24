@@ -803,3 +803,43 @@
 @media (max-width: $bp-mobile) {
   .experts-archive__grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+// Department sections inside the experts archive — Caroline's request
+// (meeting 15/05): "page experts repensée avec sous-rubriques
+// (commerciaux vente / commerciaux syndic / direction)".
+.experts-archive__dept {
+  margin-top: 56px;
+
+  &:first-of-type { margin-top: 0; }
+
+  &-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  &-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #0f1a2b;
+    margin: 0;
+  }
+
+  &-lede {
+    font-size: 14px;
+    color: #5b6470;
+    margin: 0;
+  }
+}
+
+@media (max-width: $bp-mobile) {
+  .experts-archive__dept {
+    margin-top: 40px;
+
+    &-title { font-size: 20px; }
+  }
+}

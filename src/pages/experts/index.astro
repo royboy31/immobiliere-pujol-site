@@ -17,23 +17,94 @@ function splitName(title: string): { first: string; last: string } {
   };
 }
 
-const items = experts.map((entry) => {
-  const e = entry.data;
-  const { first, last } = splitName(e.title);
-  return {
-    slug: e.slug,
-    photo: e.photo,
-    fonction: e.fonction,
-    type: getExpertType(e),
-    first,
-    last,
-  };
-});
+type Item = {
+  slug: string;
+  photo?: string;
+  fonction?: string;
+  type: string;
+  first: string;
+  last: string;
+};
 
-// Order: rentals, then sales, then everyone else — keeps the green/orange
-// blocks visually grouped instead of scattered randomly.
-const typeOrder: Record<string, number> = { rental: 0, sales: 1, other: 2 };
-items.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
+// Build the list of visible experts (hidden=true are kept in the collection
+// for backlink preservation but don't appear on the listing).
+const items: Item[] = experts
+  .filter((entry) => !entry.data.hidden)
+  .map((entry) => {
+    const e = entry.data;
+    const { first, last } = splitName(e.title);
+    return {
+      slug: e.slug,
+      photo: e.photo,
+      fonction: e.fonction,
+      type: getExpertType(e),
+      first,
+      last,
+    };
+  });
+
+// Section ordering — Caroline's choice (meeting 15/05): direction first, then
+// the commercial teams, then anyone else.
+const DEPT_ORDER: { key: string; label: string; lede: string }[] = [
+  {
+    key: 'Direction',
+    label: 'Direction',
+    lede: "Les associés et directeurs qui pilotent l'agence.",
+  },
+  {
+    key: 'Vente',
+    label: 'Commerciaux vente',
+    lede: "Spécialistes de la vente d'appartements et de maisons sur Marseille.",
+  },
+  {
+    key: 'Gestion locative',
+    label: 'Gestion locative',
+    lede: "L'équipe qui gère vos biens en location.",
+  },
+  {
+    key: 'Syndic',
+    label: 'Syndic de copropriété',
+    lede: "Gestionnaires de copropriétés à Marseille.",
+  },
+  {
+    key: 'Contentieux',
+    label: 'Contentieux & juridique',
+    lede: "Pour vos dossiers contentieux et juridiques.",
+  },
+];
+
+// Group items by department, preserving the order above.
+const sections = DEPT_ORDER.map((d) => {
+  // Match by the raw experts entry so we can read its `department` field
+  // (which the Item type doesn't carry — keeping Item minimal for the card).
+  const group = experts
+    .filter((entry) => !entry.data.hidden && (entry.data.department || '') === d.key)
+    .map((entry) => {
+      const { first, last } = splitName(entry.data.title);
+      return {
+        slug: entry.data.slug,
+        photo: entry.data.photo,
+        fonction: entry.data.fonction,
+        type: getExpertType(entry.data),
+        first,
+        last,
+      } as Item;
+    });
+  return { ...d, items: group };
+}).filter((s) => s.items.length > 0);
+
+// Anyone visible without a department falls under "Autres expertises" so we
+// never silently drop a card.
+const placedSlugs = new Set(sections.flatMap((s) => s.items.map((i) => i.slug)));
+const orphans = items.filter((i) => !placedSlugs.has(i.slug));
+if (orphans.length) {
+  sections.push({
+    key: 'autres',
+    label: 'Autres expertises',
+    lede: '',
+    items: orphans,
+  });
+}
 ---
 
 <BaseLayout
@@ -54,22 +125,30 @@ items.sort((a, b) => typeOrder[a.type] - typeOrder[b.type]);
       </div>
     </div>
 
-    <div class="experts-archive__grid">
-      {items.map((p) => (
-        <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type}`}>
-          <div class="expert-tile__ph">
-            {p.photo ? (
-              <img src={p.photo} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />
-            ) : (
-              <span class="expert-tile__ph-empty" aria-hidden="true">{p.first.charAt(0)}</span>
-            )}
-          </div>
-          <div class="expert-tile__name">
-            {p.first}{p.last && <> <b>{p.last}</b></>}
-          </div>
-          {p.fonction && <div class="expert-tile__role">{p.fonction}</div>}
-        </a>
-      ))}
-    </div>
+    {sections.map((s) => (
+      <section class="experts-archive__dept">
+        <header class="experts-archive__dept-head">
+          <h2 class="experts-archive__dept-title">{s.label}</h2>
+          {s.lede && <p class="experts-archive__dept-lede">{s.lede}</p>}
+        </header>
+        <div class="experts-archive__grid">
+          {s.items.map((p) => (
+            <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type}`}>
+              <div class="expert-tile__ph">
+                {p.photo ? (
+                  <img src={p.photo} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />
+                ) : (
+                  <span class="expert-tile__ph-empty" aria-hidden="true">{p.first.charAt(0)}</span>
+                )}
+              </div>
+              <div class="expert-tile__name">
+                {p.first}{p.last && <> <b>{p.last}</b></>}
+              </div>
+              {p.fonction && <div class="expert-tile__role">{p.fonction}</div>}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </section>
 </BaseLayout>
