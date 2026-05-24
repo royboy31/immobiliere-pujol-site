@@ -112,12 +112,11 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
       )}
 
       {view.saleStatus && (
-        <div class="sold-overlay sold-overlay--hero">
+        <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''}`}>
           <span class="sold-overlay__label">Sous promesse</span>
           {view.contactPhoto && (
             <img class="sold-overlay__agent" src={view.contactPhoto} alt="" loading="lazy" />
           )}
-          <img class="sold-overlay__logo" src="/images/home/pujol-logo-white.png" alt="Immobilière Pujol" loading="lazy" />
         </div>
       )}
 

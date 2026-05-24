@@ -2171,20 +2171,12 @@
     height: 90px;
     border-radius: 50%;
     object-fit: cover;
+    background: #ec7234;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
-  &__logo {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    width: 130px;
-    height: auto;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-  }
-
-  // When agent photo present, shift logo right of it
-  &__agent ~ &__logo { left: 108px; bottom: 16px; }
+  // Green background for rental listings
+  &--rental &__agent { background: $ds-olive; }
 
   // Hero (detail page) — larger sizing
   &--hero {
@@ -2195,19 +2187,11 @@
     }
 
     .sold-overlay__agent {
-      bottom: 14px;
-      left: 14px;
-      width: 120px;
-      height: 120px;
+      bottom: 6px;
+      left: 0;
+      width: 159px;
+      height: 161px;
     }
-
-    .sold-overlay__logo {
-      bottom: 24px;
-      left: 14px;
-      width: 180px;
-    }
-
-    .sold-overlay__agent ~ .sold-overlay__logo { left: 148px; }
   }
 }
 
@@ -2216,14 +2200,10 @@
   .sold-overlay {
     &__label { font-size: 16px; padding: 5px 14px 5px 10px; }
     &__agent { width: 65px; height: 65px; bottom: 6px; left: 6px; }
-    &__logo { width: 100px; bottom: 8px; left: 6px; }
-    &__agent ~ &__logo { left: 78px; }
 
     &--hero {
-      .sold-overlay__label { font-size: 22px; padding: 6px 18px 6px 14px; }
-      .sold-overlay__agent { width: 90px; height: 90px; bottom: 10px; left: 10px; }
-      .sold-overlay__logo { width: 140px; bottom: 16px; left: 10px; }
-      .sold-overlay__agent ~ .sold-overlay__logo { left: 110px; }
+      .sold-overlay__label { font-size: 28px; padding: 2px 18px 2px 14px; }
+      .sold-overlay__agent { width: 100px; height: 100px; bottom: 4px; left: 0; }
     }
   }
 }
