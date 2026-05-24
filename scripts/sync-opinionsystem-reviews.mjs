@@ -135,6 +135,9 @@ async function main() {
     }
   }
   console.log(`OpinionSystem collaborators: ${collaborators.length}`);
+  for (const c of collaborators) {
+    console.log(`  → ${c.firstname || '?'} ${c.lastname || '?'} <${c.email || 'no-email'}> id:${c.collaborator_id}`);
+  }
 
   // 2. Load our experts
   const experts = await loadExperts();
