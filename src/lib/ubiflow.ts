@@ -71,6 +71,8 @@ export interface UbiflowAnnonce {
   mandatNumero: string;
   mandatType: string;
   slug: string;
+  saleStatus?: string | null;
+  contactPhoto?: string | null;
 }
 
 function str(val: unknown): string {
