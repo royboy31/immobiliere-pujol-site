@@ -55,6 +55,11 @@ async function main() {
     const email = normEmail(d.contactAAfficher);
     if (!email || !byEmail.has(email)) continue;
 
+    // Skip garages / parking / box — per Caroline's request, they pollute the
+    // historique without commercial interest. Detection: LBI/Hektor slug prefix
+    // ljvga (vente-garage) or ljlga (location-garage).
+    if (/^lj[vl]ga/i.test(d.slug || '')) continue;
+
     const arr = buckets.get(email) ?? [];
     arr.push({
       slug: d.slug,
