@@ -81,7 +81,8 @@ async function loadExperts() {
     try {
       const d = JSON.parse(await readFile(join(EXPERTS_DIR, f), 'utf-8'));
       const email = normEmail(d.email);
-      if (email && d.slug) experts.push({ slug: d.slug, email, title: d.title });
+      const aliases = (d.emailAliases || []).map(normEmail).filter(Boolean);
+      if (email && d.slug) experts.push({ slug: d.slug, email, aliases, title: d.title });
     } catch {}
   }
   return experts;
@@ -145,19 +146,24 @@ async function main() {
   let matched = 0, totalReviews = 0, skipped = 0, errors = 0;
 
   const tasks = experts.map((expert) => pool(async () => {
-    // Match by email first, then fall back to name matching
+    // Match by primary email, then aliases, then fall back to name
     let collab = collabByEmail.get(expert.email);
     let matchMethod = 'email';
+    if (!collab && expert.aliases) {
+      for (const alias of expert.aliases) {
+        collab = collabByEmail.get(alias);
+        if (collab) { matchMethod = 'alias'; break; }
+      }
+    }
     if (!collab) {
       const { first, last } = extractName(expert.title);
-      // Try full name first, then first name only
       const fullKey = last ? `${normName(first)} ${normName(last)}` : normName(first);
       collab = collabByName.get(fullKey) || (last ? collabByName.get(normName(first)) : null);
       matchMethod = 'name';
     }
     if (!collab) { skipped++; return; }
-    if (matchMethod === 'name') {
-      console.log(`  ℹ ${expert.slug}: matched by name (${collab.firstname} ${collab.lastname || ''}) — email mismatch`);
+    if (matchMethod !== 'email') {
+      console.log(`  ℹ ${expert.slug}: matched by ${matchMethod} (${collab.firstname} ${collab.lastname || ''}) — primary email mismatch`);
     }
     matched++;
 
