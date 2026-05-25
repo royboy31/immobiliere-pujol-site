@@ -2068,6 +2068,9 @@
   .annonce-hero .annonce-contact { order: 6; }
   .annonce-hero .annonce-cta-card { order: 6; }
   .annonce-page .annonce-hero .expert-card { order: 7; }
+  // Without an explicit order the sidebar map falls back to order:0 and floats
+  // above the photo. Pin it to the bottom of the stacked mobile layout.
+  .annonce-hero .annonce-map { order: 8; }
 
   .annonce-desc-block {
     margin-top: 8px;
