@@ -3,6 +3,9 @@ name: Scrape Google Reviews
 on:
   workflow_dispatch: # Manual trigger only
 
+permissions:
+  contents: write
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -27,6 +30,16 @@ jobs:
           cat public/_data/google-reviews.json | head -5
           echo "..."
           python3 -c "import json; d=json.load(open('public/_data/google-reviews.json')); print(f'Rating: {d[\"rating\"]}, Count: {d[\"reviewCount\"]}, Reviews with text: {len(d[\"reviews\"])}')"
+
+      - name: Upload debug screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gmaps-debug
+          path: |
+            /tmp/gmaps-debug.png
+            /tmp/gmaps-reviews.png
+          if-no-files-found: ignore
 
       - name: Commit and push
         run: |
