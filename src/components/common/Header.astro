@@ -1,6 +1,17 @@
 ---
-import { fetchGoogleReviews } from '../../lib/google-reviews';
-const { stats: googleStats } = await fetchGoogleReviews();
+// Google stats — read from static JSON asset via ASSETS binding
+let googleStats = { rating: 4.7, reviewCount: 2050 };
+try {
+  const { env } = await import('cloudflare:workers');
+  const assets = (env as any)?.ASSETS;
+  if (assets) {
+    const res = await assets.fetch(new Request('https://placeholder/_data/google-reviews.json'));
+    if (res.ok) {
+      const data = await res.json() as any;
+      if (data?.rating) googleStats = { rating: data.rating, reviewCount: data.reviewCount || 0 };
+    }
+  }
+} catch {}
 // Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
 const navItems = [
   {
