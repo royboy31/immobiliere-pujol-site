@@ -51,29 +51,73 @@ async function main() {
     await page.screenshot({ path: '/tmp/gmaps-debug.png', fullPage: false });
     console.log('  Debug screenshot saved to /tmp/gmaps-debug.png');
 
-    // Wait for the page to fully load reviews panel
+    // Wait for the business panel to load
     await page.waitForSelector('div[role="main"]', { timeout: 10000 }).catch(() => {});
     await sleep(2000);
 
-    // Click the reviews tab
+    // Click the star rating or "X avis" link to open the reviews panel
+    let openedReviews = false;
     try {
-      const tabs = await page.$$('button[role="tab"]');
-      for (const tab of tabs) {
-        const text = await tab.evaluate(el => el.textContent);
-        if (/avis|review/i.test(text)) {
-          await tab.click();
-          console.log(`  Clicked reviews tab: "${text.trim()}"`);
-          await sleep(3000);
-          break;
-        }
+      // Try clicking the rating stars or review count link
+      const reviewLinks = await page.$$('button[jsaction*="reviewChart"], a[href*="lrd"], button[aria-label*="avis"], button[aria-label*="étoile"]');
+      if (reviewLinks.length > 0) {
+        await reviewLinks[0].click();
+        console.log('  Clicked rating/review link');
+        openedReviews = true;
+        await sleep(3000);
       }
-    } catch (e) {
-      console.log('  Could not find reviews tab, continuing...');
+    } catch {}
+
+    // If that didn't work, try scrolling the panel down to find the reviews section
+    if (!openedReviews) {
+      try {
+        // Scroll the side panel to find "Avis" section
+        const panel = await page.$('div.m6QErb.DxyBCb, div.m6QErb');
+        if (panel) {
+          for (let i = 0; i < 10; i++) {
+            await page.evaluate(el => el.scrollTop += 500, panel);
+            await sleep(500);
+          }
+          // Look for "Tous les avis" or "All reviews" button
+          const allReviewsBtns = await page.$$('button[aria-label*="avis"], a[href*="reviews"], span');
+          for (const btn of allReviewsBtns) {
+            const text = await btn.evaluate(el => el.textContent);
+            if (/tous les avis|all.*review|\d+\s*avis/i.test(text)) {
+              await btn.click();
+              console.log(`  Clicked: "${text.trim()}"`);
+              openedReviews = true;
+              await sleep(3000);
+              break;
+            }
+          }
+        }
+      } catch {}
     }
 
-    // Take another screenshot after clicking reviews tab
+    // If still not opened, try clicking the tab if visible
+    if (!openedReviews) {
+      try {
+        const tabs = await page.$$('button[role="tab"]');
+        for (const tab of tabs) {
+          const text = await tab.evaluate(el => el.textContent);
+          if (/avis|review/i.test(text)) {
+            await tab.click();
+            console.log(`  Clicked reviews tab: "${text.trim()}"`);
+            openedReviews = true;
+            await sleep(3000);
+            break;
+          }
+        }
+      } catch {}
+    }
+
+    if (!openedReviews) {
+      console.log('  WARNING: Could not open reviews panel');
+    }
+
+    // Take screenshot after attempting to open reviews
     await page.screenshot({ path: '/tmp/gmaps-reviews.png', fullPage: false });
-    console.log('  Reviews tab screenshot saved');
+    console.log('  Reviews panel screenshot saved');
 
     // Sort by newest
     try {
