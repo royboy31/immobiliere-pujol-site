@@ -1231,7 +1231,15 @@
     line-height: 1.4;
     margin-top: 4px;
 
-    input { flex: none; margin-top: 2px; }
+    input[type='checkbox'] {
+      appearance: auto;
+      -webkit-appearance: checkbox;
+      width: 16px;
+      height: 16px;
+      flex: none;
+      margin-top: 2px;
+      cursor: pointer;
+    }
     a { color: inherit; text-decoration: underline; }
   }
 
@@ -1239,6 +1247,15 @@
     margin-top: 8px;
     width: 100%;
     padding: 14px 20px;
+  }
+
+  &__legal {
+    font-size: 10px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, .55);
+    margin: 0;
+
+    a { color: inherit; text-decoration: underline; }
   }
 
   &__ref {
@@ -2119,5 +2136,74 @@
 
     &__title { font-size: 32px; margin-bottom: 24px; }
     &__grid { grid-template-columns: 1fr; gap: 18px; }
+  }
+}
+
+// ── Sold / Sous promesse overlay ──────────────────────────────────────────
+// Layout: label (mid-left with white bg), agent circle (bottom-left),
+// logo (bottom-center, right of agent).
+
+.sold-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  &__label {
+    position: absolute;
+    top: 44%;
+    left: 0;
+    background: #fff;
+    color: $ds-olive;
+    font-family: $ds-font-serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 6px 20px 6px 14px;
+    line-height: 1.3;
+  }
+
+  &__agent {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ec7234;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  // Green background for rental listings
+  &--rental &__agent { background: $ds-olive; }
+
+  // Hero (detail page) — larger sizing
+  &--hero {
+    .sold-overlay__label {
+      top: 45%;
+      font-size: 47px;
+      padding: 2px 28px 2px 22px;
+    }
+
+    .sold-overlay__agent {
+      bottom: 6px;
+      left: 0;
+      width: 159px;
+      height: 161px;
+    }
+  }
+}
+
+// Mobile adjustments
+@media (max-width: 600px) {
+  .sold-overlay {
+    &__label { font-size: 16px; padding: 5px 14px 5px 10px; }
+    &__agent { width: 65px; height: 65px; bottom: 6px; left: 6px; }
+
+    &--hero {
+      .sold-overlay__label { font-size: 28px; padding: 2px 18px 2px 14px; }
+      .sold-overlay__agent { width: 100px; height: 100px; bottom: 4px; left: 0; }
+    }
   }
 }

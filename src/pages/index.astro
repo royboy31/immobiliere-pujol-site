@@ -65,37 +65,38 @@ const venteCards = ventes.map(buildCard);
 const locationCards = locations.map(buildCard);
 
 // ---------- EXPERTS ----------
-// Hard-coded from the Claude Design handoff (expert1–4.png have the
-// olive / orange / navy circle backgrounds baked in). Caroline Pujol links
-// to her real profile; the others link to the experts list page.
+// Each photo is a transparent expert headshot composited onto a colored oval
+// matching the expert's specialty: olive=gestion locative, orange=vente,
+// slate-navy=syndic. Generated from public/images/experts/*.png — see
+// scripts/build-home-expert-circles.mjs if you need to regenerate.
 const expertsBase = [
   {
-    href: '/experts/',
-    photo: '/images/home/expert1.png',
+    href: '/experts/gaelle-lapert/',
+    photo: '/images/home/experts/gaelle.png',
+    first: 'Gaëlle',
+    last: 'Lapert',
+    role: 'Commerciale en gestion locative',
+  },
+  {
+    href: '/experts/benoit-transactions/',
+    photo: '/images/home/experts/benoit.png',
+    first: 'Benoit',
+    last: 'Marin-Vicente',
+    role: 'Vente de biens immobiliers',
+  },
+  {
+    href: '/experts/julia-lauron-ventes-de-biens-immobiliers/',
+    photo: '/images/home/experts/julia.png',
     first: 'Julia',
     last: 'Lauron',
-    role: 'Ventes de Biens Immobiliers',
+    role: 'Ventes de biens immobiliers',
   },
   {
-    href: '/experts/',
-    photo: '/images/home/expert2.png',
-    first: 'Gaelle',
-    last: 'Lapert',
-    role: 'Commerciale en gestion locative',
-  },
-  {
-    href: '/experts/caroline-pujol/',
-    photo: '/images/home/expert3.png',
-    first: 'Caroline',
-    last: 'Pujol',
-    role: 'Vente, rénovation et gestion de biens immobiliers à Marseille',
-  },
-  {
-    href: '/experts/',
-    photo: '/images/home/expert4.png',
-    first: 'Gaelle',
-    last: 'Lapert',
-    role: 'Commerciale en gestion locative',
+    href: '/experts/emeline-syndic-de-coproprietes/',
+    photo: '/images/home/experts/emeline.png',
+    first: 'Emeline',
+    last: 'Pellin',
+    role: 'Syndic de copropriétés',
   },
 ];
 // Repeat the 4 experts so the carousel has cards to scroll one-by-one.
@@ -314,7 +315,7 @@ const STAR_PATH =
           <a class="expert" href={e.href}>
             <div class="ph"><img src={e.photo} alt={`${e.first} ${e.last}`.trim()} /></div>
             <div class="name">
-              {e.first && <>{e.first} </>}<b>{e.last}</b>
+              {e.first && <>{e.first}{' '}</>}<b>{e.last}</b>
             </div>
             <div class="role">{e.role}</div>
           </a>
@@ -478,7 +479,7 @@ const STAR_PATH =
 
     {/* ============= NEWSLETTER ============= */}
     <section class="news-wrap">
-      <form class="news" method="post" action="https://pujol-email.kamindudushmantha.workers.dev/newsletter" data-newsletter-form>
+      <form class="news" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-newsletter-form>
         <h2>Inscrivez-vous à la<br /><b>Newsletter</b></h2>
         <div class="form">
           <input name="email" type="email" placeholder="Email" required />

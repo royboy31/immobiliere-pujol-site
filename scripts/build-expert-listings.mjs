@@ -52,8 +52,13 @@ async function main() {
     scanned++;
     let d;
     try { d = JSON.parse(await readFile(join(ANNONCES_DIR, f), 'utf-8')); } catch { continue; }
-    const email = normEmail(d.contactAAfficher);
+    const email = normEmail(d.emailAAfficher || d.contactAAfficher);
     if (!email || !byEmail.has(email)) continue;
+
+    // Skip garages / parking / box — per Caroline's request, they pollute the
+    // historique without commercial interest. Detection: LBI/Hektor slug prefix
+    // ljvga (vente-garage) or ljlga (location-garage).
+    if (/^lj[vl]ga/i.test(d.slug || '')) continue;
 
     const arr = buckets.get(email) ?? [];
     arr.push({

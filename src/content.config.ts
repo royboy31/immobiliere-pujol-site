@@ -71,6 +71,12 @@ const experts = defineCollection({
     instagram: z.string().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
+    // Set to true to keep the JSON (and therefore the /experts/{slug}/ detail
+    // page + backlinks) but hide the card from the /experts/ listing.
+    hidden: z.boolean().optional(),
+    // Section the expert appears under on the /experts/ index. One of:
+    // "Direction" | "Vente" | "Gestion locative" | "Syndic" | "Contentieux".
+    department: z.string().optional(),
   }),
 });
 

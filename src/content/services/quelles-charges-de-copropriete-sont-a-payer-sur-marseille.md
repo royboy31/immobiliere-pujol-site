@@ -1,14 +1,14 @@
 ---
-title: "Estimation Des Honoraires Du Syndic Pour La Gestion De Votre Copropriété À Marseille ?"
+title: "Calculer Vos Honoraires De Syndic À Marseille — Demandez Votre Devis"
 slug: "services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille"
-seoTitle: "Estimation des honoraires du syndic pour la gestion de votre copropriété à Marseille ?"
-seoDescription: "Estimez les honoraires de syndic à Marseille  Consultez L'immobilière Pujol, syndic reconnu pour la qualité de son travail"
+seoTitle: "Calculer vos honoraires de syndic à Marseille — Demandez votre devis"
+seoDescription: "Contactez l'Immobilière Pujol pour calculer vos honoraires de syndic à Marseille et obtenir un devis personnalisé sous 24 heures."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Estimation Des Honoraires Du Syndic Pour La Gestion De Votre Copropriété À Marseille ?</h1>        
+    <h1 class="hero__title">Calculer vos honoraires de syndic à Marseille — Demandez votre devis</h1>        
 
 
         
@@ -50,10 +50,9 @@ seoDescription: "Estimez les honoraires de syndic à Marseille  Consultez L'immo
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Estimation Des Honoraires Du Syndic Pour La Gestion De Votre Copropriété À Marseille ?</h3>
-                    <p>Déposez votre demande et sous 24h vous devriez recevoir une estimation de nos services</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+                    <h3 class="contextual__title">Calculer vos honoraires de syndic à Marseille — Demandez votre devis</h3>
+                    <p>Le calcul des honoraires de syndic dépend de plusieurs paramètres propres à votre copropriété : nombre de lots, équipements (ascenseur, chaufferie, gardien, espaces verts), procédures en cours, etc. Pour vous proposer un montant juste, nous étudions chaque dossier individuellement.</p>
+<p><strong>Renseignez le formulaire ci-dessous</strong> pour obtenir un devis personnalisé de syndic. Nous vous adresserons une proposition adaptée à votre copropriété sous 24 heures.</p>
                 </section>
             </div>
 

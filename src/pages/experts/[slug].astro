@@ -37,11 +37,17 @@ const nameParts = displayName.split(/\s+/);
 const firstName = nameParts[0] || displayName;
 const lastName = nameParts.slice(1).join(' ');
 
+// Garages / parking / box are excluded per Caroline's request — they pollute
+// expert profiles without commercial interest. Detected via LBI/Hektor slug
+// prefix lj[vl]ga.
+const isGarage = (s: string | undefined | null) => /^lj[vl]ga/i.test(s || '');
+
 // Active annonces — full UbiflowAnnonce shape so we can reuse <AnnonceCard>.
 let activeAnnonces: Awaited<ReturnType<typeof fetchUbiflowAnnonces>> = [];
 try {
   const annonces = await fetchUbiflowAnnonces();
   activeAnnonces = annonces.filter((a) => {
+    if (isGarage(a.slug)) return false;
     const em = (a.emailAAfficher || '').split('|')[0].trim().replace(/!+$/, '').toLowerCase();
     return expertEmail && em === expertEmail;
   });
@@ -74,7 +80,13 @@ try {
 } catch (e) {}
 
 const activeSlugs = new Set(activeAnnonces.map((a) => a.slug));
-const closedOnly = historyListings.filter((l) => !activeSlugs.has(l.slug));
+const garageCount = historyListings.filter((l) => isGarage(l.slug)).length;
+const closedOnly = historyListings.filter(
+  (l) => !activeSlugs.has(l.slug) && !isGarage(l.slug),
+);
+// Adjust totalCount to exclude garages picked up from a stale cached payload.
+// After the next deploy (build script also filters), garageCount will be 0.
+if (garageCount > 0) historyTotalCount = Math.max(0, historyTotalCount - garageCount);
 
 const expertType = getExpertType(expert);
 const isSales = expertType === 'sales';
@@ -312,10 +324,16 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           </ul>
         )}
 
+        {reviewsPayload.surveys.length > 3 && (
+          <button type="button" class="expert-reviews__more expert-reviews__more--top" id="expert-reviews-toggle-top">
+            Voir les {reviewsPayload.surveys.length - 3} autres avis
+          </button>
+        )}
+
         {reviewsPayload.surveys.length > 0 && (
           <ul class="expert-reviews__list" id="expert-reviews-list">
             {reviewsPayload.surveys.map((r, i) => (
-              <li class={`expert-review-card${i >= 6 ? ' expert-review-card--hidden' : ''}`}>
+              <li class={`expert-review-card${i >= 3 ? ' expert-review-card--hidden' : ''}`}>
                 <div class="expert-review-card__head">
                   <span class="expert-review-card__client">{r.clientName}</span>
                   {r.date && <time>{new Date(r.date).toLocaleDateString('fr-FR')}</time>}
@@ -332,12 +350,6 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
             ))}
           </ul>
         )}
-
-        {reviewsPayload.surveys.length > 6 && (
-          <button type="button" class="expert-reviews__more" id="expert-reviews-toggle">
-            Voir les {reviewsPayload.surveys.length - 6} autres avis
-          </button>
-        )}
       </section>
     )}
 
@@ -347,11 +359,11 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           <span class="expert-listings__overline">Disponible</span>
           <h2 class="expert-listings__title">
             {isSales ? (
-              <>Les biens en vente proposés par <b>{firstName}</b></>
+              <>Les biens <b>en vente proposés par {firstName}</b></>
             ) : isRental ? (
-              <>Les biens en location proposés par <b>{firstName}</b></>
+              <>Les biens <b>en location proposés par {firstName}</b></>
             ) : (
-              <>Les biens proposés par <b>{firstName}</b></>
+              <>Les biens en charge de <b>{firstName}</b></>
             )}
           </h2>
           <p class="expert-listings__sub">{activeSub}</p>
@@ -439,12 +451,12 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
   </article>
 
   <script>
-    const btn = document.getElementById('expert-reviews-toggle');
-    if (btn) {
-      btn.addEventListener('click', () => {
+    const toggleBtn = document.getElementById('expert-reviews-toggle-top');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
         const hidden = document.querySelectorAll('.expert-review-card--hidden');
         hidden.forEach((el) => el.classList.remove('expert-review-card--hidden'));
-        btn.remove();
+        toggleBtn.remove();
       });
     }
   </script>
@@ -464,7 +476,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--color-olive, #6b7c3a);
+      color: var(--expert-accent);
       margin-bottom: 0.5rem;
     }
     .expert-reviews__title {
@@ -485,7 +497,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       font-size: 2.5rem;
       font-weight: 700;
       line-height: 1;
-      color: var(--color-olive, #6b7c3a);
+      color: var(--expert-accent);
     }
     .expert-reviews__den {
       font-size: 1rem;
@@ -499,7 +511,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
     .expert-reviews__certif {
       display: inline-block;
       font-size: 0.8rem;
-      color: var(--color-olive, #6b7c3a);
+      color: var(--expert-accent);
       text-decoration: underline;
     }
     .expert-reviews__criteres {
@@ -520,7 +532,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
     }
     .expert-reviews__criteres li strong {
       white-space: nowrap;
-      color: var(--color-olive, #6b7c3a);
+      color: var(--expert-accent);
     }
     .expert-reviews__list {
       list-style: none;
@@ -582,13 +594,16 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       display: block;
       margin: 1.5rem auto 0;
       padding: 0.6rem 1.5rem;
-      background: var(--color-olive, #6b7c3a);
+      background: var(--expert-accent);
       color: #fff;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.85rem;
       font-weight: 600;
+    }
+    .expert-reviews__more--top {
+      margin: 0 0 1.5rem;
     }
     .expert-reviews__more:hover {
       opacity: 0.9;

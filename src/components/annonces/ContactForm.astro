@@ -4,9 +4,11 @@ interface Props {
   titre: string;
   contactEmail?: string | null;
   type: 'V' | 'L' | string;
+  codePostal?: string | null;
+  negociateur?: string | null;
 }
 
-const { reference, titre, contactEmail, type } = Astro.props;
+const { reference, titre, contactEmail, type, codePostal, negociateur } = Astro.props;
 const isLocation = type === 'L';
 ---
 
@@ -16,6 +18,9 @@ const isLocation = type === 'L';
       data-contact-title={titre}>
   <input type="hidden" name="reference" value={reference} />
   <input type="hidden" name="title" value={titre} />
+  <input type="hidden" name="type" value={type} />
+  <input type="hidden" name="code_postal" value={codePostal || ''} />
+  <input type="hidden" name="negociateur" value={negociateur || 'Immobilière Pujol'} />
   <h3 class="annonce-contact__title">Laissez-nous vos <b>coordonnées</b></h3>
   <p class="annonce-contact__sub">
     Pour organiser une visite ou recevoir plus d'informations sur cette annonce.
@@ -46,6 +51,14 @@ const isLocation = type === 'L';
     <span>J'accepte que mes données soient utilisées pour traiter ma demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
   </label>
 
+  <p class="annonce-contact__legal">
+    En soumettant ce formulaire, j'accepte que les informations collectées soient utilisées
+    dans le cadre de ma demande et de la relation commerciale qui peut en découler. Pour
+    connaître et exercer vos droits, notamment de retrait de votre consentement à
+    l'utilisation des données collectées par ce formulaire, veuillez consulter notre
+    <a href="/politique-de-confidentialite/">Politique de confidentialité</a>.
+  </p>
+
   <button type="submit" class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'} annonce-contact__submit`}>
     ENVOYER MA DEMANDE
   </button>
@@ -63,7 +76,7 @@ const isLocation = type === 'L';
       if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
 
       try {
-        const res = await fetch('https://pujol-email.kamindudushmantha.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
+        const res = await fetch('https://pujol-email.roy-68a.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
         const data = await res.json();
         if (data.ok) {
           form.innerHTML = '<div class="annonce-contact__success" style="text-align:center;padding:24px"><h3>Merci !</h3><p>Votre demande a bien été envoyée. Nous vous recontacterons rapidement.</p></div>';

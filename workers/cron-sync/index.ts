@@ -430,9 +430,27 @@ const LBI_CHAUFFAGE: Record<string, string> = {
   '10368': 'Individuel électrique radiateur',
 };
 
+// ── Sale status from LBI field 136 (0-indexed: 135) ──
+function parseSaleStatus(raw: string | undefined): string | null {
+  const v = (raw || '').trim().toLowerCase();
+  if (v === 'sous offre') return 'sous-offre';
+  if (v === 'sous compromis') return 'sous-compromis';
+  return null; // 'Actif' or empty → no special status
+}
+
+// ── Expert email → photo path (for overlay on cards) ──
+const CONTACT_PHOTO_MAP: Record<string, string> = {
+  'benoit@immobiliere-pujol.fr': '/images/experts/benoit-transactions.png',
+  'benoitmarinvicente@immobiliere-pujol.fr': '/images/experts/benoit-transactions.png',
+  'julia@immobiliere-pujol.fr': '/images/experts/julia-lauron-ventes-de-biens-immobiliers.png',
+  'thibault@immobiliere-pujol.fr': '/images/experts/thibault-arnoux.png',
+  'candice@immobiliere-pujol.fr': '/images/experts/candice-loth.png',
+  'carolinepujol@immobiliere-pujol.fr': '/images/experts/caroline-pujol.png',
+};
+
 // ── Negotiator name → expert email mapping ──
 const NEGOTIATOR_MAP: Record<string, string> = {
-  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'benoit marin-vicente': 'benoit@immobiliere-pujol.fr',
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
   'candice loth': 'candice@immobiliere-pujol.fr',
@@ -528,6 +546,7 @@ interface LbiAnnonce {
   visiteVirtuelle: string | null;
   photos: string[];
   slug: string;
+  saleStatus: string | null;
 }
 
 function parseLbiCsv(raw: string): LbiAnnonce[] {
@@ -580,6 +599,7 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       visiteVirtuelle: (f[103]?.trim().split(/\s*,\s*/)[0]) || null,
       photos,
       slug: '',
+      saleStatus: parseSaleStatus(f[135]),
     };
 
     // Generate slug (same pattern as ubiflow)
@@ -660,10 +680,10 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
-      mandat_numero, url_visite_virtuelle,
+      mandat_numero, url_visite_virtuelle, termine,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?, ?,?,'lbi',?,?
+      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', reference_agence=excluded.reference_agence,
@@ -684,6 +704,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       telephone_a_afficher=excluded.telephone_a_afficher,
       email_a_afficher=excluded.email_a_afficher,
       mandat_numero=excluded.mandat_numero, url_visite_virtuelle=excluded.url_visite_virtuelle,
+      termine=excluded.termine,
       date_modification=excluded.date_modification, source='lbi',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
@@ -698,7 +719,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
     a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur, a.typeChauffage,
     a.titre, a.descriptif,
     a.contactNom, a.telephone, a.email,
-    a.mandatNumero, a.visiteVirtuelle,
+    a.mandatNumero, a.visiteVirtuelle, a.saleStatus,
     now, now, now, now
   );
 }
@@ -921,6 +942,9 @@ async function writeActiveJson(env: Env): Promise<number> {
     mandatType: a.mandat_type || '',
     slug: a.slug || '',
     meuble: !!a.meuble,
+    source: (a.source || 'ubiflow') as 'ubiflow' | 'lbi',
+    saleStatus: a.termine || null,
+    contactPhoto: CONTACT_PHOTO_MAP[(a.email_a_afficher || '').toLowerCase()] || null,
   }));
 
   await env.PHOTOS.put('annonces/active.json', JSON.stringify(json), {
@@ -937,6 +961,7 @@ async function writeActiveJson(env: Env): Promise<number> {
     photos: a.photos.slice(0, 4),
     meuble: a.meuble, parking: a.parking, garage: a.garage,
     terrasse: a.terrasse, balcon: a.balcon,
+    saleStatus: a.saleStatus, contactPhoto: a.contactPhoto,
   }));
   await env.PHOTOS.put('annonces/cards.json', JSON.stringify(cards), {
     httpMetadata: { contentType: 'application/json' },
@@ -977,7 +1002,17 @@ export default {
       });
     }
 
-    return new Response('pujol-cron-sync: /sync, /status, /import-lbi', { status: 200 });
+    // Counts: GET /counts — active + closed breakdown by source
+    if (url.pathname === '/counts') {
+      const rows = await env.DB
+        .prepare(`SELECT source, status, COUNT(*) as count FROM annonces GROUP BY source, status ORDER BY source, status`)
+        .all<{ source: string; status: string; count: number }>();
+      return new Response(JSON.stringify(rows.results, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('pujol-cron-sync: /sync, /status, /import-lbi, /counts', { status: 200 });
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
