@@ -1,15 +1,8 @@
 ---
-// Google stats — on SSR pages, use Astro.url to fetch the static JSON asset.
-// On prerendered pages this runs at build time via Node fetch.
-let googleStats = { rating: 4.7, reviewCount: 2050 };
-try {
-  const url = new URL('/_data/google-reviews.json', Astro.url.origin);
-  const res = await fetch(url.toString());
-  if (res.ok) {
-    const data = await res.json() as any;
-    if (data?.rating) googleStats = { rating: data.rating, reviewCount: data.reviewCount || 0 };
-  }
-} catch {}
+// Google stats for the header bar.
+// Updated by scripts/sync-google-reviews.mjs which writes this file at build time.
+import googleData from '../../data/google-stats.json';
+const googleStats = { rating: googleData.rating ?? 4.7, reviewCount: googleData.reviewCount ?? 2050 };
 // Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
 const navItems = [
   {

@@ -107,6 +107,10 @@ async function main() {
   if (!existsSync(dir)) await mkdir(dir, { recursive: true });
   await writeFile(DEST, JSON.stringify(payload, null, 2));
 
+  // Also write the stats to src/data/ so Header.astro can import it statically
+  const STATS_DEST = join(__dirname, '..', 'src', 'data', 'google-stats.json');
+  await writeFile(STATS_DEST, JSON.stringify({ rating: stats.rating, reviewCount: stats.reviewCount }));
+
   console.log(`✓ Rating: ${stats.rating}/5, Google count: ${stats.reviewCount}`);
   console.log(`✓ Carousel: ${carousel.length} OpinionSystem reviews (from ${reviews.length} total)`);
   console.log(`  Written to ${DEST}`);
