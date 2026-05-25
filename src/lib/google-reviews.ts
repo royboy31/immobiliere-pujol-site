@@ -1,95 +1,91 @@
-// Build-time Google-reviews fetcher.
+// Google reviews reader.
 //
-// The WordPress plugin on the live site (immobiliere-pujol.fr) renders the
-// 4 most recent reviews directly in the HTML. We scrape that block at build
-// time and bake the result into the static homepage. If the fetch ever
-// fails (network, layout change), we fall back to a hard-coded snapshot so
-// the build never breaks.
+// At build time, scripts/sync-google-reviews.mjs scrapes the WordPress
+// site and writes public/_data/google-reviews.json.  This module reads
+// that file and returns the stats + reviews.  Falls back to hardcoded
+// snapshot if the JSON is missing.
 
 export interface GoogleReview {
   author: string;
   rating: number;
   date: string;
   text: string;
-  avatar?: string;
-  profileUrl?: string;
+  profileUrl?: string | null;
 }
 
-const SOURCE_URL = 'https://www.immobiliere-pujol.fr/';
-
-const FALLBACK: GoogleReview[] = [
-  {
-    author: 'Metehan',
-    rating: 5,
-    date: '2026',
-    text: "Je vous remercie très sincèrement pour votre excellente coopération à mon égard, Madame Sene Madjiguène.",
-  },
-  {
-    author: 'Nora',
-    rating: 5,
-    date: '2026',
-    text: "Très bonne expérience avec cette agence immobilière. L'équipe est vraiment humaine, à l'écoute et bienveillante.",
-  },
-  {
-    author: 'Maryline',
-    rating: 5,
-    date: '2026',
-    text: "J'ai trouvé la location qui correspond à tous mes critères grâce à cette agence ! Je suis particulièrement ravie de l'accompagnement.",
-  },
-];
-
-function decodeEntities(s: string): string {
-  return s
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&rsquo;/g, '’')
-    .replace(/&lsquo;/g, '‘')
-    .replace(/&hellip;/g, '…')
-    .replace(/&nbsp;/g, ' ');
+export interface GoogleStats {
+  rating: number;
+  reviewCount: number;
 }
 
-function stripTags(s: string): string {
-  return decodeEntities(s.replace(/<[^>]+>/g, ''))
-    .replace(/\s+/g, ' ')
-    .trim();
+export interface GoogleReviewData {
+  stats: GoogleStats;
+  reviews: GoogleReview[];
 }
 
-function parseReviews(html: string): GoogleReview[] {
-  const block = html.match(/<ul class="listing">([\s\S]*?)<\/ul>/);
-  if (!block) return [];
-  const items = [...block[1].matchAll(/<li class="rating-(\d+)"[^>]*>([\s\S]*?)<\/li>/g)];
+const FALLBACK: GoogleReviewData = {
+  stats: { rating: 4.7, reviewCount: 2049 },
+  reviews: [
+    {
+      author: 'Metehan',
+      rating: 5,
+      date: '2026',
+      text: "Je vous remercie très sincèrement pour votre excellente coopération à mon égard, Madame Sene Madjiguène.",
+    },
+    {
+      author: 'Nora',
+      rating: 5,
+      date: '2026',
+      text: "Très bonne expérience avec cette agence immobilière. L'équipe est vraiment humaine, à l'écoute et bienveillante.",
+    },
+    {
+      author: 'Maryline',
+      rating: 5,
+      date: '2026',
+      text: "J'ai trouvé la location qui correspond à tous mes critères grâce à cette agence ! Je suis particulièrement ravie de l'accompagnement.",
+    },
+  ],
+};
 
-  return items
-    .map(([, ratingStr, body]): GoogleReview | null => {
-      const rating = Number(ratingStr) || 5;
-      const author = stripTags(body.match(/<span class="author-name">([\s\S]*?)<\/span>/)?.[1] || '');
-      if (!author) return null;
-      const date = stripTags(body.match(/<span class="date">([\s\S]*?)<\/span>/)?.[1] || '');
-      const snippet = stripTags(body.match(/<span class="review-snippet">([\s\S]*?)<\/span>/)?.[1] || '');
-      const more = stripTags(body.match(/<span class="review-full-text">([\s\S]*?)<\/span>/)?.[1] || '');
-      const text = (snippet + (more ? ' ' + more : '')).trim();
-      const avatar = body.match(/<img[^>]+src="([^"]+)"/)?.[1];
-      const profileUrl = body.match(/href="(https:\/\/www\.google\.com\/maps\/contrib\/[^"]+)"/)?.[1];
-      return { author, rating, date, text, avatar, profileUrl };
-    })
-    .filter((r): r is GoogleReview => r !== null);
-}
-
-export async function fetchGoogleReviews(): Promise<GoogleReview[]> {
+/**
+ * Fetch Google review data from the pre-built JSON.
+ * Works both at SSG build time (direct file read) and SSR runtime (ASSETS fetch).
+ */
+export async function fetchGoogleReviews(): Promise<GoogleReviewData> {
   try {
-    const res = await fetch(SOURCE_URL, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PujolBuild/1.0)' },
-      // 8s timeout via AbortController
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) return FALLBACK;
-    const html = await res.text();
-    const parsed = parseReviews(html);
-    return parsed.length > 0 ? parsed : FALLBACK;
+    // Try ASSETS binding first (Cloudflare Workers runtime)
+    let res: Response | null = null;
+    try {
+      const { env } = await import('cloudflare:workers');
+      const assets = (env as any)?.ASSETS;
+      if (assets) {
+        res = await assets.fetch(new Request('https://placeholder/_data/google-reviews.json'));
+      }
+    } catch {}
+
+    // Fallback: direct file read (build time / dev)
+    if (!res || !res.ok) {
+      const { readFile } = await import('node:fs/promises');
+      const { join, dirname } = await import('node:path');
+      const { fileURLToPath } = await import('node:url');
+      const __dirname = dirname(fileURLToPath(import.meta.url));
+      const raw = await readFile(join(__dirname, '..', '..', 'public', '_data', 'google-reviews.json'), 'utf-8');
+      const data = JSON.parse(raw);
+      return parsePayload(data);
+    }
+
+    return parsePayload(await res.json());
   } catch {
     return FALLBACK;
   }
+}
+
+function parsePayload(data: any): GoogleReviewData {
+  return {
+    stats: {
+      rating: data.rating ?? FALLBACK.stats.rating,
+      reviewCount: data.reviewCount ?? FALLBACK.stats.reviewCount,
+    },
+    reviews: data.reviews?.length > 0 ? data.reviews : FALLBACK.reviews,
+  };
 }

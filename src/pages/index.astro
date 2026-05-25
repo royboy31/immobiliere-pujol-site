@@ -124,7 +124,7 @@ function fmtDate(s: string): string {
 
 // ---------- GOOGLE REVIEWS ----------
 // Scraped from the live site at build time. See src/lib/google-reviews.ts.
-const reviews = await fetchGoogleReviews();
+const { stats: googleStats, reviews } = await fetchGoogleReviews();
 // Duplicate the list so the vertical marquee loops seamlessly:
 // keyframes animate from translateY(0) to translateY(-50%).
 const reviewLoop = [...reviews, ...reviews];
@@ -383,14 +383,14 @@ const STAR_PATH =
       </div>
 
       <div>
-        <div class="stat-num">4.7<span class="small">/5</span></div>
+        <div class="stat-num">{googleStats.rating.toFixed(1)}<span class="small">/5</span></div>
         <div class="stat-stars">
           {[1, 2, 3, 4, 5].map(() => (
             <svg viewBox="0 0 20 20" fill="currentColor"><path d={STAR_PATH} /></svg>
           ))}
         </div>
-        <div class="stat-reviews"><img src="/images/home/google-g.png" alt="" /> 2008 reviews</div>
-        <h3 class="stat-title">Plus de 2000<br /><b>Clients satisfaits</b></h3>
+        <div class="stat-reviews"><img src="/images/home/google-g.png" alt="" /> {googleStats.reviewCount.toLocaleString('fr-FR')} reviews</div>
+        <h3 class="stat-title">Plus de {Math.floor(googleStats.reviewCount / 1000) * 1000}<br /><b>Clients satisfaits</b></h3>
         <p class="stat-sub">La satisfaction de nos clients est notre plus belle réussite. Merci pour votre confiance et vos avis qui nous motivent chaque jour.</p>
       </div>
     </section>

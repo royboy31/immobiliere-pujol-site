@@ -1,4 +1,6 @@
 ---
+import { fetchGoogleReviews } from '../../lib/google-reviews';
+const { stats: googleStats } = await fetchGoogleReviews();
 // Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
 const navItems = [
   {
@@ -59,10 +61,10 @@ const navItems = [
     <img class="g" src="/images/home/google-icon.png" alt="Google" />
     <div style="display:flex;flex-direction:column;line-height:1.05;gap:1px">
       <div style="display:flex;align-items:center;gap:6px">
-        <span class="score">4.7</span>
+        <span class="score">{googleStats.rating.toFixed(1)}</span>
         <img class="stars" src="/images/home/google-stars.png" alt="" />
       </div>
-      <span class="reviews">2008 avis Google vérifiés</span>
+      <span class="reviews">{googleStats.reviewCount.toLocaleString('fr-FR')} avis Google vérifiés</span>
     </div>
   </div>
   <div class="right">
