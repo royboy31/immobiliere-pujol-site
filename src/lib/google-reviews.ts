@@ -1,16 +1,23 @@
-// Google reviews reader.
+// Homepage reviews reader.
 //
-// At build time, scripts/sync-google-reviews.mjs scrapes the WordPress
-// site and writes public/_data/google-reviews.json.  This module reads
-// that file and returns the stats + reviews.  Falls back to hardcoded
-// snapshot if the JSON is missing.
+// At build time, scripts/sync-google-reviews.mjs:
+//   1. Scrapes Google rating + review count from the WordPress site
+//   2. Loads the 50 most recent OpinionSystem reviews (mixed across experts)
+//   3. Writes public/_data/google-reviews.json
+//
+// This module reads that file at build/render time.
 
-export interface GoogleReview {
+import { readFile } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+export interface HomepageReview {
   author: string;
   rating: number;
   date: string;
   text: string;
-  profileUrl?: string | null;
+  property?: string;
+  expert?: string;
 }
 
 export interface GoogleStats {
@@ -18,13 +25,13 @@ export interface GoogleStats {
   reviewCount: number;
 }
 
-export interface GoogleReviewData {
+export interface ReviewData {
   stats: GoogleStats;
-  reviews: GoogleReview[];
+  reviews: HomepageReview[];
 }
 
-const FALLBACK: GoogleReviewData = {
-  stats: { rating: 4.7, reviewCount: 2049 },
+const FALLBACK: ReviewData = {
+  stats: { rating: 4.7, reviewCount: 2050 },
   reviews: [
     {
       author: 'Metehan',
@@ -47,45 +54,22 @@ const FALLBACK: GoogleReviewData = {
   ],
 };
 
-/**
- * Fetch Google review data from the pre-built JSON.
- * Works both at SSG build time (direct file read) and SSR runtime (ASSETS fetch).
- */
-export async function fetchGoogleReviews(): Promise<GoogleReviewData> {
+export async function fetchGoogleReviews(): Promise<ReviewData> {
   try {
-    // Try ASSETS binding first (Cloudflare Workers runtime)
-    let res: Response | null = null;
-    try {
-      const { env } = await import('cloudflare:workers');
-      const assets = (env as any)?.ASSETS;
-      if (assets) {
-        res = await assets.fetch(new Request('https://placeholder/_data/google-reviews.json'));
-      }
-    } catch {}
-
-    // Fallback: direct file read (build time / dev)
-    if (!res || !res.ok) {
-      const { readFile } = await import('node:fs/promises');
-      const { join, dirname } = await import('node:path');
-      const { fileURLToPath } = await import('node:url');
-      const __dirname = dirname(fileURLToPath(import.meta.url));
-      const raw = await readFile(join(__dirname, '..', '..', 'public', '_data', 'google-reviews.json'), 'utf-8');
-      const data = JSON.parse(raw);
-      return parsePayload(data);
-    }
-
-    return parsePayload(await res.json());
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const raw = await readFile(
+      join(__dirname, '..', '..', 'public', '_data', 'google-reviews.json'),
+      'utf-8',
+    );
+    const data = JSON.parse(raw);
+    return {
+      stats: {
+        rating: data.rating ?? FALLBACK.stats.rating,
+        reviewCount: data.reviewCount ?? FALLBACK.stats.reviewCount,
+      },
+      reviews: data.reviews?.length > 0 ? data.reviews : FALLBACK.reviews,
+    };
   } catch {
     return FALLBACK;
   }
-}
-
-function parsePayload(data: any): GoogleReviewData {
-  return {
-    stats: {
-      rating: data.rating ?? FALLBACK.stats.rating,
-      reviewCount: data.reviewCount ?? FALLBACK.stats.reviewCount,
-    },
-    reviews: data.reviews?.length > 0 ? data.reviews : FALLBACK.reviews,
-  };
 }
