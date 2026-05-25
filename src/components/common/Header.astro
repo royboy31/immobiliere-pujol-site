@@ -1,16 +1,13 @@
 ---
-// Google stats — read from static JSON asset via ASSETS binding
+// Google stats — on SSR pages, use Astro.url to fetch the static JSON asset.
+// On prerendered pages this runs at build time via Node fetch.
 let googleStats = { rating: 4.7, reviewCount: 2050 };
 try {
-  const { env } = await import('cloudflare:workers');
-  const assets = (env as any)?.ASSETS;
-  if (assets) {
-    const req = new Request('https://placeholder/_data/google-reviews.json');
-    const res = await assets.fetch.call(assets, req);
-    if (res.ok) {
-      const data = await res.json() as any;
-      if (data?.rating) googleStats = { rating: data.rating, reviewCount: data.reviewCount || 0 };
-    }
+  const url = new URL('/_data/google-reviews.json', Astro.url.origin);
+  const res = await fetch(url.toString());
+  if (res.ok) {
+    const data = await res.json() as any;
+    if (data?.rating) googleStats = { rating: data.rating, reviewCount: data.reviewCount || 0 };
   }
 } catch {}
 // Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
