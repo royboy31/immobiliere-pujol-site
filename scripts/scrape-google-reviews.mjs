@@ -31,17 +31,29 @@ async function main() {
   try {
     console.log('Loading Google Maps...');
     await page.goto(PLACE_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-    await sleep(3000);
+    await sleep(4000);
 
-    // Accept cookies consent
-    try {
-      const consentBtn = await page.$('button[aria-label*="Tout accepter"], form[action*="consent"] button');
-      if (consentBtn) {
-        await consentBtn.click();
-        console.log('  Accepted cookies');
-        await sleep(2000);
-      }
-    } catch {}
+    // Accept cookies consent — Google shows various consent forms
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        const consentBtns = await page.$$('button[aria-label*="Tout accepter"], button[aria-label*="Accept all"], form[action*="consent"] button, button[jsname="b3VHJd"]');
+        if (consentBtns.length > 0) {
+          await consentBtns[0].click();
+          console.log(`  Accepted cookies (attempt ${attempt + 1})`);
+          await sleep(3000);
+        } else {
+          break;
+        }
+      } catch { break; }
+    }
+
+    // Debug: take screenshot to see what the page looks like
+    await page.screenshot({ path: '/tmp/gmaps-debug.png', fullPage: false });
+    console.log('  Debug screenshot saved to /tmp/gmaps-debug.png');
+
+    // Wait for the page to fully load reviews panel
+    await page.waitForSelector('div[role="main"]', { timeout: 10000 }).catch(() => {});
+    await sleep(2000);
 
     // Click the reviews tab
     try {
@@ -58,6 +70,10 @@ async function main() {
     } catch (e) {
       console.log('  Could not find reviews tab, continuing...');
     }
+
+    // Take another screenshot after clicking reviews tab
+    await page.screenshot({ path: '/tmp/gmaps-reviews.png', fullPage: false });
+    console.log('  Reviews tab screenshot saved');
 
     // Sort by newest
     try {
@@ -79,7 +95,24 @@ async function main() {
     } catch {}
 
     // Find scrollable panel and scroll to load reviews
-    const scrollable = await page.$('div.m6QErb.DxyBCb, div.m6QErb[role="feed"]');
+    let scrollable = await page.$('div.m6QErb.DxyBCb');
+    if (!scrollable) scrollable = await page.$('div.m6QErb[role="feed"]');
+    if (!scrollable) scrollable = await page.$('div.m6QErb');
+
+    // Debug: log what we can find
+    const debugInfo = await page.evaluate(() => {
+      const el = document.querySelector('div.m6QErb');
+      return {
+        hasM6QErb: !!el,
+        reviewCount: document.querySelectorAll('div[data-review-id]').length,
+        bodyText: document.body.innerText.substring(0, 500),
+      };
+    });
+    console.log(`  Debug: m6QErb=${debugInfo.hasM6QErb}, reviews in DOM=${debugInfo.reviewCount}`);
+    if (debugInfo.reviewCount === 0) {
+      console.log(`  Page text preview: ${debugInfo.bodyText.substring(0, 200)}`);
+    }
+
     if (!scrollable) {
       console.log('  Could not find scrollable reviews panel!');
     } else {
