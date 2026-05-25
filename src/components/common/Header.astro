@@ -5,7 +5,8 @@ try {
   const { env } = await import('cloudflare:workers');
   const assets = (env as any)?.ASSETS;
   if (assets) {
-    const res = await assets.fetch(new Request('https://placeholder/_data/google-reviews.json'));
+    const req = new Request('https://placeholder/_data/google-reviews.json');
+    const res = await assets.fetch.call(assets, req);
     if (res.ok) {
       const data = await res.json() as any;
       if (data?.rating) googleStats = { rating: data.rating, reviewCount: data.reviewCount || 0 };
