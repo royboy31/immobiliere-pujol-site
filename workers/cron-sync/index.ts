@@ -450,11 +450,20 @@ const CONTACT_PHOTO_MAP: Record<string, string> = {
 
 // ── Negotiator name → expert email mapping ──
 const NEGOTIATOR_MAP: Record<string, string> = {
-  'benoit marin-vicente': 'benoit@immobiliere-pujol.fr',
+  'benoit marin-vicente': 'benoitmarinvicente@immobiliere-pujol.fr',
   'julia lauron': 'julia@immobiliere-pujol.fr',
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
   'candice loth': 'candice@immobiliere-pujol.fr',
   'caroline pujol': 'carolinepujol@immobiliere-pujol.fr',
+};
+
+// Reference prefix → email fallback (used when descriptif has no negotiator signature)
+const REF_PREFIX_MAP: Record<string, string> = {
+  'LJ': 'julia@immobiliere-pujol.fr',
+  'LC': 'candice@immobiliere-pujol.fr',
+  'AT': 'thibault@immobiliere-pujol.fr',
+  'SP': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'IV': 'thibault@immobiliere-pujol.fr',
 };
 
 function parseNegotiator(descriptif: string): { name: string; phone: string } | null {
@@ -623,8 +632,14 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       a.contactNom = nego.name;
       a.telephone = nego.phone;
     } else {
-      // No negotiator found — clear agency email so expert card is hidden
-      a.email = null;
+      // Fallback: use reference prefix to determine agent
+      const prefix = (a.reference || '').slice(0, 2).toUpperCase();
+      const prefixEmail = REF_PREFIX_MAP[prefix];
+      if (prefixEmail) {
+        a.email = prefixEmail;
+      } else {
+        a.email = null;
+      }
     }
 
     // Extract address from descriptif
