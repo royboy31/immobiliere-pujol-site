@@ -52,7 +52,7 @@ async function main() {
     scanned++;
     let d;
     try { d = JSON.parse(await readFile(join(ANNONCES_DIR, f), 'utf-8')); } catch { continue; }
-    const email = normEmail(d.contactAAfficher);
+    const email = normEmail(d.emailAAfficher || d.contactAAfficher);
     if (!email || !byEmail.has(email)) continue;
 
     const arr = buckets.get(email) ?? [];
