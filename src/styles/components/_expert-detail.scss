@@ -498,6 +498,212 @@
 }
 
 // =========================================
+// REVIEWS — full-bleed paper section with a classic card carousel.
+// Head shows only the overall score; per-criteria breakdown is intentionally
+// hidden. Cards scroll horizontally, driven by the accent-themed arrow buttons.
+// =========================================
+.expert-reviews {
+  padding: 70px $ds-side-pad;
+  background: $ds-paper;
+  border-top: 1px solid $ds-hairline;
+
+  &__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__overline {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--expert-accent);
+    align-self: flex-start;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 44px;
+    line-height: .95;
+    margin: 0;
+    color: $black;
+
+    b { font-weight: 700; }
+  }
+
+  &__score {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  &__num {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--expert-accent);
+  }
+
+  &__den {
+    font-family: $ds-font-noto;
+    font-size: 18px;
+    color: $ds-ink;
+  }
+
+  &__count {
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    color: $ds-ink;
+    margin-left: 10px;
+  }
+
+  &__certif {
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    color: var(--expert-accent);
+    text-decoration: underline;
+    margin-top: 4px;
+    align-self: flex-start;
+  }
+
+  &__arrows {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+
+  // Theme the shared arrow buttons to the expert accent instead of olive.
+  .arrow-btn {
+    border-color: var(--expert-accent);
+    color: var(--expert-accent);
+    background-image: linear-gradient(to top, var(--expert-accent) 50%, transparent 50%);
+
+    &:hover { color: $white; }
+  }
+
+  // Horizontal scroll carousel — ~3 cards visible, arrows scroll one card.
+  &__track {
+    list-style: none;
+    padding: 0 0 4px;
+    margin: 0;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+}
+
+.expert-review-card {
+  flex: 0 0 calc((100% - 48px) / 3); // 3 cards + 2 * 24px gaps
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: $white;
+  border: 1px solid $ds-hairline;
+  border-radius: 24px;
+  padding: 28px 26px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+
+  &__quote {
+    position: relative;
+    margin: 0;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $ds-ink;
+    flex: 1 1 auto;
+
+    // Decorative accent quote mark.
+    &::before {
+      content: "\201C";
+      display: block;
+      font-family: $ds-font-helv;
+      font-weight: 700;
+      font-size: 56px;
+      line-height: .6;
+      color: var(--expert-accent);
+      margin-bottom: 8px;
+    }
+  }
+
+  &__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px solid $ds-hairline;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__client {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 15px;
+    color: $black;
+  }
+
+  &__prop {
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    color: #777;
+  }
+
+  &__date {
+    font-family: $ds-font-noto;
+    font-size: 13px;
+    color: #777;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &__reply {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: $ds-paper;
+    border-radius: 14px;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ds-ink;
+
+    span {
+      display: block;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    p { margin: 0; }
+  }
+}
+
+// =========================================
 // RESPONSIVE
 // =========================================
 @media (max-width: $bp-tablet) {
@@ -543,6 +749,26 @@
     &__overline { font-size: 32px; }
     &__title { font-size: 32px; }
     &__sub { font-size: 14px; }
+  }
+
+  .expert-reviews {
+    padding: 50px $mobile-pad;
+
+    &__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    &__title { font-size: 30px; }
+    &__num { font-size: 44px; }
+    &__track { gap: 16px; }
+  }
+
+  .expert-review-card {
+    flex: 0 0 85%; // one card with a peek of the next
+    padding: 24px 22px;
   }
 
   .expert-history-grid {
