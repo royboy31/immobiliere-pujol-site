@@ -486,8 +486,8 @@
 
   // Override ghost button on the light bg.
   .btn-pill--ghost {
-    border-color: rgba(255, 255, 255, .55);
-    color: $white;
+    border-color: #000;
+    color: #000;
 
     &:hover {
       background: $white;
