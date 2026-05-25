@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, '..', 'public', '_data', 'google-reviews.json');
+// URL with !9m1!1b1 flag tells Google Maps to open the reviews tab directly
 const PLACE_URL = 'https://www.google.com/maps/place/IMMOBILIERE+PUJOL/@43.2834028,5.3913967,17z/data=!4m8!3m7!1s0x12c9c0b2020b5667:0xb62b09168d6e35dd!8m2!3d43.2834028!4d5.3913967!9m1!1b1!16s%2Fg%2F1pzwkstjl';
 const TARGET = 50;
 
@@ -55,46 +56,58 @@ async function main() {
     await page.waitForSelector('div[role="main"]', { timeout: 10000 }).catch(() => {});
     await sleep(2000);
 
-    // Click the star rating or "X avis" link to open the reviews panel
-    let openedReviews = false;
+    // Scroll the side panel down to find reviews section
+    const panel = await page.$('div.m6QErb.DxyBCb') || await page.$('div.m6QErb');
+    if (panel) {
+      console.log('  Scrolling panel to find reviews...');
+      for (let i = 0; i < 15; i++) {
+        await page.evaluate(el => el.scrollTop += 400, panel);
+        await sleep(500);
+      }
+    }
+
+    // Dismiss any login/sign-in dialogs that may have appeared
     try {
-      // Try clicking the rating stars or review count link
-      const reviewLinks = await page.$$('button[jsaction*="reviewChart"], a[href*="lrd"], button[aria-label*="avis"], button[aria-label*="étoile"]');
-      if (reviewLinks.length > 0) {
-        await reviewLinks[0].click();
-        console.log('  Clicked rating/review link');
-        openedReviews = true;
-        await sleep(3000);
+      const cancelBtns = await page.$$('button[aria-label="Annuler"], button[jsname="B73oi"]');
+      for (const btn of cancelBtns) {
+        await btn.click();
+        console.log('  Dismissed login dialog');
+        await sleep(500);
       }
     } catch {}
 
-    // If that didn't work, try scrolling the panel down to find the reviews section
-    if (!openedReviews) {
-      try {
-        // Scroll the side panel to find "Avis" section
-        const panel = await page.$('div.m6QErb.DxyBCb, div.m6QErb');
-        if (panel) {
-          for (let i = 0; i < 10; i++) {
-            await page.evaluate(el => el.scrollTop += 500, panel);
-            await sleep(500);
+    // Click on the review count text (e.g. "2 050 avis") or "Tous les avis" button
+    let openedReviews = false;
+    try {
+      const clickables = await page.evaluate(() => {
+        const results = [];
+        document.querySelectorAll('button, a, span').forEach(el => {
+          const text = el.textContent || '';
+          if (/\d+\s*avis|\btous les avis\b/i.test(text) && text.length < 50) {
+            results.push({ tag: el.tagName, text: text.trim().substring(0, 50) });
           }
-          // Look for "Tous les avis" or "All reviews" button
-          const allReviewsBtns = await page.$$('button[aria-label*="avis"], a[href*="reviews"], span');
-          for (const btn of allReviewsBtns) {
-            const text = await btn.evaluate(el => el.textContent);
-            if (/tous les avis|all.*review|\d+\s*avis/i.test(text)) {
-              await btn.click();
-              console.log(`  Clicked: "${text.trim()}"`);
-              openedReviews = true;
-              await sleep(3000);
-              break;
-            }
-          }
+        });
+        return results;
+      });
+      console.log(`  Found ${clickables.length} "avis" elements: ${JSON.stringify(clickables.slice(0, 5))}`);
+
+      // Click the first meaningful one
+      const avisButtons = await page.$$('button, a, span');
+      for (const el of avisButtons) {
+        const text = await el.evaluate(e => e.textContent?.trim() || '');
+        if (/^\d[\d\s]*avis$/i.test(text) || /tous les avis/i.test(text)) {
+          await el.click();
+          console.log(`  Clicked: "${text}"`);
+          openedReviews = true;
+          await sleep(3000);
+          break;
         }
-      } catch {}
+      }
+    } catch (e) {
+      console.log(`  Error finding avis link: ${e.message}`);
     }
 
-    // If still not opened, try clicking the tab if visible
+    // Also try tabs
     if (!openedReviews) {
       try {
         const tabs = await page.$$('button[role="tab"]');
