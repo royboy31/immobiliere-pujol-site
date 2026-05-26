@@ -483,7 +483,15 @@ const sidebarItems = [
   { href: pagePath, label: entry.data.title, current: true },
 ].sort((a, b) => a.label.localeCompare(b.label));
 
-const formObjects = ['Location', 'Vente', 'Gestion locative', 'Achat', 'Syndic', 'Autre'];
+const formObjects = [
+  "Location : vous êtes intéressés par une annonce de location /à la recherche d'un bien à louer ?",
+  'Vente/achat : vous souhaitez vendre /acheter un bien immobilier ?',
+  'Gestion locative : vous souhaitez obtenir une proposition en gestion locative ?',
+  'Client syndic : vous souhaitez joindre le gestionnaire/comptable de votre copropriété ?',
+  'Syndic : vous souhaitez obtenir un devis en syndic pour votre copropriété ?',
+  'Autre (bien détailler votre demande)',
+  'Client : déclarer une urgence le week-end et les jours fériés',
+];
 
 // ── Slug-specific form overrides ────────────────────────────────────────────
 // Pages that need a dedicated form instead of the generic contact form (GF 4).
