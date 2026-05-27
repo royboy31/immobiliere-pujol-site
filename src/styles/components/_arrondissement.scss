@@ -1,0 +1,177 @@
+// ============================================
+// ARRONDISSEMENT PAGES — /arrondissement/{cp}/[locations|ventes]/
+// Styles for the per-secteur listings page. Pairs with the .seo-hero
+// (defined in _seo-archive.scss) and the .annonces-grid-section /
+// .annonces-grid components (defined in _annonces.scss).
+// ============================================
+
+// Local side-padding token — same value as $ds-side-pad in _home.scss
+// but those are locally scoped in their respective files, so redeclare here.
+$arr-side-pad: unquote("max(100px, calc(50% - 620px))");
+
+// Pills sit inside the hero band, under the H1 + subtitle.
+.arr-pills {
+  margin-top: 28px;
+}
+
+// Intro paragraph from WP zipContent — narrower than the hero so the legacy
+// SEO copy stays readable without dominating the page.
+.arr-intro-section {
+  background: $white;
+  padding: 24px $arr-side-pad 8px;
+}
+.arr-intro {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  color: $ds-ink;
+
+  p { margin: 0 0 14px; }
+  strong { font-weight: 700; color: $black; }
+  ul { list-style: disc; padding-left: 22px; margin: 12px 0 18px; }
+  li { margin-bottom: 4px; }
+}
+
+// Listings sit in .annonces-grid-section (defined in _annonces.scss) which
+// provides the paper background + side padding. Tweak vertical rhythm.
+.arr-listings-section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+// Empty state — only when a sub-filter has zero listings.
+.arr-empty {
+  background: $white;
+  border-radius: 18px;
+  padding: 60px 32px;
+  text-align: center;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, .05);
+  max-width: 720px;
+  margin: 0 auto;
+
+  h2 {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 36px;
+    margin: 0 0 14px;
+    color: $black;
+    b { font-weight: 700; }
+  }
+  p {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    color: $ds-ink;
+    margin: 0 auto 24px;
+    max-width: 480px;
+  }
+}
+.arr-empty__cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+// ===== SERVICES BLOCK =====
+// Bottom band on every arrondissement page. Drives SEO link distribution
+// to the 4 main service landings (per François pre-launch review).
+.arr-services-section {
+  background: $ds-paper;
+  padding: 80px $arr-side-pad 110px;
+}
+.arr-services {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.arr-services__head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.arr-services__overline {
+  display: block;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: $ds-orange;
+  margin-bottom: 12px;
+}
+.arr-services__lede {
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 17px;
+  color: $ds-ink;
+  margin: 14px auto 0;
+  max-width: 620px;
+  line-height: 1.55;
+}
+.arr-services__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.arr-services__list li { margin: 0; }
+.arr-services__list a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 22px 26px;
+  background: $white;
+  color: $black;
+  text-decoration: none;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, .06);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  position: relative;
+
+  &::after {
+    content: '→';
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    color: $ds-orange;
+    font-size: 22px;
+    transition: transform .2s ease;
+  }
+  &:hover {
+    border-color: $ds-orange;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .06);
+    &::after { transform: translateY(-50%) translateX(4px); }
+  }
+}
+.arr-services__label {
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.25;
+  padding-right: 32px;
+}
+.arr-services__sub {
+  font-family: $ds-font-noto;
+  font-weight: 300;
+  font-size: 14px;
+  color: $ds-ink;
+}
+
+@media (max-width: 720px) {
+  .arr-intro-section { padding: 20px 20px 0; }
+  .arr-intro { font-size: 16px; }
+  .arr-listings-section { padding: 24px 20px 60px; }
+  .arr-empty { padding: 40px 22px; h2 { font-size: 26px; } }
+  .arr-services-section { padding: 50px 20px 70px; }
+  .arr-services__list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .arr-services__list a { padding: 18px 22px; }
+}
