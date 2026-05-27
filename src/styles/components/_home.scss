@@ -805,42 +805,10 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .right .photo { width: 100%; height: auto; display: block; }
 }
 
-.about-stats {
-  display: flex;
-  gap: 90px;
-  align-items: center;
+.reviews {
   padding: 0 $ds-side-pad 80px;
   background: $white;
-
-  .stat-num {
-    font-family: $ds-font-helv;
-    font-weight: 300;
-    font-size: 110px;
-    line-height: .9467;
-    color: $black;
-
-    .small { font-size: 60px; font-weight: 300; }
-  }
-
-  .stat-stars {
-    display: flex;
-    gap: 6px;
-    margin: 14px 0 10px;
-
-    svg { width: 38px; height: 38px; color: $ds-yellow; }
-  }
-
-  .stat-reviews {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: $ds-font-noto;
-    font-weight: 400;
-    font-size: 18px;
-    color: $black;
-
-    img { width: 28px; height: 28px; }
-  }
+  text-align: center;
 
   .stat-title {
     font-family: $ds-font-helv;
@@ -848,7 +816,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     font-size: 60px;
     line-height: .9467;
     color: $black;
-    margin: 18px 0 14px;
+    margin: 0 0 14px;
 
     b { font-weight: 700; }
   }
@@ -859,97 +827,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     font-size: 18px;
     line-height: 1.5;
     color: $ds-ink;
-    max-width: 520px;
-    margin: 0;
-  }
-}
-
-// Vertical marquee — viewport with a fixed height clips the column,
-// the column itself animates upward forever. Items are duplicated in HTML
-// so the loop wraps seamlessly when translateY hits -50%.
-.testi-viewport {
-  position: relative;
-  width: 580px;
-  height: 580px;
-  overflow: hidden;
-  // Soft fade at the top and bottom so reviews glide in/out cleanly.
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000 40px,
-    #000 calc(100% - 40px),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000 40px,
-    #000 calc(100% - 40px),
-    transparent 100%
-  );
-}
-
-.testi-stage {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.testi-arrows {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: none;
-}
-
-.testi-col {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  will-change: transform;
-}
-
-.testi {
-  background: $ds-soft-green;
-  border-radius: 24px;
-  padding: 28px 36px 30px;
-  width: 580px;
-  position: relative;
-
-  .stars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 18px;
-
-    svg { width: 14px; height: 14px; color: $ds-yellow; }
-  }
-
-  p {
-    font-family: $ds-font-noto;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.5;
-    color: $black;
-    margin: 0 0 22px;
-    max-width: 460px;
-  }
-
-  &__author {
-    font-family: $ds-font-noto;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 1;
-    color: $black;
-    margin: 0;
-  }
-
-  .g {
-    position: absolute;
-    right: 30px;
-    bottom: 28px;
-    width: 32px;
-    height: 32px;
+    max-width: 640px;
+    margin: 0 auto 40px;
   }
 }
 
@@ -1319,32 +1198,11 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     .left p { font-size: 16px; max-width: 100%; }
   }
 
-  .about-stats {
-    flex-direction: column;
-    gap: 40px;
+  .reviews {
     padding: 40px $mobile-pad 60px;
-    align-items: flex-start;
 
-    .stat-num {
-      font-size: 72px;
-      .small { font-size: 40px; }
-    }
-    .stat-stars svg { width: 28px; height: 28px; }
-    .stat-title { font-size: 38px; margin: 14px 0 10px; }
-    .stat-sub { font-size: 16px; max-width: 100%; }
-  }
-
-  .testi-viewport {
-    width: 100%;
-    max-width: 100%;
-    height: 460px;
-  }
-
-  .testi {
-    width: 100%;
-    padding: 22px 24px 26px;
-
-    p { max-width: 100%; }
+    .stat-title { font-size: 38px; margin: 0 0 12px; }
+    .stat-sub { font-size: 16px; max-width: 100%; margin-bottom: 32px; }
   }
 
   // ----- BLOG -----
@@ -1411,8 +1269,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .ds-sec-title { font-size: 28px; }
   .experts h2,
   .about .left h2,
-  .about-stats .stat-title { font-size: 32px; }
+  .reviews .stat-title { font-size: 32px; }
   .news h2 { font-size: 28px; }
-  .about-stats .stat-num { font-size: 60px; }
   .blog h2 { font-size: 28px; }
 }
