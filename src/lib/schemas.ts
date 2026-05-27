@@ -157,20 +157,42 @@ export function buildBreadcrumb(items: BreadcrumbItem[]) {
   };
 }
 
-/** Auto-generate a sensible breadcrumb from a path. Falls back to "Accueil → <Last segment>". */
-export function autoBreadcrumb(pathname: string, pageTitle: string) {
+/** Auto-generate a sensible breadcrumb from a path. Falls back to "Accueil → <Last segment>".
+ *  When customCrumbs is provided, the URL-segment derivation is replaced with the
+ *  caller's trail so the JSON-LD stays aligned with the visible nav. */
+export function autoBreadcrumb(
+  pathname: string,
+  pageTitle: string,
+  customCrumbs?: Array<{ label: string; href: string | null }>,
+) {
   const segs = pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
   if (segs.length === 0) return null;
   const items: BreadcrumbItem[] = [{ name: 'Accueil', url: SITE_URL + '/' }];
-  let acc = '';
-  for (let i = 0; i < segs.length - 1; i++) {
-    acc += '/' + segs[i];
-    const name = segs[i]
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-    items.push({ name, url: SITE_URL + acc + '/' });
+
+  if (customCrumbs && customCrumbs.length > 0) {
+    for (const c of customCrumbs) {
+      // For non-linkable crumbs (href === null) fall back to the page URL so the
+      // BreadcrumbList schema stays well-formed (every item needs a URL).
+      items.push({ name: c.label, url: SITE_URL + (c.href ?? pathname) });
+    }
+    // If the last custom crumb is the current page (href === null) we don't add
+    // another page-title entry — the caller already represented it.
+    const lastIsCurrent = customCrumbs[customCrumbs.length - 1].href === null;
+    if (!lastIsCurrent) {
+      items.push({ name: pageTitle, url: SITE_URL + pathname });
+    }
+  } else {
+    let acc = '';
+    for (let i = 0; i < segs.length - 1; i++) {
+      acc += '/' + segs[i];
+      const name = segs[i]
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      items.push({ name, url: SITE_URL + acc + '/' });
+    }
+    items.push({ name: pageTitle, url: SITE_URL + pathname });
   }
-  items.push({ name: pageTitle, url: SITE_URL + pathname });
+
   return buildBreadcrumb(items);
 }
 

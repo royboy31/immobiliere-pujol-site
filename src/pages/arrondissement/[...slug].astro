@@ -72,9 +72,25 @@ const description = seoDescription
       : `Découvrez nos annonces immobilières dans le ${name}. ${totalCount} biens disponibles à la location et à la vente.`);
 
 const isMarseilleCp = /^130(0[1-9]|1[0-6])$/.test(baseSlug);
+
+// Breadcrumb trail: replace the auto-generated "Arrondissement" (404) intermediate
+// with semantic crumbs. For type-filtered variants we link back to the base
+// arrondissement page so users can navigate up the hierarchy.
+const breadcrumbCrumbs: Array<{ label: string; href: string | null }> = [
+  { label: 'Annonces', href: '/annonces/' },
+];
+if (scope === 'all') {
+  breadcrumbCrumbs.push({ label: `Annonces dans le ${name}`, href: null });
+} else {
+  breadcrumbCrumbs.push({ label: name, href: `/arrondissement/${baseSlug}/` });
+  breadcrumbCrumbs.push({
+    label: scope === 'L' ? `Locations dans le ${name}` : `Ventes dans le ${name}`,
+    href: null,
+  });
+}
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbCrumbs={breadcrumbCrumbs}>
   <section class="seo-hero">
     <p class="seo-hero__eyebrow">Arrondissement Marseille</p>
     <h1>{name} — {scopeLabel}</h1>
