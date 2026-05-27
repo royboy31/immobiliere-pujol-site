@@ -928,8 +928,8 @@
       background: rgba(255, 255, 255, .85);
     }
 
-    &--rental { background: $ds-orange; }
-    &--sales  { background: $ds-olive; }
+    &--rental { background: $ds-olive; }
+    &--sales  { background: $ds-orange; }
     &--other  { background: $ds-slate; }
   }
 
@@ -953,8 +953,8 @@
   &:hover { transform: translateY(-3px); }
   &:hover .expert-tile__ph img { transform: scale(1.02); }
 
-  &--rental { --expert-accent: #{$ds-orange}; }
-  &--sales  { --expert-accent: #{$ds-olive}; }
+  &--rental { --expert-accent: #{$ds-olive}; }
+  &--sales  { --expert-accent: #{$ds-orange}; }
 
   &__ph {
     width: 100%;
