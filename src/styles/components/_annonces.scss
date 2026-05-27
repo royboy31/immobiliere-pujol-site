@@ -523,7 +523,7 @@
 .annonce-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   &--floating {
     margin: 30px $ds-side-pad 18px;
