@@ -35,6 +35,7 @@ export const GET: APIRoute = async ({ request }) => {
   // Match live WP sitemap index order exactly
   sm('/post-sitemap1.xml');
   sm('/page-sitemap1.xml');
+  sm('/local-sitemap1.xml');
 
   // Ads sitemaps (paginated, dynamic count)
   for (let i = 1; i <= totalAdsPages; i++) {
