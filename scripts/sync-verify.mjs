@@ -306,20 +306,20 @@ if (GH_TOKEN) {
       { headers: ghHeaders }
     );
     const runs = data.workflow_runs || [];
-    const last24h = runs.filter(r => Date.now() - new Date(r.created_at).getTime() < 86400000);
-    const failed = last24h.filter(r => r.conclusion === 'failure');
+    const recent = runs.slice(0, 3);
+    const failed = recent.filter(r => r.conclusion === 'failure');
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
-    report.counts.lbiRuns24h = last24h.length;
+    report.counts.lbiRuns24h = recent.length;
     report.counts.lbiFailed24h = failed.length;
 
     if (failed.length === 0) {
-      addCheck('Sync LBI FTP', 'OK', `${last24h.length} exécutions en 24h, 0 échec, dernier : il y a ${ageH}h`);
-    } else if (failed.length <= 2) {
-      addCheck('Sync LBI FTP', 'WARN', `${last24h.length} exécutions, ${failed.length} échecs en 24h (transitoire ?)`);
+      addCheck('Sync LBI FTP', 'OK', `${recent.length} dernières exécutions OK, dernier : il y a ${ageH}h`);
+    } else if (failed.length === 1) {
+      addCheck('Sync LBI FTP', 'WARN', `1 échec sur les ${recent.length} dernières exécutions`);
     } else {
-      addCheck('Sync LBI FTP', 'FAIL', `${last24h.length} exécutions, ${failed.length} EN ÉCHEC en 24h`);
+      addCheck('Sync LBI FTP', 'FAIL', `${failed.length} échecs sur les ${recent.length} dernières exécutions`);
     }
   } catch (err) {
     addCheck('Sync LBI FTP', 'FAIL', err.message);
