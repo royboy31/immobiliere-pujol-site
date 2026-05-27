@@ -4,7 +4,7 @@
 // Cloudflare ASSETS binding. Keeps the Worker bundle small (the data
 // lives in the static asset layer, not in the JS bundle).
 
-import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, rm, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -77,7 +77,23 @@ async function main() {
     copied++;
   }
 
-  console.log(`copy-closed-annonces: copied ${copied}, skipped ${skipped}`);
+  // Remove closed annonces from src/content so they don't bloat the Astro
+  // content-layer bundle (which gets shipped inside the Cloudflare Worker).
+  // The data is already safe in public/_data/ for SSR runtime access.
+  let removed = 0;
+  for (const f of await readdir(SRC)) {
+    if (!f.endsWith('.json')) continue;
+    try {
+      const raw = await readFile(join(SRC, f), 'utf-8');
+      const data = JSON.parse(raw);
+      if (data.status === 'closed') {
+        await unlink(join(SRC, f));
+        removed++;
+      }
+    } catch { /* skip */ }
+  }
+
+  console.log(`copy-closed-annonces: copied ${copied}, skipped ${skipped}, removed ${removed} closed from content`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
