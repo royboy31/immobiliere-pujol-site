@@ -24,7 +24,7 @@ interface Props {
 const {
   title,
   description = "Gestion locative, syndic de copropriété, vente de biens immobilier à Marseille. Immobilière Pujol.",
-  ogImage = "/images/og-default.jpg",
+  ogImage = "https://www.immobiliere-pujol.fr/images/og-default.jpg",
   canonical,
   noindex = false,
   schemas: pageSchemas = [],
@@ -95,6 +95,7 @@ for (const s of pageSchemas) {
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Immobilière Pujol" />
+    <meta property="fb:app_id" content="341420341199123" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
