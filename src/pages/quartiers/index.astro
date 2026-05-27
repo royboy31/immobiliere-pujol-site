@@ -1,0 +1,37 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface QuartierData {
+  slug: string;
+  name: string;
+  displayName: string;
+  postalCode?: string;
+  annonceCount?: number;
+}
+
+const modules = import.meta.glob<QuartierData>('../../content/quartiers/*.json', { eager: true, import: 'default' });
+const quartiers = Object.values(modules).sort((a, b) => a.displayName.localeCompare(b.displayName));
+
+const title = 'Quartiers de Marseille – Immobilière Pujol';
+const description = 'Découvrez nos annonces immobilières par quartier à Marseille. Location, vente et gestion locative.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section style="max-width:900px;margin:2rem auto;padding:0 1.5rem;">
+    <h1 style="margin-bottom:1.5rem;">Quartiers de Marseille</h1>
+    <p style="margin-bottom:2rem;color:#64748b;">{quartiers.length} quartiers</p>
+    <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      {quartiers.map((q) => (
+        <li>
+          <a href={`/quartiers/${q.slug}/`} style="display:block;padding:1rem 1.25rem;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;border:1px solid #e2e8f0;">
+            <strong>{q.displayName}</strong>
+            {q.postalCode && (
+              <span style="float:right;color:#64748b;font-size:0.85rem;">{q.postalCode}</span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

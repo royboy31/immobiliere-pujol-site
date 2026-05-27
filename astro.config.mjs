@@ -30,7 +30,7 @@ export default defineConfig({
     '/service/a-propos-de-limmobiliere-pujol/': '/services/a-propos-de-limmobiliere-pujol/',
     '/service/agence-location-appartement-marseille/': '/services/agence-location-appartement-marseille/',
     '/service/ce-que-nous-ferons-pour-louer-rapidement-votre-appartement/': '/services/ce-que-nous-ferons-pour-louer-rapidement-votre-appartement/',
-    '/service/choisir-son-agence-immobiliere/': '/services/choisir-son-agence-immobiliere/',
+    '/service/choisir-son-agence-immobiliere/': '/services/choisir-son-agence-immobiliere-a-marseille/',
     '/service/combien-coute-syndic-copropriete/': '/services/combien-coute-syndic-copropriete/',
     '/service/comment-calculer-le-cout-de-gestion-de-copropriete/': '/services/comment-calculer-le-cout-de-gestion-de-copropriete/',
     '/service/comment-changer-de-syndic-a-marseille/': '/services/comment-changer-de-syndic-a-marseille/',
@@ -58,6 +58,13 @@ export default defineConfig({
     '/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/': '/services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/',
     '/service/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/': '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/',
     '/service/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/': '/services/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/',
+    // Broken internal links — matching WP redirects
+    '/agence-immobiliere-marseille-gestion-locative-et-syndic/': '/',
+    '/les-prix-de-limmobilier-ancien-dans-le-13001-en-2018/': '/les-prix-au-m2-de-l-immobilier-ancien-dans-le-13001-en-2018/',
+    '/les-prix-de-limmobilier-ancien-dans-le-13003-en-2018/': '/les-prix-au-m2-de-l-immobilier-ancien-dans-le-13003-en-2018/',
+    '/le-prix-des-ventes-dans-lancien-realisees-dans-le-13005-en-2018/': '/marseille-les-prix-au-m2-de-l-immobilier-ancien-dans-le-13005-en-2018/',
+    '/avis-client-gestion-syndic-marseille/': '/avis-clients-gestion-syndic-marseille/',
+    '/immobiliere-pujol-avis-et-experience-collaborateur-en-syndic/': '/avis-et-experience-collaborateur-en-syndic/',
     // Mentions légales — flat URL to nested actual page
     '/mentions-legales-immobiliere-pujol/': '/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/',
     // Singular annonce type URLs → plural (SEO 301)
