@@ -58,6 +58,10 @@ export default defineConfig({
     '/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/': '/services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/',
     '/service/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/': '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/',
     '/service/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/': '/services/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats/',
+    // Service pages with wrong slugs — redirect to correct ones
+    '/services/estimation-prix-de-vente/': '/services/demander-une-estimation-de-prix-de-vente/',
+    '/services/estimation-loyer/': '/services/estimer-votre-loyer/',
+    '/services/choisir-son-agence-immobiliere/': '/services/choisir-son-agence-immobiliere-a-marseille/',
     // Broken internal links — matching WP redirects
     '/agence-immobiliere-marseille-gestion-locative-et-syndic/': '/',
     '/les-prix-de-limmobilier-ancien-dans-le-13001-en-2018/': '/les-prix-au-m2-de-l-immobilier-ancien-dans-le-13001-en-2018/',
