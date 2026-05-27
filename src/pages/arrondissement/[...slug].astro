@@ -93,21 +93,14 @@ if (scope === 'all') {
 <BaseLayout title={title} description={description} breadcrumbCrumbs={breadcrumbCrumbs}>
   <section class="seo-hero">
     <p class="seo-hero__eyebrow">Arrondissement Marseille</p>
-    <h1>{name} — {scopeLabel}</h1>
-    <span class="seo-hero__count">
-      {listings.length} bien{listings.length > 1 ? 's' : ''} disponible{listings.length > 1 ? 's' : ''} dans ce secteur
-    </span>
-  </section>
-
-  <div class="seo-area">
-    {zipContent && (
-      <div class="seo-area__intro">
-        <Fragment set:html={zipContent} />
-      </div>
-    )}
-
+    <h1>{name}{scope !== 'all' && <> — <b>{scopeLabel}</b></>}</h1>
+    <p class="seo-hero__sub">
+      {listings.length > 0
+        ? `${listings.length} bien${listings.length > 1 ? 's' : ''} actuellement disponible${listings.length > 1 ? 's' : ''} dans ce secteur.`
+        : `Aucun bien actuellement disponible dans cette catégorie — découvrez les autres secteurs et services ci-dessous.`}
+    </p>
     {isMarseilleCp && (
-      <nav class="annonces-pills seo-area__pills">
+      <nav class="annonces-pills arr-pills">
         <a href={`/arrondissement/${baseSlug}/`} class={scope === 'all' ? 'is-active' : ''}>
           Toutes <span class="count">({totalCount})</span>
         </a>
@@ -119,107 +112,245 @@ if (scope === 'all') {
         </a>
       </nav>
     )}
+  </section>
 
-    <section class="seo-area__listings-section">
-      <h2 class="ds-sec-title">{scopeLabel} dans <b>le {name}</b></h2>
-      <p>{scopeIntro}</p>
-      {listings.length > 0 ? (
-        <div class="annonces-grid">
-          {listings.map((a) => <AnnonceCard annonce={a} />)}
-        </div>
-      ) : (
-        <div class="seo-area__empty">
-          <p>Aucun bien disponible dans cette catégorie pour le moment.</p>
-          <div class="seo-area__cta-row">
-            <a href="/annonces/" class="seo-cta seo-cta--filled">Voir toutes les annonces</a>
-            <a href="/contact-immobiliere-pujol/" class="seo-cta">Nous contacter</a>
-          </div>
-        </div>
-      )}
+  {zipContent && (
+    <section class="arr-intro-section">
+      <div class="arr-intro">
+        <Fragment set:html={zipContent} />
+      </div>
     </section>
+  )}
 
-    <section class="seo-area__services-section">
-      <h2 class="ds-sec-title">Nos services dans <b>le {name}</b></h2>
-      <p>Nos équipes accompagnent les propriétaires et acquéreurs du secteur {name} sur l'ensemble du parcours immobilier.</p>
-      <ul class="seo-services-list">
+  <section class="annonces-grid-section arr-listings-section">
+    {listings.length > 0 ? (
+      <div class="annonces-grid">
+        {listings.map((a) => <AnnonceCard annonce={a} />)}
+      </div>
+    ) : (
+      <div class="arr-empty">
+        <h2>Aucun bien <b>pour le moment</b></h2>
+        <p>Décrivez-nous votre projet, nous vous prévenons dès qu'un bien correspond à vos critères dans le {name}.</p>
+        <div class="arr-empty__cta-row">
+          <a href="/annonces/" class="seo-cta seo-cta--filled">Voir toutes les annonces</a>
+          <a href="/contact-immobiliere-pujol/" class="seo-cta">Nous contacter</a>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <section class="arr-services-section">
+    <div class="arr-services">
+      <header class="arr-services__head">
+        <span class="arr-services__overline">Nos prestations</span>
+        <h2 class="ds-sec-title">Nos services dans <b>le {name}</b></h2>
+        <p class="arr-services__lede">
+          Nos équipes accompagnent les propriétaires et acquéreurs du secteur {name} sur l'ensemble du parcours immobilier.
+        </p>
+      </header>
+      <ul class="arr-services__list">
         <li>
           <a href="/service-immobilier/mettre-en-location/">
-            Mettre votre bien en location à {name}
+            <span class="arr-services__label">Mettre votre bien en location</span>
+            <span class="arr-services__sub">à {name}</span>
           </a>
         </li>
         <li>
           <a href="/service-immobilier/gestion-locative/">
-            Faire gérer votre bien à {name}
+            <span class="arr-services__label">Faire gérer votre bien</span>
+            <span class="arr-services__sub">à {name}</span>
           </a>
         </li>
         <li>
           <a href="/service-immobilier/vendre/">
-            Vendre votre bien à {name}
+            <span class="arr-services__label">Vendre votre bien</span>
+            <span class="arr-services__sub">à {name}</span>
           </a>
         </li>
         <li>
           <a href="/service-immobilier/syndic-de-copropriete-a-marseille/">
-            Syndic de copropriété à {name}
+            <span class="arr-services__label">Syndic de copropriété</span>
+            <span class="arr-services__sub">à {name}</span>
           </a>
         </li>
       </ul>
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>
 
-<style>
-  .seo-area__pills {
-    margin: 1.5rem 0;
+<style lang="scss">
+  @use '../../styles/base/variables' as *;
+
+  // Side padding token — same value used by _home.scss and _seo-archive.scss
+  // ($ds-side-pad / $ds-side-pad-seo) but those are locally scoped, so we
+  // redeclare here for use in the scoped style block.
+  $arr-side-pad: unquote("max(100px, calc(50% - 620px))");
+
+  // Pills sit under the hero — give them breathing room and constrain them
+  // inside the hero so they read as part of the page header.
+  .arr-pills {
+    margin-top: 28px;
   }
-  .seo-area__listings-section {
-    margin-top: 2rem;
+
+  // Intro paragraph from WP zipContent — keep the legacy SEO copy readable
+  // but contained so it doesn't dominate the page above the listings.
+  .arr-intro-section {
+    background: $white;
+    padding: 24px $arr-side-pad 8px;
   }
-  .seo-area__empty {
+  .arr-intro {
+    max-width: 1100px;
+    margin: 0 auto;
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    color: $ds-ink;
+
+    p { margin: 0 0 14px; }
+    strong { font-weight: 700; color: $black; }
+    ul { list-style: disc; padding-left: 22px; margin: 12px 0 18px; }
+    li { margin-bottom: 4px; }
+  }
+
+  // Pull the listings section up tight under the intro / hero so the grid
+  // reads as the main content of the page.
+  .arr-listings-section {
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  // Empty state — only shows when a sub-filter has zero listings.
+  .arr-empty {
+    background: $white;
+    border-radius: 18px;
+    padding: 60px 32px;
     text-align: center;
-    padding: 3rem 1rem;
-    background: var(--color-bg-subtle, #f8f8f6);
-    border-radius: 8px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, .05);
+    max-width: 720px;
+    margin: 0 auto;
+
+    h2 {
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 36px;
+      margin: 0 0 14px;
+      color: $black;
+      b { font-weight: 700; }
+    }
+    p {
+      font-family: $ds-font-noto;
+      font-weight: 300;
+      font-size: 17px;
+      color: $ds-ink;
+      margin: 0 auto 24px;
+      max-width: 480px;
+    }
   }
-  .seo-area__cta-row {
+  .arr-empty__cta-row {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 14px;
     flex-wrap: wrap;
   }
-  .seo-area__services-section {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border, #e5e5e5);
+
+  // ===== SERVICES BLOCK =====
+  // A bordered band at the bottom of every arrondissement page. Drives the
+  // SEO link distribution to the 4 main service landings.
+  .arr-services-section {
+    background: $ds-paper;
+    padding: 80px $arr-side-pad 110px;
   }
-  .seo-services-list {
+  .arr-services {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .arr-services__head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .arr-services__overline {
+    display: block;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $ds-orange;
+    margin-bottom: 12px;
+  }
+  .arr-services__lede {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 17px;
+    color: $ds-ink;
+    margin: 14px auto 0;
+    max-width: 620px;
+    line-height: 1.55;
+  }
+  .arr-services__list {
     list-style: none;
     padding: 0;
-    margin: 1.25rem 0 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0.5rem;
-  }
-  .seo-services-list li {
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
-  .seo-services-list a {
-    display: block;
-    padding: 0.75rem 1rem;
-    background: var(--color-bg-subtle, #f8f8f6);
-    color: inherit;
+  .arr-services__list li { margin: 0; }
+  .arr-services__list a {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 22px 26px;
+    background: $white;
+    color: $black;
     text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
-    transition: background 0.15s, transform 0.15s;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, .06);
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    position: relative;
+
+    &::after {
+      content: '→';
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+      color: $ds-orange;
+      font-size: 22px;
+      transition: transform .2s ease;
+    }
+    &:hover {
+      border-color: $ds-orange;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .06);
+      &::after { transform: translateY(-50%) translateX(4px); }
+    }
   }
-  .seo-services-list a::before {
-    content: '→ ';
-    color: var(--ds-orange, #ec7234);
-    margin-right: 0.25rem;
+  .arr-services__label {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.25;
+    padding-right: 32px;
   }
-  .seo-services-list a:hover {
-    background: var(--color-bg-subtle-hover, #efefea);
-    transform: translateX(2px);
+  .arr-services__sub {
+    font-family: $ds-font-noto;
+    font-weight: 300;
+    font-size: 14px;
+    color: $ds-ink;
+  }
+
+  @media (max-width: 720px) {
+    .arr-intro-section { padding: 20px 20px 0; }
+    .arr-intro { font-size: 16px; }
+    .arr-listings-section { padding: 24px 20px 60px; }
+    .arr-empty { padding: 40px 22px; h2 { font-size: 26px; } }
+    .arr-services-section { padding: 50px 20px 70px; }
+    .arr-services__list {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .arr-services__list a { padding: 18px 22px; }
   }
 </style>
