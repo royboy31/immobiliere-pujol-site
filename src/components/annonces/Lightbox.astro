@@ -57,6 +57,7 @@
         if (htmlMount) { htmlMount.hidden = true; htmlMount.innerHTML = ''; }
         if (img && item.src) {
           img.src = item.src;
+          img.alt = item.caption || '';
           img.hidden = false;
         }
       }
