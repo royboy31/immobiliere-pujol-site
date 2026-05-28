@@ -55,16 +55,16 @@ const navItems = [
 ---
 
 <div class="site-topbar">
-  <div class="rating">
+  <a class="rating" href="/#avis" aria-label="Voir les avis Google de nos clients">
     <img class="g" src="/images/home/google-icon.png" alt="Google" />
     <div style="display:flex;flex-direction:column;line-height:1.05;gap:1px">
       <div style="display:flex;align-items:center;gap:6px">
         <span class="score">4.7</span>
         <img class="stars" src="/images/home/google-stars.png" alt="" />
       </div>
-      <span class="reviews">2008 avis Google vérifiés</span>
+      <span class="tb-reviews">2008 avis Google vérifiés</span>
     </div>
-  </div>
+  </a>
   <div class="right">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.6" />
@@ -114,6 +114,21 @@ const navItems = [
 
 <script>
   (function () {
+    // Google rating widget: smooth-scroll to the reviews section when already
+    // on the home page; otherwise let the link navigate to /#avis normally.
+    const rating = document.querySelector<HTMLAnchorElement>('.site-topbar .rating');
+    if (rating) {
+      rating.addEventListener('click', (e) => {
+        if (window.location.pathname === '/') {
+          const target = document.getElementById('avis');
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    }
+
     const header = document.getElementById('siteHeader');
     const burger = document.getElementById('navBurger');
     if (!header || !burger) return;

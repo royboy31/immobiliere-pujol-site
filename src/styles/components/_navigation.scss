@@ -19,6 +19,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 
     .g {
       width: 22px;
@@ -41,11 +44,11 @@
       margin-top: 2px;
     }
 
-    .reviews {
+    .tb-reviews {
       color: $ds-slate-2;
       font-family: $ds-font-helv;
-      font-weight: 500;
-      font-size: 10px;
+      font-weight: 600;
+      font-size: 11.5px;
     }
   }
 
@@ -484,7 +487,7 @@
       .g { width: 18px; height: 18px; }
       .score { font-size: 12px; }
       .stars { height: 10px; }
-      .reviews { display: none; }
+      .tb-reviews { display: none; }
     }
 
     .right .conn { font-size: 11px; letter-spacing: .6px; }
