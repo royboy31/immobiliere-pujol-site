@@ -144,6 +144,7 @@ const year = new Date().getFullYear();
       {legal.map((l) => (
         <li><a href={l.href}>{l.label}</a></li>
       ))}
+      <li><a href="#" onclick="window.openCookieSettings&&window.openCookieSettings();return false;">Gérer les cookies</a></li>
     </ul>
     <div class="bot__credit">Design by <a href="https://perelweb.be" target="_blank" rel="noopener">Perel Web Studio</a></div>
   </div>
