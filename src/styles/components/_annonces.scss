@@ -515,9 +515,41 @@
 // SINGLE ANNONCE — new layout (above-fold hero + sections below)
 // ============================================
 .annonce-page {
+  position: relative;
   background: $white;
   font-family: $ds-font-noto;
   color: $black;
+}
+
+// Diagonal corner ribbon (top-left) for closed listings — mirrors the live
+// site's "Vente / Location clôturée" banner.
+.closed-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  z-index: 60;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    top: 36px;
+    left: -52px;
+    width: 230px;
+    transform: rotate(-45deg);
+    background: $ds-olive;
+    color: $white;
+    text-align: center;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  }
 }
 
 .annonce-nav {
