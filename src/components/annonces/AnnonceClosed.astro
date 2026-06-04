@@ -2,7 +2,6 @@
 import AnnonceHero from './AnnonceHero.astro';
 import AnnonceMap from './AnnonceMap.astro';
 import DpeDiagram from './DpeDiagram.astro';
-import SimilarAnnonces from './SimilarAnnonces.astro';
 import Lightbox from './Lightbox.astro';
 import ExpertCard from '../experts/ExpertCard.astro';
 import ClosedLinkBlock from './ClosedLinkBlock.astro';
@@ -45,6 +44,7 @@ interface View {
   prix?: number | null;
   honorairesChargeAcquereur?: boolean;
   isClosed: boolean;
+  saleStatus?: string | null;
 }
 
 interface Props {
@@ -56,35 +56,19 @@ interface Props {
   seoLinks?: LinkItem[];
 }
 
-const { view, expert, related = [], pool = [], currentSlug = '', seoLinks = [] } = Astro.props;
+const { view, expert, seoLinks = [] } = Astro.props;
 const isLocation = view.type === 'L';
 const similarHref = isLocation ? '/annonces/locations/' : '/annonces/ventes/';
 const similarLabel = isLocation
   ? 'VOIR LES LOCATIONS DISPONIBLES'
   : 'VOIR LES VENTES DISPONIBLES';
 
-const services = isLocation
-  ? [
-      { href: '/service-immobilier/gestion-locative/', icon: '/images/home/svc-gestion.svg', label: 'Gestion Locative à', city: 'Marseille' },
-      { href: '/services/estimer-votre-loyer/', icon: '/images/home/svc-syndic.svg', label: 'Estimer un loyer', city: '' },
-      { href: '/contact-immobiliere-pujol/', icon: '/images/home/svc-vendre.svg', label: 'Décrire votre projet', city: 'Marseille' },
-    ]
-  : [
-      { href: '/service-immobilier/vendre/', icon: '/images/home/svc-vendre.svg', label: 'Vendre', city: 'Marseille' },
-      { href: '/services/demander-une-estimation-de-prix-de-vente/', icon: '/images/home/svc-vendre.svg', label: 'Faire estimer votre bien', city: '' },
-    ];
-
-const relatedCards = (related ?? []).slice(0, 3).map((r) => ({
-  href: `/annonces/${r.slug}/`,
-  isVente: r.type === 'V',
-  title: r.title,
-  price: r.prix
-    ? r.type === 'V'
-      ? `${new Intl.NumberFormat('fr-FR').format(r.prix)} €`
-      : `${new Intl.NumberFormat('fr-FR').format(r.prix)} €/mois`
-    : '',
-  cp: r.cp,
-}));
+// Corner ribbon: colour by type (sale = orange, rental = green); wording by
+// status when known, otherwise a clear generic ("clôturée").
+const ribbonStatus = (view.saleStatus || '').toLowerCase();
+const ribbonText = isLocation
+  ? (/lou/.test(ribbonStatus) ? 'Bien loué' : 'Location clôturée')
+  : (/vendu/.test(ribbonStatus) ? 'Vendu par l\'agence' : 'Vente clôturée');
 
 const hasDetails = !!(
   view.surface || view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
@@ -94,7 +78,7 @@ const hasDetails = !!(
 ---
 
 <article class="annonce-page">
-  <div class="closed-ribbon"><span>Vente / Location clôturée</span></div>
+  <div class={`closed-ribbon ${isLocation ? 'closed-ribbon--rental' : 'closed-ribbon--sale'}`}><span>{ribbonText}</span></div>
 
   <nav class="annonce-nav annonce-nav--floating">
     <div class="annonce-nav__arrows" id="annonceNavArrows"></div>
@@ -132,10 +116,10 @@ const hasDetails = !!(
       <h2>Ce bien <b>{isLocation ? 'a été loué' : 'a trouvé preneur'}</b></h2>
       <p>Confiez-nous vos critères. Nous vous préviendrons dès qu'un bien équivalent rejoint notre catalogue.</p>
       <div class="annonce-cta-card__btns">
-        <a href={similarHref} class="btn-pill btn-pill--white">{similarLabel}</a>
-        <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--white-outline">ÊTRE PRÉVENU PAR EMAIL</a>
+        <a href={similarHref} class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'}`}>{similarLabel}</a>
+        <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--ghost">ÊTRE PRÉVENU PAR EMAIL</a>
         {!isLocation && (
-          <a href="/services/demander-une-estimation-de-prix-de-vente/" class="btn-pill btn-pill--white-outline">FAIRE ESTIMER VOTRE BIEN</a>
+          <a href="/services/demander-une-estimation-de-prix-de-vente/" class="btn-pill btn-pill--ghost">FAIRE ESTIMER VOTRE BIEN</a>
         )}
       </div>
       <div class="annonce-cta-card__ref">Référence : {view.reference}</div>
@@ -155,26 +139,6 @@ const hasDetails = !!(
     </Fragment>
   </AnnonceHero>
 
-  <section class="annonce-services">
-    <h2 class="annonce-services__title">Découvrez aussi <b>nos services</b></h2>
-    <div class="annonce-services__row">
-      {services.map((s) => (
-        <a class="annonce-svc-card" href={s.href}>
-          <span class="ic"><img src={s.icon} alt="" /></span>
-          <span class="lbl">
-            {s.label}
-            {s.city && <span class="city">{s.city}</span>}
-          </span>
-          <span class="arr">
-            <svg width="22" height="14" viewBox="0 0 22 14" fill="none">
-              <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-      ))}
-    </div>
-  </section>
-
   {(view.dpeEtiquetteConso || view.dpeEtiquetteGes) && (
     <section class="annonce-perf">
       <h2 class="annonce-perf__title">Performance <b>énergétique</b></h2>
@@ -193,44 +157,6 @@ const hasDetails = !!(
            data-lightbox-html="#dpe-diagram-ges"
            data-lightbox-caption="Émissions de gaz à effet de serre">
           <span id="dpe-diagram-ges"><DpeDiagram kind="GES" letter={view.dpeEtiquetteGes} value={view.dpeValeurGes} /></span>
-        </a>
-      </div>
-    </section>
-  )}
-
-  {pool.length > 0 && (
-    <SimilarAnnonces
-      pool={pool}
-      currentSlug={currentSlug}
-      type={view.type}
-      codePostal={view.codePostal}
-      max={6}
-      title={view.codePostal ? `Biens disponibles dans le <b>${view.codePostal}</b>` : 'Biens <b>similaires</b>'}
-    />
-  )}
-
-  {relatedCards.length > 0 && pool.length === 0 && (
-    <section class="annonce-related">
-      <h2 class="annonce-related__title">
-        Autres biens dans le <b>{view.codePostal || 'secteur'}</b>
-      </h2>
-      <div class="annonce-related__grid">
-        {relatedCards.map((c) => (
-          <a class={`listing-card ${c.isVente ? '' : 'listing-card--location'}`} href={c.href}>
-            <div class="photo" style="background:#d9d9d9">
-              <span class={`badge ${c.isVente ? 'badge--vente' : ''}`}>{c.isVente ? 'VENTE' : 'LOCATION'}</span>
-            </div>
-            <div class="body">
-              <div class="title">{c.title}</div>
-              {c.price && <div class="price">{c.price}</div>}
-              {c.cp && <div class="loc"><span>{c.cp} Marseille</span></div>}
-            </div>
-          </a>
-        ))}
-      </div>
-      <div class="annonce-related__cta">
-        <a href={similarHref} class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'}`}>
-          {similarLabel}
         </a>
       </div>
     </section>

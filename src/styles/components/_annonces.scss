@@ -550,6 +550,10 @@
     padding: 8px 0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
   }
+
+  // Sale = orange strip, rental = green strip.
+  &--sale span { background: $ds-orange; }
+  &--rental span { background: $ds-olive; }
 }
 
 .annonce-nav {
@@ -1761,7 +1765,7 @@
   border-radius: 32px;
   padding: 32px 28px;
 
-  &--closed { background: $ds-slate; color: $white; }
+  &--closed { background: $ds-soft-green; color: $ds-ink; }
 
   h2 {
     font-family: $ds-font-helv;

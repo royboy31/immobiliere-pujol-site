@@ -9,7 +9,8 @@
 export interface LinkItem {
   url: string;
   title: string;
-  type: string; // 'service' | 'article' | 'arrondissement'
+  type: string; // 'service' | 'article' | 'arrondissement' | 'closed' | 'autre'
+  date?: string;
 }
 
 interface LinkPool {
@@ -17,15 +18,10 @@ interface LinkPool {
   links: LinkItem[];
 }
 
-/**
- * Load the pre-built link pool (public/_data/link-pool.json) via the Cloudflare
- * ASSETS binding, falling back to a plain fetch in dev.
- */
-export async function loadLinkPool(
-  assets: { fetch: (req: Request) => Promise<Response> } | undefined,
-  baseUrl: URL,
-): Promise<LinkItem[]> {
-  const url = new URL('/_data/link-pool.json', baseUrl);
+type Assets = { fetch: (req: Request) => Promise<Response> } | undefined;
+
+async function fetchPool(assets: Assets, baseUrl: URL, file: string): Promise<LinkItem[]> {
+  const url = new URL(file, baseUrl);
   try {
     const resp = assets
       ? await assets.fetch(new Request(url.toString()))
@@ -36,6 +32,16 @@ export async function loadLinkPool(
   } catch {
     return [];
   }
+}
+
+/** Services + articles + arrondissements pool (public/_data/link-pool.json). */
+export function loadLinkPool(assets: Assets, baseUrl: URL): Promise<LinkItem[]> {
+  return fetchPool(assets, baseUrl, '/_data/link-pool.json');
+}
+
+/** Closed-listings pool (public/_data/closed-annonces-pool.json). */
+export function loadClosedAnnoncesPool(assets: Assets, baseUrl: URL): Promise<LinkItem[]> {
+  return fetchPool(assets, baseUrl, '/_data/closed-annonces-pool.json');
 }
 
 // Deterministic 32-bit FNV-1a hash.

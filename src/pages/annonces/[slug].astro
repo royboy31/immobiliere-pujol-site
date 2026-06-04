@@ -5,7 +5,7 @@ import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice, ex
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
-import { loadLinkPool, pickRotatedLinks, type LinkItem } from '../../lib/internal-links';
+import { loadLinkPool, loadClosedAnnoncesPool, pickRotatedLinks, type LinkItem } from '../../lib/internal-links';
 import AnnonceLive from '../../components/annonces/AnnonceLive.astro';
 import AnnonceClosed from '../../components/annonces/AnnonceClosed.astro';
 
@@ -303,11 +303,26 @@ const pool = similarAnnonces.map(a => ({
 
 // Closed listings get a rotated internal-link block (spreads link equity).
 // Seeded by the slug so each closed page links to a different, even slice.
+// Closed listings: 4 rotated internal-link blocks (mirrors the live site —
+// Annonces clôturées / Autres annonces / Services / Actualités).
 let seoLinks: LinkItem[] = [];
 if (isClosed) {
   const assets = (env as any)?.ASSETS;
-  const linkPool = await loadLinkPool(assets, new URL(Astro.url.origin));
-  seoLinks = pickRotatedLinks(linkPool, slug ?? '', 24);
+  const base = new URL(Astro.url.origin);
+  const [linkPool, closedPool] = await Promise.all([
+    loadLinkPool(assets, base),
+    loadClosedAnnoncesPool(assets, base),
+  ]);
+  const seed = slug ?? '';
+  const closedLinks = pickRotatedLinks(closedPool.filter((l) => l.url !== `/annonces/${slug}/`), seed, 10);
+  const autres: LinkItem[] = pool.slice(0, 8).map((a) => ({
+    url: `/annonces/${a.slug}/`,
+    title: a.titre || a.libelleType || 'Bien immobilier',
+    type: 'autre',
+  }));
+  const services = pickRotatedLinks(linkPool.filter((l) => l.type === 'service'), seed, 8);
+  const articles = pickRotatedLinks(linkPool.filter((l) => l.type === 'article'), seed, 10);
+  seoLinks = [...closedLinks, ...autres, ...services, ...articles];
 }
 
 const pageTitle = `${view.titre} – Immobilière Pujol`;

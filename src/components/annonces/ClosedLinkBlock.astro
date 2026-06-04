@@ -10,9 +10,10 @@ interface Props {
 const { links = [] } = Astro.props;
 
 const GROUPS: { type: string; title: string }[] = [
-  { type: 'service', title: 'Nos services & conseils' },
-  { type: 'article', title: 'À lire sur le marché immobilier marseillais' },
-  { type: 'arrondissement', title: 'Annonces par arrondissement' },
+  { type: 'closed', title: 'Annonces clôturées' },
+  { type: 'autre', title: 'Autres annonces' },
+  { type: 'service', title: 'Nos services' },
+  { type: 'article', title: 'Actualités & conseils' },
 ];
 
 const grouped = GROUPS
