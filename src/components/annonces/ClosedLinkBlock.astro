@@ -1,0 +1,40 @@
+---
+// Rotated internal-link block shown at the bottom of closed-annonce pages.
+// Spreads link equity across the site (see src/lib/internal-links.ts).
+import type { LinkItem } from '../../lib/internal-links';
+
+interface Props {
+  links: LinkItem[];
+}
+
+const { links = [] } = Astro.props;
+
+const GROUPS: { type: string; title: string }[] = [
+  { type: 'closed', title: 'Annonces clôturées' },
+  { type: 'autre', title: 'Autres annonces' },
+  { type: 'service', title: 'Nos services' },
+  { type: 'article', title: 'Actualités & conseils' },
+];
+
+const grouped = GROUPS
+  .map((g) => ({ ...g, items: links.filter((l) => l.type === g.type) }))
+  .filter((g) => g.items.length > 0);
+---
+
+{links.length > 0 && (
+  <section class="closed-links" aria-label="Découvrez aussi">
+    <h2 class="closed-links__title">Découvrez aussi <b>Immobilière Pujol</b></h2>
+    <div class="closed-links__grid">
+      {grouped.map((g) => (
+        <div class="closed-links__col">
+          <h3 class="closed-links__col-title">{g.title}</h3>
+          <ul class="closed-links__list">
+            {g.items.map((l) => (
+              <li><a href={l.url}>{l.title}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+)}

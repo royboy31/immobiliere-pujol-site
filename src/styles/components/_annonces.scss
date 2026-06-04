@@ -515,9 +515,45 @@
 // SINGLE ANNONCE — new layout (above-fold hero + sections below)
 // ============================================
 .annonce-page {
+  position: relative;
   background: $white;
   font-family: $ds-font-noto;
   color: $black;
+}
+
+// Diagonal corner ribbon (top-left) for closed listings — mirrors the live
+// site's "Vente / Location clôturée" banner.
+.closed-ribbon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 170px;
+  height: 170px;
+  overflow: hidden;
+  z-index: 60;
+  pointer-events: none;
+
+  span {
+    position: absolute;
+    top: 36px;
+    left: -52px;
+    width: 230px;
+    transform: rotate(-45deg);
+    background: $ds-olive;
+    color: $white;
+    text-align: center;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 8px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+  }
+
+  // Sale = orange strip, rental = green strip.
+  &--sale span { background: $ds-orange; }
+  &--rental span { background: $ds-olive; }
 }
 
 .annonce-nav {
@@ -576,8 +612,11 @@
   padding: 0 $ds-side-pad 60px;
   align-items: start;
 
+  // __right is first in the DOM (for correct <h1> heading order) but pinned to
+  // column 2 here so the gallery stays visually on the left (desktop).
   &__left {
     min-width: 0;
+    grid-column: 1;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -694,6 +733,8 @@
   &__hidden { display: none; }
 
   &__right {
+    grid-column: 2;
+    grid-row: 1;
     position: sticky;
     top: 100px;
     display: flex;
@@ -1724,9 +1765,9 @@
   border-radius: 32px;
   padding: 32px 28px;
 
-  &--closed { background: $ds-slate; color: $white; }
+  &--closed { background: $ds-soft-green; color: $ds-ink; }
 
-  h3 {
+  h2 {
     font-family: $ds-font-helv;
     font-weight: 300;
     font-size: 26px;
@@ -1887,6 +1928,7 @@
 
 // Service callout cards (for closed page)
 .annonce-services {
+  padding: 0 $ds-side-pad;
   margin-bottom: 60px;
 
   &__title {
@@ -1903,8 +1945,67 @@
 
   &__row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+}
+
+// Rotated internal-link block at the bottom of closed-annonce pages.
+.closed-links {
+  padding: 56px $ds-side-pad 64px;
+  background: $ds-paper;
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    margin: 0 0 32px;
+    color: $black;
+    text-align: center;
+
+    b { font-weight: 700; }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px 40px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  &__col-title {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: $ds-slate;
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $ds-hairline;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li { margin: 0 0 10px; }
+
+    a {
+      font-family: $ds-font-noto;
+      font-size: 15px;
+      line-height: 1.4;
+      color: $ds-ink;
+      text-decoration: none;
+      transition: color $transition-base;
+
+      &:hover { color: $ds-orange; }
+    }
   }
 }
 
@@ -2152,18 +2253,23 @@
   z-index: 1;
   pointer-events: none;
 
+  // Corner macaron (top-left): Vendu (orange) / Loué (olive).
   &__label {
     position: absolute;
-    top: 44%;
-    left: 0;
-    background: #fff;
-    color: $ds-olive;
-    font-family: $ds-font-serif;
-    font-style: italic;
-    font-size: 20px;
-    font-weight: 700;
-    padding: 6px 20px 6px 14px;
-    line-height: 1.3;
+    top: 14px;
+    left: 14px;
+    background: $ds-orange;
+    color: #fff;
+    font-family: $ds-font-jakarta;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    line-height: 1;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
   }
 
   &__agent {
@@ -2178,15 +2284,17 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   }
 
-  // Green background for rental listings
+  // Olive for rental listings (Loué) — macaron + agent ring.
+  &--rental &__label { background: $ds-olive; }
   &--rental &__agent { background: $ds-olive; }
 
-  // Hero (detail page) — larger sizing
+  // Hero (detail page) — slightly larger corner macaron.
   &--hero {
     .sold-overlay__label {
-      top: 45%;
-      font-size: 47px;
-      padding: 2px 28px 2px 22px;
+      top: 18px;
+      left: 18px;
+      font-size: 16px;
+      padding: 8px 18px;
     }
 
     .sold-overlay__agent {
@@ -2201,11 +2309,11 @@
 // Mobile adjustments
 @media (max-width: 600px) {
   .sold-overlay {
-    &__label { font-size: 16px; padding: 5px 14px 5px 10px; }
+    &__label { top: 10px; left: 10px; font-size: 12px; padding: 6px 12px; }
     &__agent { width: 65px; height: 65px; bottom: 6px; left: 6px; }
 
     &--hero {
-      .sold-overlay__label { font-size: 28px; padding: 2px 18px 2px 14px; }
+      .sold-overlay__label { top: 12px; left: 12px; font-size: 13px; padding: 6px 14px; }
       .sold-overlay__agent { width: 100px; height: 100px; bottom: 4px; left: 0; }
     }
   }

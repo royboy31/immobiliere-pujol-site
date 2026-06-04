@@ -1,14 +1,22 @@
 ---
-// Auto-generated breadcrumb trail derived from the current URL.
-// Mirrors the autoBreadcrumb() schema builder so the visible nav and JSON-LD
-// stay aligned. Skips render on the home page (no useful trail).
+// Breadcrumb trail rendered above the page content. Two modes:
+//   1. Auto: derive from current URL (legacy behavior for pages that don't care)
+//   2. Custom: page passes `crumbs` prop to fully control the trail
+// Always includes "Accueil" as the first item and a non-link last item for
+// the current page (unless the page provides those explicitly in `crumbs`).
+
+type Crumb = { label: string; href: string | null };
 
 interface Props {
   pageTitle: string;
   pathname: string;
+  /** Custom trail. When provided, REPLACES the auto-generated middle crumbs.
+   *  Caller doesn't need to include "Accueil" or the final page-title crumb —
+   *  this component prepends/appends them automatically. */
+  crumbs?: Crumb[];
 }
 
-const { pageTitle, pathname } = Astro.props;
+const { pageTitle, pathname, crumbs: customCrumbs } = Astro.props;
 
 const segs = pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 
@@ -20,17 +28,27 @@ function prettifySegment(seg: string): string {
     .replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-type Crumb = { label: string; href: string | null };
-
 const crumbs: Crumb[] = [{ label: 'Accueil', href: '/' }];
-let acc = '';
-for (let i = 0; i < segs.length - 1; i++) {
-  acc += '/' + segs[i];
-  crumbs.push({ label: prettifySegment(segs[i]), href: acc + '/' });
+
+if (customCrumbs && customCrumbs.length > 0) {
+  // Custom mode: page knows best what the trail should look like.
+  for (const c of customCrumbs) crumbs.push(c);
+} else {
+  // Auto mode: derive intermediate crumbs from URL segments.
+  let acc = '';
+  for (let i = 0; i < segs.length - 1; i++) {
+    acc += '/' + segs[i];
+    crumbs.push({ label: prettifySegment(segs[i]), href: acc + '/' });
+  }
 }
-// Last crumb: the current page (no link).
-const lastLabel = segs.length > 0 ? pageTitle : '';
-if (lastLabel) crumbs.push({ label: lastLabel, href: null });
+
+// Final crumb is the current page (no link), unless the caller already
+// provided one with href === null at the end.
+const lastIsCurrent = crumbs.length > 1 && crumbs[crumbs.length - 1].href === null;
+if (!lastIsCurrent) {
+  const lastLabel = segs.length > 0 ? pageTitle : '';
+  if (lastLabel) crumbs.push({ label: lastLabel, href: null });
+}
 
 const showTrail = segs.length > 0;
 ---
