@@ -5,6 +5,7 @@ import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice, ex
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
+import { loadLinkPool, pickRotatedLinks, type LinkItem } from '../../lib/internal-links';
 import AnnonceLive from '../../components/annonces/AnnonceLive.astro';
 import AnnonceClosed from '../../components/annonces/AnnonceClosed.astro';
 
@@ -300,6 +301,15 @@ const pool = similarAnnonces.map(a => ({
   slug: a.slug,
 }));
 
+// Closed listings get a rotated internal-link block (spreads link equity).
+// Seeded by the slug so each closed page links to a different, even slice.
+let seoLinks: LinkItem[] = [];
+if (isClosed) {
+  const assets = (env as any)?.ASSETS;
+  const linkPool = await loadLinkPool(assets, new URL(Astro.url.origin));
+  seoLinks = pickRotatedLinks(linkPool, slug ?? '', 24);
+}
+
 const pageTitle = `${view.titre} – Immobilière Pujol`;
 const pageDescription = view.description ? view.description.substring(0, 160) : pageTitle;
 
@@ -337,6 +347,7 @@ const listingSchema = buildRealEstateListing({
       related={view.related}
       pool={pool}
       currentSlug={slug ?? ''}
+      seoLinks={seoLinks}
     />
   )}
 </BaseLayout>

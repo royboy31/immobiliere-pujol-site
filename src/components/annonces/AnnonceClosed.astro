@@ -5,9 +5,11 @@ import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
 import Lightbox from './Lightbox.astro';
 import ExpertCard from '../experts/ExpertCard.astro';
+import ClosedLinkBlock from './ClosedLinkBlock.astro';
 import type { Expert } from '../../lib/experts';
 import type { ClosedAnnonceRelated } from '../../lib/closed-annonces';
 import type { UbiflowAnnonce } from '../../lib/ubiflow';
+import type { LinkItem } from '../../lib/internal-links';
 
 interface View {
   titre: string;
@@ -51,9 +53,10 @@ interface Props {
   related?: ClosedAnnonceRelated[];
   pool?: UbiflowAnnonce[];
   currentSlug?: string;
+  seoLinks?: LinkItem[];
 }
 
-const { view, expert, related = [], pool = [], currentSlug = '' } = Astro.props;
+const { view, expert, related = [], pool = [], currentSlug = '', seoLinks = [] } = Astro.props;
 const isLocation = view.type === 'L';
 const similarHref = isLocation ? '/annonces/locations/' : '/annonces/ventes/';
 const similarLabel = isLocation
@@ -68,8 +71,7 @@ const services = isLocation
     ]
   : [
       { href: '/service-immobilier/vendre/', icon: '/images/home/svc-vendre.svg', label: 'Vendre', city: 'Marseille' },
-      { href: '/services/demander-une-estimation-de-prix-de-vente/', icon: '/images/home/svc-syndic.svg', label: 'Estimer un bien', city: '' },
-      { href: '/service-immobilier/syndic-de-copropriete-a-marseille/', icon: '/images/home/svc-syndic.svg', label: 'Syndic de copropriété à', city: 'Marseille' },
+      { href: '/services/demander-une-estimation-de-prix-de-vente/', icon: '/images/home/svc-vendre.svg', label: 'Faire estimer votre bien', city: '' },
     ];
 
 const relatedCards = (related ?? []).slice(0, 3).map((r) => ({
@@ -130,11 +132,14 @@ const hasDetails = !!(
     </Fragment>
 
     <div slot="action" class="annonce-cta-card annonce-cta-card--closed">
-      <h3>Ce bien <b>a trouvé preneur</b></h3>
+      <h3>Ce bien <b>{isLocation ? 'a été loué' : 'a trouvé preneur'}</b></h3>
       <p>Confiez-nous vos critères. Nous vous préviendrons dès qu'un bien équivalent rejoint notre catalogue.</p>
       <div class="annonce-cta-card__btns">
         <a href={similarHref} class="btn-pill btn-pill--white">{similarLabel}</a>
-        <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--white-outline">ÊTRE PRÉVENU</a>
+        <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--white-outline">ÊTRE PRÉVENU PAR EMAIL</a>
+        {!isLocation && (
+          <a href="/services/demander-une-estimation-de-prix-de-vente/" class="btn-pill btn-pill--white-outline">FAIRE ESTIMER VOTRE BIEN</a>
+        )}
       </div>
       <div class="annonce-cta-card__ref">Référence : {view.reference}</div>
     </div>
@@ -202,7 +207,8 @@ const hasDetails = !!(
       currentSlug={currentSlug}
       type={view.type}
       codePostal={view.codePostal}
-      max={3}
+      max={6}
+      title={view.codePostal ? `Biens disponibles dans le <b>${view.codePostal}</b>` : 'Biens <b>similaires</b>'}
     />
   )}
 
@@ -233,5 +239,26 @@ const hasDetails = !!(
     </section>
   )}
 
+  <ClosedLinkBlock links={seoLinks} />
+
   <Lightbox />
 </article>
+
+<style>
+  /* #21 — make the "no longer available" message prominent (orange). */
+  .annonce-closed-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    background: #fdeee2;
+    border-left: 4px solid #c45a16;
+    color: #8a3b0c;
+    padding: 14px 20px;
+    margin: 0 0 18px;
+    border-radius: 8px;
+    font-size: 17px;
+  }
+  .annonce-closed-banner strong { font-weight: 800; }
+  .annonce-closed-banner a { color: #c45a16; font-weight: 600; }
+</style>
