@@ -127,7 +127,7 @@ const hasDetails = !!(
     </Fragment>
 
     <div slot="action" class="annonce-cta-card annonce-cta-card--closed">
-      <h3>Ce bien <b>{isLocation ? 'a été loué' : 'a trouvé preneur'}</b></h3>
+      <h2>Ce bien <b>{isLocation ? 'a été loué' : 'a trouvé preneur'}</b></h2>
       <p>Confiez-nous vos critères. Nous vous préviendrons dès qu'un bien équivalent rejoint notre catalogue.</p>
       <div class="annonce-cta-card__btns">
         <a href={similarHref} class="btn-pill btn-pill--white">{similarLabel}</a>
@@ -154,7 +154,7 @@ const hasDetails = !!(
   </AnnonceHero>
 
   <section class="annonce-services">
-    <h3 class="annonce-services__title">Découvrez aussi <b>nos services</b></h3>
+    <h2 class="annonce-services__title">Découvrez aussi <b>nos services</b></h2>
     <div class="annonce-services__row">
       {services.map((s) => (
         <a class="annonce-svc-card" href={s.href}>

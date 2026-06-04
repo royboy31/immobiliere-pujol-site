@@ -576,8 +576,11 @@
   padding: 0 $ds-side-pad 60px;
   align-items: start;
 
+  // __right is first in the DOM (for correct <h1> heading order) but pinned to
+  // column 2 here so the gallery stays visually on the left (desktop).
   &__left {
     min-width: 0;
+    grid-column: 1;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -694,6 +697,8 @@
   &__hidden { display: none; }
 
   &__right {
+    grid-column: 2;
+    grid-row: 1;
     position: sticky;
     top: 100px;
     display: flex;
@@ -1726,7 +1731,7 @@
 
   &--closed { background: $ds-slate; color: $white; }
 
-  h3 {
+  h2 {
     font-family: $ds-font-helv;
     font-weight: 300;
     font-size: 26px;
