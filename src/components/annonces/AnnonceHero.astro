@@ -2,6 +2,7 @@
 // 2-column hero.
 // LEFT: main media carousel (virtual-tour video as slide 1 when embeddable, then photos) → thumbnail strip → <slot name="left-below" /> (description).
 // RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
+import { reservedLabel } from '../../lib/listing-status';
 
 interface View {
   titre: string;
@@ -32,6 +33,9 @@ interface Props {
 
 const { view } = Astro.props;
 const isLocation = view.type === 'L';
+// Active "reserved" macaron (Sous offre / Sous promesse) from the LBI field-136
+// status; null for available listings. Closed listings show Vendu/Loué instead.
+const reserved = view.isClosed ? null : reservedLabel(view.saleStatus);
 const priceModifier = isLocation ? 'annonce-hero__price--location' : '';
 const badgeModifier = view.isClosed
   ? 'annonce-hero__badge--closed'
@@ -175,12 +179,12 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
         <div class="annonce-hero__main-empty">Pas de photo disponible</div>
       )}
 
-      {(view.saleStatus || view.isClosed) && (
-        <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''}`}>
+      {(reserved || view.isClosed) && (
+        <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''} ${reserved ? 'sold-overlay--reserved' : ''}`}>
           <span class="sold-overlay__label">
             {view.isClosed
               ? (isLocation ? 'Loué' : 'Vendu')
-              : 'Sous promesse'}
+              : reserved}
           </span>
           {view.contactPhoto && (
             <img class="sold-overlay__agent" src={view.contactPhoto} alt="" loading="lazy" />
