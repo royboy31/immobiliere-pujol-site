@@ -114,9 +114,9 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
       {(view.saleStatus || view.isClosed) && (
         <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''}`}>
           <span class="sold-overlay__label">
-            {view.saleStatus
-              ? 'Sous promesse'
-              : isLocation ? 'Loué' : 'Vendu'}
+            {view.isClosed
+              ? (isLocation ? 'Loué' : 'Vendu')
+              : 'Sous promesse'}
           </span>
           {view.contactPhoto && (
             <img class="sold-overlay__agent" src={view.contactPhoto} alt="" loading="lazy" />
