@@ -108,7 +108,7 @@ const articles = allArticles
   .sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''))
   .slice(0, 12)
   .map((a) => ({
-    href: `/${a.id}/`,
+    href: `/blog/${a.id}/`,
     img: a.data.featuredImage!,
     date: a.data.date!,
     title: a.data.title,
@@ -407,7 +407,7 @@ const services = [
           <input type="checkbox" name="agree" class="check" required />
           <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
         </label>
-        <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
+        <p class="legal">En soumettant ce formulaire, vous acceptez que les informations collectées soient utilisées dans le cadre de votre demande et de la relation commerciale qui peut en découler. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter notre Politique de confidentialité.</p>
       </form>
     </section>
 

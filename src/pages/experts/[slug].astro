@@ -37,11 +37,17 @@ const nameParts = displayName.split(/\s+/);
 const firstName = nameParts[0] || displayName;
 const lastName = nameParts.slice(1).join(' ');
 
+// Garages / parking / box are excluded per Caroline's request — they pollute
+// expert profiles without commercial interest. Detected via LBI/Hektor slug
+// prefix lj[vl]ga.
+const isGarage = (s: string | undefined | null) => /^lj[vl]ga/i.test(s || '');
+
 // Active annonces — full UbiflowAnnonce shape so we can reuse <AnnonceCard>.
 let activeAnnonces: Awaited<ReturnType<typeof fetchUbiflowAnnonces>> = [];
 try {
   const annonces = await fetchUbiflowAnnonces();
   activeAnnonces = annonces.filter((a) => {
+    if (isGarage(a.slug)) return false;
     const em = (a.emailAAfficher || '').split('|')[0].trim().replace(/!+$/, '').toLowerCase();
     return expertEmail && em === expertEmail;
   });
@@ -74,7 +80,13 @@ try {
 } catch (e) {}
 
 const activeSlugs = new Set(activeAnnonces.map((a) => a.slug));
-const closedOnly = historyListings.filter((l) => !activeSlugs.has(l.slug));
+const garageCount = historyListings.filter((l) => isGarage(l.slug)).length;
+const closedOnly = historyListings.filter(
+  (l) => !activeSlugs.has(l.slug) && !isGarage(l.slug),
+);
+// Adjust totalCount to exclude garages picked up from a stale cached payload.
+// After the next deploy (build script also filters), garageCount will be 0.
+if (garageCount > 0) historyTotalCount = Math.max(0, historyTotalCount - garageCount);
 
 const expertType = getExpertType(expert);
 const isSales = expertType === 'sales';
@@ -324,12 +336,6 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
             ))}
           </ul>
         )}
-
-        {reviewsPayload.surveys.length > 6 && (
-          <button type="button" class="expert-reviews__more" id="expert-reviews-toggle">
-            Voir les {reviewsPayload.surveys.length - 6} autres avis
-          </button>
-        )}
       </section>
     )}
 
@@ -338,7 +344,13 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Disponible</span>
           <h2 class="expert-listings__title">
-            Les biens en charge de <b>{firstName}</b>
+            {isSales ? (
+              <>Les biens <b>en vente proposés par {firstName}</b></>
+            ) : isRental ? (
+              <>Les biens <b>en location proposés par {firstName}</b></>
+            ) : (
+              <>Les biens en charge de <b>{firstName}</b></>
+            )}
           </h2>
           <p class="expert-listings__sub">{activeSub}</p>
         </header>
