@@ -105,8 +105,6 @@ const closedForType = isSales
   : isRental
     ? closedOnly.filter((l) => l.type === 'L')
     : closedOnly;
-const closedVisible = closedForType.slice(0, 12);
-
 const activeCount = activeForType.length;
 const activeSub = isSales
   ? `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la vente.`
@@ -360,7 +358,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
-    {closedVisible.length > 0 && (
+    {closedForType.length > 0 && (
       <section class="expert-listings expert-listings--closed">
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Historique</span>
@@ -376,8 +374,8 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           <p class="expert-listings__sub">{historySub}</p>
         </header>
         <div class="expert-history-grid">
-          {closedVisible.map((l) => (
-            <a href={`/annonces/${l.slug}/`} class="expert-history-card">
+          {closedForType.map((l, i) => (
+            <a href={`/annonces/${l.slug}/`} class={`expert-history-card ${i >= 12 ? 'expert-history-card--extra' : ''}`}>
               <div
                 class="expert-history-card__photo"
                 style={l.photo ? `background-image:url('${l.photo}')` : undefined}
@@ -402,10 +400,12 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
             </a>
           ))}
         </div>
-        {historyTotalCount > closedVisible.length && (
-          <p class="expert-listings__more">
-            … et {historyTotalCount - closedVisible.length} autres biens {isSales ? 'vendus' : isRental ? 'loués' : 'accompagnés'} par {firstName}.
-          </p>
+        {closedForType.length > 12 && (
+          <div class="expert-listings__more-wrap">
+            <button type="button" class="expert-listings__more-btn" data-reveal-history>
+              Voir les {closedForType.length - 12} autres biens {isSales ? 'vendus' : isRental ? 'loués' : 'accompagnés'} par {firstName}
+            </button>
+          </div>
         )}
       </section>
     )}
@@ -452,5 +452,14 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
       next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
     })();
+  </script>
+
+  <script>
+    // "Voir tous" — reveal the hidden history cards.
+    document.querySelector('[data-reveal-history]')?.addEventListener('click', (e) => {
+      document.querySelectorAll('.expert-history-card--extra')
+        .forEach((el) => el.classList.add('is-revealed'));
+      (e.currentTarget as HTMLElement).closest('.expert-listings__more-wrap')?.remove();
+    });
   </script>
 </BaseLayout>
