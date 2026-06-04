@@ -93,10 +93,12 @@ const budgetPlaceholder = scope === 'V' ? '500 000 €' : '1500 €/mois';
           <input type="checkbox" name="amenity" value="exterieur" />
           <span>Avec extérieur</span>
         </label>
-        <label class="annonces-filter__chip">
-          <input type="checkbox" name="amenity" value="meuble" />
-          <span>Meublé</span>
-        </label>
+        {scope !== 'V' && (
+          <label class="annonces-filter__chip">
+            <input type="checkbox" name="amenity" value="meuble" />
+            <span>Meublé</span>
+          </label>
+        )}
       </div>
     </fieldset>
   </div>

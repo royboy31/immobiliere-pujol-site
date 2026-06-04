@@ -68,6 +68,7 @@ interface ParsedAnnonce {
   parking: boolean;
   garage: boolean;
   interphone: boolean;
+  meuble: boolean;
   dpeEtiquetteConso: string;
   dpeValeurConso: string;
   dpeEtiquetteGes: string;
@@ -142,6 +143,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     parking: bool(bien.parking) || bool(bien.places_parking),
     garage: bool(bien.garage),
     interphone: bool(bien.interphone),
+    meuble: bool(bien.meuble) || bool(bien.meuble_oui_non),
     dpeEtiquetteConso: str(diagnostics.dpe_etiquette_conso),
     dpeValeurConso: str(diagnostics.dpe_valeur_conso),
     dpeEtiquetteGes: str(diagnostics.dpe_etiquette_ges),
@@ -238,14 +240,14 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       surface, surface_terrain,
       nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
       etage, nb_etages, ascenseur, cave, terrasse,
-      parking, garage, interphone,
+      parking, garage, interphone, meuble,
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
       mandat_numero, mandat_type, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
+      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', ubiflow_annonce_id=excluded.ubiflow_annonce_id,
@@ -262,7 +264,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       nb_salles_bain=excluded.nb_salles_bain, nb_wc=excluded.nb_wc,
       etage=excluded.etage, nb_etages=excluded.nb_etages,
       ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
-      parking=excluded.parking, garage=excluded.garage, interphone=excluded.interphone,
+      parking=excluded.parking, garage=excluded.garage, interphone=excluded.interphone, meuble=excluded.meuble,
       dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
       ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur, type_chauffage=excluded.type_chauffage,
       titre=excluded.titre, descriptif=excluded.descriptif,
@@ -282,7 +284,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.nbPieces, a.nbChambres, a.nbSallesDeBain, a.nbWC,
     a.etage || null, a.nbEtages || null,
     a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
-    a.parking ? '1' : null, a.garage ? '1' : null, a.interphone ? 1 : 0,
+    a.parking ? '1' : null, a.garage ? '1' : null, a.interphone ? 1 : 0, a.meuble ? 1 : 0,
     a.dpeEtiquetteConso || null, a.dpeValeurConso || null, a.dpeEtiquetteGes || null, a.dpeValeurGes || null,
     a.typeChauffage || null,
     a.titre, a.description,
