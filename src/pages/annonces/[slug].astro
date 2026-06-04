@@ -36,8 +36,13 @@ const isClosed = annonce ? annonce.status === 'closed' : true;
 
 const closedEmail = closedAsset?.emailAAfficher
   || (closedAsset?.contactAAfficher?.includes('@') ? closedAsset.contactAAfficher : undefined);
+// Fall back to contact_a_afficher when email_a_afficher is empty (some D1 rows
+// carry the expert email only in the contact field) so the expert still resolves.
+const dbEmail = annonce
+  ? (annonce.email_a_afficher || (annonce.contact_a_afficher?.includes('@') ? annonce.contact_a_afficher : null))
+  : null;
 const expert = annonce
-  ? findExpertByEmail(annonce.email_a_afficher)
+  ? findExpertByEmail(dbEmail)
   : findExpertByEmail(closedEmail);
 
 type View = {
