@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/sync-d1-to-content.mjs && node scripts/copy-closed-annonces.mjs && node scripts/build-expert-listings.mjs && node scripts/sync-opinionsystem-reviews.mjs && node scripts/gen-sitemap-slugs.mjs && astro build",
+    "build": "node scripts/sync-d1-to-content.mjs && node scripts/copy-closed-annonces.mjs && node scripts/build-expert-listings.mjs && node scripts/sync-opinionsystem-reviews.mjs && node scripts/sync-google-reviews.mjs && node scripts/gen-sitemap-slugs.mjs && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "generate-types": "wrangler types",
@@ -32,6 +32,7 @@
     "vite": "^7"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260501.1"
+    "@cloudflare/workers-types": "^4.20260501.1",
+    "puppeteer": "^25.0.4"
   }
 }

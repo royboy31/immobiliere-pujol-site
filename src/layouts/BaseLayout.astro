@@ -16,16 +16,20 @@ interface Props {
   schemas?: any[];
   /** Disable the auto-generated BreadcrumbList schema and the visible trail. */
   breadcrumb?: boolean;
+  /** Override the breadcrumb trail. When set, replaces the auto-generated middle
+   *  crumbs in both the visible nav and the JSON-LD BreadcrumbList schema. */
+  breadcrumbCrumbs?: Array<{ label: string; href: string | null }>;
 }
 
 const {
   title,
   description = "Gestion locative, syndic de copropriété, vente de biens immobilier à Marseille. Immobilière Pujol.",
-  ogImage = "/images/og-default.jpg",
+  ogImage = "https://www.immobiliere-pujol.fr/images/og-default.jpg",
   canonical,
   noindex = false,
   schemas: pageSchemas = [],
   breadcrumb = true,
+  breadcrumbCrumbs,
 } = Astro.props;
 
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
@@ -45,7 +49,7 @@ const loadAnalytics = !shouldNoindex;
 // the `schemas` prop. An automatic BreadcrumbList is generated from the URL
 // unless `breadcrumb={false}` or the page already provides one.
 const breadcrumbSchema = breadcrumb
-  ? autoBreadcrumb(Astro.url.pathname, title.split('–')[0].trim())
+  ? autoBreadcrumb(Astro.url.pathname, title.split('–')[0].trim(), breadcrumbCrumbs)
   : null;
 
 const allSchemas: any[] = [buildRealEstateAgent()];
@@ -91,6 +95,7 @@ for (const s of pageSchemas) {
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Immobilière Pujol" />
+    <meta property="fb:app_id" content="341420341199123" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
@@ -123,7 +128,11 @@ for (const s of pageSchemas) {
     <Header />
     <SearchOverlay />
     {breadcrumb && (
-      <Breadcrumbs pageTitle={title.split('–')[0].trim()} pathname={Astro.url.pathname} />
+      <Breadcrumbs
+        pageTitle={title.split('–')[0].trim()}
+        pathname={Astro.url.pathname}
+        crumbs={breadcrumbCrumbs}
+      />
     )}
     <main>
       <slot />

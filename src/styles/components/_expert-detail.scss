@@ -461,8 +461,8 @@
 // FINAL CTA
 // =========================================
 .expert-final-cta {
-  background: $ds-slate;
-  color: $white;
+  background: #eef3ef;
+  color: $ds-slate;
   padding: 80px $ds-side-pad;
   text-align: center;
 
@@ -472,7 +472,7 @@
     font-size: 46px;
     line-height: 1;
     margin: 0 0 26px;
-    color: $white;
+    color: #000;
 
     b { font-weight: 700; color: $ds-olive; }
   }
@@ -484,10 +484,10 @@
     justify-content: center;
   }
 
-  // Override ghost button on the dark slate bg.
+  // Override ghost button on the light bg.
   .btn-pill--ghost {
-    border-color: rgba(255, 255, 255, .55);
-    color: $white;
+    border-color: #000;
+    color: #000;
 
     &:hover {
       background: $white;
@@ -928,8 +928,8 @@
       background: rgba(255, 255, 255, .85);
     }
 
-    &--rental { background: $ds-orange; }
-    &--sales  { background: $ds-olive; }
+    &--rental { background: $ds-olive; }
+    &--sales  { background: $ds-orange; }
     &--other  { background: $ds-slate; }
   }
 
@@ -953,8 +953,8 @@
   &:hover { transform: translateY(-3px); }
   &:hover .expert-tile__ph img { transform: scale(1.02); }
 
-  &--rental { --expert-accent: #{$ds-orange}; }
-  &--sales  { --expert-accent: #{$ds-olive}; }
+  &--rental { --expert-accent: #{$ds-olive}; }
+  &--sales  { --expert-accent: #{$ds-orange}; }
 
   &__ph {
     width: 100%;

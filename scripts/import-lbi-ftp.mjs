@@ -29,6 +29,15 @@ const NEGOTIATOR_MAP = {
   'caroline pujol': 'carolinepujol@immobiliere-pujol.fr',
 };
 
+// Reference prefix → email fallback (used when descriptif has no negotiator signature)
+const REF_PREFIX_MAP = {
+  'LJ': 'julia@immobiliere-pujol.fr',
+  'LC': 'candice@immobiliere-pujol.fr',
+  'AT': 'thibault@immobiliere-pujol.fr',
+  'SP': 'benoitmarinvicente@immobiliere-pujol.fr',
+  'IV': 'thibault@immobiliere-pujol.fr',
+};
+
 function parseNegotiator(descriptif) {
   // Strip <br> tags to normalise line breaks in patterns
   const clean = descriptif.replace(/<br\s*\/?>/gi, ' ');
@@ -157,8 +166,16 @@ function parseLbiCsv(buffer) {
       annonce.contactNom = nego.name;
       annonce.telephone = nego.phone;
     } else {
-      annonce.email = null; // No negotiator — hide expert card
-      console.warn(`  ⚠ No negotiator found in descriptif for ${annonce.reference}`);
+      // Fallback: use reference prefix to determine agent
+      const prefix = (annonce.reference || '').slice(0, 2).toUpperCase();
+      const prefixEmail = REF_PREFIX_MAP[prefix] || null;
+      if (prefixEmail) {
+        annonce.email = prefixEmail;
+        console.log(`  ℹ ${annonce.reference}: no negotiator in descriptif, using ref prefix ${prefix} → ${prefixEmail}`);
+      } else {
+        annonce.email = null;
+        console.warn(`  ⚠ No negotiator found in descriptif for ${annonce.reference}`);
+      }
     }
 
     // Extract address from descriptif

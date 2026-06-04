@@ -19,6 +19,7 @@ jobs:
         run: |
           curl -s "ftp://${{ secrets.LBI_FTP_HOST }}/${{ secrets.LBI_FTP_FILE }}" \
             --user "${{ secrets.LBI_FTP_USER }}:${{ secrets.LBI_FTP_PASS }}" \
+            --retry 3 --retry-delay 30 --retry-all-errors \
             -o /tmp/lbi_import.zip
           ls -lh /tmp/lbi_import.zip
 

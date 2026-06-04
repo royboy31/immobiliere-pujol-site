@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Sync verification — compares Ubiflow feed, LBI zip (R2), D1 database, and site content.
-// Sends a report email to the team via Mandrill.
+// Vérification de synchronisation — compare le flux Ubiflow, le zip LBI (R2), la base D1 et le contenu du site.
+// Envoie un rapport par email à l'équipe via Mandrill.
 // Usage: node scripts/sync-verify.mjs [--no-email]
 //
 // Env vars: OPINIONSYSTEM_API_KEY, MANDRILL_API_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
@@ -44,13 +44,13 @@ function now() {
 
 async function fetchJson(url, opts = {}) {
   const res = await fetch(url, { signal: AbortSignal.timeout(20000), ...opts });
-  if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status} depuis ${url}`);
   return res.json();
 }
 
 async function fetchText(url, opts = {}) {
   const res = await fetch(url, { signal: AbortSignal.timeout(20000), ...opts });
-  if (!res.ok) throw new Error(`HTTP ${res.status} from ${url}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status} depuis ${url}`);
   return res.text();
 }
 
@@ -62,14 +62,13 @@ function addCheck(name, status, detail) {
   if (status === 'FAIL') report.errors.push(`${name}: ${detail}`);
 }
 
-// ── 1. Ubiflow feed ───────────────────────────────────────────────────────
+// ── 1. Flux Ubiflow ──────────────────────────────────────────────────────
 
-console.log('\n🔄  Sync Verification Report');
+console.log('\n🔄  Rapport de vérification de synchronisation');
 console.log(`    ${now()}\n`);
-console.log('── 1. Ubiflow Feed (Rentals) ──');
+console.log('── 1. Flux Ubiflow (Locations) ──');
 
 let ubiflowRentals = 0;
-let ubiflowSales = 0;
 let ubiflowTotal = 0;
 try {
   const xml = await fetchText(UBIFLOW_URL);
@@ -78,19 +77,17 @@ try {
   blocks.forEach(a => {
     const t = a.match(/<type>([^<]+)<\/type>/)?.[1];
     if (t === 'L') ubiflowRentals++;
-    else if (t === 'V') ubiflowSales++;
   });
   report.counts.ubiflowTotal = ubiflowTotal;
   report.counts.ubiflowRentals = ubiflowRentals;
-  report.counts.ubiflowSales = ubiflowSales;
-  addCheck('Ubiflow feed reachable', 'OK', `${ubiflowTotal} total (${ubiflowRentals} rentals, ${ubiflowSales} sales)`);
+  addCheck('Flux Ubiflow accessible', 'OK', `${ubiflowTotal} annonces dont ${ubiflowRentals} locations`);
 } catch (err) {
-  addCheck('Ubiflow feed reachable', 'FAIL', err.message);
+  addCheck('Flux Ubiflow accessible', 'FAIL', err.message);
 }
 
-// ── 2. R2 data (active.json + cards.json) ─────────────────────────────────
+// ── 2. Stockage R2 (active.json + cards.json) ────────────────────────────
 
-console.log('\n── 2. R2 Storage ──');
+console.log('\n── 2. Stockage R2 ──');
 
 let r2Active = [];
 let r2Cards = [];
@@ -107,9 +104,9 @@ try {
   report.counts.r2Sales = r2Sales;
   report.counts.r2UbiflowRentals = r2UbiflowRentals;
   report.counts.r2LbiSales = r2LbiSales;
-  addCheck('R2 active.json', 'OK', `${r2Active.length} total (${r2Rentals} rentals, ${r2Sales} sales)`);
-  addCheck('R2 Ubiflow rentals', 'OK', `${r2UbiflowRentals} active rentals from Ubiflow`);
-  addCheck('R2 LBI/FTP sales', 'OK', `${r2LbiSales} active sales from LBI/FTP`);
+  addCheck('R2 active.json', 'OK', `${r2Active.length} au total (${r2Rentals} locations, ${r2Sales} ventes)`);
+  addCheck('R2 locations Ubiflow', 'OK', `${r2UbiflowRentals} locations actives via Ubiflow`);
+  addCheck('R2 ventes LBI/FTP', 'OK', `${r2LbiSales} ventes actives via LBI/FTP`);
 } catch (err) {
   addCheck('R2 active.json', 'FAIL', err.message);
 }
@@ -118,48 +115,43 @@ try {
   r2Cards = await fetchJson(`${R2_PUBLIC}/annonces/cards.json`);
   report.counts.r2Cards = r2Cards.length;
   if (r2Cards.length === r2Active.length) {
-    addCheck('R2 cards.json matches active.json', 'OK', `${r2Cards.length} cards`);
+    addCheck('R2 cards.json correspond à active.json', 'OK', `${r2Cards.length} fiches`);
   } else {
-    addCheck('R2 cards.json matches active.json', 'WARN', `cards: ${r2Cards.length} vs active: ${r2Active.length}`);
+    addCheck('R2 cards.json correspond à active.json', 'WARN', `fiches : ${r2Cards.length} vs actifs : ${r2Active.length}`);
   }
 } catch (err) {
   addCheck('R2 cards.json', 'FAIL', err.message);
 }
 
-// Check for listings with no photos
+// Vérifier les annonces sans photos
 const noPhotos = r2Active.filter(a => !a.photos || a.photos.length === 0);
 if (noPhotos.length > 0) {
-  addCheck('Listings without photos', 'WARN', `${noPhotos.length} listings have 0 photos: ${noPhotos.slice(0, 5).map(a => a.slug).join(', ')}${noPhotos.length > 5 ? '...' : ''}`);
+  addCheck('Annonces sans photos', 'WARN', `${noPhotos.length} annonces ont 0 photo : ${noPhotos.slice(0, 5).map(a => a.slug).join(', ')}${noPhotos.length > 5 ? '...' : ''}`);
 } else {
-  addCheck('All listings have photos', 'OK', '');
+  addCheck('Toutes les annonces ont des photos', 'OK', '');
 }
 
-// ── 3. Ubiflow ↔ R2 tally ────────────────────────────────────────────────
+// ── 3. Correspondance Ubiflow ↔ R2 ──────────────────────────────────────
 
-console.log('\n── 3. Feed ↔ R2 Tally ──');
+console.log('\n── 3. Flux ↔ R2 ──');
 
-// Ubiflow rentals vs R2 rentals (cron worker only syncs type=L)
+// Locations Ubiflow vs locations R2 (le cron worker ne synchronise que type=L)
 if (ubiflowRentals > 0 && r2Rentals > 0) {
   const diff = Math.abs(ubiflowRentals - r2Rentals);
   if (diff === 0) {
-    addCheck('Ubiflow rentals = R2 rentals', 'OK', `${ubiflowRentals} == ${r2Rentals}`);
+    addCheck('Locations Ubiflow = locations R2', 'OK', `${ubiflowRentals} == ${r2Rentals}`);
   } else if (diff <= 3) {
-    addCheck('Ubiflow rentals ≈ R2 rentals', 'WARN', `feed: ${ubiflowRentals}, R2: ${r2Rentals} (diff: ${diff} — may be mid-sync)`);
+    addCheck('Locations Ubiflow ≈ locations R2', 'WARN', `flux : ${ubiflowRentals}, R2 : ${r2Rentals} (écart : ${diff} — sync en cours ?)`);
   } else {
-    addCheck('Ubiflow rentals vs R2 rentals', 'FAIL', `feed: ${ubiflowRentals}, R2: ${r2Rentals} (diff: ${diff})`);
+    addCheck('Locations Ubiflow vs locations R2', 'FAIL', `flux : ${ubiflowRentals}, R2 : ${r2Rentals} (écart : ${diff})`);
   }
 } else if (ubiflowRentals === 0) {
-  addCheck('Ubiflow feed rentals', 'WARN', '0 rentals in feed — may be temporary');
+  addCheck('Locations dans le flux Ubiflow', 'WARN', '0 location dans le flux — peut-être temporaire');
 }
 
-// Ubiflow sales should NOT be in R2 (sales come from LBI only)
-if (ubiflowSales > 0) {
-  addCheck('Ubiflow sales (ignored by sync)', 'OK', `${ubiflowSales} sales in feed — correctly excluded (LBI is sales source)`);
-}
+// ── 4. Contenu du site ───────────────────────────────────────────────────
 
-// ── 4. Site content check ─────────────────────────────────────────────────
-
-console.log('\n── 4. Site Content ──');
+console.log('\n── 4. Contenu du site ──');
 
 let siteSearchTotal = 0;
 let siteSearchRentals = 0;
@@ -181,26 +173,26 @@ try {
   report.counts.siteTotal = siteSearchTotal;
   report.counts.siteRentals = siteSearchRentals;
   report.counts.siteSales = siteSearchSales;
-  addCheck('Site search API', 'OK', `${siteSearchTotal} total (${siteSearchRentals} rentals, ${siteSearchSales} sales)`);
+  addCheck('API recherche du site', 'OK', `${siteSearchTotal} au total (${siteSearchRentals} locations, ${siteSearchSales} ventes)`);
 } catch (err) {
-  addCheck('Site search API', 'FAIL', err.message);
+  addCheck('API recherche du site', 'FAIL', err.message);
 }
 
-// Compare site vs R2
+// Comparer site vs R2
 if (siteSearchTotal > 0 && r2Active.length > 0) {
   const diff = Math.abs(siteSearchTotal - r2Active.length);
   if (diff === 0) {
-    addCheck('Site total = R2 total', 'OK', `${siteSearchTotal} == ${r2Active.length}`);
+    addCheck('Total site = total R2', 'OK', `${siteSearchTotal} == ${r2Active.length}`);
   } else if (diff <= 5) {
-    addCheck('Site total ≈ R2 total', 'WARN', `site: ${siteSearchTotal}, R2: ${r2Active.length} (diff: ${diff} — build may be pending)`);
+    addCheck('Total site ≈ total R2', 'WARN', `site : ${siteSearchTotal}, R2 : ${r2Active.length} (écart : ${diff} — build en attente ?)`);
   } else {
-    addCheck('Site total vs R2 total', 'FAIL', `site: ${siteSearchTotal}, R2: ${r2Active.length} (diff: ${diff})`);
+    addCheck('Total site vs total R2', 'FAIL', `site : ${siteSearchTotal}, R2 : ${r2Active.length} (écart : ${diff})`);
   }
 }
 
-// ── 5. Cron worker status ─────────────────────────────────────────────────
+// ── 5. État du worker cron ───────────────────────────────────────────────
 
-console.log('\n── 5. Cron Worker ──');
+console.log('\n── 5. Worker Cron ──');
 
 try {
   const status = await fetchJson(`${CRON_WORKER}/status`);
@@ -210,24 +202,24 @@ try {
     const syncDate = last.sync_date || last.started_at;
     const ageH = syncDate ? ((Date.now() - new Date(syncDate + 'Z').getTime()) / 3600000).toFixed(1) : '?';
     const isOk = (last.errors ?? 0) === 0;
-    addCheck('Last cron sync', isOk ? 'OK' : 'FAIL',
-      `${isOk ? 'success' : 'errors'} — ${ageH}h ago — feed: ${last.annonces_in_feed ?? '?'}, updated: ${last.updated ?? '?'}, closed: ${last.closed ?? '?'}`);
+    addCheck('Dernière sync cron', isOk ? 'OK' : 'FAIL',
+      `${isOk ? 'succès' : 'erreurs'} — il y a ${ageH}h — flux : ${last.annonces_in_feed ?? '?'}, mises à jour : ${last.updated ?? '?'}, fermées : ${last.closed ?? '?'}`);
 
     if (ageH !== '?' && parseFloat(ageH) > 3) {
-      addCheck('Cron freshness', 'WARN', `Last sync was ${ageH}h ago (expected < 2h)`);
+      addCheck('Fraîcheur du cron', 'WARN', `Dernière sync il y a ${ageH}h (attendu < 2h)`);
     } else {
-      addCheck('Cron freshness', 'OK', `${ageH}h ago`);
+      addCheck('Fraîcheur du cron', 'OK', `il y a ${ageH}h`);
     }
   } else {
-    addCheck('Cron sync logs', 'WARN', 'No sync logs found');
+    addCheck('Logs de sync cron', 'WARN', 'Aucun log de sync trouvé');
   }
 } catch (err) {
-  addCheck('Cron worker /status', 'FAIL', err.message);
+  addCheck('Worker cron /status', 'FAIL', err.message);
 }
 
-// ── 6. D1 Inventory (active vs closed by source) ─────────────────────────
+// ── 6. Inventaire D1 (actifs vs fermés par source) ──────────────────────
 
-console.log('\n── 6. D1 Inventory ──');
+console.log('\n── 6. Inventaire D1 ──');
 
 let d1UbiflowActive = 0, d1UbiflowClosed = 0;
 let d1LbiActive = 0, d1LbiClosed = 0;
@@ -250,16 +242,16 @@ try {
   report.counts.d1TotalActive = totalActive;
   report.counts.d1TotalClosed = totalClosed;
 
-  addCheck('D1 Ubiflow (rentals)', 'OK', `${d1UbiflowActive} active, ${d1UbiflowClosed} closed`);
-  addCheck('D1 LBI/FTP (sales)', 'OK', `${d1LbiActive} active, ${d1LbiClosed} closed`);
-  addCheck('D1 Grand Total', 'OK', `${totalActive} active listings (${d1UbiflowActive} rentals + ${d1LbiActive} sales), ${totalClosed} closed`);
+  addCheck('D1 Ubiflow (locations)', 'OK', `${d1UbiflowActive} actives, ${d1UbiflowClosed} fermées`);
+  addCheck('D1 LBI/FTP (ventes)', 'OK', `${d1LbiActive} actives, ${d1LbiClosed} fermées`);
+  addCheck('D1 Total général', 'OK', `${totalActive} annonces actives (${d1UbiflowActive} locations + ${d1LbiActive} ventes), ${totalClosed} fermées`);
 } catch (err) {
-  addCheck('D1 inventory counts', 'FAIL', err.message);
+  addCheck('Compteurs inventaire D1', 'FAIL', err.message);
 }
 
-// ── 7. Email worker ───────────────────────────────────────────────────────
+// ── 7. Worker email ──────────────────────────────────────────────────────
 
-console.log('\n── 7. Email Worker ──');
+console.log('\n── 7. Worker Email ──');
 
 try {
   const res = await fetch(`${EMAIL_WORKER}/contact`, {
@@ -268,22 +260,22 @@ try {
     signal: AbortSignal.timeout(10000),
   });
   if (res.status === 204) {
-    addCheck('Email worker CORS', 'OK', `origin: ${res.headers.get('Access-Control-Allow-Origin')}`);
+    addCheck('CORS worker email', 'OK', `origin : ${res.headers.get('Access-Control-Allow-Origin')}`);
   } else {
-    addCheck('Email worker CORS', 'FAIL', `HTTP ${res.status}`);
+    addCheck('CORS worker email', 'FAIL', `HTTP ${res.status}`);
   }
 } catch (err) {
-  addCheck('Email worker', 'FAIL', err.message);
+  addCheck('Worker email', 'FAIL', err.message);
 }
 
-// ── 8. GitHub Actions (last 24h) ──────────────────────────────────────────
+// ── 8. GitHub Actions (dernières 24h) ────────────────────────────────────
 
 console.log('\n── 8. GitHub Actions (24h) ──');
 
 if (GH_TOKEN) {
   const ghHeaders = { Authorization: `Bearer ${GH_TOKEN}` };
 
-  // Deploy workflow
+  // Workflow de déploiement
   try {
     const data = await fetchJson(
       `https://api.github.com/repos/${GH_REPO}/actions/workflows/deploy.yml/runs?per_page=50`,
@@ -299,57 +291,57 @@ if (GH_TOKEN) {
     report.counts.deployFailed24h = failed.length;
 
     if (failed.length === 0) {
-      addCheck('Deploy workflow', 'OK', `${last24h.length} runs in 24h, 0 failed, last: ${ageH}h ago`);
+      addCheck('Workflow déploiement', 'OK', `${last24h.length} exécutions en 24h, 0 échec, dernier : il y a ${ageH}h`);
     } else {
-      addCheck('Deploy workflow', 'WARN', `${last24h.length} runs, ${failed.length} FAILED in 24h`);
+      addCheck('Workflow déploiement', 'WARN', `${last24h.length} exécutions, ${failed.length} EN ÉCHEC en 24h`);
     }
   } catch (err) {
-    addCheck('Deploy workflow', 'FAIL', err.message);
+    addCheck('Workflow déploiement', 'FAIL', err.message);
   }
 
-  // LBI FTP sync
+  // Sync LBI FTP
   try {
     const data = await fetchJson(
       `https://api.github.com/repos/${GH_REPO}/actions/workflows/sync-lbi-ftp.yml/runs?per_page=50`,
       { headers: ghHeaders }
     );
     const runs = data.workflow_runs || [];
-    const last24h = runs.filter(r => Date.now() - new Date(r.created_at).getTime() < 86400000);
-    const failed = last24h.filter(r => r.conclusion === 'failure');
+    const recent = runs.slice(0, 3);
+    const failed = recent.filter(r => r.conclusion === 'failure');
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
-    report.counts.lbiRuns24h = last24h.length;
+    report.counts.lbiRuns24h = recent.length;
     report.counts.lbiFailed24h = failed.length;
 
     if (failed.length === 0) {
-      addCheck('LBI FTP sync', 'OK', `${last24h.length} runs in 24h, 0 failed, last: ${ageH}h ago`);
-    } else if (failed.length <= 2) {
-      addCheck('LBI FTP sync', 'WARN', `${last24h.length} runs, ${failed.length} failed in 24h (transient?)`);
+      addCheck('Sync LBI FTP', 'OK', `${recent.length} dernières exécutions OK, dernier : il y a ${ageH}h`);
+    } else if (failed.length === 1) {
+      addCheck('Sync LBI FTP', 'WARN', `1 échec sur les ${recent.length} dernières exécutions`);
     } else {
-      addCheck('LBI FTP sync', 'FAIL', `${last24h.length} runs, ${failed.length} FAILED in 24h`);
+      addCheck('Sync LBI FTP', 'FAIL', `${failed.length} échecs sur les ${recent.length} dernières exécutions`);
     }
   } catch (err) {
-    addCheck('LBI FTP sync', 'FAIL', err.message);
+    addCheck('Sync LBI FTP', 'FAIL', err.message);
   }
 } else {
-  console.log('  ⚠️  Skipped — no GH_TOKEN. Run: export GH_TOKEN=$(gh auth token)');
+  console.log('  ⚠️  Ignoré — pas de GH_TOKEN. Exécuter : export GH_TOKEN=$(gh auth token)');
 }
 
-// ── 9. External APIs ──────────────────────────────────────────────────────
+// ── 9. APIs externes ─────────────────────────────────────────────────────
 
-console.log('\n── 9. External APIs ──');
+console.log('\n── 9. APIs externes ──');
 
 const OS_KEY = process.env.OPINIONSYSTEM_API_KEY || '';
 if (OS_KEY) {
   try {
     const data = await fetchJson(`https://api.opinionsystem.fr/v2/client/collaborator?api_key=${OS_KEY}`);
-    addCheck('OpinionSystem API', 'OK', `${data.collaborators?.length ?? 0} collaborators`);
+    addCheck('API OpinionSystem', 'OK', `${data.collaborators?.length ?? 0} collaborateurs`);
   } catch (err) {
-    addCheck('OpinionSystem API', 'FAIL', err.message);
+    addCheck('API OpinionSystem', 'FAIL', err.message);
   }
 } else {
-  console.log('  ⚠️  OpinionSystem — skipped (no OPINIONSYSTEM_API_KEY)');
+  console.log('  ⚠️  OpinionSystem — ignoré (pas de OPINIONSYSTEM_API_KEY)');
 }
 
 if (MANDRILL_KEY) {
@@ -361,15 +353,15 @@ if (MANDRILL_KEY) {
       signal: AbortSignal.timeout(10000),
     });
     const text = await res.text();
-    addCheck('Mandrill API', res.ok && text.includes('PONG') ? 'OK' : 'FAIL', text.slice(0, 50));
+    addCheck('API Mandrill', res.ok && text.includes('PONG') ? 'OK' : 'FAIL', text.slice(0, 50));
   } catch (err) {
-    addCheck('Mandrill API', 'FAIL', err.message);
+    addCheck('API Mandrill', 'FAIL', err.message);
   }
 } else {
-  console.log('  ⚠️  Mandrill — skipped (no MANDRILL_API_KEY)');
+  console.log('  ⚠️  Mandrill — ignoré (pas de MANDRILL_API_KEY)');
 }
 
-// ── Summary ────────────────────────────────────────────────────────────────
+// ── Résumé ────────────────────────────────────────────────────────────────
 
 const elapsed = Date.now() - t0;
 const passed = report.checks.filter(c => c.status === 'OK').length;
@@ -377,38 +369,38 @@ const warns = report.warnings.length;
 const fails = report.errors.length;
 
 console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-console.log(`  ${passed} passed, ${warns} warnings, ${fails} errors — ${elapsed}ms`);
+console.log(`  ${passed} réussis, ${warns} avertissements, ${fails} erreurs — ${elapsed}ms`);
 
 if (fails > 0) {
-  console.log('\n  🔴 Errors:');
+  console.log('\n  🔴 Erreurs :');
   report.errors.forEach(e => console.log(`     ${e}`));
 }
 if (warns > 0) {
-  console.log('\n  🟡 Warnings:');
+  console.log('\n  🟡 Avertissements :');
   report.warnings.forEach(w => console.log(`     ${w}`));
 }
 
-// ── Counts summary table ──────────────────────────────────────────────────
+// ── Tableau récapitulatif des compteurs ──────────────────────────────────
 
-console.log('\n  📊 Counts:');
-console.log(`     Ubiflow feed:    ${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'}L + ${report.counts.ubiflowSales ?? '?'}V)`);
-console.log(`     R2 active:       ${report.counts.r2Total ?? '?'} total (${report.counts.r2Rentals ?? '?'}L + ${report.counts.r2Sales ?? '?'}V)`);
-console.log(`       ↳ Ubiflow:     ${report.counts.r2UbiflowRentals ?? '?'} rentals`);
-console.log(`       ↳ LBI/FTP:     ${report.counts.r2LbiSales ?? '?'} sales`);
-console.log(`     R2 cards:        ${report.counts.r2Cards ?? '?'}`);
-console.log(`     D1 Ubiflow:      ${report.counts.d1UbiflowActive ?? '?'} active, ${report.counts.d1UbiflowClosed ?? '?'} closed`);
-console.log(`     D1 LBI/FTP:      ${report.counts.d1LbiActive ?? '?'} active, ${report.counts.d1LbiClosed ?? '?'} closed`);
-console.log(`     D1 Grand Total:  ${report.counts.d1TotalActive ?? '?'} active, ${report.counts.d1TotalClosed ?? '?'} closed`);
-console.log(`     Site search:     ${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'}L + ${report.counts.siteSales ?? '?'}V)`);
-console.log(`     Deploys 24h:     ${report.counts.deployRuns24h ?? '?'} runs, ${report.counts.deployFailed24h ?? '?'} failed`);
-console.log(`     LBI syncs 24h:   ${report.counts.lbiRuns24h ?? '?'} runs, ${report.counts.lbiFailed24h ?? '?'} failed`);
+console.log('\n  📊 Compteurs :');
+console.log(`     Flux Ubiflow :   ${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'} locations)`);
+console.log(`     R2 actifs :      ${report.counts.r2Total ?? '?'} total (${report.counts.r2Rentals ?? '?'} loc. + ${report.counts.r2Sales ?? '?'} ventes)`);
+console.log(`       ↳ Ubiflow :    ${report.counts.r2UbiflowRentals ?? '?'} locations`);
+console.log(`       ↳ LBI/FTP :    ${report.counts.r2LbiSales ?? '?'} ventes`);
+console.log(`     R2 fiches :      ${report.counts.r2Cards ?? '?'}`);
+console.log(`     D1 Ubiflow :     ${report.counts.d1UbiflowActive ?? '?'} actives, ${report.counts.d1UbiflowClosed ?? '?'} fermées`);
+console.log(`     D1 LBI/FTP :     ${report.counts.d1LbiActive ?? '?'} actives, ${report.counts.d1LbiClosed ?? '?'} fermées`);
+console.log(`     D1 Total :       ${report.counts.d1TotalActive ?? '?'} actives, ${report.counts.d1TotalClosed ?? '?'} fermées`);
+console.log(`     Recherche site : ${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'} loc. + ${report.counts.siteSales ?? '?'} ventes)`);
+console.log(`     Déploiements 24h : ${report.counts.deployRuns24h ?? '?'} exéc., ${report.counts.deployFailed24h ?? '?'} échecs`);
+console.log(`     Syncs LBI 24h :   ${report.counts.lbiRuns24h ?? '?'} exéc., ${report.counts.lbiFailed24h ?? '?'} échecs`);
 console.log('');
 
-// ── Send email report ──────────────────────────────────────────────────────
+// ── Envoi du rapport par email ────────────────────────────────────────────
 
 if (SEND_EMAIL && MANDRILL_KEY) {
-  const statusLabel = fails > 0 ? '🔴 ERRORS' : warns > 0 ? '🟡 WARNINGS' : '🟢 ALL OK';
-  const subject = `Pujol Sync Report ${now()} — ${statusLabel}`;
+  const statusLabel = fails > 0 ? '🔴 ERREURS' : warns > 0 ? '🟡 AVERTISSEMENTS' : '🟢 TOUT OK';
+  const subject = `Rapport Sync Pujol ${now()} — ${statusLabel}`;
 
   const checksHtml = report.checks.map(c => {
     const color = c.status === 'OK' ? '#2e7d32' : c.status === 'WARN' ? '#e65100' : '#c62828';
@@ -422,23 +414,23 @@ if (SEND_EMAIL && MANDRILL_KEY) {
 
   const countsHtml = `
     <table style="border-collapse:collapse;margin:16px 0;width:100%">
-      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #B2C54F;text-transform:uppercase;letter-spacing:0.5px">Active Listings</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow (rentals)</td><td style="padding:6px 12px">${report.counts.d1UbiflowActive ?? '?'} active</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP (sales)</td><td style="padding:6px 12px">${report.counts.d1LbiActive ?? '?'} active</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL ACTIVE</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalActive ?? '?'} listings</td></tr>
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #B2C54F;text-transform:uppercase;letter-spacing:0.5px">Annonces actives</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow (locations)</td><td style="padding:6px 12px">${report.counts.d1UbiflowActive ?? '?'} actives</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP (ventes)</td><td style="padding:6px 12px">${report.counts.d1LbiActive ?? '?'} actives</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL ACTIF</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalActive ?? '?'} annonces</td></tr>
 
-      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #e65100;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Closed Listings</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow closed</td><td style="padding:6px 12px">${report.counts.d1UbiflowClosed ?? '?'}</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP closed</td><td style="padding:6px 12px">${report.counts.d1LbiClosed ?? '?'}</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL CLOSED</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalClosed ?? '?'}</td></tr>
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #e65100;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Annonces fermées</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow fermées</td><td style="padding:6px 12px">${report.counts.d1UbiflowClosed ?? '?'}</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI/FTP fermées</td><td style="padding:6px 12px">${report.counts.d1LbiClosed ?? '?'}</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">TOTAL FERMÉES</td><td style="padding:6px 12px;font-weight:700;color:#0f1a2b">${report.counts.d1TotalClosed ?? '?'}</td></tr>
 
-      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #55666f;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Data Pipeline</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Ubiflow feed</td><td style="padding:6px 12px">${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'}L + ${report.counts.ubiflowSales ?? '?'}V)</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 active</td><td style="padding:6px 12px">${report.counts.r2Total ?? '?'} (${report.counts.r2UbiflowRentals ?? '?'} Ubiflow + ${report.counts.r2LbiSales ?? '?'} LBI)</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 cards</td><td style="padding:6px 12px">${report.counts.r2Cards ?? '?'}</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Site search</td><td style="padding:6px 12px">${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'}L + ${report.counts.siteSales ?? '?'}V)</td></tr>
-      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Deploys (24h)</td><td style="padding:6px 12px">${report.counts.deployRuns24h ?? '?'} runs, ${report.counts.deployFailed24h ?? '?'} failed</td></tr>
-      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">LBI syncs (24h)</td><td style="padding:6px 12px">${report.counts.lbiRuns24h ?? '?'} runs, ${report.counts.lbiFailed24h ?? '?'} failed</td></tr>
+      <tr><td colspan="2" style="padding:8px 12px;font-weight:700;color:#0f1a2b;font-size:13px;border-bottom:2px solid #55666f;text-transform:uppercase;letter-spacing:0.5px;padding-top:16px">Pipeline de données</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Flux Ubiflow</td><td style="padding:6px 12px">${report.counts.ubiflowTotal ?? '?'} total (${report.counts.ubiflowRentals ?? '?'} locations)</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 actifs</td><td style="padding:6px 12px">${report.counts.r2Total ?? '?'} (${report.counts.r2UbiflowRentals ?? '?'} Ubiflow + ${report.counts.r2LbiSales ?? '?'} LBI)</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">R2 fiches</td><td style="padding:6px 12px">${report.counts.r2Cards ?? '?'}</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Recherche site</td><td style="padding:6px 12px">${report.counts.siteTotal ?? '?'} total (${report.counts.siteRentals ?? '?'} loc. + ${report.counts.siteSales ?? '?'} ventes)</td></tr>
+      <tr><td style="padding:6px 12px;font-weight:600;color:#55666f">Déploiements (24h)</td><td style="padding:6px 12px">${report.counts.deployRuns24h ?? '?'} exéc., ${report.counts.deployFailed24h ?? '?'} échecs</td></tr>
+      <tr style="background:#f8f8f8"><td style="padding:6px 12px;font-weight:600;color:#55666f">Syncs LBI (24h)</td><td style="padding:6px 12px">${report.counts.lbiRuns24h ?? '?'} exéc., ${report.counts.lbiFailed24h ?? '?'} échecs</td></tr>
     </table>`;
 
   const statusBg = fails > 0 ? '#c62828' : warns > 0 ? '#e65100' : '#2e7d32';
@@ -452,36 +444,36 @@ if (SEND_EMAIL && MANDRILL_KEY) {
     <tr><td align="center">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
-        <!-- Header -->
+        <!-- En-tête -->
         <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
           <img src="${STAGING}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
         </td></tr>
 
-        <!-- Status bar -->
+        <!-- Barre de statut -->
         <tr><td style="background-color:${statusBg};padding:12px 32px;text-align:center">
           <span style="color:#ffffff;font-size:16px;font-weight:700">${statusLabel}</span>
         </td></tr>
 
-        <!-- Body -->
+        <!-- Corps -->
         <tr><td style="background-color:#ffffff;padding:32px">
-          <h1 style="margin:0 0 4px;font-size:18px;color:#0f1a2b">Sync Verification Report</h1>
-          <p style="margin:0 0 20px;font-size:13px;color:#7e7e7d">${now()} — ${elapsed}ms — ${passed} passed, ${warns} warnings, ${fails} errors</p>
+          <h1 style="margin:0 0 4px;font-size:18px;color:#0f1a2b">Rapport de vérification de synchronisation</h1>
+          <p style="margin:0 0 20px;font-size:13px;color:#7e7e7d">${now()} — ${elapsed}ms — ${passed} réussis, ${warns} avertissements, ${fails} erreurs</p>
 
-          <!-- Checks table -->
+          <!-- Tableau des vérifications -->
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eef3ef;border-radius:6px;overflow:hidden;border-collapse:collapse">
-            <tr><td colspan="3" style="background-color:#f8faf5;padding:10px 12px;font-size:12px;font-weight:700;color:#55666f;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #B2C54F">Checks</td></tr>
+            <tr><td colspan="3" style="background-color:#f8faf5;padding:10px 12px;font-size:12px;font-weight:700;color:#55666f;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #B2C54F">Vérifications</td></tr>
             ${checksHtml}
           </table>
 
-          <!-- Counts -->
-          <h2 style="margin:24px 0 4px;font-size:15px;color:#0f1a2b">Listing Counts</h2>
+          <!-- Compteurs -->
+          <h2 style="margin:24px 0 4px;font-size:15px;color:#0f1a2b">Compteurs d'annonces</h2>
           ${countsHtml}
 
-          ${fails > 0 ? `<h2 style="margin:24px 0 8px;font-size:15px;color:#c62828">Errors</h2><ul style="margin:0;padding-left:20px;color:#c62828;font-size:13px">${report.errors.map(e => `<li>${e}</li>`).join('')}</ul>` : ''}
-          ${warns > 0 ? `<h2 style="margin:24px 0 8px;font-size:15px;color:#e65100">Warnings</h2><ul style="margin:0;padding-left:20px;color:#e65100;font-size:13px">${report.warnings.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
+          ${fails > 0 ? `<h2 style="margin:24px 0 8px;font-size:15px;color:#c62828">Erreurs</h2><ul style="margin:0;padding-left:20px;color:#c62828;font-size:13px">${report.errors.map(e => `<li>${e}</li>`).join('')}</ul>` : ''}
+          ${warns > 0 ? `<h2 style="margin:24px 0 8px;font-size:15px;color:#e65100">Avertissements</h2><ul style="margin:0;padding-left:20px;color:#e65100;font-size:13px">${report.warnings.map(w => `<li>${w}</li>`).join('')}</ul>` : ''}
         </td></tr>
 
-        <!-- Footer -->
+        <!-- Pied de page -->
         <tr><td style="background-color:#0f1a2b;padding:20px 32px;border-radius:0 0 8px 8px" align="center">
           <p style="margin:0;font-size:12px;color:#ffffff">Immobilière Pujol — Rapport de synchronisation automatique</p>
           <p style="margin:4px 0 0;font-size:11px;color:#ffffff;opacity:0.7">7 rue du Docteur Fiolle, 13006 Marseille — 04 91 37 38 39</p>
@@ -501,7 +493,7 @@ if (SEND_EMAIL && MANDRILL_KEY) {
         key: MANDRILL_KEY,
         message: {
           from_email: 'contact@immobiliere-pujol.com',
-          from_name: 'Pujol Sync Monitor',
+          from_name: 'Pujol — Surveillance Sync',
           to: RECIPIENTS.map(email => ({ email, type: 'to' })),
           subject,
           html,
@@ -510,17 +502,17 @@ if (SEND_EMAIL && MANDRILL_KEY) {
     });
     const data = await res.json();
     if (res.ok) {
-      console.log(`  📧 Report emailed to: ${RECIPIENTS.join(', ')}`);
+      console.log(`  📧 Rapport envoyé à : ${RECIPIENTS.join(', ')}`);
     } else {
-      console.log(`  ❌ Email failed: ${JSON.stringify(data).slice(0, 200)}`);
+      console.log(`  ❌ Échec envoi : ${JSON.stringify(data).slice(0, 200)}`);
     }
   } catch (err) {
-    console.log(`  ❌ Email failed: ${err.message}`);
+    console.log(`  ❌ Échec envoi : ${err.message}`);
   }
 } else if (SEND_EMAIL && !MANDRILL_KEY) {
-  console.log('  ⚠️  Email skipped — no MANDRILL_API_KEY. Use --no-email to suppress this.');
+  console.log('  ⚠️  Email ignoré — pas de MANDRILL_API_KEY. Utiliser --no-email pour supprimer cet avertissement.');
 } else {
-  console.log('  📧 Email skipped (--no-email flag)');
+  console.log('  📧 Email ignoré (option --no-email)');
 }
 
 process.exit(fails > 0 ? 1 : 0);

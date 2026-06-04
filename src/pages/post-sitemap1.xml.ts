@@ -24,6 +24,8 @@ export const GET: APIRoute = async ({ request }) => {
     if (resp.ok) {
       const data = (await resp.json()) as { articles: ArticleMeta[] };
       for (const a of data.articles) {
+        // Local articles go in local-sitemap1.xml, not here
+        if (a.slug.startsWith('local/')) continue;
         urls.push(entryWithImage(`/${a.slug}/`, a.date, a.image, a.title));
       }
     }

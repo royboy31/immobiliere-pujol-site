@@ -1,0 +1,30 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const arrondissements = await getCollection('arrondissements');
+arrondissements.sort((a, b) => (a.data.slug || '').localeCompare(b.data.slug || ''));
+
+const title = 'Arrondissements de Marseille – Immobilière Pujol';
+const description = 'Découvrez nos annonces immobilières par arrondissement à Marseille. Location, vente et gestion locative.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section style="max-width:900px;margin:2rem auto;padding:0 1.5rem;">
+    <h1 style="margin-bottom:1.5rem;">Arrondissements de Marseille</h1>
+    <p style="margin-bottom:2rem;color:#64748b;">{arrondissements.length} arrondissements</p>
+    <ul style="list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+      {arrondissements.map((a) => (
+        <li>
+          <a href={`/arrondissement/${a.data.slug}/`} style="display:block;padding:1rem 1.25rem;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;border:1px solid #e2e8f0;">
+            <strong>{a.data.name}</strong>
+            {a.data.count != null && (
+              <span style="float:right;color:#64748b;font-size:0.85rem;">{a.data.count} annonces</span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

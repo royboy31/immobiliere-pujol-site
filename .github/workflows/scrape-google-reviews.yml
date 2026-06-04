@@ -1,0 +1,49 @@
+name: Scrape Google Reviews
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Install Puppeteer browser
+        run: npx puppeteer browsers install chrome
+
+      - name: Scrape ~50 Google reviews
+        run: node scripts/scrape-google-reviews.mjs
+
+      - name: Show results
+        run: |
+          echo "Reviews scraped:"
+          cat public/_data/google-reviews.json | head -5
+          echo "..."
+          python3 -c "import json; d=json.load(open('public/_data/google-reviews.json')); print(f'Rating: {d[\"rating\"]}, Count: {d[\"reviewCount\"]}, Reviews with text: {len(d[\"reviews\"])}')"
+
+      - name: Upload debug screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gmaps-debug
+          path: |
+            /tmp/gmaps-debug.png
+            /tmp/gmaps-reviews.png
+          if-no-files-found: ignore
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f public/_data/google-reviews.json
+          git diff --cached --quiet && echo "No changes" || (git commit -m "Update Google reviews data (scraped $(date +%Y-%m-%d))" && git push)

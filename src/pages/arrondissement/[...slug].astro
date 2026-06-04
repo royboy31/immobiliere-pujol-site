@@ -2,49 +2,182 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { fetchActiveListings } from '../../lib/r2-annonces';
+import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import type { GetStaticPaths } from 'astro';
+
+// One template handles three URL shapes (matching live WP):
+//   /arrondissement/{slug}/            → all active listings for the secteur (V + L)
+//   /arrondissement/{slug}/locations/  → rentals only (type=L)
+//   /arrondissement/{slug}/ventes/     → sales only  (type=V)
+//
+// Locations + ventes variants are generated only for Marseille CPs (13001-13016).
+// Non-Marseille entries in the arrondissements collection (e.g. 04000, 06000)
+// keep their single base page since they have no Marseille-style nav.
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const arrondissements = await getCollection('arrondissements');
-  return arrondissements.map((entry) => ({
-    params: { slug: entry.data.slug },
-    props: { entry },
-  }));
+  const paths: Array<{ params: { slug: string }; props: { entry: any; scope: 'all' | 'V' | 'L' } }> = [];
+
+  for (const entry of arrondissements) {
+    const baseSlug = entry.data.slug;
+    paths.push({ params: { slug: baseSlug }, props: { entry, scope: 'all' } });
+
+    // Generate type-filtered variants for Marseille CPs only.
+    if (/^130(0[1-9]|1[0-6])$/.test(baseSlug)) {
+      paths.push({ params: { slug: `${baseSlug}/locations` }, props: { entry, scope: 'L' } });
+      paths.push({ params: { slug: `${baseSlug}/ventes` }, props: { entry, scope: 'V' } });
+    }
+  }
+
+  return paths;
 };
 
 interface Props {
   entry: any;
+  scope: 'all' | 'V' | 'L';
 }
 
-const { entry } = Astro.props;
-const { name, slug, count, zipContent, seoTitle, seoDescription } = entry.data;
+const { entry, scope } = Astro.props;
+const { name, slug: baseSlug, zipContent, seoTitle, seoDescription } = entry.data;
 
-const title = seoTitle || `${name} – Annonces immobilières | Immobilière Pujol`;
-const description = seoDescription || `Découvrez nos annonces immobilières dans le ${name}. ${count} biens disponibles à la location et à la vente.`;
+// Fetch active listings once, filter by CP + (optional) type.
+const allActive = await fetchActiveListings();
+const cpMatch = (a: { codePostal?: string }) => (a.codePostal || '') === baseSlug;
+const listings = allActive
+  .filter(cpMatch)
+  .filter((a) => (scope === 'all' ? true : a.type === scope))
+  .sort((a, b) => (b.prix ?? 0) - (a.prix ?? 0));
+
+const ventesCount = allActive.filter((a) => cpMatch(a) && a.type === 'V').length;
+const locsCount = allActive.filter((a) => cpMatch(a) && a.type === 'L').length;
+const totalCount = ventesCount + locsCount;
+
+const scopeLabel = scope === 'V' ? 'Ventes' : scope === 'L' ? 'Locations' : 'Annonces';
+const scopeIntro =
+  scope === 'V'
+    ? `Tous les biens à vendre actuellement disponibles dans le ${name}.`
+    : scope === 'L'
+      ? `Tous les biens à louer actuellement disponibles dans le ${name}.`
+      : `Tous les biens à la location et à la vente actuellement disponibles dans le ${name}.`;
+
+const title = seoTitle
+  || (scope === 'V' ? `Ventes immobilières dans le ${name} – Immobilière Pujol`
+    : scope === 'L' ? `Locations dans le ${name} – Immobilière Pujol`
+      : `${name} – Annonces immobilières | Immobilière Pujol`);
+
+const description = seoDescription
+  || (scope === 'V' ? `Découvrez nos ${ventesCount} biens à vendre dans le ${name} à Marseille.`
+    : scope === 'L' ? `Découvrez nos ${locsCount} biens à louer dans le ${name} à Marseille.`
+      : `Découvrez nos annonces immobilières dans le ${name}. ${totalCount} biens disponibles à la location et à la vente.`);
+
+const isMarseilleCp = /^130(0[1-9]|1[0-6])$/.test(baseSlug);
+
+// Breadcrumb trail: replace the auto-generated "Arrondissement" (404) intermediate
+// with semantic crumbs. For type-filtered variants we link back to the base
+// arrondissement page so users can navigate up the hierarchy.
+const breadcrumbCrumbs: Array<{ label: string; href: string | null }> = [
+  { label: 'Annonces', href: '/annonces/' },
+];
+if (scope === 'all') {
+  breadcrumbCrumbs.push({ label: `Annonces dans le ${name}`, href: null });
+} else {
+  breadcrumbCrumbs.push({ label: name, href: `/arrondissement/${baseSlug}/` });
+  breadcrumbCrumbs.push({
+    label: scope === 'L' ? `Locations dans le ${name}` : `Ventes dans le ${name}`,
+    href: null,
+  });
+}
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} breadcrumbCrumbs={breadcrumbCrumbs}>
   <section class="seo-hero">
     <p class="seo-hero__eyebrow">Arrondissement Marseille</p>
-    <h1>{name}</h1>
-    <span class="seo-hero__count">{count} annonce{count > 1 ? 's' : ''} dans ce secteur</span>
+    <h1>{name}{scope !== 'all' && <> — <b>{scopeLabel}</b></>}</h1>
+    <p class="seo-hero__sub">
+      {listings.length > 0
+        ? `${listings.length} bien${listings.length > 1 ? 's' : ''} actuellement disponible${listings.length > 1 ? 's' : ''} dans ce secteur.`
+        : `Aucun bien actuellement disponible dans cette catégorie — découvrez les autres secteurs et services ci-dessous.`}
+    </p>
+    {isMarseilleCp && (
+      <nav class="annonces-pills arr-pills">
+        <a href={`/arrondissement/${baseSlug}/`} class={scope === 'all' ? 'is-active' : ''}>
+          Toutes <span class="count">({totalCount})</span>
+        </a>
+        <a href={`/arrondissement/${baseSlug}/locations/`} class={scope === 'L' ? 'is-active' : ''} data-kind="loc">
+          Locations <span class="count">({locsCount})</span>
+        </a>
+        <a href={`/arrondissement/${baseSlug}/ventes/`} class={scope === 'V' ? 'is-active' : ''} data-kind="vente">
+          Ventes <span class="count">({ventesCount})</span>
+        </a>
+      </nav>
+    )}
   </section>
 
-  <div class="seo-area">
-    {zipContent && (
-      <div class="seo-area__intro">
+  {zipContent && (
+    <section class="arr-intro-section">
+      <div class="arr-intro">
         <Fragment set:html={zipContent} />
       </div>
-    )}
-
-    <section class="seo-area__cta-section">
-      <h2 class="ds-sec-title">Annonces dans <b>le {name}</b></h2>
-      <p>Découvrez tous les biens disponibles à la location et à la vente dans ce secteur.</p>
-      <div class="seo-area__cta-row">
-        <a href="/annonces/" class="seo-cta seo-cta--filled">Voir toutes les annonces</a>
-        <a href="/annonces/locations/" class="seo-cta">Locations</a>
-        <a href="/annonces/ventes/" class="seo-cta seo-cta--vente">Ventes</a>
-      </div>
     </section>
-  </div>
+  )}
+
+  <section class="annonces-grid-section arr-listings-section">
+    {listings.length > 0 ? (
+      <div class="annonces-grid">
+        {listings.map((a) => <AnnonceCard annonce={a} />)}
+      </div>
+    ) : (
+      <div class="arr-empty">
+        <h2>Aucun bien <b>pour le moment</b></h2>
+        <p>Décrivez-nous votre projet, nous vous prévenons dès qu'un bien correspond à vos critères dans le {name}.</p>
+        <div class="arr-empty__cta-row">
+          <a href="/annonces/" class="seo-cta seo-cta--filled">Voir toutes les annonces</a>
+          <a href="/contact-immobiliere-pujol/" class="seo-cta">Nous contacter</a>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <section class="arr-services-section">
+    <div class="arr-services">
+      <header class="arr-services__head">
+        <span class="arr-services__overline">Nos prestations</span>
+        <h2 class="ds-sec-title">Nos services dans <b>le {name}</b></h2>
+        <p class="arr-services__lede">
+          Nos équipes accompagnent les propriétaires et acquéreurs du secteur {name} sur l'ensemble du parcours immobilier.
+        </p>
+      </header>
+      <ul class="arr-services__list">
+        <li>
+          <a href="/service-immobilier/mettre-en-location/">
+            <span class="arr-services__label">Mettre votre bien en location</span>
+            <span class="arr-services__sub">à {name}</span>
+          </a>
+        </li>
+        <li>
+          <a href="/service-immobilier/gestion-locative/">
+            <span class="arr-services__label">Faire gérer votre bien</span>
+            <span class="arr-services__sub">à {name}</span>
+          </a>
+        </li>
+        <li>
+          <a href="/service-immobilier/vendre/">
+            <span class="arr-services__label">Vendre votre bien</span>
+            <span class="arr-services__sub">à {name}</span>
+          </a>
+        </li>
+        <li>
+          <a href="/service-immobilier/syndic-de-copropriete-a-marseille/">
+            <span class="arr-services__label">Syndic de copropriété</span>
+            <span class="arr-services__sub">à {name}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
 </BaseLayout>
+
+<!-- Styles for this page live in src/styles/components/_arrondissement.scss
+     (imported via theme.scss). Scoped <style lang="scss"> in Astro pages
+     doesn't play well with the project's SCSS variable setup. -->
