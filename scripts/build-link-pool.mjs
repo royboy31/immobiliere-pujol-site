@@ -22,7 +22,9 @@ const DEST = join(DEST_DIR, 'link-pool.json');
 
 // collection dir -> { type label, url(slug) }
 const SOURCES = [
-  { dir: 'services', type: 'service', url: (s) => `/services/${s}/` },
+  // services route strips a leading "services/" from the slug, so the canonical
+  // URL is /services/{slug-without-prefix}/ (avoids /services/services/... 404s).
+  { dir: 'services', type: 'service', url: (s) => `/services/${s.replace(/^services\//, '')}/`, skip: (s) => s === 'services' },
   { dir: 'serviceImmobilier', type: 'service', url: (s) => `/service-immobilier/${s}/` },
   { dir: 'articles', type: 'article', url: (s) => `/${s}/` },
 ];
@@ -40,8 +42,8 @@ function frontmatter(raw) {
   return { title: get('title'), slug: get('slug') };
 }
 
-async function fromMarkdown(dir, type, url) {
-  const base = join(ROOT, 'src/content', dir);
+async function fromMarkdown(src) {
+  const base = join(ROOT, 'src/content', src.dir);
   if (!existsSync(base)) return [];
   const files = await readdir(base);
   const out = [];
@@ -51,7 +53,8 @@ async function fromMarkdown(dir, type, url) {
     if (!fm.title || !fm.slug) continue;
     // Skip WordPress junk: trashed/auto-draft slugs, numeric-only, leading "__".
     if (/trashed|auto-draft/i.test(fm.slug) || fm.slug.startsWith('__') || /^\d+$/.test(fm.slug)) continue;
-    out.push({ url: url(fm.slug), title: fm.title, type });
+    if (src.skip && src.skip(fm.slug)) continue;
+    out.push({ url: src.url(fm.slug), title: fm.title, type: src.type });
   }
   return out;
 }
@@ -73,7 +76,7 @@ async function fromArrondissements() {
 
 async function main() {
   let pool = [];
-  for (const s of SOURCES) pool.push(...await fromMarkdown(s.dir, s.type, s.url));
+  for (const s of SOURCES) pool.push(...await fromMarkdown(s));
   pool.push(...await fromArrondissements());
 
   // Dedup by URL, drop obviously non-public slugs, sort for a stable order
