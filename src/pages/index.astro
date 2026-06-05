@@ -397,48 +397,5 @@ const services = [
       })();
     </script>
 
-    {/* ============= NEWSLETTER ============= */}
-    <section class="news-wrap">
-      <form class="news" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-newsletter-form>
-        <h2>Inscrivez-vous à la<br /><b>Newsletter</b></h2>
-        <div class="form">
-          <input name="email" type="email" placeholder="Email" required />
-          <button class="submit" type="submit" aria-label="S'inscrire">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
-          </button>
-        </div>
-        <label class="agree">
-          <input type="checkbox" name="agree" class="check" required />
-          <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
-        </label>
-        <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
-      </form>
-    </section>
-
-    <script>
-      (function () {
-        const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
-        if (!form) return;
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          if (!form.reportValidity()) return;
-          const btn = form.querySelector<HTMLButtonElement>('.submit');
-          if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
-          try {
-            const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-            const data = await res.json();
-            if (data.ok) {
-              try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'accueil' }); } catch (e) {}
-              form.innerHTML = '<p style="color:#b2c04e;font-weight:600;text-align:center;padding:24px 0">Merci pour votre inscription !</p>';
-            } else {
-              if (btn) { btn.disabled = false; btn.style.opacity = ''; }
-            }
-          } catch {
-            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
-          }
-        });
-      })();
-    </script>
-
   </div>
 </BaseLayout>

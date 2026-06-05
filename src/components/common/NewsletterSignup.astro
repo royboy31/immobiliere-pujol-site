@@ -1,44 +1,41 @@
 ---
-// Site-wide newsletter signup, rendered in the footer on every page.
-// Posts to the same Worker endpoint as the home-page newsletter form.
-const endpoint = 'https://pujol-email.roy-68a.workers.dev/newsletter';
-const policyHref = '/politique-de-confidentialite/';
+// Site-wide newsletter — the green card band that sits ABOVE the black footer
+// on every page (same design as the home page). Posts to the same Worker
+// endpoint. Reuses the global `.news-wrap` / `.news` styles from _home.scss.
 ---
 
-<form class="foot-news" method="post" action={endpoint} data-newsletter-footer>
-  <div class="foot-news__intro">
-    <h3>Newsletter</h3>
-    <p>Maximum une fois par mois : nos conseils et l'actualité de l'immobilier à Marseille.</p>
-  </div>
-  <div class="foot-news__fields">
-    <div class="foot-news__row">
-      <input name="email" type="email" placeholder="Votre adresse email" required aria-label="Votre adresse email" />
-      <button class="foot-news__submit" type="submit" aria-label="S'inscrire">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+<section class="news-wrap">
+  <form class="news" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-newsletter-form>
+    <h2>Inscrivez-vous à la<br /><b>Newsletter</b></h2>
+    <div class="form">
+      <input name="email" type="email" placeholder="Email" required />
+      <button class="submit" type="submit" aria-label="S'inscrire">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
       </button>
     </div>
-    <label class="foot-news__agree">
-      <input type="checkbox" name="agree" required />
-      <span>J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter. Voir notre <a href={policyHref}>politique de confidentialité</a>.</span>
+    <label class="agree">
+      <input type="checkbox" name="agree" class="check" required />
+      <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
     </label>
-  </div>
-</form>
+    <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
+  </form>
+</section>
 
 <script>
   (function () {
-    const form = document.querySelector<HTMLFormElement>('[data-newsletter-footer]');
+    const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
     if (!form) return;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      const btn = form.querySelector<HTMLButtonElement>('.foot-news__submit');
+      const btn = form.querySelector<HTMLButtonElement>('.submit');
       if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
         const data = await res.json() as { ok?: boolean };
         if (data.ok) {
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'newsletter' }); } catch (e) {}
-          form.innerHTML = '<p class="foot-news__thanks">Merci pour votre inscription !</p>';
+          form.innerHTML = '<p style="color:#b2c04e;font-weight:600;text-align:center;padding:24px 0">Merci pour votre inscription !</p>';
         } else {
           if (btn) { btn.disabled = false; btn.style.opacity = ''; }
         }
@@ -48,107 +45,3 @@ const policyHref = '/politique-de-confidentialite/';
     });
   })();
 </script>
-
-<style>
-  .foot-news {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 32px 56px;
-    align-items: center;
-    padding: 30px 0;
-    margin-top: 8px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    position: relative;
-    z-index: 2;
-  }
-
-  .foot-news__intro h3 {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 1.1;
-    color: #ffffff;
-    margin: 0 0 8px;
-  }
-  .foot-news__intro p {
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.72);
-    margin: 0;
-    max-width: 360px;
-  }
-
-  .foot-news__row {
-    display: flex;
-    gap: 10px;
-    max-width: 460px;
-  }
-  .foot-news__row input {
-    flex: 1 1 auto;
-    min-width: 0;
-    height: 48px;
-    padding: 0 18px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.06);
-    color: #ffffff;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 15px;
-    outline: none;
-    transition: border-color .2s ease, background .2s ease;
-  }
-  .foot-news__row input::placeholder { color: rgba(255, 255, 255, 0.5); }
-  .foot-news__row input:focus {
-    border-color: rgb(178, 192, 78);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .foot-news__submit {
-    flex: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 0;
-    background: rgb(178, 192, 78);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    transition: background .2s ease, transform .2s ease;
-  }
-  .foot-news__submit:hover { background: rgb(236, 114, 52); transform: translateX(2px); }
-  .foot-news__submit:disabled { cursor: default; }
-
-  .foot-news__agree {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-top: 12px;
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 300;
-    font-size: 12px;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  .foot-news__agree input { margin-top: 2px; flex: none; accent-color: rgb(178, 192, 78); }
-  .foot-news__agree a { color: rgba(255, 255, 255, 0.85); text-decoration: underline; }
-  .foot-news__agree a:hover { color: rgb(178, 192, 78); }
-
-  .foot-news__thanks {
-    color: rgb(178, 192, 78);
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    margin: 0;
-  }
-
-  @media (max-width: 768px) {
-    .foot-news {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 28px 0;
-    }
-    .foot-news__row { max-width: none; }
-  }
-</style>
