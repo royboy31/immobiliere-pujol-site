@@ -22,7 +22,7 @@ const policyHref = '/politique-de-confidentialite/';
           <span><b>Nécessaires</b> — indispensables au fonctionnement du site (toujours actifs).</span>
         </label>
         <label class="cc__opt">
-          <input type="checkbox" id="cc-analytics" />
+          <input type="checkbox" id="cc-analytics" checked />
           <span><b>Mesure d'audience</b> — statistiques de visite (Google Analytics).</span>
         </label>
         <label class="cc__opt">
@@ -68,11 +68,12 @@ const policyHref = '/politique-de-confidentialite/';
     }
 
     function show(customize) {
-      // Pre-fill toggles from any stored choice.
+      // Pre-fill toggles from any stored choice; on first visit default
+      // "Mesure d'audience" (analytics) ON, "Publicité" (ads) OFF.
       try {
         var c = JSON.parse(localStorage.getItem(KEY) || 'null');
-        document.getElementById('cc-analytics').checked = !!(c && c.analytics);
-        document.getElementById('cc-ads').checked = !!(c && c.ads);
+        document.getElementById('cc-analytics').checked = c ? !!c.analytics : true;
+        document.getElementById('cc-ads').checked = c ? !!c.ads : false;
       } catch (e) {}
       el.hidden = false;
       if (customize) openCustomize();
