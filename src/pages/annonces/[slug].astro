@@ -333,6 +333,15 @@ if (isClosed) {
 const pageTitle = `${view.titre} – Immobilière Pujol`;
 const pageDescription = view.description ? view.description.substring(0, 160) : pageTitle;
 
+// Breadcrumb trail matching the live site:
+//   Accueil › Annonces › {Vente|Location} dans le {CP} › {titre}
+const isLoc = view.type === 'L';
+const cpLabel = `${isLoc ? 'Location' : 'Vente'}${view.codePostal ? ` dans le ${view.codePostal}` : ''}`;
+const breadcrumbCrumbs = [
+  { label: 'Annonces', href: '/annonces/' },
+  { label: cpLabel, href: isLoc ? '/annonces/locations/' : '/annonces/ventes/' },
+];
+
 const annonceUrl = new URL(`/annonces/${slug}/`, Astro.site).toString();
 const listingSchema = buildRealEstateListing({
   titre: view.titre,
@@ -350,7 +359,7 @@ const listingSchema = buildRealEstateListing({
 }, annonceUrl);
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]}>
+<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]} breadcrumbCrumbs={breadcrumbCrumbs}>
   {!view.isClosed ? (
     <AnnonceLive
       view={view}
