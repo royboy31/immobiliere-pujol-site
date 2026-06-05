@@ -64,35 +64,39 @@ const venteCards = ventes.map(buildCard);
 const locationCards = locations.map(buildCard);
 
 // ---------- EXPERTS ----------
-// Each photo is a transparent expert headshot composited onto a colored oval
-// matching the expert's specialty: olive=gestion locative, orange=vente,
-// slate-navy=syndic. Generated from public/images/experts/*.png — see
-// scripts/build-home-expert-circles.mjs if you need to regenerate.
+// Same transparent headshots as the /experts listing (public/images/experts/*.png);
+// the colored oval behind each one is drawn in CSS via `--expert-accent`, themed by
+// specialty: olive=gestion locative, orange=vente, slate=syndic. Keeping a single
+// source image means the carousel and the listing always stay in sync.
 const expertsBase = [
   {
     href: '/experts/gaelle-lapert/',
-    photo: '/images/home/experts/gaelle.png',
+    photo: '/images/experts/gaelle-lapert.png',
+    type: 'rental',
     first: 'Gaëlle',
     last: 'Lapert',
     role: 'Commerciale en gestion locative',
   },
   {
     href: '/experts/benoit-transactions/',
-    photo: '/images/home/experts/benoit.png',
+    photo: '/images/experts/benoit-transactions.png',
+    type: 'sales',
     first: 'Benoit',
     last: 'Marin-Vicente',
     role: 'Vente de biens immobiliers',
   },
   {
     href: '/experts/julia-lauron-ventes-de-biens-immobiliers/',
-    photo: '/images/home/experts/julia.png',
+    photo: '/images/experts/julia-lauron-ventes-de-biens-immobiliers.png',
+    type: 'sales',
     first: 'Julia',
     last: 'Lauron',
     role: 'Ventes de biens immobiliers',
   },
   {
     href: '/experts/emeline-syndic-de-coproprietes/',
-    photo: '/images/home/experts/emeline.png',
+    photo: '/images/experts/emeline-syndic-de-coproprietes.png',
+    type: 'other',
     first: 'Emeline',
     last: 'Pellin',
     role: 'Syndic de copropriétés',
@@ -300,7 +304,7 @@ const services = [
       </div>
       <div class="experts__row" id="expertsRow">
         {experts.map((e) => (
-          <a class="expert" href={e.href}>
+          <a class={`expert expert--${e.type}`} href={e.href}>
             <div class="ph"><img src={e.photo} alt={`${e.first} ${e.last}`.trim()} /></div>
             <div class="name">
               {e.first && <>{e.first}{' '}</>}<b>{e.last}</b>
