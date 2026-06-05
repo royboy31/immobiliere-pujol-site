@@ -3,9 +3,12 @@
 // Two internal-linking blocks: fixed category nav + a rotated "À lire aussi"
 // list of other articles (seeded per-page in [...slug].astro so link equity
 // spreads evenly across the catalogue instead of always pushing the same few).
-interface Related { title: string; url: string }
+interface Related { title: string; url: string; image?: string; date?: string }
 interface Props { related: Related[] }
 const { related } = Astro.props as Props;
+
+const fmtDate = (d?: string): string =>
+  d ? new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
 
 // Canonical blog categories (labels + slugs match the live sidebar).
 const CATEGORIES = [
@@ -29,9 +32,21 @@ const CATEGORIES = [
   {related.length > 0 && (
     <nav class="blog-sidebar__block" aria-label="À lire aussi">
       <h2 class="blog-sidebar__title">À lire aussi</h2>
-      <ul class="blog-sidebar__list blog-sidebar__list--articles">
+      <ul class="blog-sidebar__articles">
         {related.map((a) => (
-          <li><a href={a.url}>{a.title}</a></li>
+          <li>
+            <a href={a.url}>
+              {a.image && (
+                <span class="blog-sidebar__thumb">
+                  <img src={a.image} alt="" loading="lazy" width="72" height="72" />
+                </span>
+              )}
+              <span class="blog-sidebar__art-text">
+                {a.date && <time class="blog-sidebar__date">{fmtDate(a.date)}</time>}
+                <span class="blog-sidebar__art-title">{a.title}</span>
+              </span>
+            </a>
+          </li>
         ))}
       </ul>
     </nav>

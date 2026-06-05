@@ -564,11 +564,65 @@ $content-prose-max: 780px;
     }
   }
 
-  // "À lire aussi" — article titles run longer; tighten line-height.
-  &__list--articles a {
-    font-size: 14px;
-    line-height: 1.35;
+  // "À lire aussi" — article cards with thumbnail + date + title.
+  &__articles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li + li { border-top: 1px solid $ds-hairline; }
+
+    a {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 0;
+      text-decoration: none;
+    }
   }
+
+  &__thumb {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: $ds-soft-green;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__art-text {
+    min-width: 0;
+    display: block;
+  }
+
+  &__date {
+    display: block;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .3px;
+    color: $ds-olive-2;
+    margin-bottom: 3px;
+  }
+
+  &__art-title {
+    display: block;
+    font-family: $ds-font-noto;
+    font-weight: 400;
+    font-size: 13.5px;
+    line-height: 1.35;
+    color: $ds-ink;
+    transition: color .2s ease;
+  }
+
+  &__articles a:hover .blog-sidebar__art-title { color: $ds-orange; }
 
   @media (max-width: $bp-tablet) {
     position: static;
