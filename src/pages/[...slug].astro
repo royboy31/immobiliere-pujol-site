@@ -108,6 +108,30 @@ function wrapImagePairs(html: string): string {
 
 rawBody = wrapImagePairs(rawBody);
 
+// Scraped WP bodies often carry surplus </div> tags. Injected via set:html they
+// close our own wrappers (.content__body, .content__layout) early, ejecting the
+// sidebar out of the grid. Balance <div> depth: drop surplus closers, append any
+// missing ones, so the body can never break out of its container.
+function balanceDivs(html: string): string {
+  const re = /<div\b[^>]*>|<\/div\s*>/gi;
+  let depth = 0, last = 0, out = '';
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(html)) !== null) {
+    out += html.slice(last, m.index);
+    if (m[0][1] === '/') {
+      if (depth > 0) { depth--; out += m[0]; } // valid close; surplus dropped
+    } else {
+      depth++; out += m[0];
+    }
+    last = re.lastIndex;
+  }
+  out += html.slice(last);
+  while (depth-- > 0) out += '</div>';
+  return out;
+}
+
+rawBody = balanceDivs(rawBody);
+
 // Detect prix-au-m2 category for special template
 const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
   (cat: string) => cat.toLowerCase().includes('prix') && cat.toLowerCase().includes('m')

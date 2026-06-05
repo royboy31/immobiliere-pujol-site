@@ -1075,6 +1075,14 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     color: $black;
     margin: 18px 0 0;
     max-width: 980px;
+
+    // Links inherit the global $color-link (olive) which is invisible on the
+    // olive panel — force them to ink + underline so the URL/phone/email show.
+    a {
+      color: $black;
+      text-decoration: underline;
+      word-break: break-word;
+    }
   }
 }
 
