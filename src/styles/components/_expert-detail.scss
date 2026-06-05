@@ -832,6 +832,12 @@
     --expert-accent-soft: #{rgba(236, 114, 52, .14)};
   }
 
+  &--syndic {
+    --expert-accent: #{$ds-blue};
+    --expert-accent-2: #{$ds-blue};
+    --expert-accent-soft: #{rgba(45, 110, 162, .14)};
+  }
+
   &--other {
     --expert-accent: #{$ds-slate};
     --expert-accent-2: #{$ds-slate};
@@ -958,6 +964,7 @@
 
     &--rental { background: $ds-olive; }
     &--sales  { background: $ds-orange; }
+    &--syndic { background: $ds-blue; }
     &--other  { background: $ds-slate; }
   }
 
@@ -983,6 +990,7 @@
 
   &--rental { --expert-accent: #{$ds-olive}; }
   &--sales  { --expert-accent: #{$ds-orange}; }
+  &--syndic { --expert-accent: #{$ds-blue}; }
 
   &__ph {
     width: 100%;

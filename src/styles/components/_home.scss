@@ -735,6 +735,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 
   &--rental { --expert-accent: #{$ds-olive}; }
   &--sales  { --expert-accent: #{$ds-orange}; }
+  &--syndic { --expert-accent: #{$ds-blue}; }
   &--other  { --expert-accent: #{$ds-slate}; }
 
   // Same treatment as the /experts listing tiles: the transparent headshot sits
