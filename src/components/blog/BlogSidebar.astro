@@ -1,0 +1,39 @@
+---
+// Blog article sidebar — replicates the live site's internal-link sidebar.
+// Two internal-linking blocks: fixed category nav + a rotated "À lire aussi"
+// list of other articles (seeded per-page in [...slug].astro so link equity
+// spreads evenly across the catalogue instead of always pushing the same few).
+interface Related { title: string; url: string }
+interface Props { related: Related[] }
+const { related } = Astro.props as Props;
+
+// Canonical blog categories (labels + slugs match the live sidebar).
+const CATEGORIES = [
+  { label: "L'immobilier neuf à Marseille", href: '/categorie/programme-neufs-marseille/' },
+  { label: 'Le marché immobilier à Marseille', href: '/categorie/actu-immobiliere/' },
+  { label: 'Conseils pour investir à Marseille', href: '/categorie/investir-marseille/' },
+  { label: 'Prix au m² par arrondissement', href: '/categorie/prix-immo-arrondissement/' },
+];
+---
+
+<aside class="blog-sidebar" aria-label="Liens utiles">
+  <nav class="blog-sidebar__block" aria-label="Nos catégories">
+    <h2 class="blog-sidebar__title">Nos catégories</h2>
+    <ul class="blog-sidebar__list">
+      {CATEGORIES.map((c) => (
+        <li><a href={c.href}>{c.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+
+  {related.length > 0 && (
+    <nav class="blog-sidebar__block" aria-label="À lire aussi">
+      <h2 class="blog-sidebar__title">À lire aussi</h2>
+      <ul class="blog-sidebar__list blog-sidebar__list--articles">
+        {related.map((a) => (
+          <li><a href={a.url}>{a.title}</a></li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</aside>

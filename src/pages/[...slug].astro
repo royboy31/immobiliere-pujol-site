@@ -3,6 +3,8 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { buildArticle, buildLocalBusiness } from '../lib/schemas';
+import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import { pickRotatedLinks } from '../lib/internal-links';
 
 // Catch-all route for root-level URLs:
 // - Blog posts (891 articles)
@@ -146,6 +148,18 @@ const slugify = (s: string): string =>
 
 const featuredImage = entry.data.featuredImage as string | undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
+
+// Blog sidebar — "À lire aussi": a rotated slice of other articles, seeded by
+// this article's slug so link equity spreads evenly across the catalogue
+// (every article links to a different set instead of always the latest few).
+let relatedArticles: { title: string; url: string }[] = [];
+if (type === 'article') {
+  const allArticles = await getCollection('articles');
+  const pool = allArticles
+    .filter((a: any) => a.data.slug !== entry.data.slug)
+    .map((a: any) => ({ url: `/${a.data.slug}/`, title: a.data.title, type: 'article' }));
+  relatedArticles = pickRotatedLinks(pool, entry.data.slug, 6).map((l) => ({ title: l.title, url: l.url }));
+}
 ---
 
 <BaseLayout title={title} description={description} schemas={pageSchemas}>
@@ -174,16 +188,14 @@ const heroCategory = type === 'article' && (entry.data.categories || [])[0];
       </header>
     )}
 
-    {type === 'article' && isPrixM2 && (
-      <aside class="content__sidebar content__sidebar--prix-m2">
-        <h2>Prix au m² par arrondissement</h2>
-        <nav>
-          <p>Sidebar arrondissements — a implementer</p>
-        </nav>
-      </aside>
+    {type === 'article' ? (
+      <div class="content__layout">
+        <div class="content__body" set:html={rawBody}></div>
+        <BlogSidebar related={relatedArticles} />
+      </div>
+    ) : (
+      <div class="content__body" set:html={rawBody}></div>
     )}
-
-    <div class="content__body" set:html={rawBody}></div>
 
     {isEstimationPage && (
       <>

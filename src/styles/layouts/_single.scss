@@ -412,31 +412,34 @@ $content-prose-max: 780px;
     }
   }
 
-  // ----- Sidebar (prix-m² articles) ----------------------------------------
-  &__sidebar {
-    max-width: $content-prose-max;
-    margin: 0 auto 32px;
+  // ----- 2-column layout (blog article: prose + internal-links sidebar) -----
+  &__layout {
+    max-width: 1180px;
+    margin: 0 auto;
     padding: 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 56px;
+    align-items: start;
 
-    &--prix-m2 {
-      background: $ds-paper;
-      padding: 22px 26px;
-      border-radius: 20px;
+    // Body flows in the left column — drop its own centering / side padding.
+    .content__body {
+      max-width: none;
+      margin: 0;
+      padding: 0 0 80px;
+    }
 
-      h2 {
-        font-family: $ds-font-helv;
-        font-weight: 300;
-        font-size: 22px;
-        margin: 0 0 10px;
-        color: $black;
-        b { font-weight: 700; }
-      }
+    @media (max-width: $bp-desktop) {
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 40px;
+    }
 
-      nav p {
-        margin: 0;
-        font-size: 14px;
-        color: $ds-ink;
-      }
+    @media (max-width: $bp-tablet) {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 20px;
+
+      .content__body { padding-bottom: 48px; }
     }
   }
 
@@ -506,6 +509,70 @@ $content-prose-max: 780px;
     color: $ds-ink;
 
     &:hover { background: $ds-orange; border-color: $ds-orange; color: $white; }
+  }
+}
+
+// ============================================
+// BLOG ARTICLE SIDEBAR (internal links)
+// ============================================
+.blog-sidebar {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  &__block {
+    background: $ds-paper;
+    border: 1px solid $ds-hairline;
+    border-radius: 18px;
+    padding: 22px 24px;
+  }
+
+  &__title {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.2;
+    color: $black;
+    margin: 0 0 14px;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li { margin: 0; }
+
+    li + li {
+      border-top: 1px solid $ds-hairline;
+    }
+
+    a {
+      display: block;
+      padding: 11px 0;
+      font-family: $ds-font-noto;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.4;
+      color: $ds-ink;
+      text-decoration: none;
+      transition: color .2s ease, padding-left .2s ease;
+
+      &:hover { color: $ds-orange; padding-left: 4px; }
+    }
+  }
+
+  // "À lire aussi" — article titles run longer; tighten line-height.
+  &__list--articles a {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  @media (max-width: $bp-tablet) {
+    position: static;
+    margin-bottom: 40px;
   }
 }
 
