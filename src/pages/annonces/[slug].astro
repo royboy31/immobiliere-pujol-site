@@ -349,9 +349,13 @@ const pageDescription = view.description ? view.description.substring(0, 160) : 
 //   Accueil › Annonces › {Vente|Location} dans le {CP} › {titre}
 const isLoc = view.type === 'L';
 const cpLabel = `${isLoc ? 'Location' : 'Vente'}${view.codePostal ? ` dans le ${view.codePostal}` : ''}`;
+// Link to the listing page with the arrondissement filter pre-applied (FilterBar
+// reads ?cp=<codePostal> on load), so the crumb actually filters by 13011.
+const listBase = isLoc ? '/annonces/locations/' : '/annonces/ventes/';
+const cpHref = view.codePostal ? `${listBase}?cp=${view.codePostal}` : listBase;
 const breadcrumbCrumbs = [
   { label: 'Annonces', href: '/annonces/' },
-  { label: cpLabel, href: isLoc ? '/annonces/locations/' : '/annonces/ventes/' },
+  { label: cpLabel, href: cpHref },
 ];
 
 const annonceUrl = new URL(`/annonces/${slug}/`, Astro.site).toString();
