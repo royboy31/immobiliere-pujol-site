@@ -75,6 +75,7 @@ const isLocation = type === 'L';
         const res = await fetch('https://pujol-email.roy-68a.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
         const data = await res.json();
         if (data.ok) {
+          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'contact-annonce' }); } catch (e) {}
           form.innerHTML = '<div class="annonce-contact__success" style="text-align:center;padding:24px"><h3>Merci !</h3><p>Votre demande a bien été envoyée. Nous vous recontacterons rapidement.</p></div>';
         } else {
           showErr(form, data.error || "Une erreur est survenue.");
