@@ -142,6 +142,33 @@ export async function getAnnonceBySlug(
 }
 
 /**
+ * Find the slug of the ACTIVE listing that shares this reference, if any.
+ *
+ * Same property can exist under two slugs: the old WordPress-scraped slug
+ * (e.g. `…-marseille-france`, left `closed`) and the live-flux slug
+ * (`…-marseille`, `active`). When an old indexed URL resolves to the closed
+ * row, we 301 to this active slug so the indexed URL keeps reaching the live
+ * listing. Returns null when the property has no active row (genuinely sold).
+ */
+export async function getActiveSlugByReference(
+  db: D1Database,
+  referenceAgence?: string | null,
+  ubiflowReference?: string | null,
+): Promise<string | null> {
+  for (const ref of [referenceAgence, ubiflowReference]) {
+    if (!ref) continue;
+    const row = await db
+      .prepare(
+        "SELECT slug FROM annonces WHERE status = 'active' AND (reference_agence = ? OR ubiflow_reference = ?) LIMIT 1",
+      )
+      .bind(ref, ref)
+      .first<{ slug: string }>();
+    if (row?.slug) return row.slug;
+  }
+  return null;
+}
+
+/**
  * Get related annonces (same arrondissement/code_postal, active, different slug)
  */
 export async function getRelatedAnnonces(

@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
+import { getAnnonceBySlug, getActiveSlugByReference, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
@@ -21,6 +21,18 @@ const annonce = await getAnnonceBySlug(db, slug);
 // If found via prefix match (old WP slug → shorter D1 slug), redirect to canonical URL
 if (annonce && annonce.slug !== slug) {
   return Astro.redirect(`/annonces/${annonce.slug}/`, 301);
+}
+
+// Slug-drift case: this URL resolves to a CLOSED row, but the same property is
+// active under another slug (the live flux minted a new slug, e.g. `…-marseille`
+// vs the old scraped `…-marseille-france`). 301 the old indexed URL to the active
+// listing so it never shows a stale "vendu" template. No active sibling → the
+// property is genuinely sold, so we keep showing the closed page.
+if (annonce && annonce.status === 'closed') {
+  const activeSlug = await getActiveSlugByReference(db, annonce.reference_agence, annonce.ubiflow_reference);
+  if (activeSlug && activeSlug !== slug) {
+    return Astro.redirect(`/annonces/${activeSlug}/`, 301);
+  }
 }
 
 let closedAsset: ClosedAnnonce | null = null;
