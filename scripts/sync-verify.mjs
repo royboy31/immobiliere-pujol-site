@@ -311,15 +311,27 @@ if (GH_TOKEN) {
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
+    // What matters is data freshness, not individual run failures: the FTP pull
+    // from Infomaniak occasionally times out (curl exit 28) from CI, but the
+    // next hourly success refreshes R2 and the zip content rarely changes. So we
+    // only FAIL when no successful sync has landed in FRESH_MAX_H hours (the zip
+    // is genuinely stale); transient failures with a recent success stay green.
+    const FRESH_MAX_H = 6;
+    const lastSuccess = runs.find(r => r.conclusion === 'success');
+    const successAgeH = lastSuccess
+      ? (Date.now() - new Date(lastSuccess.created_at).getTime()) / 3600000
+      : Infinity;
+
     report.counts.lbiRuns24h = recent.length;
     report.counts.lbiFailed24h = failed.length;
 
-    if (failed.length === 0) {
+    if (successAgeH > FRESH_MAX_H) {
+      const since = successAgeH === Infinity ? '∞' : successAgeH.toFixed(1);
+      addCheck('Sync LBI FTP', 'FAIL', `aucun succès depuis ${since}h — zip LBI potentiellement périmé`);
+    } else if (failed.length === 0) {
       addCheck('Sync LBI FTP', 'OK', `${recent.length} dernières exécutions OK, dernier : il y a ${ageH}h`);
-    } else if (failed.length === 1) {
-      addCheck('Sync LBI FTP', 'WARN', `1 échec sur les ${recent.length} dernières exécutions`);
     } else {
-      addCheck('Sync LBI FTP', 'FAIL', `${failed.length} échecs sur les ${recent.length} dernières exécutions`);
+      addCheck('Sync LBI FTP', 'WARN', `${failed.length} échec(s) récent(s) (timeout FTP), mais dernier succès il y a ${successAgeH.toFixed(1)}h — zip à jour`);
     }
   } catch (err) {
     addCheck('Sync LBI FTP', 'FAIL', err.message);
