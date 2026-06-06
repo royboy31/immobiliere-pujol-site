@@ -336,6 +336,7 @@ if (isClosed) {
     url: `/annonces/${a.slug}/`,
     title: a.titre || a.libelleType || 'Bien immobilier',
     type: 'autre',
+    image: Array.isArray(a.photos) && a.photos[0] ? a.photos[0] : undefined,
   }));
   const services = pickRotatedLinks(linkPool.filter((l) => l.type === 'service'), seed, 8);
   const articles = pickRotatedLinks(linkPool.filter((l) => l.type === 'article'), seed, 10);

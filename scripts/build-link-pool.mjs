@@ -39,7 +39,7 @@ function frontmatter(raw) {
     if (!r) return '';
     return r[1].trim().replace(/^["']/, '').replace(/["']$/, '').trim();
   };
-  return { title: get('title'), slug: get('slug') };
+  return { title: get('title'), slug: get('slug'), featuredImage: get('featuredImage') };
 }
 
 async function fromMarkdown(src) {
@@ -54,7 +54,9 @@ async function fromMarkdown(src) {
     // Skip WordPress junk: trashed/auto-draft slugs, numeric-only, leading "__".
     if (/trashed|auto-draft/i.test(fm.slug) || fm.slug.startsWith('__') || /^\d+$/.test(fm.slug)) continue;
     if (src.skip && src.skip(fm.slug)) continue;
-    out.push({ url: src.url(fm.slug), title: fm.title, type: src.type });
+    // Articles carry a thumbnail (featured image) for the visual link cards.
+    const image = src.type === 'article' && fm.featuredImage ? fm.featuredImage : undefined;
+    out.push({ url: src.url(fm.slug), title: fm.title, type: src.type, ...(image ? { image } : {}) });
   }
   return out;
 }

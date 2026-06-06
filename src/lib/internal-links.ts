@@ -11,6 +11,7 @@ export interface LinkItem {
   title: string;
   type: string; // 'service' | 'article' | 'arrondissement' | 'closed' | 'autre'
   date?: string;
+  image?: string; // thumbnail (featured image / first photo) for visual link cards
 }
 
 interface LinkPool {
