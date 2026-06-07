@@ -16,8 +16,23 @@ const allAnnonces = await getCollection('annonces', ({ data }) =>
 );
 allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
 
-const ventes = allAnnonces.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
-const locations = allAnnonces.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
+// Never feature garages/parkings or terrains (lots) in the home "Dernières
+// annonces" section. typeBien catches most; some terrains have no typeBien but
+// are identifiable by the LBI slug code ([agent][V/L][bien-type] → ga=garage,
+// te=terrain) or by descriptive slugs (…parking…, …terrain…).
+function isGarageOrLot(d: { typeBien?: string; slug?: string }): boolean {
+  const tb = (d.typeBien || '').toLowerCase();
+  if (/parking|\bbox\b|garage|terrain/.test(tb)) return true;
+  const slug = (d.slug || '').toLowerCase();
+  if (/parking|garage|terrain/.test(slug)) return true;
+  const m = slug.match(/^[a-z]{2}[vl]([a-z]{2})\d/);
+  if (m && (m[1] === 'ga' || m[1] === 'te')) return true;
+  return false;
+}
+const featurable = allAnnonces.filter((a) => !isGarageOrLot(a.data));
+
+const ventes = featurable.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
+const locations = featurable.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
 
 // Build a display card from a raw annonce.
 function fmtPrice(n?: number) {
