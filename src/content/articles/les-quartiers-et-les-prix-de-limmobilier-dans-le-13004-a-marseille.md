@@ -26,7 +26,7 @@ C’est dans le quartier des Cinq Avenues&nbsp;que le&nbsp;prix du m² médian a
 <p>Ce sont des quartiers &nbsp;charnières qui ressemblent à notre ville. Un peu populaires, un peu bourgeois, un peu rien du tout et un peu charnières vers les quartiers Nord et Sud. Il est à la fois urbain et calme. Il séduit les familles car dispose de grands appartements abordables.</p>
 <p>&nbsp;</p>
 
-<figure id="attachment_6005" aria-describedby="caption-attachment-6005" style="width: 500px" class="wp-caption alignnone"><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/05/Plan-du-4ème-arrondissement-de-Marseille.png"><img loading="lazy" decoding="async" class="wp-image-6005" src="https://www.immobiliere-pujol.fr/content/uploads/2015/05/Plan-du-4ème-arrondissement-de-Marseille.png" alt="Plan du 4e arrondissement de Marseille" width="500" height="582"></a><figcaption id="caption-attachment-6005" class="wp-caption-text">Plan du 4e arrondissement de Marseille</figcaption></figure>
+<figure id="attachment_6005" aria-describedby="caption-attachment-6005" style="width: 500px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/05/Plan-du-4ème-arrondissement-de-Marseille.png"><img loading="lazy" decoding="async" class="wp-image-6005" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/05/Plan-du-4ème-arrondissement-de-Marseille.png" alt="Plan du 4e arrondissement de Marseille" width="500" height="582"></a><figcaption id="caption-attachment-6005" class="wp-caption-text">Plan du 4e arrondissement de Marseille</figcaption></figure>
 
 <h2>&nbsp;</h2>
 <p>Le 13004, c’est un arrondissement</p>
@@ -62,6 +62,6 @@ Le stationnement y est aussi moins complexe que dans les autres quartiers plus c
 <p>–&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Employés et ouvriers&nbsp;: 50%</p>
 <p>&nbsp;</p>
 <h3><strong>Répartition des catégories des habitations dans le 13004</strong></h3>
-<p><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/05/types-de-logements-dans-le-13004-en-2013-à-Marseille1.jpg"><img loading="lazy" decoding="async" class="alignnone wp-image-5878 size-full" src="https://www.immobiliere-pujol.fr/content/uploads/2015/05/types-de-logements-dans-le-13004-en-2013-à-Marseille1.jpg" alt="Les catégories de logements dans le 13004 à marseille" width="601" height="218"></a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/05/types-de-logements-dans-le-13004-en-2013-à-Marseille1.jpg"><img loading="lazy" decoding="async" class="alignnone wp-image-5878 size-full" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/05/types-de-logements-dans-le-13004-en-2013-à-Marseille1.jpg" alt="Les catégories de logements dans le 13004 à marseille" width="601" height="218"></a></p>
 <p>&nbsp;</p>
       

@@ -5,7 +5,7 @@ date: "2015-11-01"
 excerpt: "Les prix des loyers dans le 13003 en 2015  (source clameur)   Prix au m² des loyers Studio/T1   T2   T3   T4 +     Prix des appartements anciens vendus en 2015 dans le 13003 La fourchette des transactions est établie par les notaires de France sur les…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13003", "Arrondissements Marseille", "Arrondissement 13015 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Prix-immobilier-marseille-13003.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Prix-immobilier-marseille-13003.jpg"
 seoTitle: "Les prix au m² de l’ancien en 2015 dans le 13003 Marseille"
 seoDescription: "Les prix des loyers dans le 13003 en 2015  (source clameur)   Prix au m² des loyers Studio/T1   T2   T3   T4 +     Prix des appartements anciens vendus en 2015 dans le 13003 La fourchette des transactions est établie par les notaires de France sur les…"
 ---

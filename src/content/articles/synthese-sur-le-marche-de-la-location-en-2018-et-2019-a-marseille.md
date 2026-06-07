@@ -5,7 +5,7 @@ date: "2019-12-15"
 excerpt: "Quels sont les quartiers que les locataires préfèrent à Marseille ? Combien de temps un locataire va-t-il rester dans votre appartement ? Quelle est la diffé..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/le-marché-immobiliere-de-marseille-de-la-location-en-2018-2019--1200x675.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2019/12/le-marché-immobiliere-de-marseille-de-la-location-en-2018-2019--1200x675.jpg"
 seoTitle: "Synthèse sur le marché de la location en 2018 et 2019 à Marseille"
 seoDescription: "Quels sont les quartiers que les locataires préfèrent à Marseille ? Combien de temps un locataire va-t-il rester dans votre appartement ? "
 ---

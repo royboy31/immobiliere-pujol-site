@@ -5,7 +5,7 @@ date: "2015-05-08"
 excerpt: "Rénover son appartement n’est plus un choix. Quels coûts et impacts sur le loyer? Les appartements loués depuis 30 ans et rénovés sommairement à la va vite e..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/séjour3-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/séjour3-1.jpg"
 seoTitle: "Quels travaux? pour quelle rentabilité?  La rentabilité des travaux de rénovation locatifs"
 seoDescription: "Rénover son appartement n'est plus un choix. Quels coûts et impacts sur le loyer? Les appartements loués depuis 30 ans et rénovés sommairement à la va vite et au moindre coût ne trouvent plus preneur. En fait, ils trouvent preneur mais à des loyers cassés et après 4 à 6…"
 ---

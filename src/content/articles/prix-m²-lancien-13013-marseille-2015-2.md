@@ -5,12 +5,12 @@ date: "2015-11-05"
 excerpt: "Les prix au m² de l'ancien dans le 13013 en 2015  ( source notaires) En 2015, ce sont  : • 252 appartements ancien , qui se sont vendus dans le 13e arrondissement de Marseille au prix médian* de 2060€/m² en baisse de 0,7% par rapport à 2014. • 175 appartements…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13013", "Arrondissements Marseille", "Arrondissement 13013 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Chateau-Gombert.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Chateau-Gombert.jpg"
 seoTitle: "Les prix au m² dans l’ancien dans le 13013 Marseille en 2015"
 seoDescription: "Les prix au m² de l'ancien dans le 13013 en 2015  ( source notaires) En 2015, ce sont  : • 252 appartements ancien , qui se sont vendus dans le 13e arrondissement de Marseille au prix médian* de 2060€/m² en baisse de 0,7% par rapport à 2014. • 175 appartements…"
 ---
 
-<figure id="attachment_7586" aria-describedby="caption-attachment-7586" style="width: 840px" class="wp-caption alignnone"><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/11/540.jpg" rel="attachment wp-att-7586"><img loading="lazy" decoding="async" class=" wp-image-7586" src="https://www.immobiliere-pujol.fr/content/uploads/2015/11/540.jpg" alt="Marseille, Bouches-du-Rhne (13), PACA" width="840" height="560" /></a><figcaption id="caption-attachment-7586" class="wp-caption-text">Marseille, Bouches-du-Rhne (13), PACA</figcaption></figure>
+<figure id="attachment_7586" aria-describedby="caption-attachment-7586" style="width: 840px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/540.jpg" rel="attachment wp-att-7586"><img loading="lazy" decoding="async" class=" wp-image-7586" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/540.jpg" alt="Marseille, Bouches-du-Rhne (13), PACA" width="840" height="560" /></a><figcaption id="caption-attachment-7586" class="wp-caption-text">Marseille, Bouches-du-Rhne (13), PACA</figcaption></figure>
 
 <h2 style="text-align: center;"><span style="font-size: 14pt; color: #ff6600;">Les prix au m² de l&rsquo;ancien dans le 13013 en 2015  ( source notaires)</span></h2>
 <p><strong>En 2015, ce sont  :</strong><br />

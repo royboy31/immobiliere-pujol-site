@@ -5,7 +5,7 @@ date: "2014-10-07"
 excerpt: "Depuis le 1er octobre, Les plafonds des loyers autorisés dans notre ville ont augmenté de 25% …un afflux d’habitants ? Les plafonds de revenus pour louer dan..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/résidence-neuve-les-bastides-de-borély-13008-marseille.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/résidence-neuve-les-bastides-de-borély-13008-marseille.jpg"
 seoTitle: "Investissement locatif à Marseille : impact de la hausse de 25% des plafonds de loyers"
 seoDescription: "Depuis le 1er octobre, Les plafonds des loyers autorisés dans notre ville ont augmenté de 25% …un afflux d’habitants ? Les plafonds de revenus pour louer dans notre ville ont augmenté de 30% …un afflux de cadres à haut pouvoir d’achat ? Les plafonds de revenus pour bénéficier d’un prêt à taux…"
 ---

@@ -15,7 +15,7 @@ seoDescription: "Investir à Marseille : c'est 7% de rentabilité minimum et du 
 
 C’est le calcul de la rentabilité des capitaux que j’ai effectué pour des appartements situés en centre-ville dans des immeubles anciens avec très peu de charges.
 
-<a href="https://www.immobiliere-pujol.fr/content/uploads/2016/01/Rentabilité-capitaux-investis.png" rel="attachment wp-att-7394"><img loading="lazy" decoding="async" class=" wp-image-7394 alignleft" src="https://www.immobiliere-pujol.fr/content/uploads/2016/01/Rentabilité-capitaux-investis.png" alt="Rentabilité capitaux investis" width="305" height="178"></a>
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/Rentabilité-capitaux-investis.png" rel="attachment wp-att-7394"><img loading="lazy" decoding="async" class=" wp-image-7394 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/Rentabilité-capitaux-investis.png" alt="Rentabilité capitaux investis" width="305" height="178"></a>
 
 Vous pouvez obtenir raisonnablement 8 à 10% et même jusqu’à 15% dans certains quartiers ou certains immeubles mais il faut être prudent dès que le taux dépasse les 10%. Entre ces taux, vous avez le marché de l’immobilier de ces dernières semaines.
 
@@ -37,7 +37,7 @@ La rentabilité nette après impôts et frais ressort à 3,2%…
 
 Par contre, si on emprunte la totalité (à 1,95% sur 15 ans), la rentabilité financière qui est la rentabilité des capitaux investis ressort à <strong>7,08%</strong>&nbsp;net d’impôts en moyenne à Marseille. Et si vous achetez bien, vous pouvez majorer de cette rentabilité de 2 à 3% chaque année… Là c’est quand même mieux que les 2.5% de l’assurance vie, non&nbsp;?
 
-<a href="https://www.immobiliere-pujol.fr/content/uploads/2016/01/Calculateur-du-rendement-locatif-moyen-rentabilité-locative.png" rel="attachment wp-att-7392"><img loading="lazy" decoding="async" class=" wp-image-7392 alignleft" src="https://www.immobiliere-pujol.fr/content/uploads/2016/01/Calculateur-du-rendement-locatif-moyen-rentabilité-locative-1024x858.png" alt="Calculateur du rendement locatif moyen rentabilité locative" width="432" height="362"></a>
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/Calculateur-du-rendement-locatif-moyen-rentabilité-locative.png" rel="attachment wp-att-7392"><img loading="lazy" decoding="async" class=" wp-image-7392 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/Calculateur-du-rendement-locatif-moyen-rentabilité-locative-1024x858.png" alt="Calculateur du rendement locatif moyen rentabilité locative" width="432" height="362"></a>
 
 <strong>Simulation&nbsp;établie sur le site </strong><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/01/www.rendementlocatif.com"><strong>https://www.rendementlocatif.com</strong></a>
 <h2><strong>Des prix raisonnables&nbsp;:</strong></h2>

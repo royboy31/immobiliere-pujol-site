@@ -5,7 +5,7 @@ date: "2015-10-04"
 excerpt: "Prix de vente des appartements neufs vendus en 2014 dans le 13012  (source notaires) 39 appartements au prix médian de 3981€/m².   Studio T1 T2 T3 T4 Ensemble % ventes 8% 31% 40% 17% 35 Prix médian €/m²   4370 3911 4114 3981 Prix médian   190 000€ 245 500E 362…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13012", "Arrondissements Marseille", "Arrondissement 13012 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Saint-Julien455.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Marseille-Saint-Julien455.jpg"
 seoTitle: "Prix au m² de l’immobilier neuf dans le 13012"
 seoDescription: "Prix de vente des appartements neufs vendus en 2014 dans le 13012  (source notaires) 39 appartements au prix médian de 3981€/m².   Studio T1 T2 T3 T4 Ensemble % ventes 8% 31% 40% 17% 35 Prix médian €/m²   4370 3911 4114 3981 Prix médian   190 000€ 245 500E 362…"
 ---
@@ -58,7 +58,7 @@ seoDescription: "Prix de vente des appartements neufs vendus en 2014 dans le 13
 </table>
 <p>&nbsp;</p>
 <h3>Prix de vente des appartements neufs vendus en 2013 dans le 13012  (source notaires)</h3>
-<p><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/10/prix-de-vente-appartements-NEUF-selon-type-de-bien-13012-marseille.jpg"><img loading="lazy" decoding="async" class="alignnone size-large wp-image-6233" src="https://www.immobiliere-pujol.fr/content/uploads/2015/10/prix-de-vente-appartements-NEUF-selon-type-de-bien-13012-marseille-1024x351.jpg" alt="prix de vente appartements NEUF selon type de bien 13012 marseille" width="584" height="200" /></a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/10/prix-de-vente-appartements-NEUF-selon-type-de-bien-13012-marseille.jpg"><img loading="lazy" decoding="async" class="alignnone size-large wp-image-6233" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/10/prix-de-vente-appartements-NEUF-selon-type-de-bien-13012-marseille-1024x351.jpg" alt="prix de vente appartements NEUF selon type de bien 13012 marseille" width="584" height="200" /></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p style="text-align: center;"><strong>[maxbutton id= »4&Prime;]</strong></p>

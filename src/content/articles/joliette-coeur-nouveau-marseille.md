@@ -5,7 +5,7 @@ date: "2017-02-15"
 excerpt: "Fait-il bon vivre à La Joliette ? La Joliette est sans conteste le quartier marseillais qui a connu la plus grande révolution urbaine de ces dernières années...."
 categories: ["Mon quartier, ma ville Marseille", "Mes conseils pour investir en immobilier à Marseille", "Le marché immobilier à marseille"]
 tags: ["immobilier marseille","investir marseille","la joliette","quartier marseille"]
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/La-joliette-en-rénovation-coeur-de-marseille-886x1200.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/La-joliette-en-rénovation-coeur-de-marseille-886x1200.jpg"
 seoTitle: "La Joliette, le cœur du nouveau Marseille"
 seoDescription: "Fait-il bon vivre à La Joliette ? La Joliette est sans conteste le quartier marseillais qui a connu la plus grande révolution urbaine de ces dernières années. En quinze ans, il a totalement changé d’aspect. De nombreux immeubles ont été réhabilités, d’autres ont poussé comme des champignons. Ce quartier témoigne de…"
 ---

@@ -5,7 +5,7 @@ date: "2019-12-17"
 excerpt: "La durée de location a baissé de 20 % pour toutes les locations En nombre de jours d’occupation 2014 2015 2016 2017 2018 2019 Meublés 620 603 585 564 551 507..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/Marseille-vue-du-3äme.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2019/12/Marseille-vue-du-3äme.jpg"
 seoTitle: "Quelle est la  durée de location des appartements à Marseille ?"
 seoDescription: "La durée de location a baissé de 20 % pour toutes les locations En nombre de jours d’occupation 2014 2015 2016 2017 2018 2019 Meublés 620 603 585 564 551 507 Non Meublés 1604 1553 1505 1470 1457 1290 Quelle est la durée de location pour les appartements loués vides à…"
 ---
