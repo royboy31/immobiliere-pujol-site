@@ -313,25 +313,27 @@ if (GH_TOKEN) {
 
     // What matters is data freshness, not individual run failures: the FTP pull
     // from Infomaniak occasionally times out (curl exit 28) from CI, but the
-    // next hourly success refreshes R2 and the zip content rarely changes. So we
-    // only FAIL when no successful sync has landed in FRESH_MAX_H hours (the zip
-    // is genuinely stale); transient failures with a recent success stay green.
-    const FRESH_MAX_H = 6;
+    // next success refreshes R2 and the zip content rarely changes. So a single
+    // transient timeout with a recent success stays GREEN; we only WARN once the
+    // sync is several hours behind, and FAIL when the zip is genuinely stale.
+    const FRESH_OK_H = 4;   // a success within this window → all good
+    const FRESH_FAIL_H = 8; // no success this long → stale, real problem
     const lastSuccess = runs.find(r => r.conclusion === 'success');
     const successAgeH = lastSuccess
       ? (Date.now() - new Date(lastSuccess.created_at).getTime()) / 3600000
       : Infinity;
+    const sinceTxt = successAgeH === Infinity ? '∞' : successAgeH.toFixed(1);
 
     report.counts.lbiRuns24h = recent.length;
     report.counts.lbiFailed24h = failed.length;
 
-    if (successAgeH > FRESH_MAX_H) {
-      const since = successAgeH === Infinity ? '∞' : successAgeH.toFixed(1);
-      addCheck('Sync LBI FTP', 'FAIL', `aucun succès depuis ${since}h — zip LBI potentiellement périmé`);
-    } else if (failed.length === 0) {
-      addCheck('Sync LBI FTP', 'OK', `${recent.length} dernières exécutions OK, dernier : il y a ${ageH}h`);
+    if (successAgeH > FRESH_FAIL_H) {
+      addCheck('Sync LBI FTP', 'FAIL', `aucun succès depuis ${sinceTxt}h — zip LBI périmé`);
+    } else if (successAgeH > FRESH_OK_H) {
+      addCheck('Sync LBI FTP', 'WARN', `sync FTP en retard — dernier succès il y a ${sinceTxt}h`);
     } else {
-      addCheck('Sync LBI FTP', 'WARN', `${failed.length} échec(s) récent(s) (timeout FTP), mais dernier succès il y a ${successAgeH.toFixed(1)}h — zip à jour`);
+      const note = failed.length ? ` (${failed.length} timeout récent sans impact)` : '';
+      addCheck('Sync LBI FTP', 'OK', `dernier succès il y a ${sinceTxt}h${note}`);
     }
   } catch (err) {
     addCheck('Sync LBI FTP', 'FAIL', err.message);
