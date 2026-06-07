@@ -284,16 +284,21 @@ if (GH_TOKEN) {
     const runs = data.workflow_runs || [];
     const last24h = runs.filter(r => Date.now() - new Date(r.created_at).getTime() < 86400000);
     const failed = last24h.filter(r => r.conclusion === 'failure');
+    // Status reflects the LATEST completed deploy, not a 24h failure tally: what
+    // matters is whether the site is currently deployable. Past transient
+    // failures that a later run fixed shouldn't warn for a whole day.
+    const lastDone = runs.find(r => r.status === 'completed');
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
     report.counts.deployRuns24h = last24h.length;
     report.counts.deployFailed24h = failed.length;
 
-    if (failed.length === 0) {
-      addCheck('Workflow déploiement', 'OK', `${last24h.length} exécutions en 24h, 0 échec, dernier : il y a ${ageH}h`);
+    const failNote = failed.length ? ` (${failed.length} échec(s) plus tôt sur 24h, résolus)` : '';
+    if (!lastDone || lastDone.conclusion === 'success') {
+      addCheck('Workflow déploiement', 'OK', `dernier déploiement OK il y a ${ageH}h${failNote}`);
     } else {
-      addCheck('Workflow déploiement', 'WARN', `${last24h.length} exécutions, ${failed.length} EN ÉCHEC en 24h`);
+      addCheck('Workflow déploiement', 'WARN', `dernier déploiement EN ÉCHEC il y a ${ageH}h`);
     }
   } catch (err) {
     addCheck('Workflow déploiement', 'FAIL', err.message);
