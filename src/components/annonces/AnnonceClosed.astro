@@ -75,6 +75,16 @@ const hasDetails = !!(
   view.nbWC || view.cuisine || view.typeChauffage || view.loyer || view.loyerCC ||
   view.charges || view.depotGarantie || (view.type === 'V' && view.prix)
 );
+
+// DPE/GES: only show a real rating (valid A-G letter AND value > 0). Feed rows
+// for terrains/parkings can carry a default GES "A" with value 0 — not a real DPE.
+const isDpeLetter = (s: unknown) => /^[A-G]$/i.test(String(s ?? '').trim());
+const dpeNum = (s: unknown) => {
+  const n = parseFloat(String(s ?? '').replace(',', '.'));
+  return Number.isFinite(n) ? n : 0;
+};
+const hasDpeConso = isDpeLetter(view.dpeEtiquetteConso) && dpeNum(view.dpeValeurConso) > 0;
+const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes) > 0;
 ---
 
 <article class="annonce-page">
@@ -139,25 +149,29 @@ const hasDetails = !!(
     </Fragment>
   </AnnonceHero>
 
-  {(view.dpeEtiquetteConso || view.dpeEtiquetteGes) && (
+  {(hasDpeConso || hasDpeGes) && (
     <section class="annonce-perf">
       <h2 class="annonce-perf__title">Performance <b>énergétique</b></h2>
       <p class="annonce-perf__hint">Cliquez pour agrandir.</p>
       <div class="annonce-perf__grid">
-        <a class="annonce-perf__cell"
-           href="#"
-           data-lightbox-group="dpe"
-           data-lightbox-html="#dpe-diagram-conso"
-           data-lightbox-caption="Diagnostic de performance énergétique">
-          <span id="dpe-diagram-conso"><DpeDiagram kind="DPE" letter={view.dpeEtiquetteConso} value={view.dpeValeurConso} /></span>
-        </a>
-        <a class="annonce-perf__cell"
-           href="#"
-           data-lightbox-group="dpe"
-           data-lightbox-html="#dpe-diagram-ges"
-           data-lightbox-caption="Émissions de gaz à effet de serre">
-          <span id="dpe-diagram-ges"><DpeDiagram kind="GES" letter={view.dpeEtiquetteGes} value={view.dpeValeurGes} /></span>
-        </a>
+        {hasDpeConso && (
+          <a class="annonce-perf__cell"
+             href="#"
+             data-lightbox-group="dpe"
+             data-lightbox-html="#dpe-diagram-conso"
+             data-lightbox-caption="Diagnostic de performance énergétique">
+            <span id="dpe-diagram-conso"><DpeDiagram kind="DPE" letter={view.dpeEtiquetteConso} value={view.dpeValeurConso} /></span>
+          </a>
+        )}
+        {hasDpeGes && (
+          <a class="annonce-perf__cell"
+             href="#"
+             data-lightbox-group="dpe"
+             data-lightbox-html="#dpe-diagram-ges"
+             data-lightbox-caption="Émissions de gaz à effet de serre">
+            <span id="dpe-diagram-ges"><DpeDiagram kind="GES" letter={view.dpeEtiquetteGes} value={view.dpeValeurGes} /></span>
+          </a>
+        )}
       </div>
     </section>
   )}
