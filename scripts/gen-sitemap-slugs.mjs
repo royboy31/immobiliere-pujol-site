@@ -66,7 +66,10 @@ function dirSlugs(dir, ext) {
   } catch { return []; }
 }
 
-const pages = dirSlugs('src/content/pages', '.md');
+// Exclude WP parent__child flattened pages (thank-you / confirmation pages we
+// dropped, and a duplicate mentions-légales): their `__` slugs have no valid
+// route (404) and must not appear in the sitemap.
+const pages = dirSlugs('src/content/pages', '.md').filter((s) => !s.includes('__'));
 const services = dirSlugs('src/content/services', '.md');
 const experts = dirSlugs('src/content/experts', '.json');
 const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md');
