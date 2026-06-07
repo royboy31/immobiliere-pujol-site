@@ -20,17 +20,21 @@ allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''))
 // annonces" section. typeBien catches most; some terrains have no typeBien but
 // are identifiable by the LBI slug code ([agent][V/L][bien-type] → ga=garage,
 // te=terrain) or by descriptive slugs (…parking…, …terrain…).
-function isGarageOrLot(d: { typeBien?: string; slug?: string; descriptif?: string }): boolean {
+function isGarageOrLot(d: { typeBien?: string; slug?: string; descriptif?: string; title?: string; nbPieces?: number | null; surface?: number | null }): boolean {
   const tb = (d.typeBien || '').toLowerCase();
   if (/parking|\bbox\b|garage|terrain|stationnement/.test(tb)) return true;
   const slug = (d.slug || '').toLowerCase();
   if (/parking|garage|terrain|stationnement/.test(slug)) return true;
   const m = slug.match(/^[a-z]{2}[vl]([a-z]{2})\d/);
   if (m && (m[1] === 'ga' || m[1] === 'te')) return true;
-  // Ubiflow garages/parkings/lots have no typeBien — but their description opens
-  // with the type word (a real home listing never starts with "Garage"/"Box").
-  const desc = (d.descriptif || '').replace(/<[^>]+>/g, '').trim().toLowerCase();
-  if (/^(garage|box|parking|stationnement|emplacement|terrain)\b/.test(desc)) return true;
+  // Ubiflow garages/parkings/lots come in with no typeBien. They have no rooms
+  // and a small surface, and name the type in the title/description. Real homes
+  // have rooms or a larger surface, so this never excludes an apartment/house.
+  const text = ((d.title || '') + ' ' + (d.descriptif || '')).replace(/<[^>]+>/g, '').toLowerCase();
+  const noRooms = !d.nbPieces;
+  const small = !d.surface || d.surface < 25;
+  if (noRooms && small && /\b(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text)) return true;
+  if (/^(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text.trim())) return true;
   return false;
 }
 const featurable = allAnnonces.filter((a) => !isGarageOrLot(a.data));
