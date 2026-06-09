@@ -1,12 +1,13 @@
 {
-  "title": "Candice – Vente de biens immobiliers",
+  "title": "Candice Loth – Estimation / ventes immobilière",
   "slug": "candice-loth",
-  "fonction": "Vente de biens immobiliers",
+  "fonction": "Estimation / ventes immobilière",
   "description": "<h4>Description</h4>\n<p>Candice est spécialisée dans la vente de biens immobiliers dans les secteurs du 13001, 13002, 13004 et 13009 à Marseille.</p>",
   "photo": "/images/experts/candice-loth.png",
   "email": "candice@immobiliere-pujol.fr",
   "phone": "0671736750",
   "seoTitle": "Candice – Vente de biens immobiliers",
   "seoDescription": "Candice est spécialisée dans la vente de biens immobiliers dans les secteurs du 13001, 13002, 13004 et 13009 à Marseille.",
-  "department": "Vente"
+  "department": "Vente",
+  "hidden": false
 }

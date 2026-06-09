@@ -1,12 +1,13 @@
 {
-  "title": "Thibault Arnoux – Ventes immobilière 13012 et 13013 Marseille",
+  "title": "Thibault Arnoux – Estimation / ventes immobilière",
   "slug": "thibault-arnoux",
-  "fonction": "Ventes immobilière 13012 et 13013 Marseille",
+  "fonction": "Estimation / ventes immobilière",
   "description": "",
   "photo": "/images/experts/thibault-arnoux.png",
   "email": "thibault@immobiliere-pujol.fr",
   "phone": "07 64 85 83 02",
   "seoTitle": "Thibault Arnoux – Ventes immobilière 13012 et 13013 Marseille",
   "seoDescription": "",
-  "department": "Vente"
+  "department": "Vente",
+  "hidden": false
 }

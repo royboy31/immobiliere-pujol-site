@@ -74,6 +74,10 @@ const experts = defineCollection({
     // Set to true to keep the JSON (and therefore the /experts/{slug}/ detail
     // page + backlinks) but hide the card from the /experts/ listing.
     hidden: z.boolean().optional(),
+    // Rental négociateurs (gestion locative): show only their photo on their
+    // listings — no phone, no email, no link to an expert page (Caroline, 08/06).
+    // Also excluded from the /experts/ listing.
+    listingOnly: z.boolean().optional(),
     // Section the expert appears under on the /experts/ index. One of:
     // "Direction" | "Vente" | "Gestion locative" | "Syndic" | "Contentieux".
     department: z.string().optional(),

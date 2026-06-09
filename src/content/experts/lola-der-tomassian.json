@@ -9,5 +9,6 @@
   "seoTitle": "Lola Der Tomassian",
   "seoDescription": "",
   "department": "Gestion locative",
-  "hidden": true
+  "hidden": true,
+  "listingOnly": true
 }

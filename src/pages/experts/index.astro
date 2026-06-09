@@ -29,7 +29,7 @@ type Item = {
 // Build the list of visible experts (hidden=true are kept in the collection
 // for backlink preservation but don't appear on the listing).
 const items: Item[] = experts
-  .filter((entry) => !entry.data.hidden)
+  .filter((entry) => !entry.data.hidden && !entry.data.listingOnly)
   .map((entry) => {
     const e = entry.data;
     const { first, last } = splitName(e.title);
