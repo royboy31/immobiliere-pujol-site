@@ -1,12 +1,13 @@
 {
-  "title": "Xavier – Directeur juridique et Contentieux",
+  "title": "Xavier Bertaudon – Directeur Juridique",
   "slug": "xavier-contentieux",
-  "fonction": "Directeur juridique et Contentieux",
+  "fonction": "Directeur Juridique",
   "description": "",
   "photo": "",
   "email": "",
   "phone": "",
   "seoTitle": "Xavier – Directeur juridique et Contentieux",
   "seoDescription": "Notre expert en droit, notre Monsieur Le Droit. Il est directeur juridique et contentieux de L'Immobilière Pujol",
-  "department": "Direction"
+  "department": "Direction",
+  "hidden": false
 }

@@ -1,7 +1,7 @@
 {
-  "title": "Florian Massoni – Gestionnaire locatif",
+  "title": "Florian Massoni – Directeur gestion locative",
   "slug": "florian-massoni-gestionnaire-locatif",
-  "fonction": "Gestionnaire locatif",
+  "fonction": "Directeur gestion locative",
   "description": "",
   "photo": "/images/experts/florian-massoni-gestionnaire-locatif.png",
   "email": "florian@immobiliere-pujol.fr",
@@ -9,5 +9,5 @@
   "seoTitle": "Florian Massoni – Gestionnaire locatif",
   "seoDescription": "",
   "department": "Gestion locative",
-  "hidden": true
+  "hidden": false
 }
