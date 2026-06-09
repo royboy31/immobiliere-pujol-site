@@ -5,7 +5,7 @@ date: "2015-09-18"
 excerpt: "Les prix médians au m² des appartements neufs en 2014  61 appartements neufs vendus au prix médian de 3913€/m² en hausse de 25% par rapport à 2013 dû auw ventes majoritaires de studios à la Timone qui font monter les prix médian globaux. En effet, 50% des ventes ont été…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13010", "Arrondissements Marseille", "Arrondissement 13010 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/photo-marseille.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2018/01/photo-marseille.jpeg"
 seoTitle: "Les prix au m² dans le neuf dans le 13010 Marseille"
 seoDescription: "Les prix médians au m² des appartements neufs en 2014  61 appartements neufs vendus au prix médian de 3913€/m² en hausse de 25% par rapport à 2013 dû auw ventes majoritaires de studios à la Timone qui font monter les prix médian globaux. En effet, 50% des ventes ont été…"
 ---

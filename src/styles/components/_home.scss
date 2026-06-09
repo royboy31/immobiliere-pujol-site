@@ -701,6 +701,42 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       scroll-snap-align: start;
     }
   }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  &__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    padding: 0 28px;
+    border-radius: 999px;
+    border: 1.5px solid $ds-olive;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: transparent;
+    background-image: linear-gradient(to top, $ds-olive 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    transition: background-position .4s ease, color .3s ease;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      background-position: 0 100%;
+      color: $white;
+      svg { transform: translateX(3px); }
+    }
+  }
 }
 
 .arrow-btn {
@@ -735,6 +771,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 
   &--rental { --expert-accent: #{$ds-olive}; }
   &--sales  { --expert-accent: #{$ds-orange}; }
+  &--syndic { --expert-accent: #{$ds-blue}; }
   &--other  { --expert-accent: #{$ds-slate}; }
 
   // Same treatment as the /experts listing tiles: the transparent headshot sits
@@ -1075,6 +1112,14 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     color: $black;
     margin: 18px 0 0;
     max-width: 980px;
+
+    // Links inherit the global $color-link (olive) which is invisible on the
+    // olive panel — force them to ink + underline so the URL/phone/email show.
+    a {
+      color: $black;
+      text-decoration: underline;
+      word-break: break-word;
+    }
   }
 }
 

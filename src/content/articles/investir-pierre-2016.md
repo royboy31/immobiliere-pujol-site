@@ -47,7 +47,7 @@ Quel autre actif dépend de vous , de votre vision, de votre travail, de votre i
 
 &nbsp;
 <h3><em>L’immobilier : un placement pérenne</em></h3>
-<a href="https://www.immobiliere-pujol.fr/content/uploads/2016/01/séjour4.jpg"><img loading="lazy" decoding="async" class=" wp-image-7176 alignright" src="https://www.immobiliere-pujol.fr/content/uploads/2016/01/séjour4.jpg" alt="séjour4" width="288" height="191"></a>Connaissez un autre actif que l’immobilier qui peut avoir 50 ans d’âge, être obsolète et qui avec des travaux retrouve une nouvelle jeunesse&nbsp;?
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/séjour4.jpg"><img loading="lazy" decoding="async" class=" wp-image-7176 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/01/séjour4.jpg" alt="séjour4" width="288" height="191"></a>Connaissez un autre actif que l’immobilier qui peut avoir 50 ans d’âge, être obsolète et qui avec des travaux retrouve une nouvelle jeunesse&nbsp;?
 
 Connaissez-vous un actif &nbsp;dont&nbsp;le coût d’entretien est déductible de vos revenus, quand vous lui refaites une beauté ?
 

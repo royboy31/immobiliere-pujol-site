@@ -5,7 +5,7 @@ date: "2012-02-06"
 excerpt: "06.02.2012 En 2008 face au déchaînement médiatique à l’encontre des syndics j’avais réagi en publiant l’article « les syndics souffrent« . Cette année, face ..."
 categories: ["Le marché immobilier à marseille"]
 tags: ["syndic Marseille"]
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Le-service-dun-syndic-de-copropriété-à-marseille-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Le-service-dun-syndic-de-copropriété-à-marseille-1200x750.jpg"
 seoTitle: "Comment gérer efficacement ses copropriétaires à Marseille ?"
 seoDescription: "06.02.2012 En  2008 face au déchaînement médiatique à l'encontre des syndics j'avais réagi en publiant l'article \"les syndics souffrent\". Cette année,  face à nouveau à ce même type d'émissions comme celles de M6 ou de 60 millions de consommateurs, j'ai juste envie de vous relayer l'article d'une jeune gestionnaire de copropriété…"
 ---

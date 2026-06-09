@@ -86,8 +86,9 @@ async function main() {
     const payload = {
       expert: { slug: expert.slug, email, title: expert.title },
       totalCount: arr.length,
-      // Cap payload at 200 most-recent; page can paginate client-side if needed
-      listings: arr.slice(0, 200),
+      // Cap payload at 400 most-recent (covers the biggest portfolios, e.g.
+      // Benoît ~305); page can paginate client-side if needed.
+      listings: arr.slice(0, 400),
     };
     await writeFile(
       join(DEST, expert.slug + '.json'),

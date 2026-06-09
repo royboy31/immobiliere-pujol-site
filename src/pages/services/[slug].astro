@@ -1162,6 +1162,7 @@ const customForm = CUSTOM_FORMS[slug] || null;
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
           if (data.ok) {
+            try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'service' }); } catch (e) {}
             const customMsg = form.dataset.successMsg;
             const msg = customMsg || 'Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.';
             form.innerHTML = `<div class="svc-form__success"><h2>Merci !</h2><p>${msg}</p></div>`;

@@ -13,7 +13,7 @@ seoDescription: "Sur le marché de l’immobilier, la crise est une opportunité
 
         Sur le marché de l’immobilier, la crise est une opportunité pour celles et ceux qui souhaitent investir. Les biens se vendant moins, les vendeurs sont plus ouverts à la négociation. Profitez-en&nbsp;!
 <h2><span style="font-size: medium;"><strong>Le prix du neuf versus le prix de l’ancien&nbsp;</strong></span></h2>
-<img loading="lazy" decoding="async" class="alignleft wp-image-4063 size-full" style="margin: 10px;" title="l'immobilier neuf à marseille" src="https://www.immobiliere-pujol.fr/content/uploads/2013/11/limmobilier-neuf-à-marseille.jpg" alt="" width="260" height="194">A Marseille, il y a 25 ans quand les prix étaient très bas et que la ville perdait des habitants, on ne construisait pas.
+<img loading="lazy" decoding="async" class="alignleft wp-image-4063 size-full" style="margin: 10px;" title="l'immobilier neuf à marseille" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2013/11/limmobilier-neuf-à-marseille.jpg" alt="" width="260" height="194">A Marseille, il y a 25 ans quand les prix étaient très bas et que la ville perdait des habitants, on ne construisait pas.
 
 Il y a 15 ans aussi, il était d’usage de considérer que le marché de l’ancien montait à cause d’une trop faible offre du neuf.
 

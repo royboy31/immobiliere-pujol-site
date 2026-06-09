@@ -71,6 +71,16 @@ export default defineConfig({
     '/immobiliere-pujol-avis-et-experience-collaborateur-en-syndic/': '/avis-et-experience-collaborateur-en-syndic/',
     // Mentions légales — flat URL to nested actual page
     '/mentions-legales-immobiliere-pujol/': '/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/',
+    // Broken-link audit 2026-06 — legacy paths still linked in content/GSC
+    '/service-immobilier/': '/service-immobilier/agence-immobiliere-pujol/', // breadcrumb parent had no index page
+    '/category/programme-neufs-marseille/': '/categorie/programme-neufs-marseille/',
+    '/category/prix-immo-arrondissement/': '/categorie/prix-immo-arrondissement/',
+    '/expert/caroline-pujol/': '/experts/caroline-pujol/', // old singular /expert/
+    '/investir-marseilleacheter-ou-louer-ses-bureaux/': '/investir-marseilleacheter-ou-louer-ses-bureaux-2/',
+    '/limmobilier-papa-cest-fini/': '/limmobilier-papa-cest-fini-2/',
+    '/services/candidater-au-poste-de-negociateur-immobilier/': '/service-immobilier/agence-immobiliere-pujol/',
+    '/blog/prix-immobilier-13006-marseille/': '/blog-immobilier-marseille/', // article dropped → blog index
+    '/blog/gestion-immobilier/syndic-ou-psychiatre/attachment/un-fou-derriere-les-barreaux/': '/syndic-ou-psychiatre/',
     // Singular annonce type URLs → plural (SEO 301)
     '/annonces/location/': '/annonces/locations/',
     '/annonces/vente/': '/annonces/ventes/',

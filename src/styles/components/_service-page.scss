@@ -1943,7 +1943,21 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     line-height: 1.5;
     color: $ds-ink;
     margin: 0;
-    flex: 1;
+  }
+
+  &__note {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: $ds-orange;
+    background: rgba(236, 114, 52, .1);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin: 0;
   }
 
   &__cta {
@@ -1957,7 +1971,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     text-transform: uppercase;
     color: $ds-olive-2;
     text-decoration: none;
-    margin-top: 4px;
+    margin-top: auto;
     transition: color $transition-fast;
 
     svg { transition: transform $transition-base; }

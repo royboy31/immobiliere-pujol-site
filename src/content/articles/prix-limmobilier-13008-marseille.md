@@ -37,7 +37,7 @@ On trouve de nombreuses villas, dans des espaces relativement aérés par rappor
 <p>Les 78&nbsp;920 habitants sont en majorité des personnes âgées, plutôt propriétaires de leur logement (53%) , vivant dans de grands appartements et qui ont&nbsp;&nbsp;des revenus supérieurs.</p>
 <p>&nbsp;</p>
 
-<figure id="attachment_5995" aria-describedby="caption-attachment-5995" style="width: 600px" class="wp-caption alignnone"><a href="https://www.immobiliere-pujol.fr/content/uploads/2014/09/Plan-du-8ème-arrondissement-de-Marseille1.png"><img loading="lazy" decoding="async" class="wp-image-5995" src="https://www.immobiliere-pujol.fr/content/uploads/2014/09/Plan-du-8ème-arrondissement-de-Marseille1.png" alt="Délimitation du 8eme arrondissement de Marseille" width="600" height="655"></a><figcaption id="caption-attachment-5995" class="wp-caption-text">Délimitation du 8eme arrondissement de Marseille</figcaption></figure>
+<figure id="attachment_5995" aria-describedby="caption-attachment-5995" style="width: 600px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2014/09/Plan-du-8ème-arrondissement-de-Marseille1.png"><img loading="lazy" decoding="async" class="wp-image-5995" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2014/09/Plan-du-8ème-arrondissement-de-Marseille1.png" alt="Délimitation du 8eme arrondissement de Marseille" width="600" height="655"></a><figcaption id="caption-attachment-5995" class="wp-caption-text">Délimitation du 8eme arrondissement de Marseille</figcaption></figure>
 
 <h2>&nbsp;</h2>
 <h2><span style="font-size: 12pt;">Les données chiffrées du 13008 :&nbsp;</span></h2>

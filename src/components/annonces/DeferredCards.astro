@@ -76,6 +76,9 @@ const { scope } = Astro.props;
       next?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();step(1)});
       if(dots.length){let raf=0;track.addEventListener('scroll',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{const i=Math.round(track.scrollLeft/track.clientWidth);dots.forEach((d,j)=>d.classList.toggle('is-active',j===i))})},{passive:true})}
     });
+    // Cards injected after FilterBar's initial pass — tell it to re-filter so
+    // active filters (e.g. ?cp=13011) also apply to these deferred cards.
+    document.dispatchEvent(new CustomEvent('annonces:cards-loaded'));
   }catch(e){console.error('[deferred]',e)}
 })();
 </script>

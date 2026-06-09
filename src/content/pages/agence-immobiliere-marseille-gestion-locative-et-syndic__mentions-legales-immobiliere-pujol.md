@@ -35,7 +35,7 @@ seoDescription: "Découvrez notre carte professionnelle, nos assurances, nos gar
 
 <h2>3. Carte professionnelle</h2>
 <p>Carte professionnelle gestion et transaction n° d’identification CPI 1310 2015 000 000 284.</p>
-<p><a href="https://www.immobiliere-pujol.fr/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">La carte professionnelle Immobilière Pujol en gestion immobilière, transaction et syndic</a></p>
+<p><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2025/08/Carte-N°-CPI13102015000000284-_-carte-pro-immobilierev-pujol.pdf" target="_blank" rel="noopener">La carte professionnelle Immobilière Pujol en gestion immobilière, transaction et syndic</a></p>
 <p>Non-détention de fonds : « L’Immobilière Pujol ne doit recevoir ni détenir d’autres fonds, effets ou valeurs que ceux représentatifs de sa rémunération ou de sa commission. »</p>
 
 <h2>4. Garantie financière</h2>

@@ -5,7 +5,7 @@ date: "2022-12-14"
 excerpt: "Quel est le prix médian d'un T3 dans le 1er arrondissement de Marseille. Cette vidéo sur les prix de l'immobilier à Marseille vous dit tout"
 categories: ["Prix au m2 par arrondissement à Marseille", "Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2022/12/2017-03-13-14.46.36-scaled.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2022/12/2017-03-13-14.46.36-scaled.jpg"
 seoTitle: "Quel est le prix au m² d’un T3 dans le 13001 à Marseille en 2022"
 seoDescription: "Quel est le prix médian d'un T3 dans le 1er arrondissement de Marseille. Cette vidéo sur les prix de l'immobilier à Marseille vous dit tout"
 ---

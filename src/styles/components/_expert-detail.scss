@@ -379,6 +379,33 @@
   gap: 18px;
 }
 
+// Extra history cards are hidden until "Voir tous" is clicked.
+.expert-history-card--extra:not(.is-revealed) { display: none; }
+
+.expert-listings__more-wrap {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.expert-listings__more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1.5px solid $ds-hairline-2;
+  background: transparent;
+  color: $ds-ink;
+  font-family: $ds-font-noto;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .4px;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+
+  &:hover { background: $ds-ink; color: $white; border-color: $ds-ink; }
+}
+
 .expert-history-card {
   display: flex;
   flex-direction: column;
@@ -416,6 +443,7 @@
 
     &.is-vente { background: $ds-olive; }
     &.is-location { background: $ds-orange; }
+    &.is-available { background: $ds-orange; }
   }
 
   &__body {
@@ -804,6 +832,12 @@
     --expert-accent-soft: #{rgba(236, 114, 52, .14)};
   }
 
+  &--syndic {
+    --expert-accent: #{$ds-blue};
+    --expert-accent-2: #{$ds-blue};
+    --expert-accent-soft: #{rgba(45, 110, 162, .14)};
+  }
+
   &--other {
     --expert-accent: #{$ds-slate};
     --expert-accent-2: #{$ds-slate};
@@ -930,6 +964,7 @@
 
     &--rental { background: $ds-olive; }
     &--sales  { background: $ds-orange; }
+    &--syndic { background: $ds-blue; }
     &--other  { background: $ds-slate; }
   }
 
@@ -955,6 +990,7 @@
 
   &--rental { --expert-accent: #{$ds-olive}; }
   &--sales  { --expert-accent: #{$ds-orange}; }
+  &--syndic { --expert-accent: #{$ds-blue}; }
 
   &__ph {
     width: 100%;

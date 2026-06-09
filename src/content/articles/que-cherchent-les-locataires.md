@@ -13,7 +13,7 @@ seoDescription: "La semaine dernière, j'ai examiné les alertes auxquelles les 
 
         La semaine dernière, j’ai examiné les alertes auxquelles les candidats locataires s’inscrivent sur notre site. Grâce aux centaines de demandes que nous avons, environ 400, je me suis amusé à analyser et à faire des statistiques sur ce que les locataires marseillais cherchent.
 <h2><span style="font-size: medium;"><b>Les types de biens &nbsp;recherchés</b></span></h2>
-<img loading="lazy" decoding="async" class="wp-image-5687 alignright" style="border: 2px solid black; margin: 5px;" src="https://www.immobiliere-pujol.fr/content/uploads/2014/06/louer-à-marseille.jpg" alt="louer à marseille" width="410" height="310">55% un appartement
+<img loading="lazy" decoding="async" class="wp-image-5687 alignright" style="border: 2px solid black; margin: 5px;" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2014/06/louer-à-marseille.jpg" alt="louer à marseille" width="410" height="310">55% un appartement
 35% cherchent une maison
 10% un parking ou un box.
 <h3><span style="font-size: medium;"><b>Le nombre de chambres souhaitées</b></span></h3>

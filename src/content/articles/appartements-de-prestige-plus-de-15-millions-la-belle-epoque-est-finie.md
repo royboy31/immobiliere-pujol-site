@@ -44,7 +44,7 @@ Pour info, dans le même quartier, vous avez du neuf à 7000€ le m<sup>2.&nbsp
 
 <h5 dir="ltr"><span style="font-size: medium;">Le club des appartements qui viennent d’être mis en vente ou qui sont déjà sur le marché depuis un certain temps&nbsp;:</span></h5>
 <p dir="ltr">Appartement dans le résidence «&nbsp;La réserve&nbsp;» à 12&nbsp;440€ le m<sup>2</sup> : le champion du monde &nbsp;!</p>
-<p dir="ltr"><img loading="lazy" decoding="async" class="alignnone wp-image-5549" src="https://www.immobiliere-pujol.fr/content/uploads/2014/04/vente-appartement-prestige-la-réserve-13008-marseille.jpg" alt="vente appartements de prestige la réserve 13008 marseille" width="518" height="356"></p>
+<p dir="ltr"><img loading="lazy" decoding="async" class="alignnone wp-image-5549" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2014/04/vente-appartement-prestige-la-réserve-13008-marseille.jpg" alt="vente appartements de prestige la réserve 13008 marseille" width="518" height="356"></p>
 <p dir="ltr">Autre appartement, toujours à la Réserve,à 7300€ le m<sup>2</sup> soit juste 5140€ le m<sup>2</sup> d’écart avec le précédent dans la même résidence.
 Cet appartement dispose en plus d’un jardin. Il faut toutefois le reconnaître, il est un peu vieillot. Mais celui-ci est en vente depuis 2 bonnes années.
 Le prix est donc plus raisonnable.</p>

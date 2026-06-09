@@ -274,7 +274,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
               
               <li class="article">
                   <!-- Thumbnail -->
-                  <a href="/prix-immobilier-neuf-13002-2018/" class="article__thumb objectFitContainer" style="background-image: url('https://www.immobiliere-pujol.fr/content/uploads/2019/06/13002-vieille-charité-800x513.jpg'); "></a>
+                  <a href="/prix-immobilier-neuf-13002-2018/" class="article__thumb objectFitContainer" style="background-image: url('https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2019/06/13002-vieille-charité-800x513.jpg'); "></a>
                   <!-- Infos -->
                   <div class="article__info">
                     <span class="article__date">28 juin 2019</span>
@@ -358,7 +358,7 @@ document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTi
               
               <li class="article">
                   <!-- Thumbnail -->
-                  <a href="/les-prix-au-m%c2%b2-des-ventes-en-2022-dans-le-13001-a-marseille/" class="article__thumb objectFitContainer" style="background-image: url('https://www.immobiliere-pujol.fr/content/uploads/2023/05/prix-m²-2022-1er-arrondissement-marseille-1-800x600.jpg'); "></a>
+                  <a href="/les-prix-au-m%c2%b2-des-ventes-en-2022-dans-le-13001-a-marseille/" class="article__thumb objectFitContainer" style="background-image: url('https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2023/05/prix-m²-2022-1er-arrondissement-marseille-1-800x600.jpg'); "></a>
                   <!-- Infos -->
                   <div class="article__info">
                     <span class="article__date">05 mai 2023</span>

@@ -1,0 +1,3 @@
+# Legacy WordPress URL redirects (Cloudflare assets layer).
+# Singular /annonce/ → plural /annonces/ (covers ?nonamp=1 variants).
+/annonce/* /annonces/:splat 301

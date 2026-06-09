@@ -53,7 +53,7 @@ const DEPT_ORDER: { key: string; label: string; lede: string }[] = [
   },
   {
     key: 'Vente',
-    label: 'Commerciaux vente',
+    label: 'Vente',
     lede: "Spécialistes de la vente d'appartements et de maisons sur Marseille.",
   },
   {
@@ -65,11 +65,6 @@ const DEPT_ORDER: { key: string; label: string; lede: string }[] = [
     key: 'Syndic',
     label: 'Syndic de copropriété',
     lede: "Gestionnaires de copropriétés à Marseille.",
-  },
-  {
-    key: 'Contentieux',
-    label: 'Contentieux & juridique',
-    lede: "Pour vos dossiers contentieux et juridiques.",
   },
 ];
 
@@ -119,9 +114,10 @@ if (orphans.length) {
         Vente, location, gestion locative, syndic — chacun·e à son métier, tous engagés à vos côtés à Marseille.
       </p>
       <div class="experts-archive__legend">
-        <span class="experts-archive__chip experts-archive__chip--rental">Location</span>
         <span class="experts-archive__chip experts-archive__chip--sales">Vente</span>
-        <span class="experts-archive__chip experts-archive__chip--other">Autres expertises</span>
+        <span class="experts-archive__chip experts-archive__chip--rental">Gestion locative</span>
+        <span class="experts-archive__chip experts-archive__chip--syndic">Syndic</span>
+        <span class="experts-archive__chip experts-archive__chip--other">Direction</span>
       </div>
     </div>
 

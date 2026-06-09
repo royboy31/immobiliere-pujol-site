@@ -5,7 +5,7 @@ date: "2015-11-01"
 excerpt: "Prix au m² des loyers dans le 13002 (source Clameur) Studio/T1 T2 T3 T4 Prix au m²   Prix au m² des appartements anciens vendus dans le 2e arrondissement (source notaire) Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13002", "Arrondissements Marseille", "Arrondissement 13002 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/amp-icon.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/amp-icon.png"
 seoTitle: "Prix au m² de l’ancien en 2015 dans le 13002 Marseille"
 seoDescription: "Prix au m² des loyers dans le 13002 (source Clameur) Studio/T1 T2 T3 T4 Prix au m²   Prix au m² des appartements anciens vendus dans le 2e arrondissement (source notaire) Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage…"
 ---

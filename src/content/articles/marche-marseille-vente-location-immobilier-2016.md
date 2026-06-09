@@ -5,7 +5,7 @@ date: "2016-02-20"
 excerpt: "Une fin d’année 2015 qui se termine bien Comme vous le savez, les métiers de la location et de la transaction s’inscrivent toujours dans des cycles longs et..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Nos-résultats-en-terme-de-location-à-marseille-1200x800.jpg"
 seoTitle: "Le marché de la location et de la transaction fin 2015"
 seoDescription: "Une fin d’année 2015 qui se termine bien Comme vous le savez, les métiers de la location et de la transaction s'inscrivent toujours dans des cycles longs et des cycles courts. Avec des hauts, avec des bas, avec des phases de glaciation et des phases d’accélération qui font le bonheur…"
 ---

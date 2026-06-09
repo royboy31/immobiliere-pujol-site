@@ -16,8 +16,31 @@ const allAnnonces = await getCollection('annonces', ({ data }) =>
 );
 allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
 
-const ventes = allAnnonces.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
-const locations = allAnnonces.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
+// Never feature garages/parkings or terrains (lots) in the home "Dernières
+// annonces" section. typeBien catches most; some terrains have no typeBien but
+// are identifiable by the LBI slug code ([agent][V/L][bien-type] → ga=garage,
+// te=terrain) or by descriptive slugs (…parking…, …terrain…).
+function isGarageOrLot(d: { typeBien?: string; slug?: string; descriptif?: string; title?: string; nbPieces?: number | null; surface?: number | null }): boolean {
+  const tb = (d.typeBien || '').toLowerCase();
+  if (/parking|\bbox\b|garage|terrain|stationnement/.test(tb)) return true;
+  const slug = (d.slug || '').toLowerCase();
+  if (/parking|garage|terrain|stationnement/.test(slug)) return true;
+  const m = slug.match(/^[a-z]{2}[vl]([a-z]{2})\d/);
+  if (m && (m[1] === 'ga' || m[1] === 'te')) return true;
+  // Ubiflow garages/parkings/lots come in with no typeBien. They have no rooms
+  // and a small surface, and name the type in the title/description. Real homes
+  // have rooms or a larger surface, so this never excludes an apartment/house.
+  const text = ((d.title || '') + ' ' + (d.descriptif || '')).replace(/<[^>]+>/g, '').toLowerCase();
+  const noRooms = !d.nbPieces;
+  const small = !d.surface || d.surface < 25;
+  if (noRooms && small && /\b(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text)) return true;
+  if (/^(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text.trim())) return true;
+  return false;
+}
+const featurable = allAnnonces.filter((a) => !isGarageOrLot(a.data));
+
+const ventes = featurable.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
+const locations = featurable.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
 
 // Build a display card from a raw annonce.
 function fmtPrice(n?: number) {
@@ -75,7 +98,7 @@ const expertsBase = [
     type: 'rental',
     first: 'Gaëlle',
     last: 'Lapert',
-    role: 'Commerciale en gestion locative',
+    role: 'Expert conseil en gestion locative',
   },
   {
     href: '/experts/benoit-transactions/',
@@ -96,7 +119,7 @@ const expertsBase = [
   {
     href: '/experts/emeline-syndic-de-coproprietes/',
     photo: '/images/experts/emeline-syndic-de-coproprietes.png',
-    type: 'other',
+    type: 'syndic',
     first: 'Emeline',
     last: 'Pellin',
     role: 'Syndic de copropriétés',
@@ -313,6 +336,12 @@ const services = [
           </a>
         ))}
       </div>
+      <div class="experts__cta">
+        <a class="experts__all" href="/experts/">
+          Découvrir toute l'équipe
+          <svg width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      </div>
     </section>
 
     <script>
@@ -394,48 +423,6 @@ const services = [
         };
         prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
         next.addEventListener('click', () => grid.scrollBy({ left:  step(), behavior: 'smooth' }));
-      })();
-    </script>
-
-    {/* ============= NEWSLETTER ============= */}
-    <section class="news-wrap">
-      <form class="news" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-newsletter-form>
-        <h2>Inscrivez-vous à la<br /><b>Newsletter</b></h2>
-        <div class="form">
-          <input name="email" type="email" placeholder="Email" required />
-          <button class="submit" type="submit" aria-label="S'inscrire">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
-          </button>
-        </div>
-        <label class="agree">
-          <input type="checkbox" name="agree" class="check" required />
-          <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
-        </label>
-        <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
-      </form>
-    </section>
-
-    <script>
-      (function () {
-        const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
-        if (!form) return;
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          if (!form.reportValidity()) return;
-          const btn = form.querySelector<HTMLButtonElement>('.submit');
-          if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
-          try {
-            const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-            const data = await res.json();
-            if (data.ok) {
-              form.innerHTML = '<p style="color:#b2c04e;font-weight:600;text-align:center;padding:24px 0">Merci pour votre inscription !</p>';
-            } else {
-              if (btn) { btn.disabled = false; btn.style.opacity = ''; }
-            }
-          } catch {
-            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
-          }
-        });
       })();
     </script>
 

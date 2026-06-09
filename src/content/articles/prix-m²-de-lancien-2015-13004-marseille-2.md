@@ -5,7 +5,7 @@ date: "2015-11-01"
 excerpt: "Les prix de l'immobilier ancien vendu en 2015 dans les différents quartiers du 13004 (source notaire) La fourchette des transactions est établie par les notaires de France sur les transactions réalisées dans l'ancien.Elle est donnée en prix médian.* * Le prix médian : la moitié des transactions ont été signées à un prix…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13004", "Arrondissements Marseille", "Arrondissement 13004 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Prix-immobilier-marseille-130041.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Prix-immobilier-marseille-130041.jpg"
 seoTitle: "Prix au m² de l’ancien en 2015 dans le 13004 Marseille"
 seoDescription: "Les prix de l'immobilier ancien vendu en 2015 dans les différents quartiers du 13004 (source notaire) La fourchette des transactions est établie par les notaires de France sur les transactions réalisées dans l'ancien.Elle est donnée en prix médian.* * Le prix médian : la moitié des transactions ont été signées à un prix…"
 ---

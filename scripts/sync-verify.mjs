@@ -284,16 +284,21 @@ if (GH_TOKEN) {
     const runs = data.workflow_runs || [];
     const last24h = runs.filter(r => Date.now() - new Date(r.created_at).getTime() < 86400000);
     const failed = last24h.filter(r => r.conclusion === 'failure');
+    // Status reflects the LATEST completed deploy, not a 24h failure tally: what
+    // matters is whether the site is currently deployable. Past transient
+    // failures that a later run fixed shouldn't warn for a whole day.
+    const lastDone = runs.find(r => r.status === 'completed');
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
     report.counts.deployRuns24h = last24h.length;
     report.counts.deployFailed24h = failed.length;
 
-    if (failed.length === 0) {
-      addCheck('Workflow déploiement', 'OK', `${last24h.length} exécutions en 24h, 0 échec, dernier : il y a ${ageH}h`);
+    const failNote = failed.length ? ` (${failed.length} échec(s) plus tôt sur 24h, résolus)` : '';
+    if (!lastDone || lastDone.conclusion === 'success') {
+      addCheck('Workflow déploiement', 'OK', `dernier déploiement OK il y a ${ageH}h${failNote}`);
     } else {
-      addCheck('Workflow déploiement', 'WARN', `${last24h.length} exécutions, ${failed.length} EN ÉCHEC en 24h`);
+      addCheck('Workflow déploiement', 'WARN', `dernier déploiement EN ÉCHEC il y a ${ageH}h`);
     }
   } catch (err) {
     addCheck('Workflow déploiement', 'FAIL', err.message);
@@ -311,15 +316,29 @@ if (GH_TOKEN) {
     const lastRun = runs[0];
     const ageH = lastRun ? ((Date.now() - new Date(lastRun.created_at).getTime()) / 3600000).toFixed(1) : '?';
 
+    // What matters is data freshness, not individual run failures: the FTP pull
+    // from Infomaniak occasionally times out (curl exit 28) from CI, but the
+    // next success refreshes R2 and the zip content rarely changes. So a single
+    // transient timeout with a recent success stays GREEN; we only WARN once the
+    // sync is several hours behind, and FAIL when the zip is genuinely stale.
+    const FRESH_OK_H = 4;   // a success within this window → all good
+    const FRESH_FAIL_H = 8; // no success this long → stale, real problem
+    const lastSuccess = runs.find(r => r.conclusion === 'success');
+    const successAgeH = lastSuccess
+      ? (Date.now() - new Date(lastSuccess.created_at).getTime()) / 3600000
+      : Infinity;
+    const sinceTxt = successAgeH === Infinity ? '∞' : successAgeH.toFixed(1);
+
     report.counts.lbiRuns24h = recent.length;
     report.counts.lbiFailed24h = failed.length;
 
-    if (failed.length === 0) {
-      addCheck('Sync LBI FTP', 'OK', `${recent.length} dernières exécutions OK, dernier : il y a ${ageH}h`);
-    } else if (failed.length === 1) {
-      addCheck('Sync LBI FTP', 'WARN', `1 échec sur les ${recent.length} dernières exécutions`);
+    if (successAgeH > FRESH_FAIL_H) {
+      addCheck('Sync LBI FTP', 'FAIL', `aucun succès depuis ${sinceTxt}h — zip LBI périmé`);
+    } else if (successAgeH > FRESH_OK_H) {
+      addCheck('Sync LBI FTP', 'WARN', `sync FTP en retard — dernier succès il y a ${sinceTxt}h`);
     } else {
-      addCheck('Sync LBI FTP', 'FAIL', `${failed.length} échecs sur les ${recent.length} dernières exécutions`);
+      const note = failed.length ? ` (${failed.length} timeout récent sans impact)` : '';
+      addCheck('Sync LBI FTP', 'OK', `dernier succès il y a ${sinceTxt}h${note}`);
     }
   } catch (err) {
     addCheck('Sync LBI FTP', 'FAIL', err.message);

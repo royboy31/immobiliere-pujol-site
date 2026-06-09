@@ -5,7 +5,7 @@ date: "2015-11-01"
 excerpt: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées. Les prix au m² dans l'ancien et dans le 13006 en 2015, se sont établis entre  2410€ et  2540€/m². En  2014 ce sont 345 appartements anciens qui se sont vendus dans le 13006 avec un prix médian* de 2420€/m2 en…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13006", "Arrondissements Marseille", "Arrondissement 13006 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/13006-1.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/13006-1.jpg"
 seoTitle: "Les prix au m² dans l’ancien dans le 13006 en 2015"
 seoDescription: "La fourchette des transactions est établie par les notaires de France sur les transactions réalisées. Les prix au m² dans l'ancien et dans le 13006 en 2015, se sont établis entre  2410€ et  2540€/m². En  2014 ce sont 345 appartements anciens qui se sont vendus dans le 13006 avec un prix médian* de 2420€/m2 en…"
 ---

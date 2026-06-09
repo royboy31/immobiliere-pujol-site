@@ -5,7 +5,7 @@ date: "2015-07-21"
 excerpt: "LES LOCATIONS Des prix de loyers moyens en baisse à 11,5€ m² Les derniers résultats de Observatoir des loyers Clameur , l’observatoire des loyers, ont démont..."
 categories: ["Le marché immobilier à marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/marseille-rue-republique-un-mauvais-marché.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/marseille-rue-republique-un-mauvais-marché.jpg"
 seoTitle: "Comment se porte l’immobilier à Marseille au 2e trimestre 2015?"
 seoDescription: "LES LOCATIONS Des prix de loyers moyens en baisse à 11,5€ m² Les derniers résultats de Observatoir des loyers Clameur , l'observatoire des loyers,  ont démontré une baisse des loyers moyens de 7% depuis le début de l'année à 11,5€ le m². La Provence titrait de manière provocatrice : « Effondrement des…"
 ---
