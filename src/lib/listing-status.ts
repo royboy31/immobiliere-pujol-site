@@ -7,6 +7,7 @@ export function reservedLabel(status: string | null | undefined): string | null 
   const v = (status || '').trim().toLowerCase().replace(/\s+/g, '-');
   if (v === 'sous-offre') return 'Sous offre';
   if (v === 'sous-compromis') return 'Sous promesse';
+  if (v === 'vendu') return 'Vendu';
   return null;
 }
 

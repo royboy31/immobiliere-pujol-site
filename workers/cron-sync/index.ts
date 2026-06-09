@@ -437,7 +437,16 @@ function parseSaleStatus(raw: string | undefined): string | null {
   const v = (raw || '').trim().toLowerCase();
   if (v === 'sous offre') return 'sous-offre';
   if (v === 'sous compromis') return 'sous-compromis';
-  return null; // 'Actif' or empty → no special status
+  if (v === 'vendu') return 'vendu';
+  if (v === 'mandat clos') return 'mandat-clos';
+  return null; // 'Actif'/'En estimation'/empty → no special status
+}
+
+// A LBI sale whose field 136 is 'Vendu' or 'Mandat clos' is kept in the feed
+// ("Actuel" in Hektor) but must display as closed/archived: full closed template
+// (gallery + description + title + internal-links block), out of the active grids.
+function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' {
+  return saleStatus === 'vendu' || saleStatus === 'mandat-clos' ? 'closed' : 'active';
 }
 
 // ── Expert email → photo path (for overlay on cards) ──
@@ -700,10 +709,10 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       mandat_numero, url_visite_virtuelle, termine,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
+      ?,?,?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
-      status='active', reference_agence=excluded.reference_agence,
+      status=excluded.status, reference_agence=excluded.reference_agence,
       type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
       adresse=excluded.adresse,
       code_postal=excluded.code_postal, ville=excluded.ville,
@@ -725,7 +734,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       date_modification=excluded.date_modification, source='lbi',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
-    a.slug, a.reference, a.typeAnnonce, a.typeBien,
+    a.slug, lbiDbStatus(a.saleStatus), a.reference, a.typeAnnonce, a.typeBien,
     a.adresse, a.codePostal, a.ville,
     a.prix, a.charges,
     a.surface, a.surfaceTerrain,
