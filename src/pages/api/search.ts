@@ -15,16 +15,9 @@ export const GET: APIRoute = async ({ request }) => {
   const budget = url.searchParams.get('budget');
   const q = url.searchParams.get('q');
 
-  // A full reference lookup (e.g. "MBVAP160009802", "LCVAP130009745") should find
-  // the bien whether it is still active or already sold/archived. Detected as a
-  // token with letters + a 4+ digit run and no spaces. Pure numbers / postal codes
-  // stay in the normal active search (reference is also matched there).
-  const isRefLookup = !!q && /[a-zA-Z]/.test(q) && /\d{4,}/.test(q) && !/\s/.test(q.trim());
-
   // Allow ?source= filter for debugging
   const sourceFilter = url.searchParams.get('source');
   const conditions: string[] = [];
-  if (!isRefLookup) conditions.push("status = 'active'");
   const bindings: any[] = [];
 
   if (sourceFilter && (sourceFilter === 'ubiflow' || sourceFilter === 'wordpress')) {
@@ -74,23 +67,26 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   if (q) {
+    // A query matches by reference (agency or ubiflow) in ANY status — so a
+    // reference/id finds the bien even when it is sold/archived — OR by
+    // location/title but only among ACTIVE listings (so a city/word search
+    // doesn't surface thousands of sold archive pages).
     const like = `%${q}%`;
-    if (isRefLookup) {
-      // Precise reference lookup — match the agency/ubiflow reference, any status.
-      conditions.push('(reference_agence LIKE ? OR ubiflow_reference LIKE ?)');
-      bindings.push(like, like);
-    } else {
-      // General search — also match a (partial) reference so "9802" finds the bien.
-      conditions.push('(ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ? OR reference_agence LIKE ?)');
-      bindings.push(like, like, like, like, like);
-    }
+    conditions.push(
+      '((reference_agence LIKE ? OR ubiflow_reference LIKE ?)' +
+      " OR (status = 'active' AND (ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ?)))"
+    );
+    bindings.push(like, like, like, like, like, like);
+  } else {
+    // No text query: browsing by filters only — active listings.
+    conditions.push("status = 'active'");
   }
 
   const where = conditions.join(' AND ');
 
   const countSql = `SELECT COUNT(*) as total FROM annonces WHERE ${where}`;
   const sql = `
-    SELECT id, slug, status, reference_agence, type_annonce, type_bien, titre, ville, quartier, code_postal,
+    SELECT id, slug, status, reference_agence, ubiflow_reference, type_annonce, type_bien, titre, ville, quartier, code_postal,
            prix, loyer_cc, surface, nb_pieces, nb_chambres
     FROM annonces
     WHERE ${where}
@@ -109,7 +105,7 @@ export const GET: APIRoute = async ({ request }) => {
     // the ORDER BY above), so a reference search never shows the same bien twice.
     const seenRef = new Set<string>();
     const rows = (results.results as any[]).filter((a: any) => {
-      const ref = (a.reference_agence || '').toUpperCase();
+      const ref = (a.reference_agence || a.ubiflow_reference || '').toUpperCase();
       if (!ref) return true;
       if (seenRef.has(ref)) return false;
       seenRef.add(ref);
