@@ -96,6 +96,35 @@ function generateSlug(a: Partial<ParsedAnnonce>): string {
     .substring(0, 120);
 }
 
+// ── Reuse original live (WordPress) URLs for active listings ──
+// To preserve SEO URLs identically (not just 301-redirect the drift), an active
+// listing reuses its original live-site slug when one exists. The map is keyed by
+// the leading slug token (the listing reference, e.g. "mbvap160009848"/"370neot")
+// and built at deploy time from a snapshot of the live sitemap
+// (migration/live-annonce-slugs.txt) — see scripts/gen-live-slug-map.mjs. Stored
+// in R2 and read once per run (binding op, not a fetch subrequest).
+let _liveSlugMap: Record<string, string> | null = null;
+async function loadLiveSlugMap(env: Env): Promise<Record<string, string>> {
+  if (_liveSlugMap) return _liveSlugMap;
+  try {
+    const obj = await env.PHOTOS.get('annonces/live-slug-map.json');
+    _liveSlugMap = obj ? await obj.json() : {};
+  } catch {
+    _liveSlugMap = {};
+  }
+  return _liveSlugMap!;
+}
+
+function resolveSlug(generatedSlug: string, codePostal: string | null | undefined, map: Record<string, string>): string {
+  const tok = (generatedSlug || '').split('-')[0];
+  if (!tok) return generatedSlug;
+  const live = map[tok];
+  if (!live) return generatedSlug; // genuinely new listing → keep generated slug
+  const cp = (codePostal || '').toString().trim();
+  if (cp && !live.includes(cp)) return generatedSlug; // token-collision guard
+  return live;
+}
+
 function parseAnnonce(raw: any): ParsedAnnonce {
   const bien = raw.bien || {};
   const prestation = raw.prestation || {};
@@ -301,6 +330,11 @@ async function runSync(env: Env) {
     // 1. Fetch feed
     const annonces = await fetchFeed();
     stats.annoncesInFeed = annonces.length;
+
+    // 1b. Reuse original live URL slugs (URL parity). Must run BEFORE photo upload
+    // since R2 photo keys derive from a.slug.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 2. Upload photos to R2 (these are R2 subrequests, separate from D1 limit)
     const photoMap = new Map<string, string[]>();
@@ -803,6 +837,10 @@ async function runLbiImport(env: Env) {
     const annonces = parseLbiCsv(csvText);
     stats.annoncesInZip = annonces.length;
     console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
+
+    // Reuse original live URL slugs (URL parity) before photo upload + upsert.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 3. Upload photos to R2
     const photoMap = new Map<string, string[]>();
