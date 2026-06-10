@@ -13,13 +13,16 @@ const { expert, heading = 'Expert en charge de ce bien', showPhone = false } = A
 const displayName = (expert.title.split('|').pop() ?? expert.title)
   .split(/\s+[–\-]\s+/)[0]
   .trim();
+// Rental négociateurs: photo + name only, no link to a profile, no contact details
+// (Caroline, 08/06). The detail page is not linked from listings for these people.
+const photoOnly = !!expert.listingOnly;
 ---
 
 <aside class="expert-card">
   <h2 class="expert-card__heading">{heading}</h2>
   <div class="expert-card__body">
     {expert.photo && (
-      <a href={`/experts/${expert.slug}/`} class="expert-card__photo-link">
+      photoOnly ? (
         <img
           src={expert.photo}
           alt={displayName}
@@ -28,14 +31,29 @@ const displayName = (expert.title.split('|').pop() ?? expert.title)
           width="120"
           height="160"
         />
-      </a>
+      ) : (
+        <a href={`/experts/${expert.slug}/`} class="expert-card__photo-link">
+          <img
+            src={expert.photo}
+            alt={displayName}
+            class="expert-card__photo"
+            loading="lazy"
+            width="120"
+            height="160"
+          />
+        </a>
+      )
     )}
     <div class="expert-card__info">
-      <a href={`/experts/${expert.slug}/`} class="expert-card__name">
-        <strong>{displayName}</strong>
-      </a>
+      {photoOnly ? (
+        <span class="expert-card__name"><strong>{displayName}</strong></span>
+      ) : (
+        <a href={`/experts/${expert.slug}/`} class="expert-card__name">
+          <strong>{displayName}</strong>
+        </a>
+      )}
       {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
-      {(expert.email || (showPhone && expert.phone)) && (
+      {!photoOnly && (expert.email || (showPhone && expert.phone)) && (
         <div class="expert-card__contact">
           {expert.email && (
             <a href={`mailto:${expert.email}`} class="expert-card__email">

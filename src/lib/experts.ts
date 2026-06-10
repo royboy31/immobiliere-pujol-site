@@ -17,6 +17,7 @@ export interface Expert {
   seoTitle?: string;
   seoDescription?: string;
   department?: string;
+  listingOnly?: boolean;
 }
 
 const expertModules = import.meta.glob<Expert>(

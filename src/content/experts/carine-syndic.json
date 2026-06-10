@@ -1,12 +1,13 @@
 {
-  "title": "Carine – Syndic",
+  "title": "Carine Robbe – Directrice agence du 12ème",
   "slug": "carine-syndic",
-  "fonction": "Syndic",
+  "fonction": "Directrice agence du 12ème",
   "description": "",
   "photo": "/images/experts/carine-syndic.png",
   "email": "",
   "phone": "",
   "seoTitle": "Carine – Syndic",
   "seoDescription": "",
-  "department": "Syndic"
+  "department": "Direction",
+  "hidden": false
 }

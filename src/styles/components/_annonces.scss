@@ -519,6 +519,10 @@
   background: $white;
   font-family: $ds-font-noto;
   color: $black;
+  // Stop the first child's margin-top (annonce-nav--floating: 30px) from
+  // collapsing through and pushing the whole article down — that gap detached
+  // the closed-ribbon from the breadcrumb. 1px is invisible (white on white).
+  padding-top: 1px;
 }
 
 // Diagonal corner ribbon (top-left) for closed listings — mirrors the live

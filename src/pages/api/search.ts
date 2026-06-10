@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   // Allow ?source= filter for debugging
   const sourceFilter = url.searchParams.get('source');
-  const conditions: string[] = ["status = 'active'"];
+  const conditions: string[] = [];
   const bindings: any[] = [];
 
   if (sourceFilter && (sourceFilter === 'ubiflow' || sourceFilter === 'wordpress')) {
@@ -67,20 +67,30 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   if (q) {
-    conditions.push('(ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ?)');
+    // A query matches by reference (agency or ubiflow) in ANY status — so a
+    // reference/id finds the bien even when it is sold/archived — OR by
+    // location/title but only among ACTIVE listings (so a city/word search
+    // doesn't surface thousands of sold archive pages).
     const like = `%${q}%`;
-    bindings.push(like, like, like, like);
+    conditions.push(
+      '((reference_agence LIKE ? OR ubiflow_reference LIKE ?)' +
+      " OR (status = 'active' AND (ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ?)))"
+    );
+    bindings.push(like, like, like, like, like, like);
+  } else {
+    // No text query: browsing by filters only — active listings.
+    conditions.push("status = 'active'");
   }
 
   const where = conditions.join(' AND ');
 
   const countSql = `SELECT COUNT(*) as total FROM annonces WHERE ${where}`;
   const sql = `
-    SELECT id, slug, type_annonce, type_bien, titre, ville, quartier, code_postal,
+    SELECT id, slug, status, reference_agence, ubiflow_reference, type_annonce, type_bien, titre, ville, quartier, code_postal,
            prix, loyer_cc, surface, nb_pieces, nb_chambres
     FROM annonces
     WHERE ${where}
-    ORDER BY date_creation DESC
+    ORDER BY (status = 'active') DESC, date_creation DESC
     LIMIT 20
   `;
 
@@ -91,8 +101,19 @@ export const GET: APIRoute = async ({ request }) => {
     ]);
     const total = countResult?.total ?? 0;
 
+    // Collapse slug-drift duplicates: one card per reference (active row wins via
+    // the ORDER BY above), so a reference search never shows the same bien twice.
+    const seenRef = new Set<string>();
+    const rows = (results.results as any[]).filter((a: any) => {
+      const ref = (a.reference_agence || a.ubiflow_reference || '').toUpperCase();
+      if (!ref) return true;
+      if (seenRef.has(ref)) return false;
+      seenRef.add(ref);
+      return true;
+    });
+
     // Fetch first photo for each result
-    const ids = results.results.map((a: any) => a.id);
+    const ids = rows.map((a: any) => a.id);
     let photoMap = new Map<number, string>();
     if (ids.length > 0) {
       const photos = await db
@@ -110,12 +131,12 @@ export const GET: APIRoute = async ({ request }) => {
       }
     }
 
-    const data = results.results.map((a: any) => ({
+    const data = rows.map((a: any) => ({
       ...a,
       photo: photoMap.get(a.id) || null,
     }));
 
-    return new Response(JSON.stringify({ total, count: data.length, results: data }), {
+    return new Response(JSON.stringify({ total: data.length, count: data.length, results: data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
