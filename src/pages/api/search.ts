@@ -15,9 +15,16 @@ export const GET: APIRoute = async ({ request }) => {
   const budget = url.searchParams.get('budget');
   const q = url.searchParams.get('q');
 
+  // A full reference lookup (e.g. "MBVAP160009802", "LCVAP130009745") should find
+  // the bien whether it is still active or already sold/archived. Detected as a
+  // token with letters + a 4+ digit run and no spaces. Pure numbers / postal codes
+  // stay in the normal active search (reference is also matched there).
+  const isRefLookup = !!q && /[a-zA-Z]/.test(q) && /\d{4,}/.test(q) && !/\s/.test(q.trim());
+
   // Allow ?source= filter for debugging
   const sourceFilter = url.searchParams.get('source');
-  const conditions: string[] = ["status = 'active'"];
+  const conditions: string[] = [];
+  if (!isRefLookup) conditions.push("status = 'active'");
   const bindings: any[] = [];
 
   if (sourceFilter && (sourceFilter === 'ubiflow' || sourceFilter === 'wordpress')) {
@@ -67,20 +74,27 @@ export const GET: APIRoute = async ({ request }) => {
   }
 
   if (q) {
-    conditions.push('(ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ?)');
     const like = `%${q}%`;
-    bindings.push(like, like, like, like);
+    if (isRefLookup) {
+      // Precise reference lookup — match the agency/ubiflow reference, any status.
+      conditions.push('(reference_agence LIKE ? OR ubiflow_reference LIKE ?)');
+      bindings.push(like, like);
+    } else {
+      // General search — also match a (partial) reference so "9802" finds the bien.
+      conditions.push('(ville LIKE ? OR quartier LIKE ? OR adresse LIKE ? OR titre LIKE ? OR reference_agence LIKE ?)');
+      bindings.push(like, like, like, like, like);
+    }
   }
 
   const where = conditions.join(' AND ');
 
   const countSql = `SELECT COUNT(*) as total FROM annonces WHERE ${where}`;
   const sql = `
-    SELECT id, slug, type_annonce, type_bien, titre, ville, quartier, code_postal,
+    SELECT id, slug, status, reference_agence, type_annonce, type_bien, titre, ville, quartier, code_postal,
            prix, loyer_cc, surface, nb_pieces, nb_chambres
     FROM annonces
     WHERE ${where}
-    ORDER BY date_creation DESC
+    ORDER BY (status = 'active') DESC, date_creation DESC
     LIMIT 20
   `;
 
@@ -91,8 +105,19 @@ export const GET: APIRoute = async ({ request }) => {
     ]);
     const total = countResult?.total ?? 0;
 
+    // Collapse slug-drift duplicates: one card per reference (active row wins via
+    // the ORDER BY above), so a reference search never shows the same bien twice.
+    const seenRef = new Set<string>();
+    const rows = (results.results as any[]).filter((a: any) => {
+      const ref = (a.reference_agence || '').toUpperCase();
+      if (!ref) return true;
+      if (seenRef.has(ref)) return false;
+      seenRef.add(ref);
+      return true;
+    });
+
     // Fetch first photo for each result
-    const ids = results.results.map((a: any) => a.id);
+    const ids = rows.map((a: any) => a.id);
     let photoMap = new Map<number, string>();
     if (ids.length > 0) {
       const photos = await db
@@ -110,12 +135,12 @@ export const GET: APIRoute = async ({ request }) => {
       }
     }
 
-    const data = results.results.map((a: any) => ({
+    const data = rows.map((a: any) => ({
       ...a,
       photo: photoMap.get(a.id) || null,
     }));
 
-    return new Response(JSON.stringify({ total, count: data.length, results: data }), {
+    return new Response(JSON.stringify({ total: data.length, count: data.length, results: data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
