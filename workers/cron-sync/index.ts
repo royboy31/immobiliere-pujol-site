@@ -662,14 +662,33 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
   return annonces;
 }
 
+// LBI photo URLs are content-addressed and stable (…/photo_<hash>.jpg): an
+// unchanged photo keeps the same URL across exports, a replaced one gets a new
+// URL. So we derive the R2 key from that content hash instead of the position.
+// Result: a replaced photo → new key → re-download; unchanged → same key → skip.
+// (Position-based keys never changed, so replaced photos used to keep the old
+// image forever — the photo-update bug Caroline reported, 10 Jun.)
+function lbiPhotoKey(slug: string, srcUrl: string): string {
+  const m = srcUrl.match(/photo_([a-z0-9]+)/i) || srcUrl.match(/([a-f0-9]{24,})/i);
+  let token = m ? m[1] : '';
+  if (!token) {
+    let h = 2166136261 >>> 0; // FNV-1a fallback for non-LBI URL shapes
+    for (let i = 0; i < srcUrl.length; i++) { h ^= srcUrl.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    token = h.toString(16);
+  }
+  return `annonces/${slug}/${token.slice(0, 32)}.jpg`;
+}
+
 async function uploadLbiPhotos(
   bucket: R2Bucket,
   a: LbiAnnonce,
   stats: { photosUploaded: number; photosSkipped: number }
 ): Promise<string[]> {
   const r2Keys: string[] = [];
+  const wanted = new Set<string>();
   for (let i = 0; i < a.photos.length; i++) {
-    const key = `annonces/${a.slug}/${i}.jpg`;
+    const key = lbiPhotoKey(a.slug, a.photos[i]);
+    wanted.add(key);
     try {
       const head = await bucket.head(key);
       if (head) {
@@ -686,9 +705,17 @@ async function uploadLbiPhotos(
       r2Keys.push(key);
       stats.photosUploaded++;
     } catch {
-      r2Keys.push(a.photos[i]); // fallback to external URL
+      r2Keys.push(a.photos[i]); // fallback to external URL (will retry next sync)
     }
   }
+  // Delete R2 objects for this annonce that are no longer referenced: photos the
+  // agency replaced or removed, plus the old position-based keys from before this
+  // change. R2 list/delete are binding ops (not fetch subrequests).
+  try {
+    const listed = await bucket.list({ prefix: `annonces/${a.slug}/` });
+    const stale = listed.objects.map(o => o.key).filter(k => !wanted.has(k));
+    if (stale.length) await bucket.delete(stale);
+  } catch {}
   return r2Keys;
 }
 
