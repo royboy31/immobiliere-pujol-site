@@ -485,11 +485,18 @@ function parseSaleStatus(raw: string | undefined): string | null {
   return null; // 'Actif'/'En estimation'/empty → no special status
 }
 
-// A LBI sale whose field 136 is 'Vendu' or 'Mandat clos' is kept in the feed
-// ("Actuel" in Hektor) but must display as closed/archived: full closed template
-// (gallery + description + title + internal-links block), out of the active grids.
-function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' {
-  return saleStatus === 'vendu' || saleStatus === 'mandat-clos' ? 'closed' : 'active';
+// LBI field-136 terminal statuses map differently (the agency rule):
+//  - 'vendu'      → KEEP FOREVER: status 'closed' = full archive template (gallery
+//    + description + internal-links block), out of the active grids. The 'vendu'
+//    marker is persisted in the `termine` column and closed rows are never deleted,
+//    so it survives even after the bien leaves the flux (archived in Hektor).
+//  - 'mandat-clos' → DROP: status 'dropped'. Not served — the detail page 301s the
+//    URL to /annonces/, and it's excluded from active grids, sitemap and pools.
+//  - everything else → 'active'.
+function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' | 'dropped' {
+  if (saleStatus === 'mandat-clos') return 'dropped';
+  if (saleStatus === 'vendu') return 'closed';
+  return 'active';
 }
 
 // ── Expert email → photo path (for overlay on cards) ──

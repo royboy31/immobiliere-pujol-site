@@ -17,7 +17,8 @@ export const GET: APIRoute = async ({ request }) => {
 
   // Allow ?source= filter for debugging
   const sourceFilter = url.searchParams.get('source');
-  const conditions: string[] = [];
+  // Never surface dropped (mandat-clos) listings, even on a reference lookup.
+  const conditions: string[] = ["status != 'dropped'"];
   const bindings: any[] = [];
 
   if (sourceFilter && (sourceFilter === 'ubiflow' || sourceFilter === 'wordpress')) {
