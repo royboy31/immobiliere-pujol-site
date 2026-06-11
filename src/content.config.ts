@@ -81,6 +81,9 @@ const experts = defineCollection({
     // Section the expert appears under on the /experts/ index. One of:
     // "Direction" | "Vente" | "Gestion locative" | "Syndic" | "Contentieux".
     department: z.string().optional(),
+    // Google Calendar appointment-schedule URL — powers the "Réserver un
+    // rendez-vous" button on the expert page (Caroline, 11/06).
+    agenda: z.string().url().optional(),
   }),
 });
 

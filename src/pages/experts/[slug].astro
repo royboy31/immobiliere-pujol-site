@@ -171,6 +171,7 @@ try {
 
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
+const agendaLink = (expert as any).agenda as string | undefined;
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
 
@@ -249,6 +250,15 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
                     <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                   ENVOYER UN EMAIL
+                </a>
+              )}
+              {agendaLink && (
+                <a href={agendaLink} target="_blank" rel="noopener" class="btn-pill btn-pill--olive">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6" fill="none" />
+                    <path d="M3 9 L21 9 M8 3 L8 6 M16 3 L16 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                  </svg>
+                  RÉSERVER UN RENDEZ-VOUS
                 </a>
               )}
             </div>
@@ -462,6 +472,11 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         {expert.email && (
           <a href={mailtoLink} class="btn-pill btn-pill--ghost">
             ENVOYER UN EMAIL
+          </a>
+        )}
+        {agendaLink && (
+          <a href={agendaLink} target="_blank" rel="noopener" class="btn-pill btn-pill--olive">
+            RÉSERVER UN RENDEZ-VOUS
           </a>
         )}
       </div>
