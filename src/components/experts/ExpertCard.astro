@@ -117,27 +117,25 @@ const showEmail = !photoOnly && !!expert.email;
   .expert-card__inner {
     display: flex;
     gap: 2rem;
-    align-items: stretch;
+    align-items: center;
   }
 
-  /* Photo on the orange arch panel */
+  /* Photo in the same orange oval used on the /experts/ grid (border-radius
+     50% / 38%, head kept at the top via object-position: center top). */
   .expert-card__photo-wrap {
-    flex: 0 0 clamp(200px, 26%, 280px);
-    align-self: stretch;
-    min-height: 320px;
+    flex: 0 0 clamp(190px, 24%, 250px);
+    align-self: center;
+    aspect-ratio: 230 / 307;
     background: #e8662b;
-    border-radius: 130px 130px 18px 18px;
+    border-radius: 50% / 38%;
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
   }
   .expert-card__photo-link { display: contents; }
   .expert-card__photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: bottom center;
+    object-position: center top;
     display: block;
   }
 
@@ -242,16 +240,14 @@ const showEmail = !photoOnly && !!expert.email;
 
   /* Photo-only négociateurs: compact, no orange panel height, no CTAs */
   .expert-card--photo-only .expert-card__photo-wrap {
-    flex-basis: 150px;
-    min-height: 0;
-    border-radius: 80px 80px 14px 14px;
+    flex-basis: 160px;
   }
   .expert-card--photo-only .expert-card__main { justify-content: center; }
 
   @media (max-width: 720px) {
     .expert-card { padding: 1.5rem; }
     .expert-card__inner { flex-direction: column; align-items: center; text-align: center; gap: 1.4rem; }
-    .expert-card__photo-wrap { flex-basis: auto; width: 200px; min-height: 250px; }
+    .expert-card__photo-wrap { flex-basis: auto; width: 200px; }
     .expert-card__overline { justify-content: center; }
     .expert-card__divider { margin-left: auto; margin-right: auto; }
     .expert-card__tagline { margin-left: auto; margin-right: auto; }
