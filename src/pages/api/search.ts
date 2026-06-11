@@ -137,7 +137,7 @@ export const GET: APIRoute = async ({ request }) => {
       photo: photoMap.get(a.id) || null,
     }));
 
-    return new Response(JSON.stringify({ total: data.length, count: data.length, results: data }), {
+    return new Response(JSON.stringify({ total, count: data.length, results: data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
