@@ -18,6 +18,12 @@ const db = (env as any).DB as D1Database;
 // Single D1 lookup — handles both active and closed annonces
 const annonce = await getAnnonceBySlug(db, slug);
 
+// Mandat clos (LBI field 136) → the listing is dropped: 301 the URL to the
+// global annonces page (vs Vendu, which is kept forever as a closed archive).
+if (annonce && annonce.status === 'dropped') {
+  return Astro.redirect('/annonces/', 301);
+}
+
 // If found via prefix match (old WP slug → shorter D1 slug), redirect to canonical URL
 if (annonce && annonce.slug !== slug) {
   return Astro.redirect(`/annonces/${annonce.slug}/`, 301);

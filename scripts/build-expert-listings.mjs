@@ -73,7 +73,7 @@ async function main() {
     SELECT id, slug, status, source, reference_agence, ubiflow_reference,
       type_annonce, titre, prix, surface, nb_pieces, code_postal, ville,
       email_a_afficher, contact_a_afficher, date_creation
-    FROM annonces
+    FROM annonces WHERE status != 'dropped'
   `);
   console.log(`  ${rows.length} annonces`);
 

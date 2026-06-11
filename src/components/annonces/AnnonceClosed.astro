@@ -127,7 +127,6 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
       <p>Confiez-nous vos critères. Nous vous préviendrons dès qu'un bien équivalent rejoint notre catalogue.</p>
       <div class="annonce-cta-card__btns">
         <a href={similarHref} class={`btn-pill ${isLocation ? 'btn-pill--olive' : 'btn-pill--orange'}`}>{similarLabel}</a>
-        <a href="/contact-immobiliere-pujol/" class="btn-pill btn-pill--ghost">ÊTRE PRÉVENU PAR EMAIL</a>
         {!isLocation && (
           <a href="/services/demander-une-estimation-de-prix-de-vente/" class="btn-pill btn-pill--ghost">FAIRE ESTIMER VOTRE BIEN</a>
         )}
@@ -136,7 +135,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
     </div>
 
     <Fragment slot="action-below">
-      {expert && <ExpertCard expert={expert} />}
+      {expert && <ExpertCard expert={expert} showPhone={!isLocation} />}
       <AnnonceMap
         variant="sidebar"
         adresse={view.adresse}

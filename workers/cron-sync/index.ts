@@ -96,6 +96,35 @@ function generateSlug(a: Partial<ParsedAnnonce>): string {
     .substring(0, 120);
 }
 
+// ── Reuse original live (WordPress) URLs for active listings ──
+// To preserve SEO URLs identically (not just 301-redirect the drift), an active
+// listing reuses its original live-site slug when one exists. The map is keyed by
+// the leading slug token (the listing reference, e.g. "mbvap160009848"/"370neot")
+// and built at deploy time from a snapshot of the live sitemap
+// (migration/live-annonce-slugs.txt) — see scripts/gen-live-slug-map.mjs. Stored
+// in R2 and read once per run (binding op, not a fetch subrequest).
+let _liveSlugMap: Record<string, string> | null = null;
+async function loadLiveSlugMap(env: Env): Promise<Record<string, string>> {
+  if (_liveSlugMap) return _liveSlugMap;
+  try {
+    const obj = await env.PHOTOS.get('annonces/live-slug-map.json');
+    _liveSlugMap = obj ? await obj.json() : {};
+  } catch {
+    _liveSlugMap = {};
+  }
+  return _liveSlugMap!;
+}
+
+function resolveSlug(generatedSlug: string, codePostal: string | null | undefined, map: Record<string, string>): string {
+  const tok = (generatedSlug || '').split('-')[0];
+  if (!tok) return generatedSlug;
+  const live = map[tok];
+  if (!live) return generatedSlug; // genuinely new listing → keep generated slug
+  const cp = (codePostal || '').toString().trim();
+  if (cp && !live.includes(cp)) return generatedSlug; // token-collision guard
+  return live;
+}
+
 function parseAnnonce(raw: any): ParsedAnnonce {
   const bien = raw.bien || {};
   const prestation = raw.prestation || {};
@@ -210,8 +239,10 @@ async function uploadPhotos(
   stats: { photosUploaded: number }
 ): Promise<string[]> {
   const r2Urls: string[] = [];
+  const wanted = new Set<string>();
   for (let i = 0; i < a.photos.length; i++) {
-    const key = `annonces/${a.slug}/${i}.jpg`;
+    const key = photoR2Key(a.slug, a.photos[i]);
+    wanted.add(key);
     try {
       const head = await bucket.head(key);
       if (head) { r2Urls.push(key); continue; }
@@ -227,6 +258,13 @@ async function uploadPhotos(
       r2Urls.push(a.photos[i]);
     }
   }
+  // Delete R2 objects no longer referenced (replaced/removed photos + old
+  // position-based keys). R2 list/delete are binding ops, not fetch subrequests.
+  try {
+    const listed = await bucket.list({ prefix: `annonces/${a.slug}/` });
+    const stale = listed.objects.map(o => o.key).filter(k => !wanted.has(k));
+    if (stale.length) await bucket.delete(stale);
+  } catch {}
   return r2Urls;
 }
 
@@ -301,6 +339,11 @@ async function runSync(env: Env) {
     // 1. Fetch feed
     const annonces = await fetchFeed();
     stats.annoncesInFeed = annonces.length;
+
+    // 1b. Reuse original live URL slugs (URL parity). Must run BEFORE photo upload
+    // since R2 photo keys derive from a.slug.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 2. Upload photos to R2 (these are R2 subrequests, separate from D1 limit)
     const photoMap = new Map<string, string[]>();
@@ -442,11 +485,18 @@ function parseSaleStatus(raw: string | undefined): string | null {
   return null; // 'Actif'/'En estimation'/empty → no special status
 }
 
-// A LBI sale whose field 136 is 'Vendu' or 'Mandat clos' is kept in the feed
-// ("Actuel" in Hektor) but must display as closed/archived: full closed template
-// (gallery + description + title + internal-links block), out of the active grids.
-function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' {
-  return saleStatus === 'vendu' || saleStatus === 'mandat-clos' ? 'closed' : 'active';
+// LBI field-136 terminal statuses map differently (the agency rule):
+//  - 'vendu'      → KEEP FOREVER: status 'closed' = full archive template (gallery
+//    + description + internal-links block), out of the active grids. The 'vendu'
+//    marker is persisted in the `termine` column and closed rows are never deleted,
+//    so it survives even after the bien leaves the flux (archived in Hektor).
+//  - 'mandat-clos' → DROP: status 'dropped'. Not served — the detail page 301s the
+//    URL to /annonces/, and it's excluded from active grids, sitemap and pools.
+//  - everything else → 'active'.
+function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' | 'dropped' {
+  if (saleStatus === 'mandat-clos') return 'dropped';
+  if (saleStatus === 'vendu') return 'closed';
+  return 'active';
 }
 
 // ── Expert email → photo path (for overlay on cards) ──
@@ -662,17 +712,19 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
   return annonces;
 }
 
-// LBI photo URLs are content-addressed and stable (…/photo_<hash>.jpg): an
-// unchanged photo keeps the same URL across exports, a replaced one gets a new
-// URL. So we derive the R2 key from that content hash instead of the position.
-// Result: a replaced photo → new key → re-download; unchanged → same key → skip.
-// (Position-based keys never changed, so replaced photos used to keep the old
-// image forever — the photo-update bug Caroline reported, 10 Jun.)
-function lbiPhotoKey(slug: string, srcUrl: string): string {
+// Derive the R2 key from the photo's SOURCE URL so a replaced photo (new URL) →
+// new key → re-download, while an unchanged photo (same URL) → same key → skip.
+// Both feeds change the URL when the photo changes: LBI is content-addressed
+// (…/photo_<hash>.jpg); Ubiflow keeps a position path but carries a per-listing
+// timestamp in the query (…/5.jpg?..._20260605084542) that bumps on any photo
+// edit. We key on the LBI content hash when present, else a hash of the full URL
+// (which captures the Ubiflow timestamp). Position-based keys never changed, so
+// replaced photos used to keep the old image forever — the bug Caroline reported.
+function photoR2Key(slug: string, srcUrl: string): string {
   const m = srcUrl.match(/photo_([a-z0-9]+)/i) || srcUrl.match(/([a-f0-9]{24,})/i);
   let token = m ? m[1] : '';
   if (!token) {
-    let h = 2166136261 >>> 0; // FNV-1a fallback for non-LBI URL shapes
+    let h = 2166136261 >>> 0; // FNV-1a of the full URL (captures Ubiflow timestamp)
     for (let i = 0; i < srcUrl.length; i++) { h ^= srcUrl.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
     token = h.toString(16);
   }
@@ -687,7 +739,7 @@ async function uploadLbiPhotos(
   const r2Keys: string[] = [];
   const wanted = new Set<string>();
   for (let i = 0; i < a.photos.length; i++) {
-    const key = lbiPhotoKey(a.slug, a.photos[i]);
+    const key = photoR2Key(a.slug, a.photos[i]);
     wanted.add(key);
     try {
       const head = await bucket.head(key);
@@ -803,6 +855,10 @@ async function runLbiImport(env: Env) {
     const annonces = parseLbiCsv(csvText);
     stats.annoncesInZip = annonces.length;
     console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
+
+    // Reuse original live URL slugs (URL parity) before photo upload + upsert.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 3. Upload photos to R2
     const photoMap = new Map<string, string[]>();

@@ -16,59 +16,55 @@ const displayName = (expert.title.split('|').pop() ?? expert.title)
 // Rental négociateurs: photo + name only, no link to a profile, no contact details
 // (Caroline, 08/06). The detail page is not linked from listings for these people.
 const photoOnly = !!expert.listingOnly;
+const phoneClean = (expert.phone || '').replace(/\s/g, '');
+// Agenda (book-a-meeting) lives on the expert page only for now (Caroline, 11/06),
+// so the annonce box only carries email + call and links through to the profile.
+const profileHref = `/experts/${expert.slug}/`;
 ---
 
 <aside class="expert-card">
   <h2 class="expert-card__heading">{heading}</h2>
-  <div class="expert-card__body">
+  <div class="expert-card__top">
     {expert.photo && (
       photoOnly ? (
-        <img
-          src={expert.photo}
-          alt={displayName}
-          class="expert-card__photo"
-          loading="lazy"
-          width="120"
-          height="160"
-        />
+        <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="150" height="180" />
       ) : (
-        <a href={`/experts/${expert.slug}/`} class="expert-card__photo-link">
-          <img
-            src={expert.photo}
-            alt={displayName}
-            class="expert-card__photo"
-            loading="lazy"
-            width="120"
-            height="160"
-          />
+        <a href={profileHref} class="expert-card__photo-link">
+          <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="150" height="180" />
         </a>
       )
     )}
     <div class="expert-card__info">
       {photoOnly ? (
-        <span class="expert-card__name"><strong>{displayName}</strong></span>
+        <span class="expert-card__name">{displayName}</span>
       ) : (
-        <a href={`/experts/${expert.slug}/`} class="expert-card__name">
-          <strong>{displayName}</strong>
-        </a>
+        <a href={profileHref} class="expert-card__name">{displayName}</a>
       )}
       {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
-      {!photoOnly && (expert.email || (showPhone && expert.phone)) && (
-        <div class="expert-card__contact">
-          {expert.email && (
-            <a href={`mailto:${expert.email}`} class="expert-card__email">
-              {expert.email}
-            </a>
-          )}
-          {showPhone && expert.phone && (
-            <a href={`tel:${expert.phone}`} class="expert-card__phone">
-              {expert.phone.replace(/(\d{2})(?=\d)/g, '$1 ')}
-            </a>
-          )}
-        </div>
-      )}
     </div>
   </div>
+
+  {!photoOnly && (expert.email || (showPhone && expert.phone)) && (
+    <div class="expert-card__ctas">
+      {showPhone && expert.phone && (
+        <a href={`tel:${phoneClean}`} class="btn-pill btn-pill--olive expert-card__cta">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 4 L9 4 L11 9 L8 11 a12 12 0 0 0 5 5 L15 13 L20 15 L20 19 a1 1 0 0 1 -1 1 A16 16 0 0 1 4 5 a1 1 0 0 1 1 -1 z" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linejoin="round" />
+          </svg>
+          APPELER
+        </a>
+      )}
+      {expert.email && (
+        <a href={`mailto:${expert.email}`} class="btn-pill btn-pill--ghost expert-card__cta">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" fill="none" />
+            <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          ENVOYER UN EMAIL
+        </a>
+      )}
+    </div>
+  )}
 </aside>
 
 <style>
@@ -76,49 +72,66 @@ const photoOnly = !!expert.listingOnly;
     margin: 2rem 0;
     padding: 1.5rem;
     border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    background: #fafafa;
+    border-radius: 12px;
+    background: #fff;
   }
   .expert-card__heading {
-    margin: 0 0 1rem;
-    font-size: 1.125rem;
+    margin: 0 0 1.1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #55666f;
+    text-align: center;
   }
-  .expert-card__body {
+  .expert-card__top {
     display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
+    gap: 1.1rem;
+    align-items: center;
   }
+  .expert-card__photo-link { display: block; flex-shrink: 0; }
   .expert-card__photo {
-    width: 120px;
-    height: 160px;
+    width: 138px;
+    height: 172px;
     object-fit: cover;
-    border-radius: 6px;
+    object-position: top center;
+    border-radius: 10px;
     display: block;
+    flex-shrink: 0;
+    background: #f2f2f2;
   }
   .expert-card__info {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.25rem;
+    min-width: 0;
   }
   .expert-card__name {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
     text-decoration: none;
-    color: inherit;
+    color: #1f2a30;
   }
+  a.expert-card__name:hover { text-decoration: underline; }
   .expert-card__fonction {
     margin: 0;
-    color: #555;
-    font-size: 0.95rem;
+    color: #55666f;
+    font-size: 0.92rem;
+    line-height: 1.3;
   }
-  .expert-card__contact {
+  .expert-card__ctas {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    font-size: 0.9rem;
-    margin-top: 0.4rem;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+  }
+  .expert-card__cta {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
   }
   @media (max-width: 480px) {
-    .expert-card__body { flex-direction: column; align-items: center; text-align: center; }
-    .expert-card__contact { align-items: center; }
+    .expert-card__top { flex-direction: column; text-align: center; align-items: center; }
   }
 </style>
