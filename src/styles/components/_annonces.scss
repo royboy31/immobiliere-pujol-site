@@ -1030,6 +1030,14 @@
 }
 
 // ----- Performance énergétique -----
+// Full-width "Expert en charge de ce bien" band below the hero. The card
+// centres itself (max-width set in the component); this just supplies the
+// page side gutter on narrow screens.
+.annonce-expert-section {
+  padding: 10px $ds-side-pad 20px;
+  background: $white;
+}
+
 .annonce-perf {
   padding: 30px $ds-side-pad 50px;
   background: $white;
