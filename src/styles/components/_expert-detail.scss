@@ -131,6 +131,15 @@
   ul, ol { padding-left: 22px; margin: 0 0 16px; }
   li { margin: 0 0 6px; }
 
+  // Lead quote at the top of each bio (set in the expert JSON description).
+  .expert-bio-quote {
+    font-size: 20px;
+    line-height: 1.4;
+    color: var(--expert-accent, #{$ds-olive});
+    margin: 0 0 24px;
+    em { color: inherit; font-style: italic; }
+  }
+
   iframe {
     width: 100%;
     max-width: 720px;

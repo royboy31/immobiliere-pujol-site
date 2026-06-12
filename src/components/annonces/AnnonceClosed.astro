@@ -120,6 +120,8 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
           </dl>
         </section>
       )}
+
+      {expert && <ExpertCard expert={expert} showPhone={!isLocation} />}
     </Fragment>
 
     <div slot="action" class="annonce-cta-card annonce-cta-card--closed">
@@ -135,7 +137,6 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
     </div>
 
     <Fragment slot="action-below">
-      {expert && <ExpertCard expert={expert} showPhone={!isLocation} />}
       <AnnonceMap
         variant="sidebar"
         adresse={view.adresse}

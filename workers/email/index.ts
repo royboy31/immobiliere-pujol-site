@@ -125,10 +125,27 @@ Vous aurez un retour sous peu.</p>
   signoff: "L'équipe Immobilière Pujol",
 };
 
-function buildCustomerEmail(vars: { prénom?: string }): string {
+// Specific auto-reply for the general contact form when the dropdown = "Location"
+// (Caroline 11/06). Replaces the unified reply for that case only; the greeting
+// + signoff are supplied by the branded wrapper, so the body starts after them.
+const LOCATION_AUTO_REPLY = {
+  subject: 'Votre recherche/demande de location – prochaines étapes',
+  body: `<p>Nous faisons suite à votre demande de contact dans le cadre de votre recherche de location.</p>
+<p>Nos annonces <strong>disponibles</strong> sont mises à jour quotidiennement sur notre site&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a></p>
+<p style="margin:16px 0 8px"><strong>Si votre demande concerne un bien en particulier&nbsp;:</strong><br>
+Nous vous invitons à vérifier que l'annonce est bien publiée actuellement sur notre site (et non marquée clôturée)&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a>. Si c'est le cas, nous vous demandons de faire votre demande directement depuis l'annonce concernée. Un email vous sera alors envoyé afin de compléter une fiche de renseignements, indispensable pour organiser une éventuelle visite et étudier votre dossier.</p>
+<p style="margin:8px 0"><strong>Si vous êtes en recherche active&nbsp;:</strong><br>
+Nous vous conseillons de consulter régulièrement notre site afin de ne manquer aucune nouvelle opportunité.</p>
+<p>Nous restons à votre disposition et vous souhaitons une belle journée.</p>`,
+  signoff: 'Le service Location',
+};
+
+function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string }): string {
   const greeting = vars.prénom
     ? `Bonjour ${esc(vars.prénom)},`
     : 'Bonjour,';
+  const bodyHtml = vars.bodyHtml ?? UNIFIED_AUTO_REPLY.body;
+  const signoff = vars.signoff ?? UNIFIED_AUTO_REPLY.signoff;
 
   return `
 <!DOCTYPE html>
@@ -153,10 +170,10 @@ function buildCustomerEmail(vars: { prénom?: string }): string {
           <p style="margin:0 0 16px;font-size:15px;color:#0f1a2b;font-weight:600">${greeting}</p>
 
           <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
-            ${UNIFIED_AUTO_REPLY.body}
+            ${bodyHtml}
           </div>
 
-          <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(UNIFIED_AUTO_REPLY.signoff)}</p>
+          <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(signoff)}</p>
 
         </td></tr>
 
@@ -235,12 +252,13 @@ async function sendAutoReply(
   prénom: string,
   fromEmail?: string,
   fromName?: string,
+  template?: { subject: string; body: string; signoff?: string },
 ): Promise<void> {
   if (!customerEmail || !customerEmail.includes('@')) return;
   try {
     await sendEmail(env, {
-      subject: UNIFIED_AUTO_REPLY.subject,
-      html: buildCustomerEmail({ prénom }),
+      subject: template?.subject ?? UNIFIED_AUTO_REPLY.subject,
+      html: buildCustomerEmail({ prénom, bodyHtml: template?.body, signoff: template?.signoff }),
       to: customerEmail,
       fromEmail: fromEmail || 'contact@immobiliere-pujol.fr',
       fromName: fromName || 'Immobilière Pujol',
@@ -633,9 +651,10 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
     fromName = route.fromName;
 
     if (!route.to) {
-      // Location deflection — only send auto-reply, no internal notification
+      // Location deflection — only send the location-specific auto-reply
+      // (Caroline 11/06), no internal notification.
       if (replyTo) {
-        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName);
+        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName, LOCATION_AUTO_REPLY);
       }
       await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
       return { ok: true };
