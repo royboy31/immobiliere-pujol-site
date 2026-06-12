@@ -157,8 +157,8 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
         <!-- Header -->
-        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
-          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        <tr><td style="background-color:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto">
         </td></tr>
 
         <!-- Green accent bar -->
@@ -207,6 +207,9 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
                   9h – 12h / 14h – 18h<br><br>
                   Vendredi<br>
                   9h – 12h / 14h – 17h
+                </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Accueil à l'agence sur rendez-vous uniquement
                 </p>
               </td>
             </tr>
@@ -287,8 +290,8 @@ function buildTable(subject: string, rows: [string, string][]): string {
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
         <!-- Header -->
-        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
-          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        <tr><td style="background-color:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto">
         </td></tr>
 
         <!-- Green accent bar -->
@@ -344,6 +347,9 @@ function buildTable(subject: string, rows: [string, string][]): string {
                   9h – 12h / 14h – 18h<br><br>
                   Vendredi<br>
                   9h – 12h / 14h – 17h
+                </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Accueil à l'agence sur rendez-vous uniquement
                 </p>
               </td>
             </tr>
