@@ -258,7 +258,7 @@ if (annonce) {
 }
 
 // Load a small set of similar annonces for "Biens similaires"
-const similarAnnonces = await getSimilarPool(db, slug, view.type, view.codePostal ?? null);
+const similarAnnonces = await getSimilarPool(db, slug, view.type, annonce.type_bien ?? null, view.codePostal ?? null);
 const pool = similarAnnonces.map(a => ({
   id: String(a.id),
   reference: a.ubiflow_reference || a.reference_agence || '',
