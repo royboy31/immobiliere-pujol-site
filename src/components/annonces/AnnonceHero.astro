@@ -202,7 +202,6 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
             )}
             {photos.map((p, i) => (
               <li class="lc-slide" role="img" aria-label={`${view.titre} – photo ${i + 1}`}>
-                <span class="lc-slide__bg" style={`background-image:url('${p}')`} aria-hidden="true"></span>
                 <img class="lc-slide__img" src={p} alt={`${view.titre} – photo ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
               </li>
             ))}
