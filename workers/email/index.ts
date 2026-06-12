@@ -177,14 +177,11 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
 
         </td></tr>
 
-        <!-- RGPD notice -->
-        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
-          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
-          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
-            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">${RGPD_URL}</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#999;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
-          </p>
-          <p style="margin:8px 0 0;font-size:11px;color:#999;line-height:1.5">
-            Si vous êtes un fournisseur, pour mener à bien l'ordre de service ci-dessus défini, l'Immobilière Pujol vous transmet des informations qui peuvent contenir des données à caractère personnel. Il vous incombe de respecter le droit en vigueur en matière de protection des données personnelles à l'occasion du traitement de données personnelles que vous allez réaliser en qualité de responsable de traitement.
+        <!-- RGPD notice — compact (Caroline 12/06: minimal space) -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 14px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 8px">
+          <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
+            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#aaa;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
           </p>
         </td></tr>
 
@@ -316,14 +313,11 @@ function buildTable(subject: string, rows: [string, string][]): string {
 
         </td></tr>
 
-        <!-- RGPD notice -->
-        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
-          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
-          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
-            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">${RGPD_URL}</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#999;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
-          </p>
-          <p style="margin:8px 0 0;font-size:11px;color:#999;line-height:1.5">
-            Si vous êtes un fournisseur, pour mener à bien l'ordre de service ci-dessus défini, l'Immobilière Pujol vous transmet des informations qui peuvent contenir des données à caractère personnel. Il vous incombe de respecter le droit en vigueur en matière de protection des données personnelles à l'occasion du traitement de données personnelles que vous allez réaliser en qualité de responsable de traitement.
+        <!-- RGPD notice — compact (Caroline 12/06: minimal space) -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 14px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 8px">
+          <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
+            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#aaa;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
           </p>
         </td></tr>
 
