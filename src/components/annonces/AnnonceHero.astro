@@ -45,6 +45,13 @@ const badgeModifier = view.isClosed
     ? 'annonce-hero__badge--location'
     : '';
 
+// "Nombre d'étages" (building floors) is only meaningful when > 0. The feed
+// often sends "0" (e.g. bureaux/locaux), which must not render as "0".
+const nbEtagesNum = parseInt(String(view.nbEtages ?? ''), 10);
+const hasNbEtages = Number.isFinite(nbEtagesNum) && nbEtagesNum > 0;
+// "Étage" is the floor the property sits on; "0" is a valid value (RDC).
+const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
+
 const photos = view.photos ?? [];
 const lead = photos[0];
 
@@ -124,7 +131,7 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
             <span class="annonce-hero__stat-val">{view.nbChambres}</span>
           </li>
         )}
-        {view.etage !== undefined && view.etage !== '' && view.etage !== null && (
+        {hasEtage && (
           <li class="annonce-hero__stat">
             <span class="annonce-hero__stat-ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -132,10 +139,10 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
               </svg>
             </span>
             <span class="annonce-hero__stat-label">Étage</span>
-            <span class="annonce-hero__stat-val">{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</span>
+            <span class="annonce-hero__stat-val">{view.etage}{hasNbEtages ? `/${view.nbEtages}` : ''}</span>
           </li>
         )}
-        {(view.etage === undefined || view.etage === '' || view.etage === null) && view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null && (
+        {!hasEtage && hasNbEtages && (
           <li class="annonce-hero__stat">
             <span class="annonce-hero__stat-ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
