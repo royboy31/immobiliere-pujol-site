@@ -219,10 +219,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         </header>
 
         {expert.description ? (
-          <>
-            <h2 class="expert-body__heading">À propos de <b>{firstName}</b></h2>
-            <div class="expert-bio-content" set:html={expert.description}></div>
-          </>
+          <div class="expert-bio-content" set:html={expert.description}></div>
         ) : (
           <p class="expert-body__empty">Pas de description disponible pour cet expert.</p>
         )}
