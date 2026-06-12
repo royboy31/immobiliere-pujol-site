@@ -410,6 +410,34 @@
   scroll-snap-stop: always;
 }
 
+// Hero gallery: show the FULL photo (Caroline sometimes adds text near the
+// edges, which a cover-crop would cut off). A blurred, scaled copy of the same
+// image fills the frame behind it so there are no empty letterbox bars.
+.lc-photos--hero .lc-slide {
+  position: relative;
+  background: none;
+  overflow: hidden;
+  cursor: zoom-in;
+
+  .lc-slide__bg {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(22px) brightness(0.82);
+    transform: scale(1.18);
+  }
+  .lc-slide__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+  }
+}
+
 .lc-empty {
   display: grid;
   place-items: center;
