@@ -70,6 +70,22 @@
     }
   }
 
+  &__secteur {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding: 7px 14px 7px 11px;
+    border: 1px solid $ds-hairline;
+    border-radius: 999px;
+    font-size: 15px;
+    color: $ds-ink;
+    background: $white;
+
+    svg { flex: none; color: var(--expert-accent, #{$ds-orange}); }
+    b { font-weight: 700; color: $black; }
+  }
+
   &__heading {
     font-family: $ds-font-helv;
     font-weight: 300;

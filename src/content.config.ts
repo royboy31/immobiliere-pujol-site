@@ -84,6 +84,9 @@ const experts = defineCollection({
     // Google Calendar appointment-schedule URL — powers the "Réserver un
     // rendez-vous" button on the expert page (Caroline, 11/06).
     agenda: z.string().url().optional(),
+    // Arrondissements / zone the expert covers, shown under the role on the
+    // expert page (Caroline doc 11/06). E.g. "Marseille Est & Nord : 13011, 13012".
+    secteur: z.string().optional(),
   }),
 });
 
