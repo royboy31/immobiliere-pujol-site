@@ -81,6 +81,10 @@ const experts = defineCollection({
     // Section the expert appears under on the /experts/ index. One of:
     // "Direction" | "Vente" | "Gestion locative" | "Syndic" | "Contentieux".
     department: z.string().optional(),
+    // Manual sort position within a department on the /experts/ index (lower
+    // first). Cards without an order keep their default (alphabetical) order
+    // after the ordered ones. Caroline's ordering, video review 12/06.
+    order: z.number().optional(),
     // Google Calendar appointment-schedule URL — powers the "Réserver un
     // rendez-vous" button on the expert page (Caroline, 11/06).
     agenda: z.string().url().optional(),
