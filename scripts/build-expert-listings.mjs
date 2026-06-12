@@ -77,13 +77,23 @@ async function main() {
   `);
   console.log(`  ${rows.length} annonces`);
 
-  // 2. Dedup slug-drift: one row per reference, best source wins.
+  // 2. Dedup slug-drift: one row per reference.
+  //    LBI is the live management feed and the source of truth for STATUS: a
+  //    sold bien is LBI field-136 Vendu→closed, and a bien back on the market is
+  //    LBI active. So when a reference has an LBI row, it wins — otherwise a
+  //    stale ubiflow "closed" record would keep a re-listed (LBI active) property
+  //    in an expert's "Vendus". Without an LBI row, fall back to source priority
+  //    for historical biens (only ever in ubiflow/wordpress).
   const refMap = new Map();
   for (const a of rows) {
     const ref = (a.reference_agence || a.ubiflow_reference || '').toLowerCase();
     const key = ref || `slug:${a.slug}`;
     const ex = refMap.get(key);
-    if (!ex || (SOURCE_PRIORITY[a.source] ?? 9) < (SOURCE_PRIORITY[ex.source] ?? 9)) {
+    if (!ex) {
+      refMap.set(key, a);
+    } else if (a.source === 'lbi' && ex.source !== 'lbi') {
+      refMap.set(key, a); // LBI always wins — live status truth
+    } else if (ex.source !== 'lbi' && (SOURCE_PRIORITY[a.source] ?? 9) < (SOURCE_PRIORITY[ex.source] ?? 9)) {
       refMap.set(key, a);
     }
   }
