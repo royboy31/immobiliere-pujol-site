@@ -232,7 +232,6 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
             </td></tr>
             <tr><td align="center">
               <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
-                Agence immobilière indépendante à Marseille depuis 2002.<br>
                 Vente, location, gestion locative et syndic de copropriété.
               </p>
             </td></tr>
@@ -374,7 +373,6 @@ function buildTable(subject: string, rows: [string, string][]): string {
             </td></tr>
             <tr><td align="center">
               <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
-                Agence immobilière indépendante à Marseille depuis 2002.<br>
                 Vente, location, gestion locative et syndic de copropriété.
               </p>
             </td></tr>
