@@ -26,7 +26,7 @@ Une simple affirmation de &nbsp;Mr Moalic, patron de l’Adil, a suffi à clore 
 <blockquote>«&nbsp;A<em>&nbsp;Marseille il y a des marchés tendus où beaucoup veulent vivre et des marchés détendus où peu d’habitants veulent vivre</em>&nbsp;».</blockquote>
 Une vérité toute conne à dire.
 
-<figure id="attachment_5787" aria-describedby="caption-attachment-5787" style="width: 352px" class="wp-caption alignright"><img loading="lazy" decoding="async" class="wp-image-5787 " src="https://www.immobiliere-pujol.fr/content/uploads/2014/07/marché-immobilier-marseille-tendu.jpg" alt="Marseille a-e-t-elle un marché immobilier tendu?" width="352" height="199"><figcaption id="caption-attachment-5787" class="wp-caption-text">Marseille souffre-t’elle réellement d’un marché immobilier tendu?</figcaption></figure>
+<figure id="attachment_5787" aria-describedby="caption-attachment-5787" style="width: 352px" class="wp-caption alignright"><img loading="lazy" decoding="async" class="wp-image-5787 " src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2014/07/marché-immobilier-marseille-tendu.jpg" alt="Marseille a-e-t-elle un marché immobilier tendu?" width="352" height="199"><figcaption id="caption-attachment-5787" class="wp-caption-text">Marseille souffre-t’elle réellement d’un marché immobilier tendu?</figcaption></figure>
 
 Ce ne sont pas mes confrères, &nbsp;qui pourtant ont affirmé que les loyers baissaient de 10 à 30%, &nbsp;qui ont mis le moindre doute à ces «&nbsp;observateurs&nbsp;».
 
@@ -71,7 +71,7 @@ Je ne vous dirai donc que ce que j’ai fait ce dernier trimestre et ce que je c
 <strong>Mon agence a conclu 8 ventes ce trimestre et signé 5 compromis</strong>.
 <h3>Ce que l’on constate, c’est que&nbsp;:</h3>
 <ul>
- 	<li>Les <strong>prix sont en baisse de &nbsp;3 à 4%</strong> et au moins 20% dans les quartiers nord.&nbsp;<img loading="lazy" decoding="async" class="wp-image-8468 alignright" src="https://www.immobiliere-pujol.fr/content/uploads/2016/12/complexité.jpg" alt="l'immobilier est une aventure" width="318" height="212"></li>
+ 	<li>Les <strong>prix sont en baisse de &nbsp;3 à 4%</strong> et au moins 20% dans les quartiers nord.&nbsp;<img loading="lazy" decoding="async" class="wp-image-8468 alignright" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2016/12/complexité.jpg" alt="l'immobilier est une aventure" width="318" height="212"></li>
  	<li>La ristourne obtenue par les acheteur serait de 7% sur le dernier prix de publicité.</li>
  	<li>Beaucoup de petites surfaces sont présentées du studio au T2 contrairement au &nbsp;T3 et les T4 dont les stocks baissent et qui du coup se vendent mieux et plus rapidement.</li>
  	<li><strong>Le nombre de biens à vendre s’accumule</strong> sauf dans les quartiers centraux ou l’offre demeure stable.</li>

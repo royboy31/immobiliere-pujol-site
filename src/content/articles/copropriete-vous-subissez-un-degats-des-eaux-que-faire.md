@@ -5,7 +5,7 @@ date: "2019-12-14"
 excerpt: "C’est quand votre appartement subit un dégât des eaux, que l’on commence bien souvent à se poser des questions sur son assurance, le rôle de l’assurance du v..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2019/12/Photo-dégat-des-eaux-n°4-le-06062007.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2019/12/Photo-dégat-des-eaux-n°4-le-06062007.jpg"
 seoTitle: "Copropriété : vous subissez un dégâts des eaux : que faire ?"
 seoDescription: "Copropriété : vous subissez un dégâts des eaux : que faire ? qui paye ? qui est responsable ? Suis-je bien couvert par mon assurance ?"
 ---

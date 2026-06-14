@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAnnonceBySlug, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
+import { getAnnonceBySlug, getActiveSlugByReference, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
 import { findExpertByEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
@@ -18,9 +18,27 @@ const db = (env as any).DB as D1Database;
 // Single D1 lookup — handles both active and closed annonces
 const annonce = await getAnnonceBySlug(db, slug);
 
+// Mandat clos (LBI field 136) → the listing is dropped: 301 the URL to the
+// global annonces page (vs Vendu, which is kept forever as a closed archive).
+if (annonce && annonce.status === 'dropped') {
+  return Astro.redirect('/annonces/', 301);
+}
+
 // If found via prefix match (old WP slug → shorter D1 slug), redirect to canonical URL
 if (annonce && annonce.slug !== slug) {
   return Astro.redirect(`/annonces/${annonce.slug}/`, 301);
+}
+
+// Slug-drift case: this URL resolves to a CLOSED row, but the same property is
+// active under another slug (the live flux minted a new slug, e.g. `…-marseille`
+// vs the old scraped `…-marseille-france`). 301 the old indexed URL to the active
+// listing so it never shows a stale "vendu" template. No active sibling → the
+// property is genuinely sold, so we keep showing the closed page.
+if (annonce && annonce.status === 'closed') {
+  const activeSlug = await getActiveSlugByReference(db, annonce.reference_agence, annonce.ubiflow_reference);
+  if (activeSlug && activeSlug !== slug) {
+    return Astro.redirect(`/annonces/${activeSlug}/`, 301);
+  }
 }
 
 let closedAsset: ClosedAnnonce | null = null;
@@ -240,7 +258,7 @@ if (annonce) {
 }
 
 // Load a small set of similar annonces for "Biens similaires"
-const similarAnnonces = await getSimilarPool(db, slug, view.type, view.codePostal ?? null);
+const similarAnnonces = await getSimilarPool(db, slug, view.type, annonce.type_bien ?? null, view.codePostal ?? null);
 const pool = similarAnnonces.map(a => ({
   id: String(a.id),
   reference: a.ubiflow_reference || a.reference_agence || '',
@@ -324,6 +342,7 @@ if (isClosed) {
     url: `/annonces/${a.slug}/`,
     title: a.titre || a.libelleType || 'Bien immobilier',
     type: 'autre',
+    image: Array.isArray(a.photos) && a.photos[0] ? a.photos[0] : undefined,
   }));
   const services = pickRotatedLinks(linkPool.filter((l) => l.type === 'service'), seed, 8);
   const articles = pickRotatedLinks(linkPool.filter((l) => l.type === 'article'), seed, 10);
@@ -332,6 +351,19 @@ if (isClosed) {
 
 const pageTitle = `${view.titre} – Immobilière Pujol`;
 const pageDescription = view.description ? view.description.substring(0, 160) : pageTitle;
+
+// Breadcrumb trail matching the live site:
+//   Accueil › Annonces › {Vente|Location} dans le {CP} › {titre}
+const isLoc = view.type === 'L';
+const cpLabel = `${isLoc ? 'Location' : 'Vente'}${view.codePostal ? ` dans le ${view.codePostal}` : ''}`;
+// Link to the listing page with the arrondissement filter pre-applied (FilterBar
+// reads ?cp=<codePostal> on load), so the crumb actually filters by 13011.
+const listBase = isLoc ? '/annonces/locations/' : '/annonces/ventes/';
+const cpHref = view.codePostal ? `${listBase}?cp=${view.codePostal}` : listBase;
+const breadcrumbCrumbs = [
+  { label: 'Annonces', href: '/annonces/' },
+  { label: cpLabel, href: cpHref },
+];
 
 const annonceUrl = new URL(`/annonces/${slug}/`, Astro.site).toString();
 const listingSchema = buildRealEstateListing({
@@ -350,7 +382,7 @@ const listingSchema = buildRealEstateListing({
 }, annonceUrl);
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]}>
+<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]} breadcrumbCrumbs={breadcrumbCrumbs}>
   {!view.isClosed ? (
     <AnnonceLive
       view={view}

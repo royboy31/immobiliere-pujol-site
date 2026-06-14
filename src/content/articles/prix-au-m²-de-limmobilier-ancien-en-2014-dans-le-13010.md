@@ -5,12 +5,12 @@ date: "2014-09-11"
 excerpt: "♦ Les prix moyens des loyers dans le 10eme arrondissement  (en €/m² source clameur) Le prix des loyers dans le 13010 s’est élevé  en 2014 en moyenne à 12,08€ le m², prix restés stables par rapport à 2013.   13010 Studio/T1  14,62 T2  12,75 T3  10,50 T4   10,45 Total 12,08…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13010", "Arrondissements Marseille", "Arrondissement 13010 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2018/01/photo-marseille.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2018/01/photo-marseille.jpeg"
 seoTitle: "Prix au m² de l’immobilier ancien en 2014 dans le 13010"
 seoDescription: "♦ Les prix moyens des loyers dans le 10eme arrondissement  (en €/m² source clameur) Le prix des loyers dans le 13010 s’est élevé  en 2014 en moyenne à 12,08€ le m², prix restés stables par rapport à 2013.   13010 Studio/T1  14,62 T2  12,75 T3  10,50 T4   10,45 Total 12,08…"
 ---
 
-<h3 style="text-align: center;"><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/09/IGP0386.jpg" rel="attachment wp-att-7494"><img loading="lazy" decoding="async" class="alignnone wp-image-7494" src="https://www.immobiliere-pujol.fr/content/uploads/2015/09/IGP0386.jpg" alt="_IGP0386" width="498" height="313" /></a></h3>
+<h3 style="text-align: center;"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/09/IGP0386.jpg" rel="attachment wp-att-7494"><img loading="lazy" decoding="async" class="alignnone wp-image-7494" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/09/IGP0386.jpg" alt="_IGP0386" width="498" height="313" /></a></h3>
 <h3><span style="color: #ff6600;"> ♦ Les prix moyens des loyers dans le 10eme arrondissement  (en €/m² source clameur)</span></h3>
 <p>Le prix des loyers dans le 13010 s’est élevé  en 2014 en moyenne à 12,08€ le m², prix restés stables par rapport à 2013.</p>
 <table border="1" width="357">

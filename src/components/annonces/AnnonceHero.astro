@@ -2,6 +2,7 @@
 // 2-column hero.
 // LEFT: main media carousel (virtual-tour video as slide 1 when embeddable, then photos) → thumbnail strip → <slot name="left-below" /> (description).
 // RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
+import { reservedLabel } from '../../lib/listing-status';
 
 interface View {
   titre: string;
@@ -21,6 +22,8 @@ interface View {
   nbSallesDeBain?: number | null;
   etage?: string | number;
   nbEtages?: string | number;
+  typeChauffage?: string | null;
+  charges?: number | string | null;
   isClosed: boolean;
   saleStatus?: string | null;
   contactPhoto?: string | null;
@@ -32,12 +35,22 @@ interface Props {
 
 const { view } = Astro.props;
 const isLocation = view.type === 'L';
+// Active "reserved" macaron (Sous offre / Sous promesse) from the LBI field-136
+// status; null for available listings. Closed listings show Vendu/Loué instead.
+const reserved = view.isClosed ? null : reservedLabel(view.saleStatus);
 const priceModifier = isLocation ? 'annonce-hero__price--location' : '';
 const badgeModifier = view.isClosed
   ? 'annonce-hero__badge--closed'
   : isLocation
     ? 'annonce-hero__badge--location'
     : '';
+
+// "Nombre d'étages" (building floors) is only meaningful when > 0. The feed
+// often sends "0" (e.g. bureaux/locaux), which must not render as "0".
+const nbEtagesNum = parseInt(String(view.nbEtages ?? ''), 10);
+const hasNbEtages = Number.isFinite(nbEtagesNum) && nbEtagesNum > 0;
+// "Étage" is the floor the property sits on; "0" is a valid value (RDC).
+const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
 
 const photos = view.photos ?? [];
 const lead = photos[0];
@@ -85,36 +98,82 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
 
       <ul class="annonce-hero__stats">
         {view.surface && (
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 3 H21 V21 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
-              <path d="M3 9 H7 M3 15 H7 M9 3 V7 M15 3 V7 M21 9 H17 M21 15 H17 M9 21 V17 M15 21 V17" stroke="currentColor" stroke-width="1.2" />
-            </svg>
-            <strong>{view.surface}</strong> m²
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 3 H21 V21 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+                <path d="M3 9 H7 M3 15 H7 M9 3 V7 M15 3 V7 M21 9 H17 M21 15 H17 M9 21 V17 M15 21 V17" stroke="currentColor" stroke-width="1.2" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Surface</span>
+            <span class="annonce-hero__stat-val">{view.surface} m²</span>
           </li>
         )}
         {view.nbPieces && (
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 11 L12 4 L21 11 V20 H14 V14 H10 V20 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" />
-            </svg>
-            <strong>{view.nbPieces}</strong> pièce{view.nbPieces > 1 ? 's' : ''}
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 11 L12 4 L21 11 V20 H14 V14 H10 V20 H3 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Pièce{view.nbPieces > 1 ? 's' : ''}</span>
+            <span class="annonce-hero__stat-val">{view.nbPieces}</span>
           </li>
         )}
         {view.nbChambres && (
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M3 18 V11 a3 3 0 0 1 3 -3 H10 a3 3 0 0 1 3 3 V18 M13 11 a3 3 0 0 1 3 -3 H18 a3 3 0 0 1 3 3 V18 M3 18 H21 V21" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />
-            </svg>
-            <strong>{view.nbChambres}</strong> chambre{view.nbChambres > 1 ? 's' : ''}
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M3 18 V11 a3 3 0 0 1 3 -3 H10 a3 3 0 0 1 3 3 V18 M13 11 a3 3 0 0 1 3 -3 H18 a3 3 0 0 1 3 3 V18 M3 18 H21 V21" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Chambre{view.nbChambres > 1 ? 's' : ''}</span>
+            <span class="annonce-hero__stat-val">{view.nbChambres}</span>
           </li>
         )}
-        {view.etage !== undefined && view.etage !== '' && view.etage !== null && (
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 20 H10 V14 H16 V8 H22 M2 20 V4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
-            </svg>
-            Étage <strong>{view.etage}{view.nbEtages ? `/${view.nbEtages}` : ''}</strong>
+        {hasEtage && (
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 20 H10 V14 H16 V8 H22 M2 20 V4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Étage</span>
+            <span class="annonce-hero__stat-val">{view.etage}{hasNbEtages ? `/${view.nbEtages}` : ''}</span>
+          </li>
+        )}
+        {!hasEtage && hasNbEtages && (
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 20 H10 V14 H16 V8 H22 M2 20 V4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Nombre d'étage</span>
+            <span class="annonce-hero__stat-val">{view.nbEtages}</span>
+          </li>
+        )}
+        {view.typeChauffage && (
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3 C12 7 8 8 8 13 a4 4 0 0 0 8 0 c0 -2 -1 -3 -2 -4 c0 2 -1 2 -2 2 c1 -3 0 -6 0 -8 Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Chauffage</span>
+            <span class="annonce-hero__stat-val">{view.typeChauffage}</span>
+          </li>
+        )}
+        {view.charges != null && String(view.charges) !== '' && Number(view.charges) > 0 && (
+          <li class="annonce-hero__stat">
+            <span class="annonce-hero__stat-ic">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" />
+                <path d="M14.5 9.3 a3.5 3.5 0 1 0 0 5.4 M8.4 11 H13 M8.4 13 H12.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" fill="none" />
+              </svg>
+            </span>
+            <span class="annonce-hero__stat-label">Charges</span>
+            <span class="annonce-hero__stat-val">{view.charges} €</span>
           </li>
         )}
       </ul>
@@ -142,12 +201,9 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
               </li>
             )}
             {photos.map((p, i) => (
-              <li
-                class="lc-slide"
-                style={`background-image:url('${p}')`}
-                role="img"
-                aria-label={`${view.titre} – photo ${i + 1}`}
-              ></li>
+              <li class="lc-slide" role="img" aria-label={`${view.titre} – photo ${i + 1}`}>
+                <img class="lc-slide__img" src={p} alt={`${view.titre} – photo ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
+              </li>
             ))}
           </ul>
 
@@ -175,12 +231,12 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
         <div class="annonce-hero__main-empty">Pas de photo disponible</div>
       )}
 
-      {(view.saleStatus || view.isClosed) && (
-        <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''}`}>
+      {(reserved || view.isClosed) && (
+        <div class={`sold-overlay sold-overlay--hero ${isLocation ? 'sold-overlay--rental' : ''} ${reserved ? 'sold-overlay--reserved' : ''}`}>
           <span class="sold-overlay__label">
             {view.isClosed
               ? (isLocation ? 'Loué' : 'Vendu')
-              : 'Sous promesse'}
+              : reserved}
           </span>
           {view.contactPhoto && (
             <img class="sold-overlay__agent" src={view.contactPhoto} alt="" loading="lazy" />
@@ -292,6 +348,21 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
           dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
         });
       }, { passive: true });
+    }
+
+    // Hero only: clicking the visible photo opens the lightbox at that photo.
+    // (A swipe scrolls and fires no click, so this never fights the carousel.)
+    if (root.classList.contains('lc-photos--hero')) {
+      track.addEventListener('click', () => {
+        const slides = Array.from(track.querySelectorAll<HTMLElement>('.lc-slide'));
+        const i = Math.round(track.scrollLeft / track.clientWidth);
+        const src = slides[i]?.querySelector<HTMLImageElement>('.lc-slide__img')?.getAttribute('src');
+        if (!src) return; // video slide has no photo to zoom
+        const anchors = Array.from(
+          document.querySelectorAll<HTMLElement>('[data-lightbox-group="annonce"][data-lightbox-src]')
+        );
+        anchors.find((a) => a.getAttribute('data-lightbox-src') === src)?.click();
+      });
     }
   });
 </script>

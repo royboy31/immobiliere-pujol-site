@@ -601,15 +601,18 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 
   .loc {
     display: flex;
-    gap: 8px;
+    gap: 6px;
+    flex-wrap: wrap;
     font-family: $ds-font-noto;
-    font-size: 13px;
-    font-weight: 400;
-    color: #666;
     align-items: center;
+    margin-top: -4px;
 
-    .a { font-weight: 400; color: #666; }
+    .loc__pin { color: $ds-orange; flex: none; }
+    .loc__cp { font-size: 17px; font-weight: 700; color: $black; }
+    .a { font-size: 13px; font-weight: 400; color: #888; }
   }
+
+  &--location .loc .loc__pin { color: $ds-olive-2; }
 }
 
 .btn-pill-cta {
@@ -701,6 +704,42 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       scroll-snap-align: start;
     }
   }
+
+  &__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  &__all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    padding: 0 28px;
+    border-radius: 999px;
+    border: 1.5px solid $ds-olive;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: transparent;
+    background-image: linear-gradient(to top, $ds-olive 50%, transparent 50%);
+    background-size: 100% 200%;
+    background-position: 0 0;
+    transition: background-position .4s ease, color .3s ease;
+
+    svg { transition: transform $transition-base; }
+
+    &:hover {
+      background-position: 0 100%;
+      color: $white;
+      svg { transform: translateX(3px); }
+    }
+  }
 }
 
 .arrow-btn {
@@ -725,6 +764,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 }
 
 .expert {
+  --expert-accent: #{$ds-slate};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -732,18 +772,28 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   text-decoration: none;
   color: inherit;
 
-  // The design PNGs already have the oval + colored background baked in.
-  // Lock to a fixed aspect ratio so all four photos take the same height
-  // and the names below them line up horizontally.
+  &--rental { --expert-accent: #{$ds-olive}; }
+  &--sales  { --expert-accent: #{$ds-orange}; }
+  &--syndic { --expert-accent: #{$ds-blue}; }
+  &--other  { --expert-accent: #{$ds-slate}; }
+
+  // Same treatment as the /experts listing tiles: the transparent headshot sits
+  // on a CSS-drawn colored oval keyed to the expert's specialty. Lock the aspect
+  // ratio so all photos share a height and the names below line up.
   .ph {
     width: 100%;
     aspect-ratio: 230 / 307;
-    display: block;
+    border-radius: 50% / 38%;
+    overflow: hidden;
+    background: var(--expert-accent);
+    display: grid;
+    place-items: end center;
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center top;
       display: block;
     }
   }
@@ -1065,6 +1115,14 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     color: $black;
     margin: 18px 0 0;
     max-width: 980px;
+
+    // Links inherit the global $color-link (olive) which is invisible on the
+    // olive panel — force them to ink + underline so the URL/phone/email show.
+    a {
+      color: $black;
+      text-decoration: underline;
+      word-break: break-word;
+    }
   }
 }
 

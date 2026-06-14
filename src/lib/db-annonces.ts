@@ -142,6 +142,33 @@ export async function getAnnonceBySlug(
 }
 
 /**
+ * Find the slug of the ACTIVE listing that shares this reference, if any.
+ *
+ * Same property can exist under two slugs: the old WordPress-scraped slug
+ * (e.g. `…-marseille-france`, left `closed`) and the live-flux slug
+ * (`…-marseille`, `active`). When an old indexed URL resolves to the closed
+ * row, we 301 to this active slug so the indexed URL keeps reaching the live
+ * listing. Returns null when the property has no active row (genuinely sold).
+ */
+export async function getActiveSlugByReference(
+  db: D1Database,
+  referenceAgence?: string | null,
+  ubiflowReference?: string | null,
+): Promise<string | null> {
+  for (const ref of [referenceAgence, ubiflowReference]) {
+    if (!ref) continue;
+    const row = await db
+      .prepare(
+        "SELECT slug FROM annonces WHERE status = 'active' AND (reference_agence = ? OR ubiflow_reference = ?) LIMIT 1",
+      )
+      .bind(ref, ref)
+      .first<{ slug: string }>();
+    if (row?.slug) return row.slug;
+  }
+  return null;
+}
+
+/**
  * Get related annonces (same arrondissement/code_postal, active, different slug)
  */
 export async function getRelatedAnnonces(
@@ -166,26 +193,101 @@ export async function getRelatedAnnonces(
 
 /**
  * Get a small pool of similar active annonces with photos for "Biens similaires".
- * Prefers same type + code_postal, falls back to any active annonce.
+ *
+ * Priority (Caroline 12/06):
+ *   1. Same transaction type (vente vs location) — hard filter.
+ *   2. Same type de bien category (garage→garages, maison→maisons...) — hard filter.
+ *   3. Same arrondissement first, then
+ *   4. limitrophe (bordering) arrondissements, then the rest of the city.
+ * No padding with other property types: if there are fewer than `limit` of the
+ * same type, we show fewer (an empty pool simply hides the block).
  */
+
+// Type-de-bien categories → SQL LIKE patterns (mirrors the search filter).
+const SIMILAR_TYPE_CATEGORIES: string[][] = [
+  ['T1','T2','T3','T4','T5','T6','T7','T8','T9','F1','F2','F3','F4','F5','Studio','Duplex%','Triplex%','Loft','Appartement%'],
+  ['Maison%','Villa%','Propriété%'],
+  ['Parking%','Garage%','Box%','Stationnement%'],
+  ['Local%','Commerce%','Boutique%','Bureau%','Atelier%','Entrepôt%','Entrepot%'],
+  ['Terrain%'],
+  ['Immeuble%'],
+];
+function similarTypePatterns(typeBien: string | null | undefined): string[] | null {
+  if (!typeBien) return null;
+  const t = typeBien.toLowerCase().trim();
+  for (const patterns of SIMILAR_TYPE_CATEGORIES) {
+    for (const p of patterns) {
+      const base = p.replace(/%$/, '').toLowerCase();
+      if (p.endsWith('%') ? t.startsWith(base) : t === base) return patterns;
+    }
+  }
+  return null; // unknown type → fall back to exact type_bien match
+}
+
+// Marseille arrondissement adjacency (limitrophe). Approximate — to validate
+// with François/Caroline. Keyed by code postal, values are bordering CPs.
+const MARSEILLE_LIMITROPHE: Record<string, string[]> = {
+  '13001': ['13002','13003','13004','13005','13006','13007'],
+  '13002': ['13001','13003','13007','13015'],
+  '13003': ['13001','13002','13004','13014','13015'],
+  '13004': ['13001','13003','13005','13012','13013','13014'],
+  '13005': ['13001','13004','13006','13010','13012'],
+  '13006': ['13001','13005','13007','13008','13010'],
+  '13007': ['13001','13002','13006','13008'],
+  '13008': ['13006','13007','13009','13010'],
+  '13009': ['13008','13010','13013'],
+  '13010': ['13005','13006','13008','13009','13011','13012','13013'],
+  '13011': ['13010','13012','13013'],
+  '13012': ['13004','13005','13010','13011','13013','13014'],
+  '13013': ['13004','13009','13010','13011','13012','13014'],
+  '13014': ['13003','13004','13013','13015','13016'],
+  '13015': ['13002','13003','13014','13016'],
+  '13016': ['13014','13015'],
+};
+
 export async function getSimilarPool(
   db: D1Database,
   excludeSlug: string,
   type: string,
+  typeBien: string | null,
   codePostal: string | null,
   limit = 6,
 ): Promise<(DbAnnonce & { photos: string[] })[]> {
+  const conditions = ["slug != ?", "status = 'active'", 'type_annonce = ?'];
+  const bindings: any[] = [excludeSlug, type];
+
+  // 2. Hard filter on type de bien (category patterns, or exact when unknown).
+  const patterns = similarTypePatterns(typeBien);
+  if (patterns) {
+    conditions.push('(' + patterns.map(() => 'type_bien LIKE ?').join(' OR ') + ')');
+    bindings.push(...patterns);
+  } else if (typeBien) {
+    conditions.push('type_bien = ?');
+    bindings.push(typeBien);
+  }
+
+  // 3 + 4. Arrondissement, then limitrophe, then the rest of the city.
+  const cp = codePostal || '';
+  const limitrophe = MARSEILLE_LIMITROPHE[cp] || [];
+  let orderCp: string;
+  if (limitrophe.length) {
+    orderCp = `CASE WHEN code_postal = ? THEN 0 WHEN code_postal IN (${limitrophe.map(() => '?').join(',')}) THEN 1 ELSE 2 END`;
+    bindings.push(cp, ...limitrophe);
+  } else {
+    orderCp = `CASE WHEN code_postal = ? THEN 0 ELSE 1 END`;
+    bindings.push(cp);
+  }
+
+  bindings.push(limit);
+
   const annonces = await db
     .prepare(
       `SELECT * FROM annonces
-       WHERE slug != ? AND status = 'active'
-       ORDER BY
-         CASE WHEN type_annonce = ? THEN 0 ELSE 1 END,
-         CASE WHEN code_postal = ? THEN 0 ELSE 1 END,
-         date_creation DESC
+       WHERE ${conditions.join(' AND ')}
+       ORDER BY ${orderCp}, date_creation DESC
        LIMIT ?`,
     )
-    .bind(excludeSlug, type, codePostal || '', limit)
+    .bind(...bindings)
     .all<DbAnnonce>();
 
   const ids = annonces.results.map(a => a.id);

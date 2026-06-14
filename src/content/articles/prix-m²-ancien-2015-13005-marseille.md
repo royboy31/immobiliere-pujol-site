@@ -5,12 +5,12 @@ date: "2015-11-01"
 excerpt: "Les prix moyens des loyers dans le 5eme arrondissement  (en €/m² source clameur)     Prix au m² Studio/T1   T2   T3   T4+       ♦ Les prix de vente dans l’ancien le 13005 (source des Notaires)   Les prix médian de l'immobilier ancien dans le 5ème par quartier…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13005", "Arrondissements Marseille", "Arrondissement 13005 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Prix-immobilier-marseille-13005.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Prix-immobilier-marseille-13005.jpg"
 seoTitle: "Les prix au m² de l’ancien en 2015 dans le 13005 Marseille"
 seoDescription: "Les prix moyens des loyers dans le 5eme arrondissement  (en €/m² source clameur)     Prix au m² Studio/T1   T2   T3   T4+       ♦ Les prix de vente dans l’ancien le 13005 (source des Notaires)   Les prix médian de l'immobilier ancien dans le 5ème par quartier…"
 ---
 
-<h3><span style="color: #ff6600;"> <a href="https://www.immobiliere-pujol.fr/content/uploads/2015/11/location-quartier-camas-13005-marseille.jpg" rel="attachment wp-att-7710"><img loading="lazy" decoding="async" class="wp-image-7710 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2015/11/location-quartier-camas-13005-marseille.jpg" alt="location quartier camas 13005 marseille" width="582" height="379" /></a></span></h3>
+<h3><span style="color: #ff6600;"> <a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/location-quartier-camas-13005-marseille.jpg" rel="attachment wp-att-7710"><img loading="lazy" decoding="async" class="wp-image-7710 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/location-quartier-camas-13005-marseille.jpg" alt="location quartier camas 13005 marseille" width="582" height="379" /></a></span></h3>
 <h3><span style="color: #ff6600;"><span style="text-decoration: underline;">L</span></span><span style="color: #ff6600;"><span style="text-decoration: underline;">es prix moyens des loyers dans le 5eme arrondissement  (en €/m² source c</span></span><span style="text-decoration: underline;"><span style="color: #ff6600; text-decoration: underline;">lameur)</span></span></h3>
 <div class="gmail_default">
 <div class="gmail_default"> </div>

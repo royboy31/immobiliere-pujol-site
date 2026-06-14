@@ -5,7 +5,7 @@ date: "2015-11-01"
 excerpt: "es prix moyens des loyers dans le 7eme arrondissement  (en €/m2 source clameur)   Prix moyen au m² Studio/T1   T2   T3   T4+         ♦ Les prix de vente dans l’ancien le 13007 (source Notaires)   • Les prix de l'immobilier ancien vendu en 2015 par…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13007", "Arrondissements Marseille", "Arrondissement 13007 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/le-balcon-des-auffes-13007-marseille.jpeg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/le-balcon-des-auffes-13007-marseille.jpeg"
 seoTitle: "Les prix au m² dans l’ancien en 2015 dans le 13007 Marseille"
 seoDescription: "es prix moyens des loyers dans le 7eme arrondissement  (en €/m2 source clameur)   Prix moyen au m² Studio/T1   T2   T3   T4+         ♦ Les prix de vente dans l’ancien le 13007 (source Notaires)   • Les prix de l'immobilier ancien vendu en 2015 par…"
 ---

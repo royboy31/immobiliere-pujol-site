@@ -1943,7 +1943,21 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     line-height: 1.5;
     color: $ds-ink;
     margin: 0;
-    flex: 1;
+  }
+
+  &__note {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    color: $ds-orange;
+    background: rgba(236, 114, 52, .1);
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin: 0;
   }
 
   &__cta {
@@ -1957,7 +1971,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     text-transform: uppercase;
     color: $ds-olive-2;
     text-decoration: none;
-    margin-top: 4px;
+    margin-top: auto;
     transition: color $transition-fast;
 
     svg { transition: transform $transition-base; }
@@ -2243,6 +2257,134 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
       background-position: 0 100%;
       color: $ds-olive-2;
       svg { transform: translateX(4px); }
+    }
+  }
+
+  &__tutos {
+    margin-top: 6px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0, 0, 0, .08);
+  }
+
+  &__tutos-title {
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: $ds-ink;
+    margin: 0 0 10px;
+  }
+
+  &__tutos-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.tuto-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 8px;
+  margin: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: $ds-font-noto;
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.35;
+  color: $ds-ink;
+  transition: background $transition-base, color $transition-base;
+
+  &__icon {
+    flex: 0 0 auto;
+    color: $ds-olive;
+    transition: transform $transition-base;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: $ds-paper;
+    color: $black;
+    .tuto-link__icon { transform: scale(1.1); }
+  }
+}
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  &[hidden] { display: none; }
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .8);
+    backdrop-filter: blur(2px);
+  }
+
+  &__dialog {
+    position: relative;
+    width: min(960px, 100%);
+  }
+
+  &__close {
+    position: absolute;
+    top: -46px;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .15);
+    color: $white;
+    cursor: pointer;
+    transition: background $transition-base;
+
+    &:hover,
+    &:focus-visible { background: rgba(255, 255, 255, .3); }
+  }
+
+  &__title {
+    color: $white;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 15px;
+    margin: 0 0 10px;
+  }
+
+  &__frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   }
 }

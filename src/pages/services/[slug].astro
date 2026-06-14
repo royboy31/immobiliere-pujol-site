@@ -542,7 +542,7 @@ const CUSTOM_FORMS: Record<string, CustomFormConfig> = {
     lead: "Renseignez les informations ci-dessous et nous vous adresserons une estimation personnalisée.",
     honeypot: 'input_14',
     submitLabel: 'Envoyer ma demande',
-    successMessage: 'Votre demande d\'estimation de loyer a bien été envoyée. Un conseiller vous recontactera rapidement.',
+    successMessage: 'Votre demande d\'estimation de loyer vient d\'être envoyée. Notre expert conseil en gestion locative va prendre contact avec vous rapidement.',
     fields: [
       { name: 'input_1.3', label: 'Prénom', type: 'text', placeholder: 'Prénom', required: true },
       { name: 'input_1.6', label: 'Nom', type: 'text', placeholder: 'Nom', required: true },
@@ -1162,6 +1162,7 @@ const customForm = CUSTOM_FORMS[slug] || null;
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
           if (data.ok) {
+            try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'service' }); } catch (e) {}
             const customMsg = form.dataset.successMsg;
             const msg = customMsg || 'Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.';
             form.innerHTML = `<div class="svc-form__success"><h2>Merci !</h2><p>${msg}</p></div>`;

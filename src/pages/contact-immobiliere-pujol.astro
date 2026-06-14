@@ -28,7 +28,6 @@ const formObjects = [
   'Client syndic : vous souhaitez joindre le gestionnaire/comptable de votre copropriété ?',
   'Syndic : vous souhaitez obtenir un devis en syndic pour votre copropriété ?',
   'Autre (bien détailler votre demande)',
-  'Client : déclarer une urgence le week-end et les jours fériés',
 ];
 
 // Quick-link cards driving the most common direct contact paths.
@@ -91,6 +90,7 @@ const quickLinks = [
               {contact.addressLine1}<br />
               {contact.addressLine2}
             </p>
+            <p class="contact-card__note">Uniquement sur rendez-vous</p>
             <a class="contact-card__cta" href={contact.mapHref} target="_blank" rel="noopener">
               Itinéraire
               <svg width="16" height="11" viewBox="0 0 22 14" fill="none" aria-hidden="true">
@@ -273,6 +273,7 @@ const quickLinks = [
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
           if (data.ok) {
+            try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'contact' }); } catch (e) {}
             form.innerHTML = '<div class="svc-form__success"><h2>Merci !</h2><p>Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.</p></div>';
           } else {
             showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");

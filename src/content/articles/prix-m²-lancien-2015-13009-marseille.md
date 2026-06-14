@@ -5,12 +5,12 @@ date: "2015-11-02"
 excerpt: "♦ Les prix au m² médians de l'immobilier ancien dans le 13009 (source  notaires)  * Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes. •…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13009", "Arrondissements Marseille", "Arrondissement 13009 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Mazargues57.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Marseille-Mazargues57.jpg"
 seoTitle: "Les prix au m² dans l’ancien en 2015 dans le 13009 Marseille"
 seoDescription: "♦ Les prix au m² médians de l'immobilier ancien dans le 13009 (source  notaires)  * Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes. •…"
 ---
 
-<h3><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/11/MG_3761DxO.jpg" rel="attachment wp-att-7489"><img loading="lazy" decoding="async" class="size-full wp-image-7489 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2015/11/MG_3761DxO.jpg" alt="_MG_3761DxO" width="600" height="400" /></a></h3>
+<h3><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/MG_3761DxO.jpg" rel="attachment wp-att-7489"><img loading="lazy" decoding="async" class="size-full wp-image-7489 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/MG_3761DxO.jpg" alt="_MG_3761DxO" width="600" height="400" /></a></h3>
 <h3> </h3>
 <h3><span style="font-size: 14pt; color: #ff6600;">♦ Les prix au m² médians de l&rsquo;immobilier ancien dans le 13009 <em>(source  notaires)</em></span></h3>
 <p><i> * Le prix médian : la moitié des transactions ont été signées à un prix inférieur et l’autre moitié à un prix supérieur. L’avantage de la médiane comme mesure de tendance centrale est qu’elle n’est pas  influencée par les valeurs extrêmes.</i></p>

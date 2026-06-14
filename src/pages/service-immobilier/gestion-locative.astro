@@ -418,6 +418,7 @@ const sections = [
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
           if (data.ok) {
+            try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'devis-gestion-locative' }); } catch (e) {}
             form.innerHTML = '<div class="svc-form__success"><h2>Merci !</h2><p>Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.</p></div>';
           } else {
             showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");

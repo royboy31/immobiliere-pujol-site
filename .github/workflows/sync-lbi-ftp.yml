@@ -17,11 +17,17 @@ jobs:
 
       - name: Download zip from FTP
         run: |
+          # Infomaniak FTP is occasionally slow from CI (curl exit 28 = timeout).
+          # Bound each attempt (--connect-timeout/--max-time) and spread 5 retries
+          # over more time so a transient slow window doesn't fail the run.
           curl -s "ftp://${{ secrets.LBI_FTP_HOST }}/${{ secrets.LBI_FTP_FILE }}" \
             --user "${{ secrets.LBI_FTP_USER }}:${{ secrets.LBI_FTP_PASS }}" \
-            --retry 3 --retry-delay 30 --retry-all-errors \
+            --ftp-pasv --connect-timeout 30 --max-time 180 \
+            --retry 5 --retry-delay 60 --retry-all-errors --retry-connrefused \
             -o /tmp/lbi_import.zip
           ls -lh /tmp/lbi_import.zip
+          # Refuse to upload a partial/corrupt download (would poison R2).
+          unzip -t /tmp/lbi_import.zip > /dev/null
 
       - name: Upload to R2
         run: npx wrangler r2 object put pujol-photos/lbi/import.zip --file=/tmp/lbi_import.zip --remote

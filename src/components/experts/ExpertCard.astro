@@ -13,94 +13,246 @@ const { expert, heading = 'Expert en charge de ce bien', showPhone = false } = A
 const displayName = (expert.title.split('|').pop() ?? expert.title)
   .split(/\s+[–\-]\s+/)[0]
   .trim();
+// Rental négociateurs: photo + name only, no link to a profile, no contact details
+// (Caroline, 08/06). The detail page is not linked from listings for these people.
+const photoOnly = !!expert.listingOnly;
+const phoneClean = (expert.phone || '').replace(/\s/g, '');
+const phonePretty = (expert.phone || '').replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+const profileHref = `/experts/${expert.slug}/`;
+// Agenda (book-a-meeting) is intentionally NOT shown on listings — it lives on
+// the expert page only for now (Caroline, 11/06).
+const showCall = !photoOnly && showPhone && !!expert.phone;
+const showEmail = !photoOnly && !!expert.email;
 ---
 
-<aside class="expert-card">
-  <h2 class="expert-card__heading">{heading}</h2>
-  <div class="expert-card__body">
-    {expert.photo && (
-      <a href={`/experts/${expert.slug}/`} class="expert-card__photo-link">
-        <img
-          src={expert.photo}
-          alt={displayName}
-          class="expert-card__photo"
-          loading="lazy"
-          width="120"
-          height="160"
-        />
-      </a>
-    )}
-    <div class="expert-card__info">
-      <a href={`/experts/${expert.slug}/`} class="expert-card__name">
-        <strong>{displayName}</strong>
-      </a>
+<aside class={`expert-card ${photoOnly ? 'expert-card--photo-only' : ''}`}>
+  <div class="expert-card__inner">
+    <div class="expert-card__photo-wrap">
+      {expert.photo && (
+        photoOnly ? (
+          <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
+        ) : (
+          <a href={profileHref} class="expert-card__photo-link">
+            <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
+          </a>
+        )
+      )}
+    </div>
+
+    <div class="expert-card__main">
+      <p class="expert-card__overline">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7" />
+          <path d="M4 20 a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        {heading}
+      </p>
+
+      {photoOnly ? (
+        <h2 class="expert-card__name">{displayName}</h2>
+      ) : (
+        <a href={profileHref} class="expert-card__name-link"><h2 class="expert-card__name">{displayName}</h2></a>
+      )}
       {expert.fonction && <p class="expert-card__fonction">{expert.fonction}</p>}
-      {(expert.email || (showPhone && expert.phone)) && (
-        <div class="expert-card__contact">
-          {expert.email && (
-            <a href={`mailto:${expert.email}`} class="expert-card__email">
-              {expert.email}
-            </a>
+
+      {!photoOnly && (
+        <>
+          <span class="expert-card__divider"></span>
+          <p class="expert-card__tagline">
+            Votre expert dédié pour vous accompagner à chaque étape de votre projet immobilier.
+          </p>
+
+          {(showCall || showEmail) && (
+            <div class="expert-card__ctas">
+              {showCall && (
+                <a href={`tel:${phoneClean}`} class="expert-card__btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 4 L9 4 L11 9 L8 11 a12 12 0 0 0 5 5 L15 13 L20 15 L20 19 a1 1 0 0 1 -1 1 A16 16 0 0 1 4 5 a1 1 0 0 1 1 -1 z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round" />
+                  </svg>
+                  <span class="expert-card__btn-text">
+                    <span class="expert-card__btn-label">APPELER</span>
+                    <span class="expert-card__btn-value">{phonePretty}</span>
+                  </span>
+                </a>
+              )}
+              {showEmail && (
+                <a href={`mailto:${expert.email}`} class="expert-card__btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7" fill="none" />
+                    <path d="M3 7 L12 13 L21 7" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span class="expert-card__btn-text">
+                    <span class="expert-card__btn-label">ENVOYER UN EMAIL</span>
+                    <span class="expert-card__btn-value">{expert.email}</span>
+                  </span>
+                </a>
+              )}
+            </div>
           )}
-          {showPhone && expert.phone && (
-            <a href={`tel:${expert.phone}`} class="expert-card__phone">
-              {expert.phone.replace(/(\d{2})(?=\d)/g, '$1 ')}
-            </a>
-          )}
-        </div>
+        </>
       )}
     </div>
   </div>
+
+  {!photoOnly && (
+    <ul class="expert-card__trust">
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5 L11 15.5 L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Réponse sous 24h</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5 L11 15.5 L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Conseils personnalisés</li>
+      <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12.5 L11 15.5 L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Accompagnement complet</li>
+    </ul>
+  )}
 </aside>
 
 <style>
   .expert-card {
-    margin: 2rem 0;
+    margin: 1.75rem 0 0;
     padding: 1.5rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 34px rgba(20, 30, 40, 0.05);
+    text-align: left;
   }
-  .expert-card__heading {
-    margin: 0 0 1rem;
-    font-size: 1.125rem;
-  }
-  .expert-card__body {
+  .expert-card__inner {
     display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
+    gap: 1.4rem;
+    align-items: center;
   }
+
+  /* Photo in the same orange oval used on the /experts/ grid (border-radius
+     50% / 38%, head kept at the top via object-position: center top). */
+  .expert-card__photo-wrap {
+    flex: 0 0 clamp(130px, 28%, 165px);
+    align-self: center;
+    aspect-ratio: 230 / 307;
+    background: #e8662b;
+    border-radius: 50% / 38%;
+    overflow: hidden;
+  }
+  .expert-card__photo-link { display: contents; }
   .expert-card__photo {
-    width: 120px;
-    height: 160px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 6px;
+    object-position: center top;
     display: block;
   }
-  .expert-card__info {
+
+  .expert-card__main {
+    flex: 1 1 auto;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
   }
+  .expert-card__overline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.6rem;
+    color: #e8662b;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .expert-card__name-link { text-decoration: none; }
   .expert-card__name {
-    font-size: 1.05rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  .expert-card__fonction {
     margin: 0;
-    color: #555;
-    font-size: 0.95rem;
+    font-size: clamp(1.35rem, 2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #1f2a30;
   }
-  .expert-card__contact {
+  a.expert-card__name-link:hover .expert-card__name { color: #e8662b; }
+  .expert-card__fonction {
+    margin: 0.35rem 0 0;
+    font-size: 1.05rem;
+    color: #5a6b73;
+  }
+  .expert-card__divider {
+    width: 48px;
+    height: 3px;
+    border-radius: 2px;
+    background: #e8662b;
+    margin: 0.85rem 0;
+  }
+  .expert-card__tagline {
+    margin: 0 0 1rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: #45555d;
+    max-width: 34rem;
+  }
+
+  .expert-card__ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
+  .expert-card__btn {
     display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    font-size: 0.9rem;
-    margin-top: 0.4rem;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid #f0c9af;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #e8662b;
+    background: #fff;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   }
-  @media (max-width: 480px) {
-    .expert-card__body { flex-direction: column; align-items: center; text-align: center; }
-    .expert-card__contact { align-items: center; }
+  .expert-card__btn:hover {
+    border-color: #e8662b;
+    background: #fff7f2;
+    box-shadow: 0 6px 16px rgba(232, 102, 43, 0.12);
+  }
+  .expert-card__btn svg { flex: 0 0 auto; }
+  .expert-card__btn-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+  .expert-card__btn-label { font-weight: 700; font-size: 0.92rem; letter-spacing: 0.02em; }
+  .expert-card__btn-value {
+    font-size: 0.9rem;
+    color: #6a7880;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Trust badges */
+  .expert-card__trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    margin: 1.1rem 0 0;
+    padding: 1rem 0 0;
+    border-top: 1px solid #eee;
+    list-style: none;
+  }
+  .expert-card__trust li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #3a4a52;
+    font-size: 0.9rem;
+  }
+  .expert-card__trust svg { color: #e8662b; flex: 0 0 auto; }
+
+  /* Photo-only négociateurs: compact, no orange panel height, no CTAs */
+  .expert-card--photo-only .expert-card__photo-wrap {
+    flex-basis: 160px;
+  }
+  .expert-card--photo-only .expert-card__main { justify-content: center; }
+
+  @media (max-width: 720px) {
+    .expert-card { padding: 1.5rem; }
+    .expert-card__inner { flex-direction: column; align-items: center; text-align: center; gap: 1.4rem; }
+    .expert-card__photo-wrap { flex-basis: auto; width: 200px; }
+    .expert-card__overline { justify-content: center; }
+    .expert-card__divider { margin-left: auto; margin-right: auto; }
+    .expert-card__tagline { margin-left: auto; margin-right: auto; }
+    .expert-card__ctas { grid-template-columns: 1fr; }
+    .expert-card__btn { justify-content: center; }
+    .expert-card__btn-text { align-items: center; }
+    .expert-card__trust { justify-content: center; }
   }
 </style>

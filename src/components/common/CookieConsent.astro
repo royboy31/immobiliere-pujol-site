@@ -1,0 +1,180 @@
+---
+// Cookie consent banner (CNIL / RGPD) wired to Google Consent Mode v2.
+// Default consent is set to "denied" in BaseLayout's <head> before GTM loads;
+// this banner lets the visitor accept / refuse / customise and updates consent.
+// Reopen anytime via window.openCookieSettings() (e.g. footer link).
+const policyHref = '/politique-de-confidentialite/';
+---
+
+<div class="cc" id="cookie-consent" role="dialog" aria-live="polite" aria-label="Consentement aux cookies" hidden>
+  <div class="cc__panel">
+    <div class="cc__body">
+      <h2 class="cc__title">Votre vie privée</h2>
+      <p class="cc__text">
+        Nous utilisons des cookies pour mesurer l'audience du site (Google Analytics)
+        et évaluer nos campagnes publicitaires. Vous pouvez tout accepter, tout
+        refuser, ou choisir. Voir notre <a href={policyHref}>politique de confidentialité</a>.
+      </p>
+
+      <div class="cc__options" id="cc-options" hidden>
+        <label class="cc__opt cc__opt--locked">
+          <input type="checkbox" checked disabled />
+          <span><b>Nécessaires</b> — indispensables au fonctionnement du site (toujours actifs).</span>
+        </label>
+        <label class="cc__opt">
+          <input type="checkbox" id="cc-analytics" checked />
+          <span><b>Mesure d'audience</b> — statistiques de visite (Google Analytics).</span>
+        </label>
+        <label class="cc__opt">
+          <input type="checkbox" id="cc-ads" />
+          <span><b>Publicité</b> — mesure de nos campagnes (Google Ads).</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="cc__actions">
+      <button type="button" class="cc__btn cc__btn--ghost" data-cc="refuse">Tout refuser</button>
+      <button type="button" class="cc__btn cc__btn--ghost" data-cc="customize">Personnaliser</button>
+      <button type="button" class="cc__btn cc__btn--save" data-cc="save" hidden>Enregistrer mes choix</button>
+      <button type="button" class="cc__btn cc__btn--accept" data-cc="accept">Tout accepter</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var KEY = 'pujol-cookie-consent';
+    var el = document.getElementById('cookie-consent');
+    if (!el) return;
+    var options = document.getElementById('cc-options');
+    var saveBtn = el.querySelector('[data-cc="save"]');
+    var customizeBtn = el.querySelector('[data-cc="customize"]');
+
+    function gtagUpdate(analytics, ads) {
+      window.dataLayer = window.dataLayer || [];
+      function g() { window.dataLayer.push(arguments); }
+      g('consent', 'update', {
+        analytics_storage: analytics ? 'granted' : 'denied',
+        ad_storage: ads ? 'granted' : 'denied',
+        ad_user_data: ads ? 'granted' : 'denied',
+        ad_personalization: ads ? 'granted' : 'denied',
+      });
+    }
+
+    function save(analytics, ads) {
+      try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ads: ads, ts: Date.now() })); } catch (e) {}
+      gtagUpdate(analytics, ads);
+      hide();
+    }
+
+    function show(customize) {
+      // Pre-fill toggles from any stored choice; on first visit default
+      // "Mesure d'audience" (analytics) ON, "Publicité" (ads) OFF.
+      try {
+        var c = JSON.parse(localStorage.getItem(KEY) || 'null');
+        document.getElementById('cc-analytics').checked = c ? !!c.analytics : true;
+        document.getElementById('cc-ads').checked = c ? !!c.ads : false;
+      } catch (e) {}
+      el.hidden = false;
+      if (customize) openCustomize();
+    }
+    function hide() { el.hidden = true; options.hidden = true; saveBtn.hidden = true; customizeBtn.hidden = false; }
+    function openCustomize() { options.hidden = false; saveBtn.hidden = false; customizeBtn.hidden = true; }
+
+    el.querySelector('[data-cc="accept"]').addEventListener('click', function () { save(true, true); });
+    el.querySelector('[data-cc="refuse"]').addEventListener('click', function () { save(false, false); });
+    customizeBtn.addEventListener('click', openCustomize);
+    saveBtn.addEventListener('click', function () {
+      save(document.getElementById('cc-analytics').checked, document.getElementById('cc-ads').checked);
+    });
+
+    // Expose a reopen hook (footer "Gérer les cookies" link, etc.)
+    window.openCookieSettings = function () { show(true); };
+
+    // Show on first visit (no stored choice).
+    var hasChoice = false;
+    try { hasChoice = !!localStorage.getItem(KEY); } catch (e) {}
+    if (!hasChoice) show(false);
+  })();
+</script>
+
+<style>
+  .cc {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .cc[hidden] { display: none; }
+  .cc__panel {
+    pointer-events: auto;
+    max-width: 720px;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    padding: 22px 24px;
+  }
+  .cc__title {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    color: #3a3a3a;
+  }
+  .cc__text {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #3a3a3a;
+    margin: 0 0 14px;
+  }
+  .cc__text a { color: #ec7234; text-decoration: underline; }
+  .cc__options { display: grid; gap: 10px; margin: 0 0 16px; }
+  .cc__opt {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #3a3a3a;
+  }
+  .cc__opt input { margin-top: 2px; flex: none; }
+  .cc__opt--locked { opacity: 0.75; }
+  .cc__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  .cc__btn {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    padding: 11px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .cc__btn--ghost { background: transparent; border-color: rgba(0, 0, 0, 0.4); color: #3a3a3a; }
+  .cc__btn--ghost:hover { background: #3a3a3a; color: #fff; border-color: #3a3a3a; }
+  .cc__btn--save { background: #566770; color: #fff; }
+  .cc__btn--save:hover { background: #455660; }
+  .cc__btn--accept { background: #ec7234; color: #fff; }
+  .cc__btn--accept:hover { background: #d85f23; }
+
+  @media (max-width: 600px) {
+    .cc { left: 8px; right: 8px; bottom: 8px; }
+    .cc__panel { padding: 18px; }
+    .cc__actions { justify-content: stretch; }
+    .cc__btn { flex: 1 1 auto; text-align: center; }
+  }
+</style>

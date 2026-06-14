@@ -5,13 +5,13 @@ date: "2016-03-30"
 excerpt: "2015- Les prix au m² de l’immobilier neuf  dans le 5ème arrondissement de Marseille (source Notaires)    studios 2 pièces 3 pièces 4 pièces 5 pièces et plus ventes 20,3 60,8 16,2 2,7   prix au m² 4210 3680 3690   prix médian 110 000 145000 235000   surface habitable…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13005"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/amp-icon.png"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/amp-icon.png"
 seoTitle: "Les prix au m² de l’immobilier neuf dans le 5ème"
 seoDescription: "2015- Les prix au m² de l’immobilier neuf  dans le 5ème arrondissement de Marseille (source Notaires)    studios 2 pièces 3 pièces 4 pièces 5 pièces et plus ventes 20,3 60,8 16,2 2,7   prix au m² 4210 3680 3690   prix médian 110 000 145000 235000   surface habitable…"
 ---
 
 <h2 style="text-align: center;"><span style="color: #ff6600;">2015- Les prix au m² de l’immobilier neuf  dans le 5ème arrondissement de Marseille (source Notaires) </span></h2>
-<a href="https://www.immobiliere-pujol.fr/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg"><img loading="lazy" decoding="async" class="alignnone size-full wp-image-226132" src="https://www.immobiliere-pujol.fr/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg" alt="" width="614" height="400" srcset="https://www.immobiliere-pujol.fr/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg 614w, https://www.immobiliere-pujol.fr/content/uploads/2017/11/location-quartier-camas-13005-marseille-600x391.jpg 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></a>
+<a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg"><img loading="lazy" decoding="async" class="alignnone size-full wp-image-226132" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg" alt="" width="614" height="400" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/location-quartier-camas-13005-marseille.jpg 614w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/location-quartier-camas-13005-marseille-600x391.jpg 600w" sizes="auto, (max-width: 614px) 100vw, 614px" /></a>
 <table style="height: 234px;" width="871">
 <tbody>
 <tr>

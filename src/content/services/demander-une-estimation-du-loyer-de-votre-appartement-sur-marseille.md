@@ -29,9 +29,24 @@ seoDescription: "Ce service est uniquement fourni pour des biens immobiliers sit
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
                     <h3 class="contextual__title">Demander Une Estimation Du Loyer De Votre Appartement Sur Marseille</h3>
-                    Ce service est uniquement fourni pour des biens immobiliers situés à Marseille, Allauch et Plan de Cuques.
+                    <p>Le marché locatif varie énormément d'une commune à l'autre. C'est pourquoi nos experts qui louent plus de 600 biens par an analysent les spécificités de chaque zone pour vous livrer un prix juste :</p>
+                    <ul>
+                        <li>Les cœurs urbains et étudiant : De Marseille à Aix-en-Provence</li>
+                        <li>La couronne marseillaise : À Aubagne, Allauch, Plan-de-Cuques et dans les communes environnantes</li>
+                    </ul>
 
-&nbsp;
+                    <h4>Fixer le bon loyer : le secret d'un investissement réussi</h4>
+                    <ul>
+                        <li>Évitez la vacance locative : Un loyer trop élevé fait fuir les bons profils.</li>
+                        <li>Maximisez vos revenus : Un loyer trop bas est un manque à gagner chaque mois.</li>
+                    </ul>
+
+                    <h4>Comment ça marche ? (En 3 étapes simples)</h4>
+                    <ol>
+                        <li>Renseignez vos coordonnées, le type de bien et son adresse (qu'il soit à Aix, Marseille ou dans la couronne Marseillaise).</li>
+                        <li>Précisez ses caractéristiques (surface, nombre de pièces, balcon, parking...).</li>
+                        <li>Obtenez votre estimation basée sur les derniers loyers constatés pour des biens loués similaires.</li>
+                    </ol>
                 </section>
             </div>
 

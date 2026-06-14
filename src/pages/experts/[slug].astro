@@ -9,6 +9,7 @@ type ExpertData = {
   title: string;
   slug: string;
   fonction?: string;
+  secteur?: string;
   description?: string;
   photo?: string;
   email?: string;
@@ -81,8 +82,15 @@ try {
 
 const activeSlugs = new Set(activeAnnonces.map((a) => a.slug));
 const garageCount = historyListings.filter((l) => isGarage(l.slug)).length;
+// "Vendus/loués" = listings whose real status is closed (not just absent from
+// the Ubiflow rentals feed — active LBI sales were wrongly leaking in here).
 const closedOnly = historyListings.filter(
-  (l) => !activeSlugs.has(l.slug) && !isGarage(l.slug),
+  (l) => l.status === 'closed' && !activeSlugs.has(l.slug) && !isGarage(l.slug),
+);
+// Active sales come from LBI (not the Ubiflow feed), so surface them from the
+// history payload's still-published rows.
+const activeFromHistory = historyListings.filter(
+  (l) => l.status !== 'closed' && !activeSlugs.has(l.slug) && !isGarage(l.slug),
 );
 // Adjust totalCount to exclude garages picked up from a stale cached payload.
 // After the next deploy (build script also filters), garageCount will be 0.
@@ -105,17 +113,21 @@ const closedForType = isSales
   : isRental
     ? closedOnly.filter((l) => l.type === 'L')
     : closedOnly;
-const activeCount = activeForType.length;
+// Active sales (history-card render) since the Ubiflow feed only carries rentals.
+const activeSalesHistory = isSales ? activeFromHistory.filter((l) => l.type === 'V') : [];
+
+const activeCount = isSales ? activeSalesHistory.length : activeForType.length;
+const closedCount = closedForType.length;
 const activeSub = isSales
   ? `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la vente.`
   : isRental
     ? `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la location.`
     : `${activeCount} bien${activeCount > 1 ? 's' : ''} actuellement à la vente ou à la location.`;
 const historySub = isSales
-  ? `${historyTotalCount} biens vendus.`
+  ? `${closedCount} biens vendus.`
   : isRental
-    ? `${historyTotalCount} biens loués.`
-    : `${historyTotalCount} biens vendus ou loués.`;
+    ? `${closedCount} biens loués.`
+    : `${closedCount} biens vendus ou loués.`;
 const quickstatsLabel = isSales ? 'Vendus' : isRental ? 'Loués' : 'Accompagnés';
 const ctaLead = isSales
   ? 'Un projet de vente à réaliser bientôt ?'
@@ -160,6 +172,7 @@ try {
 
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
+const agendaLink = (expert as any).agenda as string | undefined;
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
 
@@ -194,13 +207,19 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
               C'est votre expert <b>{expert.fonction}</b>.
             </p>
           )}
+          {expert.secteur && (
+            <p class="expert-body__secteur">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.7" />
+              </svg>
+              <span>Secteur : <b>{expert.secteur}</b></span>
+            </p>
+          )}
         </header>
 
         {expert.description ? (
-          <>
-            <h2 class="expert-body__heading">À propos de <b>{firstName}</b></h2>
-            <div class="expert-bio-content" set:html={expert.description}></div>
-          </>
+          <div class="expert-bio-content" set:html={expert.description}></div>
         ) : (
           <p class="expert-body__empty">Pas de description disponible pour cet expert.</p>
         )}
@@ -240,6 +259,15 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
                   ENVOYER UN EMAIL
                 </a>
               )}
+              {agendaLink && (
+                <a href={agendaLink} target="_blank" rel="noopener" class="btn-pill btn-pill--olive">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6" fill="none" />
+                    <path d="M3 9 L21 9 M8 3 L8 6 M16 3 L16 6" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                  </svg>
+                  RÉSERVER UN RENDEZ-VOUS
+                </a>
+              )}
             </div>
 
             {hasSocial && (
@@ -268,14 +296,14 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         </div>
 
         {/* Quick stats card under the photo card */}
-        {(activeForType.length > 0 || historyTotalCount > 0) && (
+        {(activeCount > 0 || closedCount > 0) && (
           <div class="expert-quickstats">
             <div class="expert-quickstats__cell">
-              <span class="expert-quickstats__num">{activeForType.length}</span>
+              <span class="expert-quickstats__num">{activeCount}</span>
               <span class="expert-quickstats__lbl">Disponibles</span>
             </div>
             <div class="expert-quickstats__cell">
-              <span class="expert-quickstats__num">{historyTotalCount}</span>
+              <span class="expert-quickstats__num">{closedCount}</span>
               <span class="expert-quickstats__lbl">{quickstatsLabel}</span>
             </div>
           </div>
@@ -337,7 +365,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
-    {activeForType.length > 0 && (
+    {(isSales ? activeSalesHistory.length > 0 : activeForType.length > 0) && (
       <section class="expert-listings expert-listings--active">
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Disponible</span>
@@ -352,9 +380,30 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           </h2>
           <p class="expert-listings__sub">{activeSub}</p>
         </header>
-        <div class="annonces-grid">
-          {activeForType.map((a) => <AnnonceCard annonce={a} />)}
-        </div>
+        {isSales ? (
+          <div class="expert-history-grid">
+            {activeSalesHistory.map((l) => (
+              <a href={`/annonces/${l.slug}/`} class="expert-history-card">
+                <div class="expert-history-card__photo" style={l.photo ? `background-image:url('${l.photo}')` : undefined}>
+                  <span class="expert-history-card__tag is-available">À vendre</span>
+                </div>
+                <div class="expert-history-card__body">
+                  <div class="expert-history-card__title">{l.title}</div>
+                  <div class="expert-history-card__meta">
+                    {l.surface && <span>{l.surface} m²</span>}
+                    {l.nbPieces && <span>T{l.nbPieces}</span>}
+                    {l.codePostal && <span>{l.codePostal}</span>}
+                  </div>
+                  {l.prix && <div class="expert-history-card__price">{new Intl.NumberFormat('fr-FR').format(l.prix)} €</div>}
+                </div>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="annonces-grid">
+            {activeForType.map((a) => <AnnonceCard annonce={a} />)}
+          </div>
+        )}
       </section>
     )}
 
@@ -430,6 +479,11 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         {expert.email && (
           <a href={mailtoLink} class="btn-pill btn-pill--ghost">
             ENVOYER UN EMAIL
+          </a>
+        )}
+        {agendaLink && (
+          <a href={agendaLink} target="_blank" rel="noopener" class="btn-pill btn-pill--olive">
+            RÉSERVER UN RENDEZ-VOUS
           </a>
         )}
       </div>

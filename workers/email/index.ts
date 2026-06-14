@@ -125,10 +125,27 @@ Vous aurez un retour sous peu.</p>
   signoff: "L'équipe Immobilière Pujol",
 };
 
-function buildCustomerEmail(vars: { prénom?: string }): string {
+// Specific auto-reply for the general contact form when the dropdown = "Location"
+// (Caroline 11/06). Replaces the unified reply for that case only; the greeting
+// + signoff are supplied by the branded wrapper, so the body starts after them.
+const LOCATION_AUTO_REPLY = {
+  subject: 'Votre recherche/demande de location – prochaines étapes',
+  body: `<p>Nous faisons suite à votre demande de contact dans le cadre de votre recherche de location.</p>
+<p>Nos annonces <strong>disponibles</strong> sont mises à jour quotidiennement sur notre site&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a></p>
+<p style="margin:16px 0 8px"><strong>Si votre demande concerne un bien en particulier&nbsp;:</strong><br>
+Nous vous invitons à vérifier que l'annonce est bien publiée actuellement sur notre site (et non marquée clôturée)&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a>. Si c'est le cas, nous vous demandons de faire votre demande directement depuis l'annonce concernée. Un email vous sera alors envoyé afin de compléter une fiche de renseignements, indispensable pour organiser une éventuelle visite et étudier votre dossier.</p>
+<p style="margin:8px 0"><strong>Si vous êtes en recherche active&nbsp;:</strong><br>
+Nous vous conseillons de consulter régulièrement notre site afin de ne manquer aucune nouvelle opportunité.</p>
+<p>Nous restons à votre disposition et vous souhaitons une belle journée.</p>`,
+  signoff: 'Le service Location',
+};
+
+function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string }): string {
   const greeting = vars.prénom
     ? `Bonjour ${esc(vars.prénom)},`
     : 'Bonjour,';
+  const bodyHtml = vars.bodyHtml ?? UNIFIED_AUTO_REPLY.body;
+  const signoff = vars.signoff ?? UNIFIED_AUTO_REPLY.signoff;
 
   return `
 <!DOCTYPE html>
@@ -140,8 +157,8 @@ function buildCustomerEmail(vars: { prénom?: string }): string {
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
         <!-- Header -->
-        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
-          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        <tr><td style="background-color:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto">
         </td></tr>
 
         <!-- Green accent bar -->
@@ -153,21 +170,18 @@ function buildCustomerEmail(vars: { prénom?: string }): string {
           <p style="margin:0 0 16px;font-size:15px;color:#0f1a2b;font-weight:600">${greeting}</p>
 
           <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
-            ${UNIFIED_AUTO_REPLY.body}
+            ${bodyHtml}
           </div>
 
-          <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(UNIFIED_AUTO_REPLY.signoff)}</p>
+          <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(signoff)}</p>
 
         </td></tr>
 
-        <!-- RGPD notice -->
-        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
-          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
-          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
-            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">${RGPD_URL}</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#999;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
-          </p>
-          <p style="margin:8px 0 0;font-size:11px;color:#999;line-height:1.5">
-            Si vous êtes un fournisseur, pour mener à bien l'ordre de service ci-dessus défini, l'Immobilière Pujol vous transmet des informations qui peuvent contenir des données à caractère personnel. Il vous incombe de respecter le droit en vigueur en matière de protection des données personnelles à l'occasion du traitement de données personnelles que vous allez réaliser en qualité de responsable de traitement.
+        <!-- RGPD notice — compact (Caroline 12/06: minimal space) -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 14px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 8px">
+          <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
+            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#aaa;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
           </p>
         </td></tr>
 
@@ -194,6 +208,9 @@ function buildCustomerEmail(vars: { prénom?: string }): string {
                   Vendredi<br>
                   9h – 12h / 14h – 17h
                 </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Accueil à l'agence sur rendez-vous uniquement
+                </p>
               </td>
             </tr>
           </table>
@@ -215,7 +232,6 @@ function buildCustomerEmail(vars: { prénom?: string }): string {
             </td></tr>
             <tr><td align="center">
               <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
-                Agence immobilière indépendante à Marseille depuis 2002.<br>
                 Vente, location, gestion locative et syndic de copropriété.
               </p>
             </td></tr>
@@ -235,12 +251,13 @@ async function sendAutoReply(
   prénom: string,
   fromEmail?: string,
   fromName?: string,
+  template?: { subject: string; body: string; signoff?: string },
 ): Promise<void> {
   if (!customerEmail || !customerEmail.includes('@')) return;
   try {
     await sendEmail(env, {
-      subject: UNIFIED_AUTO_REPLY.subject,
-      html: buildCustomerEmail({ prénom }),
+      subject: template?.subject ?? UNIFIED_AUTO_REPLY.subject,
+      html: buildCustomerEmail({ prénom, bodyHtml: template?.body, signoff: template?.signoff }),
       to: customerEmail,
       fromEmail: fromEmail || 'contact@immobiliere-pujol.fr',
       fromName: fromName || 'Immobilière Pujol',
@@ -272,8 +289,8 @@ function buildTable(subject: string, rows: [string, string][]): string {
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
 
         <!-- Header -->
-        <tr><td style="background-color:#0f1a2b;padding:24px 32px;border-radius:8px 8px 0 0" align="center">
-          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="220" style="display:block;max-width:220px;height:auto">
+        <tr><td style="background-color:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center">
+          <img src="${STAGING_URL}/images/home/pujol-logo-white.png" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto">
         </td></tr>
 
         <!-- Green accent bar -->
@@ -298,14 +315,11 @@ function buildTable(subject: string, rows: [string, string][]): string {
 
         </td></tr>
 
-        <!-- RGPD notice -->
-        <tr><td style="background-color:#ffffff;padding:0 32px 24px">
-          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 16px">
-          <p style="margin:0;font-size:11px;color:#999;line-height:1.5">
-            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="${RGPD_URL}" style="color:#999;text-decoration:underline">${RGPD_URL}</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#999;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>
-          </p>
-          <p style="margin:8px 0 0;font-size:11px;color:#999;line-height:1.5">
-            Si vous êtes un fournisseur, pour mener à bien l'ordre de service ci-dessus défini, l'Immobilière Pujol vous transmet des informations qui peuvent contenir des données à caractère personnel. Il vous incombe de respecter le droit en vigueur en matière de protection des données personnelles à l'occasion du traitement de données personnelles que vous allez réaliser en qualité de responsable de traitement.
+        <!-- RGPD notice — compact (Caroline 12/06: minimal space) -->
+        <tr><td style="background-color:#ffffff;padding:0 32px 14px">
+          <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 8px">
+          <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
+            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#aaa;text-decoration:underline">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
           </p>
         </td></tr>
 
@@ -333,6 +347,9 @@ function buildTable(subject: string, rows: [string, string][]): string {
                   Vendredi<br>
                   9h – 12h / 14h – 17h
                 </p>
+                <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
+                  Accueil à l'agence sur rendez-vous uniquement
+                </p>
               </td>
             </tr>
           </table>
@@ -356,7 +373,6 @@ function buildTable(subject: string, rows: [string, string][]): string {
             </td></tr>
             <tr><td align="center">
               <p style="margin:0;font-size:12px;color:#ffffff;opacity:0.7;line-height:1.5">
-                Agence immobilière indépendante à Marseille depuis 2002.<br>
                 Vente, location, gestion locative et syndic de copropriété.
               </p>
             </td></tr>
@@ -633,9 +649,10 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
     fromName = route.fromName;
 
     if (!route.to) {
-      // Location deflection — only send auto-reply, no internal notification
+      // Location deflection — only send the location-specific auto-reply
+      // (Caroline 11/06), no internal notification.
       if (replyTo) {
-        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName);
+        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName, LOCATION_AUTO_REPLY);
       }
       await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
       return { ok: true };

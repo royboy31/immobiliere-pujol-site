@@ -56,9 +56,11 @@ const { scope } = Astro.props;
       const slidesHtml=slides.length?'<ul class="lc-track" data-lc-track>'+slides.map((p,i)=>'<li class="lc-slide" style="background-image:url(\''+p+'\')" role="img" aria-label="'+esc(title)+' – photo '+(i+1)+'"></li>').join('')+'</ul>':'<div class="lc-empty">Pas de photo</div>';
       const arrows=slides.length>1?'<button class="lc-arrow lc-arrow--prev" type="button" data-lc-prev>'+arrowL+'</button><button class="lc-arrow lc-arrow--next" type="button" data-lc-next>'+arrowR+'</button><div class="lc-dots" data-lc-dots>'+slides.map((_,i)=>'<span class="lc-dot'+(i===0?' is-active':'')+'"></span>').join('')+'</div>':'';
       const pillsHtml=pills.length?'<div class="meta">'+pills.map(p=>'<span class="pill-tag">'+esc(p)+'</span>').join('')+'</div>':'';
-      const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+(cp.trim()?'<span>'+esc(cp.trim())+'</span>':'')+'</div>':'';
-      const overlayHtml=a.saleStatus?'<div class="sold-overlay'+(isV?'':' sold-overlay--rental')+'"><span class="sold-overlay__label">Sous promesse</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'</div>':'';
-      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div><div class="price">'+esc(price)+'</div>'+pillsHtml+locHtml+'</a>';
+      const locPin='<svg class="loc__pin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="11" r="2.3" stroke="currentColor" stroke-width="1.8"/></svg>';
+      const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+locPin+(cp.trim()?'<span class="loc__cp">'+esc(cp.trim())+'</span>':'')+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+'</div>':'';
+      const sLabel=a.saleStatus==='sous-offre'?'Sous offre':(a.saleStatus==='sous-compromis'?'Sous promesse':(a.saleStatus==='vendu'?'Vendu':''));
+      const overlayHtml=sLabel?'<div class="sold-overlay'+(isV?'':' sold-overlay--rental')+'"><span class="sold-overlay__label">'+sLabel+'</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'</div>':'';
+      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div>'+locHtml+'<div class="price">'+esc(price)+'</div>'+pillsHtml+'</a>';
       frag.appendChild(el);
     }
     grid.appendChild(frag);
@@ -76,6 +78,9 @@ const { scope } = Astro.props;
       next?.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();step(1)});
       if(dots.length){let raf=0;track.addEventListener('scroll',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{const i=Math.round(track.scrollLeft/track.clientWidth);dots.forEach((d,j)=>d.classList.toggle('is-active',j===i))})},{passive:true})}
     });
+    // Cards injected after FilterBar's initial pass — tell it to re-filter so
+    // active filters (e.g. ?cp=13011) also apply to these deferred cards.
+    document.dispatchEvent(new CustomEvent('annonces:cards-loaded'));
   }catch(e){console.error('[deferred]',e)}
 })();
 </script>

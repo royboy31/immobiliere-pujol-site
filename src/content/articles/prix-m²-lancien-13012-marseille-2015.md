@@ -5,13 +5,13 @@ date: "2015-11-03"
 excerpt: "2015-Les prix au m² dans l'ancien dans le 13012 arrondissement Les prix des loyers dans le 13012 (sources Clameur)   13012 Studio 15,72 T2 14,05 T3 11,32 T4 10,77   12,97   Les prix au m² de l'ancien vendus en 2015 dans le 13012  (source notaires)  En 2015, ce sont…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13012", "Arrondissements Marseille", "Arrondissement 13012 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Marseille-Saint-Julien455.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Marseille-Saint-Julien455.jpg"
 seoTitle: "Les prix au m² dans l’ancien dans le 13012 Marseille en 2015"
 seoDescription: "2015-Les prix au m² dans l'ancien dans le 13012 arrondissement Les prix des loyers dans le 13012 (sources Clameur)   13012 Studio 15,72 T2 14,05 T3 11,32 T4 10,77   12,97   Les prix au m² de l'ancien vendus en 2015 dans le 13012  (source notaires)  En 2015, ce sont…"
 ---
 
 <h2 style="text-align: center;"><span style="color: #ff6600;">2015-Les prix au m² dans l&rsquo;ancien dans le 13012 arrondissement</span></h2>
-<h2><span style="color: #ff6600;"><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/11/img_1.jpg" rel="attachment wp-att-7591"><img loading="lazy" decoding="async" class="wp-image-7591 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2015/11/img_1-1024x657.jpg" alt="img_1" width="728" height="467" /></a></span></h2>
+<h2><span style="color: #ff6600;"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/img_1.jpg" rel="attachment wp-att-7591"><img loading="lazy" decoding="async" class="wp-image-7591 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/11/img_1-1024x657.jpg" alt="img_1" width="728" height="467" /></a></span></h2>
 <p style="text-align: center;"><span style="color: #ff6600; font-size: 18pt;"><strong>Les prix des loyers dans le 13012 (sources Clameur)</strong></span></p>
 <table dir="ltr" style="height: 123px;" border="1" width="154" cellspacing="0" cellpadding="0">
 <colgroup> 

@@ -9,5 +9,6 @@
   "seoTitle": "Clara RODITIS",
   "seoDescription": "",
   "department": "Gestion locative",
-  "hidden": true
+  "hidden": true,
+  "listingOnly": true
 }

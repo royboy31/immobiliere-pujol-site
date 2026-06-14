@@ -8,5 +8,7 @@
   "phone": "",
   "seoTitle": "Stéphane Pujol – Directeur",
   "seoDescription": "Tout simplement et en toute modestie: THE BOSS Fondateur de l'immobilière Pujol en 2002, il respire l'immobilier à Marseille depuis ses 8 ans. Cela fait 22 ans qu'il s'éclate et s'amuse à construire une société moderne, une marque, reflet de son savoir faire. Il dirige son équipage au gré du…",
-  "department": "Direction"
+  "department": "Direction",
+  "order": 1,
+  "hidden": false
 }

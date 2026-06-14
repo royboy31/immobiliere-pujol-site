@@ -29,7 +29,7 @@ type Item = {
 // Build the list of visible experts (hidden=true are kept in the collection
 // for backlink preservation but don't appear on the listing).
 const items: Item[] = experts
-  .filter((entry) => !entry.data.hidden)
+  .filter((entry) => !entry.data.hidden && !entry.data.listingOnly)
   .map((entry) => {
     const e = entry.data;
     const { first, last } = splitName(e.title);
@@ -53,7 +53,7 @@ const DEPT_ORDER: { key: string; label: string; lede: string }[] = [
   },
   {
     key: 'Vente',
-    label: 'Commerciaux vente',
+    label: 'Vente',
     lede: "Spécialistes de la vente d'appartements et de maisons sur Marseille.",
   },
   {
@@ -66,11 +66,6 @@ const DEPT_ORDER: { key: string; label: string; lede: string }[] = [
     label: 'Syndic de copropriété',
     lede: "Gestionnaires de copropriétés à Marseille.",
   },
-  {
-    key: 'Contentieux',
-    label: 'Contentieux & juridique',
-    lede: "Pour vos dossiers contentieux et juridiques.",
-  },
 ];
 
 // Group items by department, preserving the order above.
@@ -79,6 +74,7 @@ const sections = DEPT_ORDER.map((d) => {
   // (which the Item type doesn't carry — keeping Item minimal for the card).
   const group = experts
     .filter((entry) => !entry.data.hidden && (entry.data.department || '') === d.key)
+    .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
     .map((entry) => {
       const { first, last } = splitName(entry.data.title);
       return {
@@ -116,12 +112,13 @@ if (orphans.length) {
       <span class="experts-archive__overline">L'équipe</span>
       <h1 class="ds-sec-title">Toutes nos <b>expertises immobilières</b></h1>
       <p class="experts-archive__lede">
-        Vente, location, gestion locative, syndic — chacun·e à son métier, tous engagés à vos côtés à Marseille.
+        Un seul interlocuteur pour trois expertises métier : Syndic • Vente • Gestion.
       </p>
       <div class="experts-archive__legend">
-        <span class="experts-archive__chip experts-archive__chip--rental">Location</span>
         <span class="experts-archive__chip experts-archive__chip--sales">Vente</span>
-        <span class="experts-archive__chip experts-archive__chip--other">Autres expertises</span>
+        <span class="experts-archive__chip experts-archive__chip--rental">Gestion locative</span>
+        <span class="experts-archive__chip experts-archive__chip--syndic">Syndic</span>
+        <span class="experts-archive__chip experts-archive__chip--other">Direction</span>
       </div>
     </div>
 

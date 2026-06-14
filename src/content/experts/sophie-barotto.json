@@ -1,7 +1,7 @@
 {
-  "title": "Anais Barotto – Gestion locative Appartements/bureaux/locaux",
+  "title": "Anaïs Barotto – Responsable Locations Locaux Professionnels",
   "slug": "sophie-barotto",
-  "fonction": "Gestion locative Appartements/bureaux/locaux",
+  "fonction": "Responsable Locations Locaux Professionnels",
   "description": "",
   "photo": "/images/experts/sophie-barotto.png",
   "email": "anaisbarotto@immobiliere-pujol.fr",
@@ -9,5 +9,5 @@
   "seoTitle": "Anais Barotto – Gestion locative Appartements/bureaux/locaux",
   "seoDescription": "",
   "department": "Gestion locative",
-  "hidden": true
+  "hidden": false
 }

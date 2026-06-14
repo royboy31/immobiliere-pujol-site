@@ -9,6 +9,7 @@ import {
   isMeuble,
   piecesBucket,
 } from '../../lib/annonces-filter';
+import { reservedLabel } from '../../lib/listing-status';
 
 interface Props {
   annonce: UbiflowAnnonce;
@@ -16,6 +17,7 @@ interface Props {
 
 const { annonce } = Astro.props;
 const isVente = annonce.type === 'V';
+const reserved = reservedLabel(annonce.saleStatus);
 
 // Show up to 4 photos in the in-card carousel.
 const slides = (annonce.photos ?? []).slice(0, 4);
@@ -91,9 +93,9 @@ const price4Filter = filterPrice(annonce);
 
     <span class={`badge ${isVente ? 'badge--vente' : ''}`}>{isVente ? 'VENTE' : 'LOCATION'}</span>
 
-    {annonce.saleStatus && (
-      <div class={`sold-overlay ${!isVente ? 'sold-overlay--rental' : ''}`}>
-        <span class="sold-overlay__label">Sous promesse</span>
+    {reserved && (
+      <div class={`sold-overlay sold-overlay--reserved ${!isVente ? 'sold-overlay--rental' : ''}`}>
+        <span class="sold-overlay__label">{reserved}</span>
         {annonce.contactPhoto && (
           <img class="sold-overlay__agent" src={annonce.contactPhoto} alt="" loading="lazy" />
         )}
@@ -103,16 +105,20 @@ const price4Filter = filterPrice(annonce);
 
   <a class="body" href={href}>
     <div class="title">{title}</div>
+    {(annonce.quartier || cpVille) && (
+      <div class="loc">
+        <svg class="loc__pin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z" stroke="currentColor" stroke-width="1.8" />
+          <circle cx="12" cy="11" r="2.3" stroke="currentColor" stroke-width="1.8" />
+        </svg>
+        {cpVille && <span class="loc__cp">{cpVille}</span>}
+        {annonce.quartier && <span class="a">{annonce.quartier}</span>}
+      </div>
+    )}
     <div class="price">{price}</div>
     {pills.length > 0 && (
       <div class="meta">
         {pills.map((p) => <span class="pill-tag">{p}</span>)}
-      </div>
-    )}
-    {(annonce.quartier || cpVille) && (
-      <div class="loc">
-        {annonce.quartier && <span class="a">{annonce.quartier}</span>}
-        {cpVille && <span>{cpVille}</span>}
       </div>
     )}
   </a>

@@ -16,6 +16,8 @@ export interface Expert {
   instagram?: string;
   seoTitle?: string;
   seoDescription?: string;
+  department?: string;
+  listingOnly?: boolean;
 }
 
 const expertModules = import.meta.glob<Expert>(
@@ -47,14 +49,23 @@ export function findExpertByEmail(rawEmail: string | undefined | null): Expert |
   return getExpertMap().get(normalizeEmail(rawEmail)) ?? null;
 }
 
-export type ExpertType = 'rental' | 'sales' | 'other';
+export type ExpertType = 'rental' | 'sales' | 'syndic' | 'other';
 
-// Classify expert by fonction so the page can theme sales (green) vs rentals (orange).
-// Rental wins ties because "gestion locative" appears alongside "vente" in mixed roles
-// (e.g. Caroline Pujol — "Vente, rénovation et gestion de biens immobiliers").
-export function getExpertType(expert: Pick<Expert, 'fonction'>): ExpertType {
+// Classify expert for theming: vente=orange (sales), location/gestion=green
+// (rental), syndic=blue, direction=neutral grey (other). Department is the
+// authoritative signal (Caroline's choice, meeting 15/05) since a fonction can
+// mention several métiers (e.g. Caroline Pujol — "Vente, rénovation et gestion");
+// fonction is the fallback when no department is set.
+export function getExpertType(expert: Pick<Expert, 'fonction' | 'department'>): ExpertType {
+  const dept = (expert.department || '').toLowerCase();
+  if (dept === 'direction') return 'other';
+  if (dept === 'syndic') return 'syndic';
+  if (dept === 'vente') return 'sales';
+  if (dept === 'gestion locative') return 'rental';
+
   const f = (expert.fonction || '').toLowerCase();
   if (!f) return 'other';
+  if (/syndic|copropri/.test(f)) return 'syndic';
   if (/locati|locatif|location|loueur|loue/.test(f)) return 'rental';
   if (/vente|transaction/.test(f)) return 'sales';
   return 'other';

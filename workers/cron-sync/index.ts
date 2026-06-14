@@ -68,6 +68,7 @@ interface ParsedAnnonce {
   parking: boolean;
   garage: boolean;
   interphone: boolean;
+  meuble: boolean;
   dpeEtiquetteConso: string;
   dpeValeurConso: string;
   dpeEtiquetteGes: string;
@@ -93,6 +94,35 @@ function generateSlug(a: Partial<ParsedAnnonce>): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '')
     .substring(0, 120);
+}
+
+// ── Reuse original live (WordPress) URLs for active listings ──
+// To preserve SEO URLs identically (not just 301-redirect the drift), an active
+// listing reuses its original live-site slug when one exists. The map is keyed by
+// the leading slug token (the listing reference, e.g. "mbvap160009848"/"370neot")
+// and built at deploy time from a snapshot of the live sitemap
+// (migration/live-annonce-slugs.txt) — see scripts/gen-live-slug-map.mjs. Stored
+// in R2 and read once per run (binding op, not a fetch subrequest).
+let _liveSlugMap: Record<string, string> | null = null;
+async function loadLiveSlugMap(env: Env): Promise<Record<string, string>> {
+  if (_liveSlugMap) return _liveSlugMap;
+  try {
+    const obj = await env.PHOTOS.get('annonces/live-slug-map.json');
+    _liveSlugMap = obj ? await obj.json() : {};
+  } catch {
+    _liveSlugMap = {};
+  }
+  return _liveSlugMap!;
+}
+
+function resolveSlug(generatedSlug: string, codePostal: string | null | undefined, map: Record<string, string>): string {
+  const tok = (generatedSlug || '').split('-')[0];
+  if (!tok) return generatedSlug;
+  const live = map[tok];
+  if (!live) return generatedSlug; // genuinely new listing → keep generated slug
+  const cp = (codePostal || '').toString().trim();
+  if (cp && !live.includes(cp)) return generatedSlug; // token-collision guard
+  return live;
 }
 
 function parseAnnonce(raw: any): ParsedAnnonce {
@@ -142,6 +172,7 @@ function parseAnnonce(raw: any): ParsedAnnonce {
     parking: bool(bien.parking) || bool(bien.places_parking),
     garage: bool(bien.garage),
     interphone: bool(bien.interphone),
+    meuble: bool(bien.meuble) || bool(bien.meuble_oui_non),
     dpeEtiquetteConso: str(diagnostics.dpe_etiquette_conso),
     dpeValeurConso: str(diagnostics.dpe_valeur_conso),
     dpeEtiquetteGes: str(diagnostics.dpe_etiquette_ges),
@@ -208,8 +239,10 @@ async function uploadPhotos(
   stats: { photosUploaded: number }
 ): Promise<string[]> {
   const r2Urls: string[] = [];
+  const wanted = new Set<string>();
   for (let i = 0; i < a.photos.length; i++) {
-    const key = `annonces/${a.slug}/${i}.jpg`;
+    const key = photoR2Key(a.slug, a.photos[i]);
+    wanted.add(key);
     try {
       const head = await bucket.head(key);
       if (head) { r2Urls.push(key); continue; }
@@ -225,6 +258,13 @@ async function uploadPhotos(
       r2Urls.push(a.photos[i]);
     }
   }
+  // Delete R2 objects no longer referenced (replaced/removed photos + old
+  // position-based keys). R2 list/delete are binding ops, not fetch subrequests.
+  try {
+    const listed = await bucket.list({ prefix: `annonces/${a.slug}/` });
+    const stale = listed.objects.map(o => o.key).filter(k => !wanted.has(k));
+    if (stale.length) await bucket.delete(stale);
+  } catch {}
   return r2Urls;
 }
 
@@ -238,14 +278,14 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       surface, surface_terrain,
       nb_pieces, nb_chambres, nb_salles_bain, nb_wc,
       etage, nb_etages, ascenseur, cave, terrasse,
-      parking, garage, interphone,
+      parking, garage, interphone, meuble,
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
       mandat_numero, mandat_type, url_visite_virtuelle,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
+      ?,'active',?,?, ?,?, ?,?,?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'ubiflow',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status='active', ubiflow_annonce_id=excluded.ubiflow_annonce_id,
@@ -262,7 +302,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
       nb_salles_bain=excluded.nb_salles_bain, nb_wc=excluded.nb_wc,
       etage=excluded.etage, nb_etages=excluded.nb_etages,
       ascenseur=excluded.ascenseur, cave=excluded.cave, terrasse=excluded.terrasse,
-      parking=excluded.parking, garage=excluded.garage, interphone=excluded.interphone,
+      parking=excluded.parking, garage=excluded.garage, interphone=excluded.interphone, meuble=excluded.meuble,
       dpe_note=excluded.dpe_note, dpe_valeur=excluded.dpe_valeur,
       ges_note=excluded.ges_note, ges_valeur=excluded.ges_valeur, type_chauffage=excluded.type_chauffage,
       titre=excluded.titre, descriptif=excluded.descriptif,
@@ -282,7 +322,7 @@ function buildUpsertStmt(db: D1Database, a: ParsedAnnonce, now: string): D1Prepa
     a.nbPieces, a.nbChambres, a.nbSallesDeBain, a.nbWC,
     a.etage || null, a.nbEtages || null,
     a.ascenseur ? 1 : 0, a.cave ? 1 : 0, a.terrasse ? 1 : 0,
-    a.parking ? '1' : null, a.garage ? '1' : null, a.interphone ? 1 : 0,
+    a.parking ? '1' : null, a.garage ? '1' : null, a.interphone ? 1 : 0, a.meuble ? 1 : 0,
     a.dpeEtiquetteConso || null, a.dpeValeurConso || null, a.dpeEtiquetteGes || null, a.dpeValeurGes || null,
     a.typeChauffage || null,
     a.titre, a.description,
@@ -299,6 +339,11 @@ async function runSync(env: Env) {
     // 1. Fetch feed
     const annonces = await fetchFeed();
     stats.annoncesInFeed = annonces.length;
+
+    // 1b. Reuse original live URL slugs (URL parity). Must run BEFORE photo upload
+    // since R2 photo keys derive from a.slug.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 2. Upload photos to R2 (these are R2 subrequests, separate from D1 limit)
     const photoMap = new Map<string, string[]>();
@@ -435,7 +480,23 @@ function parseSaleStatus(raw: string | undefined): string | null {
   const v = (raw || '').trim().toLowerCase();
   if (v === 'sous offre') return 'sous-offre';
   if (v === 'sous compromis') return 'sous-compromis';
-  return null; // 'Actif' or empty → no special status
+  if (v === 'vendu') return 'vendu';
+  if (v === 'mandat clos') return 'mandat-clos';
+  return null; // 'Actif'/'En estimation'/empty → no special status
+}
+
+// LBI field-136 terminal statuses map differently (the agency rule):
+//  - 'vendu'      → KEEP FOREVER: status 'closed' = full archive template (gallery
+//    + description + internal-links block), out of the active grids. The 'vendu'
+//    marker is persisted in the `termine` column and closed rows are never deleted,
+//    so it survives even after the bien leaves the flux (archived in Hektor).
+//  - 'mandat-clos' → DROP: status 'dropped'. Not served — the detail page 301s the
+//    URL to /annonces/, and it's excluded from active grids, sitemap and pools.
+//  - everything else → 'active'.
+function lbiDbStatus(saleStatus: string | null): 'active' | 'closed' | 'dropped' {
+  if (saleStatus === 'mandat-clos') return 'dropped';
+  if (saleStatus === 'vendu') return 'closed';
+  return 'active';
 }
 
 // ── Expert email → photo path (for overlay on cards) ──
@@ -651,14 +712,35 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
   return annonces;
 }
 
+// Derive the R2 key from the photo's SOURCE URL so a replaced photo (new URL) →
+// new key → re-download, while an unchanged photo (same URL) → same key → skip.
+// Both feeds change the URL when the photo changes: LBI is content-addressed
+// (…/photo_<hash>.jpg); Ubiflow keeps a position path but carries a per-listing
+// timestamp in the query (…/5.jpg?..._20260605084542) that bumps on any photo
+// edit. We key on the LBI content hash when present, else a hash of the full URL
+// (which captures the Ubiflow timestamp). Position-based keys never changed, so
+// replaced photos used to keep the old image forever — the bug Caroline reported.
+function photoR2Key(slug: string, srcUrl: string): string {
+  const m = srcUrl.match(/photo_([a-z0-9]+)/i) || srcUrl.match(/([a-f0-9]{24,})/i);
+  let token = m ? m[1] : '';
+  if (!token) {
+    let h = 2166136261 >>> 0; // FNV-1a of the full URL (captures Ubiflow timestamp)
+    for (let i = 0; i < srcUrl.length; i++) { h ^= srcUrl.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    token = h.toString(16);
+  }
+  return `annonces/${slug}/${token.slice(0, 32)}.jpg`;
+}
+
 async function uploadLbiPhotos(
   bucket: R2Bucket,
   a: LbiAnnonce,
   stats: { photosUploaded: number; photosSkipped: number }
 ): Promise<string[]> {
   const r2Keys: string[] = [];
+  const wanted = new Set<string>();
   for (let i = 0; i < a.photos.length; i++) {
-    const key = `annonces/${a.slug}/${i}.jpg`;
+    const key = photoR2Key(a.slug, a.photos[i]);
+    wanted.add(key);
     try {
       const head = await bucket.head(key);
       if (head) {
@@ -675,9 +757,17 @@ async function uploadLbiPhotos(
       r2Keys.push(key);
       stats.photosUploaded++;
     } catch {
-      r2Keys.push(a.photos[i]); // fallback to external URL
+      r2Keys.push(a.photos[i]); // fallback to external URL (will retry next sync)
     }
   }
+  // Delete R2 objects for this annonce that are no longer referenced: photos the
+  // agency replaced or removed, plus the old position-based keys from before this
+  // change. R2 list/delete are binding ops (not fetch subrequests).
+  try {
+    const listed = await bucket.list({ prefix: `annonces/${a.slug}/` });
+    const stale = listed.objects.map(o => o.key).filter(k => !wanted.has(k));
+    if (stale.length) await bucket.delete(stale);
+  } catch {}
   return r2Keys;
 }
 
@@ -698,10 +788,10 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       mandat_numero, url_visite_virtuelle, termine,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,'active',?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
+      ?,?,?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
-      status='active', reference_agence=excluded.reference_agence,
+      status=excluded.status, reference_agence=excluded.reference_agence,
       type_annonce=excluded.type_annonce, type_bien=excluded.type_bien,
       adresse=excluded.adresse,
       code_postal=excluded.code_postal, ville=excluded.ville,
@@ -723,7 +813,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       date_modification=excluded.date_modification, source='lbi',
       date_fermeture=NULL, updated_at=excluded.updated_at`
   ).bind(
-    a.slug, a.reference, a.typeAnnonce, a.typeBien,
+    a.slug, lbiDbStatus(a.saleStatus), a.reference, a.typeAnnonce, a.typeBien,
     a.adresse, a.codePostal, a.ville,
     a.prix, a.charges,
     a.surface, a.surfaceTerrain,
@@ -765,6 +855,10 @@ async function runLbiImport(env: Env) {
     const annonces = parseLbiCsv(csvText);
     stats.annoncesInZip = annonces.length;
     console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
+
+    // Reuse original live URL slugs (URL parity) before photo upload + upsert.
+    const slugMap = await loadLiveSlugMap(env);
+    for (const a of annonces) a.slug = resolveSlug(a.slug, a.codePostal, slugMap);
 
     // 3. Upload photos to R2
     const photoMap = new Map<string, string[]>();

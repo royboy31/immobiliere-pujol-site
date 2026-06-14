@@ -26,7 +26,7 @@ C’était un quartier plutôt populaire de notre ville, surtout la Capelette. &
 
 &nbsp;
 
-<figure id="attachment_6046" aria-describedby="caption-attachment-6046" style="width: 500px" class="wp-caption alignnone"><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/09/Plan-du-10ème-arrondissement-de-Marseille.png"><img loading="lazy" decoding="async" class="wp-image-6046" src="https://www.immobiliere-pujol.fr/content/uploads/2015/09/Plan-du-10ème-arrondissement-de-Marseille.png" alt="Plan du 10eme arrondissement de Marseille" width="500" height="509"></a><figcaption id="caption-attachment-6046" class="wp-caption-text">Plan du 10eme arrondissement de Marseille</figcaption></figure>
+<figure id="attachment_6046" aria-describedby="caption-attachment-6046" style="width: 500px" class="wp-caption alignnone"><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/09/Plan-du-10ème-arrondissement-de-Marseille.png"><img loading="lazy" decoding="async" class="wp-image-6046" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/09/Plan-du-10ème-arrondissement-de-Marseille.png" alt="Plan du 10eme arrondissement de Marseille" width="500" height="509"></a><figcaption id="caption-attachment-6046" class="wp-caption-text">Plan du 10eme arrondissement de Marseille</figcaption></figure>
 <h2></h2>
 C’est un arrondissement relativement aéré où les espaces verts et les larges avenues sont plus nombreux que dans beaucoup d’autres arrondissements de Marseille.
 

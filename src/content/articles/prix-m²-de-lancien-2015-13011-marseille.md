@@ -5,12 +5,12 @@ date: "2015-10-05"
 excerpt: "Les prix des loyers dans le 11ème arrondissement (13011) Les loyers dans cet arrondissement se portés élevés  en 2014 en moyenne à 12,2€ /m², légèrement en baisse par rapport à 2013.  en €/m² 13011 Studio/ T1 13,74 T2 12,57 T3 10,1 Moyenne 12,14   Les prix au m² de l'ancien en…"
 categories: ["Prix au m2 par arrondissement à Marseille", "Immobilier Arrondissement 13011", "Arrondissements Marseille", "Arrondissement 13011 Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/La_Treille-village32.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/La_Treille-village32.jpg"
 seoTitle: "Les prix au m² de l’ancien en 2015 dans le 13011 Marseille"
 seoDescription: "Les prix des loyers dans le 11ème arrondissement (13011) Les loyers dans cet arrondissement se portés élevés  en 2014 en moyenne à 12,2€ /m², légèrement en baisse par rapport à 2013.  en €/m² 13011 Studio/ T1 13,74 T2 12,57 T3 10,1 Moyenne 12,14   Les prix au m² de l'ancien en…"
 ---
 
-<h3><a href="https://www.immobiliere-pujol.fr/content/uploads/2015/10/marseille_555.jpg" rel="attachment wp-att-7505"><img loading="lazy" decoding="async" class="wp-image-7505 aligncenter" src="https://www.immobiliere-pujol.fr/content/uploads/2015/10/marseille_555.jpg" alt="marseille_555" width="507" height="342" /></a></h3>
+<h3><a href="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/10/marseille_555.jpg" rel="attachment wp-att-7505"><img loading="lazy" decoding="async" class="wp-image-7505 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2015/10/marseille_555.jpg" alt="marseille_555" width="507" height="342" /></a></h3>
 <h3><span style="color: #ff6600;">Les prix des loyers dans le 11ème arrondissement (13011)</span></h3>
 <p>Les loyers dans cet arrondissement se portés élevés  en 2014 en moyenne à 12,2€ /m², légèrement en baisse par rapport à 2013.</p>
 <table style="height: 181px; border-color: #000000;" border="1" width="416">

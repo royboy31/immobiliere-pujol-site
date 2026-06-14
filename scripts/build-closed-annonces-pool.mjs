@@ -32,7 +32,8 @@ async function main() {
     try { d = JSON.parse(await readFile(join(DIR, f), 'utf-8')); } catch { continue; }
     if (d.status !== 'closed' || !d.slug) continue;
     if (/^lj[vl]ga/i.test(d.slug)) continue; // skip garages (Caroline)
-    out.push({ url: `/annonces/${d.slug}/`, title: title(d), type: 'closed', date: (d.date || '').slice(0, 10) });
+    const image = Array.isArray(d.photos) && d.photos[0] ? d.photos[0] : '';
+    out.push({ url: `/annonces/${d.slug}/`, title: title(d), type: 'closed', date: (d.date || '').slice(0, 10), image });
   }
   // Stable order (rotation relies on it); newest first so the recent-weighted
   // "Autres annonces" slice can read from the head.

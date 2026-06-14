@@ -9,24 +9,40 @@ const seoDescription =
 const heroImg =
   'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/vinced-photo-immo-pujol-facade-27-1-1200x800.jpg';
 
+// NOTE: les 3 vidéos marquées « 7darvAkSEEU » pointent toutes vers le même
+// lien dans la liste fournie par le client. C'est probablement une erreur de
+// copier-coller : à confirmer / corriger avec Caroline avant la mise en ligne.
 const portals = [
   {
     role: 'Copropriétaire',
     desc: "Suivez votre copropriété, vos appels de fonds et documents.",
     href: 'https://immobilierepujol.neotimm.com/extranet#/login',
     cta: 'Accéder à mon espace',
+    videos: [
+      { label: 'Découvrir votre espace client', id: 'vylv-mqJ5WU' },
+      { label: 'Voter en ligne par correspondance', id: 'x0BBLxSmCfU' },
+      { label: 'Payer vos charges en ligne', id: '7darvAkSEEU' }, // ⚠️ à confirmer
+      { label: 'Envoyer une demande ou déclarer un incident', id: '7darvAkSEEU' }, // ⚠️ à confirmer
+    ],
   },
   {
     role: 'Propriétaire — gestion locative',
     desc: "Loyers encaissés, comptes-rendus, baux : votre bien en un coup d'œil.",
     href: 'https://immobilierepujol.neotimm.com/extranet#/login',
     cta: 'Accéder à mon espace',
+    videos: [
+      { label: 'Découvrir votre espace client', id: 'tJxzle0_muI' },
+    ],
   },
   {
     role: 'Locataire',
     desc: "Quittances, paiements, demandes d'intervention — tout depuis votre extranet.",
     href: 'https://immobilierepujol.neotimm.com/extranet#/login',
     cta: 'Accéder à mon espace',
+    videos: [
+      { label: 'Découvrir votre espace client', id: '4VaIq_sOdp8' },
+      { label: 'Payer votre loyer en ligne', id: '7darvAkSEEU' }, // ⚠️ à confirmer
+    ],
   },
 ];
 ---
@@ -92,6 +108,25 @@ const portals = [
                   <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </a>
+
+              {p.videos && p.videos.length > 0 && (
+                <div class="account-card__tutos">
+                  <p class="account-card__tutos-title">Tutoriels vidéo</p>
+                  <ul class="account-card__tutos-list">
+                    {p.videos.map((v) => (
+                      <li>
+                        <button type="button" class="tuto-link" data-video-id={v.id} data-video-title={v.label}>
+                          <svg class="tuto-link__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                            <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.4" />
+                            <path d="M8 6.5 L14 10 L8 13.5 Z" fill="currentColor" />
+                          </svg>
+                          <span>{v.label}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -115,4 +150,64 @@ const portals = [
     </section>
 
   </div>
+
+  {/* ============= VIDEO LIGHTBOX ============= */}
+  <div class="video-lightbox" id="video-lightbox" hidden role="dialog" aria-modal="true" aria-label="Lecteur vidéo">
+    <div class="video-lightbox__backdrop" data-close></div>
+    <div class="video-lightbox__dialog">
+      <button type="button" class="video-lightbox__close" data-close aria-label="Fermer la vidéo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <p class="video-lightbox__title" id="video-lightbox-title"></p>
+      <div class="video-lightbox__frame">
+        <iframe
+          id="video-lightbox-iframe"
+          title="Tutoriel vidéo Immobilière Pujol"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
+
+<script>
+  const lb = document.getElementById('video-lightbox');
+  const iframe = document.getElementById('video-lightbox-iframe') as HTMLIFrameElement | null;
+  const titleEl = document.getElementById('video-lightbox-title');
+
+  if (lb && iframe && titleEl) {
+    let lastFocused: HTMLElement | null = null;
+
+    const open = (id: string, label: string) => {
+      lastFocused = document.activeElement as HTMLElement;
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      titleEl.textContent = label;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      (lb.querySelector('.video-lightbox__close') as HTMLElement)?.focus();
+    };
+
+    const close = () => {
+      lb.hidden = true;
+      iframe.src = '';
+      document.body.style.overflow = '';
+      lastFocused?.focus();
+    };
+
+    document.querySelectorAll<HTMLButtonElement>('.tuto-link').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.videoId;
+        const label = btn.dataset.videoTitle || '';
+        if (id) open(id, label);
+      });
+    });
+
+    lb.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lb.hidden) close();
+    });
+  }
+</script>

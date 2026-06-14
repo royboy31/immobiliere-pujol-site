@@ -22,15 +22,24 @@ const grouped = GROUPS
 ---
 
 {links.length > 0 && (
-  <section class="closed-links" aria-label="Découvrez aussi">
-    <h2 class="closed-links__title">Découvrez aussi <b>Immobilière Pujol</b></h2>
+  <section class="closed-links" aria-label="Continuez votre visite">
+    <h2 class="closed-links__title">Continuez votre visite chez <b>Immobilière Pujol</b></h2>
     <div class="closed-links__grid">
       {grouped.map((g) => (
         <div class="closed-links__col">
           <h3 class="closed-links__col-title">{g.title}</h3>
-          <ul class="closed-links__list">
+          <ul class:list={['closed-links__list', { 'closed-links__list--cards': g.items.some((l) => l.image) }]}>
             {g.items.map((l) => (
-              <li><a href={l.url}>{l.title}</a></li>
+              <li>
+                <a href={l.url}>
+                  {l.image && (
+                    <span class="closed-links__thumb">
+                      <img src={l.image} alt="" loading="lazy" width="56" height="56" />
+                    </span>
+                  )}
+                  <span class="closed-links__label">{l.title}</span>
+                </a>
+              </li>
             ))}
           </ul>
         </div>

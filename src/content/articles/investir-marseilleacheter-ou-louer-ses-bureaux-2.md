@@ -5,7 +5,7 @@ date: "2016-12-01"
 excerpt: "Beaucoup de dirigeants se demandent s’il faut acheter ou louer ses bureaux. Pour moi, la réponse ne fait aucun doute. Dès que vous disposez d’une certaine..."
 categories: ["Mes conseils pour investir en immobilier à Marseille"]
 tags: []
-featuredImage: "https://www.immobiliere-pujol.fr/content/uploads/2017/11/Strétagie-de-commercialisation-pour-louer-vite-1200x750.jpg"
+featuredImage: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/content/uploads/2017/11/Strétagie-de-commercialisation-pour-louer-vite-1200x750.jpg"
 seoTitle: "Un patron qui n'achète pas ses bureaux est un patron qui n'a rien compris !"
 seoDescription: "Beaucoup de dirigeants se demandent s’il faut acheter ou louer ses bureaux. Pour moi, la réponse ne fait aucun doute. Dès que vous disposez d’une certaine visibilité sur la pérennité de votre entreprise: l’heure est venue d’acheter. C’est particulièrement vrai pour les métiers de services. Aujourd’hui, le monde change très…"
 ---

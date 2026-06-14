@@ -16,8 +16,31 @@ const allAnnonces = await getCollection('annonces', ({ data }) =>
 );
 allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
 
-const ventes = allAnnonces.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
-const locations = allAnnonces.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
+// Never feature garages/parkings or terrains (lots) in the home "Dernières
+// annonces" section. typeBien catches most; some terrains have no typeBien but
+// are identifiable by the LBI slug code ([agent][V/L][bien-type] → ga=garage,
+// te=terrain) or by descriptive slugs (…parking…, …terrain…).
+function isGarageOrLot(d: { typeBien?: string; slug?: string; descriptif?: string; title?: string; nbPieces?: number | null; surface?: number | null }): boolean {
+  const tb = (d.typeBien || '').toLowerCase();
+  if (/parking|\bbox\b|garage|terrain|stationnement/.test(tb)) return true;
+  const slug = (d.slug || '').toLowerCase();
+  if (/parking|garage|terrain|stationnement/.test(slug)) return true;
+  const m = slug.match(/^[a-z]{2}[vl]([a-z]{2})\d/);
+  if (m && (m[1] === 'ga' || m[1] === 'te')) return true;
+  // Ubiflow garages/parkings/lots come in with no typeBien. They have no rooms
+  // and a small surface, and name the type in the title/description. Real homes
+  // have rooms or a larger surface, so this never excludes an apartment/house.
+  const text = ((d.title || '') + ' ' + (d.descriptif || '')).replace(/<[^>]+>/g, '').toLowerCase();
+  const noRooms = !d.nbPieces;
+  const small = !d.surface || d.surface < 25;
+  if (noRooms && small && /\b(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text)) return true;
+  if (/^(garage|box|parking|stationnement|emplacement|terrain)\b/.test(text.trim())) return true;
+  return false;
+}
+const featurable = allAnnonces.filter((a) => !isGarageOrLot(a.data));
+
+const ventes = featurable.filter((a) => a.data.typeAnnonce === 'V').slice(0, 8);
+const locations = featurable.filter((a) => a.data.typeAnnonce === 'L').slice(0, 8);
 
 // Build a display card from a raw annonce.
 function fmtPrice(n?: number) {
@@ -64,35 +87,39 @@ const venteCards = ventes.map(buildCard);
 const locationCards = locations.map(buildCard);
 
 // ---------- EXPERTS ----------
-// Each photo is a transparent expert headshot composited onto a colored oval
-// matching the expert's specialty: olive=gestion locative, orange=vente,
-// slate-navy=syndic. Generated from public/images/experts/*.png — see
-// scripts/build-home-expert-circles.mjs if you need to regenerate.
+// Same transparent headshots as the /experts listing (public/images/experts/*.png);
+// the colored oval behind each one is drawn in CSS via `--expert-accent`, themed by
+// specialty: olive=gestion locative, orange=vente, slate=syndic. Keeping a single
+// source image means the carousel and the listing always stay in sync.
 const expertsBase = [
   {
     href: '/experts/gaelle-lapert/',
-    photo: '/images/home/experts/gaelle.png',
+    photo: '/images/experts/gaelle-lapert.png',
+    type: 'rental',
     first: 'Gaëlle',
     last: 'Lapert',
-    role: 'Commerciale en gestion locative',
+    role: 'Expert conseil en gestion locative',
   },
   {
     href: '/experts/benoit-transactions/',
-    photo: '/images/home/experts/benoit.png',
+    photo: '/images/experts/benoit-transactions.png',
+    type: 'sales',
     first: 'Benoit',
     last: 'Marin-Vicente',
     role: 'Vente de biens immobiliers',
   },
   {
     href: '/experts/julia-lauron-ventes-de-biens-immobiliers/',
-    photo: '/images/home/experts/julia.png',
+    photo: '/images/experts/julia-lauron-ventes-de-biens-immobiliers.png',
+    type: 'sales',
     first: 'Julia',
     last: 'Lauron',
     role: 'Ventes de biens immobiliers',
   },
   {
     href: '/experts/emeline-syndic-de-coproprietes/',
-    photo: '/images/home/experts/emeline.png',
+    photo: '/images/experts/emeline-syndic-de-coproprietes.png',
+    type: 'syndic',
     first: 'Emeline',
     last: 'Pellin',
     role: 'Syndic de copropriétés',
@@ -300,7 +327,7 @@ const services = [
       </div>
       <div class="experts__row" id="expertsRow">
         {experts.map((e) => (
-          <a class="expert" href={e.href}>
+          <a class={`expert expert--${e.type}`} href={e.href}>
             <div class="ph"><img src={e.photo} alt={`${e.first} ${e.last}`.trim()} /></div>
             <div class="name">
               {e.first && <>{e.first}{' '}</>}<b>{e.last}</b>
@@ -308,6 +335,12 @@ const services = [
             <div class="role">{e.role}</div>
           </a>
         ))}
+      </div>
+      <div class="experts__cta">
+        <a class="experts__all" href="/experts/">
+          Découvrir toute l'équipe
+          <svg width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
       </div>
     </section>
 

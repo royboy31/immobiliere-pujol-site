@@ -1,13 +1,14 @@
 {
-  "title": "Anthony – Comptable gestion",
+  "title": "Anthony Vigier – Directeur général",
   "slug": "anthony-comptable-gestion",
-  "fonction": "Comptable gestion",
+  "fonction": "Directeur général",
   "description": "",
   "photo": "/images/experts/anthony-comptable-gestion.png",
   "email": "",
   "phone": "",
   "seoTitle": "Anthony – Comptable gestion",
   "seoDescription": "",
-  "department": "Comptabilité",
-  "hidden": true
+  "department": "Direction",
+  "order": 3,
+  "hidden": false
 }
