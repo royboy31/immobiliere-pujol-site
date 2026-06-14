@@ -23,7 +23,6 @@ jobs:
             const fs = require('fs');
             const cfg = JSON.parse(fs.readFileSync('wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
-            if (cfg.r2_buckets) delete cfg.r2_buckets;
             fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
 
