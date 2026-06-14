@@ -21,7 +21,9 @@ jobs:
         run: |
           node -e "
             const fs = require('fs');
-            const cfg = JSON.parse(fs.readFileSync('wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
+            const raw = fs.readFileSync('wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
@@ -50,7 +52,9 @@ jobs:
         run: |
           node -e "
             const fs = require('fs');
-            const cfg = JSON.parse(fs.readFileSync('workers/email/wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
+            const raw = fs.readFileSync('workers/email/wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
             cfg.account_id = '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}';
             cfg.vars.ALLOWED_ORIGIN = 'https://immobiliere-pujol-staging.pujol.workers.dev';
             fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
@@ -67,7 +71,9 @@ jobs:
         run: |
           node -e "
             const fs = require('fs');
-            const cfg = JSON.parse(fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
+            const raw = fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
