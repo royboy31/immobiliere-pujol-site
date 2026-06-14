@@ -45,3 +45,38 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Patch email worker config for Pujol account
+        run: |
+          node -e "
+            const fs = require('fs');
+            const cfg = JSON.parse(fs.readFileSync('workers/email/wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
+            cfg.account_id = '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}';
+            cfg.vars.ALLOWED_ORIGIN = 'https://immobiliere-pujol-staging.pujol.workers.dev';
+            fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
+      - name: Deploy email worker
+        working-directory: workers/email
+        run: rm -rf ../../.wrangler && npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Patch cron-sync worker config for Pujol account
+        run: |
+          node -e "
+            const fs = require('fs');
+            const cfg = JSON.parse(fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8').replace(/\/\/.*/g,''));
+            cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            cfg.vars = cfg.vars || {};
+            cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
+            fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
+      - name: Deploy cron-sync worker
+        working-directory: workers/cron-sync
+        run: rm -rf ../../.wrangler && npm install && npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
