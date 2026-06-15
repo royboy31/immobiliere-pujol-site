@@ -12,7 +12,7 @@ interface Env {
   PHOTOS: R2Bucket;
   GITHUB_TOKEN: string;
   GITHUB_REPO: string; // "owner/repo"
-  DEPLOY_WORKFLOW?: string; // defaults to "deploy.yml"
+  DEPLOY_WORKFLOW?: string; // workflow filename, defaults to "deploy.yml"
   R2_PUBLIC_URL?: string; // public R2 bucket URL, set per-account at deploy time
 }
 
