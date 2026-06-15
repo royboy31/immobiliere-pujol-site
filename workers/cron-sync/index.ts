@@ -12,6 +12,7 @@ interface Env {
   PHOTOS: R2Bucket;
   GITHUB_TOKEN: string;
   GITHUB_REPO: string; // "owner/repo"
+  DEPLOY_WORKFLOW?: string; // defaults to "deploy.yml"
 }
 
 // ── XML parsing (inlined from src/lib/ubiflow.ts to keep this worker self-contained) ──
@@ -208,7 +209,7 @@ async function triggerRedeploy(env: Env): Promise<boolean> {
   }
   try {
     const resp = await fetch(
-      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/deploy.yml/dispatches`,
+      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/${env.DEPLOY_WORKFLOW || 'deploy.yml'}/dispatches`,
       {
         method: 'POST',
         headers: {
