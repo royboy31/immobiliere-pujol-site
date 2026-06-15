@@ -13,6 +13,7 @@ interface Env {
   GITHUB_TOKEN: string;
   GITHUB_REPO: string; // "owner/repo"
   DEPLOY_WORKFLOW?: string; // defaults to "deploy.yml"
+  R2_PUBLIC_URL?: string; // public R2 bucket URL, set per-account at deploy time
 }
 
 // ── XML parsing (inlined from src/lib/ubiflow.ts to keep this worker self-contained) ──
@@ -952,10 +953,11 @@ async function runLbiImport(env: Env) {
 // ── Write active.json snapshot to R2 ──
 // Listing pages (prerendered) fetch this JSON at build time instead of querying D1.
 
-const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
+let R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
 
-function resolvePhotoUrl(url: string): string {
-  return url.startsWith('http') ? url : `${R2_PUBLIC}/${url}`;
+function resolvePhotoUrl(url: string, env?: Env): string {
+  const base = env?.R2_PUBLIC_URL || R2_PUBLIC;
+  return url.startsWith('http') ? url : `${base}/${url}`;
 }
 
 async function writeActiveJson(env: Env): Promise<number> {
@@ -984,7 +986,7 @@ async function writeActiveJson(env: Env): Promise<number> {
       .all<{ annonce_id: number; url: string; position: number }>();
     for (const p of photos.results) {
       const list = photoMap.get(p.annonce_id) || [];
-      list.push(resolvePhotoUrl(p.url));
+      list.push(resolvePhotoUrl(p.url, env));
       photoMap.set(p.annonce_id, list);
     }
   }

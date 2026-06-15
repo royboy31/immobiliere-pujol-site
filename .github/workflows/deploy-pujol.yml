@@ -7,14 +7,6 @@ jobs:
   deploy-pujol:
     runs-on: ubuntu-latest
     environment: pujol-staging
-    env:
-      ROY_R2_URL: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev"
-      PUJOL_R2_URL: "https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev"
-      ROY_EMAIL_WORKER: "pujol-email.roy-68a.workers.dev"
-      PUJOL_EMAIL_WORKER: "pujol-email.pujol.workers.dev"
-      ROY_STAGING: "immobiliere-pujol-staging.roy-68a.workers.dev"
-      PUJOL_STAGING: "immobiliere-pujol-staging.pujol.workers.dev"
-
     steps:
       - uses: actions/checkout@v4
 
@@ -25,54 +17,23 @@ jobs:
 
       - run: npm ci
 
-      # ── Patch all Roy references to Pujol ──────────────────────────────
-      - name: Patch R2 public URL (Roy → Pujol)
-        run: |
-          echo "Replacing R2 public URL..."
-          find src workers scripts -type f \( -name "*.ts" -o -name "*.astro" -o -name "*.mjs" -o -name "*.js" -o -name "*.json" -o -name "*.md" \) \
-            -exec sed -i "s|$ROY_R2_URL|$PUJOL_R2_URL|g" {} +
-          echo "Done. Replacements in source files:"
-          grep -r "$PUJOL_R2_URL" src/ --include="*.ts" -l | wc -l
-
-      - name: Patch form action URLs (Roy email worker → Pujol)
-        run: |
-          echo "Replacing email worker URLs..."
-          find src -type f \( -name "*.astro" -o -name "*.ts" \) \
-            -exec sed -i "s|$ROY_EMAIL_WORKER|$PUJOL_EMAIL_WORKER|g" {} +
-          echo "Done."
-
-      - name: Patch staging URL in email templates
-        run: |
-          sed -i "s|$ROY_STAGING|$PUJOL_STAGING|g" workers/email/index.ts
-
-      - name: Patch wrangler configs for Pujol account
+      - name: Patch wrangler config for Pujol account
         run: |
           node -e "
             const fs = require('fs');
-
-            // Main wrangler.jsonc — swap D1 ID, keep R2
-            let raw = fs.readFileSync('wrangler.jsonc','utf8');
-            let cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,''));
+            const raw = fs.readFileSync('wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
-
-            // Email worker — swap account_id + ALLOWED_ORIGIN
-            raw = fs.readFileSync('workers/email/wrangler.jsonc','utf8');
-            cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,''));
-            delete cfg.account_id;
-            cfg.vars.ALLOWED_ORIGIN = 'https://${{ env.PUJOL_STAGING }}';
-            fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
-
-            // Cron-sync worker — swap D1 ID + DEPLOY_WORKFLOW
-            raw = fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8');
-            cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,''));
-            cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
-            cfg.vars = cfg.vars || {};
-            cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
-            fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
 
-      # ── Sync D1 → content ─────────────────────────────────────────────
+      - name: Patch R2 public URL for Pujol account
+        run: |
+          echo "Replacing Roy R2 URL with Pujol R2 URL in src/ and workers/"
+          find src/ workers/cron-sync/ -type f \( -name '*.ts' -o -name '*.astro' -o -name '*.md' -o -name '*.json' \) \
+            -exec sed -i 's|pub-a37eed540afe4dc9b4479da74ba265e1|pub-ffb425c962e94d71bef4d2fbce95daee|g' {} +
+
       - name: Sync D1 annonces to content
         run: node scripts/sync-d1-to-content.mjs
         continue-on-error: true
@@ -80,7 +41,6 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # ── Build ──────────────────────────────────────────────────────────
       - run: npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=4096
@@ -88,21 +48,48 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
 
-      # ── Deploy all 3 workers ───────────────────────────────────────────
       - name: Deploy main worker
         run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Patch email worker config for Pujol account
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('workers/email/wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
+            cfg.account_id = '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}';
+            cfg.vars.ALLOWED_ORIGIN = 'https://immobiliere-pujol-staging.pujol.workers.dev';
+            fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
       - name: Deploy email worker
-        run: npx wrangler deploy --config workers/email/wrangler.jsonc
+        working-directory: workers/email
+        run: rm -rf ../../.wrangler && npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Patch cron-sync worker config for Pujol account
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
+            cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            cfg.vars = cfg.vars || {};
+            cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
+            cfg.vars.R2_PUBLIC_URL = 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev';
+            fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
       - name: Deploy cron-sync worker
-        run: npx wrangler deploy --config workers/cron-sync/wrangler.jsonc
+        working-directory: workers/cron-sync
+        run: rm -rf ../../.wrangler && npm install && npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
