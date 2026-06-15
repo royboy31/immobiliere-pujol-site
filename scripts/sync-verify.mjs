@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Vérification de synchronisation — compare le flux Ubiflow, le zip LBI (R2), la base D1 et le contenu du site.
 // Envoie un rapport par email à l'équipe via Mandrill.
-// Usage: node scripts/sync-verify.mjs [--no-email]
+// Usage: node scripts/sync-verify.mjs [--target roy|pujol] [--no-email]
 //
 // Env vars: OPINIONSYSTEM_API_KEY, MANDRILL_API_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
 // Or: run with `export GH_TOKEN=$(gh auth token)` for GitHub Actions checks.
@@ -15,12 +15,41 @@ try {
   });
 } catch {}
 
+// ── Target selection ───────────────────────────────────────────────────────
+
+const TARGETS = {
+  roy: {
+    label: 'Roy',
+    staging: 'https://immobiliere-pujol-staging.roy-68a.workers.dev',
+    cronWorker: 'https://pujol-cron-sync.roy-68a.workers.dev',
+    emailWorker: 'https://pujol-email.roy-68a.workers.dev',
+    r2Public: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev',
+    deployWorkflow: 'deploy.yml',
+  },
+  pujol: {
+    label: 'Pujol',
+    staging: 'https://immobiliere-pujol-staging.pujol.workers.dev',
+    cronWorker: 'https://pujol-cron-sync.pujol.workers.dev',
+    emailWorker: 'https://pujol-email.pujol.workers.dev',
+    r2Public: 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev',
+    deployWorkflow: 'deploy-pujol.yml',
+  },
+};
+
+const targetArg = process.argv.find((a, i) => process.argv[i - 1] === '--target') || 'pujol';
+if (!TARGETS[targetArg]) {
+  console.error(`Unknown target: ${targetArg}. Use --target roy or --target pujol`);
+  process.exit(1);
+}
+const TARGET = TARGETS[targetArg];
+
 // ── Config ─────────────────────────────────────────────────────────────────
 
-const STAGING = 'https://immobiliere-pujol-staging.roy-68a.workers.dev';
-const CRON_WORKER = 'https://pujol-cron-sync.roy-68a.workers.dev';
-const EMAIL_WORKER = 'https://pujol-email.roy-68a.workers.dev';
-const R2_PUBLIC = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev';
+const STAGING = TARGET.staging;
+const CRON_WORKER = TARGET.cronWorker;
+const EMAIL_WORKER = TARGET.emailWorker;
+const R2_PUBLIC = TARGET.r2Public;
+const DEPLOY_WORKFLOW = TARGET.deployWorkflow;
 const UBIFLOW_URL = 'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
 const GH_REPO = 'royboy31/immobiliere-pujol-site';
 
@@ -64,7 +93,7 @@ function addCheck(name, status, detail) {
 
 // ── 1. Flux Ubiflow ──────────────────────────────────────────────────────
 
-console.log('\n🔄  Rapport de vérification de synchronisation');
+console.log(`\n🔄  Rapport de vérification de synchronisation [${TARGET.label}]`);
 console.log(`    ${now()}\n`);
 console.log('── 1. Flux Ubiflow (Locations) ──');
 
@@ -278,7 +307,7 @@ if (GH_TOKEN) {
   // Workflow de déploiement
   try {
     const data = await fetchJson(
-      `https://api.github.com/repos/${GH_REPO}/actions/workflows/deploy.yml/runs?per_page=50`,
+      `https://api.github.com/repos/${GH_REPO}/actions/workflows/${DEPLOY_WORKFLOW}/runs?per_page=50`,
       { headers: ghHeaders }
     );
     const runs = data.workflow_runs || [];
@@ -419,7 +448,7 @@ console.log('');
 
 if (SEND_EMAIL && MANDRILL_KEY) {
   const statusLabel = fails > 0 ? '🔴 ERREURS' : warns > 0 ? '🟡 AVERTISSEMENTS' : '🟢 TOUT OK';
-  const subject = `Rapport Sync Pujol ${now()} — ${statusLabel}`;
+  const subject = `Rapport Sync Pujol [${TARGET.label}] ${now()} — ${statusLabel}`;
 
   const checksHtml = report.checks.map(c => {
     const color = c.status === 'OK' ? '#2e7d32' : c.status === 'WARN' ? '#e65100' : '#c62828';
