@@ -43,8 +43,14 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 // Only the meta tags are overridden; breadcrumbs keep the page's own title.
 const liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
 const liveMeta = (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
-const metaTitle = liveMeta?.t ?? title;
 const metaDescription = liveMeta ? liveMeta.d : description;
+// Title: mirror live verbatim when available. For pages NOT on live (e.g. the new
+// /service-immobilier/* pages) append the brand suffix for consistency — but NOT
+// for annonces, whose live Yoast titles intentionally have no suffix.
+const SITE_NAME = 'Immobilière Pujol';
+const isAnnonce = liveKey.startsWith('/annonces/');
+const metaTitle = liveMeta?.t
+  ?? ((isAnnonce || title.includes(SITE_NAME)) ? title : `${title} – ${SITE_NAME}`);
 
 // STAGING: block all indexing until go-live.
 // Set ALLOW_INDEXING=true in Cloudflare env vars when ready for production.

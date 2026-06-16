@@ -1,3 +1,22 @@
 # Legacy WordPress URL redirects (Cloudflare assets layer).
 # Singular /annonce/ → plural /annonces/ (covers ?nonamp=1 variants).
 /annonce/* /annonces/:splat 301
+
+# Legacy /blog/<slug>/ articles are now served at the root slug.
+/blog/* /:splat 301
+
+# Sitemap continuity — Google has /sitemaps.xml registered (old Yoast path).
+/sitemap.xml /sitemap_index.xml 301
+/sitemaps.xml /sitemap_index.xml 301
+
+# Legacy short slugs that existed on live (validated 200) → closest equivalent.
+/acheter /annonces/ventes/ 301
+/acheter/ /annonces/ventes/ 301
+/louer /annonces/locations/ 301
+/louer/ /annonces/locations/ 301
+/gestion-locative /service-immobilier/gestion-locative/ 301
+/gestion-locative/ /service-immobilier/gestion-locative/ 301
+/agence-immobiliere /agence-immobiliere-marseille/ 301
+/agence-immobiliere/ /agence-immobiliere-marseille/ 301
+/mentions-legales /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301
+/mentions-legales/ /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301

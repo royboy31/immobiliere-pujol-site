@@ -245,8 +245,9 @@ const breadcrumbCrumbs = type === 'article'
       </>
     )}
 
-    {type === 'article' && entry.data.categories && (
+    {type === 'article' && ((entry.data.categories?.length ?? 0) > 0 || (entry.data.tags?.length ?? 0) > 0) && (
       <footer class="content__footer">
+        {(entry.data.categories?.length ?? 0) > 0 && (
         <div class="content__categories">
           {entry.data.categories.map((cat: string) => {
             const catSlug = cat.toLowerCase()
@@ -256,7 +257,8 @@ const breadcrumbCrumbs = type === 'article'
             return <a href={`/categorie/${catSlug}/`} class="tag">{cat}</a>;
           })}
         </div>
-        {entry.data.tags && (
+        )}
+        {(entry.data.tags?.length ?? 0) > 0 && (
           <div class="content__tags">
             {entry.data.tags.map((tag: string) => {
               const tagSlug = tag.toLowerCase()
