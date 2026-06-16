@@ -121,7 +121,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
         </section>
       )}
 
-      {expert && <ExpertCard expert={expert} showPhone={!isLocation} />}
+      {expert && <ExpertCard expert={expert} showPhone={!isLocation} variant={isLocation ? 'location' : 'vente'} />}
     </Fragment>
 
     <div slot="action" class="annonce-cta-card annonce-cta-card--closed">

@@ -5,9 +5,11 @@ interface Props {
   expert: Expert;
   heading?: string;
   showPhone?: boolean;
+  /** Accent colour: 'vente' = orange (default), 'location' = green. */
+  variant?: 'vente' | 'location';
 }
 
-const { expert, heading = 'Expert en charge de ce bien', showPhone = false } = Astro.props;
+const { expert, heading = 'Expert en charge de ce bien', showPhone = false, variant = 'vente' } = Astro.props;
 // Expert titles are stored as "Name – Role" (em dash or hyphen, surrounded by spaces).
 // Take only the name half so it doesn't duplicate the role rendered separately as `fonction`.
 const displayName = (expert.title.split('|').pop() ?? expert.title)
@@ -25,7 +27,7 @@ const showCall = !photoOnly && showPhone && !!expert.phone;
 const showEmail = !photoOnly && !!expert.email;
 ---
 
-<aside class={`expert-card ${photoOnly ? 'expert-card--photo-only' : ''}`}>
+<aside class={`expert-card expert-card--${variant} ${photoOnly ? 'expert-card--photo-only' : ''}`}>
   <div class="expert-card__inner">
     <div class="expert-card__photo-wrap">
       {expert.photo && (
@@ -105,6 +107,11 @@ const showEmail = !photoOnly && !!expert.email;
 
 <style>
   .expert-card {
+    /* Accent: orange for sales (default), green for rentals (--location). */
+    --ec-accent: #e8662b;
+    --ec-accent-soft: #f0c9af;
+    --ec-accent-bg: #fff7f2;
+    --ec-accent-shadow: rgba(232, 102, 43, 0.12);
     margin: 1.75rem 0 0;
     padding: 1.5rem;
     border: 1px solid #ececec;
@@ -112,6 +119,12 @@ const showEmail = !photoOnly && !!expert.email;
     background: #fff;
     box-shadow: 0 12px 34px rgba(20, 30, 40, 0.05);
     text-align: left;
+  }
+  .expert-card--location {
+    --ec-accent: #8fa33d;
+    --ec-accent-soft: #cdd89a;
+    --ec-accent-bg: #f6f9ec;
+    --ec-accent-shadow: rgba(143, 163, 61, 0.16);
   }
   .expert-card__inner {
     display: flex;
@@ -125,7 +138,7 @@ const showEmail = !photoOnly && !!expert.email;
     flex: 0 0 clamp(130px, 28%, 165px);
     align-self: center;
     aspect-ratio: 230 / 307;
-    background: #e8662b;
+    background: var(--ec-accent);
     border-radius: 50% / 38%;
     overflow: hidden;
   }
@@ -149,7 +162,7 @@ const showEmail = !photoOnly && !!expert.email;
     align-items: center;
     gap: 0.5rem;
     margin: 0 0 0.6rem;
-    color: #e8662b;
+    color: var(--ec-accent);
     font-weight: 700;
     font-size: 0.82rem;
     letter-spacing: 0.07em;
@@ -163,7 +176,7 @@ const showEmail = !photoOnly && !!expert.email;
     line-height: 1.1;
     color: #1f2a30;
   }
-  a.expert-card__name-link:hover .expert-card__name { color: #e8662b; }
+  a.expert-card__name-link:hover .expert-card__name { color: var(--ec-accent); }
   .expert-card__fonction {
     margin: 0.35rem 0 0;
     font-size: 1.05rem;
@@ -173,7 +186,7 @@ const showEmail = !photoOnly && !!expert.email;
     width: 48px;
     height: 3px;
     border-radius: 2px;
-    background: #e8662b;
+    background: var(--ec-accent);
     margin: 0.85rem 0;
   }
   .expert-card__tagline {
@@ -195,17 +208,17 @@ const showEmail = !photoOnly && !!expert.email;
     gap: 0.6rem;
     min-width: 0;
     padding: 0.7rem 1rem;
-    border: 1.5px solid #f0c9af;
+    border: 1.5px solid var(--ec-accent-soft);
     border-radius: 12px;
     text-decoration: none;
-    color: #e8662b;
+    color: var(--ec-accent);
     background: #fff;
     transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   }
   .expert-card__btn:hover {
-    border-color: #e8662b;
-    background: #fff7f2;
-    box-shadow: 0 6px 16px rgba(232, 102, 43, 0.12);
+    border-color: var(--ec-accent);
+    background: var(--ec-accent-bg);
+    box-shadow: 0 6px 16px var(--ec-accent-shadow);
   }
   .expert-card__btn svg { flex: 0 0 auto; }
   .expert-card__btn-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
@@ -235,7 +248,7 @@ const showEmail = !photoOnly && !!expert.email;
     color: #3a4a52;
     font-size: 0.9rem;
   }
-  .expert-card__trust svg { color: #e8662b; flex: 0 0 auto; }
+  .expert-card__trust svg { color: var(--ec-accent); flex: 0 0 auto; }
 
   /* Photo-only négociateurs: compact, no orange panel height, no CTAs */
   .expert-card--photo-only .expert-card__photo-wrap {
