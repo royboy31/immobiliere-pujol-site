@@ -230,6 +230,10 @@
   position: relative;
   overflow: hidden;
   font-family: $ds-font-noto;
+  // Light text on a dark background renders "stippled"/fuzzy with macOS subpixel
+  // antialiasing — force grayscale AA for clean, readable text (inherits to all).
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &::before {
     content: "";
@@ -282,10 +286,10 @@
     p, li,
     ul a {
       font-family: $ds-font-noto;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 14px;
       line-height: 1.6;
-      color: rgba(255, 255, 255, .85);
+      color: rgba(255, 255, 255, .9);
     }
 
     ul a {
@@ -355,7 +359,7 @@
       height: 42px;
       padding: 0 20px;
       border-radius: 999px;
-      border: 1.5px solid $ds-olive;
+      border: 2.5px solid $ds-olive;
       color: $white;
       font-family: $ds-font-noto;
       font-weight: 700;
@@ -403,7 +407,7 @@
     height: 36px;
     border-radius: 50%;
     background: transparent;
-    border: 1.5px solid $green;
+    border: 2.5px solid $green;
     color: $green;
     display: grid;
     place-items: center;
@@ -633,13 +637,21 @@
   }
 }
 
-@media (max-width: $bp-mobile) {
+// Single-column footer on tablet & below: the 2-col layout leaves "L'Agence"
+// alone with empty space next to it and looks unbalanced under ~1024px.
+// Content is centered in this stacked layout.
+@media (max-width: $bp-desktop) {
   .site-footer .top {
     grid-template-columns: 1fr;
     gap: 28px;
   }
   .site-footer .col--brand,
   .site-footer .col--contact { grid-column: 1; }
+
+  .site-footer .col { text-align: center; }
+  .site-footer .col h3::after { left: 50%; transform: translateX(-50%); }
+  .site-footer .col ul { align-items: center; }
+  .site-footer .col--contact .contact-list li { justify-content: center; }
 }
 
 @media (max-width: $bp-mobile) {
