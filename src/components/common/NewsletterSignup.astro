@@ -35,7 +35,7 @@
         const data = await res.json() as { ok?: boolean };
         if (data.ok) {
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'newsletter' }); } catch (e) {}
-          form.innerHTML = '<p style="color:#b2c04e;font-weight:600;text-align:center;padding:24px 0">Merci pour votre inscription !</p>';
+          form.innerHTML = '<p style="color:#1f2a30;font-weight:700;text-align:center;padding:24px 0;font-size:20px">Merci pour votre inscription !</p>';
         } else {
           if (btn) { btn.disabled = false; btn.style.opacity = ''; }
         }
