@@ -8,12 +8,12 @@ on:
       target:
         description: 'Target to verify (roy, pujol, or both)'
         required: false
-        default: 'both'
+        default: 'pujol'
         type: choice
         options:
-          - both
-          - roy
           - pujol
+          - roy
+          - both
 
 jobs:
   verify:
@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ${{ github.event_name == 'workflow_dispatch' && (inputs.target == 'both' && fromJSON('["roy","pujol"]') || fromJSON(format('["{0}"]', inputs.target))) || fromJSON('["roy","pujol"]') }}
+        target: ${{ github.event_name == 'workflow_dispatch' && (inputs.target == 'both' && fromJSON('["roy","pujol"]') || fromJSON(format('["{0}"]', inputs.target))) || fromJSON('["pujol"]') }}
     name: verify-${{ matrix.target }}
     steps:
       - uses: actions/checkout@v4
