@@ -119,6 +119,9 @@ const showEmail = !photoOnly && !!expert.email;
     background: #fff;
     box-shadow: 0 12px 34px rgba(20, 30, 40, 0.05);
     text-align: left;
+    /* Stack based on the card's OWN width (it sits in a narrow column on the
+       annonce page), not the viewport — see @container rule below. */
+    container-type: inline-size;
   }
   .expert-card--location {
     --ec-accent: #8fa33d;
@@ -256,8 +259,9 @@ const showEmail = !photoOnly && !!expert.email;
   }
   .expert-card--photo-only .expert-card__main { justify-content: center; }
 
-  @media (max-width: 720px) {
-    .expert-card { padding: 1.5rem; }
+  /* Stack (photo on top, centered) whenever the card itself is narrow — covers
+     the ~275px column on the annonce detail page, not just small viewports. */
+  @container (max-width: 400px) {
     .expert-card__inner { flex-direction: column; align-items: center; text-align: center; gap: 1.4rem; }
     .expert-card__photo-wrap { flex-basis: auto; width: 200px; }
     .expert-card__overline { justify-content: center; }

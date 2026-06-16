@@ -633,7 +633,9 @@
   }
 }
 
-@media (max-width: $bp-mobile) {
+// Single-column footer on tablet & below: the 2-col layout leaves "L'Agence"
+// alone with empty space next to it and looks unbalanced under ~1024px.
+@media (max-width: $bp-desktop) {
   .site-footer .top {
     grid-template-columns: 1fr;
     gap: 28px;
