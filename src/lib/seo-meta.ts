@@ -1,16 +1,18 @@
 // Phase-1 meta mirror for annonce (SSR) pages.
 //
-// The annonce title/description map is large (~2.3 MB), so it must NOT be bundled
-// into the Worker (that exceeds the size/startup limit). Instead it is served as a
-// static asset (public/seo-meta-annonces.json) and loaded here at runtime via
-// env.ASSETS.fetch, memoized per isolate so it is fetched + parsed only once.
-//
-// See migration/seo-meta.csv + migration/build-seo-meta-json.py.
+// The full annonce title/description map is ~2.3 MB. Parsing that on a cold isolate
+// exceeds the Worker CPU limit (empty/503 responses). So the map is SHARDED into 64
+// small files (public/seo-meta-annonces/<shard>.json, ~35 KB each) keyed by
+// FNV-1a(slug) % 64. Each request fetches and parses only its one shard, memoized
+// per isolate. See migration/build-seo-meta-json.py (must use the same hash).
+
+import { hashString } from './internal-links';
 
 interface SeoMeta { t: string; d: string }
 type Assets = { fetch: (req: Request) => Promise<Response> } | undefined;
 
-let _cache: Record<string, SeoMeta> | null = null;
+const SHARDS = 64;
+const _cache = new Map<number, Record<string, SeoMeta>>();
 
 /** Normalize a pathname to the map key: percent-decoded, trailing slash. */
 function keyFor(pathname: string): string {
@@ -18,24 +20,29 @@ function keyFor(pathname: string): string {
 }
 
 /**
- * Live WP meta for an annonce path, or null if not in the map (e.g. a listing
- * created after the scrape — caller falls back to the generated title/description).
+ * Live WP meta for an annonce, or null if not in the map (e.g. a listing created
+ * after the scrape — caller falls back to the generated title/description).
+ * `slug` selects the shard; `pathname` is the lookup key.
  */
 export async function getAnnonceSeoMeta(
   assets: Assets,
   baseUrl: URL,
+  slug: string,
   pathname: string,
 ): Promise<SeoMeta | null> {
-  if (_cache === null) {
+  const shard = hashString(slug) % SHARDS;
+  let map = _cache.get(shard);
+  if (!map) {
     try {
-      const url = new URL('/seo-meta-annonces.json', baseUrl);
+      const url = new URL(`/seo-meta-annonces/${shard}.json`, baseUrl);
       const resp = assets
         ? await assets.fetch(new Request(url.toString()))
         : await fetch(url.toString());
-      _cache = resp.ok ? ((await resp.json()) as Record<string, SeoMeta>) : {};
+      map = resp.ok ? ((await resp.json()) as Record<string, SeoMeta>) : {};
     } catch {
-      _cache = {};
+      map = {};
     }
+    _cache.set(shard, map);
   }
-  return _cache[keyFor(pathname)] ?? null;
+  return map[keyFor(pathname)] ?? null;
 }

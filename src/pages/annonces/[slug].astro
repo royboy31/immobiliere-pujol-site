@@ -358,6 +358,7 @@ if (isClosed) {
 const liveAnnonce = await getAnnonceSeoMeta(
   (env as any)?.ASSETS,
   new URL(Astro.url.origin),
+  slug,
   Astro.url.pathname,
 );
 const pageTitle = liveAnnonce?.t ?? `${view.titre} – Immobilière Pujol`;

@@ -135,11 +135,40 @@ edits to `BaseLayout.astro` + `annonces/[slug].astro`.
   (NOTE: index.astro and [...slug].astro did NOT need edits — BaseLayout's override covers
   home + all SSG pages centrally.)
 
-### Lesson (deploy #1299 failed)
+### Status: LIVE ON STAGING (16 Jun, commit 8cbe06c5)
+Verified string-exact vs live WP: home, article, service, closed annonce all MATCH
+(title + description). Deploy.yml succeeded after the static-asset fix.
+
+### KNOWN GAP — active listings (~3% of annonce URLs)
+Active listings render at a canonical slug DIFFERENT from their live WP URL (e.g. WP
+`…-marseille-france` 301-redirects to `…-marseille`). The rendered path isn't in the
+map (which is keyed by the WP URL), so it falls back to generated meta. Closed annonces
+are fine (served at their WP URL). Sampled 30 annonce URLs → 29 match, 1 redirected+missed.
+Fix options: (1) meta-layer — also key the map by the canonical slug, or look up by the
+listing reference token (e.g. `atvap150009851`, identical in WP + canonical URL); (2)
+URL-layer — serve active listings at the exact WP URL (no redirect), fixing URL parity
+AND meta together. DECISION PENDING.
+
+### Lesson 1 (deploy #1299 failed)
 Bundling the 2.3 MB annonce JSON into the SSR worker passed the build but failed the
 `wrangler deploy` upload (size/startup limit). Fix: serve large lookup data as a static
-asset and load it at runtime (memoized), per the existing loadLinkPool/loadClosedAnnoncesPool
-pattern. Keep only small maps bundled.
+asset and load it at runtime, per loadLinkPool/loadClosedAnnoncesPool. Keep small maps bundled.
+
+### Lesson 2 (runtime CPU limit — empty/503 annonce pages)
+Loading the WHOLE 2.3 MB asset at runtime then JSON.parse on a COLD isolate exceeds the
+Worker CPU limit ("outcome":"exceededCpu", confirmed via `wrangler tail`) → ~1 in 6 annonce
+requests returned an empty 200 / 503. Fix: SHARD the annonce map into 64 small files
+(public/seo-meta-annonces/<n>.json, ~35 KB) keyed by FNV-1a(slug)%64; the SSR route fetches
+only its one shard (src/lib/seo-meta.ts, reusing hashString from internal-links.ts). The
+generated-from-fields fallback was rejected: a Yoast-pattern title matches live 0% (live uses
+"Villa 5 pièces à louer, 13e arrondissement de Marseille, Marseille" etc., not reproducible).
+
+### URL parity (16 Jun): mirror = migration/url-parity.csv (MATCH 7065 / REDIRECT 99 / MISSING 8)
+99 redirects = 68 slug-drift (4 active + 64 closed) + 31 dropped (mandat-clos). DONE: refreshed
+migration/live-annonce-slugs.txt from the scrape, regenerated map, uploaded to R2 (Roy), ran
+migrate-live-slugs.mjs --apply on Roy (4 active re-pointed). DEFERRED to post-go-live closed
+cleanup (with Caroline status validation): 64 closed slug drift + 31 dropped. 8 missing = thin tags/junk.
+R2 map upload + migrate must be repeated on the Pujol account.
 
 ---
 
