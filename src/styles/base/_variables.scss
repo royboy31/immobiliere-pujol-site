@@ -100,6 +100,9 @@ $bp-tablet:   768px;
 $bp-desktop:  1024px;
 $bp-wide:     1200px;
 $bp-ultra:    1440px;
+// Header nav collapses to the burger below this: the full 6-item horizontal menu
+// needs ~1240px and clips "L'AGENCE"/"LE BLOG" on iPad-landscape (~1024px).
+$bp-nav:      1240px;
 
 // ============================================
 // BORDERS & RADIUS

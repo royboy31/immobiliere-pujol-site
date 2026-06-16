@@ -474,7 +474,10 @@
 // =========================================
 // RESPONSIVE — header / topbar / footer
 // =========================================
-@media (max-width: $bp-tablet) {
+// Collapse the desktop nav to the burger below $bp-nav (1240px): the full 6-item
+// horizontal menu overflows on iPad-landscape widths (~1024px) and clips
+// "L'AGENCE"/"LE BLOG", so the burger must kick in earlier than tablet.
+@media (max-width: $bp-nav) {
   // ----- TOPBAR -----
   .site-topbar {
     height: 36px;
@@ -487,7 +490,8 @@
       .g { width: 18px; height: 18px; }
       .score { font-size: 12px; }
       .stars { height: 10px; }
-      .tb-reviews { display: none; }
+      // Keep the review count visible on tablet/mobile — strong trust signal.
+      .tb-reviews { font-size: 11px; }
     }
 
     .right .conn { font-size: 11px; letter-spacing: .6px; }
