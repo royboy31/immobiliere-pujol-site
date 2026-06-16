@@ -397,6 +397,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 
   &__row {
     display: flex;
+    flex-wrap: wrap;
     gap: 24px;
     justify-content: center;
   }
@@ -406,8 +407,10 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   background: $white;
   border-radius: 24px;
   padding: 24px 30px;
-  width: 382px;
-  height: 118px;
+  // Flex so the 3 cards reflow (3 → 2 → 1) and never overflow on narrow widths.
+  flex: 1 1 300px;
+  max-width: 382px;
+  min-height: 118px;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -506,6 +509,15 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       width: 44px;
       height: 44px;
     }
+  }
+}
+
+// Two carousels side-by-side need ~1000px+; stack them below desktop so each
+// gets full width (tablet ~795px otherwise clips the right column).
+@media (max-width: $bp-desktop) {
+  .listings__cols {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 }
 
