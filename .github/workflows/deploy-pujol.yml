@@ -71,6 +71,7 @@ jobs:
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
+            cfg.vars.DEPLOY_REF = 'pujol-main';
             fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
 
