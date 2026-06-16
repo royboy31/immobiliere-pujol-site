@@ -21,10 +21,14 @@ from urllib.parse import unquote
 
 HERE = os.path.dirname(__file__)
 CSV = os.path.join(HERE, "seo-meta.csv")
-# NB: NOT in src/data/ — that dir is a build artifact dir (regenerated/restored,
-# never committed). These maps are permanent committed source, so they live in src/seo-data/.
+# Non-annonce map: small (64 KB gz), imported (bundled) by BaseLayout for SSG pages.
+# Lives in src/seo-data/ (NOT src/data/ — that's a build-artifact dir).
 OUT_MAIN = os.path.abspath(os.path.join(HERE, "..", "src", "seo-data", "seo-meta.json"))
-OUT_ADS = os.path.abspath(os.path.join(HERE, "..", "src", "seo-data", "seo-meta-annonces.json"))
+# Annonce map: large (2.3 MB). Must NOT be bundled into the SSR worker (exceeds the
+# Worker size/startup limit — that broke deploy #1299). Served as a STATIC ASSET from
+# public/ and loaded at runtime via env.ASSETS.fetch with per-isolate memoization
+# (see src/lib/seo-meta.ts). public/ root is not touched by the build restore.
+OUT_ADS = os.path.abspath(os.path.join(HERE, "..", "public", "seo-meta-annonces.json"))
 
 
 def norm(path):

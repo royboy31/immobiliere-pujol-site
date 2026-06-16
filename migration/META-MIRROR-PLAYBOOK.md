@@ -80,9 +80,13 @@ Format for each entry: `[date] <commit> — files — what changed`.
 - **[15 Jun]** `migration/build-seo-meta-json.py` — compiles the CSV into two
   pathname-keyed maps (key = percent-DECODED path + trailing slash; value `{t,d}`,
   description verbatim incl. empty; only non-empty titles emitted):
-  - `src/seo-data/seo-meta.json` — non-annonce pages, 1,230 entries / 64 KB gz (SSG, build-time only).
-  - `src/seo-data/seo-meta-annonces.json` — `/annonces/*`, 5,416 entries / 478 KB gz (bundled in SSR worker).
-  NB: in `src/seo-data/`, NOT `src/data/` — the latter is a build-artifact dir (regenerated/restored, never committed; see section "Build artifacts" in Kamindu_infrastructure.md).
+  - `src/seo-data/seo-meta.json` — non-annonce pages, 1,230 entries / 64 KB gz. BUNDLED
+  (imported by BaseLayout); small, fine. In `src/seo-data/`, NOT `src/data/` (build-artifact dir).
+  - `public/seo-meta-annonces.json` — `/annonces/*`, 5,416 entries / 2.3 MB raw. Served as a
+  STATIC ASSET (public/ root, not restored by the build). MUST NOT be bundled into the SSR
+  worker — doing so broke `wrangler deploy` (run #1299: build OK, "Deploy main worker" failed
+  on the Worker size/startup limit). Loaded at runtime via `env.ASSETS.fetch` with per-isolate
+  memoization in `src/lib/seo-meta.ts`.
 - **[15 Jun]** `src/layouts/BaseLayout.astro` — import `seo-meta.json`; compute
   `liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/,'/')`; override ONLY
   the meta tags (`<title>`, description, og:title/description, twitter:title/description)
@@ -120,15 +124,22 @@ edits to `BaseLayout.astro` + `annonces/[slug].astro`.
 - `migration/seo-meta.csv` — scraped live WP meta (account-agnostic data)
 - `migration/scrape-wp-meta.py` — the scraper ✅
 - `migration/build-seo-meta-json.py` — CSV → JSON compiler ✅
-- `src/seo-data/seo-meta.json` — non-annonce lookup map ✅
-- `src/seo-data/seo-meta-annonces.json` — annonce lookup map ✅
+- `src/seo-data/seo-meta.json` — non-annonce lookup map (bundled) ✅
+- `public/seo-meta-annonces.json` — annonce lookup map (static asset, runtime-loaded) ✅
+- `src/lib/seo-meta.ts` — memoized runtime loader for the annonce map ✅
 - `migration/META-MIRROR-PLAYBOOK.md` — this doc
 
 ### Files this work modifies
 - `src/layouts/BaseLayout.astro` — meta-tag override from seo-meta.json ✅
-- `src/pages/annonces/[slug].astro` — pageTitle/pageDescription override from seo-meta-annonces.json ✅
+- `src/pages/annonces/[slug].astro` — pageTitle/pageDescription via getAnnonceSeoMeta() ✅
   (NOTE: index.astro and [...slug].astro did NOT need edits — BaseLayout's override covers
   home + all SSG pages centrally.)
+
+### Lesson (deploy #1299 failed)
+Bundling the 2.3 MB annonce JSON into the SSR worker passed the build but failed the
+`wrangler deploy` upload (size/startup limit). Fix: serve large lookup data as a static
+asset and load it at runtime (memoized), per the existing loadLinkPool/loadClosedAnnoncesPool
+pattern. Keep only small maps bundled.
 
 ---
 

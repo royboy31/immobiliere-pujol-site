@@ -8,7 +8,7 @@ import { buildRealEstateListing } from '../../lib/schemas';
 import { loadLinkPool, loadClosedAnnoncesPool, pickRotatedLinks, type LinkItem } from '../../lib/internal-links';
 import AnnonceLive from '../../components/annonces/AnnonceLive.astro';
 import AnnonceClosed from '../../components/annonces/AnnonceClosed.astro';
-import liveAnnonceMeta from '../../seo-data/seo-meta-annonces.json';
+import { getAnnonceSeoMeta } from '../../lib/seo-meta';
 
 const { slug } = Astro.params;
 if (!slug) return Astro.redirect('/annonces/');
@@ -355,8 +355,11 @@ if (isClosed) {
 // Listings created after the scrape fall back to the generated values below.
 // TODO phase 2 / new-listing fallback: replicate the exact Yoast pattern
 // (`{typeBien} T{n} à vendre|louer, {CP}, {ville}`) so post-scrape listings match.
-const liveAnnonceKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
-const liveAnnonce = (liveAnnonceMeta as Record<string, { t: string; d: string }>)[liveAnnonceKey];
+const liveAnnonce = await getAnnonceSeoMeta(
+  (env as any)?.ASSETS,
+  new URL(Astro.url.origin),
+  Astro.url.pathname,
+);
 const pageTitle = liveAnnonce?.t ?? `${view.titre} – Immobilière Pujol`;
 const pageDescription = liveAnnonce
   ? liveAnnonce.d
