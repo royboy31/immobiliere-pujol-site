@@ -7,6 +7,7 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadPerdu } from './perdu-set.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -24,6 +25,8 @@ function title(d) {
 }
 
 async function main() {
+  const perdu = await loadPerdu();
+  let perduSkipped = 0;
   const files = await readdir(DIR);
   const out = [];
   for (const f of files) {
@@ -32,6 +35,7 @@ async function main() {
     try { d = JSON.parse(await readFile(join(DIR, f), 'utf-8')); } catch { continue; }
     if (d.status !== 'closed' || !d.slug) continue;
     if (/^lj[vl]ga/i.test(d.slug)) continue; // skip garages (Caroline)
+    if (perdu.isPerdu(d.slug)) { perduSkipped++; continue; } // hidden "perdu" (Caroline) — URL still resolves
     const image = Array.isArray(d.photos) && d.photos[0] ? d.photos[0] : '';
     out.push({ url: `/annonces/${d.slug}/`, title: title(d), type: 'closed', date: (d.date || '').slice(0, 10), image });
   }
@@ -45,7 +49,7 @@ async function main() {
 
   if (!existsSync(DEST_DIR)) await mkdir(DEST_DIR, { recursive: true });
   await writeFile(DEST, JSON.stringify({ count: capped.length, links: capped }));
-  console.log(`closed-annonces-pool: ${capped.length} of ${out.length} closed annonces (capped)`);
+  console.log(`closed-annonces-pool: ${capped.length} of ${out.length} closed annonces (capped); ${perduSkipped} "perdu" hidden`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

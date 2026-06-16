@@ -14,6 +14,7 @@ import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadPerdu } from './perdu-set.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -67,6 +68,9 @@ async function main() {
   for (const e of experts) byEmail.set(e.email, e);
   console.log(`experts with email: ${experts.length}`);
 
+  const perdu = await loadPerdu();
+  let perduSkipped = 0;
+
   // 1. Every annonce from D1 (active + closed). No descriptif (huge) — use titre.
   console.log('📡 Fetching annonces from D1...');
   const rows = queryD1(`
@@ -116,6 +120,8 @@ async function main() {
     if (!email || !byEmail.has(email)) continue;
     // Skip garages / parking / box (Caroline): LBI/Hektor slug prefix lj[vl]ga.
     if (/^lj[vl]ga/i.test(a.slug || '')) continue;
+    // Hide "perdu" listings from expert pages (Caroline) — the URL still resolves.
+    if (perdu.isPerdu(a.slug)) { perduSkipped++; continue; }
 
     const arr = buckets.get(email) ?? [];
     arr.push({
@@ -150,7 +156,7 @@ async function main() {
     totalListings += arr.length;
   }
 
-  console.log(`wrote: ${written} expert files, ${totalListings} total listings`);
+  console.log(`wrote: ${written} expert files, ${totalListings} total listings (${perduSkipped} "perdu" hidden)`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
