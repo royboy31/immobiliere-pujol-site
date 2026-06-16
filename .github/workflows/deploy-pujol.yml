@@ -1,6 +1,8 @@
 name: Deploy to Pujol Account
 
 on:
+  push:
+    branches: [pujol-main]
   workflow_dispatch:
 
 jobs:
@@ -83,6 +85,7 @@ jobs:
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
+            cfg.vars.DEPLOY_REF = 'pujol-main';
             cfg.vars.R2_PUBLIC_URL = 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev';
             fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "

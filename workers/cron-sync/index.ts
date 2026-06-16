@@ -13,6 +13,7 @@ interface Env {
   GITHUB_TOKEN: string;
   GITHUB_REPO: string; // "owner/repo"
   DEPLOY_WORKFLOW?: string; // workflow filename, defaults to "deploy.yml"
+  DEPLOY_REF?: string; // git branch ref for workflow_dispatch, defaults to "main"
   R2_PUBLIC_URL?: string; // public R2 bucket URL, set per-account at deploy time
 }
 
@@ -218,7 +219,7 @@ async function triggerRedeploy(env: Env): Promise<boolean> {
           Accept: 'application/vnd.github+json',
           'User-Agent': 'pujol-cron-sync',
         },
-        body: JSON.stringify({ ref: 'main' }),
+        body: JSON.stringify({ ref: env.DEPLOY_REF || 'main' }),
       }
     );
     if (resp.ok || resp.status === 204) {
