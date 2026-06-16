@@ -5,6 +5,7 @@ import Footer from '../components/common/Footer.astro';
 import Breadcrumbs from '../components/common/Breadcrumbs.astro';
 import CookieConsent from '../components/common/CookieConsent.astro';
 import { buildRealEstateAgent, autoBreadcrumb } from '../lib/schemas';
+import liveSeoMeta from '../seo-data/seo-meta.json';
 import '../styles/theme.scss';
 
 interface Props {
@@ -34,6 +35,16 @@ const {
 } = Astro.props;
 
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
+
+// PHASE-1 META MIRROR: emit the live WordPress <title> / meta description VERBATIM
+// (no optimization — that is phase 2). Lookup is by decoded pathname with a
+// trailing slash; see migration/seo-meta.csv + migration/build-seo-meta-json.py.
+// Annonce (SSR) pages are handled in src/pages/annonces/[slug].astro, not here.
+// Only the meta tags are overridden; breadcrumbs keep the page's own title.
+const liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
+const liveMeta = (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
+const metaTitle = liveMeta?.t ?? title;
+const metaDescription = liveMeta ? liveMeta.d : description;
 
 // STAGING: block all indexing until go-live.
 // Set ALLOW_INDEXING=true in Cloudflare env vars when ready for production.
@@ -79,8 +90,8 @@ for (const s of pageSchemas) {
       rel="stylesheet"
     />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
 
     <meta name="robots" content={shouldNoindex ? "noindex, nofollow" : "index, follow"} />
@@ -91,8 +102,8 @@ for (const s of pageSchemas) {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Immobilière Pujol" />
@@ -102,8 +113,8 @@ for (const s of pageSchemas) {
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@stephanepujol" />
     <meta name="twitter:creator" content="@stephanepujol" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
 
     {/* Consent Mode v2 — default everything denied, then restore the stored
