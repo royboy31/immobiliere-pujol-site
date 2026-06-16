@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
+  download:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,19 +17,43 @@ jobs:
 
       - name: Download zip from FTP
         run: |
-          # Infomaniak FTP is occasionally slow from CI (curl exit 28 = timeout).
-          # Bound each attempt (--connect-timeout/--max-time) and spread 5 retries
-          # over more time so a transient slow window doesn't fail the run.
           curl -s "ftp://${{ secrets.LBI_FTP_HOST }}/${{ secrets.LBI_FTP_FILE }}" \
             --user "${{ secrets.LBI_FTP_USER }}:${{ secrets.LBI_FTP_PASS }}" \
             --ftp-pasv --connect-timeout 30 --max-time 180 \
             --retry 5 --retry-delay 60 --retry-all-errors --retry-connrefused \
             -o /tmp/lbi_import.zip
           ls -lh /tmp/lbi_import.zip
-          # Refuse to upload a partial/corrupt download (would poison R2).
           unzip -t /tmp/lbi_import.zip > /dev/null
 
-      - name: Upload to R2
+      - name: Upload to R2 (Roy)
+        run: npx wrangler r2 object put pujol-photos/lbi/import.zip --file=/tmp/lbi_import.zip --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lbi-zip
+          path: /tmp/lbi_import.zip
+          retention-days: 1
+
+  upload-pujol:
+    needs: download
+    runs-on: ubuntu-latest
+    environment: pujol-staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: lbi-zip
+          path: /tmp
+
+      - name: Upload to R2 (Pujol)
         run: npx wrangler r2 object put pujol-photos/lbi/import.zip --file=/tmp/lbi_import.zip --remote
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

@@ -135,7 +135,7 @@ const articles = allArticles
   .sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''))
   .slice(0, 12)
   .map((a) => ({
-    href: `/${a.id}/`,
+    href: `/blog/${a.id}/`,
     img: a.data.featuredImage!,
     date: a.data.date!,
     title: a.data.title,
@@ -423,6 +423,48 @@ const services = [
         };
         prev.addEventListener('click', () => grid.scrollBy({ left: -step(), behavior: 'smooth' }));
         next.addEventListener('click', () => grid.scrollBy({ left:  step(), behavior: 'smooth' }));
+      })();
+    </script>
+
+    {/* ============= NEWSLETTER ============= */}
+    <section class="news-wrap">
+      <form class="news" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-newsletter-form>
+        <h2>Inscrivez-vous à la<br /><b>Newsletter</b></h2>
+        <div class="form">
+          <input name="email" type="email" placeholder="Email" required />
+          <button class="submit" type="submit" aria-label="S'inscrire">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </div>
+        <label class="agree">
+          <input type="checkbox" name="agree" class="check" required />
+          <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
+        </label>
+        <p class="legal">En soumettant ce formulaire, vous acceptez que les informations collectées soient utilisées dans le cadre de votre demande et de la relation commerciale qui peut en découler. Pour connaître et exercer vos droits, notamment de retrait de votre consentement à l'utilisation des données collectées par ce formulaire, veuillez consulter notre Politique de confidentialité.</p>
+      </form>
+    </section>
+
+    <script>
+      (function () {
+        const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
+        if (!form) return;
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          if (!form.reportValidity()) return;
+          const btn = form.querySelector<HTMLButtonElement>('.submit');
+          if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+          try {
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+            const data = await res.json();
+            if (data.ok) {
+              form.innerHTML = '<p style="color:#b2c04e;font-weight:600;text-align:center;padding:24px 0">Merci pour votre inscription !</p>';
+            } else {
+              if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+            }
+          } catch {
+            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+          }
+        });
       })();
     </script>
 
