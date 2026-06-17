@@ -76,6 +76,8 @@ header{
   max-width: 100vw;
 }
 main{
-  max-width: 100vw;
+  // 100% (not 100vw) so full-bleed sections fill the zoomed root; a vw cap is
+  // narrower than the zoomed layout viewport and left an empty strip on the right.
+  max-width: 100%;
   position: relative;
 }
