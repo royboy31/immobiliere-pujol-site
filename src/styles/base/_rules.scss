@@ -11,7 +11,9 @@ section {
 }
 
 body {
-	max-width: 100vw;
+	// 100% (not 100vw) so the box fills the zoomed root: under the global root
+	// zoom the layout viewport is wider than 100vw, and a vw cap left a gap.
+	max-width: 100%;
 	overflow-x:hidden;
 }
 
