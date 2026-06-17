@@ -172,6 +172,9 @@ try {
 
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
+// Back-office experts (no email & no phone) get no "Un projet en tête ?" CTA —
+// there is nothing to click, so the section would be a dead end.
+const hasContact = !!(expert.email || expert.phone);
 const agendaLink = (expert as any).agenda as string | undefined;
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
@@ -465,6 +468,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
+    {hasContact && (
     <section class="expert-final-cta">
       <h2 class="expert-final-cta__title">
         {ctaLead} <br />
@@ -488,6 +492,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         )}
       </div>
     </section>
+    )}
   </article>
 
   <script>
