@@ -514,10 +514,11 @@
 // FINAL CTA
 // =========================================
 .expert-final-cta {
-  background: $ds-slate;
-  color: $white;
+  background: $ds-paper;
+  color: $ds-ink;
   padding: 80px $ds-side-pad;
   text-align: center;
+  border-top: 1px solid $ds-hairline;
 
   &__title {
     font-family: $ds-font-helv;
@@ -525,9 +526,9 @@
     font-size: 46px;
     line-height: 1;
     margin: 0 0 26px;
-    color: $white;
+    color: $ds-ink;
 
-    b { font-weight: 700; color: $ds-olive; }
+    b { font-weight: 700; color: var(--expert-accent, #{$ds-olive}); }
   }
 
   &__row {
@@ -535,18 +536,6 @@
     gap: 14px;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  // Override ghost button on the dark slate bg.
-  .btn-pill--ghost {
-    border-color: rgba(255, 255, 255, .55);
-    color: $white;
-
-    &:hover {
-      background: $white;
-      color: $black;
-      border-color: $white;
-    }
   }
 }
 
