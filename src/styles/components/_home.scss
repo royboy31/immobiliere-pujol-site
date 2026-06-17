@@ -1025,7 +1025,9 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   position: relative;
   z-index: 5;
   padding: 0 $ds-side-pad;
-  background: linear-gradient(to bottom, #f1f1f1 0%, #f1f1f1 50%, #000 50%, #000 100%);
+  // Top half transparent (blends with the page) so no grey shows in the side
+  // margins around the olive card; bottom half black flows into the footer.
+  background: linear-gradient(to bottom, transparent 0%, transparent 50%, #000 50%, #000 100%);
 }
 
 .news {
