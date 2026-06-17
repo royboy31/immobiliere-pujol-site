@@ -9,6 +9,7 @@ type ExpertData = {
   title: string;
   slug: string;
   fonction?: string;
+  secteur?: string;
   description?: string;
   photo?: string;
   email?: string;
@@ -206,13 +207,19 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
               C'est votre expert <b>{expert.fonction}</b>.
             </p>
           )}
+          {expert.secteur && (
+            <p class="expert-body__secteur">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="12" cy="11" r="2.2" stroke="currentColor" stroke-width="1.7" />
+              </svg>
+              <span>Secteur : <b>{expert.secteur}</b></span>
+            </p>
+          )}
         </header>
 
         {expert.description ? (
-          <>
-            <h2 class="expert-body__heading">À propos de <b>{firstName}</b></h2>
-            <div class="expert-bio-content" set:html={expert.description}></div>
-          </>
+          <div class="expert-bio-content" set:html={expert.description}></div>
         ) : (
           <p class="expert-body__empty">Pas de description disponible pour cet expert.</p>
         )}

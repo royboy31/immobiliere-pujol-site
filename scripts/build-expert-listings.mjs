@@ -14,6 +14,7 @@ import { readdir, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadPerdu } from './perdu-set.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -67,6 +68,9 @@ async function main() {
   for (const e of experts) byEmail.set(e.email, e);
   console.log(`experts with email: ${experts.length}`);
 
+  const perdu = await loadPerdu();
+  let perduSkipped = 0;
+
   // 1. Every annonce from D1 (active + closed). No descriptif (huge) — use titre.
   console.log('📡 Fetching annonces from D1...');
   const rows = queryD1(`
@@ -77,13 +81,23 @@ async function main() {
   `);
   console.log(`  ${rows.length} annonces`);
 
-  // 2. Dedup slug-drift: one row per reference, best source wins.
+  // 2. Dedup slug-drift: one row per reference.
+  //    LBI is the live management feed and the source of truth for STATUS: a
+  //    sold bien is LBI field-136 Vendu→closed, and a bien back on the market is
+  //    LBI active. So when a reference has an LBI row, it wins — otherwise a
+  //    stale ubiflow "closed" record would keep a re-listed (LBI active) property
+  //    in an expert's "Vendus". Without an LBI row, fall back to source priority
+  //    for historical biens (only ever in ubiflow/wordpress).
   const refMap = new Map();
   for (const a of rows) {
     const ref = (a.reference_agence || a.ubiflow_reference || '').toLowerCase();
     const key = ref || `slug:${a.slug}`;
     const ex = refMap.get(key);
-    if (!ex || (SOURCE_PRIORITY[a.source] ?? 9) < (SOURCE_PRIORITY[ex.source] ?? 9)) {
+    if (!ex) {
+      refMap.set(key, a);
+    } else if (a.source === 'lbi' && ex.source !== 'lbi') {
+      refMap.set(key, a); // LBI always wins — live status truth
+    } else if (ex.source !== 'lbi' && (SOURCE_PRIORITY[a.source] ?? 9) < (SOURCE_PRIORITY[ex.source] ?? 9)) {
       refMap.set(key, a);
     }
   }
@@ -106,6 +120,8 @@ async function main() {
     if (!email || !byEmail.has(email)) continue;
     // Skip garages / parking / box (Caroline): LBI/Hektor slug prefix lj[vl]ga.
     if (/^lj[vl]ga/i.test(a.slug || '')) continue;
+    // Hide "perdu" listings from expert pages (Caroline) — the URL still resolves.
+    if (perdu.isPerdu(a.slug)) { perduSkipped++; continue; }
 
     const arr = buckets.get(email) ?? [];
     arr.push({
@@ -140,7 +156,7 @@ async function main() {
     totalListings += arr.length;
   }
 
-  console.log(`wrote: ${written} expert files, ${totalListings} total listings`);
+  console.log(`wrote: ${written} expert files, ${totalListings} total listings (${perduSkipped} "perdu" hidden)`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

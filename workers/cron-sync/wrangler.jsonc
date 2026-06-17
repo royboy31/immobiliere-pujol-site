@@ -6,7 +6,9 @@
 	"d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "109fb417-c984-4c08-90b2-2a10ae1bc279" }],
 	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }],
 	"vars": {
-		"GITHUB_REPO": "royboy31/immobiliere-pujol-site"
+		"GITHUB_REPO": "royboy31/immobiliere-pujol-site",
+		"DEPLOY_WORKFLOW": "deploy.yml",
+		"R2_PUBLIC_URL": "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev"
 	}
 	// GITHUB_TOKEN must be set as a secret:
 	// wrangler secret put GITHUB_TOKEN --config workers/cron-sync/wrangler.jsonc

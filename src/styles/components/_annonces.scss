@@ -410,6 +410,32 @@
   scroll-snap-stop: always;
 }
 
+// Hero gallery: show the FULL photo (Caroline sometimes adds text near the
+// edges, which a cover-crop would cut off). The contain-fit leaves thin side
+// margins on wide photos — kept plain white (Caroline 12/06).
+.lc-photos--hero .lc-slide {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  // Size the element to the actual picture (centered) so its rounded corners
+  // are the picture's corners — not the frame's, which the contain-fit hid.
+  .lc-slide__img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 14px;
+    display: block;
+  }
+}
+
 .lc-empty {
   display: grid;
   place-items: center;

@@ -135,7 +135,7 @@ const articles = allArticles
   .sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''))
   .slice(0, 12)
   .map((a) => ({
-    href: `/${a.id}/`,
+    href: `/blog/${a.id}/`,
     img: a.data.featuredImage!,
     date: a.data.date!,
     title: a.data.title,

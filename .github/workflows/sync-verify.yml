@@ -4,10 +4,25 @@ on:
   schedule:
     - cron: '0 7 * * *'  # Every day at 07:00 UTC (09:00 Paris)
   workflow_dispatch:
+    inputs:
+      target:
+        description: 'Target to verify (roy, pujol, or both)'
+        required: false
+        default: 'both'
+        type: choice
+        options:
+          - both
+          - roy
+          - pujol
 
 jobs:
   verify:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ github.event_name == 'workflow_dispatch' && (inputs.target == 'both' && fromJSON('["roy","pujol"]') || fromJSON(format('["{0}"]', inputs.target))) || fromJSON('["roy","pujol"]') }}
+    name: verify-${{ matrix.target }}
     steps:
       - uses: actions/checkout@v4
 
@@ -15,8 +30,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Run sync verification
-        run: node scripts/sync-verify.mjs
+      - name: Run sync verification (${{ matrix.target }})
+        run: node scripts/sync-verify.mjs --target ${{ matrix.target }}
         env:
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
           MANDRILL_API_KEY: ${{ secrets.MANDRILL_API_KEY }}

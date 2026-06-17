@@ -1,7 +1,7 @@
 {
-  "title": "Carine Robbe – Directrice agence du 12ème",
+  "title": "Carine Robbe – Directrice agence Marseille 12e",
   "slug": "carine-syndic",
-  "fonction": "Directrice agence du 12ème",
+  "fonction": "Directrice agence Marseille 12e",
   "description": "",
   "photo": "/images/experts/carine-syndic.png",
   "email": "",
@@ -9,5 +9,6 @@
   "seoTitle": "Carine – Syndic",
   "seoDescription": "",
   "department": "Direction",
+  "order": 5,
   "hidden": false
 }

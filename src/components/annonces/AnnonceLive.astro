@@ -63,7 +63,7 @@ const { view, contactName, contactEmail, expert, pool = [], currentSlug = '' } =
 const isSale = view.type === 'V';
 const hasMeuble = !isSale && (view.meuble === 0 || view.meuble === 1);
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
-const hasNbEtages = !isSale && view.nbEtages !== undefined && view.nbEtages !== '' && view.nbEtages !== null;
+const hasNbEtages = !isSale && parseInt(String(view.nbEtages ?? ''), 10) > 0;
 
 const hasTechDetails = !!(
   view.nbPieces || view.nbChambres || view.nbSallesDeBain ||
@@ -152,7 +152,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
         </section>
       )}
 
-      {expert && <ExpertCard expert={expert} showPhone={isSale} />}
+      {expert && <ExpertCard expert={expert} showPhone={isSale} variant={isSale ? 'vente' : 'location'} />}
     </Fragment>
 
     <ContactForm

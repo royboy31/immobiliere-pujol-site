@@ -74,6 +74,7 @@ const sections = DEPT_ORDER.map((d) => {
   // (which the Item type doesn't carry — keeping Item minimal for the card).
   const group = experts
     .filter((entry) => !entry.data.hidden && (entry.data.department || '') === d.key)
+    .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
     .map((entry) => {
       const { first, last } = splitName(entry.data.title);
       return {
@@ -111,7 +112,7 @@ if (orphans.length) {
       <span class="experts-archive__overline">L'équipe</span>
       <h1 class="ds-sec-title">Toutes nos <b>expertises immobilières</b></h1>
       <p class="experts-archive__lede">
-        Vente, location, gestion locative, syndic — chacun·e à son métier, tous engagés à vos côtés à Marseille.
+        Un seul interlocuteur pour trois expertises métier : Syndic • Vente • Gestion.
       </p>
       <div class="experts-archive__legend">
         <span class="experts-archive__chip experts-archive__chip--sales">Vente</span>
