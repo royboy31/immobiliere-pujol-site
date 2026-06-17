@@ -295,8 +295,8 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           </div>
         </div>
 
-        {/* Quick stats card under the photo card */}
-        {(activeCount > 0 || closedCount > 0) && (
+        {/* Quick stats card under the photo card — sales experts only */}
+        {isSales && (activeCount > 0 || closedCount > 0) && (
           <div class="expert-quickstats">
             <div class="expert-quickstats__cell">
               <span class="expert-quickstats__num">{activeCount}</span>
@@ -311,7 +311,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </aside>
     </section>
 
-    {reviewsPayload?.rating && reviewsPayload.rating.count > 0 && (
+    {isSales && reviewsPayload?.rating && reviewsPayload.rating.count > 0 && (
       <section class="expert-reviews">
         <header class="expert-reviews__head">
           <div class="expert-reviews__intro">
@@ -365,7 +365,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
-    {(isSales ? activeSalesHistory.length > 0 : activeForType.length > 0) && (
+    {isSales && activeSalesHistory.length > 0 && (
       <section class="expert-listings expert-listings--active">
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Disponible</span>
@@ -407,7 +407,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
-    {closedForType.length > 0 && (
+    {isSales && closedForType.length > 0 && (
       <section class="expert-listings expert-listings--closed">
         <header class="expert-listings__head">
           <span class="expert-listings__overline">Historique</span>
@@ -459,7 +459,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </section>
     )}
 
-    {activeForType.length === 0 && closedForType.length === 0 && (
+    {isSales && activeCount === 0 && closedCount === 0 && (
       <section class="expert-listings expert-listings--empty">
         <p>Aucun bien n'est actuellement associé à ce profil.</p>
       </section>
