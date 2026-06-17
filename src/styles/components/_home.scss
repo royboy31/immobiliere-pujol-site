@@ -617,6 +617,11 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     flex-wrap: wrap;
     font-family: $ds-font-noto;
     align-items: center;
+    align-content: flex-start;
+    // Reserve 2 lines so cards with a quartier (which wraps the location to a
+    // 2nd line) stay the same height as cards without — keeps the two carousels'
+    // cards aligned. See home "Nos dernières annonces".
+    min-height: 38px;
     margin-top: -4px;
 
     .loc__pin { color: $ds-orange; flex: none; }
