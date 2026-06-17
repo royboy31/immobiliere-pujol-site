@@ -181,12 +181,38 @@ function parseLbiCsv(buffer) {
     // Extract address from descriptif
     annonce.adresse = parseAddress(annonce.descriptif || '', annonce.codePostal, annonce.ville);
 
-    // Generate slug (same logic as cron-sync)
-    annonce.slug = generateSlug(annonce);
+    // Generate slug (same logic as cron-sync), then re-point onto the original
+    // live-URL slug so every writer (cron-sync, this importer, migrate-live-slugs)
+    // converges on ONE canonical slug per reference. Without this the importer
+    // emitted a slug without the live "-france" suffix, which under
+    // ON CONFLICT(slug) inserted a DUPLICATE row instead of updating the live
+    // row. See scripts/dedupe-annonce-refs.mjs.
+    annonce.slug = resolveSlug(generateSlug(annonce), annonce.codePostal, LIVE_SLUG_MAP);
     annonces.push(annonce);
   }
 
   return annonces;
+}
+
+// Live-URL slug map (token → live slug), shared with cron-sync/migrate. Loaded
+// once; empty fallback keeps the generated slug if the map is unavailable.
+const LIVE_SLUG_MAP = (() => {
+  try {
+    return JSON.parse(readFileSync(path.resolve('public/_data/live-slug-map.json'), 'utf8'));
+  } catch {
+    return {};
+  }
+})();
+
+// Must match resolveSlug() in workers/cron-sync/index.ts.
+function resolveSlug(slug, cp, map) {
+  const tok = (slug || '').split('-')[0];
+  if (!tok) return slug;
+  const live = map[tok];
+  if (!live) return slug;
+  cp = (cp || '').toString().trim();
+  if (cp && !live.includes(cp)) return slug;
+  return live;
 }
 
 function generateSlug(a) {
