@@ -2190,6 +2190,9 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
+    // Equal card heights across the row (stretch to the tallest card); the
+    // reserved desc keeps role+desc+CTA aligned, tutorials fill below.
+    align-items: stretch;
   }
 }
 
@@ -2225,7 +2228,9 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     line-height: 1.55;
     color: $ds-ink;
     margin: 0;
-    flex: 1;
+    // Reserve 2 lines (no flex-grow) so role+desc is a uniform height and the
+    // CTA aligns across all cards, with the (variable) tutorials below it.
+    min-height: 3.1em;
   }
 
   &__cta {
