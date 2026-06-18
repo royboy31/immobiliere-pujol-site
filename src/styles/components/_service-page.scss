@@ -2190,9 +2190,9 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
-    // Natural card heights (don't stretch) so cards with fewer tutorials don't
-    // get empty trailing space; the CTA stays aligned via the reserved desc.
-    align-items: start;
+    // Equal card heights across the row (stretch to the tallest card); the
+    // reserved desc keeps role+desc+CTA aligned, tutorials fill below.
+    align-items: stretch;
   }
 }
 
