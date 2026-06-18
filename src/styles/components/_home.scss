@@ -873,8 +873,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 }
 
 .reviews {
-  padding: 0 $ds-side-pad 80px;
-  background: $white;
+  padding: 70px $ds-side-pad 80px;
+  background: #f1f1f1;
   text-align: center;
 
   .stat-title {
@@ -904,7 +904,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 // =========================================
 .blog {
   padding: 60px 0;
-  background: #f1f1f1;
+  background: $white;
 
   &__head {
     display: flex;
