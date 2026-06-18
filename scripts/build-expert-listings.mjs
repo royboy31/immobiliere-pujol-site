@@ -39,6 +39,25 @@ function normEmail(raw) {
   return raw.split('|')[0].trim().replace(/!+$/, '').toLowerCase();
 }
 
+// Display order for an expert's biens: most recent first, but push standalone
+// garages/box/parking and low-value biens (< 100k €) to the end — they look bad
+// leading the "Vendus" list. A title STARTING with the type word is a standalone
+// garage; "T5 ... avec garage" (a real apartment) does not match, so it stays up.
+const STANDALONE_GARAGE = /^(garages?|box|parkings?|stationnements?|emplacements?|caves?|place\s+de\s+parking)\b/i;
+// 0 = normal (top), 1 = low-value < 100k, 2 = standalone garage (very bottom).
+// Garages rank below low-value so they also sink on rental experts, where every
+// bien is < 100k (monthly rent) and the price tier alone wouldn't separate them.
+function demoteRank(x) {
+  if (STANDALONE_GARAGE.test((x.title || '').trim())) return 2;
+  const p = typeof x.prix === 'number' ? x.prix : null;
+  return (p !== null && p > 0 && p < 100000) ? 1 : 0;
+}
+function compareListings(a, b) {
+  const da = demoteRank(a), db = demoteRank(b);
+  if (da !== db) return da - db;                       // demoted group last
+  return (b.date || '').localeCompare(a.date || '');   // within group: recent first
+}
+
 function queryD1(sql) {
   const cmd = `npx wrangler d1 execute pujol-annonces --remote --json --command="${sql.replace(/"/g, '\\"')}"`;
   const out = execSync(cmd, { encoding: 'utf-8', timeout: 180000, maxBuffer: 128 * 1024 * 1024, env: { ...process.env } });
@@ -53,7 +72,8 @@ async function loadExperts() {
     try {
       const d = JSON.parse(await readFile(join(EXPERTS_DIR, f), 'utf-8'));
       const email = normEmail(d.email);
-      if (email && d.slug) experts.push({ slug: d.slug, email, title: d.title });
+      const aliases = (d.emailAliases || []).map(normEmail).filter(Boolean);
+      if (email && d.slug) experts.push({ slug: d.slug, email, aliases, title: d.title });
     } catch {}
   }
   return experts;
@@ -65,11 +85,22 @@ async function main() {
 
   const experts = await loadExperts();
   const byEmail = new Map();
-  for (const e of experts) byEmail.set(e.email, e);
+  for (const e of experts) {
+    byEmail.set(e.email, e);
+    for (const a of e.aliases || []) if (!byEmail.has(a)) byEmail.set(a, e);
+  }
   console.log(`experts with email: ${experts.length}`);
 
   const perdu = await loadPerdu();
   let perduSkipped = 0;
+
+  // Closed-history negotiator reassignment (Caroline's sheet). Maps a listing
+  // reference_agence → corrected expert email. LBI is the source of truth for
+  // ACTIVE biens, so the override only applies to non-active rows.
+  const reassign = JSON.parse(
+    await readFile(join(ROOT, 'src/data/expert-reassignments.json'), 'utf-8')
+  );
+  let reassigned = 0;
 
   // 1. Every annonce from D1 (active + closed). No descriptif (huge) — use titre.
   console.log('📡 Fetching annonces from D1...');
@@ -113,18 +144,25 @@ async function main() {
     console.warn(`  ⚠ photos query failed: ${e.message}`);
   }
 
-  // 4. Bucket by displayed negotiator email.
+  // 4. Bucket by expert SLUG (not email): an expert can be reached via primary
+  //    email AND aliases (e.g. benoit@ vs benoitmarinvicente@) AND the override,
+  //    so keying by email would split one expert across buckets and the per-slug
+  //    write below would clobber all but the last.
   const buckets = new Map();
   for (const a of deduped) {
-    const email = normEmail(a.email_a_afficher || a.contact_a_afficher);
-    if (!email || !byEmail.has(email)) continue;
+    const ref = (a.reference_agence || a.ubiflow_reference || '').toUpperCase();
+    const override = (a.status !== 'active' && ref && reassign[ref]) ? reassign[ref] : null;
+    const email = normEmail(override || a.email_a_afficher || a.contact_a_afficher);
+    const expert = email ? byEmail.get(email) : null;
+    if (!expert) continue;
+    if (override) reassigned++;
     // Skip garages / parking / box (Caroline): LBI/Hektor slug prefix lj[vl]ga.
     if (/^lj[vl]ga/i.test(a.slug || '')) continue;
     // Hide "perdu" listings from expert pages (Caroline) — the URL still resolves.
     if (perdu.isPerdu(a.slug)) { perduSkipped++; continue; }
 
-    const arr = buckets.get(email) ?? [];
-    arr.push({
+    const b = buckets.get(expert.slug) ?? { expert, arr: [] };
+    b.arr.push({
       slug: a.slug,
       title: a.titre || a.slug,
       type: a.type_annonce ?? '',          // V or L
@@ -137,26 +175,25 @@ async function main() {
       photo: toPhotoUrl(photoMap.get(a.id)),
       date: a.date_creation ?? '',
     });
-    buckets.set(email, arr);
+    buckets.set(expert.slug, b);
   }
 
   // 5. Write per-expert files (same shape the expert page already consumes).
   let written = 0;
   let totalListings = 0;
-  for (const [email, arr] of buckets) {
-    arr.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    const expert = byEmail.get(email);
+  for (const [slug, { expert, arr }] of buckets) {
+    arr.sort(compareListings);
     const payload = {
-      expert: { slug: expert.slug, email, title: expert.title },
+      expert: { slug: expert.slug, email: expert.email, title: expert.title },
       totalCount: arr.length,
       listings: arr.slice(0, 400),
     };
-    await writeFile(join(DEST, expert.slug + '.json'), JSON.stringify(payload));
+    await writeFile(join(DEST, slug + '.json'), JSON.stringify(payload));
     written++;
     totalListings += arr.length;
   }
 
-  console.log(`wrote: ${written} expert files, ${totalListings} total listings (${perduSkipped} "perdu" hidden)`);
+  console.log(`wrote: ${written} expert files, ${totalListings} total listings (${perduSkipped} "perdu" hidden, ${reassigned} reassigned)`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

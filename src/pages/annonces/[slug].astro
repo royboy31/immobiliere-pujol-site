@@ -2,7 +2,7 @@
 export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getAnnonceBySlug, getActiveSlugByReference, getSimilarPool, getRelatedAnnonces, formatDbPrice, extractTourUrl } from '../../lib/db-annonces';
-import { findExpertByEmail } from '../../lib/experts';
+import { findExpertByEmail, reassignedEmail } from '../../lib/experts';
 import { getClosedAnnonce, formatClosedPrice, type ClosedAnnonce } from '../../lib/closed-annonces';
 import { buildRealEstateListing } from '../../lib/schemas';
 import { loadLinkPool, loadClosedAnnoncesPool, pickRotatedLinks, type LinkItem } from '../../lib/internal-links';
@@ -60,9 +60,17 @@ const closedEmail = closedAsset?.emailAAfficher
 const dbEmail = annonce
   ? (annonce.email_a_afficher || (annonce.contact_a_afficher?.includes('@') ? annonce.contact_a_afficher : null))
   : null;
-const expert = annonce
-  ? findExpertByEmail(dbEmail)
-  : findExpertByEmail(closedEmail);
+// Closed-history reassignment (Caroline's sheet): override the negotiator for
+// non-active biens by reference. LBI stays the source of truth for active biens.
+const annonceRef = annonce
+  ? (annonce.reference_agence || annonce.ubiflow_reference || null)
+  : (closedAsset?.referenceAgence || null);
+const reassignedTo = reassignedEmail(annonceRef, annonce ? annonce.status : 'closed');
+const expert = reassignedTo
+  ? findExpertByEmail(reassignedTo)
+  : annonce
+    ? findExpertByEmail(dbEmail)
+    : findExpertByEmail(closedEmail);
 
 type View = {
   titre: string;
