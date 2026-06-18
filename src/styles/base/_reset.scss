@@ -9,14 +9,6 @@ html {
   box-sizing: border-box;
 }
 
-/* Global UI density: the design is hard-px and renders oversized (notably on
-   14" laptops at 100%). zoom uniformly scales the whole px-based UI (type,
-   spacing, images) by 12% and reflows correctly, without changing the visitor's
-   own browser zoom (the two multiply). Adjust this single value to retune. */
-:root {
-  zoom: 0.88;
-}
-
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

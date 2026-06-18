@@ -170,6 +170,36 @@ try {
   if (resp && resp.ok) reviewsPayload = await resp.json();
 } catch {}
 
+// Immodvisor reviews live in their own dir (coexist with OpinionSystem above).
+// Native scale is /5; OpinionSystem is /10. Same survey shape for rendering.
+type ImmodvisorPayload = {
+  rating: { overall: number; count: number } | null;
+  surveys: ReviewsPayload['surveys'];
+};
+let immodvisorPayload: ImmodvisorPayload | null = null;
+try {
+  const base = new URL(`/_data/reviews-immodvisor/${slug}.json`, Astro.url.origin);
+  const req = new Request(base.toString());
+  const resp = _assets ? await _assets.fetch(req) : await fetch(base.toString());
+  if (resp && resp.ok) immodvisorPayload = await resp.json();
+} catch {}
+
+// Merge both sources into one view, normalized to /5 (OpinionSystem /10 → ÷2).
+const osCount = reviewsPayload?.rating?.count ?? 0;
+const imdCount = immodvisorPayload?.rating?.count ?? 0;
+const reviewCount = osCount + imdCount;
+const osOn5 = reviewsPayload?.rating ? reviewsPayload.rating.overall / 2 : 0;
+const imdOn5 = immodvisorPayload?.rating ? immodvisorPayload.rating.overall : 0;
+const reviewScore = reviewCount
+  ? +(((osOn5 * osCount) + (imdOn5 * imdCount)) / reviewCount).toFixed(1)
+  : 0;
+const certificateUrl = reviewsPayload?.certificateUrl ?? null;
+const mergedSurveys = [
+  ...(reviewsPayload?.surveys ?? []),
+  ...(immodvisorPayload?.surveys ?? []),
+].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+const hasReviews = reviewCount > 0;
+
 const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
 // Back-office experts (no email & no phone) get no "Un projet en tête ?" CTA —
@@ -180,7 +210,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} schemas={
-  reviewsPayload?.rating && reviewsPayload.rating.count > 0
+  hasReviews
     ? [{
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -189,9 +219,9 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         worksFor: { '@type': 'RealEstateAgent', name: 'Immobilière Pujol' },
         aggregateRating: {
           '@type': 'AggregateRating',
-          ratingValue: reviewsPayload.rating.overall,
-          bestRating: 10,
-          ratingCount: reviewsPayload.rating.count,
+          ratingValue: reviewScore,
+          bestRating: 5,
+          ratingCount: reviewCount,
         },
       }]
     : []
@@ -314,7 +344,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
       </aside>
     </section>
 
-    {isSales && reviewsPayload?.rating && reviewsPayload.rating.count > 0 && (
+    {isSales && hasReviews && (
       <section class="expert-reviews">
         <header class="expert-reviews__head">
           <div class="expert-reviews__intro">
@@ -323,19 +353,19 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
               Ce que les clients de <b>{firstName}</b> en pensent
             </h2>
             <div class="expert-reviews__score">
-              <span class="expert-reviews__num">{reviewsPayload.rating.overall.toFixed(1)}</span>
-              <span class="expert-reviews__den">/ 10</span>
+              <span class="expert-reviews__num">{reviewScore.toFixed(1)}</span>
+              <span class="expert-reviews__den">/ 5</span>
               <span class="expert-reviews__count">
-                {reviewsPayload.rating.count} avis vérifié{reviewsPayload.rating.count > 1 ? 's' : ''}
+                {reviewCount} avis vérifié{reviewCount > 1 ? 's' : ''}
               </span>
             </div>
-            {reviewsPayload.certificateUrl && (
-              <a href={reviewsPayload.certificateUrl} target="_blank" rel="noopener" class="expert-reviews__certif">
+            {certificateUrl && (
+              <a href={certificateUrl} target="_blank" rel="noopener" class="expert-reviews__certif">
                 Voir le certificat OpinionSystem
               </a>
             )}
           </div>
-          {reviewsPayload.surveys.length > 1 && (
+          {mergedSurveys.length > 1 && (
             <div class="expert-reviews__arrows">
               <button class="arrow-btn" id="reviewPrev" type="button" aria-label="Avis précédent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
               <button class="arrow-btn" id="reviewNext" type="button" aria-label="Avis suivant"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
@@ -343,9 +373,9 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           )}
         </header>
 
-        {reviewsPayload.surveys.length > 0 && (
+        {mergedSurveys.length > 0 && (
           <ul class="expert-reviews__track" id="expert-reviews-track">
-            {reviewsPayload.surveys.map((r) => (
+            {mergedSurveys.map((r) => (
               <li class="expert-review-card">
                 <blockquote class="expert-review-card__quote">{r.comment}</blockquote>
                 <div class="expert-review-card__foot">
