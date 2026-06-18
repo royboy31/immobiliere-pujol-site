@@ -3,6 +3,8 @@
 // the experts JSON files are bundled into the SSR chunk (not the full content
 // data layer, which includes 5,000+ annonces and would blow the Worker size limit).
 
+import reassignmentsJson from '../data/expert-reassignments.json';
+
 export interface Expert {
   slug: string;
   title: string;
@@ -18,6 +20,7 @@ export interface Expert {
   seoDescription?: string;
   department?: string;
   listingOnly?: boolean;
+  emailAliases?: string[];
 }
 
 const expertModules = import.meta.glob<Expert>(
@@ -39,6 +42,12 @@ function getExpertMap(): Map<string, Expert> {
   for (const expert of Object.values(expertModules)) {
     const key = normalizeEmail(expert.email);
     if (key) map.set(key, expert);
+    // Also index aliases (e.g. benoit@ → benoitmarinvicente@) so feed/override
+    // emails in the short form still resolve to the right expert.
+    for (const alias of expert.emailAliases ?? []) {
+      const ak = normalizeEmail(alias);
+      if (ak && !map.has(ak)) map.set(ak, expert);
+    }
   }
   cachedMap = map;
   return map;
@@ -47,6 +56,20 @@ function getExpertMap(): Map<string, Expert> {
 export function findExpertByEmail(rawEmail: string | undefined | null): Expert | null {
   if (!rawEmail) return null;
   return getExpertMap().get(normalizeEmail(rawEmail)) ?? null;
+}
+
+// Closed-history negotiator reassignment (Caroline's sheet, 2026-06): maps a
+// listing `reference_agence` → the corrected expert email. LBI is the source of
+// truth for ACTIVE biens, so this only applies to non-active (history) biens —
+// if a bien reopens, the feed takes over and the override is skipped.
+const REASSIGNMENTS = reassignmentsJson as Record<string, string>;
+export function reassignedEmail(
+  reference: string | null | undefined,
+  status: string | null | undefined,
+): string | null {
+  const ref = (reference || '').toUpperCase();
+  if (!ref || status === 'active') return null;
+  return REASSIGNMENTS[ref] ?? null;
 }
 
 export type ExpertType = 'rental' | 'sales' | 'syndic' | 'other';
