@@ -231,15 +231,9 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
     <section class="expert-body">
       <div class="expert-body__main">
         <header class="expert-body__title">
-          <span class="expert-body__overline">Votre conseiller</span>
           <h1 class="expert-body__name">
             {firstName}{lastName && <> <b>{lastName}</b></>}
           </h1>
-          {expert.fonction && (
-            <p class="expert-body__tagline">
-              C'est votre expert <b>{expert.fonction}</b>.
-            </p>
-          )}
           {expert.secteur && (
             <p class="expert-body__secteur">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">

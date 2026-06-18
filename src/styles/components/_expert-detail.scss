@@ -112,12 +112,23 @@
 }
 
 // Bio content styling (rich CMS HTML).
+// Handwritten sign-off at the end of a bio (e.g. Stéphane's personal letter).
+.expert-bio-signature {
+  font-family: $ds-font-script;
+  font-size: 52px;
+  line-height: 1;
+  color: $black;
+  margin: 24px 0 0;
+}
+
 .expert-bio-content {
   font-family: $ds-font-noto;
   font-weight: 300;
   font-size: 17px;
   line-height: 1.65;
   color: $ds-ink;
+
+  .expert-bio-signature { margin-top: 8px; }
 
   h1, h2, h3, h4 {
     font-family: $ds-font-helv;
