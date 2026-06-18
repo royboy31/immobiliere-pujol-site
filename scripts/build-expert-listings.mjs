@@ -39,6 +39,25 @@ function normEmail(raw) {
   return raw.split('|')[0].trim().replace(/!+$/, '').toLowerCase();
 }
 
+// Display order for an expert's biens: most recent first, but push standalone
+// garages/box/parking and low-value biens (< 100k €) to the end — they look bad
+// leading the "Vendus" list. A title STARTING with the type word is a standalone
+// garage; "T5 ... avec garage" (a real apartment) does not match, so it stays up.
+const STANDALONE_GARAGE = /^(garages?|box|parkings?|stationnements?|emplacements?|caves?|place\s+de\s+parking)\b/i;
+// 0 = normal (top), 1 = low-value < 100k, 2 = standalone garage (very bottom).
+// Garages rank below low-value so they also sink on rental experts, where every
+// bien is < 100k (monthly rent) and the price tier alone wouldn't separate them.
+function demoteRank(x) {
+  if (STANDALONE_GARAGE.test((x.title || '').trim())) return 2;
+  const p = typeof x.prix === 'number' ? x.prix : null;
+  return (p !== null && p > 0 && p < 100000) ? 1 : 0;
+}
+function compareListings(a, b) {
+  const da = demoteRank(a), db = demoteRank(b);
+  if (da !== db) return da - db;                       // demoted group last
+  return (b.date || '').localeCompare(a.date || '');   // within group: recent first
+}
+
 function queryD1(sql) {
   const cmd = `npx wrangler d1 execute pujol-annonces --remote --json --command="${sql.replace(/"/g, '\\"')}"`;
   const out = execSync(cmd, { encoding: 'utf-8', timeout: 180000, maxBuffer: 128 * 1024 * 1024, env: { ...process.env } });
@@ -163,7 +182,7 @@ async function main() {
   let written = 0;
   let totalListings = 0;
   for (const [slug, { expert, arr }] of buckets) {
-    arr.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    arr.sort(compareListings);
     const payload = {
       expert: { slug: expert.slug, email: expert.email, title: expert.title },
       totalCount: arr.length,
