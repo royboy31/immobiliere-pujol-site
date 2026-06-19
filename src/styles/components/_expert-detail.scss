@@ -155,8 +155,16 @@
   em, i { color: $black; }
   a { color: $ds-olive-2; }
 
-  ul, ol { padding-left: 22px; margin: 0 0 16px; }
+  ul { padding-left: 22px; margin: 0 0 16px; list-style: disc; }
+  ol { padding-left: 22px; margin: 0 0 16px; list-style: decimal; }
   li { margin: 0 0 6px; }
+
+  // Role + sector line under the quote (e.g. "Expert en Transaction — Marseille Est").
+  .expert-bio-spec {
+    font-weight: 600;
+    color: $black;
+    margin: 0 0 18px;
+  }
 
   // Lead quote at the top of each bio (set in the expert JSON description).
   .expert-bio-quote {

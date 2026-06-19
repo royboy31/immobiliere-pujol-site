@@ -684,7 +684,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   &__head {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start; // arrows grouped left with the title (Caroline 19/06)
+    gap: 28px;
     margin-bottom: 50px;
   }
 

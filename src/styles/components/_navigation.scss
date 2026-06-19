@@ -478,6 +478,22 @@
 // =========================================
 // RESPONSIVE — header / topbar / footer
 // =========================================
+// Small-laptop (14") declutter: just ABOVE the burger breakpoint the full 6-item
+// nav + logo + icons crowd and nearly touch (Caroline 19/06). Tighten spacing,
+// type and logo on ~1241-1480px so it breathes without dropping to the burger.
+@media (min-width: ($bp-nav + 1)) and (max-width: 1480px) {
+  .site-header {
+    .logo img { height: 46px; }
+    .menu {
+      gap: 22px;
+      font-size: 12px;
+      letter-spacing: .4px;
+      .item > a { gap: 4px; }
+    }
+    .icons { gap: 14px; }
+  }
+}
+
 // Collapse the desktop nav to the burger below $bp-nav (1240px): the full 6-item
 // horizontal menu overflows on iPad-landscape widths (~1024px) and clips
 // "L'AGENCE"/"LE BLOG", so the burger must kick in earlier than tablet.
