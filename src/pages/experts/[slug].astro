@@ -3,7 +3,23 @@ export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
-import { getExpertType } from '../../lib/experts';
+type ExpertType = 'rental' | 'sales' | 'syndic' | 'other';
+// Inlined from lib/experts so this page doesn't import that module's EAGER glob
+// of every expert JSON (incl. the long bios) into the SSR worker — that bloat
+// tripped Cloudflare 1102 (resource limits) on expert pages.
+function getExpertType(e: { fonction?: string; department?: string }): ExpertType {
+  const dept = (e.department || '').toLowerCase();
+  if (dept === 'direction') return 'other';
+  if (dept === 'syndic') return 'syndic';
+  if (dept === 'vente') return 'sales';
+  if (dept === 'gestion locative') return 'rental';
+  const f = (e.fonction || '').toLowerCase();
+  if (!f) return 'other';
+  if (/syndic|copropri/.test(f)) return 'syndic';
+  if (/locati|locatif|location|loueur|loue/.test(f)) return 'rental';
+  if (/vente|transaction/.test(f)) return 'sales';
+  return 'other';
+}
 
 type ExpertData = {
   title: string;
@@ -17,15 +33,18 @@ type ExpertData = {
   linkedin?: string;
   facebook?: string;
   instagram?: string;
+  department?: string;
 };
-const expertModules = import.meta.glob<ExpertData>(
+// Lazy glob: load ONLY the requested expert's JSON per request (filename === slug)
+// instead of eager-bundling all experts (incl. bios) into the SSR worker.
+const expertLoaders = import.meta.glob<ExpertData>(
   '../../content/experts/*.json',
-  { eager: true, import: 'default' },
+  { import: 'default' },
 );
-const allExperts = Object.values(expertModules);
 
 const { slug } = Astro.params;
-const expert = allExperts.find((e) => e.slug === slug);
+const loaderKey = Object.keys(expertLoaders).find((k) => k.endsWith(`/${slug}.json`));
+const expert = loaderKey ? await expertLoaders[loaderKey]() : undefined;
 if (!expert) return new Response('Not found', { status: 404 });
 
 const expertEmail = (expert.email || '')
