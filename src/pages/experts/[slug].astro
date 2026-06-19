@@ -136,7 +136,7 @@ const ctaLead = isSales
     : 'Un projet en tête ?';
 const ctaTail = isSales || isRental
   ? `Prenez contact avec ${firstName} pour en discuter.`
-  : `Parlons-en avec ${firstName}.`;
+  : `Parlez-en avec ${firstName}.`;
 
 const pageDesc = expert.description
   ? expert.description.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160)
