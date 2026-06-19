@@ -14,6 +14,19 @@
   font-size: 14px;
   font-family: $ds-font-noto;
   background: $white;
+  position: relative;
+
+  // "Membre du TOP 100 de l'Immobilier" badge, centered in the topbar, next to
+  // the Google rating. Click → scrolls to the agency section (#agence).
+  .top100 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    img { height: 30px; width: auto; display: block; }
+  }
 
   .rating {
     display: flex;
@@ -503,6 +516,8 @@
     height: 36px;
     padding: 0 16px;
     font-size: 12px;
+
+    .top100 { display: none; } // topbar too tight on mobile; badge stays in the agency section
 
     .rating {
       gap: 8px;
