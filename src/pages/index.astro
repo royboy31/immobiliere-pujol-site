@@ -1,20 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection, getEntry } from 'astro:content';
 import { buildWebSite } from '../lib/schemas';
+// Prebuilt by scripts/build-home-data.mjs. Imported as static JSON instead of
+// getCollection() so astro:content (and the ~24 MB content data layer) is NOT
+// bundled into the SSR worker — that had blown the Cloudflare Worker size limit.
+import homeData from '../data/home.json';
 
-// ---------- SEO from CMS page entry ----------
-const pageEntry = await getEntry('pages', 'home');
-const seoTitle =
-  pageEntry?.data.seoTitle ||
-  "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
-const seoDescription = pageEntry?.data.seoDescription || '';
+// ---------- SEO ----------
+const seoTitle = "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
+const seoDescription = "Gestion locative, syndic de copropriété, vente de biens immobilier. Immobilière Pujol l'agence immobilière LA PLUS RECOMMANDÉE PAR SES CLIENTS";
 
-// ---------- LISTINGS (from content collection, synced from D1 pre-build) ----------
-const allAnnonces = await getCollection('annonces', ({ data }) =>
-  data.status === 'publish' && Array.isArray(data.photos) && data.photos.length > 0
-);
-allAnnonces.sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''));
+// ---------- LISTINGS (prebuilt from cards.json; same shape as the content entry) ----------
+const allAnnonces = (homeData.annonces as any[]).map((d) => ({ data: d, id: d.slug as string }));
 
 // Never feature garages/parkings or terrains (lots) in the home "Dernières
 // annonces" section. typeBien catches most; some terrains have no typeBien but
@@ -153,7 +150,7 @@ const expertsBase = [
 const experts = [...expertsBase, ...expertsBase, ...expertsBase];
 
 // ---------- ARTICLES ----------
-const allArticles = await getCollection('articles');
+const allArticles = (homeData.articles as any[]).map((d) => ({ data: d, id: d.slug as string }));
 const articles = allArticles
   .filter((a) => a.data.featuredImage && a.data.date)
   .sort((a, b) => (b.data.date || '').localeCompare(a.data.date || ''))

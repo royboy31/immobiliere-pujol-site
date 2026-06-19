@@ -30,3 +30,6 @@ pnpm-debug.log*
 
 # Miniflare local dev state
 .wrangler/
+
+# generated at build by scripts/build-home-data.mjs
+src/data/home.json
