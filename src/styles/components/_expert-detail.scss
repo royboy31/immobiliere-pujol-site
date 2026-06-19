@@ -485,8 +485,8 @@
     font-size: 11px;
     letter-spacing: .4px;
 
-    &.is-vente { background: $ds-olive; }
-    &.is-location { background: $ds-orange; }
+    &.is-vente { background: $ds-orange; }
+    &.is-location { background: $ds-olive; }
     &.is-available { background: $ds-orange; }
   }
 
@@ -525,7 +525,7 @@
     color: $ds-orange-2;
     margin-top: 2px;
 
-    &.is-location { color: $ds-orange; }
+    &.is-location { color: $ds-olive-2; }
   }
 }
 
