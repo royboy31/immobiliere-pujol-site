@@ -5,7 +5,7 @@
 .site-topbar {
   max-width: $ds-page-w;
   margin: 0 auto;
-  height: 64px;
+  height: 80px;
   border-bottom: 1px solid $ds-hairline;
   display: flex;
   align-items: center;
@@ -25,7 +25,7 @@
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
-    img { height: 56px; width: auto; display: block; }
+    img { height: 70px; width: auto; display: block; }
   }
 
   .rating {
