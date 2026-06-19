@@ -873,8 +873,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   // "Membre du TOP 100 de l'Immobilier" badge under the text (links to lecercletop100.fr).
   .about__top100 {
     display: inline-block;
-    margin-top: 10px;
-    img { height: 120px; width: auto; display: block; }
+    margin-top: 16px;
+    img { height: 240px; width: auto; display: block; }
   }
 
   .right { position: relative; display: block; }
