@@ -64,6 +64,8 @@ const policyHref = '/politique-de-confidentialite/';
     function save(analytics, ads) {
       try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ads: ads, ts: Date.now() })); } catch (e) {}
       gtagUpdate(analytics, ads);
+      // Let consent-aware scripts (e.g. Clarity) react without a page reload.
+      try { window.dispatchEvent(new CustomEvent('pujol-consent-change', { detail: { analytics: analytics, ads: ads } })); } catch (e) {}
       hide();
     }
 
