@@ -50,7 +50,7 @@ seoDescription: "Immobilière Pujol en syndic est une agence recommandée par se
 <p>N’hésitez pas à prendre contact avec notre agence si vous avez la moindre question, ou simplement besoin d’informations complémentaires.</p>
 <p>Rue du Dr Fiolle, 7
 13006 Marseille
-<span data-webdialer="true">+33 4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<span data-webdialer="true">+33 4 91 37 38 39</span></p>
 
 <h2>Les autres services de notre agence</h2>
 <p>Immobilière Pujol, c’est aussi des services de :</p>

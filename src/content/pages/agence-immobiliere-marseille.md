@@ -51,7 +51,7 @@ seoDescription: "Découvrez une agence en qui avoir confiance Vous vous lancez d
 <p>Immobilière Pujol vous propose également ses services de gestion de copropriété, pour vous accompagner au mieux dans les tâches administratives liées à votre immeuble.</p>
 <h2>Contactez-nous ou demandez un devis</h2>
 <p>Si vous souhaitez prendre contact avec notre équipe, pour avoir des informations complémentaires ou encore pour réaliser un devis, voici nos coordonnées :</p>
-<p>Rue du Dr Fiolle, 7 13006 Marseille <span data-webdialer="true">+33 4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<p>Rue du Dr Fiolle, 7 13006 Marseille <span data-webdialer="true">+33 4 91 37 38 39</span></p>
 <p>Vous pouvez aussi passer par notre formulaire de contact ci-dessous</p>
 <h2>Les autres services de notre agence</h2>
 <p>Immobilière Pujol, c’est également des services de :</p>

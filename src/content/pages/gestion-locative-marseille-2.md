@@ -57,7 +57,7 @@ seoDescription: "Vous avez besoin d'aide en gestion locative ou en location à M
 <p>N’hésitez pas à prendre contact avec nous si vous avez la moindre question :</p>
 <p>Rue du Dr Fiolle, 7
 13006 Marseille
-<span data-webdialer="true">+33 4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<span data-webdialer="true">+33 4 91 37 38 39</span></p>
 <p>Ou bien passez par notre formulaire pour réaliser un devis en ligne :</p>
 
 <h2>Les autres services de notre agence</h2>

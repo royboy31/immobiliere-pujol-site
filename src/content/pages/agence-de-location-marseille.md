@@ -53,7 +53,7 @@ une agence de confiance, attentive aux propriétaires et aux locataires, qui sai
 </ul>
 <h2>Contactez-nous pour nous demander un devis</h2>
 <p>Si vous souhaitez recevoir de plus amples informations sur nos services ou notre agence, n’hésitez pas à nous contacter :</p>
-<p>7 Rue du Dr Fiolle, 7 13006 Marseille 0<span data-webdialer="true">4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<p>7 Rue du Dr Fiolle, 7 13006 Marseille 0<span data-webdialer="true">4 91 37 38 39</span></p>
 <h2>Les autres services de notre agence</h2>
 <p>Faites également confiance à l&rsquo;Immobilière Pujol pour ses services de :</p>
 <ul>

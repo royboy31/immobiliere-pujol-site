@@ -17,6 +17,7 @@ export const GET: APIRoute = async ({ request }) => {
     if (resp.ok) {
       const data = (await resp.json()) as { services: string[] };
       for (const slug of data.services) {
+        if (!slug || slug === 'services') continue; // /services/services/ is a 404 (SEO audit fix)
         urls.push(entry(`/services/${slug}/`));
       }
     }

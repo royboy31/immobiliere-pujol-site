@@ -190,9 +190,12 @@ if (type === 'article') {
 const breadcrumbCrumbs = type === 'article'
   ? [{ label: 'Blog', href: '/blog-immobilier-marseille/' }]
   : undefined;
+
+// Stale WP thank-you/confirmation pages should not be indexed (SEO audit fix).
+const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || '');
 ---
 
-<BaseLayout title={title} description={description} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs}>
+<BaseLayout title={title} description={description} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">

@@ -76,7 +76,9 @@ export async function fetchAllAnnonceSlugs(
 
   // Merge static slugs (from content collection) with active slugs
   const allSet = new Set<string>([...activeSlugs.keys(), ...staticSlugs]);
-  const allSlugs = [...allSet].sort();
+  // Exclude `_d1sync` duplicate slugs — they 301-redirect to the canonical slug,
+  // so listing them in the sitemap wastes crawl budget (SEO audit fix).
+  const allSlugs = [...allSet].filter((s) => !s.includes('_d1sync')).sort();
 
   return { activeSlugs, allSlugs };
 }

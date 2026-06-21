@@ -158,7 +158,7 @@
     if (activeTypeBien) params.set('type_bien', activeTypeBien);
 
     try {
-      const res = await fetch(`/api/search?${params}`, { signal: abortCtrl.signal });
+      const res = await fetch(`/api/search/?${params}`, { signal: abortCtrl.signal });
       const data = await res.json();
       renderResults(data, q);
     } catch (e) {

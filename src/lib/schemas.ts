@@ -11,18 +11,19 @@ const SAME_AS = [
   'https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA',
 ];
 
-// Opening hours — mirrored from the live schema.
-// Agency is open Tue–Sat, mornings 9–12, afternoons 14–18 (shorter on Fri/Sat).
+// Opening hours — real hours per the contact page: Lun–Jeu 9h–12h / 14h–18h,
+// Ven 9h–12h / 14h–17h. (Closed Sat/Sun.)
 const OPENING_HOURS = [
-  { day: 'Tuesday',  opens: '09:00', closes: '12:00' },
-  { day: 'Tuesday',  opens: '14:00', closes: '18:00' },
+  { day: 'Monday',    opens: '09:00', closes: '12:00' },
+  { day: 'Monday',    opens: '14:00', closes: '18:00' },
+  { day: 'Tuesday',   opens: '09:00', closes: '12:00' },
+  { day: 'Tuesday',   opens: '14:00', closes: '18:00' },
   { day: 'Wednesday', opens: '09:00', closes: '12:00' },
   { day: 'Wednesday', opens: '14:00', closes: '18:00' },
   { day: 'Thursday',  opens: '09:00', closes: '12:00' },
   { day: 'Thursday',  opens: '14:00', closes: '18:00' },
   { day: 'Friday',    opens: '09:00', closes: '12:00' },
   { day: 'Friday',    opens: '14:00', closes: '17:00' },
-  { day: 'Saturday',  opens: '09:00', closes: '12:00' },
 ];
 
 export function buildRealEstateAgent() {
@@ -71,14 +72,6 @@ export function buildWebSite() {
     description: "Le site de l'agence immobilière Pujol à Marseille",
     url: SITE_URL,
     publisher: { '@id': `${SITE_URL}/#organization` },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/?s={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
     inLanguage: 'fr-FR',
   };
 }
@@ -110,10 +103,6 @@ interface ArticleLike {
 
 export function buildArticle(entry: ArticleLike, pageUrl: string) {
   const author = entry.author || 'Stéphane Pujol';
-  const authorSlug = author.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '')
-    .replace(/^-|-$/g, '');
   const description = (entry.seoDescription || entry.excerpt || entry.title).slice(0, 250);
   return {
     '@context': 'https://schema.org',
@@ -131,7 +120,6 @@ export function buildArticle(entry: ArticleLike, pageUrl: string) {
     author: {
       '@type': 'Person',
       name: author,
-      url: `${SITE_URL}/author/${authorSlug}/`,
     },
     publisher: {
       '@type': 'Organization',

@@ -1,0 +1,21 @@
+# Immobilière Pujol
+> Agence immobilière à Marseille depuis 2002 : vente, gestion locative, syndic de copropriété et location. La plus recommandée par ses clients.
+
+## Coordonnées
+- Adresse : 7 rue du Docteur Fiolle, 13006 Marseille
+- Téléphone : 04 91 37 38 39
+- Horaires : Lundi–Jeudi 9h–12h / 14h–18h, Vendredi 9h–12h / 14h–17h
+
+## Pages principales
+- [Accueil](https://www.immobiliere-pujol.fr/)
+- [Annonces immobilières](https://www.immobiliere-pujol.fr/annonces/)
+- [Vente](https://www.immobiliere-pujol.fr/service-immobilier/vendre/)
+- [Gestion locative](https://www.immobiliere-pujol.fr/service-immobilier/gestion-locative/)
+- [Mise en location](https://www.immobiliere-pujol.fr/service-immobilier/mettre-en-location/)
+- [Syndic de copropriété](https://www.immobiliere-pujol.fr/service-immobilier/syndic-de-copropriete-a-marseille/)
+- [Nos experts](https://www.immobiliere-pujol.fr/experts/)
+- [Blog immobilier Marseille](https://www.immobiliere-pujol.fr/blog-immobilier-marseille/)
+- [Contact](https://www.immobiliere-pujol.fr/contact-immobiliere-pujol/)
+
+## Sitemap
+- https://www.immobiliere-pujol.fr/sitemap_index.xml
