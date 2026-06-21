@@ -3,6 +3,7 @@
 // LEFT: main media carousel (virtual-tour video as slide 1 when embeddable, then photos) → thumbnail strip → <slot name="left-below" /> (description).
 // RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
 import { reservedLabel } from '../../lib/listing-status';
+import { cfImg } from '../../lib/img';
 
 interface View {
   titre: string;
@@ -202,7 +203,7 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
             )}
             {photos.map((p, i) => (
               <li class="lc-slide" role="img" aria-label={`${view.titre} – photo ${i + 1}`}>
-                <img class="lc-slide__img" src={p} alt={`${view.titre} – photo ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
+                <img class="lc-slide__img" src={cfImg(p, 1600)} alt={`${view.titre} – photo ${i + 1}`} loading={i === 0 ? 'eager' : 'lazy'} />
               </li>
             ))}
           </ul>
@@ -285,7 +286,7 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
                 data-lightbox-src={p}
                 data-lightbox-caption={`${view.titre} – photo ${photoIdx + 1}`}
                 aria-label={`Photo ${photoIdx + 1}`}
-                style={`background-image:url('${p}')`}
+                style={`background-image:url('${cfImg(p, 240)}')`}
                 data-more={showMore ? `+${remaining}` : undefined}
               ></a>
             </li>

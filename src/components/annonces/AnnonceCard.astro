@@ -10,6 +10,7 @@ import {
   piecesBucket,
 } from '../../lib/annonces-filter';
 import { reservedLabel } from '../../lib/listing-status';
+import { cfImg } from '../../lib/img';
 
 interface Props {
   annonce: UbiflowAnnonce;
@@ -60,7 +61,7 @@ const price4Filter = filterPrice(annonce);
           {slides.map((p, i) => (
             <li
               class="lc-slide"
-              style={`background-image:url('${p}')`}
+              style={`background-image:url('${cfImg(p, 640)}')`}
               role="img"
               aria-label={`${title} – photo ${i + 1}`}
             ></li>
