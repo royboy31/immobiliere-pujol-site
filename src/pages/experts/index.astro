@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { getExpertType } from '../../lib/experts';
+import { cfImg } from '../../lib/img';
 
 const experts = await getCollection('experts');
 
@@ -133,7 +134,7 @@ if (orphans.length) {
             <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type}`}>
               <div class="expert-tile__ph">
                 {p.photo ? (
-                  <img src={p.photo} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />
+                  <img src={cfImg(p.photo, 360)} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />
                 ) : (
                   <span class="expert-tile__ph-empty" aria-hidden="true">{p.first.charAt(0)}</span>
                 )}

@@ -3,6 +3,7 @@ export const prerender = false;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
+import { cfImg } from '../../lib/img';
 type ExpertType = 'rental' | 'sales' | 'syndic' | 'other';
 // Inlined from lib/experts so this page doesn't import that module's EAGER glob
 // of every expert JSON (incl. the long bios) into the SSR worker — that bloat
@@ -275,7 +276,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
         <div class="expert-info-card">
           <div class="expert-info-card__photo-wrap">
             {expert.photo ? (
-              <img src={expert.photo} alt={displayName} class="expert-info-card__photo" loading="eager" />
+              <img src={cfImg(expert.photo, 600)} alt={displayName} class="expert-info-card__photo" loading="eager" />
             ) : (
               <div class="expert-info-card__photo expert-info-card__photo--empty">{firstName.charAt(0)}</div>
             )}
@@ -430,7 +431,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
           <div class="expert-history-grid">
             {activeSalesHistory.map((l) => (
               <a href={`/annonces/${l.slug}/`} class="expert-history-card">
-                <div class="expert-history-card__photo" style={l.photo ? `background-image:url('${l.photo}')` : undefined}>
+                <div class="expert-history-card__photo" style={l.photo ? `background-image:url('${cfImg(l.photo, 480)}')` : undefined}>
                   <span class="expert-history-card__tag is-available">À vendre</span>
                 </div>
                 <div class="expert-history-card__body">
@@ -473,7 +474,7 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
             <a href={`/annonces/${l.slug}/`} class={`expert-history-card ${i >= 12 ? 'expert-history-card--extra' : ''}`}>
               <div
                 class="expert-history-card__photo"
-                style={l.photo ? `background-image:url('${l.photo}')` : undefined}
+                style={l.photo ? `background-image:url('${cfImg(l.photo, 480)}')` : undefined}
               >
                 <span class={`expert-history-card__tag ${l.type === 'V' ? 'is-vente' : 'is-location'}`}>
                   {l.type === 'V' ? 'Vendu' : 'Loué'}
