@@ -4,6 +4,7 @@
 interface Env {
   MANDRILL_API_KEY: string;
   ALLOWED_ORIGIN: string;
+  TURNSTILE_SECRET?: string;
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
@@ -855,6 +856,32 @@ export default {
     const hasHtmlLink = /<\s*a\b|href\s*=|\[url[=\]]|\bBBcode\b/i.test(blob);
     if (hasHtmlLink || urlCount >= 3) {
       return jsonOk({ ok: true }, origin, env);
+    }
+
+    // Cloudflare Turnstile — enforced only when the secret is configured (prod).
+    // Staging has no secret → skipped (honeypot + content filter stand in).
+    if (env.TURNSTILE_SECRET) {
+      const token = ((fd.get('cf-turnstile-response') as string) || '').trim();
+      let pass = false;
+      if (token) {
+        try {
+          const v = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+              secret: env.TURNSTILE_SECRET,
+              response: token,
+              remoteip: request.headers.get('CF-Connecting-IP') || '',
+            }),
+          });
+          pass = ((await v.json()) as { success?: boolean }).success === true;
+        } catch {
+          pass = false;
+        }
+      }
+      if (!pass) {
+        return jsonErr('Vérification anti-spam échouée. Veuillez réessayer.', 403, origin, env);
+      }
     }
 
     let result: { ok: boolean; error?: string };
