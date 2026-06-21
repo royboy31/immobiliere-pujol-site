@@ -172,6 +172,13 @@ for (const s of pageSchemas) {
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','xagptvfky1');`} />
     )}
 
+    {/* Cloudflare Turnstile — prod only (the verify secret lives only on the prod
+        email worker). Auto-renders the .cf-turnstile widget on the lead forms.
+        On staging this script is absent, so the widget divs stay inert. */}
+    {loadAnalytics && (
+      <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    )}
+
     <!-- Schema.org JSON-LD -->
     {allSchemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
