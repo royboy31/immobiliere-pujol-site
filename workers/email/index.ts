@@ -839,6 +839,13 @@ export default {
       return jsonErr('Invalid form data', 400, origin, env);
     }
 
+    // Universal honeypot — a hidden "_hp" field present on every form. Humans
+    // never see it; bots fill every field. If it's filled, silently accept
+    // (return ok so the bot doesn't retry) and drop the submission.
+    if (((fd.get('_hp') as string) || '').trim()) {
+      return jsonOk({ ok: true }, origin, env);
+    }
+
     let result: { ok: boolean; error?: string };
 
     switch (path) {

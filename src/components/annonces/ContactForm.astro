@@ -16,6 +16,7 @@ const isLocation = type === 'L';
       data-contact-email={contactEmail || ''}
       data-contact-ref={reference}
       data-contact-title={titre}>
+      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
   <input type="hidden" name="reference" value={reference} />
   <input type="hidden" name="title" value={titre} />
   <input type="hidden" name="type" value={type} />
