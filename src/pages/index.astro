@@ -5,6 +5,7 @@ import { buildWebSite } from '../lib/schemas';
 // getCollection() so astro:content (and the ~24 MB content data layer) is NOT
 // bundled into the SSR worker — that had blown the Cloudflare Worker size limit.
 import homeData from '../data/home.json';
+import { cfImg } from '../lib/img';
 
 // ---------- SEO ----------
 const seoTitle = "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
@@ -276,7 +277,7 @@ const services = [
             <div class="listings__track">
               {col.cards.map((c) => (
                 <a class={`listing-card ${c.isVente ? '' : 'listing-card--location'}`} href={c.href}>
-                  <div class="photo" style={`background-image:url('${c.photo}')`}>
+                  <div class="photo" style={`background-image:url('${cfImg(c.photo, 640)}')`}>
                     <span class={`badge ${c.isVente ? 'badge--vente' : ''}`}>{c.isVente ? 'VENTE' : 'LOCATION'}</span>
                   </div>
                   <div class="body">
@@ -421,7 +422,7 @@ const services = [
       <div class="blog__grid" id="blogGrid">
         {articles.map((a) => (
           <a class="post" href={a.href}>
-            <div class="img" style={`background-image:url('${a.img}')`}></div>
+            <div class="img" style={`background-image:url('${cfImg(a.img, 640)}')`}></div>
             <div class="meta"><span>{fmtDate(a.date)}</span></div>
             <h3>{a.title}</h3>
             <p>{a.excerpt}</p>
