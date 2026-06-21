@@ -203,5 +203,22 @@ for (const s of pageSchemas) {
     </main>
     <Footer />
     <CookieConsent />
+    {/* When any form replaces its content with a success message, scroll it into
+        view + move focus there — so the "Merci" confirmation is seen (esp. mobile). */}
+    <script is:inline>
+      new MutationObserver((muts) => {
+        for (const m of muts) {
+          if (m.target instanceof HTMLFormElement && m.addedNodes.length) {
+            const el = m.target.querySelector('.svc-form__success, .annonce-contact__success') || m.target.firstElementChild;
+            if (el) {
+              el.setAttribute('tabindex', '-1');
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              try { el.focus({ preventScroll: true }); } catch (e) {}
+            }
+            return;
+          }
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+    </script>
   </body>
 </html>
