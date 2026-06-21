@@ -83,6 +83,13 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      # Remove the staging-only X-Robots-Tag noindex header so production is
+      # indexable at go-live. With ALLOW_INDEXING=true (below) and the real
+      # domain live, robots.txt also flips to Allow on its own. PROD only —
+      # staging (deploy.yml) keeps public/_headers untouched.
+      - name: Remove staging X-Robots-Tag header (go-live)
+        run: rm -f public/_headers
+
       # ── Build ──────────────────────────────────────────────────────────
       - run: npm run build
         env:
