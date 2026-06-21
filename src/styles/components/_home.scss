@@ -1086,6 +1086,17 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       &::placeholder {
         color: rgba(0, 0, 0, .64);
       }
+
+      // Kill Chrome's lavender autofill background — blend it into the olive band.
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $black;
+        caret-color: $black;
+        -webkit-box-shadow: 0 0 0 1000px $ds-olive inset;
+        box-shadow: 0 0 0 1000px $ds-olive inset;
+        transition: background-color 9999s ease-in-out 0s;
+      }
     }
   }
 
