@@ -55,7 +55,7 @@ seoDescription: "Faire confiance à une agence de gestion immobilière à Marsei
 <p>N’hésitez pas à faire appel à nous pour toute question ou toute demande de précision.</p>
 <p>Rue du Dr Fiolle, 7
 13006 Marseille
-<span data-webdialer="true">+33 4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<span data-webdialer="true">+33 4 91 37 38 39</span></p>
 <p>Passez par notre formulaire si vous souhaitez réaliser dès maintenant un devis en ligne.</p>
 
 <h2>Les autres services de notre agence</h2>

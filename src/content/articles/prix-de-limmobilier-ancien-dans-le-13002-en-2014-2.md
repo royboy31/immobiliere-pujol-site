@@ -30,7 +30,7 @@ seoDescription: "Prix au m² des loyers dans le 13002 (source Clameur)   Studio
 </tr>
 </tbody>
 </table>
-<p><a title="Les prix de l’immobilier ancien dans le 13006 en 2013" href="/blog/prix-immobilier-13006-marseille">Voir les loyers de 2013</a></p>
+<p><a title="Les prix de l’immobilier ancien dans le 13006 en 2013" href="/blog/les-prix-de-limmobilier-ancien-dans-le-13006-en-2013-2/">Voir les loyers de 2013</a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2><span style="text-decoration: underline; color: #ff6600; font-size: 18pt;">Prix moyens&nbsp;de l’immobilier ancien dans le 13002 (selon les sites d’estimation immobilière)</span></h2>

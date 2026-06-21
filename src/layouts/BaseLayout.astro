@@ -98,7 +98,7 @@ for (const s of pageSchemas) {
 
     <title>{metaTitle}</title>
     <meta name="description" content={metaDescription} />
-    <link rel="canonical" href={canonicalURL} />
+    {!noindex && <link rel="canonical" href={canonicalURL} />}
 
     <meta name="robots" content={shouldNoindex ? "noindex, nofollow" : "index, follow"} />
     <meta name="google-site-verification" content="XKAzqnzZ1WGlJqJZvQFkvRvnoawpEcOIgkoIRPAXLgc" />

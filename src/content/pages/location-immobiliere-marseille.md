@@ -55,7 +55,7 @@ seoDescription: "Louer avec des sécurités, avec une garantie de trouver un bon
 <p>Si vous avez encore des questions, que vous désirez recevoir des renseignements supplémentaires quant à notre agence, appelez-nous ou bien remplissez notre formulaire de contact.</p>
 <p>Rue du Dr Fiolle, 7
 13006 Marseille
-<span data-webdialer="true">+33 4 91 37 38 39<img decoding="async" class="stwebdialer" style="width: 12px; height: 12px;" title="Appeler via Mitel " src="chrome-extension://dnnmgcbgmfoeifpcmlligbagoiijmepj/images/icons/icon12.png" data-stnumber="+33491373839" /></span></p>
+<span data-webdialer="true">+33 4 91 37 38 39</span></p>
 
 <h2>Les autres services de notre agence</h2>
 <p>Immobilière Pujol, c’est aussi des services de :</p>
