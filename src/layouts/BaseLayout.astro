@@ -160,6 +160,24 @@ for (const s of pageSchemas) {
       <!-- Analytics disabled (staging / noindex). Enable by setting ALLOW_INDEXING in env. -->
     )}
 
+    {/* Microsoft Clarity (behavioural analytics / session recordings). Prod only,
+        and only after analytics consent — Clarity doesn't honour Google Consent
+        Mode, so we gate it on the stored consent and start it on consent change. */}
+    {loadAnalytics && (
+      <script is:inline set:html={`(function(){
+        var KEY='pujol-cookie-consent',started=false;
+        function ok(){try{var c=JSON.parse(localStorage.getItem(KEY)||'null');return !!(c&&c.analytics)}catch(e){return false}}
+        function start(){
+          if(started||!ok())return; started=true;
+          (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','xagptvfky1');
+        }
+        start();
+        window.addEventListener('pujol-consent-change',start);
+      })();`} />
+    )}
+
     <!-- Schema.org JSON-LD -->
     {allSchemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
