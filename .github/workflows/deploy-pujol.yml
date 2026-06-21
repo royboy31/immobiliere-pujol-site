@@ -95,6 +95,7 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           ALLOW_INDEXING: "true"   # PROD only — go-live: index,follow + production robots.txt
+          IMAGE_RESIZE: "true"     # PROD only — route R2 images through /cdn-cgi/image/ (zone Transformations + domain cut over 21/06)
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
