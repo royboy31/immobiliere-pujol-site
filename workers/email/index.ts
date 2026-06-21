@@ -846,6 +846,17 @@ export default {
       return jsonOk({ ok: true }, origin, env);
     }
 
+    // Content spam filter — link-stuffed / HTML messages (e.g. pharma SEO spam).
+    // Legit form submissions never contain HTML anchors or several URLs, so we
+    // silently drop them. Catches bots that skip the honeypot.
+    let blob = '';
+    for (const v of fd.values()) if (typeof v === 'string') blob += ' ' + v;
+    const urlCount = (blob.match(/https?:\/\//gi) || []).length;
+    const hasHtmlLink = /<\s*a\b|href\s*=|\[url[=\]]|\bBBcode\b/i.test(blob);
+    if (hasHtmlLink || urlCount >= 3) {
+      return jsonOk({ ok: true }, origin, env);
+    }
+
     let result: { ok: boolean; error?: string };
 
     switch (path) {
