@@ -262,9 +262,9 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
       {!hasInlineVideo && lead && (
         <a
           class="annonce-hero__hidden"
-          href={lead}
+          href={cfImg(lead, 1600)}
           data-lightbox-group="annonce"
-          data-lightbox-src={lead}
+          data-lightbox-src={cfImg(lead, 1600)}
           data-lightbox-caption={`${view.titre} – photo 1`}
           aria-hidden="true"
         ></a>
@@ -281,9 +281,9 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
             <li>
               <a
                 class={`annonce-hero__thumb ${showMore ? 'annonce-hero__thumb--more' : ''}`}
-                href={p}
+                href={cfImg(p, 1600)}
                 data-lightbox-group="annonce"
-                data-lightbox-src={p}
+                data-lightbox-src={cfImg(p, 1600)}
                 data-lightbox-caption={`${view.titre} – photo ${photoIdx + 1}`}
                 aria-label={`Photo ${photoIdx + 1}`}
                 style={`background-image:url('${cfImg(p, 240)}')`}
@@ -301,9 +301,9 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
       return (
         <a
           class="annonce-hero__hidden"
-          href={p}
+          href={cfImg(p, 1600)}
           data-lightbox-group="annonce"
-          data-lightbox-src={p}
+          data-lightbox-src={cfImg(p, 1600)}
           data-lightbox-caption={`${view.titre} – photo ${photoIdx + 1}`}
           aria-hidden="true"
         ></a>
