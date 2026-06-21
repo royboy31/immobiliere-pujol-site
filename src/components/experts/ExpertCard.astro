@@ -1,5 +1,6 @@
 ---
 import type { Expert } from '../../lib/experts';
+import { cfImg } from '../../lib/img';
 
 interface Props {
   expert: Expert;
@@ -32,10 +33,10 @@ const showEmail = !photoOnly && !!expert.email;
     <div class="expert-card__photo-wrap">
       {expert.photo && (
         photoOnly ? (
-          <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
+          <img src={cfImg(expert.photo, 360)} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
         ) : (
           <a href={profileHref} class="expert-card__photo-link">
-            <img src={expert.photo} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
+            <img src={cfImg(expert.photo, 360)} alt={displayName} class="expert-card__photo" loading="lazy" width="280" height="340" />
           </a>
         )
       )}
