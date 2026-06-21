@@ -41,9 +41,22 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      # --- Production indexing switch (go-live) ---
+      # Dormant until the GitHub Actions variable ALLOW_INDEXING is set to 'true'
+      # on the `pujol-staging` environment. Staging (deploy.yml) is never touched.
+      # When 'true', strip the staging-only X-Robots-Tag noindex header so prod
+      # can be indexed. robots.txt flips to Allow on its own once the real domain
+      # (immobiliere-pujol.fr) is live AND this flag is set.
+      - name: Enable indexing for production (go-live switch)
+        if: vars.ALLOW_INDEXING == 'true'
+        run: |
+          echo "ALLOW_INDEXING=true -> removing staging X-Robots-Tag noindex header (public/_headers)"
+          rm -f public/_headers
+
       - run: npm run build
         env:
           NODE_OPTIONS: --max-old-space-size=4096
+          ALLOW_INDEXING: ${{ vars.ALLOW_INDEXING }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
