@@ -860,7 +860,9 @@ export default {
 
     // Cloudflare Turnstile — enforced only when the secret is configured (prod).
     // Staging has no secret → skipped (honeypot + content filter stand in).
-    if (env.TURNSTILE_SECRET) {
+    // The newsletter form carries no widget by design (UX), so it's exempt —
+    // it relies on the honeypot + content filter above.
+    if (env.TURNSTILE_SECRET && path !== '/newsletter') {
       const token = ((fd.get('cf-turnstile-response') as string) || '').trim();
       let pass = false;
       if (token) {
