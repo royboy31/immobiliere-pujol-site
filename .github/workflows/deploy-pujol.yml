@@ -62,7 +62,7 @@ jobs:
             raw = fs.readFileSync('workers/email/wrangler.jsonc','utf8');
             cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1'));
             delete cfg.account_id;
-            cfg.vars.ALLOWED_ORIGIN = 'https://${{ env.PUJOL_STAGING }}';
+            cfg.vars.ALLOWED_ORIGIN = 'https://www.immobiliere-pujol.fr';
             fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
 
             // Cron-sync worker — swap D1 ID + set DEPLOY_WORKFLOW
