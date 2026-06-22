@@ -21,7 +21,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: ${{ github.event_name == 'workflow_dispatch' && (inputs.target == 'both' && fromJSON('["roy","pujol"]') || fromJSON(format('["{0}"]', inputs.target))) || fromJSON('["roy","pujol"]') }}
+        # Scheduled daily run verifies + emails PROD (pujol / live site) only.
+        # Manual dispatch can still target roy, pujol, or both.
+        target: ${{ github.event_name == 'workflow_dispatch' && (inputs.target == 'both' && fromJSON('["roy","pujol"]') || fromJSON(format('["{0}"]', inputs.target))) || fromJSON('["pujol"]') }}
     name: verify-${{ matrix.target }}
     steps:
       - uses: actions/checkout@v4
