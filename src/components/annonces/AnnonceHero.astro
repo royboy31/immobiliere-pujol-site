@@ -191,14 +191,20 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
           <ul class="lc-track" data-lc-track>
             {hasInlineVideo && (
               <li class="lc-slide lc-slide--video" aria-label={`${view.titre} – visite virtuelle`}>
-                <iframe
-                  class="annonce-hero__iframe"
-                  src={`https://www.youtube-nocookie.com/embed/${ytId}?rel=0`}
-                  title={`${view.titre} – visite virtuelle`}
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                ></iframe>
+                <button
+                  type="button"
+                  class="annonce-hero__video-facade"
+                  data-yt={ytId}
+                  aria-label={`Lire la visite virtuelle – ${view.titre}`}
+                >
+                  <img
+                    class="annonce-hero__video-thumb"
+                    src={`https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`}
+                    alt={`${view.titre} – visite virtuelle`}
+                    loading="lazy"
+                  />
+                  <span class="annonce-hero__video-play" aria-hidden="true"></span>
+                </button>
               </li>
             )}
             {photos.map((p, i) => (
@@ -365,5 +371,65 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
         anchors.find((a) => a.getAttribute('data-lightbox-src') === src)?.click();
       });
     }
+  });
+</script>
+
+<style>
+  /* Click-to-play facade for the virtual-tour video: keeps the ~780KB YouTube
+     player off the initial load. Fills the slide exactly like the iframe did
+     (.lc-slide--video is position:relative). */
+  .annonce-hero__video-facade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: #000;
+  }
+  .annonce-hero__video-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .annonce-hero__video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.65);
+    transition: background 0.15s ease;
+  }
+  .annonce-hero__video-play::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    border-style: solid;
+    border-width: 11px 0 11px 19px;
+    border-color: transparent transparent transparent #fff;
+  }
+  .annonce-hero__video-facade:hover .annonce-hero__video-play { background: #c00; }
+</style>
+
+<script>
+  // Swap the facade for the real player on click (autoplay so the first click plays).
+  document.querySelectorAll('[data-yt]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-yt');
+      const ifr = document.createElement('iframe');
+      ifr.className = 'annonce-hero__iframe';
+      ifr.src = `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1`;
+      ifr.title = 'Visite virtuelle';
+      ifr.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      ifr.allowFullscreen = true;
+      btn.replaceWith(ifr);
+    }, { once: true });
   });
 </script>
