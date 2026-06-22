@@ -290,9 +290,14 @@ export function buildRealEstateListing(a: AnnonceForSchema, pageUrl: string) {
     }),
   } : null;
 
+  // Real estate has no Google rich-result type. Using @type Product (for sales)
+  // made Google run its e-commerce validators (product snippet / merchant
+  // listing / review snippet), which demand shipping, returns, brand and ratings
+  // that do not apply to property. Accommodation for both sale and rental keeps
+  // the markup semantically correct and outside those validators.
   return {
     '@context': 'https://schema.org',
-    '@type': isSale ? 'Product' : 'Accommodation',
+    '@type': 'Accommodation',
     '@id': pageUrl,
     name: a.titre,
     description: (a.description || a.titre).slice(0, 500),
@@ -310,6 +315,5 @@ export function buildRealEstateListing(a: AnnonceForSchema, pageUrl: string) {
       },
     } : {}),
     ...(offer ? { offers: offer } : {}),
-    brand: { '@type': 'Organization', name: PUBLISHER_NAME },
   };
 }
