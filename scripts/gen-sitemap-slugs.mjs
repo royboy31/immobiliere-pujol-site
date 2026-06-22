@@ -1,6 +1,6 @@
 // Generates public/_data/sitemap-slugs.json at build time.
 // Contains annonce slugs, category slugs, and tag slugs for the dynamic sitemap.
-import { readdirSync, readFileSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
@@ -9,9 +9,19 @@ function slugify(s) {
   return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-// Annonce slugs
-const annonceDir = join(ROOT, 'src/content/annonces');
-const annonces = readdirSync(annonceDir).filter(f => f.endsWith('.json')).map(f => f.replace('.json', ''));
+// Annonce slugs. Active listings live in src/content/annonces; closed/vendu
+// listings were moved to public/_data/annonces by copy-closed-annonces (which
+// runs earlier in the build) to keep the Astro content bundle small. Union both
+// so the sitemap covers active AND historical/closed listings.
+const annonceDirs = [join(ROOT, 'src/content/annonces'), join(ROOT, 'public/_data/annonces')];
+const annonceSet = new Set();
+for (const dir of annonceDirs) {
+  if (!existsSync(dir)) continue;
+  for (const f of readdirSync(dir)) {
+    if (f.endsWith('.json')) annonceSet.add(f.replace('.json', ''));
+  }
+}
+const annonces = [...annonceSet];
 
 // Categories, tags, and article metadata from article frontmatter
 const articlesDir = join(ROOT, 'src/content/articles');

@@ -874,7 +874,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .about__top100 {
     display: block;            // flush-left with the heading/paragraph
     margin-top: 18px;
-    img { height: 460px; width: auto; display: block; }
+    img { height: 300px; width: auto; display: block; }
   }
 
   .right { position: relative; display: block; }
