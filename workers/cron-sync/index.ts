@@ -916,29 +916,36 @@ async function runLbiImport(env: Env) {
       await env.DB.batch(photoStmts.slice(i, i + 100));
     }
 
-    // 6. Close LBI annonces no longer in zip
+    // 6. Drop LBI annonces no longer in the zip.
+    //    An active bien that vanishes from the feed was UN-PUBLISHED by the
+    //    negotiator (the publish/unpublish-by-mandate tactic). It must DISAPPEAR
+    //    — status 'dropped' makes the detail page 301 to /annonces/ — and must
+    //    NOT be shown as sold. A genuine sale is caught earlier as field-136
+    //    'vendu' → status 'closed' (archive) while still IN the feed, so it is
+    //    never 'active' at this point and is unaffected. Re-publishing the bien
+    //    puts it back in the feed → upserted 'active' again automatically.
     const feedSlugSet = new Set(annonces.map(a => a.slug));
     const activeLbi = await env.DB
       .prepare("SELECT id, slug FROM annonces WHERE status = 'active' AND source = 'lbi'")
       .all<{ id: number; slug: string }>();
 
-    const lbiCloseStmts: D1PreparedStatement[] = [];
-    let lbiClosed = 0;
+    const lbiDropStmts: D1PreparedStatement[] = [];
+    let lbiDropped = 0;
     for (const row of activeLbi.results) {
       if (!feedSlugSet.has(row.slug)) {
-        lbiCloseStmts.push(
-          env.DB.prepare("UPDATE annonces SET status='closed', date_fermeture=?, updated_at=? WHERE id=?")
+        lbiDropStmts.push(
+          env.DB.prepare("UPDATE annonces SET status='dropped', date_fermeture=?, updated_at=? WHERE id=?")
             .bind(now, now, row.id)
         );
-        lbiClosed++;
+        lbiDropped++;
       }
     }
-    if (lbiCloseStmts.length > 0) {
-      for (let i = 0; i < lbiCloseStmts.length; i += 100) {
-        await env.DB.batch(lbiCloseStmts.slice(i, i + 100));
+    if (lbiDropStmts.length > 0) {
+      for (let i = 0; i < lbiDropStmts.length; i += 100) {
+        await env.DB.batch(lbiDropStmts.slice(i, i + 100));
       }
     }
-    console.log(`[lbi-import] Closed ${lbiClosed} stale LBI annonces`);
+    console.log(`[lbi-import] Dropped ${lbiDropped} un-published LBI annonces`);
 
     console.log('[lbi-import] Done:', JSON.stringify(stats));
   } catch (e: any) {
