@@ -2,6 +2,7 @@
 // Contains annonce slugs, category slugs, and tag slugs for the dynamic sitemap.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { loadPerdu } from './perdu-set.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname;
 
@@ -21,7 +22,11 @@ for (const dir of annonceDirs) {
     if (f.endsWith('.json')) annonceSet.add(f.replace('.json', ''));
   }
 }
-const annonces = [...annonceSet];
+// Exclude "perdu" (lost-mandate) listings — they're hidden from the site
+// (perdu-set) so they must not be advertised in the sitemap. Same matcher as
+// the rest of the site (full slug or leading reference token).
+const perdu = await loadPerdu();
+const annonces = [...annonceSet].filter((s) => !perdu.isPerdu(s));
 
 // Categories, tags, and article metadata from article frontmatter
 const articlesDir = join(ROOT, 'src/content/articles');
