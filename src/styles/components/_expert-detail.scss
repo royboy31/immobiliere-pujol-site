@@ -910,6 +910,12 @@
     color: $white;
   }
 
+  // Syndic accent is a dark blue — filled CTA buttons need white text for contrast
+  // (olive/orange are light enough for dark text, blue is not).
+  &--syndic .btn-pill--olive {
+    color: $white;
+  }
+
   .expert-bio-content h4 { color: var(--expert-accent); }
   .expert-bio-content a { color: var(--expert-accent-2); }
 }
