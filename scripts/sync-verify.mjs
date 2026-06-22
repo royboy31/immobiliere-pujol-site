@@ -28,7 +28,8 @@ const TARGETS = {
   },
   pujol: {
     label: 'Pujol',
-    staging: 'https://immobiliere-pujol-staging.pujol.workers.dev',
+    // Live production domain (was the *.pujol.workers.dev URL pre-cutover).
+    staging: 'https://www.immobiliere-pujol.fr',
     cronWorker: 'https://pujol-cron-sync.pujol.workers.dev',
     emailWorker: 'https://pujol-email.pujol.workers.dev',
     r2Public: 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev',

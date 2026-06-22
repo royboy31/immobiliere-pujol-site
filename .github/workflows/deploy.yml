@@ -55,7 +55,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Post-deploy sync verification
-        run: node scripts/sync-verify.mjs --target roy
+        run: node scripts/sync-verify.mjs --target roy --no-email
         continue-on-error: true
         env:
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
