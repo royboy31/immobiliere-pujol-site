@@ -328,9 +328,9 @@ if (
   reviewsHero = {
     rating: '4,7 / 5',
     total: '+ 2 000 avis Google vérifiés',
-    headline: 'Vous nous recommandez. Nous le rendons bien.',
+    headline: 'Votre confiance est notre plus belle récompense.',
     subline:
-      "Les avis de nos clients sont l'un des indicateurs les plus honnêtes de la qualité de service que nous délivrons — sur Google, Pages Jaunes, Opinion System, Immodvisor et YouTube.",
+      "Pour nous, un immobilier plus juste et durable commence par une transparence totale. C'est pourquoi nous mettons une culture du soin au cœur de nos actions, tant pour nos équipes que pour nos clients. <strong>Parce que votre avis est le reflet de notre engagement au quotidien, découvrez ce que nos clients pensent de nous et aidez-nous à toujours mieux vous accompagner.</strong>",
   };
 
   // Shared platforms across both review pages.
@@ -665,7 +665,7 @@ const customForm = CUSTOM_FORMS[slug] || null;
                   </div>
                 </div>
                 <h2 class="svc-reviews-hero__headline">{reviewsHero.headline}</h2>
-                <p class="svc-reviews-hero__subline">{reviewsHero.subline}</p>
+                <p class="svc-reviews-hero__subline" set:html={reviewsHero.subline}></p>
               </section>
 
               <section class="svc-review-platforms" aria-labelledby="svc-review-platforms-title">
