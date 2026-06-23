@@ -420,19 +420,33 @@ async function runSync(env: Env) {
       .prepare("SELECT id, slug FROM annonces WHERE status = 'active' AND source = 'ubiflow'")
       .all<{ id: number; slug: string }>();
 
-    const closeStmts: D1PreparedStatement[] = [];
-    for (const row of active.results) {
-      if (!feedSlugSet.has(row.slug)) {
-        closeStmts.push(
-          env.DB.prepare("UPDATE annonces SET status='closed', date_fermeture=?, updated_at=? WHERE id=?")
-            .bind(now, now, row.id)
-        );
-        stats.closed++;
+    // GUARD: never mass-close on a degraded/empty Ubiflow feed. fetchFeed()
+    // returns [] (no error) when the upstream feed drops all rentals, which
+    // would otherwise close every live rental. If the feed has 0 rentals, or
+    // collapses to under half of what's currently active, skip reconciliation
+    // and flag it — the rentals stay live and close normally once the feed
+    // recovers (they re-upsert to 'active' automatically).
+    const activeCount = active.results.length;
+    if (annonces.length === 0 || annonces.length < activeCount * 0.5) {
+      stats.errors++;
+      stats.errorDetails.push(
+        `Flux Ubiflow dégradé : ${annonces.length} locations vs ${activeCount} actives — fermetures ignorées (annonces conservées)`
+      );
+    } else {
+      const closeStmts: D1PreparedStatement[] = [];
+      for (const row of active.results) {
+        if (!feedSlugSet.has(row.slug)) {
+          closeStmts.push(
+            env.DB.prepare("UPDATE annonces SET status='closed', date_fermeture=?, updated_at=? WHERE id=?")
+              .bind(now, now, row.id)
+          );
+          stats.closed++;
+        }
       }
-    }
-    if (closeStmts.length > 0) {
-      for (let i = 0; i < closeStmts.length; i += 100) {
-        await env.DB.batch(closeStmts.slice(i, i + 100));
+      if (closeStmts.length > 0) {
+        for (let i = 0; i < closeStmts.length; i += 100) {
+          await env.DB.batch(closeStmts.slice(i, i + 100));
+        }
       }
     }
 
