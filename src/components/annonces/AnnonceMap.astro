@@ -60,7 +60,7 @@ const externalHref = `https://maps.google.com/?q=${encoded}`;
         <path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z" stroke="currentColor" stroke-width="1.6" />
         <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6" />
       </svg>
-      <span>Afficher la carte</span>
+      <span>Chargement de la carte…</span>
     </button>
   </div>
   <a class="annonce-map__cta" href={externalHref} target="_blank" rel="noopener">
@@ -72,8 +72,9 @@ const externalHref = `https://maps.google.com/?q=${encoded}`;
 </section>
 
 <style>
-  /* Click-to-load facade: keeps the heavy Google Maps embed (and its cookies)
-     off the initial load. Same box as the iframe so layout is unchanged. */
+  /* Placeholder shown until the map auto-loads (on scroll-near or ~5s after
+     load). Keeps the heavy Google Maps embed off the critical render path.
+     Same box as the iframe so there is no layout shift. */
   .annonce-map__facade {
     width: 100%;
     height: 100%;
@@ -95,17 +96,36 @@ const externalHref = `https://maps.google.com/?q=${encoded}`;
 </style>
 
 <script>
+  // Auto-load the map without user interaction, but deferred so it stays off the
+  // critical render path (keeps LCP/FCP fast). It loads on whichever happens
+  // first: the map scrolls near the viewport, OR ~5s after the page finishes
+  // loading. A click loads it instantly.
   document.querySelectorAll('[data-map-embed]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const src = btn.getAttribute('data-map-embed');
+    let loaded = false;
+    const load = () => {
+      if (loaded || !btn.isConnected) return;
+      loaded = true;
       const ifr = document.createElement('iframe');
       ifr.className = 'annonce-map__embed';
-      ifr.src = src;
+      ifr.src = btn.getAttribute('data-map-embed');
       ifr.title = btn.getAttribute('data-map-title') || 'Localisation du bien';
       ifr.loading = 'lazy';
       ifr.referrerPolicy = 'no-referrer-when-downgrade';
       ifr.allowFullscreen = true;
       btn.replaceWith(ifr);
-    }, { once: true });
+    };
+
+    btn.addEventListener('click', load, { once: true });
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) { io.disconnect(); load(); }
+      }, { rootMargin: '400px' });
+      io.observe(btn);
+    }
+
+    const scheduleFallback = () => setTimeout(load, 5000);
+    if (document.readyState === 'complete') scheduleFallback();
+    else window.addEventListener('load', scheduleFallback, { once: true });
   });
 </script>
