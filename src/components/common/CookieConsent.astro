@@ -63,6 +63,20 @@ const policyHref = '/politique-de-confidentialite/';
 
     function save(analytics, ads) {
       try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ads: ads, ts: Date.now() })); } catch (e) {}
+      // Record the consent decision so we can measure the accept/refuse rate in
+      // GTM/GA4. Pushed BEFORE gtagUpdate so a refusal is captured before
+      // analytics is (potentially) denied. Build a GA4 event tag in GTM on the
+      // custom event 'cookie_consent' (params: consent_choice, analytics_consent,
+      // ads_consent). Most reliable during the no-consent launch window.
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'cookie_consent',
+          consent_choice: (analytics && ads) ? 'accept_all' : (!analytics && !ads) ? 'refuse_all' : 'custom',
+          analytics_consent: analytics ? 'granted' : 'denied',
+          ads_consent: ads ? 'granted' : 'denied',
+        });
+      } catch (e) {}
       gtagUpdate(analytics, ads);
       // Let consent-aware scripts (e.g. Clarity) react without a page reload.
       try { window.dispatchEvent(new CustomEvent('pujol-consent-change', { detail: { analytics: analytics, ads: ads } })); } catch (e) {}
