@@ -61,6 +61,8 @@ const SEND_EMAIL = !process.argv.includes('--no-email');
 const RECIPIENTS = [
   'kamindudushmantha@gmail.com',
   'roy@perelweb.be',
+  // Caroline reçoit uniquement le rapport PROD (site live), pas le staging.
+  ...(targetArg === 'pujol' ? ['carolinepujol@immobiliere-pujol.fr'] : []),
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
