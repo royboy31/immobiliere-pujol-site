@@ -81,7 +81,7 @@ const sections = [
     title: '4. Nos résultats en vente',
     paragraphs: [
       "Notre délai pour vendre est en moyenne de 45 jours là où la moyenne du secteur immobilier à Marseille oscille entre 88 et 105 jours. 95% de nos mandats sont signés en exclusivité.",
-      "Cette confiance que nous accordent nos clients est le moteur de notre efficacité, nous permettant de mener chaque projet vers une réussite rapide et sereine.",
+      "<strong>Cette confiance que nous accordent nos clients est le moteur de notre efficacité, nous permettant de mener chaque projet vers une réussite rapide et sereine.</strong>",
     ],
     articles: [
       { href: '/services/nos-resultats-en-vente/', label: 'Nos résultats en vente' },
@@ -138,7 +138,7 @@ const sections = [
               </h2>
 
               {s.paragraphs.map((p) => (
-                <p class="svc-section__lead">{p}</p>
+                <p class="svc-section__lead" set:html={p}></p>
               ))}
 
               {s.articles.length > 0 && (
