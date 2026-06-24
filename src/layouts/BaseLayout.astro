@@ -123,8 +123,15 @@ for (const s of pageSchemas) {
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={ogImage} />
 
-    {/* Consent Mode v2 — default everything denied, then restore the stored
-        choice. MUST run before GTM so tags respect consent from the first hit. */}
+    {/* Consent Mode v2 — ads default denied, then restore the stored choice.
+        MUST run before GTM so tags respect consent from the first hit.
+        TEMPORARY (go-live 2026-06-21 → revert ~2026-09 after 2-3 months, Roy's
+        decision, Caroline OK): analytics_storage defaults to 'granted' so we
+        capture the real launch traffic instead of losing ~40% to non-consented
+        Consent Mode modelling. Same posture as the Clarity block below. An
+        explicit "Refuser" in the banner is still honoured (sets it back to
+        denied). To revert to full RGPD conformity, set analytics_storage back to
+        'denied'. */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
@@ -132,7 +139,7 @@ for (const s of pageSchemas) {
         ad_storage: 'denied',
         ad_user_data: 'denied',
         ad_personalization: 'denied',
-        analytics_storage: 'denied',
+        analytics_storage: 'granted',
         functionality_storage: 'granted',
         security_storage: 'granted',
         wait_for_update: 500,
