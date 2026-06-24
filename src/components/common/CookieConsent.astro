@@ -63,19 +63,25 @@ const policyHref = '/politique-de-confidentialite/';
 
     function save(analytics, ads) {
       try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ads: ads, ts: Date.now() })); } catch (e) {}
-      // Record the consent decision so we can measure the accept/refuse rate in
-      // GTM/GA4. Pushed BEFORE gtagUpdate so a refusal is captured before
-      // analytics is (potentially) denied. Build a GA4 event tag in GTM on the
-      // custom event 'cookie_consent' (params: consent_choice, analytics_consent,
-      // ads_consent). Most reliable during the no-consent launch window.
+      // Record the consent decision so we can measure the accept/refuse rate.
+      // Pushed BEFORE gtagUpdate so a refusal is captured before analytics is
+      // (potentially) denied. Two forms, no GTM config required:
+      //  1. GTM-style named event ('cookie_consent') — usable by a custom-event
+      //     trigger if a GA4 tag is ever added in GTM.
+      //  2. gtag-style event — consumed directly by the GA4 gtag.js that GTM
+      //     loads, so it lands as a 'cookie_consent' event in GA4 on its own.
+      // Most reliable during the no-consent launch window (analytics granted).
       try {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'cookie_consent',
-          consent_choice: (analytics && ads) ? 'accept_all' : (!analytics && !ads) ? 'refuse_all' : 'custom',
+        var choice = (analytics && ads) ? 'accept_all' : (!analytics && !ads) ? 'refuse_all' : 'custom';
+        var params = {
+          consent_choice: choice,
           analytics_consent: analytics ? 'granted' : 'denied',
           ads_consent: ads ? 'granted' : 'denied',
-        });
+        };
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(Object.assign({ event: 'cookie_consent' }, params));
+        var gtagEvt = function () { window.dataLayer.push(arguments); };
+        gtagEvt('event', 'cookie_consent', params);
       } catch (e) {}
       gtagUpdate(analytics, ads);
       // Let consent-aware scripts (e.g. Clarity) react without a page reload.
