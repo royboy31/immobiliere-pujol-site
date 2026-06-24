@@ -33,7 +33,7 @@ jobs:
           node-version: 22
 
       - name: Run sync verification (${{ matrix.target }})
-        run: node scripts/sync-verify.mjs --target ${{ matrix.target }}
+        run: node scripts/sync-verify.mjs --target ${{ matrix.target }} --daily
         env:
           OPINIONSYSTEM_API_KEY: ${{ secrets.OPINIONSYSTEM_API_KEY }}
           MANDRILL_API_KEY: ${{ secrets.MANDRILL_API_KEY }}

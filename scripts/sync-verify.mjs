@@ -58,11 +58,14 @@ const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
 const MANDRILL_KEY = process.env.MANDRILL_API_KEY || '';
 const GH_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '';
 const SEND_EMAIL = !process.argv.includes('--no-email');
+// Caroline ne reçoit QUE le rapport quotidien du matin (cron, flag --daily),
+// jamais les rapports post-déploiement (sinon 1 mail par déploiement). Roy et
+// Kamindu reçoivent les deux.
+const isDailyReport = process.argv.includes('--daily');
 const RECIPIENTS = [
   'kamindudushmantha@gmail.com',
   'roy@perelweb.be',
-  // Caroline reçoit uniquement le rapport PROD (site live), pas le staging.
-  ...(targetArg === 'pujol' ? ['carolinepujol@immobiliere-pujol.fr'] : []),
+  ...(isDailyReport && targetArg === 'pujol' ? ['carolinepujol@immobiliere-pujol.fr'] : []),
 ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
