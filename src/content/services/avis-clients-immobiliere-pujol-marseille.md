@@ -28,8 +28,8 @@ seoDescription: "consultez les avis déposés par les clients de l'Immobilière 
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Avis Clients Sur L'immobilière Pujol</h3>
-                    <p>Les avis des clients de l&rsquo;Immobilière Pujol sont un des indicateurs de la qualité de service que nous <span style="font-size: 16px;">délivrons.</span></p>
+                    <h3 class="contextual__title">Bâtir une relation de confiance, jour après jour.</h3>
+                    <p>Les retours de nos clients témoignent de la qualité de notre engagement et sont précieux pour améliorer nos services. Découvrez ce qu&rsquo;ils pensent de leur expérience avec nous.</p>
 <h3><span style="color: #000000; font-size: 14pt;">Les avis clients <a href="https://www.google.fr/search?q=immobili%C3%A8re+pujol&amp;cad=h" target="_blank" rel="noopener">google </a></span></h3>
 <p>&nbsp;</p>
 <h3><span style="font-size: 14pt;">Les avis clients <a href="https://www.pagesjaunes.fr/pros/09570235" target="_blank" rel="noopener">pages jaunes</a></span></h3>
