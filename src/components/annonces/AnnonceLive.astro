@@ -152,7 +152,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
         </section>
       )}
 
-      {expert && <ExpertCard expert={expert} showPhone={isSale} variant={isSale ? 'vente' : 'location'} />}
+      {expert && <ExpertCard expert={expert} showPhone={isSale} showEmail={isSale} variant={isSale ? 'vente' : 'location'} />}
     </Fragment>
 
     <ContactForm

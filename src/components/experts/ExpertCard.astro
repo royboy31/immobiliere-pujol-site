@@ -6,11 +6,12 @@ interface Props {
   expert: Expert;
   heading?: string;
   showPhone?: boolean;
+  showEmail?: boolean;
   /** Accent colour: 'vente' = orange (default), 'location' = green. */
   variant?: 'vente' | 'location';
 }
 
-const { expert, heading = 'Expert en charge de ce bien', showPhone = false, variant = 'vente' } = Astro.props;
+const { expert, heading = 'Expert en charge de ce bien', showPhone = false, showEmail: showEmailProp = true, variant = 'vente' } = Astro.props;
 // Expert titles are stored as "Name – Role" (em dash or hyphen, surrounded by spaces).
 // Take only the name half so it doesn't duplicate the role rendered separately as `fonction`.
 const displayName = (expert.title.split('|').pop() ?? expert.title)
@@ -25,7 +26,8 @@ const profileHref = `/experts/${expert.slug}/`;
 // Agenda (book-a-meeting) is intentionally NOT shown on listings — it lives on
 // the expert page only for now (Caroline, 11/06).
 const showCall = !photoOnly && showPhone && !!expert.phone;
-const showEmail = !photoOnly && !!expert.email;
+// Rental listings: no direct contact (no email, no phone) — form only (Caroline, 24/06).
+const showEmail = !photoOnly && showEmailProp && !!expert.email;
 ---
 
 <aside class={`expert-card expert-card--${variant} ${photoOnly ? 'expert-card--photo-only' : ''}`}>
