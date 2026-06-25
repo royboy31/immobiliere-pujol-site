@@ -102,6 +102,7 @@ jobs:
           IMMODVISOR_API_KEY: ${{ secrets.IMMODVISOR_API_KEY }}
           IMMODVISOR_CHECKSUM_IN: ${{ secrets.IMMODVISOR_CHECKSUM_IN }}
           IMMODVISOR_CHECKSUM_OUT: ${{ secrets.IMMODVISOR_CHECKSUM_OUT }}
+          GOOGLE_PLACES_KEY: ${{ secrets.GOOGLE_PLACES_KEY }}
 
       # ── Deploy all 3 workers ───────────────────────────────────────────
       - name: Deploy main worker

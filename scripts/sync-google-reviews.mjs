@@ -19,31 +19,41 @@ const CAROUSEL_SIZE = 50;
 // ── 1. Scrape Google rating + count from WordPress widget ──
 
 async function scrapeGoogleStats() {
-  try {
-    const res = await fetch(WP_URL, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PujolBuild/1.0)' },
-      signal: AbortSignal.timeout(10000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const html = await res.text();
-
-    const ratingMatch = html.match(/<span class="number">(\d[,.]?\d)<\/span>/);
-    const countMatch = html.match(/>([\d\s\u00a0]+)\s*reviews?<\/a>/);
-
-    const rating = ratingMatch ? parseFloat(ratingMatch[1].replace(',', '.')) : null;
-    const reviewCount = countMatch
-      ? parseInt(countMatch[1].replace(/[\s\u00a0]/g, ''), 10)
-      : null;
-
-    if (rating) {
-      console.log(`Google stats: ${rating}/5, ${reviewCount} reviews`);
-      return { rating, reviewCount: reviewCount || 0 };
+  const PLACE_ID = process.env.GOOGLE_PLACE_ID || 'ChIJZ1YLArLAyRIR3TVujRYJK7Y';
+  const KEY = process.env.GOOGLE_PLACES_KEY || '';
+  if (KEY) {
+    try {
+      const res = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
+        // The API key is HTTP-referrer-restricted to www.immobiliere-pujol.fr,
+        // so the server-side build presents that referer (WP_URL).
+        headers: {
+          'X-Goog-Api-Key': KEY,
+          'X-Goog-FieldMask': 'rating,userRatingCount',
+          'Referer': WP_URL,
+        },
+        signal: AbortSignal.timeout(10000),
+      });
+      const data = await res.json();
+      if (res.ok && typeof data.rating === 'number') {
+        console.log(`Google stats (Places API): ${data.rating}/5, ${data.userRatingCount} reviews`);
+        return { rating: data.rating, reviewCount: data.userRatingCount ?? 0 };
+      }
+      console.warn(`⚠ Places API: ${data?.error?.message || ('HTTP ' + res.status)}`);
+    } catch (e) {
+      console.warn(`⚠ Places API fetch failed: ${e.message}`);
     }
-  } catch (e) {
-    console.warn(`⚠ Could not scrape Google stats: ${e.message}`);
+  } else {
+    console.warn('⚠ GOOGLE_PLACES_KEY not set — keeping last known Google stats');
   }
-  console.log('Using fallback Google stats');
-  return { rating: 4.7, reviewCount: 2050 };
+  // Fallback: reuse the last good value so a transient failure never resets the count.
+  try {
+    const prev = JSON.parse(await readFile(join(__dirname, '..', 'src', 'data', 'google-stats.json'), 'utf-8'));
+    if (prev && prev.rating) {
+      console.log(`Using last known Google stats: ${prev.rating}/5, ${prev.reviewCount}`);
+      return { rating: prev.rating, reviewCount: prev.reviewCount };
+    }
+  } catch {}
+  return { rating: 4.7, reviewCount: 2114 };
 }
 
 // ── 2. Load OpinionSystem reviews from all experts ──
