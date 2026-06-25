@@ -50,6 +50,7 @@ jobs:
           IMMODVISOR_API_KEY: ${{ secrets.IMMODVISOR_API_KEY }}
           IMMODVISOR_CHECKSUM_IN: ${{ secrets.IMMODVISOR_CHECKSUM_IN }}
           IMMODVISOR_CHECKSUM_OUT: ${{ secrets.IMMODVISOR_CHECKSUM_OUT }}
+          GOOGLE_PLACES_KEY: ${{ secrets.GOOGLE_PLACES_KEY }}
 
       - name: Deploy main worker
         run: npx wrangler deploy
