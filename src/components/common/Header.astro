@@ -64,7 +64,7 @@ const navItems = [
     <div style="display:flex;flex-direction:column;line-height:1.05;gap:1px">
       <div style="display:flex;align-items:center;gap:6px">
         <span class="score">{googleStats.rating.toFixed(1)}</span>
-        <img class="stars" src="/images/home/google-stars.png" alt="" />
+        <img class="stars" src="/images/home/google-stars.png" alt="" width="110" height="20" />
       </div>
       <span class="tb-reviews">{googleStats.reviewCount.toLocaleString('fr-FR')} avis Google vérifiés</span>
     </div>
@@ -83,7 +83,7 @@ const navItems = [
 
 <header class="site-header" id="siteHeader">
   <a class="logo" href="/" aria-label="Immobilière Pujol - Accueil">
-    <img src="/images/home/pujol-logo.png" alt="Immobilière Pujol" />
+    <img src="/images/home/pujol-logo.png" alt="Immobilière Pujol" width="210" height="55" />
   </a>
   <ul class="menu" id="primaryMenu" aria-label="Navigation principale">
     {navItems.map((item) => (
