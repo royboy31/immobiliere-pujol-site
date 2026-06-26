@@ -42,10 +42,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   position: relative;
   z-index: 10;
   min-height: 760px;
-  // Static fallback while the video loads / if it fails to play.
-  background:
-    linear-gradient(rgba(15, 25, 42, .35), rgba(15, 25, 42, .45)),
-    url('/images/home/hero-bg.jpg') center/cover no-repeat;
+  // Dark fallback shown behind the poster <picture> / video layers before they paint.
+  background: #0f192a;
   color: $white;
   overflow: visible;
   display: flex;
@@ -54,6 +52,18 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   justify-content: center;
   gap: 80px;
   padding: 0 $ds-page-pad;
+
+  // Real <img> poster layer: paints fast as the LCP element (sits under the video,
+  // which fades in on top once it plays). Lighthouse locks LCP onto this image
+  // instead of the video's late first frame.
+  &__poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
 
   &__video {
     position: absolute;

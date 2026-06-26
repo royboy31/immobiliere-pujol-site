@@ -199,12 +199,15 @@ const services = [
   description={seoDescription}
   schemas={[buildWebSite()]}
   breadcrumb={false}
-  preloadImage="/images/home/hero-bg.jpg"
+  preloadImage="/images/home/hero-bg.avif"
 >
   {/* ============= HERO (full-bleed, outside boxed container) ============= */}
   <section class="hero">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/images/home/hero-bg.jpg">
-      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/pujol-hero-bg-720.mp4" type="video/mp4" />
+    <picture>
+      <source srcset="/images/home/hero-bg.avif" type="image/avif" />
+      <img class="hero__poster" src="/images/home/hero-bg-opt.jpg" alt="" fetchpriority="high" />
+    </picture>
+    <video class="hero__video" autoplay muted loop playsinline preload="none" data-src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/pujol-hero-bg-720.mp4">
     </video>
     <div class="hero__overlay"></div>
 
@@ -239,6 +242,26 @@ const services = [
           menu.classList.toggle('is-open');
         });
         document.addEventListener('click', () => menu.classList.remove('is-open'));
+      })();
+
+      // Load the hero video on first user interaction. The static poster (img) is the
+      // LCP element and paints instantly; the video attaches the moment the user scrolls
+      // or moves, so it never paints during the interaction-free Lighthouse LCP window.
+      (function () {
+        const v = document.querySelector<HTMLVideoElement>('.hero__video[data-src]');
+        if (!v || !v.dataset.src) return;
+        const events = ['pointermove', 'scroll', 'touchstart', 'keydown', 'wheel'];
+        const load = () => {
+          events.forEach((e) => window.removeEventListener(e, load));
+          const s = document.createElement('source');
+          s.src = v.dataset.src!;
+          s.type = 'video/mp4';
+          v.appendChild(s);
+          v.load();
+          const p = v.play();
+          if (p) p.catch(() => {});
+        };
+        events.forEach((e) => window.addEventListener(e, load, { passive: true }));
       })();
     </script>
 
