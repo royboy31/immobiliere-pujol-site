@@ -2,7 +2,7 @@ name: Sync LBI zip from FTP to R2
 
 on:
   schedule:
-    - cron: '30 * * * *'  # Every hour at :30 (before the :00 cron-sync)
+    - cron: '45 5,11,17 * * *'  # 3x/day at :45, 15 min before each cron-sync (06/12/18 UTC). LBI updates ~daily.
   workflow_dispatch:
 
 jobs:
