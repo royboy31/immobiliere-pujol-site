@@ -688,7 +688,10 @@
 
 @media (max-width: $bp-mobile) {
   .site-topbar {
-    .right .conn { display: none; }
+    // Hide only the text on mobile — keep the icon as a tappable link to the account.
+    .right .conn__label { display: none; }
+    .right .conn { padding: 8px; margin: -8px; } // enlarge tap target around the icon
+    .right .conn svg { width: 24px; height: 24px; } // bigger, easier-to-tap icon on mobile
   }
 
   .site-header .logo img { height: 46px; }
