@@ -199,11 +199,11 @@ const services = [
   description={seoDescription}
   schemas={[buildWebSite()]}
   breadcrumb={false}
+  preloadImage="/images/home/hero-bg.jpg"
 >
   {/* ============= HERO (full-bleed, outside boxed container) ============= */}
   <section class="hero">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="/images/home/hero-bg.jpg">
-      <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/pujol-heor-bg.mp4" type="video/mp4" />
+    <video class="hero__video" autoplay muted loop playsinline preload="none" poster="/images/home/hero-bg.jpg" data-src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/pujol-heor-bg.mp4">
     </video>
     <div class="hero__overlay"></div>
 
@@ -238,6 +238,24 @@ const services = [
           menu.classList.toggle('is-open');
         });
         document.addEventListener('click', () => menu.classList.remove('is-open'));
+      })();
+
+      // Defer the hero video (~38MB) off the critical path: attach its source only
+      // after load + idle, so it never competes with the LCP poster image on mobile.
+      (function () {
+        const attach = () => {
+          const v = document.querySelector<HTMLVideoElement>('.hero__video[data-src]');
+          if (!v || !v.dataset.src) return;
+          v.src = v.dataset.src;
+          v.removeAttribute('data-src');
+          v.load();
+          const p = v.play();
+          if (p) p.catch(() => {});
+        };
+        const idle = () =>
+          'requestIdleCallback' in window ? requestIdleCallback(attach) : setTimeout(attach, 200);
+        if (document.readyState === 'complete') idle();
+        else window.addEventListener('load', idle);
       })();
     </script>
 
