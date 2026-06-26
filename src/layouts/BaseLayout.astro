@@ -21,6 +21,8 @@ interface Props {
   /** Override the breadcrumb trail. When set, replaces the auto-generated middle
    *  crumbs in both the visible nav and the JSON-LD BreadcrumbList schema. */
   breadcrumbCrumbs?: Array<{ label: string; href: string | null }>;
+  /** Preload a high-priority above-the-fold image (the LCP element) so it paints fast. */
+  preloadImage?: string;
 }
 
 const {
@@ -32,6 +34,7 @@ const {
   schemas: pageSchemas = [],
   breadcrumb = true,
   breadcrumbCrumbs,
+  preloadImage,
 } = Astro.props;
 
 const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
@@ -88,6 +91,8 @@ for (const s of pageSchemas) {
     <link rel="icon" type="image/png" sizes="144x144" href="/favicons/homescreen144.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicons/homescreen96.png" />
     <link rel="apple-touch-icon" href="/favicons/homescreen192.png" />
+
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} type={preloadImage.endsWith('.avif') ? 'image/avif' : undefined} fetchpriority="high" />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
