@@ -353,11 +353,11 @@ if (GH_TOKEN) {
 
     // What matters is data freshness, not individual run failures: the FTP pull
     // from Infomaniak occasionally times out (curl exit 28) from CI, but the
-    // next success refreshes R2 and the zip content rarely changes. So a single
-    // transient timeout with a recent success stays GREEN; we only WARN once the
-    // sync is several hours behind, and FAIL when the zip is genuinely stale.
-    const FRESH_OK_H = 4;   // a success within this window → all good
-    const FRESH_FAIL_H = 8; // no success this long → stale, real problem
+    // next success refreshes R2 and the zip content rarely changes. LBI exports
+    // ~once/day and the sync runs 3x/day, so anything under 24h is healthy — only
+    // a genuinely stale zip (a full day with no successful sync) is a problem.
+    const FRESH_OK_H = 24;   // a success within 24h → all good (no alert)
+    const FRESH_FAIL_H = 48; // no success in 48h → genuinely stale, real problem
     const lastSuccess = runs.find(r => r.conclusion === 'success');
     const successAgeH = lastSuccess
       ? (Date.now() - new Date(lastSuccess.created_at).getTime()) / 3600000
