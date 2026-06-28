@@ -240,8 +240,8 @@ try {
     addCheck('Dernière sync cron', isOk ? 'OK' : 'FAIL',
       `${isOk ? 'succès' : 'erreurs'} — il y a ${ageH}h — flux : ${last.annonces_in_feed ?? '?'}, mises à jour : ${last.updated ?? '?'}, fermées : ${last.closed ?? '?'}`);
 
-    if (ageH !== '?' && parseFloat(ageH) > 3) {
-      addCheck('Fraîcheur du cron', 'WARN', `Dernière sync il y a ${ageH}h (attendu < 2h)`);
+    if (ageH !== '?' && parseFloat(ageH) > 8) {
+      addCheck('Fraîcheur du cron', 'WARN', `Dernière sync il y a ${ageH}h (sync 3x/jour, attendu < 8h)`);
     } else {
       addCheck('Fraîcheur du cron', 'OK', `il y a ${ageH}h`);
     }
