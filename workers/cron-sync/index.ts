@@ -532,6 +532,7 @@ const NEGOTIATOR_MAP: Record<string, string> = {
   'thibault arnoux': 'thibault@immobiliere-pujol.fr',
   'candice loth': 'candice@immobiliere-pujol.fr',
   'caroline pujol': 'carolinepujol@immobiliere-pujol.fr',
+  'klaudia duda': 'klaudia@immobiliere-pujol.fr',
 };
 
 // Reference prefix → email fallback (used when descriptif has no negotiator signature)
