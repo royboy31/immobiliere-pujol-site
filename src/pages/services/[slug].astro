@@ -1161,7 +1161,7 @@ const customForm = CUSTOM_FORMS[slug] || null;
         e.preventDefault();
         if (!form.reportValidity()) return;
         const btn = form.querySelector<HTMLButtonElement>('.svc-form__submit');
-        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+        if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
         try {
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
@@ -1172,11 +1172,11 @@ const customForm = CUSTOM_FORMS[slug] || null;
             form.innerHTML = `<div class="svc-form__success"><h2>Merci !</h2><p>${msg}</p></div>`;
           } else {
             showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");
-            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+            if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
           }
         } catch {
           showError(form, "Erreur de connexion. Veuillez réessayer.");
-          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
         }
       });
     });

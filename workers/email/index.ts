@@ -620,7 +620,7 @@ function resolveContactRoute(objet: string): DropdownRoute {
 
 // ── Route handlers ──────────────────────────────────────────────────────────
 
-async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
+async function handleContact(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
   const formId = (fd.get('gform_submit') as string) || '';
   const def = FORM_DEFS[formId];
   if (!def) return { ok: false, error: `Unknown form ID: ${formId}` };
@@ -659,11 +659,12 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
 
     if (!route.to) {
       // Location deflection — only send the location-specific auto-reply
-      // (Caroline 11/06), no internal notification.
+      // (Caroline 11/06), no internal notification. Deferred so the browser
+      // gets its response immediately.
       if (replyTo) {
-        await sendAutoReply(env, replyTo, prénom, fromEmail, fromName, LOCATION_AUTO_REPLY);
+        ctx.waitUntil(sendAutoReply(env, replyTo, prénom, fromEmail, fromName, LOCATION_AUTO_REPLY));
       }
-      await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
+      ctx.waitUntil(logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]));
       return { ok: true };
     }
 
@@ -680,18 +681,17 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
     fromName,
   });
 
-  // Log to Google Sheet
-  await logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]);
-
-  // Send unified auto-reply
+  // Log to Google Sheet + send the auto-reply in the background so the browser
+  // gets its response right after the notification send (not 2-3s later).
+  ctx.waitUntil(logToSheet(def.tab, [now(), ...rows.map(([, v]) => v)]));
   if (replyTo) {
-    await sendAutoReply(env, replyTo, prénom, fromEmail, fromName);
+    ctx.waitUntil(sendAutoReply(env, replyTo, prénom, fromEmail, fromName));
   }
 
   return emailResult;
 }
 
-async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
+async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
   const name = ((fd.get('name') as string) || '').trim();
   const email = ((fd.get('email') as string) || '').trim();
   const phone = ((fd.get('phone') as string) || '').trim();
@@ -743,39 +743,39 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
       fromName,
     });
     // Also send to Zoho parser
-    await sendEmail(env, {
+    ctx.waitUntil(sendEmail(env, {
       subject,
       html: buildTable(subject, tableRows),
       replyTo: email,
       to: ZOHO_PARSER,
       fromEmail,
       fromName,
-    });
+    }));
   } else {
     // Location Phase 1 — Zoho parser only
-    await sendEmail(env, {
+    ctx.waitUntil(sendEmail(env, {
       subject,
       html: buildTable(subject, tableRows),
       replyTo: email,
       to: ZOHO_PARSER,
       fromEmail,
       fromName,
-    });
+    }));
   }
 
-  await logToSheet('Annonces', [now(), reference, title, type, codePostal, negociateur, name, email, phone, message]);
+  ctx.waitUntil(logToSheet('Annonces', [now(), reference, title, type, codePostal, negociateur, name, email, phone, message]));
 
   // Unified auto-reply — for Vente, sender visible = negotiator name (so client identifies interlocutor)
   const prénom = name.split(' ')[0];
   const replyFromName = isVente && negociateur && negociateur !== 'Immobilière Pujol'
     ? negociateur
     : fromName;
-  await sendAutoReply(env, email, prénom, fromEmail, replyFromName);
+  ctx.waitUntil(sendAutoReply(env, email, prénom, fromEmail, replyFromName));
 
   return { ok: true };
 }
 
-async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; error?: string }> {
+async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
   const email = ((fd.get('email') as string) || '').trim();
   if (!email) return { ok: false, error: 'Email requis.' };
 
@@ -788,7 +788,7 @@ async function handleNewsletter(fd: FormData, env: Env): Promise<{ ok: boolean; 
     to: `contact${D}`,
   });
 
-  await logToSheet('Newsletter', [now(), email]);
+  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
 
   return emailResult;
 }
@@ -810,7 +810,7 @@ const SHEET_HEADERS: Record<string, string[]> = {
 // ── Worker entry point ──────────────────────────────────────────────────────
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const origin = request.headers.get('Origin') || '';
 
     // CORS preflight
@@ -898,13 +898,13 @@ export default {
 
     switch (path) {
       case '/contact':
-        result = await handleContact(fd, env);
+        result = await handleContact(fd, env, ctx);
         break;
       case '/contact-annonce':
-        result = await handleContactAnnonce(fd, env);
+        result = await handleContactAnnonce(fd, env, ctx);
         break;
       case '/newsletter':
-        result = await handleNewsletter(fd, env);
+        result = await handleNewsletter(fd, env, ctx);
         break;
       default:
         return jsonErr('Not found', 404, origin, env);

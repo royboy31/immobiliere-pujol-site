@@ -81,7 +81,7 @@ const isLocation = type === 'L';
       if (!form.reportValidity()) return;
 
       const btn = form.querySelector<HTMLButtonElement>('.annonce-contact__submit');
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+      if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
 
       try {
         const res = await fetch('https://pujol-email.roy-68a.workers.dev/contact-annonce', { method: 'POST', body: new FormData(form) });
@@ -91,11 +91,11 @@ const isLocation = type === 'L';
           form.innerHTML = '<div class="annonce-contact__success" style="text-align:center;padding:24px"><h3>Merci !</h3><p>Votre demande a bien été envoyée. Nous vous recontacterons rapidement.</p></div>';
         } else {
           showErr(form, data.error || "Une erreur est survenue.");
-          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
         }
       } catch {
         showErr(form, "Erreur de connexion. Veuillez réessayer.");
-        if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+        if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
       }
     });
   });
