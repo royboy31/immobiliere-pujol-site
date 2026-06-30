@@ -114,6 +114,14 @@ const SITE_URL = 'https://www.immobiliere-pujol.fr';
 const STAGING_URL = 'https://immobiliere-pujol-staging.roy-68a.workers.dev';
 const RGPD_URL = 'https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868';
 
+// Sender for INTERNAL form notifications. Must NOT be one of the recipient
+// agents: Gmail ignores Reply-To when you reply to a mail that appears to come
+// from your own address (it replies to the To/Cc instead), so an agent who is
+// both the From and a recipient could never "Répondre" straight to the prospect.
+// A neutral address keeps From != recipient, so Reply-To (the prospect) wins.
+// The prospect-facing auto-reply still goes out from the agent identity.
+const NOTIFY_FROM = 'notifications@immobiliere-pujol.fr';
+
 // ── Unified auto-reply (Caroline 21 mai) ─────────────────────────────────
 // ONE template for ALL forms — simple, branded, same subject line.
 
@@ -668,7 +676,7 @@ async function handleContact(fd: FormData, env: Env): Promise<{ ok: boolean; err
     replyTo: replyTo || undefined,
     to,
     cc,
-    fromEmail,
+    fromEmail: NOTIFY_FROM,
     fromName,
   });
 
@@ -731,7 +739,7 @@ async function handleContactAnnonce(fd: FormData, env: Env): Promise<{ ok: boole
       html: buildTable(subject, tableRows),
       replyTo: email,
       to: negotiatorEmail,
-      fromEmail,
+      fromEmail: NOTIFY_FROM,
       fromName,
     });
     // Also send to Zoho parser
