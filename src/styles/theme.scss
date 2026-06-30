@@ -37,3 +37,31 @@
 @import 'layouts/grid';
 @import 'layouts/listing';
 @import 'layouts/single';
+
+/*
+*
+* Form submit loading state — instant feedback so users don't click twice.
+* `.is-submitting` is toggled on the submit button by each form's handler.
+* Spinner uses currentColor, so it stays legible on any button colour.
+*
+*/
+.is-submitting {
+  cursor: wait;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.is-submitting::before {
+  content: '';
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.5em;
+  vertical-align: -0.1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: pujol-spin 0.6s linear infinite;
+}
+@keyframes pujol-spin {
+  to { transform: rotate(360deg); }
+}

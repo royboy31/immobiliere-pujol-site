@@ -179,7 +179,7 @@ const profiles = [
         e.preventDefault();
         if (!form.reportValidity()) return;
         const btn = form.querySelector<HTMLButtonElement>('.svc-form__submit');
-        if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+        if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
         try {
           const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
           const data = await res.json();
@@ -188,11 +188,11 @@ const profiles = [
             form.innerHTML = '<div class="svc-form__success"><h2>Déclaration envoyée</h2><p>Votre déclaration d\'urgence a bien été transmise. Notre équipe d\'astreinte vous recontacte au plus vite.</p></div>';
           } else {
             showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");
-            if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+            if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
           }
         } catch {
           showError(form, "Erreur de connexion. Veuillez réessayer.");
-          if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
         }
       });
     });
