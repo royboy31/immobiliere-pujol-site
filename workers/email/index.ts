@@ -702,6 +702,7 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
   const type = ((fd.get('type') as string) || '').trim();
   const codePostal = ((fd.get('code_postal') as string) || '').trim();
   const negociateur = ((fd.get('negociateur') as string) || '').trim();
+  const negociateurEmail = ((fd.get('negociateur_email') as string) || '').trim().toLowerCase();
 
   if (!name || !email) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
@@ -730,9 +731,13 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
     : `Contact du site web / annonce en location`;
 
   if (isVente) {
-    // Send to negotiator (or fallback)
-    const negotiatorEmail = negociateur && negociateur !== 'Immobilière Pujol'
-      ? `annonces${D}`   // Phase 1: no structured negotiator email yet, fallback
+    // Route to the negotiator shown on the listing — their email is passed as a
+    // hidden field (the conseiller displayed on the annonce page = email_a_afficher).
+    // Validate it is an internal @immobiliere-pujol.fr address so a tampered form
+    // can't make us mail an arbitrary recipient; fall back to the shared annonces@
+    // box when it's missing/unknown.
+    const negotiatorEmail = negociateurEmail.endsWith('@immobiliere-pujol.fr')
+      ? negociateurEmail
       : `annonces${D}`;
     await sendEmail(env, {
       subject,
