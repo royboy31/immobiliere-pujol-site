@@ -892,3 +892,26 @@ $content-prose-max: 780px;
     text-align: center;
   }
 }
+
+/* End-of-article expert contact card (article frontmatter `expertCta`).
+   Reuses .expert-info-card (from _expert-detail) so it matches the expert page. */
+.article-expert-cta {
+  margin: 40px auto 8px;
+  padding-top: 28px;
+  border-top: 1px solid $ds-hairline;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__lead {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px;
+  }
+
+  .expert-info-card {
+    max-width: 380px;
+    width: 100%;
+  }
+}

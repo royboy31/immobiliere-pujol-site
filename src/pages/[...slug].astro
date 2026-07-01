@@ -4,7 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { pickRotatedLinks } from '../lib/internal-links';
+
+// Build-time map of expert JSON (this page is prerendered, so the eager glob
+// stays out of the SSR worker). Used for the optional end-of-article expert CTA.
+const expertModules = import.meta.glob('../content/experts/*.json', { eager: true });
+function getExpertBySlug(slug: string): any | null {
+  const m = (expertModules as Record<string, any>)[`../content/experts/${slug}.json`];
+  return m ? (m.default ?? m) : null;
+}
 
 // Catch-all route for root-level URLs:
 // - Blog posts (891 articles)
@@ -193,6 +202,11 @@ const breadcrumbCrumbs = type === 'article'
 
 // Stale WP thank-you/confirmation pages should not be indexed (SEO audit fix).
 const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || '');
+
+// Optional end-of-article expert card (frontmatter `expertCta: <expert-slug>`).
+const ctaExpert = type === 'article' && entry.data.expertCta
+  ? getExpertBySlug(entry.data.expertCta)
+  : null;
 ---
 
 <BaseLayout title={title} description={description} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
@@ -223,7 +237,15 @@ const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || ''
 
     {type === 'article' ? (
       <div class="content__layout">
-        <div class="content__body" set:html={rawBody}></div>
+        <div class="content__body">
+          <Fragment set:html={rawBody} />
+          {ctaExpert && (
+            <div class="article-expert-cta">
+              <p class="article-expert-cta__lead">Un projet locatif à Marseille ? Parlons-en.</p>
+              <ExpertContactCard expert={ctaExpert} />
+            </div>
+          )}
+        </div>
         <BlogSidebar related={relatedArticles} />
       </div>
     ) : (
