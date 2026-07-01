@@ -230,21 +230,18 @@ const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc} schemas={
-  hasReviews
-    ? [{
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: displayName,
-        jobTitle: expert.fonction || undefined,
-        worksFor: { '@type': 'RealEstateAgent', name: 'Immobilière Pujol' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: reviewScore,
-          bestRating: 5,
-          ratingCount: reviewCount,
-        },
-      }]
-    : []
+  // A Person entity describing the agent. We deliberately do NOT attach
+  // aggregateRating here: Google does not support review snippets on Person
+  // ("Invalid object type for field" in Search Console), so the rating markup
+  // only produced errors with zero eligibility. The visible "X avis vérifiés"
+  // stays as on-page HTML.
+  [{
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: displayName,
+    jobTitle: expert.fonction || undefined,
+    worksFor: { '@type': 'RealEstateAgent', name: 'Immobilière Pujol' },
+  }]
 }>
   <article class={`expert-page expert-page--${expertType}`}>
     {/* 2-col body — title + description on the left, sticky info card on the right */}
