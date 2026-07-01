@@ -9,6 +9,7 @@ author: "Gaëlle Lapert"
 seoTitle: "Investissement locatif : le coût caché de la vacance locative | Immobilière Pujol"
 seoDescription: "Le vrai coût caché d'un investissement locatif n'est pas les charges, mais la vacance locative. Découvrez ses 3 causes et la méthode Pujol pour l'éviter à Marseille."
 expertCta: "gaelle-lapert"
+expertCtaTitle: "Prenez rendez-vous avec Gaëlle Lapert, notre experte conseil."
 ---
 
 <p>Lorsqu'un propriétaire bailleur analyse la rentabilité de son investissement, son regard se porte quasi systématiquement sur les frais visibles : les charges de copropriété, les impôts fonciers et les honoraires de gestion locative. Pourtant, il existe un coût invisible, souvent relégué au second plan, qui s'avère bien plus dévastateur pour votre portefeuille : <strong>la vacance locative</strong>.</p>
@@ -101,5 +102,3 @@ expertCta: "gaelle-lapert"
 <h3>Votre logement tarde à trouver un locataire ?</h3>
 
 <p>Ne laissez pas les mois de vacance dégrader la performance de votre investissement. Rencontrez une équipe de professionnels engagés à vos côtés pour optimiser la gestion de vos biens.</p>
-
-<p>👉 <a href="/experts/gaelle-lapert/"><strong>Prenez rendez-vous avec Gaëlle Lapert, notre expert conseil, pour découvrir la méthode Pujol pour éviter la vacance locative.</strong></a></p>

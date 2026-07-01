@@ -18,6 +18,8 @@ const articles = defineCollection({
     // Slug of an expert (src/content/experts/<slug>.json) whose contact card
     // (photo + call/email/RDV) is appended at the end of the article.
     expertCta: z.string().optional(),
+    // Optional heading shown above that expert card.
+    expertCtaTitle: z.string().optional(),
   }),
 });
 

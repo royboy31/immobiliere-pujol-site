@@ -241,7 +241,9 @@ const ctaExpert = type === 'article' && entry.data.expertCta
           <Fragment set:html={rawBody} />
           {ctaExpert && (
             <div class="article-expert-cta">
-              <p class="article-expert-cta__lead">Un projet locatif à Marseille ? Parlons-en.</p>
+              {entry.data.expertCtaTitle && (
+                <h2 class="article-expert-cta__lead">{entry.data.expertCtaTitle}</h2>
+              )}
               <ExpertContactCard expert={ctaExpert} />
             </div>
           )}
