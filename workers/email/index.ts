@@ -791,6 +791,7 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext): 
     subject,
     html,
     to: `contact${D}`,
+    cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
   });
 
   ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
