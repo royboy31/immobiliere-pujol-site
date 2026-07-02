@@ -523,6 +523,7 @@ const CONTACT_PHOTO_MAP: Record<string, string> = {
   'thibault@immobiliere-pujol.fr': '/images/experts/thibault-arnoux.png',
   'candice@immobiliere-pujol.fr': '/images/experts/candice-loth.png',
   'carolinepujol@immobiliere-pujol.fr': '/images/experts/caroline-pujol.png',
+  'klaudia@immobiliere-pujol.fr': '/images/experts/klaudia-duda.png',
 };
 
 // ── Negotiator name → expert email mapping ──
