@@ -180,6 +180,11 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 const featuredImage = entry.data.featuredImage as string | undefined;
+// Use the article's featured image as the social/share preview (og:image).
+// Must be an absolute URL; fall back to BaseLayout's default when there's none.
+const ogImage = featuredImage
+  ? new URL(featuredImage, Astro.site ?? Astro.url).toString()
+  : undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 
 // Blog sidebar — "À lire aussi": a rotated slice of other articles, seeded by
@@ -209,7 +214,7 @@ const ctaExpert = type === 'article' && entry.data.expertCta
   : null;
 ---
 
-<BaseLayout title={title} description={description} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
+<BaseLayout title={title} description={description} ogImage={ogImage} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">
