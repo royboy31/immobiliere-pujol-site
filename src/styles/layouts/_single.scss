@@ -104,23 +104,78 @@ $content-prose-max: 780px;
     color: $ds-ink;
   }
 
-  // Variant with featured image — invert text colors and drop paper bg
+  // Article byline row (author + date + reading time)
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+    color: #55666f;
+  }
+  &__meta-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(0,0,0,.1); }
+  &__meta-author { font-weight: 700; }
+  &__meta-sep { opacity: .5; }
+  &__header .content__meta time {
+    background: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    color: inherit;
+    font-family: $ds-font-noto;
+    font-size: 14px;
+  }
+
+  // Variant with featured image — immersive header, bottom-left (Caroline: Option 1)
   &--hero-image {
     .content__header {
       background: $black;
-      padding-top: 120px;
-      padding-bottom: 100px;
+      padding: 0;
       min-height: 460px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: flex-start;
     }
-    .content__header h1 { color: $white; }
-    .content__eyebrow { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .35); color: $white; }
+    .content__header-overlay {
+      background: linear-gradient(180deg, rgba(15,26,43,.12) 0%, rgba(15,26,43,.05) 42%, rgba(15,26,43,.85) 100%);
+    }
+    .content__header-inner {
+      align-items: flex-start;
+      text-align: left;
+      max-width: 1120px;
+      width: 100%;
+      padding: 34px 40px;
+      gap: 16px;
+    }
+    // Green category badge, hugging the text (Caroline: réduire la barre verte)
+    .content__eyebrow {
+      align-self: flex-start;
+      background: $green;
+      border-color: $green;
+      color: #16240a;
+
+      &:hover { background: $white; border-color: $white; color: $black; }
+    }
+    .content__header h1 {
+      color: $white;
+      text-align: left;
+      font-weight: 700;
+      font-size: 40px;
+      max-width: 920px;
+      text-shadow: 0 2px 18px rgba(0,0,0,.4);
+    }
+    .content__meta { color: $white; }
+    .content__meta-avatar { border-color: rgba(255,255,255,.75); }
 
     @media (max-width: $bp-tablet) {
-      .content__header { padding: 80px 20px 70px; min-height: 340px; }
-      .content__header h1 { font-size: 30px; }
+      .content__header { min-height: 340px; }
+      .content__header-inner { padding: 24px 20px; }
+      .content__header h1 { font-size: 26px; }
     }
   }
 
@@ -890,5 +945,28 @@ $content-prose-max: 780px;
     background: $color-bg-alt;
     border-radius: $radius-md;
     text-align: center;
+  }
+}
+
+/* End-of-article expert contact card (article frontmatter `expertCta`).
+   Reuses .expert-info-card (from _expert-detail) so it matches the expert page. */
+.article-expert-cta {
+  margin: 40px auto 8px;
+  padding-top: 28px;
+  border-top: 1px solid $ds-hairline;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__lead {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 20px;
+  }
+
+  .expert-info-card {
+    max-width: 380px;
+    width: 100%;
   }
 }

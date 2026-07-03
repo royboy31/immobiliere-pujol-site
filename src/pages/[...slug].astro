@@ -4,7 +4,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
+import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { pickRotatedLinks } from '../lib/internal-links';
+
+// Build-time map of expert JSON (this page is prerendered, so the eager glob
+// stays out of the SSR worker). Used for the optional end-of-article expert CTA.
+const expertModules = import.meta.glob('../content/experts/*.json', { eager: true });
+function getExpertBySlug(slug: string): any | null {
+  const m = (expertModules as Record<string, any>)[`../content/experts/${slug}.json`];
+  return m ? (m.default ?? m) : null;
+}
 
 // Catch-all route for root-level URLs:
 // - Blog posts (891 articles)
@@ -171,6 +180,11 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 const featuredImage = entry.data.featuredImage as string | undefined;
+// Use the article's featured image as the social/share preview (og:image).
+// Must be an absolute URL; fall back to BaseLayout's default when there's none.
+const ogImage = featuredImage
+  ? new URL(featuredImage, Astro.site ?? Astro.url).toString()
+  : undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 
 // Blog sidebar — "À lire aussi": a rotated slice of other articles, seeded by
@@ -193,9 +207,23 @@ const breadcrumbCrumbs = type === 'article'
 
 // Stale WP thank-you/confirmation pages should not be indexed (SEO audit fix).
 const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || '');
+
+// Optional end-of-article expert card (frontmatter `expertCta: <expert-slug>`).
+const ctaExpert = type === 'article' && entry.data.expertCta
+  ? getExpertBySlug(entry.data.expertCta)
+  : null;
+
+// Article header byline (immersive header): author name + photo + reading time.
+const authorName = (type === 'article' && entry.data.author) || null;
+const authorPhoto = ctaExpert?.photo || null;
+const wordCount = rawBody.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length;
+const readMin = Math.max(1, Math.round(wordCount / 200));
+const articleDate = type === 'article' && entry.data.date
+  ? new Date(entry.data.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null;
 ---
 
-<BaseLayout title={title} description={description} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
+<BaseLayout title={title} description={description} ogImage={ogImage} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">
@@ -210,12 +238,15 @@ const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || ''
             <a class="content__eyebrow" href={`/categorie/${slugify(heroCategory)}/`}>{heroCategory}</a>
           )}
           <h1>{entry.data.title}</h1>
-          {type === 'article' && entry.data.date && (
-            <time datetime={entry.data.date}>
-              {new Date(entry.data.date).toLocaleDateString('fr-FR', {
-                year: 'numeric', month: 'long', day: 'numeric'
-              })}
-            </time>
+          {type === 'article' && (
+            <div class="content__meta">
+              {authorPhoto && <img class="content__meta-avatar" src={authorPhoto} alt={authorName || ''} width="40" height="40" loading="eager" />}
+              {authorName && <span class="content__meta-author">{authorName}</span>}
+              {authorName && articleDate && <span class="content__meta-sep">•</span>}
+              {articleDate && <time datetime={entry.data.date}>{articleDate}</time>}
+              {articleDate && <span class="content__meta-sep">•</span>}
+              <span>{readMin} min de lecture</span>
+            </div>
           )}
         </div>
       </header>
@@ -223,7 +254,17 @@ const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || ''
 
     {type === 'article' ? (
       <div class="content__layout">
-        <div class="content__body" set:html={rawBody}></div>
+        <div class="content__body">
+          <Fragment set:html={rawBody} />
+          {ctaExpert && (
+            <div class="article-expert-cta">
+              {entry.data.expertCtaTitle && (
+                <h2 class="article-expert-cta__lead">{entry.data.expertCtaTitle}</h2>
+              )}
+              <ExpertContactCard expert={ctaExpert} />
+            </div>
+          )}
+        </div>
         <BlogSidebar related={relatedArticles} />
       </div>
     ) : (
