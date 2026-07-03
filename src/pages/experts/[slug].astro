@@ -363,9 +363,10 @@ const agendaLink = (expert as any).agenda as string | undefined;
             {activeSalesHistory.map((l) => (
               <a href={`/annonces/${l.slug}/`} class="expert-history-card">
                 <div class="expert-history-card__photo" style={l.photo ? `background-image:url('${cfImg(l.photo, 480)}')` : undefined}>
-                  <span class="expert-history-card__tag is-available">À vendre</span>
-                  {reservedLabel(l.saleStatus) && (
-                    <span class="expert-history-card__reserved">{reservedLabel(l.saleStatus)}</span>
+                  {reservedLabel(l.saleStatus) ? (
+                    <span class="expert-history-card__tag is-reserved">{reservedLabel(l.saleStatus)}</span>
+                  ) : (
+                    <span class="expert-history-card__tag is-available">À vendre</span>
                   )}
                 </div>
                 <div class="expert-history-card__body">

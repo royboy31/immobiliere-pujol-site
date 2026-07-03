@@ -488,23 +488,9 @@
     &.is-vente { background: $ds-orange; }
     &.is-location { background: $ds-olive; }
     &.is-available { background: $ds-orange; }
-  }
-
-  // Reserved macaron (top-right): Sous offre / Sous promesse — amber, mirrors the
-  // reserved overlay on the collection cards so the status is visible here too.
-  &__reserved {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: $ds-yellow;
-    color: $ds-ink;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-family: $ds-font-noto;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: .4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+    // Reserved (Sous offre / Sous promesse) replaces the "À vendre" pill in the
+    // same corner — amber, mirroring the reserved macaron on the collection cards.
+    &.is-reserved { background: $ds-yellow; color: $ds-ink; }
   }
 
   &__body {
