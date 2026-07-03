@@ -107,7 +107,7 @@ async function main() {
   const rows = queryD1(`
     SELECT id, slug, status, source, reference_agence, ubiflow_reference,
       type_annonce, titre, prix, surface, nb_pieces, code_postal, ville,
-      email_a_afficher, contact_a_afficher, date_creation
+      email_a_afficher, contact_a_afficher, date_creation, termine
     FROM annonces WHERE status != 'dropped'
   `);
   console.log(`  ${rows.length} annonces`);
@@ -167,6 +167,7 @@ async function main() {
       title: a.titre || a.slug,
       type: a.type_annonce ?? '',          // V or L
       status: a.status ?? '',              // 'active' or 'closed' (live, from D1)
+      saleStatus: a.termine ?? null,       // LBI field-136: sous-offre / sous-compromis / vendu
       prix: a.prix ?? null,
       surface: a.surface ?? null,
       nbPieces: a.nb_pieces ?? null,

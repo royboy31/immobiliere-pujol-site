@@ -5,6 +5,7 @@ import { fetchUbiflowAnnonces } from '../../lib/ubiflow';
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import ExpertContactCard from '../../components/experts/ExpertContactCard.astro';
 import { cfImg } from '../../lib/img';
+import { reservedLabel } from '../../lib/listing-status';
 type ExpertType = 'rental' | 'sales' | 'syndic' | 'other';
 // Inlined from lib/experts so this page doesn't import that module's EAGER glob
 // of every expert JSON (incl. the long bios) into the SSR worker — that bloat
@@ -86,7 +87,7 @@ try {
 
 let historyTotalCount = 0;
 let historyListings: Array<{
-  slug: string; title: string; type: string; status: string;
+  slug: string; title: string; type: string; status: string; saleStatus: string | null;
   prix: number | null; surface: number | null; nbPieces: number | null;
   codePostal: string; ville: string; photo: string | null;
 }> = [];
@@ -363,6 +364,9 @@ const agendaLink = (expert as any).agenda as string | undefined;
               <a href={`/annonces/${l.slug}/`} class="expert-history-card">
                 <div class="expert-history-card__photo" style={l.photo ? `background-image:url('${cfImg(l.photo, 480)}')` : undefined}>
                   <span class="expert-history-card__tag is-available">À vendre</span>
+                  {reservedLabel(l.saleStatus) && (
+                    <span class="expert-history-card__reserved">{reservedLabel(l.saleStatus)}</span>
+                  )}
                 </div>
                 <div class="expert-history-card__body">
                   <div class="expert-history-card__title">{l.title}</div>
