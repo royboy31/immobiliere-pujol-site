@@ -212,6 +212,15 @@ const isThankYou = /merci-pour|confirmation-demande/i.test(entry.data.slug || ''
 const ctaExpert = type === 'article' && entry.data.expertCta
   ? getExpertBySlug(entry.data.expertCta)
   : null;
+
+// Article header byline (immersive header): author name + photo + reading time.
+const authorName = (type === 'article' && entry.data.author) || null;
+const authorPhoto = ctaExpert?.photo || null;
+const wordCount = rawBody.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length;
+const readMin = Math.max(1, Math.round(wordCount / 200));
+const articleDate = type === 'article' && entry.data.date
+  ? new Date(entry.data.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null;
 ---
 
 <BaseLayout title={title} description={description} ogImage={ogImage} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
@@ -229,12 +238,15 @@ const ctaExpert = type === 'article' && entry.data.expertCta
             <a class="content__eyebrow" href={`/categorie/${slugify(heroCategory)}/`}>{heroCategory}</a>
           )}
           <h1>{entry.data.title}</h1>
-          {type === 'article' && entry.data.date && (
-            <time datetime={entry.data.date}>
-              {new Date(entry.data.date).toLocaleDateString('fr-FR', {
-                year: 'numeric', month: 'long', day: 'numeric'
-              })}
-            </time>
+          {type === 'article' && (
+            <div class="content__meta">
+              {authorPhoto && <img class="content__meta-avatar" src={authorPhoto} alt={authorName || ''} width="40" height="40" loading="eager" />}
+              {authorName && <span class="content__meta-author">{authorName}</span>}
+              {authorName && articleDate && <span class="content__meta-sep">•</span>}
+              {articleDate && <time datetime={entry.data.date}>{articleDate}</time>}
+              {articleDate && <span class="content__meta-sep">•</span>}
+              <span>{readMin} min de lecture</span>
+            </div>
           )}
         </div>
       </header>

@@ -6,6 +6,7 @@ import { buildArrondissements, buildKindOptions, filterPrice } from '../../lib/a
 import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
 import DeferredCards from '../../components/annonces/DeferredCards.astro';
+import ListingCtaCards from '../../components/annonces/ListingCtaCards.astro';
 
 const allAnnonces = await fetchActiveListings();
 const annonces = allAnnonces.filter(a => a.type === 'L').sort((a, b) => filterPrice(b) - filterPrice(a));
@@ -57,5 +58,6 @@ const arrondissements = buildArrondissements(annonces);
       )}
     </section>
     <DeferredCards scope="L" />
+    <ListingCtaCards variant="location" />
   </div>
 </BaseLayout>
