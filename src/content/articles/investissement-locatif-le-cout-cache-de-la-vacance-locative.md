@@ -29,6 +29,10 @@ expertCta: "gaelle-lapert"
 
 <p>En gestion immobilière, nous utilisons un indicateur implacable : <strong>la pyramide de la demande locative</strong>. Les chiffres parlent d'eux-mêmes :</p>
 
+<figure class="article-figure">
+  <img src="/images/blog/pyramide-demande-locative.jpg" alt="Pyramide de la demande locative" width="1100" height="716" loading="lazy" decoding="async" />
+</figure>
+
 <ul>
   <li><strong>Au juste prix du marché :</strong> Vous captez <strong>95 %</strong> des candidats potentiels. La mise en location est ultra-rapide.</li>
   <li><strong>À seulement +5 % au-dessus du marché :</strong> Vous perdez déjà la moitié des locataires qualifiés (<strong>50 %</strong> d'intérêt).</li>
