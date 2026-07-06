@@ -147,6 +147,9 @@ $content-prose-max: 780px;
       align-items: flex-end;
       justify-content: flex-start;
     }
+    // Face-safety: bias the crop toward the top of the frame so portraits
+    // (faces near the top) aren't cut off.
+    .content__header-media img { object-position: center 20%; }
     .content__header-overlay {
       background: linear-gradient(180deg, rgba(15,26,43,.12) 0%, rgba(15,26,43,.05) 42%, rgba(15,26,43,.85) 100%);
     }
