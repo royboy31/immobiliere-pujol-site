@@ -133,10 +133,16 @@ $content-prose-max: 780px;
 
   // Variant with featured image — immersive header, bottom-left (Caroline: Option 1)
   &--hero-image {
+    // Boxed hero (Caroline: full-bleed cropped Gaëlle's face). Contained width +
+    // rounded corners, like the mock — a narrower box crops the image less
+    // vertically, so faces stay intact, and it avoids the tall full-width banner.
     .content__header {
       background: $black;
       padding: 0;
       min-height: 460px;
+      max-width: 1180px;
+      margin: 0 auto 60px;
+      border-radius: 20px;
       display: flex;
       align-items: flex-end;
       justify-content: flex-start;
@@ -173,7 +179,7 @@ $content-prose-max: 780px;
     .content__meta-avatar { border-color: rgba(255,255,255,.75); }
 
     @media (max-width: $bp-tablet) {
-      .content__header { min-height: 340px; }
+      .content__header { min-height: 340px; margin: 0 16px 40px; border-radius: 14px; }
       .content__header-inner { padding: 24px 20px; }
       .content__header h1 { font-size: 26px; }
     }
