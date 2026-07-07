@@ -17,7 +17,7 @@
 	"vars": {
 		"UPLOAD_TOKEN": "pujol-r2-upload-4c3e8f9d1b2a",
 		"ADMIN_EMAILS": "roy@perelweb.studio,carolinepujol@immobiliere-pujol.fr",
-		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$zDBk3btyW9Vd0qPWmGtPqw$LPAVzYrrQw0GlsWzTlK0f6Bdmt--U9uLNbZ0p8bMV5s",
+		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$C3i2S5CNzUXbyxjK13Olrw$eiYJuTl4sa0aDtaKdUVtSnO9ZA5vpy9hRFFGvCFnpBc",
 		"ADMIN_SESSION_SECRET": "zgSxSQYzhMeUaYHhZbnRKgJ2SN8W28qj0m7vM1tDyvyScVLSbnhPIkTU5r8igeY_",
 		"ADMIN_PATH": "admin-pujol"
 	}
