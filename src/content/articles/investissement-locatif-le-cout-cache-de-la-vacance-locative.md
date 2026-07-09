@@ -100,4 +100,4 @@ expertCta: "gaelle-lapert"
 
 <p>Je suis à votre entière disposition pour analyser votre situation, étudier votre bien et vous expliquer de vive voix comment sécuriser vos revenus. Rencontrons-nous !</p>
 
-<p>👉 <a href="/experts/gaelle-lapert/"><strong>Prenez rendez-vous directement avec moi pour échanger sur votre projet et découvrir la Méthode Pujol</strong></a> <strong>pour évtiter la vacances locative</strong></p>
+<p>👉 <a href="/experts/gaelle-lapert/"><strong>Prenez rendez-vous directement avec moi pour échanger sur votre projet et découvrir la Méthode Pujol</strong></a> <strong>pour éviter la vacance locative</strong></p>
