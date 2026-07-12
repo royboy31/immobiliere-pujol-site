@@ -317,6 +317,11 @@ try {
   report.counts.rentalsByStatus = rentalRows;
   addCheck('Locations (toutes sources)', 'OK', `${rActive} actives, ${rClosed} fermées`);
 
+  // Historique fermé via les flux (biens clôturés depuis la mise en ligne),
+  // hors archive WordPress. d1UbiflowClosed / d1LbiClosed viennent de la section 6.
+  const fluxClosed = d1UbiflowClosed + d1LbiClosed;
+  addCheck('Annonces fermées via les flux', 'OK', `Ubiflow : ${d1UbiflowClosed}, LBI/FTP : ${d1LbiClosed}, total : ${fluxClosed}`);
+
   // Annonces sans type (héritage WordPress) — informatif, pour boucler le total
   const untypedRows = sb.untyped || [];
   const uTotal = untypedRows.reduce((s, r) => s + r.count, 0);
