@@ -284,6 +284,35 @@ try {
   addCheck('Compteurs inventaire D1', 'FAIL', err.message);
 }
 
+// ── 6b. Statuts des ventes (LBI actives + fermées vendu/inconnu) ─────────
+
+console.log('\n── 6b. Statuts des ventes ──');
+
+try {
+  const sb = await fetchJson(`${CRON_WORKER}/counts-status`);
+  const LABELS = {
+    ouvert: 'ouvert (disponible)',
+    'sous-offre': 'sous offre',
+    'sous-compromis': 'sous compromis',
+    vendu: 'vendu (confirmé)',
+    inconnu: 'statut inconnu',
+  };
+  const fmt = (rows) => rows.map((r) => `${r.count} ${LABELS[r.st] || r.st}`).join(', ');
+  const activeRows = sb.activeLbiSales || [];
+  const closedRows = sb.closedSales || [];
+  const activeTotal = activeRows.reduce((s, r) => s + r.count, 0);
+  const closedTotal = closedRows.reduce((s, r) => s + r.count, 0);
+  const soldKnown = (closedRows.find((r) => r.st === 'vendu') || {}).count || 0;
+
+  report.counts.lbiActiveByStatus = activeRows;
+  report.counts.closedSalesByStatus = closedRows;
+
+  addCheck('Ventes LBI actives par statut', 'OK', `${activeTotal} biens à vendre : ${fmt(activeRows)}`);
+  addCheck('Ventes fermées (statut connu)', 'OK', `${closedTotal} fermées : ${fmt(closedRows)}`);
+} catch (err) {
+  addCheck('Statuts des ventes', 'WARN', err.message);
+}
+
 // ── 7. Worker email ──────────────────────────────────────────────────────
 
 console.log('\n── 7. Worker Email ──');
