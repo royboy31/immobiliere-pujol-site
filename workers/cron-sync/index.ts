@@ -1160,7 +1160,14 @@ export default {
                   FROM annonces WHERE type_annonce = 'V' AND status = 'closed'
                   GROUP BY st ORDER BY count DESC`)
         .all<{ st: string; count: number }>()).results;
-      return new Response(JSON.stringify({ activeLbiSales, closedSales }, null, 2), {
+      // Rentals (type L) and untyped rows, by status — for a full inventory accounting.
+      const rentals = (await env.DB
+        .prepare(`SELECT status, COUNT(*) AS count FROM annonces WHERE type_annonce = 'L' GROUP BY status ORDER BY count DESC`)
+        .all<{ status: string; count: number }>()).results;
+      const untyped = (await env.DB
+        .prepare(`SELECT status, COUNT(*) AS count FROM annonces WHERE type_annonce IS NULL OR type_annonce = '' GROUP BY status ORDER BY count DESC`)
+        .all<{ status: string; count: number }>()).results;
+      return new Response(JSON.stringify({ activeLbiSales, closedSales, rentals, untyped }, null, 2), {
         headers: { 'Content-Type': 'application/json' },
       });
     }

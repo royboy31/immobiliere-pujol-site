@@ -284,9 +284,9 @@ try {
   addCheck('Compteurs inventaire D1', 'FAIL', err.message);
 }
 
-// ── 6b. Statuts des ventes (LBI actives + fermées vendu/inconnu) ─────────
+// ── 6b. Inventaire détaillé (ventes par statut + locations + total) ──────
 
-console.log('\n── 6b. Statuts des ventes ──');
+console.log('\n── 6b. Inventaire détaillé ──');
 
 try {
   const sb = await fetchJson(`${CRON_WORKER}/counts-status`);
@@ -309,6 +309,25 @@ try {
 
   addCheck('Ventes LBI actives par statut', 'OK', `${activeTotal} biens à vendre : ${fmt(activeRows)}`);
   addCheck('Ventes fermées (statut connu)', 'OK', `${closedTotal} fermées : ${fmt(closedRows)}`);
+
+  // Locations (toutes sources) : actives vs fermées
+  const rentalRows = sb.rentals || [];
+  const rActive = (rentalRows.find((r) => r.status === 'active') || {}).count || 0;
+  const rClosed = (rentalRows.find((r) => r.status === 'closed') || {}).count || 0;
+  report.counts.rentalsByStatus = rentalRows;
+  addCheck('Locations (toutes sources)', 'OK', `${rActive} actives, ${rClosed} fermées`);
+
+  // Annonces sans type (héritage WordPress) — informatif, pour boucler le total
+  const untypedRows = sb.untyped || [];
+  const uTotal = untypedRows.reduce((s, r) => s + r.count, 0);
+  if (uTotal > 0) {
+    report.counts.untypedByStatus = untypedRows;
+    addCheck('Annonces sans type', 'OK', `${uTotal} sans type : ${untypedRows.map((r) => `${r.count} ${r.status}`).join(', ')}`);
+  }
+
+  // Inventaire total (ventes + locations + sans type)
+  const grandTotal = activeTotal + closedTotal + (rActive + rClosed) + uTotal;
+  addCheck('Inventaire total annonces', 'OK', `${grandTotal} annonces : ${activeTotal + rActive} actives, ${closedTotal + rClosed + uTotal} fermées`);
 } catch (err) {
   addCheck('Statuts des ventes', 'WARN', err.message);
 }
