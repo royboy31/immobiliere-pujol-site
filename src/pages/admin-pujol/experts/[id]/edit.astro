@@ -1,0 +1,16 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+import ExpertEditor from '../../../../components/admin/ExpertEditor.astro';
+import { getDB, ensureSchema, getExpert } from '../../../../lib/experts-db';
+
+const db = await getDB();
+await ensureSchema(db);
+const expert = await getExpert(db, Number(Astro.params.id));
+if (!expert) return Astro.redirect('../../');
+
+const name = ((expert.title || '').split('|').pop() || '').split(/\s+[–-]\s+/)[0].trim() || expert.title;
+---
+<AdminLayout title={`Éditer — ${name}`} section="experts">
+  <ExpertEditor expert={expert} />
+</AdminLayout>

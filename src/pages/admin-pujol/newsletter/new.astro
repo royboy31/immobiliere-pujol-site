@@ -1,0 +1,469 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listExperts } from '../../../lib/experts-db';
+
+// Experts feed the broadcast contact-card picker. Best-effort — an empty list
+// just means no expert options.
+let experts: { slug: string; name: string; role: string; photo: string; phone: string; email: string }[] = [];
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  experts = (await listExperts(db)).map((e) => ({
+    slug: e.slug,
+    name: ((e.title || '').split('|').pop() || '').split(/\s+[–-]\s+/)[0].trim() || e.title,
+    role: e.fonction || '',
+    photo: e.photo || '',
+    phone: e.phone || '',
+    email: e.email || '',
+  }));
+} catch { /* ignore */ }
+---
+
+<AdminLayout title="Nouvelle newsletter" section="newsletter">
+  <div class="nl-topbar">
+    <a href="./" class="btn btn--ghost">← Retour</a>
+    <span class="spacer"></span>
+    <span id="nl-status" class="nl-savestate"></span>
+    <button id="nl-save" class="btn btn--ghost">Enregistrer le brouillon</button>
+    <button id="nl-send" class="btn btn--primary">Envoyer</button>
+  </div>
+
+  <div class="nl-grid">
+    <!-- ── Composer ─────────────────────────────────────────────── -->
+    <div class="nl-form">
+      <p class="nl-fieldlabel">Modèle</p>
+      <div class="tmpl-row" id="tmpl-row">
+        <label class="tmpl-card is-active"><input type="radio" name="tmpl" value="blog" checked />
+          <span class="tmpl-card__t">Actualités</span>
+          <span class="tmpl-card__d">Articles de blog, dernières nouveautés</span>
+        </label>
+        <label class="tmpl-card"><input type="radio" name="tmpl" value="listings" />
+          <span class="tmpl-card__t">Sélection de biens</span>
+          <span class="tmpl-card__d">Ventes, locations, offres à la une</span>
+        </label>
+        <label class="tmpl-card"><input type="radio" name="tmpl" value="broadcast" />
+          <span class="tmpl-card__t">Message / Offre</span>
+          <span class="tmpl-card__d">Annonce, promotion, message libre</span>
+        </label>
+      </div>
+
+      <div class="card nl-card">
+        <label>Objet de l’email
+          <input id="f-subject" type="text" placeholder="Ce que le destinataire voit dans sa boîte" />
+        </label>
+        <label>Pré-en-tête (preheader)
+          <input id="f-preheader" type="text" placeholder="Texte d’aperçu affiché après l’objet" />
+        </label>
+      </div>
+
+      <!-- BLOG -->
+      <section class="tmpl-panel" data-panel="blog">
+        <div class="card nl-card">
+          <label>Titre (optionnel)
+            <input id="f-blog-heading" type="text" placeholder="ex. Les actualités du mois" />
+          </label>
+          <p class="rt-label">Introduction</p>
+          <div class="rt-toolbar" data-for="rt-blog-intro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-blog-intro" class="rt" contenteditable="true" data-ph="Quelques mots d’introduction…"></div>
+        </div>
+        <div class="card nl-card">
+          <p class="nl-cardtitle">Articles <small>(jusqu’à 3)</small></p>
+          <div class="pick-selected" id="blog-selected"></div>
+          <input class="pick-search" id="blog-search" type="text" placeholder="Rechercher un article…" />
+          <div class="pick-avail" id="blog-avail"></div>
+        </div>
+        <div class="card nl-card">
+          <p class="rt-label">Conclusion (optionnel)</p>
+          <div class="rt-toolbar" data-for="rt-blog-outro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-blog-outro" class="rt" contenteditable="true" data-ph="Mot de la fin…"></div>
+        </div>
+      </section>
+
+      <!-- LISTINGS -->
+      <section class="tmpl-panel" data-panel="listings" hidden>
+        <div class="card nl-card">
+          <div class="nl-two">
+            <label>Titre (optionnel)
+              <input id="f-list-heading" type="text" placeholder="ex. Nos biens à la une" />
+            </label>
+            <label>Type
+              <select id="f-list-kind">
+                <option value="mixte">Ventes & locations</option>
+                <option value="V">Ventes uniquement</option>
+                <option value="L">Locations uniquement</option>
+              </select>
+            </label>
+          </div>
+          <p class="rt-label">Introduction (optionnel)</p>
+          <div class="rt-toolbar" data-for="rt-list-intro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-list-intro" class="rt" contenteditable="true" data-ph="Quelques mots d’introduction…"></div>
+        </div>
+        <div class="card nl-card">
+          <p class="nl-cardtitle">Biens <small>(jusqu’à 6 — suggestion automatique modifiable)</small></p>
+          <div class="pick-selected" id="list-selected"></div>
+          <input class="pick-search" id="list-search" type="text" placeholder="Rechercher un bien (ville, code postal…)" />
+          <div class="pick-avail" id="list-avail"></div>
+        </div>
+      </section>
+
+      <!-- BROADCAST -->
+      <section class="tmpl-panel" data-panel="broadcast" hidden>
+        <div class="card nl-card">
+          <label>Image d’en-tête (URL)
+            <input id="f-bc-hero" type="url" placeholder="URL ou téléverser…" />
+          </label>
+          <div class="nl-featrow">
+            <button type="button" id="f-bc-hero-upload" class="nl-smallbtn">⬆ Téléverser une image</button>
+            <input type="file" id="f-bc-hero-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+          </div>
+          <div id="f-bc-hero-preview" class="nl-thumb"></div>
+          <label>Titre
+            <input id="f-bc-heading" type="text" placeholder="Le message principal" />
+          </label>
+          <p class="rt-label">Message</p>
+          <div class="rt-toolbar" data-for="rt-bc-body"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-bc-body" class="rt" contenteditable="true" data-ph="Votre message…"></div>
+        </div>
+        <div class="card nl-card">
+          <p class="nl-cardtitle">Bouton d’action (optionnel)</p>
+          <div class="nl-two">
+            <label>Libellé <input id="f-bc-cta-label" type="text" placeholder="ex. Demander une estimation" /></label>
+            <label>Lien <input id="f-bc-cta-url" type="url" placeholder="https://…" /></label>
+          </div>
+        </div>
+        <div class="card nl-card">
+          <p class="nl-cardtitle">Carte contact (optionnel)</p>
+          <label>Expert à afficher
+            <select id="f-bc-expert">
+              <option value="">— Aucun —</option>
+              {experts.map((e) => (
+                <option value={e.slug} data-name={e.name} data-role={e.role} data-photo={e.photo} data-phone={e.phone} data-email={e.email}>{e.name}{e.role ? ` — ${e.role}` : ''}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+      </section>
+    </div>
+
+    <!-- ── Preview + actions ────────────────────────────────────── -->
+    <aside class="nl-side">
+      <div class="nl-preview-head">
+        <span>Aperçu</span>
+        <button id="nl-refresh" class="nl-smallbtn" type="button">↻ Rafraîchir</button>
+      </div>
+      <iframe id="nl-preview" class="nl-preview" title="Aperçu de la newsletter"></iframe>
+      <div class="card nl-card" style="margin-top:14px;">
+        <p class="nl-cardtitle">Envoyer un test</p>
+        <div class="nl-testrow">
+          <input id="f-test-email" type="email" placeholder="votre@email.fr" />
+          <button id="nl-test" class="nl-smallbtn" type="button">Envoyer le test</button>
+        </div>
+        <p class="nl-hint" id="nl-send-note"></p>
+      </div>
+    </aside>
+  </div>
+</AdminLayout>
+
+<style>
+  .nl-topbar {
+    display:flex; align-items:center; gap:10px; margin:-36px -44px 26px; padding:15px 44px;
+    position:sticky; top:0; z-index:20; background:rgba(250,250,250,.85);
+    backdrop-filter:saturate(180%) blur(10px); -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--pj-hairline);
+  }
+  .nl-topbar .spacer { flex:1; }
+  .nl-savestate { font-size:12px; color:#7f9a17; font-weight:600; }
+  .nl-grid { display:grid; grid-template-columns: minmax(0,1fr) 420px; gap:24px; align-items:start; }
+  @media (max-width:1100px){ .nl-grid { grid-template-columns:1fr; } }
+  .nl-fieldlabel { font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.5px; text-transform:uppercase; color:var(--pj-ink); margin:0 0 10px; }
+  .nl-cardtitle { font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.7px; text-transform:uppercase; color:var(--pj-olive-2); margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--pj-hairline); }
+  .nl-cardtitle small { color:#9aa0a6; font-weight:400; text-transform:none; letter-spacing:normal; }
+
+  .tmpl-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+  @media (max-width:640px){ .tmpl-row { grid-template-columns:1fr; } }
+  .tmpl-card { display:block; cursor:pointer; background:#fff; border:1px solid var(--pj-hairline); border-radius:14px; padding:16px; transition:border-color .2s, box-shadow .2s; }
+  .tmpl-card input { position:absolute; opacity:0; pointer-events:none; }
+  .tmpl-card.is-active { border-color:var(--pj-olive); box-shadow:0 0 0 3px rgba(178,192,78,.18); }
+  .tmpl-card__t { display:block; font-weight:700; font-size:15px; color:#000; }
+  .tmpl-card__d { display:block; font-size:12px; color:#9aa0a6; margin-top:4px; line-height:1.4; }
+
+  .nl-card { margin-bottom:16px; padding:20px 22px; }
+  .nl-card label { display:block; margin-bottom:14px; font-family:var(--pj-noto); font-weight:700; font-size:12px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); }
+  .nl-card label:last-child { margin-bottom:0; }
+  .nl-two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:600px){ .nl-two { grid-template-columns:1fr; } }
+
+  .nl-form input[type=text], .nl-form input[type=url], .nl-form input[type=email], .nl-form select, .rt {
+    display:block; width:100%; margin-top:8px; padding:12px 15px; border:1px solid var(--pj-hairline);
+    border-radius:11px; font-family:var(--pj-noto); font-weight:400; font-size:15px; line-height:1.45; color:#000; background:#fff;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .nl-form input:focus, .nl-form select:focus, .rt:focus { outline:none; border-color:var(--pj-olive); box-shadow:0 0 0 3px rgba(178,192,78,.2); }
+  .nl-form ::placeholder { color:#b8bcb0; }
+
+  .rt-label { font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); margin:14px 0 6px; }
+  .rt-toolbar { display:flex; gap:4px; margin-bottom:0; }
+  .rt-toolbar button { min-width:30px; height:28px; border:1px solid var(--pj-hairline); border-radius:7px 7px 0 0; border-bottom:none; background:#fff; color:#3a3a3a; font-size:13px; }
+  .rt-toolbar button:hover { background:var(--pj-paper); }
+  .rt { min-height:70px; margin-top:0 !important; border-top-left-radius:0 !important; }
+  .rt:empty::before { content:attr(data-ph); color:#b8bcb0; }
+
+  /* Picker rows are built with innerHTML in client JS → they don't carry this
+     component's Astro scope attribute, so these rules MUST be :global() or the
+     image sizing (and everything else) won't apply and images render full-size. */
+  .pick-selected { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+  .pick-selected:empty::before { content:'Aucun élément sélectionné.'; color:#9aa0a6; font-size:13px; }
+  .pick-search { margin-bottom:10px; }
+  .pick-avail { max-height:230px; overflow-y:auto; border:1px solid var(--pj-hairline); border-radius:10px; }
+  :global(.pick-item) { display:flex; align-items:center; gap:10px; background:#fbfcf8; border:1px solid var(--pj-hairline); border-radius:10px; padding:8px 10px; }
+  :global(.pick-item img) { width:52px; height:40px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+  :global(.pick-item__b) { min-width:0; flex:1; }
+  :global(.pick-item__t) { font-size:13px; font-weight:600; color:#000; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  :global(.pick-item__s) { font-size:11px; color:#9aa0a6; }
+  :global(.pick-item__act) { flex-shrink:0; white-space:nowrap; }
+  :global(.pick-item__act button) { border:none; background:transparent; color:#8a8a8a; font-size:14px; padding:2px 5px; border-radius:5px; cursor:pointer; }
+  :global(.pick-item__act button:hover) { background:#eee; color:#000; }
+  :global(.pick-row) { display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid var(--pj-hairline); cursor:pointer; }
+  :global(.pick-row:last-child) { border-bottom:none; }
+  :global(.pick-row:hover) { background:#fbfcf8; }
+  :global(.pick-row.is-picked) { opacity:.45; pointer-events:none; }
+  :global(.pick-row img) { width:46px; height:34px; object-fit:cover; border-radius:5px; flex-shrink:0; }
+  :global(.pick-row__t) { font-size:13px; color:#000; flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  :global(.pick-row__add) { font-size:12px; color:var(--pj-olive-2); font-weight:700; flex-shrink:0; }
+
+  .nl-featrow { margin-bottom:12px; }
+  .nl-smallbtn { font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.4px; padding:8px 14px; border-radius:999px; border:1px solid var(--pj-hairline); background:#fff; color:#000; cursor:pointer; }
+  .nl-smallbtn:hover { background:var(--pj-paper); border-color:rgba(0,0,0,.2); }
+  .nl-thumb img { max-width:100%; max-height:150px; border-radius:10px; margin:0 0 12px; border:1px solid var(--pj-hairline); display:block; }
+  .nl-hint { font-size:11px; color:#9aa0a6; margin:10px 0 0; }
+
+  .nl-side { position:sticky; top:78px; }
+  .nl-preview-head { display:flex; align-items:center; justify-content:space-between; font-size:11px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; color:#8a8a8a; margin-bottom:8px; }
+  .nl-preview { width:100%; height:620px; border:1px solid var(--pj-hairline); border-radius:14px; background:#eef3ef; box-shadow:0 8px 22px rgba(0,0,0,.06); }
+  .nl-testrow { display:flex; gap:8px; }
+  .nl-testrow input { flex:1; margin-top:0 !important; }
+</style>
+
+<script define:vars={{ adminEmail: (Astro.locals as any).adminEmail || '' }}>
+  const $ = (id) => document.getElementById(id);
+  const testEmailEl = $('f-test-email');
+  if (adminEmail) testEmailEl.value = adminEmail;
+
+  let template = 'blog';
+  const rtState = {}; // id -> html
+
+  // ── Template switch ──
+  document.querySelectorAll('input[name="tmpl"]').forEach((r) => {
+    r.addEventListener('change', () => {
+      template = r.value;
+      document.querySelectorAll('.tmpl-card').forEach((c) => c.classList.toggle('is-active', c.contains(r)));
+      document.querySelectorAll('.tmpl-panel').forEach((p) => { p.hidden = p.dataset.panel !== template; });
+      if (template === 'blog') pickers.blog.ensureLoaded();
+      if (template === 'listings') pickers.listings.ensureLoaded();
+      schedulePreview();
+    });
+  });
+
+  // ── Minimal rich text ──
+  document.querySelectorAll('.rt-toolbar').forEach((tb) => {
+    const target = $(tb.dataset.for);
+    tb.querySelectorAll('button').forEach((b) => {
+      b.addEventListener('mousedown', (e) => {
+        e.preventDefault(); target.focus();
+        if (b.dataset.cmd === 'link') { const u = prompt('URL du lien :', 'https://'); if (u) document.execCommand('createLink', false, u); }
+        else document.execCommand(b.dataset.cmd, false, null);
+        rtState[target.id] = target.innerHTML; schedulePreview();
+      });
+    });
+    target.addEventListener('input', () => { rtState[target.id] = target.innerHTML; schedulePreview(); });
+  });
+  const rt = (id) => (rtState[id] || '').trim();
+
+  // ── Generic picker (articles + listings) ──
+  function makePicker({ kind, endpoint, max, selEl, availEl, searchEl, extraParam }) {
+    let available = [];
+    const selected = [];
+    let loaded = false;
+
+    function renderSelected() {
+      selEl.innerHTML = '';
+      selected.forEach((it, i) => {
+        const row = document.createElement('div'); row.className = 'pick-item';
+        row.innerHTML =
+          (it.imageUrl ? `<img src="${it.imageUrl}" alt="">` : '') +
+          `<div class="pick-item__b"><div class="pick-item__t">${it.title}</div><div class="pick-item__s">${it.sub || ''}</div></div>` +
+          `<div class="pick-item__act">
+             <button data-up title="Monter">▲</button>
+             <button data-down title="Descendre">▼</button>
+             <button data-rm title="Retirer">✕</button>
+           </div>`;
+        row.querySelector('[data-up]').onclick = () => { if (i > 0) { [selected[i-1], selected[i]] = [selected[i], selected[i-1]]; renderSelected(); renderAvail(); schedulePreview(); } };
+        row.querySelector('[data-down]').onclick = () => { if (i < selected.length-1) { [selected[i+1], selected[i]] = [selected[i], selected[i+1]]; renderSelected(); renderAvail(); schedulePreview(); } };
+        row.querySelector('[data-rm]').onclick = () => { selected.splice(i,1); renderSelected(); renderAvail(); schedulePreview(); };
+        selEl.appendChild(row);
+      });
+    }
+    function renderAvail() {
+      const q = (searchEl.value || '').toLowerCase();
+      const pickedSlugs = new Set(selected.map((s) => s.slug));
+      availEl.innerHTML = '';
+      available.filter((it) => !q || `${it.title} ${it.sub || ''}`.toLowerCase().includes(q)).slice(0, 60).forEach((it) => {
+        const row = document.createElement('div');
+        row.className = 'pick-row' + (pickedSlugs.has(it.slug) ? ' is-picked' : '');
+        row.innerHTML = (it.imageUrl ? `<img src="${it.imageUrl}" alt="">` : '') + `<span class="pick-row__t">${it.title}</span><span class="pick-row__add">＋ Ajouter</span>`;
+        row.onclick = () => {
+          if (selected.length >= max) { alert(`Maximum ${max} éléments.`); return; }
+          selected.push(it); renderSelected(); renderAvail(); schedulePreview();
+        };
+        availEl.appendChild(row);
+      });
+    }
+    searchEl.addEventListener('input', renderAvail);
+
+    async function load() {
+      availEl.innerHTML = '<div style="padding:14px;color:#9aa0a6;font-size:13px;">Chargement…</div>';
+      try {
+        const p = new URLSearchParams({ limit: '60' });
+        if (extraParam) extraParam(p);
+        const res = await fetch(`${endpoint}?${p.toString()}`);
+        const json = await res.json();
+        available = (kind === 'listings' ? (json.items || []) : json).map(normalize);
+        loaded = true;
+        // auto-suggest: preselect first N if nothing chosen yet
+        if (!selected.length) { available.slice(0, kind === 'listings' ? 4 : 3).forEach((it) => selected.push(it)); }
+        renderSelected(); renderAvail(); schedulePreview();
+      } catch (e) { availEl.innerHTML = `<div style="padding:14px;color:var(--danger);font-size:13px;">Erreur de chargement.</div>`; }
+    }
+    function normalize(it) {
+      if (kind === 'listings') {
+        return { slug: it.slug, title: it.title, sub: [it.price, [it.postalCode, it.city].filter(Boolean).join(' ')].filter(Boolean).join(' · '),
+                 imageUrl: it.imageUrl, url: it.url, price: it.price, city: it.city, postalCode: it.postalCode, surface: it.surface, rooms: it.rooms, kind: it.kind };
+      }
+      return { slug: it.slug, title: it.title, sub: it.date || '', imageUrl: it.featuredImage, url: it.url, excerpt: it.excerpt };
+    }
+    return {
+      ensureLoaded: () => { if (!loaded) load(); },
+      reload: load,
+      getSelected: () => selected.slice(),
+    };
+  }
+
+  const pickers = {
+    blog: makePicker({ kind: 'blog', endpoint: '/api/admin-pujol/newsletter/articles/', max: 3,
+      selEl: $('blog-selected'), availEl: $('blog-avail'), searchEl: $('blog-search') }),
+    listings: makePicker({ kind: 'listings', endpoint: '/api/admin-pujol/newsletter/listings/', max: 6,
+      selEl: $('list-selected'), availEl: $('list-avail'), searchEl: $('list-search'),
+      extraParam: (p) => { const k = $('f-list-kind').value; if (k === 'V' || k === 'L') p.set('kind', k); } }),
+  };
+  $('f-list-kind').addEventListener('change', () => pickers.listings.reload());
+
+  // ── Hero upload (reuses the blog R2 upload endpoint) ──
+  const heroPrev = $('f-bc-hero-preview');
+  const renderHero = () => { const u = $('f-bc-hero').value.trim(); heroPrev.innerHTML = u ? `<img src="${u}" alt="">` : ''; };
+  $('f-bc-hero').addEventListener('input', () => { renderHero(); schedulePreview(); });
+  $('f-bc-hero-upload').addEventListener('click', () => $('f-bc-hero-file').click());
+  $('f-bc-hero-file').addEventListener('change', async () => {
+    const f = $('f-bc-hero-file').files[0]; $('f-bc-hero-file').value = ''; if (!f) return;
+    setStatus('Téléversement…');
+    try {
+      const fd = new FormData(); fd.append('file', f);
+      const res = await fetch('/api/admin-pujol/articles/upload-image/', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error(await res.text());
+      $('f-bc-hero').value = (await res.json()).url; renderHero(); setStatus('Image ajoutée ✓'); schedulePreview();
+    } catch (e) { setStatus(''); alert('Échec du téléversement : ' + e.message); }
+  });
+
+  // ── Build the template-specific data payload ──
+  const v = (id) => ($(id).value || '').trim();
+  function buildData() {
+    if (template === 'listings') {
+      return {
+        subject: v('f-subject'), preheader: v('f-preheader'), heading: v('f-list-heading'),
+        intro: rt('rt-list-intro'), kind: $('f-list-kind').value,
+        listings: pickers.listings.getSelected().map((l) => ({
+          title: l.title, url: l.url, price: l.price, city: l.city, postalCode: l.postalCode,
+          surface: l.surface, rooms: l.rooms, imageUrl: l.imageUrl, kind: l.kind,
+        })),
+      };
+    }
+    if (template === 'broadcast') {
+      const opt = $('f-bc-expert').selectedOptions[0];
+      const expert = opt && opt.value ? { name: opt.dataset.name, role: opt.dataset.role, photo: opt.dataset.photo, phone: opt.dataset.phone, email: opt.dataset.email } : undefined;
+      return {
+        subject: v('f-subject'), preheader: v('f-preheader'), heroImage: v('f-bc-hero'),
+        heading: v('f-bc-heading'), body: rt('rt-bc-body'),
+        ctaLabel: v('f-bc-cta-label'), ctaUrl: v('f-bc-cta-url'), expert,
+      };
+    }
+    // blog
+    return {
+      subject: v('f-subject'), preheader: v('f-preheader'), heading: v('f-blog-heading'),
+      intro: rt('rt-blog-intro'), outro: rt('rt-blog-outro'),
+      articles: pickers.blog.getSelected().map((a) => ({ title: a.title, url: a.url, excerpt: a.excerpt, imageUrl: a.imageUrl, slug: a.slug })),
+    };
+  }
+
+  // ── Live preview (debounced) ──
+  let previewTimer = null;
+  function schedulePreview() { clearTimeout(previewTimer); previewTimer = setTimeout(refreshPreview, 450); }
+  async function refreshPreview() {
+    try {
+      const res = await fetch('/api/admin-pujol/newsletter/preview/', {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ template, data: buildData() }),
+      });
+      const html = await res.text();
+      $('nl-preview').srcdoc = html;
+    } catch (e) { /* ignore transient */ }
+  }
+  $('nl-refresh').addEventListener('click', refreshPreview);
+  ['f-subject','f-preheader','f-blog-heading','f-list-heading','f-bc-heading','f-bc-cta-label','f-bc-cta-url'].forEach((id) => $(id).addEventListener('input', schedulePreview));
+  $('f-bc-expert').addEventListener('change', schedulePreview);
+
+  function setStatus(msg) { $('nl-status').textContent = msg; }
+
+  // ── Test / Save / Send ──
+  $('nl-test').addEventListener('click', async () => {
+    const email = testEmailEl.value.trim(); if (!email) { alert('Indiquez une adresse de test.'); return; }
+    setStatus('Envoi du test…');
+    const res = await fetch('/api/admin-pujol/newsletter/test/', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ template, subject: v('f-subject') || 'Newsletter', data: buildData(), testEmail: email }),
+    });
+    const j = await res.json().catch(() => ({}));
+    setStatus('');
+    if (res.ok) alert('Test envoyé ✓');
+    else alert('Test non envoyé : ' + (j.error || res.status));
+  });
+
+  $('nl-save').addEventListener('click', async () => {
+    if (!v('f-subject')) { alert('Renseignez l’objet.'); return; }
+    setStatus('Enregistrement…');
+    const res = await fetch('/api/admin-pujol/newsletter/', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData() }),
+    });
+    setStatus('');
+    if (res.ok) { setStatus('Brouillon enregistré ✓'); }
+    else alert('Échec de l’enregistrement.');
+  });
+
+  $('nl-send').addEventListener('click', async () => {
+    if (!v('f-subject')) { alert('Renseignez l’objet.'); return; }
+    if (!confirm('Envoyer cette newsletter à toute la liste ?')) return;
+    setStatus('Envoi…'); $('nl-send').disabled = true;
+    const res = await fetch('/api/admin-pujol/newsletter/send/', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData() }),
+    });
+    const j = await res.json().catch(() => ({}));
+    $('nl-send').disabled = false; setStatus('');
+    if (res.ok && j.ok) { alert('Newsletter envoyée ✓'); window.location.href = './'; }
+    else if (res.status === 501) { $('nl-send-note').textContent = j.error || 'Envoi non configuré.'; alert('Brouillon enregistré. ' + (j.error || 'Envoi non configuré (Brevo à provisionner).')); }
+    else alert('Échec de l’envoi : ' + (j.error || res.status));
+  });
+
+  // initial load
+  pickers.blog.ensureLoaded();
+</script>

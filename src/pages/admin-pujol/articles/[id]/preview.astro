@@ -1,0 +1,95 @@
+---
+export const prerender = false;
+import { getDB, ensureSchema, getArticle } from '../../../../lib/blog-db';
+
+const SITE = 'https://www.immobiliere-pujol.fr';
+const db = await getDB();
+await ensureSchema(db);
+const article = await getArticle(db, Number(Astro.params.id));
+if (!article) return Astro.redirect('../../');
+
+// Effective SEO/OG values (mirror the fallback logic the public render should use)
+const metaTitle = article.seo_title || article.title;
+const metaDesc = article.seo_description || article.excerpt;
+const canonical = article.canonical_url || `${SITE}/${article.slug}/`;
+const robots = `${article.noindex ? 'noindex' : 'index'},${article.nofollow ? 'nofollow' : 'follow'}`;
+const ogTitle = article.og_title || metaTitle;
+const ogDesc = article.og_description || metaDesc;
+const ogImage = article.og_image || article.featured_image;
+const twitterCard = article.twitter_card || 'summary_large_image';
+
+const dateStr = article.article_date || article.published_at || article.updated_at;
+const dateFmt = dateStr ? new Date(dateStr).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{metaTitle}</title>
+  {metaDesc && <meta name="description" content={metaDesc} />}
+  <meta name="robots" content={robots} />
+  <link rel="canonical" href={canonical} />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={ogTitle} />
+  {ogDesc && <meta property="og:description" content={ogDesc} />}
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content={twitterCard} />
+  {article.focus_keyword && <meta name="keywords" content={article.focus_keyword} />}
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="pv-banner">
+    Aperçu — <b>{article.status === 'published' ? 'Publié' : 'Brouillon'}</b> · rendu public + méta SEO
+    <a href="../edit/">← Retour à l’édition</a>
+  </div>
+
+  <details class="pv-seo">
+    <summary>Détails SEO &amp; réseaux sociaux (valeurs effectives)</summary>
+    <table>
+      <tr><td>Titre SEO</td><td>{metaTitle}</td></tr>
+      <tr><td>Méta-description</td><td>{metaDesc || '—'}</td></tr>
+      <tr><td>URL canonique</td><td>{canonical}</td></tr>
+      <tr><td>Robots</td><td>{robots}</td></tr>
+      <tr><td>Mot-clé principal</td><td>{article.focus_keyword || '—'}</td></tr>
+      <tr><td>OG titre</td><td>{ogTitle}</td></tr>
+      <tr><td>OG description</td><td>{ogDesc || '—'}</td></tr>
+      <tr><td>OG image</td><td>{ogImage ? <a href={ogImage} target="_blank">{ogImage}</a> : '—'}</td></tr>
+      <tr><td>Carte Twitter/X</td><td>{twitterCard}</td></tr>
+    </table>
+  </details>
+
+  <article class="pv-article">
+    <p class="pv-eyebrow">{(article.categories[0] || 'Blog')}</p>
+    <h1>{article.title}</h1>
+    <p class="pv-meta">{article.author || 'Immobilière Pujol'}{dateFmt ? ` · ${dateFmt}` : ''}</p>
+    {article.featured_image && <img class="pv-hero" src={article.featured_image} alt={article.title} />}
+    <div class="pv-body" set:html={article.body_html}></div>
+  </article>
+
+  <style is:global>
+    body { margin:0; background:#f4f6f2; font-family:"Noto Sans",sans-serif; color:#1f2a30; }
+    .pv-banner { background:#566770; color:#fff; font-size:13px; padding:10px 20px; text-align:center; position:sticky; top:0; z-index:10; }
+    .pv-banner a { color:#cfe08a; margin-left:14px; text-decoration:none; font-weight:700; }
+    .pv-seo { max-width:760px; margin:16px auto 0; background:#fff; border:1px solid rgba(0,0,0,.1); border-radius:12px; padding:6px 18px; font-size:13px; }
+    .pv-seo summary { cursor:pointer; font-weight:700; padding:8px 0; color:#566770; }
+    .pv-seo table { width:100%; border-collapse:collapse; margin:6px 0 10px; }
+    .pv-seo td { padding:7px 8px; border-top:1px solid #eee; vertical-align:top; word-break:break-word; }
+    .pv-seo td:first-child { color:#8a8f98; width:170px; font-weight:600; }
+    .pv-article { max-width:760px; margin:0 auto; padding:30px 24px 90px; }
+    .pv-eyebrow { text-transform:uppercase; letter-spacing:.8px; font-size:12px; font-weight:700; color:#a6b352; margin:0 0 12px; }
+    .pv-article h1 { font-family:"Helvetica Neue",Helvetica,sans-serif; font-weight:300; font-size:42px; line-height:1.1; margin:0 0 12px; color:#000; }
+    .pv-meta { color:#8a8a8a; font-size:14px; margin:0 0 26px; }
+    .pv-hero { width:100%; border-radius:16px; margin:0 0 30px; }
+    .pv-body { font-weight:300; font-size:17px; line-height:1.8; }
+    .pv-body h2 { font-family:"Helvetica Neue",Helvetica,sans-serif; font-weight:700; font-size:27px; margin:1.5em 0 .4em; }
+    .pv-body h3 { font-family:"Helvetica Neue",Helvetica,sans-serif; font-weight:700; font-size:21px; margin:1.3em 0 .3em; }
+    .pv-body img { max-width:100%; height:auto; border-radius:10px; margin:16px 0; }
+    .pv-body a { color:#7f9a17; }
+    .pv-body blockquote { border-left:3px solid #a6b352; margin:1.2em 0; padding:.3em 1.2em; color:#555; font-style:italic; }
+    .pv-body ul, .pv-body ol { padding-left:1.3em; }
+    .pv-body li { margin:.35em 0; }
+  </style>
+</body>
+</html>

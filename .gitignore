@@ -33,3 +33,6 @@ pnpm-debug.log*
 
 # generated at build by scripts/build-home-data.mjs
 src/data/home.json
+
+# Local dev secrets (never commit)
+.dev.vars

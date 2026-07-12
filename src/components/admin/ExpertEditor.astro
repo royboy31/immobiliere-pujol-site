@@ -1,0 +1,443 @@
+---
+// Shared expert editor (create + edit). WYSIWYG bio with an HTML-source toggle,
+// structured profile / contact / visibility fields, SEO controls with a live
+// Google-SERP preview, and R2 photo upload. Mirrors ArticleEditor.astro. All
+// persistence goes through /api/admin-pujol/experts.
+import type { ExpertRecord } from '../../lib/experts-db';
+
+interface Props { expert?: ExpertRecord | null }
+const { expert = null } = Astro.props;
+const isNew = !expert;
+
+// Full set present in the data. Only Direction/Vente/Gestion locative/Syndic are
+// grouped on the public /experts/ index; the rest (Contentieux, Accueil,
+// Comptabilité) are typically hidden=true but must stay editable without loss.
+const DEPARTMENTS = ['Direction', 'Vente', 'Gestion locative', 'Syndic', 'Contentieux', 'Accueil', 'Comptabilité'];
+
+const initial: ExpertRecord = expert ?? {
+  id: 0, slug: '', title: '', fonction: '', description: '', photo: '',
+  phone: '', email: '', email_aliases: [], linkedin: '', facebook: '', instagram: '',
+  seo_title: '', seo_description: '', department: '', sort_order: null, agenda: '', secteur: '',
+  hidden: false, listing_only: false, created_by: '', created_at: '', updated_at: '',
+};
+---
+
+<div class="ed-topbar">
+  <a href={isNew ? '../' : '../../'} class="btn btn--ghost">← Retour</a>
+  <span class="spacer"></span>
+  <span id="ed-status" class="ed-savestate"></span>
+  {!isNew && initial.slug && !initial.listing_only && (
+    <a href={`/experts/${initial.slug}/`} target="_blank" class="btn btn--ghost">Voir la page ↗</a>
+  )}
+  <button id="ed-save" class="btn btn--primary">Enregistrer</button>
+</div>
+
+<div class="ed-grid">
+  <div class="ed-main">
+    <input id="f-title" type="text" class="ed-title-input" placeholder="Prénom Nom – Rôle" value={initial.title} />
+    <input id="f-fonction" type="text" class="ed-fonction-input" placeholder="Petite accroche (ex. « La patronne »)" value={initial.fonction} />
+
+    <p class="ed-fieldlabel">Biographie</p>
+    <div class="ed-toolbar" id="ed-toolbar">
+      <button type="button" data-cmd="formatBlock" data-val="h3" title="Titre 3"><b>H3</b></button>
+      <button type="button" data-cmd="formatBlock" data-val="h4" title="Titre 4"><b>H4</b></button>
+      <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraphe">¶</button>
+      <span class="sep"></span>
+      <button type="button" data-cmd="bold" title="Gras"><b>B</b></button>
+      <button type="button" data-cmd="italic" title="Italique"><i>I</i></button>
+      <button type="button" data-cmd="insertUnorderedList" title="Liste">• —</button>
+      <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Citation">❝</button>
+      <span class="sep"></span>
+      <button type="button" data-style="expert-bio-quote" title="Chapô / citation en exergue">« Chapô »</button>
+      <button type="button" data-style="expert-bio-spec" title="Ligne de spécialité">★ Spécialité</button>
+      <span class="sep"></span>
+      <button type="button" id="ed-link" title="Lien">🔗</button>
+      <button type="button" id="ed-image" title="Insérer une image">🖼️</button>
+      <span class="spacer"></span>
+      <button type="button" id="ed-toggle-src" class="ed-srcbtn">&lt;/&gt; Source HTML</button>
+    </div>
+
+    <div id="ed-body" class="ed-body" contenteditable="true" set:html={initial.description}></div>
+    <textarea id="ed-source" class="ed-source" spellcheck="false" style="display:none;"></textarea>
+    <p class="ed-imghint">« Chapô » et « Spécialité » appliquent les styles de la fiche publique. Astuce : glissez-déposez / collez une image dans le corps.</p>
+    <input type="file" id="ed-image-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+
+    <!-- ── SEO panel ─────────────────────────────────────────────────── -->
+    <div class="card ed-seo">
+      <p class="ed-paneltitle">Référencement (SEO) — aperçu Google</p>
+      <div class="serp">
+        <div class="serp__crumb"><span>immobiliere-pujol.fr</span><span id="serp-path"></span></div>
+        <div class="serp__title" id="serp-title">Nom de l’expert</div>
+        <div class="serp__desc" id="serp-desc">La méta-description apparaîtra ici…</div>
+      </div>
+      <label>Titre SEO (balise title)
+        <input id="f-seotitle" type="text" value={initial.seo_title} placeholder={initial.title || 'Titre affiché dans Google'} maxlength="120" />
+        <span class="counter" id="c-seotitle"></span>
+      </label>
+      <label>Méta-description
+        <textarea id="f-seodesc" class="ed-plain" style="min-height:80px;" maxlength="320">{initial.seo_description}</textarea>
+        <span class="counter" id="c-seodesc"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────── -->
+  <aside class="ed-side">
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Profil</p>
+      <label>Département
+        <select id="f-department">
+          <option value="">— Aucun —</option>
+          {(initial.department && !DEPARTMENTS.includes(initial.department)
+            ? [initial.department, ...DEPARTMENTS] : DEPARTMENTS).map((d) => (
+            <option value={d} selected={initial.department === d}>{d}</option>
+          ))}
+        </select>
+      </label>
+      <label>Ordre d’affichage
+        <input id="f-order" type="number" value={initial.sort_order ?? ''} placeholder="ex. 1 (plus petit = plus haut)" />
+      </label>
+      <label>Secteur couvert
+        <input id="f-secteur" type="text" value={initial.secteur} placeholder="ex. Marseille Est & Nord : 13011, 13012" />
+      </label>
+      <label>Slug (URL)
+        <input id="f-slug" type="text" value={initial.slug} placeholder="généré depuis le nom" />
+      </label>
+      {!isNew && <small class="ed-hint">Modifier le slug change l’URL publique — à éviter pour le référencement.</small>}
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Photo</p>
+      <label>URL de la photo
+        <input id="f-photo" type="url" value={initial.photo} placeholder="URL ou téléverser…" />
+      </label>
+      <div class="ed-featrow">
+        <button type="button" id="f-photo-upload" class="ed-smallbtn">⬆ Téléverser une photo</button>
+        <input type="file" id="f-photo-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+      </div>
+      <div id="f-photo-preview" class="ed-thumb"></div>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Coordonnées</p>
+      <label>Téléphone
+        <input id="f-phone" type="text" value={initial.phone} placeholder="06 12 34 56 78" />
+      </label>
+      <label>Email
+        <input id="f-email" type="text" value={initial.email} placeholder="prenom@immobiliere-pujol.fr" />
+      </label>
+      <label>Emails alias (séparés par des virgules)
+        <input id="f-aliases" type="text" value={initial.email_aliases.join(', ')} placeholder="pour la correspondance des annonces" />
+        <small class="ed-hint">Autres emails du flux qui pointent vers cet expert.</small>
+      </label>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Réseaux &amp; rendez-vous</p>
+      <label>LinkedIn
+        <input id="f-linkedin" type="url" value={initial.linkedin} placeholder="https://linkedin.com/in/…" />
+      </label>
+      <label>Facebook
+        <input id="f-facebook" type="url" value={initial.facebook} placeholder="https://facebook.com/…" />
+      </label>
+      <label>Instagram
+        <input id="f-instagram" type="url" value={initial.instagram} placeholder="https://instagram.com/…" />
+      </label>
+      <label>Agenda (prise de rendez-vous)
+        <input id="f-agenda" type="url" value={initial.agenda} placeholder="URL Google Calendar…" />
+      </label>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Visibilité</p>
+      <label class="chk"><input id="f-hidden" type="checkbox" checked={initial.hidden} /> Masqué du listing <small>(garde la fiche, retire la carte de /experts/)</small></label>
+      <label class="chk"><input id="f-listingonly" type="checkbox" checked={initial.listing_only} /> Photo seule sur les annonces <small>(pas de fiche, exclu de /experts/)</small></label>
+    </div>
+  </aside>
+</div>
+
+<style>
+  .ed-topbar {
+    display:flex; align-items:center; gap:10px;
+    margin:-36px -44px 26px; padding:15px 44px;
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,250,250,.82); backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--pj-hairline);
+  }
+  .ed-topbar .spacer { flex:1; }
+  .ed-savestate { font-size:12px; color:#7f9a17; font-weight:600; transition:opacity .2s; }
+  .ed-cardtitle {
+    font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.7px;
+    text-transform:uppercase; color:var(--pj-olive-2); margin:0 0 15px;
+    padding-bottom:11px; border-bottom:1px solid var(--pj-hairline);
+  }
+  .ed-grid { display:grid; grid-template-columns: minmax(0,1fr) 340px; gap:24px; align-items:start; }
+  @media (max-width: 960px) { .ed-grid { grid-template-columns: 1fr; } }
+  .ed-title-input {
+    font-family: var(--pj-helv); font-weight:300; font-size:30px; color:#000;
+    border:none; border-bottom:2px solid var(--pj-hairline); border-radius:0;
+    padding:6px 2px 12px; margin-bottom:10px; width:100%; background:transparent;
+  }
+  .ed-title-input:focus { outline:none; border-bottom-color: var(--pj-olive); box-shadow:none; }
+  .ed-title-input::placeholder { color:#c8c8c8; font-weight:300; }
+  .ed-fonction-input {
+    font-family: var(--pj-noto); font-weight:400; font-size:16px; color:#5c6a10; font-style:italic;
+    border:none; border-bottom:1px solid var(--pj-hairline); border-radius:0;
+    padding:4px 2px 8px; margin-bottom:22px; width:100%; background:transparent;
+  }
+  .ed-fonction-input:focus { outline:none; border-bottom-color: var(--pj-olive); }
+  .ed-fonction-input::placeholder { color:#c8c8c8; font-style:italic; }
+  .ed-fieldlabel {
+    font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.5px;
+    text-transform:uppercase; color:var(--pj-ink); margin:0 0 8px;
+  }
+  .ed-toolbar {
+    display:flex; align-items:center; gap:4px; flex-wrap:wrap;
+    background:#fff; border:1px solid var(--pj-hairline); border-radius:14px 14px 0 0;
+    padding:9px 12px; border-bottom:none;
+    box-shadow:0 4px 14px rgba(0,0,0,.04);
+  }
+  .ed-toolbar button {
+    min-width:34px; height:32px; padding:0 9px; border:1px solid transparent; border-radius:8px;
+    background:transparent; color:#3a3a3a; font-size:14px; line-height:1; transition:background .15s,border-color .15s,color .15s;
+  }
+  .ed-toolbar button[data-style] { font-size:12px; font-weight:600; color:#5c6a10; }
+  .ed-toolbar button:hover { background: var(--pj-paper); border-color:var(--pj-hairline); color:#000; }
+  .ed-toolbar button:active { background:#e6ecd8; }
+  .ed-toolbar .sep { width:1px; height:20px; background:var(--pj-hairline); margin:0 5px; }
+  .ed-toolbar .spacer { flex:1; }
+  .ed-srcbtn { font-family: ui-monospace, monospace; font-size:12px !important; color:#666 !important; }
+  .ed-srcbtn.is-active { background: var(--pj-slate) !important; color:#fff !important; }
+  .ed-body, .ed-source {
+    background:#fff; border:1px solid var(--pj-hairline); border-radius:0 0 14px 14px;
+    padding:26px 30px; min-height:420px; font-family: var(--pj-noto); font-weight:300;
+    font-size:16px; line-height:1.75; color:#1f2a30;
+    box-shadow:0 8px 22px rgba(0,0,0,.05);
+  }
+  .ed-body:focus { outline:none; box-shadow: inset 0 0 0 2px rgba(178,192,78,.25); }
+  .ed-body :global(h3) { font-family: var(--pj-helv); font-weight:700; font-size:21px; margin:1.2em 0 .35em; }
+  .ed-body :global(h4) { font-family: var(--pj-helv); font-weight:700; font-size:17px; margin:1.1em 0 .3em; }
+  .ed-body :global(img) { max-width:100%; height:auto; border-radius:8px; margin:12px 0; }
+  .ed-body :global(blockquote) { border-left:3px solid var(--pj-olive); margin:1em 0; padding:.2em 1em; color:#555; }
+  .ed-body :global(a) { color: var(--pj-olive-2); text-decoration: underline; }
+  .ed-body :global(.expert-bio-quote) { font-family: var(--pj-helv); font-style:italic; font-size:19px; color:#3a3a3a; border-left:3px solid var(--pj-olive); padding-left:14px; margin:0 0 1em; }
+  .ed-body :global(.expert-bio-spec) { font-weight:700; color:#5c6a10; text-transform:none; margin:0 0 1em; }
+  .ed-source { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size:13px; line-height:1.6; color:#1f2a30; width:100%; resize:vertical; }
+  .ed-imghint { font-size:12px; color:#9aa0a6; margin:8px 2px 0; }
+  .ed-body.is-dragover { box-shadow: inset 0 0 0 2px var(--pj-olive); }
+
+  /* SEO panel */
+  .ed-seo { margin-top:22px; padding:24px 26px; }
+  .ed-paneltitle { display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.6px; text-transform:uppercase; color:#8a8a8a; font-weight:700; margin:0 0 14px; }
+  .ed-paneltitle::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--pj-olive); flex-shrink:0; }
+  .counter { display:block; font-size:11px; font-weight:400; letter-spacing:normal; text-transform:none; margin-top:4px; color:#9aa0a6; }
+  .counter.ok { color:#5c6a10; } .counter.warn { color:#b8860b; } .counter.bad { color:#c0392b; }
+
+  /* Google SERP preview */
+  .serp { border:1px solid var(--pj-hairline); border-radius:10px; padding:14px 16px; margin-bottom:18px; background:#fff; max-width:600px; }
+  .serp__crumb { font-size:12px; color:#202124; line-height:1.3; }
+  .serp__crumb #serp-path { color:#5f6368; }
+  .serp__title { color:#1a0dab; font-size:19px; line-height:1.3; margin:2px 0 3px; font-family:Arial,sans-serif; }
+  .serp__desc { color:#4d5156; font-size:13px; line-height:1.5; font-family:Arial,sans-serif; }
+
+  .ed-card { margin-bottom:16px; padding:20px 22px; }
+  .ed-card label { margin-bottom:14px; }
+  .ed-card label:last-child { margin-bottom:0; }
+
+  /* ── Form fields ──────────────────────────────────────────────────
+     AdminLayout's input styling is Astro-scoped to the layout, so it does
+     NOT reach these slotted fields. Without the rule below, text / url /
+     number / textarea inputs fall back to small, unstyled browser defaults. */
+  .ed-side input[type=text], .ed-side input[type=url], .ed-side input[type=email],
+  .ed-side input[type=number], .ed-side textarea, .ed-side select,
+  .ed-seo  input[type=text], .ed-seo  input[type=url], .ed-seo  input[type=email],
+  .ed-seo  input[type=number], .ed-seo  textarea, .ed-seo  select {
+    display:block; width:100%; margin-top:8px;
+    padding:12px 15px;
+    border:1px solid var(--pj-hairline); border-radius:11px;
+    font-family:var(--pj-noto); font-weight:400; font-size:15px; line-height:1.45;
+    color:#000; background:#fff;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .ed-side input[type=text]:focus, .ed-side input[type=url]:focus, .ed-side input[type=email]:focus,
+  .ed-side input[type=number]:focus, .ed-side textarea:focus, .ed-side select:focus,
+  .ed-seo  input[type=text]:focus, .ed-seo  input[type=url]:focus, .ed-seo  input[type=email]:focus,
+  .ed-seo  input[type=number]:focus, .ed-seo  textarea:focus, .ed-seo  select:focus {
+    outline:none; border-color:var(--pj-olive); box-shadow:0 0 0 3px rgba(178,192,78,.2);
+  }
+  .ed-side ::placeholder, .ed-seo ::placeholder { color:#b8bcb0; }
+  .ed-plain { font-family: var(--pj-noto) !important; font-weight:400; }
+  .ed-hint { display:block; color:#9aa0a6; font-size:11px; margin-top:6px; text-transform:none; letter-spacing:normal; font-weight:400; }
+  .ed-thumb img { max-width:100%; max-height:180px; border-radius:10px; margin-top:8px; border:1px solid var(--pj-hairline); display:block; }
+  .ed-featrow { margin-bottom:10px; }
+  .ed-smallbtn { font-family: var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.4px; padding:8px 14px; border-radius:999px; border:1px solid var(--pj-hairline); background:#fff; color:#000; cursor:pointer; transition:background .2s,border-color .2s; }
+  .ed-smallbtn:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
+  .chk { display:flex; align-items:flex-start; gap:8px; margin-bottom:14px; text-transform:none; letter-spacing:normal; font-weight:600; font-size:13px; color:#333; }
+  .chk:last-child { margin-bottom:0; }
+  .chk input { width:auto; margin:3px 0 0; flex-shrink:0; }
+  .chk small { display:block; color:#9aa0a6; font-weight:400; margin-top:2px; }
+</style>
+
+<script define:vars={{ initial, isNew }}>
+  const $ = (id) => document.getElementById(id);
+  const body = $('ed-body'), source = $('ed-source');
+  let sourceMode = false;
+  let slugTouched = !isNew && !!initial.slug;
+
+  // ── Toolbar (exec commands) ──
+  document.querySelectorAll('#ed-toolbar button[data-cmd]').forEach((btn) => {
+    btn.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const cmd = btn.dataset.cmd, val = btn.dataset.val;
+      if (cmd === 'formatBlock') document.execCommand('formatBlock', false, val);
+      else document.execCommand(cmd, false, null);
+    });
+  });
+  // ── Special paragraph styles (chapô / spécialité) ──
+  document.querySelectorAll('#ed-toolbar button[data-style]').forEach((btn) => {
+    btn.addEventListener('mousedown', (e) => { e.preventDefault(); styleBlock(btn.dataset.style); });
+  });
+  function styleBlock(cls) {
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount || !body.contains(sel.anchorNode)) return;
+    let node = sel.anchorNode;
+    if (node.nodeType === 3) node = node.parentNode;
+    while (node && node !== body && !/^(P|H3|H4|BLOCKQUOTE|DIV|LI)$/.test(node.tagName)) node = node.parentNode;
+    if (!node || node === body) { document.execCommand('formatBlock', false, 'p'); node = window.getSelection().anchorNode; if (node.nodeType === 3) node = node.parentNode; }
+    if (!node || node === body) return;
+    const had = node.classList.contains(cls);
+    node.classList.remove('expert-bio-quote', 'expert-bio-spec');
+    if (!had) node.classList.add(cls);
+  }
+  $('ed-link').addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    const url = prompt('URL du lien :', 'https://');
+    if (url) document.execCommand('createLink', false, url);
+  });
+
+  // ── Source HTML toggle ──
+  $('ed-toggle-src').addEventListener('click', () => {
+    sourceMode = !sourceMode;
+    $('ed-toggle-src').classList.toggle('is-active', sourceMode);
+    if (sourceMode) { source.value = body.innerHTML; body.style.display = 'none'; source.style.display = 'block'; }
+    else { body.innerHTML = source.value; source.style.display = 'none'; body.style.display = 'block'; }
+  });
+
+  // ── Slug auto-gen (from the name half of the title) ──
+  const slugify = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 96);
+  const nameHalf = (t) => ((t || '').split('|').pop() || '').split(/\s+[–-]\s+/)[0].trim();
+  $('f-title').addEventListener('input', () => {
+    if (!slugTouched) $('f-slug').value = slugify(nameHalf($('f-title').value));
+    updateSerp(); updatePlaceholders();
+  });
+  $('f-slug').addEventListener('input', () => { slugTouched = true; updateSerp(); });
+
+  // ── Image upload helpers ──
+  async function uploadFile(file) {
+    const fd = new FormData(); fd.append('file', file);
+    const res = await fetch('/api/admin-pujol/experts/upload-image/', { method: 'POST', body: fd });
+    if (!res.ok) throw new Error((await res.text()) || res.status);
+    return (await res.json()).url;
+  }
+  function wireUpload(btnId, fileId, onUrl) {
+    $(btnId).addEventListener('click', () => $(fileId).click());
+    $(fileId).addEventListener('change', async () => {
+      const f = $(fileId).files && $(fileId).files[0]; $(fileId).value = '';
+      if (!f) return;
+      setState('Téléversement…', true);
+      try { onUrl(await uploadFile(f)); setState('Image ajoutée ✓', false); }
+      catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
+    });
+  }
+
+  // ── Body image (button + paste + drop) ──
+  const imgFileInput = $('ed-image-file');
+  let savedRange = null;
+  const saveRange = () => { const s = window.getSelection(); if (s && s.rangeCount && body.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange(); };
+  body.addEventListener('mouseup', saveRange); body.addEventListener('keyup', saveRange);
+  $('ed-image').addEventListener('mousedown', (e) => { e.preventDefault(); saveRange(); imgFileInput.click(); });
+  imgFileInput.addEventListener('change', () => { const f = imgFileInput.files && imgFileInput.files[0]; imgFileInput.value = ''; if (f) handleBodyImage(f); });
+  body.addEventListener('paste', (e) => {
+    const items = e.clipboardData && e.clipboardData.items; if (!items) return;
+    for (const it of items) if (it.type && it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) handleBodyImage(f); return; }
+  });
+  body.addEventListener('dragover', (e) => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files')) { e.preventDefault(); body.classList.add('is-dragover'); } });
+  body.addEventListener('dragleave', () => body.classList.remove('is-dragover'));
+  body.addEventListener('drop', (e) => { body.classList.remove('is-dragover'); const files = e.dataTransfer && e.dataTransfer.files; if (files && files.length && files[0].type.startsWith('image/')) { e.preventDefault(); handleBodyImage(files[0]); } });
+  async function handleBodyImage(file) {
+    setState('Téléversement de l’image…', true);
+    try {
+      const url = await uploadFile(file); const tag = `<img src="${url}" alt="">`;
+      if (sourceMode) { const ta = source, s = ta.selectionStart || ta.value.length, e = ta.selectionEnd || s; ta.value = ta.value.slice(0, s) + tag + ta.value.slice(e); }
+      else { body.focus(); const sel = window.getSelection(); if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); } document.execCommand('insertHTML', false, tag); saveRange(); }
+      setState('Image ajoutée ✓', false);
+    } catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
+  }
+
+  // ── Photo ──
+  const photoPrev = $('f-photo-preview');
+  const renderPhoto = () => { const u = $('f-photo').value.trim(); photoPrev.innerHTML = u ? `<img src="${u}" alt="">` : ''; };
+  $('f-photo').addEventListener('input', renderPhoto);
+  wireUpload('f-photo-upload', 'f-photo-file', (url) => { $('f-photo').value = url; renderPhoto(); });
+
+  // ── Char counters ──
+  function bindCounter(inputId, counterId, min, max) {
+    const el = $(inputId), c = $(counterId);
+    const upd = () => {
+      const n = el.value.length;
+      c.textContent = `${n} / ${max} caractères`;
+      c.className = 'counter ' + (n === 0 ? '' : n > max ? 'bad' : n < min ? 'warn' : 'ok');
+    };
+    el.addEventListener('input', upd); upd();
+  }
+  bindCounter('f-seotitle', 'c-seotitle', 30, 60);
+  bindCounter('f-seodesc', 'c-seodesc', 70, 160);
+
+  // ── Live SERP preview ──
+  const val = (id) => $(id).value.trim();
+  function updatePlaceholders() { $('f-seotitle').placeholder = val('f-title') || 'Titre affiché dans Google'; }
+  function updateSerp() {
+    const t = val('f-seotitle') || val('f-title') || 'Nom de l’expert';
+    const slug = val('f-slug') || slugify(nameHalf(val('f-title'))) || 'mon-expert';
+    const d = val('f-seodesc') || 'La méta-description apparaîtra ici…';
+    $('serp-title').textContent = t;
+    $('serp-path').textContent = ` › experts › ${slug}`;
+    $('serp-desc').textContent = d;
+  }
+  ['f-seotitle', 'f-seodesc'].forEach((id) => $(id).addEventListener('input', updateSerp));
+  updatePlaceholders(); updateSerp(); renderPhoto();
+
+  // ── Collect + save ──
+  const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
+  function collect() {
+    const orderRaw = $('f-order').value.trim();
+    return {
+      title: val('f-title'), slug: val('f-slug'), fonction: val('f-fonction'),
+      description: sourceMode ? source.value : body.innerHTML,
+      photo: val('f-photo'), phone: val('f-phone'), email: val('f-email'),
+      email_aliases: list($('f-aliases').value),
+      linkedin: val('f-linkedin'), facebook: val('f-facebook'), instagram: val('f-instagram'),
+      seo_title: val('f-seotitle'), seo_description: val('f-seodesc'),
+      department: $('f-department').value, sort_order: orderRaw === '' ? null : Number(orderRaw),
+      agenda: val('f-agenda'), secteur: val('f-secteur'),
+      hidden: $('f-hidden').checked, listing_only: $('f-listingonly').checked,
+    };
+  }
+  function setState(msg, busy) { $('ed-status').textContent = msg; $('ed-save').disabled = !!busy; }
+
+  async function save() {
+    if (!val('f-title')) { alert('Le nom / titre est obligatoire.'); return; }
+    setState('Enregistrement…', true);
+    const url = isNew ? '/api/admin-pujol/experts/' : `/api/admin-pujol/experts/${initial.id}/`;
+    const method = isNew ? 'POST' : 'PUT';
+    try {
+      const res = await fetch(url, { method, headers: { 'content-type': 'application/json' }, body: JSON.stringify(collect()) });
+      if (!res.ok) throw new Error(await res.text());
+      setState('Enregistré ✓', false);
+      window.location.href = isNew ? '../' : '../../';
+    } catch (err) { setState('', false); alert('Échec de l’enregistrement : ' + err.message); }
+  }
+  $('ed-save').addEventListener('click', save);
+</script>

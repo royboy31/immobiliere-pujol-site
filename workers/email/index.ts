@@ -5,6 +5,14 @@ interface Env {
   MANDRILL_API_KEY: string;
   ALLOWED_ORIGIN: string;
   TURNSTILE_SECRET?: string;
+  // --- newsletter / Brevo (optional until provisioned; see newsletter-dev-spec.md) ---
+  BREVO_API_KEY?: string;
+  NEWSLETTER_LIST_ID?: string;
+  DOI_TEMPLATE_ID?: string;
+  NEWSLETTER_SENDER_EMAIL?: string;
+  NEWSLETTER_SENDER_NAME?: string;
+  NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
+  NEWSLETTER_INTERNAL_TOKEN?: string;
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
@@ -799,6 +807,78 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext): 
   return emailResult;
 }
 
+// ── Newsletter — Brevo campaign endpoints (internal, JSON body) ─────────────
+// Called by the main app (composer) over HTTP with a shared internal token. All
+// Brevo access is centralised here so BREVO_API_KEY lives in one place. These
+// are inert until the Brevo secrets/vars are provisioned (return 501).
+const BREVO = 'https://api.brevo.com/v3';
+function nlJson(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+}
+function nlGuard(req: Request, env: Env): Response | null {
+  if (!env.NEWSLETTER_INTERNAL_TOKEN || req.headers.get('x-internal-token') !== env.NEWSLETTER_INTERNAL_TOKEN)
+    return nlJson({ error: 'Forbidden' }, 403);
+  if (!env.BREVO_API_KEY) return nlJson({ error: 'Newsletter non configurée (BREVO_API_KEY manquant).' }, 501);
+  return null;
+}
+
+// POST /newsletter/send — create + send a Brevo campaign to the Newsletter list.
+async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { subject, html, campaignName } = await req.json().catch(() => ({} as any));
+  if (!subject || !html) return nlJson({ error: 'subject + html requis' }, 400);
+
+  const create = await fetch(`${BREVO}/emailCampaigns`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      name: campaignName || `Newsletter ${now()}`,
+      subject,
+      sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      htmlContent: html,
+      recipients: { listIds: [Number(env.NEWSLETTER_LIST_ID)] },
+    }),
+  });
+  if (!create.ok) return nlJson({ error: 'Brevo create failed', detail: await create.text() }, 502);
+  const { id: campaignId } = (await create.json()) as { id: number };
+
+  const send = await fetch(`${BREVO}/emailCampaigns/${campaignId}/sendNow`, {
+    method: 'POST', headers: { 'api-key': env.BREVO_API_KEY! },
+  });
+  if (!send.ok) return nlJson({ error: 'Brevo send failed', detail: await send.text(), campaignId }, 502);
+  return nlJson({ ok: true, campaignId });
+}
+
+// POST /newsletter/test — send the rendered HTML to a single address (transactional).
+async function handleNewsletterTest(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { testEmail, subject, html } = await req.json().catch(() => ({} as any));
+  if (!testEmail || !html) return nlJson({ error: 'testEmail + html requis' }, 400);
+  const res = await fetch(`${BREVO}/smtp/email`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      to: [{ email: testEmail }],
+      subject: subject || '[TEST] Newsletter',
+      htmlContent: html,
+    }),
+  });
+  if (!res.ok) return nlJson({ error: 'Brevo test failed', detail: await res.text() }, 502);
+  return nlJson({ ok: true });
+}
+
+// POST /newsletter/stats — fetch campaign statistics for the in-admin history.
+async function handleNewsletterStats(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { campaignId } = await req.json().catch(() => ({} as any));
+  if (!campaignId) return nlJson({ error: 'campaignId requis' }, 400);
+  const res = await fetch(`${BREVO}/emailCampaigns/${campaignId}`, { headers: { 'api-key': env.BREVO_API_KEY! } });
+  if (!res.ok) return nlJson({ error: 'Brevo stats failed', detail: await res.text() }, 502);
+  const data = (await res.json()) as any;
+  return nlJson({ ok: true, stats: data?.statistics?.globalStats ?? null });
+}
+
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
 
 const SHEET_HEADERS: Record<string, string[]> = {
@@ -846,6 +926,12 @@ export default {
     if (request.method !== 'POST') {
       return jsonErr('Method not allowed', 405, origin, env);
     }
+
+    // Newsletter internal endpoints carry a JSON body + x-internal-token — handle
+    // them BEFORE the formData() parse below (which would consume/fail on JSON).
+    if (path === '/newsletter/send')  return handleNewsletterSend(request, env);
+    if (path === '/newsletter/test')  return handleNewsletterTest(request, env);
+    if (path === '/newsletter/stats') return handleNewsletterStats(request, env);
 
     let fd: FormData;
     try {

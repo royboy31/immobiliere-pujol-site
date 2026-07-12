@@ -21,7 +21,7 @@ const error = Astro.url.searchParams.get('err');
       {error && (
         <p class="login-page__error">Identifiants incorrects.</p>
       )}
-      <form method="POST" action={`/api/${adminPath}/auth/login`}>
+      <form method="POST" action={`/api/${adminPath}/auth/login/`}>
         <input type="hidden" name="next" value={next} />
         <label>
           Email
