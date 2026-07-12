@@ -1146,7 +1146,26 @@ export default {
       });
     }
 
-    return new Response('pujol-cron-sync: /sync, /status, /import-lbi, /counts', { status: 200 });
+    // Status breakdown: GET /counts-status
+    //  - activeLbiSales: LBI biens à vendre en cours, groupés par statut métier (termine)
+    //  - closedSales: ventes fermées, statut connu (vendu) vs inconnu (reste)
+    if (url.pathname === '/counts-status') {
+      const activeLbiSales = (await env.DB
+        .prepare(`SELECT COALESCE(NULLIF(termine, ''), 'ouvert') AS st, COUNT(*) AS count
+                  FROM annonces WHERE source = 'lbi' AND type_annonce = 'V' AND status = 'active'
+                  GROUP BY st ORDER BY count DESC`)
+        .all<{ st: string; count: number }>()).results;
+      const closedSales = (await env.DB
+        .prepare(`SELECT CASE WHEN LOWER(termine) = 'vendu' THEN 'vendu' ELSE 'inconnu' END AS st, COUNT(*) AS count
+                  FROM annonces WHERE type_annonce = 'V' AND status = 'closed'
+                  GROUP BY st ORDER BY count DESC`)
+        .all<{ st: string; count: number }>()).results;
+      return new Response(JSON.stringify({ activeLbiSales, closedSales }, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('pujol-cron-sync: /sync, /status, /import-lbi, /counts, /counts-status', { status: 200 });
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
