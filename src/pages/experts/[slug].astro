@@ -228,9 +228,13 @@ const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
 // there is nothing to click, so the section would be a dead end.
 const hasContact = !!(expert.email || expert.phone);
 const agendaLink = (expert as any).agenda as string | undefined;
+
+// Aperçu de partage social (og:image) : la photo de l'expert en absolu,
+// sinon l'image par défaut du site.
+const ogImage = expert.photo ? new URL(expert.photo, Astro.site ?? Astro.url).toString() : undefined;
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc} schemas={
+<BaseLayout title={pageTitle} description={pageDesc} ogImage={ogImage} schemas={
   // A Person entity describing the agent. We deliberately do NOT attach
   // aggregateRating here: Google does not support review snippets on Person
   // ("Invalid object type for field" in Search Console), so the rating markup

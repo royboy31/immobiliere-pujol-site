@@ -406,9 +406,13 @@ const listingSchema = buildRealEstateListing({
   ville: view.ville,
   photos: view.photos,
 }, annonceUrl);
+
+// Aperçu de partage social (og:image) : la première photo du bien (URL absolue
+// R2), sinon l'image par défaut du site quand le bien n'a pas de photo.
+const ogImage = Array.isArray(view.photos) && view.photos[0]?.startsWith('http') ? view.photos[0] : undefined;
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} schemas={[listingSchema]} breadcrumbCrumbs={breadcrumbCrumbs}>
+<BaseLayout title={pageTitle} description={pageDescription} ogImage={ogImage} schemas={[listingSchema]} breadcrumbCrumbs={breadcrumbCrumbs}>
   {!view.isClosed ? (
     <AnnonceLive
       view={view}
