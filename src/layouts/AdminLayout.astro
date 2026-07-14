@@ -28,7 +28,11 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
     href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
-  <style>
+  <!-- Global (not scoped): this is the admin design system. Child pages render
+       into <slot/>, so scoped layout styles would never reach their .btn/.card/
+       input markup. is:global makes .btn, .card, inputs, tables, etc. apply
+       across every admin page. Page-level <style> blocks stay scoped and win. -->
+  <style is:global>
     :root {
       --pj-olive: rgb(178, 192, 78);
       --pj-olive-2: rgb(166, 179, 82);
@@ -161,53 +165,68 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 11px 22px;
+      padding: 11px 20px;
       border-radius: 999px;
       border: 1px solid transparent;
       font-family: var(--pj-noto);
       font-weight: 700;
       font-size: 12px;
-      letter-spacing: .6px;
+      letter-spacing: .5px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background-position .35s ease, color .25s ease, border-color .25s ease;
+      white-space: nowrap;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .12s ease;
     }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 2px solid var(--pj-olive); outline-offset: 2px; }
+    /* Solid olive pill — the primary action across the admin (matches login). */
     .btn--primary {
       color: #000;
-      background-color: transparent;
-      background-image: linear-gradient(to top, transparent 50%, var(--pj-olive) 50%);
-      background-size: 100% 200%;
-      background-position: 0 0;
+      background-color: var(--pj-olive);
       border-color: var(--pj-olive);
+      box-shadow: 0 6px 16px rgba(178, 192, 78, .32);
     }
-    .btn--primary:hover { background-position: 0 100%; color: var(--pj-olive-2); text-decoration: none; }
+    .btn--primary:hover {
+      background-color: var(--pj-olive-2);
+      color: #000;
+      box-shadow: 0 8px 22px rgba(178, 192, 78, .45);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .btn--primary:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(178, 192, 78, .35); }
     .btn--ghost {
-      background: transparent; color: #000;
+      background: #fff; color: var(--pj-ink);
       border-color: var(--pj-hairline);
     }
-    .btn--ghost:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
-    .btn--danger { background: transparent; color: var(--danger); border-color: var(--danger); }
-    .btn--danger:hover { background: var(--danger); color: #fff; }
+    .btn--ghost:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); color: #000; }
+    .btn--danger { background: #fff; color: var(--danger); border-color: rgba(220,38,38,.4); }
+    .btn--danger:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+    .btn--sm { padding: 7px 13px; font-size: 10.5px; }
 
-    input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+    input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], textarea, select {
       display: block; width: 100%;
       padding: 11px 14px;
       border: 1px solid var(--pj-hairline);
-      border-radius: 10px;
+      border-radius: 12px;
       font: inherit;
       font-family: var(--pj-noto);
       font-weight: 400;
       color: #000;
-      background: #fff;
-      transition: border-color .2s ease, box-shadow .2s ease;
+      background: #fbfcf8;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
     }
+    input[type=text]:hover, input[type=email]:hover, input[type=password]:hover,
+    input[type=url]:hover, input[type=number]:hover, textarea:hover, select:hover { border-color: rgba(0,0,0,.2); }
     input[type=text]:focus, input[type=email]:focus, input[type=password]:focus,
-    input[type=url]:focus, textarea:focus {
+    input[type=url]:focus, input[type=number]:focus, textarea:focus, select:focus {
       outline: none;
+      background: #fff;
       border-color: var(--pj-olive);
-      box-shadow: 0 0 0 3px rgba(178, 192, 78, .2);
+      box-shadow: 0 0 0 3px rgba(178, 192, 78, .22);
     }
+    input::placeholder, textarea::placeholder { color: #9aa2a6; }
     textarea {
       min-height: 160px;
       font-family: ui-monospace, "SF Mono", Menlo, monospace;

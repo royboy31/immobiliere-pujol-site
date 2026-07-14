@@ -41,13 +41,16 @@
   }
   .publish-bar__btn {
     flex: 0 0 auto;
-    font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 700; font-size: 14px;
-    color: #fff; background: var(--pj-olive-2, rgb(166, 179, 82));
-    border: none; border-radius: 8px; padding: 12px 20px; cursor: pointer;
-    transition: background .2s ease, opacity .2s ease;
+    font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 700; font-size: 13.5px;
+    color: #000; background: var(--pj-olive, rgb(178, 192, 78));
+    border: 1px solid var(--pj-olive, rgb(178, 192, 78));
+    border-radius: 999px; padding: 12px 22px; cursor: pointer;
+    box-shadow: 0 6px 16px rgba(178, 192, 78, .32);
+    transition: background .2s ease, box-shadow .2s ease, transform .12s ease, opacity .2s ease;
   }
-  .publish-bar__btn:hover { background: rgb(150, 163, 66); }
-  .publish-bar__btn:disabled { opacity: .55; cursor: default; }
+  .publish-bar__btn:hover { background: var(--pj-olive-2, rgb(166, 179, 82)); box-shadow: 0 8px 22px rgba(178, 192, 78, .45); transform: translateY(-1px); }
+  .publish-bar__btn:active { transform: translateY(0); }
+  .publish-bar__btn:disabled { opacity: .55; cursor: default; box-shadow: none; transform: none; }
 </style>
 
 <script>
