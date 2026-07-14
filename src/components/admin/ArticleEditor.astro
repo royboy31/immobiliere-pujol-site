@@ -319,7 +319,9 @@ const initial: BlogArticle = article ?? {
   .ed-side ::placeholder, .ed-seo ::placeholder { color:#b8bcb0; }
   .ed-plain { font-family: var(--pj-noto) !important; font-weight:400; }
   .ed-hint { display:block; color:#9aa0a6; font-size:11px; margin-top:-6px; text-transform:none; letter-spacing:normal; font-weight:400; }
-  .ed-thumb img { max-width:100%; max-height:150px; border-radius:10px; margin-top:8px; border:1px solid var(--pj-hairline); display:block; }
+  /* :global — featured/OG previews are injected via innerHTML so they lack the
+     scoped attribute; without :global the <img> renders at full natural size. */
+  .ed-thumb :global(img) { max-width:100%; max-height:150px; width:auto; height:auto; object-fit:contain; border-radius:10px; margin-top:8px; border:1px solid var(--pj-hairline); display:block; }
   .ed-featrow { margin-bottom:10px; }
   .ed-smallbtn { font-family: var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.4px; padding:8px 14px; border-radius:999px; border:1px solid var(--pj-hairline); background:#fff; color:#000; cursor:pointer; transition:background .2s,border-color .2s; }
   .ed-smallbtn:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
