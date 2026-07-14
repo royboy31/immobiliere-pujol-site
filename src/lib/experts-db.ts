@@ -66,7 +66,9 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS experts (
   listing_only INTEGER NOT NULL DEFAULT 0,
   created_by TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
-  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+  updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  published_at TEXT,
+  published_json TEXT
 )`;
 
 // Columns added after the first schema — applied to pre-existing tables so the
@@ -77,6 +79,10 @@ const ADD_COLUMNS: Record<string, string> = {
   secteur: 'TEXT',
   sort_order: 'INTEGER',
   listing_only: 'INTEGER NOT NULL DEFAULT 0',
+  // Frozen snapshot of the last explicitly-published state (see blog-db.ts). The
+  // build-time sync reads published_json only; set by publishExperts() ("Publier").
+  published_at: 'TEXT',
+  published_json: 'TEXT',
 };
 
 let schemaReady = false;
@@ -240,4 +246,34 @@ export async function updateExpert(db: D1Database, id: number, input: ExpertInpu
 export async function deleteExpert(db: D1Database, id: number): Promise<boolean> {
   const res = await db.prepare('DELETE FROM experts WHERE id = ?').bind(id).run();
   return (res.meta.changes || 0) > 0;
+}
+
+// ── publish snapshot (the build-time sync reads published_json ONLY) ──────────
+
+// Snapshot = json_object of the content columns (skips id/lifecycle). Built
+// server-side by SQLite. scripts/sync-d1-experts-to-content.mjs parses this blob.
+// Keep aligned with the columns above AND scripts/backfill-published-snapshot.mjs.
+const EXPERT_SNAPSHOT_JSON = `json_object(
+  'slug', slug, 'title', title, 'fonction', fonction, 'description', description,
+  'photo', photo, 'phone', phone, 'email', email, 'email_aliases', email_aliases,
+  'linkedin', linkedin, 'facebook', facebook, 'instagram', instagram,
+  'seo_title', seo_title, 'seo_description', seo_description, 'department', department,
+  'sort_order', sort_order, 'agenda', agenda, 'secteur', secteur,
+  'hidden', hidden, 'listing_only', listing_only)`;
+
+/** "Publier": freeze every expert's current state into published_json (what the
+ *  site builds from). Experts have no draft lifecycle — visibility is governed by
+ *  hidden/listing_only, which the snapshot carries. Idempotent. */
+export async function publishExperts(db: D1Database): Promise<void> {
+  const now = new Date().toISOString();
+  await db.prepare(`UPDATE experts SET published_json = ${EXPERT_SNAPSHOT_JSON}, published_at = ?`).bind(now).run();
+}
+
+/** Count of experts with unpublished changes — for the admin banner. */
+export async function countPendingExperts(db: D1Database): Promise<number> {
+  const row = await db.prepare(
+    `SELECT COUNT(*) AS n FROM experts
+     WHERE published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)`
+  ).first<{ n: number }>();
+  return row?.n || 0;
 }

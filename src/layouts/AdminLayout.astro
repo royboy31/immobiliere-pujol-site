@@ -1,5 +1,6 @@
 ---
 import { getAdminEnv, getAdminPath } from '../lib/admin-auth';
+import PublishBar from '../components/admin/PublishBar.astro';
 
 interface Props {
   title: string;
@@ -256,6 +257,7 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
     </aside>
   )}
   <main class="admin-main">
+    {!hideSidebar && <PublishBar />}
     <slot />
   </main>
 </div>

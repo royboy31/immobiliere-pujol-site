@@ -180,10 +180,11 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 const featuredImage = entry.data.featuredImage as string | undefined;
-// Use the article's featured image as the social/share preview (og:image).
-// Must be an absolute URL; fall back to BaseLayout's default when there's none.
-const ogImage = featuredImage
-  ? new URL(featuredImage, Astro.site ?? Astro.url).toString()
+// og:image — an explicit article og_image wins, else the featured image. Absolute URL;
+// falls back to BaseLayout's default when there's none.
+const ogSource = (type === 'article' ? entry.data.ogImage : undefined) || featuredImage;
+const ogImage = ogSource
+  ? new URL(ogSource, Astro.site ?? Astro.url).toString()
   : undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 
@@ -221,9 +222,17 @@ const readMin = Math.max(1, Math.round(wordCount / 200));
 const articleDate = type === 'article' && entry.data.date
   ? new Date(entry.data.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
   : null;
+
+// Extended SEO/OG overrides — only articles carry these fields (pages/static don't).
+const seoCanonical = type === 'article' ? entry.data.canonicalUrl : undefined;
+const seoOgTitle = type === 'article' ? entry.data.ogTitle : undefined;
+const seoOgDescription = type === 'article' ? entry.data.ogDescription : undefined;
+const seoTwitterCard = type === 'article' ? entry.data.twitterCard : undefined;
+const seoNoindex = isThankYou || (type === 'article' && !!entry.data.noindex);
+const seoNofollow = type === 'article' && !!entry.data.nofollow;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
+<BaseLayout title={title} description={description} ogImage={ogImage} canonical={seoCanonical} ogTitle={seoOgTitle} ogDescription={seoOgDescription} twitterCard={seoTwitterCard} noindex={seoNoindex} nofollow={seoNofollow} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">

@@ -75,7 +75,8 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS blog_articles (
   created_by TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now')),
-  published_at TEXT
+  published_at TEXT,
+  published_json TEXT
 )`;
 
 // Columns added after the first schema — applied to pre-existing tables so the
@@ -90,6 +91,10 @@ const ADD_COLUMNS: Record<string, string> = {
   og_description: 'TEXT',
   og_image: 'TEXT',
   twitter_card: "TEXT NOT NULL DEFAULT 'summary_large_image'",
+  // Frozen snapshot of the last explicitly-published state. The build-time sync
+  // reads THIS (never the live working row), so a rebuild can't publish an
+  // in-progress edit. Set/cleared by publishArticles() (the "Publier" action).
+  published_json: 'TEXT',
 };
 
 let schemaReady = false;
@@ -183,6 +188,22 @@ export function slugify(input: string): string {
     .slice(0, 96) || 'article';
 }
 
+// Normalise an EXPLICITLY-PROVIDED slug while preserving it faithfully. Unlike
+// slugify() (used to derive a fresh slug from a title), this keeps path
+// separators ("local/…"), non-ASCII ("les-prix-au-m²-…"), underscores
+// ("__trashed-4") and the full length — it only lowercases, turns whitespace
+// into dashes, and trims stray leading/trailing slashes. Legacy imported slugs
+// (which are live URLs) must round-trip through this untouched, otherwise
+// editing an article would silently change its URL. New posts with no slug still
+// go through slugify(title).
+export function normalizeSlug(input: string): string {
+  return (input || '')
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/^\/+|\/+$/g, '') || 'article';
+}
+
 async function uniqueSlug(db: D1Database, base: string, excludeId?: number): Promise<string> {
   let slug = base, n = 1;
   while (true) {
@@ -208,7 +229,7 @@ const b = (v: any) => (v ? 1 : 0);
 
 export async function createArticle(db: D1Database, input: ArticleInput, adminEmail: string): Promise<BlogArticle> {
   const title = (input.title || 'Sans titre').trim();
-  const slug = await uniqueSlug(db, input.slug ? slugify(input.slug) : slugify(title));
+  const slug = await uniqueSlug(db, input.slug ? normalizeSlug(input.slug) : slugify(title));
   const status = input.status === 'published' ? 'published' : 'draft';
   const publishedAt = status === 'published' ? (input.published_at || new Date().toISOString()) : null;
   const articleDate = input.article_date || new Date().toISOString().slice(0, 10);
@@ -235,8 +256,8 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
   const existing = await getArticle(db, id);
   if (!existing) return null;
   // Slug is frozen after creation to preserve indexed URLs, unless explicitly changed.
-  const slug = input.slug && slugify(input.slug) !== existing.slug
-    ? await uniqueSlug(db, slugify(input.slug), id)
+  const slug = input.slug && normalizeSlug(input.slug) !== existing.slug
+    ? await uniqueSlug(db, normalizeSlug(input.slug), id)
     : existing.slug;
   const status = input.status === 'published' ? 'published' : (input.status === 'draft' ? 'draft' : existing.status);
   const publishedAt = status === 'published' ? (existing.published_at || new Date().toISOString()) : null;
@@ -263,4 +284,41 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
 export async function deleteArticle(db: D1Database, id: number): Promise<boolean> {
   const res = await db.prepare('DELETE FROM blog_articles WHERE id = ?').bind(id).run();
   return (res.meta.changes || 0) > 0;
+}
+
+// ── publish snapshot (the build-time sync reads published_json ONLY) ──────────
+
+// Snapshot = json_object of the CONTENT columns only (skips id/status/lifecycle).
+// Built server-side by SQLite so publish never streams every body_html into the
+// Worker. scripts/sync-d1-articles-to-content.mjs parses this blob. Keep this
+// list aligned with the columns above AND scripts/backfill-published-snapshot.mjs.
+const ARTICLE_SNAPSHOT_JSON = `json_object(
+  'slug', slug, 'title', title, 'excerpt', excerpt, 'body_html', body_html,
+  'featured_image', featured_image, 'categories', categories, 'tags', tags,
+  'author', author, 'article_date', article_date, 'seo_title', seo_title,
+  'seo_description', seo_description, 'canonical_url', canonical_url,
+  'focus_keyword', focus_keyword, 'noindex', noindex, 'nofollow', nofollow,
+  'og_title', og_title, 'og_description', og_description, 'og_image', og_image,
+  'twitter_card', twitter_card, 'expert_cta', expert_cta,
+  'expert_cta_title', expert_cta_title)`;
+
+/** "Publier": freeze every PUBLISHED article's current state into published_json
+ *  (what the site builds from) and drop the snapshot for drafts. Idempotent —
+ *  re-running reproduces identical snapshots. */
+export async function publishArticles(db: D1Database): Promise<void> {
+  const now = new Date().toISOString();
+  await db.prepare(`UPDATE blog_articles SET published_json = ${ARTICLE_SNAPSHOT_JSON}, published_at = ? WHERE status = 'published'`).bind(now).run();
+  await db.prepare(`UPDATE blog_articles SET published_json = NULL WHERE status = 'draft'`).run();
+}
+
+/** Count of articles with unpublished changes — powers the admin "N modifications
+ *  non publiées" banner. Published rows edited since (or never) published, and
+ *  drafts still live on the site, all count. */
+export async function countPendingArticles(db: D1Database): Promise<number> {
+  const row = await db.prepare(
+    `SELECT COUNT(*) AS n FROM blog_articles
+     WHERE (status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
+        OR (status = 'draft' AND published_json IS NOT NULL)`
+  ).first<{ n: number }>();
+  return row?.n || 0;
 }

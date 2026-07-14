@@ -20,6 +20,16 @@ const articles = defineCollection({
     expertCta: z.string().optional(),
     // Optional heading shown above that expert card.
     expertCtaTitle: z.string().optional(),
+    // Extended SEO / Open Graph — written from D1 by sync-d1-articles-to-content.mjs
+    // and emitted in [...slug].astro's <head>. focusKeyword is editor-only (not rendered).
+    canonicalUrl: z.string().optional(),
+    focusKeyword: z.string().optional(),
+    noindex: z.boolean().optional(),
+    nofollow: z.boolean().optional(),
+    ogTitle: z.string().optional(),
+    ogDescription: z.string().optional(),
+    ogImage: z.string().optional(),
+    twitterCard: z.string().optional(),
   }),
 });
 

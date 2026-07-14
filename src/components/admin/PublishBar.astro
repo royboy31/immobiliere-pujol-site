@@ -1,0 +1,113 @@
+---
+// Global "Publier" bar — shown on every admin page via AdminLayout. Publishing is
+// a single action: it snapshots ALL pending article + expert changes and fires one
+// site rebuild. Pending count + build status are loaded/polled client-side.
+---
+
+<div class="publish-bar" id="publish-bar">
+  <div class="publish-bar__text">
+    <span class="publish-bar__banner" id="pub-banner">Chargement…</span>
+    <span class="publish-bar__status" id="pub-status"></span>
+  </div>
+  <button type="button" class="publish-bar__btn" id="pub-btn">🚀 Publier les modifications en ligne</button>
+</div>
+
+<style>
+  .publish-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    background: #fff;
+    border: 1px solid var(--pj-hairline, rgba(0, 0, 0, .1));
+    border-radius: 14px;
+    padding: 14px 22px;
+    margin: 0 0 28px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+  }
+  .publish-bar__text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .publish-bar__banner {
+    font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 700; font-size: 14px;
+    color: var(--pj-ink, rgb(58, 58, 58));
+  }
+  .publish-bar__banner[data-state="pending"] { color: var(--pj-orange, rgb(236, 114, 52)); }
+  .publish-bar__banner[data-state="pending"]::before { content: "● "; }
+  .publish-bar__banner[data-state="clean"] { color: rgb(120, 138, 60); }
+  .publish-bar__banner[data-state="clean"]::before { content: "✓ "; }
+  .publish-bar__status {
+    font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 300; font-size: 13px;
+    color: rgb(90, 90, 90); line-height: 1.4;
+  }
+  .publish-bar__btn {
+    flex: 0 0 auto;
+    font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 700; font-size: 14px;
+    color: #fff; background: var(--pj-olive-2, rgb(166, 179, 82));
+    border: none; border-radius: 8px; padding: 12px 20px; cursor: pointer;
+    transition: background .2s ease, opacity .2s ease;
+  }
+  .publish-bar__btn:hover { background: rgb(150, 163, 66); }
+  .publish-bar__btn:disabled { opacity: .55; cursor: default; }
+</style>
+
+<script>
+  const banner = document.getElementById('pub-banner');
+  const statusEl = document.getElementById('pub-status');
+  const btn = document.getElementById('pub-btn') as HTMLButtonElement | null;
+
+  async function loadPending() {
+    try {
+      const r = await fetch('/api/admin-pujol/publish/', { headers: { Accept: 'application/json' } });
+      if (!r.ok) return;
+      const d = await r.json();
+      const n = d.pending?.total ?? 0;
+      if (banner) {
+        banner.textContent = n
+          ? `${n} modification${n > 1 ? 's' : ''} non publiée${n > 1 ? 's' : ''}`
+          : 'Tout est publié';
+        banner.dataset.state = n ? 'pending' : 'clean';
+      }
+      if (!d.deployConfigured && statusEl) {
+        statusEl.textContent = '⚠️ Déploiement non configuré (secret GITHUB_TOKEN manquant) — « Publier » enregistre l’instantané mais ne relance pas le build.';
+      }
+    } catch { /* ignore */ }
+  }
+
+  let polls = 0;
+  async function pollStatus() {
+    polls++;
+    try {
+      const r = await fetch('/api/admin-pujol/publish/status/', { headers: { Accept: 'application/json' } });
+      const d = await r.json();
+      const run = d.run;
+      if (run && statusEl) {
+        if (run.status === 'completed') {
+          statusEl.textContent = run.conclusion === 'success' ? '✅ En ligne !' : `❌ Build échoué (${run.conclusion}).`;
+          if (btn) btn.disabled = false;
+          return;
+        }
+        statusEl.textContent = `🛠️ Build ${run.status === 'in_progress' ? 'en cours' : run.status}…`;
+      }
+    } catch { /* ignore */ }
+    if (polls < 45) setTimeout(pollStatus, 8000);
+    else { if (statusEl) statusEl.textContent = 'Build lancé — suivez-le sur GitHub Actions.'; if (btn) btn.disabled = false; }
+  }
+
+  btn?.addEventListener('click', async () => {
+    if (!confirm('Publier toutes les modifications (articles + experts) et relancer la mise en ligne du site ?')) return;
+    btn.disabled = true;
+    if (statusEl) statusEl.textContent = 'Enregistrement de l’instantané…';
+    try {
+      const r = await fetch('/api/admin-pujol/publish/', { method: 'POST', headers: { Accept: 'application/json' } });
+      const d = await r.json();
+      await loadPending();
+      if (d.deployTriggered) { if (statusEl) statusEl.textContent = '🛠️ Build lancé…'; polls = 0; pollStatus(); }
+      else if (statusEl) { statusEl.textContent = d.deployError ? `Instantané enregistré, build non lancé : ${d.deployError}` : 'Instantané enregistré.'; btn.disabled = false; }
+    } catch (e: any) {
+      if (statusEl) statusEl.textContent = 'Erreur : ' + (e?.message || e);
+      btn.disabled = false;
+    }
+  });
+
+  loadPending();
+</script>
