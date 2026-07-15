@@ -788,23 +788,79 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
   return { ok: true };
 }
 
-async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
-  const email = ((fd.get('email') as string) || '').trim();
-  if (!email) return { ok: false, error: 'Email requis.' };
+// Newsletter signup — Brevo double opt-in (newsletter-dev-spec.md §3.2).
+//
+// ⚠️ DOUBLE-GATED ON PURPOSE — read before loosening either condition.
+//
+// This worker is NOT staging-only. The PRODUCTION site posts here too: the
+// `pujol-main` footer hardcodes `action="https://pujol-email.roy-68a.workers.dev
+// /newsletter"` and deploy-pujol.yml never patches it (spec §6.2 is unresolved).
+// So an unguarded DOI path would send REAL customers a confirmation from whatever
+// Brevo account holds BREVO_API_KEY — currently a personal free account sending
+// from a gmail address, into a test list — and would drop Caroline's per-signup
+// copy. The two gates below keep that from happening by accident:
+//
+//   1. CONFIG  — all of BREVO_API_KEY + DOI_TEMPLATE_ID + NEWSLETTER_LIST_ID set.
+//   2. ORIGIN  — the request comes from ALLOWED_ORIGIN (this worker's own
+//                environment, i.e. the staging site). Production posts from a
+//                different origin and therefore keeps the pre-Brevo behaviour.
+//
+// Origin is a routing signal, NOT a security boundary (a bot can forge the
+// header); it is here to keep environments apart while Brevo is a test account.
+// To curl the DOI path, send `-H "Origin: <ALLOWED_ORIGIN>"`.
+//
+// Before arming this for production: resolve §6.2 (per-environment worker URL),
+// move to the client's own Brevo account (§1.1), authenticate
+// news.immobiliere-pujol.fr (§1.3), and create the DOI template (§1.2).
+async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string; doi?: boolean }> {
+  const email = ((fd.get('email') as string) || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) return { ok: false, error: 'Email invalide.' };
+
+  const configured = !!(env.BREVO_API_KEY && env.DOI_TEMPLATE_ID && env.NEWSLETTER_LIST_ID);
+  const isOwnEnv = !!env.ALLOWED_ORIGIN && origin === env.ALLOWED_ORIGIN;
+  const doiReady = configured && isOwnEnv;
 
   const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const html = buildTable(subject, [['Email', email]]);
+  const notifyRows: [string, string][] = [['Email', email]];
+  if (doiReady) notifyRows.push(['Statut', 'en attente de confirmation (double opt-in)']);
+  const notify = () =>
+    sendEmail(env, {
+      subject,
+      html: buildTable(subject, notifyRows),
+      to: `contact${D}`,
+      cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
+    });
 
-  const emailResult = await sendEmail(env, {
-    subject,
-    html,
-    to: `contact${D}`,
-    cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
+  // Pre-Brevo behaviour — unchanged, including surfacing a send failure as an error.
+  if (!doiReady) {
+    const emailResult = await notify();
+    ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+    return emailResult;
+  }
+
+  // Brevo sends the branded confirmation; the contact joins the list only after
+  // they click. Brevo records consent date/source = our RGPD registry (§3.2/§8).
+  const res = await fetch(`${BREVO}/contacts/doubleOptinConfirmation`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY as string, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email,
+      includeListIds: [Number(env.NEWSLETTER_LIST_ID)],
+      templateId: Number(env.DOI_TEMPLATE_ID),
+      redirectionUrl: env.NEWSLETTER_CONFIRM_REDIRECT_URL,
+      attributes: { SOURCE: 'site', OPTIN_DATE: new Date().toISOString() },
+    }),
   });
 
-  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+  // 400 = already a contact / already in the list → success from the visitor's POV.
+  if (!res.ok && res.status !== 400) {
+    return { ok: false, error: 'Inscription impossible pour le moment.' };
+  }
 
-  return emailResult;
+  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+  ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
+
+  return { ok: true, doi: true };
 }
 
 // ── Newsletter — Brevo campaign endpoints (internal, JSON body) ─────────────
@@ -958,11 +1014,18 @@ export default {
       return jsonOk({ ok: true }, origin, env);
     }
 
-    // Cloudflare Turnstile — enforced only when the secret is configured (prod).
-    // Staging has no secret → skipped (honeypot + content filter stand in).
-    // The newsletter form carries no widget by design (UX), so it's exempt —
-    // it relies on the honeypot + content filter above.
-    if (env.TURNSTILE_SECRET && path !== '/newsletter') {
+    // Cloudflare Turnstile — enforced only when the secret is configured.
+    // No secret → skipped (honeypot + content filter stand in).
+    //
+    // /newsletter used to be exempt ("no widget by design"); spec §3.5 calls that
+    // a list-bombing hole and the signup form now carries a widget, so the
+    // exemption is gone. This worker has NO TURNSTILE_SECRET today, so nothing is
+    // enforced here yet.
+    // ⚠️ Setting TURNSTILE_SECRET on THIS worker will start rejecting newsletter
+    // signups that arrive without a token — and PRODUCTION posts here (§6.2)
+    // while `pujol-main` still ships the widget-less form. Ship the widget to
+    // pujol-main BEFORE setting that secret, or prod signups will 403.
+    if (env.TURNSTILE_SECRET) {
       const token = ((fd.get('cf-turnstile-response') as string) || '').trim();
       let pass = false;
       if (token) {
@@ -986,7 +1049,7 @@ export default {
       }
     }
 
-    let result: { ok: boolean; error?: string };
+    let result: { ok: boolean; error?: string; doi?: boolean };
 
     switch (path) {
       case '/contact':
@@ -996,7 +1059,7 @@ export default {
         result = await handleContactAnnonce(fd, env, ctx);
         break;
       case '/newsletter':
-        result = await handleNewsletter(fd, env, ctx);
+        result = await handleNewsletter(fd, env, ctx, origin);
         break;
       default:
         return jsonErr('Not found', 404, origin, env);
@@ -1006,6 +1069,8 @@ export default {
       return jsonErr(result.error || "Erreur d'envoi", 500, origin, env);
     }
 
-    return jsonOk({ ok: true }, origin, env);
+    // `doi: true` tells the signup form to ask for inbox confirmation instead of
+    // thanking the visitor outright (spec §6.4). Absent on every other path.
+    return jsonOk(result.doi ? { ok: true, doi: true } : { ok: true }, origin, env);
   },
 };
