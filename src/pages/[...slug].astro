@@ -6,6 +6,7 @@ import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
 import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { pickRotatedLinks } from '../lib/internal-links';
+import { isLegalPage } from '../lib/legal-pages';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
 // stays out of the SSR worker). Used for the optional end-of-article expert CTA.
@@ -149,6 +150,11 @@ const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
 const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
 const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
 
+// The 2 legal pages are edited in the admin (D1 site_pages), so their own
+// seoTitle/seoDescription must beat BaseLayout's frozen WordPress meta mirror.
+// Every other page — incl. all articles — keeps the mirror.
+const bypassSeoMirror = type === 'page' && isLegalPage(entry.data.slug);
+
 const pageUrl = new URL(`/${entry.data.slug}/`, Astro.site).toString();
 const pageSchemas: any[] = [];
 if (type === 'article') {
@@ -232,7 +238,7 @@ const seoNoindex = isThankYou || (type === 'article' && !!entry.data.noindex);
 const seoNofollow = type === 'article' && !!entry.data.nofollow;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} canonical={seoCanonical} ogTitle={seoOgTitle} ogDescription={seoOgDescription} twitterCard={seoTwitterCard} noindex={seoNoindex} nofollow={seoNofollow} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs}>
+<BaseLayout title={title} description={description} bypassSeoMirror={bypassSeoMirror} ogImage={ogImage} canonical={seoCanonical} ogTitle={seoOgTitle} ogDescription={seoOgDescription} twitterCard={seoTwitterCard} noindex={seoNoindex} nofollow={seoNofollow} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">

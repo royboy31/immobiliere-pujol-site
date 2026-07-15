@@ -21,6 +21,12 @@ interface Props {
   ogDescription?: string;
   /** twitter:card type — "summary" (default) or "summary_large_image". */
   twitterCard?: string;
+  /**
+   * Skip the phase-1 WordPress meta mirror below and use this page's own
+   * title/description. Only for pages whose meta is now edited in the admin
+   * (the D1-backed legal pages) — otherwise the frozen live meta must win.
+   */
+  bypassSeoMirror?: boolean;
   /** Page-specific JSON-LD schemas (Article, WebSite, RealEstateListing, etc.). */
   schemas?: any[];
   /** Disable the auto-generated BreadcrumbList schema and the visible trail. */
@@ -42,6 +48,7 @@ const {
   ogTitle,
   ogDescription,
   twitterCard = "summary",
+  bypassSeoMirror = false,
   schemas: pageSchemas = [],
   breadcrumb = true,
   breadcrumbCrumbs,
@@ -56,7 +63,11 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 // Annonce (SSR) pages are handled in src/pages/annonces/[slug].astro, not here.
 // Only the meta tags are overridden; breadcrumbs keep the page's own title.
 const liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
-const liveMeta = (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
+// bypassSeoMirror: the legal pages are edited in the admin now, so their D1
+// title/description must win over the frozen mirror. Every other page keeps it.
+const liveMeta = bypassSeoMirror
+  ? undefined
+  : (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
 const metaDescription = liveMeta ? liveMeta.d : description;
 // Title: mirror live verbatim when available. For pages NOT on live (e.g. the new
 // /service-immobilier/* pages) append the brand suffix for consistency — but NOT
