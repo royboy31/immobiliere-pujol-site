@@ -44,12 +44,36 @@ function queryD1(sql) {
   return parsed?.[0]?.results ?? [];
 }
 
+/** e.message alone hides the D1 error; wrangler puts it in stdout as JSON. */
+function detail(e) {
+  return [e.message, ...(e.output || []).map((o) => (o ? String(o) : ''))].filter(Boolean).join('\n');
+}
+
 console.log('📡 Fetching published legal pages from D1...');
+
+// site_pages is created lazily by the admin's ensureSchema(), so on a DB where
+// the editor has never been opened it does not exist yet — a normal pre-cutover
+// state, not a failure. Ask sqlite_master rather than matching on an error
+// string: this query succeeds either way, so a genuine D1 outage still aborts
+// below instead of being mistaken for "table missing".
+let exists;
+try {
+  exists = queryD1("SELECT name FROM sqlite_master WHERE type='table' AND name='site_pages'");
+} catch (e) {
+  console.error('❌ D1 read failed — aborting build (won’t ship stale legal pages):\n', detail(e));
+  process.exit(1);
+}
+
+if (!exists.length) {
+  console.log('ℹ️  site_pages does not exist yet (editor never opened) — leaving src/content/pages untouched.');
+  process.exit(0);
+}
+
 let rows;
 try {
   rows = queryD1('SELECT published_json FROM site_pages WHERE published_json IS NOT NULL');
 } catch (e) {
-  console.error('❌ D1 read failed — aborting build (won’t ship stale legal pages):', e.message);
+  console.error('❌ D1 read failed — aborting build (won’t ship stale legal pages):\n', detail(e));
   process.exit(1);
 }
 
