@@ -27,12 +27,13 @@ export const POST: APIRoute = async ({ request }) => {
   const file = form?.get('file');
   if (!(file instanceof File)) return new Response('No file', { status: 400 });
 
-  if (file.type !== 'application/pdf') return new Response('Seuls les fichiers PDF sont acceptés', { status: 415 });
   if (file.size > MAX_BYTES) return new Response('PDF trop lourd (max 20 Mo)', { status: 413 });
 
-  // Trust the bytes, not the browser-declared type: a renamed .doc still arrives
-  // as application/pdf. We hardcode the stored contentType below, so a mislabeled
-  // file would otherwise be served as a PDF that no reader can open.
+  // The bytes decide, not file.type. The browser-declared type is unreliable in
+  // both directions: it is '' on OS/browser combos with no MIME mapping (which
+  // rejected real PDFs), and it is forgeable on a renamed .doc. Since we hardcode
+  // the stored contentType below, an unchecked file would be served as a PDF no
+  // reader can open — so the magic number is the gate, and the only gate.
   // (Length-checked first: a truncated/empty upload would make the 5-byte view throw.)
   const bytes = await file.arrayBuffer();
   const magic = bytes.byteLength >= 5 ? new TextDecoder().decode(new Uint8Array(bytes, 0, 5)) : '';

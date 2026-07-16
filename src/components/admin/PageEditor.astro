@@ -191,21 +191,33 @@ const { page } = Astro.props;
         const tag = `<a href="${url}">${label} (PDF)</a>`;
 
         if (sourceMode) {
-          const s = source.selectionStart ?? source.value.length;
-          const e = source.selectionEnd ?? s;
-          source.value = source.value.slice(0, s) + tag + source.value.slice(e);
-        } else {
+          const s = source.selectionStart || source.value.length;
+          source.value = source.value.slice(0, s) + tag + source.value.slice(source.selectionEnd || s);
+        } else if (savedRange && body.contains(savedRange.commonAncestorContainer)) {
+          // Caret known: restore it and use execCommand, the same path the
+          // article editor's image insert has been using.
           body.focus();
           const sel = window.getSelection()!;
-          if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); }
+          sel.removeAllRanges();
+          sel.addRange(savedRange);
           // Text selected → link that text; otherwise drop in a labelled link.
-          if (sel.rangeCount && !sel.getRangeAt(0).collapsed) document.execCommand('createLink', false, url);
+          if (!savedRange.collapsed) document.execCommand('createLink', false, url);
           else document.execCommand('insertHTML', false, tag);
           saveRange();
+        } else {
+          // No caret in the body — the editor was never clicked into. execCommand
+          // silently does nothing without a selection, which looked exactly like
+          // "the PDF never saved", so append deterministically instead.
+          const p = document.createElement('p');
+          p.innerHTML = tag;
+          body.appendChild(p);
         }
         say('PDF ajouté ✓ — cliquez sur Enregistrer pour le conserver.', true);
       } catch (err: any) {
-        say('Échec du téléversement : ' + (err?.message || err), false);
+        // alert, not just the status line: a rejected upload inserts no link, and
+        // a message in the corner is missable — which is how this stayed opaque.
+        say('Échec du téléversement.', false);
+        alert('Échec du téléversement : ' + (err?.message || err));
       }
     }
 
