@@ -56,7 +56,8 @@ const initial: ExpertRecord = expert ?? {
 
 <div class="ed-grid">
   <div class="ed-main">
-    <input id="f-title" type="text" class="ed-title-input" placeholder="Prénom Nom – Rôle" value={initial.title} />
+    <input id="f-title" type="text" class="ed-title-input" placeholder="Prénom Nom" value={initial.title} />
+    <small class="ed-hint">Nom affiché en titre de la page. Le rôle va dans « Fonction » ci-dessous ; le titre SEO se règle dans l’onglet Référencement.</small>
     <input id="f-fonction" type="text" class="ed-fonction-input" placeholder="Petite accroche (ex. « La patronne »)" value={initial.fonction} />
 
     <p class="ed-fieldlabel">Biographie</p>
