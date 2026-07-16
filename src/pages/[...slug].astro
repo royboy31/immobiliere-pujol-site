@@ -150,10 +150,12 @@ const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
 const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
 const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
 
-// The 2 legal pages are edited in the admin (D1 site_pages), so their own
-// seoTitle/seoDescription must beat BaseLayout's frozen WordPress meta mirror.
-// Every other page — incl. all articles — keeps the mirror.
-const bypassSeoMirror = type === 'page' && isLegalPage(entry.data.slug);
+// Content edited in the admin (D1) must beat BaseLayout's frozen WordPress meta
+// mirror, otherwise the editor's SEO fields are decorative: the mirror covers
+// 1015 of the 1017 articles and was overriding every title/description an admin
+// typed. Articles and the 2 legal pages are both D1-backed, so both bypass it.
+// Pages other than the legal ones are not editable, and keep the mirror.
+const bypassSeoMirror = type === 'article' || (type === 'page' && isLegalPage(entry.data.slug));
 
 const pageUrl = new URL(`/${entry.data.slug}/`, Astro.site).toString();
 const pageSchemas: any[] = [];
