@@ -852,8 +852,14 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
     }),
   });
 
-  // 400 = already a contact / already in the list → success from the visitor's POV.
-  if (!res.ok && res.status !== 400) {
+  // Brevo answers 201 both for a new signup and for an existing/already-confirmed
+  // contact (it simply re-sends the confirmation), so this endpoint has no
+  // "already exists" 400 to swallow — that is POST /contacts' behaviour, not this
+  // one's. Every 400 here is a real fault (invalid address, missing
+  // redirectionUrl, no active DOI template), so surface it instead of promising
+  // the visitor a confirmation email that was never sent.
+  if (!res.ok) {
+    console.error(`Brevo DOI ${res.status}: ${await res.text().catch(() => '')}`);
     return { ok: false, error: 'Inscription impossible pour le moment.' };
   }
 
