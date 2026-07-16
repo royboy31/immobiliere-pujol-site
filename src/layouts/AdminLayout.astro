@@ -1,11 +1,11 @@
 ---
 import { getAdminEnv, getAdminPath } from '../lib/admin-auth';
-import { getDB, ensureSchema, getOrCreateUser, defaultName } from '../lib/admin-users';
+import { getDB, ensureSchema, getOrCreateUser, defaultName, isSuperAdmin } from '../lib/admin-users';
 import PublishBar from '../components/admin/PublishBar.astro';
 
 interface Props {
   title: string;
-  section?: 'experts' | 'articles' | 'pages' | 'home' | 'newsletter';
+  section?: 'experts' | 'articles' | 'pages' | 'home' | 'newsletter' | 'users';
   hideSidebar?: boolean;
 }
 
@@ -20,6 +20,7 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
 // plain form post) and just falls back to a name derived from the email.
 let adminName = adminEmail ? defaultName(adminEmail) : '';
 let hasOwnPassword = false;
+let isSuper = false;
 if (adminEmail && !hideSidebar) {
   try {
     const db = await getDB();
@@ -27,6 +28,7 @@ if (adminEmail && !hideSidebar) {
     const user = await getOrCreateUser(db, adminEmail);
     adminName = user.name;
     hasOwnPassword = !!user.password_hash;
+    isSuper = await isSuperAdmin(env, adminEmail);
   } catch {
     // D1 unavailable — keep the email-derived fallback.
   }
@@ -374,6 +376,7 @@ const initials = (adminName || adminEmail || '?')
         <a href={`${base}/articles/`} class:list={[{ 'is-active': section === 'articles' }]}>Articles de blog</a>
         <a href={`${base}/newsletter/`} class:list={[{ 'is-active': section === 'newsletter' }]}>Newsletters</a>
         <a href={`${base}/pages/`} class:list={[{ 'is-active': section === 'pages' }]}>Pages légales</a>
+        {isSuper && <a href={`${base}/users/`} class:list={[{ 'is-active': section === 'users' }]}>Utilisateurs</a>}
       </nav>
       <div class="admin-sidebar__user" id="admin-user"
            data-profile-url={`/api/${adminPath}/auth/profile/`}

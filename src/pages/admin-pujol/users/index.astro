@@ -1,0 +1,160 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getAdminEnv, getAdminPath } from '../../../lib/admin-auth';
+import { getDB, ensureSchema, listUsers, isSuperAdmin, isEnvAdmin, type AdminUser } from '../../../lib/admin-users';
+
+// Self-guard: the middleware only proves you are logged in, not that you are a
+// super-admin. A regular admin who guesses this URL is bounced to the dashboard.
+const env = await getAdminEnv();
+const base = `/${getAdminPath(env)}`;
+const adminEmail = (Astro.locals as any).adminEmail ?? '';
+const iAmSuper = adminEmail ? await isSuperAdmin(env, adminEmail) : false;
+if (!iAmSuper) return Astro.redirect(`${base}/`);
+
+let users: (AdminUser & { env: boolean })[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  users = (await listUsers(db)).map((u) => ({ ...u, env: isEnvAdmin(env, u.email) }));
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+const fmt = (s: string | null) =>
+  s ? new Date(s.includes('T') ? s : s.replace(' ', 'T') + 'Z').toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+---
+
+<AdminLayout title="Utilisateurs" section="users">
+  <div class="toolbar">
+    <h1 style="margin:0;">Utilisateurs <span style="font-weight:300;color:#888;">({users.length})</span></h1>
+    <span class="spacer"></span>
+    <button id="u-new" class="btn btn--primary" type="button">+ Nouvel administrateur</button>
+  </div>
+
+  <p class="u-help">Les administrateurs peuvent modifier le contenu du site. Seuls les
+    <strong>super-administrateurs</strong> peuvent gérer cette liste. Les comptes marqués
+    « serveur » sont configurés au niveau de l’hébergement et ne peuvent pas être modifiés ici.</p>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="u-table">
+      <thead>
+        <tr><th>Nom</th><th>Email</th><th>Rôle</th><th>Statut</th><th>Créé</th><th style="text-align:right;">Actions</th></tr>
+      </thead>
+      <tbody id="u-rows">
+        {users.map((u) => (
+          <tr data-email={u.email} data-env={u.env ? '1' : '0'}>
+            <td>{u.name}</td>
+            <td class="u-email">{u.email}</td>
+            <td>
+              <span class={`badge ${u.role === 'super' ? 'badge--sent' : ''}`}>{u.role === 'super' ? 'Super-admin' : 'Admin'}</span>
+              {u.env && <span class="u-tag" title="Configuré au niveau serveur">serveur</span>}
+            </td>
+            <td>{u.active ? 'Actif' : <span style="color:var(--danger);">Désactivé</span>}</td>
+            <td class="u-date">{fmt(u.created_at)}</td>
+            <td style="text-align:right;white-space:nowrap;">
+              {u.env ? <span style="color:#aaa;font-size:12px;">—</span> : (
+                <>
+                  <button class="btn btn--sm" data-role-toggle={u.email} data-role={u.role}>{u.role === 'super' ? 'Rétrograder' : 'Promouvoir'}</button>
+                  <button class="btn btn--sm btn--danger" data-active-toggle={u.email} data-active={u.active ? '1' : '0'}>{u.active ? 'Désactiver' : 'Réactiver'}</button>
+                </>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Create dialog -->
+  <div id="u-modal" class="u-modal" hidden>
+    <div class="u-modal__box">
+      <h2 style="margin:0 0 4px;">Nouvel administrateur</h2>
+      <p class="u-help" style="margin:0 0 16px;">Un mot de passe est requis. La personne pourra le changer après sa première connexion.</p>
+      <label>Email<input id="u-email" type="email" placeholder="prenom@exemple.fr" /></label>
+      <label>Nom (optionnel)<input id="u-name" type="text" placeholder="laissé vide = déduit de l’email" /></label>
+      <label>Mot de passe initial<input id="u-pw" type="text" placeholder="au moins 10 caractères" /></label>
+      <label class="u-check"><input id="u-super" type="checkbox" /> Super-administrateur (peut gérer les utilisateurs)</label>
+      <p class="u-err" id="u-err"></p>
+      <div class="u-modal__actions">
+        <button class="btn btn--ghost" id="u-cancel" type="button">Annuler</button>
+        <button class="btn btn--primary" id="u-create" type="button">Créer</button>
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<style>
+  .toolbar { display:flex; align-items:center; margin-bottom:18px; }
+  .toolbar .spacer { flex:1; }
+  .u-help { color:#666; font-size:13px; line-height:1.6; max-width:70ch; margin:0 0 18px; }
+  .u-table { width:100%; border-collapse:collapse; font-family:var(--pj-noto); }
+  .u-table th { text-align:left; font-size:11px; letter-spacing:.5px; text-transform:uppercase; color:#8a8a8a; font-weight:700; padding:14px 20px; border-bottom:1px solid var(--pj-hairline); }
+  .u-table td { padding:14px 20px; border-bottom:1px solid var(--pj-hairline); font-size:14px; vertical-align:middle; }
+  .u-table tr:last-child td { border-bottom:none; }
+  .u-email, .u-date { color:#666; font-size:13px; }
+  .u-tag { display:inline-block; margin-left:6px; font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:#8a8a8a; border:1px solid var(--pj-hairline); border-radius:4px; padding:1px 5px; }
+  .btn--sm { padding:5px 10px; font-size:12px; margin-left:6px; }
+  .u-modal { position:fixed; inset:0; background:rgba(15,26,43,.5); display:flex; align-items:center; justify-content:center; z-index:100; padding:20px; }
+  .u-modal[hidden] { display:none; }
+  .u-modal__box { background:#fff; border-radius:10px; padding:28px; width:100%; max-width:460px; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+  .u-modal__box label { display:block; font-size:13px; font-weight:600; color:var(--pj-ink); margin:0 0 14px; }
+  .u-modal__box input[type=email], .u-modal__box input[type=text] { display:block; width:100%; margin-top:5px; padding:9px 11px; border:1px solid var(--pj-hairline); border-radius:6px; font-size:14px; box-sizing:border-box; }
+  .u-check { display:flex !important; align-items:center; gap:8px; font-weight:500 !important; }
+  .u-check input { width:auto !important; margin:0 !important; }
+  .u-err { color:var(--danger); font-size:13px; min-height:18px; margin:4px 0 12px; }
+  .u-modal__actions { display:flex; justify-content:flex-end; gap:10px; }
+</style>
+
+<script>
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const val = (id: string) => ((document.getElementById(id) as HTMLInputElement)?.value || '').trim();
+
+  const modal = $('u-modal');
+  const open = () => { $('u-err').textContent = ''; modal.hidden = false; (document.getElementById('u-email') as HTMLInputElement).focus(); };
+  const close = () => { modal.hidden = true; ['u-email','u-name','u-pw'].forEach((i)=>{(document.getElementById(i) as HTMLInputElement).value='';}); (document.getElementById('u-super') as HTMLInputElement).checked=false; };
+
+  $('u-new').addEventListener('click', open);
+  $('u-cancel').addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+
+  $('u-create').addEventListener('click', async () => {
+    const email = val('u-email'), name = val('u-name'), password = val('u-pw');
+    const role = (document.getElementById('u-super') as HTMLInputElement).checked ? 'super' : 'admin';
+    if (!email) return void ($('u-err').textContent = 'Email requis.');
+    if (password.length < 10) return void ($('u-err').textContent = 'Mot de passe : au moins 10 caractères.');
+    ($('u-create') as HTMLButtonElement).disabled = true;
+    const res = await fetch('/api/admin-pujol/users/', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, name, password, role }),
+    });
+    const j = await res.json().catch(() => ({}));
+    ($('u-create') as HTMLButtonElement).disabled = false;
+    if (res.ok && j.ok) location.reload();
+    else $('u-err').textContent = j.error || `Échec (${res.status}).`;
+  });
+
+  // Role / active toggles
+  async function patch(email: string, body: any, label: string) {
+    if (!confirm(`${label} « ${email} » ?`)) return;
+    const res = await fetch(`/api/admin-pujol/users/${encodeURIComponent(email)}/`, {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body),
+    });
+    const j = await res.json().catch(() => ({}));
+    if (res.ok && j.ok) location.reload();
+    else alert(j.error || `Échec (${res.status}).`);
+  }
+  document.querySelectorAll('[data-role-toggle]').forEach((b) => b.addEventListener('click', () => {
+    const el = b as HTMLElement; const email = el.dataset.roleToggle!;
+    const next = el.dataset.role === 'super' ? 'admin' : 'super';
+    patch(email, { role: next }, next === 'super' ? 'Promouvoir en super-admin' : 'Rétrograder en admin');
+  }));
+  document.querySelectorAll('[data-active-toggle]').forEach((b) => b.addEventListener('click', () => {
+    const el = b as HTMLElement; const email = el.dataset.activeToggle!;
+    const next = el.dataset.active !== '1';
+    patch(email, { active: next }, next ? 'Réactiver' : 'Désactiver');
+  }));
+</script>
