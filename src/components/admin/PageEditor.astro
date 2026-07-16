@@ -27,6 +27,8 @@ const { page } = Astro.props;
     <button type="button" data-cmd="insertUnorderedList" title="Liste">• —</button>
     <span class="sep"></span>
     <button type="button" id="pe-link" title="Lien">🔗</button>
+    <button type="button" id="pe-pdf" title="Insérer un PDF">📎 PDF</button>
+    <input type="file" id="pe-pdf-file" accept="application/pdf,.pdf" hidden />
     <span class="spacer"></span>
     <button type="button" id="pe-toggle-src" class="pe-srcbtn">&lt;/&gt; Source HTML</button>
   </div>
@@ -146,6 +148,66 @@ const { page } = Astro.props;
       const url = prompt('URL du lien :');
       if (url) document.execCommand('createLink', false, url);
     });
+
+    // ── PDF upload → link at the cursor ──────────────────────────────────
+    // The file lands in R2 and is streamed back by /media/[...path]; only the
+    // <a> lives in the body HTML, so it rides the normal save → 🚀 Publier →
+    // sync-d1-pages-to-content chain with no schema or template change.
+    const pdfInput = $('pe-pdf-file') as HTMLInputElement;
+    let savedRange: Range | null = null;
+    const saveRange = () => {
+      const s = window.getSelection();
+      if (s && s.rangeCount && body.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange();
+    };
+    body.addEventListener('mouseup', saveRange);
+    body.addEventListener('keyup', saveRange);
+
+    // mousedown + preventDefault, not click: pressing the button would otherwise
+    // take focus and collapse the caret before we could save where it was.
+    $('pe-pdf').addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      saveRange();
+      pdfInput.click();
+    });
+    pdfInput.addEventListener('change', () => {
+      const f = pdfInput.files && pdfInput.files[0];
+      pdfInput.value = ''; // let the same file be re-picked after an error
+      if (f) insertPdf(f);
+    });
+
+    const esc = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+    async function insertPdf(file: File) {
+      say('Téléversement du PDF…', true);
+      try {
+        const fd = new FormData();
+        fd.append('file', file);
+        const res = await fetch('/api/admin-pujol/pages/upload-file/', { method: 'POST', body: fd });
+        if (!res.ok) throw new Error((await res.text()) || String(res.status));
+        const { url, name } = (await res.json()) as { url: string; name: string };
+
+        const label = esc((name || 'Document').replace(/\.pdf$/i, ''));
+        const tag = `<a href="${url}">${label} (PDF)</a>`;
+
+        if (sourceMode) {
+          const s = source.selectionStart ?? source.value.length;
+          const e = source.selectionEnd ?? s;
+          source.value = source.value.slice(0, s) + tag + source.value.slice(e);
+        } else {
+          body.focus();
+          const sel = window.getSelection()!;
+          if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); }
+          // Text selected → link that text; otherwise drop in a labelled link.
+          if (sel.rangeCount && !sel.getRangeAt(0).collapsed) document.execCommand('createLink', false, url);
+          else document.execCommand('insertHTML', false, tag);
+          saveRange();
+        }
+        say('PDF ajouté ✓ — cliquez sur Enregistrer pour le conserver.', true);
+      } catch (err: any) {
+        say('Échec du téléversement : ' + (err?.message || err), false);
+      }
+    }
 
     $('pe-toggle-src').addEventListener('click', () => {
       sourceMode = !sourceMode;
