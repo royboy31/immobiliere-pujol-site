@@ -15,6 +15,8 @@ export interface NewsletterCampaign {
   content_json: any;                // full template-specific composed content
   status: 'draft' | 'sent';
   recipient_count: number | null;
+  list_id: number | null;      // Brevo list the campaign was sent to
+  list_name: string | null;    // label at send time (kept even if the allowlist changes)
   created_by: string;
   sent_at: string | null;
   created_at: string;
@@ -43,6 +45,8 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS newsletter_campaigns (
   content_json TEXT,
   status TEXT NOT NULL DEFAULT 'draft',
   recipient_count INTEGER,
+  list_id INTEGER,
+  list_name TEXT,
   created_by TEXT,
   sent_at TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
@@ -50,9 +54,13 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS newsletter_campaigns (
 )`;
 
 // Additive migration for tables created from an earlier schema (the spec's
-// original shape lacked content_json).
+// original shape lacked content_json; list_id/list_name arrived with the
+// recipient-list selector). Existing rows keep NULL — they predate the choice
+// and were all sent to the single configured list.
 const ADD_COLUMNS: Record<string, string> = {
   content_json: 'TEXT',
+  list_id: 'INTEGER',
+  list_name: 'TEXT',
 };
 
 let schemaReady = false;
@@ -141,10 +149,16 @@ export async function updateCampaign(db: D1Database, id: number, input: Campaign
 }
 
 /** Mark a campaign as sent after Brevo confirms. */
-export async function markSent(db: D1Database, id: number, brevoCampaignId: number | null, recipientCount: number | null): Promise<NewsletterCampaign | null> {
+export async function markSent(
+  db: D1Database,
+  id: number,
+  brevoCampaignId: number | null,
+  recipientCount: number | null,
+  list?: { id: number | null; name: string | null },
+): Promise<NewsletterCampaign | null> {
   await db.prepare(
-    `UPDATE newsletter_campaigns SET status='sent', brevo_campaign_id=?, recipient_count=?, sent_at=datetime('now'), updated_at=datetime('now') WHERE id=?`
-  ).bind(brevoCampaignId, recipientCount, id).run();
+    `UPDATE newsletter_campaigns SET status='sent', brevo_campaign_id=?, recipient_count=?, list_id=?, list_name=?, sent_at=datetime('now'), updated_at=datetime('now') WHERE id=?`
+  ).bind(brevoCampaignId, recipientCount, list?.id ?? null, list?.name ?? null, id).run();
   return await getCampaign(db, id);
 }
 

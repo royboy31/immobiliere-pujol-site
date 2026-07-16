@@ -41,16 +41,22 @@ export const POST: APIRoute = async ({ request }) => {
     status: 'draft',
   }, admin);
 
-  // 2) ask the worker to create + send the Brevo campaign
-  const r = await callWorker('/newsletter/send', { subject, html, campaignName });
+  // 2) ask the worker to create + send the Brevo campaign. listId is passed
+  //    through as-is: the worker owns the allowlist and refuses anything not on
+  //    it, so validating here too would only duplicate (and could drift from) it.
+  const r = await callWorker('/newsletter/send', { subject, html, campaignName, listId: body.listId });
   if (!r.ok) {
     // Draft is preserved; surface why sending didn't happen.
     return Response.json({ ok: false, draftId: draft.id, ...r.data }, { status: r.status });
   }
 
-  // 3) mark sent with the returned Brevo campaign id
+  // 3) mark sent with the Brevo campaign id + the list the worker actually used
+  //    (its echo, not our request — they differ if the request omitted a list).
   const brevoId = r.data?.campaignId ?? null;
   const recipients = r.data?.recipientCount ?? null;
-  const sent = await markSent(db, draft.id, brevoId, recipients);
+  const sent = await markSent(db, draft.id, brevoId, recipients, {
+    id: r.data?.listId ?? null,
+    name: r.data?.listLabel ?? null,
+  });
   return Response.json({ ok: true, campaign: sent, brevoCampaignId: brevoId });
 };

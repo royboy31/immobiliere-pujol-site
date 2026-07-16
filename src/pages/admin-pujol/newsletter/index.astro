@@ -37,7 +37,7 @@ const fmt = (s: string | null) =>
     <div class="card" style="padding:0;overflow:hidden;">
       <table class="nl-table">
         <thead>
-          <tr><th>Objet</th><th>Modèle</th><th>Statut</th><th>Date</th><th style="text-align:right;">Actions</th></tr>
+          <tr><th>Objet</th><th>Modèle</th><th>Destinataires</th><th>Statut</th><th>Date</th><th style="text-align:right;">Actions</th></tr>
         </thead>
         <tbody>
           {campaigns.map((c) => (
@@ -47,6 +47,9 @@ const fmt = (s: string | null) =>
                 {c.preheader && <div class="nl-pre">{c.preheader}</div>}
               </td>
               <td class="nl-tmpl">{TEMPLATE_LABEL[c.template] || c.template}</td>
+              {/* NULL for rows predating the list selector, and for drafts (the
+                  list is only fixed at send time) — show a dash, not "unknown". */}
+              <td class="nl-tmpl">{c.list_name || '—'}</td>
               <td><span class={`badge badge--${c.status}`}>{c.status === 'sent' ? 'Envoyée' : 'Brouillon'}</span></td>
               <td class="nl-date">{fmt(c.status === 'sent' ? c.sent_at : c.created_at)}{c.recipient_count ? ` · ${c.recipient_count} dest.` : ''}</td>
               <td style="text-align:right;white-space:nowrap;">

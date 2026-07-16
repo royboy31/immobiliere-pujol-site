@@ -8,6 +8,13 @@ interface Env {
   // --- newsletter / Brevo (optional until provisioned; see newsletter-dev-spec.md) ---
   BREVO_API_KEY?: string;
   NEWSLETTER_LIST_ID?: string;
+  // Allowlist of lists the composer may send to, "id:label" comma-separated, e.g.
+  // "3:Newsletter,7:Vendeurs". Deliberately an env allowlist and NOT "every list
+  // in the Brevo account": the recipient list being fixed in config is what makes
+  // spec §9's "staging can never send to the real list" structural rather than a
+  // matter of clicking the right dropdown entry. Unset → falls back to the single
+  // NEWSLETTER_LIST_ID, i.e. exactly the previous behaviour.
+  NEWSLETTER_LIST_IDS?: string;
   DOI_TEMPLATE_ID?: string;
   NEWSLETTER_SENDER_EMAIL?: string;
   NEWSLETTER_SENDER_NAME?: string;
@@ -884,11 +891,62 @@ function nlGuard(req: Request, env: Env): Response | null {
   return null;
 }
 
-// POST /newsletter/send — create + send a Brevo campaign to the Newsletter list.
+// ── Recipient-list allowlist ────────────────────────────────────────────────
+// The composer may only send to a list named here. This worker is the ONLY
+// enforcement point: the admin UI's dropdown is a convenience, and a caller
+// holding the internal token could otherwise post any list id it liked.
+interface AllowedList { id: number; label: string; }
+
+function allowedLists(env: Env): AllowedList[] {
+  const raw = (env.NEWSLETTER_LIST_IDS || '').trim();
+  if (raw) {
+    const out: AllowedList[] = [];
+    for (const part of raw.split(',')) {
+      const s = part.trim();
+      if (!s) continue;
+      const i = s.indexOf(':');                      // labels may contain ':'? take the FIRST colon only
+      const id = Number((i === -1 ? s : s.slice(0, i)).trim());
+      if (!Number.isInteger(id) || id <= 0) continue;  // skip junk rather than send somewhere unintended
+      out.push({ id, label: (i === -1 ? '' : s.slice(i + 1).trim()) || `Liste ${id}` });
+    }
+    if (out.length) return out;
+  }
+  // Fallback: the single configured list = the pre-allowlist behaviour.
+  const single = Number(env.NEWSLETTER_LIST_ID);
+  return Number.isInteger(single) && single > 0 ? [{ id: single, label: 'Newsletter' }] : [];
+}
+
+// Resolve the requested list to an allowed one. Returns null if it isn't allowed,
+// so the caller can refuse rather than silently retarget the send.
+function resolveList(env: Env, requested: unknown): AllowedList | null {
+  const lists = allowedLists(env);
+  if (!lists.length) return null;
+  if (requested === undefined || requested === null || requested === '') return lists[0];
+  const id = Number(requested);
+  return lists.find((l) => l.id === id) || null;
+}
+
+// POST /newsletter/lists — the lists this environment may send to (for the composer).
+async function handleNewsletterLists(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  return nlJson({ ok: true, lists: allowedLists(env) });
+}
+
+// POST /newsletter/send — create + send a Brevo campaign to a permitted list.
 async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
   const bad = nlGuard(req, env); if (bad) return bad;
-  const { subject, html, campaignName } = await req.json().catch(() => ({} as any));
+  const { subject, html, campaignName, listId } = (await req.json().catch(() => ({}))) as any;
   if (!subject || !html) return nlJson({ error: 'subject + html requis' }, 400);
+
+  // Refuse rather than fall back to the default list: a caller that asked for a
+  // specific audience must never be silently redirected to a different one.
+  const list = resolveList(env, listId);
+  if (!list) {
+    return nlJson({
+      error: listId ? `Liste ${listId} non autorisée pour cet environnement.` : 'Aucune liste configurée.',
+      allowed: allowedLists(env),
+    }, 400);
+  }
 
   const create = await fetch(`${BREVO}/emailCampaigns`, {
     method: 'POST',
@@ -898,7 +956,7 @@ async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
       subject,
       sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
       htmlContent: html,
-      recipients: { listIds: [Number(env.NEWSLETTER_LIST_ID)] },
+      recipients: { listIds: [list.id] },
     }),
   });
   if (!create.ok) return nlJson({ error: 'Brevo create failed', detail: await create.text() }, 502);
@@ -908,7 +966,7 @@ async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
     method: 'POST', headers: { 'api-key': env.BREVO_API_KEY! },
   });
   if (!send.ok) return nlJson({ error: 'Brevo send failed', detail: await send.text(), campaignId }, 502);
-  return nlJson({ ok: true, campaignId });
+  return nlJson({ ok: true, campaignId, listId: list.id, listLabel: list.label });
 }
 
 // POST /newsletter/test — send the rendered HTML to a single address (transactional).
@@ -994,6 +1052,7 @@ export default {
     if (path === '/newsletter/send')  return handleNewsletterSend(request, env);
     if (path === '/newsletter/test')  return handleNewsletterTest(request, env);
     if (path === '/newsletter/stats') return handleNewsletterStats(request, env);
+    if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
 
     let fd: FormData;
     try {

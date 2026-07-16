@@ -49,6 +49,10 @@ try {
       </div>
 
       <div class="card nl-card">
+        <label>Destinataires
+          <select id="f-list"><option value="">Chargement…</option></select>
+        </label>
+        <p class="nl-hint" id="f-list-note">La liste d’abonnés qui recevra cet email.</p>
         <label>Objet de l’email
           <input id="f-subject" type="text" placeholder="Ce que le destinataire voit dans sa boîte" />
         </label>
@@ -451,11 +455,16 @@ try {
 
   $('nl-send').addEventListener('click', async () => {
     if (!v('f-subject')) { alert('Renseignez l’objet.'); return; }
-    if (!confirm('Envoyer cette newsletter à toute la liste ?')) return;
+    const listId = v('f-list');
+    if (!listId) { alert('Aucune liste de destinataires configurée.'); return; }
+    // Name the audience in the confirm — "toute la liste" told Caroline nothing
+    // about WHICH list, which is the whole point of being able to choose one.
+    const listLabel = ($('f-list').selectedOptions[0] || {}).textContent || 'la liste';
+    if (!confirm(`Envoyer cette newsletter à « ${listLabel} » ?`)) return;
     setStatus('Envoi…'); $('nl-send').disabled = true;
     const res = await fetch('/api/admin-pujol/newsletter/send/', {
       method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData() }),
+      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData(), listId }),
     });
     const j = await res.json().catch(() => ({}));
     $('nl-send').disabled = false; setStatus('');
@@ -464,6 +473,41 @@ try {
     else alert('Échec de l’envoi : ' + (j.error || res.status));
   });
 
+  // Recipient lists. The options come from the email worker's env allowlist, NOT
+  // from Brevo — the composer must only ever offer lists this environment may
+  // mail. The worker re-checks on send; this is convenience, not the guard.
+  async function loadLists() {
+    const sel = $('f-list');
+    const note = $('f-list-note');
+    try {
+      const r = await fetch('/api/admin-pujol/newsletter/lists/');
+      const j = await r.json().catch(() => ({}));
+      const lists = j.lists || [];
+      sel.innerHTML = '';
+      if (!lists.length) {
+        const o = document.createElement('option');
+        o.value = ''; o.textContent = '— aucune liste configurée —';
+        sel.appendChild(o); sel.disabled = true;
+        note.textContent = j.error || 'Aucune liste de destinataires configurée (Brevo à provisionner).';
+        return;
+      }
+      for (const l of lists) {
+        const o = document.createElement('option');
+        o.value = String(l.id); o.textContent = l.label;   // textContent: labels are config, never HTML
+        sel.appendChild(o);
+      }
+      sel.disabled = lists.length === 1;   // nothing to choose = don't pretend there is
+      note.textContent = lists.length === 1
+        ? 'La liste d’abonnés qui recevra cet email.'
+        : 'Choisissez la liste d’abonnés qui recevra cet email.';
+    } catch {
+      sel.innerHTML = '<option value="">— erreur de chargement —</option>';
+      sel.disabled = true;
+      note.textContent = 'Impossible de charger les listes.';
+    }
+  }
+
   // initial load
   pickers.blog.ensureLoaded();
+  loadLists();
 </script>
