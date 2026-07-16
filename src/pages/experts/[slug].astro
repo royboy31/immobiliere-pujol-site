@@ -37,6 +37,8 @@ type ExpertData = {
   facebook?: string;
   instagram?: string;
   department?: string;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 // Lazy glob: load ONLY the requested expert's JSON per request (filename === slug)
 // instead of eager-bundling all experts (incl. bios) into the SSR worker.
@@ -160,10 +162,15 @@ const ctaTail = isSales || isRental
   ? `Prenez contact avec ${firstName} pour en discuter.`
   : `Parlez-en avec ${firstName}.`;
 
-const pageDesc = expert.description
-  ? expert.description.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160)
-  : `Profil de ${displayName} chez Immobilière Pujol. Biens gérés, actuellement disponibles et historique.`;
-const pageTitle = `${displayName} – Immobilière Pujol`;
+// The admin's SEO fields win when set; otherwise fall back to the derived
+// defaults (bio excerpt / name + brand) so an expert with empty SEO renders
+// exactly as before. BaseLayout appends the brand suffix when the title lacks
+// it, so a seoTitle like "Benoit – Vente…" becomes "… – Immobilière Pujol".
+const pageDesc = expert.seoDescription?.trim()
+  || (expert.description
+    ? expert.description.replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160)
+    : `Profil de ${displayName} chez Immobilière Pujol. Biens gérés, actuellement disponibles et historique.`);
+const pageTitle = expert.seoTitle?.trim() || `${displayName} – Immobilière Pujol`;
 
 type ReviewsPayload = {
   collaboratorId: number;
