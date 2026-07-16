@@ -50,7 +50,8 @@ const fmt = (s: string | null) =>
             <td>{u.name}</td>
             <td class="u-email">{u.email}</td>
             <td>
-              <span class={`badge ${u.role === 'super' ? 'badge--sent' : ''}`}>{u.role === 'super' ? 'Super-admin' : 'Admin'}</span>
+              {/* env admins are always super (bootstrap trust), whatever their stored row says */}
+              <span class={`badge ${(u.role === 'super' || u.env) ? 'badge--sent' : ''}`}>{(u.role === 'super' || u.env) ? 'Super-admin' : 'Admin'}</span>
               {u.env && <span class="u-tag" title="Configuré au niveau serveur">serveur</span>}
             </td>
             <td>{u.active ? 'Actif' : <span style="color:var(--danger);">Désactivé</span>}</td>
