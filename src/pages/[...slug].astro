@@ -147,8 +147,14 @@ const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
   (cat: string) => cat.toLowerCase().includes('prix') && cat.toLowerCase().includes('m')
 );
 
-const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
-const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
+// Legacy Yoast titles end with "| Immobilière Pujol" and BaseLayout re-adds the
+// brand, so only that trailing segment is stripped. Splitting on any "|" (what
+// this did before) truncated titles that use the pipe as real punctuation — and
+// now that the admin's SEO actually renders, it would silently cut any title an
+// admin types at its first pipe, "|" being a common SEO separator.
+const stripBrandSuffix = (s?: string) => (s || '').replace(/\s*\|\s*Immobilière Pujol\s*$/i, '').trim();
+const title = stripBrandSuffix(entry.data.seoTitle) || entry.data.title || 'Immobilière Pujol';
+const description = entry.data.seoDescription?.trim() || entry.data.excerpt || '';
 
 // Content edited in the admin (D1) must beat BaseLayout's frozen WordPress meta
 // mirror, otherwise the editor's SEO fields are decorative: the mirror covers
