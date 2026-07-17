@@ -38,9 +38,9 @@ try {
           <span class="tmpl-card__t">Actualités</span>
           <span class="tmpl-card__d">Articles de blog, dernières nouveautés</span>
         </label>
-        <label class="tmpl-card"><input type="radio" name="tmpl" value="listings" />
-          <span class="tmpl-card__t">Sélection de biens</span>
-          <span class="tmpl-card__d">Ventes, locations, offres à la une</span>
+        <label class="tmpl-card"><input type="radio" name="tmpl" value="mixed" />
+          <span class="tmpl-card__t">Sélection mixte</span>
+          <span class="tmpl-card__d">Articles et biens dans un seul email</span>
         </label>
         <label class="tmpl-card"><input type="radio" name="tmpl" value="broadcast" />
           <span class="tmpl-card__t">Message / Offre</span>
@@ -84,30 +84,41 @@ try {
         </div>
       </section>
 
-      <!-- LISTINGS -->
-      <section class="tmpl-panel" data-panel="listings" hidden>
+      <!-- MIXED (articles + biens) -->
+      <section class="tmpl-panel" data-panel="mixed" hidden>
+        <div class="card nl-card">
+          <label>Titre (optionnel)
+            <input id="f-mix-heading" type="text" placeholder="ex. Les actualités et biens du mois" />
+          </label>
+          <p class="rt-label">Introduction (optionnel)</p>
+          <div class="rt-toolbar" data-for="rt-mix-intro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-mix-intro" class="rt" contenteditable="true" data-ph="Quelques mots d’introduction…"></div>
+        </div>
+        <div class="card nl-card">
+          <p class="nl-cardtitle">Articles <small>(jusqu’à 3 — section optionnelle)</small></p>
+          <div class="pick-selected" id="mix-art-selected"></div>
+          <input class="pick-search" id="mix-art-search" type="text" placeholder="Rechercher un article…" />
+          <div class="pick-avail" id="mix-art-avail"></div>
+        </div>
         <div class="card nl-card">
           <div class="nl-two">
-            <label>Titre (optionnel)
-              <input id="f-list-heading" type="text" placeholder="ex. Nos biens à la une" />
-            </label>
-            <label>Type
-              <select id="f-list-kind">
+            <p class="nl-cardtitle" style="margin-bottom:0;border-bottom:none;padding-bottom:0;">Biens <small>(jusqu’à 4 — section optionnelle)</small></p>
+            <label style="margin-bottom:0;">Type
+              <select id="f-mix-kind">
                 <option value="mixte">Ventes & locations</option>
                 <option value="V">Ventes uniquement</option>
                 <option value="L">Locations uniquement</option>
               </select>
             </label>
           </div>
-          <p class="rt-label">Introduction (optionnel)</p>
-          <div class="rt-toolbar" data-for="rt-list-intro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
-          <div id="rt-list-intro" class="rt" contenteditable="true" data-ph="Quelques mots d’introduction…"></div>
+          <div class="pick-selected" id="mix-list-selected" style="margin-top:14px;"></div>
+          <input class="pick-search" id="mix-list-search" type="text" placeholder="Rechercher un bien (ville, code postal…)" />
+          <div class="pick-avail" id="mix-list-avail"></div>
         </div>
         <div class="card nl-card">
-          <p class="nl-cardtitle">Biens <small>(jusqu’à 6 — suggestion automatique modifiable)</small></p>
-          <div class="pick-selected" id="list-selected"></div>
-          <input class="pick-search" id="list-search" type="text" placeholder="Rechercher un bien (ville, code postal…)" />
-          <div class="pick-avail" id="list-avail"></div>
+          <p class="rt-label">Conclusion (optionnel)</p>
+          <div class="rt-toolbar" data-for="rt-mix-outro"><button type="button" data-cmd="bold"><b>B</b></button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="link">🔗</button></div>
+          <div id="rt-mix-outro" class="rt" contenteditable="true" data-ph="Mot de la fin…"></div>
         </div>
       </section>
 
@@ -264,7 +275,7 @@ try {
       document.querySelectorAll('.tmpl-card').forEach((c) => c.classList.toggle('is-active', c.contains(r)));
       document.querySelectorAll('.tmpl-panel').forEach((p) => { p.hidden = p.dataset.panel !== template; });
       if (template === 'blog') pickers.blog.ensureLoaded();
-      if (template === 'listings') pickers.listings.ensureLoaded();
+      if (template === 'mixed') { pickers.mixedArticles.ensureLoaded(); pickers.mixedListings.ensureLoaded(); }
       schedulePreview();
     });
   });
@@ -289,6 +300,7 @@ try {
     let available = [];
     const selected = [];
     let loaded = false;
+    let presetApplied = false; // duplicate hydration injected a selection → don't auto-suggest
 
     function renderSelected() {
       selEl.innerHTML = '';
@@ -334,8 +346,9 @@ try {
         const json = await res.json();
         available = (kind === 'listings' ? (json.items || []) : json).map(normalize);
         loaded = true;
-        // auto-suggest: preselect first N if nothing chosen yet
-        if (!selected.length) { available.slice(0, kind === 'listings' ? 4 : 3).forEach((it) => selected.push(it)); }
+        // auto-suggest: preselect first N if nothing chosen yet (skip when a
+        // duplicate hydrated a selection — even an intentionally empty one)
+        if (!selected.length && !presetApplied) { available.slice(0, kind === 'listings' ? 4 : 3).forEach((it) => selected.push(it)); }
         renderSelected(); renderAvail(); schedulePreview();
       } catch (e) { availEl.innerHTML = `<div style="padding:14px;color:var(--danger);font-size:13px;">Erreur de chargement.</div>`; }
     }
@@ -346,21 +359,40 @@ try {
       }
       return { slug: it.slug, title: it.title, sub: it.date || '', imageUrl: it.featuredImage, url: it.url, excerpt: it.excerpt };
     }
+    // Inject a preset selection (duplicate hydration). Items are the stored card
+    // snapshots from content_json; recompute the `sub` line if it wasn't stored.
+    function setSelected(items) {
+      selected.length = 0;
+      (items || []).forEach((it) => {
+        const item = { ...it };
+        if (item.sub == null) {
+          item.sub = kind === 'listings'
+            ? [it.price, [it.postalCode, it.city].filter(Boolean).join(' ')].filter(Boolean).join(' · ')
+            : (it.date || '');
+        }
+        selected.push(item);
+      });
+      presetApplied = true;
+      renderSelected(); renderAvail(); schedulePreview();
+    }
     return {
       ensureLoaded: () => { if (!loaded) load(); },
       reload: load,
       getSelected: () => selected.slice(),
+      setSelected,
     };
   }
 
   const pickers = {
     blog: makePicker({ kind: 'blog', endpoint: '/api/admin-pujol/newsletter/articles/', max: 3,
       selEl: $('blog-selected'), availEl: $('blog-avail'), searchEl: $('blog-search') }),
-    listings: makePicker({ kind: 'listings', endpoint: '/api/admin-pujol/newsletter/listings/', max: 6,
-      selEl: $('list-selected'), availEl: $('list-avail'), searchEl: $('list-search'),
-      extraParam: (p) => { const k = $('f-list-kind').value; if (k === 'V' || k === 'L') p.set('kind', k); } }),
+    mixedArticles: makePicker({ kind: 'blog', endpoint: '/api/admin-pujol/newsletter/articles/', max: 3,
+      selEl: $('mix-art-selected'), availEl: $('mix-art-avail'), searchEl: $('mix-art-search') }),
+    mixedListings: makePicker({ kind: 'listings', endpoint: '/api/admin-pujol/newsletter/listings/', max: 4,
+      selEl: $('mix-list-selected'), availEl: $('mix-list-avail'), searchEl: $('mix-list-search'),
+      extraParam: (p) => { const k = $('f-mix-kind').value; if (k === 'V' || k === 'L') p.set('kind', k); } }),
   };
-  $('f-list-kind').addEventListener('change', () => pickers.listings.reload());
+  $('f-mix-kind').addEventListener('change', () => pickers.mixedListings.reload());
 
   // ── Hero upload (reuses the blog R2 upload endpoint) ──
   const heroPrev = $('f-bc-hero-preview');
@@ -381,12 +413,13 @@ try {
   // ── Build the template-specific data payload ──
   const v = (id) => ($(id).value || '').trim();
   function buildData() {
-    if (template === 'listings') {
+    if (template === 'mixed') {
       return {
-        subject: v('f-subject'), preheader: v('f-preheader'), heading: v('f-list-heading'),
-        intro: rt('rt-list-intro'), kind: $('f-list-kind').value,
-        listings: pickers.listings.getSelected().map((l) => ({
-          title: l.title, url: l.url, price: l.price, city: l.city, postalCode: l.postalCode,
+        subject: v('f-subject'), preheader: v('f-preheader'), heading: v('f-mix-heading'),
+        intro: rt('rt-mix-intro'), outro: rt('rt-mix-outro'), kind: $('f-mix-kind').value,
+        articles: pickers.mixedArticles.getSelected().map((a) => ({ title: a.title, url: a.url, excerpt: a.excerpt, imageUrl: a.imageUrl, slug: a.slug })),
+        listings: pickers.mixedListings.getSelected().map((l) => ({
+          slug: l.slug, title: l.title, url: l.url, price: l.price, city: l.city, postalCode: l.postalCode,
           surface: l.surface, rooms: l.rooms, imageUrl: l.imageUrl, kind: l.kind,
         })),
       };
@@ -422,7 +455,7 @@ try {
     } catch (e) { /* ignore transient */ }
   }
   $('nl-refresh').addEventListener('click', refreshPreview);
-  ['f-subject','f-preheader','f-blog-heading','f-list-heading','f-bc-heading','f-bc-cta-label','f-bc-cta-url'].forEach((id) => $(id).addEventListener('input', schedulePreview));
+  ['f-subject','f-preheader','f-blog-heading','f-mix-heading','f-bc-heading','f-bc-cta-label','f-bc-cta-url'].forEach((id) => $(id).addEventListener('input', schedulePreview));
   $('f-bc-expert').addEventListener('change', schedulePreview);
 
   function setStatus(msg) { $('nl-status').textContent = msg; }
@@ -507,7 +540,69 @@ try {
     }
   }
 
+  // ── Duplicate: prefill the composer from an existing campaign ──
+  // Set the template UI without triggering the change handler's auto-suggest —
+  // hydration injects its own selection first via each picker's setSelected().
+  function showTemplate(tmpl) {
+    template = tmpl;
+    const radio = document.querySelector(`input[name="tmpl"][value="${tmpl}"]`);
+    if (radio) radio.checked = true;
+    document.querySelectorAll('.tmpl-card').forEach((c) => c.classList.toggle('is-active', !!radio && c.contains(radio)));
+    document.querySelectorAll('.tmpl-panel').forEach((p) => { p.hidden = p.dataset.panel !== tmpl; });
+  }
+  const setRt = (elId, html) => { const el = $(elId); if (el) { el.innerHTML = html || ''; rtState[elId] = html || ''; } };
+
+  async function hydrateFrom(id) {
+    setStatus('Chargement de la copie…');
+    let campaign;
+    try {
+      const res = await fetch(`/api/admin-pujol/newsletter/${encodeURIComponent(id)}/`);
+      if (!res.ok) throw new Error(String(res.status));
+      campaign = await res.json();
+    } catch (e) {
+      setStatus(''); alert('Impossible de charger la newsletter à dupliquer.');
+      pickers.blog.ensureLoaded(); return;
+    }
+    const d = campaign.content_json || {};
+    // Campaigns saved under the old 'listings' model open in the mixed panel
+    // (mixed is a superset — articles simply start empty).
+    let tmpl = campaign.template || 'blog';
+    if (tmpl === 'listings') tmpl = 'mixed';
+    showTemplate(tmpl);
+
+    $('f-subject').value = campaign.subject || d.subject || '';
+    $('f-preheader').value = campaign.preheader || d.preheader || '';
+
+    if (tmpl === 'mixed') {
+      $('f-mix-heading').value = d.heading || '';
+      if (d.kind) $('f-mix-kind').value = d.kind;
+      setRt('rt-mix-intro', d.intro); setRt('rt-mix-outro', d.outro);
+      pickers.mixedArticles.setSelected(d.articles || []);
+      pickers.mixedListings.setSelected(d.listings || []);
+      pickers.mixedArticles.ensureLoaded(); pickers.mixedListings.ensureLoaded();
+    } else if (tmpl === 'broadcast') {
+      $('f-bc-hero').value = d.heroImage || ''; renderHero();
+      $('f-bc-heading').value = d.heading || '';
+      setRt('rt-bc-body', d.body);
+      $('f-bc-cta-label').value = d.ctaLabel || '';
+      $('f-bc-cta-url').value = d.ctaUrl || '';
+      if (d.expert) { // content_json stores the expert by name, not slug
+        const opt = Array.from($('f-bc-expert').options).find((o) => o.dataset.name === d.expert.name);
+        if (opt) $('f-bc-expert').value = opt.value;
+      }
+    } else { // blog
+      $('f-blog-heading').value = d.heading || '';
+      setRt('rt-blog-intro', d.intro); setRt('rt-blog-outro', d.outro);
+      pickers.blog.setSelected(d.articles || []);
+      pickers.blog.ensureLoaded();
+    }
+    setStatus('Copie prête — ajustez puis envoyez.');
+    schedulePreview();
+  }
+
   // initial load
-  pickers.blog.ensureLoaded();
+  const fromId = new URLSearchParams(location.search).get('from');
+  if (fromId) hydrateFrom(fromId);
+  else pickers.blog.ensureLoaded();
   loadLists();
 </script>

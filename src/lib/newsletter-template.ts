@@ -14,7 +14,7 @@
 // to the pujol-email worker, which owns all Brevo calls. The footer carries the
 // Brevo {{ unsubscribe }} tag so campaigns get a working one-click unsubscribe.
 
-export type NewsletterTemplate = 'blog' | 'listings' | 'broadcast';
+export type NewsletterTemplate = 'blog' | 'listings' | 'broadcast' | 'mixed';
 
 // ── Brand constants (kept in sync with workers/email/index.ts) ────────────────
 const SITE = 'https://www.immobiliere-pujol.fr';
@@ -162,8 +162,9 @@ export interface BlogInput {
   outro?: string;
   articles: NewsletterArticle[]; // 1..3
 }
-export function renderBlog(input: BlogInput): string {
-  const cards = input.articles.map((a) => `
+// A single blog-article card — shared by the blog and mixed templates.
+function articleCard(a: NewsletterArticle): string {
+  return `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px;border:1px solid ${BG};border-radius:8px;overflow:hidden">
       ${a.imageUrl ? `<tr><td><a href="${esc(a.url)}"><img src="${esc(emailImg(a.imageUrl, 600))}" alt="${esc(a.title)}" width="600" style="display:block;width:100%;max-width:600px;height:auto"></a></td></tr>` : ''}
       <tr><td style="padding:18px 20px 20px">
@@ -171,7 +172,10 @@ export function renderBlog(input: BlogInput): string {
         ${a.excerpt ? `<p style="margin:0 0 16px;font-size:14px;color:${INK};line-height:1.6">${esc(a.excerpt)}</p>` : ''}
         ${button("Lire l'article", a.url)}
       </td></tr>
-    </table>`).join('');
+    </table>`;
+}
+export function renderBlog(input: BlogInput): string {
+  const cards = input.articles.map(articleCard).join('');
 
   const content = `
     ${input.heading ? `<h1 style="margin:0 0 6px;font-size:22px;line-height:1.3;color:${NAVY};font-weight:700">${esc(input.heading)}</h1>` : ''}
@@ -209,14 +213,14 @@ function listingBadge(kind: 'V' | 'L' | undefined): string {
   if (!label) return '';
   return `<span style="display:inline-block;background-color:${OLIVE};color:${NAVY};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:3px 8px;border-radius:3px">${label}</span>`;
 }
-export function renderListings(input: ListingsInput): string {
-  const cards = input.listings.map((l) => {
-    const facts = [
-      l.surface ? `${l.surface} m²` : '',
-      l.rooms ? `${l.rooms} pièce${l.rooms > 1 ? 's' : ''}` : '',
-      [l.postalCode, l.city].filter(Boolean).join(' '),
-    ].filter(Boolean).join(' · ');
-    return `
+// A single property-listing card — shared by the listings and mixed templates.
+function listingCard(l: NewsletterListing): string {
+  const facts = [
+    l.surface ? `${l.surface} m²` : '',
+    l.rooms ? `${l.rooms} pièce${l.rooms > 1 ? 's' : ''}` : '',
+    [l.postalCode, l.city].filter(Boolean).join(' '),
+  ].filter(Boolean).join(' · ');
+  return `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;border:1px solid ${BG};border-radius:8px;overflow:hidden">
       ${l.imageUrl ? `<tr><td><a href="${esc(l.url)}"><img src="${esc(emailImg(l.imageUrl, 600))}" alt="${esc(l.title)}" width="600" style="display:block;width:100%;max-width:600px;height:auto"></a></td></tr>` : ''}
       <tr><td style="padding:16px 20px 18px">
@@ -229,7 +233,17 @@ export function renderListings(input: ListingsInput): string {
         ${button('Voir le bien', l.url)}
       </td></tr>
     </table>`;
-  }).join('');
+}
+
+// The "see all listings" CTA that closes any listing section.
+function allListingsCta(): string {
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:8px 0 4px">
+      ${button('Voir toutes nos annonces', `${SITE}/annonces/`, { block: true })}
+    </td></tr></table>`;
+}
+
+export function renderListings(input: ListingsInput): string {
+  const cards = input.listings.map(listingCard).join('');
 
   const content = `
     ${input.heading ? `<h1 style="margin:0 0 6px;font-size:22px;line-height:1.3;color:${NAVY};font-weight:700">${esc(input.heading)}</h1>` : ''}
@@ -237,9 +251,7 @@ export function renderListings(input: ListingsInput): string {
     <div style="height:20px;font-size:0;line-height:0">&nbsp;</div>
     ${cards}
     <div style="height:6px;font-size:0;line-height:0">&nbsp;</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:8px 0 4px">
-      ${button('Voir toutes nos annonces', `${SITE}/annonces/`, { block: true })}
-    </td></tr></table>
+    ${allListingsCta()}
     ${input.outro ? richText(input.outro) : ''}`;
 
   return renderShell({ subject: input.subject, preheader: input.preheader, contentHtml: content });
@@ -286,11 +298,58 @@ export function renderBroadcast(input: BroadcastInput): string {
   return renderShell({ subject: input.subject, preheader: input.preheader, contentHtml: content });
 }
 
+// ── Template D: mixed / sélection mixte ───────────────────────────────────────
+// A single email that can carry blog articles AND/OR property listings — either
+// section is optional (empty articles = a listings-only email, the old template B
+// behaviour). Replaces "Sélection de biens" in the composer; renderListings is
+// kept for campaigns already stored with template 'listings'.
+export interface MixedInput {
+  subject: string;
+  preheader?: string;
+  heading?: string;
+  intro?: string;
+  outro?: string;
+  kind?: 'V' | 'L' | 'mixte'; // kept for parity with the listings picker
+  articles: NewsletterArticle[]; // 0..3
+  listings: NewsletterListing[]; // 0..4
+}
+export function renderMixed(input: MixedInput): string {
+  const articles = input.articles || [];
+  const listings = input.listings || [];
+  const articleCards = articles.map(articleCard).join('');
+  const listingCards = listings.map(listingCard).join('');
+
+  const articleSection = articles.length
+    ? `${sectionTitle('Actualités')}
+       <div style="height:14px;font-size:0;line-height:0">&nbsp;</div>
+       ${articleCards}`
+    : '';
+  const listingSection = listings.length
+    ? `${articles.length ? '<div style="height:8px;font-size:0;line-height:0">&nbsp;</div>' : ''}
+       ${sectionTitle('Nos biens à la une')}
+       <div style="height:14px;font-size:0;line-height:0">&nbsp;</div>
+       ${listingCards}
+       <div style="height:6px;font-size:0;line-height:0">&nbsp;</div>
+       ${allListingsCta()}`
+    : '';
+
+  const content = `
+    ${input.heading ? `<h1 style="margin:0 0 6px;font-size:22px;line-height:1.3;color:${NAVY};font-weight:700">${esc(input.heading)}</h1>` : ''}
+    ${richText(input.intro)}
+    <div style="height:20px;font-size:0;line-height:0">&nbsp;</div>
+    ${articleSection}
+    ${listingSection}
+    ${input.outro ? `<div style="height:8px;font-size:0;line-height:0">&nbsp;</div>${richText(input.outro)}` : ''}`;
+
+  return renderShell({ subject: input.subject, preheader: input.preheader, contentHtml: content });
+}
+
 // ── Dispatcher ────────────────────────────────────────────────────────────────
 export function renderNewsletter(template: NewsletterTemplate, data: any): string {
   switch (template) {
     case 'listings':  return renderListings(data as ListingsInput);
     case 'broadcast': return renderBroadcast(data as BroadcastInput);
+    case 'mixed':     return renderMixed(data as MixedInput);
     case 'blog':
     default:          return renderBlog(data as BlogInput);
   }
