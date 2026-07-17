@@ -1,0 +1,14 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import ArticleEditor from '../../../components/admin/ArticleEditor.astro';
+
+type Expert = { slug: string; title: string };
+const expertMods = import.meta.glob<Expert>('../../../content/experts/*.json', { eager: true, import: 'default' });
+const experts = Object.values(expertMods)
+  .map((e) => ({ slug: e.slug, title: (e.title || e.slug).split('|').pop()?.trim() || e.slug }))
+  .sort((a, b) => a.title.localeCompare(b.title));
+---
+<AdminLayout title="Nouvel article" section="articles">
+  <ArticleEditor article={null} experts={experts} />
+</AdminLayout>

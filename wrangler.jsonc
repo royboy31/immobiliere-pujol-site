@@ -16,8 +16,8 @@
 	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }],
 	"vars": {
 		"UPLOAD_TOKEN": "pujol-r2-upload-4c3e8f9d1b2a",
-		"ADMIN_EMAILS": "roy@perelweb.studio,carolinepujol@immobiliere-pujol.fr",
-		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$zDBk3btyW9Vd0qPWmGtPqw$LPAVzYrrQw0GlsWzTlK0f6Bdmt--U9uLNbZ0p8bMV5s",
+		"ADMIN_EMAILS": "roy@perelweb.studio,carolinepujol@immobiliere-pujol.fr,kamindudushmantha@gmail.com",
+		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$MrKFC1nm8GaETEKkOrQK6A$pa-b78xea_bWkvm-cRWxhQCn6hyOt5uhagT_Z3RvEuI",
 		"ADMIN_SESSION_SECRET": "zgSxSQYzhMeUaYHhZbnRKgJ2SN8W28qj0m7vM1tDyvyScVLSbnhPIkTU5r8igeY_",
 		"ADMIN_PATH": "admin-pujol"
 	}

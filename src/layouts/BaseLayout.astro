@@ -14,6 +14,19 @@ interface Props {
   ogImage?: string;
   canonical?: string;
   noindex?: boolean;
+  /** Independent nofollow (noindex already implies nofollow). */
+  nofollow?: boolean;
+  /** Open Graph / Twitter overrides — fall back to the page title/description. */
+  ogTitle?: string;
+  ogDescription?: string;
+  /** twitter:card type — "summary" (default) or "summary_large_image". */
+  twitterCard?: string;
+  /**
+   * Skip the phase-1 WordPress meta mirror below and use this page's own
+   * title/description. Only for pages whose meta is now edited in the admin
+   * (the D1-backed legal pages) — otherwise the frozen live meta must win.
+   */
+  bypassSeoMirror?: boolean;
   /** Page-specific JSON-LD schemas (Article, WebSite, RealEstateListing, etc.). */
   schemas?: any[];
   /** Disable the auto-generated BreadcrumbList schema and the visible trail. */
@@ -31,6 +44,11 @@ const {
   ogImage = "https://www.immobiliere-pujol.fr/images/og-default.jpg",
   canonical,
   noindex = false,
+  nofollow = false,
+  ogTitle,
+  ogDescription,
+  twitterCard = "summary",
+  bypassSeoMirror = false,
   schemas: pageSchemas = [],
   breadcrumb = true,
   breadcrumbCrumbs,
@@ -45,7 +63,11 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 // Annonce (SSR) pages are handled in src/pages/annonces/[slug].astro, not here.
 // Only the meta tags are overridden; breadcrumbs keep the page's own title.
 const liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
-const liveMeta = (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
+// bypassSeoMirror: the legal pages are edited in the admin now, so their D1
+// title/description must win over the frozen mirror. Every other page keeps it.
+const liveMeta = bypassSeoMirror
+  ? undefined
+  : (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];
 const metaDescription = liveMeta ? liveMeta.d : description;
 // Title: mirror live verbatim when available. For pages NOT on live (e.g. the new
 // /service-immobilier/* pages) append the brand suffix for consistency — but NOT
@@ -58,6 +80,12 @@ const metaTitle = liveMeta?.t
 // STAGING: block all indexing until go-live.
 // Set ALLOW_INDEXING=true in Cloudflare env vars when ready for production.
 const shouldNoindex = noindex || !import.meta.env.ALLOW_INDEXING;
+// A page may request nofollow independently; noindex always implies nofollow.
+const shouldNofollow = nofollow || shouldNoindex;
+const robotsContent = `${shouldNoindex ? 'noindex' : 'index'}, ${shouldNofollow ? 'nofollow' : 'follow'}`;
+// OG / Twitter: explicit overrides win, else fall back to the page meta.
+const ogTitleFinal = ogTitle || metaTitle;
+const ogDescriptionFinal = ogDescription || metaDescription;
 
 // GTM & analytics: only fire in production (when we allow indexing).
 // Staging must never pollute live stats.
@@ -115,7 +143,7 @@ for (const s of pageSchemas) {
     <meta name="description" content={metaDescription} />
     {!noindex && <link rel="canonical" href={canonicalURL} />}
 
-    <meta name="robots" content={shouldNoindex ? "noindex, nofollow" : "index, follow"} />
+    <meta name="robots" content={robotsContent} />
     <meta name="google-site-verification" content="XKAzqnzZ1WGlJqJZvQFkvRvnoawpEcOIgkoIRPAXLgc" />
 
     <link rel="alternate" type="application/rss+xml" title="Immobilière Pujol" href="/feed/" />
@@ -123,19 +151,19 @@ for (const s of pageSchemas) {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={metaTitle} />
-    <meta property="og:description" content={metaDescription} />
+    <meta property="og:title" content={ogTitleFinal} />
+    <meta property="og:description" content={ogDescriptionFinal} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="Immobilière Pujol" />
     <meta property="fb:app_id" content="341420341199123" />
 
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:site" content="@stephanepujol" />
     <meta name="twitter:creator" content="@stephanepujol" />
-    <meta name="twitter:title" content={metaTitle} />
-    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:title" content={ogTitleFinal} />
+    <meta name="twitter:description" content={ogDescriptionFinal} />
     <meta name="twitter:image" content={ogImage} />
 
     {/* Consent Mode v2 — ads default denied, then restore the stored choice.

@@ -92,12 +92,37 @@ export async function signSession(env: AdminEnv, email: string): Promise<string>
     .sign(te(env.ADMIN_SESSION_SECRET));
 }
 
+/**
+ * May this email log in at all? Env allowlist OR an active row in admin_users.
+ *
+ * The env check is sync and comes first, so the three bootstrap admins are never
+ * blocked by a D1 problem. The D1 check is what lets UI-created admins in. If D1
+ * is unreachable the query throws and we fall back to env-only — degrading to
+ * exactly the pre-admin_users behaviour, never locking out an env admin.
+ *
+ * Queried inline (not via admin-users) to avoid a circular import: admin-users
+ * imports from this module.
+ */
+export async function emailAllowed(env: AdminEnv, email: string): Promise<boolean> {
+  if (isAllowedEmail(env, email)) return true;
+  try {
+    const { env: rt } = await import('cloudflare:workers');
+    const db = (rt as any).DB as D1Database | undefined;
+    if (!db) return false;
+    const row = await db.prepare('SELECT active FROM admin_users WHERE email = ?')
+      .bind(email.trim().toLowerCase()).first();
+    return !!row && Number((row as any).active) === 1;
+  } catch {
+    return false; // D1 down / table missing — env admins already returned true above
+  }
+}
+
 export async function verifySession(env: AdminEnv, token: string): Promise<string | null> {
   try {
     const { payload } = await jwtVerify(token, te(env.ADMIN_SESSION_SECRET));
     const email = typeof payload.email === 'string' ? payload.email : null;
     if (!email) return null;
-    if (!isAllowedEmail(env, email)) return null;
+    if (!(await emailAllowed(env, email))) return null;
     return email;
   } catch { return null; }
 }

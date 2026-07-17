@@ -3,11 +3,11 @@ import type { APIRoute } from 'astro';
 import {
   getAdminEnv,
   getAdminPath,
-  isAllowedEmail,
-  verifyPassword,
+  emailAllowed,
   signSession,
   makeSessionCookie,
 } from '../../../../lib/admin-auth';
+import { verifyAdminPassword } from '../../../../lib/admin-users';
 
 export const POST: APIRoute = async ({ request }) => {
   const env = await getAdminEnv();
@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     email = String(body?.email || ''); password = String(body?.password || ''); next = String(body?.next || `/${adminPath}/`);
   }
 
-  if (!isAllowedEmail(env, email) || !(await verifyPassword(env, password))) {
+  if (!(await emailAllowed(env, email)) || !(await verifyAdminPassword(env, email, password))) {
     return new Response(null, {
       status: 302,
       headers: { Location: `/${adminPath}/login?err=1&next=${encodeURIComponent(next)}` },

@@ -35,9 +35,16 @@ Cloudflare account, deployed from the **`pujol-main`** branch (see
 3. **Never commit build artifacts.** `npm run build` regenerates these from D1;
    restore them after every build:
    ```bash
-   git checkout HEAD -- src/content/annonces src/data public/_data
+   git checkout HEAD -- src/content/annonces src/content/articles src/content/experts src/content/pages src/data public/_data
    ```
-   Committing them deletes thousands of annonce pages.
+   Committing them deletes thousands of annonce pages. `src/content/articles`
+   (blog) and `src/content/experts` are now D1-synced too (see the
+   `sync-d1-*-to-content.mjs` scripts) — restore them alongside annonces.
+   `src/content/pages` is only **partly** D1-synced: the 2 legal pages are
+   rewritten from `site_pages`, the other 27 (incl. `home.md` and the landing
+   pages) are hand-maintained and are NOT in D1. `sync-d1-pages-to-content.mjs`
+   therefore never deletes a file — restore the directory rather than assuming
+   only the legal pages moved.
 
 4. **Deploy the main app** with `npm run build && npx wrangler deploy` (repo root).
    The **email worker** deploys separately:

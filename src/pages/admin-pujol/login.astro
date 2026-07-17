@@ -11,85 +11,282 @@ const error = Astro.url.searchParams.get('err');
 
 <AdminLayout title="Connexion" hideSidebar>
   <div class="login-page">
-    <div class="login-page__brand">
-      <p class="login-page__eyebrow">Immobilière Pujol</p>
-      <h1>Espace <b>administration</b></h1>
-      <p class="login-page__sub">Connectez-vous pour gérer les contenus du site.</p>
-    </div>
+    <div class="login-page__inner">
+      <div class="login-page__brand">
+        <span class="login-page__mark" aria-hidden="true">P</span>
+        <p class="login-page__eyebrow">Immobilière Pujol</p>
+        <h1>Espace <b>administration</b></h1>
+        <p class="login-page__sub">Connectez-vous pour gérer les contenus du site.</p>
+      </div>
 
-    <div class="card login-page__card">
-      {error && (
-        <p class="login-page__error">Identifiants incorrects.</p>
-      )}
-      <form method="POST" action={`/api/${adminPath}/auth/login`}>
-        <input type="hidden" name="next" value={next} />
-        <label>
-          Email
-          <input type="email" name="email" required autocomplete="username" />
-        </label>
-        <label>
-          Mot de passe
-          <input type="password" name="password" required autocomplete="current-password" />
-        </label>
-        <button type="submit" class="btn btn--primary login-page__submit">
-          Se connecter
-        </button>
-      </form>
+      <div class="login-page__card">
+        {error && (
+          <p class="login-page__error" role="alert">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+              <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            Identifiants incorrects.
+          </p>
+        )}
+        <form method="POST" action={`/api/${adminPath}/auth/login/`}>
+          <input type="hidden" name="next" value={next} />
+
+          <div class="login-field">
+            <label for="login-email">Email</label>
+            <div class="login-field__control">
+              <svg class="login-field__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.8" />
+                <path d="m4 7.5 8 5.5 8-5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <input id="login-email" type="email" name="email" required autocomplete="username" placeholder="vous@pujol.fr" />
+            </div>
+          </div>
+
+          <div class="login-field">
+            <label for="login-password">Mot de passe</label>
+            <div class="login-field__control">
+              <svg class="login-field__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="10.5" width="16" height="9.5" rx="2.5" stroke="currentColor" stroke-width="1.8" />
+                <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              <input id="login-password" type="password" name="password" required autocomplete="current-password" placeholder="••••••••" />
+              <button type="button" class="login-field__toggle" data-toggle-pw aria-label="Afficher le mot de passe" aria-pressed="false">
+                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" />
+                </svg>
+                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden>
+                  <path d="M4 4l16 16M9.9 5.2A9.6 9.6 0 0 1 12 5c6 0 9.5 7 9.5 7a15.8 15.8 0 0 1-3.3 4M6.3 7.8A15.9 15.9 0 0 0 2.5 12S6 19 12 19a9.4 9.4 0 0 0 3.3-.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="login-page__submit">
+            Se connecter
+          </button>
+        </form>
+      </div>
+
+      <p class="login-page__foot">
+        <a href="/">← Retour au site</a>
+      </p>
     </div>
   </div>
 </AdminLayout>
 
+<script>
+  document.querySelectorAll('[data-toggle-pw]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const input = btn.parentElement?.querySelector('input') as HTMLInputElement | null;
+      if (!input) return;
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.setAttribute('aria-pressed', String(show));
+      btn.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+      const eye = btn.querySelector('.icon-eye');
+      const eyeOff = btn.querySelector('.icon-eye-off');
+      if (eye) (eye as HTMLElement).hidden = show;
+      if (eyeOff) (eyeOff as HTMLElement).hidden = !show;
+    });
+  });
+</script>
+
 <style>
+  /* Break out of the admin-main padding so the auth screen goes edge-to-edge,
+     then centre the card in the viewport over a soft branded backdrop. */
   .login-page {
-    max-width: 460px;
-    margin: 80px auto;
-    padding: 0 20px;
+    margin: -36px -44px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(178, 192, 78, .16) 0%, rgba(178, 192, 78, 0) 60%),
+      linear-gradient(180deg, var(--pj-paper) 0%, #fafafa 60%);
   }
+  .login-page__inner {
+    width: 100%;
+    max-width: 420px;
+  }
+
   .login-page__brand {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 26px;
+  }
+  .login-page__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    background: linear-gradient(150deg, var(--pj-olive) 0%, var(--pj-olive-2) 100%);
+    box-shadow: 0 8px 22px rgba(178, 192, 78, .4);
+    font-family: var(--pj-helv);
+    font-weight: 700;
+    font-size: 26px;
+    color: #000;
   }
   .login-page__eyebrow {
-    font-family: "Noto Sans", sans-serif;
+    font-family: var(--pj-noto);
     font-weight: 700;
-    font-size: 12px;
-    letter-spacing: .8px;
+    font-size: 11px;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: rgb(166, 179, 82);
-    margin: 0 0 10px;
+    color: var(--pj-olive-2);
+    margin: 0 0 8px;
   }
   .login-page h1 {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-family: var(--pj-helv);
     font-weight: 300;
-    font-size: 36px;
+    font-size: 32px;
     line-height: 1.05;
-    margin: 0 0 12px;
+    letter-spacing: -.2px;
+    margin: 0 0 10px;
     color: #000;
   }
   .login-page h1 b { font-weight: 700; }
   .login-page__sub {
-    font-family: "Noto Sans", sans-serif;
+    font-family: var(--pj-noto);
     font-weight: 300;
-    font-size: 15px;
-    color: rgb(58, 58, 58);
+    font-size: 14.5px;
+    color: var(--pj-ink);
     margin: 0;
   }
+
+  /* Self-contained — AdminLayout's .card is scoped to the layout and never
+     reaches this slotted form, so define the surface here. */
   .login-page__card {
-    padding: 30px 32px;
+    background: #fff;
+    border: 1px solid var(--pj-hairline);
+    padding: 32px 32px 34px;
+    border-radius: 22px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .04);
   }
+
   .login-page__error {
-    background: #fee2e2;
-    color: #991b1b;
-    padding: 10px 16px;
-    border-radius: 10px;
-    margin: 0 0 18px;
-    font-family: "Noto Sans", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fef2f2;
+    color: #b42318;
+    padding: 11px 14px;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    margin: 0 0 20px;
+    font-family: var(--pj-noto);
     font-size: 13px;
     font-weight: 500;
   }
-  .login-page__submit {
-    width: 100%;
-    justify-content: center;
-    margin-top: 6px;
+  .login-page__error svg { flex-shrink: 0; }
+
+  /* ── form fields ─────────────────────────────────────────────────────────── */
+  .login-field { margin-bottom: 18px; }
+  .login-field label {
+    display: block;
+    margin: 0 0 7px;
+    font-family: var(--pj-noto);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: var(--pj-slate);
   }
+  .login-field__control { position: relative; display: flex; align-items: center; }
+  .login-field__icon {
+    position: absolute;
+    left: 14px;
+    width: 18px; height: 18px;
+    color: var(--pj-slate);
+    opacity: .7;
+    pointer-events: none;
+    transition: color .2s ease, opacity .2s ease;
+  }
+  /* Scoped input styling — softer filled control with room for the leading icon. */
+  .login-field input {
+    width: 100%;
+    margin: 0;
+    padding: 13px 14px 13px 44px;
+    font-family: var(--pj-noto);
+    font-weight: 400;
+    font-size: 15px;
+    color: #000;
+    background: #fbfcf8;
+    border: 1px solid var(--pj-hairline);
+    border-radius: 12px;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  .login-field input::placeholder { color: #9aa2a6; }
+  .login-field input:focus {
+    outline: none;
+    background: #fff;
+    border-color: var(--pj-olive);
+    box-shadow: 0 0 0 3px rgba(178, 192, 78, .22);
+  }
+  .login-field__control:focus-within .login-field__icon { color: var(--pj-olive-2); opacity: 1; }
+
+  /* Any field with a reveal toggle leaves room on the right — anchored to the
+     control (not [type=password]) so it survives the toggle to type=text. */
+  .login-field__control:has(.login-field__toggle) input { padding-right: 46px; }
+  .login-field__toggle {
+    position: absolute;
+    right: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    color: var(--pj-slate);
+    cursor: pointer;
+    transition: color .2s ease, background-color .2s ease;
+  }
+  .login-field__toggle:hover { color: var(--pj-olive-2); background: rgba(178, 192, 78, .1); }
+  .login-field__toggle:focus-visible { outline: 2px solid var(--pj-olive); outline-offset: 1px; }
+  .login-field__toggle svg { width: 19px; height: 19px; }
+  .login-field__toggle [hidden] { display: none; }
+
+  /* Self-contained solid CTA — .btn/.btn--primary are scoped to AdminLayout and
+     don't reach this slot, so all button styling is declared locally. */
+  .login-page__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+    padding: 15px 22px;
+    font-family: var(--pj-noto);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+    color: #000;
+    background-color: var(--pj-olive);
+    border: 1px solid var(--pj-olive);
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(178, 192, 78, .38);
+    transition: background-color .2s ease, box-shadow .2s ease, transform .12s ease;
+  }
+  .login-page__submit:hover {
+    background-color: var(--pj-olive-2);
+    color: #000;
+    box-shadow: 0 10px 26px rgba(178, 192, 78, .5);
+    transform: translateY(-1px);
+  }
+  .login-page__submit:active { transform: translateY(0); box-shadow: 0 5px 14px rgba(178, 192, 78, .4); }
+
+  .login-page__foot {
+    text-align: center;
+    margin: 22px 0 0;
+    font-family: var(--pj-noto);
+    font-size: 13px;
+  }
+  .login-page__foot a { color: var(--pj-slate); }
+  .login-page__foot a:hover { color: var(--pj-orange); }
 </style>

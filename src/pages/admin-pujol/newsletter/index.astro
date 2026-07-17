@@ -1,0 +1,100 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listCampaigns, type NewsletterCampaign } from '../../../lib/newsletter-db';
+
+let campaigns: NewsletterCampaign[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  campaigns = await listCampaigns(db);
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+const TEMPLATE_LABEL: Record<string, string> = {
+  blog: 'Actualités', listings: 'Sélection de biens', mixed: 'Sélection mixte', broadcast: 'Message / Offre',
+};
+const fmt = (s: string | null) =>
+  s ? new Date(s.includes('T') ? s : s.replace(' ', 'T') + 'Z').toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+---
+
+<AdminLayout title="Newsletters" section="newsletter">
+  <div class="toolbar">
+    <h1 style="margin:0;">Newsletters <span style="font-weight:300;color:#888;">({campaigns.length})</span></h1>
+    <span class="spacer"></span>
+    <a href="./new/" class="btn btn--primary">+ Nouvelle newsletter</a>
+  </div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && campaigns.length === 0 && (
+    <div class="card"><p>Aucune newsletter pour l’instant. Cliquez sur « Nouvelle newsletter » pour composer votre premier envoi.</p></div>
+  )}
+
+  {campaigns.length > 0 && (
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="nl-table">
+        <thead>
+          <tr><th>Objet</th><th>Modèle</th><th>Destinataires</th><th>Statut</th><th>Date</th><th style="text-align:right;">Actions</th></tr>
+        </thead>
+        <tbody>
+          {campaigns.map((c) => (
+            <tr data-id={c.id}>
+              <td>
+                <div class="nl-subject">{c.subject}</div>
+                {c.preheader && <div class="nl-pre">{c.preheader}</div>}
+              </td>
+              <td class="nl-tmpl">{TEMPLATE_LABEL[c.template] || c.template}</td>
+              {/* NULL for rows predating the list selector, and for drafts (the
+                  list is only fixed at send time) — show a dash, not "unknown". */}
+              <td class="nl-tmpl">{c.list_name || '—'}</td>
+              <td><span class={`badge badge--${c.status}`}>{c.status === 'sent' ? 'Envoyée' : 'Brouillon'}</span></td>
+              <td class="nl-date">{fmt(c.status === 'sent' ? c.sent_at : c.created_at)}{c.recipient_count ? ` · ${c.recipient_count} dest.` : ''}</td>
+              <td style="text-align:right;white-space:nowrap;">
+                <a class="btn btn--ghost btn--sm" href={`./new/?from=${c.id}`}>Dupliquer</a>
+                <button class="btn btn--danger btn--sm" data-del={c.id} data-title={c.subject}>Suppr.</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</AdminLayout>
+
+<style>
+  .nl-table { width: 100%; border-collapse: collapse; font-family: var(--pj-noto); }
+  .nl-table th {
+    text-align: left; font-size: 11px; letter-spacing: .5px; text-transform: uppercase;
+    color: #8a8a8a; font-weight: 700; padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline);
+  }
+  .nl-table td { padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline); vertical-align: middle; }
+  .nl-table tr:last-child td { border-bottom: none; }
+  .nl-table tr:hover td { background: #fbfcf8; }
+  .nl-subject { font-weight: 600; font-size: 15px; color: #000; }
+  .nl-pre { font-size: 12px; color: #9aa0a6; margin-top: 2px; }
+  .nl-tmpl { font-size: 13px; color: #555; }
+  .nl-date { font-size: 13px; color: #666; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  }
+  .badge--sent { background: rgba(178,192,78,.2); color: #5c6a10; }
+  .badge--draft { background: #eee; color: #777; }
+  .btn--sm { padding: 6px 12px; font-size: 10px; margin-left: 6px; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-del]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.del;
+      if (!confirm(`Supprimer « ${btn.dataset.title} » de l’historique ?`)) return;
+      btn.disabled = true;
+      const res = await fetch(`/api/admin-pujol/newsletter/${id}/`, { method: 'DELETE' });
+      if (res.ok) btn.closest('tr')?.remove();
+      else { alert('Échec de la suppression.'); btn.disabled = false; }
+    });
+  });
+</script>

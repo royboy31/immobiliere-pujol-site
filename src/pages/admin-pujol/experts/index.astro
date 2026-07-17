@@ -1,36 +1,118 @@
 ---
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listExperts, type ExpertRecord } from '../../../lib/experts-db';
 
-type Expert = { slug: string; title: string; fonction?: string; photo?: string; email?: string; phone?: string };
-const expertMods = import.meta.glob<Expert>('../../../content/experts/*.json', { eager: true, import: 'default' });
-const experts = Object.values(expertMods).sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+let experts: ExpertRecord[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  experts = await listExperts(db);
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+// Display name = the name half of "Prénom Nom – Rôle".
+const displayName = (title: string) =>
+  ((title || '').split('|').pop() || '').split(/\s+[–-]\s+/)[0].trim() || title;
+
+const visibility = (e: ExpertRecord) =>
+  e.listing_only ? { label: 'Annonces', cls: 'listing' }
+  : e.hidden ? { label: 'Masqué', cls: 'hidden' }
+  : { label: 'Visible', cls: 'visible' };
 ---
 
 <AdminLayout title="Experts" section="experts">
   <div class="toolbar">
-    <h1 style="margin:0;">Experts ({experts.length})</h1>
+    <h1 style="margin:0;">Experts <span style="font-weight:300;color:#888;">({experts.length})</span></h1>
     <span class="spacer"></span>
     <a href="./new/" class="btn btn--primary">+ Nouvel expert</a>
   </div>
 
-  <div class="grid">
-    {experts.map((e) => {
-      const displayName = (e.title || '').split('|').pop()?.trim() || e.title;
-      return (
-        <a class="card" href={`./${e.slug}/edit/`} style="color:inherit; display:flex; gap:.9rem; align-items:flex-start;">
-          {e.photo ? (
-            <img src={e.photo} alt={displayName} width="64" height="80" style="object-fit:cover; border-radius:6px; flex-shrink:0;" />
-          ) : (
-            <div style="width:64px; height:80px; background:#e5e7eb; border-radius:6px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:.75rem;">photo</div>
-          )}
-          <div style="min-width:0;">
-            <strong style="display:block;">{displayName}</strong>
-            <small style="color:#555; display:block;">{e.fonction || '—'}</small>
-            <small style="color:#888; display:block; margin-top:.25rem; word-break:break-all;">{e.email || 'pas d\'email'}</small>
-          </div>
-        </a>
-      );
-    })}
-  </div>
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && experts.length === 0 && (
+    <div class="card"><p>Aucun expert pour l’instant. Cliquez sur « Nouvel expert » pour commencer.</p></div>
+  )}
+
+  {experts.length > 0 && (
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="exp-table">
+        <thead>
+          <tr><th>Expert</th><th>Département</th><th>Visibilité</th><th style="text-align:right;">Actions</th></tr>
+        </thead>
+        <tbody>
+          {experts.map((e) => {
+            const v = visibility(e);
+            return (
+              <tr data-id={e.id}>
+                <td>
+                  <div class="exp-who">
+                    {e.photo
+                      ? <img src={e.photo} alt="" class="exp-avatar" width="44" height="52" />
+                      : <div class="exp-avatar exp-avatar--empty">{displayName(e.title).charAt(0)}</div>}
+                    <div style="min-width:0;">
+                      <a href={`./${e.id}/edit/`} class="exp-name">{displayName(e.title)}</a>
+                      <div class="exp-role">{e.fonction || '—'}</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="exp-dept">{e.department || '—'}</td>
+                <td><span class={`badge badge--${v.cls}`}>{v.label}</span></td>
+                <td style="text-align:right;white-space:nowrap;">
+                  {!e.listing_only && <a href={`/experts/${e.slug}/`} class="btn btn--ghost btn--sm" target="_blank">Voir</a>}
+                  <a href={`./${e.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
+                  <button class="btn btn--danger btn--sm" data-del={e.id} data-title={displayName(e.title)}>Suppr.</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
 </AdminLayout>
+
+<style>
+  .exp-table { width: 100%; border-collapse: collapse; font-family: var(--pj-noto); }
+  .exp-table th {
+    text-align: left; font-size: 11px; letter-spacing: .5px; text-transform: uppercase;
+    color: #8a8a8a; font-weight: 700; padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline);
+  }
+  .exp-table td { padding: 12px 20px; border-bottom: 1px solid var(--pj-hairline); vertical-align: middle; }
+  .exp-table tr:last-child td { border-bottom: none; }
+  .exp-table tr:hover td { background: #fbfcf8; }
+  .exp-who { display: flex; align-items: center; gap: 12px; }
+  .exp-avatar { width: 44px; height: 52px; object-fit: cover; border-radius: 8px; flex-shrink: 0; border: 1px solid var(--pj-hairline); }
+  .exp-avatar--empty { display: flex; align-items: center; justify-content: center; background: #eef0ea; color: #b6bcae; font-weight: 700; font-size: 18px; }
+  .exp-name { font-weight: 600; font-size: 15px; color: #000; }
+  .exp-name:hover { color: var(--pj-orange); }
+  .exp-role { font-size: 12px; color: #9aa0a6; margin-top: 2px; }
+  .exp-dept { font-size: 13px; color: #555; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  }
+  .badge--visible { background: rgba(178,192,78,.2); color: #5c6a10; }
+  .badge--hidden { background: #eee; color: #777; }
+  .badge--listing { background: rgba(86,103,112,.15); color: #566770; }
+  .btn--sm { padding: 6px 12px; font-size: 10px; margin-left: 6px; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-del]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.del;
+      if (!confirm(`Supprimer « ${btn.dataset.title} » ? Cette action est définitive.`)) return;
+      btn.disabled = true;
+      const res = await fetch(`/api/admin-pujol/experts/${id}/`, { method: 'DELETE' });
+      if (res.ok) {
+        btn.closest('tr')?.remove();
+      } else {
+        alert('Échec de la suppression.');
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

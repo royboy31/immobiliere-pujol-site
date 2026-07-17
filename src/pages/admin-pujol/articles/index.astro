@@ -1,10 +1,175 @@
 ---
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listArticles, type BlogArticle } from '../../../lib/blog-db';
+
+let articles: BlogArticle[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  articles = await listArticles(db);
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+const fmt = (s: string | null) =>
+  s ? new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+
+// Accent-insensitive haystack, precomputed once per row so filtering stays a
+// plain substring test over ~1000 rows on every keystroke.
+const norm = (s: string | null) =>
+  (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 ---
-<AdminLayout title="Articles" section="articles">
-  <h1>Articles de blog</h1>
-  <div class="card">
-    <p>Module en cours de construction. Prochaine étape : liste + éditeur Markdown.</p>
+
+<AdminLayout title="Articles de blog" section="articles">
+  <div class="toolbar">
+    <h1 style="margin:0;">Articles de blog <span id="art-count" style="font-weight:300;color:#888;">({articles.length})</span></h1>
+    <span class="spacer"></span>
+    {articles.length > 0 && (
+      <div class="art-search">
+        <span class="art-search__icon" aria-hidden="true">⌕</span>
+        <input
+          type="text"
+          id="art-search"
+          class="art-search__input"
+          placeholder="Rechercher un article…"
+          autocomplete="off"
+          aria-label="Rechercher un article par titre ou slug"
+        />
+        <button type="button" id="art-search-clear" class="art-search__clear" aria-label="Effacer la recherche" hidden>×</button>
+      </div>
+    )}
+    <a href="./new/" class="btn btn--primary">+ Nouvel article</a>
   </div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && articles.length === 0 && (
+    <div class="card"><p>Aucun article pour l’instant. Cliquez sur « Nouvel article » pour commencer.</p></div>
+  )}
+
+  {articles.length > 0 && (
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="art-table">
+        <thead>
+          <tr><th>Titre</th><th>Statut</th><th>Modifié</th><th style="text-align:right;">Actions</th></tr>
+        </thead>
+        <tbody>
+          {articles.map((a) => (
+            <tr data-id={a.id} data-search={`${norm(a.title)} ${norm(a.slug)}`}>
+              <td>
+                <a href={`./${a.id}/edit/`} class="art-title">{a.title}</a>
+                <div class="art-slug">/{a.slug}/</div>
+              </td>
+              <td>
+                <span class={`badge badge--${a.status}`}>{a.status === 'published' ? 'Publié' : 'Brouillon'}</span>
+              </td>
+              <td class="art-date">{fmt(a.updated_at)}</td>
+              <td style="text-align:right;white-space:nowrap;">
+                <a href={`./${a.id}/preview/`} class="btn btn--ghost btn--sm" target="_blank">Aperçu</a>
+                <a href={`./${a.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
+                <button class="btn btn--danger btn--sm" data-del={a.id} data-title={a.title}>Suppr.</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div id="art-empty" class="art-empty" hidden>Aucun article ne correspond à votre recherche.</div>
+    </div>
+  )}
 </AdminLayout>
+
+<style>
+  .art-table { width: 100%; border-collapse: collapse; font-family: var(--pj-noto); }
+  .art-table th {
+    text-align: left; font-size: 11px; letter-spacing: .5px; text-transform: uppercase;
+    color: #8a8a8a; font-weight: 700; padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline);
+  }
+  .art-table td { padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline); vertical-align: middle; }
+  .art-table tr:last-child td { border-bottom: none; }
+  .art-table tr:hover td { background: #fbfcf8; }
+  .art-title { font-weight: 600; font-size: 15px; color: #000; }
+  .art-title:hover { color: var(--pj-orange); }
+  .art-slug { font-size: 12px; color: #9aa0a6; margin-top: 2px; font-family: ui-monospace, monospace; }
+  .art-date { font-size: 13px; color: #666; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  }
+  .badge--published { background: rgba(178,192,78,.2); color: #5c6a10; }
+  .badge--draft { background: #eee; color: #777; }
+  .btn--sm { padding: 6px 12px; font-size: 10px; margin-left: 6px; }
+
+  .art-search { position: relative; flex: 0 1 320px; }
+  .art-search__icon {
+    position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+    font-size: 17px; color: #9aa2a6; pointer-events: none; line-height: 1;
+  }
+  .art-search__input { padding-left: 36px; padding-right: 34px; }
+  .art-search__clear {
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    border: 0; background: none; cursor: pointer; padding: 4px 8px;
+    font-size: 18px; line-height: 1; color: #9aa2a6; border-radius: 8px;
+  }
+  .art-search__clear:hover { color: var(--pj-ink); background: rgba(0,0,0,.05); }
+  .art-empty { text-align: center; color: #8a8a8a; font-size: 14px; padding: 28px 20px; }
+</style>
+
+<script>
+  const input = document.getElementById('art-search') as HTMLInputElement | null;
+  const clearBtn = document.getElementById('art-search-clear') as HTMLButtonElement | null;
+  const countEl = document.getElementById('art-count');
+  const emptyRow = document.getElementById('art-empty');
+
+  const norm = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+  function applyFilter() {
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('tr[data-search]'));
+    // Every whitespace-separated term must match, so "local marseille" narrows
+    // instead of widening.
+    const terms = norm(input?.value || '').split(/\s+/).filter(Boolean);
+    let shown = 0;
+
+    for (const row of rows) {
+      const hay = row.dataset.search || '';
+      const match = terms.every((t) => hay.includes(t));
+      row.hidden = !match;
+      if (match) shown++;
+    }
+
+    if (countEl) countEl.textContent = terms.length ? `(${shown} sur ${rows.length})` : `(${rows.length})`;
+    if (emptyRow) emptyRow.hidden = shown > 0 || !terms.length;
+    if (clearBtn) clearBtn.hidden = !input?.value;
+  }
+
+  input?.addEventListener('input', applyFilter);
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && input.value) {
+      input.value = '';
+      applyFilter();
+    }
+  });
+  clearBtn?.addEventListener('click', () => {
+    if (!input) return;
+    input.value = '';
+    applyFilter();
+    input.focus();
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-del]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.del;
+      if (!confirm(`Supprimer « ${btn.dataset.title} » ? Cette action est définitive.`)) return;
+      btn.disabled = true;
+      const res = await fetch(`/api/admin-pujol/articles/${id}/`, { method: 'DELETE' });
+      if (res.ok) {
+        btn.closest('tr')?.remove();
+        applyFilter();
+      } else {
+        alert('Échec de la suppression.');
+        btn.disabled = false;
+      }
+    });
+  });
+</script>

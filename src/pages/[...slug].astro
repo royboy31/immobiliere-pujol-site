@@ -6,6 +6,7 @@ import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
 import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { pickRotatedLinks } from '../lib/internal-links';
+import { isLegalPage } from '../lib/legal-pages';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
 // stays out of the SSR worker). Used for the optional end-of-article expert CTA.
@@ -146,8 +147,21 @@ const isPrixM2 = type === 'article' && (entry.data.categories || []).some(
   (cat: string) => cat.toLowerCase().includes('prix') && cat.toLowerCase().includes('m')
 );
 
-const title = entry.data.seoTitle?.split('|')[0] || entry.data.title || 'Immobilière Pujol';
-const description = entry.data.seoDescription?.split('|')[0] || entry.data.excerpt || '';
+// Legacy Yoast titles end with "| Immobilière Pujol" and BaseLayout re-adds the
+// brand, so only that trailing segment is stripped. Splitting on any "|" (what
+// this did before) truncated titles that use the pipe as real punctuation — and
+// now that the admin's SEO actually renders, it would silently cut any title an
+// admin types at its first pipe, "|" being a common SEO separator.
+const stripBrandSuffix = (s?: string) => (s || '').replace(/\s*\|\s*Immobilière Pujol\s*$/i, '').trim();
+const title = stripBrandSuffix(entry.data.seoTitle) || entry.data.title || 'Immobilière Pujol';
+const description = entry.data.seoDescription?.trim() || entry.data.excerpt || '';
+
+// Content edited in the admin (D1) must beat BaseLayout's frozen WordPress meta
+// mirror, otherwise the editor's SEO fields are decorative: the mirror covers
+// 1015 of the 1017 articles and was overriding every title/description an admin
+// typed. Articles and the 2 legal pages are both D1-backed, so both bypass it.
+// Pages other than the legal ones are not editable, and keep the mirror.
+const bypassSeoMirror = type === 'article' || (type === 'page' && isLegalPage(entry.data.slug));
 
 const pageUrl = new URL(`/${entry.data.slug}/`, Astro.site).toString();
 const pageSchemas: any[] = [];
@@ -180,10 +194,11 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 const featuredImage = entry.data.featuredImage as string | undefined;
-// Use the article's featured image as the social/share preview (og:image).
-// Must be an absolute URL; fall back to BaseLayout's default when there's none.
-const ogImage = featuredImage
-  ? new URL(featuredImage, Astro.site ?? Astro.url).toString()
+// og:image — an explicit article og_image wins, else the featured image. Absolute URL;
+// falls back to BaseLayout's default when there's none.
+const ogSource = (type === 'article' ? entry.data.ogImage : undefined) || featuredImage;
+const ogImage = ogSource
+  ? new URL(ogSource, Astro.site ?? Astro.url).toString()
   : undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 
@@ -221,9 +236,17 @@ const readMin = Math.max(1, Math.round(wordCount / 200));
 const articleDate = type === 'article' && entry.data.date
   ? new Date(entry.data.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })
   : null;
+
+// Extended SEO/OG overrides — only articles carry these fields (pages/static don't).
+const seoCanonical = type === 'article' ? entry.data.canonicalUrl : undefined;
+const seoOgTitle = type === 'article' ? entry.data.ogTitle : undefined;
+const seoOgDescription = type === 'article' ? entry.data.ogDescription : undefined;
+const seoTwitterCard = type === 'article' ? entry.data.twitterCard : undefined;
+const seoNoindex = isThankYou || (type === 'article' && !!entry.data.noindex);
+const seoNofollow = type === 'article' && !!entry.data.nofollow;
 ---
 
-<BaseLayout title={title} description={description} ogImage={ogImage} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs} noindex={isThankYou}>
+<BaseLayout title={title} description={description} bypassSeoMirror={bypassSeoMirror} ogImage={ogImage} canonical={seoCanonical} ogTitle={seoOgTitle} ogDescription={seoOgDescription} twitterCard={seoTwitterCard} noindex={seoNoindex} nofollow={seoNofollow} schemas={pageSchemas} breadcrumbCrumbs={breadcrumbCrumbs}>
   <article class:list={['content', `content--${type}`, { 'content--prix-m2': isPrixM2, 'content--hero-image': !!featuredImage && !bodyHasOwnH1 }]}>
     {!bodyHasOwnH1 && (
       <header class="content__header">

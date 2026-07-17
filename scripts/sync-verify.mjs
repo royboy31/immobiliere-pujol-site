@@ -6,7 +6,7 @@
 // Env vars: OPINIONSYSTEM_API_KEY, MANDRILL_API_KEY, CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
 // Or: run with `export GH_TOKEN=$(gh auth token)` for GitHub Actions checks.
 
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 try {
   const env = readFileSync(new URL('../.env', import.meta.url), 'utf8');
   env.split('\n').forEach(line => {
@@ -62,11 +62,15 @@ const SEND_EMAIL = !process.argv.includes('--no-email');
 // jamais les rapports post-déploiement (sinon 1 mail par déploiement). Roy et
 // Kamindu reçoivent les deux.
 const isDailyReport = process.argv.includes('--daily');
-const RECIPIENTS = [
-  'kamindudushmantha@gmail.com',
-  'roy@perelweb.be',
-  ...(isDailyReport && targetArg === 'pujol' ? ['carolinepujol@immobiliere-pujol.fr'] : []),
-];
+// REPORT_TO env override (comma-separated) — pour envoyer un rapport de test à
+// une seule adresse sans toucher la liste de diffusion quotidienne.
+const RECIPIENTS = process.env.REPORT_TO
+  ? process.env.REPORT_TO.split(',').map((e) => e.trim()).filter(Boolean)
+  : [
+      'kamindudushmantha@gmail.com',
+      'roy@perelweb.be',
+      ...(isDailyReport && targetArg === 'pujol' ? ['carolinepujol@immobiliere-pujol.fr'] : []),
+    ];
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -279,7 +283,7 @@ try {
 
   addCheck('D1 Ubiflow (locations)', 'OK', `${d1UbiflowActive} actives, ${d1UbiflowClosed} fermées`);
   addCheck('D1 LBI/FTP (ventes)', 'OK', `${d1LbiActive} actives, ${d1LbiClosed} fermées`);
-  addCheck('D1 Total général', 'OK', `${totalActive} annonces actives (${d1UbiflowActive} locations + ${d1LbiActive} ventes), ${totalClosed} fermées`);
+  addCheck('D1 flux (Ubiflow + LBI)', 'OK', `${totalActive} annonces actives (${d1UbiflowActive} locations + ${d1LbiActive} ventes), ${totalClosed} fermées via les flux`);
 } catch (err) {
   addCheck('Compteurs inventaire D1', 'FAIL', err.message);
 }
@@ -316,6 +320,11 @@ try {
   const rClosed = (rentalRows.find((r) => r.status === 'closed') || {}).count || 0;
   report.counts.rentalsByStatus = rentalRows;
   addCheck('Locations (toutes sources)', 'OK', `${rActive} actives, ${rClosed} fermées`);
+
+  // Historique fermé via les flux (biens clôturés depuis la mise en ligne),
+  // hors archive WordPress. d1UbiflowClosed / d1LbiClosed viennent de la section 6.
+  const fluxClosed = d1UbiflowClosed + d1LbiClosed;
+  addCheck('Annonces fermées via les flux', 'OK', `Ubiflow : ${d1UbiflowClosed}, LBI/FTP : ${d1LbiClosed}, total : ${fluxClosed}`);
 
   // Annonces sans type (héritage WordPress) — informatif, pour boucler le total
   const untypedRows = sb.untyped || [];
@@ -500,7 +509,7 @@ console.log('');
 
 // ── Envoi du rapport par email ────────────────────────────────────────────
 
-if (SEND_EMAIL && MANDRILL_KEY) {
+if ((SEND_EMAIL && MANDRILL_KEY) || process.env.REPORT_HTML_OUT) {
   const statusLabel = fails > 0 ? '🔴 ERREURS' : warns > 0 ? '🟡 AVERTISSEMENTS' : '🟢 TOUT OK';
   const subject = `Rapport Sync Pujol [${TARGET.label}] ${now()} — ${statusLabel}`;
 
@@ -587,29 +596,36 @@ if (SEND_EMAIL && MANDRILL_KEY) {
 </body>
 </html>`;
 
-  try {
-    const res = await fetch(MANDRILL_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        key: MANDRILL_KEY,
-        message: {
-          from_email: 'contact@immobiliere-pujol.com',
-          from_name: 'Pujol — Surveillance Sync',
-          to: RECIPIENTS.map(email => ({ email, type: 'to' })),
-          subject,
-          html,
-        },
-      }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      console.log(`  📧 Rapport envoyé à : ${RECIPIENTS.join(', ')}`);
-    } else {
-      console.log(`  ❌ Échec envoi : ${JSON.stringify(data).slice(0, 200)}`);
+  if (process.env.REPORT_HTML_OUT) {
+    writeFileSync(process.env.REPORT_HTML_OUT, html);
+    console.log(`  💾 HTML du rapport écrit : ${process.env.REPORT_HTML_OUT}`);
+  }
+
+  if (SEND_EMAIL && MANDRILL_KEY) {
+    try {
+      const res = await fetch(MANDRILL_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          key: MANDRILL_KEY,
+          message: {
+            from_email: 'contact@immobiliere-pujol.com',
+            from_name: 'Pujol — Surveillance Sync',
+            to: RECIPIENTS.map(email => ({ email, type: 'to' })),
+            subject,
+            html,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log(`  📧 Rapport envoyé à : ${RECIPIENTS.join(', ')}`);
+      } else {
+        console.log(`  ❌ Échec envoi : ${JSON.stringify(data).slice(0, 200)}`);
+      }
+    } catch (err) {
+      console.log(`  ❌ Échec envoi : ${err.message}`);
     }
-  } catch (err) {
-    console.log(`  ❌ Échec envoi : ${err.message}`);
   }
 } else if (SEND_EMAIL && !MANDRILL_KEY) {
   console.log('  ⚠️  Email ignoré — pas de MANDRILL_API_KEY. Utiliser --no-email pour supprimer cet avertissement.');

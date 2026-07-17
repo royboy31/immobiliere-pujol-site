@@ -1,9 +1,11 @@
 ---
 import { getAdminEnv, getAdminPath } from '../lib/admin-auth';
+import { getDB, ensureSchema, getOrCreateUser, defaultName, isSuperAdmin } from '../lib/admin-users';
+import PublishBar from '../components/admin/PublishBar.astro';
 
 interface Props {
   title: string;
-  section?: 'experts' | 'articles' | 'pages' | 'home';
+  section?: 'experts' | 'articles' | 'pages' | 'home' | 'newsletter' | 'users';
   hideSidebar?: boolean;
 }
 
@@ -12,6 +14,33 @@ const env = await getAdminEnv();
 const adminPath = getAdminPath(env);
 const base = `/${adminPath}`;
 const adminEmail = (Astro.locals as any).adminEmail ?? '';
+
+// Profile for the sidebar account menu. Rendered server-side so the name is
+// there on first paint; if D1 is unavailable the menu still works (logout is a
+// plain form post) and just falls back to a name derived from the email.
+let adminName = adminEmail ? defaultName(adminEmail) : '';
+let hasOwnPassword = false;
+let isSuper = false;
+if (adminEmail && !hideSidebar) {
+  try {
+    const db = await getDB();
+    await ensureSchema(db);
+    const user = await getOrCreateUser(db, adminEmail);
+    adminName = user.name;
+    hasOwnPassword = !!user.password_hash;
+    isSuper = await isSuperAdmin(env, adminEmail);
+  } catch {
+    // D1 unavailable — keep the email-derived fallback.
+  }
+}
+
+/** "Roy Boy" -> "RB"; falls back to the first email character. */
+const initials = (adminName || adminEmail || '?')
+  .split(/\s+/)
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w) => w.charAt(0).toUpperCase())
+  .join('') || '?';
 ---
 
 <!DOCTYPE html>
@@ -27,7 +56,11 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
     href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   />
-  <style>
+  <!-- Global (not scoped): this is the admin design system. Child pages render
+       into <slot/>, so scoped layout styles would never reach their .btn/.card/
+       input markup. is:global makes .btn, .card, inputs, tables, etc. apply
+       across every admin page. Page-level <style> blocks stay scoped and win. -->
+  <style is:global>
     :root {
       --pj-olive: rgb(178, 192, 78);
       --pj-olive-2: rgb(166, 179, 82);
@@ -96,32 +129,114 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
       font-weight: 700;
     }
     .admin-sidebar__nav span.count { margin-left: auto; opacity: .7; font-size: 11px; }
+    /* Account menu, pinned to the sidebar bottom. The panel opens upward. */
     .admin-sidebar__user {
-      padding: 18px 20px;
+      position: relative;
+      padding: 12px;
       border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 12px;
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .admin-sidebar__user .email {
-      color: rgba(255, 255, 255, .65);
-      overflow: hidden; text-overflow: ellipsis;
-      letter-spacing: .3px;
     }
     .admin-sidebar__user form { margin: 0; }
-    .admin-sidebar__user button {
-      background: transparent; color: #fff;
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 8px 12px;
-      border-radius: 999px;
+
+    .admin-user__trigger {
+      display: flex; align-items: center; gap: 10px;
       width: 100%;
+      padding: 8px;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: left;
       font-family: var(--pj-noto);
-      font-weight: 700;
-      font-size: 11px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
       transition: background .2s, border-color .2s;
     }
-    .admin-sidebar__user button:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .5); }
+    .admin-user__trigger:hover,
+    .admin-user__trigger[aria-expanded="true"] {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .admin-user__avatar {
+      flex: none;
+      width: 32px; height: 32px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: var(--pj-olive);
+      color: #2b3110;
+      font-weight: 700; font-size: 12px; letter-spacing: .5px;
+    }
+    .admin-user__id { min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+    .admin-user__name {
+      color: #fff; font-weight: 600; font-size: 13px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .admin-user__email {
+      color: rgba(255,255,255,.55); font-size: 11px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .admin-user__chevron {
+      margin-left: auto; color: rgba(255,255,255,.5); font-size: 10px;
+      transition: transform .2s ease;
+    }
+    .admin-user__trigger[aria-expanded="true"] .admin-user__chevron { transform: rotate(180deg); }
+
+    .admin-user__panel {
+      position: absolute;
+      left: 12px; right: 12px; bottom: calc(100% - 6px);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      padding: 6px;
+      z-index: 50;
+      max-height: 70vh; overflow-y: auto;
+    }
+    .admin-user__head { padding: 10px 10px 12px; border-bottom: 1px solid var(--pj-hairline); }
+    .admin-user__head-name { display: block; font-weight: 700; color: #000; font-size: 13px; }
+    .admin-user__head-email {
+      display: block; color: #8a8a8a; font-size: 11px; margin-top: 2px;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .admin-user__section { border-bottom: 1px solid var(--pj-hairline); }
+    .admin-user__section summary {
+      list-style: none; cursor: pointer;
+      padding: 11px 10px;
+      font-size: 12.5px; font-weight: 600; color: var(--pj-ink);
+      border-radius: 8px;
+    }
+    .admin-user__section summary::-webkit-details-marker { display: none; }
+    .admin-user__section summary::after { content: '›'; float: right; color: #b9bfc4; }
+    .admin-user__section[open] summary::after { content: '⌄'; }
+    .admin-user__section summary:hover { background: #f4f6ee; }
+
+    .admin-user__hint { margin: 0 10px 8px; font-size: 11px; line-height: 1.45; color: #8a8a8a; }
+    .admin-user__form { display: flex; flex-direction: column; gap: 6px; padding: 0 10px 12px; }
+    .admin-user__form input { padding: 8px 10px; border-radius: 9px; font-size: 12.5px; }
+    .admin-user__save {
+      align-self: flex-start;
+      background: var(--pj-olive); color: #2b3110;
+      border: 0; border-radius: 999px;
+      padding: 7px 15px; cursor: pointer;
+      font-family: var(--pj-noto); font-weight: 700; font-size: 11px;
+      letter-spacing: .4px; text-transform: uppercase;
+    }
+    .admin-user__save:hover { background: var(--pj-olive-2); }
+    .admin-user__save:disabled { opacity: .55; cursor: default; }
+
+    .admin-user__msg { margin: 8px 10px 0; font-size: 11.5px; line-height: 1.4; }
+    .admin-user__msg.is-ok { color: #5c6a10; }
+    .admin-user__msg.is-err { color: var(--danger); }
+
+    .admin-user__logout { padding: 6px; }
+    .admin-user__logout button {
+      width: 100%;
+      background: transparent; color: var(--danger);
+      border: 1px solid var(--pj-hairline);
+      padding: 9px 12px; border-radius: 999px; cursor: pointer;
+      font-family: var(--pj-noto); font-weight: 700; font-size: 11px;
+      letter-spacing: .6px; text-transform: uppercase;
+      transition: background .2s, border-color .2s;
+    }
+    .admin-user__logout button:hover { background: rgba(199,58,42,.08); border-color: var(--danger); }
 
     .admin-main { flex: 1; min-width: 0; padding: 36px 44px; }
     h1 {
@@ -160,53 +275,68 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 11px 22px;
+      padding: 11px 20px;
       border-radius: 999px;
       border: 1px solid transparent;
       font-family: var(--pj-noto);
       font-weight: 700;
       font-size: 12px;
-      letter-spacing: .6px;
+      letter-spacing: .5px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background-position .35s ease, color .25s ease, border-color .25s ease;
+      white-space: nowrap;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .12s ease;
     }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 2px solid var(--pj-olive); outline-offset: 2px; }
+    /* Solid olive pill — the primary action across the admin (matches login). */
     .btn--primary {
       color: #000;
-      background-color: transparent;
-      background-image: linear-gradient(to top, transparent 50%, var(--pj-olive) 50%);
-      background-size: 100% 200%;
-      background-position: 0 0;
+      background-color: var(--pj-olive);
       border-color: var(--pj-olive);
+      box-shadow: 0 6px 16px rgba(178, 192, 78, .32);
     }
-    .btn--primary:hover { background-position: 0 100%; color: var(--pj-olive-2); text-decoration: none; }
+    .btn--primary:hover {
+      background-color: var(--pj-olive-2);
+      color: #000;
+      box-shadow: 0 8px 22px rgba(178, 192, 78, .45);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+    .btn--primary:active { transform: translateY(0); box-shadow: 0 4px 12px rgba(178, 192, 78, .35); }
     .btn--ghost {
-      background: transparent; color: #000;
+      background: #fff; color: var(--pj-ink);
       border-color: var(--pj-hairline);
     }
-    .btn--ghost:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
-    .btn--danger { background: transparent; color: var(--danger); border-color: var(--danger); }
-    .btn--danger:hover { background: var(--danger); color: #fff; }
+    .btn--ghost:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); color: #000; }
+    .btn--danger { background: #fff; color: var(--danger); border-color: rgba(220,38,38,.4); }
+    .btn--danger:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+    .btn--sm { padding: 7px 13px; font-size: 10.5px; }
 
-    input[type=text], input[type=email], input[type=password], input[type=url], textarea {
+    input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], textarea, select {
       display: block; width: 100%;
       padding: 11px 14px;
       border: 1px solid var(--pj-hairline);
-      border-radius: 10px;
+      border-radius: 12px;
       font: inherit;
       font-family: var(--pj-noto);
       font-weight: 400;
       color: #000;
-      background: #fff;
-      transition: border-color .2s ease, box-shadow .2s ease;
+      background: #fbfcf8;
+      transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
     }
+    input[type=text]:hover, input[type=email]:hover, input[type=password]:hover,
+    input[type=url]:hover, input[type=number]:hover, textarea:hover, select:hover { border-color: rgba(0,0,0,.2); }
     input[type=text]:focus, input[type=email]:focus, input[type=password]:focus,
-    input[type=url]:focus, textarea:focus {
+    input[type=url]:focus, input[type=number]:focus, textarea:focus, select:focus {
       outline: none;
+      background: #fff;
       border-color: var(--pj-olive);
-      box-shadow: 0 0 0 3px rgba(178, 192, 78, .2);
+      box-shadow: 0 0 0 3px rgba(178, 192, 78, .22);
     }
+    input::placeholder, textarea::placeholder { color: #9aa2a6; }
     textarea {
       min-height: 160px;
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
@@ -244,19 +374,163 @@ const adminEmail = (Astro.locals as any).adminEmail ?? '';
         <a href={`${base}/`} class:list={[{ 'is-active': section === 'home' }]}>Tableau de bord</a>
         <a href={`${base}/experts/`} class:list={[{ 'is-active': section === 'experts' }]}>Experts</a>
         <a href={`${base}/articles/`} class:list={[{ 'is-active': section === 'articles' }]}>Articles de blog</a>
+        <a href={`${base}/newsletter/`} class:list={[{ 'is-active': section === 'newsletter' }]}>Newsletters</a>
         <a href={`${base}/pages/`} class:list={[{ 'is-active': section === 'pages' }]}>Pages légales</a>
+        {isSuper && <a href={`${base}/users/`} class:list={[{ 'is-active': section === 'users' }]}>Utilisateurs</a>}
       </nav>
-      <div class="admin-sidebar__user">
-        <span class="email">{adminEmail || 'anonyme'}</span>
-        <form method="POST" action={`/api/${adminPath}/auth/logout`}>
-          <button type="submit">Déconnexion</button>
-        </form>
+      <div class="admin-sidebar__user" id="admin-user"
+           data-profile-url={`/api/${adminPath}/auth/profile/`}
+           data-password-url={`/api/${adminPath}/auth/password/`}>
+        <div class="admin-user__panel" id="admin-user-panel" hidden>
+          <div class="admin-user__head">
+            <span class="admin-user__head-name" id="admin-user-panel-name">{adminName || 'anonyme'}</span>
+            <span class="admin-user__head-email">{adminEmail || 'anonyme'}</span>
+          </div>
+
+          <div class="admin-user__msg" id="admin-user-msg" hidden></div>
+
+          <details class="admin-user__section">
+            <summary>Modifier le nom</summary>
+            <form class="admin-user__form" id="admin-name-form">
+              <input type="text" id="admin-name-input" value={adminName} maxlength="60"
+                     autocomplete="name" aria-label="Votre nom" placeholder="Votre nom" />
+              <button type="submit" class="admin-user__save">Enregistrer</button>
+            </form>
+          </details>
+
+          <details class="admin-user__section">
+            <summary>Changer le mot de passe</summary>
+            {!hasOwnPassword && (
+              <p class="admin-user__hint">
+                Vous utilisez encore le mot de passe partagé. En définir un vous donnera un mot de
+                passe personnel ; celui des autres administrateurs ne changera pas.
+              </p>
+            )}
+            <form class="admin-user__form" id="admin-pw-form">
+              <input type="password" id="admin-pw-current" autocomplete="current-password"
+                     aria-label="Mot de passe actuel" placeholder="Mot de passe actuel" />
+              <input type="password" id="admin-pw-new" autocomplete="new-password"
+                     aria-label="Nouveau mot de passe" placeholder="Nouveau mot de passe (10 car. min.)" />
+              <button type="submit" class="admin-user__save">Changer</button>
+            </form>
+          </details>
+
+          <form method="POST" action={`/api/${adminPath}/auth/logout/`} class="admin-user__logout">
+            <button type="submit">Déconnexion</button>
+          </form>
+        </div>
+
+        <button type="button" class="admin-user__trigger" id="admin-user-trigger"
+                aria-haspopup="true" aria-expanded="false" aria-controls="admin-user-panel">
+          <span class="admin-user__avatar" aria-hidden="true">{initials}</span>
+          <span class="admin-user__id">
+            <span class="admin-user__name" id="admin-user-name">{adminName || 'anonyme'}</span>
+            <span class="admin-user__email">{adminEmail || 'anonyme'}</span>
+          </span>
+          <span class="admin-user__chevron" aria-hidden="true">▴</span>
+        </button>
       </div>
     </aside>
   )}
   <main class="admin-main">
+    {!hideSidebar && <PublishBar />}
     <slot />
   </main>
 </div>
+
+<script>
+  const root = document.getElementById('admin-user');
+  const trigger = document.getElementById('admin-user-trigger');
+  const panel = document.getElementById('admin-user-panel');
+
+  if (root && trigger && panel) {
+    // Endpoints come from data attributes: this script is bundled, so it can't
+    // read the layout's adminPath directly.
+    const profileUrl = root.dataset.profileUrl || '';
+    const passwordUrl = root.dataset.passwordUrl || '';
+
+    const msg = document.getElementById('admin-user-msg');
+    const nameForm = document.getElementById('admin-name-form') as HTMLFormElement | null;
+    const nameInput = document.getElementById('admin-name-input') as HTMLInputElement | null;
+    const pwForm = document.getElementById('admin-pw-form') as HTMLFormElement | null;
+    const pwCurrent = document.getElementById('admin-pw-current') as HTMLInputElement | null;
+    const pwNew = document.getElementById('admin-pw-new') as HTMLInputElement | null;
+
+    function say(text: string, ok: boolean) {
+      if (!msg) return;
+      msg.textContent = text;
+      msg.className = `admin-user__msg ${ok ? 'is-ok' : 'is-err'}`;
+      msg.hidden = false;
+    }
+    function clearMsg() {
+      if (msg) { msg.hidden = true; msg.textContent = ''; }
+    }
+
+    function setOpen(open: boolean) {
+      panel!.hidden = !open;
+      trigger!.setAttribute('aria-expanded', String(open));
+      if (!open) clearMsg();
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(panel.hidden);
+    });
+    // Clicks inside the panel must not reach the close-on-outside handler.
+    panel.addEventListener('click', (e) => e.stopPropagation());
+    document.addEventListener('click', () => { if (!panel.hidden) setOpen(false); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); trigger.focus(); }
+    });
+
+    async function post(url: string, body: unknown) {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      let data: any = {};
+      try { data = await res.json(); } catch { /* non-JSON error page */ }
+      return { ok: res.ok, data };
+    }
+
+    nameForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = (nameInput?.value || '').trim();
+      if (!name) { say('Le nom ne peut pas être vide.', false); return; }
+
+      const btn = nameForm.querySelector('button');
+      if (btn) btn.disabled = true;
+      const { ok, data } = await post(profileUrl, { name });
+      if (btn) btn.disabled = false;
+
+      if (!ok) { say(data.error || 'Échec de l’enregistrement.', false); return; }
+      // Reflect the new name in both the trigger and the panel header.
+      for (const id of ['admin-user-name', 'admin-user-panel-name']) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = data.name;
+      }
+      say('Nom mis à jour.', true);
+    });
+
+    pwForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current = pwCurrent?.value || '';
+      const next = pwNew?.value || '';
+      if (!current || !next) { say('Mot de passe actuel et nouveau requis.', false); return; }
+
+      const btn = pwForm.querySelector('button');
+      if (btn) btn.disabled = true;
+      const { ok, data } = await post(passwordUrl, { current_password: current, new_password: next });
+      if (btn) btn.disabled = false;
+
+      if (!ok) { say(data.error || 'Échec du changement de mot de passe.', false); return; }
+      pwForm.reset();
+      const hint = pwForm.parentElement?.querySelector('.admin-user__hint');
+      if (hint) hint.remove();
+      say('Mot de passe mis à jour. Il ne s’applique qu’à votre compte.', true);
+    });
+  }
+</script>
 </body>
 </html>

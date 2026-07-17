@@ -1,0 +1,38 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+import PageEditor from '../../../../components/admin/PageEditor.astro';
+import { getDB, ensureSchema, getPage, type SitePage } from '../../../../lib/pages-db';
+
+const id = Number(Astro.params.id);
+let page: SitePage | null = null;
+let error = '';
+
+if (!Number.isFinite(id)) {
+  error = 'Identifiant invalide.';
+} else {
+  try {
+    const db = await getDB();
+    await ensureSchema(db);
+    page = await getPage(db, id);
+    if (!page) error = 'Page introuvable.';
+  } catch (e: any) {
+    error = String(e?.message || e);
+  }
+}
+---
+
+<AdminLayout title={page ? page.title : 'Page légale'} section="pages">
+  <div class="toolbar">
+    <h1 style="margin:0;">Modifier la page</h1>
+    <span class="spacer"></span>
+    <a href="../../" class="btn btn--ghost btn--sm">← Toutes les pages</a>
+  </div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">{error}</div>}
+  {page && <PageEditor page={page} />}
+</AdminLayout>
+
+<style>
+  .btn--sm { padding: 6px 12px; font-size: 10px; }
+</style>

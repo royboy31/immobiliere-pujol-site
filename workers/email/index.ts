@@ -5,6 +5,21 @@ interface Env {
   MANDRILL_API_KEY: string;
   ALLOWED_ORIGIN: string;
   TURNSTILE_SECRET?: string;
+  // --- newsletter / Brevo (optional until provisioned; see newsletter-dev-spec.md) ---
+  BREVO_API_KEY?: string;
+  NEWSLETTER_LIST_ID?: string;
+  // Allowlist of lists the composer may send to, "id:label" comma-separated, e.g.
+  // "3:Newsletter,7:Vendeurs". Deliberately an env allowlist and NOT "every list
+  // in the Brevo account": the recipient list being fixed in config is what makes
+  // spec §9's "staging can never send to the real list" structural rather than a
+  // matter of clicking the right dropdown entry. Unset → falls back to the single
+  // NEWSLETTER_LIST_ID, i.e. exactly the previous behaviour.
+  NEWSLETTER_LIST_IDS?: string;
+  DOI_TEMPLATE_ID?: string;
+  NEWSLETTER_SENDER_EMAIL?: string;
+  NEWSLETTER_SENDER_NAME?: string;
+  NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
+  NEWSLETTER_INTERNAL_TOKEN?: string;
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
@@ -780,23 +795,208 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
   return { ok: true };
 }
 
-async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
-  const email = ((fd.get('email') as string) || '').trim();
-  if (!email) return { ok: false, error: 'Email requis.' };
+// Newsletter signup — Brevo double opt-in (newsletter-dev-spec.md §3.2).
+//
+// ⚠️ DOUBLE-GATED ON PURPOSE — read before loosening either condition.
+//
+// This worker is NOT staging-only. The PRODUCTION site posts here too: the
+// `pujol-main` footer hardcodes `action="https://pujol-email.roy-68a.workers.dev
+// /newsletter"` and deploy-pujol.yml never patches it (spec §6.2 is unresolved).
+// So an unguarded DOI path would send REAL customers a confirmation from whatever
+// Brevo account holds BREVO_API_KEY — currently a personal free account sending
+// from a gmail address, into a test list — and would drop Caroline's per-signup
+// copy. The two gates below keep that from happening by accident:
+//
+//   1. CONFIG  — all of BREVO_API_KEY + DOI_TEMPLATE_ID + NEWSLETTER_LIST_ID set.
+//   2. ORIGIN  — the request comes from ALLOWED_ORIGIN (this worker's own
+//                environment, i.e. the staging site). Production posts from a
+//                different origin and therefore keeps the pre-Brevo behaviour.
+//
+// Origin is a routing signal, NOT a security boundary (a bot can forge the
+// header); it is here to keep environments apart while Brevo is a test account.
+// To curl the DOI path, send `-H "Origin: <ALLOWED_ORIGIN>"`.
+//
+// Before arming this for production: resolve §6.2 (per-environment worker URL),
+// move to the client's own Brevo account (§1.1), authenticate
+// news.immobiliere-pujol.fr (§1.3), and create the DOI template (§1.2).
+async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string; doi?: boolean }> {
+  const email = ((fd.get('email') as string) || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) return { ok: false, error: 'Email invalide.' };
+
+  const configured = !!(env.BREVO_API_KEY && env.DOI_TEMPLATE_ID && env.NEWSLETTER_LIST_ID);
+  const isOwnEnv = !!env.ALLOWED_ORIGIN && origin === env.ALLOWED_ORIGIN;
+  const doiReady = configured && isOwnEnv;
 
   const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const html = buildTable(subject, [['Email', email]]);
+  const notifyRows: [string, string][] = [['Email', email]];
+  if (doiReady) notifyRows.push(['Statut', 'en attente de confirmation (double opt-in)']);
+  const notify = () =>
+    sendEmail(env, {
+      subject,
+      html: buildTable(subject, notifyRows),
+      to: `contact${D}`,
+      cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
+    });
 
-  const emailResult = await sendEmail(env, {
-    subject,
-    html,
-    to: `contact${D}`,
-    cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
+  // Pre-Brevo behaviour — unchanged, including surfacing a send failure as an error.
+  if (!doiReady) {
+    const emailResult = await notify();
+    ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+    return emailResult;
+  }
+
+  // Brevo sends the branded confirmation; the contact joins the list only after
+  // they click. Brevo records consent date/source = our RGPD registry (§3.2/§8).
+  const res = await fetch(`${BREVO}/contacts/doubleOptinConfirmation`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY as string, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email,
+      includeListIds: [Number(env.NEWSLETTER_LIST_ID)],
+      templateId: Number(env.DOI_TEMPLATE_ID),
+      redirectionUrl: env.NEWSLETTER_CONFIRM_REDIRECT_URL,
+      attributes: { SOURCE: 'site', OPTIN_DATE: new Date().toISOString() },
+    }),
   });
 
-  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+  // Brevo answers 201 both for a new signup and for an existing/already-confirmed
+  // contact (it simply re-sends the confirmation), so this endpoint has no
+  // "already exists" 400 to swallow — that is POST /contacts' behaviour, not this
+  // one's. Every 400 here is a real fault (invalid address, missing
+  // redirectionUrl, no active DOI template), so surface it instead of promising
+  // the visitor a confirmation email that was never sent.
+  if (!res.ok) {
+    console.error(`Brevo DOI ${res.status}: ${await res.text().catch(() => '')}`);
+    return { ok: false, error: 'Inscription impossible pour le moment.' };
+  }
 
-  return emailResult;
+  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+  ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
+
+  return { ok: true, doi: true };
+}
+
+// ── Newsletter — Brevo campaign endpoints (internal, JSON body) ─────────────
+// Called by the main app (composer) over HTTP with a shared internal token. All
+// Brevo access is centralised here so BREVO_API_KEY lives in one place. These
+// are inert until the Brevo secrets/vars are provisioned (return 501).
+const BREVO = 'https://api.brevo.com/v3';
+function nlJson(data: unknown, status = 200): Response {
+  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+}
+function nlGuard(req: Request, env: Env): Response | null {
+  if (!env.NEWSLETTER_INTERNAL_TOKEN || req.headers.get('x-internal-token') !== env.NEWSLETTER_INTERNAL_TOKEN)
+    return nlJson({ error: 'Forbidden' }, 403);
+  if (!env.BREVO_API_KEY) return nlJson({ error: 'Newsletter non configurée (BREVO_API_KEY manquant).' }, 501);
+  return null;
+}
+
+// ── Recipient-list allowlist ────────────────────────────────────────────────
+// The composer may only send to a list named here. This worker is the ONLY
+// enforcement point: the admin UI's dropdown is a convenience, and a caller
+// holding the internal token could otherwise post any list id it liked.
+interface AllowedList { id: number; label: string; }
+
+function allowedLists(env: Env): AllowedList[] {
+  const raw = (env.NEWSLETTER_LIST_IDS || '').trim();
+  if (raw) {
+    const out: AllowedList[] = [];
+    for (const part of raw.split(',')) {
+      const s = part.trim();
+      if (!s) continue;
+      const i = s.indexOf(':');                      // labels may contain ':'? take the FIRST colon only
+      const id = Number((i === -1 ? s : s.slice(0, i)).trim());
+      if (!Number.isInteger(id) || id <= 0) continue;  // skip junk rather than send somewhere unintended
+      out.push({ id, label: (i === -1 ? '' : s.slice(i + 1).trim()) || `Liste ${id}` });
+    }
+    if (out.length) return out;
+  }
+  // Fallback: the single configured list = the pre-allowlist behaviour.
+  const single = Number(env.NEWSLETTER_LIST_ID);
+  return Number.isInteger(single) && single > 0 ? [{ id: single, label: 'Newsletter' }] : [];
+}
+
+// Resolve the requested list to an allowed one. Returns null if it isn't allowed,
+// so the caller can refuse rather than silently retarget the send.
+function resolveList(env: Env, requested: unknown): AllowedList | null {
+  const lists = allowedLists(env);
+  if (!lists.length) return null;
+  if (requested === undefined || requested === null || requested === '') return lists[0];
+  const id = Number(requested);
+  return lists.find((l) => l.id === id) || null;
+}
+
+// POST /newsletter/lists — the lists this environment may send to (for the composer).
+async function handleNewsletterLists(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  return nlJson({ ok: true, lists: allowedLists(env) });
+}
+
+// POST /newsletter/send — create + send a Brevo campaign to a permitted list.
+async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { subject, html, campaignName, listId } = (await req.json().catch(() => ({}))) as any;
+  if (!subject || !html) return nlJson({ error: 'subject + html requis' }, 400);
+
+  // Refuse rather than fall back to the default list: a caller that asked for a
+  // specific audience must never be silently redirected to a different one.
+  const list = resolveList(env, listId);
+  if (!list) {
+    return nlJson({
+      error: listId ? `Liste ${listId} non autorisée pour cet environnement.` : 'Aucune liste configurée.',
+      allowed: allowedLists(env),
+    }, 400);
+  }
+
+  const create = await fetch(`${BREVO}/emailCampaigns`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      name: campaignName || `Newsletter ${now()}`,
+      subject,
+      sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      htmlContent: html,
+      recipients: { listIds: [list.id] },
+    }),
+  });
+  if (!create.ok) return nlJson({ error: 'Brevo create failed', detail: await create.text() }, 502);
+  const { id: campaignId } = (await create.json()) as { id: number };
+
+  const send = await fetch(`${BREVO}/emailCampaigns/${campaignId}/sendNow`, {
+    method: 'POST', headers: { 'api-key': env.BREVO_API_KEY! },
+  });
+  if (!send.ok) return nlJson({ error: 'Brevo send failed', detail: await send.text(), campaignId }, 502);
+  return nlJson({ ok: true, campaignId, listId: list.id, listLabel: list.label });
+}
+
+// POST /newsletter/test — send the rendered HTML to a single address (transactional).
+async function handleNewsletterTest(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { testEmail, subject, html } = await req.json().catch(() => ({} as any));
+  if (!testEmail || !html) return nlJson({ error: 'testEmail + html requis' }, 400);
+  const res = await fetch(`${BREVO}/smtp/email`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      to: [{ email: testEmail }],
+      subject: subject || '[TEST] Newsletter',
+      htmlContent: html,
+    }),
+  });
+  if (!res.ok) return nlJson({ error: 'Brevo test failed', detail: await res.text() }, 502);
+  return nlJson({ ok: true });
+}
+
+// POST /newsletter/stats — fetch campaign statistics for the in-admin history.
+async function handleNewsletterStats(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const { campaignId } = await req.json().catch(() => ({} as any));
+  if (!campaignId) return nlJson({ error: 'campaignId requis' }, 400);
+  const res = await fetch(`${BREVO}/emailCampaigns/${campaignId}`, { headers: { 'api-key': env.BREVO_API_KEY! } });
+  if (!res.ok) return nlJson({ error: 'Brevo stats failed', detail: await res.text() }, 502);
+  const data = (await res.json()) as any;
+  return nlJson({ ok: true, stats: data?.statistics?.globalStats ?? null });
 }
 
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
@@ -847,6 +1047,13 @@ export default {
       return jsonErr('Method not allowed', 405, origin, env);
     }
 
+    // Newsletter internal endpoints carry a JSON body + x-internal-token — handle
+    // them BEFORE the formData() parse below (which would consume/fail on JSON).
+    if (path === '/newsletter/send')  return handleNewsletterSend(request, env);
+    if (path === '/newsletter/test')  return handleNewsletterTest(request, env);
+    if (path === '/newsletter/stats') return handleNewsletterStats(request, env);
+    if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
+
     let fd: FormData;
     try {
       fd = await request.formData();
@@ -872,11 +1079,18 @@ export default {
       return jsonOk({ ok: true }, origin, env);
     }
 
-    // Cloudflare Turnstile — enforced only when the secret is configured (prod).
-    // Staging has no secret → skipped (honeypot + content filter stand in).
-    // The newsletter form carries no widget by design (UX), so it's exempt —
-    // it relies on the honeypot + content filter above.
-    if (env.TURNSTILE_SECRET && path !== '/newsletter') {
+    // Cloudflare Turnstile — enforced only when the secret is configured.
+    // No secret → skipped (honeypot + content filter stand in).
+    //
+    // /newsletter used to be exempt ("no widget by design"); spec §3.5 calls that
+    // a list-bombing hole and the signup form now carries a widget, so the
+    // exemption is gone. This worker has NO TURNSTILE_SECRET today, so nothing is
+    // enforced here yet.
+    // ⚠️ Setting TURNSTILE_SECRET on THIS worker will start rejecting newsletter
+    // signups that arrive without a token — and PRODUCTION posts here (§6.2)
+    // while `pujol-main` still ships the widget-less form. Ship the widget to
+    // pujol-main BEFORE setting that secret, or prod signups will 403.
+    if (env.TURNSTILE_SECRET) {
       const token = ((fd.get('cf-turnstile-response') as string) || '').trim();
       let pass = false;
       if (token) {
@@ -900,7 +1114,7 @@ export default {
       }
     }
 
-    let result: { ok: boolean; error?: string };
+    let result: { ok: boolean; error?: string; doi?: boolean };
 
     switch (path) {
       case '/contact':
@@ -910,7 +1124,7 @@ export default {
         result = await handleContactAnnonce(fd, env, ctx);
         break;
       case '/newsletter':
-        result = await handleNewsletter(fd, env, ctx);
+        result = await handleNewsletter(fd, env, ctx, origin);
         break;
       default:
         return jsonErr('Not found', 404, origin, env);
@@ -920,6 +1134,8 @@ export default {
       return jsonErr(result.error || "Erreur d'envoi", 500, origin, env);
     }
 
-    return jsonOk({ ok: true }, origin, env);
+    // `doi: true` tells the signup form to ask for inbox confirmation instead of
+    // thanking the visitor outright (spec §6.4). Absent on every other path.
+    return jsonOk(result.doi ? { ok: true, doi: true } : { ok: true }, origin, env);
   },
 };

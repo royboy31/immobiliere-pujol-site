@@ -1,0 +1,505 @@
+---
+// Shared article editor (create + edit). WYSIWYG body with an HTML-source
+// toggle, rich SEO + Open Graph controls with live SERP/social previews, and
+// R2 image upload. All persistence goes through /api/admin-pujol/articles.
+import type { BlogArticle } from '../../lib/blog-db';
+
+interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[] }
+const { article = null, experts = [] } = Astro.props;
+const isNew = !article;
+const SITE = 'https://www.immobiliere-pujol.fr';
+const today = new Date().toISOString().slice(0, 10);
+const initial: BlogArticle = article ?? {
+  id: 0, slug: '', title: '', excerpt: '', body_html: '', featured_image: '',
+  categories: [], tags: [], author: 'Immobilière Pujol', article_date: today,
+  seo_title: '', seo_description: '', canonical_url: '', focus_keyword: '', noindex: false, nofollow: false,
+  og_title: '', og_description: '', og_image: '', twitter_card: 'summary_large_image',
+  expert_cta: '', expert_cta_title: '', status: 'draft', created_by: '', created_at: '', updated_at: '', published_at: null,
+};
+---
+
+<div class="ed-topbar">
+  <a href={isNew ? '../' : '../../'} class="btn btn--ghost">← Retour</a>
+  <span class="spacer"></span>
+  <span id="ed-status" class="ed-savestate"></span>
+  {!isNew && <a href="../preview/" target="_blank" class="btn btn--ghost">Aperçu ↗</a>}
+  <button id="ed-save" class="btn btn--ghost">Enregistrer le brouillon</button>
+  <button id="ed-publish" class="btn btn--primary">Publier</button>
+</div>
+
+<div class="ed-grid">
+  <div class="ed-main">
+    <input id="f-title" type="text" class="ed-title-input" placeholder="Titre de l’article" value={initial.title} />
+
+    <div class="ed-toolbar" id="ed-toolbar">
+      <button type="button" data-cmd="formatBlock" data-val="h2" title="Titre 2"><b>H2</b></button>
+      <button type="button" data-cmd="formatBlock" data-val="h3" title="Titre 3"><b>H3</b></button>
+      <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraphe">¶</button>
+      <span class="sep"></span>
+      <button type="button" data-cmd="bold" title="Gras"><b>B</b></button>
+      <button type="button" data-cmd="italic" title="Italique"><i>I</i></button>
+      <button type="button" data-cmd="insertUnorderedList" title="Liste">• —</button>
+      <button type="button" data-cmd="formatBlock" data-val="blockquote" title="Citation">❝</button>
+      <span class="sep"></span>
+      <button type="button" id="ed-link" title="Lien">🔗</button>
+      <button type="button" id="ed-image" title="Téléverser une image">🖼️</button>
+      <span class="spacer"></span>
+      <button type="button" id="ed-toggle-src" class="ed-srcbtn">&lt;/&gt; Source HTML</button>
+    </div>
+
+    <div id="ed-body" class="ed-body" contenteditable="true" set:html={initial.body_html}></div>
+    <textarea id="ed-source" class="ed-source" spellcheck="false" style="display:none;"></textarea>
+    <p class="ed-imghint">Astuce : bouton 🖼️, ou glissez-déposez / collez une image directement dans le corps.</p>
+    <input type="file" id="ed-image-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+
+    <!-- ── SEO / Social panel ─────────────────────────────────────────── -->
+    <div class="card ed-seo">
+      <div class="ed-tabs" role="tablist">
+        <button type="button" class="ed-tab is-active" data-tab="seo">Référencement (SEO)</button>
+        <button type="button" class="ed-tab" data-tab="social">Réseaux sociaux</button>
+      </div>
+
+      <!-- SEO tab -->
+      <section class="ed-tabpanel" data-panel="seo">
+        <p class="ed-paneltitle">Aperçu Google</p>
+        <div class="serp">
+          <div class="serp__crumb"><span id="serp-domain">immobiliere-pujol.fr</span><span id="serp-path"></span></div>
+          <div class="serp__title" id="serp-title">Titre de la page</div>
+          <div class="serp__desc" id="serp-desc">La méta-description apparaîtra ici…</div>
+        </div>
+
+        <label>Titre SEO (balise title)
+          <input id="f-seotitle" type="text" value={initial.seo_title} placeholder={initial.title || 'Titre affiché dans Google'} maxlength="120" />
+          <span class="counter" id="c-seotitle"></span>
+        </label>
+        <label>Méta-description
+          <textarea id="f-seodesc" class="ed-plain" style="min-height:80px;" maxlength="320">{initial.seo_description}</textarea>
+          <span class="counter" id="c-seodesc"></span>
+        </label>
+        <div class="ed-two">
+          <label>URL canonique
+            <input id="f-canonical" type="url" value={initial.canonical_url} placeholder="laisser vide = URL de l’article" />
+          </label>
+          <label>Mot-clé principal
+            <input id="f-focus" type="text" value={initial.focus_keyword} placeholder="ex. investir marseille" />
+          </label>
+        </div>
+        <div class="ed-robots">
+          <span class="ed-robots__label">Indexation</span>
+          <label class="chk"><input id="f-noindex" type="checkbox" checked={initial.noindex} /> noindex <small>(exclure de Google)</small></label>
+          <label class="chk"><input id="f-nofollow" type="checkbox" checked={initial.nofollow} /> nofollow <small>(ne pas suivre les liens)</small></label>
+        </div>
+      </section>
+
+      <!-- Social tab -->
+      <section class="ed-tabpanel" data-panel="social" hidden>
+        <p class="ed-paneltitle">Aperçu du partage (Open Graph)</p>
+        <div class="social-card">
+          <div class="social-card__img" id="social-img"></div>
+          <div class="social-card__body">
+            <div class="social-card__domain">immobiliere-pujol.fr</div>
+            <div class="social-card__title" id="social-title">Titre du partage</div>
+            <div class="social-card__desc" id="social-desc">Description du partage…</div>
+          </div>
+        </div>
+
+        <label>Titre Open Graph
+          <input id="f-ogtitle" type="text" value={initial.og_title} placeholder="défaut : titre SEO ou titre de l’article" maxlength="120" />
+          <span class="counter" id="c-ogtitle"></span>
+        </label>
+        <label>Description Open Graph
+          <textarea id="f-ogdesc" class="ed-plain" style="min-height:70px;" maxlength="320">{initial.og_description}</textarea>
+          <span class="counter" id="c-ogdesc"></span>
+        </label>
+        <label>Image de partage (Open Graph)
+          <input id="f-ogimage" type="url" value={initial.og_image} placeholder="défaut : image à la une" />
+        </label>
+        <div class="ed-featrow">
+          <button type="button" id="f-ogimage-upload" class="ed-smallbtn">⬆ Téléverser une image</button>
+          <input type="file" id="f-ogimage-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+        </div>
+        <div id="f-ogimage-preview" class="ed-thumb"></div>
+        <label>Type de carte Twitter/X
+          <select id="f-twitter">
+            <option value="summary_large_image" selected={initial.twitter_card === 'summary_large_image'}>Grande image</option>
+            <option value="summary" selected={initial.twitter_card === 'summary'}>Résumé (petite image)</option>
+          </select>
+        </label>
+      </section>
+    </div>
+  </div>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────── -->
+  <aside class="ed-side">
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Publication</p>
+      <label>Statut
+        <select id="f-status">
+          <option value="draft" selected={initial.status === 'draft'}>Brouillon</option>
+          <option value="published" selected={initial.status === 'published'}>Publié</option>
+        </select>
+      </label>
+      <label>Date de l’article
+        <input id="f-date" type="date" value={initial.article_date} />
+      </label>
+      <label>Slug (URL)
+        <input id="f-slug" type="text" value={initial.slug} placeholder="généré depuis le titre" />
+      </label>
+      {!isNew && <small class="ed-hint">Modifier le slug change l’URL publique — à éviter pour le référencement.</small>}
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Image à la une</p>
+      <label>URL de l’image
+        <input id="f-featured" type="url" value={initial.featured_image} placeholder="URL ou téléverser…" />
+      </label>
+      <div class="ed-featrow">
+        <button type="button" id="f-featured-upload" class="ed-smallbtn">⬆ Téléverser une image</button>
+        <input type="file" id="f-featured-file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" hidden />
+      </div>
+      <div id="f-featured-preview" class="ed-thumb"></div>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Contenu &amp; classement</p>
+      <label>Extrait (résumé)
+        <textarea id="f-excerpt" class="ed-plain" style="min-height:70px;">{initial.excerpt}</textarea>
+      </label>
+      <label>Catégories (séparées par des virgules)
+        <input id="f-categories" type="text" value={initial.categories.join(', ')} />
+      </label>
+      <label>Tags (séparés par des virgules)
+        <input id="f-tags" type="text" value={initial.tags.join(', ')} />
+      </label>
+      <label>Auteur
+        <input id="f-author" type="text" value={initial.author} />
+      </label>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">Carte expert</p>
+      <label>Afficher en fin d’article
+        <select id="f-expertcta">
+          <option value="">Aucune</option>
+          {experts.map((e) => (
+            <option value={e.slug} selected={initial.expert_cta === e.slug}>{e.title}</option>
+          ))}
+        </select>
+      </label>
+      <label>Titre au-dessus de la carte
+        <input id="f-expertctatitle" type="text" value={initial.expert_cta_title} />
+      </label>
+    </div>
+  </aside>
+</div>
+
+<style>
+  .ed-topbar {
+    display:flex; align-items:center; gap:10px;
+    margin:-36px -44px 26px; padding:15px 44px;
+    position:sticky; top:0; z-index:20;
+    background:rgba(250,250,250,.82); backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--pj-hairline);
+  }
+  .ed-topbar .spacer { flex:1; }
+  .ed-savestate { font-size:12px; color:#7f9a17; font-weight:600; transition:opacity .2s; }
+  .ed-cardtitle {
+    font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.7px;
+    text-transform:uppercase; color:var(--pj-olive-2); margin:0 0 15px;
+    padding-bottom:11px; border-bottom:1px solid var(--pj-hairline);
+  }
+  .ed-grid { display:grid; grid-template-columns: minmax(0,1fr) 320px; gap:24px; align-items:start; }
+  @media (max-width: 960px) { .ed-grid { grid-template-columns: 1fr; } }
+  .ed-title-input {
+    font-family: var(--pj-helv); font-weight:300; font-size:30px; color:#000;
+    border:none; border-bottom:2px solid var(--pj-hairline); border-radius:0;
+    padding:6px 2px 12px; margin-bottom:18px; width:100%; background:transparent;
+  }
+  .ed-title-input:focus { outline:none; border-bottom-color: var(--pj-olive); box-shadow:none; }
+  .ed-title-input::placeholder { color:#c8c8c8; font-weight:300; }
+  .ed-toolbar {
+    display:flex; align-items:center; gap:4px; flex-wrap:wrap;
+    background:#fff; border:1px solid var(--pj-hairline); border-radius:14px 14px 0 0;
+    padding:9px 12px; border-bottom:none;
+    box-shadow:0 4px 14px rgba(0,0,0,.04);
+  }
+  .ed-toolbar button {
+    min-width:34px; height:32px; padding:0 9px; border:1px solid transparent; border-radius:8px;
+    background:transparent; color:#3a3a3a; font-size:14px; line-height:1; transition:background .15s,border-color .15s,color .15s;
+  }
+  .ed-toolbar button:hover { background: var(--pj-paper); border-color:var(--pj-hairline); color:#000; }
+  .ed-toolbar button:active { background:#e6ecd8; }
+  .ed-toolbar .sep { width:1px; height:20px; background:var(--pj-hairline); margin:0 5px; }
+  .ed-toolbar .spacer { flex:1; }
+  .ed-srcbtn { font-family: ui-monospace, monospace; font-size:12px !important; color:#666 !important; }
+  .ed-srcbtn.is-active { background: var(--pj-slate) !important; color:#fff !important; }
+  .ed-body, .ed-source {
+    background:#fff; border:1px solid var(--pj-hairline); border-radius:0 0 14px 14px;
+    padding:26px 30px; min-height:420px; font-family: var(--pj-noto); font-weight:300;
+    font-size:16px; line-height:1.75; color:#1f2a30;
+    box-shadow:0 8px 22px rgba(0,0,0,.05);
+  }
+  .ed-body:focus { outline:none; box-shadow: inset 0 0 0 2px rgba(178,192,78,.25); }
+  .ed-body :global(h2) { font-family: var(--pj-helv); font-weight:700; font-size:24px; margin:1.2em 0 .4em; }
+  .ed-body :global(h3) { font-family: var(--pj-helv); font-weight:700; font-size:19px; margin:1.1em 0 .3em; }
+  .ed-body :global(img) { max-width:100%; height:auto; border-radius:8px; margin:12px 0; }
+  .ed-body :global(blockquote) { border-left:3px solid var(--pj-olive); margin:1em 0; padding:.2em 1em; color:#555; }
+  .ed-body :global(a) { color: var(--pj-olive-2); text-decoration: underline; }
+  .ed-source { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size:13px; line-height:1.6; color:#1f2a30; width:100%; resize:vertical; }
+  .ed-imghint { font-size:12px; color:#9aa0a6; margin:8px 2px 0; }
+  .ed-body.is-dragover { box-shadow: inset 0 0 0 2px var(--pj-olive); }
+
+  /* SEO / social panel */
+  .ed-seo { margin-top:22px; padding:0; overflow:hidden; }
+  .ed-tabs { display:flex; gap:0; border-bottom:1px solid var(--pj-hairline); background:linear-gradient(#fbfcf8,#f5f8ee); }
+  .ed-tab {
+    padding:15px 22px; border:none; background:transparent; font-family:var(--pj-noto);
+    font-weight:700; font-size:12px; letter-spacing:.5px; text-transform:uppercase; color:#9aa0a6;
+    border-bottom:2px solid transparent; cursor:pointer; transition:color .2s, background .2s;
+  }
+  .ed-tab:hover { color:#3a3a3a; }
+  .ed-tab.is-active { color:#000; background:#fff; border-bottom-color: var(--pj-olive); }
+  .ed-tabpanel { padding:24px 26px; }
+  .ed-paneltitle { display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.6px; text-transform:uppercase; color:#8a8a8a; font-weight:700; margin:0 0 14px; }
+  .ed-paneltitle::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--pj-olive); flex-shrink:0; }
+  .ed-two { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:600px){ .ed-two { grid-template-columns:1fr; } }
+  .counter { display:block; font-size:11px; font-weight:400; letter-spacing:normal; text-transform:none; margin-top:4px; color:#9aa0a6; }
+  .counter.ok { color:#5c6a10; } .counter.warn { color:#b8860b; } .counter.bad { color:#c0392b; }
+  .ed-robots { display:flex; align-items:center; flex-wrap:wrap; gap:16px; margin-top:6px; }
+  .ed-robots__label { font-size:11px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); font-weight:700; }
+  .chk { display:flex; align-items:center; gap:7px; margin:0; text-transform:none; letter-spacing:normal; font-weight:600; font-size:13px; color:#333; }
+  .chk input { width:auto; margin:0; }
+  .chk small { color:#9aa0a6; font-weight:400; }
+
+  /* Google SERP preview */
+  .serp { border:1px solid var(--pj-hairline); border-radius:10px; padding:14px 16px; margin-bottom:18px; background:#fff; max-width:600px; }
+  .serp__crumb { font-size:12px; color:#202124; line-height:1.3; }
+  .serp__crumb #serp-path { color:#5f6368; }
+  .serp__title { color:#1a0dab; font-size:19px; line-height:1.3; margin:2px 0 3px; font-family:Arial,sans-serif; }
+  .serp__desc { color:#4d5156; font-size:13px; line-height:1.5; font-family:Arial,sans-serif; }
+
+  /* Social card preview */
+  .social-card { border:1px solid var(--pj-hairline); border-radius:10px; overflow:hidden; max-width:520px; margin-bottom:18px; background:#fff; }
+  .social-card__img { aspect-ratio:1.91/1; background:#eef0ea center/cover no-repeat; display:flex; align-items:center; justify-content:center; color:#b6bcae; font-size:12px; }
+  .social-card__img::after { content:'image de partage'; }
+  .social-card__img.has-img::after { content:''; }
+  .social-card__body { padding:12px 14px; }
+  .social-card__domain { text-transform:uppercase; font-size:11px; color:#8a8f98; letter-spacing:.3px; }
+  .social-card__title { font-weight:700; font-size:15px; color:#1d2129; margin:3px 0; line-height:1.3; }
+  .social-card__desc { font-size:13px; color:#606770; line-height:1.4; }
+
+  .ed-card { margin-bottom:16px; padding:20px 22px; }
+  .ed-card label { margin-bottom:14px; }
+  .ed-card label:last-child { margin-bottom:0; }
+
+  /* ── Form fields ──────────────────────────────────────────────────
+     AdminLayout's input styling is Astro-scoped to the layout, so it does
+     NOT reach these slotted fields. Without the rule below, text / url /
+     textarea inputs fall back to small, unstyled browser defaults — this
+     restores the design-system field look (matching select + date). */
+  .ed-side input[type=text], .ed-side input[type=url], .ed-side input[type=email],
+  .ed-side input[type=date], .ed-side textarea, .ed-side select,
+  .ed-seo  input[type=text], .ed-seo  input[type=url], .ed-seo  input[type=email],
+  .ed-seo  input[type=date], .ed-seo  textarea, .ed-seo  select {
+    display:block; width:100%; margin-top:8px;
+    padding:12px 15px;
+    border:1px solid var(--pj-hairline); border-radius:11px;
+    font-family:var(--pj-noto); font-weight:400; font-size:15px; line-height:1.45;
+    color:#000; background:#fff;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .ed-side input[type=text]:focus, .ed-side input[type=url]:focus, .ed-side input[type=email]:focus,
+  .ed-side input[type=date]:focus, .ed-side textarea:focus, .ed-side select:focus,
+  .ed-seo  input[type=text]:focus, .ed-seo  input[type=url]:focus, .ed-seo  input[type=email]:focus,
+  .ed-seo  input[type=date]:focus, .ed-seo  textarea:focus, .ed-seo  select:focus {
+    outline:none; border-color:var(--pj-olive); box-shadow:0 0 0 3px rgba(178,192,78,.2);
+  }
+  .ed-side ::placeholder, .ed-seo ::placeholder { color:#b8bcb0; }
+  .ed-plain { font-family: var(--pj-noto) !important; font-weight:400; }
+  .ed-hint { display:block; color:#9aa0a6; font-size:11px; margin-top:-6px; text-transform:none; letter-spacing:normal; font-weight:400; }
+  /* :global — featured/OG previews are injected via innerHTML so they lack the
+     scoped attribute; without :global the <img> renders at full natural size. */
+  .ed-thumb :global(img) { max-width:100%; max-height:150px; width:auto; height:auto; object-fit:contain; border-radius:10px; margin-top:8px; border:1px solid var(--pj-hairline); display:block; }
+  .ed-featrow { margin-bottom:10px; }
+  .ed-smallbtn { font-family: var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.4px; padding:8px 14px; border-radius:999px; border:1px solid var(--pj-hairline); background:#fff; color:#000; cursor:pointer; transition:background .2s,border-color .2s; }
+  .ed-smallbtn:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
+</style>
+
+<script define:vars={{ initial, isNew, SITE }}>
+  const $ = (id) => document.getElementById(id);
+  const body = $('ed-body'), source = $('ed-source');
+  let sourceMode = false;
+  let slugTouched = !isNew && !!initial.slug;
+
+  // ── Toolbar ──
+  document.querySelectorAll('#ed-toolbar button[data-cmd]').forEach((b) => {
+    b.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const cmd = b.dataset.cmd, val = b.dataset.val;
+      if (cmd === 'formatBlock') document.execCommand('formatBlock', false, val);
+      else document.execCommand(cmd, false, null);
+    });
+  });
+  $('ed-link').addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    const url = prompt('URL du lien :', 'https://');
+    if (url) document.execCommand('createLink', false, url);
+  });
+
+  // ── Source HTML toggle ──
+  $('ed-toggle-src').addEventListener('click', () => {
+    sourceMode = !sourceMode;
+    $('ed-toggle-src').classList.toggle('is-active', sourceMode);
+    if (sourceMode) { source.value = body.innerHTML; body.style.display = 'none'; source.style.display = 'block'; }
+    else { body.innerHTML = source.value; source.style.display = 'none'; body.style.display = 'block'; }
+  });
+
+  // ── Slug auto-gen ──
+  const slugify = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 96);
+  $('f-title').addEventListener('input', () => {
+    if (!slugTouched) $('f-slug').value = slugify($('f-title').value);
+    updateSerp(); updateSocial(); updatePlaceholders();
+  });
+  $('f-slug').addEventListener('input', () => { slugTouched = true; updateSerp(); });
+
+  // ── Image upload helpers ──
+  async function uploadFile(file) {
+    const fd = new FormData(); fd.append('file', file);
+    const res = await fetch('/api/admin-pujol/articles/upload-image/', { method: 'POST', body: fd });
+    if (!res.ok) throw new Error((await res.text()) || res.status);
+    return (await res.json()).url;
+  }
+  function wireUpload(btnId, fileId, onUrl) {
+    $(btnId).addEventListener('click', () => $(fileId).click());
+    $(fileId).addEventListener('change', async () => {
+      const f = $(fileId).files && $(fileId).files[0]; $(fileId).value = '';
+      if (!f) return;
+      setState('Téléversement…', true);
+      try { onUrl(await uploadFile(f)); setState('Image ajoutée ✓', false); }
+      catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
+    });
+  }
+
+  // ── Body image (button + paste + drop) ──
+  const imgFileInput = $('ed-image-file');
+  let savedRange = null;
+  const saveRange = () => { const s = window.getSelection(); if (s && s.rangeCount && body.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange(); };
+  body.addEventListener('mouseup', saveRange); body.addEventListener('keyup', saveRange);
+  $('ed-image').addEventListener('mousedown', (e) => { e.preventDefault(); saveRange(); imgFileInput.click(); });
+  imgFileInput.addEventListener('change', () => { const f = imgFileInput.files && imgFileInput.files[0]; imgFileInput.value = ''; if (f) handleBodyImage(f); });
+  body.addEventListener('paste', (e) => {
+    const items = e.clipboardData && e.clipboardData.items; if (!items) return;
+    for (const it of items) if (it.type && it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) handleBodyImage(f); return; }
+  });
+  body.addEventListener('dragover', (e) => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files')) { e.preventDefault(); body.classList.add('is-dragover'); } });
+  body.addEventListener('dragleave', () => body.classList.remove('is-dragover'));
+  body.addEventListener('drop', (e) => { body.classList.remove('is-dragover'); const files = e.dataTransfer && e.dataTransfer.files; if (files && files.length && files[0].type.startsWith('image/')) { e.preventDefault(); handleBodyImage(files[0]); } });
+  async function handleBodyImage(file) {
+    setState('Téléversement de l’image…', true);
+    try {
+      const url = await uploadFile(file); const tag = `<img src="${url}" alt="">`;
+      if (sourceMode) { const ta = source, s = ta.selectionStart || ta.value.length, e = ta.selectionEnd || s; ta.value = ta.value.slice(0, s) + tag + ta.value.slice(e); }
+      else { body.focus(); const sel = window.getSelection(); if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); } document.execCommand('insertHTML', false, tag); saveRange(); }
+      setState('Image ajoutée ✓', false);
+    } catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
+  }
+
+  // ── Featured + OG image ──
+  const featuredPrev = $('f-featured-preview');
+  const renderFeatured = () => { const u = $('f-featured').value.trim(); featuredPrev.innerHTML = u ? `<img src="${u}" alt="">` : ''; updateSocial(); };
+  $('f-featured').addEventListener('input', renderFeatured);
+  wireUpload('f-featured-upload', 'f-featured-file', (url) => { $('f-featured').value = url; renderFeatured(); });
+
+  const ogPrev = $('f-ogimage-preview');
+  const renderOg = () => { const u = $('f-ogimage').value.trim(); ogPrev.innerHTML = u ? `<img src="${u}" alt="">` : ''; updateSocial(); };
+  $('f-ogimage').addEventListener('input', renderOg);
+  wireUpload('f-ogimage-upload', 'f-ogimage-file', (url) => { $('f-ogimage').value = url; renderOg(); });
+
+  // ── Tabs ──
+  document.querySelectorAll('.ed-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.ed-tab').forEach((t) => t.classList.toggle('is-active', t === tab));
+      document.querySelectorAll('.ed-tabpanel').forEach((p) => { p.hidden = p.dataset.panel !== tab.dataset.tab; });
+    });
+  });
+
+  // ── Char counters ──
+  function bindCounter(inputId, counterId, min, max) {
+    const el = $(inputId), c = $(counterId);
+    const upd = () => {
+      const n = el.value.length;
+      c.textContent = `${n} / ${max} caractères`;
+      c.className = 'counter ' + (n === 0 ? '' : n > max ? 'bad' : n < min ? 'warn' : 'ok');
+    };
+    el.addEventListener('input', upd); upd();
+  }
+  bindCounter('f-seotitle', 'c-seotitle', 30, 60);
+  bindCounter('f-seodesc', 'c-seodesc', 70, 160);
+  bindCounter('f-ogtitle', 'c-ogtitle', 20, 70);
+  bindCounter('f-ogdesc', 'c-ogdesc', 60, 200);
+
+  // ── Live previews ──
+  const val = (id) => $(id).value.trim();
+  function updatePlaceholders() {
+    $('f-seotitle').placeholder = val('f-title') || 'Titre affiché dans Google';
+  }
+  function updateSerp() {
+    const t = val('f-seotitle') || val('f-title') || 'Titre de la page';
+    const slug = val('f-slug') || slugify(val('f-title')) || 'mon-article';
+    const d = val('f-seodesc') || val('f-excerpt') || 'La méta-description apparaîtra ici…';
+    $('serp-title').textContent = t;
+    $('serp-path').textContent = ` › ${slug}`;
+    $('serp-desc').textContent = d;
+  }
+  function updateSocial() {
+    const img = val('f-ogimage') || val('f-featured');
+    const t = val('f-ogtitle') || val('f-seotitle') || val('f-title') || 'Titre du partage';
+    const d = val('f-ogdesc') || val('f-seodesc') || val('f-excerpt') || 'Description du partage…';
+    const box = $('social-img');
+    if (img) { box.style.backgroundImage = `url("${img}")`; box.classList.add('has-img'); }
+    else { box.style.backgroundImage = ''; box.classList.remove('has-img'); }
+    $('social-title').textContent = t;
+    $('social-desc').textContent = d;
+  }
+  ['f-seotitle', 'f-seodesc', 'f-excerpt'].forEach((id) => $(id).addEventListener('input', () => { updateSerp(); updateSocial(); }));
+  ['f-ogtitle', 'f-ogdesc'].forEach((id) => $(id).addEventListener('input', updateSocial));
+  updatePlaceholders(); updateSerp(); renderFeatured(); renderOg(); updateSocial();
+
+  // ── Collect + save ──
+  const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
+  function collect(status) {
+    return {
+      title: val('f-title'), slug: val('f-slug'),
+      body_html: sourceMode ? source.value : body.innerHTML,
+      excerpt: val('f-excerpt'), featured_image: val('f-featured'),
+      categories: list($('f-categories').value), tags: list($('f-tags').value),
+      author: val('f-author'), article_date: val('f-date'),
+      seo_title: val('f-seotitle'), seo_description: val('f-seodesc'),
+      canonical_url: val('f-canonical'), focus_keyword: val('f-focus'),
+      noindex: $('f-noindex').checked, nofollow: $('f-nofollow').checked,
+      og_title: val('f-ogtitle'), og_description: val('f-ogdesc'),
+      og_image: val('f-ogimage'), twitter_card: $('f-twitter').value,
+      expert_cta: $('f-expertcta').value, expert_cta_title: val('f-expertctatitle'),
+      status,
+    };
+  }
+  function setState(msg, busy) { $('ed-status').textContent = msg; $('ed-save').disabled = $('ed-publish').disabled = !!busy; }
+
+  async function save(status) {
+    if (!val('f-title')) { alert('Le titre est obligatoire.'); return; }
+    setState('Enregistrement…', true);
+    const url = isNew ? '/api/admin-pujol/articles/' : `/api/admin-pujol/articles/${initial.id}/`;
+    const method = isNew ? 'POST' : 'PUT';
+    try {
+      const res = await fetch(url, { method, headers: { 'content-type': 'application/json' }, body: JSON.stringify(collect(status)) });
+      if (!res.ok) throw new Error(await res.text());
+      setState('Enregistré ✓', false);
+      window.location.href = isNew ? '../' : '../../';
+    } catch (err) { setState('', false); alert('Échec de l’enregistrement : ' + err.message); }
+  }
+  $('ed-save').addEventListener('click', () => save('draft'));
+  $('ed-publish').addEventListener('click', () => save('published'));
+</script>

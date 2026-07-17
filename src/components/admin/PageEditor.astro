@@ -1,0 +1,290 @@
+---
+// Legal-page editor: WYSIWYG body with an HTML-source toggle, plus title + SEO.
+// Mirrors ArticleEditor's editing idiom but is deliberately narrower — legal
+// pages have no featured image, no Open Graph overrides, and no slug field (the
+// slug is a live URL and is immutable; see src/lib/pages-db.ts).
+import type { SitePage } from '../../lib/pages-db';
+
+interface Props { page: SitePage }
+const { page } = Astro.props;
+---
+
+<div class="pe" data-id={page.id}>
+  <div class="pe-slug">
+    Adresse : <code>/{page.slug}/</code>
+    <span class="pe-slug__lock" title="Le slug d’une page légale n’est pas modifiable">🔒 non modifiable</span>
+  </div>
+
+  <input id="pe-title" type="text" class="pe-title-input" placeholder="Titre de la page" value={page.title} />
+
+  <div class="pe-toolbar" id="pe-toolbar">
+    <button type="button" data-cmd="formatBlock" data-val="h2" title="Titre 2"><b>H2</b></button>
+    <button type="button" data-cmd="formatBlock" data-val="h3" title="Titre 3"><b>H3</b></button>
+    <button type="button" data-cmd="formatBlock" data-val="p" title="Paragraphe">¶</button>
+    <span class="sep"></span>
+    <button type="button" data-cmd="bold" title="Gras"><b>B</b></button>
+    <button type="button" data-cmd="italic" title="Italique"><i>I</i></button>
+    <button type="button" data-cmd="insertUnorderedList" title="Liste">• —</button>
+    <span class="sep"></span>
+    <button type="button" id="pe-link" title="Lien">🔗</button>
+    <button type="button" id="pe-pdf" title="Insérer un PDF">📎 PDF</button>
+    <input type="file" id="pe-pdf-file" accept="application/pdf,.pdf" hidden />
+    <span class="spacer"></span>
+    <button type="button" id="pe-toggle-src" class="pe-srcbtn">&lt;/&gt; Source HTML</button>
+  </div>
+
+  <div id="pe-body" class="pe-body" contenteditable="true" set:html={page.body_html}></div>
+  <textarea id="pe-source" class="pe-source" spellcheck="false" style="display:none;"></textarea>
+
+  <div class="card pe-seo">
+    <p class="pe-paneltitle">Référencement (SEO)</p>
+    <div class="serp">
+      <div class="serp__crumb">immobiliere-pujol.fr/{page.slug}/</div>
+      <div class="serp__title" id="pe-serp-title">{page.seo_title || page.title}</div>
+      <div class="serp__desc" id="pe-serp-desc">{page.seo_description || 'La méta-description apparaîtra ici…'}</div>
+    </div>
+
+    <label>Titre SEO <span class="pe-count" id="pe-seo-title-count"></span>
+      <input id="pe-seo-title" type="text" value={page.seo_title} placeholder={page.title} />
+    </label>
+    <label>Méta-description <span class="pe-count" id="pe-seo-desc-count"></span>
+      <input id="pe-seo-desc" type="text" value={page.seo_description} />
+    </label>
+  </div>
+
+  <div class="pe-actions">
+    <a href="../../" class="btn btn--ghost">Annuler</a>
+    <span class="pe-status" id="pe-status"></span>
+    <button type="button" class="btn btn--primary" id="pe-save">Enregistrer</button>
+  </div>
+</div>
+
+<style>
+  .pe-slug { font-size: 12px; color: #8a8a8a; margin-bottom: 10px; }
+  .pe-slug code { font-family: ui-monospace, monospace; color: #5a6470; }
+  .pe-slug__lock { margin-left: 8px; color: #a8adb3; }
+
+  .pe-title-input {
+    font-family: var(--pj-helv); font-size: 24px; font-weight: 300;
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+
+  .pe-toolbar {
+    display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    padding: 8px; border: 1px solid var(--pj-hairline);
+    border-radius: 12px 12px 0 0; background: #fbfcf8; border-bottom: none;
+  }
+  .pe-toolbar button {
+    background: transparent; border: 1px solid transparent; border-radius: 8px;
+    padding: 6px 10px; cursor: pointer; font-size: 13px; color: var(--pj-ink);
+    font-family: var(--pj-noto);
+  }
+  .pe-toolbar button:hover { background: rgba(0,0,0,.06); }
+  .pe-toolbar .sep { width: 1px; height: 20px; background: var(--pj-hairline); margin: 0 4px; }
+  .pe-toolbar .spacer { flex: 1; }
+  .pe-srcbtn { font-size: 11px !important; font-weight: 700; color: #8a8a8a !important; }
+  .pe-srcbtn.is-active { background: var(--pj-olive) !important; color: #2b3110 !important; }
+
+  .pe-body, .pe-source {
+    border: 1px solid var(--pj-hairline); border-radius: 0 0 12px 12px;
+    padding: 20px; background: #fff; min-height: 380px;
+    font-family: var(--pj-noto); font-size: 15px; line-height: 1.7; color: #1f2a30;
+  }
+  .pe-body:focus { outline: none; border-color: var(--pj-olive); }
+  .pe-body :global(h2) { font-size: 20px; margin: 22px 0 10px; }
+  .pe-body :global(h3) { font-size: 17px; margin: 18px 0 8px; }
+  .pe-body :global(p) { margin: 0 0 12px; }
+  .pe-body :global(ul) { margin: 0 0 12px 20px; }
+  .pe-body :global(table) { border-collapse: collapse; margin: 0 0 14px; }
+  .pe-body :global(td), .pe-body :global(th) { border: 1px solid var(--pj-hairline); padding: 6px 10px; }
+  .pe-source {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px;
+    line-height: 1.6; width: 100%; resize: vertical;
+  }
+
+  .pe-seo { margin-top: 20px; }
+  .pe-paneltitle {
+    margin: 0 0 12px; font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: #8a8a8a;
+  }
+  .pe-count { float: right; font-size: 11px; color: #9aa2a6; font-weight: 400; }
+  .pe-count.is-over { color: var(--danger); }
+
+  .serp {
+    border: 1px solid var(--pj-hairline); border-radius: 10px;
+    padding: 14px 16px; margin-bottom: 16px; background: #fff;
+  }
+  .serp__crumb { font-size: 12px; color: #5f6368; }
+  .serp__title { color: #1a0dab; font-size: 18px; line-height: 1.3; margin: 3px 0; }
+  .serp__desc { color: #4d5156; font-size: 13px; line-height: 1.5; }
+
+  .pe-actions { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+  .pe-actions .btn--primary { margin-left: auto; }
+  .pe-status { font-size: 12.5px; }
+  .pe-status.is-ok { color: #5c6a10; }
+  .pe-status.is-err { color: var(--danger); }
+</style>
+
+<script>
+  const $ = (id: string) => document.getElementById(id)!;
+  const root = document.querySelector('.pe') as HTMLElement | null;
+
+  if (root) {
+    const id = root.dataset.id;
+    const body = $('pe-body') as HTMLElement;
+    const source = $('pe-source') as HTMLTextAreaElement;
+    let sourceMode = false;
+
+    // ── formatting toolbar ───────────────────────────────────────────────
+    $('pe-toolbar').addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('button');
+      const cmd = btn?.dataset.cmd;
+      if (!cmd) return;
+      if (cmd === 'formatBlock') document.execCommand('formatBlock', false, btn!.dataset.val || 'p');
+      else document.execCommand(cmd, false);
+    });
+
+    $('pe-link').addEventListener('click', () => {
+      const url = prompt('URL du lien :');
+      if (url) document.execCommand('createLink', false, url);
+    });
+
+    // ── PDF upload → link at the cursor ──────────────────────────────────
+    // The file lands in R2 and is streamed back by /media/[...path]; only the
+    // <a> lives in the body HTML, so it rides the normal save → 🚀 Publier →
+    // sync-d1-pages-to-content chain with no schema or template change.
+    const pdfInput = $('pe-pdf-file') as HTMLInputElement;
+    let savedRange: Range | null = null;
+    const saveRange = () => {
+      const s = window.getSelection();
+      if (s && s.rangeCount && body.contains(s.anchorNode)) savedRange = s.getRangeAt(0).cloneRange();
+    };
+    body.addEventListener('mouseup', saveRange);
+    body.addEventListener('keyup', saveRange);
+
+    // mousedown + preventDefault, not click: pressing the button would otherwise
+    // take focus and collapse the caret before we could save where it was.
+    $('pe-pdf').addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      saveRange();
+      pdfInput.click();
+    });
+    pdfInput.addEventListener('change', () => {
+      const f = pdfInput.files && pdfInput.files[0];
+      pdfInput.value = ''; // let the same file be re-picked after an error
+      if (f) insertPdf(f);
+    });
+
+    const esc = (s: string) =>
+      s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+    async function insertPdf(file: File) {
+      say('Téléversement du PDF…', true);
+      try {
+        const fd = new FormData();
+        fd.append('file', file);
+        const res = await fetch('/api/admin-pujol/pages/upload-file/', { method: 'POST', body: fd });
+        if (!res.ok) throw new Error((await res.text()) || String(res.status));
+        const { url, name } = (await res.json()) as { url: string; name: string };
+
+        const label = esc((name || 'Document').replace(/\.pdf$/i, ''));
+        const tag = `<a href="${url}">${label} (PDF)</a>`;
+
+        if (sourceMode) {
+          const s = source.selectionStart || source.value.length;
+          source.value = source.value.slice(0, s) + tag + source.value.slice(source.selectionEnd || s);
+        } else if (savedRange && body.contains(savedRange.commonAncestorContainer)) {
+          // Caret known: restore it and use execCommand, the same path the
+          // article editor's image insert has been using.
+          body.focus();
+          const sel = window.getSelection()!;
+          sel.removeAllRanges();
+          sel.addRange(savedRange);
+          // Text selected → link that text; otherwise drop in a labelled link.
+          if (!savedRange.collapsed) document.execCommand('createLink', false, url);
+          else document.execCommand('insertHTML', false, tag);
+          saveRange();
+        } else {
+          // No caret in the body — the editor was never clicked into. execCommand
+          // silently does nothing without a selection, which looked exactly like
+          // "the PDF never saved", so append deterministically instead.
+          const p = document.createElement('p');
+          p.innerHTML = tag;
+          body.appendChild(p);
+        }
+        say('PDF ajouté ✓ — cliquez sur Enregistrer pour le conserver.', true);
+      } catch (err: any) {
+        // alert, not just the status line: a rejected upload inserts no link, and
+        // a message in the corner is missable — which is how this stayed opaque.
+        say('Échec du téléversement.', false);
+        alert('Échec du téléversement : ' + (err?.message || err));
+      }
+    }
+
+    $('pe-toggle-src').addEventListener('click', () => {
+      sourceMode = !sourceMode;
+      $('pe-toggle-src').classList.toggle('is-active', sourceMode);
+      if (sourceMode) {
+        source.value = body.innerHTML;
+        body.style.display = 'none';
+        source.style.display = 'block';
+      } else {
+        body.innerHTML = source.value;
+        source.style.display = 'none';
+        body.style.display = 'block';
+      }
+    });
+
+    // ── SEO counters + live SERP preview ─────────────────────────────────
+    const seoTitle = $('pe-seo-title') as HTMLInputElement;
+    const seoDesc = $('pe-seo-desc') as HTMLInputElement;
+    const title = $('pe-title') as HTMLInputElement;
+
+    function counter(el: HTMLInputElement, out: HTMLElement, max: number) {
+      out.textContent = `${el.value.length} / ${max}`;
+      out.classList.toggle('is-over', el.value.length > max);
+    }
+    function refresh() {
+      $('pe-serp-title').textContent = seoTitle.value || title.value;
+      $('pe-serp-desc').textContent = seoDesc.value || 'La méta-description apparaîtra ici…';
+      counter(seoTitle, $('pe-seo-title-count'), 60);
+      counter(seoDesc, $('pe-seo-desc-count'), 160);
+    }
+    [seoTitle, seoDesc, title].forEach((el) => el.addEventListener('input', refresh));
+    refresh();
+
+    // ── save ─────────────────────────────────────────────────────────────
+    const status = $('pe-status');
+    const say = (msg: string, ok: boolean) => {
+      status.textContent = msg;
+      status.className = `pe-status ${ok ? 'is-ok' : 'is-err'}`;
+    };
+
+    $('pe-save').addEventListener('click', async () => {
+      // Take the source textarea as truth while it is the visible editor.
+      const html = sourceMode ? source.value : body.innerHTML;
+      if (!title.value.trim()) { say('Le titre est obligatoire.', false); return; }
+
+      const btn = $('pe-save') as HTMLButtonElement;
+      btn.disabled = true;
+      say('Enregistrement…', true);
+
+      const res = await fetch(`/api/admin-pujol/pages/${id}/`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: title.value.trim(),
+          seo_title: seoTitle.value,
+          seo_description: seoDesc.value,
+          body_html: html,
+        }),
+      });
+      btn.disabled = false;
+
+      let data: any = {};
+      try { data = await res.json(); } catch { /* non-JSON error page */ }
+      if (!res.ok) { say(data.error || 'Échec de l’enregistrement.', false); return; }
+      say('Enregistré ✅ — cliquez sur 🚀 Publier pour mettre le site à jour.', true);
+    });
+  }
+</script>

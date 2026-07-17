@@ -1,10 +1,95 @@
 ---
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listPages, type SitePage } from '../../../lib/pages-db';
+
+let pages: SitePage[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  pages = await listPages(db);
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+const fmt = (s: string | null) =>
+  s ? new Date(s).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+
+const isPending = (p: SitePage) =>
+  !p.published_json || !p.published_at || new Date(p.updated_at) > new Date(p.published_at);
 ---
-<AdminLayout title="Pages" section="pages">
-  <h1>Pages légales</h1>
-  <div class="card">
-    <p>Module en cours de construction. Prochaine étape : liste des pages + éditeur HTML.</p>
+
+<AdminLayout title="Pages légales" section="pages">
+  <div class="toolbar">
+    <h1 style="margin:0;">Pages légales <span style="font-weight:300;color:#888;">({pages.length})</span></h1>
   </div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && (
+    <div class="card" style="margin-bottom:18px;">
+      <p style="margin:0;font-size:13px;color:#666;">
+        Ces pages ont un contenu juridique. Leur adresse (slug) n’est pas modifiable : elle est
+        utilisée par des liens externes. Après modification, cliquez sur <b>🚀 Publier</b> pour
+        mettre le site à jour.
+      </p>
+    </div>
+  )}
+
+  {!error && pages.length === 0 && (
+    <div class="card"><p>Aucune page légale trouvée dans la base.</p></div>
+  )}
+
+  {pages.length > 0 && (
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="pg-table">
+        <thead>
+          <tr><th>Page</th><th>État</th><th>Modifiée</th><th style="text-align:right;">Actions</th></tr>
+        </thead>
+        <tbody>
+          {pages.map((p) => (
+            <tr>
+              <td>
+                <a href={`./${p.id}/edit/`} class="pg-title">{p.title}</a>
+                <div class="pg-slug">/{p.slug}/</div>
+              </td>
+              <td>
+                {isPending(p)
+                  ? <span class="badge badge--pending">Non publiée</span>
+                  : <span class="badge badge--live">En ligne</span>}
+              </td>
+              <td class="pg-date">{fmt(p.updated_at)}</td>
+              <td style="text-align:right;white-space:nowrap;">
+                <a href={`/${p.slug}/`} class="btn btn--ghost btn--sm" target="_blank">Voir</a>
+                <a href={`./${p.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
 </AdminLayout>
+
+<style>
+  .pg-table { width: 100%; border-collapse: collapse; font-family: var(--pj-noto); }
+  .pg-table th {
+    text-align: left; font-size: 11px; letter-spacing: .5px; text-transform: uppercase;
+    color: #8a8a8a; font-weight: 700; padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline);
+  }
+  .pg-table td { padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline); vertical-align: middle; }
+  .pg-table tr:last-child td { border-bottom: none; }
+  .pg-table tr:hover td { background: #fbfcf8; }
+  .pg-title { font-weight: 600; font-size: 15px; color: #000; }
+  .pg-title:hover { color: var(--pj-orange); }
+  .pg-slug { font-size: 12px; color: #9aa0a6; margin-top: 2px; font-family: ui-monospace, monospace; }
+  .pg-date { font-size: 13px; color: #666; }
+  .badge {
+    display: inline-block; padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  }
+  .badge--live { background: rgba(178,192,78,.2); color: #5c6a10; }
+  .badge--pending { background: rgba(236,114,52,.15); color: #a84a17; }
+  .btn--sm { padding: 6px 12px; font-size: 10px; margin-left: 6px; }
+</style>
