@@ -10,6 +10,7 @@ export interface DeployEnv {
   GITHUB_TOKEN?: string;
   GITHUB_REPO?: string;      // "owner/repo"
   DEPLOY_WORKFLOW?: string;  // defaults to "deploy.yml"
+  DEPLOY_REF?: string;       // git ref to build; defaults to "main" (prod sets "pujol-main")
 }
 
 const GH = 'https://api.github.com';
@@ -19,7 +20,7 @@ export function deployConfigured(env: DeployEnv): boolean {
   return !!(env.GITHUB_TOKEN && env.GITHUB_REPO);
 }
 
-/** POST a workflow_dispatch on deploy.yml @ main. Returns { ok } or an error string. */
+/** POST a workflow_dispatch on DEPLOY_WORKFLOW @ DEPLOY_REF. Returns { ok } or an error string. */
 export async function triggerDeploy(env: DeployEnv): Promise<{ ok: boolean; error?: string }> {
   if (!deployConfigured(env)) return { ok: false, error: 'GITHUB_TOKEN/GITHUB_REPO not configured' };
   const wf = env.DEPLOY_WORKFLOW || 'deploy.yml';
@@ -27,7 +28,7 @@ export async function triggerDeploy(env: DeployEnv): Promise<{ ok: boolean; erro
     const resp = await fetch(`${GH}/repos/${env.GITHUB_REPO}/actions/workflows/${wf}/dispatches`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'User-Agent': UA },
-      body: JSON.stringify({ ref: 'main' }),
+      body: JSON.stringify({ ref: env.DEPLOY_REF || 'main' }),
     });
     if (resp.ok || resp.status === 204) return { ok: true };
     return { ok: false, error: `${resp.status} ${await resp.text()}` };
