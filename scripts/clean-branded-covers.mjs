@@ -142,6 +142,13 @@ for (const r of rows) {
     } catch { rec.notes += 'json_parse_error;'; }
   } else rec.notes += 'json_missing;';
   rec.json_idx = jsonPhotos ? (jsonHits.join('|') || 'none') : '';
+  // JSON-archive edit is file-driven & independent of D1 state (D1 may already be clean in this env / on re-run)
+  if (APPLY && !SKIP_JSON && jsonPhotos && jsonHits.length && jsonPhotos.length - jsonHits.length > 0) {
+    const obj = JSON.parse(readFileSync(jsonFile, 'utf8'));
+    obj.photos = obj.photos.filter((u) => !isBranded(u));
+    writeFileSync(jsonFile, JSON.stringify(obj, null, 2) + '\n');
+    rec.notes += `json_removed_${jsonHits.length};`;
+  }
 
   if (matches.length === 0) {
     rec.flag = ph.length ? 'ALREADY_REMOVED_D1' : 'NO_PHOTOS';
@@ -162,15 +169,8 @@ for (const r of rows) {
     photo_row_id: m.id, removed_url: m.url, removed_position: m.position, source: m.source });
   report.push(rec);
 
-  // --- apply (skip if it would leave the listing with zero photos) ---
-  const canApply = remaining.length > 0;
-  if (APPLY && !SKIP_JSON && jsonPhotos && jsonHits.length && (jsonPhotos.length - jsonHits.length > 0)) {
-    const obj = JSON.parse(readFileSync(jsonFile, 'utf8'));
-    obj.photos = obj.photos.filter((u) => !isBranded(u));
-    writeFileSync(jsonFile, JSON.stringify(obj, null, 2) + '\n');
-    rec.notes += `json_removed_${jsonHits.length};`;
-  }
-  if (APPLY && !SKIP_D1 && canApply) {
+  // --- apply D1 (JSON handled above; skip if it would leave the listing with zero photos) ---
+  if (APPLY && !SKIP_D1 && remaining.length > 0) {
     d1(`DELETE FROM annonces_photos WHERE id IN (${matches.map((m) => m.id).join(',')});`);
     // re-sequence the kept photos to contiguous 0-based order (kept is already position-sorted)
     const cases = remaining.map((p, i) => `WHEN ${p.id} THEN ${i}`).join(' ');
