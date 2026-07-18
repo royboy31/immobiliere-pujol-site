@@ -1,0 +1,74 @@
+name: Cleanup branded covers (Pujol prod)
+
+# Removes the hand-branded first photos (Vendu / Sous promesse macaron + salesperson portrait)
+# from the 177 closed sold listings in scripts/data/branded-first-images.csv, against the
+# PROD D1 on the Pujol account (option c: uses the Pujol secrets, no local token needed).
+#
+#   mode = dry-run  -> read-only; uploads report + rollback manifest as artifacts (review first)
+#   mode = apply    -> D1 delete + renumber on PROD (JSON archive is handled separately via git)
+#
+# The JSON-archive edits (durability vs reseed + link-block thumbnails) are NOT done here; they
+# run locally (`--apply --skip-d1`) and ship through a normal PR -> promote to pujol-main.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run (report only) or apply (writes to PROD D1)"
+        type: choice
+        options: [dry-run, apply]
+        default: dry-run
+      confirm:
+        description: "For apply only: type APPLY-PROD to proceed"
+        default: ""
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    environment: pujol-staging   # holds the Pujol Cloudflare secrets
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Guard the apply leg
+        if: ${{ inputs.mode == 'apply' && inputs.confirm != 'APPLY-PROD' }}
+        run: |
+          echo "::error::apply mode requires confirm=APPLY-PROD"
+          exit 1
+
+      - name: Point wrangler at the Pujol prod D1
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
+            cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
+      - name: Run cleanup (${{ inputs.mode }})
+        run: |
+          ARGS=""
+          if [ "${{ inputs.mode }}" = "apply" ]; then ARGS="--apply --skip-json"; fi
+          node scripts/clean-branded-covers.mjs $ARGS
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CSV_PATH: scripts/data/branded-first-images.csv
+          OUT_DIR: ./out
+          D1_NAME: pujol-annonces
+
+      - name: Upload report + rollback manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branded-cleanup-${{ inputs.mode }}
+          path: out/
+          if-no-files-found: warn
