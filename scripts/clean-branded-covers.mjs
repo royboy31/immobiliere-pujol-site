@@ -40,6 +40,10 @@ function normKey(u) {
   return s.replace(/^\/+/, '');
 }
 const base = (u) => normKey(u).split('/').pop().toLowerCase();
+// Content id of a listing photo: the `photo_<hash>` token, ignoring any `-NN` size suffix / host.
+// The branded composite is stored as several byte-identical copies sharing this hash (r2 `-NN`
+// copy + LBI base copy, sometimes more), so we match/remove ALL of them, not just one URL.
+const photoHash = (u) => { const m = base(u).match(/photo_([a-f0-9]{16,})/); return m ? m[1] : ''; };
 const slugFromUrl = (u) => (String(u).match(/\/annonces\/([^/?#]+)/) || [])[1] || '';
 
 function parseCsvLine(line) {
@@ -81,6 +85,7 @@ const rows = lines.slice(1).map((l) => {
     image_url: (f[col.image_url] || '').trim(),
     brandedKey: normKey(f[col.image_url]),
     brandedBase: base(f[col.image_url]),
+    brandedHash: photoHash(f[col.image_url]),
   };
 });
 console.log(`Loaded ${rows.length} listings from CSV.`);
@@ -121,58 +126,61 @@ for (const r of rows) {
 
   const ph = (photosByAnnonce.get(a.id) || []).slice().sort((x, y) => x.position - y.position);
   rec.total = ph.length;
-  const matches = ph.filter((p) => normKey(p.url) === r.brandedKey || base(p.url) === r.brandedBase);
+  // Match ALL copies of the branded image: by content hash (catches the r2 `-NN` copy AND the
+  // byte-identical LBI base copy), with exact-url as a fallback for non-`photo_<hash>` names.
+  const isBranded = (u) => (r.brandedHash && photoHash(u) === r.brandedHash) || normKey(u) === r.brandedKey || base(u) === r.brandedBase;
+  const matches = ph.filter((p) => isBranded(p.url));
+  const remaining = ph.filter((p) => !isBranded(p.url)).sort((x, y) => x.position - y.position);
 
-  // JSON archive
+  // JSON archive: how many branded copies are in photos[]
   const jsonFile = path.join(CONTENT_DIR, `${r.slug}.json`);
-  let jsonPhotos = null, jsonIdx = -1;
+  let jsonPhotos = null, jsonHits = [];
   if (existsSync(jsonFile)) {
     try {
       jsonPhotos = JSON.parse(readFileSync(jsonFile, 'utf8')).photos || [];
-      jsonIdx = jsonPhotos.findIndex((u) => normKey(u) === r.brandedKey || base(u) === r.brandedBase);
+      jsonHits = jsonPhotos.map((u, i) => (isBranded(u) ? i : -1)).filter((i) => i >= 0);
     } catch { rec.notes += 'json_parse_error;'; }
   } else rec.notes += 'json_missing;';
-  rec.json_idx = jsonPhotos ? jsonIdx : '';
+  rec.json_idx = jsonPhotos ? (jsonHits.join('|') || 'none') : '';
 
   if (matches.length === 0) {
     rec.flag = ph.length ? 'ALREADY_REMOVED_D1' : 'NO_PHOTOS';
     bump(rec.flag); report.push(rec); continue;
   }
-  if (matches.length > 1) { rec.flag = 'MULTI_MATCH'; rec.notes += `${matches.length} photo rows match;`; bump(rec.flag); report.push(rec); continue; }
 
-  const m = matches[0];
-  rec.d1_pos = m.position;
-  rec.d1_source = m.source;
-  if (m.source !== 'wordpress') rec.notes += `source=${m.source}(feed-managed,may resync);`;
-  const coverChanges = m.position === 0;
+  rec.copies = matches.length;
+  rec.d1_pos = matches.map((m) => m.position).join('|');
+  rec.d1_source = [...new Set(matches.map((m) => m.source))].join('|');
+  const coverChanges = Math.min(...matches.map((m) => m.position)) === 0;
   rec.cover_changes = coverChanges ? 'yes' : 'no(cover already clean)';
-  const remaining = ph.filter((p) => p.id !== m.id).sort((x, y) => x.position - y.position);
   rec.new_cover = base(remaining[0]?.url || '');
-  rec.flag = coverChanges ? 'OK_COVER' : 'OK_NONCOVER';
+  if (!remaining.length) rec.flag = 'ALL_BRANDED_NO_CLEAN';       // every photo is the branded shot -> needs Caroline
+  else rec.flag = coverChanges ? 'OK_COVER' : 'OK_NONCOVER';
   bump(rec.flag);
 
-  manifest.push({ slug: r.slug, ref: r.ref, annonce_id: a.id, photo_row_id: m.id,
-    removed_url: m.url, removed_position: m.position, source: m.source, json_index: jsonIdx });
+  for (const m of matches) manifest.push({ slug: r.slug, ref: r.ref, annonce_id: a.id,
+    photo_row_id: m.id, removed_url: m.url, removed_position: m.position, source: m.source });
   report.push(rec);
 
-  // --- apply ---
-  if (APPLY) {
-    if (!SKIP_D1) {
-      d1(`DELETE FROM annonces_photos WHERE id = ${m.id}; ` +
-         `UPDATE annonces_photos SET position = position - 1 WHERE annonce_id = ${a.id} AND position > ${m.position};`);
-    }
-    if (!SKIP_JSON && jsonPhotos && jsonIdx >= 0) {
-      jsonPhotos.splice(jsonIdx, 1);
-      const obj = JSON.parse(readFileSync(jsonFile, 'utf8'));
-      obj.photos = jsonPhotos;
-      writeFileSync(jsonFile, JSON.stringify(obj, null, 2) + '\n');
-    }
+  // --- apply (skip if it would leave the listing with zero photos) ---
+  const canApply = remaining.length > 0;
+  if (APPLY && !SKIP_JSON && jsonPhotos && jsonHits.length && (jsonPhotos.length - jsonHits.length > 0)) {
+    const obj = JSON.parse(readFileSync(jsonFile, 'utf8'));
+    obj.photos = obj.photos.filter((u) => !isBranded(u));
+    writeFileSync(jsonFile, JSON.stringify(obj, null, 2) + '\n');
+    rec.notes += `json_removed_${jsonHits.length};`;
+  }
+  if (APPLY && !SKIP_D1 && canApply) {
+    d1(`DELETE FROM annonces_photos WHERE id IN (${matches.map((m) => m.id).join(',')});`);
+    // re-sequence the kept photos to contiguous 0-based order (kept is already position-sorted)
+    const cases = remaining.map((p, i) => `WHEN ${p.id} THEN ${i}`).join(' ');
+    d1(`UPDATE annonces_photos SET position = CASE id ${cases} END WHERE id IN (${remaining.map((p) => p.id).join(',')});`);
   }
 }
 
 // --- write outputs --------------------------------------------------------
 mkdirSync(OUT_DIR, { recursive: true });
-const cols = ['index', 'expert', 'ref', 'slug', 'annonce_id', 'status', 'flag', 'd1_pos', 'd1_source', 'total',
+const cols = ['index', 'expert', 'ref', 'slug', 'annonce_id', 'status', 'flag', 'copies', 'd1_pos', 'd1_source', 'total',
   'cover_changes', 'new_cover', 'json_idx', 'brandedBase', 'notes'];
 const csv = [cols.join(','), ...report.map((r) => cols.map((c) => `"${String(r[c] ?? '').replace(/"/g, '""')}"`).join(','))].join('\n');
 const suffix = APPLY ? 'apply' : 'dry-run';
@@ -185,7 +193,9 @@ console.log(`\nMode: ${targets}  |  D1: ${D1_NAME}`);
 console.log('Result by flag:');
 for (const [k, v] of Object.entries(counts).sort((a, b) => b[1] - a[1])) console.log(`  ${k.padEnd(20)} ${v}`);
 const actionable = (counts.OK_COVER || 0) + (counts.OK_NONCOVER || 0);
-console.log(`\nWould remove a photo on ${actionable} listing(s) (${counts.OK_COVER || 0} change the cover, ${counts.OK_NONCOVER || 0} remove a non-cover 2nd photo).`);
+console.log(`\nActionable listings: ${actionable} (${counts.OK_COVER || 0} change the cover, ${counts.OK_NONCOVER || 0} non-cover).`);
+console.log(`Branded photo copies removed across all listings: ${manifest.length} (avg ${actionable ? (manifest.length / actionable).toFixed(1) : 0} per listing).`);
 console.log(`Report:   ${path.join(OUT_DIR, `report-${suffix}.csv`)}`);
 console.log(`Manifest: ${path.join(OUT_DIR, `manifest-${suffix}.json`)}`);
-if ((counts.NOT_IN_D1 || counts.MULTI_MATCH || counts.NO_PHOTOS)) console.log(`\n⚠  Review the NOT_IN_D1 / MULTI_MATCH / NO_PHOTOS rows before --apply.`);
+const warn = (counts.NOT_IN_D1 || 0) + (counts.ALL_BRANDED_NO_CLEAN || 0) + (counts.NO_PHOTOS || 0);
+if (warn) console.log(`\n⚠  ${warn} row(s) need review: NOT_IN_D1=${counts.NOT_IN_D1 || 0}, ALL_BRANDED_NO_CLEAN=${counts.ALL_BRANDED_NO_CLEAN || 0} (no clean photo -> Caroline), NO_PHOTOS=${counts.NO_PHOTOS || 0}.`);
