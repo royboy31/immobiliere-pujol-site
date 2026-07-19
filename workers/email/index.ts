@@ -221,7 +221,7 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
                 </p>
                 <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
                   <strong>Site</strong> <a href="${SITE_URL}" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">www.immobiliere-pujol.fr</span></a><br>
-                  <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
+                  <strong>Contact</strong> <a href="https://www.immobiliere-pujol.fr/contact-immobiliere-pujol/" style="color:#ffffff!important;text-decoration:underline!important"><span style="color:#ffffff!important">Nous contacter</span></a>
                 </p>
               </td>
               <td style="vertical-align:top" width="50%">
@@ -360,7 +360,7 @@ function buildTable(subject: string, rows: [string, string][]): string {
                 </p>
                 <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
                   <strong>Site</strong> <a href="${SITE_URL}" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">www.immobiliere-pujol.fr</span></a><br>
-                  <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
+                  <strong>Contact</strong> <a href="https://www.immobiliere-pujol.fr/contact-immobiliere-pujol/" style="color:#ffffff!important;text-decoration:underline!important"><span style="color:#ffffff!important">Nous contacter</span></a>
                 </p>
               </td>
               <td style="vertical-align:top" width="50%">
