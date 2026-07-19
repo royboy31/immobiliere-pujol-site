@@ -136,6 +136,10 @@ New `src/pages/newsletter-confirmee.astro` (public, prerender off):
 - [ ] `dataLayer` `form_submit` still pushed
 - [ ] Sheet `Newsletter` still logs the attempt
 
+## Step 6b — Blog categories as checkboxes (from Caroline, 16 Jul meeting)
+
+In the **article editor** (`src/components/admin/ArticleEditor.astro`): replace the free-text comma-separated categories field with a **checkbox list of the existing blog categories** (source them from the current category set used by `blog-immobilier-marseille.astro` / the content collection). Multi-select; keep the stored format identical to today (array in frontmatter/D1) so rendering is untouched. Rationale: Caroline mis-categorizes with free text; checkboxes make the taxonomy consistent.
+
 ## Step 7 — Sending-domain prep: `actu.immobiliere-pujol.fr`
 
 Goal: authenticate the dedicated newsletter sending subdomain so campaign emails pass SPF/DKIM/DMARC, isolated from the agency's `contact@` reputation. You have what's needed: the Cloudflare zone `immobiliere-pujol.fr` lives in the Pujol Cloudflare account.
