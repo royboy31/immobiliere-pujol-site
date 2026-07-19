@@ -12,7 +12,7 @@
 5. **Sending-domain prep**: create and authenticate `actu.immobiliere-pujol.fr` (Step 7).
 
 **⛔ Out of scope — Roy supervises these personally. Do NOT touch:**
-- Importing the existing master list (the 2 495 cleaned contacts) into Brevo.
+- Importing the existing master list into Brevo. Reference (read-only, shared with you): [Liste maîtresse — tab « Liste nettoyée »](https://docs.google.com/spreadsheets/d/1g46qDg9d08hkc3OjhRiW2hzp48Vidv7Za03Ct2OgSMo/edit?gid=754937836#gid=754937836) — 987 import-direct + 1 508 à reconfirmer; the attribute columns there map 1:1 to the Brevo attributes in Step 0.2.
 - Any email to any existing contact (no reconfirmation campaign, no test blasts to lists).
 - Production deploys, as always, only with Roy's explicit approval.
 
