@@ -152,6 +152,24 @@ Goal: authenticate the dedicated newsletter sending subdomain so campaign emails
 5. **Do NOT** repoint `NEWSLETTER_SENDER_EMAIL` on any deployed worker yet — Roy flips the sender at go-live. Just report to Roy: which Brevo account, the records added, verification status, sender created.
 6. Note for later (not yours): `newsletter@actu.…` has no mailbox. Replies should carry `Reply-To: contact@immobiliere-pujol.fr` (template/campaign setting) or we add a Cloudflare Email Routing rule — Roy decides at go-live.
 
+## Step 7b — Second sending domain: `alerte.immobiliere-pujol.fr`
+
+The property-alert system (development starts **next week**) gets its **own** sending subdomain, so a problem on alert emails can never hurt the newsletter's reputation (and vice-versa). Since you'll be in Brevo + Cloudflare DNS for Step 7 anyway, do both in the same session:
+
+1. Same procedure as Step 7: Brevo → add domain `alerte.immobiliere-pujol.fr` → copy its DNS records → add them in the Cloudflare zone → verify green.
+2. Create the sender: `Immobilière Pujol <alerte@alerte.immobiliere-pujol.fr>` (final local-part to confirm with Roy at the meeting; nothing wired to any worker yet).
+3. Same rules: DMARC starts `p=none`, don't point any deployed worker at it, report status to Roy.
+
+## Meeting agenda (with Roy, 20 Jul)
+
+1. **Progress review**: Steps 0-6 status (DOI flow, Turnstile, landing page, preferences form) — demo on staging.
+2. **Brevo prod state**: the prod email worker already carries `BREVO_API_KEY`, `NEWSLETTER_LIST_ID`, **`NEWSLETTER_LIST_IDS`** (plural — not in the reviewed code), sender vars. Walk Roy through: which Brevo account(s), which lists these ids point at, what code uses `NEWSLETTER_LIST_IDS`. Roy supervises everything list-related on prod — nothing sends until he green-lights.
+3. **Sending domains**: `actu.` + `alerte.` status (Steps 7/7b).
+4. **Branded-covers cleanup**: confirm what your commits (`9f8a3445`, `f730dae2`, `3a5d4ac4`) already applied and on which environment(s) — Roy needs the prod state to close his tracking.
+5. **Blog categories checkboxes** (Step 6b) — scope check.
+6. **Alert system kickoff** (next week): scope = devis + `docs/newsletter-dev-spec.md` patterns; new inputs from Caroline: "êtes-vous déjà propriétaire / un bien à vendre ?" question on the alert form; admin "Alertes" read-only screen; matching engine on cron-sync.
+7. Multi-zone template: ✅ already done ("Sélection mixte") — nothing pending unless Roy's review finds gaps.
+
 ---
 
 When all green on staging (Steps 0-6) and the domain is authenticated (Step 7), ping Roy — he reviews, then handles prod (Brevo prod objects, secrets, sender switch, deploy) plus the supervised list import/reconfirmation.
