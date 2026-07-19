@@ -74,10 +74,14 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext) {
   // Brevo: 201/204 = OK. 400 "already exists / already in list" = treat as OK for the visitor.
   if (!res.ok && res.status !== 400) return { ok: false, error: "Inscription impossible pour le moment." };
 
-  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));   // keep the Sheet trail
+  ctx.waitUntil(logToSheet('Newsletter', [now(), email, 'En attente']));   // keep the Sheet trail
   return { ok: true };
 }
 ```
+
+**Sheet logging (updated 19 Jul — columns now exist in the leads sheet & `SHEET_HEADERS`):** the Newsletter tab is Caroline's visibility layer, columns `Date | Email | Statut opt-in | Date confirmation | Prénom | Nom | Profil | Intérêt Location | Intérêt Vente | Intérêt Syndic | Tous sujets | Notes`.
+- On signup: append row with `Statut opt-in = En attente`.
+- On DOI confirmation (the landing page / preferences API): append a row (or update — appending a second row with `Statut = Confirmée` + `Date confirmation` is fine and simpler with the Apps Script) carrying Prénom/Nom/Profil/interests once submitted. Brevo stays the source of truth; the Sheet is a human-readable log.
 
 Notes:
 - Brevo sends the confirmation email, hosts the signed confirm link, **records the click as the consent proof**, adds the contact to the list *only after* the click, then redirects to our URL. We store nothing ourselves.

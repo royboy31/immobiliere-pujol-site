@@ -1163,7 +1163,7 @@ const SHEET_HEADERS: Record<string, string[]> = {
   'Devis Syndic':      ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Adresse copropriété', 'Nombre de lots', 'Message'],
   'Honoraires Syndic': ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Rôle — Président CS', 'Rôle — Membre CS', 'Rôle — Copropriétaire', 'Adresse', 'Ville', 'Code postal', 'Nombre de lots', 'Équipements', 'Procédures / recouvrement', 'Commentaires'],
   'Annonces':          ['Date', 'Référence', 'Titre', 'Type (V/L)', 'Code postal', 'Négociateur', 'Nom', 'Email', 'Téléphone', 'Message'],
-  'Newsletter':        ['Date', 'Email'],
+  'Newsletter':        ['Date', 'Email', 'Statut opt-in', 'Date confirmation', 'Prénom', 'Nom', 'Profil', 'Intérêt Location', 'Intérêt Vente', 'Intérêt Syndic', 'Tous sujets', 'Notes'],
 };
 
 // ── Worker entry point ──────────────────────────────────────────────────────
