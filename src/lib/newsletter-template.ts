@@ -112,7 +112,7 @@ function renderShell(input: { subject: string; preheader?: string; contentHtml: 
                 <p style="margin:0;font-size:13px;color:#ffffff;line-height:1.7">7 rue du Docteur Fiolle<br>13006 Marseille</p>
                 <p style="margin:12px 0 0;font-size:13px;color:#ffffff;line-height:1.7">
                   <strong>Site</strong> <a href="${SITE}" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">www.immobiliere-pujol.fr</span></a><br>
-                  <strong>Email</strong> <a href="mailto:contact@immobiliere-pujol.fr" style="color:#ffffff!important;text-decoration:none!important"><span style="color:#ffffff!important">contact@immobiliere-pujol.fr</span></a>
+                  <strong>Contact</strong> <a href="${SITE}/contact-immobiliere-pujol/" style="color:#ffffff!important;text-decoration:underline!important"><span style="color:#ffffff!important">Nous contacter</span></a>
                 </p>
               </td>
               <td style="vertical-align:top" width="50%">
