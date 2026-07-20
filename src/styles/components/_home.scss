@@ -1183,6 +1183,104 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       word-break: break-word;
     }
   }
+
+  // ── Step 2 — name + interests (progressive disclosure) ──────────────
+  .news-step2-note {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.4;
+    color: $black;
+    margin: 8px 0 0;
+    max-width: 620px;
+
+    b { font-weight: 700; }
+  }
+
+  .news-names {
+    display: flex;
+    gap: 20px;
+    margin-top: 28px;
+
+    input {
+      flex: 1;
+      min-width: 0;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid $ds-hairline-2;
+      outline: 0;
+      font-family: $ds-font-helv;
+      font-weight: 300;
+      font-size: 18px;
+      color: $black;
+      padding: 6px 0 12px;
+
+      &::placeholder { color: rgba(0, 0, 0, .64); }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $black;
+        caret-color: $black;
+        -webkit-box-shadow: 0 0 0 1000px $ds-olive inset;
+        box-shadow: 0 0 0 1000px $ds-olive inset;
+        transition: background-color 9999s ease-in-out 0s;
+      }
+    }
+  }
+
+  .news-q {
+    font-family: $ds-font-noto;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.4;
+    color: $black;
+    margin: 28px 0 0;
+
+    span { font-weight: 400; opacity: .8; }
+  }
+
+  .news-interests {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 16px;
+
+    label {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      cursor: pointer;
+
+      span {
+        font-family: $ds-font-noto;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.4;
+        color: $black;
+      }
+    }
+  }
+
+  .news-valider {
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: $black;
+    color: #fff;
+    border: 0;
+    border-radius: 40px;
+    padding: 14px 32px;
+    font-family: $ds-font-helv;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity .2s ease;
+
+    &:hover { opacity: .85; }
+    &:disabled { opacity: .5; cursor: default; }
+  }
 }
 
 // =========================================
@@ -1389,5 +1487,8 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .reviews .stat-title { font-size: 32px; }
   .news h2 { font-size: 28px; }
   .news .news-sub { font-size: 15px; }
+  .news .news-step2-note { font-size: 15px; }
+  .news .news-names { flex-direction: column; gap: 22px; }
+  .news .news-valider { width: 100%; justify-content: center; }
   .blog h2 { font-size: 28px; }
 }
