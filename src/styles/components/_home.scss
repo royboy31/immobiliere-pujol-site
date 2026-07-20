@@ -1185,6 +1185,18 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   }
 
   // ── Step 2 — name + interests (progressive disclosure) ──────────────
+  // Red "signup not finalised until you click the email link" notice (Caroline's
+  // doc). Swapped to .news-step2-note styling when no confirmation email is sent.
+  .news-pending {
+    font-family: $ds-font-helv;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.4;
+    color: #b3261e;
+    margin: 8px 0 0;
+    max-width: 620px;
+  }
+
   .news-step2-note {
     font-family: $ds-font-helv;
     font-weight: 300;
@@ -1487,6 +1499,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .reviews .stat-title { font-size: 32px; }
   .news h2 { font-size: 28px; }
   .news .news-sub { font-size: 15px; }
+  .news .news-pending { font-size: 15px; }
   .news .news-step2-note { font-size: 15px; }
   .news .news-names { flex-direction: column; gap: 22px; }
   .news .news-valider { width: 100%; justify-content: center; }

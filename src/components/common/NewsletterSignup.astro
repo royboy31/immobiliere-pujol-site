@@ -39,7 +39,8 @@
 
     {/* ── Step 2 — name + interests (revealed after step 1) ─────────── */}
     <div data-step="2" hidden>
-      <p class="news-step2-note" data-step2-note>Vérifiez votre boîte mail pour confirmer votre inscription. En attendant, personnalisez vos préférences <b>(facultatif)</b>&nbsp;:</p>
+      <p class="news-pending" data-step2-note>Votre inscription n'est pas encore finalisée à ce stade. Veuillez cliquer sur le lien de validation envoyé sur votre boîte email.</p>
+      <p class="news-step2-note">En attendant, personnalisez vos préférences <b>(facultatif)</b>&nbsp;:</p>
       <div class="news-names">
         <input name="firstname" type="text" placeholder="Prénom" autocomplete="given-name" />
         <input name="lastname" type="text" placeholder="Nom" autocomplete="family-name" />
@@ -79,7 +80,13 @@
           subscribedEmail = (form.querySelector<HTMLInputElement>('[name="email"]')?.value || '').trim();
           // `doi` = a Brevo confirmation email was sent; the visitor must click it.
           // Without it the signup was recorded directly, so soften the note.
-          if (note && !data.doi) note.innerHTML = 'Merci pour votre inscription ! Personnalisez vos préférences <b>(facultatif)</b> :';
+          // Keep the red "not finalised yet" notice when a confirmation email
+          // was sent; otherwise swap it to a plain (non-red) confirmation.
+          if (note && !data.doi) {
+            note.textContent = 'Merci pour votre inscription !';
+            note.classList.remove('news-pending');
+            note.classList.add('news-step2-note');
+          }
           if (step1) step1.hidden = true;
           if (step2) step2.hidden = false;
         } else if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
