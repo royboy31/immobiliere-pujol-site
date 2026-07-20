@@ -876,6 +876,47 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
   return { ok: true, doi: true };
 }
 
+// /newsletter/profile — the signup card's optional step 2. After the email DOI,
+// the visitor may add their name + topic interests inline; we enrich the SAME
+// Brevo contact (keyed by email) with FIRSTNAME/LASTNAME + INT_* boolean
+// attributes. This implies no new consent and adds no list — the opt-in already
+// happened at the email step. Origin-gated like the DOI path so environments
+// stay apart; outside the DOI env it silently no-ops (still 200) so the UI flows.
+async function handleNewsletterProfile(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; error?: string }> {
+  const email = ((fd.get('email') as string) || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) return { ok: false, error: 'Email invalide.' };
+
+  const configured = !!(env.BREVO_API_KEY && env.NEWSLETTER_LIST_ID);
+  const isOwnEnv = !!env.ALLOWED_ORIGIN && origin === env.ALLOWED_ORIGIN;
+  if (!configured || !isOwnEnv) return { ok: true };   // no-op outside the Brevo/DOI env
+
+  const firstname = ((fd.get('firstname') as string) || '').trim().slice(0, 80);
+  const lastname = ((fd.get('lastname') as string) || '').trim().slice(0, 80);
+  const picked = fd.getAll('interests').map((v) => String(v));
+
+  const attributes: Record<string, string | boolean> = {
+    INT_LOCATION: picked.includes('location'),
+    INT_VENTE: picked.includes('vente'),
+    INT_SYNDIC: picked.includes('syndic'),
+    INT_TOUS: picked.includes('tous'),
+  };
+  if (firstname) attributes.FIRSTNAME = firstname;
+  if (lastname) attributes.LASTNAME = lastname;
+
+  // POST /contacts with updateEnabled updates the existing (pending-DOI) contact;
+  // no listIds/opt-in change here — attributes only.
+  const res = await fetch(`${BREVO}/contacts`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY as string, 'content-type': 'application/json' },
+    body: JSON.stringify({ email, attributes, updateEnabled: true }),
+  });
+  if (!res.ok && res.status !== 204) {
+    console.error(`Brevo profile ${res.status}: ${await res.text().catch(() => '')}`);
+    return { ok: false, error: 'Enregistrement impossible pour le moment.' };
+  }
+  return { ok: true };
+}
+
 // ── Newsletter — Brevo campaign endpoints (internal, JSON body) ─────────────
 // Called by the main app (composer) over HTTP with a shared internal token. All
 // Brevo access is centralised here so BREVO_API_KEY lives in one place. These
@@ -1090,7 +1131,10 @@ export default {
     // signups that arrive without a token — and PRODUCTION posts here (§6.2)
     // while `pujol-main` still ships the widget-less form. Ship the widget to
     // pujol-main BEFORE setting that secret, or prod signups will 403.
-    if (env.TURNSTILE_SECRET) {
+    // /newsletter/profile is the signup card's optional step 2 (name + interests);
+    // the visitor already cleared Turnstile at the email step, so exempt it (there
+    // is no fresh token) — the honeypot + content filter above still apply.
+    if (env.TURNSTILE_SECRET && path !== '/newsletter/profile') {
       const token = ((fd.get('cf-turnstile-response') as string) || '').trim();
       let pass = false;
       if (token) {
@@ -1125,6 +1169,9 @@ export default {
         break;
       case '/newsletter':
         result = await handleNewsletter(fd, env, ctx, origin);
+        break;
+      case '/newsletter/profile':
+        result = await handleNewsletterProfile(fd, env, origin);
         break;
       default:
         return jsonErr('Not found', 404, origin, env);

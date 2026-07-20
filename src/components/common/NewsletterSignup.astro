@@ -2,6 +2,13 @@
 // Site-wide newsletter — the green card band that sits ABOVE the black footer
 // on every page (same design as the home page). Posts to the same Worker
 // endpoint. Reuses the global `.news-wrap` / `.news` styles from _home.scss.
+//
+// Two-step, inline (progressive disclosure):
+//   Step 1 — email + consent -> POST /newsletter (Brevo double opt-in fires).
+//   Step 2 — Prénom/Nom + topic interests -> POST /newsletter/profile (enriches
+//            the Brevo contact with FIRSTNAME/LASTNAME + INT_* attributes).
+// The email step is the real subscription; step 2 is optional enrichment, so a
+// visitor who leaves after step 1 is still subscribed.
 ---
 
 <section class="news-wrap">
@@ -9,22 +16,43 @@
       <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
     <h2>Inscrivez-vous à notre<br /><b>newsletter</b></h2>
     <p class="news-sub">Recevez tous les mois nos derniers articles sur le marché immobilier à Marseille ainsi que les conseils de nos experts.</p>
-    <div class="form">
-      <input name="email" type="email" placeholder="Email" required />
-      <button class="submit" type="submit" aria-label="S'inscrire">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
-      </button>
+
+    {/* ── Step 1 — email + consent ─────────────────────────────────── */}
+    <div data-step="1">
+      <div class="form">
+        <input name="email" type="email" placeholder="Email" required />
+        <button class="submit" type="submit" aria-label="S'inscrire">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </button>
+      </div>
+      <label class="agree">
+        <input type="checkbox" name="agree" class="check" required />
+        <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
+      </label>
+      {/* Turnstile (spec §3.5/§6.1) — the email worker no longer exempts /newsletter.
+          Same site key + interaction-only appearance as the lead forms. BaseLayout
+          loads the Turnstile api.js only when analytics load, so this div stays
+          inert on staging, exactly like the other forms. */}
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
+      <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
     </div>
-    <label class="agree">
-      <input type="checkbox" name="agree" class="check" required />
-      <span class="agree-label">J'accepte le traitement de mes données dans le cadre de mon inscription à la newsletter</span>
-    </label>
-    {/* Turnstile (spec §3.5/§6.1) — the email worker no longer exempts /newsletter.
-        Same site key + interaction-only appearance as the lead forms. BaseLayout
-        loads the Turnstile api.js only when analytics load, so this div stays
-        inert on staging, exactly like the other forms. */}
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
-    <p class="legal">Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a></p>
+
+    {/* ── Step 2 — name + interests (revealed after step 1) ─────────── */}
+    <div data-step="2" hidden>
+      <p class="news-step2-note" data-step2-note>Vérifiez votre boîte mail pour confirmer votre inscription. En attendant, personnalisez vos préférences <b>(facultatif)</b>&nbsp;:</p>
+      <div class="news-names">
+        <input name="firstname" type="text" placeholder="Prénom" autocomplete="given-name" />
+        <input name="lastname" type="text" placeholder="Nom" autocomplete="family-name" />
+      </div>
+      <p class="news-q">Quels sont les sujets qui vous intéressent le plus&nbsp;? <span>(cochez autant de cases que vous souhaitez)</span></p>
+      <div class="news-interests">
+        <label><input type="checkbox" name="interests" value="location" class="check" /><span>Le marché de la location à Marseille, les prix des loyers, nos articles/conseils pour bien louer et gérer</span></label>
+        <label><input type="checkbox" name="interests" value="vente" class="check" /><span>Le marché des ventes à Marseille, les prix au m², nos articles/conseils pour bien vendre ou acheter</span></label>
+        <label><input type="checkbox" name="interests" value="syndic" class="check" /><span>Le syndic et la gestion des copropriétés</span></label>
+        <label><input type="checkbox" name="interests" value="tous" class="check" /><span>Pas de sujets en particulier&nbsp;; tous vos articles m'intéressent</span></label>
+      </div>
+      <button type="button" class="news-valider" data-step2-submit>Valider mes préférences</button>
+    </div>
   </form>
 </section>
 
@@ -32,6 +60,12 @@
   (function () {
     const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
     if (!form) return;
+    const step1 = form.querySelector<HTMLElement>('[data-step="1"]');
+    const step2 = form.querySelector<HTMLElement>('[data-step="2"]');
+    const note = form.querySelector<HTMLElement>('[data-step2-note]');
+    let subscribedEmail = '';
+
+    // Step 1 — email submit fires the Brevo double opt-in, then reveals step 2.
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!form.reportValidity()) return;
@@ -42,21 +76,33 @@
         const data = await res.json() as { ok?: boolean; doi?: boolean };
         if (data.ok) {
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'newsletter' }); } catch (e) {}
-          // `doi` = the worker started a Brevo double opt-in, so the visitor is not
-          // subscribed until they click the confirmation link (spec §6.4). Without
-          // it the signup was recorded directly and the old wording still holds.
-          const msg = data.doi
-            ? 'Vérifiez votre boîte mail pour confirmer votre inscription.'
-            : 'Merci pour votre inscription !';
-          form.innerHTML = '<p style="color:#1f2a30;font-weight:700;text-align:center;padding:24px 0;font-size:20px"></p>';
-          const p = form.querySelector('p');
-          if (p) p.textContent = msg;
-        } else {
-          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
-        }
+          subscribedEmail = (form.querySelector<HTMLInputElement>('[name="email"]')?.value || '').trim();
+          // `doi` = a Brevo confirmation email was sent; the visitor must click it.
+          // Without it the signup was recorded directly, so soften the note.
+          if (note && !data.doi) note.innerHTML = 'Merci pour votre inscription ! Personnalisez vos préférences <b>(facultatif)</b> :';
+          if (step1) step1.hidden = true;
+          if (step2) step2.hidden = false;
+        } else if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
       } catch {
         if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
       }
+    });
+
+    // Step 2 — enrich the contact (name + interests). Best-effort: whatever the
+    // outcome, thank the visitor (they are already subscribed from step 1).
+    const valider = form.querySelector<HTMLButtonElement>('[data-step2-submit]');
+    valider?.addEventListener('click', async () => {
+      valider.disabled = true;
+      const fd = new FormData();
+      fd.set('email', subscribedEmail);
+      fd.set('firstname', (form.querySelector<HTMLInputElement>('[name="firstname"]')?.value || '').trim());
+      fd.set('lastname', (form.querySelector<HTMLInputElement>('[name="lastname"]')?.value || '').trim());
+      form.querySelectorAll<HTMLInputElement>('[name="interests"]:checked').forEach((c) => fd.append('interests', c.value));
+      const url = form.action.replace(/\/newsletter$/, '/newsletter/profile');
+      try { await fetch(url, { method: 'POST', body: fd }); } catch {}
+      form.innerHTML = '<p style="color:#1f2a30;font-weight:700;text-align:center;padding:24px 0;font-size:20px"></p>';
+      const p = form.querySelector('p');
+      if (p) p.textContent = 'Merci ! Vérifiez votre boîte mail pour confirmer votre inscription.';
     });
   })();
 </script>
