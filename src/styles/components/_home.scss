@@ -1073,6 +1073,16 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     b { font-weight: 700; }
   }
 
+  .news-sub {
+    font-family: $ds-font-helv;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 18px 0 0;
+    color: rgba(0, 0, 0, .78);
+    max-width: 560px;
+  }
+
   .form {
     margin-top: 36px;
     border-bottom: 1px solid $ds-hairline-2;
@@ -1378,5 +1388,6 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   .about .left h2,
   .reviews .stat-title { font-size: 32px; }
   .news h2 { font-size: 28px; }
+  .news .news-sub { font-size: 15px; }
   .blog h2 { font-size: 28px; }
 }
