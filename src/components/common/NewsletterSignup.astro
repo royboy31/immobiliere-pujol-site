@@ -39,8 +39,7 @@
 
     {/* ── Step 2 — name + interests (revealed after step 1) ─────────── */}
     <div data-step="2" hidden>
-      <p class="news-pending" data-step2-note>Votre inscription n'est pas encore finalisée à ce stade. Veuillez cliquer sur le lien de validation envoyé sur votre boîte email.</p>
-      <p class="news-step2-note">En attendant, personnalisez vos préférences <b>(facultatif)</b>&nbsp;:</p>
+      <p class="news-step2-note">Personnalisez vos préférences <b>(facultatif)</b>&nbsp;:</p>
       <div class="news-names">
         <input name="firstname" type="text" placeholder="Prénom" autocomplete="given-name" />
         <input name="lastname" type="text" placeholder="Nom" autocomplete="family-name" />
@@ -63,8 +62,8 @@
     if (!form) return;
     const step1 = form.querySelector<HTMLElement>('[data-step="1"]');
     const step2 = form.querySelector<HTMLElement>('[data-step="2"]');
-    const note = form.querySelector<HTMLElement>('[data-step2-note]');
     let subscribedEmail = '';
+    let pendingDoi = false;
 
     // Step 1 — email submit fires the Brevo double opt-in, then reveals step 2.
     form.addEventListener('submit', async (e) => {
@@ -82,11 +81,7 @@
           // Without it the signup was recorded directly, so soften the note.
           // Keep the red "not finalised yet" notice when a confirmation email
           // was sent; otherwise swap it to a plain (non-red) confirmation.
-          if (note && !data.doi) {
-            note.textContent = 'Merci pour votre inscription !';
-            note.classList.remove('news-pending');
-            note.classList.add('news-step2-note');
-          }
+          pendingDoi = !!data.doi;
           if (step1) step1.hidden = true;
           if (step2) step2.hidden = false;
         } else if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
@@ -107,9 +102,17 @@
       form.querySelectorAll<HTMLInputElement>('[name="interests"]:checked').forEach((c) => fd.append('interests', c.value));
       const url = form.action.replace(/\/newsletter$/, '/newsletter/profile');
       try { await fetch(url, { method: 'POST', body: fd }); } catch {}
-      form.innerHTML = '<p style="color:#1f2a30;font-weight:700;text-align:center;padding:24px 0;font-size:20px"></p>';
-      const p = form.querySelector('p');
-      if (p) p.textContent = 'Merci ! Vérifiez votre boîte mail pour confirmer votre inscription.';
+      // Step 3 - final screen. When a confirmation email was sent, show the red
+      // "not finalised until you click the link" notice; otherwise confirm plainly.
+      if (pendingDoi) {
+        form.innerHTML = '<p class="news-pending" style="text-align:center;margin:24px auto 0"></p>';
+        const p = form.querySelector('p');
+        if (p) p.textContent = "Votre inscription n'est pas encore finalisée à ce stade. Veuillez cliquer sur le lien de validation envoyé sur votre boîte email.";
+      } else {
+        form.innerHTML = '<p style="color:#1f2a30;font-weight:700;text-align:center;padding:24px 0;font-size:20px"></p>';
+        const p = form.querySelector('p');
+        if (p) p.textContent = 'Merci ! Votre inscription est bien confirmée.';
+      }
     });
   })();
 </script>
