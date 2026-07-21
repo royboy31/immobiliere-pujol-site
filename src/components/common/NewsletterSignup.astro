@@ -102,7 +102,7 @@
       form.querySelectorAll<HTMLInputElement>('[name="interests"]:checked').forEach((c) => fd.append('interests', c.value));
       const url = form.action.replace(/\/newsletter$/, '/newsletter/profile');
       try { await fetch(url, { method: 'POST', body: fd }); } catch {}
-      // Step 3 - final screen. When a confirmation email was sent, show the red
+      // Step 3 - final screen. When a confirmation email was sent, show the
       // "not finalised until you click the link" notice; otherwise confirm plainly.
       if (pendingDoi) {
         form.innerHTML = '<p class="news-pending" style="text-align:center;margin:24px auto 0"></p>';

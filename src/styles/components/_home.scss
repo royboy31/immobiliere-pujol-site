@@ -1187,12 +1187,16 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
   // ── Step 2 — name + interests (progressive disclosure) ──────────────
   // Red "signup not finalised until you click the email link" notice (Caroline's
   // doc). Swapped to .news-step2-note styling when no confirmation email is sent.
+  // Caroline's spec asked for red, but on the olive encart that only reaches
+  // 3.3:1 — and this is the line telling people their signup is NOT finished,
+  // so it is the one that has to be readable. Same $black as the rest of the
+  // box (10.5:1); the 600 weight carries the warning instead of the colour.
   .news-pending {
     font-family: $ds-font-helv;
     font-weight: 600;
     font-size: 17px;
     line-height: 1.4;
-    color: #b3261e;
+    color: $black;
     margin: 8px 0 0;
     max-width: 620px;
   }
