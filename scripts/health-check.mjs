@@ -135,18 +135,22 @@ if (OS_KEY) {
   console.log('  ⚠️  OpinionSystem — skipped (no OPINIONSYSTEM_API_KEY)');
 }
 
-await check('Mandrill API ping', async () => {
-  const res = await fetch('https://mandrillapp.com/api/1.0/users/ping', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ key: process.env.MANDRILL_API_KEY || 'test' }),
-    signal: AbortSignal.timeout(10000),
+// Brevo replaced Mandrill as the transactional provider on 21 Jul 2026 (the
+// MailChimp account was cancelled, which killed every Mandrill key with it).
+if (process.env.BREVO_API_KEY) {
+  await check('Brevo API', async () => {
+    const res = await fetch('https://api.brevo.com/v3/account', {
+      headers: { 'api-key': process.env.BREVO_API_KEY },
+      signal: AbortSignal.timeout(10000),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${JSON.stringify(data).slice(0, 100)}`);
+    const plan = (data.plan || []).find((p) => p.creditsType === 'sendLimit');
+    return plan ? `${data.email} — ${plan.credits} sends until ${plan.endDate}` : data.email;
   });
-  const text = await res.text();
-  if (res.ok && text.includes('PONG')) return 'PONG';
-  if (res.status === 500) return 'key not set locally (worker has it)';
-  throw new Error(`HTTP ${res.status}: ${text.slice(0, 100)}`);
-});
+} else {
+  console.log('  ⚠️  Brevo — skipped (no BREVO_API_KEY)');
+}
 
 // 4. R2 / Static assets
 console.log('\n── Storage ──');

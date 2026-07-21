@@ -54,8 +54,18 @@ const DEPLOY_WORKFLOW = TARGET.deployWorkflow;
 const UBIFLOW_URL = 'https://sw.ubiflow.net/diffusion-annonces.php?MDP_PARTENAIRE=55a6fc447c0ac5c3840087406768fbc760671110&DIFFUSEUR=IMMOBILIERE_PUJOL&ANNONCEUR=ag132582';
 const GH_REPO = 'royboy31/immobiliere-pujol-site';
 
+// Transactional provider — Brevo depuis le 21/07/2026 (le compte Mandrill a été
+// résilié avec MailChimp). Mandrill reste en repli tant que BREVO_API_KEY n'est
+// pas fourni, pour ne pas casser un environnement non encore migré.
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
 const MANDRILL_KEY = process.env.MANDRILL_API_KEY || '';
+const BREVO_URL = 'https://api.brevo.com/v3/smtp/email';
+const BREVO_KEY = process.env.BREVO_API_KEY || '';
+// L'expéditeur doit être authentifié côté Brevo. immobiliere-pujol.com ne l'est
+// pas — on envoie donc depuis le domaine .fr, authentifié pour l'agence.
+const SENDER_EMAIL = process.env.REPORT_FROM || 'contact@immobiliere-pujol.fr';
+const SENDER_NAME = 'Pujol — Surveillance Sync';
+const MAIL_KEY = BREVO_KEY || MANDRILL_KEY;
 const GH_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '';
 const SEND_EMAIL = !process.argv.includes('--no-email');
 // Caroline ne reçoit QUE le rapport quotidien du matin (cron, flag --daily),
@@ -455,7 +465,27 @@ if (OS_KEY) {
   console.log('  ⚠️  OpinionSystem — ignoré (pas de OPINIONSYSTEM_API_KEY)');
 }
 
-if (MANDRILL_KEY) {
+if (BREVO_KEY) {
+  try {
+    const res = await fetch('https://api.brevo.com/v3/account', {
+      headers: { 'api-key': BREVO_KEY },
+      signal: AbortSignal.timeout(10000),
+    });
+    const data = await res.json().catch(() => ({}));
+    // Le quota restant est le vrai signal d'alerte : une clé valide sur un compte
+    // à court de crédits cesse d'envoyer sans que la clé devienne invalide.
+    const plan = (data.plan || []).find((p) => p.creditsType === 'sendLimit');
+    addCheck(
+      'API Brevo',
+      res.ok ? 'OK' : 'FAIL',
+      res.ok
+        ? `${data.email || ''}${plan ? ` — ${plan.credits} envois jusqu'au ${plan.endDate}` : ''}`
+        : `HTTP ${res.status} ${JSON.stringify(data).slice(0, 80)}`,
+    );
+  } catch (err) {
+    addCheck('API Brevo', 'FAIL', err.message);
+  }
+} else if (MANDRILL_KEY) {
   try {
     const res = await fetch('https://mandrillapp.com/api/1.0/users/ping', {
       method: 'POST',
@@ -469,7 +499,7 @@ if (MANDRILL_KEY) {
     addCheck('API Mandrill', 'FAIL', err.message);
   }
 } else {
-  console.log('  ⚠️  Mandrill — ignoré (pas de MANDRILL_API_KEY)');
+  console.log('  ⚠️  Email — ignoré (ni BREVO_API_KEY ni MANDRILL_API_KEY)');
 }
 
 // ── Résumé ────────────────────────────────────────────────────────────────
@@ -509,7 +539,7 @@ console.log('');
 
 // ── Envoi du rapport par email ────────────────────────────────────────────
 
-if ((SEND_EMAIL && MANDRILL_KEY) || process.env.REPORT_HTML_OUT) {
+if ((SEND_EMAIL && MAIL_KEY) || process.env.REPORT_HTML_OUT) {
   const statusLabel = fails > 0 ? '🔴 ERREURS' : warns > 0 ? '🟡 AVERTISSEMENTS' : '🟢 TOUT OK';
   const subject = `Rapport Sync Pujol [${TARGET.label}] ${now()} — ${statusLabel}`;
 
@@ -601,34 +631,54 @@ if ((SEND_EMAIL && MANDRILL_KEY) || process.env.REPORT_HTML_OUT) {
     console.log(`  💾 HTML du rapport écrit : ${process.env.REPORT_HTML_OUT}`);
   }
 
-  if (SEND_EMAIL && MANDRILL_KEY) {
-    try {
-      const res = await fetch(MANDRILL_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          key: MANDRILL_KEY,
-          message: {
-            from_email: 'contact@immobiliere-pujol.com',
-            from_name: 'Pujol — Surveillance Sync',
-            to: RECIPIENTS.map(email => ({ email, type: 'to' })),
+  if (SEND_EMAIL && MAIL_KEY) {
+    const [url, init] = BREVO_KEY
+      ? [BREVO_URL, {
+          method: 'POST',
+          headers: { 'api-key': BREVO_KEY, 'content-type': 'application/json' },
+          body: JSON.stringify({
+            sender: { email: SENDER_EMAIL, name: SENDER_NAME },
+            to: RECIPIENTS.map(email => ({ email })),
             subject,
-            html,
-          },
-        }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        console.log(`  📧 Rapport envoyé à : ${RECIPIENTS.join(', ')}`);
+            htmlContent: html,
+          }),
+        }]
+      : [MANDRILL_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            key: MANDRILL_KEY,
+            message: {
+              from_email: 'contact@immobiliere-pujol.com',
+              from_name: SENDER_NAME,
+              to: RECIPIENTS.map(email => ({ email, type: 'to' })),
+              subject,
+              html,
+            },
+          }),
+        }];
+
+    try {
+      const res = await fetch(url, init);
+      const data = await res.json().catch(() => ({}));
+      // Mandrill répond 200 avec un statut "rejected" par destinataire : un code
+      // HTTP OK ne suffit pas à conclure que le message est parti.
+      const rejected = Array.isArray(data)
+        ? data.filter(d => d.status === 'rejected' || d.status === 'invalid')
+        : [];
+      if (res.ok && rejected.length === 0) {
+        console.log(`  📧 Rapport envoyé à : ${RECIPIENTS.join(', ')} (via ${BREVO_KEY ? 'Brevo' : 'Mandrill'})`);
+      } else if (rejected.length) {
+        console.log(`  ❌ Rejeté : ${rejected.map(r => `${r.email} (${r.reject_reason})`).join(', ')}`);
       } else {
-        console.log(`  ❌ Échec envoi : ${JSON.stringify(data).slice(0, 200)}`);
+        console.log(`  ❌ Échec envoi : HTTP ${res.status} ${JSON.stringify(data).slice(0, 200)}`);
       }
     } catch (err) {
       console.log(`  ❌ Échec envoi : ${err.message}`);
     }
   }
-} else if (SEND_EMAIL && !MANDRILL_KEY) {
-  console.log('  ⚠️  Email ignoré — pas de MANDRILL_API_KEY. Utiliser --no-email pour supprimer cet avertissement.');
+} else if (SEND_EMAIL && !MAIL_KEY) {
+  console.log('  ⚠️  Email ignoré — pas de BREVO_API_KEY. Utiliser --no-email pour supprimer cet avertissement.');
 } else {
   console.log('  📧 Email ignoré (option --no-email)');
 }
