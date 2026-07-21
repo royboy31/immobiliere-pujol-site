@@ -18,6 +18,9 @@ interface Env {
   DOI_TEMPLATE_ID?: string;
   NEWSLETTER_SENDER_EMAIL?: string;
   NEWSLETTER_SENDER_NAME?: string;
+  // Where replies to a newsletter go. Unset → the sender address. Never leave
+  // it to Brevo's own default: that is the account owner (carolinepujol@).
+  NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
 }
@@ -1066,6 +1069,10 @@ async function handleNewsletterSend(req: Request, env: Env): Promise<Response> {
       name: campaignName || `Newsletter ${now()}`,
       subject,
       sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      // Without an explicit replyTo, Brevo falls back to the account owner's
+      // address — carolinepujol@ — so every "reply" to a newsletter would land
+      // in her personal inbox instead of the shared contact box.
+      replyTo: env.NEWSLETTER_REPLY_TO || env.NEWSLETTER_SENDER_EMAIL,
       htmlContent: html,
       recipients: { listIds: [list.id] },
     }),
@@ -1090,6 +1097,7 @@ async function handleNewsletterTest(req: Request, env: Env): Promise<Response> {
     headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
     body: JSON.stringify({
       sender: { name: env.NEWSLETTER_SENDER_NAME, email: env.NEWSLETTER_SENDER_EMAIL },
+      replyTo: { email: env.NEWSLETTER_REPLY_TO || env.NEWSLETTER_SENDER_EMAIL as string },
       to: [{ email: testEmail }],
       subject: subject || '[TEST] Newsletter',
       htmlContent: html,
