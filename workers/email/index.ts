@@ -32,8 +32,25 @@ function esc(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// The public site posts here from the live domain, but every form hardcodes the
+// staging worker URL (deploy-pujol.yml never rewrites it), so ALLOWED_ORIGIN —
+// a staging URL on both deployments — never matched a production visitor. The
+// worker still processed those submissions and mailed them; only the browser
+// could not read the reply, so the form showed "Erreur de connexion" on a
+// submission that had in fact gone through. Hence the live hostnames listed here.
+const PROD_ORIGINS = [
+  'https://www.immobiliere-pujol.fr',
+  'https://immobiliere-pujol.fr',
+  'https://immobiliere-pujol-staging.pujol.workers.dev',
+];
+
 function cors(origin: string, env: Env): Record<string, string> {
-  const allowed = [env.ALLOWED_ORIGIN, 'http://localhost:4321', 'http://localhost:3000'];
+  const allowed = [
+    env.ALLOWED_ORIGIN,
+    ...PROD_ORIGINS,
+    'http://localhost:4321',
+    'http://localhost:3000',
+  ];
   const allow = allowed.includes(origin) ? origin : env.ALLOWED_ORIGIN;
   return {
     'Access-Control-Allow-Origin': allow,
