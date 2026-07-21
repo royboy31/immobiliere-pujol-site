@@ -65,7 +65,60 @@ interface SendOpts {
   fromName?: string;
 }
 
+// 21 Jul 2026: Mandrill died with the MailChimp account cancellation. Brevo is
+// now the primary transactional provider (BREVO_API_KEY is set on both staging
+// and prod workers); the Mandrill path remains only as a legacy fallback for
+// environments where Brevo isn't provisioned.
+//
+// Sender note: the agency domain immobiliere-pujol.fr is NOT yet authenticated
+// in Brevo, so we always send From the Brevo-verified sender
+// (NEWSLETTER_SENDER_EMAIL) and keep the intended identity in the display name.
+// Reply-To preserves the routing convention: internal notifications reply to
+// the prospect; prospect auto-replies reply to the agent's real address. Once
+// the domain is authenticated in Brevo, restore `sender.email = fromEmail`.
 async function sendEmail(
+  env: Env,
+  opts: SendOpts
+): Promise<{ ok: boolean; error?: string }> {
+  if (env.BREVO_API_KEY) return sendViaBrevo(env, opts);
+  return sendViaMandrill(env, opts);
+}
+
+async function sendViaBrevo(
+  env: Env,
+  opts: SendOpts
+): Promise<{ ok: boolean; error?: string }> {
+  const intendedFrom = opts.fromEmail || 'contact@immobiliere-pujol.fr';
+  const payload = {
+    sender: {
+      email: env.NEWSLETTER_SENDER_EMAIL || 'notifications@immobiliere-pujol.fr',
+      name: opts.fromName || 'Immobilière Pujol',
+    },
+    to: [{ email: opts.to || 'contact@immobiliere-pujol.fr' }],
+    ...(opts.cc ? { cc: [{ email: opts.cc }] } : {}),
+    replyTo: { email: opts.replyTo || intendedFrom },
+    subject: opts.subject,
+    htmlContent: opts.html,
+    tags: ['source=site-public'],
+  };
+
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': env.BREVO_API_KEY!, 'content-type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      const data = (await res.json().catch(() => ({}))) as any;
+      return { ok: false, error: data?.message || `Brevo HTTP ${res.status}` };
+    }
+    return { ok: true };
+  } catch (err: any) {
+    return { ok: false, error: err.message || 'Network error' };
+  }
+}
+
+async function sendViaMandrill(
   env: Env,
   opts: SendOpts
 ): Promise<{ ok: boolean; error?: string }> {
