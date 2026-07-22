@@ -326,6 +326,12 @@ const initial: BlogArticle = article ?? {
   .ed-link-date { display:block; font-size:11px; color:#999; margin-top:2px; }
   .ed-link-empty { font-size:12.5px; color:#999; padding:8px 10px; margin:0; }
   .ed-link-hint { font-size:11.5px; color:#8a8a8a; line-height:1.45; margin:8px 0 0; }
+  .ed-cat-selected { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .ed-cat-chip { display:inline-flex; align-items:center; gap:5px; background:#eef3dc; border:1px solid #B2C54F; color:#4a561c; border-radius:999px; padding:4px 6px 4px 11px; font-family:var(--pj-noto); font-size:12px; font-weight:600; }
+  .ed-cat-chip--muted { background:#f2f2f0; border-color:#ddd; color:#888; padding-right:11px; }
+  .ed-cat-chip-x { background:none; border:0; cursor:pointer; font-size:15px; line-height:1; color:#71822d; padding:0 3px; }
+  .ed-cat-chip-x:hover { color:#c0392b; }
+  .ed-cat-none { font-size:12px; color:#999; }
   .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:240px; overflow-y:auto; scrollbar-width:thin; overscroll-behavior:contain; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
   .ed-cat-item[hidden] { display:none; }
   .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
@@ -555,6 +561,33 @@ const initial: BlogArticle = article ?? {
         item.hidden = q !== '' && !norm(item.textContent || '').includes(q);
       });
     });
+  })();
+
+  // ── Selected-categories overview: chips under the list (× to remove) ──
+  (() => {
+    const box = $('f-categories');
+    if (!box) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'f-cat-selected'; wrap.className = 'ed-cat-selected';
+    box.insertAdjacentElement('afterend', wrap);
+    let preserved = [];
+    try { preserved = JSON.parse(box.dataset.preserved || '[]'); } catch (_) {}
+    const render = () => {
+      const chips = [...box.querySelectorAll('input:checked')].map((c) => {
+        const label = (c.closest('.ed-cat-item')?.textContent || c.value).trim();
+        return `<span class="ed-cat-chip" data-value="${c.value.replace(/"/g, '&quot;')}">${label}<button type="button" class="ed-cat-chip-x" aria-label="Retirer">&times;</button></span>`;
+      }).join('');
+      const kept = preserved.map((p) => `<span class="ed-cat-chip ed-cat-chip--muted" title="Catégorie conservée (hors thèmes)">${p}</span>`).join('');
+      wrap.innerHTML = (chips || kept) ? chips + kept : '<span class="ed-cat-none">Aucune catégorie sélectionnée</span>';
+    };
+    box.addEventListener('change', render);
+    wrap.addEventListener('click', (e) => {
+      const x = e.target.closest('.ed-cat-chip-x'); if (!x) return;
+      const v = x.closest('.ed-cat-chip')?.dataset.value;
+      const input = [...box.querySelectorAll('input')].find((i) => i.value === v);
+      if (input) { input.checked = false; render(); }
+    });
+    render();
   })();
 
   // ── Collect + save ──
