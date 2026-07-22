@@ -137,7 +137,29 @@ export const GET: APIRoute = async ({ request }) => {
       photo: photoMap.get(a.id) || null,
     }));
 
-    return new Response(JSON.stringify({ total, count: data.length, results: data }), {
+    // Blog articles matching the text query (published only) — shown as a
+    // separate section in the SearchOverlay.
+    let articles: any[] = [];
+    if (q) {
+      const alike = `%${q}%`;
+      try {
+        const art = await db
+          .prepare(
+            `SELECT slug, title, excerpt, article_date FROM blog_articles
+             WHERE status = 'published' AND noindex = 0
+               AND (title LIKE ? OR excerpt LIKE ? OR categories LIKE ?)
+             ORDER BY datetime(article_date) DESC
+             LIMIT 5`
+          )
+          .bind(alike, alike, alike)
+          .all();
+        articles = art.results as any[];
+      } catch {
+        // blog_articles absent (older DB) — search stays annonces-only
+      }
+    }
+
+    return new Response(JSON.stringify({ total, count: data.length, results: data, articles }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });

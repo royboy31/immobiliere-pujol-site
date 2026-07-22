@@ -172,7 +172,8 @@
   }
 
   function renderResults(data, q) {
-    if (data.results.length === 0) {
+    const arts = data.articles || [];
+    if (data.results.length === 0 && arts.length === 0) {
       body.innerHTML = `
         <div class="search-overlay__empty">
           <div class="search-overlay__empty-icon">
@@ -229,7 +230,23 @@
       ? `<a class="search-overlay__view-all" href="${viewAllHref}">Voir tous les ${data.total} résultats</a>`
       : '';
 
-    body.innerHTML = status + `<div class="search-overlay__results">${cards}</div>` + viewAll;
+    // Blog articles section (separate from the annonces)
+    let articlesHtml = '';
+    if (arts.length) {
+      const items = arts.map((a) => `
+        <a class="search-overlay__result search-overlay__result--article" href="/${escHtml(a.slug)}/">
+          <div class="search-overlay__result-body">
+            <span class="search-overlay__result-badge" style="background:#1f2a30;color:#fff">Article</span>
+            <span class="search-overlay__result-title">${escHtml(a.title)}</span>
+            ${a.excerpt ? `<div class="search-overlay__result-meta"><span>${escHtml(String(a.excerpt).slice(0, 120))}…</span></div>` : ''}
+          </div>
+        </a>`).join('');
+      articlesHtml = `<div class="search-overlay__status">Articles du <strong>blog</strong></div><div class="search-overlay__results">${items}</div>`;
+    }
+    const annoncesHtml = data.results.length
+      ? status + `<div class="search-overlay__results">${cards}</div>` + viewAll
+      : '';
+    body.innerHTML = annoncesHtml + articlesHtml;
   }
 
   function num(n) {
