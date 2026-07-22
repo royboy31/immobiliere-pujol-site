@@ -144,7 +144,7 @@ function richText(html: string | undefined): string {
 }
 
 function sectionTitle(text: string): string {
-  return `<p style="margin:0 0 4px;font-size:11px;font-weight:700;color:${NAVY};text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid ${OLIVE};padding-bottom:3px">${esc(text)}</span></p>`;
+  return `<p style="margin:0 0 4px;font-size:15px;font-weight:700;color:${NAVY};text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid ${OLIVE};padding-bottom:4px">${esc(text)}</span></p>`;
 }
 
 // ── Template A: blog / actualités ────────────────────────────────────────────
