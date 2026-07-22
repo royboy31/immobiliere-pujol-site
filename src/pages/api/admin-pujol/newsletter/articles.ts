@@ -30,6 +30,8 @@ export const GET: APIRoute = async ({ request, url }) => {
         url: `${SITE}/${slug}/`,
       };
     })
+    // /local/ SEO landing pages are picked/linked from their own hub, never here.
+    .filter((a) => !a.slug.startsWith('local/'))
     .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
   if (q) items = items.filter((a) => a.title.toLowerCase().includes(q));

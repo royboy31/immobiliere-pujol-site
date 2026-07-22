@@ -161,6 +161,13 @@ const initial: BlogArticle = article ?? {
     </div>
 
     <div class="card ed-card">
+      <p class="ed-cardtitle">Lier un article</p>
+      <input id="f-link-search" type="text" placeholder="Rechercher un article…" autocomplete="off" />
+      <div id="f-link-results" class="ed-link-list"></div>
+      <p class="ed-link-hint">Sélectionnez du texte dans l'article puis cliquez un titre pour créer le lien. Sans sélection, le titre est inséré comme lien.</p>
+    </div>
+
+    <div class="card ed-card">
       <p class="ed-cardtitle">Contenu &amp; classement</p>
       <label>Extrait (résumé)
         <textarea id="f-excerpt" class="ed-plain" style="min-height:70px;">{initial.excerpt}</textarea>
@@ -311,6 +318,14 @@ const initial: BlogArticle = article ?? {
   .ed-field { margin-bottom:14px; }
   .ed-fieldlabel { display:block; font-family:var(--pj-noto); font-weight:700; font-size:12px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); margin-bottom:8px; }
   .ed-cat-filter { display:block; width:100%; margin:0 0 8px; padding:9px 12px; border:1px solid var(--pj-hairline); border-radius:9px; font-family:var(--pj-noto); font-size:13px; }
+  .ed-link-list { display:flex; flex-direction:column; gap:2px; max-height:260px; overflow-y:auto; scrollbar-width:thin; margin-top:8px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; padding:6px; }
+  .ed-link-list:empty { display:none; }
+  .ed-link-item { display:block; width:100%; text-align:left; background:none; border:0; border-radius:8px; padding:8px 10px; cursor:pointer; font-family:var(--pj-noto); }
+  .ed-link-item:hover { background:#f2f4ee; }
+  .ed-link-title { display:block; font-size:13px; font-weight:600; color:#222; line-height:1.35; }
+  .ed-link-date { display:block; font-size:11px; color:#999; margin-top:2px; }
+  .ed-link-empty { font-size:12.5px; color:#999; padding:8px 10px; margin:0; }
+  .ed-link-hint { font-size:11.5px; color:#8a8a8a; line-height:1.45; margin:8px 0 0; }
   .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:240px; overflow-y:auto; scrollbar-width:thin; overscroll-behavior:contain; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
   .ed-cat-item[hidden] { display:none; }
   .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
@@ -429,6 +444,43 @@ const initial: BlogArticle = article ?? {
       setState('Image ajoutée ✓', false);
     } catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
   }
+
+  // ── "Lier un article" panel — search + one-click internal link insert ──
+  (() => {
+    const search = $('f-link-search'); const results = $('f-link-results');
+    if (!search || !results) return;
+    let deb = null, loaded = false;
+    async function load(q) {
+      try {
+        const r = await fetch(`/api/admin-pujol/newsletter/articles/?limit=20&q=${encodeURIComponent(q || '')}`);
+        if (!r.ok) throw new Error();
+        const items = await r.json();
+        results.innerHTML = items.length
+          ? items.map((a) => `<button type="button" class="ed-link-item" data-slug="${a.slug}" data-title="${(a.title || '').replace(/"/g, '&quot;')}"><span class="ed-link-title">${a.title}</span>${a.date ? `<span class="ed-link-date">${String(a.date).slice(0, 10)}</span>` : ''}</button>`).join('')
+          : '<p class="ed-link-empty">Aucun article trouvé.</p>';
+      } catch (_) { results.innerHTML = '<p class="ed-link-empty">Erreur de chargement.</p>'; }
+    }
+    search.addEventListener('focus', () => { if (!loaded) { loaded = true; load(''); } });
+    search.addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(() => load(search.value.trim()), 250); });
+    // mousedown preventDefault keeps the editor's selection alive while clicking the panel
+    results.addEventListener('mousedown', (e) => e.preventDefault());
+    results.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ed-link-item'); if (!btn) return;
+      const href = `/${btn.dataset.slug}/`; const title = btn.dataset.title || href;
+      if (sourceMode) {
+        const ta = source, s0 = ta.selectionStart || 0, e0 = ta.selectionEnd || s0;
+        const selTxt = ta.value.slice(s0, e0);
+        const tag = `<a href="${href}">${selTxt || title}</a>`;
+        ta.value = ta.value.slice(0, s0) + tag + ta.value.slice(e0);
+        return;
+      }
+      body.focus(); const sel = window.getSelection();
+      if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); }
+      if (sel.rangeCount && !sel.getRangeAt(0).collapsed) document.execCommand('createLink', false, href);
+      else document.execCommand('insertHTML', false, `<a href="${href}">${title}</a>`);
+      saveRange();
+    });
+  })();
 
   // ── Featured + OG image ──
   const featuredPrev = $('f-featured-preview');
