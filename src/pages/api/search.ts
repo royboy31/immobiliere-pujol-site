@@ -147,6 +147,7 @@ export const GET: APIRoute = async ({ request }) => {
           .prepare(
             `SELECT slug, title, excerpt, article_date FROM blog_articles
              WHERE status = 'published' AND noindex = 0
+               AND slug NOT LIKE 'local/%'
                AND (title LIKE ? OR excerpt LIKE ? OR categories LIKE ?)
              ORDER BY datetime(article_date) DESC
              LIMIT 5`
