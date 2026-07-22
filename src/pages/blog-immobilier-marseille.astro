@@ -109,13 +109,6 @@ const featuredCategory =
     <p class="seo-hero__sub">
       L'actualité du marché, des analyses, des conseils pratiques et des points de vue tranchés — par l'équipe de l'Immobilière Pujol.
     </p>
-    <button class="blog-hero__search" type="button" aria-label="Rechercher un article">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <circle cx="11" cy="11" r="7" />
-        <line x1="20" y1="20" x2="16" y2="16" stroke-linecap="round" />
-      </svg>
-      <span>Rechercher un article…</span>
-    </button>
   </section>
 
   <!-- ============= FEATURED + NEWSLETTER ============= -->
@@ -245,31 +238,6 @@ const featuredCategory =
 
 <style>
   /* ---- Hero search pill ---- */
-  .blog-hero__search {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 28px;
-    padding: 14px 22px 14px 20px;
-    min-width: 360px;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, .1);
-    border-radius: 999px;
-    color: rgba(0, 0, 0, .55);
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, .08);
-    cursor: pointer;
-    transition: transform .25s ease, box-shadow .25s ease, color .25s ease, border-color .25s ease;
-  }
-  .blog-hero__search:hover {
-    transform: translateY(-1px);
-    color: #000;
-    border-color: rgb(178, 192, 78);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, .12);
-  }
-  .blog-hero__search svg { color: rgb(166, 179, 82); }
 
   /* ---- Featured + Newsletter row ---- */
   .blog-featured {
@@ -620,23 +588,7 @@ const featuredCategory =
   }
 
   @media (max-width: 768px) {
-    .blog-hero__search { min-width: 0; width: 100%; max-width: 320px; font-size: 14px; }
-    .blog-featured { padding: 60px 20px; }
-    .blog-featured__inner { gap: 24px; }
-    .blog-featured__body { padding: 24px; }
-    .blog-featured__title { font-size: 26px; }
-    .blog-news { padding: 28px 24px 26px; }
-    .blog-news h2 { font-size: 26px; }
-    .blog-pillars { padding: 60px 0; }
-    .blog-pillars__head { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
-    .blog-pillars__head .ds-sec-title { font-size: 28px; }
-    .blog-pillars__track {
-      padding: 4px 20px 14px;
-      scroll-padding-left: 20px;
-    }
-    .blog-pillar { flex-basis: 80%; max-width: 80%; }
-  }
-</style>
+  </style>
 
 <script>
   // Pillar carousel arrows — scroll the track by one card width per click.
@@ -652,12 +604,4 @@ const featuredCategory =
     });
   }
 
-  // Hero search pill — open the site-wide SearchOverlay (delegate to its existing trigger).
-  const heroSearch = document.querySelector('.blog-hero__search');
-  if (heroSearch) {
-    heroSearch.addEventListener('click', () => {
-      const headerBtn = document.querySelector('.icons button[aria-label="Rechercher"]') as HTMLButtonElement | null;
-      headerBtn?.click();
-    });
-  }
 </script>
