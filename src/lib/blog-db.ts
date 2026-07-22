@@ -225,6 +225,20 @@ export async function getArticle(db: D1Database, id: number): Promise<BlogArticl
   return row ? toArticle(row) : null;
 }
 
+// Distinct categories in use across all articles, sorted alphabetically.
+// Powers the editor's category checkbox list (pick from existing only).
+export async function listCategories(db: D1Database): Promise<string[]> {
+  const { results } = await db.prepare('SELECT categories FROM blog_articles').all();
+  const set = new Set<string>();
+  for (const row of results || []) {
+    for (const c of safeJson((row as any).categories)) {
+      const name = (c || '').trim();
+      if (name) set.add(name);
+    }
+  }
+  return [...set].sort((a, b) => a.localeCompare(b, 'fr'));
+}
+
 const b = (v: any) => (v ? 1 : 0);
 
 export async function createArticle(db: D1Database, input: ArticleInput, adminEmail: string): Promise<BlogArticle> {
