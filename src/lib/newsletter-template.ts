@@ -312,6 +312,8 @@ export interface MixedInput {
   kind?: 'V' | 'L' | 'mixte'; // kept for parity with the listings picker
   articles: NewsletterArticle[]; // 0..3
   listings: NewsletterListing[]; // 0..4
+  listingsTitle?: string;    // section heading for the biens block (defaults to "Nos biens à la une")
+  listingsSubtitle?: string; // optional line under the section heading
 }
 export function renderMixed(input: MixedInput): string {
   const articles = input.articles || [];
@@ -326,7 +328,8 @@ export function renderMixed(input: MixedInput): string {
     : '';
   const listingSection = listings.length
     ? `${articles.length ? '<div style="height:8px;font-size:0;line-height:0">&nbsp;</div>' : ''}
-       ${sectionTitle('Nos biens à la une')}
+       ${sectionTitle(input.listingsTitle || 'Nos biens à la une')}
+       ${input.listingsSubtitle ? `<p style="margin:6px 0 0;font-size:14px;color:${INK};line-height:1.5">${esc(input.listingsSubtitle)}</p>` : ''}
        <div style="height:14px;font-size:0;line-height:0">&nbsp;</div>
        ${listingCards}
        <div style="height:6px;font-size:0;line-height:0">&nbsp;</div>

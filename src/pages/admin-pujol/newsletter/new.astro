@@ -111,6 +111,12 @@ try {
               </select>
             </label>
           </div>
+          <label style="margin-top:14px;">Titre de la section (optionnel)
+            <input id="f-mix-list-title" type="text" placeholder="Nos biens à la une" />
+          </label>
+          <label>Sous-titre (optionnel)
+            <input id="f-mix-list-subtitle" type="text" placeholder="Une phrase pour présenter la sélection de biens" />
+          </label>
           <div class="pick-selected" id="mix-list-selected" style="margin-top:14px;"></div>
           <input class="pick-search" id="mix-list-search" type="text" placeholder="Rechercher un bien (ville, code postal…)" />
           <div class="pick-avail" id="mix-list-avail"></div>
@@ -417,6 +423,7 @@ try {
       return {
         subject: v('f-subject'), preheader: v('f-preheader'), heading: v('f-mix-heading'),
         intro: rt('rt-mix-intro'), outro: rt('rt-mix-outro'), kind: $('f-mix-kind').value,
+        listingsTitle: v('f-mix-list-title'), listingsSubtitle: v('f-mix-list-subtitle'),
         articles: pickers.mixedArticles.getSelected().map((a) => ({ title: a.title, url: a.url, excerpt: a.excerpt, imageUrl: a.imageUrl, slug: a.slug })),
         listings: pickers.mixedListings.getSelected().map((l) => ({
           slug: l.slug, title: l.title, url: l.url, price: l.price, city: l.city, postalCode: l.postalCode,
@@ -455,7 +462,7 @@ try {
     } catch (e) { /* ignore transient */ }
   }
   $('nl-refresh').addEventListener('click', refreshPreview);
-  ['f-subject','f-preheader','f-blog-heading','f-mix-heading','f-bc-heading','f-bc-cta-label','f-bc-cta-url'].forEach((id) => $(id).addEventListener('input', schedulePreview));
+  ['f-subject','f-preheader','f-blog-heading','f-mix-heading','f-mix-list-title','f-mix-list-subtitle','f-bc-heading','f-bc-cta-label','f-bc-cta-url'].forEach((id) => $(id).addEventListener('input', schedulePreview));
   $('f-bc-expert').addEventListener('change', schedulePreview);
 
   function setStatus(msg) { $('nl-status').textContent = msg; }
@@ -575,6 +582,8 @@ try {
 
     if (tmpl === 'mixed') {
       $('f-mix-heading').value = d.heading || '';
+      $('f-mix-list-title').value = d.listingsTitle || '';
+      $('f-mix-list-subtitle').value = d.listingsSubtitle || '';
       if (d.kind) $('f-mix-kind').value = d.kind;
       setRt('rt-mix-intro', d.intro); setRt('rt-mix-outro', d.outro);
       pickers.mixedArticles.setSelected(d.articles || []);
