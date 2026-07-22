@@ -9,7 +9,10 @@ const slugify = (s: string): string =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-const articles = await getCollection('articles');
+// Exclude the /local/ SEO landing pages (587 of them) — they live on their own
+// hub at /local/ and must never surface in the blog feed, tags, or featured slot.
+const articles = (await getCollection('articles'))
+  .filter((a) => !(a.data.slug || '').startsWith('local/'));
 
 const sorted = [...articles].sort((a, b) => {
   const da = a.data.date ? new Date(a.data.date).getTime() : 0;
