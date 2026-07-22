@@ -210,6 +210,8 @@ if (type === 'article') {
   const allArticles = await getCollection('articles');
   const pool = allArticles
     .filter((a: any) => a.data.slug !== entry.data.slug)
+    // Never suggest /local/ SEO landing pages in the blog's "À lire aussi".
+    .filter((a: any) => !(a.data.slug || '').startsWith('local/'))
     .map((a: any) => ({ url: `/${a.data.slug}/`, title: a.data.title, type: 'article', image: a.data.featuredImage, date: a.data.date }));
   relatedArticles = pickRotatedLinks(pool, entry.data.slug, 6).map((l: any) => ({ title: l.title, url: l.url, image: l.image, date: l.date }));
 }

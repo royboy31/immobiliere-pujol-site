@@ -23,7 +23,8 @@ export const GET: APIRoute = async ({ request }) => {
     const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);
     if (resp.ok) {
       const data = await resp.json();
-      articles = data.articles || [];
+      // Keep /local/ SEO landing pages out of the blog RSS feed.
+      articles = (data.articles || []).filter((a: ArticleMeta) => !(a.slug || '').startsWith('local/'));
     }
   } catch { /* skip */ }
 
