@@ -152,22 +152,66 @@ const featuredCategory =
           <p class="blog-news__lead">
             Maximum une fois par mois — des analyses, des chiffres clés et nos coups de cœur immobiliers à Marseille.
           </p>
-          <form class="blog-news__form" onsubmit="event.preventDefault();">
-            <input type="email" placeholder="Votre adresse email" aria-label="Adresse email" required />
+          {/* Mirrors NewsletterSignup step 1 (same worker endpoint + contract):
+              email + consent -> POST /newsletter (Brevo double opt-in fires).
+              Preference enrichment (step 2) is footer/landing-only; the DOI
+              email itself is what subscribes people, so this card stays lean. */}
+          <form class="blog-news__form" method="post" action="https://pujol-email.roy-68a.workers.dev/newsletter" data-blog-news-form>
+            <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
+            <input name="email" type="email" placeholder="Votre adresse email" aria-label="Adresse email" required />
             <button type="submit" class="blog-news__submit" aria-label="S'inscrire">
               <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
                 <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </button>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
           </form>
           <label class="blog-news__agree">
-            <input type="checkbox" required />
+            <input type="checkbox" data-blog-news-agree />
             <span>J'accepte le traitement de mes données dans le cadre de mon inscription.</span>
           </label>
           <p class="blog-news__legal" style="font-size:10px;color:#999;line-height:1.4;margin-top:8px">
             Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener" style="color:#999">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0762203313" style="color:#999">07&nbsp;62&nbsp;20&nbsp;33&nbsp;13</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#999">rgpd@immobiliere-pujol.fr</a>
           </p>
         </aside>
+
+        <script>
+          // Blog newsletter card — mirrors NewsletterSignup step 1 (same
+          // endpoint, same {ok, doi} contract). The consent checkbox lives
+          // outside the <form> for layout reasons, so it's validated here.
+          (function () {
+            const form = document.querySelector<HTMLFormElement>('[data-blog-news-form]');
+            if (!form) return;
+            const agree = document.querySelector<HTMLInputElement>('[data-blog-news-agree]');
+            form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              if (!form.reportValidity()) return;
+              if (agree && !agree.checked) {
+                agree.focus();
+                agree.closest('label')?.classList.add('blog-news__agree--error');
+                return;
+              }
+              const btn = form.querySelector<HTMLButtonElement>('.blog-news__submit');
+              if (btn) btn.disabled = true;
+              try {
+                const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+                const data = await res.json() as { ok?: boolean; doi?: boolean };
+                if (data.ok) {
+                  try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'newsletter' }); } catch (e) {}
+                  const card = form.closest('.blog-news');
+                  if (card) {
+                    const msg = data.doi
+                      ? "Votre inscription n'est pas encore finalisée à ce stade. Veuillez cliquer sur le lien de validation envoyé sur votre boîte email."
+                      : 'Merci ! Votre inscription est bien enregistrée.';
+                    card.innerHTML = '<p class="blog-news__overline">Newsletter</p><p style="font-weight:600;line-height:1.5"></p>';
+                    const p = card.querySelector('p:last-child');
+                    if (p) p.textContent = msg;
+                  }
+                } else if (btn) btn.disabled = false;
+              } catch { if (btn) btn.disabled = false; }
+            });
+          })();
+        </script>
       </div>
     </section>
   )}
