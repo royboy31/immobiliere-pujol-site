@@ -213,7 +213,15 @@ if (type === 'article') {
     // Never suggest /local/ SEO landing pages in the blog's "À lire aussi".
     .filter((a: any) => !(a.data.slug || '').startsWith('local/'))
     .map((a: any) => ({ url: `/${a.data.slug}/`, title: a.data.title, type: 'article', image: a.data.featuredImage, date: a.data.date }));
-  relatedArticles = pickRotatedLinks(pool, entry.data.slug, 6).map((l: any) => ({ title: l.title, url: l.url, image: l.image, date: l.date }));
+  // Only suggest reasonably fresh content: articles from the last 3 years
+  // (2019-2021 pieces read stale). Fallback to the full pool if the recent
+  // set is ever too small to fill the sidebar.
+  const threeYearsAgo = Date.now() - 3 * 365.25 * 24 * 60 * 60 * 1000;
+  const recentPool = pool.filter((a: any) => {
+    const t = Date.parse(a.date || '');
+    return !isNaN(t) && t >= threeYearsAgo;
+  });
+  relatedArticles = pickRotatedLinks(recentPool.length >= 6 ? recentPool : pool, entry.data.slug, 6).map((l: any) => ({ title: l.title, url: l.url, image: l.image, date: l.date }));
 }
 
 // Blog articles sit under the blog index — surface "Blog" as the middle crumb
