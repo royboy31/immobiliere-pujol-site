@@ -3,9 +3,10 @@
 // toggle, rich SEO + Open Graph controls with live SERP/social previews, and
 // R2 image upload. All persistence goes through /api/admin-pujol/articles.
 import type { BlogArticle } from '../../lib/blog-db';
+import { BLOG_THEMES } from '../../lib/blog-db';
 
-interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[]; allCategories?: string[] }
-const { article = null, experts = [], allCategories = [] } = Astro.props;
+interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[] }
+const { article = null, experts = [] } = Astro.props;
 const isNew = !article;
 const SITE = 'https://www.immobiliere-pujol.fr';
 const today = new Date().toISOString().slice(0, 10);
@@ -16,6 +17,14 @@ const initial: BlogArticle = article ?? {
   og_title: '', og_description: '', og_image: '', twitter_card: 'summary_large_image',
   expert_cta: '', expert_cta_title: '', status: 'draft', created_by: '', created_at: '', updated_at: '', published_at: null,
 };
+
+// Category checkboxes = the 6 curated site themes. A theme is pre-ticked when any
+// of the article's stored categories maps to it (same regex as the public site).
+// Categories that map to no theme (e.g. arrondissement tags) are preserved on save
+// so editing an article never silently drops them.
+const initialCats = initial.categories || [];
+const themeState = BLOG_THEMES.map((t) => ({ label: t.label, value: t.value, checked: initialCats.some((c) => t.match.test(c)) }));
+const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match.test(c)));
 ---
 
 <div class="ed-topbar">
@@ -167,18 +176,14 @@ const initial: BlogArticle = article ?? {
       </label>
       <div class="ed-field">
         <span class="ed-fieldlabel">Catégories</span>
-        {allCategories.length === 0 ? (
-          <p class="ed-cat-empty">Aucune catégorie existante. Créez-en via un premier article importé, puis elles apparaîtront ici.</p>
-        ) : (
-          <div id="f-categories" class="ed-cat-list">
-            {allCategories.map((c) => (
-              <label class="ed-cat-item">
-                <input type="checkbox" value={c} checked={initial.categories.includes(c)} />
-                <span>{c}</span>
-              </label>
-            ))}
-          </div>
-        )}
+        <div id="f-categories" class="ed-cat-list" data-preserved={JSON.stringify(preservedCats)}>
+          {themeState.map((t) => (
+            <label class="ed-cat-item">
+              <input type="checkbox" value={t.value} checked={t.checked} />
+              <span>{t.label}</span>
+            </label>
+          ))}
+        </div>
       </div>
       <label>Tags (séparés par des virgules)
         <input id="f-tags" type="text" value={initial.tags.join(', ')} />
@@ -312,7 +317,6 @@ const initial: BlogArticle = article ?? {
   .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:190px; overflow-y:auto; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
   .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
   .ed-cat-item input { width:auto; margin:0; }
-  .ed-cat-empty { font-size:12px; color:#9aa0a6; line-height:1.5; margin:0; }
 
   /* ── Form fields ──────────────────────────────────────────────────
      AdminLayout's input styling is Astro-scoped to the layout, so it does
@@ -492,7 +496,11 @@ const initial: BlogArticle = article ?? {
   const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
   const checkedCategories = () => {
     const box = $('f-categories');
-    return box ? [...box.querySelectorAll('input[type="checkbox"]:checked')].map((c) => c.value) : [];
+    if (!box) return [];
+    const checked = [...box.querySelectorAll('input[type="checkbox"]:checked')].map((c) => c.value);
+    let preserved = [];
+    try { preserved = JSON.parse(box.dataset.preserved || '[]'); } catch (_) {}
+    return [...checked, ...preserved];
   };
   function collect(status) {
     return {

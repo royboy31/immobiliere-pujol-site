@@ -225,19 +225,25 @@ export async function getArticle(db: D1Database, id: number): Promise<BlogArticl
   return row ? toArticle(row) : null;
 }
 
-// Distinct categories in use across all articles, sorted alphabetically.
-// Powers the editor's category checkbox list (pick from existing only).
-export async function listCategories(db: D1Database): Promise<string[]> {
-  const { results } = await db.prepare('SELECT categories FROM blog_articles').all();
-  const set = new Set<string>();
-  for (const row of results || []) {
-    for (const c of safeJson((row as any).categories)) {
-      const name = (c || '').trim();
-      if (name) set.add(name);
-    }
-  }
-  return [...set].sort((a, b) => a.localeCompare(b, 'fr'));
-}
+// The 6 curated blog themes the public site is organised around (the "pillars"
+// in blog-immobilier-marseille.astro). The editor offers exactly these as the
+// category checkboxes.
+//   • label — clean name shown to the editor.
+//   • match — maps an article's (often messy, WP-imported) stored category to
+//     its theme; MUST stay in sync with the site's pillarDefs regexes so a
+//     legacy string like "Le marché immobilier à marseille" still ticks its box.
+//   • value — the canonical string stored when a theme is ticked. Deliberately
+//     the existing dominant DB string per theme, so public category eyebrows and
+//     pillar counts stay consistent and no new duplicate strings are introduced.
+export interface BlogTheme { label: string; value: string; match: RegExp }
+export const BLOG_THEMES: BlogTheme[] = [
+  { label: 'Le marché immobilier à Marseille', value: 'Le marché immobilier à marseille',                       match: /(le\s*march[eé]\s*immobilier|actualit[eé]\s*immobili[eè]re)/i },
+  { label: 'Investir en immobilier',            value: 'Mes conseils pour investir en immobilier à Marseille',  match: /(investir|mes\s*conseils)/i },
+  { label: "L'immobilier neuf",                 value: "L'immobilier neuf à marseille",                         match: /(immobilier\s*neuf|programmes?\s*neufs?)/i },
+  { label: 'Prix au m² par arrondissement',     value: 'Prix au m2 par arrondissement à Marseille',             match: /prix\s*au\s*m2?\s*par\s*arrondissement/i },
+  { label: 'Mon quartier, ma ville',            value: 'Mon quartier, ma ville Marseille',                      match: /mon\s*quartier/i },
+  { label: 'Avant / Après',                     value: 'Avant/après',                                           match: /avant[\s\-_/]*apr[eè]s/i },
+];
 
 const b = (v: any) => (v ? 1 : 0);
 
