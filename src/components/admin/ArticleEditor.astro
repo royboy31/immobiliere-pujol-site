@@ -4,8 +4,8 @@
 // R2 image upload. All persistence goes through /api/admin-pujol/articles.
 import type { BlogArticle } from '../../lib/blog-db';
 
-interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[] }
-const { article = null, experts = [] } = Astro.props;
+interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[]; allCategories?: string[] }
+const { article = null, experts = [], allCategories = [] } = Astro.props;
 const isNew = !article;
 const SITE = 'https://www.immobiliere-pujol.fr';
 const today = new Date().toISOString().slice(0, 10);
@@ -165,9 +165,21 @@ const initial: BlogArticle = article ?? {
       <label>Extrait (résumé)
         <textarea id="f-excerpt" class="ed-plain" style="min-height:70px;">{initial.excerpt}</textarea>
       </label>
-      <label>Catégories (séparées par des virgules)
-        <input id="f-categories" type="text" value={initial.categories.join(', ')} />
-      </label>
+      <div class="ed-field">
+        <span class="ed-fieldlabel">Catégories</span>
+        {allCategories.length === 0 ? (
+          <p class="ed-cat-empty">Aucune catégorie existante. Créez-en via un premier article importé, puis elles apparaîtront ici.</p>
+        ) : (
+          <div id="f-categories" class="ed-cat-list">
+            {allCategories.map((c) => (
+              <label class="ed-cat-item">
+                <input type="checkbox" value={c} checked={initial.categories.includes(c)} />
+                <span>{c}</span>
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
       <label>Tags (séparés par des virgules)
         <input id="f-tags" type="text" value={initial.tags.join(', ')} />
       </label>
@@ -293,6 +305,14 @@ const initial: BlogArticle = article ?? {
   .ed-card { margin-bottom:16px; padding:20px 22px; }
   .ed-card label { margin-bottom:14px; }
   .ed-card label:last-child { margin-bottom:0; }
+
+  /* Category picker — checkboxes, pick from existing categories only */
+  .ed-field { margin-bottom:14px; }
+  .ed-fieldlabel { display:block; font-family:var(--pj-noto); font-weight:700; font-size:12px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); margin-bottom:8px; }
+  .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:190px; overflow-y:auto; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
+  .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
+  .ed-cat-item input { width:auto; margin:0; }
+  .ed-cat-empty { font-size:12px; color:#9aa0a6; line-height:1.5; margin:0; }
 
   /* ── Form fields ──────────────────────────────────────────────────
      AdminLayout's input styling is Astro-scoped to the layout, so it does
@@ -470,12 +490,16 @@ const initial: BlogArticle = article ?? {
 
   // ── Collect + save ──
   const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
+  const checkedCategories = () => {
+    const box = $('f-categories');
+    return box ? [...box.querySelectorAll('input[type="checkbox"]:checked')].map((c) => c.value) : [];
+  };
   function collect(status) {
     return {
       title: val('f-title'), slug: val('f-slug'),
       body_html: sourceMode ? source.value : body.innerHTML,
       excerpt: val('f-excerpt'), featured_image: val('f-featured'),
-      categories: list($('f-categories').value), tags: list($('f-tags').value),
+      categories: checkedCategories(), tags: list($('f-tags').value),
       author: val('f-author'), article_date: val('f-date'),
       seo_title: val('f-seotitle'), seo_description: val('f-seodesc'),
       canonical_url: val('f-canonical'), focus_keyword: val('f-focus'),
