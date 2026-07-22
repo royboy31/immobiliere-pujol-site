@@ -167,6 +167,7 @@ const initial: BlogArticle = article ?? {
       </label>
       <div class="ed-field">
         <span class="ed-fieldlabel">Catégories</span>
+        <input id="f-cat-filter" class="ed-cat-filter" type="text" placeholder="Filtrer les catégories…" autocomplete="off" />
         {allCategories.length === 0 ? (
           <p class="ed-cat-empty">Aucune catégorie existante. Créez-en via un premier article importé, puis elles apparaîtront ici.</p>
         ) : (
@@ -309,7 +310,9 @@ const initial: BlogArticle = article ?? {
   /* Category picker — checkboxes, pick from existing categories only */
   .ed-field { margin-bottom:14px; }
   .ed-fieldlabel { display:block; font-family:var(--pj-noto); font-weight:700; font-size:12px; letter-spacing:.4px; text-transform:uppercase; color:var(--pj-ink); margin-bottom:8px; }
-  .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:190px; overflow-y:auto; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
+  .ed-cat-filter { display:block; width:100%; margin:0 0 8px; padding:9px 12px; border:1px solid var(--pj-hairline); border-radius:9px; font-family:var(--pj-noto); font-size:13px; }
+  .ed-cat-list { display:flex; flex-direction:column; gap:9px; max-height:240px; overflow-y:auto; scrollbar-width:thin; overscroll-behavior:contain; padding:12px 14px; border:1px solid var(--pj-hairline); border-radius:11px; background:#fff; }
+  .ed-cat-item[hidden] { display:none; }
   .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
   .ed-cat-item input { width:auto; margin:0; }
   .ed-cat-empty { font-size:12px; color:#9aa0a6; line-height:1.5; margin:0; }
@@ -487,6 +490,20 @@ const initial: BlogArticle = article ?? {
   ['f-seotitle', 'f-seodesc', 'f-excerpt'].forEach((id) => $(id).addEventListener('input', () => { updateSerp(); updateSocial(); }));
   ['f-ogtitle', 'f-ogdesc'].forEach((id) => $(id).addEventListener('input', updateSocial));
   updatePlaceholders(); updateSerp(); renderFeatured(); renderOg(); updateSocial();
+
+  // ── Category filter (type to narrow the checkbox list) ──
+  (() => {
+    const filter = $('f-cat-filter');
+    const box = $('f-categories');
+    if (!filter || !box) return;
+    const norm = (t) => t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    filter.addEventListener('input', () => {
+      const q = norm(filter.value.trim());
+      box.querySelectorAll('.ed-cat-item').forEach((item) => {
+        item.hidden = q !== '' && !norm(item.textContent || '').includes(q);
+      });
+    });
+  })();
 
   // ── Collect + save ──
   const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
