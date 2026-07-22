@@ -198,6 +198,23 @@ async function logToSheet(tab: string, row: string[]): Promise<void> {
   }
 }
 
+// Upsert one row keyed by a column value (e.g. Email), so a newsletter signup
+// that arrives as two POSTs — step 1 (email) then step 2 (name + interests) —
+// lands on a SINGLE row instead of two appends. The Apps Script matches `key`
+// in `data`, updates the existing row's provided non-empty cells, or inserts a
+// new row. Fire-and-forget like logToSheet.
+async function upsertSheet(tab: string, key: string, data: Record<string, string>): Promise<void> {
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ tab, key, data }),
+      redirect: 'follow',
+    });
+  } catch {
+    // Fire-and-forget — don't block the response if Sheets is down
+  }
+}
+
 const SITE_URL = 'https://www.immobiliere-pujol.fr';
 const STAGING_URL = 'https://immobiliere-pujol-staging.roy-68a.workers.dev';
 const RGPD_URL = 'https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868';
@@ -914,7 +931,9 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
   // Pre-Brevo behaviour — unchanged, including surfacing a send failure as an error.
   if (!doiReady) {
     const emailResult = await notify();
-    ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+    ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
+      Date: now(), Email: email, 'Statut opt-in': 'Inscrit (sans double opt-in)',
+    }));
     return emailResult;
   }
 
@@ -943,7 +962,9 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
     return { ok: false, error: 'Inscription impossible pour le moment.' };
   }
 
-  ctx.waitUntil(logToSheet('Newsletter', [now(), email]));
+  ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
+    Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)',
+  }));
   ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
 
   return { ok: true, doi: true };
@@ -955,7 +976,7 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
 // attributes. This implies no new consent and adds no list — the opt-in already
 // happened at the email step. Origin-gated like the DOI path so environments
 // stay apart; outside the DOI env it silently no-ops (still 200) so the UI flows.
-async function handleNewsletterProfile(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; error?: string }> {
+async function handleNewsletterProfile(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string }> {
   const email = ((fd.get('email') as string) || '').trim().toLowerCase();
   if (!email || !email.includes('@')) return { ok: false, error: 'Email invalide.' };
 
@@ -966,6 +987,19 @@ async function handleNewsletterProfile(fd: FormData, env: Env, origin: string): 
   const firstname = ((fd.get('firstname') as string) || '').trim().slice(0, 80);
   const lastname = ((fd.get('lastname') as string) || '').trim().slice(0, 80);
   const picked = fd.getAll('interests').map((v) => String(v));
+
+  // Enrich the SAME sheet row (keyed by email) with name + interests. Only
+  // non-empty cells overwrite, so this never blanks step 1's Date / opt-in.
+  const sheetData: Record<string, string> = {
+    Email: email,
+    'Intérêt Location': picked.includes('location') ? 'Oui' : 'Non',
+    'Intérêt Vente': picked.includes('vente') ? 'Oui' : 'Non',
+    'Intérêt Syndic': picked.includes('syndic') ? 'Oui' : 'Non',
+    'Tous sujets': picked.includes('tous') ? 'Oui' : 'Non',
+  };
+  if (firstname) sheetData['Prénom'] = firstname;
+  if (lastname) sheetData['Nom'] = lastname;
+  ctx.waitUntil(upsertSheet('Newsletter', 'Email', sheetData));
 
   const attributes: Record<string, string | boolean> = {
     INT_LOCATION: picked.includes('location'),
@@ -1249,7 +1283,7 @@ export default {
         result = await handleNewsletter(fd, env, ctx, origin);
         break;
       case '/newsletter/profile':
-        result = await handleNewsletterProfile(fd, env, origin);
+        result = await handleNewsletterProfile(fd, env, ctx, origin);
         break;
       default:
         return jsonErr('Not found', 404, origin, env);
