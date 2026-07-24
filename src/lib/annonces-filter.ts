@@ -74,10 +74,17 @@ export function buildKindOptions(list: UbiflowAnnonce[]): KindOption[] {
 }
 
 // Unique sorted postal codes that appear at least once in the list.
+// Pad a 4-digit postal code back to 5 digits (leading zero lost upstream, e.g.
+// Nice "6000" -> "06000", "6200" -> "06200"). Marseille (13xxx) is unaffected.
+export function normalizeCp(cp?: string | null): string {
+  const s = (cp || '').trim();
+  return /^\d{4}$/.test(s) ? '0' + s : s;
+}
+
 export function buildArrondissements(list: UbiflowAnnonce[]): { code: string; count: number }[] {
   const counts = new Map<string, number>();
   for (const a of list) {
-    const cp = (a.codePostal || '').trim();
+    const cp = normalizeCp(a.codePostal);
     if (!cp) continue;
     counts.set(cp, (counts.get(cp) ?? 0) + 1);
   }

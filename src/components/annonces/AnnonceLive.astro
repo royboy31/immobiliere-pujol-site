@@ -4,6 +4,7 @@ import AnnonceMap from './AnnonceMap.astro';
 import ContactForm from './ContactForm.astro';
 import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
+import ContentCta from './ContentCta.astro';
 import Lightbox from './Lightbox.astro';
 import ExpertCard from '../experts/ExpertCard.astro';
 import type { Expert } from '../../lib/experts';
@@ -214,6 +215,9 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
       max={3}
     />
   )}
+
+  <ContentCta variant="proprietaire" />
+  <ContentCta variant="conseils" />
 
   <Lightbox />
 </article>

@@ -7,6 +7,7 @@ import AnnonceCard from '../../components/annonces/AnnonceCard.astro';
 import FilterBar from '../../components/annonces/FilterBar.astro';
 import DeferredCards from '../../components/annonces/DeferredCards.astro';
 import ListingCtaCards from '../../components/annonces/ListingCtaCards.astro';
+import ContentCta from '../../components/annonces/ContentCta.astro';
 
 const allAnnonces = await fetchActiveListings();
 const annonces = allAnnonces.filter(a => a.type === 'V').sort((a, b) => filterPrice(b) - filterPrice(a));
@@ -59,5 +60,6 @@ const arrondissements = buildArrondissements(annonces);
     </section>
     <DeferredCards scope="V" />
     <ListingCtaCards />
+    <ContentCta variant="conseils" />
   </div>
 </BaseLayout>

@@ -1,0 +1,88 @@
+---
+// Reusable content CTA band used at the bottom of listing + annonce pages.
+// - variant "conseils": pushes readers toward the blog / conseils articles.
+// - variant "proprietaire": owner-persona lead capture (gérer / estimer).
+interface Props { variant: 'conseils' | 'proprietaire'; }
+const { variant } = Astro.props;
+
+const cfg = variant === 'proprietaire'
+  ? {
+      cls: 'content-cta--owner',
+      eyebrow: 'Propriétaires',
+      title: 'Vous avez un bien similaire à faire gérer ou à estimer ?',
+      sub: 'Nos experts vous accompagnent pour la gestion locative, la vente ou une simple estimation.',
+      btn: 'Contactez-nous',
+      href: '/contact-immobiliere-pujol/',
+    }
+  : {
+      cls: 'content-cta--conseils',
+      eyebrow: 'Nos conseils',
+      title: 'Consultez nos conseils immobiliers à Marseille',
+      sub: 'Analyses du marché, prix au m² et astuces pour vendre, louer ou investir — par nos experts.',
+      btn: 'Découvrir nos conseils',
+      href: '/blog-immobilier-marseille/',
+    };
+---
+
+<section class={`content-cta ${cfg.cls}`}>
+  <div class="content-cta__inner">
+    <div class="content-cta__text">
+      <p class="content-cta__eyebrow">{cfg.eyebrow}</p>
+      <h2 class="content-cta__title">{cfg.title}</h2>
+      <p class="content-cta__sub">{cfg.sub}</p>
+    </div>
+    <a class="content-cta__btn" href={cfg.href}>{cfg.btn} →</a>
+  </div>
+</section>
+
+<style>
+  .content-cta { margin: 40px 0; padding: 0 20px; }
+  .content-cta__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 18px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .content-cta__text { flex: 1 1 420px; }
+  .content-cta__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    opacity: .85;
+  }
+  .content-cta__title { font-size: 24px; line-height: 1.2; margin: 0 0 8px; }
+  .content-cta__sub { margin: 0; font-size: 15px; line-height: 1.5; opacity: .92; }
+  .content-cta__btn {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .04em;
+    text-decoration: none;
+    transition: background .2s, color .2s, border-color .2s;
+  }
+
+  /* Propriétaires — orange */
+  .content-cta--owner .content-cta__inner { background: #EC7234; color: #fff; }
+  .content-cta--owner .content-cta__btn { background: #fff; color: #c85a1f; }
+  .content-cta--owner .content-cta__btn:hover { background: #0f1a2b; color: #fff; }
+
+  /* Conseils — navy + olive */
+  .content-cta--conseils .content-cta__inner { background: #0f1a2b; color: #fff; }
+  .content-cta--conseils .content-cta__btn { background: #B2C54F; color: #16240a; }
+  .content-cta--conseils .content-cta__btn:hover { background: #fff; color: #0f1a2b; }
+
+  @media (max-width: 640px) {
+    .content-cta__inner { padding: 26px 22px; }
+    .content-cta__title { font-size: 20px; }
+  }
+</style>
