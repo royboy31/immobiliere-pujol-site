@@ -4,6 +4,7 @@ import { formatPrice } from '../../lib/ubiflow';
 import {
   classifyKind,
   filterPrice,
+  normalizeCp,
   hasExterieur,
   hasParking,
   isMeuble,
@@ -34,7 +35,7 @@ if (annonce.nbChambres) pills.push(`${annonce.nbChambres} ch.`);
 if (!isVente && isMeuble(annonce)) pills.push('Meublé');
 if (!isVente && annonce.depotGarantie) pills.push(`Dépôt ${Math.round(annonce.depotGarantie)} €`);
 
-const cpVille = `${annonce.codePostal || ''} ${annonce.ville || ''}`.trim();
+const cpVille = `${normalizeCp(annonce.codePostal)} ${annonce.ville || ''}`.trim();
 
 // Filter metadata used by the FilterBar client script.
 const kind = classifyKind(annonce.libelleType);
@@ -47,7 +48,7 @@ const price4Filter = filterPrice(annonce);
   data-slug={annonce.slug}
   data-type={annonce.type}
   data-kind={kind}
-  data-cp={annonce.codePostal || ''}
+  data-cp={normalizeCp(annonce.codePostal)}
   data-pieces={pieces}
   data-price={price4Filter}
   data-parking={hasParking(annonce) ? '1' : '0'}

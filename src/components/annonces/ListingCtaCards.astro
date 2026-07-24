@@ -49,9 +49,16 @@ const cfg = variant === 'location'
       const visible = Array.from(grid.children).filter(
         (c) => c.classList.contains('annonce-card-item') && !c.classList.contains('is-hidden')
       );
-      // First CTA at grid cell 8 (before the 8th visible card), then every 9 cells.
-      for (let k = 7; k < visible.length; k += 8) {
-        grid.insertBefore(makeCta(), visible[k]);
+      if (visible.length >= 8) {
+        // First CTA before the 8th visible card, then every 8 cells.
+        for (let k = 7; k < visible.length; k += 8) {
+          grid.insertBefore(makeCta(), visible[k]);
+        }
+      } else if (visible.length > 0) {
+        // Short list (e.g. a single arrondissement like Nice / 13006): still show
+        // one encart, placed higher — mid 2nd row when possible, else after the cards.
+        const at = Math.min(4, visible.length);
+        grid.insertBefore(makeCta(), visible[at] || null);
       }
     }
 
