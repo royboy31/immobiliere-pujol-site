@@ -497,10 +497,13 @@ try {
     if (!v('f-subject')) { alert('Renseignez l’objet.'); return; }
     const listId = v('f-list');
     if (!listId) { alert('Aucune liste de destinataires configurée.'); return; }
-    // Name the audience in the confirm — "toute la liste" told Caroline nothing
-    // about WHICH list, which is the whole point of being able to choose one.
-    const listLabel = ($('f-list').selectedOptions[0] || {}).textContent || 'la liste';
-    if (!confirm(`Envoyer cette newsletter à « ${listLabel} » ?`)) return;
+    // Name the audience AND the headcount in the confirm — "toute la liste" told
+    // Caroline nothing; she needs to see exactly how many people she's about to mail.
+    const opt = $('f-list').selectedOptions[0] || {};
+    const listLabel = opt.textContent || 'la liste';
+    const count = opt.dataset ? opt.dataset.count : '';
+    const who = count ? `${count} destinataires (« ${listLabel} »)` : `« ${listLabel} »`;
+    if (!confirm(`Envoyer cette newsletter à ${who} ?`)) return;
     setStatus('Envoi…'); $('nl-send').disabled = true;
     const res = await fetch('/api/admin-pujol/newsletter/send/', {
       method: 'POST', headers: { 'content-type': 'application/json' },
@@ -534,12 +537,22 @@ try {
       for (const l of lists) {
         const o = document.createElement('option');
         o.value = String(l.id); o.textContent = l.label;   // textContent: labels are config, never HTML
+        if (typeof l.count === 'number') o.dataset.count = String(l.count);
         sel.appendChild(o);
       }
       sel.disabled = lists.length === 1;   // nothing to choose = don't pretend there is
-      note.textContent = lists.length === 1
-        ? 'La liste d’abonnés qui recevra cet email.'
-        : 'Choisissez la liste d’abonnés qui recevra cet email.';
+      // Show how many people the chosen list will actually reach — the number is
+      // the whole point of the confirm, so surface it the moment a list is picked.
+      const updateNote = () => {
+        const opt = sel.selectedOptions[0];
+        const c = opt && opt.dataset ? opt.dataset.count : '';
+        if (c) note.innerHTML = `Cet email partira à <strong>${c} destinataires</strong>.`;
+        else note.textContent = lists.length === 1
+          ? 'La liste d’abonnés qui recevra cet email.'
+          : 'Choisissez la liste d’abonnés qui recevra cet email.';
+      };
+      sel.addEventListener('change', updateNote);
+      updateNote();
     } catch {
       sel.innerHTML = '<option value="">— erreur de chargement —</option>';
       sel.disabled = true;

@@ -1074,10 +1074,26 @@ function resolveList(env: Env, requested: unknown): AllowedList | null {
   return lists.find((l) => l.id === id) || null;
 }
 
-// POST /newsletter/lists — the lists this environment may send to (for the composer).
+// POST /newsletter/lists — the lists this environment may send to (for the composer),
+// each with its live emailable count = Brevo totalSubscribers minus blacklisted,
+// i.e. exactly how many addresses a campaign to that list actually leaves for.
+// Count is best-effort: on any Brevo hiccup the list still appears with count:null
+// so the composer never loses its send target, it just can't show the number.
 async function handleNewsletterLists(req: Request, env: Env): Promise<Response> {
   const bad = nlGuard(req, env); if (bad) return bad;
-  return nlJson({ ok: true, lists: allowedLists(env) });
+  const base = allowedLists(env);
+  const lists = await Promise.all(base.map(async (l) => {
+    if (!env.BREVO_API_KEY) return { ...l, count: null };
+    try {
+      const res = await fetch(`${BREVO}/contacts/lists/${l.id}`, { headers: { 'api-key': env.BREVO_API_KEY } });
+      if (!res.ok) return { ...l, count: null };
+      const j: any = await res.json();
+      const total = Number(j.totalSubscribers ?? j.uniqueSubscribers ?? 0);
+      const blacklisted = Number(j.totalBlacklisted ?? 0);
+      return { ...l, count: Math.max(0, total - blacklisted) };
+    } catch { return { ...l, count: null }; }
+  }));
+  return nlJson({ ok: true, lists });
 }
 
 // POST /newsletter/send — create + send a Brevo campaign to a permitted list.
