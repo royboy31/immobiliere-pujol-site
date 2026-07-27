@@ -500,7 +500,7 @@ try {
     // Name the audience AND the headcount in the confirm — "toute la liste" told
     // Caroline nothing; she needs to see exactly how many people she's about to mail.
     const opt = $('f-list').selectedOptions[0] || {};
-    const listLabel = opt.textContent || 'la liste';
+    const listLabel = (opt.dataset && opt.dataset.label) || opt.textContent || 'la liste';
     const count = opt.dataset ? opt.dataset.count : '';
     const who = count ? `${count} destinataires (« ${listLabel} »)` : `« ${listLabel} »`;
     if (!confirm(`Envoyer cette newsletter à ${who} ?`)) return;
@@ -536,8 +536,16 @@ try {
       }
       for (const l of lists) {
         const o = document.createElement('option');
-        o.value = String(l.id); o.textContent = l.label;   // textContent: labels are config, never HTML
-        if (typeof l.count === 'number') o.dataset.count = String(l.count);
+        o.value = String(l.id);
+        o.dataset.label = l.label;   // clean label kept for the send confirm
+        // Put the headcount right in the option so it's visible in the dropdown
+        // itself, not only in the hint below. textContent: labels are config, never HTML.
+        if (typeof l.count === 'number') {
+          o.dataset.count = String(l.count);
+          o.textContent = `${l.label} (${l.count} destinataires)`;
+        } else {
+          o.textContent = l.label;
+        }
         sel.appendChild(o);
       }
       sel.disabled = lists.length === 1;   // nothing to choose = don't pretend there is
