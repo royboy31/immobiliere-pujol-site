@@ -9,7 +9,7 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
 import { renderNewsletter, type NewsletterTemplate } from '../../../../lib/newsletter-template';
-import { getDB, ensureSchema, createCampaign, markSent } from '../../../../lib/newsletter-db';
+import { getDB, ensureSchema, createCampaign, updateCampaign, markSent } from '../../../../lib/newsletter-db';
 import { callWorker } from '../../../../lib/newsletter-worker';
 
 export const POST: APIRoute = async ({ request }) => {
@@ -33,13 +33,20 @@ export const POST: APIRoute = async ({ request }) => {
   // 1) persist a draft campaign log before attempting the send
   const db = await getDB();
   await ensureSchema(db);
-  const draft = await createCampaign(db, {
+  const draftInput = {
     subject, preheader, template,
     intro: data.intro || '', outro: data.outro || '',
     article_slugs: Array.isArray(data.articles) ? data.articles.map((a: any) => a.slug).filter(Boolean) : [],
     content_json: data,
-    status: 'draft',
-  }, admin);
+    status: 'draft' as const,
+  };
+  // If this send is of an existing draft (composer passes its id), reuse that row
+  // so it moves draft → sent instead of leaving an orphan draft behind. A stale/
+  // unknown id falls back to a fresh row so a send is never lost.
+  const existingId = Number((body as any).id) || null;
+  const draft = existingId
+    ? (await updateCampaign(db, existingId, draftInput)) ?? (await createCampaign(db, draftInput, admin))
+    : await createCampaign(db, draftInput, admin);
 
   // 2) ask the worker to create + send the Brevo campaign. listId is passed
   //    through as-is: the worker owns the allowlist and refuses anything not on

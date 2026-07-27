@@ -53,6 +53,7 @@ const fmt = (s: string | null) =>
               <td><span class={`badge badge--${c.status}`}>{c.status === 'sent' ? 'Envoyée' : 'Brouillon'}</span></td>
               <td class="nl-date">{fmt(c.status === 'sent' ? c.sent_at : c.created_at)}{c.recipient_count ? ` · ${c.recipient_count} dest.` : ''}</td>
               <td style="text-align:right;white-space:nowrap;">
+                {c.status === 'draft' && <a class="btn btn--ghost btn--sm" href={`./new/?edit=${c.id}`}>Modifier</a>}
                 <a class="btn btn--ghost btn--sm" href={`./new/?from=${c.id}`}>Dupliquer</a>
                 <button class="btn btn--danger btn--sm" data-del={c.id} data-title={c.subject}>Suppr.</button>
               </td>
