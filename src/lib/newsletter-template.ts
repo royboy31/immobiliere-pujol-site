@@ -94,9 +94,9 @@ function renderShell(input: { subject: string; preheader?: string; contentHtml: 
         <!-- RGPD + unsubscribe -->
         <tr><td style="background-color:#ffffff;padding:8px 32px 16px">
           <hr style="border:none;border-top:1px solid ${BG};margin:0 0 10px">
-          <p style="margin:0 0 8px;font-size:11px;color:#8a8a8a;line-height:1.5">
-            Vous recevez cet email car vous êtes inscrit(e) à la newsletter de l'Immobilière Pujol.
-            <a href="{{ unsubscribe }}" style="color:#8a8a8a;text-decoration:underline">Se désinscrire</a>.
+          <p style="margin:0 0 10px;font-size:13px;color:#555;line-height:1.6">
+            Vous recevez cet email car vous êtes inscrit(e) à la newsletter de l'Immobilière Pujol.<br>
+            <a href="{{ unsubscribe }}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Se désinscrire en un clic</a>
           </p>
           <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
             Dans le cadre de nos activités, nous traitons vos données à caractère personnel dans le respect du RGPD et de la loi n°78-17 du 6 janvier 1978. Voir notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Pour toute question&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
