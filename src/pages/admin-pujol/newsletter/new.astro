@@ -272,6 +272,7 @@ try {
   if (adminEmail) testEmailEl.value = adminEmail;
 
   let template = 'blog';
+  let editId = null;   // set when re-opening an existing draft → Save updates it in place
   const rtState = {}; // id -> html
 
   // ── Template switch ──
@@ -484,13 +485,22 @@ try {
   $('nl-save').addEventListener('click', async () => {
     if (!v('f-subject')) { alert('Renseignez l’objet.'); return; }
     setStatus('Enregistrement…');
-    const res = await fetch('/api/admin-pujol/newsletter/', {
-      method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData() }),
-    });
-    setStatus('');
-    if (res.ok) { setStatus('Brouillon enregistré ✓'); }
-    else alert('Échec de l’enregistrement.');
+    const payload = { template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData() };
+    // Re-opened draft → update it; new draft → create it.
+    const res = editId
+      ? await fetch(`/api/admin-pujol/newsletter/${editId}/`, {
+          method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+      : await fetch('/api/admin-pujol/newsletter/', {
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+    if (res.ok) {
+      // First save of a brand-new draft: switch into edit mode so the next save
+      // updates the same row (and a refresh re-opens it), instead of duplicating.
+      if (!editId) {
+        const saved = await res.json().catch(() => ({}));
+        if (saved && saved.id) { editId = saved.id; history.replaceState(null, '', `./?edit=${editId}`); }
+      }
+      setStatus('Brouillon enregistré ✓');
+    } else alert('Échec de l’enregistrement.');
   });
 
   $('nl-send').addEventListener('click', async () => {
@@ -507,7 +517,7 @@ try {
     setStatus('Envoi…'); $('nl-send').disabled = true;
     const res = await fetch('/api/admin-pujol/newsletter/send/', {
       method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData(), listId }),
+      body: JSON.stringify({ template, subject: v('f-subject'), preheader: v('f-preheader'), data: buildData(), listId, id: editId }),
     });
     const j = await res.json().catch(() => ({}));
     $('nl-send').disabled = false; setStatus('');
@@ -580,15 +590,15 @@ try {
   }
   const setRt = (elId, html) => { const el = $(elId); if (el) { el.innerHTML = html || ''; rtState[elId] = html || ''; } };
 
-  async function hydrateFrom(id) {
-    setStatus('Chargement de la copie…');
+  async function hydrateFrom(id, isEdit) {
+    setStatus(isEdit ? 'Chargement du brouillon…' : 'Chargement de la copie…');
     let campaign;
     try {
       const res = await fetch(`/api/admin-pujol/newsletter/${encodeURIComponent(id)}/`);
       if (!res.ok) throw new Error(String(res.status));
       campaign = await res.json();
     } catch (e) {
-      setStatus(''); alert('Impossible de charger la newsletter à dupliquer.');
+      setStatus(''); alert(isEdit ? 'Impossible de charger ce brouillon.' : 'Impossible de charger la newsletter à dupliquer.');
       pickers.blog.ensureLoaded(); return;
     }
     const d = campaign.content_json || {};
@@ -626,13 +636,16 @@ try {
       pickers.blog.setSelected(d.articles || []);
       pickers.blog.ensureLoaded();
     }
-    setStatus('Copie prête — ajustez puis envoyez.');
+    setStatus(isEdit ? 'Brouillon chargé, modifiez puis enregistrez ou envoyez.' : 'Copie prête — ajustez puis envoyez.');
     schedulePreview();
   }
 
   // initial load
-  const fromId = new URLSearchParams(location.search).get('from');
-  if (fromId) hydrateFrom(fromId);
+  const params = new URLSearchParams(location.search);
+  const editParam = params.get('edit');
+  const fromId = params.get('from');
+  if (editParam) { editId = editParam; hydrateFrom(editParam, true); }
+  else if (fromId) hydrateFrom(fromId, false);
   else pickers.blog.ensureLoaded();
   loadLists();
 </script>
