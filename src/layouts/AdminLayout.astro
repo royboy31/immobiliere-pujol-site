@@ -5,7 +5,7 @@ import PublishBar from '../components/admin/PublishBar.astro';
 
 interface Props {
   title: string;
-  section?: 'experts' | 'articles' | 'pages' | 'home' | 'newsletter' | 'users';
+  section?: 'experts' | 'articles' | 'pages' | 'home' | 'newsletter' | 'alertes' | 'users';
   hideSidebar?: boolean;
 }
 
@@ -375,6 +375,7 @@ const initials = (adminName || adminEmail || '?')
         <a href={`${base}/experts/`} class:list={[{ 'is-active': section === 'experts' }]}>Experts</a>
         <a href={`${base}/articles/`} class:list={[{ 'is-active': section === 'articles' }]}>Articles de blog</a>
         <a href={`${base}/newsletter/`} class:list={[{ 'is-active': section === 'newsletter' }]}>Newsletters</a>
+        <a href={`${base}/alertes/`} class:list={[{ 'is-active': section === 'alertes' }]}>Alertes</a>
         <a href={`${base}/pages/`} class:list={[{ 'is-active': section === 'pages' }]}>Pages légales</a>
         {isSuper && <a href={`${base}/users/`} class:list={[{ 'is-active': section === 'users' }]}>Utilisateurs</a>}
       </nav>

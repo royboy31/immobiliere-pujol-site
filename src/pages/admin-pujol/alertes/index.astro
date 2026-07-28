@@ -1,0 +1,206 @@
+---
+export const prerender = false;
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getDB, ensureSchema, listAlerts, describeCriteria, type Alert } from '../../../lib/alerts-db';
+
+let alerts: Alert[] = [];
+let error = '';
+try {
+  const db = await getDB();
+  await ensureSchema(db);
+  alerts = await listAlerts(db);
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+const STATUS_LABEL: Record<string, string> = { active: 'Active', pending: 'En attente', paused: 'En pause', unsub: 'Désinscrit' };
+const fmtDate = (ms: number) => new Date(ms).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+
+const KINDS: [string, string][] = [
+  ['appartement', 'Appartement'], ['maison', 'Maison'], ['parking', 'Parking / Garage'],
+  ['local', 'Local / Bureau'], ['terrain', 'Terrain'],
+];
+const ARRONDS = ['13001','13002','13003','13004','13005','13006','13007','13008','13009','13010','13011','13012','13013','13014','13015','13016','06000','06100','06200','06300'];
+const activeCount = alerts.filter((a) => a.status === 'active').length;
+---
+
+<AdminLayout title="Alertes" section="alertes">
+  <div class="toolbar">
+    <h1 style="margin:0;">Alertes <span style="font-weight:300;color:#888;">({alerts.length} · {activeCount} actives)</span></h1>
+    <span class="spacer"></span>
+    <button id="al-add-btn" class="btn btn--primary">+ Ajouter une alerte</button>
+  </div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && (
+    <div class="al-filters">
+      <input id="al-search" type="search" placeholder="Rechercher un email…" />
+      <select id="al-ftype"><option value="">Tous types</option><option value="V">Vente</option><option value="L">Location</option></select>
+      <select id="al-fstatus">
+        <option value="">Tous statuts</option>
+        <option value="active">Active</option><option value="pending">En attente</option>
+        <option value="paused">En pause</option><option value="unsub">Désinscrit</option>
+      </select>
+    </div>
+  )}
+
+  {!error && alerts.length === 0 && (
+    <div class="card"><p>Aucune alerte pour l’instant.</p></div>
+  )}
+
+  {alerts.length > 0 && (
+    <div class="card" style="padding:0;overflow:hidden;">
+      <table class="al-table">
+        <thead>
+          <tr><th>Contact</th><th>Type</th><th>Critères</th><th>Statut</th><th>Créée le</th><th style="text-align:right;">Actions</th></tr>
+        </thead>
+        <tbody>
+          {alerts.map((a) => (
+            <tr data-id={a.id} data-email={a.email} data-type={a.transac} data-status={a.status}>
+              <td>
+                <div class="al-email">{a.email}</div>
+                {(a.prenom || a.phone) && <div class="al-sub">{[a.prenom, a.phone].filter(Boolean).join(' · ')}</div>}
+              </td>
+              <td class="al-tmpl">{a.transac === 'V' ? 'Vente' : 'Location'}</td>
+              <td class="al-crit">{describeCriteria(a)}{a.bien_a_vendre ? ' · a un bien à vendre' : ''}</td>
+              <td><span class={`badge badge--${a.status}`}>{STATUS_LABEL[a.status] || a.status}</span></td>
+              <td class="al-date">{fmtDate(a.created_at)}</td>
+              <td style="text-align:right;white-space:nowrap;">
+                {a.status === 'active'
+                  ? <button class="btn btn--ghost btn--sm" data-pause={a.id}>Mettre en pause</button>
+                  : (a.status === 'paused' || a.status === 'pending')
+                    ? <button class="btn btn--ghost btn--sm" data-activate={a.id}>Activer</button>
+                    : null}
+                <button class="btn btn--danger btn--sm" data-del={a.id} data-email={a.email}>Suppr.</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <!-- Add modal -->
+  <dialog id="al-modal" class="al-modal">
+    <div class="al-modal__inner">
+      <button type="button" class="al-modal__close" id="al-close" aria-label="Fermer">&times;</button>
+      <h3 style="margin:0 0 4px;">Ajouter une alerte</h3>
+      <p style="margin:0 0 18px;color:#6b7280;font-size:14px;">La personne est ajoutée directement. Un e-mail de confirmation avec lien de désinscription lui est envoyé.</p>
+      <form id="al-form">
+        <div class="af2-row">
+          <label>Email *<input name="email" type="email" required /></label>
+          <label>Prénom<input name="prenom" type="text" /></label>
+        </div>
+        <div class="af2-row">
+          <label>Téléphone<input name="phone" type="tel" /></label>
+          <label>Type de recherche *
+            <select name="transac" required><option value="">—</option><option value="V">Vente</option><option value="L">Location</option></select>
+          </label>
+        </div>
+        <div class="af2-row">
+          <label>Type de bien<select name="kind"><option value="">Indifférent</option>{KINDS.map(([v,l]) => <option value={v}>{l}</option>)}</select></label>
+          <label>Secteur<select name="cp"><option value="">Indifférent</option>{ARRONDS.map((c) => <option value={c}>{c}</option>)}</select></label>
+        </div>
+        <div class="af2-row">
+          <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
+          <label>Chambres (min.)<select name="chambres_min"><option value="">Indifférent</option>{[1,2,3,4,5].map((n) => <option value={n}>{n}+</option>)}</select></label>
+        </div>
+        <label class="af2-check" data-vente hidden><input type="checkbox" name="bien_a_vendre" /> A un bien à vendre</label>
+        <p id="al-form-err" class="al-form-err"></p>
+        <div class="al-modal__actions">
+          <button type="button" class="btn btn--ghost" id="al-cancel">Annuler</button>
+          <button type="submit" class="btn btn--primary" id="al-save">Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+</AdminLayout>
+
+<style>
+  .al-filters { display:flex; gap:10px; margin:0 0 16px; flex-wrap:wrap; }
+  .al-filters input, .al-filters select { padding:9px 12px; border:1px solid var(--pj-hairline); border-radius:8px; font-size:14px; }
+  .al-filters input { flex:1; min-width:200px; }
+  .al-table { width:100%; border-collapse:collapse; font-family:var(--pj-noto); }
+  .al-table th { text-align:left; font-size:11px; letter-spacing:.5px; text-transform:uppercase; color:#8a8a8a; font-weight:700; padding:14px 18px; border-bottom:1px solid var(--pj-hairline); }
+  .al-table td { padding:13px 18px; border-bottom:1px solid var(--pj-hairline); vertical-align:middle; }
+  .al-table tr:last-child td { border-bottom:none; }
+  .al-table tr.is-hidden { display:none; }
+  .al-email { font-weight:600; font-size:14px; color:#000; }
+  .al-sub { font-size:12px; color:#9aa0a6; margin-top:2px; }
+  .al-tmpl, .al-date { font-size:13px; color:#555; }
+  .al-crit { font-size:13px; color:#333; max-width:340px; }
+  .badge { display:inline-block; padding:4px 11px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; }
+  .badge--active { background:rgba(178,192,78,.2); color:#5c6a10; }
+  .badge--pending { background:#fdf0e2; color:#b26a12; }
+  .badge--paused { background:#eee; color:#777; }
+  .badge--unsub { background:#fdecea; color:#b3261e; }
+  .btn--sm { padding:6px 12px; font-size:10px; margin-left:6px; }
+  /* modal */
+  .al-modal { padding:0; border:none; background:transparent; }
+  .al-modal::backdrop { background:rgba(15,26,43,.5); }
+  .al-modal__inner { position:relative; width:560px; max-width:92vw; max-height:90vh; overflow-y:auto; background:#fff; border-radius:14px; padding:28px; }
+  .al-modal__close { position:absolute; top:12px; right:14px; width:32px; height:32px; border:none; border-radius:50%; background:#f1f4ef; color:#4a5560; font-size:20px; cursor:pointer; }
+  .af2-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+  #al-form label { display:flex; flex-direction:column; gap:5px; font-size:13px; font-weight:600; color:#1f2a30; }
+  #al-form input, #al-form select { padding:10px 12px; border:1px solid #d4dad6; border-radius:8px; font-size:14px; font-weight:400; }
+  .af2-check { flex-direction:row !important; align-items:center; gap:8px; font-weight:400 !important; }
+  .al-form-err { color:#c0392b; font-weight:600; font-size:13px; margin:6px 0 0; }
+  .al-modal__actions { display:flex; justify-content:flex-end; gap:10px; margin-top:18px; }
+  @media (max-width:560px){ .af2-row { grid-template-columns:1fr; } }
+</style>
+
+<script>
+  const $ = (id: string): any => document.getElementById(id);
+  const modal: any = $('al-modal');
+
+  // Filtering
+  const applyFilter = () => {
+    const q = ($('al-search')?.value || '').trim().toLowerCase();
+    const ft = $('al-ftype')?.value || '';
+    const fs = $('al-fstatus')?.value || '';
+    document.querySelectorAll('.al-table tbody tr').forEach((row) => {
+      const tr = row as HTMLElement;
+      const okQ = !q || (tr.dataset.email || '').includes(q);
+      const okT = !ft || tr.dataset.type === ft;
+      const okS = !fs || tr.dataset.status === fs;
+      tr.classList.toggle('is-hidden', !(okQ && okT && okS));
+    });
+  };
+  ['al-search', 'al-ftype', 'al-fstatus'].forEach((id) => $(id)?.addEventListener('input', applyFilter));
+
+  // Add modal
+  $('al-add-btn')?.addEventListener('click', () => modal?.showModal());
+  $('al-close')?.addEventListener('click', () => modal?.close());
+  $('al-cancel')?.addEventListener('click', () => modal?.close());
+  const form: any = $('al-form');
+  const venteChk: any = form && form.querySelector('[data-vente]');
+  form?.querySelector('select[name="transac"]')?.addEventListener('change', (e: any) => {
+    if (venteChk) venteChk.hidden = e.target.value !== 'V';
+  });
+  form?.addEventListener('submit', async (e: Event) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const body: any = Object.fromEntries(fd.entries());
+    body.bien_a_vendre = fd.get('bien_a_vendre') === 'on';
+    const btn = $('al-save'); if (btn) btn.disabled = true;
+    const res = await fetch('/api/admin-pujol/alertes/', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    const j: any = await res.json().catch(() => ({}));
+    if (btn) btn.disabled = false;
+    if (res.ok && j.ok) { window.location.reload(); }
+    else { const el = $('al-form-err'); if (el) el.textContent = j.error || 'Échec de l’ajout.'; }
+  });
+
+  // Row actions
+  const patchStatus = async (id: string, status: string) => {
+    const res = await fetch(`/api/admin-pujol/alertes/${id}/`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ status }) });
+    if (res.ok) window.location.reload(); else alert('Action impossible.');
+  };
+  document.querySelectorAll('[data-pause]').forEach((b: any) => b.addEventListener('click', () => patchStatus(b.dataset.pause, 'paused')));
+  document.querySelectorAll('[data-activate]').forEach((b: any) => b.addEventListener('click', () => patchStatus(b.dataset.activate, 'active')));
+  document.querySelectorAll('[data-del]').forEach((b: any) => b.addEventListener('click', async () => {
+    if (!confirm(`Supprimer l’alerte de ${b.dataset.email} ?`)) return;
+    const res = await fetch(`/api/admin-pujol/alertes/${b.dataset.del}/`, { method: 'DELETE' });
+    if (res.ok) b.closest('tr')?.remove(); else alert('Suppression impossible.');
+  }));
+</script>

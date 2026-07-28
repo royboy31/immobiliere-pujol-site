@@ -1330,6 +1330,47 @@ async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
 
+// POST /alerts/registered — courtesy email for a back-office (manual) add: the
+// alert is already active, so this confirms it and offers one-click unsubscribe.
+function buildAlertRegistered(prenom: string, criteriaText: string, manageUrl: string): string {
+  const hi = prenom ? `Bonjour ${prenom},` : 'Bonjour,';
+  return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ef;padding:32px 16px"><tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+      <tr><td style="background:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center"><img src="${PUJOL_LOGO}" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto"></td></tr>
+      <tr><td style="background:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+      <tr><td style="background:#fff;padding:32px 32px 26px">
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#0f1a2b;text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid #B2C54F;padding-bottom:3px">Alerte annonces</span></p>
+        <h1 style="margin:18px 0 12px;font-size:23px;color:#0f1a2b">Votre alerte est enregistrée</h1>
+        <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
+          <p style="margin:0 0 14px">${hi}</p>
+          <p style="margin:0 0 14px">Nous avons enregistré votre alerte à votre demande. Dès qu'un bien correspond, vous recevrez un e-mail&nbsp;:</p>
+          <p style="margin:0 0 14px;padding:11px 15px;background:#f4f6ef;border-left:3px solid #B2C54F;font-weight:600;color:#0f1a2b">${criteriaText}</p>
+          <p style="margin:0 0 14px">Vous pouvez vous désinscrire à tout moment&nbsp;:</p>
+        </div>
+        <p style="margin:0 0 6px"><a href="${manageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Supprimer mon alerte</a></p>
+      </td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille</p></td></tr>
+    </table>
+  </td></tr></table></body></html>`;
+}
+
+async function handleAlertRegistered(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = (b.email || '').trim();
+  if (!email) return nlJson({ error: 'email requis' }, 400);
+  const r = await sendEmail(env, {
+    subject: 'Votre alerte annonces est enregistrée — Immobilière Pujol',
+    html: buildAlertRegistered(String(b.prenom || ''), String(b.criteriaText || ''), String(b.manageUrl || '')),
+    to: email,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol',
+    replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+  });
+  return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+}
+
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
 
 const SHEET_HEADERS: Record<string, string[]> = {
@@ -1387,6 +1428,7 @@ export default {
     if (path === '/alerts/optin')     return handleAlertOptin(request, env);
     if (path === '/alerts/notify')    return handleAlertNotify(request, env);
     if (path === '/alerts/match')     return handleAlertMatch(request, env);
+    if (path === '/alerts/registered') return handleAlertRegistered(request, env);
 
     let fd: FormData;
     try {
