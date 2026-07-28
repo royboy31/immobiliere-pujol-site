@@ -26,7 +26,9 @@ const error = Astro.url.searchParams.get('err');
               <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
               <path d="M12 7v6M12 16.5v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            Identifiants incorrects.
+            {error === 'rate'
+              ? 'Trop de tentatives. Réessayez dans quelques minutes.'
+              : 'Identifiants incorrects.'}
           </p>
         )}
         <form method="POST" action={`/api/${adminPath}/auth/login/`}>
