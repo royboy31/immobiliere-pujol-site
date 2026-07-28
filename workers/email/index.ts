@@ -1354,12 +1354,14 @@ export default {
     //
     // /newsletter used to be exempt ("no widget by design"); spec §3.5 calls that
     // a list-bombing hole and the signup form now carries a widget, so the
-    // exemption is gone. This worker has NO TURNSTILE_SECRET today, so nothing is
-    // enforced here yet.
-    // ⚠️ Setting TURNSTILE_SECRET on THIS worker will start rejecting newsletter
-    // signups that arrive without a token — and PRODUCTION posts here (§6.2)
-    // while `pujol-main` still ships the widget-less form. Ship the widget to
-    // pujol-main BEFORE setting that secret, or prod signups will 403.
+    // exemption is gone. Enforcement is per-environment, driven by the secret:
+    //   • PROD: TURNSTILE_SECRET is set (as a Cloudflare secret) so tokens ARE
+    //     verified; the widget + api.js load on prod, so real submissions carry a
+    //     token. (Confirmed: a bad token gets 403 here.)
+    //   • STAGING: no secret AND api.js is not loaded (see BaseLayout loadAnalytics),
+    //     so this block is skipped and the honeypot + content filter above are the
+    //     anti-spam layers. Do NOT set TURNSTILE_SECRET on staging — the widget
+    //     can't render there, so every form would 403.
     // /newsletter/profile is the signup card's optional step 2 (name + interests);
     // the visitor already cleared Turnstile at the email step, so exempt it (there
     // is no fresh token) — the honeypot + content filter above still apply.
