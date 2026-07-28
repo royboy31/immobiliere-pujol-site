@@ -120,10 +120,18 @@ const KINDS: [string, string][] = [
 <script>
   document.querySelectorAll<HTMLFormElement>('[data-alert-form]').forEach((form) => {
     const venteBlock = form.querySelector<HTMLElement>('[data-vente]');
-    // Toggle the vente-only questions with the transac choice (when the toggle is shown).
-    form.querySelectorAll<HTMLInputElement>('input[name="transac"]').forEach((r) => {
-      r.addEventListener('change', () => { if (venteBlock) venteBlock.hidden = r.value !== 'V'; });
-    });
+    // Reflect the transac choice: show the vente-only questions and fill the
+    // selected toggle button (class-based so it works without :has() too).
+    const syncTransac = () => {
+      const checked = form.querySelector<HTMLInputElement>('input[name="transac"]:checked');
+      if (venteBlock) venteBlock.hidden = !checked || checked.value !== 'V';
+      form.querySelectorAll<HTMLLabelElement>('.af-toggle label').forEach((l) => {
+        const input = l.querySelector<HTMLInputElement>('input');
+        l.classList.toggle('is-on', !!input && input.checked);
+      });
+    };
+    form.querySelectorAll<HTMLInputElement>('input[name="transac"]').forEach((r) => r.addEventListener('change', syncTransac));
+    syncTransac();
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -177,8 +185,18 @@ const KINDS: [string, string][] = [
   }
   .alert-form input:focus, .alert-form select:focus { outline: none; border-color: #B2C54F; box-shadow: 0 0 0 3px rgba(178,197,79,.18); }
   .af-toggle { display: flex; gap: 10px; }
-  .af-toggle label { flex: 1; display: flex; align-items: center; gap: 8px; padding: 11px 14px; border: 1px solid #d4dad6; border-radius: 8px; cursor: pointer; font-size: 15px; }
-  .af-toggle input { accent-color: #EC7234; }
+  .af-toggle label {
+    flex: 1; display: flex; align-items: center; justify-content: center; padding: 13px 14px;
+    border: 1.5px solid #d4dad6; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;
+    color: #4a5560; text-align: center; transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .af-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .af-toggle label:hover { border-color: #b7c0ba; }
+  .af-toggle label:focus-within { box-shadow: 0 0 0 3px rgba(178,197,79,.28); }
+  /* Selected = full fill. Navy is the fallback; brand colors via :has() where supported. */
+  .af-toggle label.is-on { background: #0f1a2b; border-color: #0f1a2b; color: #fff; }
+  .af-toggle label.is-on:has(input[value="V"]) { background: #EC7234; border-color: #EC7234; }
+  .af-toggle label.is-on:has(input[value="L"]) { background: #6f8319; border-color: #6f8319; }
   .af-vente { display: flex; flex-wrap: wrap; gap: 16px; }
   .af-check, .af-agree { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #4a5560; line-height: 1.5; cursor: pointer; }
   .af-check input, .af-agree input { margin-top: 2px; accent-color: #B2C54F; }
