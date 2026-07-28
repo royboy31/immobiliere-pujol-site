@@ -1267,6 +1267,69 @@ async function handleAlertNotify(req: Request, env: Env): Promise<Response> {
   return nlJson({ ok: true, notified: to });
 }
 
+// Subscriber-facing "un bien correspond à votre alerte" email (Phase 2 matching).
+function alertMatchCard(l: any): string {
+  const img = l.image
+    ? `<a href="${l.url}" style="text-decoration:none"><img src="${l.image}" width="536" alt="" style="width:100%;max-width:536px;height:auto;display:block;border-radius:10px 10px 0 0"></a>`
+    : '';
+  const topRadius = l.image ? '0 0 10px 10px' : '10px';
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px"><tr><td>
+    ${img}
+    <div style="border:1px solid #ececec;${l.image ? 'border-top:none;' : ''}border-radius:${topRadius};padding:16px 18px">
+      <div style="font-weight:700;font-size:16px;color:#0f1a2b;line-height:1.35">${l.title || ''}</div>
+      ${l.location ? `<div style="color:#6b7280;font-size:13px;margin:5px 0 0">${l.location}</div>` : ''}
+      ${l.price ? `<div style="color:#EC7234;font-weight:800;font-size:21px;margin:10px 0 14px">${l.price}</div>` : ''}
+      <a href="${l.url}" style="display:inline-block;background:#0f1a2b;color:#fff;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.3px">VOIR L'ANNONCE</a>
+    </div></td></tr></table>`;
+}
+
+function buildAlertMatch(prenom: string, criteriaText: string, listings: any[], manageUrl: string): string {
+  const hi = prenom ? `Bonjour ${prenom},` : 'Bonjour,';
+  const n = listings.length;
+  const head = n === 1 ? 'Un bien correspond' : `${n} biens correspondent`;
+  const intro = n === 1
+    ? "Un nouveau bien vient d'être mis en ligne et correspond à votre alerte&nbsp;:"
+    : "De nouveaux biens viennent d'être mis en ligne et correspondent à votre alerte&nbsp;:";
+  return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ef;padding:32px 16px"><tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+      <tr><td style="background:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center"><img src="${PUJOL_LOGO}" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto"></td></tr>
+      <tr><td style="background:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+      <tr><td style="background:#fff;padding:30px 32px 26px">
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#0f1a2b;text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid #B2C54F;padding-bottom:3px">Alerte annonces</span></p>
+        <h1 style="margin:18px 0 12px;font-size:23px;line-height:1.3;color:#0f1a2b">${head} à votre recherche</h1>
+        <p style="margin:0 0 6px;font-size:14px;color:#3a3a3a;line-height:1.6">${hi}</p>
+        <p style="margin:0 0 18px;font-size:14px;color:#3a3a3a;line-height:1.6">${intro}</p>
+        ${criteriaText ? `<p style="margin:0 0 22px;padding:11px 15px;background:#f4f6ef;border-left:3px solid #B2C54F;font-weight:600;color:#0f1a2b;font-size:14px">${criteriaText}</p>` : ''}
+        ${listings.map(alertMatchCard).join('')}
+        <hr style="border:none;border-top:1px solid #eef3ef;margin:8px 0 14px">
+        <p style="margin:0;font-size:12px;color:#8a8a8a;line-height:1.6">Vous recevez cet e-mail car vous avez créé une alerte sur immobiliere-pujol.fr.<br>
+          <a href="${manageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Gérer ou supprimer mon alerte</a></p>
+      </td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.</p></td></tr>
+    </table>
+  </td></tr></table></body></html>`;
+}
+
+// POST /alerts/match — send the subscriber a "bien correspondant" email.
+// Body: { email, prenom, criteriaText, manageUrl, listings:[{title,price,location,url,image}] }.
+async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = (b.email || '').trim();
+  const listings = Array.isArray(b.listings) ? b.listings : [];
+  if (!email || !listings.length) return nlJson({ error: 'email + listings requis' }, 400);
+  const r = await sendEmail(env, {
+    subject: listings.length === 1 ? 'Un bien correspond à votre alerte — Immobilière Pujol' : `${listings.length} biens correspondent à votre alerte — Immobilière Pujol`,
+    html: buildAlertMatch(String(b.prenom || ''), String(b.criteriaText || ''), listings, String(b.manageUrl || '')),
+    to: email,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol',
+    replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+  });
+  return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+}
+
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
 
 const SHEET_HEADERS: Record<string, string[]> = {
@@ -1323,6 +1386,7 @@ export default {
     if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
     if (path === '/alerts/optin')     return handleAlertOptin(request, env);
     if (path === '/alerts/notify')    return handleAlertNotify(request, env);
+    if (path === '/alerts/match')     return handleAlertMatch(request, env);
 
     let fd: FormData;
     try {
