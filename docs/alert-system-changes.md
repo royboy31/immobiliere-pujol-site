@@ -17,6 +17,8 @@ without dragging in unrelated develop-only work.
 | 4 | `c3f68fe3` | Form: clear selected state on the achat/location toggle |
 | 5 | `5827aeac` | Listing pop-up on each active fiche (`AnnonceLive`) |
 | 6 | `eec05583` | Closed-listing pop-up (`AnnonceClosed`) + list-page "Créer une alerte" band (`ventes`/`locations`) |
+| 7 | `9125d717` | Phase 2 send side: `/alerts/match` worker endpoint + `buildAlertMatch` subscriber email |
+| 8 | `f6256aa5` | Phase 2 matcher: `cron-sync` detects new active listings → emails matching alerts |
 
 Convenience (verify against the table first — grep can drift):
 ```
@@ -26,7 +28,7 @@ git log --reverse --format='%H %s' develop --grep='^Alerts'
 To apply onto prod:
 ```
 git checkout pujol-main && git reset --hard origin/pujol-main
-git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583
+git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5
 git push origin pujol-main      # triggers the prod deploy workflow
 ```
 
@@ -49,6 +51,11 @@ Modified: `workers/email/index.ts` (added `/alerts/optin` + `/alerts/notify` + r
 - **D1 `alerts` table**: created automatically by `ensureSchema` on first API hit (prod D1 `6bf184d7…`). No manual migration.
 - **Optional** `ALERTS_TURNSTILE_SECRET` on the main prod worker to enforce Turnstile on alert forms (else honeypot is the guard). Do NOT set `TURNSTILE_SECRET` on the email worker (it would start rejecting newsletter signups — see that worker's note).
 - ⚠️ **On prod the notification emails are LIVE**: a confirmed vente alert emails `benoit@` + the listing négociateur; a location alert emails the négociateur or `annonces@`. Expect real agency emails once live.
+- **Phase 2 matcher config (cron-sync worker)** — the matcher stays **dormant (safe no-op)** until all three are set on the `pujol-cron-sync` worker:
+  - `EMAIL_WORKER_URL` (var) = the email worker URL for that env (prod: `https://pujol-email.<pujol-acct>.workers.dev`).
+  - `NEWSLETTER_INTERNAL_TOKEN` (secret) = **the same value** as on the email worker (Roy/deploy holds it; Claude can't read it).
+  - `SITE_BASE_URL` (var) = public site origin (prod `https://www.immobiliere-pujol.fr`, staging the staging URL) — used for listing + manage links.
+  - Set on prod via `wrangler secret put NEWSLETTER_INTERNAL_TOKEN --name pujol-cron-sync` (+ add the two vars to `workers/cron-sync/wrangler.jsonc` or patch them in `deploy-pujol.yml`). Matcher guards: backfill >40 new = skip, anti-flood ~1 email/day/alert, only ACTIVE new listings.
 
 ## Post-deploy check (prod)
 1. `GET /alerte/` returns 200 with the form.
