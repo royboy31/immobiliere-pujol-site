@@ -8,6 +8,7 @@ import FilterBar from '../../components/annonces/FilterBar.astro';
 import DeferredCards from '../../components/annonces/DeferredCards.astro';
 import ListingCtaCards from '../../components/annonces/ListingCtaCards.astro';
 import ContentCta from '../../components/annonces/ContentCta.astro';
+import AlertListCta from '../../components/alertes/AlertListCta.astro';
 
 const allAnnonces = await fetchActiveListings();
 const annonces = allAnnonces.filter(a => a.type === 'L').sort((a, b) => filterPrice(b) - filterPrice(a));
@@ -36,6 +37,7 @@ const arrondissements = buildArrondissements(annonces);
 
     <section class="annonces-filter-section">
       <FilterBar kinds={kinds} arrondissements={arrondissements} scope="L" />
+      <AlertListCta transac="L" />
     </section>
 
     <section class="annonces-grid-section">

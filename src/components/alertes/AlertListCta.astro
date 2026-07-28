@@ -1,0 +1,28 @@
+---
+// "Créer une alerte" band for the ventes/locations list pages. Wraps AlertPopup
+// (transac preset, no listing prefill) with an inviting one-liner.
+import AlertPopup from './AlertPopup.astro';
+interface Props { transac: 'V' | 'L'; }
+const { transac } = Astro.props;
+const isSale = transac === 'V';
+---
+
+<div class="alert-list-cta">
+  <p class="alert-list-cta__txt">
+    Vous ne trouvez pas votre bien {isSale ? 'à acheter' : 'à louer'} ?
+    Créez une alerte et soyez prévenu(e) dès qu’un bien correspond à votre recherche.
+  </p>
+  <div class="alert-list-cta__btn">
+    <AlertPopup transac={transac} label="Créer une alerte" />
+  </div>
+</div>
+
+<style>
+  .alert-list-cta {
+    display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap;
+    margin-top: 16px; padding: 16px 20px; background: #f4f6ef; border: 1px solid #e6ebe1; border-radius: 12px;
+  }
+  .alert-list-cta__txt { margin: 0; font-size: 15px; line-height: 1.5; color: #4a5560; max-width: 560px; }
+  .alert-list-cta__btn { flex: none; width: 260px; max-width: 100%; }
+  @media (max-width: 640px) { .alert-list-cta { text-align: center; } }
+</style>

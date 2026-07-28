@@ -5,6 +5,8 @@ import DpeDiagram from './DpeDiagram.astro';
 import Lightbox from './Lightbox.astro';
 import ExpertCard from '../experts/ExpertCard.astro';
 import ClosedLinkBlock from './ClosedLinkBlock.astro';
+import AlertPopup from '../alertes/AlertPopup.astro';
+import { classifyKind, normalizeCp } from '../../lib/annonces-filter';
 import type { Expert } from '../../lib/experts';
 import type { ClosedAnnonceRelated } from '../../lib/closed-annonces';
 import type { UbiflowAnnonce } from '../../lib/ubiflow';
@@ -58,6 +60,17 @@ interface Props {
 
 const { view, expert, seoLinks = [] } = Astro.props;
 const isLocation = view.type === 'L';
+
+// Pre-fill for the "bien similaire" alert pop-up, from this (sold/rented) listing.
+const _alertKind = classifyKind(view.titre);
+const alertPrefill = {
+  cp: view.codePostal ? normalizeCp(view.codePostal) : null,
+  kind: _alertKind === 'autre' ? null : _alertKind,
+  chambres_min: view.nbChambres ?? null,
+  budget_max: isLocation ? (view.loyerCC ?? view.loyer ?? null) : (view.prix ?? null),
+  source_ref: view.reference,
+  negociateur_email: null,
+};
 const similarHref = isLocation ? '/annonces/locations/' : '/annonces/ventes/';
 const similarLabel = isLocation
   ? 'VOIR LES LOCATIONS DISPONIBLES'
@@ -133,6 +146,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
           <a href="/services/demander-une-estimation-de-prix-de-vente/" class="btn-pill btn-pill--ghost">FAIRE ESTIMER VOTRE BIEN</a>
         )}
       </div>
+      <AlertPopup transac={view.type} prefill={alertPrefill} />
       <div class="annonce-cta-card__ref">Référence : {view.reference}</div>
     </div>
 
