@@ -1,0 +1,72 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AlertForm from '../../components/alertes/AlertForm.astro';
+
+const seoTitle = 'Créer une alerte annonces — Immobilière Pujol';
+const seoDescription =
+  'Recevez par e-mail les biens qui correspondent à votre recherche à Marseille dès leur mise en ligne. Enregistrez vos critères en une minute.';
+---
+
+<BaseLayout title={seoTitle} description={seoDescription}>
+  <section class="alerte-hero">
+    <div class="alerte-wrap">
+      <p class="alerte-eyebrow">Alerte annonces</p>
+      <h1>Soyez prévenu(e) avant tout le monde</h1>
+      <p class="alerte-lead">
+        Enregistrez vos critères de recherche : dès qu’un bien correspondant est mis en ligne,
+        vous recevez un e-mail avec l’annonce. Achat ou location, à Marseille et ses environs.
+      </p>
+    </div>
+  </section>
+
+  <section class="alerte-body">
+    <div class="alerte-wrap">
+      <div class="alerte-card">
+        <AlertForm transac="" />
+      </div>
+      <ul class="alerte-steps">
+        <li><span>1</span> Vous saisissez vos critères et votre e-mail</li>
+        <li><span>2</span> Vous confirmez via le lien reçu par e-mail</li>
+        <li><span>3</span> Vous recevez chaque nouveau bien correspondant</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Surface a friendly notice if a confirm/unsub link was invalid or expired.
+  if (new URLSearchParams(location.search).get('erreur') === 'lien') {
+    const w = document.querySelector<HTMLElement>('.alerte-card');
+    if (w) {
+      const n = document.createElement('p');
+      n.style.cssText = 'background:#fdecea;color:#b3261e;padding:12px 14px;border-radius:8px;margin:0 0 18px;font-size:14px';
+      n.textContent = 'Ce lien n’est plus valide. Vous pouvez créer une nouvelle alerte ci-dessous.';
+      w.insertAdjacentElement('afterbegin', n);
+    }
+  }
+</script>
+
+<style>
+  .alerte-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .alerte-hero { padding: 56px 0 28px; text-align: center; }
+  .alerte-eyebrow {
+    margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #7f9420;
+  }
+  .alerte-hero h1 { margin: 0 0 16px; font-size: clamp(28px, 4.5vw, 40px); line-height: 1.2; color: #1f2a30; }
+  .alerte-lead { margin: 0; font-size: 17px; line-height: 1.6; color: #4a5560; }
+  .alerte-body { padding: 8px 0 80px; }
+  .alerte-card {
+    background: #fff; border: 1px solid #e6ebe7; border-radius: 16px; padding: 28px;
+    box-shadow: 0 12px 40px rgba(31, 42, 48, 0.06);
+  }
+  .alerte-steps {
+    list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 12px;
+  }
+  .alerte-steps li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #4a5560; }
+  .alerte-steps span {
+    flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(178,197,79,.18); color: #6f8319;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+  }
+  @media (max-width: 560px) { .alerte-card { padding: 20px; } }
+</style>
