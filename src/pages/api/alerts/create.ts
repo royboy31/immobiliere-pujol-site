@@ -92,7 +92,7 @@ export const POST: APIRoute = async ({ request }) => {
   // Ask the email worker to send the double opt-in. Build environment-correct URLs
   // from the request origin so staging confirms on staging and prod on prod.
   const origin = new URL(request.url).origin;
-  const confirmUrl = `${origin}/api/alerts/confirm?token=${alert.token}`;
+  const confirmUrl = `${origin}/api/alerts/confirm/?token=${alert.token}`;
   const r = await callWorker('/alerts/optin', {
     email: alert.email,
     prenom: alert.prenom || '',

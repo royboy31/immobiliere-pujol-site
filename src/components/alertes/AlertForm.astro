@@ -134,7 +134,7 @@ const KINDS: [string, string][] = [
       const btn = form.querySelector<HTMLButtonElement>('.af-submit');
       if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
       try {
-        const res = await fetch('/api/alerts/create', { method: 'POST', body: new FormData(form) });
+        const res = await fetch('/api/alerts/create/', { method: 'POST', body: new FormData(form) });
         const data: any = await res.json();
         if (data.ok) {
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'alerte' }); } catch (e) {}
