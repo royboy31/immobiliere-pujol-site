@@ -98,8 +98,13 @@ jobs:
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
             cfg.vars.R2_PUBLIC_URL = 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev';
+            const cts = process.env.INJECT_CRON_TRIGGER_SECRET;
+            if (!cts) { console.error('Missing CRON_TRIGGER_SECRET — refusing to deploy'); process.exit(1); }
+            cfg.vars.CRON_TRIGGER_SECRET = cts;
             fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
+        env:
+          INJECT_CRON_TRIGGER_SECRET: ${{ secrets.CRON_TRIGGER_SECRET }}
 
       - name: Deploy cron-sync worker
         working-directory: workers/cron-sync
