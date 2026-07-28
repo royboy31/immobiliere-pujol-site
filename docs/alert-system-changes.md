@@ -19,6 +19,7 @@ without dragging in unrelated develop-only work.
 | 6 | `eec05583` | Closed-listing pop-up (`AnnonceClosed`) + list-page "Créer une alerte" band (`ventes`/`locations`) |
 | 7 | `9125d717` | Phase 2 send side: `/alerts/match` worker endpoint + `buildAlertMatch` subscriber email |
 | 8 | `f6256aa5` | Phase 2 matcher: `cron-sync` detects new active listings → emails matching alerts |
+| 9 | `d9d46f7d` | Back-office `admin-pujol/alertes` (list + filter + manual add + pause/delete) + `/alerts/registered` email + sidebar item |
 
 Convenience (verify against the table first — grep can drift):
 ```
@@ -28,7 +29,7 @@ git log --reverse --format='%H %s' develop --grep='^Alerts'
 To apply onto prod:
 ```
 git checkout pujol-main && git reset --hard origin/pujol-main
-git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5
+git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5 d9d46f7d
 git push origin pujol-main      # triggers the prod deploy workflow
 ```
 
@@ -41,9 +42,12 @@ unrelated to alerts (handle separately):
 ## Files owned by the alert system
 New: `src/lib/alerts-db.ts` · `src/pages/api/alerts/{create,confirm,unsubscribe}.ts` ·
 `src/pages/alerte/{index,confirmee,desabonnee}.astro` ·
-`src/components/alertes/{AlertForm,AlertPopup,AlertListCta}.astro`
-Modified: `workers/email/index.ts` (added `/alerts/optin` + `/alerts/notify` + route registration) ·
-`src/components/annonces/{AnnonceLive,AnnonceClosed}.astro` · `src/pages/annonces/{ventes,locations}.astro`
+`src/components/alertes/{AlertForm,AlertPopup,AlertListCta}.astro` ·
+`src/pages/admin-pujol/alertes/index.astro` · `src/pages/api/admin-pujol/alertes/{index,[id]}.ts`
+Modified: `workers/email/index.ts` (`/alerts/optin` + `/alerts/notify` + `/alerts/match` + `/alerts/registered` + routes) ·
+`workers/cron-sync/index.ts` (matcher hook) ·
+`src/components/annonces/{AnnonceLive,AnnonceClosed}.astro` · `src/pages/annonces/{ventes,locations}.astro` ·
+`src/layouts/AdminLayout.astro` (sidebar "Alertes" item + section type)
 
 ## Prod prerequisites (already satisfied unless noted)
 - **Email worker** (`pujol-email`, Pujol acct): `BREVO_API_KEY` + `NEWSLETTER_INTERNAL_TOKEN` — already set (newsletter uses them). The alert endpoints reuse them; **no new secret required**.
