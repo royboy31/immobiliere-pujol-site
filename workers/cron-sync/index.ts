@@ -14,6 +14,7 @@ interface Env {
   GITHUB_REPO: string; // "owner/repo"
   DEPLOY_WORKFLOW?: string; // workflow filename, defaults to "deploy.yml"
   DEPLOY_REF?: string; // git branch ref for workflow_dispatch, defaults to "main"
+  CRON_TRIGGER_SECRET?: string; // shared secret gating the manual write endpoints (/sync, /import-lbi)
 }
 
 // ── XML parsing (inlined from src/lib/ubiflow.ts to keep this worker self-contained) ──
@@ -1108,6 +1109,20 @@ async function writeActiveJson(env: Env): Promise<number> {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+
+    // The write endpoints (/sync, /import-lbi) trigger D1+R2 writes and can dispatch a
+    // GitHub deploy, so they must not be publicly triggerable. Require a shared secret
+    // (?key= or x-trigger-key header). The scheduled() handler below is unaffected — it
+    // calls runSync/runLbiImport directly and never goes through fetch(). Read endpoints
+    // (/status, /counts*) stay open: they return only aggregate listing counts and are
+    // used by the health-check / sync-verify monitoring scripts.
+    if (url.pathname === '/sync' || url.pathname === '/import-lbi') {
+      const provided = url.searchParams.get('key') || request.headers.get('x-trigger-key') || '';
+      const expected = env.CRON_TRIGGER_SECRET || '';
+      if (!expected || provided !== expected) {
+        return new Response('Unauthorized', { status: 401 });
+      }
+    }
 
     // Manual trigger: GET /sync
     if (url.pathname === '/sync') {
