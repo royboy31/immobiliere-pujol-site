@@ -25,8 +25,18 @@ jobs:
             const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
             const cfg = JSON.parse(cleaned);
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            cfg.vars = cfg.vars || {};
+            for (const k of ['ADMIN_SESSION_SECRET','ADMIN_PASSWORD_HASH','UPLOAD_TOKEN']) {
+              const v = process.env['INJECT_' + k];
+              if (!v) { console.error('Missing secret ' + k + ' — refusing to deploy'); process.exit(1); }
+              cfg.vars[k] = v;
+            }
             fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
+        env:
+          INJECT_ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET }}
+          INJECT_ADMIN_PASSWORD_HASH: ${{ secrets.ADMIN_PASSWORD_HASH }}
+          INJECT_UPLOAD_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
 
       - name: Patch R2 public URL for Pujol account
         run: |

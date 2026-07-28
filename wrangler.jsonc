@@ -15,10 +15,10 @@
 	"d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "109fb417-c984-4c08-90b2-2a10ae1bc279" }],
 	"r2_buckets": [{ "binding": "PHOTOS", "bucket_name": "pujol-photos" }],
 	"vars": {
-		"UPLOAD_TOKEN": "pujol-r2-upload-4c3e8f9d1b2a",
 		"ADMIN_EMAILS": "roy@perelweb.studio,carolinepujol@immobiliere-pujol.fr,kamindudushmantha@gmail.com",
-		"ADMIN_PASSWORD_HASH": "pbkdf2-sha256$100000$MrKFC1nm8GaETEKkOrQK6A$pa-b78xea_bWkvm-cRWxhQCn6hyOt5uhagT_Z3RvEuI",
-		"ADMIN_SESSION_SECRET": "zgSxSQYzhMeUaYHhZbnRKgJ2SN8W28qj0m7vM1tDyvyScVLSbnhPIkTU5r8igeY_",
 		"ADMIN_PATH": "admin-pujol"
 	}
+	// UPLOAD_TOKEN, ADMIN_PASSWORD_HASH, ADMIN_SESSION_SECRET are NOT stored here.
+	// Staging: set as Cloudflare secrets (wrangler secret put) on the Roy account.
+	// Prod: injected at deploy from GitHub Actions secrets by deploy-pujol.yml.
 }
