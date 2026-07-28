@@ -56,6 +56,12 @@ jobs:
             let raw = fs.readFileSync('wrangler.jsonc','utf8');
             let cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1'));
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            cfg.vars = cfg.vars || {};
+            for (const k of ['ADMIN_SESSION_SECRET','ADMIN_PASSWORD_HASH','UPLOAD_TOKEN']) {
+              const v = process.env['INJECT_' + k];
+              if (!v) { console.error('Missing secret ' + k + ' — refusing to deploy'); process.exit(1); }
+              cfg.vars[k] = v;
+            }
             fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
 
             // Email worker — remove hardcoded account_id, swap ALLOWED_ORIGIN
@@ -74,6 +80,10 @@ jobs:
             cfg.vars.DEPLOY_REF = 'pujol-main';
             fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
+        env:
+          INJECT_ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET }}
+          INJECT_ADMIN_PASSWORD_HASH: ${{ secrets.ADMIN_PASSWORD_HASH }}
+          INJECT_UPLOAD_TOKEN: ${{ secrets.UPLOAD_TOKEN }}
 
       # ── Sync D1 → content ─────────────────────────────────────────────
       - name: Sync D1 annonces to content
