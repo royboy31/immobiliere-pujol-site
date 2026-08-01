@@ -2,7 +2,12 @@ name: Daily Sync Verification
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # Every day at 07:00 UTC (09:00 Paris)
+    # 06:50 UTC on an off-peak minute (NOT :00, which is GitHub's most congested
+    # slot and was starting this run 40-75 min late). Scheduling a bit early + off
+    # the hour makes it fire close to on-time so the email lands ~09:00 Paris (CEST).
+    # NOTE: GitHub cron is always UTC and ignores DST — in winter (CET) this becomes
+    # 07:50 Paris, bump to '50 7 * * *' if you want 09:00 year-round.
+    - cron: '50 6 * * *'
   workflow_dispatch:
     inputs:
       target:
