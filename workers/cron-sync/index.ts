@@ -238,6 +238,39 @@ async function triggerRedeploy(env: Env): Promise<boolean> {
   }
 }
 
+// ── Trigger the daily sync-verify report via GitHub Actions workflow_dispatch ──
+// Cloudflare cron fires this punctually (unlike GitHub's own `schedule`, which was
+// unreliable). Dispatches the prod (pujol) report with --daily → email ~09:00 Paris.
+async function triggerSyncVerify(env: Env): Promise<boolean> {
+  if (!env.GITHUB_TOKEN || !env.GITHUB_REPO) {
+    console.log('[cron-sync] No GITHUB_TOKEN/GITHUB_REPO — skipping sync-verify trigger');
+    return false;
+  }
+  try {
+    const resp = await fetch(
+      `https://api.github.com/repos/${env.GITHUB_REPO}/actions/workflows/sync-verify.yml/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'pujol-cron-sync',
+        },
+        body: JSON.stringify({ ref: 'main', inputs: { target: 'pujol' } }),
+      }
+    );
+    if (resp.ok || resp.status === 204) {
+      console.log('[cron-sync] sync-verify report triggered');
+      return true;
+    }
+    console.error(`[cron-sync] sync-verify trigger failed: ${resp.status} ${await resp.text()}`);
+    return false;
+  } catch (e: any) {
+    console.error(`[cron-sync] sync-verify trigger error: ${e.message}`);
+    return false;
+  }
+}
+
 // ── Sync logic (batched to stay within Worker subrequest limits) ──
 
 async function uploadPhotos(
@@ -1275,12 +1308,20 @@ export default {
     // calls runSync/runLbiImport directly and never goes through fetch(). Read endpoints
     // (/status, /counts*) stay open: they return only aggregate listing counts and are
     // used by the health-check / sync-verify monitoring scripts.
-    if (url.pathname === '/sync' || url.pathname === '/import-lbi') {
+    if (url.pathname === '/sync' || url.pathname === '/import-lbi' || url.pathname === '/trigger-verify') {
       const provided = url.searchParams.get('key') || request.headers.get('x-trigger-key') || '';
       const expected = env.CRON_TRIGGER_SECRET || '';
       if (!expected || provided !== expected) {
         return new Response('Unauthorized', { status: 401 });
       }
+    }
+
+    // Manual/test trigger for the daily report (same action as the 55-6 cron).
+    if (url.pathname === '/trigger-verify') {
+      const ok = await triggerSyncVerify(env);
+      return new Response(JSON.stringify({ triggered: ok }, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Manual trigger: GET /sync
@@ -1350,6 +1391,16 @@ export default {
   },
 
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
+    // Daily health-check dispatch (Cloudflare cron is punctual). Only the PROD
+    // worker fires it so we don't double-send; the staging worker no-ops. This
+    // cron does NOT run the feed sync.
+    if (event.cron === '55 6 * * *') {
+      if (env.DEPLOY_WORKFLOW === 'deploy-pujol.yml') {
+        ctx.waitUntil(triggerSyncVerify(env));
+      }
+      return;
+    }
+
     ctx.waitUntil((async () => {
       let changed = false;
 
