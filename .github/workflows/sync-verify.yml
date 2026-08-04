@@ -1,8 +1,11 @@
 name: Daily Sync Verification
 
 on:
-  schedule:
-    - cron: '0 7 * * *'  # Every day at 07:00 UTC (09:00 Paris)
+  # No `schedule:` here on purpose. GitHub's cron was unreliable (40-75 min late,
+  # then dropped entirely after an edit). The daily run is now triggered punctually
+  # by the pujol-cron-sync Cloudflare worker (cron '55 6 * * *' → ~09:00 Paris),
+  # which calls this workflow via workflow_dispatch with target=pujol. See
+  # workers/cron-sync/index.ts (triggerSyncVerify).
   workflow_dispatch:
     inputs:
       target:
