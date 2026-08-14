@@ -1,0 +1,79 @@
+name: Brevo alerte sending-domain setup
+
+# One-shot manual tool: creates the dedicated alert sending domain
+# (alerte.immobiliere-pujol.fr) in Brevo, adds its DNS records to the
+# Cloudflare zone, authenticates the domain, and creates the sender
+# alerte@alerte.immobiliere-pujol.fr. Idempotent: safe to re-run until
+# everything reports OK (DNS propagation can need a second run).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      DOMAIN: alerte.immobiliere-pujol.fr
+      ZONE: immobiliere-pujol.fr
+      SENDER_EMAIL: alerte@alerte.immobiliere-pujol.fr
+      SENDER_NAME: "Immobilière Pujol"
+    steps:
+      - name: Create or fetch Brevo domain
+        run: |
+          echo "== create domain (409/400 if it already exists is fine) =="
+          curl -s -X POST https://api.brevo.com/v3/senders/domains \
+            -H "api-key: $BREVO_API_KEY" -H "content-type: application/json" \
+            -d "{\"name\":\"$DOMAIN\"}" | tee create.json | head -c 2000; echo
+          echo "== domain configuration =="
+          curl -s "https://api.brevo.com/v3/senders/domains/$DOMAIN" \
+            -H "api-key: $BREVO_API_KEY" | tee domain.json
+          echo
+
+      - name: Add DNS records to Cloudflare zone
+        run: |
+          ZONE_ID=$(curl -s "https://api.cloudflare.com/client/v4/zones?name=$ZONE" \
+            -H "Authorization: Bearer $CF_API_TOKEN" | jq -r '.result[0].id // empty')
+          if [ -z "$ZONE_ID" ]; then
+            echo "::warning::Cloudflare token cannot list the zone $ZONE (no DNS permission?)."
+            echo "MANUAL_DNS_NEEDED=1" >> "$GITHUB_ENV"
+            echo "Records to add manually are in the 'domain configuration' JSON above (dns_records)."
+            exit 0
+          fi
+          echo "zone id: $ZONE_ID"
+          jq -c '.dns_records | to_entries[] | .value | select(.host_name != null)' domain.json | while read -r rec; do
+            TYPE=$(echo "$rec" | jq -r '.type' | tr 'a-z' 'A-Z')
+            NAME=$(echo "$rec" | jq -r '.host_name')
+            VALUE=$(echo "$rec" | jq -r '.value')
+            echo "-- $TYPE $NAME -> $VALUE"
+            RESP=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
+              -H "Authorization: Bearer $CF_API_TOKEN" -H "content-type: application/json" \
+              -d "$(jq -n --arg t "$TYPE" --arg n "$NAME" --arg v "$VALUE" \
+                    '{type:$t, name:$n, content:$v, ttl:300, proxied:false}')")
+            OK=$(echo "$RESP" | jq -r '.success')
+            CODE=$(echo "$RESP" | jq -r '.errors[0].code // empty')
+            if [ "$OK" = "true" ]; then echo "   created"
+            elif [ "$CODE" = "81057" ] || [ "$CODE" = "81053" ]; then echo "   already exists, ok"
+            else echo "   ERROR: $(echo "$RESP" | jq -c '.errors')"; fi
+          done
+
+      - name: Authenticate domain in Brevo
+        run: |
+          echo "== authenticate (fails until DNS has propagated; re-run then) =="
+          curl -s -X PUT "https://api.brevo.com/v3/senders/domains/$DOMAIN/authenticate" \
+            -H "api-key: $BREVO_API_KEY" | tee auth.json
+          echo
+          echo "== final domain state =="
+          curl -s "https://api.brevo.com/v3/senders/domains/$DOMAIN" \
+            -H "api-key: $BREVO_API_KEY" | jq '{domain_name, authenticated, verified}' || true
+
+      - name: Create sender
+        run: |
+          echo "== create sender (400 if it already exists is fine) =="
+          curl -s -X POST https://api.brevo.com/v3/senders \
+            -H "api-key: $BREVO_API_KEY" -H "content-type: application/json" \
+            -d "{\"name\":\"$SENDER_NAME\",\"email\":\"$SENDER_EMAIL\"}"; echo
+          echo "== senders list (name+email only) =="
+          curl -s https://api.brevo.com/v3/senders -H "api-key: $BREVO_API_KEY" \
+            | jq '[.senders[] | {name, email, active}]' || true
