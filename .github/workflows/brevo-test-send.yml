@@ -1,0 +1,31 @@
+name: Brevo test send (alerte sender)
+
+# One-shot debug tool: sends a plain test email from the dedicated alert
+# sender through the repo's BREVO_API_KEY, to verify which Brevo account
+# the key belongs to and that the sender is usable. Also prints the
+# account identity (/v3/account) for cross-checking.
+
+on:
+  workflow_dispatch:
+    inputs:
+      to:
+        description: Recipient address
+        required: true
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      TO: ${{ github.event.inputs.to }}
+    steps:
+      - name: Account identity
+        run: |
+          curl -s https://api.brevo.com/v3/account -H "api-key: $BREVO_API_KEY" \
+            | jq '{email, companyName: .companyName?, organization: .organizationName?}'
+      - name: Send test
+        run: |
+          curl -s -X POST https://api.brevo.com/v3/smtp/email \
+            -H "api-key: $BREVO_API_KEY" -H "content-type: application/json" \
+            -d "{\"sender\":{\"email\":\"alerte@alerte.immobiliere-pujol.fr\",\"name\":\"Immobilière Pujol\"},\"to\":[{\"email\":\"$TO\"}],\"subject\":\"[TEST expediteur alerte] envoi direct API\",\"htmlContent\":\"<p>Test de l'expediteur dedie alerte@alerte.immobiliere-pujol.fr via l'API Brevo (cle du repo). Si ce message arrive, le sender et le domaine sont operationnels dans ce compte.</p>\"}"
+          echo
