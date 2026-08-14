@@ -4,7 +4,11 @@
 	"compatibility_date": "2026-04-02",
 	"main": "index.ts",
 	"vars": {
-		"ALLOWED_ORIGIN": "https://immobiliere-pujol-staging.roy-68a.workers.dev"
+		"ALLOWED_ORIGIN": "https://immobiliere-pujol-staging.roy-68a.workers.dev",
+		// Expéditeur Brevo dédié des emails abonnés du système d'alerte.
+		// Ne poser cette valeur que si le sender est actif dans Brevo
+		// (domaine alerte.immobiliere-pujol.fr authentifié le 14 Aug 2026).
+		"ALERT_SENDER_EMAIL": "alerte@alerte.immobiliere-pujol.fr"
 	}
 	// MANDRILL_API_KEY must be set as a secret:
 	// wrangler secret put MANDRILL_API_KEY --config workers/email/wrangler.jsonc
