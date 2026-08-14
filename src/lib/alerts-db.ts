@@ -18,7 +18,7 @@ export interface Alert {
   nom: string | null;
   phone: string | null;
   transac: Transac;
-  cp: string | null;
+  cp: string | null;      // one or more codes postaux, stored as a sorted CSV ("13001,13006")
   kind: string | null;
   budget_max: number | null;
   chambres_min: number | null;
@@ -63,7 +63,7 @@ export const KIND_LABELS: Record<string, string> = {
 export function describeCriteria(a: Pick<Alert, 'transac' | 'kind' | 'cp' | 'budget_max' | 'chambres_min'>): string {
   const parts: string[] = [a.transac === 'V' ? 'Vente' : 'Location'];
   if (a.kind) parts.push(KIND_LABELS[a.kind] || a.kind);
-  if (a.cp) parts.push(a.cp);
+  if (a.cp) parts.push(a.cp.split(',').join(', '));
   if (a.chambres_min) parts.push(`${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''} min.`);
   if (a.budget_max) parts.push(`budget max ${a.budget_max.toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
@@ -209,7 +209,7 @@ export async function findMatchingAlerts(
 ): Promise<Alert[]> {
   const { results } = await db.prepare(
     `SELECT * FROM alerts WHERE status='active' AND transac=?
-       AND (cp IS NULL OR cp=?)
+       AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0)
        AND (kind IS NULL OR kind=?)
        AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
        AND (chambres_min IS NULL OR ? IS NULL OR chambres_min <= ?)`

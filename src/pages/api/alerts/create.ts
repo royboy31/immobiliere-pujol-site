@@ -61,13 +61,17 @@ export const POST: APIRoute = async ({ request }) => {
     return v || null;
   };
 
+  // Multi-select secteurs: one `cp` form entry per case cochée, stored as a sorted
+  // CSV in the single `cp` column (sorted so the dedup string-compare is stable).
+  const cps = [...new Set(fd.getAll('cp').map((v) => String(v).trim()).filter((v) => /^\d{5}$/.test(v)))].sort();
+
   const input = {
     email,
     prenom: str('prenom'),
     nom: str('nom'),
     phone: str('phone'),
     transac: transac as Transac,
-    cp: str('cp'),
+    cp: cps.length ? cps.join(',') : null,
     kind: str('kind'),
     budget_max: num('budget_max'),
     chambres_min: num('chambres_min'),

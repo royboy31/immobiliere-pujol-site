@@ -397,7 +397,7 @@ const KIND_LABELS_C: Record<string, string> = {
 function describeCriteriaC(a: any): string {
   const parts: string[] = [a.transac === 'V' ? 'Vente' : 'Location'];
   if (a.kind) parts.push(KIND_LABELS_C[a.kind] || a.kind);
-  if (a.cp) parts.push(a.cp);
+  if (a.cp) parts.push(String(a.cp).split(',').join(', '));
   if (a.chambres_min) parts.push(`${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''} min.`);
   if (a.budget_max) parts.push(`budget max ${Number(a.budget_max).toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
@@ -467,7 +467,7 @@ async function matchNewListingsToAlerts(
       const prix = a.type === 'V' ? a.prix : a.loyerCC;
       const { results } = await env.DB.prepare(
         `SELECT * FROM alerts WHERE status='active' AND transac=?
-           AND (cp IS NULL OR cp=?) AND (kind IS NULL OR kind=?)
+           AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0) AND (kind IS NULL OR kind=?)
            AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
            AND (chambres_min IS NULL OR ? IS NULL OR chambres_min <= ?)`
       ).bind(a.type, cp, kindArg, prix, prix, a.nbChambres, a.nbChambres).all();

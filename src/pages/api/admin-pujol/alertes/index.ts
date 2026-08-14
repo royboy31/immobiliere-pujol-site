@@ -38,7 +38,9 @@ export const POST: APIRoute = async ({ request }) => {
     prenom: (b.prenom || '').trim() || null,
     phone: (b.phone || '').trim() || null,
     transac: transac as Transac,
-    cp: (b.cp || '').trim() || null,
+    // Multi-select secteurs arrive as a CSV; normalize (valid codes, dedup, sorted)
+    // so the dedup string-compare stays consistent with the public form.
+    cp: [...new Set(String(b.cp || '').split(',').map((s) => s.trim()).filter((s) => /^\d{5}$/.test(s)))].sort().join(',') || null,
     kind: (b.kind || '').trim() || null,
     budget_max: num(b.budget_max),
     chambres_min: num(b.chambres_min),

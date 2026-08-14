@@ -18,6 +18,9 @@ interface Props {
 }
 const { transac = '', prefill = {}, compact = false } = Astro.props;
 
+// `cp` is stored as a CSV of codes postaux (multi-select); a listing prefill is a single code.
+const selectedCps = (prefill.cp || '').split(',').map((s) => s.trim()).filter(Boolean);
+
 // Marseille arrondissements + the main Nice codes present in the catalogue.
 const ARRONDS = [
   '13001','13002','13003','13004','13005','13006','13007','13008',
@@ -52,7 +55,19 @@ const KINDS: [string, string][] = [
     )
   }
 
-  <div class="af-row">
+  <div class="af-field">
+    <span class="af-lbl">Secteurs <small class="af-hint">(plusieurs choix possibles ; aucun = tous les secteurs)</small></span>
+    <div class="af-cps">
+      {ARRONDS.map((cp) => (
+        <label class="af-cp">
+          <input type="checkbox" name="cp" value={cp} checked={selectedCps.includes(cp)} />
+          <span>{cp}</span>
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <div class="af-row af-row--3">
     <label class="af-field">
       <span class="af-lbl">Type de bien</span>
       <select name="kind">
@@ -60,16 +75,6 @@ const KINDS: [string, string][] = [
         {KINDS.map(([v, l]) => <option value={v} selected={prefill.kind === v}>{l}</option>)}
       </select>
     </label>
-    <label class="af-field">
-      <span class="af-lbl">Secteur</span>
-      <select name="cp">
-        <option value="">Indifférent</option>
-        {ARRONDS.map((cp) => <option value={cp} selected={prefill.cp === cp}>{cp}</option>)}
-      </select>
-    </label>
-  </div>
-
-  <div class="af-row">
     <label class="af-field">
       <span class="af-lbl">Budget max (€)</span>
       <input type="number" name="budget_max" min="0" step="1000" inputmode="numeric"
@@ -188,8 +193,21 @@ const KINDS: [string, string][] = [
 <style>
   .alert-form { display: flex; flex-direction: column; gap: 16px; }
   .af-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .af-row--3 { grid-template-columns: 1fr 1fr 1fr; }
   .af-field { display: flex; flex-direction: column; gap: 6px; }
   .af-lbl { font-size: 13px; font-weight: 600; color: #1f2a30; }
+  .af-hint { font-weight: 400; color: #77828d; }
+  .af-cps { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; }
+  .af-cp { position: relative; }
+  .af-cp input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .af-cp span {
+    display: block; text-align: center; padding: 8px 4px; border: 1.5px solid #d4dad6; border-radius: 8px;
+    font-size: 13px; font-weight: 600; color: #4a5560; cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .af-cp span:hover { border-color: #b7c0ba; }
+  .af-cp input:checked + span { background: #6f8319; border-color: #6f8319; color: #fff; }
+  .af-cp input:focus-visible + span { box-shadow: 0 0 0 3px rgba(178,197,79,.28); }
   .af-lbl b { color: #EC7234; }
   .alert-form input[type="text"], .alert-form input[type="email"], .alert-form input[type="tel"],
   .alert-form input[type="number"], .alert-form select {
@@ -225,5 +243,5 @@ const KINDS: [string, string][] = [
   .af-success { text-align: center; padding: 20px 8px; }
   .af-success h3 { margin: 0 0 8px; color: #1f2a30; }
   .af-success p { margin: 0; color: #4a5560; line-height: 1.6; }
-  @media (max-width: 560px) { .af-row { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .af-row, .af-row--3 { grid-template-columns: 1fr; } .af-cps { grid-template-columns: repeat(4, 1fr); } }
 </style>

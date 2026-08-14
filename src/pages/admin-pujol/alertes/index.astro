@@ -100,11 +100,16 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
         </div>
         <div class="af2-row">
           <label>Type de bien<select name="kind"><option value="">Indifférent</option>{KINDS.map(([v,l]) => <option value={v}>{l}</option>)}</select></label>
-          <label>Secteur<select name="cp"><option value="">Indifférent</option>{ARRONDS.map((c) => <option value={c}>{c}</option>)}</select></label>
+          <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
         </div>
         <div class="af2-row">
-          <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
           <label>Chambres (min.)<select name="chambres_min"><option value="">Indifférent</option>{[1,2,3,4,5].map((n) => <option value={n}>{n}+</option>)}</select></label>
+        </div>
+        <div class="af2-cps">
+          <span class="af2-cps-lbl">Secteurs <small>(plusieurs choix possibles ; aucun = tous)</small></span>
+          <div class="af2-cpgrid">
+            {ARRONDS.map((c) => <label class="af2-cp"><input type="checkbox" name="cp" value={c} /><span>{c}</span></label>)}
+          </div>
         </div>
         <label class="af2-check" data-vente hidden><input type="checkbox" name="bien_a_vendre" /> A un bien à vendre</label>
         <p id="al-form-err" class="al-form-err"></p>
@@ -145,6 +150,14 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
   #al-form label { display:flex; flex-direction:column; gap:5px; font-size:13px; font-weight:600; color:#1f2a30; }
   #al-form input, #al-form select { padding:10px 12px; border:1px solid #d4dad6; border-radius:8px; font-size:14px; font-weight:400; }
   .af2-check { flex-direction:row !important; align-items:center; gap:8px; font-weight:400 !important; }
+  .af2-cps { margin-bottom:12px; }
+  .af2-cps-lbl { display:block; font-size:13px; font-weight:600; color:#1f2a30; margin-bottom:6px; }
+  .af2-cps-lbl small { font-weight:400; color:#6b7280; }
+  .af2-cpgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(70px, 1fr)); gap:6px; }
+  .af2-cp { position:relative; }
+  .af2-cp input { position:absolute; opacity:0; width:0; height:0; }
+  .af2-cp span { display:block; text-align:center; padding:7px 4px; border:1px solid #d4dad6; border-radius:8px; font-size:12px; font-weight:600; color:#4a5560; cursor:pointer; }
+  .af2-cp input:checked + span { background:#6f8319; border-color:#6f8319; color:#fff; }
   .al-form-err { color:#c0392b; font-weight:600; font-size:13px; margin:6px 0 0; }
   .al-modal__actions { display:flex; justify-content:flex-end; gap:10px; margin-top:18px; }
   @media (max-width:560px){ .af2-row { grid-template-columns:1fr; } }
@@ -183,6 +196,7 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
     const fd = new FormData(form);
     const body: any = Object.fromEntries(fd.entries());
     body.bien_a_vendre = fd.get('bien_a_vendre') === 'on';
+    body.cp = fd.getAll('cp').join(','); // multi-select secteurs → CSV (fromEntries keeps only the last one)
     const btn = $('al-save'); if (btn) btn.disabled = true;
     const res = await fetch('/api/admin-pujol/alertes/', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const j: any = await res.json().catch(() => ({}));
