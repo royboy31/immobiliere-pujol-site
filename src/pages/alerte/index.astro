@@ -12,24 +12,24 @@ const seoDescription =
   <section class="alerte-hero">
     <div class="alerte-wrap">
       <p class="alerte-eyebrow">Alerte annonces</p>
-      <h1>Soyez prévenu(e) avant tout le monde</h1>
+      <h1>Ne laissez plus passer aucune opportunité !</h1>
       <p class="alerte-lead">
-        Enregistrez vos critères de recherche : dès qu’un bien correspondant est mis en ligne,
-        vous recevez un e-mail avec l’annonce. Achat ou location, à Marseille et ses environs.
+        Créez votre alerte personnalisée : recevez instantanément par e-mail toutes les
+        nouvelles annonces d'achat ou de location à Marseille et ses environs.
       </p>
     </div>
   </section>
 
   <section class="alerte-body">
     <div class="alerte-wrap">
+      <ul class="alerte-steps">
+        <li><span>1</span> <p><strong>Renseignez vos critères</strong> (et indiquez si vous avez un bien à vendre)</p></li>
+        <li><span>2</span> <p><strong>Validez votre alerte</strong> via le lien que vous allez recevoir dans votre boîte mail</p></li>
+        <li><span>3</span> <p><strong>Recevez les annonces</strong> dès leur mise en ligne</p></li>
+      </ul>
       <div class="alerte-card">
         <AlertForm transac="" />
       </div>
-      <ul class="alerte-steps">
-        <li><span>1</span> Vous saisissez vos critères et votre e-mail</li>
-        <li><span>2</span> Vous confirmez via le lien reçu par e-mail</li>
-        <li><span>3</span> Vous recevez chaque nouveau bien correspondant</li>
-      </ul>
     </div>
   </section>
 </BaseLayout>
@@ -61,9 +61,11 @@ const seoDescription =
     box-shadow: 0 12px 40px rgba(31, 42, 48, 0.06);
   }
   .alerte-steps {
-    list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 12px;
+    list-style: none; margin: 0 0 28px; padding: 0; display: grid; gap: 12px;
   }
   .alerte-steps li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #4a5560; }
+  .alerte-steps li p { margin: 0; }
+  .alerte-steps strong { color: #1f2a30; }
   .alerte-steps span {
     flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(178,197,79,.18); color: #6f8319;
     display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;

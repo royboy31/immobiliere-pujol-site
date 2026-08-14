@@ -86,8 +86,9 @@ const KINDS: [string, string][] = [
 
   <!-- Vente-only: shown by the script when "À l’achat" is selected -->
   <div class="af-vente" data-vente hidden={transac !== 'V'}>
-    <label class="af-check"><input type="checkbox" name="proprietaire" /> <span>Je suis déjà propriétaire</span></label>
-    <label class="af-check"><input type="checkbox" name="bien_a_vendre" /> <span>J’ai un bien à vendre</span></label>
+    <span class="af-lbl">Avez-vous également un bien à vendre pour concrétiser ce projet ?</span>
+    <label class="af-check"><input type="radio" name="bien_a_vendre" value="1" /> <span>Oui, j'ai un bien à vendre</span></label>
+    <label class="af-check"><input type="radio" name="bien_a_vendre" value="0" /> <span>Non, c'est un premier achat / je n'ai rien à vendre</span></label>
   </div>
 
   <div class="af-row">
@@ -110,11 +111,22 @@ const KINDS: [string, string][] = [
 
   <label class="af-agree">
     <input type="checkbox" name="agree" required />
-    <span>J’accepte de recevoir des alertes par e-mail et que mes données soient traitées pour cette demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
+    <span>J'accepte que mes données soient utilisées pour traiter ma demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
   </label>
+  <p class="af-rgpd">
+    Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects,
+    salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et
+    par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez
+    accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en
+    consultant notre politique de traitements des données personnelles sur la page suivante :
+    <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">declarations-juridiques.fr</a>.
+    Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection
+    commerciale en contactant l'Immobilière Pujol au 07 62 20 33 13 ou par mail :
+    <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a>
+  </p>
 
   <button type="submit" class="af-submit">CRÉER MON ALERTE</button>
-  <p class="af-note">Vous recevrez un e-mail de confirmation. Cliquez sur le lien pour activer votre alerte.</p>
+  <p class="af-note">Consultez vos messages. Vous allez recevoir un e-mail de confirmation. Cliquez sur le lien reçu pour activer votre alerte.</p>
 </form>
 
 <script>
@@ -148,7 +160,7 @@ const KINDS: [string, string][] = [
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'alerte' }); } catch (e) {}
           const msg = data.already
             ? 'Vous avez déjà une alerte avec ces critères. Rien à faire de plus !'
-            : 'Presque terminé ! Vérifiez votre boîte mail et cliquez sur le lien pour activer votre alerte.';
+            : 'Consultez vos messages. Vous allez recevoir un e-mail de confirmation. Cliquez sur le lien reçu pour activer votre alerte.';
           form.innerHTML = `<div class="af-success"><h3>Merci !</h3><p>${msg}</p></div>`;
         } else {
           showErr(form, data.error || 'Une erreur est survenue.');
@@ -197,10 +209,12 @@ const KINDS: [string, string][] = [
   .af-toggle label.is-on { background: #0f1a2b; border-color: #0f1a2b; color: #fff; }
   .af-toggle label.is-on:has(input[value="V"]) { background: #EC7234; border-color: #EC7234; }
   .af-toggle label.is-on:has(input[value="L"]) { background: #6f8319; border-color: #6f8319; }
-  .af-vente { display: flex; flex-wrap: wrap; gap: 16px; }
+  .af-vente { display: flex; flex-direction: column; gap: 10px; }
   .af-check, .af-agree { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #4a5560; line-height: 1.5; cursor: pointer; }
   .af-check input, .af-agree input { margin-top: 2px; accent-color: #B2C54F; }
   .af-agree a { color: #1f2a30; }
+  .af-rgpd { margin: -6px 0 0; font-size: 11px; line-height: 1.55; color: #8a949e; }
+  .af-rgpd a { color: #77828d; }
   .af-submit {
     margin-top: 6px; padding: 14px 24px; border: none; border-radius: 999px; background: #EC7234; color: #fff;
     font-weight: 700; font-size: 15px; letter-spacing: .3px; cursor: pointer; transition: transform .15s ease, opacity .15s ease;
