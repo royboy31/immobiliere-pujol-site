@@ -20,6 +20,11 @@ jobs:
     steps:
       - name: Fetch events
         run: |
+          echo "== /smtp/emails (activity, near real-time) =="
+          curl -s "https://api.brevo.com/v3/smtp/emails?email=$EMAIL&sort=desc&limit=10" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '[.transactionalEmails[]? | {date, subject, from, to}]'
+          echo "== /smtp/statistics/events =="
           curl -s "https://api.brevo.com/v3/smtp/statistics/events?email=$EMAIL&limit=20&sort=desc" \
             -H "api-key: $BREVO_API_KEY" \
             | jq '[.events[]? | {date, subject, event, from, reason}]'
