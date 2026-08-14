@@ -23,6 +23,12 @@ interface Env {
   NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
+  // Dedicated Brevo-verified sender for subscriber-facing alert emails
+  // (opt-in / match / registered), e.g. alerte@alerte.immobiliere-pujol.fr.
+  // Only set once the alerte sending domain is authenticated in Brevo —
+  // an unverified sender makes Brevo reject the send. Unset → the shared
+  // NEWSLETTER_SENDER_EMAIL sender, i.e. exactly the previous behaviour.
+  ALERT_SENDER_EMAIL?: string;
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
@@ -83,6 +89,9 @@ interface SendOpts {
   cc?: string;
   fromEmail?: string;
   fromName?: string;
+  // Brevo-verified sender address that overrides the shared newsletter
+  // sender for this message (must be active in Brevo or the send fails).
+  senderEmail?: string;
 }
 
 // 21 Jul 2026: Mandrill died with the MailChimp account cancellation. Brevo is
@@ -111,7 +120,7 @@ async function sendViaBrevo(
   const intendedFrom = opts.fromEmail || 'contact@immobiliere-pujol.fr';
   const payload = {
     sender: {
-      email: env.NEWSLETTER_SENDER_EMAIL || 'notifications@immobiliere-pujol.fr',
+      email: opts.senderEmail || env.NEWSLETTER_SENDER_EMAIL || 'notifications@immobiliere-pujol.fr',
       name: opts.fromName || 'Immobilière Pujol',
     },
     to: [{ email: opts.to || 'contact@immobiliere-pujol.fr' }],
@@ -1220,6 +1229,7 @@ async function handleAlertOptin(req: Request, env: Env): Promise<Response> {
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol',
     replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
   });
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
@@ -1326,6 +1336,7 @@ async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol',
     replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
   });
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
@@ -1367,6 +1378,7 @@ async function handleAlertRegistered(req: Request, env: Env): Promise<Response> 
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol',
     replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
   });
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
