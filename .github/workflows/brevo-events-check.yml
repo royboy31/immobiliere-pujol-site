@@ -1,0 +1,25 @@
+name: Brevo transactional events check
+
+# Read-only debug tool: prints recent Brevo transactional events (sent /
+# delivered / bounce / spam) for a recipient address. Used to verify alert
+# email delivery during tests.
+
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: Recipient address to look up
+        required: true
+
+jobs:
+  events:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      EMAIL: ${{ github.event.inputs.email }}
+    steps:
+      - name: Fetch events
+        run: |
+          curl -s "https://api.brevo.com/v3/smtp/statistics/events?email=$EMAIL&limit=20&sort=desc" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '[.events[]? | {date, subject, event, from, reason}]'
