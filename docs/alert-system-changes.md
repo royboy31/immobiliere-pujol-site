@@ -14,6 +14,7 @@ what was built, how to see it, how to move it to production, and what is left.
 | Phase 1 — capture (`/alerte/` page, pop-up on every listing, list-page buttons), double opt-in, agency notify | ✅ built + on staging |
 | Phase 1 — back-office (`admin-pujol/alertes`: list, filter, manual add, pause/delete) | ✅ built + on staging |
 | Phase 2 — matcher (email `/alerts/match` + `cron-sync` hook) | ✅ built + on staging, **core logic tested**, **live cron trigger NOT yet run** |
+| Caroline feedback batch A (copy/layout) + multi-arrondissements + fix radios (14 Aug 2026) | ✅ built + on staging, verified (see below) |
 | Production | ⬜ not deployed — cherry-pick below when ready |
 
 **Nothing is on production yet.** The whole system lives on staging only.
@@ -42,6 +43,9 @@ what was built, how to see it, how to move it to production, and what is left.
 | 7 | `9125d717` | Phase 2 send side: `/alerts/match` worker endpoint + `buildAlertMatch` subscriber email |
 | 8 | `f6256aa5` | Phase 2 matcher: `cron-sync` detects new active listings → emails matching alerts |
 | 9 | `d9d46f7d` | Back-office `admin-pujol/alertes` (list + filter + manual add + pause/delete) + `/alerts/registered` email + sidebar item |
+| 10 | `c89f2fff` | Caroline batch A (14 Aug): titre + intro, 3 étapes au-dessus du formulaire, question Oui/Non "bien à vendre" (remplace 2 cases), RGPD raccourci + paragraphe légal, phrase finale/succès |
+| 11 | `4b617ab2` | Multi-arrondissements (14 Aug): grille de cases Secteur (public + popup + admin), stockage CSV trié dans la colonne `cp` existante (pas de migration D1), matcher `cron-sync` passe de `cp=?` à `instr(','||cp||',', ','||?||',')`, `describeCriteriaC` formate la liste. **Touche `workers/cron-sync` → la promotion doit redéployer `pujol-cron-sync` en prod, pas seulement le worker site.** |
+| 12 | `b22cb4f4` | Fix (14 Aug): radios Oui/Non invisibles (reset CSS global `appearance:none`) — règle scopée au formulaire qui restaure l'apparence native |
 
 Sanity-check the list against the log before picking (grep can drift):
 ```
@@ -51,15 +55,28 @@ git log --reverse --format='%H %s' develop --grep='^Alerts'
 Apply to prod:
 ```
 git checkout pujol-main && git reset --hard origin/pujol-main
-git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5 d9d46f7d
+git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5 d9d46f7d c89f2fff 4b617ab2 b22cb4f4
 git push origin pujol-main      # triggers the prod deploy workflow
 ```
+⚠️ Le workflow prod déploie-t-il aussi `pujol-cron-sync` ? Vérifier avant de promouvoir : le commit `4b617ab2` modifie le matcher dans `workers/cron-sync/index.ts` et le worker prod doit être redéployé avec.
 Files are isolated (see "Files owned"), so conflicts are unlikely; if one arises, take the alert-side additions.
 
 ## NOT part of this set (exclude)
 Two security commits from Roy's **other agent** (admin-panel hardening) are interleaved on develop but touch different files — **do not** include them in the alert pick, handle separately:
 - `b32b1475` security: move admin secrets out of committed wrangler.jsonc
 - `b347c1a3` security: gate cron-sync write endpoints behind a shared secret
+
+Two CI commits (health-check cron scheduling) are also interleaved and independent of the alert system:
+- `6993b891` ci: move daily health check off the top-of-hour
+- `68cad4b5` ci: trigger daily health check from Cloudflare cron
+
+## Multi-arrondissements — vérifié sur staging (14 Aug 2026)
+- Alerte test créée avec 3 secteurs → stockée `13006,13008,13009` (CSV trié) dans la colonne `cp` existante.
+- Re-soumission des mêmes secteurs dans un autre ordre → détectée comme doublon (normalisation triée).
+- SQL du matcher : matche `13009`, rejette `13001` (comparaison par élément complet, pas de faux positif sous-chaîne grâce aux virgules d'encadrement).
+- Sémantique inchangée : `cp NULL` (aucune case cochée) = tous secteurs ; les alertes mono-secteur existantes restent compatibles sans migration.
+- Les workers site + cron-sync staging redéployés le 14 Aug à 18:43 UTC.
+- Inchangé côté moteur : cadence de sync, détection des nouveautés, filtres transac/type/budget/chambres, garde anti-backfill (>40), cap 1 email/jour/alerte, flux email.
 
 ## Files owned by the alert system
 New: `src/lib/alerts-db.ts` · `src/pages/api/alerts/{create,confirm,unsubscribe}.ts` ·
