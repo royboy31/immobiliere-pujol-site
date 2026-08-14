@@ -46,6 +46,7 @@ what was built, how to see it, how to move it to production, and what is left.
 | 10 | `c89f2fff` | Caroline batch A (14 Aug): titre + intro, 3 étapes au-dessus du formulaire, question Oui/Non "bien à vendre" (remplace 2 cases), RGPD raccourci + paragraphe légal, phrase finale/succès |
 | 11 | `4b617ab2` | Multi-arrondissements (14 Aug): grille de cases Secteur (public + popup + admin), stockage CSV trié dans la colonne `cp` existante (pas de migration D1), matcher `cron-sync` passe de `cp=?` à `instr(','||cp||',', ','||?||',')`, `describeCriteriaC` formate la liste. **Touche `workers/cron-sync` → la promotion doit redéployer `pujol-cron-sync` en prod, pas seulement le worker site.** |
 | 12 | `b22cb4f4` | Fix (14 Aug): radios Oui/Non invisibles (reset CSS global `appearance:none`) — règle scopée au formulaire qui restaure l'apparence native |
+| 13 | `24a77e6c` | Expéditeur dédié (14 Aug): les emails abonnés (opt-in, match, registered) partent du sender Brevo `ALERT_SENDER_EMAIL` quand la var est posée sur le worker email (fallback inchangé sinon). Voir prérequis ci-dessous. |
 
 Sanity-check the list against the log before picking (grep can drift):
 ```
@@ -90,6 +91,7 @@ Modified: `workers/email/index.ts` (`/alerts/optin` + `/alerts/notify` + `/alert
 
 ## Prod prerequisites
 - **Email worker** (`pujol-email`, Pujol acct): `BREVO_API_KEY` + `NEWSLETTER_INTERNAL_TOKEN` — already set (newsletter uses them). Alert endpoints reuse them; **no new secret**.
+- **Expéditeur dédié `alerte@alerte.immobiliere-pujol.fr`** (14 Aug 2026): domaine + sender créés dans Brevo (workflow manuel `brevo-alerte-domain.yml`, re-runnable). Reste : poser les 4 enregistrements DNS dans la zone Cloudflare (TXT brevo-code sur `alerte`, CNAME `brevo1._domainkey.alerte` et `brevo2._domainkey.alerte` vers `b1`/`b2.alerte-immobiliere-pujol-fr.dkim.brevo.com`, TXT `_dmarc.alerte`), re-runner le workflow pour authentifier + activer le sender, **puis** poser la var `ALERT_SENDER_EMAIL=alerte@alerte.immobiliere-pujol.fr` sur le worker email (staging et prod). ⚠️ Ne jamais poser la var avant que le sender soit actif dans Brevo, sinon les envois abonnés échouent.
 - **Main worker**: `EMAIL_WORKER_URL` + `NEWSLETTER_INTERNAL_TOKEN` + the `DB` binding — already set.
 - **D1 `alerts` table**: auto-created by `ensureSchema` on first API hit (prod D1 `6bf184d7…`). No migration.
 - **Optional** `ALERTS_TURNSTILE_SECRET` on the main prod worker to enforce Turnstile on alert forms (else honeypot is the guard). Do **not** set `TURNSTILE_SECRET` on the email worker (it would reject newsletter signups).
