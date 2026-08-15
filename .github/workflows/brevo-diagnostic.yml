@@ -1,0 +1,53 @@
+name: Brevo account diagnostic
+
+# Read-only debug tool: prints the Brevo account plan/credits, aggregated
+# transactional stats for a date range, and the activity entry for a
+# specific messageId. Used to diagnose silent drops of accepted emails.
+
+on:
+  workflow_dispatch:
+    inputs:
+      message_id:
+        description: messageId to look up (with angle brackets)
+        required: false
+        default: ""
+      start_date:
+        description: Aggregate stats start date (YYYY-MM-DD)
+        required: false
+        default: "2026-08-14"
+      end_date:
+        description: Aggregate stats end date (YYYY-MM-DD)
+        required: false
+        default: "2026-08-15"
+
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      MSGID: ${{ github.event.inputs.message_id }}
+      START: ${{ github.event.inputs.start_date }}
+      END: ${{ github.event.inputs.end_date }}
+    steps:
+      - name: Account plan and credits
+        run: |
+          curl -s https://api.brevo.com/v3/account -H "api-key: $BREVO_API_KEY" \
+            | jq '{email, plan}'
+      - name: Aggregated transactional stats
+        run: |
+          curl -s "https://api.brevo.com/v3/smtp/statistics/aggregatedReport?startDate=$START&endDate=$END" \
+            -H "api-key: $BREVO_API_KEY" | jq .
+      - name: Activity by messageId
+        run: |
+          if [ -n "$MSGID" ]; then
+            curl -s -G "https://api.brevo.com/v3/smtp/emails" \
+              --data-urlencode "messageId=$MSGID" \
+              -H "api-key: $BREVO_API_KEY" | jq .
+          else
+            echo "no messageId provided"
+          fi
+      - name: Blocked or quarantined contacts
+        run: |
+          echo "== transactional blocked contacts =="
+          curl -s "https://api.brevo.com/v3/smtp/blockedContacts?limit=20&sort=desc" \
+            -H "api-key: $BREVO_API_KEY" | jq '{count, contacts: [.contacts[]? | {email, reason, blockedAt}]}'
