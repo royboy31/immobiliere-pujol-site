@@ -46,6 +46,17 @@ jobs:
           else
             echo "no messageId provided"
           fi
+      - name: Error and deferred events (account-wide)
+        run: |
+          for EV in error deferred blocked; do
+            echo "== events type=$EV =="
+            curl -s "https://api.brevo.com/v3/smtp/statistics/events?event=$EV&limit=10&sort=desc" \
+              -H "api-key: $BREVO_API_KEY" | jq '[.events[]? | {date, email, subject, from, reason}]'
+          done
+      - name: Recent activity all recipients
+        run: |
+          curl -s "https://api.brevo.com/v3/smtp/emails?startDate=$START&endDate=$END&sort=desc&limit=20" \
+            -H "api-key: $BREVO_API_KEY" | jq '{count, emails: [.transactionalEmails[]? | {date, subject, from, email}]}'
       - name: Blocked or quarantined contacts
         run: |
           echo "== transactional blocked contacts =="
