@@ -1,0 +1,83 @@
+name: Brevo reconcile assumptions
+
+# Read-only. Verifies the four Brevo assumptions the proposed daily Sheet
+# reconciliation depends on:
+#   1. DOI-created contacts really carry attributes.SOURCE = "site"
+#   2. GET /contacts?listIds=N actually filters server-side
+#   3. the real max page size of /smtp/statistics/events (pagination correctness)
+#   4. the DOI template produces "clicks" events usable as a confirmation date
+# Reads only; creates and modifies nothing.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+    steps:
+      - name: 1. Attributes on known confirmed DOI contacts
+        run: |
+          for E in muriel.tavernier@hotmail.fr contact19611925@gmail.com mmlmda@orange.fr habhab.ff@gmail.com; do
+            ENC=$(printf %s "$E" | jq -sRr @uri)
+            echo "== $E"
+            curl -s "https://api.brevo.com/v3/contacts/$ENC" -H "api-key: $BREVO_API_KEY" \
+              | jq '{listIds, attributes}'
+          done
+
+      - name: 1b. How many contacts carry SOURCE=site at all
+        run: |
+          TOTAL=$(curl -s "https://api.brevo.com/v3/contacts?limit=1" -H "api-key: $BREVO_API_KEY" | jq '.count')
+          echo "account contacts: $TOTAL"
+          : > c.json
+          OFFSET=0
+          for i in $(seq 1 12); do
+            RESP=$(curl -s "https://api.brevo.com/v3/contacts?limit=1000&offset=$OFFSET" -H "api-key: $BREVO_API_KEY")
+            N=$(echo "$RESP" | jq '[.contacts[]?] | length')
+            echo "page $i offset=$OFFSET rows=$N"
+            [ "$N" = "0" ] && break
+            echo "$RESP" | jq -c '.contacts[]' >> c.json
+            OFFSET=$((OFFSET + 1000))
+            [ "$N" -lt 1000 ] && break
+            sleep 1
+          done
+          echo "collected: $(wc -l < c.json)"
+          echo "-- SOURCE attribute distribution --"
+          jq -s '[.[] | (.attributes.SOURCE // "<absent>")] | group_by(.) | map({source: .[0], count: length}) | sort_by(-.count)' c.json
+          echo "-- contacts in list 3 --"
+          jq -s '[.[] | select((.listIds // []) | index(3))] | length' c.json
+          echo "-- contacts in list 3 AND SOURCE=site (what the reconcile would update) --"
+          jq -s '[.[] | select(((.listIds // []) | index(3)) and ((.attributes.SOURCE // "") | ascii_downcase) == "site")] | length' c.json
+
+      - name: 2. Does listIds filter server-side
+        run: |
+          echo "-- unfiltered count --"
+          curl -s "https://api.brevo.com/v3/contacts?limit=1" -H "api-key: $BREVO_API_KEY" | jq '{count}'
+          echo "-- listIds=3 --"
+          curl -s "https://api.brevo.com/v3/contacts?limit=1&listIds=3" -H "api-key: $BREVO_API_KEY" | jq '{count}'
+          echo "-- dedicated list endpoint for comparison --"
+          curl -s "https://api.brevo.com/v3/contacts/lists/3/contacts?limit=1" -H "api-key: $BREVO_API_KEY" | jq '{count}'
+
+      - name: 3. Real max page size of the events endpoint
+        run: |
+          for L in 1000 2500 5000; do
+            RESP=$(curl -s "https://api.brevo.com/v3/smtp/statistics/events?days=90&limit=$L&offset=0" -H "api-key: $BREVO_API_KEY")
+            N=$(echo "$RESP" | jq '[.events[]?] | length')
+            ERR=$(echo "$RESP" | jq -c 'if .code then {code, message} else empty end')
+            echo "requested limit=$L -> returned=$N ${ERR}"
+          done
+
+      - name: 4. Click events on the DOI template
+        run: |
+          TPL=$(curl -s "https://api.brevo.com/v3/smtp/templates?limit=50" -H "api-key: $BREVO_API_KEY" \
+            | jq -c '[.templates[]? | {id, name, isActive}]')
+          echo "templates: $TPL"
+          for EV in clicks opened requests; do
+            N=$(curl -s "https://api.brevo.com/v3/smtp/statistics/events?days=90&event=$EV&templateId=1&limit=2500" \
+              -H "api-key: $BREVO_API_KEY" | jq '[.events[]?] | length')
+            echo "templateId=1 event=$EV -> $N events"
+          done
+          echo "-- sample clicks on template 1 --"
+          curl -s "https://api.brevo.com/v3/smtp/statistics/events?days=90&event=clicks&templateId=1&limit=5" \
+            -H "api-key: $BREVO_API_KEY" | jq '[.events[]? | {email, date, subject}]'
