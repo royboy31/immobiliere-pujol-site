@@ -33,35 +33,7 @@ jobs:
 
       - name: Status of each pending signup
         run: |
-          EMAILS="anneclairebosha@gmail.com
-beayas71@gmail.com
-chokrihouimli4@gmail.com
-cataniaannie66@gmail.com
-muriel.tavernier@hotmail.fr
-francine.carrascosa@gmail.com
-christiane.oliveros@orange.fr
-contact19611925@gmail.com
-karine1967@hotmail.fr
-fmichelle2026@gmail.com
-gui.nedellec@gmail.com
-christian.magnan@laposte.net
-math.belgacem@gmail.com
-christian.mazzonello@gmail.com
-poupi78@aol.com
-habhab.ff@gmail.com
-mohamed.nadhuifa@gmail.com
-moradeau@gmail.com
-mujtabahashimi41@yahoo.com
-dbecard13@gmail.com
-billal.0401@outlook.fr
-houfanisara055@gmail.com
-samm130011@gmail.com
-mmlmda@orange.fr
-daurinelhad25@gmail.com
-cecilia.rebai@gmail.com
-i.garijo05@gmail.com
-belmarr@icloud.com
-wojcik.providence@live.fr"
+          EMAILS="anneclairebosha@gmail.com beayas71@gmail.com chokrihouimli4@gmail.com cataniaannie66@gmail.com muriel.tavernier@hotmail.fr francine.carrascosa@gmail.com christiane.oliveros@orange.fr contact19611925@gmail.com karine1967@hotmail.fr fmichelle2026@gmail.com gui.nedellec@gmail.com christian.magnan@laposte.net math.belgacem@gmail.com christian.mazzonello@gmail.com poupi78@aol.com habhab.ff@gmail.com mohamed.nadhuifa@gmail.com moradeau@gmail.com mujtabahashimi41@yahoo.com dbecard13@gmail.com billal.0401@outlook.fr houfanisara055@gmail.com samm130011@gmail.com mmlmda@orange.fr daurinelhad25@gmail.com cecilia.rebai@gmail.com i.garijo05@gmail.com belmarr@icloud.com wojcik.providence@live.fr"
           FOUND=0; MISSING=0
           for E in $EMAILS; do
             ENC=$(printf %s "$E" | jq -sRr @uri)
