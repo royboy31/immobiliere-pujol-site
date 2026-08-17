@@ -1,0 +1,94 @@
+name: Brevo blocklist scope check
+
+# Read-only. Answers one question: on this account, is a transactional block
+# account-wide or scoped to the sender address that triggered it?
+# Method: dump the blocked contacts, group them by senderEmail and reason,
+# then re-query the same list filtered by the site sender to see whether
+# blocks created by other senders (LOJII staff mailboxes) show up there too.
+# Makes no change to any account, contact or block.
+
+on:
+  workflow_dispatch:
+    inputs:
+      site_sender:
+        description: Site sender address to test the filter against
+        required: false
+        default: "conseil@conseil.immobiliere-pujol.fr"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      SITE_SENDER: ${{ github.event.inputs.site_sender }}
+    steps:
+      - name: Blocked contact object shape
+        run: |
+          curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+            --data-urlencode "limit=1" \
+            -H "api-key: $BREVO_API_KEY" | jq '{count, sample: .contacts[0]}'
+
+      - name: Dump all blocked contacts
+        run: |
+          : > blocked.json
+          OFFSET=0
+          for i in $(seq 1 20); do
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+              --data-urlencode "limit=100" \
+              --data-urlencode "offset=$OFFSET" \
+              --data-urlencode "sort=desc" \
+              -H "api-key: $BREVO_API_KEY")
+            N=$(echo "$RESP" | jq '[.contacts[]?] | length')
+            echo "page $i offset=$OFFSET rows=$N"
+            if [ "$N" = "0" ] || [ -z "$N" ]; then
+              echo "$RESP" | jq -c 'if .code then . else empty end'
+              break
+            fi
+            echo "$RESP" | jq -c '.contacts[]' >> blocked.json
+            OFFSET=$((OFFSET + 100))
+            sleep 1
+          done
+          echo "total blocked contacts: $(wc -l < blocked.json)"
+
+      - name: Group by sender and reason
+        run: |
+          echo "== by senderEmail =="
+          jq -s 'group_by(.senderEmail) | map({sender: .[0].senderEmail, count: length})
+                 | sort_by(-.count) | .[0:30]' blocked.json
+          echo "== by reason code =="
+          jq -s 'group_by(.reason.code) | map({code: .[0].reason.code, count: length})
+                 | sort_by(-.count)' blocked.json
+          echo "== distinct addresses vs rows (>1 row = same address blocked per sender) =="
+          jq -s '{rows: length, distinct_addresses: ([.[].email] | unique | length)}' blocked.json
+
+      - name: Addresses blocked under more than one sender
+        run: |
+          jq -s 'group_by(.email) | map(select(length > 1))
+                 | map({email: .[0].email, senders: [.[].senderEmail], reasons: [.[].reason.code]})
+                 | .[0:10]' blocked.json
+
+      - name: Same list filtered by the site sender
+        run: |
+          curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+            --data-urlencode "senders=$SITE_SENDER" \
+            --data-urlencode "limit=100" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '{count, by_sender: ([.contacts[]?.senderEmail] | group_by(.)
+                   | map({sender: .[0], count: length}))}'
+
+      - name: Cross check, is a LOJII-blocked address visible for the site sender
+        run: |
+          TARGET=$(jq -sr '[.[] | select(.senderEmail != env.SITE_SENDER)] | .[0].email // empty' blocked.json)
+          if [ -z "$TARGET" ]; then echo "no non-site blocked address found"; exit 0; fi
+          echo "target address blocked under a non-site sender: $TARGET"
+          echo "-- entries for this address, unfiltered --"
+          curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+            --data-urlencode "email=$TARGET" --data-urlencode "limit=50" \
+            -H "api-key: $BREVO_API_KEY" | jq '{count, contacts: [.contacts[]? | {email, senderEmail, reason: .reason.code}]}'
+          echo "-- entries for this address, filtered to the site sender --"
+          curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+            --data-urlencode "email=$TARGET" --data-urlencode "senders=$SITE_SENDER" --data-urlencode "limit=50" \
+            -H "api-key: $BREVO_API_KEY" | jq '{count, contacts: [.contacts[]? | {email, senderEmail, reason: .reason.code}]}'
+          echo "-- marketing level flag for this address --"
+          curl -s "https://api.brevo.com/v3/contacts/$(printf %s "$TARGET" | jq -sRr @uri)" \
+            -H "api-key: $BREVO_API_KEY" | jq '{email, emailBlacklisted, smsBlacklisted} // .'
