@@ -1,0 +1,87 @@
+name: Brevo DOI status check
+
+# Read-only. Takes the newsletter signups that the production Sheet still shows
+# as "En attente (double opt-in)" and asks Brevo whether each contact actually
+# exists, which lists it belongs to, and its opt-in attributes.
+# With Brevo double opt-in the contact is only created / added to the list once
+# the recipient clicks the confirmation link, so:
+#   contact found + listIds non-empty  -> confirmed, the Sheet is just not updated
+#   contact not found (document_not_found) -> never confirmed
+# Creates nothing, sends nothing, modifies nothing.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+    steps:
+      - name: Which Brevo account is this key
+        run: |
+          curl -s https://api.brevo.com/v3/account -H "api-key: $BREVO_API_KEY" | jq '{email, companyName}'
+
+      - name: Lists on the account
+        run: |
+          curl -s "https://api.brevo.com/v3/contacts/lists?limit=50" -H "api-key: $BREVO_API_KEY" \
+            | jq '{count, lists: [.lists[]? | {id, name, totalSubscribers}]}'
+
+      - name: Total contacts on the account
+        run: |
+          curl -s "https://api.brevo.com/v3/contacts?limit=1" -H "api-key: $BREVO_API_KEY" | jq '{count}'
+
+      - name: Status of each pending signup
+        run: |
+          EMAILS="anneclairebosha@gmail.com
+beayas71@gmail.com
+chokrihouimli4@gmail.com
+cataniaannie66@gmail.com
+muriel.tavernier@hotmail.fr
+francine.carrascosa@gmail.com
+christiane.oliveros@orange.fr
+contact19611925@gmail.com
+karine1967@hotmail.fr
+fmichelle2026@gmail.com
+gui.nedellec@gmail.com
+christian.magnan@laposte.net
+math.belgacem@gmail.com
+christian.mazzonello@gmail.com
+poupi78@aol.com
+habhab.ff@gmail.com
+mohamed.nadhuifa@gmail.com
+moradeau@gmail.com
+mujtabahashimi41@yahoo.com
+dbecard13@gmail.com
+billal.0401@outlook.fr
+houfanisara055@gmail.com
+samm130011@gmail.com
+mmlmda@orange.fr
+daurinelhad25@gmail.com
+cecilia.rebai@gmail.com
+i.garijo05@gmail.com
+belmarr@icloud.com
+wojcik.providence@live.fr"
+          FOUND=0; MISSING=0
+          for E in $EMAILS; do
+            ENC=$(printf %s "$E" | jq -sRr @uri)
+            RESP=$(curl -s "https://api.brevo.com/v3/contacts/$ENC" -H "api-key: $BREVO_API_KEY")
+            if echo "$RESP" | jq -e '.code == "document_not_found"' >/dev/null 2>&1; then
+              echo "MISSING  $E"
+              MISSING=$((MISSING+1))
+            else
+              echo "FOUND    $E -> $(echo "$RESP" | jq -c '{listIds, emailBlacklisted, createdAt, doi: (.attributes["DOUBLE_OPT-IN"] // .attributes.OPT_IN // null)}')"
+              FOUND=$((FOUND+1))
+            fi
+            sleep 0.3
+          done
+          echo "---"
+          echo "found=$FOUND missing=$MISSING"
+
+      - name: Contacts created in the DOI era, any list
+        run: |
+          curl -s -G "https://api.brevo.com/v3/contacts" \
+            --data-urlencode "limit=50" \
+            --data-urlencode "sort=desc" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '{count, recent: [.contacts[]? | {email, createdAt, listIds, emailBlacklisted}] | .[0:25]}'
