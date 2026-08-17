@@ -31,9 +31,12 @@ jobs:
 
       - name: Transactional volume per day
         run: |
-          curl -s "https://api.brevo.com/v3/smtp/statistics/reports?startDate=$START&endDate=$END&sortField=date" \
+          curl -s -G "https://api.brevo.com/v3/smtp/statistics/reports" \
+            --data-urlencode "startDate=$START" \
+            --data-urlencode "endDate=$END" \
+            --data-urlencode "limit=50" \
             -H "api-key: $BREVO_API_KEY" \
-            | jq '{days: [.reports[]? | {date, requests, delivered, softBounces, hardBounces, blocked, spamReports}],
+            | jq '{days: [.reports[]? | {date, requests, delivered, softBounces, hardBounces, blocked, spamReports}] | sort_by(.date),
                    total_requests: ([.reports[]?.requests] | add),
                    total_delivered: ([.reports[]?.delivered] | add)}'
 
@@ -42,26 +45,31 @@ jobs:
           curl -s "https://api.brevo.com/v3/smtp/statistics/aggregatedReport?startDate=$START&endDate=$END" \
             -H "api-key: $BREVO_API_KEY" | jq .
 
-      - name: Fetch transactional log (paginated)
+      - name: Fetch every billed send (event=requests, paginated)
         run: |
           : > all.json
           OFFSET=0
-          for i in $(seq 1 40); do
-            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/emails" \
+          for i in $(seq 1 30); do
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/events" \
               --data-urlencode "startDate=$START" \
               --data-urlencode "endDate=$END" \
-              --data-urlencode "limit=1000" \
+              --data-urlencode "event=requests" \
+              --data-urlencode "limit=2500" \
               --data-urlencode "offset=$OFFSET" \
               --data-urlencode "sort=desc" \
               -H "api-key: $BREVO_API_KEY")
-            N=$(echo "$RESP" | jq '[.transactionalEmails[]?] | length')
+            N=$(echo "$RESP" | jq '[.events[]?] | length')
             echo "page $i offset=$OFFSET rows=$N"
             if [ "$N" = "0" ] || [ -z "$N" ]; then
               echo "$RESP" | jq -c 'if .code then . else empty end'
               break
             fi
-            echo "$RESP" | jq -c '.transactionalEmails[]' >> all.json
-            OFFSET=$((OFFSET + 1000))
+            if [ "$i" = "1" ]; then
+              echo "-- event object shape --"
+              echo "$RESP" | jq '.events[0]'
+            fi
+            echo "$RESP" | jq -c '.events[]' >> all.json
+            OFFSET=$((OFFSET + 2500))
             sleep 1
           done
           echo "total rows collected: $(wc -l < all.json)"
@@ -91,10 +99,16 @@ jobs:
 
       - name: Breakdown by tag and template
         run: |
-          jq -s '[.[] | {tag: ((.tags // []) | join(",")), template: (.templateId // "none")}]
+          jq -s '[.[] | {tag: ((.tag // .tags // "none") | tostring), template: ((.templateId // "none") | tostring)}]
                  | group_by([.tag, .template])
                  | map({tag: .[0].tag, template: .[0].template, count: length})
                  | sort_by(-.count) | .[0:30]' all.json
+
+      - name: Subject x sender cross-tab
+        run: |
+          jq -s 'group_by([.from, .subject])
+                 | map({from: .[0].from, subject: .[0].subject, count: length})
+                 | sort_by(-.count) | .[0:40]' all.json
 
       - name: Marketing campaigns sent in the cycle
         run: |
