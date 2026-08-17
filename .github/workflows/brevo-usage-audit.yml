@@ -104,6 +104,20 @@ jobs:
                  | map({tag: .[0].tag, template: .[0].template, count: length})
                  | sort_by(-.count) | .[0:30]' all.json
 
+      - name: Site senders per day (contact@ root domain vs conseil@ subdomain)
+        run: |
+          jq -s '[.[] | select(.from == "contact@immobiliere-pujol.fr" or .from == "conseil@conseil.immobiliere-pujol.fr")]
+                 | group_by([.from, .date[0:10]])
+                 | map({from: .[0].from, day: .[0].date[0:10], count: length})
+                 | sort_by(.day)' all.json
+
+      - name: Opt-in emails per day
+        run: |
+          jq -s '[.[] | select((.tag // "") == "optin")]
+                 | group_by(.date[0:10])
+                 | map({day: .[0].date[0:10], count: length, senders: ([.[].from] | unique)})
+                 | sort_by(.day)' all.json
+
       - name: Subject x sender cross-tab
         run: |
           jq -s 'group_by([.from, .subject])
