@@ -1,0 +1,113 @@
+name: Brevo usage audit
+
+# Read-only. Answers "what is consuming the 20k emails/month?" by breaking the
+# billing cycle down into transactional volume (per day, per sender, per
+# subject, per recipient) and marketing campaign volume (per campaign).
+# Makes no change to any account, worker or DNS record.
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: Cycle start (YYYY-MM-DD)
+        required: false
+        default: "2026-07-20"
+      end_date:
+        description: Cycle end (YYYY-MM-DD)
+        required: false
+        default: "2026-08-17"
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+      START: ${{ github.event.inputs.start_date }}
+      END: ${{ github.event.inputs.end_date }}
+    steps:
+      - name: Account plan and remaining credits
+        run: |
+          curl -s https://api.brevo.com/v3/account -H "api-key: $BREVO_API_KEY" | jq '{email, companyName, plan}'
+
+      - name: Transactional volume per day
+        run: |
+          curl -s "https://api.brevo.com/v3/smtp/statistics/reports?startDate=$START&endDate=$END&sortField=date" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '{days: [.reports[]? | {date, requests, delivered, softBounces, hardBounces, blocked, spamReports}],
+                   total_requests: ([.reports[]?.requests] | add),
+                   total_delivered: ([.reports[]?.delivered] | add)}'
+
+      - name: Transactional aggregate for the cycle
+        run: |
+          curl -s "https://api.brevo.com/v3/smtp/statistics/aggregatedReport?startDate=$START&endDate=$END" \
+            -H "api-key: $BREVO_API_KEY" | jq .
+
+      - name: Fetch transactional log (paginated)
+        run: |
+          : > all.json
+          OFFSET=0
+          for i in $(seq 1 40); do
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/emails" \
+              --data-urlencode "startDate=$START" \
+              --data-urlencode "endDate=$END" \
+              --data-urlencode "limit=1000" \
+              --data-urlencode "offset=$OFFSET" \
+              --data-urlencode "sort=desc" \
+              -H "api-key: $BREVO_API_KEY")
+            N=$(echo "$RESP" | jq '[.transactionalEmails[]?] | length')
+            echo "page $i offset=$OFFSET rows=$N"
+            if [ "$N" = "0" ] || [ -z "$N" ]; then
+              echo "$RESP" | jq -c 'if .code then . else empty end'
+              break
+            fi
+            echo "$RESP" | jq -c '.transactionalEmails[]' >> all.json
+            OFFSET=$((OFFSET + 1000))
+            sleep 1
+          done
+          echo "total rows collected: $(wc -l < all.json)"
+
+      - name: Breakdown by subject
+        run: |
+          jq -s 'group_by(.subject) | map({subject: .[0].subject, count: length})
+                 | sort_by(-.count) | .[0:40]' all.json
+
+      - name: Breakdown by sender
+        run: |
+          jq -s 'group_by(.from) | map({from: .[0].from, count: length}) | sort_by(-.count)' all.json
+
+      - name: Breakdown by day
+        run: |
+          jq -s 'group_by(.date[0:10]) | map({day: .[0].date[0:10], count: length}) | sort_by(.day)' all.json
+
+      - name: Top recipients
+        run: |
+          jq -s 'group_by(.email) | map({email: .[0].email, count: length})
+                 | sort_by(-.count) | .[0:40]' all.json
+
+      - name: Top recipient domains
+        run: |
+          jq -s 'group_by(.email | split("@")[1]) | map({domain: (.[0].email | split("@")[1]), count: length})
+                 | sort_by(-.count) | .[0:20]' all.json
+
+      - name: Breakdown by tag and template
+        run: |
+          jq -s '[.[] | {tag: ((.tags // []) | join(",")), template: (.templateId // "none")}]
+                 | group_by([.tag, .template])
+                 | map({tag: .[0].tag, template: .[0].template, count: length})
+                 | sort_by(-.count) | .[0:30]' all.json
+
+      - name: Marketing campaigns sent in the cycle
+        run: |
+          curl -s -G "https://api.brevo.com/v3/emailCampaigns" \
+            --data-urlencode "statistics=globalStats" \
+            --data-urlencode "startDate=${START}T00:00:00.000Z" \
+            --data-urlencode "endDate=${END}T23:59:59.000Z" \
+            --data-urlencode "limit=100" \
+            -H "api-key: $BREVO_API_KEY" \
+            | jq '{count, campaigns: [.campaigns[]? | {name, subject, status, sentDate: .sentDate,
+                   sent: .statistics.globalStats.sent, delivered: .statistics.globalStats.delivered}]}'
+
+      - name: Contact lists and sizes
+        run: |
+          curl -s "https://api.brevo.com/v3/contacts/lists?limit=50" -H "api-key: $BREVO_API_KEY" \
+            | jq '{count, lists: [.lists[]? | {id, name, totalSubscribers, totalBlacklisted}]}'
