@@ -1,0 +1,39 @@
+name: Brevo blocklist retention probe
+
+# Read-only. The events API only exposes a recent window. This probe asks a
+# different question: does the BLOCKLIST keep entries older than that window?
+# If it does, the address list that Anthony actually needs is not at risk of
+# disappearing at the end of the billing cycle, only the event context is.
+# Logs aggregate counts by month only. No address is ever printed.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+    steps:
+      - name: blockedAt distribution by month (no addresses)
+        run: |
+          : > b.json
+          OFFSET=0
+          for i in $(seq 1 20); do
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/blockedContacts" \
+              --data-urlencode "limit=100" --data-urlencode "offset=$OFFSET" \
+              -H "api-key: $BREVO_API_KEY")
+            N=$(echo "$RESP" | jq '[.contacts[]?] | length')
+            [ "$N" = "0" ] && break
+            echo "$RESP" | jq -c '.contacts[] | {blockedAt, code: .reason.code}' >> b.json
+            OFFSET=$((OFFSET + 100))
+            [ "$N" -lt 100 ] && break
+            sleep 1
+          done
+          echo "total blocked entries: $(wc -l < b.json)"
+          echo "-- by month --"
+          jq -s 'group_by(.blockedAt[0:7]) | map({month: .[0].blockedAt[0:7], count: length}) | sort_by(.month)' b.json
+          echo "-- oldest / newest --"
+          jq -s '{oldest: (min_by(.blockedAt).blockedAt), newest: (max_by(.blockedAt).blockedAt)}' b.json
+          echo "-- by month and reason --"
+          jq -s 'group_by([.blockedAt[0:7], .code]) | map({month: .[0].blockedAt[0:7], code: .[0].code, count: length}) | sort_by(.month)' b.json
