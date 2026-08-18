@@ -55,6 +55,13 @@ Sanity-check the list against the log before picking (grep can drift):
 git log --reverse --format='%H %s' develop --grep='^Alerts'
 ```
 
+### Production branch safety
+
+- Never copy or merge `.github/workflows/deploy-pujol.yml` from `main` into `pujol-main`. The production version removes staging's `public/_headers`, sets `ALLOW_INDEXING=true` and `IMAGE_RESIZE=true`, and patches Pujol-specific worker URLs and secrets. Replacing it with the staging version would put production in `noindex, nofollow` and route forms to staging.
+- If security commits `b32b1475` or `b347c1a3` are promoted separately, reconcile their `deploy-pujol.yml` changes manually against the production version. Do not take that file wholesale.
+- Commit `68cad4b5` touches `workers/cron-sync/wrangler.jsonc`; review its environment values manually before any separate production promotion.
+- Preserve the production-only `.github/workflows/sync-lbi-ftp-pujol.yml`. After promotion, verify that live `/robots.txt` contains `Allow: /` and that the homepage has no `X-Robots-Tag: noindex` header.
+
 Apply to prod:
 ```
 git checkout pujol-main && git reset --hard origin/pujol-main
