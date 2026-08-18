@@ -211,17 +211,61 @@ async function logToSheet(tab: string, row: string[]): Promise<void> {
 // that arrives as two POSTs — step 1 (email) then step 2 (name + interests) —
 // lands on a SINGLE row instead of two appends. The Apps Script matches `key`
 // in `data`, updates the existing row's provided non-empty cells, or inserts a
-// new row. Fire-and-forget like logToSheet.
-async function upsertSheet(tab: string, key: string, data: Record<string, string>): Promise<void> {
+// new row. Public form callers keep the fire-and-forget behaviour; scheduled
+// reconciliation uses strict mode so a failed write marks the cron run failed.
+interface SheetUpsertOptions {
+  writeOnce?: string[];
+  strict?: boolean;
+}
+
+async function upsertSheet(
+  tab: string,
+  key: string,
+  data: Record<string, string>,
+  options: SheetUpsertOptions = {},
+): Promise<boolean> {
   try {
-    await fetch(SHEETS_URL, {
+    const res = await fetch(SHEETS_URL, {
       method: 'POST',
-      body: JSON.stringify({ tab, key, data }),
+      body: JSON.stringify({ tab, key, data, writeOnce: options.writeOnce || [] }),
       redirect: 'follow',
     });
-  } catch {
+    if (!res.ok) throw new Error(`Sheets HTTP ${res.status}`);
+
+    const result = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    if (!result?.ok) throw new Error(result?.error || 'Réponse Sheets invalide');
+    return true;
+  } catch (err) {
+    if (options.strict) throw err;
     // Fire-and-forget — don't block the response if Sheets is down
+    return false;
   }
+}
+
+async function updateExistingSheetRows(
+  tab: string,
+  key: string,
+  records: Record<string, string>[],
+  writeOnce: string[] = [],
+): Promise<{ matchedRecords: number; updatedRows: number }> {
+  const res = await fetch(SHEETS_URL, {
+    method: 'POST',
+    body: JSON.stringify({ tab, key, records, updateOnly: true, writeOnce }),
+    redirect: 'follow',
+  });
+  if (!res.ok) throw new Error(`Sheets HTTP ${res.status}`);
+
+  const result = (await res.json().catch(() => null)) as {
+    ok?: boolean;
+    error?: string;
+    matchedRecords?: number;
+    updatedRows?: number;
+  } | null;
+  if (!result?.ok) throw new Error(result?.error || 'Réponse Sheets invalide');
+  return {
+    matchedRecords: result.matchedRecords || 0,
+    updatedRows: result.updatedRows || 0,
+  };
 }
 
 const SITE_URL = 'https://www.immobiliere-pujol.fr';
@@ -1038,6 +1082,114 @@ async function handleNewsletterProfile(fd: FormData, env: Env, ctx: ExecutionCon
 // Brevo access is centralised here so BREVO_API_KEY lives in one place. These
 // are inert until the Brevo secrets/vars are provisioned (return 501).
 const BREVO = 'https://api.brevo.com/v3';
+
+interface BrevoContact {
+  email?: string;
+  listIds?: number[];
+}
+
+interface BrevoEmailEvent {
+  date?: string;
+  email?: string;
+}
+
+function parisDate(isoDate: string): string {
+  return new Date(isoDate).toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+}
+
+async function fetchBrevoPages<T>(
+  env: Env,
+  path: string,
+  itemKey: 'contacts' | 'events',
+  limit: number,
+): Promise<T[]> {
+  const items: T[] = [];
+  let offset = 0;
+
+  while (true) {
+    const separator = path.includes('?') ? '&' : '?';
+    const res = await fetch(`${BREVO}${path}${separator}limit=${limit}&offset=${offset}`, {
+      headers: { 'api-key': env.BREVO_API_KEY as string },
+    });
+    if (!res.ok) throw new Error(`Brevo ${path} HTTP ${res.status}`);
+
+    const payload = (await res.json()) as Record<string, unknown>;
+    const page = Array.isArray(payload[itemKey]) ? payload[itemKey] as T[] : [];
+    items.push(...page);
+    if (page.length < limit) return items;
+    offset += limit;
+  }
+}
+
+// Brevo owns the confirmation click and exposes no callback to this Worker.
+// Reconcile the source of truth once a day instead: confirmed contacts are list
+// members, and DOI click events provide the consent timestamp. The production
+// origin guard is intentional because the staging worker shares the live Sheet.
+async function reconcileNewsletterSheet(env: Env): Promise<void> {
+  if (env.ALLOWED_ORIGIN !== SITE_URL) return;
+  if (!env.BREVO_API_KEY || !env.NEWSLETTER_LIST_ID || !env.DOI_TEMPLATE_ID) {
+    throw new Error('Newsletter Sheet sync is not configured');
+  }
+
+  const listId = Number(env.NEWSLETTER_LIST_ID);
+  if (!Number.isSafeInteger(listId) || listId <= 0) throw new Error('NEWSLETTER_LIST_ID invalide');
+  const contacts = await fetchBrevoPages<BrevoContact>(
+    env,
+    `/contacts?sort=asc&listIds=${encodeURIComponent(String(listId))}`,
+    'contacts',
+    1000,
+  );
+  const confirmedContacts = contacts.filter((contact) =>
+    contact.email && contact.listIds?.includes(listId)
+  );
+
+  const events = await fetchBrevoPages<BrevoEmailEvent>(
+    env,
+    `/smtp/statistics/events?days=90&event=clicks&templateId=${encodeURIComponent(env.DOI_TEMPLATE_ID)}`,
+    'events',
+    5000,
+  );
+  const firstClickByEmail = new Map<string, string>();
+  for (const event of events) {
+    const email = event.email?.trim().toLowerCase();
+    if (!email || !event.date) continue;
+    const current = firstClickByEmail.get(email);
+    if (!current || Date.parse(event.date) < Date.parse(current)) {
+      firstClickByEmail.set(email, event.date);
+    }
+  }
+
+  let withoutClickTimestamp = 0;
+  const records = confirmedContacts.map((contact) => {
+    const email = contact.email!.trim().toLowerCase();
+    const confirmationDate = firstClickByEmail.get(email);
+    if (!confirmationDate) withoutClickTimestamp++;
+    return {
+      Email: email,
+      'Statut opt-in': 'Confirmé (double opt-in)',
+      ...(confirmationDate ? { 'Date confirmation': parisDate(confirmationDate) } : {}),
+    };
+  });
+
+  // updateOnly makes the Sheet itself the allowlist: imported/repermission
+  // contacts absent from the production signup log are never inserted. This is
+  // more robust than Brevo's free-text SOURCE attribute, whose historical values
+  // are not controlled. The Apps Script matches and updates duplicate rows.
+  const sheetResult = await updateExistingSheetRows(
+    'Newsletter',
+    'Email',
+    records,
+    ['Date confirmation'],
+  );
+
+  console.log(JSON.stringify({
+    event: 'newsletter_sheet_reconciled',
+    confirmedListContacts: confirmedContacts.length,
+    matchedSheetRecords: sheetResult.matchedRecords,
+    updatedSheetRows: sheetResult.updatedRows,
+    withoutClickTimestamp,
+  }));
+}
 function nlJson(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
 }
@@ -1234,15 +1386,14 @@ async function handleAlertOptin(req: Request, env: Env): Promise<Response> {
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
 
-// POST /alerts/notify — tell the agency a new qualified lead just confirmed.
-// Location → the listing's négociateur (fallback annonces@). Vente → négociateur
-// + the transaction desk (Benoît). négociateur_email is validated as internal.
+// POST /alerts/notify: tell the agency a new qualified lead just confirmed.
+// Zoho and Caroline receive every alert. Benoît receives only when the prospect
+// declares a property to sell. Listing negotiators and
+// annonces@ are deliberately excluded because the CRM owns dispatch and follow-up.
 async function handleAlertNotify(req: Request, env: Env): Promise<Response> {
   const bad = nlGuard(req, env); if (bad) return bad;
   const b = (await req.json().catch(() => ({}))) as any;
   const isVente = b.transac === 'V';
-  const nego = typeof b.negociateur_email === 'string' && b.negociateur_email.toLowerCase().endsWith(D)
-    ? b.negociateur_email.toLowerCase() : '';
 
   const rows: [string, string][] = [
     ['Type de recherche', isVente ? 'Vente' : 'Location'],
@@ -1261,11 +1412,11 @@ async function handleAlertNotify(req: Request, env: Env): Promise<Response> {
   const subject = `Nouvelle alerte ${isVente ? 'Vente' : 'Location'} : ${String(b.prenom || '')} ${String(b.nom || '')} (${String(b.email || '')})`.replace(/\s+/g, ' ').trim();
   const html = buildTable(subject, rows);
 
-  const recipients = new Set<string>();
-  if (nego) recipients.add(nego);
-  if (isVente) recipients.add(CONTACT_ROUTING['Vente'].to);   // benoit@ — transaction desk
-  else if (!nego) recipients.add(`annonces${D}`);              // location without a source listing
-  if (recipients.size === 0) recipients.add(`annonces${D}`);
+  const recipients = new Set<string>([
+    ZOHO_PARSER,
+    `carolinepujol${D}`,
+  ]);
+  if (!!b.bien_a_vendre) recipients.add(CONTACT_ROUTING['Vente'].to);
 
   const to = Array.from(recipients);
   for (const addr of to) {
@@ -1400,6 +1551,10 @@ const SHEET_HEADERS: Record<string, string[]> = {
 // ── Worker entry point ──────────────────────────────────────────────────────
 
 export default {
+  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+    await reconcileNewsletterSheet(env);
+  },
+
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const origin = request.headers.get('Origin') || '';
 

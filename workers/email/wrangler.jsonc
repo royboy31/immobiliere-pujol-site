@@ -3,6 +3,11 @@
 	"account_id": "68abcbaf4817943a805737802e15679a",
 	"compatibility_date": "2026-04-02",
 	"main": "index.ts",
+	"triggers": {
+		// Daily reconciliation. The handler no-ops outside the production origin
+		// because both account workers currently point at the production Sheet.
+		"crons": ["15 5 * * *"]
+	},
 	"vars": {
 		"ALLOWED_ORIGIN": "https://immobiliere-pujol-staging.roy-68a.workers.dev",
 		// Expéditeur Brevo dédié des emails abonnés du système d'alerte.
