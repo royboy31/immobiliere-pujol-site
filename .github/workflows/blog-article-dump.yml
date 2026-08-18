@@ -41,6 +41,8 @@ jobs:
       - name: Dump article
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # The token spans several accounts, so wrangler cannot pick one on its own.
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           ARTICLE_ID: ${{ inputs.article_id }}
         run: |
           set -euo pipefail
