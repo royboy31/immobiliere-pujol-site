@@ -1,0 +1,74 @@
+name: Dump blog article HTML (Pujol prod, read-only)
+
+# Read-only diagnostic. Prints the stored body_html of a blog article from the
+# PROD D1 on the Pujol account, so editor bugs reported by Caroline can be
+# diagnosed against the real markup instead of a screenshot. Same secrets route
+# as cleanup-branded-covers.yml (environment `pujol-staging`); no deploy, no write.
+
+on:
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: "Article id to dump. Leave empty for the most recently updated one."
+        required: false
+        default: ""
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    environment: pujol-staging   # holds the Pujol Cloudflare secrets
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Point wrangler at the Pujol prod D1
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('wrangler.jsonc','utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
+            const cfg = JSON.parse(cleaned);
+            cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
+            fs.writeFileSync('wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+
+      - name: Dump article
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ARTICLE_ID: ${{ inputs.article_id }}
+        run: |
+          set -euo pipefail
+          # Numeric-only id, so the SELECT can never be widened from the input.
+          ID="$(printf '%s' "${ARTICLE_ID}" | tr -cd '0-9')"
+          if [ -n "$ID" ]; then
+            WHERE="id = $ID"
+          else
+            WHERE="id = (SELECT id FROM blog_articles ORDER BY updated_at DESC LIMIT 1)"
+          fi
+          echo "## Recently updated articles"
+          npx wrangler d1 execute pujol-annonces --remote --json \
+            --command "SELECT id, title, status, updated_at FROM blog_articles ORDER BY updated_at DESC LIMIT 10"
+          echo "## body_html for $WHERE"
+          npx wrangler d1 execute pujol-annonces --remote --json \
+            --command "SELECT id, title, status, updated_at, body_html FROM blog_articles WHERE $WHERE" \
+            > article.json
+          node -e "
+            const d = JSON.parse(require('fs').readFileSync('article.json','utf8'));
+            const row = d[0].results[0];
+            if (!row) { console.log('no row'); process.exit(0); }
+            console.log('id:', row.id, '| status:', row.status, '| updated_at:', row.updated_at);
+            console.log('title:', row.title);
+            console.log('--- body_html ---');
+            console.log(row.body_html);
+          "
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: article-json
+          path: article.json
