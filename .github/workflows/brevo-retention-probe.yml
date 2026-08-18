@@ -1,0 +1,81 @@
+name: Brevo event retention probe (read-only)
+
+# How far back does Brevo still return transactional data? The rejection-report
+# plan starts with "load all the history still available", so the real retention
+# window has to be measured, not assumed.
+#
+# Aggregates only: /statistics/reports returns per-day counters and never a
+# recipient address, so nothing personal reaches the run log.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+    steps:
+      - name: Plan
+        run: |
+          curl -s https://api.brevo.com/v3/account -H "api-key: $BREVO_API_KEY" | jq '{plan}'
+
+      - name: Per-month probe of the daily reports endpoint
+        run: |
+          for M in 2026-01 2026-02 2026-03 2026-04 2026-05 2026-06 2026-07 2026-08; do
+            case "$M" in
+              *-01|*-03|*-05|*-07|*-08) LAST=31 ;;
+              *-02) LAST=28 ;;
+              *) LAST=30 ;;
+            esac
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/reports" \
+              --data-urlencode "startDate=$M-01" \
+              --data-urlencode "endDate=$M-$LAST" \
+              --data-urlencode "limit=50" \
+              -H "api-key: $BREVO_API_KEY")
+            echo "$RESP" | jq -c --arg m "$M" '
+              if .code then {month: $m, error: .code, message: .message}
+              else {month: $m,
+                    days_returned: ([.reports[]?] | length),
+                    first_day: ([.reports[]?.date] | sort | first),
+                    last_day: ([.reports[]?.date] | sort | last),
+                    requests: ([.reports[]?.requests] | add),
+                    hardBounces: ([.reports[]?.hardBounces] | add),
+                    softBounces: ([.reports[]?.softBounces] | add),
+                    blocked: ([.reports[]?.blocked] | add),
+                    spam: ([.reports[]?.spamReports] | add)}
+              end'
+            sleep 1
+          done
+
+      - name: Does the events endpoint still return rows for the oldest month with data?
+        run: |
+          for M in 2026-01-01 2026-03-01 2026-05-01 2026-06-01; do
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/events" \
+              --data-urlencode "startDate=$M" \
+              --data-urlencode "endDate=$M" \
+              --data-urlencode "event=hardBounces" \
+              --data-urlencode "limit=10" \
+              -H "api-key: $BREVO_API_KEY")
+            # Counts only. Never echo the event objects: they carry recipient addresses.
+            echo "$RESP" | jq -c --arg m "$M" '
+              if .code then {day: $m, error: .code, message: .message}
+              else {day: $m, hardBounce_rows: ([.events[]?] | length)} end'
+            sleep 1
+          done
+
+      - name: Widest range the events endpoint accepts
+        run: |
+          for RANGE in "2026-07-19:2026-08-18" "2026-06-18:2026-08-18" "2026-02-18:2026-08-18" "2025-08-18:2026-08-18"; do
+            S="${RANGE%%:*}"; E="${RANGE##*:}"
+            RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/events" \
+              --data-urlencode "startDate=$S" \
+              --data-urlencode "endDate=$E" \
+              --data-urlencode "event=hardBounces" \
+              --data-urlencode "limit=10" \
+              -H "api-key: $BREVO_API_KEY")
+            echo "$RESP" | jq -c --arg r "$RANGE" '
+              if .code then {range: $r, error: .code, message: .message}
+              else {range: $r, rows: ([.events[]?] | length)} end'
+            sleep 1
+          done
