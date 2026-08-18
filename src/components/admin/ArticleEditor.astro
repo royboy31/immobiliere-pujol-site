@@ -52,6 +52,7 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
       <span class="sep"></span>
       <button type="button" id="ed-link" title="Lien">🔗</button>
       <button type="button" id="ed-image" title="Téléverser une image">🖼️</button>
+      <button type="button" id="ed-clean" title="Nettoyer la mise en forme importée">🧹</button>
       <span class="spacer"></span>
       <button type="button" id="ed-toggle-src" class="ed-srcbtn">&lt;/&gt; Source HTML</button>
     </div>
@@ -449,9 +450,55 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   body.addEventListener('mouseup', saveRange); body.addEventListener('keyup', saveRange);
   $('ed-image').addEventListener('mousedown', (e) => { e.preventDefault(); saveRange(); imgFileInput.click(); });
   imgFileInput.addEventListener('change', () => { const f = imgFileInput.files && imgFileInput.files[0]; imgFileInput.value = ''; if (f) handleBodyImage(f); });
+  // ── Paste cleanup ──
+  // Word, Google Docs and AI chats carry their own inline styles and framework
+  // attributes into the clipboard. The damaging one is `line-height:1.15
+  // !important` on <p>: it outranks both this editor's CSS and the published
+  // article's, so pasted paragraphs render tighter than the list items around
+  // them and the author reads it as "the bullets add spacing". Keep the
+  // structure, drop the imported formatting.
+  const KEEP_TAGS = new Set(['P', 'DIV', 'BR', 'UL', 'OL', 'LI', 'H2', 'H3', 'H4', 'A', 'B', 'STRONG', 'EM', 'I', 'IMG', 'BLOCKQUOTE']);
+  const KEEP_ATTRS = { A: ['href'], IMG: ['src', 'alt'] };
+
+  function cleanHtml(html) {
+    const doc = document.implementation.createHTMLDocument('');
+    doc.body.innerHTML = html;
+    doc.body.querySelectorAll('script,style,noscript,meta,link,title').forEach((el) => el.remove());
+    // Unwrap everything outside the whitelist but keep its text: font, span,
+    // response-element, follow-up… Repeat, since unwrapping exposes new parents.
+    for (let pass = 0; pass < 20; pass++) {
+      const strays = [...doc.body.querySelectorAll('*')].filter((el) => !KEEP_TAGS.has(el.tagName));
+      if (!strays.length) break;
+      strays.forEach((el) => el.replaceWith(...el.childNodes));
+    }
+    doc.body.querySelectorAll('*').forEach((el) => {
+      const keep = KEEP_ATTRS[el.tagName] || [];
+      [...el.attributes].forEach((a) => { if (!keep.includes(a.name.toLowerCase())) el.removeAttribute(a.name); });
+    });
+    // Blocks left empty by the cleanup, but never one holding an image or a break.
+    doc.body.querySelectorAll('p,div,li,h2,h3,h4,blockquote').forEach((el) => {
+      if (!el.textContent.trim() && !el.querySelector('img,br')) el.remove();
+    });
+    return doc.body.innerHTML.trim();
+  }
+
   body.addEventListener('paste', (e) => {
-    const items = e.clipboardData && e.clipboardData.items; if (!items) return;
-    for (const it of items) if (it.type && it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) handleBodyImage(f); return; }
+    const cd = e.clipboardData; if (!cd) return;
+    const items = cd.items;
+    if (items) for (const it of items) if (it.type && it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) handleBodyImage(f); return; }
+    const html = cd.getData && cd.getData('text/html');
+    if (!html) return;                       // plain-text pastes are already clean
+    e.preventDefault();
+    document.execCommand('insertHTML', false, cleanHtml(html));
+    saveRange();
+    setState('Collage nettoyé ✓', false);
+  });
+
+  // Same cleaner on demand, to repair content pasted before this existed.
+  $('ed-clean').addEventListener('click', () => {
+    if (sourceMode) source.value = cleanHtml(source.value);
+    else body.innerHTML = cleanHtml(body.innerHTML);
+    setState('Mise en forme nettoyée ✓', false);
   });
   body.addEventListener('dragover', (e) => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files')) { e.preventDefault(); body.classList.add('is-dragover'); } });
   body.addEventListener('dragleave', () => body.classList.remove('is-dragover'));
