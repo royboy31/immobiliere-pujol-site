@@ -31,7 +31,7 @@ jobs:
             RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/reports" \
               --data-urlencode "startDate=$M-01" \
               --data-urlencode "endDate=$M-$LAST" \
-              --data-urlencode "limit=50" \
+              --data-urlencode "limit=30" \
               -H "api-key: $BREVO_API_KEY")
             echo "$RESP" | jq -c --arg m "$M" '
               if .code then {month: $m, error: .code, message: .message}
@@ -48,19 +48,20 @@ jobs:
             sleep 1
           done
 
-      - name: Does the events endpoint still return rows for the oldest month with data?
+      - name: How far back do events still come back (walking 89-day windows)?
         run: |
-          for M in 2026-01-01 2026-03-01 2026-05-01 2026-06-01; do
+          for RANGE in "2026-05-21:2026-08-18" "2026-02-20:2026-05-20" "2025-11-22:2026-02-19" "2025-08-24:2025-11-21"; do
+            M="${RANGE%%:*}"; E2="${RANGE##*:}"
             RESP=$(curl -s -G "https://api.brevo.com/v3/smtp/statistics/events" \
               --data-urlencode "startDate=$M" \
-              --data-urlencode "endDate=$M" \
+              --data-urlencode "endDate=$E2" \
               --data-urlencode "event=hardBounces" \
               --data-urlencode "limit=10" \
               -H "api-key: $BREVO_API_KEY")
             # Counts only. Never echo the event objects: they carry recipient addresses.
-            echo "$RESP" | jq -c --arg m "$M" '
-              if .code then {day: $m, error: .code, message: .message}
-              else {day: $m, hardBounce_rows: ([.events[]?] | length)} end'
+            echo "$RESP" | jq -c --arg m "$RANGE" '
+              if .code then {window: $m, error: .code, message: .message}
+              else {window: $m, hardBounce_rows: ([.events[]?] | length)} end'
             sleep 1
           done
 
