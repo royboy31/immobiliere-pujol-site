@@ -15,6 +15,7 @@ what was built, how to see it, how to move it to production, and what is left.
 | Phase 1 — back-office (`admin-pujol/alertes`: list, filter, manual add, pause/delete) | ✅ built + on staging |
 | Phase 2 — matcher (email `/alerts/match` + `cron-sync` hook) | ✅ built + on staging, **core logic tested**, **live cron trigger NOT yet run** |
 | Caroline feedback batch A (copy/layout) + multi-arrondissements + fix radios (14 Aug 2026) | ✅ built + on staging, verified (see below) |
+| Routage agence confirmé (18 Aug 2026): parser Zoho + Caroline toujours, Benoît seulement si bien à vendre | ✅ built + tested, not yet deployed |
 | Production | ⬜ not deployed — cherry-pick below when ready |
 
 **Nothing is on production yet.** The whole system lives on staging only.
@@ -47,6 +48,7 @@ what was built, how to see it, how to move it to production, and what is left.
 | 11 | `4b617ab2` | Multi-arrondissements (14 Aug): grille de cases Secteur (public + popup + admin), stockage CSV trié dans la colonne `cp` existante (pas de migration D1), matcher `cron-sync` passe de `cp=?` à `instr(','||cp||',', ','||?||',')`, `describeCriteriaC` formate la liste. **Touche `workers/cron-sync` → la promotion doit redéployer `pujol-cron-sync` en prod, pas seulement le worker site.** |
 | 12 | `b22cb4f4` | Fix (14 Aug): radios Oui/Non invisibles (reset CSS global `appearance:none`) — règle scopée au formulaire qui restaure l'apparence native |
 | 13 | `24a77e6c` | Expéditeur dédié (14 Aug): les emails abonnés (opt-in, match, registered) partent du sender Brevo `ALERT_SENDER_EMAIL` quand la var est posée sur le worker email (fallback inchangé sinon). Voir prérequis ci-dessous. |
+| 14 | `b0d589ab` | Routage confirmé (18 Aug): parser Zoho + Caroline sur toutes les alertes, Benoît uniquement quand `bien_a_vendre` est vrai, aucun envoi à `annonces@` ni au négociateur. Ce commit ajoute aussi la réconciliation quotidienne des statuts opt-in Newsletter vers Google Sheets. |
 
 Sanity-check the list against the log before picking (grep can drift):
 ```
@@ -56,7 +58,7 @@ git log --reverse --format='%H %s' develop --grep='^Alerts'
 Apply to prod:
 ```
 git checkout pujol-main && git reset --hard origin/pujol-main
-git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5 d9d46f7d c89f2fff 4b617ab2 b22cb4f4
+git cherry-pick fa527788 2afee487 f9701f10 c3f68fe3 5827aeac eec05583 9125d717 f6256aa5 d9d46f7d c89f2fff 4b617ab2 b22cb4f4 24a77e6c b0d589ab
 git push origin pujol-main      # triggers the prod deploy workflow
 ```
 ⚠️ Le workflow prod déploie-t-il aussi `pujol-cron-sync` ? Vérifier avant de promouvoir : le commit `4b617ab2` modifie le matcher dans `workers/cron-sync/index.ts` et le worker prod doit être redéployé avec.
@@ -91,11 +93,11 @@ Modified: `workers/email/index.ts` (`/alerts/optin` + `/alerts/notify` + `/alert
 
 ## Prod prerequisites
 - **Email worker** (`pujol-email`, Pujol acct): `BREVO_API_KEY` + `NEWSLETTER_INTERNAL_TOKEN` — already set (newsletter uses them). Alert endpoints reuse them; **no new secret**.
-- **Expéditeur dédié `alerte@alerte.immobiliere-pujol.fr`** (14 Aug 2026): domaine + sender créés dans Brevo (workflow manuel `brevo-alerte-domain.yml`, re-runnable). Reste : poser les 4 enregistrements DNS dans la zone Cloudflare (TXT brevo-code sur `alerte`, CNAME `brevo1._domainkey.alerte` et `brevo2._domainkey.alerte` vers `b1`/`b2.alerte-immobiliere-pujol-fr.dkim.brevo.com`, TXT `_dmarc.alerte`), re-runner le workflow pour authentifier + activer le sender, **puis** poser la var `ALERT_SENDER_EMAIL=alerte@alerte.immobiliere-pujol.fr` sur le worker email (staging et prod). ⚠️ Ne jamais poser la var avant que le sender soit actif dans Brevo, sinon les envois abonnés échouent.
+- **Expéditeur dédié `alerte@alerte.immobiliere-pujol.fr`**: domaine Brevo authentifié, DKIM vérifié et sender actif depuis le 14 Aug 2026. La var `ALERT_SENDER_EMAIL` est posée sur staging. La poser aussi sur le worker email de production au moment de la promotion.
 - **Main worker**: `EMAIL_WORKER_URL` + `NEWSLETTER_INTERNAL_TOKEN` + the `DB` binding — already set.
 - **D1 `alerts` table**: auto-created by `ensureSchema` on first API hit (prod D1 `6bf184d7…`). No migration.
 - **Optional** `ALERTS_TURNSTILE_SECRET` on the main prod worker to enforce Turnstile on alert forms (else honeypot is the guard). Do **not** set `TURNSTILE_SECRET` on the email worker (it would reject newsletter signups).
-- ⚠️ **On prod the notification emails are LIVE**: a confirmed vente alert emails `benoit@` + the listing négociateur; a location alert emails the négociateur or `annonces@`.
+- ⚠️ **On prod the notification emails are LIVE**: toute alerte confirmée part vers le parser Zoho et Caroline. `benoit@` est ajouté uniquement si `bien_a_vendre` est vrai. Aucun envoi à `annonces@` ni au négociateur de l'annonce.
 
 ## Phase 2 activation (do after the cherry-pick, or on staging to test first)
 The `cron-sync` matcher stays a **safe no-op** until these three are set on the `pujol-cron-sync` worker (per environment):
@@ -125,7 +127,7 @@ On staging, once the 3 vars are set:
 5. Back-office `admin-pujol/alertes` loads, manual add works, pause/delete work.
 
 ## Open decisions / follow-ups
-- Notification routing: per-négociateur vs centralised (Caroline to confirm with Benoît) — currently vente → négociateur + `benoit@`, location → négociateur/`annonces@`.
+- La question « bien à vendre » reste affichée uniquement sur le parcours Achat. Caroline doit encore confirmer si elle souhaite l'étendre au parcours Location avec la formulation « à vendre ou à louer ».
 - Matching cadence: currently per-import batch capped ~1/day/alert; a true daily digest is a later refinement.
 - Manual back-office add currently creates **active** + courtesy email; if stricter RGPD wanted, switch to pending + double opt-in.
 - Caroline asked to review the `/alerte/` form (email drafted 28 Jul) — fold in her feedback.

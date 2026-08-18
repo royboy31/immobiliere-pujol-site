@@ -15,6 +15,73 @@ function doPost(e) {
       return json({ ok: true, mode: 'append' });
     }
 
+    // ── Batch update existing rows (newsletter confirmation reconciliation) ──
+    if (Array.isArray(data.records)) {
+      var batchLastCol = Math.max(1, sheet.getLastColumn());
+      var batchHeaders = sheet.getRange(1, 1, 1, batchLastCol).getValues()[0]
+                              .map(function (h) { return String(h).trim(); });
+      var batchKeyCol = batchHeaders.indexOf(data.key);
+      if (batchKeyCol === -1) return json({ ok: false, error: 'Key header not found: ' + data.key });
+
+      var batchLastRow = sheet.getLastRow();
+      var rowsByKey = {};
+      if (batchLastRow <= 1) {
+        return json({ ok: true, mode: 'batch-update', matchedRecords: 0, updatedRows: 0 });
+      }
+      if (batchLastRow > 1) {
+        var batchKeys = sheet.getRange(2, batchKeyCol + 1, batchLastRow - 1, 1).getValues();
+        batchKeys.forEach(function (row, i) {
+          var value = String(row[0]).trim().toLowerCase();
+          if (!value) return;
+          if (!rowsByKey[value]) rowsByKey[value] = [];
+          rowsByKey[value].push(i + 2);
+        });
+      }
+
+      var batchWriteOnce = Array.isArray(data.writeOnce) ? data.writeOnce : [];
+      var matchedRecords = 0;
+      var updatedRows = 0;
+      var updateColumns = {};
+      var missingHeaders = {};
+      data.records.forEach(function (record) {
+        Object.keys(record).forEach(function (h) {
+          if (h === data.key) return;
+          if (batchHeaders.indexOf(h) === -1) missingHeaders[h] = true;
+          else updateColumns[h] = true;
+        });
+      });
+      var missingHeaderNames = Object.keys(missingHeaders);
+      if (missingHeaderNames.length) {
+        return json({ ok: false, error: 'Headers not found: ' + missingHeaderNames.join(', ') });
+      }
+      var columnValues = {};
+      Object.keys(updateColumns).forEach(function (h) {
+        var columnIndex = batchHeaders.indexOf(h);
+        columnValues[h] = sheet.getRange(2, columnIndex + 1, Math.max(0, batchLastRow - 1), 1).getValues();
+      });
+
+      data.records.forEach(function (record) {
+        var recordKey = String(record[data.key] || '').trim().toLowerCase();
+        var matchingRows = rowsByKey[recordKey] || [];
+        if (!matchingRows.length) return;          // updateOnly: never insert imports
+        matchedRecords++;
+        matchingRows.forEach(function (rowIndex) {
+          Object.keys(updateColumns).forEach(function (h) {
+            if (!Object.prototype.hasOwnProperty.call(record, h) || !String(record[h]).length) return;
+            var valueIndex = rowIndex - 2;
+            if (batchWriteOnce.indexOf(h) !== -1 && String(columnValues[h][valueIndex][0]).length) return;
+            columnValues[h][valueIndex][0] = record[h];
+          });
+          updatedRows++;
+        });
+      });
+      Object.keys(updateColumns).forEach(function (h) {
+        var columnIndex = batchHeaders.indexOf(h);
+        sheet.getRange(2, columnIndex + 1, batchLastRow - 1, 1).setValues(columnValues[h]);
+      });
+      return json({ ok: true, mode: 'batch-update', matchedRecords: matchedRecords, updatedRows: updatedRows });
+    }
+
     // ── Upsert by key: { tab, key: 'Email', data: { Header: value, ... } } ────
     if (data.data) {
       var lastCol = Math.max(1, sheet.getLastColumn());
@@ -32,28 +99,32 @@ function doPost(e) {
       var keyCol = Math.max(0, headers.indexOf(data.key));
       var keyVal = String(data.data[data.key] || '').trim().toLowerCase();
       var lastRow = sheet.getLastRow();
-      var rowIndex = -1;
+      var rowIndexes = [];
 
       if (lastRow > 1 && keyVal) {
         var col = sheet.getRange(2, keyCol + 1, lastRow - 1, 1).getValues();
         for (var i = 0; i < col.length; i++) {
-          if (String(col[i][0]).trim().toLowerCase() === keyVal) { rowIndex = i + 2; break; }
+          if (String(col[i][0]).trim().toLowerCase() === keyVal) rowIndexes.push(i + 2);
         }
       }
 
-      if (rowIndex === -1) {                      // insert new row
+      if (!rowIndexes.length) {                   // insert new row
         sheet.appendRow(headers.map(function (h) {
           return Object.prototype.hasOwnProperty.call(data.data, h) ? data.data[h] : '';
         }));
         return json({ ok: true, mode: 'insert' });
       }
 
-      headers.forEach(function (h, c) {            // update: only provided, non-empty cells
-        if (Object.prototype.hasOwnProperty.call(data.data, h) && String(data.data[h]).length) {
-          sheet.getRange(rowIndex, c + 1).setValue(data.data[h]);
-        }
+      var writeOnce = Array.isArray(data.writeOnce) ? data.writeOnce : [];
+      rowIndexes.forEach(function (rowIndex) {
+        headers.forEach(function (h, c) {          // update all matching duplicate rows
+          if (!Object.prototype.hasOwnProperty.call(data.data, h) || !String(data.data[h]).length) return;
+          var cell = sheet.getRange(rowIndex, c + 1);
+          if (writeOnce.indexOf(h) !== -1 && String(cell.getValue()).length) return;
+          cell.setValue(data.data[h]);
+        });
       });
-      return json({ ok: true, mode: 'update' });
+      return json({ ok: true, mode: 'update', rows: rowIndexes.length });
     }
 
     return json({ ok: false, error: 'no row or data' });
