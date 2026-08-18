@@ -266,6 +266,15 @@ const initial: BlogArticle = article ?? {
   .ed-body :global(img) { max-width:100%; height:auto; border-radius:8px; margin:12px 0; }
   .ed-body :global(blockquote) { border-left:3px solid var(--pj-olive); margin:1em 0; padding:.2em 1em; color:#555; }
   .ed-body :global(a) { color: var(--pj-olive-2); text-decoration: underline; }
+  /* Mirror the published article typography (.svc-article-body in
+     _service-page.scss) so the editor is truthful about the final rendering.
+     `b`/`strong` matter most: without a rule the UA default `bolder` resolves
+     against the .ed-body 300 base to only 400, so the Gras button looks dead
+     even though execCommand did wrap the selection. */
+  .ed-body :global(b), .ed-body :global(strong) { font-weight:700; color:#000; }
+  .ed-body :global(p) { margin:0 0 18px; }
+  .ed-body :global(ul), .ed-body :global(ol) { margin:0 0 22px; padding-left:22px; }
+  .ed-body :global(li) { margin:0 0 8px; }
   .ed-source { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size:13px; line-height:1.6; color:#1f2a30; width:100%; resize:vertical; }
   .ed-imghint { font-size:12px; color:#9aa0a6; margin:8px 2px 0; }
   .ed-body.is-dragover { box-shadow: inset 0 0 0 2px var(--pj-olive); }
