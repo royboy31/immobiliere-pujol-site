@@ -455,6 +455,19 @@ const initial: BlogArticle = article ?? {
   // structure, drop the imported formatting.
   const KEEP_TAGS = new Set(['P', 'DIV', 'BR', 'UL', 'OL', 'LI', 'H2', 'H3', 'H4', 'A', 'B', 'STRONG', 'EM', 'I', 'IMG', 'BLOCKQUOTE']);
   const KEEP_ATTRS = { A: ['href'], IMG: ['src', 'alt'] };
+  const SAFE_SCHEMES = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+
+  // href/src survive the cleanup, so their protocol has to be checked: article
+  // bodies are rendered as HTML on the public site, and a pasted
+  // `javascript:` link would otherwise be stored and served. Control
+  // characters are stripped first because `java\nscript:` is a classic bypass.
+  function safeUrl(value, allowInlineImage) {
+    const v = String(value || '').replace(/[\u0000-\u0020]+/g, '');
+    const scheme = /^([a-z][a-z0-9+.-]*):/i.exec(v);
+    if (!scheme) return true;                            // relative URL
+    if (SAFE_SCHEMES.has(scheme[1].toLowerCase() + ':')) return true;
+    return !!allowInlineImage && /^data:image\/(png|jpe?g|gif|webp|avif);/i.test(v);
+  }
 
   function cleanHtml(html) {
     const doc = document.implementation.createHTMLDocument('');
@@ -469,8 +482,15 @@ const initial: BlogArticle = article ?? {
     }
     doc.body.querySelectorAll('*').forEach((el) => {
       const keep = KEEP_ATTRS[el.tagName] || [];
-      [...el.attributes].forEach((a) => { if (!keep.includes(a.name.toLowerCase())) el.removeAttribute(a.name); });
+      [...el.attributes].forEach((a) => {
+        const name = a.name.toLowerCase();
+        if (!keep.includes(name)) { el.removeAttribute(a.name); return; }
+        // A kept href/src still has to carry a harmless protocol.
+        if ((name === 'href' || name === 'src') && !safeUrl(a.value, name === 'src')) el.removeAttribute(a.name);
+      });
     });
+    // An <img> whose src was just rejected renders as a broken image.
+    doc.body.querySelectorAll('img:not([src])').forEach((el) => el.remove());
     // Blocks left empty by the cleanup, but never one holding an image or a break.
     doc.body.querySelectorAll('p,div,li,h2,h3,h4,blockquote').forEach((el) => {
       if (!el.textContent.trim() && !el.querySelector('img,br')) el.remove();
