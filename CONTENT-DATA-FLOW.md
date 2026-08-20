@@ -6,25 +6,36 @@ not the planned D1-rebuild changes (those are in `D1-REBUILD-PLAN.md`).
 
 ---
 
-## 0. The big picture — two disconnected worlds
+## 0. The big picture — D1 is authoritative, the files are build artifacts
 
-There are **two separate stores** for blog/expert content, and they are **not yet bridged**:
+**Updated 2026-08-20. The gap described below as "two disconnected worlds" is closed.** Blog,
+experts and legal pages now have the same D1 → files bridge that annonces have always had.
 
-| | **Store A — committed files** | **Store B — D1 database** |
+| | **Files under `src/content/`** | **D1 database** |
 |---|---|---|
-| Blog | `src/content/articles/*.md` (~891) | table `blog_articles` |
+| Blog | `src/content/articles/*.md` | table `blog_articles` |
 | Experts | `src/content/experts/*.json` | table `experts` |
-| Written by | git commits (WP scrape / hand-authored) | the **admin editors** |
-| Read by | **the public site** (build time) | the **admin UI** only |
+| Pages | `src/content/pages/*.md` | table `site_pages` |
+| Annonces | `src/content/annonces/*.json` | table `annonces` |
+| Written by | a **build-time sync script**, from D1 | the **admin editors** |
+| Read by | **the public site** (Astro content collections) | the admin UI, and the sync scripts |
 
-- **The public site renders Store A** (files) via Astro content collections.
-- **The admin editors read/write Store B** (D1).
-- ⚠️ **They do not talk to each other.** An article/expert edited in the admin is saved to D1 but
-  **does not appear on the public site** — the build never reads D1 for blog/experts. Closing this
-  gap is what `D1-REBUILD-PLAN.md` is about.
+- **The admin editors read/write D1.** D1 is the source of truth for all four collections.
+- **`npm run build` regenerates the files from D1** before `astro build` runs, in this order:
+  `sync-d1-to-content.mjs` (annonces), `sync-d1-articles-to-content.mjs`,
+  `sync-d1-experts-to-content.mjs`, `sync-d1-pages-to-content.mjs`.
+- Every sync reads the **`published_json` column only**, never the live working row, so a rebuild
+  (including the hourly annonces rebuild) can never publish an in-progress edit.
+- ⚠️ **The files under `src/content/` are build artifacts. Editing one in git changes nothing:**
+  the next build overwrites it from D1. To change published content, write to D1 (admin editor, or
+  a `wrangler d1 execute` on both `fonction`-style columns **and** `published_json`). Restore a
+  dirty working copy with `git checkout HEAD -- src/content/<collection>`.
+- The articles and experts syncs also **delete** any file with no published row behind it. The pages
+  sync never deletes, because most of `src/content/pages` is not backed by D1.
 
-> (For reference, **annonces** already bridge the two: D1 → `sync-d1-to-content.mjs` → JSON files →
-> site. Blog/experts do **not** have that bridge yet.)
+> Consequence for the site's own repo history: commits that edit `src/content/articles/*.md` or
+> `src/content/experts/*.json` are cosmetic. They keep git readable but have no effect on the
+> deployed site.
 
 ---
 
@@ -112,13 +123,18 @@ ArticleEditor.astro   ──JSON──▶    /api/admin-pujol/articles/  ──�
 
 ### 2a. How they were / are IMPORTED
 
-**Original profiles (Store A — the live source today):**
-- **Hand-authored** `src/content/experts/*.json`, one object per expert (the real 27 profiles).
+**Original profiles (hand-authored, now superseded by D1):**
+- `src/content/experts/*.json`, one object per expert (the real 27 profiles). Originally
+  hand-authored and committed; **since the D1 bridge landed these files are regenerated at every
+  build** by `scripts/sync-d1-experts-to-content.mjs` from `experts.published_json`.
 - Fields (validated by `src/content.config.ts` → `experts` schema):
   `title ("Prénom Nom – Rôle"), slug, fonction, description (HTML bio), photo, phone, email,
   emailAliases[], linkedin, facebook, instagram, seoTitle, seoDescription, hidden, listingOnly,
   department, order, agenda, secteur`.
-- Committed to git; the current source of truth for `/experts/`.
+- ⚠️ **The source of truth for `/experts/` is the `experts` table in D1, not these files.** The sync
+  aborts the build (exit 1) on a D1 error or a 0-row result, and removes any JSON with no published
+  row behind it. Note the two D1 databases are distinct: staging lives in Roy's account, production
+  in the Pujol account (`pujol-annonces-eu`), so a content change has to be applied to both.
 
 **Import into D1 (Store B — done for staging, 2026-07-12):**
 - Same importer approach as blog: `POST /api/admin-pujol/experts/` for each JSON, mapping camelCase
@@ -160,7 +176,8 @@ ExpertEditor.astro    ──JSON──▶   /api/admin-pujol/experts/   ──�
 Experts use **two different read mechanisms** (unlike blog):
 
 1. **`src/pages/experts/index.astro`** (the archive) — **static**, `getCollection('experts')` (fed by
-   the `glob()` loader over `src/content/experts/*.json`). Filters out `hidden`/`listingOnly`, groups
+   the `glob()` loader over `src/content/experts/*.json`, themselves regenerated from D1 by the
+   build, see §0). Filters out `hidden`/`listingOnly`, groups
    by `department` (Direction → Vente → Gestion locative → Syndic → others), sorts by `order`,
    prerenders the grid.
 
@@ -171,6 +188,11 @@ Experts use **two different read mechanisms** (unlike blog):
    also renders the expert's **live** listings via `fetchUbiflowAnnonces`.
 
 Experts also appear via:
+- ⚠️ **`src/pages/index.astro` — the homepage carousel holds its own hard-coded expert array**
+  (`href`, `photo`, `type`, `first`, `last`, `role`), independent of D1 and of the content
+  collection. A profile renamed in D1 keeps its old title here until this array is edited too. Any
+  change to an expert's `fonction` therefore needs **two** edits: the D1 row (both `fonction` and
+  `published_json`, on staging and production) **and** this file.
 - `ExpertContactCard` — appended to a blog article when its frontmatter sets `expertCta` (read in
   `[...slug].astro` from a build-time expert glob).
 - `lib/experts.ts` — maps a listing's `contactAAfficher` email (incl. `emailAliases`) to an expert,
