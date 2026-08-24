@@ -131,7 +131,7 @@ if (orphans.length) {
         </header>
         <div class="experts-archive__grid">
           {s.items.map((p) => (
-            <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type}`}>
+            <a href={`/experts/${p.slug}/`} class={`expert-tile expert-tile--${p.type} expert-tile--${p.slug}`}>
               <div class="expert-tile__ph">
                 {p.photo ? (
                   <img src={cfImg(p.photo, 360)} alt={`${p.first} ${p.last}`.trim()} loading="lazy" />

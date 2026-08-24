@@ -235,6 +235,7 @@ const ctaExpert = type === 'article' && entry.data.expertCta
 // Article header byline (immersive header): author name + photo + reading time.
 const authorName = (type === 'article' && entry.data.author) || null;
 const authorPhoto = ctaExpert?.photo || null;
+const authorHref = ctaExpert?.slug ? `/experts/${ctaExpert.slug}/` : null;
 const wordCount = rawBody.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean).length;
 const readMin = Math.max(1, Math.round(wordCount / 200));
 const articleDate = type === 'article' && entry.data.date
@@ -267,8 +268,17 @@ const seoNofollow = type === 'article' && !!entry.data.nofollow;
           <h1>{entry.data.title}</h1>
           {type === 'article' && (
             <div class="content__meta">
-              {authorPhoto && <img class="content__meta-avatar" src={authorPhoto} alt={authorName || ''} width="40" height="40" loading="eager" />}
-              {authorName && <span class="content__meta-author">{authorName}</span>}
+              {authorHref && (authorPhoto || authorName) ? (
+                <a class="content__meta-expert" href={authorHref}>
+                  {authorPhoto && <img class="content__meta-avatar" src={authorPhoto} alt={authorName || ''} width="40" height="40" loading="eager" />}
+                  {authorName && <span class="content__meta-author">{authorName}</span>}
+                </a>
+              ) : (
+                <>
+                  {authorPhoto && <img class="content__meta-avatar" src={authorPhoto} alt={authorName || ''} width="40" height="40" loading="eager" />}
+                  {authorName && <span class="content__meta-author">{authorName}</span>}
+                </>
+              )}
               {authorName && articleDate && <span class="content__meta-sep">•</span>}
               {articleDate && <time datetime={entry.data.date}>{articleDate}</time>}
               {articleDate && <span class="content__meta-sep">•</span>}

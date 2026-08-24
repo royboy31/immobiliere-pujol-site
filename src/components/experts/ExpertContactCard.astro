@@ -19,21 +19,31 @@ const phoneClean = (expert.phone || '').replace(/\s/g, '');
 const mailtoLink = expert.email ? `mailto:${expert.email}` : '';
 const agendaLink = expert.agenda as string | undefined;
 const hasSocial = !!(expert.linkedin || expert.facebook || expert.instagram);
+const profileHref = expert.slug ? `/experts/${expert.slug}/` : null;
 ---
 
 <div class="expert-info-card">
   <div class="expert-info-card__photo-wrap">
-    {expert.photo ? (
+    {expert.photo ? (profileHref ? (
+      <a href={profileHref} class="expert-info-card__profile-link">
+        <img src={cfImg(expert.photo, 600)} alt={displayName} class="expert-info-card__photo" loading={eager ? 'eager' : 'lazy'} />
+      </a>
+    ) : (
       <img src={cfImg(expert.photo, 600)} alt={displayName} class="expert-info-card__photo" loading={eager ? 'eager' : 'lazy'} />
+    )
     ) : (
       <div class="expert-info-card__photo expert-info-card__photo--empty">{firstName.charAt(0)}</div>
     )}
   </div>
 
   <div class="expert-info-card__body">
-    <h3 class="expert-info-card__name">
-      {firstName}{lastName && <> <b>{lastName}</b></>}
-    </h3>
+    {profileHref ? (
+      <a href={profileHref} class="expert-info-card__profile-link">
+        <h3 class="expert-info-card__name">{firstName}{lastName && <> <b>{lastName}</b></>}</h3>
+      </a>
+    ) : (
+      <h3 class="expert-info-card__name">{firstName}{lastName && <> <b>{lastName}</b></>}</h3>
+    )}
     {expert.fonction && <p class="expert-info-card__role">{expert.fonction}</p>}
 
     <div class="expert-info-card__ctas">

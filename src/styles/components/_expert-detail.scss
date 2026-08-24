@@ -201,6 +201,14 @@
   align-items: center;
   text-align: center;
 
+  &__profile-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__profile-link:hover &__name { text-decoration: underline; }
+
   &__photo-wrap {
     width: 160px;
     height: 160px;
@@ -1029,6 +1037,15 @@
 
   &:hover { transform: translateY(-3px); }
   &:hover .expert-tile__ph img { transform: scale(1.02); }
+
+  // Thibault's source portrait includes a large blank band above his head.
+  // Scale only this tile so his face and shoulders match the other portraits.
+  &--thibault-arnoux .expert-tile__ph img {
+    transform: scale(1.18) translateY(-4%);
+  }
+  &--thibault-arnoux:hover .expert-tile__ph img {
+    transform: scale(1.20) translateY(-4%);
+  }
 
   &--rental { --expert-accent: #{$ds-olive}; }
   &--sales  { --expert-accent: #{$ds-orange}; }
