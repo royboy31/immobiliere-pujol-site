@@ -232,3 +232,26 @@ test('alert notifications follow the confirmed CRM routing matrix', async () => 
     globalThis.fetch = originalFetch;
   }
 });
+
+test('matched-listing emails require the dedicated alert token', async () => {
+  const baseEnv = {
+    BREVO_API_KEY: 'test-key',
+    NEWSLETTER_INTERNAL_TOKEN: 'newsletter-token',
+    ALERT_INTERNAL_TOKEN: 'alert-token',
+  };
+  const body = JSON.stringify({ email: 'prospect@example.com', listings: [{ title: 'Test' }] });
+
+  const newsletterTokenResponse = await worker.fetch(new Request('https://worker.example/alerts/match', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-internal-token': 'newsletter-token' },
+    body,
+  }), baseEnv, {});
+  assert.equal(newsletterTokenResponse.status, 403);
+
+  const alertTokenWithoutBrevo = await worker.fetch(new Request('https://worker.example/alerts/match', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-internal-token': 'alert-token' },
+    body,
+  }), { ...baseEnv, BREVO_API_KEY: undefined }, {});
+  assert.equal(alertTokenWithoutBrevo.status, 501);
+});

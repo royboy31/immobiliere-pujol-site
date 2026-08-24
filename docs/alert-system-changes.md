@@ -99,7 +99,7 @@ Modified: `workers/email/index.ts` (`/alerts/optin` + `/alerts/notify` + `/alert
 `src/layouts/AdminLayout.astro` (sidebar "Alertes" item + section type)
 
 ## Prod prerequisites
-- **Email worker** (`pujol-email`, Pujol acct): `BREVO_API_KEY` + `NEWSLETTER_INTERNAL_TOKEN` — already set (newsletter uses them). Alert endpoints reuse them; **no new secret**.
+- **Email worker** (`pujol-email`, Pujol acct): `BREVO_API_KEY` + `NEWSLETTER_INTERNAL_TOKEN` are already set. Matched-listing email uses a separate `ALERT_INTERNAL_TOKEN`, so activating the cron cannot disturb newsletter or site-to-email authentication.
 - **Expéditeur dédié `alerte@alerte.immobiliere-pujol.fr`**: domaine Brevo authentifié, DKIM vérifié et sender actif depuis le 14 Aug 2026. La var `ALERT_SENDER_EMAIL` est posée sur staging. La poser aussi sur le worker email de production au moment de la promotion.
 - **Main worker**: `EMAIL_WORKER_URL` + `NEWSLETTER_INTERNAL_TOKEN` + the `DB` binding — already set.
 - **D1 `alerts` table**: auto-created by `ensureSchema` on first API hit (prod D1 `6bf184d7…`). No migration.
@@ -109,12 +109,12 @@ Modified: `workers/email/index.ts` (`/alerts/optin` + `/alerts/notify` + `/alert
 ## Phase 2 activation (do after the cherry-pick, or on staging to test first)
 The `cron-sync` matcher stays a **safe no-op** until these three are set on the `pujol-cron-sync` worker (per environment):
 - `EMAIL_WORKER_URL` (var) — the email worker URL for that env (prod: `https://pujol-email.<pujol-acct>.workers.dev`; staging: `https://pujol-email.roy-68a.workers.dev`).
-- `NEWSLETTER_INTERNAL_TOKEN` (secret) — **the same value** as on the email worker (Roy/deploy holds it; not readable via wrangler).
+- `ALERT_INTERNAL_TOKEN` (secret) — **the same value** as the email worker's alert-only token. The production workflow provisions both from the GitHub environment secret after Roy explicitly activates matching.
 - `SITE_BASE_URL` (var) — public site origin (prod `https://www.immobiliere-pujol.fr`; staging the staging URL).
 
 Set on prod, e.g.:
 ```
-CLOUDFLARE_ACCOUNT_ID=<pujol> wrangler secret put NEWSLETTER_INTERNAL_TOKEN --name pujol-cron-sync
+CLOUDFLARE_ACCOUNT_ID=<pujol> wrangler secret put ALERT_INTERNAL_TOKEN --name pujol-cron-sync
 # + add EMAIL_WORKER_URL and SITE_BASE_URL as vars (wrangler.jsonc or patch in deploy-pujol.yml)
 ```
 Matcher guards: no-op if unconfigured · backfill >40 new listings = skip · anti-flood ~1 email/day/alert (`last_notified_at`) · only ACTIVE new listings · fully try/caught (never breaks an import).
