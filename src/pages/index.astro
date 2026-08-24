@@ -374,7 +374,13 @@ const services = [
       <div class="experts__row" id="expertsRow">
         {experts.map((e) => (
           <a class={`expert expert--${e.type}`} href={e.href}>
-            <div class="ph"><img src={cfImg(e.photo, 320)} alt={`${e.first} ${e.last}`.trim()} /></div>
+            <div class="ph">
+              <img
+                class={e.href === '/experts/thibault-arnoux/' ? 'expert-photo--thibault' : undefined}
+                src={cfImg(e.photo, 320)}
+                alt={`${e.first} ${e.last}`.trim()}
+              />
+            </div>
             <div class="name">
               {e.first && <>{e.first}{' '}</>}<b>{e.last}</b>
             </div>

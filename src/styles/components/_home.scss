@@ -824,6 +824,14 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
       object-position: center top;
       display: block;
     }
+
+    // Thibault's source portrait uses the exact card aspect ratio but includes
+    // substantially more space above and around him than the other headshots.
+    // Tighten only this carousel image while preserving the original portrait.
+    img.expert-photo--thibault {
+      transform: scale(1.18) translateY(-10%);
+      transform-origin: center top;
+    }
   }
 
   .name {
