@@ -1,10 +1,54 @@
 import assert from 'node:assert/strict';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
 import worker from './index.ts';
+
+function createReminderDb(seed = []) {
+  const rows = new Map(seed.map((row) => [row.email.toLowerCase(), {
+    email: row.email.toLowerCase(),
+    signup_at: row.signup_at,
+    reminder_at: row.reminder_at ?? null,
+  }]));
+  return {
+    rows,
+    prepare(sql) {
+      let args = [];
+      const statement = {
+        bind(...values) { args = values; return statement; },
+        async run() {
+          if (sql.includes('VALUES (?, ?, NULL)')) {
+            const [email, signupAt] = args;
+            const current = rows.get(email);
+            if (!current) rows.set(email, { email, signup_at: signupAt, reminder_at: null });
+            else if (signupAt < current.signup_at) current.signup_at = signupAt;
+          } else if (sql.includes('VALUES (?, ?, ?)')) {
+            const [email, signupAt, reminderAt] = args;
+            const current = rows.get(email);
+            if (!current) rows.set(email, { email, signup_at: signupAt, reminder_at: reminderAt });
+            else if (!current.reminder_at) current.reminder_at = reminderAt;
+          }
+          return { success: true };
+        },
+        async all() {
+          if (sql.includes('WHERE email IN')) {
+            return { results: args.map((email) => rows.get(email)).filter(Boolean) };
+          }
+          if (sql.includes('reminder_at IS NULL')) {
+            const [start, cutoff] = args;
+            return { results: [...rows.values()]
+              .filter((row) => !row.reminder_at && row.signup_at >= start && row.signup_at <= cutoff)
+              .sort((a, b) => a.signup_at.localeCompare(b.signup_at))
+              .slice(0, 50) };
+          }
+          throw new Error(`unexpected D1 query: ${sql}`);
+        },
+      };
+      return statement;
+    },
+  };
+}
 
 const productionEnv = {
   ALLOWED_ORIGIN: 'https://www.immobiliere-pujol.fr',
@@ -121,12 +165,6 @@ test('Apps Script batch mode updates every duplicate and never inserts missing c
   const context = {
     LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
     SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: () => sheet }) },
-    PropertiesService: { getScriptProperties: () => ({ getProperty: () => 'sheet-token' }) },
-    Utilities: {
-      DigestAlgorithm: { SHA_256: 'sha256' },
-      Charset: { UTF_8: 'utf8' },
-      computeDigest: (_algorithm, value) => [...crypto.createHash('sha256').update(String(value)).digest()],
-    },
     ContentService: {
       MimeType: { JSON: 'json' },
       createTextOutput: (content) => ({
@@ -168,18 +206,41 @@ test('Apps Script batch mode updates every duplicate and never inserts missing c
   assert.equal(rows[2][3], '02/08/2026 12:00:00');
   assert.equal(rows[3][2], 'En attente (double opt-in)');
 
-  const forbidden = context.doPost({ postData: { contents: JSON.stringify({
-    action: 'listPendingNewsletterReminders', tab: 'Newsletter', token: 'wrong',
-  }) } });
-  assert.deepEqual(JSON.parse(forbidden.getContent()), { ok: false, error: 'Forbidden' });
+});
 
-  const pending = context.doPost({ postData: { contents: JSON.stringify({
-    action: 'listPendingNewsletterReminders', tab: 'Newsletter', token: 'sheet-token',
-  }) } });
-  assert.deepEqual(JSON.parse(pending.getContent()), {
-    ok: true,
-    records: [{ email: 'other@example.com', signupAt: '03/08/2026', reminderAt: '' }],
-  });
+test('successful DOI signup records future reminder state in D1', async () => {
+  const originalFetch = globalThis.fetch;
+  const db = createReminderDb();
+  const pending = [];
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
+    if (url.includes('script.google.com')) return Response.json({ ok: true, mode: 'insert' });
+    if (url.includes('mandrillapp.com')) return Response.json([{ status: 'sent' }]);
+    throw new Error(`unexpected fetch ${url} ${init.method || 'GET'}`);
+  };
+
+  try {
+    const body = new FormData();
+    body.set('email', 'Future@Example.com');
+    const response = await worker.fetch(new Request('https://worker.example/newsletter', {
+      method: 'POST',
+      headers: { Origin: 'https://www.immobiliere-pujol.fr' },
+      body,
+    }), {
+      ...productionEnv,
+      DB: db,
+      NEWSLETTER_CONFIRM_REDIRECT_URL: 'https://www.immobiliere-pujol.fr/merci/',
+      MANDRILL_API_KEY: 'mandrill-key',
+    }, { waitUntil(promise) { pending.push(promise); } });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { ok: true, doi: true });
+    await Promise.all(pending);
+    assert.equal(db.rows.get('future@example.com')?.reminder_at, null);
+    assert.match(db.rows.get('future@example.com')?.signup_at || '', /^\d{4}-\d{2}-\d{2}T/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test('one-time DOI reminder dry run excludes confirmed and already-reminded contacts', async () => {
@@ -188,15 +249,6 @@ test('one-time DOI reminder dry run excludes confirmed and already-reminded cont
   globalThis.fetch = async (input) => {
     const url = String(input);
     calls.push(url);
-    if (url.includes('script.google.com')) return Response.json({
-      ok: true,
-      records: [
-        { email: 'eligible@example.com', signupAt: '22/07/2026 10:00:00', reminderAt: '' },
-        { email: 'confirmed@example.com', signupAt: '23/07/2026 10:00:00', reminderAt: '' },
-        { email: 'reminded@example.com', signupAt: '24/07/2026 10:00:00', reminderAt: '25/07/2026 10:00:00' },
-        { email: 'reminded@example.com', signupAt: '24/07/2026 10:00:00', reminderAt: '' },
-      ],
-    });
     if (url.includes('/v3/contacts?')) return Response.json({
       contacts: [{ email: 'confirmed@example.com', listIds: [3] }],
     });
@@ -214,16 +266,20 @@ test('one-time DOI reminder dry run excludes confirmed and already-reminded cont
     }), {
       ...productionEnv,
       NEWSLETTER_INTERNAL_TOKEN: 'newsletter-token',
-      SHEET_INTERNAL_TOKEN: 'sheet-token',
+      DB: createReminderDb([
+        { email: 'eligible@example.com', signup_at: '2026-07-22T09:00:00.000Z' },
+        { email: 'confirmed@example.com', signup_at: '2026-07-23T09:00:00.000Z' },
+        { email: 'reminded@example.com', signup_at: '2026-07-24T09:00:00.000Z', reminder_at: '2026-07-25T09:00:00.000Z' },
+      ]),
     }, {});
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), {
       ok: true,
       dryRun: true,
       requested: 4,
-      eligible: 1,
+      eligible: 2,
       excludedConfirmed: 1,
-      excludedNotPending: 1,
+      excludedNotPending: 0,
       excludedAlreadyReminded: 1,
     });
     assert.equal(calls.some((url) => url.includes('doubleOptinConfirmation')), false);
@@ -239,10 +295,6 @@ test('one-time DOI reminder marks the Sheet only after Brevo accepts it', async 
     const url = String(input);
     const body = init.body ? JSON.parse(init.body) : null;
     calls.push({ url, body });
-    if (url.includes('script.google.com') && body?.action) return Response.json({
-      ok: true,
-      records: [{ email: 'eligible@example.com', signupAt: '22/07/2026 10:00:00', reminderAt: '' }],
-    });
     if (url.includes('/v3/contacts?')) return Response.json({ contacts: [] });
     if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
     if (url.includes('script.google.com') && body?.data) return Response.json({ ok: true, mode: 'update' });
@@ -257,7 +309,9 @@ test('one-time DOI reminder marks the Sheet only after Brevo accepts it', async 
     }), {
       ...productionEnv,
       NEWSLETTER_INTERNAL_TOKEN: 'newsletter-token',
-      SHEET_INTERNAL_TOKEN: 'sheet-token',
+      DB: createReminderDb([
+        { email: 'eligible@example.com', signup_at: '2026-07-22T09:00:00.000Z' },
+      ]),
     }, {});
     assert.equal(response.status, 200);
     assert.equal((await response.json()).sent, 1);
@@ -285,21 +339,19 @@ test('automatic reminders send once for eligible post-release signups', async ()
     if (url.includes('script.google.com') && Array.isArray(body?.records)) {
       return Response.json({ ok: true, matchedRecords: 0, updatedRows: 0 });
     }
-    if (url.includes('script.google.com') && body?.action) return Response.json({
-      ok: true,
-      records: [{ email: 'future@example.com', signupAt, reminderAt: '' }],
-    });
     if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
     if (url.includes('script.google.com') && body?.data) return Response.json({ ok: true, mode: 'update' });
     throw new Error(`unexpected fetch ${url}`);
   };
 
   try {
-    await worker.scheduled({ cron: '20 * * * *' }, {
+    const env = {
       ...productionEnv,
-      SHEET_INTERNAL_TOKEN: 'sheet-token',
+      DB: createReminderDb([{ email: 'future@example.com', signup_at: signupAt }]),
       NEWSLETTER_REMINDER_AUTO_FROM: autoFrom,
-    });
+    };
+    await worker.scheduled({ cron: '20 * * * *' }, env);
+    await worker.scheduled({ cron: '20 * * * *' }, env);
     assert.equal(calls.filter((call) => call.url.includes('doubleOptinConfirmation')).length, 1);
     const doiIndex = calls.findIndex((call) => call.url.includes('doubleOptinConfirmation'));
     const markIndex = calls.findIndex((call) => call.body?.data?.['Date rappel opt-in']);

@@ -9,47 +9,6 @@ function doPost(e) {
       return json({ ok: false, error: 'Tab not found: ' + data.tab });
     }
 
-    // ── Protected read for the production DOI reminder worker ─────────────
-    // This is the only path that returns subscriber addresses. Keep it behind
-    // a Script Property shared only with the production email worker.
-    if (data.action === 'listPendingNewsletterReminders') {
-      var expectedToken = PropertiesService.getScriptProperties().getProperty('SHEET_INTERNAL_TOKEN');
-      if (!expectedToken || !secureTokenEqual(data.token, expectedToken)) {
-        return json({ ok: false, error: 'Forbidden' });
-      }
-      var reminderHeaders = sheet.getRange(1, 1, 1, Math.max(1, sheet.getLastColumn())).getValues()[0]
-                                 .map(function (h) { return String(h).trim(); });
-      if (reminderHeaders.indexOf('Date rappel opt-in') === -1) {
-        sheet.getRange(1, reminderHeaders.length + 1).setValue('Date rappel opt-in');
-        reminderHeaders.push('Date rappel opt-in');
-      }
-      var dateCol = reminderHeaders.indexOf('Date');
-      var emailCol = reminderHeaders.indexOf('Email');
-      var statusCol = reminderHeaders.indexOf('Statut opt-in');
-      var reminderCol = reminderHeaders.indexOf('Date rappel opt-in');
-      if (dateCol === -1 || emailCol === -1 || statusCol === -1) {
-        return json({ ok: false, error: 'Newsletter headers incomplete' });
-      }
-      var reminderRecords = [];
-      var reminderLastRow = sheet.getLastRow();
-      if (reminderLastRow > 1) {
-        var reminderRows = sheet.getRange(2, 1, reminderLastRow - 1, reminderHeaders.length).getValues();
-        reminderRows.forEach(function (row) {
-          var status = String(row[statusCol] || '').trim().toLowerCase();
-          var email = String(row[emailCol] || '').trim().toLowerCase();
-          if (status.indexOf('en attente') !== 0 || !email) return;
-          var signupValue = row[dateCol];
-          var reminderValue = row[reminderCol];
-          reminderRecords.push({
-            email: email,
-            signupAt: signupValue instanceof Date ? signupValue.toISOString() : String(signupValue || '').trim(),
-            reminderAt: reminderValue instanceof Date ? reminderValue.toISOString() : String(reminderValue || '').trim()
-          });
-        });
-      }
-      return json({ ok: true, records: reminderRecords });
-    }
-
     // ── Legacy append: { tab, row: [...] } — all forms except the newsletter ──
     if (data.row) {
       sheet.appendRow(data.row);
@@ -179,18 +138,6 @@ function doPost(e) {
 function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
-}
-
-function secureTokenEqual(provided, expected) {
-  var left = Utilities.computeDigest(
-    Utilities.DigestAlgorithm.SHA_256, String(provided || ''), Utilities.Charset.UTF_8
-  );
-  var right = Utilities.computeDigest(
-    Utilities.DigestAlgorithm.SHA_256, String(expected || ''), Utilities.Charset.UTF_8
-  );
-  var diff = 0;
-  for (var i = 0; i < left.length; i++) diff |= left[i] ^ right[i];
-  return diff === 0;
 }
 
 // Run this in the editor to test the upsert end-to-end (writes to the Newsletter tab).

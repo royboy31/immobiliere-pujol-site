@@ -2,6 +2,7 @@
 // Deployed as a separate worker alongside the main Astro site.
 
 interface Env {
+  DB: D1Database;
   MANDRILL_API_KEY: string;
   ALLOWED_ORIGIN: string;
   TURNSTILE_SECRET?: string;
@@ -23,9 +24,6 @@ interface Env {
   NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
-  // Dedicated secret for reading pending newsletter rows from the Apps Script.
-  // The write-only legacy form path remains unchanged.
-  SHEET_INTERNAL_TOKEN?: string;
   // ISO timestamp. Automatic reminders only consider signups on/after this
   // release cutoff, so historical pending contacts stay in the reviewed batch.
   NEWSLETTER_REMINDER_AUTO_FROM?: string;
@@ -277,59 +275,49 @@ async function updateExistingSheetRows(
   };
 }
 
-interface PendingNewsletterRow {
+interface NewsletterReminderState {
   email: string;
-  signupAt: string;
-  reminderAt: string;
+  signup_at: string;
+  reminder_at: string | null;
 }
 
-function isPendingNewsletterRow(value: unknown): value is PendingNewsletterRow {
-  if (!value || typeof value !== 'object') return false;
-  const row = value as Record<string, unknown>;
-  return typeof row.email === 'string'
-    && typeof row.signupAt === 'string'
-    && typeof row.reminderAt === 'string';
+async function ensureNewsletterReminderSchema(env: Env): Promise<void> {
+  await env.DB.prepare(`CREATE TABLE IF NOT EXISTS newsletter_reminders (
+    email TEXT PRIMARY KEY COLLATE NOCASE,
+    signup_at TEXT NOT NULL,
+    reminder_at TEXT
+  )`).run();
 }
 
-function collapsePendingNewsletterRows(rows: PendingNewsletterRow[]): PendingNewsletterRow[] {
-  const unique = new Map<string, PendingNewsletterRow>();
-  for (const row of rows) {
-    const email = row.email.trim().toLowerCase();
-    if (!email) continue;
-    const existing = unique.get(email);
-    if (!existing) {
-      unique.set(email, { ...row, email });
-      continue;
-    }
-    unique.set(email, {
-      email,
-      signupAt: existing.signupAt || row.signupAt,
-      // Any recorded reminder on a duplicate row blocks another send.
-      reminderAt: existing.reminderAt || row.reminderAt,
-    });
-  }
-  return [...unique.values()];
+async function recordPendingNewsletterSignup(env: Env, email: string, signupAt: string): Promise<void> {
+  await ensureNewsletterReminderSchema(env);
+  await env.DB.prepare(`INSERT INTO newsletter_reminders (email, signup_at, reminder_at)
+    VALUES (?, ?, NULL)
+    ON CONFLICT(email) DO UPDATE SET signup_at = MIN(newsletter_reminders.signup_at, excluded.signup_at)`)
+    .bind(email.trim().toLowerCase(), signupAt)
+    .run();
 }
 
-async function fetchPendingNewsletterRows(env: Env): Promise<PendingNewsletterRow[]> {
-  if (!env.SHEET_INTERNAL_TOKEN) throw new Error('SHEET_INTERNAL_TOKEN manquant');
-  const res = await fetch(SHEETS_URL, {
-    method: 'POST',
-    body: JSON.stringify({
-      action: 'listPendingNewsletterReminders',
-      tab: 'Newsletter',
-      token: env.SHEET_INTERNAL_TOKEN,
-    }),
-    redirect: 'follow',
-  });
-  if (!res.ok) throw new Error(`Sheets HTTP ${res.status}`);
-  const result = (await res.json().catch(() => null)) as {
-    ok?: boolean;
-    error?: string;
-    records?: PendingNewsletterRow[];
-  } | null;
-  if (!result?.ok) throw new Error(result?.error || 'Réponse Sheets invalide');
-  return Array.isArray(result.records) ? result.records.filter(isPendingNewsletterRow) : [];
+async function fetchNewsletterReminderStates(env: Env, emails: string[]): Promise<NewsletterReminderState[]> {
+  await ensureNewsletterReminderSchema(env);
+  if (!emails.length) return [];
+  const placeholders = emails.map(() => '?').join(',');
+  const result = await env.DB.prepare(
+    `SELECT email, signup_at, reminder_at FROM newsletter_reminders WHERE email IN (${placeholders})`,
+  ).bind(...emails).all<NewsletterReminderState>();
+  return result.results || [];
+}
+
+async function fetchDueNewsletterReminders(env: Env, start: string, cutoff: string): Promise<NewsletterReminderState[]> {
+  await ensureNewsletterReminderSchema(env);
+  const result = await env.DB.prepare(`SELECT email, signup_at, reminder_at
+    FROM newsletter_reminders
+    WHERE reminder_at IS NULL AND signup_at >= ? AND signup_at <= ?
+    ORDER BY signup_at ASC
+    LIMIT 50`)
+    .bind(start, cutoff)
+    .all<NewsletterReminderState>();
+  return result.results || [];
 }
 
 const SITE_URL = 'https://www.immobiliere-pujol.fr';
@@ -1098,6 +1086,7 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
   ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
     Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)',
   }));
+  ctx.waitUntil(recordPendingNewsletterSignup(env, email, new Date().toISOString()));
   ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
 
   return { ok: true, doi: true };
@@ -1278,39 +1267,36 @@ async function reconcileNewsletterSheet(env: Env): Promise<Set<string>> {
   return confirmedEmails;
 }
 
-function parseSheetDate(value: string): number {
-  const iso = Date.parse(value);
-  if (Number.isFinite(iso)) return iso;
-  const match = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
-  if (!match) return Number.NaN;
-  const [, day, month, year, hour = '0', minute = '0', second = '0'] = match;
-  // Sheet timestamps are Europe/Paris. A conservative UTC conversion is enough
-  // for the once-daily 24-hour threshold and never sends early.
-  return Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour) - 1, Number(minute), Number(second));
-}
-
-async function markNewsletterReminder(email: string): Promise<void> {
-  const saved = await upsertSheet('Newsletter', 'Email', {
+async function markNewsletterReminder(env: Env, email: string): Promise<void> {
+  await ensureNewsletterReminderSchema(env);
+  const reminderAt = new Date().toISOString();
+  await env.DB.prepare(`INSERT INTO newsletter_reminders (email, signup_at, reminder_at)
+    VALUES (?, ?, ?)
+    ON CONFLICT(email) DO UPDATE SET reminder_at = COALESCE(newsletter_reminders.reminder_at, excluded.reminder_at)`)
+    .bind(email, reminderAt, reminderAt)
+    .run();
+  const sheetSaved = await upsertSheet('Newsletter', 'Email', {
     Email: email,
     'Date rappel opt-in': now(),
-  }, { writeOnce: ['Date rappel opt-in'], strict: true });
-  if (!saved) throw new Error('Échec de marquage du rappel');
+  }, { writeOnce: ['Date rappel opt-in'] });
+  if (!sheetSaved) console.warn(JSON.stringify({ event: 'newsletter_reminder_sheet_mark_failed' }));
 }
 
 async function sendEligibleNewsletterReminders(
   env: Env,
-  rows: PendingNewsletterRow[],
+  emails: string[],
   confirmedEmails: Set<string>,
   limit: number,
 ): Promise<{ eligible: number; sent: number; failed: number; excludedConfirmed: number; excludedAlreadyReminded: number }> {
-  const unique = collapsePendingNewsletterRows(rows);
-  const candidates = unique.filter((row) => !row.reminderAt);
+  const unique = [...new Set(emails.map((email) => email.trim().toLowerCase()).filter(Boolean))];
+  const states = await fetchNewsletterReminderStates(env, unique);
+  const reminded = new Set(states.filter((state) => !!state.reminder_at).map((state) => state.email));
+  const candidates = unique.filter((email) => !reminded.has(email));
   let sent = 0;
   let failed = 0;
   let excludedConfirmed = 0;
-  const excludedAlreadyReminded = unique.length - candidates.length;
-  for (const row of candidates.slice(0, limit)) {
-    const email = row.email.trim().toLowerCase();
+  const excludedAlreadyReminded = reminded.size;
+  for (const email of candidates.slice(0, limit)) {
     if (confirmedEmails.has(email)) {
       excludedConfirmed++;
       continue;
@@ -1322,11 +1308,11 @@ async function sendEligibleNewsletterReminders(
       failed++;
       continue;
     }
-    await markNewsletterReminder(email);
+    await markNewsletterReminder(env, email);
     sent++;
   }
   return {
-    eligible: candidates.filter((row) => !confirmedEmails.has(row.email.trim().toLowerCase())).length,
+    eligible: candidates.filter((email) => !confirmedEmails.has(email)).length,
     sent,
     failed,
     excludedConfirmed,
@@ -1335,22 +1321,19 @@ async function sendEligibleNewsletterReminders(
 }
 
 async function runAutomaticNewsletterReminders(env: Env, confirmedEmails: Set<string>): Promise<void> {
-  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.NEWSLETTER_REMINDER_AUTO_FROM || !env.SHEET_INTERNAL_TOKEN) return;
+  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.NEWSLETTER_REMINDER_AUTO_FROM) return;
   const start = Date.parse(env.NEWSLETTER_REMINDER_AUTO_FROM);
   if (!Number.isFinite(start)) throw new Error('NEWSLETTER_REMINDER_AUTO_FROM invalide');
-  const cutoff = Date.now() - 24 * 60 * 60 * 1000;
-  const rows = (await fetchPendingNewsletterRows(env)).filter((row) => {
-    const signup = parseSheetDate(row.signupAt);
-    return Number.isFinite(signup) && signup >= start && signup <= cutoff;
-  });
-  const result = await sendEligibleNewsletterReminders(env, rows, confirmedEmails, 50);
+  const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const rows = await fetchDueNewsletterReminders(env, new Date(start).toISOString(), cutoff);
+  const result = await sendEligibleNewsletterReminders(env, rows.map((row) => row.email), confirmedEmails, 50);
   console.log(JSON.stringify({ event: 'newsletter_reminders_automatic', ...result }));
 }
 
 async function handleNewsletterReminders(req: Request, env: Env): Promise<Response> {
   const guard = nlGuard(req, env);
   if (guard) return guard;
-  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.SHEET_INTERNAL_TOKEN || !env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
+  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
     return nlJson({ error: 'Rappels newsletter non configurés.' }, 501);
   }
   let rawBody: unknown;
@@ -1361,21 +1344,20 @@ async function handleNewsletterReminders(req: Request, env: Env): Promise<Respon
   const requested = new Set(emails.map((email) => email.trim().toLowerCase()).filter((email) => email.includes('@')));
   if (!requested.size || requested.size > 100) return nlJson({ error: 'Liste de destinataires invalide.' }, 400);
 
-  const [rows, confirmedEmails] = await Promise.all([
-    fetchPendingNewsletterRows(env),
+  const [states, confirmedEmails] = await Promise.all([
+    fetchNewsletterReminderStates(env, [...requested]),
     fetchConfirmedNewsletterEmails(env),
   ]);
-  const selectedRows = collapsePendingNewsletterRows(
-    rows.filter((row) => requested.has(row.email.trim().toLowerCase())),
-  );
-  const pendingEmails = new Set(selectedRows.map((row) => row.email.trim().toLowerCase()));
-  const eligible = selectedRows.filter((row) => !row.reminderAt && !confirmedEmails.has(row.email.trim().toLowerCase()));
+  const reminded = new Set(states.filter((state) => !!state.reminder_at).map((state) => state.email));
+  const eligible = [...requested].filter((email) => !reminded.has(email) && !confirmedEmails.has(email));
+  // The caller supplies the manually reviewed historical pending allowlist.
+  // Future signups are recorded directly in D1 by handleNewsletter().
   const summary = {
     requested: requested.size,
-    eligible: new Set(eligible.map((row) => row.email.trim().toLowerCase())).size,
+    eligible: eligible.length,
     excludedConfirmed: [...requested].filter((email) => confirmedEmails.has(email)).length,
-    excludedNotPending: [...requested].filter((email) => !pendingEmails.has(email) && !confirmedEmails.has(email)).length,
-    excludedAlreadyReminded: selectedRows.filter((row) => !!row.reminderAt && !confirmedEmails.has(row.email)).length,
+    excludedNotPending: 0,
+    excludedAlreadyReminded: [...reminded].filter((email) => !confirmedEmails.has(email)).length,
   };
   if (body.dryRun !== false) return nlJson({ ok: true, dryRun: true, ...summary });
 

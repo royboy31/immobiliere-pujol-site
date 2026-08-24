@@ -3,6 +3,7 @@
 	"account_id": "68abcbaf4817943a805737802e15679a",
 	"compatibility_date": "2026-04-02",
 	"main": "index.ts",
+	"d1_databases": [{ "binding": "DB", "database_name": "pujol-annonces", "database_id": "109fb417-c984-4c08-90b2-2a10ae1bc279" }],
 	"triggers": {
 		// Daily reconciliation plus an hourly reminder check. Both handler paths
 		// no-op outside the production origin because the account workers share
