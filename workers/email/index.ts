@@ -23,6 +23,9 @@ interface Env {
   NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
+  // Least-privilege token used only by cron-sync for matched-listing emails.
+  // The site's newsletter token remains unchanged for opt-in and admin calls.
+  ALERT_INTERNAL_TOKEN?: string;
   // Dedicated Brevo-verified sender for subscriber-facing alert emails
   // (opt-in / match / registered), e.g. alerte@alerte.immobiliere-pujol.fr.
   // Only set once the alerte sending domain is authenticated in Brevo —
@@ -1205,6 +1208,13 @@ function nlGuard(req: Request, env: Env): Response | null {
   return null;
 }
 
+function alertMatchGuard(req: Request, env: Env): Response | null {
+  if (!env.ALERT_INTERNAL_TOKEN || req.headers.get('x-internal-token') !== env.ALERT_INTERNAL_TOKEN)
+    return nlJson({ error: 'Forbidden' }, 403);
+  if (!env.BREVO_API_KEY) return nlJson({ error: 'Alertes non configurées (BREVO_API_KEY manquant).' }, 501);
+  return null;
+}
+
 // ── Recipient-list allowlist ────────────────────────────────────────────────
 // The composer may only send to a list named here. This worker is the ONLY
 // enforcement point: the admin UI's dropdown is a convenience, and a caller
@@ -1489,7 +1499,7 @@ function buildAlertMatch(prenom: string, criteriaText: string, listings: any[], 
 // POST /alerts/match — send the subscriber a "bien correspondant" email.
 // Body: { email, prenom, criteriaText, manageUrl, listings:[{title,price,location,url,image}] }.
 async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
-  const bad = nlGuard(req, env); if (bad) return bad;
+  const bad = alertMatchGuard(req, env); if (bad) return bad;
   const b = (await req.json().catch(() => ({}))) as any;
   const email = (b.email || '').trim();
   const listings = Array.isArray(b.listings) ? b.listings : [];

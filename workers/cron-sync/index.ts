@@ -18,7 +18,7 @@ interface Env {
   R2_PUBLIC_URL?: string;
   // Alert matching (Phase 2) — all optional; the matcher no-ops if any is missing.
   EMAIL_WORKER_URL?: string;          // e.g. https://pujol-email.<acct>.workers.dev
-  NEWSLETTER_INTERNAL_TOKEN?: string; // must match the email worker's token
+  ALERT_INTERNAL_TOKEN?: string;      // must match the email worker's alert-only token
   SITE_BASE_URL?: string;             // public site origin for listing/manage links
 }
 
@@ -468,7 +468,7 @@ async function matchNewListingsToAlerts(
   photoMap: Map<string, string[]>,
 ): Promise<void> {
   try {
-    if (!env.EMAIL_WORKER_URL || !env.NEWSLETTER_INTERNAL_TOKEN) return;
+    if (!env.EMAIL_WORKER_URL || !env.ALERT_INTERNAL_TOKEN) return;
     const newOnes = annonces.filter((a) => newSlugs.has(a.slug));
     if (!newOnes.length) return;
     if (newOnes.length > 40) { console.log(`[alert-match] skipped: ${newOnes.length} new listings (backfill guard)`); return; }
@@ -524,7 +524,7 @@ async function matchNewListingsToAlerts(
       try {
         const r = await fetch(`${emailBase}/alerts/match`, {
           method: 'POST',
-          headers: { 'content-type': 'application/json', 'x-internal-token': env.NEWSLETTER_INTERNAL_TOKEN },
+          headers: { 'content-type': 'application/json', 'x-internal-token': env.ALERT_INTERNAL_TOKEN },
           body: JSON.stringify({
             email: alert.email,
             prenom: alert.prenom || '',
