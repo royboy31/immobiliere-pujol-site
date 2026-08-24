@@ -29,6 +29,8 @@ export interface BlogArticle {
   // expert CTA card
   expert_cta: string;
   expert_cta_title: string;
+  // Ordered article slugs chosen by Caroline for the public "À lire aussi" block.
+  related_slugs: string[];
   // lifecycle
   status: 'draft' | 'published';
   created_by: string;
@@ -71,6 +73,7 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS blog_articles (
   twitter_card TEXT NOT NULL DEFAULT 'summary_large_image',
   expert_cta TEXT,
   expert_cta_title TEXT,
+  related_slugs TEXT,
   status TEXT NOT NULL DEFAULT 'draft',
   created_by TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
@@ -95,6 +98,7 @@ const ADD_COLUMNS: Record<string, string> = {
   // reads THIS (never the live working row), so a rebuild can't publish an
   // in-progress edit. Set/cleared by publishArticles() (the "Publier" action).
   published_json: 'TEXT',
+  related_slugs: 'TEXT',
 };
 
 let schemaReady = false;
@@ -172,6 +176,7 @@ function toArticle(row: any): BlogArticle {
     nofollow: !!row.nofollow,
     article_date: row.article_date || '',
     twitter_card: row.twitter_card || 'summary_large_image',
+    related_slugs: safeJson(row.related_slugs),
   };
 }
 function safeJson(v: any): string[] {
@@ -220,6 +225,32 @@ export async function listArticles(db: D1Database): Promise<BlogArticle[]> {
   return (results || []).map(toArticle);
 }
 
+export interface RelatedArticleOption {
+  slug: string;
+  title: string;
+  article_date: string;
+}
+
+/** Published, non-local articles Caroline may select for "À lire aussi". */
+export async function listRelatedArticleOptions(db: D1Database, excludeId?: number): Promise<RelatedArticleOption[]> {
+  const where = ["status = 'published'", "slug NOT LIKE 'local/%'"];
+  const bindings: unknown[] = [];
+  if (excludeId) {
+    where.push('id != ?');
+    bindings.push(excludeId);
+  }
+  const { results } = await db.prepare(
+    `SELECT slug, title, article_date FROM blog_articles
+     WHERE ${where.join(' AND ')}
+     ORDER BY date(article_date) DESC, title ASC`
+  ).bind(...bindings).all();
+  return (results || []).map((row: any) => ({
+    slug: String(row.slug || ''),
+    title: String(row.title || row.slug || ''),
+    article_date: String(row.article_date || ''),
+  }));
+}
+
 export async function getArticle(db: D1Database, id: number): Promise<BlogArticle | null> {
   const row = await db.prepare('SELECT * FROM blog_articles WHERE id = ?').bind(id).first();
   return row ? toArticle(row) : null;
@@ -258,15 +289,15 @@ export async function createArticle(db: D1Database, input: ArticleInput, adminEm
       (slug, title, excerpt, body_html, featured_image, categories, tags, author, article_date,
        seo_title, seo_description, canonical_url, focus_keyword, noindex, nofollow,
        og_title, og_description, og_image, twitter_card,
-       expert_cta, expert_cta_title, status, created_by, published_at)
-     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+       expert_cta, expert_cta_title, related_slugs, status, created_by, published_at)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
   ).bind(
     slug, title, input.excerpt || '', input.body_html || '', input.featured_image || '',
     JSON.stringify(input.categories || []), JSON.stringify(input.tags || []), input.author || '', articleDate,
     input.seo_title || '', input.seo_description || '', input.canonical_url || '', input.focus_keyword || '',
     b(input.noindex), b(input.nofollow),
     input.og_title || '', input.og_description || '', input.og_image || '', input.twitter_card || 'summary_large_image',
-    input.expert_cta || '', input.expert_cta_title || '', status, adminEmail, publishedAt,
+    input.expert_cta || '', input.expert_cta_title || '', JSON.stringify(input.related_slugs || []), status, adminEmail, publishedAt,
   ).run();
   const id = res.meta.last_row_id as number;
   return (await getArticle(db, id))!;
@@ -281,13 +312,13 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
     : existing.slug;
   const status = input.status === 'published' ? 'published' : (input.status === 'draft' ? 'draft' : existing.status);
   const publishedAt = status === 'published' ? (existing.published_at || new Date().toISOString()) : null;
-  const pick = <K extends keyof BlogArticle>(k: K) => (input[k] ?? existing[k]);
+  const pick = (k: keyof ArticleInput) => (input[k] ?? existing[k as keyof BlogArticle]);
   await db.prepare(
     `UPDATE blog_articles SET
        slug=?, title=?, excerpt=?, body_html=?, featured_image=?, categories=?, tags=?, author=?, article_date=?,
        seo_title=?, seo_description=?, canonical_url=?, focus_keyword=?, noindex=?, nofollow=?,
        og_title=?, og_description=?, og_image=?, twitter_card=?,
-       expert_cta=?, expert_cta_title=?, status=?, published_at=?, updated_at=datetime('now')
+       expert_cta=?, expert_cta_title=?, related_slugs=?, status=?, published_at=?, updated_at=datetime('now')
      WHERE id=?`
   ).bind(
     slug, (input.title ?? existing.title).trim(), pick('excerpt'), pick('body_html'), pick('featured_image'),
@@ -296,7 +327,7 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
     pick('seo_title'), pick('seo_description'), pick('canonical_url'), pick('focus_keyword'),
     b(input.noindex ?? existing.noindex), b(input.nofollow ?? existing.nofollow),
     pick('og_title'), pick('og_description'), pick('og_image'), pick('twitter_card'),
-    pick('expert_cta'), pick('expert_cta_title'), status, publishedAt, id,
+    pick('expert_cta'), pick('expert_cta_title'), JSON.stringify(input.related_slugs ?? existing.related_slugs), status, publishedAt, id,
   ).run();
   return await getArticle(db, id);
 }
@@ -320,7 +351,7 @@ const ARTICLE_SNAPSHOT_JSON = `json_object(
   'focus_keyword', focus_keyword, 'noindex', noindex, 'nofollow', nofollow,
   'og_title', og_title, 'og_description', og_description, 'og_image', og_image,
   'twitter_card', twitter_card, 'expert_cta', expert_cta,
-  'expert_cta_title', expert_cta_title)`;
+  'expert_cta_title', expert_cta_title, 'related_slugs', related_slugs)`;
 
 /** "Publier": freeze every PUBLISHED article's current state into published_json
  *  (what the site builds from) and drop the snapshot for drafts. Idempotent —
@@ -341,4 +372,29 @@ export async function countPendingArticles(db: D1Database): Promise<number> {
         OR (status = 'draft' AND published_json IS NOT NULL)`
   ).first<{ n: number }>();
   return row?.n || 0;
+}
+
+export interface PendingArticleChange {
+  id: number;
+  slug: string;
+  title: string;
+  action: 'online' | 'remove';
+}
+
+/** Exact article set consumed by the global publication preview and final gate. */
+export async function listPendingArticleChanges(db: D1Database): Promise<PendingArticleChange[]> {
+  const { results } = await db.prepare(
+    `SELECT id, slug, title,
+            CASE WHEN status = 'draft' THEN 'remove' ELSE 'online' END AS action
+       FROM blog_articles
+      WHERE (status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
+         OR (status = 'draft' AND published_json IS NOT NULL)
+      ORDER BY action ASC, title ASC`
+  ).all();
+  return (results || []).map((row: any) => ({
+    id: Number(row.id),
+    slug: String(row.slug || ''),
+    title: String(row.title || row.slug || ''),
+    action: row.action === 'remove' ? 'remove' : 'online',
+  }));
 }

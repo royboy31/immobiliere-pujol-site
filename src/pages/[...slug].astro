@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import { buildArticle, buildLocalBusiness } from '../lib/schemas';
 import BlogSidebar from '../components/blog/BlogSidebar.astro';
 import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
-import { pickRotatedLinks } from '../lib/internal-links';
+import { buildRelatedArticles } from '../lib/blog-related';
 import { isLegalPage } from '../lib/legal-pages';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
@@ -202,26 +202,20 @@ const ogImage = ogSource
   : undefined;
 const heroCategory = type === 'article' && (entry.data.categories || [])[0];
 
-// Blog sidebar — "À lire aussi": a rotated slice of other articles, seeded by
-// this article's slug so link equity spreads evenly across the catalogue
-// (every article links to a different set instead of always the latest few).
+// Blog sidebar — Caroline's ordered choices have priority. Empty slots are
+// filled deterministically with the newest published articles, never a rotated
+// set of old links.
 let relatedArticles: { title: string; url: string; image?: string; date?: string }[] = [];
 if (type === 'article') {
   const allArticles = await getCollection('articles');
-  const pool = allArticles
-    .filter((a: any) => a.data.slug !== entry.data.slug)
-    // Never suggest /local/ SEO landing pages in the blog's "À lire aussi".
-    .filter((a: any) => !(a.data.slug || '').startsWith('local/'))
-    .map((a: any) => ({ url: `/${a.data.slug}/`, title: a.data.title, type: 'article', image: a.data.featuredImage, date: a.data.date }));
-  // Only suggest reasonably fresh content: articles from the last 3 years
-  // (2019-2021 pieces read stale). Fallback to the full pool if the recent
-  // set is ever too small to fill the sidebar.
-  const threeYearsAgo = Date.now() - 3 * 365.25 * 24 * 60 * 60 * 1000;
-  const recentPool = pool.filter((a: any) => {
-    const t = Date.parse(a.date || '');
-    return !isNaN(t) && t >= threeYearsAgo;
-  });
-  relatedArticles = pickRotatedLinks(recentPool.length >= 6 ? recentPool : pool, entry.data.slug, 6).map((l: any) => ({ title: l.title, url: l.url, image: l.image, date: l.date }));
+  const pool = allArticles.map((article: any) => ({
+    slug: article.data.slug,
+    title: article.data.title,
+    image: article.data.featuredImage,
+    date: article.data.date,
+  }));
+  relatedArticles = buildRelatedArticles(pool, entry.data.slug, entry.data.relatedArticles || [], 6)
+    .map(({ slug, title, image, date }) => ({ title, url: `/${slug}/`, image, date }));
 }
 
 // Blog articles sit under the blog index — surface "Blog" as the middle crumb

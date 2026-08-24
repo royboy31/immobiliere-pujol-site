@@ -2,13 +2,17 @@
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
 import ArticleEditor from '../../../components/admin/ArticleEditor.astro';
+import { getDB, ensureSchema, listRelatedArticleOptions } from '../../../lib/blog-db';
 
 type Expert = { slug: string; title: string };
 const expertMods = import.meta.glob<Expert>('../../../content/experts/*.json', { eager: true, import: 'default' });
 const experts = Object.values(expertMods)
   .map((e) => ({ slug: e.slug, title: (e.title || e.slug).split('|').pop()?.trim() || e.slug }))
   .sort((a, b) => a.title.localeCompare(b.title));
+const db = await getDB();
+await ensureSchema(db);
+const relatedOptions = await listRelatedArticleOptions(db);
 ---
 <AdminLayout title="Nouvel article" section="articles">
-  <ArticleEditor article={null} experts={experts} />
+  <ArticleEditor article={null} experts={experts} relatedOptions={relatedOptions} />
 </AdminLayout>

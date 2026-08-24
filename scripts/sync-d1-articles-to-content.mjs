@@ -71,6 +71,8 @@ for (const r of rows) {
   if (a.author) fm.author = a.author;
   if (a.expert_cta) fm.expertCta = a.expert_cta;
   if (a.expert_cta_title) fm.expertCtaTitle = a.expert_cta_title;
+  const relatedArticles = safeArr(a.related_slugs);
+  if (relatedArticles.length) fm.relatedArticles = relatedArticles;
   // Extended SEO / Open Graph (emitted by [...slug].astro <head>). Written only
   // when meaningful, to keep frontmatter clean. focusKeyword is editor-only.
   if (a.canonical_url) fm.canonicalUrl = a.canonical_url;

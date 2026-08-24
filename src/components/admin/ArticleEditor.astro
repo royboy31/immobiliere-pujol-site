@@ -5,8 +5,13 @@
 import type { BlogArticle } from '../../lib/blog-db';
 import { BLOG_THEMES } from '../../lib/blog-db';
 
-interface Props { article?: BlogArticle | null; experts?: { slug: string; title: string }[] }
-const { article = null, experts = [] } = Astro.props;
+interface RelatedOption { slug: string; title: string; article_date: string }
+interface Props {
+  article?: BlogArticle | null;
+  experts?: { slug: string; title: string }[];
+  relatedOptions?: RelatedOption[];
+}
+const { article = null, experts = [], relatedOptions = [] } = Astro.props;
 const isNew = !article;
 const SITE = 'https://www.immobiliere-pujol.fr';
 const today = new Date().toISOString().slice(0, 10);
@@ -16,6 +21,7 @@ const initial: BlogArticle = article ?? {
   seo_title: '', seo_description: '', canonical_url: '', focus_keyword: '', noindex: false, nofollow: false,
   og_title: '', og_description: '', og_image: '', twitter_card: 'summary_large_image',
   expert_cta: '', expert_cta_title: '', status: 'draft', created_by: '', created_at: '', updated_at: '', published_at: null,
+  related_slugs: [],
 };
 
 // Category checkboxes = the 6 curated site themes. A theme is pre-ticked when any
@@ -32,8 +38,12 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   <span class="spacer"></span>
   <span id="ed-status" class="ed-savestate"></span>
   {!isNew && <a href="../preview/" target="_blank" class="btn btn--ghost">Aperçu ↗</a>}
-  <button id="ed-save" class="btn btn--ghost">Enregistrer le brouillon</button>
-  <button id="ed-publish" class="btn btn--primary">Publier</button>
+  <button id="ed-save" class="btn btn--ghost">{initial.status === 'published' ? 'Enregistrer les modifications' : 'Enregistrer le brouillon'}</button>
+  {initial.status === 'published' ? (
+    <button id="ed-draft" class="btn btn--danger-soft">Repasser en brouillon</button>
+  ) : (
+    <button id="ed-publish" class="btn btn--primary">Passer en publié</button>
+  )}
 </div>
 
 <div class="ed-grid">
@@ -143,12 +153,14 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   <aside class="ed-side">
     <div class="card ed-card">
       <p class="ed-cardtitle">Publication</p>
-      <label>Statut
-        <select id="f-status">
-          <option value="draft" selected={initial.status === 'draft'}>Brouillon</option>
-          <option value="published" selected={initial.status === 'published'}>Publié</option>
-        </select>
-      </label>
+      <p class:list={['ed-current-status', `is-${initial.status}`]}>
+        Statut actuel : <strong>{initial.status === 'published' ? 'Publié' : 'Brouillon'}</strong>
+      </p>
+      <p class="ed-status-hint">
+        {initial.status === 'published'
+          ? 'Enregistrer conserve le statut publié. Les modifications vont en ligne seulement avec la publication globale.'
+          : 'Enregistrer conserve le brouillon. « Passer en publié » prépare sa mise en ligne lors de la publication globale.'}
+      </p>
       <label>Date de l’article
         <input id="f-date" type="date" value={initial.article_date} />
       </label>
@@ -174,7 +186,19 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
       <p class="ed-cardtitle">Lier un article</p>
       <input id="f-link-search" type="text" placeholder="Rechercher un article…" autocomplete="off" />
       <div id="f-link-results" class="ed-link-list"></div>
-      <p class="ed-link-hint">Sélectionnez du texte dans l'article puis cliquez un titre pour créer le lien. Sans sélection, le titre est inséré comme lien.</p>
+      <label class="ed-link-anchor">Texte du lien
+        <input id="f-link-anchor" type="text" placeholder="Sélectionnez un article ci-dessus" disabled />
+      </label>
+      <button type="button" id="f-link-insert" class="ed-smallbtn" disabled>Insérer le lien</button>
+      <p class="ed-link-hint">Le texte sélectionné dans l’article est repris automatiquement. Vous pouvez le modifier avant l’insertion.</p>
+    </div>
+
+    <div class="card ed-card">
+      <p class="ed-cardtitle">À lire aussi</p>
+      <input id="f-related-search" type="text" placeholder="Rechercher un article publié…" autocomplete="off" />
+      <div id="f-related-results" class="ed-link-list"></div>
+      <ol id="f-related-selected" class="ed-related-selected"></ol>
+      <p class="ed-link-hint">Ajoutez plusieurs articles, puis utilisez les flèches pour choisir leur ordre dans la colonne droite.</p>
     </div>
 
     <div class="card ed-card">
@@ -230,6 +254,8 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   }
   .ed-topbar .spacer { flex:1; }
   .ed-savestate { font-size:12px; color:#7f9a17; font-weight:600; transition:opacity .2s; }
+  .btn--danger-soft { color:#9f2f26; background:#fff5f4; border-color:#efc9c5; }
+  .btn--danger-soft:hover { background:#fde9e7; }
   .ed-cardtitle {
     font-family:var(--pj-noto); font-weight:700; font-size:11px; letter-spacing:.7px;
     text-transform:uppercase; color:var(--pj-olive-2); margin:0 0 15px;
@@ -249,6 +275,7 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     background:#fff; border:1px solid var(--pj-hairline); border-radius:14px 14px 0 0;
     padding:9px 12px; border-bottom:none;
     box-shadow:0 4px 14px rgba(0,0,0,.04);
+    position:sticky; top:var(--ed-topbar-height, 72px); z-index:15;
   }
   .ed-toolbar button {
     min-width:34px; height:32px; padding:0 9px; border:1px solid transparent; border-radius:8px;
@@ -328,6 +355,9 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   .ed-card { margin-bottom:16px; padding:20px 22px; }
   .ed-card label { margin-bottom:14px; }
   .ed-card label:last-child { margin-bottom:0; }
+  .ed-current-status { margin:0 0 8px; padding:9px 11px; border-radius:9px; font-size:13px; background:#f4f5f1; color:#56606a; }
+  .ed-current-status.is-published { background:#eff5df; color:#566b0d; }
+  .ed-status-hint { margin:0 0 16px; color:#767d84; font-size:12px; line-height:1.5; }
 
   /* Category picker — checkboxes, pick from existing categories only */
   .ed-field { margin-bottom:14px; }
@@ -343,6 +373,13 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   .ed-link-list :global(.ed-link-date) { display:block; font-size:11px; color:#999; margin-top:2px; }
   .ed-link-list :global(.ed-link-empty) { font-size:12.5px; color:#999; padding:8px 10px; margin:0; }
   .ed-link-hint { font-size:11.5px; color:#8a8a8a; line-height:1.45; margin:8px 0 0; }
+  .ed-link-anchor { margin-top:12px; }
+  .ed-related-selected { list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
+  .ed-related-selected :global(li) { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px; align-items:center; padding:9px 10px; border:1px solid var(--pj-hairline); border-radius:9px; background:#fbfcf8; }
+  .ed-related-selected :global(.ed-related-title) { min-width:0; font-size:12.5px; line-height:1.35; color:#222; }
+  .ed-related-selected :global(.ed-related-actions) { display:flex; gap:3px; }
+  .ed-related-selected :global(button) { width:28px; height:28px; padding:0; border:1px solid var(--pj-hairline); border-radius:7px; background:#fff; cursor:pointer; }
+  .ed-related-selected :global(button:disabled) { opacity:.35; cursor:default; }
   :global(.ed-cat-selected) { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
   :global(.ed-cat-chip) { display:inline-flex; align-items:center; background:#f4f7e6; border:1px solid #d9e2b4; color:#55651d; border-radius:999px; padding:5px 5px 5px 12px; font-family:var(--pj-noto); font-size:12px; font-weight:600; line-height:1.2; }
   :global(.ed-cat-chip--muted) { background:#f6f6f4; border-color:#e4e4e1; color:#9a9a97; padding-right:12px; }
@@ -387,11 +424,20 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
   .ed-smallbtn:hover { background: var(--pj-paper); border-color: rgba(0,0,0,.2); }
 </style>
 
-<script define:vars={{ initial, isNew, SITE }}>
+<script define:vars={{ initial, isNew, SITE, relatedOptions }}>
   const $ = (id) => document.getElementById(id);
   const body = $('ed-body'), source = $('ed-source');
   let sourceMode = false;
   let slugTouched = !isNew && !!initial.slug;
+
+  // Keep the formatting toolbar immediately below the action header even when
+  // the header wraps on a narrow screen.
+  const topbar = document.querySelector('.ed-topbar');
+  const syncToolbarOffset = () => {
+    if (topbar) document.documentElement.style.setProperty('--ed-topbar-height', `${topbar.getBoundingClientRect().height}px`);
+  };
+  syncToolbarOffset();
+  if (topbar && 'ResizeObserver' in window) new ResizeObserver(syncToolbarOffset).observe(topbar);
 
   // ── Toolbar ──
   document.querySelectorAll('#ed-toolbar button[data-cmd]').forEach((b) => {
@@ -533,18 +579,25 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     } catch (err) { setState('', false); alert('Échec du téléversement : ' + err.message); }
   }
 
-  // ── "Lier un article" panel — search + one-click internal link insert ──
+  const escapeHtml = (value) => String(value || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+  // ── "Lier un article" panel — select target, edit anchor, then insert ──
   (() => {
     const search = $('f-link-search'); const results = $('f-link-results');
-    if (!search || !results) return;
+    const anchor = $('f-link-anchor'); const insert = $('f-link-insert');
+    if (!search || !results || !anchor || !insert) return;
     let deb = null, loaded = false;
+    let target = null;
+    let sourceRange = null;
     async function load(q) {
       try {
         const r = await fetch(`/api/admin-pujol/newsletter/articles/?limit=20&q=${encodeURIComponent(q || '')}`);
         if (!r.ok) throw new Error();
         const items = await r.json();
         results.innerHTML = items.length
-          ? items.map((a) => `<button type="button" class="ed-link-item" data-slug="${a.slug}" data-title="${(a.title || '').replace(/"/g, '&quot;')}"><span class="ed-link-title">${a.title}</span>${a.date ? `<span class="ed-link-date">${String(a.date).slice(0, 10)}</span>` : ''}</button>`).join('')
+          ? items.map((a) => `<button type="button" class="ed-link-item" data-slug="${escapeHtml(a.slug)}" data-title="${escapeHtml(a.title)}"><span class="ed-link-title">${escapeHtml(a.title)}</span>${a.date ? `<span class="ed-link-date">${escapeHtml(String(a.date).slice(0, 10))}</span>` : ''}</button>`).join('')
           : '<p class="ed-link-empty">Aucun article trouvé.</p>';
       } catch (_) { results.innerHTML = '<p class="ed-link-empty">Erreur de chargement.</p>'; }
     }
@@ -555,19 +608,78 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     results.addEventListener('click', (e) => {
       const btn = e.target.closest('.ed-link-item'); if (!btn) return;
       const href = `/${btn.dataset.slug}/`; const title = btn.dataset.title || href;
-      if (sourceMode) {
-        const ta = source, s0 = ta.selectionStart || 0, e0 = ta.selectionEnd || s0;
-        const selTxt = ta.value.slice(s0, e0);
-        const tag = `<a href="${href}">${selTxt || title}</a>`;
-        ta.value = ta.value.slice(0, s0) + tag + ta.value.slice(e0);
-        return;
-      }
-      body.focus(); const sel = window.getSelection();
-      if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); }
-      if (sel.rangeCount && !sel.getRangeAt(0).collapsed) document.execCommand('createLink', false, href);
-      else document.execCommand('insertHTML', false, `<a href="${href}">${title}</a>`);
-      saveRange();
+      target = { href, title };
+      sourceRange = sourceMode ? { start: source.selectionStart || 0, end: source.selectionEnd || source.selectionStart || 0 } : null;
+      const selectedText = sourceMode
+        ? source.value.slice(sourceRange.start, sourceRange.end)
+        : (savedRange ? savedRange.toString() : '');
+      anchor.value = selectedText.trim() || title;
+      anchor.disabled = false;
+      insert.disabled = false;
+      anchor.focus(); anchor.select();
     });
+    insert.addEventListener('click', () => {
+      if (!target) return;
+      const text = anchor.value.trim();
+      if (!text) { alert('Le texte du lien ne peut pas être vide.'); anchor.focus(); return; }
+      const tag = `<a href="${escapeHtml(target.href)}">${escapeHtml(text)}</a>`;
+      if (sourceMode) {
+        const range = sourceRange || { start: source.selectionStart || 0, end: source.selectionEnd || source.selectionStart || 0 };
+        source.value = source.value.slice(0, range.start) + tag + source.value.slice(range.end);
+        source.focus(); source.setSelectionRange(range.start + tag.length, range.start + tag.length);
+      } else {
+        body.focus(); const sel = window.getSelection();
+        if (savedRange) { sel.removeAllRanges(); sel.addRange(savedRange); }
+        document.execCommand('insertHTML', false, tag);
+        saveRange();
+      }
+      setState('Lien inséré ✓', false);
+      target = null; sourceRange = null; anchor.value = ''; anchor.disabled = true; insert.disabled = true;
+    });
+  })();
+
+  // ── Curated "À lire aussi" — local search, ordered add/remove/reorder ──
+  let selectedRelatedSlugs = [...new Set((initial.related_slugs || []).filter((slug) => slug && slug !== initial.slug && !slug.startsWith('local/')))];
+  (() => {
+    const search = $('f-related-search'); const results = $('f-related-results'); const selected = $('f-related-selected');
+    if (!search || !results || !selected) return;
+    const options = (relatedOptions || []).filter((item) => item.slug && item.slug !== initial.slug && !item.slug.startsWith('local/'));
+    const bySlug = new Map(options.map((item) => [item.slug, item]));
+    const norm = (value) => String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    function renderSelected() {
+      selected.innerHTML = selectedRelatedSlugs.map((slug, index) => {
+        const item = bySlug.get(slug);
+        const title = item?.title || `${slug} (indisponible)`;
+        return `<li data-slug="${escapeHtml(slug)}"><span class="ed-related-title">${escapeHtml(title)}</span><span class="ed-related-actions"><button type="button" data-action="up" aria-label="Monter" ${index === 0 ? 'disabled' : ''}>↑</button><button type="button" data-action="down" aria-label="Descendre" ${index === selectedRelatedSlugs.length - 1 ? 'disabled' : ''}>↓</button><button type="button" data-action="remove" aria-label="Retirer">×</button></span></li>`;
+      }).join('');
+      renderResults();
+    }
+    function renderResults() {
+      const q = norm(search.value.trim());
+      const matches = options.filter((item) => !selectedRelatedSlugs.includes(item.slug) && (!q || norm(`${item.title} ${item.slug}`).includes(q))).slice(0, 12);
+      results.innerHTML = matches.length
+        ? matches.map((item) => `<button type="button" class="ed-link-item" data-related-slug="${escapeHtml(item.slug)}"><span class="ed-link-title">${escapeHtml(item.title)}</span>${item.article_date ? `<span class="ed-link-date">${escapeHtml(item.article_date)}</span>` : ''}</button>`).join('')
+        : '<p class="ed-link-empty">Aucun article publié trouvé.</p>';
+    }
+    search.addEventListener('focus', renderResults);
+    search.addEventListener('input', renderResults);
+    results.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-related-slug]'); if (!btn) return;
+      const slug = btn.dataset.relatedSlug;
+      if (slug && !selectedRelatedSlugs.includes(slug)) selectedRelatedSlugs.push(slug);
+      search.value = ''; renderSelected();
+    });
+    selected.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]'); if (!btn) return;
+      const li = btn.closest('li[data-slug]'); const slug = li?.dataset.slug;
+      const index = selectedRelatedSlugs.indexOf(slug);
+      if (index < 0) return;
+      if (btn.dataset.action === 'remove') selectedRelatedSlugs.splice(index, 1);
+      if (btn.dataset.action === 'up' && index > 0) [selectedRelatedSlugs[index - 1], selectedRelatedSlugs[index]] = [selectedRelatedSlugs[index], selectedRelatedSlugs[index - 1]];
+      if (btn.dataset.action === 'down' && index < selectedRelatedSlugs.length - 1) [selectedRelatedSlugs[index + 1], selectedRelatedSlugs[index]] = [selectedRelatedSlugs[index], selectedRelatedSlugs[index + 1]];
+      renderSelected();
+    });
+    renderSelected();
   })();
 
   // ── Featured + OG image ──
@@ -682,7 +794,7 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     try { preserved = JSON.parse(box.dataset.preserved || '[]'); } catch (_) {}
     return [...checked, ...preserved];
   };
-  function collect(status) {
+  function collect(statusAction) {
     return {
       title: val('f-title'), slug: val('f-slug'),
       body_html: sourceMode ? source.value : body.innerHTML,
@@ -695,23 +807,30 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
       og_title: val('f-ogtitle'), og_description: val('f-ogdesc'),
       og_image: val('f-ogimage'), twitter_card: $('f-twitter').value,
       expert_cta: $('f-expertcta').value, expert_cta_title: val('f-expertctatitle'),
-      status,
+      related_slugs: selectedRelatedSlugs,
+      status_action: statusAction,
     };
   }
-  function setState(msg, busy) { $('ed-status').textContent = msg; $('ed-save').disabled = $('ed-publish').disabled = !!busy; }
+  function setState(msg, busy) {
+    $('ed-status').textContent = msg;
+    ['ed-save', 'ed-publish', 'ed-draft'].forEach((id) => { const button = $(id); if (button) button.disabled = !!busy; });
+  }
 
-  async function save(status) {
+  async function save(statusAction) {
     if (!val('f-title')) { alert('Le titre est obligatoire.'); return; }
+    if (statusAction === 'publish' && !confirm('Passer cet article en statut publié ? Il sera mis en ligne lors de la prochaine publication globale.')) return;
+    if (statusAction === 'draft' && !confirm('Repasser cet article en brouillon ? Il sera retiré du site lors de la prochaine publication globale.')) return;
     setState('Enregistrement…', true);
     const url = isNew ? '/api/admin-pujol/articles/' : `/api/admin-pujol/articles/${initial.id}/`;
     const method = isNew ? 'POST' : 'PUT';
     try {
-      const res = await fetch(url, { method, headers: { 'content-type': 'application/json' }, body: JSON.stringify(collect(status)) });
+      const res = await fetch(url, { method, headers: { 'content-type': 'application/json' }, body: JSON.stringify(collect(statusAction)) });
       if (!res.ok) throw new Error(await res.text());
       setState('Enregistré ✓', false);
       window.location.href = isNew ? '../' : '../../';
     } catch (err) { setState('', false); alert('Échec de l’enregistrement : ' + err.message); }
   }
-  $('ed-save').addEventListener('click', () => save('draft'));
-  $('ed-publish').addEventListener('click', () => save('published'));
+  $('ed-save').addEventListener('click', () => save('preserve'));
+  $('ed-publish')?.addEventListener('click', () => save('publish'));
+  $('ed-draft')?.addEventListener('click', () => save('draft'));
 </script>

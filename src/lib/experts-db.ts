@@ -277,3 +277,23 @@ export async function countPendingExperts(db: D1Database): Promise<number> {
   ).first<{ n: number }>();
   return row?.n || 0;
 }
+
+export interface PendingExpertChange {
+  id: number;
+  slug: string;
+  title: string;
+}
+
+/** Exact expert set shown by the global publication preview. */
+export async function listPendingExpertChanges(db: D1Database): Promise<PendingExpertChange[]> {
+  const { results } = await db.prepare(
+    `SELECT id, slug, title FROM experts
+     WHERE published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)
+     ORDER BY title ASC`
+  ).all();
+  return (results || []).map((row: any) => ({
+    id: Number(row.id),
+    slug: String(row.slug || ''),
+    title: String(row.title || row.slug || ''),
+  }));
+}

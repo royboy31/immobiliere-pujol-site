@@ -28,7 +28,7 @@ const ARTICLE_SNAPSHOT = `json_object(
   'focus_keyword', focus_keyword, 'noindex', noindex, 'nofollow', nofollow,
   'og_title', og_title, 'og_description', og_description, 'og_image', og_image,
   'twitter_card', twitter_card, 'expert_cta', expert_cta,
-  'expert_cta_title', expert_cta_title)`;
+  'expert_cta_title', expert_cta_title, 'related_slugs', related_slugs)`;
 
 const EXPERT_SNAPSHOT = `json_object(
   'slug', slug, 'title', title, 'fonction', fonction, 'description', description,
@@ -62,6 +62,7 @@ console.log(`Backfill published snapshot  •  D1 mode: ${MODE}`);
 
 console.log('\n① Adding columns (additive, idempotent)…');
 exec('ALTER TABLE blog_articles ADD COLUMN published_json TEXT', { ignoreDup: true });
+exec('ALTER TABLE blog_articles ADD COLUMN related_slugs TEXT', { ignoreDup: true });
 exec('ALTER TABLE experts ADD COLUMN published_at TEXT', { ignoreDup: true });
 exec('ALTER TABLE experts ADD COLUMN published_json TEXT', { ignoreDup: true });
 
