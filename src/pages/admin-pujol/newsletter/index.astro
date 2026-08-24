@@ -29,6 +29,27 @@ const fmt = (s: string | null) =>
 
   {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
 
+  <details class="card reminder-panel">
+    <summary>Rappels de confirmation double opt-in</summary>
+    <p class="reminder-panel__intro">
+      Collez uniquement les adresses encore « En attente », une par ligne. Le test à blanc
+      affiche des compteurs sans envoyer d’e-mail. L’envoi reste verrouillé jusqu’à sa réussite.
+    </p>
+    <label class="reminder-panel__label" for="reminder-emails">Adresses à vérifier</label>
+    <textarea
+      id="reminder-emails"
+      rows="6"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="une-adresse@exemple.fr"
+    ></textarea>
+    <div class="reminder-panel__actions">
+      <button type="button" class="btn btn--ghost" id="reminder-dry-run">Tester sans envoyer</button>
+      <button type="button" class="btn btn--primary" id="reminder-send" disabled>Envoyer les rappels</button>
+    </div>
+    <p id="reminder-result" class="reminder-panel__result" role="status" aria-live="polite"></p>
+  </details>
+
   {!error && campaigns.length === 0 && (
     <div class="card"><p>Aucune newsletter pour l’instant. Cliquez sur « Nouvelle newsletter » pour composer votre premier envoi.</p></div>
   )}
@@ -85,6 +106,15 @@ const fmt = (s: string | null) =>
   .badge--sent { background: rgba(178,192,78,.2); color: #5c6a10; }
   .badge--draft { background: #eee; color: #777; }
   .btn--sm { padding: 6px 12px; font-size: 10px; margin-left: 6px; }
+  .reminder-panel summary { cursor: pointer; font-weight: 700; }
+  .reminder-panel__intro { max-width: 760px; color: #555; }
+  .reminder-panel__label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 700; }
+  .reminder-panel textarea {
+    width: min(100%, 760px); padding: 10px 12px; resize: vertical;
+    border: 1px solid var(--pj-hairline); border-radius: 8px; font: inherit;
+  }
+  .reminder-panel__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .reminder-panel__result { min-height: 1.5em; margin: 12px 0 0; font-size: 13px; }
 </style>
 
 <script>
@@ -97,5 +127,70 @@ const fmt = (s: string | null) =>
       if (res.ok) btn.closest('tr')?.remove();
       else { alert('Échec de la suppression.'); btn.disabled = false; }
     });
+  });
+
+  const reminderInput = document.querySelector<HTMLTextAreaElement>('#reminder-emails');
+  const reminderDryRun = document.querySelector<HTMLButtonElement>('#reminder-dry-run');
+  const reminderSend = document.querySelector<HTMLButtonElement>('#reminder-send');
+  const reminderResult = document.querySelector<HTMLElement>('#reminder-result');
+  let approvedCount = 0;
+
+  const reminderEmails = () => Array.from(new Set(
+    (reminderInput?.value || '')
+      .split(/[\n,;]/)
+      .map((email) => email.trim().toLowerCase())
+      .filter(Boolean),
+  ));
+
+  const lockReminderSend = () => {
+    approvedCount = 0;
+    if (reminderSend) reminderSend.disabled = true;
+  };
+
+  reminderInput?.addEventListener('input', lockReminderSend);
+
+  const runReminders = async (dryRun: boolean) => {
+    if (!reminderDryRun || !reminderSend || !reminderResult) return;
+    const emails = reminderEmails();
+    if (emails.length === 0) {
+      reminderResult.textContent = 'Ajoutez au moins une adresse.';
+      return;
+    }
+    reminderDryRun.disabled = true;
+    reminderSend.disabled = true;
+    reminderResult.textContent = dryRun ? 'Test à blanc en cours…' : 'Envoi en cours…';
+    try {
+      const response = await fetch('/api/admin-pujol/newsletter/reminders', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ dryRun, emails }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.error || `Erreur ${response.status}`);
+      const requested = Number(result.requested || 0);
+      const eligible = Number(result.eligible || 0);
+      const excludedConfirmed = Number(result.excludedConfirmed || 0);
+      const excludedAlreadyReminded = Number(result.excludedAlreadyReminded || 0);
+      if (dryRun) {
+        approvedCount = eligible;
+        reminderResult.textContent = `Demandées : ${requested}. Éligibles : ${eligible}. Confirmées exclues : ${excludedConfirmed}. Déjà relancées : ${excludedAlreadyReminded}.`;
+        reminderSend.disabled = eligible === 0;
+      } else {
+        lockReminderSend();
+        reminderResult.textContent = `Envoyées : ${Number(result.sent || 0)}. Échecs : ${Number(result.failed || 0)}.`;
+      }
+    } catch (error) {
+      lockReminderSend();
+      reminderResult.textContent = `Échec : ${error instanceof Error ? error.message : String(error)}`;
+    } finally {
+      reminderDryRun.disabled = false;
+    }
+  };
+
+  reminderDryRun?.addEventListener('click', () => runReminders(true));
+  reminderSend?.addEventListener('click', () => {
+    if (!approvedCount) return;
+    if (!confirm(`Envoyer maintenant ${approvedCount} rappel(s) de confirmation ?`)) return;
+    runReminders(false);
   });
 </script>
