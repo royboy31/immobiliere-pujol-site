@@ -1,0 +1,50 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Landing after the alert double-opt-in click (redirect target of
+// /api/alerts/confirm). Reports the outcome only; the activation already happened.
+const seoTitle = 'Alerte confirmée — Immobilière Pujol';
+const seoDescription = 'Votre alerte annonces est activée. Vous serez prévenu dès qu’un bien correspond à votre recherche.';
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} noindex={true}>
+  <section class="al-confirm">
+    <div class="al-confirm__card">
+      <div class="al-confirm__mark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12.5 L9.5 18 L20 6.5" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <h1>Votre alerte est activée.</h1>
+      <p>
+        Merci&nbsp;! Dès qu’un bien correspond à vos critères, vous recevrez un e-mail
+        avec l’annonce. Vous êtes ainsi parmi les premiers informés.
+      </p>
+      <p class="al-confirm__note">
+        Vous pouvez modifier ou supprimer votre alerte à tout moment via le lien présent en bas de chacun de nos e-mails.
+      </p>
+      <a class="al-confirm__cta" href="/annonces/">Voir les annonces</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .al-confirm { display: flex; justify-content: center; padding: 72px 20px 96px; }
+  .al-confirm__card { max-width: 620px; width: 100%; text-align: center; }
+  .al-confirm__mark {
+    width: 68px; height: 68px; margin: 0 auto 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(178, 197, 79, 0.16); color: #7f9420;
+  }
+  .al-confirm__card h1 { font-size: clamp(26px, 4vw, 34px); line-height: 1.25; color: #1f2a30; margin: 0 0 18px; }
+  .al-confirm__card p { font-size: 17px; line-height: 1.6; color: #4a5560; margin: 0 0 14px; }
+  .al-confirm__note { font-size: 15px !important; color: #77828d !important; }
+  .al-confirm__cta {
+    display: inline-block; margin-top: 26px; padding: 13px 30px; border-radius: 999px;
+    background: #1f2a30; color: #fff; font-weight: 700; text-decoration: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .al-confirm__cta:hover { transform: translateY(-1px); opacity: 0.92; }
+</style>

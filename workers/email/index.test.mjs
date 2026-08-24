@@ -161,3 +161,65 @@ test('Apps Script batch mode updates every duplicate and never inserts missing c
   assert.equal(rows[2][3], '02/08/2026 12:00:00');
   assert.equal(rows[3][2], 'En attente (double opt-in)');
 });
+
+test('alert notifications follow the confirmed CRM routing matrix', async () => {
+  const originalFetch = globalThis.fetch;
+  const env = {
+    BREVO_API_KEY: 'test-key',
+    NEWSLETTER_INTERNAL_TOKEN: 'test-token',
+    NEWSLETTER_SENDER_EMAIL: 'notifications@example.com',
+  };
+  const cases = [
+    {
+      name: 'location',
+      body: { transac: 'L', bien_a_vendre: false },
+      recipients: ['g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr'],
+    },
+    {
+      name: 'sale search without a property to sell',
+      body: { transac: 'V', bien_a_vendre: false },
+      recipients: ['g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr'],
+    },
+    {
+      name: 'sale search with a property to sell',
+      body: { transac: 'V', bien_a_vendre: true },
+      recipients: [
+        'g9f4fx36@parser.eu.zohocrm.com',
+        'carolinepujol@immobiliere-pujol.fr',
+        'benoit@immobiliere-pujol.fr',
+      ],
+    },
+  ];
+
+  try {
+    for (const testCase of cases) {
+      const sentTo = [];
+      globalThis.fetch = async (_input, init = {}) => {
+        sentTo.push(JSON.parse(init.body).to[0].email);
+        return Response.json({ messageId: 'test-message' }, { status: 201 });
+      };
+
+      const response = await worker.fetch(new Request('https://worker.example/alerts/notify', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'x-internal-token': 'test-token',
+        },
+        body: JSON.stringify({
+          ...testCase.body,
+          email: 'prospect@example.com',
+          negociateur_email: 'agent@immobiliere-pujol.fr',
+        }),
+      }), env, {});
+      const result = await response.json();
+
+      assert.equal(response.status, 200, testCase.name);
+      assert.deepEqual(result.notified, testCase.recipients, testCase.name);
+      assert.deepEqual(sentTo, testCase.recipients, testCase.name);
+      assert.equal(sentTo.includes('agent@immobiliere-pujol.fr'), false, testCase.name);
+      assert.equal(sentTo.includes('annonces@immobiliere-pujol.fr'), false, testCase.name);
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

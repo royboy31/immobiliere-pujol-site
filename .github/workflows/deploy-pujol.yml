@@ -71,13 +71,17 @@ jobs:
             cfg.vars.ALLOWED_ORIGIN = 'https://www.immobiliere-pujol.fr';
             fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
 
-            // Cron-sync worker — swap D1 ID + set DEPLOY_WORKFLOW
+            // Cron-sync worker — swap D1 ID + set production routing.
+            // NEWSLETTER_INTERNAL_TOKEN stays a Worker secret and is provisioned
+            // separately when Roy explicitly activates the matcher.
             raw = fs.readFileSync('workers/cron-sync/wrangler.jsonc','utf8');
             cfg = JSON.parse(raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1'));
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
             cfg.vars.DEPLOY_REF = 'pujol-main';
+            cfg.vars.EMAIL_WORKER_URL = 'https://pujol-email.pujol.workers.dev';
+            cfg.vars.SITE_BASE_URL = 'https://www.immobiliere-pujol.fr';
             const cts = process.env.INJECT_CRON_TRIGGER_SECRET;
             if (!cts) { console.error('Missing CRON_TRIGGER_SECRET — refusing to deploy'); process.exit(1); }
             cfg.vars.CRON_TRIGGER_SECRET = cts;

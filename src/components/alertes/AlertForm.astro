@@ -1,0 +1,249 @@
+---
+// Reusable alert-creation form. Used standalone on /alerte/ (user picks vente or
+// location) and, later, inside the listing pop-up (transac + criteria pre-filled).
+// Posts to the same-origin /api/alerts/create; the alert is created `pending` and
+// activated only after the double-opt-in click.
+interface Prefill {
+  cp?: string | null;
+  kind?: string | null;
+  chambres_min?: number | null;
+  budget_max?: number | null;
+  source_ref?: string | null;
+  negociateur_email?: string | null;
+}
+interface Props {
+  transac?: 'V' | 'L' | '';   // '' = let the user choose; a preset hides the toggle
+  prefill?: Prefill;
+  compact?: boolean;          // tighter styling for the pop-up
+}
+const { transac = '', prefill = {}, compact = false } = Astro.props;
+
+// `cp` is stored as a CSV of codes postaux (multi-select); a listing prefill is a single code.
+const selectedCps = (prefill.cp || '').split(',').map((s) => s.trim()).filter(Boolean);
+
+// Marseille arrondissements + the main Nice codes present in the catalogue.
+const ARRONDS = [
+  '13001','13002','13003','13004','13005','13006','13007','13008',
+  '13009','13010','13011','13012','13013','13014','13015','13016',
+  '06000','06100','06200','06300',
+];
+const KINDS: [string, string][] = [
+  ['appartement', 'Appartement'],
+  ['maison', 'Maison'],
+  ['parking', 'Parking / Garage'],
+  ['local', 'Local / Bureau'],
+  ['terrain', 'Terrain'],
+];
+---
+
+<form class={`alert-form${compact ? ' alert-form--compact' : ''}`} data-alert-form>
+  <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true"
+         style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
+  <input type="hidden" name="source_ref" value={prefill.source_ref || ''} />
+  <input type="hidden" name="negociateur_email" value={prefill.negociateur_email || ''} />
+
+  {transac
+    ? <input type="hidden" name="transac" value={transac} />
+    : (
+      <div class="af-field">
+        <span class="af-lbl">Je recherche</span>
+        <div class="af-toggle" role="radiogroup">
+          <label><input type="radio" name="transac" value="V" required /> <span>À l’achat</span></label>
+          <label><input type="radio" name="transac" value="L" /> <span>En location</span></label>
+        </div>
+      </div>
+    )
+  }
+
+  <div class="af-field">
+    <span class="af-lbl">Secteurs <small class="af-hint">(plusieurs choix possibles ; aucun = tous les secteurs)</small></span>
+    <div class="af-cps">
+      {ARRONDS.map((cp) => (
+        <label class="af-cp">
+          <input type="checkbox" name="cp" value={cp} checked={selectedCps.includes(cp)} />
+          <span>{cp}</span>
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <div class="af-row af-row--3">
+    <label class="af-field">
+      <span class="af-lbl">Type de bien</span>
+      <select name="kind">
+        <option value="">Indifférent</option>
+        {KINDS.map(([v, l]) => <option value={v} selected={prefill.kind === v}>{l}</option>)}
+      </select>
+    </label>
+    <label class="af-field">
+      <span class="af-lbl">Budget max (€)</span>
+      <input type="number" name="budget_max" min="0" step="1000" inputmode="numeric"
+             placeholder="ex. 350000" value={prefill.budget_max ?? ''} />
+    </label>
+    <label class="af-field">
+      <span class="af-lbl">Chambres (min.)</span>
+      <select name="chambres_min">
+        <option value="">Indifférent</option>
+        {[1,2,3,4,5].map((n) => <option value={n} selected={prefill.chambres_min === n}>{n}+</option>)}
+      </select>
+    </label>
+  </div>
+
+  <!-- Vente-only: shown by the script when "À l’achat" is selected -->
+  <div class="af-vente" data-vente hidden={transac !== 'V'}>
+    <span class="af-lbl">Avez-vous également un bien à vendre pour concrétiser ce projet ?</span>
+    <label class="af-check"><input type="radio" name="bien_a_vendre" value="1" /> <span>Oui, j'ai un bien à vendre</span></label>
+    <label class="af-check"><input type="radio" name="bien_a_vendre" value="0" /> <span>Non, c'est un premier achat / je n'ai rien à vendre</span></label>
+  </div>
+
+  <div class="af-row">
+    <label class="af-field">
+      <span class="af-lbl">Prénom</span>
+      <input type="text" name="prenom" autocomplete="given-name" />
+    </label>
+    <label class="af-field">
+      <span class="af-lbl">Téléphone</span>
+      <input type="tel" name="phone" autocomplete="tel" />
+    </label>
+  </div>
+
+  <label class="af-field">
+    <span class="af-lbl">Email <b>*</b></span>
+    <input type="email" name="email" autocomplete="email" required />
+  </label>
+
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
+
+  <label class="af-agree">
+    <input type="checkbox" name="agree" required />
+    <span>J'accepte que mes données soient utilisées pour traiter ma demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
+  </label>
+  <p class="af-rgpd">
+    Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects,
+    salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et
+    par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez
+    accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en
+    consultant notre politique de traitements des données personnelles sur la page suivante :
+    <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">declarations-juridiques.fr</a>.
+    Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection
+    commerciale en contactant l'Immobilière Pujol au 07 62 20 33 13 ou par mail :
+    <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a>
+  </p>
+
+  <button type="submit" class="af-submit">CRÉER MON ALERTE</button>
+  <p class="af-note">Consultez vos messages. Vous allez recevoir un e-mail de confirmation. Cliquez sur le lien reçu pour activer votre alerte.</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-alert-form]').forEach((form) => {
+    const venteBlock = form.querySelector<HTMLElement>('[data-vente]');
+    // Reflect the transac choice: show the vente-only questions and fill the
+    // selected toggle button (class-based so it works without :has() too).
+    const syncTransac = () => {
+      const checked = form.querySelector<HTMLInputElement>('input[name="transac"]:checked');
+      if (venteBlock) venteBlock.hidden = !checked || checked.value !== 'V';
+      form.querySelectorAll<HTMLLabelElement>('.af-toggle label').forEach((l) => {
+        const input = l.querySelector<HTMLInputElement>('input');
+        l.classList.toggle('is-on', !!input && input.checked);
+      });
+    };
+    form.querySelectorAll<HTMLInputElement>('input[name="transac"]').forEach((r) => r.addEventListener('change', syncTransac));
+    syncTransac();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const agree = form.querySelector<HTMLInputElement>('input[name="agree"]');
+      if (agree && !agree.checked) { showErr(form, 'Veuillez cocher la case pour accepter le traitement de vos données.'); agree.focus(); return; }
+      if (!form.reportValidity()) return;
+
+      const btn = form.querySelector<HTMLButtonElement>('.af-submit');
+      if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
+      try {
+        const res = await fetch('/api/alerts/create/', { method: 'POST', body: new FormData(form) });
+        const data: any = await res.json();
+        if (data.ok) {
+          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'alerte' }); } catch (e) {}
+          const msg = data.already
+            ? 'Vous avez déjà une alerte avec ces critères. Rien à faire de plus !'
+            : 'Consultez vos messages. Vous allez recevoir un e-mail de confirmation. Cliquez sur le lien reçu pour activer votre alerte.';
+          form.innerHTML = `<div class="af-success"><h3>Merci !</h3><p>${msg}</p></div>`;
+        } else {
+          showErr(form, data.error || 'Une erreur est survenue.');
+          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
+        }
+      } catch {
+        showErr(form, 'Erreur de connexion. Veuillez réessayer.');
+        if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
+      }
+    });
+  });
+
+  function showErr(form: HTMLFormElement, msg: string) {
+    let el = form.querySelector('.af-error');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'af-error';
+      (el as HTMLElement).style.cssText = 'color:#c0392b;font-weight:600;margin-top:8px;text-align:center';
+      form.querySelector('.af-submit')?.insertAdjacentElement('beforebegin', el);
+    }
+    el.textContent = msg;
+  }
+</script>
+
+<style>
+  .alert-form { display: flex; flex-direction: column; gap: 16px; }
+  .af-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .af-row--3 { grid-template-columns: 1fr 1fr 1fr; }
+  .af-field { display: flex; flex-direction: column; gap: 6px; }
+  .af-lbl { font-size: 13px; font-weight: 600; color: #1f2a30; }
+  .af-hint { font-weight: 400; color: #77828d; }
+  .af-cps { display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 8px; }
+  .af-cp { position: relative; }
+  .af-cp input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .af-cp span {
+    display: block; text-align: center; padding: 8px 4px; border: 1.5px solid #d4dad6; border-radius: 8px;
+    font-size: 13px; font-weight: 600; color: #4a5560; cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .af-cp span:hover { border-color: #b7c0ba; }
+  .af-cp input:checked + span { background: #6f8319; border-color: #6f8319; color: #fff; }
+  .af-cp input:focus-visible + span { box-shadow: 0 0 0 3px rgba(178,197,79,.28); }
+  .af-lbl b { color: #EC7234; }
+  .alert-form input[type="text"], .alert-form input[type="email"], .alert-form input[type="tel"],
+  .alert-form input[type="number"], .alert-form select {
+    padding: 11px 13px; border: 1px solid #d4dad6; border-radius: 8px; font-size: 15px; background: #fff; width: 100%;
+  }
+  .alert-form input:focus, .alert-form select:focus { outline: none; border-color: #B2C54F; box-shadow: 0 0 0 3px rgba(178,197,79,.18); }
+  .af-toggle { display: flex; gap: 10px; }
+  .af-toggle label {
+    flex: 1; display: flex; align-items: center; justify-content: center; padding: 13px 14px;
+    border: 1.5px solid #d4dad6; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;
+    color: #4a5560; text-align: center; transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .af-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .af-toggle label:hover { border-color: #b7c0ba; }
+  .af-toggle label:focus-within { box-shadow: 0 0 0 3px rgba(178,197,79,.28); }
+  /* Selected = full fill. Navy is the fallback; brand colors via :has() where supported. */
+  .af-toggle label.is-on { background: #0f1a2b; border-color: #0f1a2b; color: #fff; }
+  .af-toggle label.is-on:has(input[value="V"]) { background: #EC7234; border-color: #EC7234; }
+  .af-toggle label.is-on:has(input[value="L"]) { background: #6f8319; border-color: #6f8319; }
+  .af-vente { display: flex; flex-direction: column; gap: 10px; }
+  .af-check, .af-agree { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #4a5560; line-height: 1.5; cursor: pointer; }
+  .af-check input, .af-agree input { margin-top: 2px; accent-color: #B2C54F; }
+  /* The global reset strips appearance from everything except checkboxes; restore it for these radios. */
+  .af-check input[type='radio'] { -webkit-appearance: radio; appearance: auto; width: 15px; height: 15px; flex: none; }
+  .af-agree a { color: #1f2a30; }
+  .af-rgpd { margin: -6px 0 0; font-size: 11px; line-height: 1.55; color: #8a949e; }
+  .af-rgpd a { color: #77828d; }
+  .af-submit {
+    margin-top: 6px; padding: 14px 24px; border: none; border-radius: 999px; background: #EC7234; color: #fff;
+    font-weight: 700; font-size: 15px; letter-spacing: .3px; cursor: pointer; transition: transform .15s ease, opacity .15s ease;
+  }
+  .af-submit:hover { transform: translateY(-1px); }
+  .af-submit.is-submitting { opacity: .6; cursor: default; }
+  .af-note { margin: 0; font-size: 13px; color: #77828d; text-align: center; }
+  .af-success { text-align: center; padding: 20px 8px; }
+  .af-success h3 { margin: 0 0 8px; color: #1f2a30; }
+  .af-success p { margin: 0; color: #4a5560; line-height: 1.6; }
+  @media (max-width: 560px) { .af-row, .af-row--3 { grid-template-columns: 1fr; } .af-cps { grid-template-columns: repeat(4, 1fr); } }
+</style>

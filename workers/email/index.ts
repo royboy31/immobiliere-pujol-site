@@ -23,6 +23,12 @@ interface Env {
   NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
+  // Dedicated Brevo-verified sender for subscriber-facing alert emails
+  // (opt-in / match / registered), e.g. alerte@alerte.immobiliere-pujol.fr.
+  // Only set once the alerte sending domain is authenticated in Brevo —
+  // an unverified sender makes Brevo reject the send. Unset → the shared
+  // NEWSLETTER_SENDER_EMAIL sender, i.e. exactly the previous behaviour.
+  ALERT_SENDER_EMAIL?: string;
 }
 
 const MANDRILL_URL = 'https://mandrillapp.com/api/1.0/messages/send';
@@ -32,7 +38,12 @@ const ZOHO_PARSER = 'g9f4fx36@parser.eu.zohocrm.com';
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 function esc(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 // The public site posts here from the live domain, but every form hardcodes the
@@ -83,6 +94,9 @@ interface SendOpts {
   cc?: string;
   fromEmail?: string;
   fromName?: string;
+  // Brevo-verified sender address that overrides the shared newsletter
+  // sender for this message (must be active in Brevo or the send fails).
+  senderEmail?: string;
 }
 
 // 21 Jul 2026: Mandrill died with the MailChimp account cancellation. Brevo is
@@ -111,7 +125,7 @@ async function sendViaBrevo(
   const intendedFrom = opts.fromEmail || 'contact@immobiliere-pujol.fr';
   const payload = {
     sender: {
-      email: env.NEWSLETTER_SENDER_EMAIL || 'notifications@immobiliere-pujol.fr',
+      email: opts.senderEmail || env.NEWSLETTER_SENDER_EMAIL || 'notifications@immobiliere-pujol.fr',
       name: opts.fromName || 'Immobilière Pujol',
     },
     to: [{ email: opts.to || 'contact@immobiliere-pujol.fr' }],
@@ -1320,6 +1334,222 @@ async function handleNewsletterStats(req: Request, env: Env): Promise<Response> 
   return nlJson({ ok: true, stats: data?.statistics?.globalStats ?? null });
 }
 
+// ── Alerts (annonces) : double opt-in email + agency lead notification ───────
+// Called by the site's /api/alerts/* routes (they hold the D1 binding) with a
+// JSON body + x-internal-token. This worker only renders + sends the emails.
+
+const PUJOL_LOGO = 'https://www.immobiliere-pujol.fr/images/home/pujol-logo-white.png';
+
+function buildAlertOptin(prenom: string, criteriaText: string, confirmUrl: string): string {
+  const hi = prenom ? `Bonjour ${esc(prenom)},` : 'Bonjour,';
+  const safeCriteria = esc(criteriaText);
+  const safeConfirmUrl = esc(confirmUrl);
+  return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ef;padding:32px 16px"><tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+      <tr><td style="background:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center">
+        <img src="${PUJOL_LOGO}" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto"></td></tr>
+      <tr><td style="background:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+      <tr><td style="background:#fff;padding:32px 32px 24px">
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#0f1a2b;text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid #B2C54F;padding-bottom:3px">Alerte annonces</span></p>
+        <h1 style="margin:20px 0 16px;font-size:24px;line-height:1.3;color:#0f1a2b;font-weight:700">Confirmez votre alerte</h1>
+        <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
+          <p style="margin:0 0 14px">${hi}</p>
+          <p style="margin:0 0 14px">Vous souhaitez être prévenu(e) dès qu'un bien correspond à votre recherche&nbsp;:</p>
+          <p style="margin:0 0 14px;padding:12px 16px;background:#f4f6ef;border-left:3px solid #B2C54F;font-weight:600;color:#0f1a2b">${safeCriteria}</p>
+          <p style="margin:0 0 14px">Il reste une étape&nbsp;: cliquez ci-dessous pour activer votre alerte.</p>
+        </div>
+        <table role="presentation" cellpadding="0" cellspacing="0" style="margin:28px 0"><tr>
+          <td align="center" style="background:#EC7234;border-radius:4px">
+            <a href="${safeConfirmUrl}" style="display:inline-block;padding:14px 32px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.3px">ACTIVER MON ALERTE</a></td></tr></table>
+        <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
+          <p style="margin:0 0 14px"><strong style="color:#b3261e">Tant que vous n'avez pas cliqué</strong>, l'alerte n'est pas active et vous ne recevrez rien.</p>
+          <p style="margin:0 0 14px"><strong>Vous n'êtes pas à l'origine de cette demande&nbsp;?</strong> Ignorez simplement cet e-mail.</p>
+        </div>
+        <hr style="border:none;border-top:1px solid #eef3ef;margin:24px 0 14px">
+        <p style="margin:0;font-size:11px;color:#8a8a8a;line-height:1.6">Si le bouton ne fonctionne pas, copiez ce lien&nbsp;:<br>
+          <a href="${safeConfirmUrl}" style="color:#8a8a8a;text-decoration:underline;word-break:break-all">${safeConfirmUrl}</a></p>
+      </td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.</p></td></tr>
+    </table>
+  </td></tr></table></body></html>`;
+}
+
+// POST /alerts/optin — send the double opt-in email to the person who signed up.
+async function handleAlertOptin(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = (b.email || '').trim();
+  if (!email) return nlJson({ error: 'email requis' }, 400);
+  const r = await sendEmail(env, {
+    subject: 'Confirmez votre alerte annonces — Immobilière Pujol',
+    html: buildAlertOptin(String(b.prenom || ''), String(b.criteriaText || ''), String(b.confirmUrl || '')),
+    to: email,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol',
+    replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
+  });
+  return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+}
+
+// POST /alerts/notify: tell the agency a new qualified lead just confirmed.
+// Zoho and Caroline receive every alert. Benoît receives only when the prospect
+// declares a property to sell. Listing negotiators and annonces@ are deliberately
+// excluded because the CRM owns dispatch and follow-up.
+async function handleAlertNotify(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const isVente = b.transac === 'V';
+
+  const rows: [string, string][] = [
+    ['Type de recherche', isVente ? 'Vente' : 'Location'],
+    ['Critères', String(b.criteriaText || '')],
+    ['Prénom', String(b.prenom || '')],
+    ['Nom', String(b.nom || '')],
+    ['Email', String(b.email || '')],
+    ['Téléphone', String(b.phone || '')],
+  ];
+  if (isVente) {
+    if (b.proprietaire) rows.push(['Déjà propriétaire', 'Oui']);
+    if (b.bien_a_vendre) rows.push(['A un bien à vendre', 'Oui — LEAD VENDEUR']);
+  }
+  if (b.source_ref) rows.push(["Annonce d'origine", String(b.source_ref)]);
+
+  const subject = `Nouvelle alerte ${isVente ? 'Vente' : 'Location'} : ${String(b.prenom || '')} ${String(b.nom || '')} (${String(b.email || '')})`.replace(/\s+/g, ' ').trim();
+  const html = buildTable(subject, rows);
+
+  const recipients = new Set<string>([
+    ZOHO_PARSER,
+    `carolinepujol${D}`,
+  ]);
+  if (!!b.bien_a_vendre) recipients.add(CONTACT_ROUTING['Vente'].to);
+
+  const to = Array.from(recipients);
+  for (const addr of to) {
+    await sendEmail(env, {
+      subject, html, replyTo: String(b.email || ''), to: addr,
+      fromEmail: NOTIFY_FROM, fromName: `Alerte ${isVente ? 'Vente' : 'Location'}`,
+    });
+  }
+  return nlJson({ ok: true, notified: to });
+}
+
+// Subscriber-facing "un bien correspond à votre alerte" email (Phase 2 matching).
+function alertMatchCard(l: any): string {
+  const url = esc(String(l.url || ''));
+  const image = esc(String(l.image || ''));
+  const title = esc(String(l.title || ''));
+  const location = esc(String(l.location || ''));
+  const price = esc(String(l.price || ''));
+  const img = image
+    ? `<a href="${url}" style="text-decoration:none"><img src="${image}" width="536" alt="" style="width:100%;max-width:536px;height:auto;display:block;border-radius:10px 10px 0 0"></a>`
+    : '';
+  const topRadius = l.image ? '0 0 10px 10px' : '10px';
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px"><tr><td>
+    ${img}
+    <div style="border:1px solid #ececec;${l.image ? 'border-top:none;' : ''}border-radius:${topRadius};padding:16px 18px">
+      <div style="font-weight:700;font-size:16px;color:#0f1a2b;line-height:1.35">${title}</div>
+      ${location ? `<div style="color:#6b7280;font-size:13px;margin:5px 0 0">${location}</div>` : ''}
+      ${price ? `<div style="color:#EC7234;font-weight:800;font-size:21px;margin:10px 0 14px">${price}</div>` : ''}
+      <a href="${url}" style="display:inline-block;background:#0f1a2b;color:#fff;padding:11px 22px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:.3px">VOIR L'ANNONCE</a>
+    </div></td></tr></table>`;
+}
+
+function buildAlertMatch(prenom: string, criteriaText: string, listings: any[], manageUrl: string): string {
+  const hi = prenom ? `Bonjour ${esc(prenom)},` : 'Bonjour,';
+  const safeCriteria = esc(criteriaText);
+  const safeManageUrl = esc(manageUrl);
+  const n = listings.length;
+  const head = n === 1 ? 'Un bien correspond' : `${n} biens correspondent`;
+  const intro = n === 1
+    ? "Un nouveau bien vient d'être mis en ligne et correspond à votre alerte&nbsp;:"
+    : "De nouveaux biens viennent d'être mis en ligne et correspondent à votre alerte&nbsp;:";
+  return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ef;padding:32px 16px"><tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+      <tr><td style="background:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center"><img src="${PUJOL_LOGO}" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto"></td></tr>
+      <tr><td style="background:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+      <tr><td style="background:#fff;padding:30px 32px 26px">
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#0f1a2b;text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid #B2C54F;padding-bottom:3px">Alerte annonces</span></p>
+        <h1 style="margin:18px 0 12px;font-size:23px;line-height:1.3;color:#0f1a2b">${head} à votre recherche</h1>
+        <p style="margin:0 0 6px;font-size:14px;color:#3a3a3a;line-height:1.6">${hi}</p>
+        <p style="margin:0 0 18px;font-size:14px;color:#3a3a3a;line-height:1.6">${intro}</p>
+        ${safeCriteria ? `<p style="margin:0 0 22px;padding:11px 15px;background:#f4f6ef;border-left:3px solid #B2C54F;font-weight:600;color:#0f1a2b;font-size:14px">${safeCriteria}</p>` : ''}
+        ${listings.map(alertMatchCard).join('')}
+        <hr style="border:none;border-top:1px solid #eef3ef;margin:8px 0 14px">
+        <p style="margin:0;font-size:12px;color:#8a8a8a;line-height:1.6">Vous recevez cet e-mail car vous avez créé une alerte sur immobiliere-pujol.fr.<br>
+          <a href="${safeManageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Gérer ou supprimer mon alerte</a></p>
+      </td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.</p></td></tr>
+    </table>
+  </td></tr></table></body></html>`;
+}
+
+// POST /alerts/match — send the subscriber a "bien correspondant" email.
+// Body: { email, prenom, criteriaText, manageUrl, listings:[{title,price,location,url,image}] }.
+async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = (b.email || '').trim();
+  const listings = Array.isArray(b.listings) ? b.listings : [];
+  if (!email || !listings.length) return nlJson({ error: 'email + listings requis' }, 400);
+  const r = await sendEmail(env, {
+    subject: listings.length === 1 ? 'Un bien correspond à votre alerte — Immobilière Pujol' : `${listings.length} biens correspondent à votre alerte — Immobilière Pujol`,
+    html: buildAlertMatch(String(b.prenom || ''), String(b.criteriaText || ''), listings, String(b.manageUrl || '')),
+    to: email,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol',
+    replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
+  });
+  return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+}
+
+// POST /alerts/registered — courtesy email for a back-office (manual) add: the
+// alert is already active, so this confirms it and offers one-click unsubscribe.
+function buildAlertRegistered(prenom: string, criteriaText: string, manageUrl: string): string {
+  const hi = prenom ? `Bonjour ${esc(prenom)},` : 'Bonjour,';
+  const safeCriteria = esc(criteriaText);
+  const safeManageUrl = esc(manageUrl);
+  return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef3ef;padding:32px 16px"><tr><td align="center">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+      <tr><td style="background:#0f1a2b;padding:20px 32px;border-radius:8px 8px 0 0" align="center"><img src="${PUJOL_LOGO}" alt="Immobilière Pujol" width="180" style="display:block;max-width:180px;height:auto"></td></tr>
+      <tr><td style="background:#B2C54F;height:4px;font-size:0;line-height:0">&nbsp;</td></tr>
+      <tr><td style="background:#fff;padding:32px 32px 26px">
+        <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#0f1a2b;text-transform:uppercase;letter-spacing:.8px"><span style="border-bottom:2px solid #B2C54F;padding-bottom:3px">Alerte annonces</span></p>
+        <h1 style="margin:18px 0 12px;font-size:23px;color:#0f1a2b">Votre alerte est enregistrée</h1>
+        <div style="font-size:14px;color:#3a3a3a;line-height:1.7">
+          <p style="margin:0 0 14px">${hi}</p>
+          <p style="margin:0 0 14px">Nous avons enregistré votre alerte à votre demande. Dès qu'un bien correspond, vous recevrez un e-mail&nbsp;:</p>
+          <p style="margin:0 0 14px;padding:11px 15px;background:#f4f6ef;border-left:3px solid #B2C54F;font-weight:600;color:#0f1a2b">${safeCriteria}</p>
+          <p style="margin:0 0 14px">Vous pouvez vous désinscrire à tout moment&nbsp;:</p>
+        </div>
+        <p style="margin:0 0 6px"><a href="${safeManageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Supprimer mon alerte</a></p>
+      </td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille</p></td></tr>
+    </table>
+  </td></tr></table></body></html>`;
+}
+
+async function handleAlertRegistered(req: Request, env: Env): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = (b.email || '').trim();
+  if (!email) return nlJson({ error: 'email requis' }, 400);
+  const r = await sendEmail(env, {
+    subject: 'Votre alerte annonces est enregistrée — Immobilière Pujol',
+    html: buildAlertRegistered(String(b.prenom || ''), String(b.criteriaText || ''), String(b.manageUrl || '')),
+    to: email,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol',
+    replyTo: env.NEWSLETTER_REPLY_TO || `contact${D}`,
+    senderEmail: env.ALERT_SENDER_EMAIL,
+  });
+  return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+}
+
 // ── Sheet header setup (one-shot) ───────────────────────────────────────────
 
 const SHEET_HEADERS: Record<string, string[]> = {
@@ -1378,6 +1608,10 @@ export default {
     if (path === '/newsletter/test')  return handleNewsletterTest(request, env);
     if (path === '/newsletter/stats') return handleNewsletterStats(request, env);
     if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
+    if (path === '/alerts/optin')     return handleAlertOptin(request, env);
+    if (path === '/alerts/notify')    return handleAlertNotify(request, env);
+    if (path === '/alerts/match')     return handleAlertMatch(request, env);
+    if (path === '/alerts/registered') return handleAlertRegistered(request, env);
 
     let fd: FormData;
     try {
