@@ -134,6 +134,7 @@ const fmt = (s: string | null) =>
   const reminderSend = document.querySelector<HTMLButtonElement>('#reminder-send');
   const reminderResult = document.querySelector<HTMLElement>('#reminder-result');
   let approvedCount = 0;
+  let approvedSnapshot = '';
 
   const reminderEmails = () => Array.from(new Set(
     (reminderInput?.value || '')
@@ -144,6 +145,7 @@ const fmt = (s: string | null) =>
 
   const lockReminderSend = () => {
     approvedCount = 0;
+    approvedSnapshot = '';
     if (reminderSend) reminderSend.disabled = true;
   };
 
@@ -152,6 +154,7 @@ const fmt = (s: string | null) =>
   const runReminders = async (dryRun: boolean) => {
     if (!reminderDryRun || !reminderSend || !reminderResult) return;
     const emails = reminderEmails();
+    const testedSnapshot = emails.join('\n');
     if (emails.length === 0) {
       reminderResult.textContent = 'Ajoutez au moins une adresse.';
       return;
@@ -166,18 +169,29 @@ const fmt = (s: string | null) =>
         body: JSON.stringify({ dryRun, emails }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result?.error || `Erreur ${response.status}`);
+      const hasSendCounts = typeof result?.sent === 'number' && typeof result?.failed === 'number';
+      if (!response.ok && (dryRun || !hasSendCounts)) {
+        throw new Error(result?.error || `Erreur ${response.status}`);
+      }
       const requested = Number(result.requested || 0);
       const eligible = Number(result.eligible || 0);
       const excludedConfirmed = Number(result.excludedConfirmed || 0);
       const excludedAlreadyReminded = Number(result.excludedAlreadyReminded || 0);
       if (dryRun) {
+        if (reminderEmails().join('\n') !== testedSnapshot) {
+          lockReminderSend();
+          reminderResult.textContent = 'La liste a changé pendant le test. Relancez le test à blanc.';
+          return;
+        }
         approvedCount = eligible;
+        approvedSnapshot = testedSnapshot;
         reminderResult.textContent = `Demandées : ${requested}. Éligibles : ${eligible}. Confirmées exclues : ${excludedConfirmed}. Déjà relancées : ${excludedAlreadyReminded}.`;
         reminderSend.disabled = eligible === 0;
       } else {
         lockReminderSend();
-        reminderResult.textContent = `Envoyées : ${Number(result.sent || 0)}. Échecs : ${Number(result.failed || 0)}.`;
+        const sent = Number(result.sent || 0);
+        const failed = Number(result.failed || 0);
+        reminderResult.textContent = `${failed ? 'Envoi partiel. ' : ''}Envoyées : ${sent}. Échecs : ${failed}.`;
       }
     } catch (error) {
       lockReminderSend();
@@ -189,7 +203,11 @@ const fmt = (s: string | null) =>
 
   reminderDryRun?.addEventListener('click', () => runReminders(true));
   reminderSend?.addEventListener('click', () => {
-    if (!approvedCount) return;
+    if (!approvedCount || reminderEmails().join('\n') !== approvedSnapshot) {
+      lockReminderSend();
+      if (reminderResult) reminderResult.textContent = 'La liste a changé. Relancez le test à blanc.';
+      return;
+    }
     if (!confirm(`Envoyer maintenant ${approvedCount} rappel(s) de confirmation ?`)) return;
     runReminders(false);
   });
