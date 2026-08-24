@@ -98,6 +98,8 @@ jobs:
             cfg.vars = cfg.vars || {};
             cfg.vars.DEPLOY_WORKFLOW = 'deploy-pujol.yml';
             cfg.vars.R2_PUBLIC_URL = 'https://pub-ffb425c962e94d71bef4d2fbce95daee.r2.dev';
+            cfg.vars.EMAIL_WORKER_URL = 'https://pujol-email.pujol.workers.dev';
+            cfg.vars.SITE_BASE_URL = 'https://www.immobiliere-pujol.fr';
             const cts = process.env.INJECT_CRON_TRIGGER_SECRET;
             if (!cts) { console.error('Missing CRON_TRIGGER_SECRET — refusing to deploy'); process.exit(1); }
             cfg.vars.CRON_TRIGGER_SECRET = cts;
