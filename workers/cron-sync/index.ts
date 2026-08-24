@@ -402,9 +402,40 @@ function describeCriteriaC(a: any): string {
   if (a.budget_max) parts.push(`budget max ${Number(a.budget_max).toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
 }
-function listingPriceDisplay(a: ParsedAnnonce): string {
-  if (a.type === 'V') return a.prix ? `${a.prix.toLocaleString('fr-FR')} €` : '';
-  return a.loyerCC ? `${a.loyerCC.toLocaleString('fr-FR')} €/mois` : '';
+interface AlertCandidate {
+  slug: string;
+  type: 'V' | 'L';
+  title: string;
+  kindLabel: string;
+  codePostal: string;
+  ville: string;
+  price: number | null;
+  bedrooms: number | null;
+}
+
+export function isUbiflowRental(a: Pick<ParsedAnnonce, 'type'>): boolean {
+  return a.type === 'L';
+}
+
+export function alertCandidateFromUbiflow(a: ParsedAnnonce): AlertCandidate | null {
+  if (!isUbiflowRental(a)) return null;
+  return {
+    slug: a.slug,
+    type: 'L',
+    title: a.titre,
+    kindLabel: a.libelleType,
+    codePostal: a.codePostal,
+    ville: a.ville,
+    price: a.loyerCC,
+    bedrooms: a.nbChambres,
+  };
+}
+
+function listingPriceDisplay(a: AlertCandidate): string {
+  if (a.price == null) return '';
+  return a.type === 'V'
+    ? `${a.price.toLocaleString('fr-FR')} €`
+    : `${a.price.toLocaleString('fr-FR')} €/mois`;
 }
 function firstPhotoUrl(env: Env, photos: string[] | undefined): string {
   const p = (photos || [])[0];
@@ -431,7 +462,7 @@ async function findNewSlugs(env: Env, slugs: string[]): Promise<Set<string>> {
 // if there are no active alerts, or on a suspiciously large "new" batch (backfill guard).
 async function matchNewListingsToAlerts(
   env: Env,
-  annonces: ParsedAnnonce[],
+  annonces: AlertCandidate[],
   newSlugs: Set<string>,
   photoMap: Map<string, string[]>,
 ): Promise<void> {
@@ -462,20 +493,20 @@ async function matchNewListingsToAlerts(
     const perAlert = new Map<string, { alert: any; listings: any[] }>();
     for (const a of finalNew) {
       const cp = normalizeCp(a.codePostal);
-      const kind = classifyKindLbl(a.libelleType || a.titre);
+      const kind = classifyKindLbl(a.kindLabel || a.title);
       const kindArg = kind === 'autre' ? null : kind;
-      const prix = a.type === 'V' ? a.prix : a.loyerCC;
+      const prix = a.price;
       const { results } = await env.DB.prepare(
         `SELECT * FROM alerts WHERE status='active' AND transac=?
            AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0) AND (kind IS NULL OR kind=?)
            AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
            AND (chambres_min IS NULL OR ? IS NULL OR chambres_min <= ?)`
-      ).bind(a.type, cp, kindArg, prix, prix, a.nbChambres, a.nbChambres).all();
+      ).bind(a.type, cp, kindArg, prix, prix, a.bedrooms, a.bedrooms).all();
       for (const alert of (results || [])) {
         const key = (alert as any).id;
         if (!perAlert.has(key)) perAlert.set(key, { alert, listings: [] });
         perAlert.get(key)!.listings.push({
-          title: a.titre,
+          title: a.title,
           price: listingPriceDisplay(a),
           location: [cp, a.ville].filter(Boolean).join(' '),
           url: `${base}/annonces/${a.slug}/`,
@@ -519,7 +550,7 @@ async function runSync(env: Env) {
 
   try {
     // 1. Fetch feed
-    const annonces = await fetchFeed();
+    const annonces = (await fetchFeed()).filter(isUbiflowRental);
     stats.annoncesInFeed = annonces.length;
 
     // 1b. Reuse original live URL slugs (URL parity). Must run BEFORE photo upload
@@ -634,7 +665,10 @@ async function runSync(env: Env) {
     }
 
     // 6b. Alert matching — e-mail subscribers whose criteria a new rental satisfies.
-    await matchNewListingsToAlerts(env, annonces, newSlugs, photoMap);
+    const alertCandidates = annonces
+      .map(alertCandidateFromUbiflow)
+      .filter((candidate): candidate is AlertCandidate => candidate !== null);
+    await matchNewListingsToAlerts(env, alertCandidates, newSlugs, photoMap);
 
     // 7. Log success
     await env.DB.prepare(
@@ -821,6 +855,24 @@ interface LbiAnnonce {
   photos: string[];
   slug: string;
   saleStatus: string | null;
+}
+
+export function isLbiSale(a: Pick<LbiAnnonce, 'typeAnnonce'>): boolean {
+  return a.typeAnnonce === 'V';
+}
+
+export function alertCandidateFromLbi(a: LbiAnnonce): AlertCandidate | null {
+  if (!isLbiSale(a)) return null;
+  return {
+    slug: a.slug,
+    type: 'V',
+    title: a.titre,
+    kindLabel: a.typeBien,
+    codePostal: a.codePostal,
+    ville: a.ville,
+    price: a.prix,
+    bedrooms: a.nbChambres,
+  };
 }
 
 function parseLbiCsv(raw: string): LbiAnnonce[] {
@@ -1056,7 +1108,7 @@ async function runLbiImport(env: Env) {
 
     // Decode as latin1 (LBI uses ISO-8859-1)
     const csvText = new TextDecoder('iso-8859-1').decode(csvBytes);
-    const annonces = parseLbiCsv(csvText);
+    const annonces = parseLbiCsv(csvText).filter(isLbiSale);
     stats.annoncesInZip = annonces.length;
     console.log(`[lbi-import] Found ${annonces.length} annonces in zip`);
 
@@ -1122,7 +1174,10 @@ async function runLbiImport(env: Env) {
     }
 
     // 5b. Alert matching — e-mail subscribers whose criteria a new sale satisfies.
-    await matchNewListingsToAlerts(env, annonces, newSlugs, photoMap);
+    const alertCandidates = annonces
+      .map(alertCandidateFromLbi)
+      .filter((candidate): candidate is AlertCandidate => candidate !== null);
+    await matchNewListingsToAlerts(env, alertCandidates, newSlugs, photoMap);
 
     // 6. Drop LBI annonces no longer in the zip.
     //    An active bien that vanishes from the feed was UN-PUBLISHED by the
