@@ -20,6 +20,8 @@ const articles = defineCollection({
     expertCta: z.string().optional(),
     // Optional heading shown above that expert card.
     expertCtaTitle: z.string().optional(),
+    // Ordered related-article slugs selected in the admin editor.
+    relatedArticles: z.array(z.string()).optional(),
     // Extended SEO / Open Graph — written from D1 by sync-d1-articles-to-content.mjs
     // and emitted in [...slug].astro's <head>. focusKeyword is editor-only (not rendered).
     canonicalUrl: z.string().optional(),

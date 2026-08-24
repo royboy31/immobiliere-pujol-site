@@ -8,6 +8,7 @@
   <div class="publish-bar__text">
     <span class="publish-bar__banner" id="pub-banner">Chargement…</span>
     <span class="publish-bar__status" id="pub-status"></span>
+    <div class="publish-bar__preview" id="pub-preview" hidden></div>
   </div>
   <button type="button" class="publish-bar__btn" id="pub-btn">🚀 Publier les modifications en ligne</button>
 </div>
@@ -39,6 +40,12 @@
     font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 300; font-size: 13px;
     color: rgb(90, 90, 90); line-height: 1.4;
   }
+  .publish-bar__preview { margin-top:8px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px 24px; }
+  .publish-bar__preview[hidden] { display:none; }
+  .publish-bar__preview :global(h3) { margin:0 0 4px; font-size:12px; color:#444; }
+  .publish-bar__preview :global(ul) { margin:0; padding-left:18px; font-size:12px; color:#666; }
+  .publish-bar__preview :global(a) { color:#596c12; }
+  @media (max-width:700px) { .publish-bar__preview { grid-template-columns:1fr; } }
   .publish-bar__btn {
     flex: 0 0 auto;
     font-family: var(--pj-noto, "Noto Sans", sans-serif); font-weight: 700; font-size: 13.5px;
@@ -56,13 +63,41 @@
 <script>
   const banner = document.getElementById('pub-banner');
   const statusEl = document.getElementById('pub-status');
+  const previewEl = document.getElementById('pub-preview');
   const btn = document.getElementById('pub-btn') as HTMLButtonElement | null;
+  let currentPreview: any = null;
+  let currentPreviewToken = '';
+
+  const esc = (value: unknown) => String(value ?? '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const articleLink = (item: any) => item.action === 'remove'
+    ? `/admin-pujol/articles/${item.id}/edit/`
+    : `/${item.slug}/`;
+  function renderPreview(preview: any) {
+    if (!previewEl) return;
+    const online = [
+      ...(preview?.articles || []).filter((item: any) => item.action === 'online').map((item: any) => ({ ...item, href: articleLink(item) })),
+      ...(preview?.experts || []).map((item: any) => ({ ...item, href: `/experts/${item.slug}/` })),
+      ...(preview?.pages || []).map((item: any) => ({ ...item, href: `/${item.slug}/` })),
+    ];
+    const removed = (preview?.articles || []).filter((item: any) => item.action === 'remove')
+      .map((item: any) => ({ ...item, href: articleLink(item) }));
+    const group = (title: string, items: any[]) => items.length
+      ? `<section><h3>${esc(title)} (${items.length})</h3><ul>${items.map((item) => `<li><a href="${esc(item.href)}">${esc(item.title)}</a></li>`).join('')}</ul></section>`
+      : '';
+    previewEl.innerHTML = group('Va être mis en ligne ou mis à jour', online) + group('Va être retiré du site', removed);
+    previewEl.hidden = !online.length && !removed.length;
+  }
 
   async function loadPending() {
     try {
       const r = await fetch('/api/admin-pujol/publish/', { headers: { Accept: 'application/json' } });
       if (!r.ok) return;
-      const d = await r.json();
+      const d: any = await r.json();
+      currentPreview = d.preview;
+      currentPreviewToken = d.previewToken || '';
+      renderPreview(currentPreview);
       const n = d.pending?.total ?? 0;
       if (banner) {
         banner.textContent = n
@@ -70,6 +105,7 @@
           : 'Tout est publié';
         banner.dataset.state = n ? 'pending' : 'clean';
       }
+      if (btn) btn.disabled = !n;
       if (!d.deployConfigured && statusEl) {
         statusEl.textContent = '⚠️ Déploiement non configuré (secret GITHUB_TOKEN manquant) — « Publier » enregistre l’instantané mais ne relance pas le build.';
       }
@@ -81,7 +117,7 @@
     polls++;
     try {
       const r = await fetch('/api/admin-pujol/publish/status/', { headers: { Accept: 'application/json' } });
-      const d = await r.json();
+      const d: any = await r.json();
       const run = d.run;
       if (run && statusEl) {
         if (run.status === 'completed') {
@@ -97,13 +133,30 @@
   }
 
   btn?.addEventListener('click', async () => {
-    if (!confirm('Publier toutes les modifications (articles + experts) et relancer la mise en ligne du site ?')) return;
+    const online = [
+      ...(currentPreview?.articles || []).filter((item: any) => item.action === 'online'),
+      ...(currentPreview?.experts || []),
+      ...(currentPreview?.pages || []),
+    ].length;
+    const removed = (currentPreview?.articles || []).filter((item: any) => item.action === 'remove').length;
+    if (!online && !removed) return;
+    const summary = [online ? `${online} élément${online > 1 ? 's' : ''} mis en ligne ou mis à jour` : '', removed ? `${removed} article${removed > 1 ? 's' : ''} retiré${removed > 1 ? 's' : ''}` : ''].filter(Boolean).join(', ');
+    if (!confirm(`Confirmer la publication globale : ${summary} ?`)) return;
     btn.disabled = true;
     if (statusEl) statusEl.textContent = 'Enregistrement de l’instantané…';
     try {
-      const r = await fetch('/api/admin-pujol/publish/', { method: 'POST', headers: { Accept: 'application/json' } });
-      const d = await r.json();
+      const r = await fetch('/api/admin-pujol/publish/', {
+        method: 'POST',
+        headers: { Accept: 'application/json', 'content-type': 'application/json' },
+        body: JSON.stringify({ previewToken: currentPreviewToken }),
+      });
+      const d: any = await r.json();
+      if (!r.ok) {
+        if (d.preview) { currentPreview = d.preview; currentPreviewToken = d.previewToken || ''; renderPreview(currentPreview); }
+        throw new Error(d.error || `HTTP ${r.status}`);
+      }
       await loadPending();
+      renderPreview(d.published);
       if (d.deployTriggered) { if (statusEl) statusEl.textContent = '🛠️ Build lancé…'; polls = 0; pollStatus(); }
       else if (statusEl) { statusEl.textContent = d.deployError ? `Instantané enregistré, build non lancé : ${d.deployError}` : 'Instantané enregistré.'; btn.disabled = false; }
     } catch (e: any) {

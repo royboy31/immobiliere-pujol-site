@@ -206,3 +206,24 @@ export async function countPendingPages(db: D1Database): Promise<number> {
     .first<{ n: number }>();
   return row?.n || 0;
 }
+
+export interface PendingPageChange {
+  id: number;
+  slug: string;
+  title: string;
+}
+
+/** Exact legal-page set shown by the global publication preview. */
+export async function listPendingPageChanges(db: D1Database): Promise<PendingPageChange[]> {
+  const { results } = await db.prepare(
+    `SELECT id, slug, title FROM site_pages
+     WHERE published_json IS NULL OR published_at IS NULL
+        OR datetime(updated_at) > datetime(published_at)
+     ORDER BY title ASC`
+  ).all();
+  return (results || []).map((row: any) => ({
+    id: Number(row.id),
+    slug: String(row.slug || ''),
+    title: String(row.title || row.slug || ''),
+  })).filter((page) => isLegalPage(page.slug));
+}

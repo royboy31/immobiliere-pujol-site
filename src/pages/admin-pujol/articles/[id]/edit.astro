@@ -2,7 +2,7 @@
 export const prerender = false;
 import AdminLayout from '../../../../layouts/AdminLayout.astro';
 import ArticleEditor from '../../../../components/admin/ArticleEditor.astro';
-import { getDB, ensureSchema, getArticle, listCategories } from '../../../../lib/blog-db';
+import { getDB, ensureSchema, getArticle, listCategories, listRelatedArticleOptions } from '../../../../lib/blog-db';
 
 type Expert = { slug: string; title: string };
 const expertMods = import.meta.glob<Expert>('../../../../content/experts/*.json', { eager: true, import: 'default' });
@@ -15,7 +15,8 @@ await ensureSchema(db);
 const article = await getArticle(db, Number(Astro.params.id));
 if (!article) return Astro.redirect('../../');
 const allCategories = await listCategories(db);
+const relatedOptions = await listRelatedArticleOptions(db, article.id);
 ---
 <AdminLayout title={`Éditer — ${article.title}`} section="articles">
-  <ArticleEditor article={article} experts={experts} allCategories={allCategories} />
+  <ArticleEditor article={article} experts={experts} allCategories={allCategories} relatedOptions={relatedOptions} />
 </AdminLayout>
