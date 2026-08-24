@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
@@ -120,6 +121,12 @@ test('Apps Script batch mode updates every duplicate and never inserts missing c
   const context = {
     LockService: { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) },
     SpreadsheetApp: { getActiveSpreadsheet: () => ({ getSheetByName: () => sheet }) },
+    PropertiesService: { getScriptProperties: () => ({ getProperty: () => 'sheet-token' }) },
+    Utilities: {
+      DigestAlgorithm: { SHA_256: 'sha256' },
+      Charset: { UTF_8: 'utf8' },
+      computeDigest: (_algorithm, value) => [...crypto.createHash('sha256').update(String(value)).digest()],
+    },
     ContentService: {
       MimeType: { JSON: 'json' },
       createTextOutput: (content) => ({
@@ -160,6 +167,146 @@ test('Apps Script batch mode updates every duplicate and never inserts missing c
   assert.equal(rows[2][2], 'Confirmé (double opt-in)');
   assert.equal(rows[2][3], '02/08/2026 12:00:00');
   assert.equal(rows[3][2], 'En attente (double opt-in)');
+
+  const forbidden = context.doPost({ postData: { contents: JSON.stringify({
+    action: 'listPendingNewsletterReminders', tab: 'Newsletter', token: 'wrong',
+  }) } });
+  assert.deepEqual(JSON.parse(forbidden.getContent()), { ok: false, error: 'Forbidden' });
+
+  const pending = context.doPost({ postData: { contents: JSON.stringify({
+    action: 'listPendingNewsletterReminders', tab: 'Newsletter', token: 'sheet-token',
+  }) } });
+  assert.deepEqual(JSON.parse(pending.getContent()), {
+    ok: true,
+    records: [{ email: 'other@example.com', signupAt: '03/08/2026', reminderAt: '' }],
+  });
+});
+
+test('one-time DOI reminder dry run excludes confirmed and already-reminded contacts', async () => {
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async (input) => {
+    const url = String(input);
+    calls.push(url);
+    if (url.includes('script.google.com')) return Response.json({
+      ok: true,
+      records: [
+        { email: 'eligible@example.com', signupAt: '22/07/2026 10:00:00', reminderAt: '' },
+        { email: 'confirmed@example.com', signupAt: '23/07/2026 10:00:00', reminderAt: '' },
+        { email: 'reminded@example.com', signupAt: '24/07/2026 10:00:00', reminderAt: '25/07/2026 10:00:00' },
+        { email: 'reminded@example.com', signupAt: '24/07/2026 10:00:00', reminderAt: '' },
+      ],
+    });
+    if (url.includes('/v3/contacts?')) return Response.json({
+      contacts: [{ email: 'confirmed@example.com', listIds: [3] }],
+    });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    const response = await worker.fetch(new Request('https://worker.example/newsletter/reminders', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-internal-token': 'newsletter-token' },
+      body: JSON.stringify({
+        dryRun: true,
+        emails: ['eligible@example.com', 'confirmed@example.com', 'reminded@example.com', 'missing@example.com'],
+      }),
+    }), {
+      ...productionEnv,
+      NEWSLETTER_INTERNAL_TOKEN: 'newsletter-token',
+      SHEET_INTERNAL_TOKEN: 'sheet-token',
+    }, {});
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), {
+      ok: true,
+      dryRun: true,
+      requested: 4,
+      eligible: 1,
+      excludedConfirmed: 1,
+      excludedNotPending: 1,
+      excludedAlreadyReminded: 1,
+    });
+    assert.equal(calls.some((url) => url.includes('doubleOptinConfirmation')), false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('one-time DOI reminder marks the Sheet only after Brevo accepts it', async () => {
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    const body = init.body ? JSON.parse(init.body) : null;
+    calls.push({ url, body });
+    if (url.includes('script.google.com') && body?.action) return Response.json({
+      ok: true,
+      records: [{ email: 'eligible@example.com', signupAt: '22/07/2026 10:00:00', reminderAt: '' }],
+    });
+    if (url.includes('/v3/contacts?')) return Response.json({ contacts: [] });
+    if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
+    if (url.includes('script.google.com') && body?.data) return Response.json({ ok: true, mode: 'update' });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    const response = await worker.fetch(new Request('https://worker.example/newsletter/reminders', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-internal-token': 'newsletter-token' },
+      body: JSON.stringify({ dryRun: false, emails: ['eligible@example.com'] }),
+    }), {
+      ...productionEnv,
+      NEWSLETTER_INTERNAL_TOKEN: 'newsletter-token',
+      SHEET_INTERNAL_TOKEN: 'sheet-token',
+    }, {});
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).sent, 1);
+    const doiIndex = calls.findIndex((call) => call.url.includes('doubleOptinConfirmation'));
+    const markIndex = calls.findIndex((call) => call.body?.data?.['Date rappel opt-in']);
+    assert.ok(doiIndex >= 0 && markIndex > doiIndex);
+    assert.equal(calls[doiIndex].body.attributes, undefined);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('automatic reminders send once for eligible post-release signups', async () => {
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  const now = Date.now();
+  const signupAt = new Date(now - 25 * 60 * 60 * 1000).toISOString();
+  const autoFrom = new Date(now - 26 * 60 * 60 * 1000).toISOString();
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    const body = init.body ? JSON.parse(init.body) : null;
+    calls.push({ url, body });
+    if (url.includes('/v3/contacts?')) return Response.json({ contacts: [] });
+    if (url.includes('/v3/smtp/statistics/events?')) return Response.json({ events: [] });
+    if (url.includes('script.google.com') && Array.isArray(body?.records)) {
+      return Response.json({ ok: true, matchedRecords: 0, updatedRows: 0 });
+    }
+    if (url.includes('script.google.com') && body?.action) return Response.json({
+      ok: true,
+      records: [{ email: 'future@example.com', signupAt, reminderAt: '' }],
+    });
+    if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
+    if (url.includes('script.google.com') && body?.data) return Response.json({ ok: true, mode: 'update' });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    await worker.scheduled({ cron: '20 * * * *' }, {
+      ...productionEnv,
+      SHEET_INTERNAL_TOKEN: 'sheet-token',
+      NEWSLETTER_REMINDER_AUTO_FROM: autoFrom,
+    });
+    assert.equal(calls.filter((call) => call.url.includes('doubleOptinConfirmation')).length, 1);
+    const doiIndex = calls.findIndex((call) => call.url.includes('doubleOptinConfirmation'));
+    const markIndex = calls.findIndex((call) => call.body?.data?.['Date rappel opt-in']);
+    assert.ok(markIndex > doiIndex);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test('alert notifications follow the confirmed CRM routing matrix', async () => {

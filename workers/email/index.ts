@@ -23,6 +23,12 @@ interface Env {
   NEWSLETTER_REPLY_TO?: string;
   NEWSLETTER_CONFIRM_REDIRECT_URL?: string;
   NEWSLETTER_INTERNAL_TOKEN?: string;
+  // Dedicated secret for reading pending newsletter rows from the Apps Script.
+  // The write-only legacy form path remains unchanged.
+  SHEET_INTERNAL_TOKEN?: string;
+  // ISO timestamp. Automatic reminders only consider signups on/after this
+  // release cutoff, so historical pending contacts stay in the reviewed batch.
+  NEWSLETTER_REMINDER_AUTO_FROM?: string;
   // Least-privilege token used only by cron-sync for matched-listing emails.
   // The site's newsletter token remains unchanged for opt-in and admin calls.
   ALERT_INTERNAL_TOKEN?: string;
@@ -269,6 +275,61 @@ async function updateExistingSheetRows(
     matchedRecords: result.matchedRecords || 0,
     updatedRows: result.updatedRows || 0,
   };
+}
+
+interface PendingNewsletterRow {
+  email: string;
+  signupAt: string;
+  reminderAt: string;
+}
+
+function isPendingNewsletterRow(value: unknown): value is PendingNewsletterRow {
+  if (!value || typeof value !== 'object') return false;
+  const row = value as Record<string, unknown>;
+  return typeof row.email === 'string'
+    && typeof row.signupAt === 'string'
+    && typeof row.reminderAt === 'string';
+}
+
+function collapsePendingNewsletterRows(rows: PendingNewsletterRow[]): PendingNewsletterRow[] {
+  const unique = new Map<string, PendingNewsletterRow>();
+  for (const row of rows) {
+    const email = row.email.trim().toLowerCase();
+    if (!email) continue;
+    const existing = unique.get(email);
+    if (!existing) {
+      unique.set(email, { ...row, email });
+      continue;
+    }
+    unique.set(email, {
+      email,
+      signupAt: existing.signupAt || row.signupAt,
+      // Any recorded reminder on a duplicate row blocks another send.
+      reminderAt: existing.reminderAt || row.reminderAt,
+    });
+  }
+  return [...unique.values()];
+}
+
+async function fetchPendingNewsletterRows(env: Env): Promise<PendingNewsletterRow[]> {
+  if (!env.SHEET_INTERNAL_TOKEN) throw new Error('SHEET_INTERNAL_TOKEN manquant');
+  const res = await fetch(SHEETS_URL, {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'listPendingNewsletterReminders',
+      tab: 'Newsletter',
+      token: env.SHEET_INTERNAL_TOKEN,
+    }),
+    redirect: 'follow',
+  });
+  if (!res.ok) throw new Error(`Sheets HTTP ${res.status}`);
+  const result = (await res.json().catch(() => null)) as {
+    ok?: boolean;
+    error?: string;
+    records?: PendingNewsletterRow[];
+  } | null;
+  if (!result?.ok) throw new Error(result?.error || 'Réponse Sheets invalide');
+  return Array.isArray(result.records) ? result.records.filter(isPendingNewsletterRow) : [];
 }
 
 const SITE_URL = 'https://www.immobiliere-pujol.fr';
@@ -965,6 +1026,32 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
 // Before arming this for production: resolve §6.2 (per-environment worker URL),
 // move to the client's own Brevo account (§1.1), authenticate
 // news.immobiliere-pujol.fr (§1.3), and create the DOI template (§1.2).
+async function requestDoiEmail(
+  env: Env,
+  email: string,
+  attributes?: Record<string, string>,
+): Promise<{ ok: boolean; error?: string }> {
+  if (!env.BREVO_API_KEY || !env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
+    return { ok: false, error: 'Double opt-in non configuré.' };
+  }
+  const res = await fetch(`${BREVO}/contacts/doubleOptinConfirmation`, {
+    method: 'POST',
+    headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      email,
+      includeListIds: [Number(env.NEWSLETTER_LIST_ID)],
+      templateId: Number(env.DOI_TEMPLATE_ID),
+      redirectionUrl: env.NEWSLETTER_CONFIRM_REDIRECT_URL,
+      ...(attributes ? { attributes } : {}),
+    }),
+  });
+  if (!res.ok) {
+    console.error(`Brevo DOI ${res.status}: ${await res.text().catch(() => '')}`);
+    return { ok: false, error: 'Inscription impossible pour le moment.' };
+  }
+  return { ok: true };
+}
+
 async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string; doi?: boolean }> {
   const email = ((fd.get('email') as string) || '').trim().toLowerCase();
   if (!email || !email.includes('@')) return { ok: false, error: 'Email invalide.' };
@@ -995,16 +1082,9 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
 
   // Brevo sends the branded confirmation; the contact joins the list only after
   // they click. Brevo records consent date/source = our RGPD registry (§3.2/§8).
-  const res = await fetch(`${BREVO}/contacts/doubleOptinConfirmation`, {
-    method: 'POST',
-    headers: { 'api-key': env.BREVO_API_KEY as string, 'content-type': 'application/json' },
-    body: JSON.stringify({
-      email,
-      includeListIds: [Number(env.NEWSLETTER_LIST_ID)],
-      templateId: Number(env.DOI_TEMPLATE_ID),
-      redirectionUrl: env.NEWSLETTER_CONFIRM_REDIRECT_URL,
-      attributes: { SOURCE: 'site', OPTIN_DATE: new Date().toISOString() },
-    }),
+  const doiResult = await requestDoiEmail(env, email, {
+    SOURCE: 'site',
+    OPTIN_DATE: new Date().toISOString(),
   });
 
   // Brevo answers 201 both for a new signup and for an existing/already-confirmed
@@ -1013,10 +1093,7 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
   // one's. Every 400 here is a real fault (invalid address, missing
   // redirectionUrl, no active DOI template), so surface it instead of promising
   // the visitor a confirmation email that was never sent.
-  if (!res.ok) {
-    console.error(`Brevo DOI ${res.status}: ${await res.text().catch(() => '')}`);
-    return { ok: false, error: 'Inscription impossible pour le moment.' };
-  }
+  if (!doiResult.ok) return doiResult;
 
   ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
     Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)',
@@ -1128,12 +1205,10 @@ async function fetchBrevoPages<T>(
 // Reconcile the source of truth once a day instead: confirmed contacts are list
 // members, and DOI click events provide the consent timestamp. The production
 // origin guard is intentional because the staging worker shares the live Sheet.
-async function reconcileNewsletterSheet(env: Env): Promise<void> {
-  if (env.ALLOWED_ORIGIN !== SITE_URL) return;
-  if (!env.BREVO_API_KEY || !env.NEWSLETTER_LIST_ID || !env.DOI_TEMPLATE_ID) {
-    throw new Error('Newsletter Sheet sync is not configured');
+async function fetchConfirmedNewsletterEmails(env: Env): Promise<Set<string>> {
+  if (!env.BREVO_API_KEY || !env.NEWSLETTER_LIST_ID) {
+    throw new Error('Newsletter Brevo non configurée');
   }
-
   const listId = Number(env.NEWSLETTER_LIST_ID);
   if (!Number.isSafeInteger(listId) || listId <= 0) throw new Error('NEWSLETTER_LIST_ID invalide');
   const contacts = await fetchBrevoPages<BrevoContact>(
@@ -1142,9 +1217,18 @@ async function reconcileNewsletterSheet(env: Env): Promise<void> {
     'contacts',
     1000,
   );
-  const confirmedContacts = contacts.filter((contact) =>
-    contact.email && contact.listIds?.includes(listId)
-  );
+  return new Set(contacts
+    .filter((contact) => contact.email && contact.listIds?.includes(listId))
+    .map((contact) => contact.email!.trim().toLowerCase()));
+}
+
+async function reconcileNewsletterSheet(env: Env): Promise<Set<string>> {
+  if (env.ALLOWED_ORIGIN !== SITE_URL) return new Set();
+  if (!env.BREVO_API_KEY || !env.NEWSLETTER_LIST_ID || !env.DOI_TEMPLATE_ID) {
+    throw new Error('Newsletter Sheet sync is not configured');
+  }
+
+  const confirmedEmails = await fetchConfirmedNewsletterEmails(env);
 
   const events = await fetchBrevoPages<BrevoEmailEvent>(
     env,
@@ -1163,8 +1247,7 @@ async function reconcileNewsletterSheet(env: Env): Promise<void> {
   }
 
   let withoutClickTimestamp = 0;
-  const records = confirmedContacts.map((contact) => {
-    const email = contact.email!.trim().toLowerCase();
+  const records = [...confirmedEmails].map((email) => {
     const confirmationDate = firstClickByEmail.get(email);
     if (!confirmationDate) withoutClickTimestamp++;
     return {
@@ -1187,11 +1270,118 @@ async function reconcileNewsletterSheet(env: Env): Promise<void> {
 
   console.log(JSON.stringify({
     event: 'newsletter_sheet_reconciled',
-    confirmedListContacts: confirmedContacts.length,
+    confirmedListContacts: confirmedEmails.size,
     matchedSheetRecords: sheetResult.matchedRecords,
     updatedSheetRows: sheetResult.updatedRows,
     withoutClickTimestamp,
   }));
+  return confirmedEmails;
+}
+
+function parseSheetDate(value: string): number {
+  const iso = Date.parse(value);
+  if (Number.isFinite(iso)) return iso;
+  const match = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+  if (!match) return Number.NaN;
+  const [, day, month, year, hour = '0', minute = '0', second = '0'] = match;
+  // Sheet timestamps are Europe/Paris. A conservative UTC conversion is enough
+  // for the once-daily 24-hour threshold and never sends early.
+  return Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour) - 1, Number(minute), Number(second));
+}
+
+async function markNewsletterReminder(email: string): Promise<void> {
+  const saved = await upsertSheet('Newsletter', 'Email', {
+    Email: email,
+    'Date rappel opt-in': now(),
+  }, { writeOnce: ['Date rappel opt-in'], strict: true });
+  if (!saved) throw new Error('Échec de marquage du rappel');
+}
+
+async function sendEligibleNewsletterReminders(
+  env: Env,
+  rows: PendingNewsletterRow[],
+  confirmedEmails: Set<string>,
+  limit: number,
+): Promise<{ eligible: number; sent: number; failed: number; excludedConfirmed: number; excludedAlreadyReminded: number }> {
+  const unique = collapsePendingNewsletterRows(rows);
+  const candidates = unique.filter((row) => !row.reminderAt);
+  let sent = 0;
+  let failed = 0;
+  let excludedConfirmed = 0;
+  const excludedAlreadyReminded = unique.length - candidates.length;
+  for (const row of candidates.slice(0, limit)) {
+    const email = row.email.trim().toLowerCase();
+    if (confirmedEmails.has(email)) {
+      excludedConfirmed++;
+      continue;
+    }
+    // Reminder calls deliberately omit OPTIN_DATE so the original signup date
+    // remains the consent-history timestamp in Brevo and in the Sheet.
+    const result = await requestDoiEmail(env, email);
+    if (!result.ok) {
+      failed++;
+      continue;
+    }
+    await markNewsletterReminder(email);
+    sent++;
+  }
+  return {
+    eligible: candidates.filter((row) => !confirmedEmails.has(row.email.trim().toLowerCase())).length,
+    sent,
+    failed,
+    excludedConfirmed,
+    excludedAlreadyReminded,
+  };
+}
+
+async function runAutomaticNewsletterReminders(env: Env, confirmedEmails: Set<string>): Promise<void> {
+  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.NEWSLETTER_REMINDER_AUTO_FROM || !env.SHEET_INTERNAL_TOKEN) return;
+  const start = Date.parse(env.NEWSLETTER_REMINDER_AUTO_FROM);
+  if (!Number.isFinite(start)) throw new Error('NEWSLETTER_REMINDER_AUTO_FROM invalide');
+  const cutoff = Date.now() - 24 * 60 * 60 * 1000;
+  const rows = (await fetchPendingNewsletterRows(env)).filter((row) => {
+    const signup = parseSheetDate(row.signupAt);
+    return Number.isFinite(signup) && signup >= start && signup <= cutoff;
+  });
+  const result = await sendEligibleNewsletterReminders(env, rows, confirmedEmails, 50);
+  console.log(JSON.stringify({ event: 'newsletter_reminders_automatic', ...result }));
+}
+
+async function handleNewsletterReminders(req: Request, env: Env): Promise<Response> {
+  const guard = nlGuard(req, env);
+  if (guard) return guard;
+  if (env.ALLOWED_ORIGIN !== SITE_URL || !env.SHEET_INTERNAL_TOKEN || !env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
+    return nlJson({ error: 'Rappels newsletter non configurés.' }, 501);
+  }
+  let rawBody: unknown;
+  try { rawBody = await req.json(); } catch { return nlJson({ error: 'JSON invalide.' }, 400); }
+  if (!rawBody || typeof rawBody !== 'object') return nlJson({ error: 'JSON invalide.' }, 400);
+  const body = rawBody as { dryRun?: unknown; emails?: unknown };
+  const emails = Array.isArray(body.emails) ? body.emails.filter((email): email is string => typeof email === 'string') : [];
+  const requested = new Set(emails.map((email) => email.trim().toLowerCase()).filter((email) => email.includes('@')));
+  if (!requested.size || requested.size > 100) return nlJson({ error: 'Liste de destinataires invalide.' }, 400);
+
+  const [rows, confirmedEmails] = await Promise.all([
+    fetchPendingNewsletterRows(env),
+    fetchConfirmedNewsletterEmails(env),
+  ]);
+  const selectedRows = collapsePendingNewsletterRows(
+    rows.filter((row) => requested.has(row.email.trim().toLowerCase())),
+  );
+  const pendingEmails = new Set(selectedRows.map((row) => row.email.trim().toLowerCase()));
+  const eligible = selectedRows.filter((row) => !row.reminderAt && !confirmedEmails.has(row.email.trim().toLowerCase()));
+  const summary = {
+    requested: requested.size,
+    eligible: new Set(eligible.map((row) => row.email.trim().toLowerCase())).size,
+    excludedConfirmed: [...requested].filter((email) => confirmedEmails.has(email)).length,
+    excludedNotPending: [...requested].filter((email) => !pendingEmails.has(email) && !confirmedEmails.has(email)).length,
+    excludedAlreadyReminded: selectedRows.filter((row) => !!row.reminderAt && !confirmedEmails.has(row.email)).length,
+  };
+  if (body.dryRun !== false) return nlJson({ ok: true, dryRun: true, ...summary });
+
+  const result = await sendEligibleNewsletterReminders(env, eligible, confirmedEmails, 100);
+  console.log(JSON.stringify({ event: 'newsletter_reminders_one_time', requested: summary.requested, ...result }));
+  return nlJson({ ok: result.failed === 0, dryRun: false, ...summary, sent: result.sent, failed: result.failed }, result.failed ? 502 : 200);
 }
 function nlJson(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
@@ -1555,14 +1745,18 @@ const SHEET_HEADERS: Record<string, string[]> = {
   'Devis Syndic':      ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Adresse copropriété', 'Nombre de lots', 'Message'],
   'Honoraires Syndic': ['Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Rôle — Président CS', 'Rôle — Membre CS', 'Rôle — Copropriétaire', 'Adresse', 'Ville', 'Code postal', 'Nombre de lots', 'Équipements', 'Procédures / recouvrement', 'Commentaires'],
   'Annonces':          ['Date', 'Référence', 'Titre', 'Type (V/L)', 'Code postal', 'Négociateur', 'Nom', 'Email', 'Téléphone', 'Message'],
-  'Newsletter':        ['Date', 'Email', 'Statut opt-in', 'Date confirmation', 'Prénom', 'Nom', 'Profil', 'Intérêt Location', 'Intérêt Vente', 'Intérêt Syndic', 'Tous sujets', 'Notes'],
+  'Newsletter':        ['Date', 'Email', 'Statut opt-in', 'Date confirmation', 'Date rappel opt-in', 'Prénom', 'Nom', 'Profil', 'Intérêt Location', 'Intérêt Vente', 'Intérêt Syndic', 'Tous sujets', 'Notes'],
 };
 
 // ── Worker entry point ──────────────────────────────────────────────────────
 
 export default {
-  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
-    await reconcileNewsletterSheet(env);
+  async scheduled(controller: ScheduledController, env: Env): Promise<void> {
+    if (env.ALLOWED_ORIGIN !== SITE_URL) return;
+    const confirmedEmails = controller.cron === '20 * * * *'
+      ? await fetchConfirmedNewsletterEmails(env)
+      : await reconcileNewsletterSheet(env);
+    await runAutomaticNewsletterReminders(env, confirmedEmails);
   },
 
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -1602,6 +1796,7 @@ export default {
     if (path === '/newsletter/test')  return handleNewsletterTest(request, env);
     if (path === '/newsletter/stats') return handleNewsletterStats(request, env);
     if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
+    if (path === '/newsletter/reminders') return handleNewsletterReminders(request, env);
     if (path === '/alerts/optin')     return handleAlertOptin(request, env);
     if (path === '/alerts/notify')    return handleAlertNotify(request, env);
     if (path === '/alerts/match')     return handleAlertMatch(request, env);

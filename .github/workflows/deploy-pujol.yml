@@ -76,7 +76,8 @@ jobs:
             const cleaned = raw.replace(/^\s*\/\/.*/gm,'').replace(/,(\s*[}\]])/g,'\$1');
             const cfg = JSON.parse(cleaned);
             cfg.account_id = '${{ secrets.CLOUDFLARE_ACCOUNT_ID }}';
-            cfg.vars.ALLOWED_ORIGIN = 'https://immobiliere-pujol-staging.pujol.workers.dev';
+            cfg.vars.ALLOWED_ORIGIN = 'https://www.immobiliere-pujol.fr';
+            cfg.vars.NEWSLETTER_REMINDER_AUTO_FROM = '2026-08-24T21:11:21Z';
             fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
           "
 
@@ -115,17 +116,23 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Activate alert matcher token
+      - name: Activate production internal tokens
         run: |
           set -euo pipefail
           if [ -z "$ALERT_INTERNAL_TOKEN" ]; then
             echo "Missing ALERT_INTERNAL_TOKEN, refusing to activate alert matching"
             exit 1
           fi
+          if [ -z "$SHEET_INTERNAL_TOKEN" ]; then
+            echo "Missing SHEET_INTERNAL_TOKEN, refusing to activate newsletter reminders"
+            exit 1
+          fi
           printf '%s' "$ALERT_INTERNAL_TOKEN" | npx wrangler secret put ALERT_INTERNAL_TOKEN --name pujol-email
           printf '%s' "$ALERT_INTERNAL_TOKEN" | npx wrangler secret put ALERT_INTERNAL_TOKEN --name pujol-cron-sync
+          printf '%s' "$SHEET_INTERNAL_TOKEN" | npx wrangler secret put SHEET_INTERNAL_TOKEN --name pujol-email
         env:
           ALERT_INTERNAL_TOKEN: ${{ secrets.ALERT_INTERNAL_TOKEN }}
+          SHEET_INTERNAL_TOKEN: ${{ secrets.SHEET_INTERNAL_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
