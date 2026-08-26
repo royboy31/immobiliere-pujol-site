@@ -15,6 +15,7 @@ what was built, how to see it, how to move it to production, and what is left.
 | Phase 1 — back-office (`admin-pujol/alertes`: list, filter, manual add, pause/delete) | ✅ built + on staging |
 | Phase 2 — matcher (email `/alerts/match` + `cron-sync` hook) | ✅ built + on staging, **core logic tested**, **live cron trigger NOT yet run** |
 | Caroline feedback batch A (copy/layout) + multi-arrondissements + fix radios (14 Aug 2026) | ✅ built + on staging, verified (see below) |
+| Caroline feedback batch B (square Oui/Non controls, orange step 2, simplified pending-confirmation state, 26 Aug 2026) | ✅ built + locally verified; staging review pending |
 | Routage agence confirmé (18 Aug 2026): parser Zoho + Caroline toujours, Benoît seulement si bien à vendre | ✅ built + tested, not yet deployed |
 | Production | ⬜ not deployed — cherry-pick below when ready |
 

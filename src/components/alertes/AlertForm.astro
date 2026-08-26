@@ -166,7 +166,14 @@ const KINDS: [string, string][] = [
           const msg = data.already
             ? 'Vous avez déjà une alerte avec ces critères. Rien à faire de plus !'
             : 'Consultez vos messages. Vous allez recevoir un e-mail de confirmation. Cliquez sur le lien reçu pour activer votre alerte.';
-          form.innerHTML = `<div class="af-success"><h3>Merci !</h3><p>${msg}</p></div>`;
+          const heading = data.already
+            ? 'Merci !'
+            : 'Merci, il vous reste encore une étape pour activer l\'alerte !';
+          const instructionClass = data.already ? '' : ' class="af-success__instruction"';
+          form.innerHTML = `<div class="af-success"><h3>${heading}</h3><p${instructionClass}>${msg}</p></div>`;
+          form.dispatchEvent(new CustomEvent('alert:success', {
+            bubbles: true,
+          }));
         } else {
           showErr(form, data.error || 'Une erreur est survenue.');
           if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
@@ -228,10 +235,20 @@ const KINDS: [string, string][] = [
   .af-toggle label.is-on:has(input[value="V"]) { background: #EC7234; border-color: #EC7234; }
   .af-toggle label.is-on:has(input[value="L"]) { background: #6f8319; border-color: #6f8319; }
   .af-vente { display: flex; flex-direction: column; gap: 10px; }
+  .af-vente[hidden] { display: none; }
   .af-check, .af-agree { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: #4a5560; line-height: 1.5; cursor: pointer; }
   .af-check input, .af-agree input { margin-top: 2px; accent-color: #B2C54F; }
-  /* The global reset strips appearance from everything except checkboxes; restore it for these radios. */
-  .af-check input[type='radio'] { -webkit-appearance: radio; appearance: auto; width: 15px; height: 15px; flex: none; }
+  /* Keep exclusive radio semantics while matching the requested square controls. */
+  .af-check input[type='radio'] {
+    -webkit-appearance: none; appearance: none; display: grid; place-content: center;
+    width: 15px; height: 15px; flex: none; border: 1.5px solid #9ba59f; border-radius: 2px; background: #fff;
+  }
+  .af-check input[type='radio']::before {
+    content: ''; width: 7px; height: 7px; background: #6f8319; transform: scale(0); transition: transform .1s ease;
+  }
+  .af-check input[type='radio']:checked { border-color: #6f8319; }
+  .af-check input[type='radio']:checked::before { transform: scale(1); }
+  .af-check input[type='radio']:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(178,197,79,.28); }
   .af-agree a { color: #1f2a30; }
   .af-rgpd { margin: -6px 0 0; font-size: 11px; line-height: 1.55; color: #8a949e; }
   .af-rgpd a { color: #77828d; }
@@ -242,8 +259,9 @@ const KINDS: [string, string][] = [
   .af-submit:hover { transform: translateY(-1px); }
   .af-submit.is-submitting { opacity: .6; cursor: default; }
   .af-note { margin: 0; font-size: 13px; color: #77828d; text-align: center; }
-  .af-success { text-align: center; padding: 20px 8px; }
-  .af-success h3 { margin: 0 0 8px; color: #1f2a30; }
-  .af-success p { margin: 0; color: #4a5560; line-height: 1.6; }
+  :global(.af-success) { text-align: center; padding: 20px 8px; }
+  :global(.af-success h3) { margin: 0 0 8px; color: #1f2a30; }
+  :global(.af-success p) { margin: 0; color: #4a5560; line-height: 1.6; }
+  :global(.af-success .af-success__instruction) { color: #EC7234; }
   @media (max-width: 560px) { .af-row, .af-row--3 { grid-template-columns: 1fr; } .af-cps { grid-template-columns: repeat(4, 1fr); } }
 </style>

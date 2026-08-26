@@ -24,7 +24,7 @@ const seoDescription =
     <div class="alerte-wrap">
       <ul class="alerte-steps">
         <li><span>1</span> <p><strong>Renseignez vos critères</strong> (et indiquez si vous avez un bien à vendre)</p></li>
-        <li><span>2</span> <p><strong>Validez votre alerte</strong> via le lien que vous allez recevoir dans votre boîte mail</p></li>
+        <li class="alerte-step--confirmation"><span>2</span> <p><strong>Validez votre alerte</strong> via le lien que vous allez recevoir dans votre boîte mail</p></li>
         <li><span>3</span> <p><strong>Recevez les annonces</strong> dès leur mise en ligne</p></li>
       </ul>
       <div class="alerte-card">
@@ -35,6 +35,18 @@ const seoDescription =
 </BaseLayout>
 
 <script>
+  document.addEventListener('alert:success', (event) => {
+    const target = event.target;
+    const card = target instanceof HTMLFormElement
+      ? target.closest<HTMLElement>('.alerte-card')
+      : null;
+    if (!card) return;
+
+    document.querySelector<HTMLElement>('.alerte-hero')?.setAttribute('hidden', '');
+    document.querySelector<HTMLElement>('.alerte-steps')?.setAttribute('hidden', '');
+    card.scrollIntoView({ block: 'start' });
+  });
+
   // Surface a friendly notice if a confirm/unsub link was invalid or expired.
   if (new URLSearchParams(location.search).get('erreur') === 'lien') {
     const w = document.querySelector<HTMLElement>('.alerte-card');
@@ -50,6 +62,7 @@ const seoDescription =
 <style>
   .alerte-wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
   .alerte-hero { padding: 56px 0 28px; text-align: center; }
+  .alerte-hero[hidden], .alerte-steps[hidden] { display: none; }
   .alerte-eyebrow {
     margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #7f9420;
   }
@@ -66,6 +79,8 @@ const seoDescription =
   .alerte-steps li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #4a5560; }
   .alerte-steps li p { margin: 0; }
   .alerte-steps strong { color: #1f2a30; }
+  .alerte-steps .alerte-step--confirmation,
+  .alerte-steps .alerte-step--confirmation strong { color: #EC7234; }
   .alerte-steps span {
     flex: none; width: 28px; height: 28px; border-radius: 50%; background: rgba(178,197,79,.18); color: #6f8319;
     display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
