@@ -1209,6 +1209,16 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     max-width: 620px;
   }
 
+  .news-error {
+    font-family: $ds-font-helv;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #8b1e16;
+    margin: 10px 0 0;
+    max-width: 620px;
+  }
+
   .news-step2-note {
     font-family: $ds-font-helv;
     font-weight: 300;

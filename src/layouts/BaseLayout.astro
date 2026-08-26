@@ -92,6 +92,9 @@ const ogDescriptionFinal = ogDescription || metaDescription;
 // GTM_ID can be overridden per environment if needed.
 const gtmId = import.meta.env.GTM_ID || 'GTM-WNFF3V';
 const loadAnalytics = !shouldNoindex;
+// Turnstile is environment-gated, not page-indexability-gated. Production
+// noindex pages still render protected forms and therefore need the widget.
+const loadTurnstile = !!import.meta.env.ALLOW_INDEXING;
 
 // Always emit the enriched RealEstateAgent on every page. Pages can add their
 // own schemas (Article, WebSite, RealEstateListing, BreadcrumbList) via
@@ -222,10 +225,10 @@ for (const s of pageSchemas) {
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,'clarity','script','xagptvfky1');`} />
     )}
 
-    {/* Cloudflare Turnstile — prod only (the verify secret lives only on the prod
-        email worker). Auto-renders the .cf-turnstile widget on the lead forms.
-        On staging this script is absent, so the widget divs stay inert. */}
-    {loadAnalytics && (
+    {/* Cloudflare Turnstile — production only (the verify secret lives only on
+        the production email worker). This must not depend on whether the current
+        page is indexable: noindex pages still render protected forms. */}
+    {loadTurnstile && (
       <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     )}
 
