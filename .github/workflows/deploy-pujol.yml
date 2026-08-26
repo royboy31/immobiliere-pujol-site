@@ -71,6 +71,7 @@ jobs:
             cfg.d1_databases[0].database_id = '${{ secrets.D1_DATABASE_ID }}';
             cfg.vars.ALLOWED_ORIGIN = 'https://www.immobiliere-pujol.fr';
             cfg.vars.NEWSLETTER_REMINDER_AUTO_FROM = '2026-08-24T21:11:21Z';
+            cfg.vars.ALERT_SENDER_EMAIL = 'alerte@alerte.immobiliere-pujol.fr';
             fs.writeFileSync('workers/email/wrangler.jsonc', JSON.stringify(cfg, null, 2));
 
             // Cron-sync worker — swap D1 ID + set production routing.
