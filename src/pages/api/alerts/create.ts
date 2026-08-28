@@ -74,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
     cp: cps.length ? cps.join(',') : null,
     kind: str('kind'),
     budget_max: num('budget_max'),
-    chambres_min: num('chambres_min'),
+    chambres_min: Math.min(num('chambres_min') ?? 0, 4) || null,
     proprietaire: transac === 'V' && (fd.get('proprietaire') === 'on' || fd.get('proprietaire') === '1'),
     bien_a_vendre: transac === 'V' && (fd.get('bien_a_vendre') === 'on' || fd.get('bien_a_vendre') === '1'),
     source_ref: str('source_ref'),

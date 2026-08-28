@@ -43,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
     cp: [...new Set(String(b.cp || '').split(',').map((s) => s.trim()).filter((s) => /^\d{5}$/.test(s)))].sort().join(',') || null,
     kind: (b.kind || '').trim() || null,
     budget_max: num(b.budget_max),
-    chambres_min: num(b.chambres_min),
+    chambres_min: Math.min(num(b.chambres_min) ?? 0, 4) || null,
     proprietaire: transac === 'V' && !!b.proprietaire,
     bien_a_vendre: transac === 'V' && !!b.bien_a_vendre,
     status: 'active', // internal add: the request was already expressed

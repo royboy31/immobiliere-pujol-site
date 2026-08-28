@@ -1,12 +1,33 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { DatabaseSync } from 'node:sqlite';
 
 import {
+  ALERT_BEDROOM_MATCH_SQL,
   alertCandidateFromLbi,
   alertCandidateFromUbiflow,
   isLbiSale,
   isUbiflowRental,
 } from './index.ts';
+
+test('matches exact bedroom counts, with four as the only open-ended bucket', () => {
+  const db = new DatabaseSync(':memory:');
+  db.exec('CREATE TABLE alerts (id TEXT, chambres_min INTEGER)');
+  const insert = db.prepare('INSERT INTO alerts VALUES (?, ?)');
+  insert.run('any', null);
+  for (const bedrooms of [1, 2, 3, 4]) insert.run(String(bedrooms), bedrooms);
+
+  const matchingIds = (bedrooms) => db.prepare(
+    `SELECT id FROM alerts WHERE ${ALERT_BEDROOM_MATCH_SQL} ORDER BY id`,
+  ).all(bedrooms).map(({ id }) => id);
+
+  assert.deepEqual(matchingIds(1), ['1', 'any']);
+  assert.deepEqual(matchingIds(2), ['2', 'any']);
+  assert.deepEqual(matchingIds(3), ['3', 'any']);
+  assert.deepEqual(matchingIds(4), ['4', 'any']);
+  assert.deepEqual(matchingIds(5), ['4', 'any']);
+  assert.deepEqual(matchingIds(null), ['any']);
+});
 
 test('normalizes an LBI sale into the fields consumed by the alert matcher', () => {
   assert.deepEqual(alertCandidateFromLbi({

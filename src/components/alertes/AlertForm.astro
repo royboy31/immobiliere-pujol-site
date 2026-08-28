@@ -77,14 +77,15 @@ const KINDS: [string, string][] = [
     </label>
     <label class="af-field">
       <span class="af-lbl">Budget max (€)</span>
-      <input type="number" name="budget_max" min="0" step="1000" inputmode="numeric"
+      <input type="number" name="budget_max" min="0" step="1" inputmode="numeric"
              placeholder="ex. 350000" value={prefill.budget_max ?? ''} />
     </label>
     <label class="af-field">
-      <span class="af-lbl">Chambres (min.)</span>
+      <span class="af-lbl">Chambres</span>
       <select name="chambres_min">
         <option value="">Indifférent</option>
-        {[1,2,3,4,5].map((n) => <option value={n} selected={prefill.chambres_min === n}>{n}+</option>)}
+        {[1,2,3].map((n) => <option value={n} selected={prefill.chambres_min === n}>{n}</option>)}
+        <option value="4" selected={prefill.chambres_min === 4}>4+</option>
       </select>
     </label>
   </div>

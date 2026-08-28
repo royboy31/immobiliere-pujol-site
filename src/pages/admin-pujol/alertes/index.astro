@@ -103,7 +103,7 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
           <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
         </div>
         <div class="af2-row">
-          <label>Chambres (min.)<select name="chambres_min"><option value="">Indifférent</option>{[1,2,3,4,5].map((n) => <option value={n}>{n}+</option>)}</select></label>
+          <label>Chambres<select name="chambres_min"><option value="">Indifférent</option>{[1,2,3].map((n) => <option value={n}>{n}</option>)}<option value="4">4+</option></select></label>
         </div>
         <div class="af2-cps">
           <span class="af2-cps-lbl">Secteurs <small>(plusieurs choix possibles ; aucun = tous)</small></span>
