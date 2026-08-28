@@ -70,7 +70,7 @@ const _alertKind = classifyKind(view.titre);
 const alertPrefill = {
   cp: view.codePostal ? normalizeCp(view.codePostal) : null,
   kind: _alertKind === 'autre' ? null : _alertKind,
-  chambres_min: view.nbChambres ?? null,
+  chambres_min: view.nbChambres == null ? null : Math.min(view.nbChambres, 4),
   budget_max: isSale ? (view.prix ?? null) : (view.loyerCC ?? view.loyer ?? null),
   source_ref: view.reference,
   negociateur_email: contactEmail || null,

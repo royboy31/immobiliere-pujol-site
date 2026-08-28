@@ -59,12 +59,14 @@ export const KIND_LABELS: Record<string, string> = {
 };
 
 /** One-line French summary of an alert's criteria, e.g.
- *  "Location · Appartement · 13006 · 2 chambres min. · budget max 900 €". */
+ *  "Location · Appartement · 13006 · 2 chambres · budget max 900 €". */
 export function describeCriteria(a: Pick<Alert, 'transac' | 'kind' | 'cp' | 'budget_max' | 'chambres_min'>): string {
   const parts: string[] = [a.transac === 'V' ? 'Vente' : 'Location'];
   if (a.kind) parts.push(KIND_LABELS[a.kind] || a.kind);
   if (a.cp) parts.push(a.cp.split(',').join(', '));
-  if (a.chambres_min) parts.push(`${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''} min.`);
+  if (a.chambres_min) parts.push(a.chambres_min >= 4
+    ? '4 chambres et plus'
+    : `${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''}`);
   if (a.budget_max) parts.push(`budget max ${a.budget_max.toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
 }
@@ -201,7 +203,9 @@ export async function findDuplicate(db: D1Database, input: AlertInput): Promise<
 
 /**
  * Phase 2: active alerts a freshly-published listing satisfies. A NULL criterion
- * means "no preference" and matches anything. Budget is a ceiling, chambres a floor.
+ * means "no preference" and matches anything. Budget is a ceiling. Bedroom values
+ * 1 to 3 are exact; 4 means four or more. Missing listing data only matches alerts
+ * with no bedroom preference.
  */
 export async function findMatchingAlerts(
   db: D1Database,
@@ -212,10 +216,10 @@ export async function findMatchingAlerts(
        AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0)
        AND (kind IS NULL OR kind=?)
        AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
-       AND (chambres_min IS NULL OR ? IS NULL OR chambres_min <= ?)`
+       AND (chambres_min IS NULL OR chambres_min = MIN(IFNULL(?, 0), 4))`
   ).bind(
     listing.transac, listing.cp, listing.kind,
-    listing.prix, listing.prix, listing.chambres, listing.chambres,
+    listing.prix, listing.prix, listing.chambres,
   ).all();
   return (results || []).map(toAlert);
 }
