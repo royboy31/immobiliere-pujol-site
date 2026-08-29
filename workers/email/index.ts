@@ -1522,8 +1522,13 @@ async function handleNewsletterStats(req: Request, env: Env): Promise<Response> 
 
 const PUJOL_LOGO = 'https://www.immobiliere-pujol.fr/images/home/pujol-logo-white.png';
 
-function buildAlertOptin(prenom: string, criteriaText: string, confirmUrl: string): string {
-  const hi = prenom ? `Bonjour ${esc(prenom)},` : 'Bonjour,';
+function alertGreeting(prenom: string, nom: string): string {
+  const fullName = [prenom, nom].filter(Boolean).join(' ');
+  return fullName ? `Bonjour ${esc(fullName)},` : 'Bonjour,';
+}
+
+function buildAlertOptin(prenom: string, nom: string, criteriaText: string, confirmUrl: string): string {
+  const hi = alertGreeting(prenom, nom);
   const safeCriteria = esc(criteriaText);
   const safeConfirmUrl = esc(confirmUrl);
   return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
@@ -1565,7 +1570,7 @@ async function handleAlertOptin(req: Request, env: Env): Promise<Response> {
   if (!email) return nlJson({ error: 'email requis' }, 400);
   const r = await sendEmail(env, {
     subject: 'Confirmez votre alerte annonces — Immobilière Pujol',
-    html: buildAlertOptin(String(b.prenom || ''), String(b.criteriaText || ''), String(b.confirmUrl || '')),
+    html: buildAlertOptin(String(b.prenom || ''), String(b.nom || ''), String(b.criteriaText || ''), String(b.confirmUrl || '')),
     to: email,
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol',
@@ -1690,8 +1695,8 @@ async function handleAlertMatch(req: Request, env: Env): Promise<Response> {
 
 // POST /alerts/registered — courtesy email for a back-office (manual) add: the
 // alert is already active, so this confirms it and offers one-click unsubscribe.
-function buildAlertRegistered(prenom: string, criteriaText: string, manageUrl: string): string {
-  const hi = prenom ? `Bonjour ${esc(prenom)},` : 'Bonjour,';
+function buildAlertRegistered(prenom: string, nom: string, criteriaText: string, manageUrl: string): string {
+  const hi = alertGreeting(prenom, nom);
   const safeCriteria = esc(criteriaText);
   const safeManageUrl = esc(manageUrl);
   return `<!doctype html><html lang="fr"><body style="margin:0;padding:0;background:#eef3ef;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
@@ -1722,7 +1727,7 @@ async function handleAlertRegistered(req: Request, env: Env): Promise<Response> 
   if (!email) return nlJson({ error: 'email requis' }, 400);
   const r = await sendEmail(env, {
     subject: 'Votre alerte annonces est enregistrée — Immobilière Pujol',
-    html: buildAlertRegistered(String(b.prenom || ''), String(b.criteriaText || ''), String(b.manageUrl || '')),
+    html: buildAlertRegistered(String(b.prenom || ''), String(b.nom || ''), String(b.criteriaText || ''), String(b.manageUrl || '')),
     to: email,
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol',

@@ -5,7 +5,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
-import { getDB, ensureSchema, listAlerts, createAlert, describeCriteria, type Transac } from '../../../../lib/alerts-db';
+import { getDB, ensureSchema, listAlerts, createAlert, describeCriteria, normalizeBedroomCriterion, type Transac } from '../../../../lib/alerts-db';
 import { callWorker } from '../../../../lib/newsletter-worker';
 
 export const GET: APIRoute = async ({ request }) => {
@@ -36,6 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
   const alert = await createAlert(db, {
     email,
     prenom: (b.prenom || '').trim() || null,
+    nom: (b.nom || '').trim() || null,
     phone: (b.phone || '').trim() || null,
     transac: transac as Transac,
     // Multi-select secteurs arrive as a CSV; normalize (valid codes, dedup, sorted)
@@ -43,7 +44,7 @@ export const POST: APIRoute = async ({ request }) => {
     cp: [...new Set(String(b.cp || '').split(',').map((s) => s.trim()).filter((s) => /^\d{5}$/.test(s)))].sort().join(',') || null,
     kind: (b.kind || '').trim() || null,
     budget_max: num(b.budget_max),
-    chambres_min: Math.min(num(b.chambres_min) ?? 0, 4) || null,
+    chambres_min: normalizeBedroomCriterion(b.chambres_min),
     proprietaire: transac === 'V' && !!b.proprietaire,
     bien_a_vendre: transac === 'V' && !!b.bien_a_vendre,
     status: 'active', // internal add: the request was already expressed
@@ -55,6 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
   await callWorker('/alerts/registered', {
     email: alert.email,
     prenom: alert.prenom || '',
+    nom: alert.nom || '',
     criteriaText: describeCriteria(alert),
     manageUrl: `${origin}/api/alerts/unsubscribe/?token=${alert.token}`,
   });
