@@ -63,10 +63,12 @@ const isLocation = view.type === 'L';
 
 // Pre-fill for the "bien similaire" alert pop-up, from this (sold/rented) listing.
 const _alertKind = classifyKind(view.titre);
+const _isStudio = _alertKind === 'appartement'
+  && (view.nbChambres === 0 || (view.nbChambres == null && view.nbPieces === 1));
 const alertPrefill = {
   cp: view.codePostal ? normalizeCp(view.codePostal) : null,
   kind: _alertKind === 'autre' ? null : _alertKind,
-  chambres_min: view.nbChambres == null ? null : Math.min(view.nbChambres, 4),
+  chambres_min: _isStudio ? 0 : (view.nbChambres == null ? null : Math.min(view.nbChambres, 4)),
   budget_max: isLocation ? (view.loyerCC ?? view.loyer ?? null) : (view.prix ?? null),
   source_ref: view.reference,
   negociateur_email: null,

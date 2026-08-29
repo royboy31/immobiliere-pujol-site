@@ -5,7 +5,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { getDB, ensureSchema, createAlert, findDuplicate, describeCriteria, type Transac } from '../../../lib/alerts-db';
+import { getDB, ensureSchema, createAlert, findDuplicate, describeCriteria, normalizeBedroomCriterion, type Transac } from '../../../lib/alerts-db';
 import { callWorker } from '../../../lib/newsletter-worker';
 
 function bad(error: string, status = 400) {
@@ -74,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
     cp: cps.length ? cps.join(',') : null,
     kind: str('kind'),
     budget_max: num('budget_max'),
-    chambres_min: Math.min(num('chambres_min') ?? 0, 4) || null,
+    chambres_min: normalizeBedroomCriterion(fd.get('chambres_min')),
     proprietaire: transac === 'V' && (fd.get('proprietaire') === 'on' || fd.get('proprietaire') === '1'),
     bien_a_vendre: transac === 'V' && (fd.get('bien_a_vendre') === 'on' || fd.get('bien_a_vendre') === '1'),
     source_ref: str('source_ref'),
@@ -100,6 +100,7 @@ export const POST: APIRoute = async ({ request }) => {
   const r = await callWorker('/alerts/optin', {
     email: alert.email,
     prenom: alert.prenom || '',
+    nom: alert.nom || '',
     criteriaText: describeCriteria(alert),
     confirmUrl,
   });

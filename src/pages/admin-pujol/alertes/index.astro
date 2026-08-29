@@ -60,7 +60,7 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
             <tr data-id={a.id} data-email={a.email} data-type={a.transac} data-status={a.status}>
               <td>
                 <div class="al-email">{a.email}</div>
-                {(a.prenom || a.phone) && <div class="al-sub">{[a.prenom, a.phone].filter(Boolean).join(' · ')}</div>}
+                {(a.prenom || a.nom || a.phone) && <div class="al-sub">{[[a.prenom, a.nom].filter(Boolean).join(' '), a.phone].filter(Boolean).join(' · ')}</div>}
               </td>
               <td class="al-tmpl">{a.transac === 'V' ? 'Vente' : 'Location'}</td>
               <td class="al-crit">{describeCriteria(a)}{a.bien_a_vendre ? ' · a un bien à vendre' : ''}</td>
@@ -89,21 +89,22 @@ const activeCount = alerts.filter((a) => a.status === 'active').length;
       <p style="margin:0 0 18px;color:#6b7280;font-size:14px;">La personne est ajoutée directement. Un e-mail de confirmation avec lien de désinscription lui est envoyé.</p>
       <form id="al-form">
         <div class="af2-row">
-          <label>Email *<input name="email" type="email" required /></label>
           <label>Prénom<input name="prenom" type="text" /></label>
+          <label>Nom<input name="nom" type="text" /></label>
         </div>
         <div class="af2-row">
           <label>Téléphone<input name="phone" type="tel" /></label>
+          <label>Email *<input name="email" type="email" required /></label>
+        </div>
+        <div class="af2-row">
           <label>Type de recherche *
             <select name="transac" required><option value="">—</option><option value="V">Vente</option><option value="L">Location</option></select>
           </label>
-        </div>
-        <div class="af2-row">
           <label>Type de bien<select name="kind"><option value="">Indifférent</option>{KINDS.map(([v,l]) => <option value={v}>{l}</option>)}</select></label>
-          <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
         </div>
         <div class="af2-row">
-          <label>Chambres<select name="chambres_min"><option value="">Indifférent</option>{[1,2,3].map((n) => <option value={n}>{n}</option>)}<option value="4">4+</option></select></label>
+          <label>Budget max (€)<input name="budget_max" type="number" min="0" /></label>
+          <label>Chambres<select name="chambres_min"><option value="">Indifférent</option><option value="0">Studio</option>{[1,2,3].map((n) => <option value={n}>{n}</option>)}<option value="4">4+</option></select></label>
         </div>
         <div class="af2-cps">
           <span class="af2-cps-lbl">Secteurs <small>(plusieurs choix possibles ; aucun = tous)</small></span>

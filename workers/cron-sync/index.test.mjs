@@ -8,25 +8,36 @@ import {
   alertCandidateFromUbiflow,
   isLbiSale,
   isUbiflowRental,
+  parseLbiInteger,
 } from './index.ts';
 
-test('matches exact bedroom counts, with four as the only open-ended bucket', () => {
+test('matches studios safely and keeps numbered bedroom choices strict', () => {
   const db = new DatabaseSync(':memory:');
   db.exec('CREATE TABLE alerts (id TEXT, chambres_min INTEGER)');
   const insert = db.prepare('INSERT INTO alerts VALUES (?, ?)');
   insert.run('any', null);
+  insert.run('studio', 0);
   for (const bedrooms of [1, 2, 3, 4]) insert.run(String(bedrooms), bedrooms);
 
-  const matchingIds = (bedrooms) => db.prepare(
+  const matchingIds = ({ kind, bedrooms, rooms }) => db.prepare(
     `SELECT id FROM alerts WHERE ${ALERT_BEDROOM_MATCH_SQL} ORDER BY id`,
-  ).all(bedrooms).map(({ id }) => id);
+  ).all(kind, bedrooms, bedrooms, rooms, bedrooms, bedrooms).map(({ id }) => id);
 
-  assert.deepEqual(matchingIds(1), ['1', 'any']);
-  assert.deepEqual(matchingIds(2), ['2', 'any']);
-  assert.deepEqual(matchingIds(3), ['3', 'any']);
-  assert.deepEqual(matchingIds(4), ['4', 'any']);
-  assert.deepEqual(matchingIds(5), ['4', 'any']);
-  assert.deepEqual(matchingIds(null), ['any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 0, rooms: 1 }), ['any', 'studio']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: null, rooms: 1 }), ['any', 'studio']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: null, rooms: 3 }), ['any']);
+  assert.deepEqual(matchingIds({ kind: 'parking', bedrooms: null, rooms: 1 }), ['any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 1, rooms: 2 }), ['1', 'any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 2, rooms: 3 }), ['2', 'any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 3, rooms: 4 }), ['3', 'any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 4, rooms: 5 }), ['4', 'any']);
+  assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 5, rooms: 6 }), ['4', 'any']);
+});
+
+test('preserves explicit zero values from the LBI feed', () => {
+  assert.equal(parseLbiInteger('0'), 0);
+  assert.equal(parseLbiInteger('3'), 3);
+  assert.equal(parseLbiInteger(''), null);
 });
 
 test('normalizes an LBI sale into the fields consumed by the alert matcher', () => {
@@ -38,6 +49,7 @@ test('normalizes an LBI sale into the fields consumed by the alert matcher', () 
     codePostal: '13008',
     ville: 'Marseille',
     prix: 325000,
+    nbPieces: 3,
     nbChambres: 2,
   }), {
     slug: 'vente-test',
@@ -48,6 +60,7 @@ test('normalizes an LBI sale into the fields consumed by the alert matcher', () 
     ville: 'Marseille',
     price: 325000,
     bedrooms: 2,
+    rooms: 3,
   });
 });
 
@@ -61,6 +74,7 @@ test('normalizes an Ubiflow rental using its rent including charges', () => {
     ville: 'Marseille',
     prix: null,
     loyerCC: 780,
+    nbPieces: 1,
     nbChambres: 1,
   }), {
     slug: 'location-test',
@@ -71,6 +85,7 @@ test('normalizes an Ubiflow rental using its rent including charges', () => {
     ville: 'Marseille',
     price: 780,
     bedrooms: 1,
+    rooms: 1,
   });
 });
 

@@ -58,15 +58,30 @@ export const KIND_LABELS: Record<string, string> = {
   autre: 'Autre',
 };
 
+/** Normalize the closed bedroom choices used by both public and admin forms. */
+export function normalizeBedroomCriterion(value: unknown): number | null {
+  const raw = String(value ?? '').trim();
+  if (!/^\d+$/.test(raw)) return null;
+  const bedrooms = Number(raw);
+  if (!Number.isSafeInteger(bedrooms)) return null;
+  return Math.min(bedrooms, 4);
+}
+
+export const ALERT_BEDROOM_MATCH_SQL = `(chambres_min IS NULL
+  OR (chambres_min = 0 AND ? = 'appartement' AND (? = 0 OR (? IS NULL AND ? = 1)))
+  OR (chambres_min BETWEEN 1 AND 3 AND chambres_min = ?)
+  OR (chambres_min = 4 AND ? >= 4))`;
+
 /** One-line French summary of an alert's criteria, e.g.
  *  "Location · Appartement · 13006 · 2 chambres · budget max 900 €". */
 export function describeCriteria(a: Pick<Alert, 'transac' | 'kind' | 'cp' | 'budget_max' | 'chambres_min'>): string {
   const parts: string[] = [a.transac === 'V' ? 'Vente' : 'Location'];
   if (a.kind) parts.push(KIND_LABELS[a.kind] || a.kind);
   if (a.cp) parts.push(a.cp.split(',').join(', '));
-  if (a.chambres_min) parts.push(a.chambres_min >= 4
-    ? '4 chambres et plus'
-    : `${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''}`);
+  if (a.chambres_min === 0) parts.push('Studio');
+  else if (a.chambres_min != null) parts.push(a.chambres_min >= 4
+      ? '4 chambres et plus'
+      : `${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''}`);
   if (a.budget_max) parts.push(`budget max ${a.budget_max.toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
 }
@@ -204,22 +219,25 @@ export async function findDuplicate(db: D1Database, input: AlertInput): Promise<
 /**
  * Phase 2: active alerts a freshly-published listing satisfies. A NULL criterion
  * means "no preference" and matches anything. Budget is a ceiling. Bedroom values
- * 1 to 3 are exact; 4 means four or more. Missing listing data only matches alerts
- * with no bedroom preference.
+ * 1 to 3 are exact; 4 means four or more. Studio means an apartment with either
+ * zero bedrooms or one room and no bedroom count. Other missing bedroom data only
+ * matches alerts with no bedroom preference.
  */
 export async function findMatchingAlerts(
   db: D1Database,
-  listing: { transac: Transac; cp: string | null; kind: string | null; prix: number | null; chambres: number | null },
+  listing: { transac: Transac; cp: string | null; kind: string | null; prix: number | null; chambres: number | null; pieces: number | null },
 ): Promise<Alert[]> {
   const { results } = await db.prepare(
     `SELECT * FROM alerts WHERE status='active' AND transac=?
        AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0)
        AND (kind IS NULL OR kind=?)
        AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
-       AND (chambres_min IS NULL OR chambres_min = MIN(IFNULL(?, 0), 4))`
+       AND ${ALERT_BEDROOM_MATCH_SQL}`
   ).bind(
     listing.transac, listing.cp, listing.kind,
-    listing.prix, listing.prix, listing.chambres,
+    listing.prix, listing.prix,
+    listing.kind, listing.chambres, listing.chambres, listing.pieces,
+    listing.chambres, listing.chambres,
   ).all();
   return (results || []).map(toAlert);
 }

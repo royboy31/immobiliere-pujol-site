@@ -398,13 +398,17 @@ function describeCriteriaC(a: any): string {
   const parts: string[] = [a.transac === 'V' ? 'Vente' : 'Location'];
   if (a.kind) parts.push(KIND_LABELS_C[a.kind] || a.kind);
   if (a.cp) parts.push(String(a.cp).split(',').join(', '));
-  if (a.chambres_min) parts.push(a.chambres_min >= 4
-    ? '4 chambres et plus'
-    : `${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''}`);
+  if (a.chambres_min === 0) parts.push('Studio');
+  else if (a.chambres_min != null) parts.push(a.chambres_min >= 4
+      ? '4 chambres et plus'
+      : `${a.chambres_min} chambre${a.chambres_min > 1 ? 's' : ''}`);
   if (a.budget_max) parts.push(`budget max ${Number(a.budget_max).toLocaleString('fr-FR')} €`);
   return parts.join(' · ');
 }
-export const ALERT_BEDROOM_MATCH_SQL = '(chambres_min IS NULL OR chambres_min = MIN(IFNULL(?, 0), 4))';
+export const ALERT_BEDROOM_MATCH_SQL = `(chambres_min IS NULL
+  OR (chambres_min = 0 AND ? = 'appartement' AND (? = 0 OR (? IS NULL AND ? = 1)))
+  OR (chambres_min BETWEEN 1 AND 3 AND chambres_min = ?)
+  OR (chambres_min = 4 AND ? >= 4))`;
 interface AlertCandidate {
   slug: string;
   type: 'V' | 'L';
@@ -414,6 +418,7 @@ interface AlertCandidate {
   ville: string;
   price: number | null;
   bedrooms: number | null;
+  rooms: number | null;
 }
 
 export function isUbiflowRental(a: Pick<ParsedAnnonce, 'type'>): boolean {
@@ -431,6 +436,7 @@ export function alertCandidateFromUbiflow(a: ParsedAnnonce): AlertCandidate | nu
     ville: a.ville,
     price: a.loyerCC,
     bedrooms: a.nbChambres,
+    rooms: a.nbPieces,
   };
 }
 
@@ -504,7 +510,10 @@ async function matchNewListingsToAlerts(
            AND (cp IS NULL OR instr(','||cp||',', ','||?||',') > 0) AND (kind IS NULL OR kind=?)
            AND (budget_max IS NULL OR ? IS NULL OR budget_max >= ?)
            AND ${ALERT_BEDROOM_MATCH_SQL}`
-      ).bind(a.type, cp, kindArg, prix, prix, a.bedrooms).all();
+      ).bind(
+        a.type, cp, kindArg, prix, prix,
+        kindArg, a.bedrooms, a.bedrooms, a.rooms, a.bedrooms, a.bedrooms,
+      ).all();
       for (const alert of (results || [])) {
         const key = (alert as any).id;
         if (!perAlert.has(key)) perAlert.set(key, { alert, listings: [] });
@@ -875,7 +884,13 @@ export function alertCandidateFromLbi(a: LbiAnnonce): AlertCandidate | null {
     ville: a.ville,
     price: a.prix,
     bedrooms: a.nbChambres,
+    rooms: a.nbPieces,
   };
+}
+
+export function parseLbiInteger(value: string | undefined): number | null {
+  const parsed = Number.parseInt(value || '', 10);
+  return Number.isFinite(parsed) ? parsed : null;
 }
 
 function parseLbiCsv(raw: string): LbiAnnonce[] {
@@ -900,14 +915,14 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       prix: parseFloat(f[10]) || null,
       surface: parseFloat(f[15]) || null,
       surfaceTerrain: parseFloat(f[16]) || null,
-      nbPieces: parseInt(f[17]) || null,
-      nbChambres: parseInt(f[18]) || null,
+      nbPieces: parseLbiInteger(f[17]),
+      nbChambres: parseLbiInteger(f[18]),
       titre: f[19] || '',
       descriptif: f[20] || '',
       etage: f[23] || null,
       nbEtages: f[24] || null,
-      nbSallesBain: parseInt(f[28]) || null,
-      nbWC: parseInt(f[30]) || null,
+      nbSallesBain: parseLbiInteger(f[28]),
+      nbWC: parseLbiInteger(f[30]),
       cave: f[35] === 'OUI',
       terrasse: f[36] === 'OUI',
       parking: !!(f[38] && f[38] !== '0'),

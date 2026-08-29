@@ -432,6 +432,41 @@ test('alert notifications follow the confirmed CRM routing matrix', async () => 
   }
 });
 
+test('alert confirmation email carries the submitted first and last name', async () => {
+  const originalFetch = globalThis.fetch;
+  let sentPayload;
+  globalThis.fetch = async (_input, init = {}) => {
+    sentPayload = JSON.parse(init.body);
+    return Response.json({ messageId: 'test-message' }, { status: 201 });
+  };
+
+  try {
+    const response = await worker.fetch(new Request('https://worker.example/alerts/optin', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-internal-token': 'test-token',
+      },
+      body: JSON.stringify({
+        email: 'prospect@example.com',
+        prenom: 'Camille',
+        nom: 'Martin',
+        criteriaText: 'Location · Appartement · Studio',
+        confirmUrl: 'https://example.com/confirm',
+      }),
+    }), {
+      BREVO_API_KEY: 'test-key',
+      NEWSLETTER_INTERNAL_TOKEN: 'test-token',
+      NEWSLETTER_SENDER_EMAIL: 'notifications@example.com',
+    }, {});
+
+    assert.equal(response.status, 200);
+    assert.match(sentPayload.htmlContent, /Bonjour Camille Martin,/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('matched-listing emails require the dedicated alert token', async () => {
   const baseEnv = {
     BREVO_API_KEY: 'test-key',

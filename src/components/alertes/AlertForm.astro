@@ -84,6 +84,7 @@ const KINDS: [string, string][] = [
       <span class="af-lbl">Chambres</span>
       <select name="chambres_min">
         <option value="">Indifférent</option>
+        <option value="0" selected={prefill.chambres_min === 0}>Studio</option>
         {[1,2,3].map((n) => <option value={n} selected={prefill.chambres_min === n}>{n}</option>)}
         <option value="4" selected={prefill.chambres_min === 4}>4+</option>
       </select>
@@ -97,10 +98,14 @@ const KINDS: [string, string][] = [
     <label class="af-check"><input type="radio" name="bien_a_vendre" value="0" /> <span>Non, c'est un premier achat / je n'ai rien à vendre</span></label>
   </div>
 
-  <div class="af-row">
+  <div class="af-row af-row--3">
     <label class="af-field">
       <span class="af-lbl">Prénom</span>
       <input type="text" name="prenom" autocomplete="given-name" />
+    </label>
+    <label class="af-field">
+      <span class="af-lbl">Nom</span>
+      <input type="text" name="nom" autocomplete="family-name" />
     </label>
     <label class="af-field">
       <span class="af-lbl">Téléphone</span>
