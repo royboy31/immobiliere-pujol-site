@@ -138,7 +138,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
           <h2>Caractéristiques techniques</h2>
           <dl class="annonce-details-dl">
             {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
-            {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
+            {view.nbChambres != null && view.nbChambres > 0 && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
             {hasEtage && <><dt>Étage</dt><dd>{view.etage}</dd></>}

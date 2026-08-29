@@ -103,7 +103,7 @@ const badgeModifier = view.isClosed
       <span class="kf__lbl">Pièce{view.nbPieces > 1 ? 's' : ''}</span>
     </div>
   )}
-  {view.nbChambres && (
+  {view.nbChambres != null && view.nbChambres > 0 && (
     <div class="kf">
       <span class="kf__val"><b>{view.nbChambres}</b></span>
       <span class="kf__lbl">Chambre{view.nbChambres > 1 ? 's' : ''}</span>
