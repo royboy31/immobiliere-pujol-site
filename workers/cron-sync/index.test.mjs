@@ -34,7 +34,7 @@ test('matches studios safely and keeps numbered bedroom choices strict', () => {
   assert.deepEqual(matchingIds({ kind: 'appartement', bedrooms: 5, rooms: 6 }), ['4', 'any']);
 });
 
-test('preserves explicit zero values from the LBI feed', () => {
+test('preserves an explicit zero bedroom count from the LBI feed', () => {
   assert.equal(parseLbiInteger('0'), 0);
   assert.equal(parseLbiInteger('3'), 3);
   assert.equal(parseLbiInteger(''), null);

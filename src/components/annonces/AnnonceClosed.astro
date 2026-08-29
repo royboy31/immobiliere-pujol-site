@@ -109,7 +109,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
           <dl class="annonce-details-dl">
             {view.surface && <><dt>Surface</dt><dd>{view.surface} m²</dd></>}
             {view.nbPieces && <><dt>Pièces</dt><dd>{view.nbPieces}</dd></>}
-            {view.nbChambres && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
+            {view.nbChambres != null && view.nbChambres > 0 && <><dt>Chambres</dt><dd>{view.nbChambres}</dd></>}
             {view.nbSallesDeBain && <><dt>Salles de bain</dt><dd>{view.nbSallesDeBain}</dd></>}
             {view.nbWC && <><dt>WC</dt><dd>{view.nbWC}</dd></>}
             {view.cuisine && <><dt>Cuisine</dt><dd>{view.cuisine}</dd></>}

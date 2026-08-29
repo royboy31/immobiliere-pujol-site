@@ -121,7 +121,7 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
             <span class="annonce-hero__stat-val">{view.nbPieces}</span>
           </li>
         )}
-        {view.nbChambres && (
+        {view.nbChambres != null && view.nbChambres > 0 && (
           <li class="annonce-hero__stat">
             <span class="annonce-hero__stat-ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
