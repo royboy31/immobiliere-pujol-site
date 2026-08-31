@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -11,6 +12,12 @@ import {
   isUbiflowRental,
   parseLbiInteger,
 } from './index.ts';
+
+test('allows the cron Worker to call the email Worker through workers.dev', () => {
+  const raw = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
+  const config = JSON.parse(raw.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'));
+  assert.ok(config.compatibility_flags?.includes('global_fetch_strictly_public'));
+});
 
 test('matches studios safely and keeps numbered bedroom choices strict', () => {
   const db = new DatabaseSync(':memory:');
