@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 
@@ -6,10 +7,17 @@ import {
   ALERT_BEDROOM_MATCH_SQL,
   alertCandidateFromLbi,
   alertCandidateFromUbiflow,
+  diagnoseAlertEmailRoute,
   isLbiSale,
   isUbiflowRental,
   parseLbiInteger,
 } from './index.ts';
+
+test('allows the cron Worker to call the email Worker through workers.dev', () => {
+  const raw = readFileSync(new URL('./wrangler.jsonc', import.meta.url), 'utf8');
+  const config = JSON.parse(raw.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '$1'));
+  assert.ok(config.compatibility_flags?.includes('global_fetch_strictly_public'));
+});
 
 test('matches studios safely and keeps numbered bedroom choices strict', () => {
   const db = new DatabaseSync(':memory:');
@@ -105,4 +113,48 @@ test('accepts only rentals from the Ubiflow import', () => {
 test('accepts only sales from the LBI import', () => {
   assert.equal(isLbiSale({ typeAnnonce: 'V' }), true);
   assert.equal(isLbiSale({ typeAnnonce: 'L' }), false);
+});
+
+test('diagnoses a matching cron to email Worker token without sending', async () => {
+  const originalFetch = globalThis.fetch;
+  let request;
+  globalThis.fetch = async (url, init) => {
+    request = { url, init };
+    return new Response(JSON.stringify({ error: 'email + listings requis' }), { status: 400 });
+  };
+  try {
+    const result = await diagnoseAlertEmailRoute({
+      EMAIL_WORKER_URL: 'https://email.example/',
+      ALERT_INTERNAL_TOKEN: 'shared-token',
+    });
+    assert.deepEqual(result, {
+      configured: true,
+      guardPassed: true,
+      status: 400,
+      body: JSON.stringify({ error: 'email + listings requis' }),
+    });
+    assert.equal(request.url, 'https://email.example/alerts/match');
+    assert.equal(request.init.headers['x-internal-token'], 'shared-token');
+    assert.equal(request.init.body, '{}');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('reports a cron to email Worker token mismatch', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403 });
+  try {
+    assert.deepEqual(await diagnoseAlertEmailRoute({
+      EMAIL_WORKER_URL: 'https://email.example',
+      ALERT_INTERNAL_TOKEN: 'wrong-token',
+    }), {
+      configured: true,
+      guardPassed: false,
+      status: 403,
+      body: JSON.stringify({ error: 'Forbidden' }),
+    });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });

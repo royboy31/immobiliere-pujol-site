@@ -1,6 +1,7 @@
 {
 	"name": "pujol-cron-sync",
 	"compatibility_date": "2026-04-02",
+	"compatibility_flags": ["global_fetch_strictly_public"],
 	"main": "index.ts",
 	// "0 6,12,18": feed sync (Ubiflow/LBI). "55 6": daily health-check dispatch
 	// (prod worker only → triggers the sync-verify report, lands ~09:00 Paris).

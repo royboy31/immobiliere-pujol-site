@@ -548,6 +548,9 @@ async function matchNewListingsToAlerts(
         if (r.ok) {
           await env.DB.prepare('UPDATE alerts SET last_notified_at=? WHERE id=?').bind(now, alert.id).run();
           console.log(`[alert-match] sent ${listings.length} listing(s) to ${alert.email}`);
+        } else {
+          const detail = (await r.text().catch(() => '')).slice(0, 500);
+          console.log(`[alert-match] email worker HTTP ${r.status}${detail ? `: ${detail}` : ''}`);
         }
       } catch (e: any) {
         console.log(`[alert-match] send failed for ${alert.email}: ${e?.message || e}`);
@@ -555,6 +558,26 @@ async function matchNewListingsToAlerts(
     }
   } catch (e: any) {
     console.log(`[alert-match] error (import unaffected): ${e?.message || e}`);
+  }
+}
+
+// Protected, no-send diagnostic for the cron → email Worker authentication path.
+// An empty body can never send an email: a healthy route returns HTTP 400 after
+// passing the token guard, while HTTP 403 identifies a token mismatch.
+export async function diagnoseAlertEmailRoute(env: Pick<Env, 'EMAIL_WORKER_URL' | 'ALERT_INTERNAL_TOKEN'>) {
+  if (!env.EMAIL_WORKER_URL || !env.ALERT_INTERNAL_TOKEN) {
+    return { configured: false, guardPassed: false, status: null, body: '' };
+  }
+  try {
+    const r = await fetch(`${env.EMAIL_WORKER_URL.replace(/\/$/, '')}/alerts/match`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-internal-token': env.ALERT_INTERNAL_TOKEN },
+      body: '{}',
+    });
+    const body = (await r.text().catch(() => '')).slice(0, 500);
+    return { configured: true, guardPassed: r.status === 400, status: r.status, body };
+  } catch (e: any) {
+    return { configured: true, guardPassed: false, status: null, body: e?.message || String(e) };
   }
 }
 
@@ -1381,12 +1404,20 @@ export default {
     // calls runSync/runLbiImport directly and never goes through fetch(). Read endpoints
     // (/status, /counts*) stay open: they return only aggregate listing counts and are
     // used by the health-check / sync-verify monitoring scripts.
-    if (url.pathname === '/sync' || url.pathname === '/import-lbi' || url.pathname === '/trigger-verify') {
+    if (url.pathname === '/sync' || url.pathname === '/import-lbi' || url.pathname === '/trigger-verify' || url.pathname === '/diagnose-alert-email') {
       const provided = url.searchParams.get('key') || request.headers.get('x-trigger-key') || '';
       const expected = env.CRON_TRIGGER_SECRET || '';
       if (!expected || provided !== expected) {
         return new Response('Unauthorized', { status: 401 });
       }
+    }
+
+    // No-send check for the cron → email Worker token guard.
+    if (url.pathname === '/diagnose-alert-email') {
+      const result = await diagnoseAlertEmailRoute(env);
+      return new Response(JSON.stringify(result, null, 2), {
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
     // Manual/test trigger for the daily report (same action as the 55-6 cron).
