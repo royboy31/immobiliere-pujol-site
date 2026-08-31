@@ -71,6 +71,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Verify cron to email Worker route
+        run: |
+          node -e "
+            const url = 'https://pujol-cron-sync.roy-68a.workers.dev/diagnose-alert-email';
+            fetch(url, { headers: { 'x-trigger-key': process.env.CRON_TRIGGER_SECRET } })
+              .then(async (response) => ({ response, body: await response.json() }))
+              .then(({ response, body }) => {
+                console.log(JSON.stringify({ httpStatus: response.status, ...body }));
+                if (!response.ok || !body.configured || !body.guardPassed || body.status !== 400) process.exit(1);
+              })
+              .catch((error) => { console.error(error.message); process.exit(1); });
+          "
+        env:
+          CRON_TRIGGER_SECRET: ${{ secrets.CRON_TRIGGER_SECRET }}
+
       - name: Post-deploy sync verification
         run: node scripts/sync-verify.mjs --target roy --no-email
         continue-on-error: true
