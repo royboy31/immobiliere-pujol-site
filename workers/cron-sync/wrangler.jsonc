@@ -11,6 +11,7 @@
 		"GITHUB_REPO": "royboy31/immobiliere-pujol-site",
 		"DEPLOY_WORKFLOW": "deploy.yml",
 		"R2_PUBLIC_URL": "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev",
+		"EMAIL_WORKER_URL": "https://pujol-email.roy-68a.workers.dev",
 		"SITE_BASE_URL": "https://immobiliere-pujol-staging.roy-68a.workers.dev"
 	}
 	// GITHUB_TOKEN must be set as a secret:

@@ -48,6 +48,22 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
+      - name: Configure protected cron diagnostics
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('workers/cron-sync/wrangler.jsonc', 'utf8');
+            const cleaned = raw.replace(/^\s*\/\/.*$/gm, '').replace(/,(\s*[}\]])/g, '\$1');
+            const cfg = JSON.parse(cleaned);
+            const triggerSecret = process.env.INJECT_CRON_TRIGGER_SECRET;
+            if (!triggerSecret) { console.error('Missing CRON_TRIGGER_SECRET'); process.exit(1); }
+            cfg.vars = cfg.vars || {};
+            cfg.vars.CRON_TRIGGER_SECRET = triggerSecret;
+            fs.writeFileSync('workers/cron-sync/wrangler.jsonc', JSON.stringify(cfg, null, 2));
+          "
+        env:
+          INJECT_CRON_TRIGGER_SECRET: ${{ secrets.CRON_TRIGGER_SECRET }}
+
       - name: Deploy cron sync worker
         working-directory: workers/cron-sync
         run: rm -rf ../../.wrangler && npm install && npx wrangler deploy
