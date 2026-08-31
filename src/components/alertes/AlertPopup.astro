@@ -1,0 +1,83 @@
+---
+// "Alertez-moi pour un bien similaire" — trigger button + modal on a listing page.
+// Opens in place (native <dialog>) with the AlertForm pre-filled from the listing.
+import AlertForm from './AlertForm.astro';
+
+interface Prefill {
+  cp?: string | null;
+  kind?: string | null;
+  chambres_min?: number | null;
+  budget_max?: number | null;
+  source_ref?: string | null;
+  negociateur_email?: string | null;
+}
+interface Props {
+  transac: 'V' | 'L' | string;
+  prefill?: Prefill;
+  label?: string;
+}
+const { transac, prefill = {}, label = 'Alertez-moi pour un bien similaire' } = Astro.props;
+const isSale = transac === 'V';
+const t: 'V' | 'L' = isSale ? 'V' : 'L';   // a listing is always vente or location
+---
+
+<div class="alert-popup">
+  <button type="button" class="alert-trigger" data-alert-open>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M6 9a6 6 0 1 1 12 0c0 4 1.5 5.5 2 6.5H4c.5-1 2-2.5 2-6.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M9.5 19a2.5 2.5 0 0 0 5 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </svg>
+    {label}
+  </button>
+
+  <dialog class="alert-modal" data-alert-modal>
+    <div class="alert-modal__inner">
+      <button type="button" class="alert-modal__close" data-alert-close aria-label="Fermer">&times;</button>
+      <p class="alert-modal__eyebrow">Alerte annonces</p>
+      <h3 class="alert-modal__title">Recevez les biens similaires</h3>
+      <p class="alert-modal__sub">
+        Dès qu’un bien {isSale ? 'à vendre' : 'à louer'} correspond à ces critères, nous vous prévenons par e-mail.
+      </p>
+      <AlertForm transac={t} prefill={prefill} compact />
+    </div>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.alert-popup').forEach((root) => {
+    const dlg = root.querySelector<HTMLDialogElement>('dialog');
+    if (!dlg) return;
+    root.querySelector('[data-alert-open]')?.addEventListener('click', () => dlg.showModal());
+    root.querySelector('[data-alert-close]')?.addEventListener('click', () => dlg.close());
+    // Click on the backdrop (outside the card) closes the modal.
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  });
+</script>
+
+<style>
+  .alert-popup { margin-top: 14px; }
+  .alert-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 13px 18px; border: 1.5px solid #0f1a2b; border-radius: 999px; background: #fff; color: #0f1a2b;
+    font-weight: 700; font-size: 14px; letter-spacing: .2px; cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .alert-trigger:hover { background: #0f1a2b; color: #fff; }
+
+  .alert-modal { padding: 0; border: none; background: transparent; max-width: 92vw; }
+  .alert-modal::backdrop { background: rgba(15, 26, 43, 0.55); backdrop-filter: blur(2px); }
+  .alert-modal__inner {
+    position: relative; width: 520px; max-width: 92vw; max-height: 90vh; overflow-y: auto;
+    background: #fff; border-radius: 16px; padding: 30px 28px 26px;
+    box-shadow: 0 24px 70px rgba(15, 26, 43, 0.35);
+  }
+  .alert-modal__close {
+    position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border: none; border-radius: 50%;
+    background: #f1f4ef; color: #4a5560; font-size: 22px; line-height: 1; cursor: pointer;
+  }
+  .alert-modal__close:hover { background: #e4e9e0; }
+  .alert-modal__eyebrow { margin: 0 0 6px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #7f9420; }
+  .alert-modal__title { margin: 0 0 8px; font-size: 22px; line-height: 1.25; color: #1f2a30; }
+  .alert-modal__sub { margin: 0 0 20px; font-size: 15px; line-height: 1.55; color: #4a5560; }
+  @media (max-width: 560px) { .alert-modal__inner { padding: 24px 18px 20px; } }
+</style>

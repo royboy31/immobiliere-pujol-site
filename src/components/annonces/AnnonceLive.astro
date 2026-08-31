@@ -2,6 +2,8 @@
 import AnnonceHero from './AnnonceHero.astro';
 import AnnonceMap from './AnnonceMap.astro';
 import ContactForm from './ContactForm.astro';
+import AlertPopup from '../alertes/AlertPopup.astro';
+import { classifyKind, normalizeCp } from '../../lib/annonces-filter';
 import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
 import ContentCta from './ContentCta.astro';
@@ -62,6 +64,19 @@ interface Props {
 const { view, contactName, contactEmail, expert, pool = [], currentSlug = '' } = Astro.props;
 
 const isSale = view.type === 'V';
+
+// Pre-fill for the "bien similaire" alert pop-up, derived from this listing.
+const _alertKind = classifyKind(view.titre);
+const _isStudio = _alertKind === 'appartement'
+  && (view.nbChambres === 0 || (view.nbChambres == null && view.nbPieces === 1));
+const alertPrefill = {
+  cp: view.codePostal ? normalizeCp(view.codePostal) : null,
+  kind: _alertKind === 'autre' ? null : _alertKind,
+  chambres_min: _isStudio ? 0 : (view.nbChambres == null ? null : Math.min(view.nbChambres, 4)),
+  budget_max: isSale ? (view.prix ?? null) : (view.loyerCC ?? view.loyer ?? null),
+  source_ref: view.reference,
+  negociateur_email: contactEmail || null,
+};
 const hasMeuble = !isSale && (view.meuble === 0 || view.meuble === 1);
 const hasEtage = view.etage !== undefined && view.etage !== '' && view.etage !== null;
 const hasNbEtages = !isSale && parseInt(String(view.nbEtages ?? ''), 10) > 0;
@@ -167,6 +182,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
     />
 
     <Fragment slot="action-below">
+      <AlertPopup transac={view.type} prefill={alertPrefill} />
       <AnnonceMap
         variant="sidebar"
         adresse={view.adresse}
