@@ -924,10 +924,13 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
   for (const line of lines) {
     const f = line.split(LBI_DELIMITER).map(v => v.replace(/^"|"$/g, ''));
 
-    // Collect photo URLs from fields 84-170
+    // Collect photo URLs by pattern across the whole row. The feed's photo
+    // fields are not contiguous (84-92, 163-173, 263 as of 2026-09) and the
+    // range also contains non-photo URLs (field 103 = YouTube visite
+    // virtuelle), so a positional range both drops photos and ingests videos.
     const photos: string[] = [];
-    for (let i = 84; i <= 170 && i < f.length; i++) {
-      if (f[i] && f[i].startsWith('http')) photos.push(f[i]);
+    for (const v of f) {
+      if (v && v.startsWith('http') && v.includes('staticlbi.com') && v.includes('/photo_')) photos.push(v);
     }
 
     const a: LbiAnnonce = {
