@@ -1573,6 +1573,54 @@ async function handleAlertOptin(req: Request, env: Env): Promise<Response> {
   return nlJson(r.ok ? { ok: true } : { ok: false, error: r.error }, r.ok ? 200 : 502);
 }
 
+// POST /alerts/newsletter-optin — the alert form's optional newsletter checkbox.
+// Internal-only (x-internal-token): the browser POSTs a single form to
+// /api/alerts/create, whose Turnstile token is consumed there, so the site worker
+// relays the newsletter opt-in server-side. Same flow as /newsletter's DOI branch;
+// the origin gate is replaced by the internal token, which already scopes the
+// caller to this environment's site worker.
+async function handleAlertNewsletterOptin(req: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  const bad = nlGuard(req, env); if (bad) return bad;
+  const b = (await req.json().catch(() => ({}))) as any;
+  const email = String(b.email || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) return nlJson({ error: 'email requis' }, 400);
+
+  const doiReady = !!(env.BREVO_API_KEY && env.DOI_TEMPLATE_ID && env.NEWSLETTER_LIST_ID);
+  const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
+  const notifyRows: [string, string][] = [['Email', email], ['Source', "Formulaire d'alerte annonces"]];
+  if (doiReady) notifyRows.push(['Statut', 'en attente de confirmation (double opt-in)']);
+  const notify = () =>
+    sendEmail(env, {
+      subject,
+      html: buildTable(subject, notifyRows),
+      to: `contact${D}`,
+      cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
+    });
+
+  // Pre-Brevo behaviour, mirroring handleNewsletter's fallback.
+  if (!doiReady) {
+    const r = await notify();
+    ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
+      Date: now(), Email: email, 'Statut opt-in': 'Inscrit (sans double opt-in)', Notes: 'Via alerte annonces',
+    }));
+    return nlJson(r.ok ? { ok: true, doi: false } : { ok: false, error: r.error }, r.ok ? 200 : 502);
+  }
+
+  const doiResult = await requestDoiEmail(env, email, {
+    SOURCE: 'alerte',
+    OPTIN_DATE: new Date().toISOString(),
+  });
+  if (!doiResult.ok) return nlJson(doiResult, 502);
+
+  ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
+    Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)', Notes: 'Via alerte annonces',
+  }));
+  ctx.waitUntil(recordPendingNewsletterSignup(env, email, new Date().toISOString()));
+  ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
+
+  return nlJson({ ok: true, doi: true });
+}
+
 // POST /alerts/notify: tell the agency a new qualified lead just confirmed.
 // Zoho and Caroline receive every alert. Benoît receives only when the prospect
 // declares a property to sell. Listing negotiators and
@@ -1785,6 +1833,7 @@ export default {
     if (path === '/newsletter/lists') return handleNewsletterLists(request, env);
     if (path === '/newsletter/reminders') return handleNewsletterReminders(request, env);
     if (path === '/alerts/optin')     return handleAlertOptin(request, env);
+    if (path === '/alerts/newsletter-optin') return handleAlertNewsletterOptin(request, env, ctx);
     if (path === '/alerts/notify')    return handleAlertNotify(request, env);
     if (path === '/alerts/match')     return handleAlertMatch(request, env);
     if (path === '/alerts/registered') return handleAlertRegistered(request, env);

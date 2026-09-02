@@ -81,14 +81,30 @@ export const POST: APIRoute = async ({ request }) => {
     negociateur_email: (str('negociateur_email') || '').toLowerCase() || null,
   };
 
+  // Optional newsletter checkbox riding on the alert form. The browser can't POST
+  // /newsletter itself (its Turnstile token is consumed by this submission), so we
+  // relay server-side to the email worker's internal endpoint. Best-effort: a
+  // newsletter failure must never block or undo the alert.
+  const newsletter = fd.get('newsletter') === 'on' || fd.get('newsletter') === '1';
+  const subscribeNewsletter = async (): Promise<boolean> => {
+    try {
+      const r = await callWorker('/alerts/newsletter-optin', { email });
+      return r.ok;
+    } catch {
+      return false;
+    }
+  };
+
   const db = await getDB();
   await ensureSchema(db);
 
   // Same person + identical criteria already live → don't create a duplicate,
   // just tell them they're set. (An existing pending alert keeps its own opt-in email.)
+  // The newsletter checkbox is still honoured — it's a separate consent.
   const dup = await findDuplicate(db, input);
   if (dup) {
-    return Response.json({ ok: true, already: true, pending: dup.status === 'pending' });
+    const nl = newsletter ? await subscribeNewsletter() : undefined;
+    return Response.json({ ok: true, already: true, pending: dup.status === 'pending', ...(newsletter ? { newsletterQueued: nl } : {}) });
   }
 
   const alert = await createAlert(db, input);
@@ -104,7 +120,10 @@ export const POST: APIRoute = async ({ request }) => {
     criteriaText: describeCriteria(alert),
     confirmUrl,
   });
+  const nl = newsletter ? await subscribeNewsletter() : undefined;
+  const nlField = newsletter ? { newsletterQueued: nl } : {};
+
   // The alert is saved even if the email couldn't go out; surface a soft warning.
-  if (!r.ok) return Response.json({ ok: true, emailQueued: false, warning: r.data?.error || 'Email non envoyé.' });
-  return Response.json({ ok: true, emailQueued: true });
+  if (!r.ok) return Response.json({ ok: true, emailQueued: false, warning: r.data?.error || 'Email non envoyé.', ...nlField });
+  return Response.json({ ok: true, emailQueued: true, ...nlField });
 };
