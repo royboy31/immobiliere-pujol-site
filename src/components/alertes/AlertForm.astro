@@ -124,6 +124,12 @@ const KINDS: [string, string][] = [
     <input type="checkbox" name="agree" required />
     <span>J'accepte que mes données soient utilisées pour traiter ma demande. Voir notre <a href="/politique-de-confidentialite/">politique de confidentialité</a>.</span>
   </label>
+  <!-- Optional newsletter opt-in (Caroline's wording, 2026-09-02). Unchecked by
+       default; when checked the server relays a normal double-opt-in signup. -->
+  <label class="af-agree">
+    <input type="checkbox" name="newsletter" />
+    <span>Je m'inscris à la newsletter pour recevoir les derniers articles sur le marché immobilier à Marseille ainsi que des conseils.</span>
+  </label>
   <p class="af-rgpd">
     Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects,
     salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et
