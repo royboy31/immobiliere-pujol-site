@@ -1592,10 +1592,19 @@ async function handleAlertNewsletterOptin(req: Request, env: Env, ctx: Execution
   const email = String(b.email || '').trim().toLowerCase();
   if (!email || !email.includes('@')) return nlJson({ error: 'email requis' }, 400);
 
-  const doiReady = !!(env.BREVO_API_KEY && env.DOI_TEMPLATE_ID && env.NEWSLETTER_LIST_ID);
+  // Unlike /newsletter there is NO pre-Brevo fallback here: this is a new consent
+  // path, so a missing DOI config must never record anyone as "Inscrit" or send
+  // the signup copy — refuse and let the alert succeed on the caller's side.
+  if (!env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
+    return nlJson({ ok: false, error: 'Double opt-in non configuré.' }, 501);
+  }
+
   const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const notifyRows: [string, string][] = [['Email', email], ['Source', "Formulaire d'alerte annonces"]];
-  if (doiReady) notifyRows.push(['Statut', 'en attente de confirmation (double opt-in)']);
+  const notifyRows: [string, string][] = [
+    ['Email', email],
+    ['Source', "Formulaire d'alerte annonces"],
+    ['Statut', 'en attente de confirmation (double opt-in)'],
+  ];
   const notify = () =>
     sendEmail(env, {
       subject,
@@ -1603,15 +1612,6 @@ async function handleAlertNewsletterOptin(req: Request, env: Env, ctx: Execution
       to: `contact${D}`,
       cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
     });
-
-  // Pre-Brevo behaviour, mirroring handleNewsletter's fallback.
-  if (!doiReady) {
-    const r = await notify();
-    ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
-      Date: now(), Email: email, 'Statut opt-in': 'Inscrit (sans double opt-in)', Notes: 'Via alerte annonces',
-    }));
-    return nlJson(r.ok ? { ok: true, doi: false } : { ok: false, error: r.error }, r.ok ? 200 : 502);
-  }
 
   const doiResult = await requestDoiEmail(env, email, {
     SOURCE: 'alerte',
