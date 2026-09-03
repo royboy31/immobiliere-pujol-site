@@ -96,7 +96,19 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     z-index: 2;
   }
 
-  h1 {
+  &__eyebrow {
+    margin: 0 0 16px;
+    font-family: $ds-font-helv;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-align: center;
+    text-transform: uppercase;
+    color: $white;
+  }
+
+  &__title {
     font-family: $ds-font-helv;
     font-weight: 300;
     font-size: 65px;
@@ -1462,7 +1474,12 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
     padding: 90px $mobile-pad 40px;
     gap: 40px;
 
-    h1 {
+    &__eyebrow {
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    &__title {
       font-size: 32px;
       line-height: 1.1;
       max-width: 100%;
@@ -1666,7 +1683,7 @@ $ds-side-pad: unquote("max(100px, calc(50% - 620px))");
 }
 
 @media (max-width: $bp-mobile) {
-  .hero h1 { font-size: 28px; }
+  .hero__title { font-size: 28px; }
   .ds-sec-title { font-size: 28px; }
   .experts h2,
   .about .left h2,
