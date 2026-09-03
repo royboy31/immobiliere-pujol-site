@@ -7,6 +7,7 @@ import BlogSidebar from '../components/blog/BlogSidebar.astro';
 import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { buildRelatedArticles } from '../lib/blog-related';
 import { isLegalPage } from '../lib/legal-pages';
+import { balanceDivs, wrapImagePairs } from '../lib/article-body';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
 // stays out of the SSR worker). Used for the optional end-of-article expert CTA.
@@ -73,72 +74,7 @@ rawBody = rawBody
   .replace(/<ul\s+class="social__list"[\s\S]*?<\/ul>/gi, '')
   .replace(/<svg\s+class="social__icon[\s\S]*?<\/svg>/gi, '');
 
-// Wrap each <img> + its trailing text (up to the next img, heading, blockquote,
-// hr, or end of document) into a 2-col card. Sides alternate left/right.
-function wrapImagePairs(html: string): string {
-  const imgRegex = /<img\b[^>]*>/gi;
-  const breakRegex = /<\/?(?:h[1-6]|table|hr|blockquote|figure)\b[^>]*>/i;
-  const imgs: { tag: string; start: number; end: number }[] = [];
-  let m: RegExpExecArray | null;
-  while ((m = imgRegex.exec(html)) !== null) {
-    imgs.push({ tag: m[0], start: m.index, end: m.index + m[0].length });
-  }
-  if (!imgs.length) return html;
-
-  let out = '';
-  let cursor = 0;
-  let pairIndex = 0;
-
-  for (let i = 0; i < imgs.length; i++) {
-    const img = imgs[i];
-    out += html.slice(cursor, img.start);
-
-    const nextStart = i + 1 < imgs.length ? imgs[i + 1].start : html.length;
-    const remaining = html.slice(img.end, nextStart);
-    const blockMatch = breakRegex.exec(remaining);
-    const bodyEnd = blockMatch ? img.end + blockMatch.index : nextStart;
-    const body = html.slice(img.end, bodyEnd);
-
-    // Skip pair-wrapping when there's no meaningful caption text — render image alone.
-    const stripped = body.replace(/<[^>]+>/g, '').replace(/&nbsp;|&#8211;/g, '').trim();
-    if (stripped.length < 6) {
-      out += `<figure class="article-figure">${img.tag}</figure>${body}`;
-      cursor = bodyEnd;
-      continue;
-    }
-
-    const side = pairIndex % 2 === 0 ? 'left' : 'right';
-    out += `<aside class="article-pair article-pair--${side}"><div class="article-pair__media">${img.tag}</div><div class="article-pair__body">${body}</div></aside>`;
-    cursor = bodyEnd;
-    pairIndex++;
-  }
-  out += html.slice(cursor);
-  return out;
-}
-
 rawBody = wrapImagePairs(rawBody);
-
-// Scraped WP bodies often carry surplus </div> tags. Injected via set:html they
-// close our own wrappers (.content__body, .content__layout) early, ejecting the
-// sidebar out of the grid. Balance <div> depth: drop surplus closers, append any
-// missing ones, so the body can never break out of its container.
-function balanceDivs(html: string): string {
-  const re = /<div\b[^>]*>|<\/div\s*>/gi;
-  let depth = 0, last = 0, out = '';
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(html)) !== null) {
-    out += html.slice(last, m.index);
-    if (m[0][1] === '/') {
-      if (depth > 0) { depth--; out += m[0]; } // valid close; surplus dropped
-    } else {
-      depth++; out += m[0];
-    }
-    last = re.lastIndex;
-  }
-  out += html.slice(last);
-  while (depth-- > 0) out += '</div>';
-  return out;
-}
 
 rawBody = balanceDivs(rawBody);
 
