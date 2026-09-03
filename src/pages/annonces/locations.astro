@@ -9,6 +9,7 @@ import DeferredCards from '../../components/annonces/DeferredCards.astro';
 import ListingCtaCards from '../../components/annonces/ListingCtaCards.astro';
 import ContentCta from '../../components/annonces/ContentCta.astro';
 import AlertListCta from '../../components/alertes/AlertListCta.astro';
+import ListingEditorial from '../../components/annonces/ListingEditorial.astro';
 
 const allAnnonces = await fetchActiveListings();
 const annonces = allAnnonces.filter(a => a.type === 'L').sort((a, b) => filterPrice(b) - filterPrice(a));
@@ -19,12 +20,13 @@ const arrondissements = buildArrondissements(annonces);
 ---
 
 <BaseLayout
-  title="Location appartement Marseille – Immobilière Pujol"
-  description="Découvrez toutes nos annonces de location d'appartements et maisons à Marseille."
+  title="Appartement à louer à Marseille : annonces | Pujol"
+  description="Trouvez un appartement à louer à Marseille parmi les annonces Immobilière Pujol. Filtrez votre recherche et créez une alerte personnalisée."
+  bypassSeoMirror
 >
   <div class="annonces-page">
     <section class="annonces-hero">
-      <h1>Nos <b>locations</b> à Marseille</h1>
+      <h1>Nos <b>appartements à louer</b> à Marseille</h1>
       <p class="annonces-hero__sub">
         {annonces.length} biens à louer sélectionnés par notre équipe — appartements, maisons, parkings et plus encore.
       </p>
@@ -62,6 +64,7 @@ const arrondissements = buildArrondissements(annonces);
     </section>
     <DeferredCards scope="L" />
     <ListingCtaCards variant="location" />
+    <ListingEditorial variant="location" />
     <ContentCta variant="conseils" />
   </div>
 </BaseLayout>

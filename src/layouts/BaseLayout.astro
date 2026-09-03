@@ -23,8 +23,8 @@ interface Props {
   twitterCard?: string;
   /**
    * Skip the phase-1 WordPress meta mirror below and use this page's own
-   * title/description. Only for pages whose meta is now edited in the admin
-   * (the D1-backed legal pages) — otherwise the frozen live meta must win.
+   * title/description. Used for pages whose metadata now has an authoritative
+   * source in the application, including approved phase-2 SEO pilots.
    */
   bypassSeoMirror?: boolean;
   /** Page-specific JSON-LD schemas (Article, WebSite, RealEstateListing, etc.). */
@@ -63,8 +63,8 @@ const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
 // Annonce (SSR) pages are handled in src/pages/annonces/[slug].astro, not here.
 // Only the meta tags are overridden; breadcrumbs keep the page's own title.
 const liveKey = decodeURIComponent(Astro.url.pathname).replace(/\/?$/, '/');
-// bypassSeoMirror: the legal pages are edited in the admin now, so their D1
-// title/description must win over the frozen mirror. Every other page keeps it.
+// bypassSeoMirror: pages with an authoritative application-managed source,
+// including approved phase-2 SEO pilots, must win over the frozen mirror.
 const liveMeta = bypassSeoMirror
   ? undefined
   : (liveSeoMeta as Record<string, { t: string; d: string }>)[liveKey];

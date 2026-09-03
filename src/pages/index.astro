@@ -8,8 +8,8 @@ import homeData from '../data/home.json';
 import { cfImg } from '../lib/img';
 
 // ---------- SEO ----------
-const seoTitle = "Immobilière Pujol – L'agence immobilière la plus recommandée par ses clients";
-const seoDescription = "Gestion locative, syndic de copropriété, vente de biens immobilier. Immobilière Pujol l'agence immobilière LA PLUS RECOMMANDÉE PAR SES CLIENTS";
+const seoTitle = "Agence immobilière à Marseille | Immobilière Pujol";
+const seoDescription = "Agence immobilière indépendante à Marseille depuis 2002 : location, vente, gestion locative et syndic de copropriété avec Immobilière Pujol.";
 
 // ---------- LISTINGS (prebuilt from cards.json; same shape as the content entry) ----------
 const allAnnonces = (homeData.annonces as any[]).map((d) => ({ data: d, id: d.slug as string }));
@@ -197,6 +197,7 @@ const services = [
 <BaseLayout
   title={seoTitle}
   description={seoDescription}
+  bypassSeoMirror
   schemas={[buildWebSite()]}
   breadcrumb={false}
   preloadImage="/images/home/hero-bg.avif"
@@ -212,7 +213,7 @@ const services = [
     <div class="hero__overlay"></div>
 
     <div class="hero__inner">
-      <h1>Nous croyons que l'immobilier<br />est fait de <b>belles expériences</b></h1>
+      <h1>Votre agence immobilière à Marseille<br />pour de <b>belles expériences</b></h1>
     </div>
 
     <div class="hero-search">
@@ -479,6 +480,45 @@ const services = [
         next.addEventListener('click', () => grid.scrollBy({ left:  step(), behavior: 'smooth' }));
       })();
     </script>
+
+    {/* ============= LOCAL EDITORIAL: useful orientation + internal links ============= */}
+    <section class="home-seo" aria-labelledby="home-seo-title">
+      <div class="home-seo__intro">
+        <p class="home-seo__eyebrow">Immobilière Pujol à Marseille</p>
+        <h2 id="home-seo-title">Une agence indépendante,<br /><b>trois métiers réunis</b></h2>
+        <p>
+          Depuis 2002, nous accompagnons les projets immobiliers à Marseille avec une même
+          exigence de clarté et de proximité. Vente, gestion locative et syndic de copropriété :
+          nos équipes partagent leur connaissance du terrain pour vous aider à décider sereinement.
+        </p>
+      </div>
+
+      <div class="home-seo__services">
+        <a href="/service-immobilier/vendre/" class="home-seo__service home-seo__service--sale">
+          <span class="home-seo__number">01</span>
+          <h3>Vendre ou acheter</h3>
+          <p>Une équipe de transaction pour estimer, présenter et mener votre projet à Marseille.</p>
+          <span class="home-seo__link">Découvrir notre service vente <span aria-hidden="true">→</span></span>
+        </a>
+        <a href="/service-immobilier/gestion-locative/" class="home-seo__service home-seo__service--rental">
+          <span class="home-seo__number">02</span>
+          <h3>Faire gérer un bien</h3>
+          <p>Un accompagnement continu pour louer, sécuriser et suivre votre patrimoine.</p>
+          <span class="home-seo__link">Découvrir la gestion locative <span aria-hidden="true">→</span></span>
+        </a>
+        <a href="/service-immobilier/syndic-de-copropriete-a-marseille/" class="home-seo__service home-seo__service--syndic">
+          <span class="home-seo__number">03</span>
+          <h3>Gérer une copropriété</h3>
+          <p>Un syndic marseillais attentif au quotidien, aux travaux et à la valeur de votre immeuble.</p>
+          <span class="home-seo__link">Découvrir notre métier de syndic <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+
+      <p class="home-seo__footnote">
+        Administrateur de biens indépendant, Immobilière Pujol réunit ces expertises au sein
+        d’une seule agence immobilière à Marseille.
+      </p>
+    </section>
 
   </div>
 </BaseLayout>

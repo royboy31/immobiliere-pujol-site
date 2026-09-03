@@ -9,6 +9,7 @@ import DeferredCards from '../../components/annonces/DeferredCards.astro';
 import ListingCtaCards from '../../components/annonces/ListingCtaCards.astro';
 import ContentCta from '../../components/annonces/ContentCta.astro';
 import AlertListCta from '../../components/alertes/AlertListCta.astro';
+import ListingEditorial from '../../components/annonces/ListingEditorial.astro';
 
 const allAnnonces = await fetchActiveListings();
 const annonces = allAnnonces.filter(a => a.type === 'V').sort((a, b) => filterPrice(b) - filterPrice(a));
@@ -19,12 +20,13 @@ const arrondissements = buildArrondissements(annonces);
 ---
 
 <BaseLayout
-  title="Vente appartement Marseille – Immobilière Pujol"
-  description="Découvrez toutes nos annonces de vente d'appartements et maisons à Marseille."
+  title="Appartements et maisons à vendre à Marseille | Pujol"
+  description="Découvrez nos appartements et maisons à vendre à Marseille. Affinez votre recherche et échangez avec les experts vente Immobilière Pujol."
+  bypassSeoMirror
 >
   <div class="annonces-page">
     <section class="annonces-hero">
-      <h1>Nos <b>ventes</b> à Marseille</h1>
+      <h1><b>Appartements et maisons à vendre</b> à Marseille</h1>
       <p class="annonces-hero__sub">
         {annonces.length} biens à vendre — appartements, maisons et programmes neufs sélectionnés par notre équipe.
       </p>
@@ -62,6 +64,7 @@ const arrondissements = buildArrondissements(annonces);
     </section>
     <DeferredCards scope="V" />
     <ListingCtaCards />
+    <ListingEditorial variant="vente" />
     <ContentCta variant="conseils" />
   </div>
 </BaseLayout>
