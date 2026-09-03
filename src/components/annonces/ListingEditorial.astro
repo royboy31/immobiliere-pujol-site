@@ -1,0 +1,199 @@
+---
+interface Props { variant: 'location' | 'vente'; }
+const { variant } = Astro.props;
+
+const cfg = variant === 'location'
+  ? {
+      eyebrow: 'Louer à Marseille',
+      title: 'Trouver un appartement à louer à Marseille',
+      intro: "Du studio au logement familial, notre sélection vous permet de consulter les locations disponibles et de concentrer votre recherche sur les secteurs qui vous correspondent.",
+      points: [
+        {
+          title: 'Des annonces faciles à parcourir',
+          text: 'Filtrez les biens par type, budget, nombre de chambres ou arrondissement pour repérer rapidement les locations adaptées à votre quotidien.',
+        },
+        {
+          title: 'Une recherche ancrée à Marseille',
+          text: 'Chaque annonce réunit les informations utiles sur le logement et sa situation, afin de comparer les possibilités avec plus de clarté.',
+        },
+        {
+          title: 'Une alerte dès qu’un bien paraît',
+          text: 'Enregistrez vos critères et recevez les nouvelles annonces de location qui correspondent à votre recherche.',
+        },
+      ],
+      primary: { label: 'Créer mon alerte location', href: '/alerte/?transac=L' },
+      secondary: { label: 'Confier un bien à louer', href: '/service-immobilier/mettre-en-location/' },
+    }
+  : {
+      eyebrow: 'Acheter à Marseille',
+      title: 'Bien préparer son achat immobilier à Marseille',
+      intro: "Découvrez les biens actuellement proposés par Immobilière Pujol et avancez dans votre achat immobilier avec une équipe qui connaît les quartiers et le marché marseillais.",
+      points: [
+        {
+          title: 'Une sélection locale',
+          text: 'Appartements, maisons et autres biens sont présentés avec leurs caractéristiques essentielles pour faciliter une première sélection.',
+        },
+        {
+          title: 'Des critères pour mieux choisir',
+          text: 'Affinez les annonces par type de bien, budget, pièces ou secteur et concentrez-vous sur les opportunités qui répondent à votre projet.',
+        },
+        {
+          title: 'Une équipe pour passer à l’action',
+          text: 'Besoin de précisions ou envie de visiter ? Nos experts en transaction vous accompagnent dans les prochaines étapes de votre achat.',
+        },
+      ],
+      primary: { label: 'Parler à notre équipe vente', href: '/contact-immobiliere-pujol/' },
+      secondary: { label: 'Faire estimer mon bien', href: '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/' },
+    };
+---
+
+<section class={`listing-editorial listing-editorial--${variant}`} aria-labelledby={`listing-editorial-${variant}`}>
+  <div class="listing-editorial__inner">
+    <div class="listing-editorial__heading">
+      <p class="listing-editorial__eyebrow">{cfg.eyebrow}</p>
+      <h2 id={`listing-editorial-${variant}`}>{cfg.title}</h2>
+      <p class="listing-editorial__intro">{cfg.intro}</p>
+    </div>
+
+    <div class="listing-editorial__points">
+      {cfg.points.map((point, index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{point.title}</h3>
+          <p>{point.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="listing-editorial__actions">
+      <a class="listing-editorial__primary" href={cfg.primary.href}>{cfg.primary.label}</a>
+      <a class="listing-editorial__secondary" href={cfg.secondary.href}>{cfg.secondary.label} <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .listing-editorial {
+    --editorial-accent: #B2C54F;
+    margin-top: 72px;
+    padding: 90px max(100px, calc(50% - 620px));
+    background: rgb(238, 243, 239);
+  }
+  .listing-editorial--vente { --editorial-accent: #EC7234; }
+  .listing-editorial__inner { max-width: 1240px; margin: 0 auto; }
+  .listing-editorial__heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, .8fr);
+    column-gap: 80px;
+    align-items: end;
+    padding-bottom: 42px;
+    border-bottom: 1px solid rgba(15, 25, 42, .14);
+  }
+  .listing-editorial__heading h2 {
+    grid-column: 1;
+    margin: 0;
+    max-width: 760px;
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Inter, sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -.02em;
+    font-weight: 700;
+    color: #0f192a;
+  }
+  .listing-editorial__eyebrow {
+    grid-column: 1;
+    margin: 0 0 16px;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--editorial-accent);
+  }
+  .listing-editorial__intro {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 300;
+    color: #303b45;
+  }
+  .listing-editorial__points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 44px;
+    padding: 42px 0 38px;
+  }
+  .listing-editorial__points article { min-width: 0; }
+  .listing-editorial__points article > span {
+    display: block;
+    margin-bottom: 24px;
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Inter, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--editorial-accent);
+  }
+  .listing-editorial__points h3 {
+    margin: 0 0 12px;
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Inter, sans-serif;
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: #0f192a;
+  }
+  .listing-editorial__points p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 300;
+    color: #303b45;
+  }
+  .listing-editorial__actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .listing-editorial__primary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 50px;
+    padding: 0 26px;
+    border-radius: 999px;
+    background: var(--editorial-accent);
+    color: #0f192a;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .listing-editorial__primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 25, 42, .12);
+  }
+  .listing-editorial__secondary {
+    color: #0f192a;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .listing-editorial__secondary span { color: var(--editorial-accent); }
+  .listing-editorial__secondary:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  @media (max-width: 900px) {
+    .listing-editorial { padding: 70px 40px; }
+    .listing-editorial__heading { grid-template-columns: 1fr; gap: 20px; }
+    .listing-editorial__heading h2,
+    .listing-editorial__eyebrow,
+    .listing-editorial__intro { grid-column: 1; grid-row: auto; }
+    .listing-editorial__intro { max-width: 680px; }
+    .listing-editorial__points { grid-template-columns: 1fr; gap: 30px; }
+  }
+  @media (max-width: 560px) {
+    .listing-editorial { margin-top: 52px; padding: 58px 20px; }
+    .listing-editorial__heading h2 { font-size: 34px; }
+    .listing-editorial__intro { font-size: 16px; }
+    .listing-editorial__actions { align-items: flex-start; flex-direction: column; gap: 20px; }
+  }
+</style>
