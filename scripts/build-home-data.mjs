@@ -12,6 +12,7 @@ import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import yaml from 'js-yaml';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const CARDS = join(ROOT, 'public/_data/cards.json');
@@ -54,22 +55,27 @@ try {
 }
 
 // ── 2. Latest 12 articles (with a featured image) from frontmatter ──
-const fm = (head, key) => {
-  const m = head.match(new RegExp(`^${key}:\\s*"?(.*?)"?\\s*$`, 'm'));
-  return m ? m[1].trim() : '';
-};
+// Real YAML parse — sync-d1-articles-to-content.mjs emits yaml.dump output
+// (single-quoted titles, block-scalar excerpts) that a line regex misreads.
 const arts = [];
 for (const f of (await readdir(ARTICLES_DIR)).filter((f) => f.endsWith('.md'))) {
   const txt = await readFile(join(ARTICLES_DIR, f), 'utf-8');
-  const head = txt.split('---')[1] || '';
-  const featuredImage = fm(head, 'featuredImage');
-  const date = fm(head, 'date');
+  let head;
+  try {
+    head = yaml.load(txt.split('---')[1] || '') || {};
+  } catch (e) {
+    console.warn(`⚠ home-data: bad frontmatter in ${f} (${e.message}) — skipped`);
+    continue;
+  }
+  const str = (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : String(v ?? '').trim());
+  const featuredImage = str(head.featuredImage);
+  const date = str(head.date);
   if (!featuredImage || !date) continue;
   arts.push({
-    slug: fm(head, 'slug') || f.replace(/\.md$/, ''),
-    title: fm(head, 'title'),
+    slug: str(head.slug) || f.replace(/\.md$/, ''),
+    title: str(head.title),
     date,
-    excerpt: fm(head, 'excerpt'),
+    excerpt: str(head.excerpt),
     featuredImage,
   });
 }
