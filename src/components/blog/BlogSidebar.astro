@@ -2,9 +2,17 @@
 // Blog article sidebar — replicates the live site's internal-link sidebar.
 // Two internal-linking blocks: fixed category nav + "À lire aussi". The route
 // supplies Caroline's ordered choices first, then the newest articles as fill.
+import { optimizeBlogImageUrl } from '../../lib/article-body';
+
 interface Related { title: string; url: string; image?: string; date?: string }
 interface Props { related: Related[] }
 const { related } = Astro.props as Props;
+
+const blogImageOptions = {
+  enabled: import.meta.env.IMAGE_RESIZE === 'true',
+  site: (Astro.site ?? Astro.url).origin,
+  width: 144,
+};
 
 const fmtDate = (d?: string): string =>
   d ? new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
@@ -36,7 +44,7 @@ const CATEGORIES = [
             <a href={a.url}>
               {a.image && (
                 <span class="blog-sidebar__thumb">
-                  <img src={a.image} alt="" loading="lazy" width="72" height="72" />
+                  <img src={optimizeBlogImageUrl(a.image, blogImageOptions)} alt="" loading="lazy" width="72" height="72" />
                 </span>
               )}
               <span class="blog-sidebar__art-text">
