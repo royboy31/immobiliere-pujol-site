@@ -8,6 +8,7 @@ import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { buildRelatedArticles } from '../lib/blog-related';
 import { isLegalPage } from '../lib/legal-pages';
 import { balanceDivs, wrapImagePairs } from '../lib/article-body';
+import { isVisibleBlogCategory } from '../lib/blog-categories';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
 // stays out of the SSR worker). Used for the optional end-of-article expert CTA.
@@ -136,7 +137,10 @@ const ogSource = (type === 'article' ? entry.data.ogImage : undefined) || featur
 const ogImage = ogSource
   ? new URL(ogSource, Astro.site ?? Astro.url).toString()
   : undefined;
-const heroCategory = type === 'article' && (entry.data.categories || [])[0];
+const articleCategories = type === 'article'
+  ? (entry.data.categories || []).filter(isVisibleBlogCategory)
+  : [];
+const heroCategory = articleCategories[0];
 
 // Blog sidebar — Caroline's ordered choices have priority. Empty slots are
 // filled deterministically with the newest published articles, never a rotated
@@ -262,11 +266,11 @@ const seoNofollow = type === 'article' && !!entry.data.nofollow;
       </>
     )}
 
-    {type === 'article' && ((entry.data.categories?.length ?? 0) > 0 || (entry.data.tags?.length ?? 0) > 0) && (
+    {type === 'article' && (articleCategories.length > 0 || (entry.data.tags?.length ?? 0) > 0) && (
       <footer class="content__footer">
-        {(entry.data.categories?.length ?? 0) > 0 && (
+        {articleCategories.length > 0 && (
         <div class="content__categories">
-          {entry.data.categories.map((cat: string) => {
+          {articleCategories.map((cat: string) => {
             const catSlug = cat.toLowerCase()
               .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
               .replace(/[^a-z0-9]+/g, '-')

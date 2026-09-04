@@ -2,12 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-
-const slugify = (s: string): string =>
-  s.toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+import { isVisibleBlogCategory, slugifyBlogCategory } from '../lib/blog-categories';
 
 // Exclude the /local/ SEO landing pages (587 of them) — they live on their own
 // hub at /local/ and must never surface in the blog feed, tags, or featured slot.
@@ -23,7 +18,7 @@ const sorted = [...articles].sort((a, b) => {
 const featured = sorted[0];
 const recent = sorted.slice(1, 13);
 
-// Pillars: the 4 evergreen content pillars, hand-picked. Article counts are
+// Pillars: the evergreen content pillars, hand-picked. Article counts are
 // computed live from the collection so the chip badge stays accurate.
 const pillarDefs = [
   {
@@ -39,13 +34,6 @@ const pillarDefs = [
     desc: "Conseils, stratégies et opportunités pour investir à Marseille.",
     match: /(investir|mes\s*conseils)/i,
     accent: 'orange',
-  },
-  {
-    slug: 'programme-neufs-marseille',
-    title: "L'immobilier neuf",
-    desc: "Programmes neufs et VEFA dans tous les arrondissements.",
-    match: /(immobilier\s*neuf|programmes?\s*neufs?)/i,
-    accent: 'slate',
   },
   {
     slug: 'prix-immo-arrondissement',
@@ -81,7 +69,7 @@ const pillars = pillarDefs.map(p => {
 const tagMap = new Map<string, { name: string; count: number }>();
 for (const a of articles) {
   for (const t of (a.data.tags || []) as string[]) {
-    const slug = slugify(t);
+    const slug = slugifyBlogCategory(t);
     if (!tagMap.has(slug)) tagMap.set(slug, { name: t, count: 0 });
     tagMap.get(slug)!.count++;
   }
@@ -95,12 +83,12 @@ const fmtDate = (s?: string) =>
   s ? new Date(s).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
 const featuredCategory =
-  featured && (featured.data.categories || [])[0];
+  featured && (featured.data.categories || []).find(isVisibleBlogCategory);
 ---
 
 <BaseLayout
   title="Blog immobilier Marseille – Immobilière Pujol"
-  description="Décrypter le marché immobilier marseillais : prix, conseils, investissement et programmes neufs commentés par l'Immobilière Pujol."
+  description="Décrypter le marché immobilier marseillais : prix, conseils, investissement et quartiers commentés par l'Immobilière Pujol."
 >
   <!-- ============= HERO ============= -->
   <section class="seo-hero blog-hero">
@@ -124,7 +112,7 @@ const featuredCategory =
           </a>
           <div class="blog-featured__body">
             {featuredCategory && (
-              <a class="blog-featured__eyebrow" href={`/categorie/${slugify(featuredCategory)}/`}>{featuredCategory}</a>
+              <a class="blog-featured__eyebrow" href={`/categorie/${slugifyBlogCategory(featuredCategory)}/`}>{featuredCategory}</a>
             )}
             <h2 class="blog-featured__title">
               <a href={`/${featured.data.slug}/`}>{featured.data.title}</a>
@@ -159,7 +147,7 @@ const featuredCategory =
     <h2 class="ds-sec-title">Les derniers <b>articles</b></h2>
     <div class="seo-card-grid">
       {recent.map(a => {
-        const cat = (a.data.categories || [])[0];
+        const cat = (a.data.categories || []).find(isVisibleBlogCategory);
         return (
           <article class={`seo-card ${!a.data.featuredImage ? 'seo-card--text' : ''}`}>
             {a.data.featuredImage && (
