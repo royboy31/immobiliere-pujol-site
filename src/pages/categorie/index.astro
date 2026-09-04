@@ -2,19 +2,15 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-
-const slugify = (s: string): string =>
-  s.toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+import { isVisibleBlogCategory, slugifyBlogCategory } from '../../lib/blog-categories';
 
 const articles = await getCollection('articles');
 
 const catMap = new Map<string, { name: string; count: number }>();
 for (const a of articles) {
   for (const cat of (a.data.categories || []) as string[]) {
-    const slug = slugify(cat);
+    if (!isVisibleBlogCategory(cat)) continue;
+    const slug = slugifyBlogCategory(cat);
     if (!catMap.has(slug)) catMap.set(slug, { name: cat, count: 0 });
     catMap.get(slug)!.count++;
   }
@@ -33,7 +29,7 @@ const categories = [...catMap.entries()]
     <p class="seo-hero__eyebrow">Les conseils Pujol</p>
     <h1>Explorer <b>nos catégories</b></h1>
     <p class="seo-hero__sub">
-      Parcourez l'ensemble des thématiques abordées par nos experts immobiliers à Marseille — marché, quartiers, conseils et programmes neufs.
+      Parcourez l'ensemble des thématiques abordées par nos experts immobiliers à Marseille : marché, quartiers et conseils.
     </p>
     <span class="seo-hero__count">{categories.length} catégorie{categories.length > 1 ? 's' : ''}</span>
   </section>

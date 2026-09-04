@@ -75,9 +75,8 @@ const cfg = variant === 'location'
 <style>
   .listing-editorial {
     --editorial-accent: #B2C54F;
-    margin-top: 72px;
     padding: 90px max(100px, calc(50% - 620px));
-    background: rgb(238, 243, 239);
+    background: #fff;
   }
   .listing-editorial--vente { --editorial-accent: #EC7234; }
   .listing-editorial__inner { max-width: 1240px; margin: 0 auto; }
@@ -191,7 +190,7 @@ const cfg = variant === 'location'
     .listing-editorial__points { grid-template-columns: 1fr; gap: 30px; }
   }
   @media (max-width: 560px) {
-    .listing-editorial { margin-top: 52px; padding: 58px 20px; }
+    .listing-editorial { padding: 58px 20px; }
     .listing-editorial__heading h2 { font-size: 34px; }
     .listing-editorial__intro { font-size: 16px; }
     .listing-editorial__actions { align-items: flex-start; flex-direction: column; gap: 20px; }
