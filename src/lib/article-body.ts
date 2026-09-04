@@ -8,6 +8,38 @@ const UNSAFE_IMAGE_ANCESTORS = new Set([
   'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul',
 ]);
 
+interface BlogImageOptions {
+  enabled: boolean;
+  site: string;
+  width?: number;
+}
+
+export function optimizeBlogImageUrl(src: string, options: BlogImageOptions): string {
+  if (!options.enabled || !src) return src;
+
+  let source: URL;
+  let site: URL;
+  try {
+    site = new URL(options.site);
+    source = new URL(src, site);
+  } catch {
+    return src;
+  }
+
+  if (source.origin !== site.origin || !source.pathname.startsWith('/media/blog/')) return src;
+
+  const width = Math.max(1, Math.round(options.width ?? 1200));
+  return `/cdn-cgi/image/width=${width},quality=80,format=auto,onerror=redirect/${source.toString()}`;
+}
+
+export function optimizeArticleBodyImages(html: string, options: BlogImageOptions): string {
+  return html.replace(
+    /(<img\b[^>]*?\bsrc\s*=\s*)(["'])([^"']+)(\2)/gi,
+    (tag, prefix: string, quote: string, src: string) =>
+      `${prefix}${quote}${optimizeBlogImageUrl(src, options)}${quote}`,
+  );
+}
+
 function openAncestorsAt(html: string, offset: number): string[] {
   const stack: string[] = [];
   const tagRegex = /<\/?([a-z][\w:-]*)\b[^>]*>/gi;
