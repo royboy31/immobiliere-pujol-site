@@ -7,7 +7,7 @@ import BlogSidebar from '../components/blog/BlogSidebar.astro';
 import ExpertContactCard from '../components/experts/ExpertContactCard.astro';
 import { buildRelatedArticles } from '../lib/blog-related';
 import { isLegalPage } from '../lib/legal-pages';
-import { balanceDivs, wrapImagePairs } from '../lib/article-body';
+import { balanceDivs, optimizeArticleBodyImages, optimizeBlogImageUrl, wrapImagePairs } from '../lib/article-body';
 import { isVisibleBlogCategory } from '../lib/blog-categories';
 
 // Build-time map of expert JSON (this page is prerendered, so the eager glob
@@ -75,6 +75,14 @@ rawBody = rawBody
   .replace(/<ul\s+class="social__list"[\s\S]*?<\/ul>/gi, '')
   .replace(/<svg\s+class="social__icon[\s\S]*?<\/svg>/gi, '');
 
+const blogImageOptions = {
+  enabled: import.meta.env.IMAGE_RESIZE === 'true',
+  site: (Astro.site ?? Astro.url).origin,
+  width: 1200,
+};
+
+if (type === 'article') rawBody = optimizeArticleBodyImages(rawBody, blogImageOptions);
+
 rawBody = wrapImagePairs(rawBody);
 
 rawBody = balanceDivs(rawBody);
@@ -131,6 +139,9 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 const featuredImage = entry.data.featuredImage as string | undefined;
+const renderedFeaturedImage = featuredImage
+  ? optimizeBlogImageUrl(featuredImage, blogImageOptions)
+  : undefined;
 // og:image — an explicit article og_image wins, else the featured image. Absolute URL;
 // falls back to BaseLayout's default when there's none.
 const ogSource = (type === 'article' ? entry.data.ogImage : undefined) || featuredImage;
@@ -197,7 +208,7 @@ const seoNofollow = type === 'article' && !!entry.data.nofollow;
       <header class="content__header">
         {featuredImage && (
           <div class="content__header-media">
-            <img src={featuredImage} alt={entry.data.title} loading="eager" />
+            <img src={renderedFeaturedImage} alt={entry.data.title} loading="eager" />
             <div class="content__header-overlay"></div>
           </div>
         )}

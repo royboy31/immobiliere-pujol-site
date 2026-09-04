@@ -3,6 +3,12 @@ export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { isVisibleBlogCategory, slugifyBlogCategory } from '../lib/blog-categories';
+import { optimizeBlogImageUrl } from '../lib/article-body';
+
+const blogImageOptions = {
+  enabled: import.meta.env.IMAGE_RESIZE === 'true',
+  site: (Astro.site ?? Astro.url).origin,
+};
 
 // Exclude the /local/ SEO landing pages (587 of them) — they live on their own
 // hub at /local/ and must never surface in the blog feed, tags, or featured slot.
@@ -106,7 +112,7 @@ const featuredCategory =
         <article class="blog-featured__card">
           <a class="blog-featured__media" href={`/${featured.data.slug}/`}>
             {featured.data.featuredImage && (
-              <img src={featured.data.featuredImage} alt={featured.data.title} loading="eager" />
+              <img src={optimizeBlogImageUrl(featured.data.featuredImage, { ...blogImageOptions, width: 1200 })} alt={featured.data.title} loading="eager" />
             )}
             <span class="blog-featured__badge">Dernier article</span>
           </a>
@@ -152,7 +158,7 @@ const featuredCategory =
           <article class={`seo-card ${!a.data.featuredImage ? 'seo-card--text' : ''}`}>
             {a.data.featuredImage && (
               <a href={`/${a.data.slug}/`} class="seo-card__media">
-                <img src={a.data.featuredImage} alt={a.data.title} loading="lazy" />
+                <img src={optimizeBlogImageUrl(a.data.featuredImage, { ...blogImageOptions, width: 720 })} alt={a.data.title} loading="lazy" />
               </a>
             )}
             <div class="seo-card__body">
