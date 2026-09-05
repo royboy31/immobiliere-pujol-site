@@ -59,7 +59,7 @@ const { scope } = Astro.props;
       const locPin='<svg class="loc__pin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-6-5.2-6-10a6 6 0 0 1 12 0c0 4.8-6 10-6 10z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="11" r="2.3" stroke="currentColor" stroke-width="1.8"/></svg>';
       const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+locPin+(cp.trim()?'<span class="loc__cp">'+esc(cp.trim())+'</span>':'')+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+'</div>':'';
       const sLabel=a.saleStatus==='sous-offre'?'Sous offre':(a.saleStatus==='sous-compromis'?'Sous promesse':(a.saleStatus==='vendu'?'Vendu':''));
-      const overlayHtml=sLabel?'<div class="sold-overlay'+(isV?'':' sold-overlay--rental')+'"><span class="sold-overlay__label">'+sLabel+'</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'</div>':'';
+      const overlayHtml=sLabel?'<div class="sold-overlay'+(a.saleStatus==='sous-offre'||a.saleStatus==='sous-compromis'?' sold-overlay--reserved':'')+(isV?'':' sold-overlay--rental')+'"><span class="sold-overlay__label">'+sLabel+'</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'</div>':'';
       el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div>'+locHtml+'<div class="price">'+esc(price)+'</div>'+pillsHtml+'</a>';
       frag.appendChild(el);
     }
