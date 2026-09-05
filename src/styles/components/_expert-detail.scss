@@ -496,9 +496,8 @@
     &.is-vente { background: $ds-orange; }
     &.is-location { background: $ds-olive; }
     &.is-available { background: $ds-orange; }
-    // Reserved (Sous offre / Sous promesse) replaces the "À vendre" pill in the
-    // same corner — amber, mirroring the reserved macaron on the collection cards.
-    &.is-reserved { background: $ds-yellow; color: $ds-ink; }
+    // Reserved (Sous offre / Sous promesse) uses the same brand orange as sales.
+    &.is-reserved { background: $ds-orange; }
   }
 
   &__body {

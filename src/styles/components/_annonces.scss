@@ -2364,9 +2364,8 @@
   &--rental &__label { background: $ds-olive; }
   &--rental &__agent { background: $ds-olive; }
 
-  // Reserved (active) states — Sous offre / Sous promesse — amber, distinct
-  // from the Vendu/Loué macaron used on closed listings.
-  &--reserved &__label { background: $ds-yellow; color: $ds-ink; }
+  // Reserved sales use the same orange treatment as the other sales badges.
+  &--reserved &__label { background: $ds-orange; color: #fff; }
 
   // Hero (detail page) — slightly larger corner macaron.
   &--hero {
