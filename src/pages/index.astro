@@ -188,7 +188,7 @@ const services = [
   {
     href: '/service-immobilier/vendre/',
     icon: '/images/home/svc-vendre.svg',
-    label: 'Vendre',
+    label: 'Vendre à Marseille et ses environs',
     city: '',
   },
 ];
@@ -271,7 +271,7 @@ const services = [
 
     {/* ============= SERVICES ============= */}
     <section class="services">
-      <h2 class="ds-sec-title">Découvrir tous <b>nos services</b></h2>
+      <h2 class="ds-sec-title">Découvrir tous <b>nos services immobiliers</b></h2>
       <div class="services__row">
         {services.map((s) => (
           <a class="svc-card" href={s.href}>
@@ -292,7 +292,7 @@ const services = [
 
     {/* ============= LISTINGS — two carousels (vente / location) ============= */}
     <section class="listings">
-      <h2 class="ds-sec-title">Nos dernières <b>annonces</b></h2>
+      <h2 class="ds-sec-title">Nos dernières <b>annonces de vente et de location</b></h2>
 
       <div class="listings__cols">
         {[
@@ -367,7 +367,7 @@ const services = [
     {/* ============= EXPERTS — horizontal-scroll carousel ============= */}
     <section class="experts">
       <div class="experts__head">
-        <h2>Nos <b>Experts</b></h2>
+        <h2>Nos <b>experts immobiliers</b></h2>
         <div class="experts__arrows">
           <button class="arrow-btn" id="expertPrev" type="button" aria-label="Précédent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
           <button class="arrow-btn" id="expertNext" type="button" aria-label="Suivant"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
@@ -421,7 +421,7 @@ const services = [
     <section class="about" id="agence">
       <div class="left">
         <h2>Immobilier <b>Humain &amp; Engagé</b><br />depuis 2002</h2>
-        <p>Entreprise indépendante, nous agissons chaque jour pour rendre l'immobilier plus juste, transparent et durable. Notre force ? Allier des outils innovants à une culture du soin, pour nos clients comme pour nos collaborateurs. En veillant au bien-être de nos équipes, nous garantissons à nos clients l'écoute, la sécurité et l'accompagnement de confiance qu'ils méritent pour tous leurs projets.</p>
+        <p>Entreprise indépendante, nous agissons chaque jour pour rendre le service immobilier plus juste, transparent et durable. Notre force ? Allier des outils innovants à une culture du soin, pour nos clients comme pour nos collaborateurs. En veillant au bien-être de nos équipes, nous garantissons à nos clients l'écoute, la sécurité et l'accompagnement de confiance qu'ils méritent pour tous leurs projets immobiliers à Marseille et ses alentours.</p>
         <a class="about__top100" href="https://lecercletop100.fr/" target="_blank" rel="noopener" aria-label="Immobilière Pujol, membre du Cercle TOP 100 de l'Immobilier">
           <img src="/images/home/top100-immobilier-full.png" alt="Immobilière Pujol, membre du TOP 100 de l'Immobilier" width="693" height="900" />
         </a>
@@ -434,7 +434,7 @@ const services = [
     {/* ============= REVIEWS (Google widget) ============= */}
     <section class="reviews" id="avis">
       <h3 class="stat-title">Votre confiance est<br /><b>notre plus belle récompense</b></h3>
-      <p class="stat-sub">Pour nous, un immobilier plus juste et durable commence par une transparence totale. C'est pourquoi nous mettons une culture du soin au cœur de nos actions, tant pour nos équipes que pour nos clients. Parce que votre avis est le reflet de notre engagement au quotidien, découvrez ce que nos clients pensent de nous et aidez-nous à toujours mieux vous accompagner.</p>
+      <p class="stat-sub">Pour nous, un immobilier plus juste et durable commence par une transparence totale. C'est pourquoi nous mettons une culture du soin au cœur de nos actions, tant pour nos équipes que pour nos clients. Parce que votre avis est le reflet de notre engagement au quotidien, découvrez ce que nos clients pensent de notre agence immobilière et de nos services en syndic, gestion locative et vente.</p>
       <script src="https://elfsightcdn.com/platform.js" async is:inline></script>
       <div class="elfsight-app-6941ec38-6995-43c0-aaa8-faee3bd1fdca" data-elfsight-app-lazy></div>
     </section>
@@ -442,10 +442,10 @@ const services = [
     {/* ============= BLOG ============= */}
     <section class="blog">
       <div class="blog__head">
-        <div>
-          <div class="blog__script">Nos conseils</div>
-          <h2><b>En direct</b></h2>
-        </div>
+        <h2>
+          <span class="blog__script">Nos conseils</span>
+          <b>pour bien acheter, louer,<br />vendre et gérer</b>
+        </h2>
         <div class="experts__arrows">
           <button class="arrow-btn" id="blogPrev" type="button" aria-label="Précédent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 6 L9 12 L15 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
           <button class="arrow-btn" id="blogNext" type="button" aria-label="Suivant"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 6 L15 12 L9 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" /></svg></button>
@@ -498,18 +498,18 @@ const services = [
         <a href="/service-immobilier/vendre/" class="home-seo__service home-seo__service--sale">
           <span class="home-seo__number">01</span>
           <h3>Vendre ou acheter</h3>
-          <p>Une équipe de transaction pour estimer, présenter et mener votre projet à Marseille.</p>
+          <p>Une équipe dédiée à la vente pour estimer, présenter et mener votre projet d'achat ou de vente d'un bien immobilier à Marseille.</p>
           <span class="home-seo__link">Découvrir notre service vente <span aria-hidden="true">→</span></span>
         </a>
         <a href="/service-immobilier/gestion-locative/" class="home-seo__service home-seo__service--rental">
           <span class="home-seo__number">02</span>
           <h3>Faire gérer un bien</h3>
-          <p>Un accompagnement continu pour louer, sécuriser et suivre votre patrimoine.</p>
+          <p>Un accompagnement en gestion locative pour louer votre bien, sécuriser vos revenus et suivre votre patrimoine de propriétaire bailleur.</p>
           <span class="home-seo__link">Découvrir la gestion locative <span aria-hidden="true">→</span></span>
         </a>
         <a href="/service-immobilier/syndic-de-copropriete-a-marseille/" class="home-seo__service home-seo__service--syndic">
           <span class="home-seo__number">03</span>
-          <h3>Gérer une copropriété</h3>
+          <h3>Faire gérer votre copropriété</h3>
           <p>Un syndic marseillais attentif au quotidien, aux travaux et à la valeur de votre immeuble.</p>
           <span class="home-seo__link">Découvrir notre métier de syndic <span aria-hidden="true">→</span></span>
         </a>
