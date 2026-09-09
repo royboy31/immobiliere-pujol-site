@@ -36,17 +36,10 @@ const pillarDefs = [
   },
   {
     slug: 'investir-marseille',
-    title: 'Investir en immobilier',
+    title: 'Conseils pour investir',
     desc: "Conseils, stratégies et opportunités pour investir à Marseille.",
     match: /(investir|mes\s*conseils)/i,
     accent: 'orange',
-  },
-  {
-    slug: 'prix-immo-arrondissement',
-    title: 'Prix au m² par arrondissement',
-    desc: "Le prix de l'immobilier ancien et neuf, secteur par secteur.",
-    match: /prix\s*au\s*m2?\s*par\s*arrondissement/i,
-    accent: 'soft-green',
   },
   {
     slug: 'mon-quartier-ma-ville',
@@ -62,14 +55,23 @@ const pillarDefs = [
     match: /avant[\s-_\/]*apr[eè]s/i,
     accent: 'orange',
   },
+  {
+    slug: 'copropriete',
+    title: 'Copropriété',
+    desc: "Conseils et actualités pour les copropriétaires à Marseille.",
+    match: /copropri[eé]t[eé]/i,
+    accent: 'soft-green',
+  },
 ];
 
-const pillars = pillarDefs.map(p => {
-  const count = articles.filter(a =>
-    (a.data.categories || []).some((c: string) => p.match.test(c))
-  ).length;
-  return { ...p, count };
-});
+const pillars = pillarDefs
+  .map(p => {
+    const count = articles.filter(a =>
+      (a.data.categories || []).some((c: string) => p.match.test(c))
+    ).length;
+    return { ...p, count };
+  })
+  .filter(p => p.count > 0);
 
 // Tag cloud — top 30 tags by article count.
 const tagMap = new Map<string, { name: string; count: number }>();

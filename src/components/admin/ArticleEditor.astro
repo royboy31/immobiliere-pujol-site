@@ -3,15 +3,15 @@
 // toggle, rich SEO + Open Graph controls with live SERP/social previews, and
 // R2 image upload. All persistence goes through /api/admin-pujol/articles.
 import type { BlogArticle } from '../../lib/blog-db';
+import { BLOG_THEMES } from '../../lib/blog-db';
 
 interface RelatedOption { slug: string; title: string; article_date: string }
 interface Props {
   article?: BlogArticle | null;
   experts?: { slug: string; title: string }[];
-  allCategories?: string[];
   relatedOptions?: RelatedOption[];
 }
-const { article = null, experts = [], allCategories = [], relatedOptions = [] } = Astro.props;
+const { article = null, experts = [], relatedOptions = [] } = Astro.props;
 const isNew = !article;
 const SITE = 'https://www.immobiliere-pujol.fr';
 const today = new Date().toISOString().slice(0, 10);
@@ -23,6 +23,14 @@ const initial: BlogArticle = article ?? {
   expert_cta: '', expert_cta_title: '', status: 'draft', created_by: '', created_at: '', updated_at: '', published_at: null,
   related_slugs: [],
 };
+
+// Category checkboxes = Caroline's curated categories, including the hidden
+// catch-all archive and the arrondissement collection that is not promoted on
+// the blog home. Categories that map to no curated category are preserved on
+// save so editing an article never silently drops them.
+const initialCats = initial.categories || [];
+const themeState = BLOG_THEMES.map((t) => ({ label: t.label, value: t.value, checked: initialCats.some((c) => t.match.test(c)) }));
+const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match.test(c)));
 ---
 
 <div class="ed-topbar">
@@ -201,18 +209,14 @@ const initial: BlogArticle = article ?? {
       <div class="ed-field">
         <span class="ed-fieldlabel">Catégories</span>
         <input id="f-cat-filter" class="ed-cat-filter" type="text" placeholder="Filtrer les catégories…" autocomplete="off" />
-        {allCategories.length === 0 ? (
-          <p class="ed-cat-empty">Aucune catégorie existante. Créez-en via un premier article importé, puis elles apparaîtront ici.</p>
-        ) : (
-          <div id="f-categories" class="ed-cat-list">
-            {allCategories.map((c) => (
-              <label class="ed-cat-item">
-                <input type="checkbox" value={c} checked={initial.categories.includes(c)} />
-                <span>{c}</span>
-              </label>
-            ))}
-          </div>
-        )}
+        <div id="f-categories" class="ed-cat-list" data-preserved={JSON.stringify(preservedCats)}>
+          {themeState.map((t) => (
+            <label class="ed-cat-item">
+              <input type="checkbox" value={t.value} checked={t.checked} />
+              <span>{t.label}</span>
+            </label>
+          ))}
+        </div>
       </div>
       <label>Tags (séparés par des virgules)
         <input id="f-tags" type="text" value={initial.tags.join(', ')} />
@@ -386,7 +390,6 @@ const initial: BlogArticle = article ?? {
   .ed-cat-item[hidden] { display:none; }
   .ed-cat-item { display:flex; align-items:center; gap:8px; margin:0; font-family:var(--pj-noto); font-weight:600; font-size:13px; letter-spacing:normal; text-transform:none; color:#333; cursor:pointer; }
   .ed-cat-item input { width:auto; margin:0; }
-  .ed-cat-empty { font-size:12px; color:#9aa0a6; line-height:1.5; margin:0; }
 
   /* ── Form fields ──────────────────────────────────────────────────
      AdminLayout's input styling is Astro-scoped to the layout, so it does
@@ -785,7 +788,11 @@ const initial: BlogArticle = article ?? {
   const list = (s) => s.split(',').map((x) => x.trim()).filter(Boolean);
   const checkedCategories = () => {
     const box = $('f-categories');
-    return box ? [...box.querySelectorAll('input[type="checkbox"]:checked')].map((c) => c.value) : [];
+    if (!box) return [];
+    const checked = [...box.querySelectorAll('input[type="checkbox"]:checked')].map((c) => c.value);
+    let preserved = [];
+    try { preserved = JSON.parse(box.dataset.preserved || '[]'); } catch (_) {}
+    return [...checked, ...preserved];
   };
   function collect(statusAction) {
     return {
