@@ -221,8 +221,25 @@ async function uniqueSlug(db: D1Database, base: string, excludeId?: number): Pro
 // ── CRUD ─────────────────────────────────────────────────────────────────────
 
 export async function listArticles(db: D1Database): Promise<BlogArticle[]> {
-  const { results } = await db.prepare('SELECT * FROM blog_articles ORDER BY datetime(updated_at) DESC').all();
+  const { results } = await db.prepare(
+    `SELECT * FROM blog_articles
+     ORDER BY CASE WHEN date(article_date) IS NULL THEN 1 ELSE 0 END,
+              date(article_date) DESC,
+              datetime(updated_at) DESC`
+  ).all();
   return (results || []).map(toArticle);
+}
+
+export async function listStoredArticleCategories(db: D1Database): Promise<string[]> {
+  const { results } = await db.prepare(
+    `SELECT DISTINCT CAST(value AS TEXT) AS category
+       FROM blog_articles, json_each(
+         CASE WHEN json_valid(categories) AND json_type(categories) = 'array' THEN categories ELSE '[]' END
+       )
+      WHERE type = 'text' AND trim(CAST(value AS TEXT)) != ''
+      ORDER BY category COLLATE NOCASE`
+  ).all<{ category: string }>();
+  return (results || []).map((row) => String(row.category));
 }
 
 export interface RelatedArticleOption {
@@ -256,9 +273,9 @@ export async function getArticle(db: D1Database, id: number): Promise<BlogArticl
   return row ? toArticle(row) : null;
 }
 
-// The 6 curated blog themes the public site is organised around (the "pillars"
-// in blog-immobilier-marseille.astro). The editor offers exactly these as the
-// category checkboxes.
+// The curated categories available in the editor. Only a subset is promoted as
+// public pillars in blog-immobilier-marseille.astro: arrondissement content and
+// the catch-all archive remain available without appearing on the blog home.
 //   • label — clean name shown to the editor.
 //   • match — maps an article's (often messy, WP-imported) stored category to
 //     its theme; MUST stay in sync with the site's pillarDefs regexes so a
@@ -269,11 +286,12 @@ export async function getArticle(db: D1Database, id: number): Promise<BlogArticl
 export interface BlogTheme { label: string; value: string; match: RegExp }
 export const BLOG_THEMES: BlogTheme[] = [
   { label: 'Le marché immobilier à Marseille', value: 'Le marché immobilier à marseille',                       match: /(le\s*march[eé]\s*immobilier|actualit[eé]\s*immobili[eè]re)/i },
-  { label: 'Investir en immobilier',            value: 'Mes conseils pour investir en immobilier à Marseille',  match: /(investir|mes\s*conseils)/i },
-  { label: "L'immobilier neuf",                 value: "L'immobilier neuf à marseille",                         match: /(immobilier\s*neuf|programmes?\s*neufs?)/i },
+  { label: 'Conseils pour investir',             value: 'Mes conseils pour investir en immobilier à Marseille',  match: /(investir|mes\s*conseils)/i },
   { label: 'Prix au m² par arrondissement',     value: 'Prix au m2 par arrondissement à Marseille',             match: /prix\s*au\s*m2?\s*par\s*arrondissement/i },
   { label: 'Mon quartier, ma ville',            value: 'Mon quartier, ma ville Marseille',                      match: /mon\s*quartier/i },
   { label: 'Avant / Après',                     value: 'Avant/après',                                           match: /avant[\s\-_/]*apr[eè]s/i },
+  { label: 'Copropriété',                       value: 'Copropriété',                                           match: /copropri[eé]t[eé]/i },
+  { label: 'Archives',                          value: 'Archives',                                              match: /^archives?(?:\s+historiques?)?$/i },
 ];
 
 const b = (v: any) => (v ? 1 : 0);
@@ -313,6 +331,9 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
   const status = input.status === 'published' ? 'published' : (input.status === 'draft' ? 'draft' : existing.status);
   const publishedAt = status === 'published' ? (existing.published_at || new Date().toISOString()) : null;
   const pick = (k: keyof ArticleInput) => (input[k] ?? existing[k as keyof BlogArticle]);
+  const articleDate = typeof input.article_date === 'string' && input.article_date.trim()
+    ? input.article_date.trim()
+    : existing.article_date;
   await db.prepare(
     `UPDATE blog_articles SET
        slug=?, title=?, excerpt=?, body_html=?, featured_image=?, categories=?, tags=?, author=?, article_date=?,
@@ -323,13 +344,64 @@ export async function updateArticle(db: D1Database, id: number, input: ArticleIn
   ).bind(
     slug, (input.title ?? existing.title).trim(), pick('excerpt'), pick('body_html'), pick('featured_image'),
     JSON.stringify(input.categories ?? existing.categories), JSON.stringify(input.tags ?? existing.tags),
-    pick('author'), pick('article_date'),
+    pick('author'), articleDate,
     pick('seo_title'), pick('seo_description'), pick('canonical_url'), pick('focus_keyword'),
     b(input.noindex ?? existing.noindex), b(input.nofollow ?? existing.nofollow),
     pick('og_title'), pick('og_description'), pick('og_image'), pick('twitter_card'),
     pick('expert_cta'), pick('expert_cta_title'), JSON.stringify(input.related_slugs ?? existing.related_slugs), status, publishedAt, id,
   ).run();
   return await getArticle(db, id);
+}
+
+export async function bulkUpdateArticleCategories(
+  db: D1Database,
+  ids: number[],
+  operation: 'add' | 'remove' | 'replace',
+  category: string,
+): Promise<number> {
+  const safeCategories = `CASE
+    WHEN json_valid(categories) AND json_type(categories) = 'array' THEN categories
+    ELSE '[]'
+  END`;
+  const chunkSize = 98;
+  const statements: D1PreparedStatement[] = [];
+
+  for (let offset = 0; offset < ids.length; offset += chunkSize) {
+    const chunk = ids.slice(offset, offset + chunkSize);
+    const placeholders = chunk.map(() => '?').join(',');
+
+    if (operation === 'add') {
+      statements.push(db.prepare(
+        `UPDATE blog_articles
+            SET categories = json_insert(${safeCategories}, '$[#]', ?),
+                updated_at = datetime('now')
+          WHERE id IN (${placeholders})
+            AND NOT EXISTS (SELECT 1 FROM json_each(${safeCategories}) WHERE value = ?)`
+      ).bind(category, ...chunk, category));
+    } else if (operation === 'remove') {
+      statements.push(db.prepare(
+        `UPDATE blog_articles
+            SET categories = COALESCE(
+                  (SELECT json_group_array(value) FROM json_each(${safeCategories}) WHERE value != ?),
+                  '[]'
+                ),
+                updated_at = datetime('now')
+          WHERE id IN (${placeholders})
+            AND EXISTS (SELECT 1 FROM json_each(${safeCategories}) WHERE value = ?)`
+      ).bind(category, ...chunk, category));
+    } else {
+      statements.push(db.prepare(
+        `UPDATE blog_articles
+            SET categories = json_array(?),
+                updated_at = datetime('now')
+          WHERE id IN (${placeholders})
+            AND (NOT json_valid(categories) OR categories != json_array(?))`
+      ).bind(category, ...chunk, category));
+    }
+  }
+
+  const results = await db.batch(statements);
+  return results.reduce((total, result) => total + Number(result.meta.changes || 0), 0);
 }
 
 export async function deleteArticle(db: D1Database, id: number): Promise<boolean> {

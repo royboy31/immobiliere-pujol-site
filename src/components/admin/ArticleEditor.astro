@@ -24,10 +24,10 @@ const initial: BlogArticle = article ?? {
   related_slugs: [],
 };
 
-// Category checkboxes = the 6 curated site themes. A theme is pre-ticked when any
-// of the article's stored categories maps to it (same regex as the public site).
-// Categories that map to no theme (e.g. arrondissement tags) are preserved on save
-// so editing an article never silently drops them.
+// Category checkboxes = Caroline's curated categories, including the hidden
+// catch-all archive and the arrondissement collection that is not promoted on
+// the blog home. Categories that map to no curated category are preserved on
+// save so editing an article never silently drops them.
 const initialCats = initial.categories || [];
 const themeState = BLOG_THEMES.map((t) => ({ label: t.label, value: t.value, checked: initialCats.some((c) => t.match.test(c)) }));
 const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match.test(c)));

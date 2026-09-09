@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-import { getDB, ensureSchema, listArticles, type BlogArticle } from '../../../lib/blog-db';
+import { BLOG_THEMES, getDB, ensureSchema, listArticles, type BlogArticle } from '../../../lib/blog-db';
 
 let articles: BlogArticle[] = [];
 let error = '';
@@ -20,6 +20,14 @@ const fmt = (s: string | null) =>
 // plain substring test over ~1000 rows on every keystroke.
 const norm = (s: string | null) =>
   (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+const storedCategories = [...new Set(articles.flatMap((article) => article.categories).filter(Boolean))]
+  .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+const targetCategoryLabels = new Map(storedCategories.map((category) => [category, category]));
+for (const theme of BLOG_THEMES) targetCategoryLabels.set(theme.value, theme.label);
+const targetCategories = [...targetCategoryLabels.entries()]
+  .map(([value, label]) => ({ value, label }))
+  .sort((a, b) => a.label.localeCompare(b.label, 'fr', { sensitivity: 'base' }));
 ---
 
 <AdminLayout title="Articles de blog" section="articles">
@@ -50,14 +58,56 @@ const norm = (s: string | null) =>
   )}
 
   {articles.length > 0 && (
-    <div class="card" style="padding:0;overflow:hidden;">
+    <>
+      <div class="card art-bulk">
+        <div class="art-bulk__filters">
+          <label>
+            Catégorie affichée
+            <select id="art-category-filter">
+              <option value="">Toutes les catégories</option>
+              {storedCategories.map((category) => <option value={category}>{category}</option>)}
+            </select>
+          </label>
+          <p id="art-selection-count" class="art-bulk__count">0 article sélectionné</p>
+        </div>
+        <div class="art-bulk__action">
+          <label>
+            Action groupée
+            <select id="art-bulk-operation">
+              <option value="add">Ajouter une catégorie</option>
+              <option value="remove">Retirer une catégorie</option>
+              <option value="replace">Remplacer toutes les catégories</option>
+            </select>
+          </label>
+          <label>
+            Catégorie
+            <select id="art-bulk-category">
+              <option value="">Choisir…</option>
+              {targetCategories.map((category) => <option value={category.value}>{category.label}</option>)}
+            </select>
+          </label>
+          <button type="button" id="art-bulk-apply" class="btn btn--primary" disabled>Appliquer</button>
+        </div>
+        <p class="art-bulk__hint">Les modifications restent non publiées jusqu’à l’action habituelle « Publier ».</p>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
       <table class="art-table">
         <thead>
-          <tr><th>Titre</th><th>Statut</th><th>Modifié</th><th style="text-align:right;">Actions</th></tr>
+          <tr>
+            <th class="art-check"><input id="art-select-visible" type="checkbox" aria-label="Sélectionner tous les résultats affichés" /></th>
+            <th>Titre</th><th>Statut</th><th>Parution</th><th style="text-align:right;">Actions</th>
+          </tr>
         </thead>
         <tbody>
           {articles.map((a) => (
-            <tr data-id={a.id} data-search={`${norm(a.title)} ${norm(a.slug)}`}>
+            <tr
+              data-id={a.id}
+              data-title={a.title}
+              data-search={`${norm(a.title)} ${norm(a.slug)}`}
+              data-categories={JSON.stringify(a.categories)}
+            >
+              <td class="art-check"><input class="art-row-check" type="checkbox" aria-label={`Sélectionner ${a.title}`} /></td>
               <td>
                 <a href={`./${a.id}/edit/`} class="art-title">{a.title}</a>
                 <div class="art-slug">/{a.slug}/</div>
@@ -65,7 +115,7 @@ const norm = (s: string | null) =>
               <td>
                 <span class={`badge badge--${a.status}`}>{a.status === 'published' ? 'Publié' : 'Brouillon'}</span>
               </td>
-              <td class="art-date">{fmt(a.updated_at)}</td>
+              <td class="art-date">{fmt(a.article_date)}</td>
               <td style="text-align:right;white-space:nowrap;">
                 <a href={`./${a.id}/preview/`} class="btn btn--ghost btn--sm" target="_blank">Aperçu</a>
                 <a href={`./${a.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
@@ -76,7 +126,8 @@ const norm = (s: string | null) =>
         </tbody>
       </table>
       <div id="art-empty" class="art-empty" hidden>Aucun article ne correspond à votre recherche.</div>
-    </div>
+      </div>
+    </>
   )}
 </AdminLayout>
 
@@ -89,6 +140,8 @@ const norm = (s: string | null) =>
   .art-table td { padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline); vertical-align: middle; }
   .art-table tr:last-child td { border-bottom: none; }
   .art-table tr:hover td { background: #fbfcf8; }
+  .art-check { width: 24px; padding-right: 0 !important; }
+  .art-check input { width: 16px; height: 16px; accent-color: var(--pj-olive); }
   .art-title { font-weight: 600; font-size: 15px; color: #000; }
   .art-title:hover { color: var(--pj-orange); }
   .art-slug { font-size: 12px; color: #9aa0a6; margin-top: 2px; font-family: ui-monospace, monospace; }
@@ -114,6 +167,17 @@ const norm = (s: string | null) =>
   }
   .art-search__clear:hover { color: var(--pj-ink); background: rgba(0,0,0,.05); }
   .art-empty { text-align: center; color: #8a8a8a; font-size: 14px; padding: 28px 20px; }
+  .art-bulk { margin-bottom: 16px; }
+  .art-bulk__filters, .art-bulk__action { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; }
+  .art-bulk__action { margin-top: 14px; }
+  .art-bulk label { flex: 1 1 220px; font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #777; }
+  .art-bulk select { width: 100%; margin-top: 7px; }
+  .art-bulk__count { margin: 0 0 11px; color: #59610d; font-size: 13px; font-weight: 700; }
+  .art-bulk__hint { margin: 11px 0 0; color: #8a8a8a; font-size: 12px; }
+  @media (max-width: 760px) {
+    .art-table th, .art-table td { padding-left: 10px; padding-right: 10px; }
+    .art-table th:nth-child(3), .art-table td:nth-child(3) { display: none; }
+  }
 </style>
 
 <script>
@@ -121,26 +185,53 @@ const norm = (s: string | null) =>
   const clearBtn = document.getElementById('art-search-clear') as HTMLButtonElement | null;
   const countEl = document.getElementById('art-count');
   const emptyRow = document.getElementById('art-empty');
+  const categoryFilter = document.getElementById('art-category-filter') as HTMLSelectElement | null;
+  const selectVisible = document.getElementById('art-select-visible') as HTMLInputElement | null;
+  const selectionCount = document.getElementById('art-selection-count');
+  const bulkOperation = document.getElementById('art-bulk-operation') as HTMLSelectElement | null;
+  const bulkCategory = document.getElementById('art-bulk-category') as HTMLSelectElement | null;
+  const bulkApply = document.getElementById('art-bulk-apply') as HTMLButtonElement | null;
 
   const norm = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
+  const allRows = () => Array.from(document.querySelectorAll<HTMLTableRowElement>('tr[data-search]'));
+  const visibleRows = () => allRows().filter((row) => !row.hidden);
+  const checkedRows = () => allRows().filter((row) => row.querySelector<HTMLInputElement>('.art-row-check')?.checked);
+
+  function refreshSelection() {
+    const selected = checkedRows().length;
+    if (selectionCount) selectionCount.textContent = `${selected} article${selected === 1 ? '' : 's'} sélectionné${selected === 1 ? '' : 's'}`;
+    if (bulkApply) bulkApply.disabled = selected === 0 || !bulkCategory?.value;
+
+    const visible = visibleRows();
+    const visibleChecked = visible.filter((row) => row.querySelector<HTMLInputElement>('.art-row-check')?.checked).length;
+    if (selectVisible) {
+      selectVisible.checked = visible.length > 0 && visibleChecked === visible.length;
+      selectVisible.indeterminate = visibleChecked > 0 && visibleChecked < visible.length;
+    }
+  }
+
   function applyFilter() {
-    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('tr[data-search]'));
+    const rows = allRows();
     // Every whitespace-separated term must match, so "local marseille" narrows
     // instead of widening.
     const terms = norm(input?.value || '').split(/\s+/).filter(Boolean);
+    const selectedCategory = categoryFilter?.value || '';
     let shown = 0;
 
     for (const row of rows) {
       const hay = row.dataset.search || '';
-      const match = terms.every((t) => hay.includes(t));
+      let categories: string[] = [];
+      try { categories = JSON.parse(row.dataset.categories || '[]'); } catch { categories = []; }
+      const match = terms.every((t) => hay.includes(t)) && (!selectedCategory || categories.includes(selectedCategory));
       row.hidden = !match;
       if (match) shown++;
     }
 
     if (countEl) countEl.textContent = terms.length ? `(${shown} sur ${rows.length})` : `(${rows.length})`;
-    if (emptyRow) emptyRow.hidden = shown > 0 || !terms.length;
+    if (emptyRow) emptyRow.hidden = shown > 0 || (!terms.length && !selectedCategory);
     if (clearBtn) clearBtn.hidden = !input?.value;
+    refreshSelection();
   }
 
   input?.addEventListener('input', applyFilter);
@@ -155,6 +246,54 @@ const norm = (s: string | null) =>
     input.value = '';
     applyFilter();
     input.focus();
+  });
+  categoryFilter?.addEventListener('change', applyFilter);
+  bulkCategory?.addEventListener('change', refreshSelection);
+
+  document.querySelectorAll<HTMLInputElement>('.art-row-check').forEach((checkbox) => {
+    checkbox.addEventListener('change', refreshSelection);
+  });
+
+  selectVisible?.addEventListener('change', () => {
+    for (const row of visibleRows()) {
+      const checkbox = row.querySelector<HTMLInputElement>('.art-row-check');
+      if (checkbox) checkbox.checked = selectVisible.checked;
+    }
+    refreshSelection();
+  });
+
+  bulkApply?.addEventListener('click', async () => {
+    const rows = checkedRows();
+    const operation = bulkOperation?.value || '';
+    const category = bulkCategory?.value || '';
+    if (!rows.length || !category || !['add', 'remove', 'replace'].includes(operation)) return;
+
+    const label = bulkCategory?.selectedOptions[0]?.textContent?.trim() || category;
+    const sample = rows.slice(0, 5).map((row) => `• ${row.dataset.title || 'Sans titre'}`).join('\n');
+    const more = rows.length > 5 ? `\n• … et ${rows.length - 5} autre${rows.length - 5 === 1 ? '' : 's'}` : '';
+    const action = operation === 'add'
+      ? `ajouter « ${label} » à`
+      : operation === 'remove'
+        ? `retirer « ${label} » de`
+        : `remplacer toutes les catégories par « ${label} » pour`;
+    if (!confirm(`Vous allez ${action} ${rows.length} article${rows.length === 1 ? '' : 's'} :\n\n${sample}${more}\n\nContinuer ?`)) return;
+
+    bulkApply.disabled = true;
+    const ids = rows.map((row) => Number(row.dataset.id));
+    try {
+      const response = await fetch('/api/admin-pujol/articles/bulk-categories/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids, operation, category }),
+      });
+      if (!response.ok) throw new Error((await response.text()) || 'Échec de la modification groupée');
+      const result = await response.json() as { updated?: number };
+      alert(`${result.updated || 0} article${result.updated === 1 ? '' : 's'} modifié${result.updated === 1 ? '' : 's'}. Les changements restent à publier.`);
+      window.location.reload();
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Échec de la modification groupée');
+      bulkApply.disabled = false;
+    }
   });
 
   document.querySelectorAll<HTMLButtonElement>('[data-del]').forEach((btn) => {
