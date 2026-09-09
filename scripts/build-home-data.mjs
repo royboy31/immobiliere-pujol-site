@@ -75,7 +75,7 @@ for (const f of (await readdir(ARTICLES_DIR)).filter((f) => f.endsWith('.md'))) 
     slug: str(head.slug) || f.replace(/\.md$/, ''),
     title: str(head.title),
     date,
-    excerpt: str(head.excerpt),
+    excerpt: str(head.excerpt) || str(head.seoDescription),
     featuredImage,
   });
 }
