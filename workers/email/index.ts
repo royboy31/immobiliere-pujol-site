@@ -732,8 +732,7 @@ const FORM_DEFS: Record<string, FormDef> = {
     honeypot: 'input_9',
     emailField: 'input_2',
     to: `emeline${D}`,
-    cc: `stephanepujol${D}`,
-    fromEmail: `stephanepujol${D}`,
+    fromEmail: `emeline${D}`,
     fromName: "Demande d'un devis en syndic (site web)",
   },
   // GF 7 — Calculer honoraires syndic
@@ -759,8 +758,7 @@ const FORM_DEFS: Record<string, FormDef> = {
     honeypot: 'input_24',
     emailField: 'input_9',
     to: `emeline${D}`,
-    cc: `stephanepujol${D}`,
-    fromEmail: `stephanepujol${D}`,
+    fromEmail: `emeline${D}`,
     fromName: 'Calculer vos honoraires de syndic',
   },
 };
