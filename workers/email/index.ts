@@ -1050,24 +1050,16 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
   const isOwnEnv = !!env.ALLOWED_ORIGIN && origin === env.ALLOWED_ORIGIN;
   const doiReady = configured && isOwnEnv;
 
-  const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const notifyRows: [string, string][] = [['Email', email]];
-  if (doiReady) notifyRows.push(['Statut', 'en attente de confirmation (double opt-in)']);
-  const notify = () =>
-    sendEmail(env, {
-      subject,
-      html: buildTable(subject, notifyRows),
-      to: `contact${D}`,
-      cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
-    });
+  // No internal notification email for newsletter signups: Caroline asked on
+  // 17/09/2026 to stop them (contact@ and her copy). The Newsletter sheet tab
+  // and Brevo remain the record of every signup.
 
-  // Pre-Brevo behaviour — unchanged, including surfacing a send failure as an error.
+  // Pre-Brevo behaviour.
   if (!doiReady) {
-    const emailResult = await notify();
     ctx.waitUntil(upsertSheet('Newsletter', 'Email', {
       Date: now(), Email: email, 'Statut opt-in': 'Inscrit (sans double opt-in)',
     }));
-    return emailResult;
+    return { ok: true };
   }
 
   // Brevo sends the branded confirmation; the contact joins the list only after
@@ -1089,7 +1081,6 @@ async function handleNewsletter(fd: FormData, env: Env, ctx: ExecutionContext, o
     Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)',
   }));
   ctx.waitUntil(recordPendingNewsletterSignup(env, email, new Date().toISOString()));
-  ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
 
   return { ok: true, doi: true };
 }
@@ -1590,25 +1581,11 @@ async function handleAlertNewsletterOptin(req: Request, env: Env, ctx: Execution
   if (!email || !email.includes('@')) return nlJson({ error: 'email requis' }, 400);
 
   // Unlike /newsletter there is NO pre-Brevo fallback here: this is a new consent
-  // path, so a missing DOI config must never record anyone as "Inscrit" or send
-  // the signup copy — refuse and let the alert succeed on the caller's side.
+  // path, so a missing DOI config must never record anyone as "Inscrit" — refuse
+  // and let the alert succeed on the caller's side.
   if (!env.DOI_TEMPLATE_ID || !env.NEWSLETTER_LIST_ID) {
     return nlJson({ ok: false, error: 'Double opt-in non configuré.' }, 501);
   }
-
-  const subject = 'Nouvelle inscription newsletter — Immobilière Pujol';
-  const notifyRows: [string, string][] = [
-    ['Email', email],
-    ['Source', "Formulaire d'alerte annonces"],
-    ['Statut', 'en attente de confirmation (double opt-in)'],
-  ];
-  const notify = () =>
-    sendEmail(env, {
-      subject,
-      html: buildTable(subject, notifyRows),
-      to: `contact${D}`,
-      cc: `carolinepujol${D}`,   // Caroline wants a copy of every newsletter signup
-    });
 
   const doiResult = await requestDoiEmail(env, email, {
     SOURCE: 'alerte',
@@ -1620,7 +1597,6 @@ async function handleAlertNewsletterOptin(req: Request, env: Env, ctx: Execution
     Date: now(), Email: email, 'Statut opt-in': 'En attente (double opt-in)', Notes: 'Via alerte annonces',
   }));
   ctx.waitUntil(recordPendingNewsletterSignup(env, email, new Date().toISOString()));
-  ctx.waitUntil(notify().then(() => undefined));   // keep Caroline's copy, non-blocking
 
   return nlJson({ ok: true, doi: true });
 }

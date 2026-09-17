@@ -99,6 +99,8 @@ test('success path fires the Brevo DOI with SOURCE=alerte and the alert list', a
     assert.equal(payload.attributes.SOURCE, 'alerte');
     assert.deepEqual(payload.includeListIds, [3]);
     assert.equal(payload.templateId, 7);
+    const mail = fetchCalls.filter((c) => c.url.includes('mandrillapp.com') || c.url.includes('/v3/smtp/email'));
+    assert.equal(mail.length, 0, 'no signup notification email to contact@ or Caroline');
   } finally { restore(); }
 });
 
