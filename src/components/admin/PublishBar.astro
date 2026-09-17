@@ -165,5 +165,8 @@
     }
   });
 
+  // Editors that save in place (no redirect) fire this so the banner and button update.
+  window.addEventListener('pujol:content-saved', () => { loadPending(); });
+
   loadPending();
 </script>
