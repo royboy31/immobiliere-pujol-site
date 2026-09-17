@@ -212,11 +212,15 @@ test('successful DOI signup records future reminder state in D1', async () => {
   const originalFetch = globalThis.fetch;
   const db = createReminderDb();
   const pending = [];
+  const mailCalls = [];
   globalThis.fetch = async (input, init = {}) => {
     const url = String(input);
     if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
     if (url.includes('script.google.com')) return Response.json({ ok: true, mode: 'insert' });
-    if (url.includes('mandrillapp.com')) return Response.json([{ status: 'sent' }]);
+    if (url.includes('mandrillapp.com') || url.includes('/v3/smtp/email')) {
+      mailCalls.push(url);
+      return Response.json([{ status: 'sent' }]);
+    }
     throw new Error(`unexpected fetch ${url} ${init.method || 'GET'}`);
   };
 
@@ -238,6 +242,8 @@ test('successful DOI signup records future reminder state in D1', async () => {
     await Promise.all(pending);
     assert.equal(db.rows.get('future@example.com')?.reminder_at, null);
     assert.match(db.rows.get('future@example.com')?.signup_at || '', /^\d{4}-\d{2}-\d{2}T/);
+    // Caroline asked on 17/09/2026 to stop the internal signup notification.
+    assert.equal(mailCalls.length, 0, 'no notification email to contact@ or Caroline');
   } finally {
     globalThis.fetch = originalFetch;
   }
