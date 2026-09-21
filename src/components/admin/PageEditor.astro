@@ -162,10 +162,15 @@ const { page } = Astro.props;
     body.addEventListener('mouseup', saveRange);
     body.addEventListener('keyup', saveRange);
 
+    // One upload at a time. Two in flight share `savedRange`, so the slower
+    // response lands its link on whatever text was selected for the faster one.
+    let uploading = false;
+
     // mousedown + preventDefault, not click: pressing the button would otherwise
     // take focus and collapse the caret before we could save where it was.
     $('pe-pdf').addEventListener('mousedown', (e) => {
       e.preventDefault();
+      if (uploading) return;
       saveRange();
       pdfInput.click();
     });
@@ -179,6 +184,14 @@ const { page } = Astro.props;
       s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
     async function insertPdf(file: File) {
+      // Freeze the caret for THIS upload. `savedRange` is rewritten by every
+      // mouseup/keyup in the body, and the insert below runs after an await —
+      // reading the shared variable then would drop this PDF's link on whatever
+      // text got selected while the upload was in flight.
+      const range = savedRange;
+      const pdfBtn = $('pe-pdf') as HTMLButtonElement;
+      uploading = true;
+      pdfBtn.disabled = true;
       say('Téléversement du PDF…', true);
       try {
         const fd = new FormData();
@@ -193,16 +206,20 @@ const { page } = Astro.props;
         if (sourceMode) {
           const s = source.selectionStart || source.value.length;
           source.value = source.value.slice(0, s) + tag + source.value.slice(source.selectionEnd || s);
-        } else if (savedRange && body.contains(savedRange.commonAncestorContainer)) {
+        } else if (range && body.contains(range.commonAncestorContainer)) {
           // Caret known: restore it and use execCommand, the same path the
           // article editor's image insert has been using.
           body.focus();
           const sel = window.getSelection()!;
           sel.removeAllRanges();
-          sel.addRange(savedRange);
+          sel.addRange(range);
           // Text selected → link that text; otherwise drop in a labelled link.
-          if (!savedRange.collapsed) document.execCommand('createLink', false, url);
+          if (!range.collapsed) document.execCommand('createLink', false, url);
           else document.execCommand('insertHTML', false, tag);
+          // Collapse afterwards: leaving the selection on the text we just
+          // linked means a second 📎 PDF click with no new selection silently
+          // overwrites this link's href instead of adding a second link.
+          if (sel.rangeCount) sel.collapseToEnd();
           saveRange();
         } else {
           // No caret in the body — the editor was never clicked into. execCommand
@@ -218,6 +235,9 @@ const { page } = Astro.props;
         // a message in the corner is missable — which is how this stayed opaque.
         say('Échec du téléversement.', false);
         alert('Échec du téléversement : ' + (err?.message || err));
+      } finally {
+        uploading = false;
+        pdfBtn.disabled = false;
       }
     }
 
