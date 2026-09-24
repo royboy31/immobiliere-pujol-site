@@ -881,6 +881,7 @@ interface LbiAnnonce {
   charges: number | null;
   typeChauffage: string | null;
   mandatNumero: string | null;
+  mandatType: string | null;
   dpeValeur: string | null;
   dpeNote: string | null;
   gesValeur: string | null;
@@ -916,7 +917,7 @@ export function parseLbiInteger(value: string | undefined): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
-function parseLbiCsv(raw: string): LbiAnnonce[] {
+export function parseLbiCsv(raw: string): LbiAnnonce[] {
   const lines = raw.trim().split('\n');
   const annonces: LbiAnnonce[] = [];
 
@@ -949,18 +950,19 @@ function parseLbiCsv(raw: string): LbiAnnonce[] {
       nbEtages: f[24] || null,
       nbSallesBain: parseInt(f[28]) || null,
       nbWC: parseInt(f[30]) || null,
-      cave: f[35] === 'OUI',
-      terrasse: f[36] === 'OUI',
-      parking: !!(f[38] && f[38] !== '0'),
-      balcon: f[40] === 'OUI',
-      ascenseur: f[41] === 'OUI',
-      interphone: f[82] === 'OUI',
+      balcon: (parseInt(f[38]) || 0) > 0,       // field 39: NB balcons
+      ascenseur: f[40] === 'OUI',               // field 41
+      cave: f[41] === 'OUI',                    // field 42
+      parking: (parseInt(f[42]) || 0) > 0,       // field 43: NB parkings
+      interphone: f[45] === 'OUI',               // field 46
+      terrasse: f[47] === 'OUI',                 // field 48
       charges: parseFloat(f[22]) || null,
       typeChauffage: LBI_CHAUFFAGE[f[32]] || f[32] || null,
       telephone: f[104]?.trim() || null,
       contactNom: f[105]?.trim() || null,
       email: f[106]?.trim() || null,
       mandatNumero: f[111]?.trim() || null,
+      mandatType: f[82] === 'OUI' ? 'exclusif' : f[82] === 'NON' ? 'simple' : null,
       dpeValeur: f[175]?.trim() || null,
       dpeNote: f[176]?.trim() || null,
       gesValeur: f[177]?.trim() || null,
@@ -1071,7 +1073,7 @@ async function uploadLbiPhotos(
   return r2Keys;
 }
 
-function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1PreparedStatement {
+export function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1PreparedStatement {
   return db.prepare(
     `INSERT INTO annonces (
       slug, status, reference_agence,
@@ -1085,10 +1087,10 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       dpe_note, dpe_valeur, ges_note, ges_valeur, type_chauffage,
       titre, descriptif,
       contact_a_afficher, telephone_a_afficher, email_a_afficher,
-      mandat_numero, url_visite_virtuelle, termine,
+      mandat_numero, mandat_type, url_visite_virtuelle, termine,
       date_creation, date_modification, source, created_at, updated_at
     ) VALUES (
-      ?,?,?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?, ?,?,'lbi',?,?
+      ?,?,?, ?,?, ?,?,?, ?,?, ?,?, ?,?,?,?, ?,?,?,?,?, ?,?,?, ?,?,?,?,?, ?,?, ?,?,?, ?,?,?,?, ?,?,'lbi',?,?
     )
     ON CONFLICT(slug) DO UPDATE SET
       status=excluded.status, reference_agence=excluded.reference_agence,
@@ -1108,7 +1110,8 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
       contact_a_afficher=excluded.contact_a_afficher,
       telephone_a_afficher=excluded.telephone_a_afficher,
       email_a_afficher=excluded.email_a_afficher,
-      mandat_numero=excluded.mandat_numero, url_visite_virtuelle=excluded.url_visite_virtuelle,
+      mandat_numero=excluded.mandat_numero, mandat_type=excluded.mandat_type,
+      url_visite_virtuelle=excluded.url_visite_virtuelle,
       termine=excluded.termine,
       date_modification=excluded.date_modification, source='lbi',
       date_fermeture=NULL, updated_at=excluded.updated_at`
@@ -1124,7 +1127,7 @@ function buildLbiUpsertStmt(db: D1Database, a: LbiAnnonce, now: string): D1Prepa
     a.dpeNote, a.dpeValeur, a.gesNote, a.gesValeur, a.typeChauffage,
     a.titre, a.descriptif,
     a.contactNom, a.telephone, a.email,
-    a.mandatNumero, a.visiteVirtuelle, a.saleStatus,
+    a.mandatNumero, a.mandatType, a.visiteVirtuelle, a.saleStatus,
     now, now, now, now
   );
 }
@@ -1346,7 +1349,7 @@ async function writeActiveJson(env: Env): Promise<number> {
     chauffageEnergie: '',
     ascenseur: !!a.ascenseur,
     terrasse: !!a.terrasse,
-    balcon: false,
+    balcon: !!a.balcon,
     garage: !!a.garage,
     parking: !!a.parking,
     cave: !!a.cave,
@@ -1387,6 +1390,7 @@ async function writeActiveJson(env: Env): Promise<number> {
     photos: a.photos.slice(0, 4),
     meuble: a.meuble, parking: a.parking, garage: a.garage,
     terrasse: a.terrasse, balcon: a.balcon,
+    mandatType: a.mandatType,
     saleStatus: a.saleStatus, contactPhoto: a.contactPhoto,
   }));
   await env.PHOTOS.put('annonces/cards.json', JSON.stringify(cards), {

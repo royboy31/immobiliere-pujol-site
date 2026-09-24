@@ -2,7 +2,7 @@
 // 2-column hero.
 // LEFT: main media carousel (virtual-tour video as slide 1 when embeddable, then photos) → thumbnail strip → <slot name="left-below" /> (description).
 // RIGHT (sticky): info card → <slot name="action" /> (form / closed CTA) → <slot name="action-below" /> (expert).
-import { reservedLabel } from '../../lib/listing-status';
+import { isExclusiveMandate, reservedLabel } from '../../lib/listing-status';
 import { cfImg } from '../../lib/img';
 
 interface View {
@@ -27,6 +27,7 @@ interface View {
   charges?: number | string | null;
   isClosed: boolean;
   saleStatus?: string | null;
+  mandatType?: string | null;
   contactPhoto?: string | null;
 }
 
@@ -39,6 +40,7 @@ const isLocation = view.type === 'L';
 // Active "reserved" macaron (Sous offre / Sous promesse) from the LBI field-136
 // status; null for available listings. Closed listings show Vendu/Loué instead.
 const reserved = view.isClosed ? null : reservedLabel(view.saleStatus);
+const isExclusive = !view.isClosed && !isLocation && isExclusiveMandate(view.mandatType);
 const priceModifier = isLocation ? 'annonce-hero__price--location' : '';
 const badgeModifier = view.isClosed
   ? 'annonce-hero__badge--closed'
@@ -80,9 +82,12 @@ const remaining = Math.max(0, photos.length - thumbsStart - thumbs.length);
   <aside class="annonce-hero__right">
     <div class="annonce-hero__info">
       <div class="annonce-hero__head-row">
-        <span class={`annonce-hero__badge ${badgeModifier}`}>
-          {view.isClosed ? 'Bien clôturé' : (isLocation ? 'Location' : 'Vente')}
-        </span>
+        <div class="annonce-hero__badges">
+          <span class={`annonce-hero__badge ${badgeModifier}`}>
+            {view.isClosed ? 'Bien clôturé' : (isLocation ? 'Location' : 'Vente')}
+          </span>
+          {isExclusive && <span class="annonce-hero__badge annonce-hero__badge--exclusive">Exclusivité</span>}
+        </div>
         <span class="annonce-hero__ref">Réf. {view.reference}</span>
       </div>
 

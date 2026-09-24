@@ -43,6 +43,7 @@ export interface DbAnnonce {
   ascenseur: number;
   cave: number;
   terrasse: number;
+  balcon: number;
   parking: string | null;
   garage: string | null;
   interphone: number;
@@ -381,7 +382,7 @@ export function dbToUbiflow(a: DbAnnonce & { photos: string[] }) {
     chauffageEnergie: '',
     ascenseur: !!a.ascenseur,
     terrasse: !!a.terrasse,
-    balcon: false,
+    balcon: !!a.balcon,
     garage: !!a.garage,
     parking: !!a.parking,
     cave: !!a.cave,

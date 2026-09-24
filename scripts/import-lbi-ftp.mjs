@@ -145,17 +145,18 @@ function parseLbiCsv(buffer) {
       nbSallesBain: parseInt(f[28]) || null,
       nbSallesEau: parseInt(f[29]) || null,
       nbWC: parseInt(f[30]) || null,
-      cave: f[35] === 'OUI',
-      terrasse: f[36] === 'OUI',
-      parking: f[38] && f[38] !== '0',
-      balcon: f[40] === 'OUI',
-      ascenseur: f[41] === 'OUI',
-      interphone: f[82] === 'OUI',
+      balcon: (parseInt(f[38]) || 0) > 0,       // field 39: NB balcons
+      ascenseur: f[40] === 'OUI',               // field 41
+      cave: f[41] === 'OUI',                    // field 42
+      parking: (parseInt(f[42]) || 0) > 0,       // field 43: NB parkings
+      interphone: f[45] === 'OUI',               // field 46
+      terrasse: f[47] === 'OUI',                 // field 48
       telephone: f[104] || null,
       contactNom: f[105]?.trim() || null,
       emailAgence: f[106] || null,
       mandatNumero: f[111] || null,
       mandatDate: f[112] || null,
+      mandatType: f[82] === 'OUI' ? 'exclusif' : f[82] === 'NON' ? 'simple' : null,
       dpeValeur: f[175] || null,
       dpeNote: f[176] || null,
       gesValeur: f[177] || null,
@@ -285,7 +286,7 @@ function buildUpsertSql(a, photoKeys, now) {
     dpe_note, dpe_valeur, ges_note,
     titre, descriptif,
     contact_a_afficher, telephone_a_afficher, email_a_afficher,
-    mandat_numero,
+    mandat_numero, mandat_type,
     date_creation, date_modification, source, created_at, updated_at
   ) VALUES (
     ${esc(a.slug)}, 'active', ${esc(a.reference)},
@@ -299,7 +300,7 @@ function buildUpsertSql(a, photoKeys, now) {
     ${esc(a.dpeNote)}, ${esc(a.dpeValeur)}, ${esc(a.gesNote)},
     ${esc(a.titre)}, ${esc(a.descriptif)},
     ${esc(a.contactNom)}, ${esc(a.telephone)}, ${esc(a.email)},
-    ${esc(a.mandatNumero)},
+    ${esc(a.mandatNumero)}, ${esc(a.mandatType)},
     ${esc(now)}, ${esc(now)}, 'lbi', ${esc(now)}, ${esc(now)}
   )
   ON CONFLICT(slug) DO UPDATE SET
@@ -319,7 +320,7 @@ function buildUpsertSql(a, photoKeys, now) {
     contact_a_afficher=excluded.contact_a_afficher,
     telephone_a_afficher=excluded.telephone_a_afficher,
     email_a_afficher=excluded.email_a_afficher,
-    mandat_numero=excluded.mandat_numero,
+    mandat_numero=excluded.mandat_numero, mandat_type=excluded.mandat_type,
     date_modification=excluded.date_modification, source='lbi',
     date_fermeture=NULL, updated_at=excluded.updated_at;`;
 }

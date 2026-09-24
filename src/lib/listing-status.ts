@@ -14,3 +14,7 @@ export function reservedLabel(status: string | null | undefined): string | null 
 export function isReserved(status: string | null | undefined): boolean {
   return reservedLabel(status) !== null;
 }
+
+export function isExclusiveMandate(mandatType: string | null | undefined): boolean {
+  return (mandatType || '').trim().toLowerCase() === 'exclusif';
+}

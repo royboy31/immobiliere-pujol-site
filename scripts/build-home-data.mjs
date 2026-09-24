@@ -46,6 +46,7 @@ try {
       loyerCC: c.loyerCC,
       surface: c.surface,
       nbPieces: c.nbPieces,
+      mandatType: c.mandatType,
       quartier: c.quartier,
       codePostal: c.codePostal,
       ville: c.ville,

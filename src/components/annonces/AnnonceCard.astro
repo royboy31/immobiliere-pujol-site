@@ -10,7 +10,7 @@ import {
   isMeuble,
   piecesBucket,
 } from '../../lib/annonces-filter';
-import { reservedLabel } from '../../lib/listing-status';
+import { isExclusiveMandate, reservedLabel } from '../../lib/listing-status';
 import { cfImg } from '../../lib/img';
 
 interface Props {
@@ -20,6 +20,7 @@ interface Props {
 const { annonce } = Astro.props;
 const isVente = annonce.type === 'V';
 const reserved = reservedLabel(annonce.saleStatus);
+const isExclusive = isVente && isExclusiveMandate(annonce.mandatType);
 
 // Show up to 4 photos in the in-card carousel.
 const slides = (annonce.photos ?? []).slice(0, 4);
@@ -94,6 +95,7 @@ const price4Filter = filterPrice(annonce);
     )}
 
     <span class={`badge ${isVente ? 'badge--vente' : ''}`}>{isVente ? 'VENTE' : 'LOCATION'}</span>
+    {isExclusive && <span class="badge badge--exclusive">EXCLUSIVITÉ</span>}
 
     {reserved && (
       <div class={`sold-overlay sold-overlay--reserved ${!isVente ? 'sold-overlay--rental' : ''}`}>

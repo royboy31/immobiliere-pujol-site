@@ -6,6 +6,7 @@ import { buildWebSite } from '../lib/schemas';
 // bundled into the SSR worker — that had blown the Cloudflare Worker size limit.
 import homeData from '../data/home.json';
 import { cfImg } from '../lib/img';
+import { isExclusiveMandate } from '../lib/listing-status';
 
 // ---------- SEO ----------
 const seoTitle = "Agence immobilière à Marseille | Immobilière Pujol";
@@ -74,6 +75,7 @@ function buildCard(a: typeof allAnnonces[number]) {
     href: `/annonces/${d.slug || a.id}/`,
     photo,
     isVente,
+    isExclusive: isVente && isExclusiveMandate(d.mandatType),
     title,
     price,
     pills,
@@ -305,6 +307,7 @@ const services = [
                 <a class={`listing-card ${c.isVente ? '' : 'listing-card--location'}`} href={c.href}>
                   <div class="photo" style={`background-image:url('${cfImg(c.photo, 640)}')`}>
                     <span class={`badge ${c.isVente ? 'badge--vente' : ''}`}>{c.isVente ? 'VENTE' : 'LOCATION'}</span>
+                    {c.isExclusive && <span class="badge badge--exclusive">EXCLUSIVITÉ</span>}
                   </div>
                   <div class="body">
                     <div class="title">{c.title}</div>

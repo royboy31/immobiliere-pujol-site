@@ -200,6 +200,7 @@ const annonces = defineCollection({
     contactAAfficher: z.string().optional(),
     telephoneAAfficher: z.string().optional(),
     emailAAfficher: z.string().optional(),
+    mandatType: z.string().optional(),
     taxonomyArrondissement: z.string().optional(),
     taxonomyQuartier: z.string().optional(),
     taxonomyTypeBien: z.string().optional(),

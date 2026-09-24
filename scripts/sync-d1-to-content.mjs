@@ -143,6 +143,7 @@ for (const a of annonces) {
     dpeNote: a.dpe_note, dpeValeur: a.dpe_valeur,
     gesNote: a.ges_note, gesValeur: a.ges_valeur,
     typeChauffage: a.type_chauffage,
+    mandatType: a.mandat_type,
     libelle: a.titre, descriptif: a.descriptif,
     contactAAfficher: a.contact_a_afficher,
     telephoneAAfficher: a.telephone_a_afficher,
@@ -165,6 +166,7 @@ for (const a of annonces) {
   if (a.ascenseur === 1) json.ascenseur = true;
   if (a.cave === 1) json.cave = true;
   if (a.terrasse === 1) json.terrasse = true;
+  if (a.balcon === 1) json.balcon = '1';
   if (a.interphone === 1) json.interphone = true;
 
   const filename = `${a.slug}_d1sync.json`;

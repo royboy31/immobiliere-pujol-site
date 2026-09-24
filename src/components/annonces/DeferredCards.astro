@@ -60,7 +60,8 @@ const { scope } = Astro.props;
       const locHtml=(a.quartier||cp.trim())?'<div class="loc">'+locPin+(cp.trim()?'<span class="loc__cp">'+esc(cp.trim())+'</span>':'')+(a.quartier?'<span class="a">'+esc(a.quartier)+'</span>':'')+'</div>':'';
       const sLabel=a.saleStatus==='sous-offre'?'Sous offre':(a.saleStatus==='sous-compromis'?'Sous promesse':(a.saleStatus==='vendu'?'Vendu':''));
       const overlayHtml=sLabel?'<div class="sold-overlay'+(a.saleStatus==='sous-offre'||a.saleStatus==='sous-compromis'?' sold-overlay--reserved':'')+(isV?'':' sold-overlay--rental')+'"><span class="sold-overlay__label">'+sLabel+'</span>'+(a.contactPhoto?'<img class="sold-overlay__agent" src="'+esc(a.contactPhoto)+'" alt="" loading="lazy">':'')+'</div>':'';
-      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div>'+locHtml+'<div class="price">'+esc(price)+'</div>'+pillsHtml+'</a>';
+      const exclusiveHtml=isV&&String(a.mandatType||'').trim().toLowerCase()==='exclusif'?'<span class="badge badge--exclusive">EXCLUSIVITÉ</span>':'';
+      el.innerHTML='<div class="lc-photos" data-lc-photos><a class="lc-photos__link" href="'+href+'" aria-label="'+esc(title)+'">'+slidesHtml+'</a>'+arrows+'<span class="badge'+(isV?' badge--vente':'')+'">'+( isV?'VENTE':'LOCATION')+'</span>'+exclusiveHtml+overlayHtml+'</div><a class="body" href="'+href+'"><div class="title">'+esc(title)+'</div>'+locHtml+'<div class="price">'+esc(price)+'</div>'+pillsHtml+'</a>';
       frag.appendChild(el);
     }
     grid.appendChild(frag);

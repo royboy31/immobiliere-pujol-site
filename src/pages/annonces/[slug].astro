@@ -117,6 +117,9 @@ type View = {
   contactAAfficher?: string | null;
   telephoneAAfficher?: string | null;
   emailAAfficher?: string | null;
+  saleStatus?: string | null;
+  mandatType?: string | null;
+  contactPhoto?: string | null;
 };
 
 let view: View;
@@ -202,6 +205,7 @@ if (annonce) {
     tourEmbedAllowed: !!dedupePipes(annonce.url_visite_virtuelle),
     isClosed,
     saleStatus: annonce.termine || null,
+    mandatType: annonce.mandat_type || null,
     contactPhoto: expert?.photo || null,
     latitude: annonce.latitude,
     longitude: annonce.longitude,
