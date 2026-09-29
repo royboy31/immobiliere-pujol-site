@@ -80,7 +80,9 @@ type View = {
   titre: string;
   description: string;
   type: string;
+  typeBien?: string | null;
   reference: string;
+  seventeeReference?: string | null;
   priceDisplay: string;
   photos: string[];
   adresse?: string | null;
@@ -171,7 +173,9 @@ if (annonce) {
     titre,
     description: annonce.descriptif || '',
     type: annonce.type_annonce || 'V',
+    typeBien: annonce.type_bien,
     reference: annonce.ubiflow_reference || annonce.reference_agence || annonce.slug,
+    seventeeReference: annonce.ubiflow_reference || annonce.reference_agence || null,
     priceDisplay: formatDbPrice(annonce),
     photos: annonce.photos,
     adresse: cleanAdresse,
@@ -226,7 +230,9 @@ if (annonce) {
     titre: ca.seoTitle || ca.descriptif?.substring(0, 60) || 'Annonce clôturée',
     description: ca.descriptif || '',
     type: ca.typeAnnonce || 'V',
+    typeBien: null,
     reference: ca.referenceAgence || ca.slug,
+    seventeeReference: null,
     priceDisplay: formatClosedPrice(ca),
     photos: ca.photos || [],
     adresse: ca.adresse,
