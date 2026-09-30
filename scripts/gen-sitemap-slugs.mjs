@@ -2,6 +2,7 @@
 // Contains annonce slugs, category slugs, and tag slugs for the dynamic sitemap.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
+import { execSync } from 'child_process';
 import { loadPerdu } from './perdu-set.mjs';
 
 const ROOT = new URL('..', import.meta.url).pathname;
@@ -22,6 +23,37 @@ for (const dir of annonceDirs) {
     if (f.endsWith('.json')) annonceSet.add(f.replace('.json', ''));
   }
 }
+// D1 annonce slugs — active AND closed. An importer-era listing that closes
+// after a build keeps its live page (the [slug] route serves it from D1 at
+// request time) but exists in neither directory above, so without this query
+// it silently drops out of the sitemap forever. Mirror the route's behavior:
+// skip 'dropped' rows (302 to /annonces/) and closed rows whose reference has
+// an active sibling (301 to the active slug) — neither may be advertised.
+// Fail open on any D1 error: the sitemap then degrades to the file-based
+// slugs (the pre-fix behavior) instead of breaking the build.
+try {
+  const sql = `SELECT a.slug FROM annonces a
+    WHERE a.status IN ('active', 'closed')
+    AND NOT (a.status = 'closed' AND EXISTS (
+      SELECT 1 FROM annonces b WHERE b.status = 'active'
+      AND ((a.reference_agence IS NOT NULL AND a.reference_agence != ''
+            AND (b.reference_agence = a.reference_agence OR b.ubiflow_reference = a.reference_agence))
+        OR (a.ubiflow_reference IS NOT NULL AND a.ubiflow_reference != ''
+            AND (b.reference_agence = a.ubiflow_reference OR b.ubiflow_reference = a.ubiflow_reference)))))`;
+  const out = execSync(
+    `npx wrangler d1 execute pujol-annonces --remote --json --command="${sql.replace(/\s+/g, ' ').replace(/"/g, '\\"')}"`,
+    { encoding: 'utf-8', timeout: 120000, maxBuffer: 50 * 1024 * 1024, cwd: ROOT, env: { ...process.env } },
+  );
+  const rows = JSON.parse(out)[0]?.results || [];
+  let added = 0;
+  for (const r of rows) {
+    if (r.slug && !annonceSet.has(r.slug)) { annonceSet.add(r.slug); added++; }
+  }
+  console.log(`[gen-sitemap-slugs] D1 slugs: ${rows.length} (${added} not in content dirs)`);
+} catch (e) {
+  console.warn(`[gen-sitemap-slugs] ⚠️ D1 slug query failed, sitemap falls back to file-based slugs only: ${e.message}`);
+}
+
 // Exclude "perdu" (lost-mandate) listings — they're hidden from the site
 // (perdu-set) so they must not be advertised in the sitemap. Same matcher as
 // the rest of the site (full slug or leading reference token).
