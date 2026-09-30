@@ -32,26 +32,39 @@ for (const dir of annonceDirs) {
 // Fail open on any D1 error: the sitemap then degrades to the file-based
 // slugs (the pre-fix behavior) instead of breaking the build.
 try {
-  const sql = `SELECT a.slug FROM annonces a
-    WHERE a.status IN ('active', 'closed')
-    AND NOT (a.status = 'closed' AND EXISTS (
-      SELECT 1 FROM annonces b WHERE b.status = 'active'
-      AND ((a.reference_agence IS NOT NULL AND a.reference_agence != ''
-            AND (b.reference_agence = a.reference_agence OR b.ubiflow_reference = a.reference_agence))
-        OR (a.ubiflow_reference IS NOT NULL AND a.ubiflow_reference != ''
-            AND (b.reference_agence = a.ubiflow_reference OR b.ubiflow_reference = a.ubiflow_reference)))))`;
+  // One linear query only: a correlated NOT EXISTS on the same table timed out
+  // (~39s) on the production D1 during the 30/09 deploy, so the sibling
+  // exclusion is computed here in JS instead, mirroring the exact-match
+  // semantics of getActiveSlugByReference in src/lib/db-annonces.ts.
+  const sql = `SELECT slug, status, reference_agence, ubiflow_reference FROM annonces WHERE status IN ('active', 'closed')`;
   const out = execSync(
-    `npx wrangler d1 execute pujol-annonces --remote --json --command="${sql.replace(/\s+/g, ' ').replace(/"/g, '\\"')}"`,
+    `npx wrangler d1 execute pujol-annonces --remote --json --command="${sql.replace(/"/g, '\\"')}"`,
     { encoding: 'utf-8', timeout: 120000, maxBuffer: 50 * 1024 * 1024, cwd: ROOT, env: { ...process.env } },
   );
   const rows = JSON.parse(out)[0]?.results || [];
-  let added = 0;
+  const activeRefs = new Set();
   for (const r of rows) {
-    if (r.slug && !annonceSet.has(r.slug)) { annonceSet.add(r.slug); added++; }
+    if (r.status !== 'active') continue;
+    if (r.reference_agence) activeRefs.add(r.reference_agence);
+    if (r.ubiflow_reference) activeRefs.add(r.ubiflow_reference);
   }
-  console.log(`[gen-sitemap-slugs] D1 slugs: ${rows.length} (${added} not in content dirs)`);
+  let added = 0;
+  let siblingSkipped = 0;
+  for (const r of rows) {
+    if (!r.slug) continue;
+    // Closed row whose reference has an active sibling: the route 301s that
+    // URL to the active slug, so it must not be advertised.
+    if (
+      r.status === 'closed' &&
+      ((r.reference_agence && activeRefs.has(r.reference_agence)) ||
+        (r.ubiflow_reference && activeRefs.has(r.ubiflow_reference)))
+    ) { siblingSkipped++; continue; }
+    if (!annonceSet.has(r.slug)) { annonceSet.add(r.slug); added++; }
+  }
+  console.log(`[gen-sitemap-slugs] D1 slugs: ${rows.length} (${added} not in content dirs, ${siblingSkipped} closed-with-active-sibling skipped)`);
 } catch (e) {
   console.warn(`[gen-sitemap-slugs] ⚠️ D1 slug query failed, sitemap falls back to file-based slugs only: ${e.message}`);
+  if (e.stderr) console.warn(String(e.stderr).slice(0, 2000));
 }
 
 // Exclude "perdu" (lost-mandate) listings — they're hidden from the site
