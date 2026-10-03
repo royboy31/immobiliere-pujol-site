@@ -15,3 +15,10 @@ export function getSeventeeApplicationUrl(
 
   return `${SEVENTEE_AGENCY_URL}/${encodeURIComponent(normalizedReference)}`;
 }
+
+export function isCommercialRental(
+  transaction: string | null | undefined,
+  propertyType: string | null | undefined,
+): boolean {
+  return transaction === 'L' && classifyKind(propertyType || undefined) === 'local';
+}

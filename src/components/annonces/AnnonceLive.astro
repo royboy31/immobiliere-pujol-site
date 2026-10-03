@@ -5,7 +5,7 @@ import ContactForm from './ContactForm.astro';
 import SeventeeApplication from './SeventeeApplication.astro';
 import AlertPopup from '../alertes/AlertPopup.astro';
 import { classifyKind, normalizeCp } from '../../lib/annonces-filter';
-import { getSeventeeApplicationUrl } from '../../lib/seventee';
+import { getSeventeeApplicationUrl, isCommercialRental } from '../../lib/seventee';
 import DpeDiagram from './DpeDiagram.astro';
 import SimilarAnnonces from './SimilarAnnonces.astro';
 import ContentCta from './ContentCta.astro';
@@ -69,6 +69,7 @@ const { view, contactName, contactEmail, expert, pool = [], currentSlug = '' } =
 
 const isSale = view.type === 'V';
 const seventeeUrl = getSeventeeApplicationUrl(view.type, view.typeBien, view.seventeeReference);
+const routeToListingContact = isCommercialRental(view.type, view.typeBien);
 
 // Pre-fill for the "bien similaire" alert pop-up, derived from this listing.
 const _alertKind = classifyKind(view.titre);
@@ -191,6 +192,7 @@ const hasDpeGes = isDpeLetter(view.dpeEtiquetteGes) && dpeNum(view.dpeValeurGes)
         type={view.type}
         codePostal={view.codePostal}
         negociateur={contactName}
+        routeToListingContact={routeToListingContact}
       />
     )}
 

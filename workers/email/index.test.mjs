@@ -438,6 +438,99 @@ test('alert notifications follow the confirmed CRM routing matrix', async () => 
   }
 });
 
+test('commercial rental contact forms notify the listing contact and keep the CRM parser copy', async () => {
+  const originalFetch = globalThis.fetch;
+  const sends = [];
+  const pending = [];
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    if (url.includes('/v3/smtp/email')) {
+      const payload = JSON.parse(init.body);
+      sends.push(payload);
+      return Response.json({ messageId: 'test-message' }, { status: 201 });
+    }
+    if (url.includes('script.google.com')) return Response.json({ ok: true });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    const body = new FormData();
+    body.set('name', 'Camille Martin');
+    body.set('email', 'camille@example.com');
+    body.set('phone', '0600000000');
+    body.set('message', 'Je souhaite visiter ce bureau.');
+    body.set('reference', '409neot');
+    body.set('title', 'Bureau à louer');
+    body.set('type', 'L');
+    body.set('code_postal', '13006');
+    body.set('negociateur', 'Agent Pujol');
+    body.set(
+      'negociateur_email',
+      'agent@immobiliere-pujol.fr|agent@immobiliere-pujol.fr|agent@immobiliere-pujol.fr',
+    );
+    body.set('route_to_listing_contact', '1');
+
+    const response = await worker.fetch(new Request('https://worker.example/contact-annonce', {
+      method: 'POST',
+      headers: { Origin: 'https://www.immobiliere-pujol.fr' },
+      body,
+    }), productionEnv, { waitUntil(promise) { pending.push(promise); } });
+    await Promise.all(pending);
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(
+      sends
+        .filter((payload) => payload.subject.startsWith('Contact Annonce - Location'))
+        .map((payload) => payload.to[0].email),
+      ['agent@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com'],
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('commercial rental contact routing rejects non-Pujol recipient injection', async () => {
+  const originalFetch = globalThis.fetch;
+  const sends = [];
+  const pending = [];
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    if (url.includes('/v3/smtp/email')) {
+      const payload = JSON.parse(init.body);
+      sends.push(payload);
+      return Response.json({ messageId: 'test-message' }, { status: 201 });
+    }
+    if (url.includes('script.google.com')) return Response.json({ ok: true });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    const body = new FormData();
+    body.set('name', 'Camille Martin');
+    body.set('email', 'camille@example.com');
+    body.set('message', 'Test');
+    body.set('reference', '409neot');
+    body.set('title', 'Bureau à louer');
+    body.set('type', 'L');
+    body.set('negociateur_email', 'attacker@example.com');
+    body.set('route_to_listing_contact', '1');
+
+    const response = await worker.fetch(new Request('https://worker.example/contact-annonce', {
+      method: 'POST',
+      headers: { Origin: 'https://www.immobiliere-pujol.fr' },
+      body,
+    }), productionEnv, { waitUntil(promise) { pending.push(promise); } });
+    await Promise.all(pending);
+
+    assert.equal(response.status, 200);
+    const destinations = sends.map((payload) => payload.to[0].email);
+    assert.equal(destinations.includes('attacker@example.com'), false);
+    assert.equal(destinations.includes('annonces@immobiliere-pujol.fr'), true);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('alert confirmation email carries the submitted first and last name', async () => {
   const originalFetch = globalThis.fetch;
   let sentPayload;
