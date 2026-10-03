@@ -9,8 +9,16 @@ const { href, reference } = Astro.props;
 
 <section class="seventee-application" aria-labelledby="seventee-application-title">
   <h2 id="seventee-application-title" class="seventee-application__title">
-    Candidatez <b>en ligne</b>
+    Ce bien vous intéresse ?
   </h2>
+  <p class="seventee-application__copy">
+    Pour organiser une visite, merci de <strong>créer votre dossier de candidature</strong> sur la
+    plateforme <strong><u>Seventee</u></strong>, notre partenaire.
+  </p>
+  <p class="seventee-application__copy">
+    Cliquez sur le bouton ci-dessous pour accéder à l'annonce, créer votre compte,
+    soumettre votre candidature et suivre son état en temps réel.
+  </p>
   <a
     class="btn-pill btn-pill--olive seventee-application__button"
     href={href}
@@ -19,15 +27,8 @@ const { href, reference } = Astro.props;
     data-seventee-application
     data-seventee-reference={reference}
   >
-    Déposer ma candidature sur Seventee
+    Déposer ma candidature
   </a>
-  <p class="seventee-application__copy">
-    Pour améliorer votre expérience de location, nous utilisons la plateforme Seventee.
-  </p>
-  <p class="seventee-application__copy">
-    Cliquez sur le lien ci-dessus pour accéder à l'annonce sur Seventee, créer votre compte,
-    soumettre votre candidature et suivre son état en temps réel.
-  </p>
   <p class="seventee-application__ref">Référence : {reference}</p>
 </section>
 
@@ -66,6 +67,7 @@ const { href, reference } = Astro.props;
     align-items: center;
     justify-content: center;
     padding: 12px 18px;
+    margin-top: 24px;
     text-align: center;
     text-decoration: none;
   }

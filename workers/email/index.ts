@@ -915,6 +915,7 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
   const codePostal = ((fd.get('code_postal') as string) || '').trim();
   const negociateur = ((fd.get('negociateur') as string) || '').trim();
   const negociateurEmail = ((fd.get('negociateur_email') as string) || '').trim().toLowerCase();
+  const routeToListingContact = fd.get('route_to_listing_contact') === '1';
 
   if (!name || !email) return { ok: false, error: 'Veuillez remplir les champs obligatoires.' };
 
@@ -936,7 +937,8 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
 
   // Routing per brief:
   // Vente → negotiator (fallback annonces@) + Zoho parser
-  // Location → Zoho parser only (Phase 1)
+  // Commercial location → listing contact + Zoho parser
+  // Other location forms → Zoho parser only (Phase 1)
   const fromEmail = isVente ? `annonces${D}` : `annonces${D}`;
   const fromName = isVente
     ? `Contact du site web / annonce en vente`
@@ -969,7 +971,24 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
       fromName,
     }));
   } else {
-    // Location Phase 1 — Zoho parser only
+    if (routeToListingContact) {
+      // Caroline's commercial-rental exception: keep the form and notify the
+      // contact carried by the listing. Validate the internal domain so a
+      // tampered hidden field cannot turn this endpoint into an open relay.
+      const normalizedListingContactEmail = negociateurEmail.split('|')[0]?.trim() || '';
+      const listingContactEmail = normalizedListingContactEmail.endsWith('@immobiliere-pujol.fr')
+        ? normalizedListingContactEmail
+        : `annonces${D}`;
+      await sendEmail(env, {
+        subject,
+        html: buildTable(subject, tableRows),
+        replyTo: email,
+        to: listingContactEmail,
+        fromEmail: NOTIFY_FROM,
+        fromName,
+      });
+    }
+    // Preserve the existing CRM parser route for every location form.
     ctx.waitUntil(sendEmail(env, {
       subject,
       html: buildTable(subject, tableRows),
