@@ -1,7 +1,7 @@
 ---
 title: "Mettre en location"
 slug: "mettre-en-location"
-heroVideo: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4"
+heroImage: "/images/services/mise-en-location-tournage-2026.jpg"
 seoTitle: "Mettre en location"
 seoDescription: "Soyez bien conseillé pour mieux louer"
 ---
@@ -14,11 +14,14 @@ seoDescription: "Soyez bien conseillé pour mieux louer"
         
     
 	</div>
-		<!-- Background video -->
-  <video class="hero__video" loop autoplay muted poster="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/location-meuble-wifi-castellane-1200x802.jpg">
-    <source src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4" type="video/mp4">
-    Your browser doesn't support HTML5 video tag.
-  </video>
+		<!-- Background image -->
+  <img
+    class="hero__video"
+    src="/images/services/mise-en-location-tournage-2026.jpg"
+    alt="Visite d'un appartement à louer avec l'Immobilière Pujol"
+    width="1024"
+    height="683"
+  >
 	</section>
 
     <section class="posrel">
