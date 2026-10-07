@@ -10,11 +10,8 @@ const ctaText = 'Demander un devis de mise en location';
 const heroCatch = 'Sécuriser votre location et vos revenus immobiliers';
 const heroSub = 'Soyez bien conseillé pour mieux louer';
 
-const heroVideo =
-  entry?.data.heroVideo ||
-  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/Ma-video3.mp4';
-const heroPoster =
-  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/location-meuble-wifi-castellane-1200x802.jpg';
+const heroImage =
+  entry?.data.heroImage || '/images/services/mise-en-location-tournage-2026.jpg';
 
 // Sidebar nav order preserved exactly as on the legacy page (1, 2, 3).
 const toc = [
@@ -67,9 +64,16 @@ const sections = [
 <BaseLayout title={seoTitle} description={seoDescription}>
   {/* ============= HERO ============= */}
   <section class="svc-hero">
-    <video class="svc-hero__video" autoplay muted loop playsinline preload="auto" poster={heroPoster}>
-      <source src={heroVideo} type="video/mp4" />
-    </video>
+    <picture class="svc-hero__video">
+      <img
+        src={heroImage}
+        alt="Visite d'un appartement à louer avec l'Immobilière Pujol"
+        width="1024"
+        height="683"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </picture>
     <div class="svc-hero__overlay"></div>
 
     <div class="svc-hero__inner">
