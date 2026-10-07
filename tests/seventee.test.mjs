@@ -51,4 +51,6 @@ test('renders Caroline’s approved Seventee copy and short button label', async
   assert.match(source, /Cliquez sur le bouton ci-dessous pour accéder à l'annonce, créer votre compte,/);
   assert.match(source, />\s*Déposer ma candidature\s*<\/a>/);
   assert.doesNotMatch(source, /Déposer ma candidature sur Seventee/);
+  assert.match(source, /rel="noopener"/);
+  assert.doesNotMatch(source, /rel="noopener noreferrer"/);
 });
