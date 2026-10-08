@@ -351,7 +351,7 @@ const LOCATION_AUTO_REPLY = {
   body: `<p>Nous faisons suite à votre demande de contact dans le cadre de votre recherche de location.</p>
 <p>Nos annonces <strong>disponibles</strong> sont mises à jour quotidiennement sur notre site&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a></p>
 <p style="margin:16px 0 8px"><strong>Si votre demande concerne un bien en particulier&nbsp;:</strong><br>
-Nous vous invitons à vérifier que l'annonce est bien publiée actuellement sur notre site (et non marquée clôturée)&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a>. Si c'est le cas, nous vous demandons de faire votre demande directement depuis l'annonce concernée. Un email vous sera alors envoyé afin de compléter une fiche de renseignements, indispensable pour organiser une éventuelle visite et étudier votre dossier.</p>
+Nous vous invitons à vérifier que l'annonce est bien publiée actuellement sur notre site (et non marquée clôturée)&nbsp;: <a href="${SITE_URL}/annonces/locations/" style="color:#0f1a2b">${SITE_URL}/annonces/locations/</a>. Si c'est le cas, nous vous demandons de faire votre demande directement depuis l'annonce concernée en cliquant sur « Déposer ma candidature ».</p>
 <p style="margin:8px 0"><strong>Si vous êtes en recherche active&nbsp;:</strong><br>
 Créez votre alerte annonces en 30 secondes&nbsp;: vous recevrez par email chaque nouveau bien correspondant à vos critères, dès sa publication&nbsp;: <a href="${SITE_URL}/alerte/" style="color:#0f1a2b">${SITE_URL}/alerte/</a></p>
 <p>Nous restons à votre disposition et vous souhaitons une belle journée.</p>`,
