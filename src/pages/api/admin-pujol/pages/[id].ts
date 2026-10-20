@@ -1,6 +1,7 @@
 export const prerender = false;
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
+import { TranslatedContentError } from '../../../../lib/translation-guard';
 import { getDB, ensureSchema, getPage, updatePage } from '../../../../lib/pages-db';
 
 const json = (body: unknown, status = 200) =>
@@ -57,6 +58,7 @@ export const PUT: APIRoute = async ({ request, params }) => {
     );
     return page ? json(page) : json({ error: 'not found' }, 404);
   } catch (e: any) {
+    if (e instanceof TranslatedContentError) return json({ error: e.message }, 422);
     return json({ error: String(e?.message || e) }, 500);
   }
 };

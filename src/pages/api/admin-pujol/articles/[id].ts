@@ -5,6 +5,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
+import { TranslatedContentError } from '../../../../lib/translation-guard';
 import { getDB, ensureSchema, getArticle, updateArticle, deleteArticle } from '../../../../lib/blog-db';
 import { resolveArticleStatus } from '../../../../lib/blog-workflow';
 
@@ -30,7 +31,9 @@ export const PUT: APIRoute = async ({ request, params }) => {
   let status;
   try { status = resolveArticleStatus(existing.status, input.status_action); }
   catch (error: any) { return new Response(error.message, { status: 400 }); }
-  const updated = await updateArticle(db, id, { ...input, status });
+  let updated;
+  try { updated = await updateArticle(db, id, { ...input, status }); }
+  catch (e) { if (e instanceof TranslatedContentError) return new Response(e.message, { status: 422 }); throw e; }
   if (!updated) return new Response('Not found', { status: 404 });
   return Response.json(updated);
 };

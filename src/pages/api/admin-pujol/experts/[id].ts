@@ -5,6 +5,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
+import { TranslatedContentError } from '../../../../lib/translation-guard';
 import { getDB, ensureSchema, getExpert, updateExpert, deleteExpert } from '../../../../lib/experts-db';
 
 export const GET: APIRoute = async ({ request, params }) => {
@@ -23,7 +24,9 @@ export const PUT: APIRoute = async ({ request, params }) => {
   const db = await getDB();
   await ensureSchema(db);
   const input = await request.json().catch(() => ({}));
-  const updated = await updateExpert(db, Number(params.id), input);
+  let updated;
+  try { updated = await updateExpert(db, Number(params.id), input); }
+  catch (e) { if (e instanceof TranslatedContentError) return new Response(e.message, { status: 422 }); throw e; }
   if (!updated) return new Response('Not found', { status: 404 });
   return Response.json(updated);
 };

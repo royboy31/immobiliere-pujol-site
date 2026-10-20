@@ -5,6 +5,8 @@
 // admin reads/writes here directly. Only ever touches the isolated `experts`
 // table — never annonces or any pre-existing table.
 
+import { assertNotBrowserTranslated } from './translation-guard.ts';
+
 export interface ExpertRecord {
   id: number;
   slug: string;
@@ -197,6 +199,7 @@ const b = (v: any) => (v ? 1 : 0);
 const num = (v: any) => (v === null || v === undefined || v === '' || Number.isNaN(Number(v)) ? null : Number(v));
 
 export async function createExpert(db: D1Database, input: ExpertInput, adminEmail: string): Promise<ExpertRecord> {
+  assertNotBrowserTranslated(input);
   const title = (input.title || 'Nouvel expert').trim();
   const slugBase = input.slug ? slugify(input.slug) : slugify(nameFromTitle(title));
   const slug = await uniqueSlug(db, slugBase);
@@ -219,6 +222,7 @@ export async function createExpert(db: D1Database, input: ExpertInput, adminEmai
 }
 
 export async function updateExpert(db: D1Database, id: number, input: ExpertInput): Promise<ExpertRecord | null> {
+  assertNotBrowserTranslated(input);
   const existing = await getExpert(db, id);
   if (!existing) return null;
   // Slug is frozen after creation to preserve indexed URLs, unless explicitly changed.

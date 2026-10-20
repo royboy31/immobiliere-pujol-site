@@ -4,6 +4,7 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { requireAdmin } from '../../../../lib/admin-guard';
+import { TranslatedContentError } from '../../../../lib/translation-guard';
 import { getDB, ensureSchema, listArticles, createArticle } from '../../../../lib/blog-db';
 import { resolveArticleStatus } from '../../../../lib/blog-workflow';
 
@@ -26,6 +27,8 @@ export const POST: APIRoute = async ({ request }) => {
   catch (error: any) { return new Response(error.message, { status: 400 }); }
   // Status is derived from the explicit action. A forged `status` field cannot
   // publish or unpublish an article through the normal save request.
-  const created = await createArticle(db, { ...input, status }, admin);
+  let created;
+  try { created = await createArticle(db, { ...input, status }, admin); }
+  catch (e) { if (e instanceof TranslatedContentError) return new Response(e.message, { status: 422 }); throw e; }
   return Response.json(created, { status: 201 });
 };

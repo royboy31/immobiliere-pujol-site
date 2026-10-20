@@ -3,6 +3,8 @@
 // annonces pattern in scripts/sync-d1-to-content.mjs) and rendered by the
 // existing [...slug].astro route. The admin reads/writes here directly.
 
+import { assertNotBrowserTranslated } from './translation-guard.ts';
+
 export interface BlogArticle {
   id: number;
   slug: string;
@@ -297,6 +299,7 @@ export const BLOG_THEMES: BlogTheme[] = [
 const b = (v: any) => (v ? 1 : 0);
 
 export async function createArticle(db: D1Database, input: ArticleInput, adminEmail: string): Promise<BlogArticle> {
+  assertNotBrowserTranslated(input);
   const title = (input.title || 'Sans titre').trim();
   const slug = await uniqueSlug(db, input.slug ? normalizeSlug(input.slug) : slugify(title));
   const status = input.status === 'published' ? 'published' : 'draft';
@@ -322,6 +325,7 @@ export async function createArticle(db: D1Database, input: ArticleInput, adminEm
 }
 
 export async function updateArticle(db: D1Database, id: number, input: ArticleInput): Promise<BlogArticle | null> {
+  assertNotBrowserTranslated(input);
   const existing = await getArticle(db, id);
   if (!existing) return null;
   // Slug is frozen after creation to preserve indexed URLs, unless explicitly changed.
