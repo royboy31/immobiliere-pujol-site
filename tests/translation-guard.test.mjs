@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { hasBrowserTranslation, TranslatedContentError } from '../src/lib/translation-guard.ts';
 import { updateExpert, createExpert } from '../src/lib/experts-db.ts';
 import { updateArticle, createArticle } from '../src/lib/blog-db.ts';
+import { updatePage } from '../src/lib/pages-db.ts';
 
 // Real payload shape saved for Thibault Arnoux on 17/07 (Chrome translating the editor).
 const CHROME_TRANSLATED = '<p class="expert-bio-quote"><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">"Trust is built."</font></font></p>';
@@ -38,10 +39,11 @@ test('a translated expert save is rejected before the row is touched', async () 
   }
 });
 
-test('translated article saves are rejected before the row is touched', async () => {
+test('translated article and legal-page saves are rejected before the row is touched', async () => {
   for (const save of [
     (db) => updateArticle(db, 1, { body_html: CHROME_TRANSLATED }),
     (db) => createArticle(db, { title: 'X', body_html: CHROME_TRANSLATED }, 'admin@example.com'),
+    (db) => updatePage(db, 1, { title: 'Mentions légales', body_html: CHROME_TRANSLATED }, 'admin@example.com'),
   ]) {
     const db = untouchableDb();
     await assert.rejects(save(db), TranslatedContentError);
