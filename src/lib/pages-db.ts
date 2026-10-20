@@ -19,6 +19,7 @@
 // share it without importing D1.
 export { LEGAL_SLUGS } from './legal-pages';
 import { LEGAL_SLUGS, isLegalPage } from './legal-pages';
+import { assertNotBrowserTranslated } from './translation-guard.ts';
 
 export interface SitePage {
   id: number;
@@ -156,6 +157,7 @@ export async function updatePage(
   input: PageInput,
   adminEmail: string,
 ): Promise<SitePage | null> {
+  assertNotBrowserTranslated(input);
   const existing = await getPage(db, id);
   if (!existing) return null;
 

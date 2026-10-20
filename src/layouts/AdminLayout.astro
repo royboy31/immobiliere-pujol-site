@@ -44,9 +44,11 @@ const initials = (adminName || adminEmail || '?')
 ---
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" translate="no">
 <head>
   <meta charset="utf-8" />
+  <!-- Browser translation rewrites the editors' DOM and the translated text gets saved. -->
+  <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex, nofollow" />
   <title>{title} – Admin Pujol</title>
