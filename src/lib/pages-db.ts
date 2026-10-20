@@ -17,8 +17,8 @@
 
 // The allowlist lives in ./legal-pages so the public [...slug].astro route can
 // share it without importing D1.
-export { LEGAL_SLUGS } from './legal-pages';
-import { LEGAL_SLUGS, isLegalPage } from './legal-pages';
+export { LEGAL_SLUGS } from './legal-pages.ts';
+import { LEGAL_SLUGS, isLegalPage } from './legal-pages.ts';
 import { assertNotBrowserTranslated } from './translation-guard.ts';
 
 export interface SitePage {
