@@ -1,14 +1,18 @@
 ---
 export const prerender = false;
 import AdminLayout from '../../../layouts/AdminLayout.astro';
-import { BLOG_THEMES, getDB, ensureSchema, listArticles, type BlogArticle } from '../../../lib/blog-db';
+import { BLOG_THEMES, getDB, ensureSchema, listArticles, listDeletedArticles, type BlogArticle } from '../../../lib/blog-db';
 
 let articles: BlogArticle[] = [];
+let activeArticles: BlogArticle[] = [];
+let deletedArticles: BlogArticle[] = [];
 let error = '';
+const view = Astro.url.searchParams.get('view') === 'trash' ? 'trash' : 'articles';
 try {
   const db = await getDB();
   await ensureSchema(db);
-  articles = await listArticles(db);
+  [activeArticles, deletedArticles] = await Promise.all([listArticles(db), listDeletedArticles(db)]);
+  articles = view === 'trash' ? deletedArticles : activeArticles;
 } catch (e: any) {
   error = String(e?.message || e);
 }
@@ -32,7 +36,7 @@ const targetCategories = [...targetCategoryLabels.entries()]
 
 <AdminLayout title="Articles de blog" section="articles">
   <div class="toolbar">
-    <h1 style="margin:0;">Articles de blog <span id="art-count" style="font-weight:300;color:#888;">({articles.length})</span></h1>
+    <h1 style="margin:0;">{view === 'trash' ? 'Corbeille' : 'Articles de blog'} <span id="art-count" style="font-weight:300;color:#888;">({articles.length})</span></h1>
     <span class="spacer"></span>
     {articles.length > 0 && (
       <div class="art-search">
@@ -48,18 +52,23 @@ const targetCategories = [...targetCategoryLabels.entries()]
         <button type="button" id="art-search-clear" class="art-search__clear" aria-label="Effacer la recherche" hidden>×</button>
       </div>
     )}
-    <a href="./new/" class="btn btn--primary">+ Nouvel article</a>
+    {view === 'articles' && <a href="./new/" class="btn btn--primary">+ Nouvel article</a>}
   </div>
+
+  <nav class="art-tabs" aria-label="Vues des articles">
+    <a href="./" class:list={['art-tab', { 'art-tab--active': view === 'articles' }]}>Articles ({activeArticles.length})</a>
+    <a href="?view=trash" class:list={['art-tab', { 'art-tab--active': view === 'trash' }]}>Corbeille ({deletedArticles.length})</a>
+  </nav>
 
   {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
 
   {!error && articles.length === 0 && (
-    <div class="card"><p>Aucun article pour l’instant. Cliquez sur « Nouvel article » pour commencer.</p></div>
+    <div class="card"><p>{view === 'trash' ? 'La corbeille est vide.' : 'Aucun article pour l’instant. Cliquez sur « Nouvel article » pour commencer.'}</p></div>
   )}
 
   {articles.length > 0 && (
     <>
-      <div class="card art-bulk">
+      {view === 'articles' && <div class="card art-bulk">
         <div class="art-bulk__filters">
           <label>
             Catégorie affichée
@@ -89,14 +98,14 @@ const targetCategories = [...targetCategoryLabels.entries()]
           <button type="button" id="art-bulk-apply" class="btn btn--primary" disabled>Appliquer</button>
         </div>
         <p class="art-bulk__hint">Les modifications restent non publiées jusqu’à l’action habituelle « Publier ».</p>
-      </div>
+      </div>}
 
       <div class="card" style="padding:0;overflow:hidden;">
       <table class="art-table">
         <thead>
           <tr>
-            <th class="art-check"><input id="art-select-visible" type="checkbox" aria-label="Sélectionner tous les résultats affichés" /></th>
-            <th>Titre</th><th>Statut</th><th>Parution</th><th style="text-align:right;">Actions</th>
+            <th class="art-check">{view === 'articles' && <input id="art-select-visible" type="checkbox" aria-label="Sélectionner tous les résultats affichés" />}</th>
+            <th>Titre</th><th>Statut</th>{view === 'trash' ? <th>Mise à la corbeille</th> : <th>Parution</th>}<th style="text-align:right;">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -107,19 +116,31 @@ const targetCategories = [...targetCategoryLabels.entries()]
               data-search={`${norm(a.title)} ${norm(a.slug)}`}
               data-categories={JSON.stringify(a.categories)}
             >
-              <td class="art-check"><input class="art-row-check" type="checkbox" aria-label={`Sélectionner ${a.title}`} /></td>
+              <td class="art-check">{view === 'articles' && <input class="art-row-check" type="checkbox" aria-label={`Sélectionner ${a.title}`} />}</td>
               <td>
-                <a href={`./${a.id}/edit/`} class="art-title">{a.title}</a>
+                {view === 'articles' ? <a href={`./${a.id}/edit/`} class="art-title">{a.title}</a> : <span class="art-title">{a.title}</span>}
                 <div class="art-slug">/{a.slug}/</div>
               </td>
               <td>
-                <span class={`badge badge--${a.status}`}>{a.status === 'published' ? 'Publié' : 'Brouillon'}</span>
+                {view === 'trash' ? (
+                  <span class={`badge badge--${a.published_json ? 'published' : 'draft'}`}>
+                    {a.published_json ? 'En ligne jusqu’à Publier' : 'Hors ligne'}
+                  </span>
+                ) : (
+                  <span class={`badge badge--${a.status}`}>{a.status === 'published' ? 'Publié' : 'Brouillon'}</span>
+                )}
               </td>
-              <td class="art-date">{fmt(a.article_date)}</td>
+              <td class="art-date">{view === 'trash' ? fmt(a.deleted_at) : fmt(a.article_date)}</td>
               <td style="text-align:right;white-space:nowrap;">
-                <a href={`./${a.id}/preview/`} class="btn btn--ghost btn--sm" target="_blank">Aperçu</a>
-                <a href={`./${a.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
-                <button class="btn btn--danger btn--sm" data-del={a.id} data-title={a.title}>Suppr.</button>
+                {view === 'articles' ? (
+                  <>
+                    <a href={`./${a.id}/preview/`} class="btn btn--ghost btn--sm" target="_blank">Aperçu</a>
+                    <a href={`./${a.id}/edit/`} class="btn btn--ghost btn--sm">Éditer</a>
+                    <button class="btn btn--danger btn--sm" data-del={a.id} data-title={a.title}>Corbeille</button>
+                  </>
+                ) : (
+                  <button class="btn btn--primary btn--sm" data-restore={a.id} data-title={a.title}>Restaurer</button>
+                )}
               </td>
             </tr>
           ))}
@@ -133,6 +154,10 @@ const targetCategories = [...targetCategoryLabels.entries()]
 
 <style>
   .art-table { width: 100%; border-collapse: collapse; font-family: var(--pj-noto); }
+  .art-tabs { display: flex; gap: 8px; margin: 0 0 16px; }
+  .art-tab { padding: 8px 14px; border: 1px solid var(--pj-hairline); border-radius: 999px; color: #666; font-size: 13px; font-weight: 700; }
+  .art-tab:hover { color: var(--pj-ink); border-color: #bbb; }
+  .art-tab--active { color: #59610d; border-color: var(--pj-olive); background: rgba(178,192,78,.14); }
   .art-table th {
     text-align: left; font-size: 11px; letter-spacing: .5px; text-transform: uppercase;
     color: #8a8a8a; font-weight: 700; padding: 14px 20px; border-bottom: 1px solid var(--pj-hairline);
@@ -299,14 +324,29 @@ const targetCategories = [...targetCategoryLabels.entries()]
   document.querySelectorAll<HTMLButtonElement>('[data-del]').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const id = btn.dataset.del;
-      if (!confirm(`Supprimer « ${btn.dataset.title} » ? Cette action est définitive.`)) return;
+      if (!confirm(`Mettre « ${btn.dataset.title} » dans la corbeille ?\n\nL’article restera en ligne jusqu’à la prochaine publication.`)) return;
       btn.disabled = true;
       const res = await fetch(`/api/admin-pujol/articles/${id}/`, { method: 'DELETE' });
       if (res.ok) {
         btn.closest('tr')?.remove();
         applyFilter();
       } else {
-        alert('Échec de la suppression.');
+        alert('Échec de la mise à la corbeille.');
+        btn.disabled = false;
+      }
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-restore]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.restore;
+      btn.disabled = true;
+      const res = await fetch(`/api/admin-pujol/articles/${id}/restore/`, { method: 'POST' });
+      if (res.ok) {
+        btn.closest('tr')?.remove();
+        applyFilter();
+      } else {
+        alert('Échec de la restauration.');
         btn.disabled = false;
       }
     });

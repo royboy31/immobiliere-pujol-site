@@ -145,11 +145,18 @@ export const GET: APIRoute = async ({ request }) => {
       try {
         const art = await db
           .prepare(
-            `SELECT slug, title, excerpt, article_date FROM blog_articles
-             WHERE status = 'published' AND noindex = 0
-               AND slug NOT LIKE 'local/%'
-               AND (title LIKE ? OR excerpt LIKE ? OR categories LIKE ?)
-             ORDER BY datetime(article_date) DESC
+            `SELECT json_extract(published_json, '$.slug') AS slug,
+                    json_extract(published_json, '$.title') AS title,
+                    json_extract(published_json, '$.excerpt') AS excerpt,
+                    json_extract(published_json, '$.article_date') AS article_date
+               FROM blog_articles
+              WHERE published_json IS NOT NULL AND json_valid(published_json)
+                AND COALESCE(json_extract(published_json, '$.noindex'), 0) = 0
+                AND json_extract(published_json, '$.slug') NOT LIKE 'local/%'
+                AND (json_extract(published_json, '$.title') LIKE ?
+                  OR json_extract(published_json, '$.excerpt') LIKE ?
+                  OR json_extract(published_json, '$.categories') LIKE ?)
+              ORDER BY datetime(json_extract(published_json, '$.article_date')) DESC
              LIMIT 5`
           )
           .bind(alike, alike, alike)

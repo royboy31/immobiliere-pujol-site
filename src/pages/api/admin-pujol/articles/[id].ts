@@ -1,6 +1,6 @@
 // GET    /api/admin-pujol/articles/:id  → one article
 // PUT    /api/admin-pujol/articles/:id  → update
-// DELETE /api/admin-pujol/articles/:id  → delete
+// DELETE /api/admin-pujol/articles/:id  → move to trash
 export const prerender = false;
 
 import type { APIRoute } from 'astro';

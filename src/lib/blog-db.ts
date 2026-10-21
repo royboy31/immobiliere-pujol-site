@@ -39,9 +39,11 @@ export interface BlogArticle {
   created_at: string;
   updated_at: string;
   published_at: string | null;
+  published_json: string | null;
+  deleted_at: string | null;
 }
 
-export type ArticleInput = Partial<Omit<BlogArticle, 'id' | 'created_at' | 'updated_at'>>;
+export type ArticleInput = Partial<Omit<BlogArticle, 'id' | 'created_at' | 'updated_at' | 'published_json' | 'deleted_at'>>;
 
 /** Get the D1 binding from the Worker runtime (works in `astro dev` too). */
 export async function getDB(): Promise<D1Database> {
@@ -81,7 +83,8 @@ const SCHEMA = `CREATE TABLE IF NOT EXISTS blog_articles (
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now')),
   published_at TEXT,
-  published_json TEXT
+  published_json TEXT,
+  deleted_at TEXT
 )`;
 
 // Columns added after the first schema — applied to pre-existing tables so the
@@ -101,6 +104,9 @@ const ADD_COLUMNS: Record<string, string> = {
   // in-progress edit. Set/cleared by publishArticles() (the "Publier" action).
   published_json: 'TEXT',
   related_slugs: 'TEXT',
+  // Soft deletion keeps the editable row recoverable. Its published snapshot
+  // remains live until the next explicit "Publier" action.
+  deleted_at: 'TEXT',
 };
 
 let schemaReady = false;
@@ -225,9 +231,19 @@ async function uniqueSlug(db: D1Database, base: string, excludeId?: number): Pro
 export async function listArticles(db: D1Database): Promise<BlogArticle[]> {
   const { results } = await db.prepare(
     `SELECT * FROM blog_articles
+     WHERE deleted_at IS NULL
      ORDER BY CASE WHEN date(article_date) IS NULL THEN 1 ELSE 0 END,
               date(article_date) DESC,
               datetime(updated_at) DESC`
+  ).all();
+  return (results || []).map(toArticle);
+}
+
+export async function listDeletedArticles(db: D1Database): Promise<BlogArticle[]> {
+  const { results } = await db.prepare(
+    `SELECT * FROM blog_articles
+     WHERE deleted_at IS NOT NULL
+     ORDER BY datetime(deleted_at) DESC, title ASC`
   ).all();
   return (results || []).map(toArticle);
 }
@@ -238,7 +254,7 @@ export async function listStoredArticleCategories(db: D1Database): Promise<strin
        FROM blog_articles, json_each(
          CASE WHEN json_valid(categories) AND json_type(categories) = 'array' THEN categories ELSE '[]' END
        )
-      WHERE type = 'text' AND trim(CAST(value AS TEXT)) != ''
+      WHERE deleted_at IS NULL AND type = 'text' AND trim(CAST(value AS TEXT)) != ''
       ORDER BY category COLLATE NOCASE`
   ).all<{ category: string }>();
   return (results || []).map((row) => String(row.category));
@@ -252,7 +268,7 @@ export interface RelatedArticleOption {
 
 /** Published, non-local articles Caroline may select for "À lire aussi". */
 export async function listRelatedArticleOptions(db: D1Database, excludeId?: number): Promise<RelatedArticleOption[]> {
-  const where = ["status = 'published'", "slug NOT LIKE 'local/%'"];
+  const where = ["deleted_at IS NULL", "status = 'published'", "slug NOT LIKE 'local/%'"];
   const bindings: unknown[] = [];
   if (excludeId) {
     where.push('id != ?');
@@ -380,6 +396,7 @@ export async function bulkUpdateArticleCategories(
             SET categories = json_insert(${safeCategories}, '$[#]', ?),
                 updated_at = datetime('now')
           WHERE id IN (${placeholders})
+            AND deleted_at IS NULL
             AND NOT EXISTS (SELECT 1 FROM json_each(${safeCategories}) WHERE value = ?)`
       ).bind(category, ...chunk, category));
     } else if (operation === 'remove') {
@@ -391,6 +408,7 @@ export async function bulkUpdateArticleCategories(
                 ),
                 updated_at = datetime('now')
           WHERE id IN (${placeholders})
+            AND deleted_at IS NULL
             AND EXISTS (SELECT 1 FROM json_each(${safeCategories}) WHERE value = ?)`
       ).bind(category, ...chunk, category));
     } else {
@@ -399,6 +417,7 @@ export async function bulkUpdateArticleCategories(
             SET categories = json_array(?),
                 updated_at = datetime('now')
           WHERE id IN (${placeholders})
+            AND deleted_at IS NULL
             AND (NOT json_valid(categories) OR categories != json_array(?))`
       ).bind(category, ...chunk, category));
     }
@@ -409,7 +428,20 @@ export async function bulkUpdateArticleCategories(
 }
 
 export async function deleteArticle(db: D1Database, id: number): Promise<boolean> {
-  const res = await db.prepare('DELETE FROM blog_articles WHERE id = ?').bind(id).run();
+  const res = await db.prepare(
+    `UPDATE blog_articles
+        SET deleted_at = datetime('now')
+      WHERE id = ? AND deleted_at IS NULL`
+  ).bind(id).run();
+  return (res.meta.changes || 0) > 0;
+}
+
+export async function restoreArticle(db: D1Database, id: number): Promise<boolean> {
+  const res = await db.prepare(
+    `UPDATE blog_articles
+        SET deleted_at = NULL
+      WHERE id = ? AND deleted_at IS NOT NULL`
+  ).bind(id).run();
   return (res.meta.changes || 0) > 0;
 }
 
@@ -434,8 +466,14 @@ const ARTICLE_SNAPSHOT_JSON = `json_object(
  *  re-running reproduces identical snapshots. */
 export async function publishArticles(db: D1Database): Promise<void> {
   const now = new Date().toISOString();
-  await db.prepare(`UPDATE blog_articles SET published_json = ${ARTICLE_SNAPSHOT_JSON}, published_at = ? WHERE status = 'published'`).bind(now).run();
-  await db.prepare(`UPDATE blog_articles SET published_json = NULL WHERE status = 'draft'`).run();
+  await db.prepare(
+    `UPDATE blog_articles SET published_json = ${ARTICLE_SNAPSHOT_JSON}, published_at = ?
+      WHERE deleted_at IS NULL AND status = 'published'`
+  ).bind(now).run();
+  await db.prepare(
+    `UPDATE blog_articles SET published_json = NULL
+      WHERE status = 'draft' OR deleted_at IS NOT NULL`
+  ).run();
 }
 
 /** Count of articles with unpublished changes — powers the admin "N modifications
@@ -444,8 +482,9 @@ export async function publishArticles(db: D1Database): Promise<void> {
 export async function countPendingArticles(db: D1Database): Promise<number> {
   const row = await db.prepare(
     `SELECT COUNT(*) AS n FROM blog_articles
-     WHERE (status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
-        OR (status = 'draft' AND published_json IS NOT NULL)`
+     WHERE (deleted_at IS NOT NULL AND published_json IS NOT NULL)
+        OR (deleted_at IS NULL AND status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
+        OR (deleted_at IS NULL AND status = 'draft' AND published_json IS NOT NULL)`
   ).first<{ n: number }>();
   return row?.n || 0;
 }
@@ -461,10 +500,11 @@ export interface PendingArticleChange {
 export async function listPendingArticleChanges(db: D1Database): Promise<PendingArticleChange[]> {
   const { results } = await db.prepare(
     `SELECT id, slug, title,
-            CASE WHEN status = 'draft' THEN 'remove' ELSE 'online' END AS action
+            CASE WHEN deleted_at IS NOT NULL OR status = 'draft' THEN 'remove' ELSE 'online' END AS action
        FROM blog_articles
-      WHERE (status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
-         OR (status = 'draft' AND published_json IS NOT NULL)
+      WHERE (deleted_at IS NOT NULL AND published_json IS NOT NULL)
+         OR (deleted_at IS NULL AND status = 'published' AND (published_json IS NULL OR published_at IS NULL OR datetime(updated_at) > datetime(published_at)))
+         OR (deleted_at IS NULL AND status = 'draft' AND published_json IS NOT NULL)
       ORDER BY action ASC, title ASC`
   ).all();
   return (results || []).map((row: any) => ({
