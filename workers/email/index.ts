@@ -1334,7 +1334,8 @@ async function runAutomaticNewsletterReminders(env: Env, confirmedEmails: Set<st
   const rows = await fetchDueNewsletterReminders(env, new Date(start).toISOString(), cutoff);
   // Confirmed rows are never marked, so drop them before the 50-send cap:
   // otherwise they fill the oldest-first batch and starve newer signups.
-  const due = rows.map((row) => row.email).filter((email) => !confirmedEmails.has(email.trim().toLowerCase()));
+  // Cap after filtering to stay under D1's 100 bound parameters per query.
+  const due = rows.map((row) => row.email).filter((email) => !confirmedEmails.has(email.trim().toLowerCase())).slice(0, 50);
   const result = await sendEligibleNewsletterReminders(env, due, confirmedEmails, 50);
   console.log(JSON.stringify({ event: 'newsletter_reminders_automatic', ...result }));
 }

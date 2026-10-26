@@ -16,7 +16,11 @@ function createReminderDb(seed = []) {
     prepare(sql) {
       let args = [];
       const statement = {
-        bind(...values) { args = values; return statement; },
+        bind(...values) {
+          if (values.length > 100) throw new Error('D1_ERROR: too many SQL variables');
+          args = values;
+          return statement;
+        },
         async run() {
           if (sql.includes('VALUES (?, ?, NULL)')) {
             const [email, signupAt] = args;
@@ -367,7 +371,7 @@ test('automatic reminders send once for eligible post-release signups', async ()
   }
 });
 
-test('automatic reminders reach unconfirmed signups queued behind 50+ confirmed ones', async () => {
+test('automatic reminders reach 100+ unconfirmed signups queued behind 50+ confirmed ones', async () => {
   const originalFetch = globalThis.fetch;
   const calls = [];
   const now = Date.now();
@@ -376,7 +380,7 @@ test('automatic reminders reach unconfirmed signups queued behind 50+ confirmed 
     email: `confirmed${i}@example.com`,
     signup_at: new Date(now - (90 * 60 - i) * 60 * 1000).toISOString(),
   }));
-  const pending = Array.from({ length: 52 }, (_, i) => ({
+  const pending = Array.from({ length: 105 }, (_, i) => ({
     email: `pending${i}@example.com`,
     signup_at: new Date(now - (30 * 60 - i) * 60 * 1000).toISOString(),
   }));
@@ -405,8 +409,9 @@ test('automatic reminders reach unconfirmed signups queued behind 50+ confirmed 
     assert.equal(reminded().length, 50);
     assert.ok(reminded().every((email) => email.startsWith('pending')));
     await worker.scheduled({ cron: '20 * * * *' }, env);
+    await worker.scheduled({ cron: '20 * * * *' }, env);
     assert.deepEqual(new Set(reminded()), new Set(pending.map(({ email }) => email)));
-    assert.equal(reminded().length, 52);
+    assert.equal(reminded().length, 105);
   } finally {
     globalThis.fetch = originalFetch;
   }
