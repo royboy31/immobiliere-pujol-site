@@ -313,8 +313,7 @@ async function fetchDueNewsletterReminders(env: Env, start: string, cutoff: stri
   const result = await env.DB.prepare(`SELECT email, signup_at, reminder_at
     FROM newsletter_reminders
     WHERE reminder_at IS NULL AND signup_at >= ? AND signup_at <= ?
-    ORDER BY signup_at ASC
-    LIMIT 50`)
+    ORDER BY signup_at ASC`)
     .bind(start, cutoff)
     .all<NewsletterReminderState>();
   return result.results || [];
@@ -1333,7 +1332,10 @@ async function runAutomaticNewsletterReminders(env: Env, confirmedEmails: Set<st
   if (!Number.isFinite(start)) throw new Error('NEWSLETTER_REMINDER_AUTO_FROM invalide');
   const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
   const rows = await fetchDueNewsletterReminders(env, new Date(start).toISOString(), cutoff);
-  const result = await sendEligibleNewsletterReminders(env, rows.map((row) => row.email), confirmedEmails, 50);
+  // Confirmed rows are never marked, so drop them before the 50-send cap:
+  // otherwise they fill the oldest-first batch and starve newer signups.
+  const due = rows.map((row) => row.email).filter((email) => !confirmedEmails.has(email.trim().toLowerCase()));
+  const result = await sendEligibleNewsletterReminders(env, due, confirmedEmails, 50);
   console.log(JSON.stringify({ event: 'newsletter_reminders_automatic', ...result }));
 }
 

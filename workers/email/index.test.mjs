@@ -40,7 +40,7 @@ function createReminderDb(seed = []) {
             return { results: [...rows.values()]
               .filter((row) => !row.reminder_at && row.signup_at >= start && row.signup_at <= cutoff)
               .sort((a, b) => a.signup_at.localeCompare(b.signup_at))
-              .slice(0, 50) };
+              .slice(0, sql.includes('LIMIT 50') ? 50 : undefined) };
           }
           throw new Error(`unexpected D1 query: ${sql}`);
         },
@@ -362,6 +362,51 @@ test('automatic reminders send once for eligible post-release signups', async ()
     const doiIndex = calls.findIndex((call) => call.url.includes('doubleOptinConfirmation'));
     const markIndex = calls.findIndex((call) => call.body?.data?.['Date rappel opt-in']);
     assert.ok(markIndex > doiIndex);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('automatic reminders reach unconfirmed signups queued behind 50+ confirmed ones', async () => {
+  const originalFetch = globalThis.fetch;
+  const calls = [];
+  const now = Date.now();
+  const autoFrom = new Date(now - 100 * 60 * 60 * 1000).toISOString();
+  const confirmed = Array.from({ length: 55 }, (_, i) => ({
+    email: `confirmed${i}@example.com`,
+    signup_at: new Date(now - (90 * 60 - i) * 60 * 1000).toISOString(),
+  }));
+  const pending = Array.from({ length: 52 }, (_, i) => ({
+    email: `pending${i}@example.com`,
+    signup_at: new Date(now - (30 * 60 - i) * 60 * 1000).toISOString(),
+  }));
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    const body = init.body ? JSON.parse(init.body) : null;
+    calls.push({ url, body });
+    if (url.includes('/v3/contacts?')) {
+      return Response.json({ contacts: confirmed.map(({ email }) => ({ email, listIds: [3] })) });
+    }
+    if (url.includes('doubleOptinConfirmation')) return new Response('', { status: 201 });
+    if (url.includes('script.google.com') && body?.data) return Response.json({ ok: true, mode: 'update' });
+    throw new Error(`unexpected fetch ${url}`);
+  };
+
+  try {
+    const env = {
+      ...productionEnv,
+      DB: createReminderDb([...confirmed, ...pending]),
+      NEWSLETTER_REMINDER_AUTO_FROM: autoFrom,
+    };
+    const reminded = () => calls
+      .filter((call) => call.url.includes('doubleOptinConfirmation'))
+      .map((call) => call.body.email);
+    await worker.scheduled({ cron: '20 * * * *' }, env);
+    assert.equal(reminded().length, 50);
+    assert.ok(reminded().every((email) => email.startsWith('pending')));
+    await worker.scheduled({ cron: '20 * * * *' }, env);
+    assert.deepEqual(new Set(reminded()), new Set(pending.map(({ email }) => email)));
+    assert.equal(reminded().length, 52);
   } finally {
     globalThis.fetch = originalFetch;
   }
