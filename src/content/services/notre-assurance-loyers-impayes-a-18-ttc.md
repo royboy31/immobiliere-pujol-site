@@ -1,14 +1,14 @@
 ---
-title: "Notre Assurance Loyers Impayés À 1,8% Ttc"
+title: "Notre Couverture Loyers Impayés À 1,8% Ttc"
 slug: "services/notre-assurance-loyers-impayes-a-18-ttc"
-seoTitle: "Notre assurance loyers impayés à 1,8% TTC"
+seoTitle: "Notre couverture loyers impayés à 1,8% TTC"
 seoDescription: "Obtenez une proposition de gestion avec une garantie de loyers impayés Notre assurance de loyers impayés comprend: Une garantie de paiement des loyers et des charges an cas de défaillance du locataire sans limite. Une prise en charge des dégradations immobilières dans le cadre d'un plafond de 7500€ Une prise en…"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Notre Assurance Loyers Impayés À 1,8% Ttc</h1>        
+    <h1 class="hero__title">Notre Couverture Loyers Impayés À 1,8% Ttc</h1>        
 
 
         
@@ -28,7 +28,7 @@ seoDescription: "Obtenez une proposition de gestion avec une garantie de loyers 
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Notre Assurance Loyers Impayés À 1,8% Ttc</h3>
+                    <h3 class="contextual__title">Notre Couverture Loyers Impayés À 1,8% Ttc</h3>
                     <h2>Obtenez une proposition de gestion avec une garantie de loyers impayés</h2>
 <p>Notre assurance de loyers impayés comprend:</p>
 <p>Une garantie de paiement des loyers et des charges an cas de défaillance du locataire sans limite.</p>

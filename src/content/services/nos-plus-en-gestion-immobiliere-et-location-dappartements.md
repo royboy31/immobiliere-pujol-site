@@ -2,7 +2,7 @@
 title: "Le Location Et La Gestion Chez Immobilière Pujol : Quoi De Plus Pour Vous?"
 slug: "services/nos-plus-en-gestion-immobiliere-et-location-dappartements"
 seoTitle: "Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous?"
-seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses clients. Gestion locative à partir 4% HT. Assurance loyers impayés à 1,8% TTC . Des services et des conseils en plus  !"
+seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses clients. Gestion locative à partir 4% HT. Couverture loyers impayés à 1,8% TTC . Des services et des conseils en plus  !"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
