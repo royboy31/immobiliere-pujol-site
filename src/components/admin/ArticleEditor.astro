@@ -519,10 +519,50 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     return !!allowInlineImage && /^data:image\/(png|jpe?g|gif|webp|avif);/i.test(v);
   }
 
+  // A heading that holds paragraphs or lists is a whole section caught inside
+  // an <h2> (typing or pasting on a heading line does it), so the section
+  // renders large and bold. Lift the blocks out and keep only the heading's
+  // own leading text as the heading. Structure decides, not length: a long
+  // genuine heading stays a heading.
+  const SECTION_BLOCKS = new Set(['P', 'DIV', 'UL', 'OL', 'BLOCKQUOTE', 'H2', 'H3', 'H4']);
+  const isSectionHeading = (h) => [...h.children].some((c) => SECTION_BLOCKS.has(c.tagName));
+  const hasSectionHeading = (root) => [...root.querySelectorAll('h2,h3,h4')].some(isSectionHeading);
+  function liftSectionsOutOfHeadings(doc) {
+    for (let pass = 0; pass < 200; pass++) {
+      const h = [...doc.body.querySelectorAll('h2,h3,h4')].find(isSectionHeading);
+      if (!h) return;
+      let run = [], first = true;
+      const flush = () => {
+        while (run.length && run[0].nodeName === 'BR') run.shift();
+        while (run.length && run[run.length - 1].nodeName === 'BR') run.pop();
+        if (run.some((n) => n.textContent.trim() || n.nodeName === 'IMG')) {
+          const el = doc.createElement(first ? h.tagName : 'P');
+          el.append(...run);
+          h.before(el);
+        }
+        run = []; first = false;
+      };
+      [...h.childNodes].forEach((n) => {
+        if (n.nodeType === 1 && SECTION_BLOCKS.has(n.tagName)) { flush(); h.before(n); }
+        else run.push(n);
+      });
+      flush();
+      h.remove();
+    }
+  }
+
   function cleanHtml(html) {
     const doc = document.implementation.createHTMLDocument('');
     doc.body.innerHTML = html;
     doc.body.querySelectorAll('script,style,noscript,meta,link,title').forEach((el) => el.remove());
+    // Google Docs wraps a whole copied selection in a neutral <b> (id
+    // docs-internal-guid-…, font-weight:normal). Once its style is stripped it
+    // would turn everything bold, so drop the wrapper before that.
+    doc.body.querySelectorAll('b,strong').forEach((el) => {
+      if (/^docs-internal-guid/.test(el.id || '') || /font-weight\s*:\s*(normal|400)\b/i.test(el.getAttribute('style') || '')) {
+        el.replaceWith(...el.childNodes);
+      }
+    });
     // Unwrap everything outside the whitelist but keep its text: font, span,
     // response-element, follow-up… Repeat, since unwrapping exposes new parents.
     for (let pass = 0; pass < 20; pass++) {
@@ -541,6 +581,7 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     });
     // An <img> whose src was just rejected renders as a broken image.
     doc.body.querySelectorAll('img:not([src])').forEach((el) => el.remove());
+    liftSectionsOutOfHeadings(doc);
     // Blocks left empty by the cleanup, but never one holding an image or a break.
     doc.body.querySelectorAll('p,div,li,h2,h3,h4,blockquote').forEach((el) => {
       if (!el.textContent.trim() && !el.querySelector('img,br')) el.remove();
@@ -553,18 +594,26 @@ const preservedCats = initialCats.filter((c) => !BLOG_THEMES.some((t) => t.match
     const items = cd.items;
     if (items) for (const it of items) if (it.type && it.type.startsWith('image/')) { e.preventDefault(); const f = it.getAsFile(); if (f) handleBodyImage(f); return; }
     const html = cd.getData && cd.getData('text/html');
-    if (!html) return;                       // plain-text pastes are already clean
+    if (!html) {                             // plain-text pastes are already clean,
+      // but on a heading line the browser can still nest them in the heading.
+      setTimeout(() => { if (hasSectionHeading(body)) body.innerHTML = cleanHtml(body.innerHTML); }, 0);
+      return;
+    }
     e.preventDefault();
     document.execCommand('insertHTML', false, cleanHtml(html));
+    // Pasting on a heading line can still nest the pasted paragraphs inside
+    // that heading; repair the body when it happens (the caret moves to the end).
+    if (hasSectionHeading(body)) body.innerHTML = cleanHtml(body.innerHTML);
     saveRange();
     setState('Collage nettoyé ✓', false);
   });
 
   // Same cleaner on demand, to repair content pasted before this existed.
   $('ed-clean').addEventListener('click', () => {
-    if (sourceMode) source.value = cleanHtml(source.value);
-    else body.innerHTML = cleanHtml(body.innerHTML);
-    setState('Mise en forme nettoyée ✓', false);
+    const before = sourceMode ? source.value : body.innerHTML;
+    const after = cleanHtml(before);
+    if (sourceMode) source.value = after; else body.innerHTML = after;
+    setState(after === before.trim() ? 'Rien à nettoyer' : 'Mise en forme nettoyée ✓', false);
   });
   body.addEventListener('dragover', (e) => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files')) { e.preventDefault(); body.classList.add('is-dragover'); } });
   body.addEventListener('dragleave', () => body.classList.remove('is-dragover'));
