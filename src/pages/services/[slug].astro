@@ -207,9 +207,9 @@ if (isGuide) {
     ? `<aside class="svc-guide-takeaway"><span class="svc-guide-takeaway__label">À retenir</span><p>${takeaway}</p></aside>`
     : '';
   const tocHtml = toc.length >= 3
-    ? `<nav class="svc-guide-toc" aria-label="Sommaire"><span class="svc-guide-toc__label">Sommaire</span><ol>${toc
+    ? `<nav class="svc-guide-toc" aria-label="Sommaire"><details class="svc-guide-toc__details"><summary class="svc-guide-toc__label">Sommaire</summary><ol>${toc
         .map((t) => `<li><a href="#${t.id}">${t.label}</a></li>`)
-        .join('')}</ol></nav>`
+        .join('')}</ol></details></nav>`
     : '';
   const firstH2 = bodyHtml.search(/<h2[\s>]/);
   if (firstH2 >= 0) {
@@ -1054,7 +1054,17 @@ const pageSchemas = entry.data.jsonLd
               </div>
             </section>
           ) : (
+            <>
             <article class={`svc-article-body${isGuide ? ' svc-article-body--guide' : ''}`} set:html={bodyHtml}></article>
+            {isGuide && (
+              <script is:inline>
+                // Sommaire: expanded on desktop, collapsed on mobile.
+                if (window.matchMedia('(min-width: 769px)').matches) {
+                  document.querySelectorAll('.svc-guide-toc__details').forEach((d) => d.setAttribute('open', ''));
+                }
+              </script>
+            )}
+            </>
           )}
 
           {valueCards.length > 0 && (
