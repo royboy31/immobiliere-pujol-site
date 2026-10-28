@@ -689,7 +689,7 @@ const pageSchemas = entry.data.jsonLd
   : [];
 ---
 
-<BaseLayout title={title} description={description} schemas={pageSchemas}>
+<BaseLayout title={title} description={description} schemas={pageSchemas} bypassSeoMirror={isGuide}>
   {/* ============= HERO ============= */}
   <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
