@@ -58,7 +58,7 @@ jsonLd: |
             "name": "Un indépendant ou auto-entrepreneur peut-il louer facilement à Marseille ?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Oui, à condition de produire les 3 derniers bilans comptables certifiés. Une activité de moins de 3 ans est un signal de risque pour les assureurs GLI (souvent refusée). Pour un indépendant marseillais dans un secteur saisonnier (tourisme, événementiel), l'analyse doit porter sur la moyenne des 3 bilans, pas sur le dernier exercice seul. Si le dossier est en limite de solvabilité, la caution solidaire physique avec un garant salarié en CDI est la garantie la plus facilement mobilisable"
+              "text": "Oui. Pour un indépendant, l’analyse repose sur les justificatifs autorisés, notamment les deux derniers bilans ou, à défaut, une attestation de ressources de l’exercice en cours délivrée par un comptable. Les conditions d’une éventuelle garantie sont examinées séparément."
             }
           },
           {
@@ -151,7 +151,7 @@ jsonLd: |
 <hr />
 <h2>Calculer la Solvabilité : Méthodes et Nuances</h2>
 <p>Le calcul classique du taux d'effort impose que les revenus nets mensuels du candidat (ou du ménage) représentent au moins <strong>3 fois le montant du loyer charges comprises</strong> (soit un taux d'effort maximal de <strong>33 %</strong>).</p>
-<p>Revenu Net Requis = Loyer charges comprises × 3</p>
+<p>Revenu net mensuel indicatif = loyer mensuel charges comprises × 3</p>
 <p><strong>Exemple :</strong> Pour un T2 loué 800 € CC dans le 6ᵉ arrondissement de Marseille, le candidat ou son ménage doit justifier d'au moins <strong>2 400 € net/mois</strong>.</p>
 <h3>Les nuances de calcul selon la situation du candidat :</h3>
 <ol>
@@ -238,7 +238,7 @@ jsonLd: |
 <p><strong>Q3. Comment détecter un faux dossier de location ?</strong></p>
 <p>Signaux sur les <strong>bulletins de salaire</strong> : polices de caractère hétérogènes, SIRET invalide ou introuvable au registre SIRENE, totaux nets incohérents avec les lignes de cotisations. Sur les <strong>avis d'imposition</strong> : absence du logo DGFIP, numéro fiscal incohérent, revenus déclarés sans rapport avec les bulletins.</p>
 <p><strong>Q4. Un indépendant ou auto-entrepreneur peut-il louer facilement à Marseille ?</strong></p>
-<p>Oui, à condition de produire les <strong>3 derniers bilans comptables</strong> certifiés. Une activité de moins de 3 ans est un signal de risque pour les assureurs <strong>GLI</strong> (souvent refusée). Pour un indépendant marseillais dans un secteur saisonnier (tourisme, événementiel), l'analyse doit porter sur la moyenne des 3 bilans, pas sur le dernier exercice seul. Si le dossier est en limite de solvabilité, la <strong>caution solidaire physique</strong> avec un garant salarié en CDI est la garantie la plus facilement mobilisable.</p>
+<p>Oui. Pour un indépendant, l’analyse repose sur les justificatifs autorisés, notamment les deux derniers bilans ou, à défaut, une attestation de ressources de l’exercice en cours délivrée par un comptable. Les conditions d’une éventuelle garantie sont examinées séparément.</p>
 <p><strong>Q5. Peut-on refuser un locataire boursier ou bénéficiaire d'APL ?</strong></p>
 <p>Un propriétaire peut légalement refuser un candidat boursier ou allocataire CAF sur des <strong>critères financiers objectifs</strong> (taux d'effort trop élevé, reste à vivre insuffisant). Il ne peut pas le refuser sur la base de son statut d'étudiant boursier ou de bénéficiaire d'APL — ce serait une discrimination indirecte au sens de l'<strong>article 225-1 du Code pénal</strong>. L'<strong>attestation CAF</strong> et la <strong>notification de bourse CROUS</strong> sont des documents intégrables dans le calcul de solvabilité au même titre qu'un bulletin de salaire.</p>
 
