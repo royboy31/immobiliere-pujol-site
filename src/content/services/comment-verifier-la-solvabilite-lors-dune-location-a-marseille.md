@@ -1,9 +1,78 @@
 ---
-title: "Comment Vérifier La Solvabilité D'un Locataire?"
-slug: "services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille"
-ctaText: "Demander une estimation de loyer"
-seoTitle: "Comment vérifier la solvabilité d’un locataire?"
-seoDescription: "Les documents que vous êtes en droit de demander. Ce que vous pouvez vérifier pour louer à  un bon locataire. Recevez une proposition de notre agence parmi les plus recommandée par ses clients"
+title: Vérifier la solvabilité d’un locataire à Marseille
+slug: services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille
+ctaText: Demander une estimation de loyer
+seoTitle: Vérifier la solvabilité d’un locataire à Marseille
+seoDescription: 'Pièces autorisées, analyse des revenus et détection des incohérences : découvrez comment vérifier un dossier locataire à Marseille dans le cadre légal.'
+jsonLd: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#webpage",
+        "name": "Vérifier la solvabilité d’un locataire à Marseille",
+        "description": "Pièces autorisées, analyse des revenus et détection des incohérences : découvrez comment vérifier un dossier locataire à Marseille dans le cadre légal.",
+        "inLanguage": "fr-FR",
+        "dateModified": "2026-10-27",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Immobilière Pujol",
+          "url": "https://www.immobiliere-pujol.fr/"
+        },
+        "hasPart": {
+          "@id": "#faq"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "inLanguage": "fr-FR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quels documents un propriétaire peut-il légalement demander à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Exclusivement ceux listés dans le décret du 5 novembre 2015 (application de la loi ALUR 2014) : pièce d'identité valide, justificatif de domicile actuel (quittances de loyer ou attestation d'hébergement), justificatif de situation professionnelle (contrat de travail, bulletins de salaire ou bilans pour indépendants), et justificatif de ressources (avis d'imposition, attestation CAF). Tout document hors liste — relevé bancaire, casier judiciaire, acte de mariage — est interdit"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment calculer la solvabilité d'un candidat locataire à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Deux méthodes complémentaires : la règle des 3x le loyer (revenus nets ≥ 3 × loyer charges comprises) et le taux d'effort de 30% (loyer ≤ 30% des revenus nets). Pour un appartement à 900€ CC à Marseille, le revenu minimum est de 2 700€ (règle des 3x) ou 3 000€ (taux 30%). Le reste à vivre complète l'analyse : déduire du revenu net le loyer, les crédits en cours et les charges fixes. Un reste à vivre inférieur à 900€/mois pour un célibataire est un signal d'alerte, quelle que soit la règle appliquée"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment détecter un faux dossier de location ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Signaux sur les bulletins de salaire : polices de caractère hétérogènes, SIRET invalide ou introuvable au registre SIRENE, totaux nets incohérents avec les lignes de cotisations. Sur les avis d'imposition : absence du logo DGFIP, numéro fiscal incohérent, revenus déclarés sans rapport avec les bulletins"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Un indépendant ou auto-entrepreneur peut-il louer facilement à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, à condition de produire les 3 derniers bilans comptables certifiés. Une activité de moins de 3 ans est un signal de risque pour les assureurs GLI (souvent refusée). Pour un indépendant marseillais dans un secteur saisonnier (tourisme, événementiel), l'analyse doit porter sur la moyenne des 3 bilans, pas sur le dernier exercice seul. Si le dossier est en limite de solvabilité, la caution solidaire physique avec un garant salarié en CDI est la garantie la plus facilement mobilisable"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Peut-on refuser un locataire boursier ou bénéficiaire d'APL ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Un propriétaire peut légalement refuser un candidat boursier ou allocataire CAF sur des critères financiers objectifs (taux d'effort trop élevé, reste à vivre insuffisant). Il ne peut pas le refuser sur la base de son statut d'étudiant boursier ou de bénéficiaire d'APL — ce serait une discrimination indirecte au sens de l'article 225-1 du Code pénal. L'attestation CAF et la notification de bourse CROUS sont des documents intégrables dans le calcul de solvabilité au même titre qu'un bulletin de salaire"
+            }
+          }
+        ]
+      }
+    ]
+  }
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
@@ -57,103 +126,123 @@ seoDescription: "Les documents que vous êtes en droit de demander. Ce que vous 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Vérifier La Solvabilité D'un Locataire?</h3>
-                    <p>L’une des responsabilités d&rsquo;un agent immobilier qui conclut une location est d&rsquo;évaluer la solvabilité du locataire, pour <a href="/service/notre-garantie-de-loyers-impayes/">garantir le paiement des loyers en temps et en heure</a>. Pour cette raison une étude de solvabilité est nécessaire.</p>
-<p>Cette étude approfondie est réalisée sur la base des documents que nous sommes en droit de demander aux candidats. Ces documents font ensuite l&rsquo;objet de vérification au niveau de l&rsquo;authenticité, de la cohérence et prise de contact direct.</p>
-<p><strong>Chez Immobilière Pujol, nous évaluons environ 1200 dossiers de locataires par an.</strong></p>
-<p>Sachez que pour 50€, certaines candidats locataire n&rsquo;ont pas de mal à obtenir :</p>
+<h3 class="contextual__title">Vérifier la solvabilité d’un locataire à Marseille</h3>
+<p>S'assurer de la solvabilité d'un candidat locataire à Marseille est une étape très importante pour sécuriser ses revenus locatifs. Entre falsifications de documents de plus en plus sophistiquées et encadrement juridique strict, la sélection d'un dossier demande rigueur, regard et habitude.</p>
+<p>Découvrez la méthode étape par étape de l'Immobilière Pujol pour vérifier l'authenticité d'un dossier locatif et louer votre bien en toute sérénité.</p>
+<hr />
+<h2>Les Documents que Vous Pouvez légalement demander</h2>
+<p>En tant que propriétaire bailleur, la loi (décret n° 2015-1437) encadre strictement les pièces que vous avez le droit d'exiger.</p>
+<p>Voici la liste exacte des justificatifs autorisés selon la situation du candidat :</p>
+<h3>Liste des pièces autorisées</h3>
 <ul>
-	<li>Un faux dossier, avec un permis de conduire falsifié</li>
-	<li>Un RIB fantôme</li>
-	<li>Un avis d’imposition fictif</li>
-	<li>Des bulletins de salaire contrefaits.</li>
+<li><strong>Justificatif d'identité :</strong> Carte nationale d'identité, passeport ou titre de séjour en cours de validité.</li>
+<li><strong>Justificatif de domicile :</strong> 3 dernières quittances de loyer, attestation d'hébergement ou taxe foncière.</li>
+<li><strong>Justificatif d'activité professionnelle :</strong> Contrat de travail, attestation d'employeur récente, carte étudiant ou extrait Kbis (pour les indépendants).</li>
+<li><strong>Justificatif de ressources :</strong> 3 derniers bulletins de salaire, dernier avis d'imposition, ou décomptes de retraite.</li>
 </ul>
-<h2>Quelle est la liste des documents que vous pouvez demander à un locataire?</h2>
-<p>&nbsp;</p>
-<p><strong>Etudiant</strong></p>
+<h3>Documents STRICTEMENT INTERDITS par la loi</h3>
+<p>Il est illégal d'exiger :</p>
 <ul>
-	<li>Justificatif d&rsquo;identité en cours de validité (CNI ou passeport)</li>
-	<li>Carte étudiant</li>
-	<li>Les 3 dernières quittances de loyers ou attestation d&rsquo;hébergement</li>
+<li>Relevés de compte bancaire</li>
+<li>Extrait de casier judiciaire</li>
+<li>Dossier médical ou carte vitale</li>
+<li>Attestation de bonne tenue de compte bancaire</li>
 </ul>
-<p><strong>Salarié</strong></p>
-<ul>
-	<li>Justificatif d&rsquo;identité en cours de validité (CNI ou passeport)</li>
-	<li>3 derniers bulletins de salaire</li>
-	<li>Contrat de travail</li>
-	<li>Attestation de l&#8217;employeur indiquant les modalité de l&#8217;emploi, le type de poste et de contrat</li>
-	<li>Dernier avis d&rsquo;imposition</li>
-	<li>3 dernières quittance de loyer ou taxe foncière ou attestation hébergement</li>
-</ul>
-<p><strong>Retraité</strong></p>
-<ul>
-	<li>Justificatif d&rsquo;identité en cours de validité (CNI ou passeport)</li>
-	<li>Justificatif de décompte retraite</li>
-	<li>Dernier avis d&rsquo;imposition</li>
-	<li>3 dernières quittance de loyer ou taxe foncière ou attestation hébergement</li>
-</ul>
-<p><strong>Autres statuts </strong></p>
-<ul>
-	<li>Justificatif d&rsquo;identité en cours de validité (CNI ou passeport)</li>
-	<li>Extrait Kbis</li>
-	<li>Dernier avis d&rsquo;imposition</li>
-	<li>2 derniers bilan comptable</li>
-	<li>3 dernières quittance de loyer ou taxe foncière ou attestation hébergement</li>
-</ul>
-<p>&nbsp;</p>
-<h2>Comment vérifier la solvabilité des locataires?</h2>
+<hr />
+<h2>Calculer la Solvabilité : Méthodes et Nuances</h2>
+<p>Le calcul classique du taux d'effort impose que les revenus nets mensuels du candidat (ou du ménage) représentent au moins <strong>3 fois le montant du loyer charges comprises</strong> (soit un taux d'effort maximal de <strong>33 %</strong>).</p>
+<p>Revenu Net Requis = Loyer charges comprises × 3</p>
+<p><strong>Exemple :</strong> Pour un T2 loué 800 € CC dans le 6ᵉ arrondissement de Marseille, le candidat ou son ménage doit justifier d'au moins <strong>2 400 € net/mois</strong>.</p>
+<h3>Les nuances de calcul selon la situation du candidat :</h3>
 <ol>
-	<li>Contacter l’employeur</li>
-	<li>Contacter l&rsquo;ancien propriétaire </li>
-	<li>faire des recherches sur Internet</li>
-	<li>Croiser les informations</li>
+<li><strong>Salariés en CDI (hors période d'essai) :</strong>
+<ul>
+<li><strong>Méthode :</strong> Se baser sur le salaire net imposable ou le net à payer avant impôt sur le revenu (hors primes exceptionnelles non récurrentes).</li>
+<li><strong>Nuance :</strong> Si le candidat a des primes régulières (ex: 13ᵉ mois ou commissions contractuelles), intégrez-les au prorata sur l'année via l'avis d'imposition.</li>
+</ul>
+</li>
+<li><strong>Indépendants &amp; Professions Libérales :</strong>
+<ul>
+<li><strong>Méthode :</strong> Prendre la moyenne du résultat fiscal des 2 derniers avis d'imposition.</li>
+<li><strong>Nuance :</strong> Un chiffre d'affaires élevé en micro-entreprise ne reflète pas le revenu net disponible après cotisations URSSAF et charges d'exploitation.</li>
+</ul>
+</li>
+<li><strong>Étudiants &amp; Jeunes Actifs :</strong>
+<ul>
+<li><strong>Méthode :</strong> Analyse des revenus des garants physiques</li>
+<li><strong>Nuance :</strong> Le ou les garants doivent généralement justifier de revenus équivalents à <strong>3,5 à 4 fois le montant du loyer</strong>, car ils assument leurs propres charges personnelles en parallèle.</li>
+</ul>
+</li>
+<li><strong>Retraités &amp; Rentiers :</strong>
+<ul>
+<li><strong>Méthode :</strong> Prise en compte du montant net des pensions ou des revenus fonciers/mobiliers récurrents sur le dernier avis d'imposition.</li>
+</ul>
+</li>
 </ol>
+<h2>Calculer le reste à vivre net</h2>
+<p>Le reste à vivre se calcule en déduisant du revenu net mensuel : le loyer charges comprises, les remboursements de crédit (auto, conso, immobilier), les pensions alimentaires versées, et les charges fixes contractuelles (abonnements, assurances). Le seuil de vigilance : un reste à vivre inférieur à <strong>900€/mois pour un célibataire</strong> ou à <strong>1 400€ pour un couple sans enfant</strong> doit déclencher une demande de garant ou de GLI, quel que soit le taux d'effort apparent.</p>
+<h2>La grille de scoring Immobilière Pujol : 8 critères combinés</h2>
+<p>l'Immobilière Pujol évalue chaque candidat sur une grille structurée de 8 critères pondérés :</p>
+<p><strong>Taux d'effort</strong> : Calcul du rapport entre le loyer charges comprises et les revenus nets mensuels (seuil standard à 33 %).</p>
+<p><strong>Reste à vivre</strong> : Analyse du solde disponible après déduction du loyer, des crédits en cours, des pensions et des charges fixes (seuil d'alerte à 900 € pour une personne seule et 1 400 € pour un couple).</p>
+<p><strong>Stabilité du contrat de travail</strong> : Évaluation du statut professionnel (CDI hors période d'essai, fonctionnaire, indépendant avec ancienneté, retraité).</p>
+<p><strong>Ancienneté dans le poste</strong> : Vérification de la pérennité des revenus et de la régularité du parcours professionnel.</p>
+<p><strong>Historique locatif (ancien bailleur)</strong> : Prise de contact avec le précédent propriétaire et contrôle des 3 dernières quittances de loyer.</p>
+<p><strong>Complétude et cohérence du dossier</strong> : Vérification de l'adéquation entre l'identité, les revenus déclarés et les pièces fournies.</p>
+<p><strong>Authentification des documents</strong> : Analyse anti-fraude des fiches de paie et contrôle des avis d'imposition via le service officiel 2D-Doc / Impots.gouv.fr.</p>
+<p><strong>Garant disponible</strong> : Présence d'un garant physique éligible</p>
+<hr />
+<h2>Détecter un Faux Dossier : signaux et méthodes</h2>
+<p>La fraude documentaire dans les dossiers de location a considérablement augmenté depuis des années. Les outils de retouche numérique accessibles en ligne et gratuitement permettent de falsifier un bulletin de salaire ou un avis d'imposition en moins de 15 minutes. Sur le parc géré par l'Immobilière Pujol, <strong>2 à 3 faux dossiers sont détectés chaque mois</strong> — dont la majorité sur des candidatures qui paraissaient a priori solides.</p>
+<h2>Les signaux d'alerte par type de document</h2>
+<p><strong>Bulletins de salaire falsifiés :</strong></p>
 <ul>
-	<li>
-<h3>Contacter l&#8217;employer du locataire</h3>
-</li>
+<li>Police de caractère différente entre lignes ou sections</li>
+<li>Totaux nets ne correspondant pas aux lignes de cotisations</li>
+<li>Nom d'employeur introuvable au registre des sociétés (SIREN)</li>
+<li>Numéro SIRET invalide ou appartenant à une autre entreprise</li>
+<li>Absence de convention collective mentionnée</li>
 </ul>
-<p>Pour éviter ces faux dossiers, deux options s’offrent à nous : envoyer un email ou appeler directement l’employeur et l&rsquo;ancien propriétaire. La deuxième option est préférable, car les emails se perdent ou sont ignorés. En outre, le téléphone permet d’écarter tout faux numéro tout en obtenant parfois des informations précieuses.</p>
-<p>Quelles questions poser ?</p>
-<p>Précisez l’objet de votre appel et ajoutez que vos questions ne prendront que quelques minutes de son temps.</p>
+<p><strong>Avis d'imposition falsifiés :</strong></p>
 <ul>
-	<li><strong>Pouvez-vous me confirmer que</strong> [nom du candidat] <strong>travaille bien pour vous depuis</strong> [date de début de contrat] ?</li>
-	<li><strong>Le recommanderiez (question à tenter et si vous tombez sur un patron de PME) ?</strong></li>
+<li>Absence du logo DGFIP en filigrane</li>
+<li>Numéro fiscal à 13 chiffres non cohérent</li>
+<li>Revenus déclarés incohérents avec les bulletins fournis</li>
+<li>Mise en page différente des documents officiels DGFiP</li>
 </ul>
-<p>ATTENTION : que l’employeur refuse de répondre ou reste injoignable ne discrédite nullement le candidat locataire.</p>
+<p><strong>Quittances de loyer falsifiées :</strong></p>
 <ul>
-	<li>
-<h3>Contacter le précédent propriétaire du locataire</h3>
-</li>
+<li>Adresse du bien incohérente avec les annonces du marché</li>
+<li>Montants de loyer sans rapport avec les prix de marché du secteur</li>
+<li>Absence de tampon ou signature d'agence</li>
 </ul>
-<p>Quelles questions poser ? : </p>
-<p>Reprendriez-vous votre locataire actuel ou ancien locataire ? Pourquoi ?  Pour quelles raisons ?</p>
+<hr />
+<h2>RGPD et Traitement des candidatures : vos obligations en tant que bailleur</h2>
+<p>La collecte des pièces justificatives de candidats locataires constitue un <strong>traitement de données personnelles</strong> au sens du <strong>Règlement Général sur la Protection des Données (RGPD)</strong>. Un propriétaire bailleur est considéré comme responsable de traitement dès lors qu'il collecte et conserve ces données, même informellement.</p>
+<h2>Ce que le RGPD impose concrètement</h2>
 <ul>
-	<li>
-<h3>Faire des recherches plus approfondies</h3>
-</li>
+<li><strong>Durée de conservation limitée</strong> : les dossiers des candidats non retenus doivent être détruits dans un délai raisonnable (généralement 1 mois après la fin de la sélection)</li>
+<li><strong>Informer le candidat</strong> : il doit être informé de la collecte, de son objet et de ses droits (accès, rectification, effacement)</li>
+<li><strong>Ne pas partager</strong> les dossiers avec des tiers non mandatés</li>
+<li><strong>Sécuriser le stockage</strong> : un dossier de candidature envoyé par email non chiffré et stocké sur un serveur non sécurisé constitue une violation potentielle du RGPD</li>
 </ul>
-<p>Internet est un formidable outil d’investigation : vérifiez l’identité du locataire et de l’employeur sur LinkedIn.</p>
-<h2>Quels sont le critères qui disqualifient un locataire?</h2>
-<p>Quand écarter un locataire de votre liste de candidats ?</p>
-<ul>
-	<li>Le candidat a menti sur l’identité de son employeur ou son salaire</li>
-	<li>Le candidat vous a fourni de faux documents</li>
-	<li>Les bulletins de salaire démontrent un absentéisme important ou des retenues mensuelles.</li>
-</ul>
-<p>Une personne qui a des difficultés à son travail est un risque pour le propriétaire. Une personne solvable est une personne <strong>responsable</strong>, qui a les moyens de payer son loyer et qui le paye en temps voulu.</p>
-<p>Si ces filtres sont importants, cela ne suffit pas à garantir le paiement des loyers.</p>
-<table style="width: 100%; border-collapse: collapse; border-color: #000000;" border="1">
-<tbody>
-<tr>
-<td style="width: 100%;">Pour en savoir plus sur ce thème,  vous pouvez également lire notre article <a href="/services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque/"><strong>Comment éviter les loyers impayés</strong></a>.</td>
-</tr>
-</tbody>
-</table>
-<h2> </h2>
-<p><span style="font-size: 18pt;"><strong>Vous souhaitez confier la gestion locative de votre bien  à un professionnel?</strong></span><br />
-<span style="font-size: 18pt;"><strong>Contactez-nous, c&rsquo;est avec plaisir que nous vous accompagnerons.</strong></span></p>
-                </section>
+<h2>Conclusion</h2>
+<p>Vérifier la solvabilité d'un locataire à Marseille est un processus en quatre temps : <strong>collecter les bonnes pièces</strong> (et uniquement celles autorisées par le décret du 5 novembre 2015), <strong>calculer le taux d'effort et le reste à vivre</strong> de façon combinée, <strong>authentifier les documents</strong> et <strong>évaluer le profil dans sa globalité</strong>.</p>
+<p>Une analyse structurée, appliquée systématiquement à des milliers de dossiers tous les ans, produit un résultat mesurable : 0,12% de taux d'impayés sur 18 ans. Confier cette analyse à un gestionnaire professionnel transfère la méthode et la responsabilité civile qui va avec.</p>
+<hr />
+<h2>FAQ — Solvabilité et Documents Légaux à Marseille</h2>
+<p><strong>Q1. Quels documents un propriétaire peut-il légalement demander à Marseille ?</strong></p>
+<p>Exclusivement ceux listés dans le <strong>décret du 5 novembre 2015</strong> (application de la <strong>loi ALUR 2014</strong>) : pièce d'identité valide, justificatif de domicile actuel (quittances de loyer ou attestation d'hébergement), justificatif de situation professionnelle (contrat de travail, bulletins de salaire ou bilans pour indépendants), et justificatif de ressources (avis d'imposition, attestation CAF). Tout document hors liste — relevé bancaire, casier judiciaire, acte de mariage — est interdit.</p>
+<p><strong>Q2. Comment calculer la solvabilité d'un candidat locataire à Marseille ?</strong></p>
+<p>Deux méthodes complémentaires : la <strong>règle des 3x le loyer</strong> (revenus nets ≥ 3 × loyer charges comprises) et le <strong>taux d'effort de 30%</strong> (loyer ≤ 30% des revenus nets). Pour un appartement à 900€ CC à Marseille, le revenu minimum est de 2 700€ (règle des 3x) ou 3 000€ (taux 30%). Le <strong>reste à vivre</strong> complète l'analyse : déduire du revenu net le loyer, les crédits en cours et les charges fixes. Un reste à vivre inférieur à 900€/mois pour un célibataire est un signal d'alerte, quelle que soit la règle appliquée.</p>
+<p><strong>Q3. Comment détecter un faux dossier de location ?</strong></p>
+<p>Signaux sur les <strong>bulletins de salaire</strong> : polices de caractère hétérogènes, SIRET invalide ou introuvable au registre SIRENE, totaux nets incohérents avec les lignes de cotisations. Sur les <strong>avis d'imposition</strong> : absence du logo DGFIP, numéro fiscal incohérent, revenus déclarés sans rapport avec les bulletins.</p>
+<p><strong>Q4. Un indépendant ou auto-entrepreneur peut-il louer facilement à Marseille ?</strong></p>
+<p>Oui, à condition de produire les <strong>3 derniers bilans comptables</strong> certifiés. Une activité de moins de 3 ans est un signal de risque pour les assureurs <strong>GLI</strong> (souvent refusée). Pour un indépendant marseillais dans un secteur saisonnier (tourisme, événementiel), l'analyse doit porter sur la moyenne des 3 bilans, pas sur le dernier exercice seul. Si le dossier est en limite de solvabilité, la <strong>caution solidaire physique</strong> avec un garant salarié en CDI est la garantie la plus facilement mobilisable.</p>
+<p><strong>Q5. Peut-on refuser un locataire boursier ou bénéficiaire d'APL ?</strong></p>
+<p>Un propriétaire peut légalement refuser un candidat boursier ou allocataire CAF sur des <strong>critères financiers objectifs</strong> (taux d'effort trop élevé, reste à vivre insuffisant). Il ne peut pas le refuser sur la base de son statut d'étudiant boursier ou de bénéficiaire d'APL — ce serait une discrimination indirecte au sens de l'<strong>article 225-1 du Code pénal</strong>. L'<strong>attestation CAF</strong> et la <strong>notification de bourse CROUS</strong> sont des documents intégrables dans le calcul de solvabilité au même titre qu'un bulletin de salaire.</p>
+
+</section>
             </div>
 
         </div>

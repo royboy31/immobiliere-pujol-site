@@ -53,6 +53,7 @@ const services = defineCollection({
     taxonomy: z.string().optional(),
     seoTitle: z.string().optional(),
     seoDescription: z.string().optional(),
+    jsonLd: z.string().optional(),
   }),
 });
 

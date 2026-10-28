@@ -611,9 +611,16 @@ const CUSTOM_FORMS: Record<string, CustomFormConfig> = {
 };
 
 const customForm = CUSTOM_FORMS[slug] || null;
+
+// Phase 2 rewrites ship their own JSON-LD (WebPage + FAQPage) in front matter.
+// Fragment ids ("#faq") are made absolute against the page URL.
+const pageUrl = new URL(pagePath, Astro.site ?? 'https://www.immobiliere-pujol.fr').href;
+const pageSchemas = entry.data.jsonLd
+  ? [JSON.parse(entry.data.jsonLd.replace(/"@id":\s*"#/g, `"@id": "${pageUrl}#`))]
+  : [];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schemas={pageSchemas}>
   {/* ============= HERO ============= */}
   <section class="svc-hero" style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
