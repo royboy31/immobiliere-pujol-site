@@ -148,6 +148,75 @@ bodyHtml = bodyHtml.replace(
   }
 );
 
+// Phase 2 guide pages (they carry their own jsonLd) get a reading layout:
+// "À retenir" box, in-page Sommaire, formula/example callouts, criteria
+// cards and a FAQ accordion. Legacy service pages are left untouched.
+const isGuide = Boolean(entry.data.jsonLd);
+if (isGuide) {
+  const stripTags = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const anchorOf = (s: string) =>
+    stripTags(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+
+  // Prohibited-items card grid (intro mentions "illégal"/"interdit") gets a warning variant.
+  bodyHtml = bodyHtml.replace(
+    /<p class="svc-indicators-intro">([^<]*(?:illégal|interdit)[^<]*)<\/p><ul class="svc-indicators">/gi,
+    '<p class="svc-indicators-intro">$1</p><ul class="svc-indicators svc-indicators--warning">'
+  );
+
+  // Section rules: spacing on the h2s replaces the <hr> separators.
+  bodyHtml = bodyHtml.replace(/<hr\s*\/?>/gi, '');
+
+  // Worked calculation: a tag-free "A = B" line becomes a formula box, and the
+  // paragraph opening with "Exemple" becomes an example callout.
+  bodyHtml = bodyHtml.replace(/<p>([^<]{3,160}\s=\s[^<]{3,160})<\/p>/g, '<p class="svc-guide-formula">$1</p>');
+  bodyHtml = bodyHtml.replace(/<p>(<strong>\s*Exemple\b)/gi, '<p class="svc-guide-example">$1');
+
+  // A run of 3+ "<strong>Label</strong> : text" paragraphs becomes numbered cards.
+  bodyHtml = bodyHtml.replace(
+    /(?:<p><strong>[^<]+<\/strong>\s*:[\s\S]*?<\/p>\s*){3,}/g,
+    (run) => {
+      const items = [...run.matchAll(/<p><strong>([^<]+)<\/strong>\s*:\s*([\s\S]*?)<\/p>/g)];
+      return `<ol class="svc-guide-cards">${items
+        .map((m) => `<li><strong>${m[1].trim()}</strong><span>${m[2].trim()}</span></li>`)
+        .join('')}</ol>`;
+    }
+  );
+
+  // FAQ: "<p><strong>Q1. …</strong></p><p>answer</p>" pairs after the FAQ
+  // heading become an accordion. Answers stay in the DOM (closed <details>).
+  bodyHtml = bodyHtml.replace(/(<h2[^>]*>\s*FAQ[\s\S]*?<\/h2>)([\s\S]*)$/i, (_m, heading, rest) => {
+    const faq = rest.replace(
+      /<p><strong>(?:Q\d+\.\s*)?([\s\S]*?)<\/strong><\/p>\s*<p>([\s\S]*?)<\/p>/g,
+      '<details class="svc-guide-faq__item"><summary>$1</summary><div class="svc-guide-faq__answer"><p>$2</p></div></details>'
+    );
+    return `${heading}<div class="svc-guide-faq">${faq}</div>`;
+  });
+
+  // Anchors on every h2, collected for the Sommaire.
+  const toc: { id: string; label: string }[] = [];
+  bodyHtml = bodyHtml.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner) => {
+    const id = anchorOf(inner);
+    toc.push({ id, label: stripTags(inner).replace(/\s*:\s*$/, '') });
+    return `<h2 id="${id}">${inner}</h2>`;
+  });
+
+  // "À retenir" reuses the first paragraph of the page's own conclusion.
+  const takeaway = bodyHtml.match(/<h2[^>]*>\s*Conclusion\s*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
+  const takeawayHtml = takeaway
+    ? `<aside class="svc-guide-takeaway"><span class="svc-guide-takeaway__label">À retenir</span><p>${takeaway}</p></aside>`
+    : '';
+  const tocHtml = toc.length >= 3
+    ? `<nav class="svc-guide-toc" aria-label="Sommaire"><span class="svc-guide-toc__label">Sommaire</span><ol>${toc
+        .map((t) => `<li><a href="#${t.id}">${t.label}</a></li>`)
+        .join('')}</ol></nav>`
+    : '';
+  const firstH2 = bodyHtml.search(/<h2[\s>]/);
+  if (firstH2 >= 0) {
+    bodyHtml = bodyHtml.slice(0, firstH2) + takeawayHtml + tocHtml + bodyHtml.slice(firstH2);
+  }
+}
+
 // Page-specific enhancement: render "Les valeurs de l'Immobilière Pujol"
 // as a clean cards grid instead of the raw alternating <ul>/<p> markup.
 type ValueCard = { num: string; title: string; description: string };
@@ -622,7 +691,7 @@ const pageSchemas = entry.data.jsonLd
 
 <BaseLayout title={title} description={description} schemas={pageSchemas}>
   {/* ============= HERO ============= */}
-  <section class="svc-hero" style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
+  <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
 
     <div class="svc-hero__inner">
@@ -985,7 +1054,7 @@ const pageSchemas = entry.data.jsonLd
               </div>
             </section>
           ) : (
-            <article class="svc-article-body" set:html={bodyHtml}></article>
+            <article class={`svc-article-body${isGuide ? ' svc-article-body--guide' : ''}`} set:html={bodyHtml}></article>
           )}
 
           {valueCards.length > 0 && (

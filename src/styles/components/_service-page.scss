@@ -3194,3 +3194,223 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   .svc-team-lead__headline { font-size: 26px; }
   .svc-team-gallery { column-count: 1; }
 }
+
+// =========================================
+// GUIDE PAGES — Phase 2 rewrites (pages with jsonLd front matter).
+// Markup is generated in services/[slug].astro.
+// =========================================
+.svc-hero--guide {
+  height: 420px;
+
+  @media (max-width: $bp-tablet) { height: auto; min-height: 340px; padding-top: 48px; padding-bottom: 48px; }
+}
+
+.svc-article-body--guide {
+  font-weight: 400;
+
+  h2 {
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(0, 0, 0, .08);
+    scroll-margin-top: 120px;
+  }
+
+  // The first heading after the Sommaire needs no rule above it.
+  .svc-guide-toc + h2 { border-top: 0; padding-top: 0; margin-top: 56px; }
+
+  // Top-level numbered lists (e.g. candidate profiles) read as cards.
+  > ol {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    counter-reset: guide-ol;
+
+    > li {
+      counter-increment: guide-ol;
+      margin: 0;
+      padding: 20px 22px 14px;
+      background: $white;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+      border-top: 3px solid $ds-olive;
+      font-size: 16px;
+
+      &::before {
+        content: counter(guide-ol, decimal-leading-zero);
+        display: block;
+        font-family: $ds-font-helv;
+        font-size: 13px;
+        letter-spacing: 1.4px;
+        color: $ds-olive-2;
+        margin-bottom: 6px;
+      }
+
+      ul { margin: 10px 0 0; padding-left: 18px; }
+      li { margin-bottom: 8px; }
+    }
+  }
+
+  .svc-guide-takeaway {
+    margin: 32px 0 20px;
+    padding: 22px 26px;
+    background: $ds-soft-green;
+    border-left: 4px solid $ds-olive;
+    border-radius: 0 18px 18px 0;
+
+    p { margin: 0; font-size: 17px; line-height: 1.6; color: $black; }
+  }
+
+  .svc-guide-takeaway__label,
+  .svc-guide-toc__label {
+    display: block;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+    margin-bottom: 10px;
+  }
+
+  .svc-guide-toc {
+    margin: 0 0 8px;
+    padding: 22px 26px;
+    background: $white;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+
+    ol {
+      list-style: decimal;
+      margin: 0;
+      padding-left: 22px;
+      columns: 2;
+      column-gap: 36px;
+    }
+
+    li { margin: 0 0 8px; font-size: 15px; line-height: 1.4; break-inside: avoid; }
+
+    a {
+      color: $black;
+      text-decoration: none;
+
+      &:hover { color: $ds-olive-2; text-decoration: underline; }
+    }
+  }
+
+  .svc-guide-formula {
+    margin: 24px 0;
+    padding: 18px 24px;
+    background: $white;
+    border: 1.5px dashed $ds-olive;
+    border-radius: 14px;
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 19px;
+    text-align: center;
+    color: $black;
+  }
+
+  .svc-guide-example {
+    margin: 0 0 28px;
+    padding: 18px 24px;
+    background: $ds-soft-green;
+    border-radius: 14px;
+    color: $black;
+  }
+
+  .svc-guide-cards {
+    list-style: none;
+    margin: 8px 0 32px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    counter-reset: guide-card;
+
+    li {
+      counter-increment: guide-card;
+      margin: 0;
+      padding: 20px 22px;
+      background: $white;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 15px;
+      line-height: 1.5;
+
+      &::before {
+        content: counter(guide-card, decimal-leading-zero);
+        font-family: $ds-font-helv;
+        font-size: 13px;
+        letter-spacing: 1.4px;
+        color: $ds-olive-2;
+      }
+    }
+
+    strong { font-size: 16px; }
+  }
+
+  .svc-guide-faq__item {
+    margin: 0 0 12px;
+    background: $white;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .04);
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 56px 18px 22px;
+      position: relative;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.4;
+      color: $black;
+
+      &::-webkit-details-marker { display: none; }
+
+      &::after {
+        content: '+';
+        position: absolute;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        font-weight: 300;
+        color: $ds-olive-2;
+      }
+    }
+
+    &[open] summary::after { content: '−'; }
+  }
+
+  .svc-guide-faq__answer {
+    padding: 0 22px 6px;
+
+    p { font-size: 16px; }
+  }
+
+  .svc-indicators--warning .svc-indicator-card {
+    border-top-color: $ds-orange;
+
+    .svc-indicator-card__num { font-size: 0; }
+    .svc-indicator-card__num::before { content: '✕  Interdit'; font-size: 12px; font-weight: 700; color: $ds-orange; }
+  }
+
+  @media (max-width: $bp-tablet) {
+    h2 { margin-top: 44px; padding-top: 22px; }
+
+    > ol,
+    .svc-guide-cards { grid-template-columns: 1fr; }
+
+    .svc-guide-toc ol { columns: 1; }
+    .svc-guide-formula { font-size: 16px; }
+  }
+}
+
+// Mobile: the related-services menu goes below the guide, not before it.
+@media (max-width: $bp-tablet) {
+  .svc-toc-section__inner:has(.svc-article-body--guide) .svc-toc { order: 2; }
+}
