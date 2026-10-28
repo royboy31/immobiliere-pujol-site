@@ -6,19 +6,13 @@ const googleStats = { rating: googleData.rating ?? 4.7, reviewCount: googleData.
 // Primary navigation — mirrors the live site (immobiliere-pujol.fr) menu.
 const navItems = [
   {
-    label: 'Mise en location',
-    href: '/service-immobilier/mettre-en-location/',
-    children: [
-      { label: 'Nos conseils et services en location', href: '/service-immobilier/mettre-en-location/' },
-      { label: 'Estimation de loyer', href: '/service-immobilier/mettre-en-location/#form' },
-      { label: 'Nos annonces de location', href: '/annonces/locations/' },
-    ],
-  },
-  {
     label: 'Gestion locative',
     href: '/service-immobilier/gestion-locative/',
     children: [
       { label: 'Nos conseils et services en gestion', href: '/service-immobilier/gestion-locative/' },
+      { label: 'La mise en location', href: '/service-immobilier/mettre-en-location/' },
+      { label: 'Estimation de loyer', href: '/service-immobilier/mettre-en-location/#form' },
+      { label: 'Nos annonces de location', href: '/annonces/locations/' },
       { label: 'Etude du marché locatif à Marseille', href: '/services/etude-sur-le-marche-de-la-location-a-marseille/' },
       { label: 'Obtenir un devis de Gestion Locative', href: '/service/devis-gestion-locative-marseille/' },
       { label: 'Contacter notre expert en gestion locative', href: '/services/contacter-un-conseiller-en-gestion-locative/' },
