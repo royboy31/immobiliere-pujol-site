@@ -230,6 +230,13 @@ if (isGuide) {
   if (firstH2 >= 0) {
     bodyHtml = bodyHtml.slice(0, firstH2) + takeawayHtml + tocHtml + bodyHtml.slice(firstH2);
   }
+
+  // Each numbered section becomes its own block, so readers see where one
+  // part ends and the next begins (Caroline 29/10).
+  bodyHtml = bodyHtml
+    .split(/(?=<h2 id=")/)
+    .map((part) => (part.startsWith('<h2 id="') ? `<section class="svc-guide-section">${part}</section>` : part))
+    .join('');
 }
 
 // Page-specific enhancement: render "Les valeurs de l'Immobilière Pujol"

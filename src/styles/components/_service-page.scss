@@ -3218,14 +3218,25 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 }
 
-// Guide pages read as one central column: the related-articles menu moves
-// below the content on desktop too (Caroline 29/10).
+// Guide pages: a narrow sticky menu of related articles on the left, so
+// readers can switch article at any point (Caroline 29/10); below the
+// content on mobile.
 .svc-toc-section__inner:has(.svc-article-body--guide) {
-  grid-template-columns: minmax(0, 820px);
+  grid-template-columns: 240px minmax(0, 820px);
   justify-content: center;
-  gap: 56px;
+  gap: 48px;
 
-  .svc-toc { order: 2; position: static; }
+  .svc-toc {
+    padding: 24px 20px;
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+  }
+
+  @media (max-width: $bp-tablet) {
+    grid-template-columns: 1fr;
+
+    .svc-toc { order: 2; position: static; max-height: none; overflow: visible; }
+  }
 }
 
 .svc-article-body--guide {
@@ -3245,7 +3256,8 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   .svc-guide-toc + h2 { border-top: 0; padding-top: 0; margin-top: 56px; }
 
   // Top-level numbered lists (e.g. candidate profiles) read as cards.
-  > ol {
+  > ol,
+  .svc-guide-section > ol {
     list-style: none;
     padding: 0;
     display: grid;
@@ -3276,6 +3288,24 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
       ul { margin: 10px 0 0; padding-left: 18px; }
       li { margin-bottom: 8px; }
     }
+  }
+
+  .svc-guide-section {
+    margin-top: 28px;
+    padding: 36px 40px;
+    background: $white;
+    border-radius: 24px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .05);
+
+    > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+    > *:last-child { margin-bottom: 0; }
+
+    // Cards inside a white block sit on the page colour instead.
+    > ol > li,
+    .svc-guide-cards li,
+    .svc-guide-faq__item,
+    .svc-guide-formula,
+    .svc-indicator-card { background: $ds-paper; box-shadow: none; }
   }
 
   .svc-guide-takeaway {
@@ -3451,7 +3481,10 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     h2 { margin-top: 44px; padding-top: 22px; }
 
     > ol,
+    .svc-guide-section > ol,
     .svc-guide-cards { grid-template-columns: 1fr; }
+
+    .svc-guide-section { padding: 24px 20px; border-radius: 18px; }
 
     .svc-guide-toc { padding: 16px 20px; }
     .svc-guide-toc ol { columns: 1; }
