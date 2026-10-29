@@ -1,8 +1,27 @@
 ---
-title: "Etude sur le marché de la location à Marseille"
-slug: "services/etude-sur-le-marche-de-la-location-a-marseille"
-seoTitle: "Etude sur le marché de la location à Marseille"
-seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondissement, durée d'occupation moyenne en location vide ou meublée..."
+title: 'Marché de la location à Marseille : dossier 2026'
+slug: services/etude-sur-le-marche-de-la-location-a-marseille
+seoTitle: 'Marché de la location à Marseille : dossier 2026'
+seoDescription: 'Découvrez le dossier annuel d’Immobilière Pujol sur la location à Marseille : tendances du marché, indicateurs et repères pour les propriétaires bailleurs.'
+jsonLd: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#webpage",
+        "name": "Marché de la location à Marseille : dossier 2026",
+        "description": "Découvrez le dossier annuel d’Immobilière Pujol sur la location à Marseille : tendances du marché, indicateurs et repères pour les propriétaires bailleurs.",
+        "inLanguage": "fr-FR",
+        "dateModified": "2026-10-27",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Immobilière Pujol",
+          "url": "https://www.immobiliere-pujol.fr/"
+        }
+      }
+    ]
+  }
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
@@ -40,24 +59,22 @@ seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondisse
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Etude sur le marché de la location à Marseille</h3>
-                    <h2>Découvrez notre dossier annuel sur le marché de la location à Marseille</h2>
-<p>Chaque année, nous nous engageons à vous fournir une analyse approfondie et précise du marché de la location à Marseille. <br />
-Notre dossier annuel est une ressource essentielle pour les propriétaires bailleurs et les investisseurs souhaitant prendre des décisions informées dans le secteur immobilier.</p>
-<p>En téléchargeant notre dossier, vous aurez accès à des : </p>
+<h3 class="contextual__title">Marché de la location à Marseille : dossier 2026</h3>
+<p>Découvrez notre dossier annuel sur le Marché de la Location à Marseille.</p>
+<p>Chaque année, nous nous engageons à vous fournir une analyse approfondie et précise du marché de la location à Marseille.</p>
+<p>Notre dossier annuel est une ressource essentielle pour les propriétaires bailleurs et les investisseurs souhaitant prendre des décisions informées dans le secteur immobilier.</p>
+<h2>Ce que contient notre dossier annuel</h2>
+<p>En téléchargeant notre dossier, vous aurez accès à :</p>
 <ul>
-	<li><strong>Des analyses approfondies</strong> : Des informations détaillées sur les tendances actuelles du marché immobilier à Marseille.</li>
-	<li><strong>Des données essentielles</strong> : Statistiques actualisées, indicateurs clés et prévisions pour l&rsquo;année à venir.</li>
-	<li><strong>Des conseils stratégiques</strong> : Des recommandations pratiques basées sur notre expertise locale pour optimiser vos investissements immobiliers.</li>
+<li><strong>Des analyses approfondies</strong> : Des informations détaillées sur les tendances actuelles du marché immobilier à Marseille.</li>
+<li><strong>Des données essentielles</strong> : Statistiques actualisées, indicateurs clés et prévisions pour l’année à venir.</li>
+<li><strong>Des conseils stratégiques</strong> : Des recommandations pratiques basées sur notre expertise locale pour optimiser vos investissements immobiliers.</li>
 </ul>
-<p><br />
-Ne manquez pas cette opportunité d&rsquo;accéder à une information plus fine qui pourrait façonner votre prochaine décision d&rsquo;investissement.</p>
+<h2>Recevez notre dossier annuel</h2>
+<p>Ne manquez pas cette opportunité d’accéder à une information plus fine qui pourrait façonner votre prochaine décision d’investissement.</p>
 <p>Recevez notre dossier annuel afin de vous préparer à tirer parti des opportunités du marché immobilier marseillais.</p>
-<p><a href="https://forms.zohopublic.eu/immobilierepujol1/form/Nouscontacter/formperma/Vneczr8bpV0tDLBvvbYtU09GxSrs2L-JGj-7XdhaQCk" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-984090 alignnone" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-800x800.jpg" alt="" width="352" height="352" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-800x800.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-768x768.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-100x100.jpg 100w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-300x300.jpg 300w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-400x400.jpg 400w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024-600x600.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/Visuel-Dossier-location-2024.jpg 1080w" sizes="auto, (max-width: 352px) 100vw, 352px" /></a></p>
-<p><a href="https://forms.zohopublic.eu/immobilierepujol1/form/Nouscontacter/formperma/Vneczr8bpV0tDLBvvbYtU09GxSrs2L-JGj-7XdhaQCk" target="_blank" rel="noopener"><img loading="lazy" decoding="async" class="wp-image-984092 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-800x134.jpg" alt="" width="334" height="56" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-800x134.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-768x128.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-1536x257.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-600x100.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE-1200x200.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2025/02/RECEVOIR-ETUDE.jpg 1874w" sizes="auto, (max-width: 334px) 100vw, 334px" /></a></p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-                </section>
+
+</section>
             </div>
 
         </div>

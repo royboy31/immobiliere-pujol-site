@@ -196,9 +196,11 @@ if (isGuide) {
   // FAQ: "<p><strong>Q1. …</strong></p><p>answer</p>" pairs after the FAQ
   // heading become an accordion. Answers stay in the DOM (closed <details>).
   bodyHtml = bodyHtml.replace(/(<h2[^>]*>\s*FAQ[\s\S]*?<\/h2>)([\s\S]*)$/i, (_m, heading, rest) => {
+    // An answer runs until the next question, so lists and extra paragraphs stay inside it.
     const faq = rest.replace(
-      /<p><strong>(?:Q\d+\.\s*)?([\s\S]*?)<\/strong><\/p>\s*<p>([\s\S]*?)<\/p>/g,
-      '<details class="svc-guide-faq__item"><summary>$1</summary><div class="svc-guide-faq__answer"><p>$2</p></div></details>'
+      /<p><strong>(?:Q\d+\.\s*)?([\s\S]*?)<\/strong><\/p>\s*([\s\S]*?)(?=<p><strong>(?:Q\d+\.)|$)/g,
+      (_q, question, answer) =>
+        `<details class="svc-guide-faq__item"><summary>${question}</summary><div class="svc-guide-faq__answer">${answer.trim()}</div></details>`
     );
     return `${heading}<div class="svc-guide-faq">${faq}</div>`;
   });
@@ -217,7 +219,7 @@ if (isGuide) {
   bodyHtml = bodyHtml.replace(/>([^<]+)</g, (_m, text) => `>${text.replace(/ ([:;?!])/g, '\u00a0$1')}<`);
 
   // "À retenir" reuses the first paragraph of the page's own conclusion.
-  const takeaway = bodyHtml.match(/<h2[^>]*>\s*(?:<span class="svc-guide-num">[^<]*<\/span>\s*)?Conclusion\s*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
+  const takeaway = bodyHtml.match(/<h2[^>]*>\s*(?:<span class="svc-guide-num">[^<]*<\/span>\s*)?Conclusion\b[^<]*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
   const takeawayHtml = takeaway
     ? `<aside class="svc-guide-takeaway"><span class="svc-guide-takeaway__label">À retenir</span><p>${takeaway}</p></aside>`
     : '';
@@ -569,8 +571,12 @@ if (slug === 'contacter-un-conseiller-en-gestion-locative') {
 }
 
 // Build the sidebar list: parent header, section label, then siblings + current page.
+// Sibling labels follow each page's current title, not the legacy link text.
+const serviceTitles = new Map(
+  (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
+);
 const sidebarItems = [
-  ...siblings.map((s) => ({ ...s, current: false })),
+  ...siblings.map((s) => ({ ...s, label: serviceTitles.get(s.href) || s.label, current: false })),
   { href: pagePath, label: entry.data.title, current: true },
 ].sort((a, b) => a.label.localeCompare(b.label));
 

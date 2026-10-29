@@ -1,9 +1,78 @@
 ---
-title: "Obtenir un devis pour la gestion locative de vos biens immobiliers"
-slug: "services/devis-gestion-locative-marseille"
-ctaText: "Demander un devis"
-seoTitle: "Obtenir un devis pour la gestion locative de vos biens immobiliers"
-seoDescription: "Obtenir un devis pour une gestion locative de biens immobiliers: notre offre, nos devis par une équipe parmi les plus recommandé de notre ville"
+title: 'Devis de gestion locative à Marseille : services et frais'
+slug: services/devis-gestion-locative-marseille
+ctaText: Demander un devis
+seoTitle: 'Devis de gestion locative à Marseille : services et frais'
+seoDescription: 'Comprenez le contenu d’un devis de gestion locative à Marseille : missions, base des honoraires, garanties et démarches pour confier votre bien à Pujol.'
+jsonLd: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#webpage",
+        "name": "Devis de gestion locative à Marseille : services et frais",
+        "description": "Comprenez le contenu d’un devis de gestion locative à Marseille : missions, base des honoraires, garanties et démarches pour confier votre bien à Pujol.",
+        "inLanguage": "fr-FR",
+        "dateModified": "2026-10-27",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Immobilière Pujol",
+          "url": "https://www.immobiliere-pujol.fr/"
+        },
+        "hasPart": {
+          "@id": "#faq"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "inLanguage": "fr-FR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Comment est calculé le montant des frais de gestion locative ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Les honoraires de gestion locative sont calculés sous forme d'un pourcentage appliqué sur les sommes encaissées (loyers hors charges ou charges comprises selon les termes du mandat). Chez l'Immobilière Pujol, vous ne payez ces honoraires que si le loyer est effectivement perçu"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Les frais de gestion locative sont-ils déductibles des impôts ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, à 100 %. Que vous déclariez vos revenus fonciers au régime réel (location vide) ou vos revenus en BIC (location meublée LMNP au réel), l'ensemble des honoraires de gestion et de souscription à l'assurance loyers impayés sont déductibles de vos recettes brutes"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Peut-on changer de gestionnaire locatif en cours de bail à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui. Vous pouvez résilier votre mandat de gestion actuel immédiatement si l’agence n’a pas respecté la loi Châtel (très souvent le cas) ou à son échéance annuelle en respectant le préavis prévu au contrat. L'Immobilière Pujol prend en charge gratuitement l'intégralité du transfert de votre dossier et des documents du locataire auprès de votre ancien gestionnaire"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Que couvre l'option assurance loyers impayés dans votre devis ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Notre assurance loyers impayés vous rembourse 100 % des loyers, charges et taxes impayés dès le premier mois de retard, sans franchise et sans plafond de durée. Elle prend également en charge la totalité des frais de procédure juridique (huissier, avocat, frais d'expulsion) ainsi que les dégradations locatives commises par le locataire à hauteur de 7500€."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quel est le délai pour mettre en location mon bien après la signature du mandat de gestion locative ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Une fois le mandat signé et les diagnostics obligatoires (DPE, Loi Boutin, ERP, etc.) récupérés, votre annonce est rédigée, photographiée et publiée sur l'ensemble des portails sous 48 heures ouvrées. Notre délai médian de relocation est de 18 jours."
+            }
+          }
+        ]
+      }
+    ]
+  }
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
@@ -53,52 +122,109 @@ seoDescription: "Obtenir un devis pour une gestion locative de biens immobiliers
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Obtenir un devis pour la gestion locative de vos biens immobiliers</h3>
-                    <p>La mise en location d’un bien et sa gestion requiert du temps et une certaine expertise pour éviter des erreurs. Nous nous adaptons à votre budget et élaborons une offre sur mesure. <br />
-Notre but est de vous aider à louer vite et bien, au juste prix, en évitant les erreurs de la mise en location : locataire insolvable, malfaçons suite aux travaux, flou sur les clauses, déclarations fiscales contestables…</p>
-<p>Nous assumons tout ou partie des actes de gestion locative. Déléguer la gestion locative à un professionnel présente de nombreux avantages : gain de temps, sécurisation des revenus… vous vous ôtez d’un poids et contractez des revenus réellement passifs.</p>
-<h2>La gestion locative pour qui ?</h2>
-<p>Pour les propriétaires désireux de déléguer toutes les tâches de location et de gestion à un administrateur de biens expérimenté. <br />
-Dans ce cadre, l&rsquo;Immobilière Pujol assure  la rénovation éventuelle du bien, sa mise en publicité, la recherche d’un locataire solvable, la rédaction du bail, la réalisation de l&rsquo;état des lieux, le paiement des charges au syndic de l’immeuble de copropriété…</p>
-<p>Pour compléter cette prestation, nous proposons d&rsquo;autres garanties pour sécuriser vos locations :</p>
+<h3 class="contextual__title">Devis de gestion locative à Marseille : services et frais</h3>
+<p>Chez l'<strong>Immobilière Pujol</strong>, la transparence est totale : <strong>aucun frais caché, aucun coût superflu</strong>. Nos honoraires de gestion sont calculés sous forme de pourcentage prélevé sur les encaissements réels (loyers + charges).</p>
+<table>
+<thead>
+<tr>
+<th><strong>Prestation / Option</strong></th>
+<th><strong>Tarif indicatif (HT / TTC)</strong></th>
+<th><strong>Ce qui est inclus</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mandat de Gestion Locative Courante</strong></td>
+<td><strong>À partir de 3,75 % HT</strong> des encaissements, selon le barème et les conditions du mandat</td>
+<td>Gestion administrative, comptable, encaissement des loyers, révision annuelle, suivi technique et sinistres, conseils.</td>
+</tr>
+<tr>
+<td><strong>Assurance loyers impayés en option</strong></td>
+<td><strong>1,8% TTC</strong> du loyer CC</td>
+<td>Prise en charge à 100 % des loyers impayés dès le 1er mois, dégradations locatives et frais de procédure/avocat.</td>
+</tr>
+<tr>
+<td><strong>Honoraires de Mise en Location (Loi Alur)</strong></td>
+<td>Selon le <a href="/agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/">barème de l’agence</a></td>
+<td>Annonce, photos, vidéo, Visites, vérification des dossiers, rédaction du bail et réalisation des état des lieux entrée et sortie.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bon à savoir (Déductibilité fiscale) :</strong> 100 % de vos frais de gestion locative et de cotisations d'assurance loyers impayés (GLI) sont <strong>intégralement déductibles de vos revenus fonciers</strong> (au régime réel) ou des bénéfices industriels et commerciaux (BIC en LMNP).</p>
+<p>Obtenez votre devis de gestion sur-mesure pour votre appartement ou immeuble à Marseille.</p>
+<h2>Ce que comprend votre mandat de gestion avec l'Immobilière Pujol</h2>
+<p>En nous confiant le mandat de gestion de votre bien à Marseille (du 1er au 16e arrondissement), vous bénéficiez d'un accompagnement à 360° :</p>
+<h3>A. Mise en location &amp; sélection du locataire</h3>
 <ul>
-	<li>Notre assurance Garantie de Loyers Impayés (GLI) est à 1,8% TTC du montant des encaissements.</li>
-	<li>Notre offre assurance <em>Propriétaire Non Occupant</em> (PNO) est à 70€ TTC par an.</li>
+<li><strong>Estimation précise du loyer</strong> selon l'emplacement exact (Prado, Timone, Joliette, Chave, etc.) et le décret d'encadrement à la relocation en zone tendue.</li>
+<li><strong>Valorisation visuelle professionnelle</strong> et diffusion prioritaire sur les plus grands portails (SeLoger/logiimmo, LeBonCoin, Bien'ici…).</li>
+<li><strong>Filtrage rigoureux des candidatures :</strong> Contrôle systématique des avis d'imposition via le service SVID de la DGFIP et vérification des fiches de paie pour écarter 100 % des faux dossiers.</li>
+<li><strong>Rédaction du bail conforme Loi Alur</strong> et réalisation des états des lieux d'entrée /sortie numérique ultra-détaillés (photos à l'appui).</li>
 </ul>
-<p>Notre objectif n’est nullement de vous vendre ces options. Nous jugeons au cas par cas de leur utilité. Notez aussi que ces honoraires optionnels sont déductibles de vos revenus fonciers.</p>
-<p>&nbsp;</p>
-<h2>Qu&rsquo;est-ce qu&rsquo;un mandat de gestion ?</h2>
-<p>Le mandat nous autorise légalement à assumer toute la gestion locative de votre patrimoine et à vous représenter tout en ayant l’obligation de vous tenir informé de nos actes. Il inclut en premier lieu la mise en location : rédaction de l’annonce immobilière (descriptif, photos, schémas, prix…), la diffusion et promotion de l’annonce, la réception des appels et les entretiens des candidats locataires les plus prometteurs.</p>
-<p><u>Mise en location</u><br />
-Nous n’hésitons pas à vous apporter notre expertise sur le prix de votre bien : nous connaissons le marché et sommes à même d’attribuer une valeur juste à votre appartement ou la maison que vous souhaitez louer.</p>
-<p>La première garantie du mandat de gestion : trouver un locataire solvable et responsable qui prendra soin de votre bien.</p>
-<p>En tant que mandataires, nous sommes en contact direct avec le ou les locataires. Nous établissons le contrat de location et percevons pour vous les loyers mensuels.</p>
-<p><u>Les travaux</u><br />
-Nous vous informons si des travaux sont nécessaires ou vivement recommandés (afin de valoriser votre bien sur le marché). Nous travaillons depuis des années avec des maçons et des prestataires fiables et compétitifs. Différents devis vous seront présentés</p>
-<p><u>Garanties et gestion des litiges</u><br />
-Le mandat permet de mettre des garanties en place : engagement de caution, garantie de loyers impayés… et en cas de litiges, nous assurons le précontentieux et, si l’amiable ne fonctionne pas, nous faisons un recours en justice.</p>
-<p><u>Gestion de syndic</u><br />
-Nous sommes encore plus compétitif quand nous gérons également l’immeuble en qualité de syndic.</p>
-<p>Nous régularisons et payons pour vous les charges de copropriété.</p>
-<p>Nous vous représentons au cours des assemblées générales de copropriétaires. Vous avez le droit de déléguer à un mandataire, même si nous ne sommes pas membres du syndicat.</p>
-<p><u>Déclarations fiscales</u><br />
-Le mandat nous autorise à préparer les éléments de la déclaration fiscale.</p>
-<p>&nbsp;</p>
-<h2>Combien coûte une gestion locative complète ?</h2>
-<p>Le bailleur paye en général entre 5 % et 8 % du total des loyers hors taxes générés par le ou les biens au cours d’une année.</p>
-<p><u>Notre offre en gestion locative se situe entre 4% et 7% TTC</u> du montant des encaissements selon le montant des loyers, la nature du bail et du bien que nous aurons à gérer.</p>
-<p>Les honoraires de gestion sont déductibles de vos revenus fonciers. En intégrant l&rsquo;impact fiscal, le coût d&rsquo;une gestion locative est donc d&rsquo;environ 25 à 30€ par mois.</p>
-<h2>Comment suivre la gestion de votre bien ?</h2>
-<p>Tous nos bailleurs bénéficient d&rsquo;un accès à leur dossier en ligne via leur espace client. </p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<hr />
-<p style="text-align: left;">Vous souhaitez nous confier la location ou la <a href="/services/devis-gestion-locative-marseille/">gestion locative </a> de votre bien?</p>
-<p>N’hésitez pas à nous contacter  :<br />
-&#8211; par mail via le formulaire ci-dessous <br />
-&#8211;  par téléphone en appelant un conseiller en gestion locative au <span style="font-size: 14pt;"><strong>04 91 37 38 39</strong></span>. <br />
-C’est avec plaisir que nous répondrons à toutes vos questions et vous accompagnerons. </p>
-                </section>
+<h3>B. Gestion administrative &amp; comptable au quotidien</h3>
+<ul>
+<li><strong>Appels et encaissement des loyers</strong> et provisions pour charges.</li>
+<li><strong>Indexation annuelle automatique du loyer</strong> selon l'Indice de Référence des Loyers (IRL).</li>
+<li><strong>Régularisation annuelle des charges de copropriété</strong> en lien avec le syndic et de la TEOM (Taxe d'enlèvement des ordures ménagères).</li>
+<li><strong>Aide à la déclaration fiscale (option) :</strong> Envoi d'un Imprimé Fiscal Unique (IFU) récapitulatif annuel prêt à être reporté sur votre déclaration de revenus.</li>
+</ul>
+<h3>C. Suivi technique &amp; gestion des sinistres</h3>
+<ul>
+<li><strong>Gestion des travaux d'urgence ou d'entretien :</strong> Intervention d'artisans et entreprises du bâtiment locales partenaires, rigoureusement sélectionnées et au prix juste.</li>
+<li><strong>Traitement complet des sinistres</strong> (dégâts des eaux, pannes) auprès des compagnies d'assurances et des syndics de copropriété.</li>
+<li><strong>Accompagnement aux obligations locales :</strong> Gestion des dossiers de <strong>Permis de louer</strong> (zones réglementées par la Métropole Aix-Marseille-Provence) et conseils en rénovation énergétique DPE.</li>
+</ul>
+<h3>D. Conseils et audit régulier de votre bien</h3>
+<ul>
+<li>Audit de votre bien à chaque relocation avant sortie du locataire pour vérifier son état, éviter les litiges avec le locataire.</li>
+<li>Conseils sur les rénovations nécessaires ou indispensables pour mettre aux normes, au goût du jour ou améliorer la note énergétique de votre appartement et optimiser votre loyer.</li>
+</ul>
+<h2>Pourquoi déléguer à l'Immobilière Pujol plutôt que gérer seul ?</h2>
+<p>Gestionnaire indépendant et familial ancré à Marseille depuis <strong>2002</strong>, l'<strong>Immobilière Pujol</strong> gère aujourd'hui un parc vaste et réalise plus de <strong>650 mises en location par an</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>GÉRER SEUL À MARSEILLE</th>
+<th>AVEC L'IMMOBILIÈRE PUJOL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❌ Risque de faux dossiers (1 sur 5)</td>
+<td>✅ Vérification DGFIP &amp; contrôle anti-fraude</td>
+</tr>
+<tr>
+<td>❌ Risque d'erreur sur le Permis de louer</td>
+<td>✅ Conformité métropolitaine garantie</td>
+</tr>
+<tr>
+<td>❌ Visibilité restreinte de l'annonce</td>
+<td>✅ Multidiffusion premium sur tous les portails</td>
+</tr>
+<tr>
+<td>❌ Gestion chronophage des litiges</td>
+<td>✅ Gestionnaire dédié, garantie loyers impayés, service contentieux interne</td>
+</tr>
+<tr>
+<td>❌ Fiscalité souvent mal optimisée</td>
+<td>✅ Accompagnement et conseils</td>
+</tr>
+</tbody>
+</table>
+<p>Confiez la gestion de votre patrimoine marseillais à un expert de proximité depuis 2002.</p>
+<h2>FAQ : tout savoir sur le devis et la gestion locative à Marseille</h2>
+<p><strong>Q1. Comment est calculé le montant des frais de gestion locative ?</strong></p>
+<p>Les honoraires de gestion locative sont calculés sous forme d'un pourcentage appliqué sur les sommes encaissées (loyers hors charges ou charges comprises selon les termes du mandat). Chez l'Immobilière Pujol, vous ne payez ces honoraires <strong>que si le loyer est effectivement perçu</strong>.</p>
+<p><strong>Q2. Les frais de gestion locative sont-ils déductibles des impôts ?</strong></p>
+<p><strong>Oui, à 100 %.</strong> Que vous déclariez vos revenus fonciers au régime réel (location vide) ou vos revenus en BIC (location meublée LMNP au réel), l'ensemble des honoraires de gestion et de souscription à l'assurance loyers impayés sont déductibles de vos recettes brutes.</p>
+<p><strong>Q3. Peut-on changer de gestionnaire locatif en cours de bail à Marseille ?</strong></p>
+<p><strong>Oui.</strong> Vous pouvez résilier votre mandat de gestion actuel immédiatement si l’agence n’a pas respecté la loi Châtel (très souvent le cas) ou à son échéance annuelle en respectant le préavis prévu au contrat. L'Immobilière Pujol prend en charge gratuitement l'intégralité du transfert de votre dossier et des documents du locataire auprès de votre ancien gestionnaire.</p>
+<p><strong>Q4. Que couvre l'option assurance loyers impayés dans votre devis ?</strong></p>
+<p>Notre assurance loyers impayés vous rembourse <strong>100 % des loyers, charges et taxes impayés dès le premier mois de retard</strong>, sans franchise et sans plafond de durée. Elle prend également en charge la totalité des frais de procédure juridique (huissier, avocat, frais d'expulsion) ainsi que les dégradations locatives commises par le locataire à hauteur de 7500€.</p>
+<p><strong>Q5. Quel est le délai pour mettre en location mon bien après la signature du mandat de gestion locative ?</strong></p>
+<p>Une fois le mandat signé et les diagnostics obligatoires (DPE, Loi Boutin, ERP, etc.) récupérés, votre annonce est rédigée, photographiée et publiée sur l'ensemble des portails <strong>sous 48 heures ouvrées</strong>. Notre délai médian de relocation est de <strong>18 jours</strong>.</p>
+
+</section>
             </div>
 
         </div>

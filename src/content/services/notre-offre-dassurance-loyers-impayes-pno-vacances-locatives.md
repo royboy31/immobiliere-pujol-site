@@ -1,9 +1,70 @@
 ---
-title: "Quelles sont assurances locatives et pourquoi les souscrire ?"
-slug: "services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives"
-ctaText: "Demander un devis"
-seoTitle: "Quelles sont assurances locatives et pourquoi les souscrire?"
-seoDescription: "Notre assurance loyers impayés à 1,8% est l'une des plus complète du marché. Notre assurance PNO à 35€ par an. Contactez nous et recevez une offre en moins de 24h"
+title: 'Assurances locatives : GLI et PNO à Marseille'
+slug: services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives
+ctaText: Demander un devis
+seoTitle: 'Assurances locatives : GLI et PNO à Marseille'
+seoDescription: 'Garantie des loyers impayés, assurance PNO et vacance : comprenez le rôle des assurances locatives et les protections proposées aux bailleurs à Marseille.'
+jsonLd: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#webpage",
+        "name": "Assurances locatives : GLI et PNO à Marseille",
+        "description": "Garantie des loyers impayés, assurance PNO et vacance : comprenez le rôle des assurances locatives et les protections proposées aux bailleurs à Marseille.",
+        "inLanguage": "fr-FR",
+        "dateModified": "2026-10-27",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Immobilière Pujol",
+          "url": "https://www.immobiliere-pujol.fr/"
+        },
+        "hasPart": {
+          "@id": "#faq"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "inLanguage": "fr-FR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quel est le tarif de l'assurance loyers impayés chez l'Immobilière Pujol ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Notre assurance Garantie Loyers Impayés (GLI) est proposée au taux négocié de 1,8 % TTC du montant des loyers et charges. Elle est accessible dans le cadre d'un mandat de gestion locative et souscrite lors de chaque signature d’un nouveau bail"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "L'assurance PNO est-elle obligatoire pour un propriétaire bailleur ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, l'assurance Propriétaire Non Occupant (PNO) est obligatoire en copropriété (Loi ALUR). Elle garantit le bien contre les sinistres (dégâts des eaux, incendie) en période de vacance locative ou si le locataire est sous-assuré"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Les frais d'assurance locative sont-ils déductibles des impôts ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, si vous déclarez vos revenus fonciers au régime réel, l'intégralité des primes d'assurance (GLI et PNO) ainsi que nos frais de gestion locative sont déductibles de vos revenus fonciers"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Que couvre la garantie dégradations immobilières de l'assurance loyers impayés Pujol ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Notre assurance loyers impayés couvre les dégradations commises par le locataire jusqu'à un plafond de 7 500 €, incluant la remise en état des peintures, parquets, sanitaires ou plomberie selon les grilles de vétusté prévues"
+            }
+          }
+        ]
+      }
+    ]
+  }
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
@@ -47,64 +108,69 @@ seoDescription: "Notre assurance loyers impayés à 1,8% est l'une des plus comp
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Quelles sont assurances locatives et pourquoi les souscrire ?</h3>
-                    <h2>Le garantie de loyers impayés</h2>
-<p>Nous proposons à nos clients propriétaires une garantie loyers impayés à 1,8% TTC des encaissements en option . Cette assurance permet de percevoir les loyers en cas d&rsquo;impayés et de couvrir les frais de remise en état de votre bien immobilier en cas de dégradations par le locataire.<br />
-Si ce pourcentage est aussi bas, c&rsquo;est que nous maintenons chez Immobilière Pujol un taux de sinistres des impayés à des niveaux très bas sur Marseille.<br />
-Ce faible taux de sinistralité nous permet de négocier au mieux le coût et les garanties (pas de franchise, garantie illimitée, prise en charge des dégradations &amp; frais de procédures) dont nous faisons profiter nos clients propriétaires. <br />
-Pour en savoir plus, lire l&rsquo;article dédié à<a href="/services/notre-garantie-de-loyers-impayes/" target="_blank" rel="noopener"> cette couverture de loyers impayés.</a> </p>
-<h2> </h2>
-<h2>L&rsquo;assurance propriétaire non occupant</h2>
-<p>Depuis <a href="/proprietaires-cout-loi-duflot/">la loi Duflot</a>, le propriétaire d&rsquo;un appartement en copropriété doit s&rsquo;assurer en responsabilité civil. Or les compagnies d&rsquo;assurance ne proposent pas ce contrat d&rsquo;assurance responsabilité civile : nous devons donc souscrire des contrats d&rsquo;assurance PNO (Propriétaire non occupant) pour le compte de nos clients.<br />
-Si cette assurance est assez peu mis en cause dans les sinistres et dégâts, elle intervient en cas de sinistres dans un appartement vacant ou si les garanties de la multi-risques habitation du locataire sont insuffisantes.</p>
-<ul>
-	<li style="list-style-type: none;">
-<ul>
-	<li>
-<h3>Les tarifs PNO que propose l&rsquo;Immobilière Pujol :</h3>
-<ul>
-	<li> 35€ annuel pour les appartements en copropriété inférieurs à 200 m².</li>
-	<li>15€ annuel pour les emplacements de parking.</li>
-	<li>55€ pour les bureaux inférieurs à 200 m²</li>
-	<li>75€ pour les commerces inférieurs à 200 m²</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2> </h2>
-<h2>La vacance ou carence locative</h2>
-<p>La vacance locative est la non-location du bien immobilier entre deux locataires.<br />
-Une assurance vacance locative va palier l&rsquo;absence de locataire et la perte des loyers pendant ce temps.<br />
-La garantie vacance locative prend effet deux mois après la date du préavis légal, après libération de l&rsquo;appartement. Quand l&rsquo;immeuble est neuf, et là on parle de carence, celle-ci prend effet 3 mois après remise des clés.</p>
-<ul>
-	<li>
-<h3>Les tarifs carence locative que propose l&rsquo;Immobilière Pujol :</h3>
-</li>
-</ul>
-<p>Nous proposons exclusivement cette assurance pour les appartements neufs, lors des premières locations. <br />
-Notre tarif est de 1,8% TTC  qui inclut une franchise de 2 mois. Cette garantie est limité à 12 mois pleins (sur 9 ans consécutifs) à raison de 5 mensualités par location.</p>
-<p>&nbsp;</p>
-<h2>Multi-risques immeuble</h2>
-<p>Quand nous assurons les immeubles en pleine gestion (un propriétaire détient l&rsquo;immeuble dans sa totalité), nous proposons <strong>des tarifs entre 0,8 et 1€ le m²</strong>. <br />
-La police d&rsquo;assurance est de très bonne qualité, avec une intercalaire qui &#8211; à notre connaissance &#8211; assure les meilleures garanties du marché tous sinistres confondus (aucune franchie sauf en cas de vandalisme).</p>
-<table style="width: 100%; border-collapse: collapse; border-color: #000000;" border="1">
+<h3 class="contextual__title">Assurances locatives : GLI et PNO à Marseille</h3>
+<p>Pour sécuriser vos revenus locatifs et protéger votre logement contre les aléas (impayés, dégradations, sinistres), <strong>l'Immobilière Pujol</strong> propose des garanties négociées aux meilleures conditions du marché pour ses propriétaires bailleurs.</p>
+<h2>Les 3 assurances locatives en un coup d'œil</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Assurance</strong></th>
+<th><strong>Tarif négocié Pujol</strong></th>
+<th><strong>Pourquoi la souscrire ?</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td style="width: 100%;">
-<p><b>Pour aller plus loin sur ces sujets</b>:<br />
-<a href="/cest-quoi-un-bon-contrat-dassurance-multi-risque-immeuble/">C&rsquo;est quoi un bon contrat d&rsquo;assurance</a><br />
-<a href="/services/notre-garantie-de-loyers-impayes/" target="_blank" rel="noopener">La garantie de loyers impayés</a><br />
-<a href="/services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque/" target="_blank" rel="noopener">Comment choisir un bon locataire?</a><br />
-<a href="/services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille/" target="_blank" rel="noopener">Comment vérifier la solvabilité d&rsquo;un locataire?</a><br />
-<a href="/services/eviter-les-litiges-avec-vos-locataires-a-marseille/" target="_blank" rel="noopener">Comment diminuer les risques de litiges avec son locataire?</a><br />
-<a href="/avec-la-crise-economique-noubliez-pas-que-vous-pouvez-garantir-vos-loyers/" target="_blank" rel="noopener">Notre garantie de loyer impayé versée dès le premier mois </a></p>
-</td>
+<td><strong>Assurance loyers impayés (GLI)</strong></td>
+<td><strong>1,8 % TTC</strong> du loyer</td>
+<td>Loyers impayés illimités + dégradations jusqu'à 7 500 € + frais de procédure inclus.</td>
+</tr>
+<tr>
+<td><strong>Assurance propriétaire non occupant (PNO)</strong></td>
+<td>Dès <strong>70 € / an</strong></td>
+<td>Obligatoire (Loi Alur). Couvre les sinistres quand le bien est vide ou en cas de défaut du locataire.</td>
 </tr>
 </tbody>
 </table>
-<p>&nbsp;</p>
-                </section>
+<h2>Assurance loyers impayés : 1,8 % TTC sans franchise</h2>
+<p>Même avec une sélection rigoureuse, les aléas de la vie (chômage, séparation, maladie) peuvent impacter la solvabilité d’un locataire. Notre contrat GLI offre l'une des couvertures les plus complètes du marché :</p>
+<ul>
+<li><strong>Prise en charge des loyers et charges :</strong> Durée et montant illimités (sans franchise).</li>
+<li><strong>Dégradations immobilières :</strong> Prise en charge des dégâts jusqu'à <strong>7 500 €</strong> (peintures, sanitaires, menuiseries selon la grille de vétusté).</li>
+<li><strong>Frais de défense et recours :</strong> Prise en charge intégrale des frais de justice, d'huissier et d’expulsion.</li>
+<li><strong>Taux préférentiel :</strong> <strong>1,8 % TTC</strong> sur les montants encaissés (déductible à 100 % de vos revenus fonciers).</li>
+</ul>
+<h2>Assurance propriétaire non occupant (PNO)</h2>
+<p>Depuis la loi ALUR, l'assurance PNO est <strong>obligatoire</strong> pour tout propriétaire bailleur d'un bien en copropriété. Elle prend le relais lorsque la Multi-Risques Habitation (MRH) du locataire ou de la copropriété ne s’applique pas.</p>
+<h3>Tarifs annuels PNO Immobilière Pujol :</h3>
+<ul>
+<li>Appartement vide : <strong>70€ TTC/an</strong></li>
+<li>Appartement meublé/ 10000€ : <strong>85€ TTC/an</strong></li>
+<li>Appartement meublé/ 20000€ : <strong>95€ TTC/an</strong></li>
+<li>Maison en copropriété : <strong>181€ TTC/an</strong></li>
+<li>Maison individuelle sous ASL : <strong>213€ TTC/an</strong></li>
+<li>Maison individuelle : <strong>213€ TTC/an</strong></li>
+<li>Commerce : <strong>181€ TTC/an</strong></li>
+<li>Dépendance/Garage : <strong>48€ TTC/an</strong></li>
+<li>Parking : <strong>42€ TTC/an</strong></li>
+</ul>
+<h2>Pourquoi choisir l'Immobilière Pujol pour gérer et assurer votre bien ?</h2>
+<ol>
+<li><strong>99,7 % des loyers appelés encaissés :</strong> Grâce à notre sélection stricte des dossiers et la vérification systématique des pièces.</li>
+<li><strong>Gestion 100 % en direct :</strong> Un gestionnaire unique dédié à votre dossier, sans intermédiaire ni plateforme impersonnelle.</li>
+<li><strong>Honoraires et primes d'assurance 100 % déductibles</strong> de vos revenus fonciers (régime réel).</li>
+</ol>
+<h2>FAQ : foire aux questions</h2>
+<p><strong>Q1. Quel est le tarif de l'assurance loyers impayés chez l'Immobilière Pujol ?</strong></p>
+<p>Notre assurance Garantie Loyers Impayés (GLI) est proposée au taux négocié de <strong>1,8 % TTC</strong> du montant des loyers et charges. Elle est accessible dans le cadre d'un mandat de gestion locative et souscrite lors de chaque signature d’un nouveau bail.</p>
+<p><strong>Q2. L'assurance PNO est-elle obligatoire pour un propriétaire bailleur ?</strong></p>
+<p>Oui, l'assurance Propriétaire Non Occupant (PNO) est obligatoire en copropriété (Loi ALUR). Elle garantit le bien contre les sinistres (dégâts des eaux, incendie) en période de vacance locative ou si le locataire est sous-assuré.</p>
+<p><strong>Q3. Les frais d'assurance locative sont-ils déductibles des impôts ?</strong></p>
+<p>Oui, si vous déclarez vos revenus fonciers au régime réel, l'intégralité des primes d'assurance (GLI et PNO) ainsi que nos frais de gestion locative sont déductibles de vos revenus fonciers.</p>
+<p><strong>Q4. Que couvre la garantie dégradations immobilières de l'assurance loyers impayés Pujol ?</strong></p>
+<p>Notre assurance loyers impayés couvre les dégradations commises par le locataire jusqu'à un plafond de <strong>7 500 €</strong>, incluant la remise en état des peintures, parquets, sanitaires ou plomberie selon les grilles de vétusté prévues.</p>
+
+</section>
             </div>
 
         </div>

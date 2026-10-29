@@ -1,8 +1,77 @@
 ---
-title: "Location d'appartements à Marseille : nos résultats et nos tarifs !"
-slug: "services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix"
-seoTitle: "Location d’appartements à Marseille : nos résultats et nos tarifs !"
-seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de taux d'encaissements des loyers. Immobilière Pujol, une agence recommandée par ses clients"
+title: 'Location à Marseille : résultats et tarifs Pujol'
+slug: services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix
+seoTitle: 'Location à Marseille : résultats et tarifs Pujol'
+seoDescription: 'Délais de relocation, présentation des biens et honoraires : consultez les résultats et les postes tarifaires de la location d’appartements à Marseille.'
+jsonLd: |
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "#webpage",
+        "name": "Location à Marseille : résultats et tarifs Pujol",
+        "description": "Délais de relocation, présentation des biens et honoraires : consultez les résultats et les postes tarifaires de la location d’appartements à Marseille.",
+        "inLanguage": "fr-FR",
+        "dateModified": "2026-10-27",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Immobilière Pujol",
+          "url": "https://www.immobiliere-pujol.fr/"
+        },
+        "hasPart": {
+          "@id": "#faq"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "#faq",
+        "inLanguage": "fr-FR",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Combien de temps faut-il pour louer un appartement à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Notre délai médian de relocation est de 18 jours. Ce résultat s'explique principalement par la qualité de la présentation de l'annonce et la réactivité de diffusion."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-il difficile de trouver une location à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, le marché est sous forte tension, particulièrement sur les petites surfaces (studios, T2) dans le centre-ville et le 5ᵉ arrondissement. Le stock disponible est limité face à une demande en hausse constante."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Combien coûte la mise en location par une agence à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "À Marseille, classée zone tendue au sens de la loi ALUR, les honoraires de mise en location sont plafonnés à 10,09€/m² pour le locataire, plus 3,03€/m² pour l'état des lieux. Le bailleur supporte également des honoraires de location, qui sont librement fixés par l’agence. Les frais de gestion locative sont déductibles des revenus fonciers au régime réel."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont les quartiers les plus prisés par les locataires à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Les secteurs les plus recherchés se concentrent sur trois grands profils : Littoral et résidentiel (7e et 8e) : Endoume, Vauban, Périer, Prado (recherchés par les cadres et familles pour le cadre de vie). Hyper-centre animé (6e et 1er) : Notre-Dame-du-Mont, Cours Julien, Castellane, Vieux-Port (prisés par les jeunes actifs). Pôle médical et étudiant (5e) : La Timone, Baille (très forte demande de petites surfaces et colocations)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Comment réduire la vacance locative de mon appartement à Marseille ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Trois leviers principaux : estimer le loyer au prix de marché (une surestimation de 5% peut doubler la vacance locative), soigner la présentation (photos professionnelles + visite virtuelle réduisent le délai de 30% en moyenne), et mandater une agence réactive capable de publier l'annonce en 24h. En zone tendue comme Marseille, le préavis réduit à 1 mois (loi ALUR) permet aussi d'enchaîner les locataires plus rapidement à condition d'anticiper la recherche dès réception du préavis sortant. bailfacile"
+            }
+          }
+        ]
+      }
+    ]
+  }
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
@@ -57,57 +126,74 @@ seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Location d'appartements à Marseille : nos résultats et nos tarifs !</h3>
-                    <p>Nous<b> </b>réalisons tous les ans <b>plus de 400 locations</b> d&rsquo;appartements et de biens immobiliers neufs ou anciens à Marseille et ses alentours.</p>
-<ul>
-	<li>
-<h2>Louer vite et bien votre bien immobilier</h2>
-</li>
-</ul>
-<p><a href="/services/nos-resultats-pour-la-mise-en-location/"><strong>Nous louons en moyenne les appartements </strong><b>en moins de 35 jours</b></a> et ce délai passe à 27 jours pour les appartements neufs.</p>
-<p><strong>La rapidité de location est le critère numéro 1 pour évaluer la qualité de travail d&rsquo;une agence immobilière à Marseille.</strong></p>
-<p>Notre objectif est simple : mettre rapidement le bien sur le marché, dès que le propriétaire autorise sa mise en location et que le prix du loyer est défini : </p>
-<ol>
-	<li>Mise en publicité de l&rsquo;annonce dans les 24h qui suive l&rsquo;accord du propriétaire</li>
-	<li>Mise en valeur avec de <a href="/photos-montrent-qualite-appartements-a-louer/">belles photos immobilières</a>  et une <a href="https://tour.previsite.com/925B946C-30EC-6A3B-91E5-6F2809A39CF9?lead_capture=false" target="_blank" rel="noopener">visite virtuelle</a> car la première impression est la plus importante</li>
-	<li>Descriptif du bien complet et fidèle à la réalité sur les annonces. </li>
-</ol>
-<h1><img loading="lazy" decoding="async" class="alignnone size-full wp-image-385837" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy.jpg" alt="" width="640" height="427" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy.jpg 640w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2018/10/louer-meuble-luxe-castellane-Copy-600x400.jpg 600w" sizes="auto, (max-width: 640px) 100vw, 640px" /></h1>
-<ul>
-	<li class="hero__title">
-<h2>Nos délais pour louer les biens immobiliers qui nous sont confiés</h2>
-</li>
-</ul>
-<p><img decoding="async" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2016/12/temps-de-mise-en-location.png" /></p>
-<ul>
-	<li><strong>80% des appartements loués en moins de 43 jours</strong></li>
-	<li>70% des locations d&rsquo;appartements sont faites en moins de 35 jours</li>
-	<li>Les appartements neufs ou quasi neufs sont loués en moins de 27 jours</li>
-</ul>
-<p>La vacance locative moyenne du marché à Marseille est de 80 jours .<br />
-Nous sommes des spécialistes de la location à Marseille et surtout des appartements neufs .</p>
-<p>Le prix des locations d&rsquo;appartements que nous obtenons est en moyenne de 5% au dessus de la moyenne du marché: 12,6€ le m en 2016.</p>
-<ul>
-	<li class="hero__title">
-<h2>louer vite et bien : le secret d&rsquo;une gestion immobilière réussie !</h2>
-</li>
-</ul>
-<p>Notre objectif est de<strong> louer vite mais aussi de louer bien</strong>, c’est-à-dire de <b><a href="/service/comment-verifier-la-solvabilite-lors-dune-location-a-marseille/">trouver un candidat locataire solvable et responsable</a> </b>qui restera le plus longtemps possible.</p>
-<p>Vous garantir des revenus stables : En 15 ans d’expérience sur le marché immobilier marseillais, notre agence a enregistré très peu de sinistres et garantit à ses clients des revenus stables, des locations d&rsquo;appartements rapides à des locataires sérieux, des honoraires compétitifs et adaptés.</p>
+<h3 class="contextual__title">Location à Marseille : résultats et tarifs Pujol</h3>
+<p>Louer son appartement dans les meilleures conditions — rapidement, au juste prix et avec un locataire solvable — est un objectif que peu d'acteurs atteignent avec constance. <strong>L'Immobilière Pujol</strong> réalise plus de 600 locations par an sur Marseille et ses environs. Notre délai médian de relocation est de 18 jours.</p>
+<p>Voici les indicateurs, les méthodes et les engagements qui expliquent ces résultats en zone tendue.</p>
 <hr />
-<p>Pour en savoir plus :</p>
-<p><a href="/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/" target="_blank" rel="noopener">Combien coute la commission d’agence pour louer à Marseille?</a><br />
-<a href="/services/nos-resultats-pour-la-mise-en-location/" target="_blank" rel="noopener">Quels sont les résultats de mises en location de l’Immobilière Pujol ?</a><br />
-<a href="/services/comment-verifier-la-solvabilite-lors-dune-location-a-marseille/" target="_blank" rel="noopener">Comment vérifier la solvabilité d’un locataire? </a><br />
-<a href="/photos-montrent-qualite-appartements-a-louer/" target="_blank" rel="noopener">Comment valoriser une location avec des photos professionnelles?</a> <br />
-<a href="/services/les-avis-clients-de-limmobiliere-pujol/" target="_blank" rel="noopener">Quels sont les avis clients de l’Immobilière Pujol? </a><br />
-<a href="/annonces/locations/" target="_blank" rel="noopener">Voir des exemples d’annonces de biens à louer?</a><br />
-<a href="/service-immobilier/gestion-locative/" target="_blank" rel="noopener">Qu’est-ce que la gestion locative par un professionnel? </a><br />
-<a href="/services/recevez-votre-devis-de-location-en-24h/" target="_blank" rel="noopener">Comment obtenir un devis de mise en location?</a><br />
-<a href="/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/" target="_blank" rel="noopener">Comment obtenir une estimation de loyer?</a></p>
-<p style="text-align: left;"><span style="color: #000000;"><strong><span style="font-size: 18pt;">Besoin d&rsquo;un accompagnement professionnel, personnalisé et sécurisant?</span></strong></span><br />
-<span style="color: #000000;"><a style="color: #000000;" href="/contact-immobiliere-pujol/"><strong><span style="font-size: 18pt;">Contactez- nous</span></strong></a></span></p>
-                </section>
+<h2>Louer vite : nos délais de relocation vs le marché marseillais</h2>
+<p>La vitesse de mise en location est l'indicateur objectif le plus fiable pour évaluer la compétence d'une agence immobilière. À Marseille, classée en <strong>zone tendue</strong> au sens de la loi ALUR, la demande locative est structurellement supérieure à l'offre — ce qui devrait mécaniquement réduire les délais, mais n'empêche pas une vacance locative prolongée pour les propriétaires qui gèrent seuls ou confient leur bien à une agence peu réactive.</p>
+<h3>Nos chiffres clés de performance locative</h3>
+<p>L'Immobilière Pujol mesure ses délais de location sur l'ensemble du portefeuille géré. Notre délai médian de relocation est de 18 jours.</p>
+<p>Ces résultats s'expliquent par trois actions systématiques : mise en publicité de l'annonce en <strong>moins de 24h</strong> après accord propriétaire, photos professionnelles et visite virtuelle 360° intégrées dès la première diffusion, et multi-diffusion simultanée sur les principaux portails immobiliers.</p>
+<h3>Neuf vs ancien : pourquoi les délais diffèrent</h3>
+<p>Les <strong>appartements neufs</strong> se louent plus vite que l'ancien pour trois raisons structurelles : absence de travaux à prévoir, conformité DPE immédiate (label A ou B), et attractivité visuelle supérieure sur les annonces. Un appartement ancien bien préparé (peintures refaites, photos professionnelles, prix ajusté au loyer de marché) peut néanmoins se rapprocher du délai neuf. L'estimation précise du loyer est ici déterminante : un bien surestimé de 5% peut doubler le délai de location.</p>
+<h2>Nos tarifs : honoraires de mise en location à Marseille</h2>
+<p>Les honoraires de location sont des frais ponctuels à chaque nouvelle recherche de locataire.
+La <strong>loi ALUR de mars 2014</strong> et son <strong>décret du 5 novembre 2015</strong> ont plafonné les honoraires de mise en location que peut facturer une agence immobilière aux locataires, à Marseille, classée zone tendue.</p>
+<p>La loi impose une protection stricte pour le locataire : <strong>la part facturée au locataire ne peut jamais être supérieure à celle du propriétaire</strong>.</p>
+<p>Pour que les honoraires soient légaux, deux conditions cumulatives s'appliquent :</p>
+<ul>
+<li><strong>Le locataire ne paie jamais plus que le montant payé par le propriétaire</strong> pour les prestations partagées (visite, dossier, bail, état des lieux).</li>
+<li><strong>La part locataire est doublement plafonnée par le barème légal :</strong> 10,09€/m² en zone tendue à Marseille, plus 3,03€/m² pour l'état des lieux.</li>
+</ul>
+<p>Contrairement aux locataires, <strong>aucun tarif maximal par m² n'est imposé au propriétaire</strong>. Le montant total de la prestation facturée par l'agence pour la mise en location (visites, dossier, rédaction du bail, état des lieux) est indiqué dans son barème.</p>
+<h3>Ce que comprennent nos honoraires de location</h3>
+<p>Les honoraires couvrent l'intégralité du processus de mise en location :</p>
+<ul>
+<li>estimation du loyer,</li>
+<li>réalisation des photos professionnelles et de la vidéo, retouche photo si besoin,</li>
+<li>rédaction et diffusion de l'annonce immobilière sur tous les portails immobiliers professionnels dont l'Immobilière Pujol est cliente,</li>
+<li>organisation et tenue des visites,</li>
+<li>étude des dossiers de candidature (vérification de la solvabilité, authentification des pièces),</li>
+<li>rédaction du bail conforme à la <strong>loi du 6 juillet 1989</strong></li>
+<li>réalisation de l'<strong>état des lieux d'entrée</strong> contradictoire.</li>
+</ul>
+<p>Nos honoraires de location sont disponibles sur le barème publié dans nos mentions légales.</p>
+<h2>Nos tarifs : honoraires de gestion locative</h2>
+<p>Les <strong>honoraires de gestion locative</strong> désignent la rémunération perçue par l’agence pour la prise en charge quotidienne d’un bien loué.
+Ces honoraires sont définis dans le barème de l’agence et dans le <strong>mandat de gestion signé entre l’agence et le propriétaire bailleur.</strong>
+Ils couvrent l'ensemble des tâches administratives, techniques et financières nécessaires au bon fonctionnement de la location :</p>
+<ul>
+<li>encaissement et quittance des loyers,</li>
+<li>révision annuelle,</li>
+<li>régularisation des charges,</li>
+<li>suivi des réparations et gestion des impayés,</li>
+<li>Conseils.</li>
+</ul>
+<p>Ces frais sont un pourcentage du montant des encaissements et sont à la <strong>charge exclusive du propriétaire</strong>. Ils sont intégralement <strong>déductibles des revenus fonciers</strong> sous le régime réel d'imposition.</p>
+<h2>Conclusion</h2>
+<p>Louer un appartement à Marseille en zone tendue ne garantit pas une mise en location rapide ni un loyer optimisé sans méthode.
+La combinaison d'une <strong>estimation de loyer juste</strong>, d’une remise en publicité au plus tôt de la réception du préavis, d’une <strong>présentation premium du bien</strong> (photos, vidéo, annonce multi-diffusée en 24h) et d'une <strong>sélection rigoureuse du locataire</strong> permet d'atteindre des délais de relocation plus court et moins de <a href="/investissement-locatif-le-cout-cache-de-la-vacance-locative/">vacance locative</a>.</p>
+<hr />
+<h2>FAQ : questions fréquentes sur la location à Marseille</h2>
+<p><strong>Q1. Combien de temps faut-il pour louer un appartement à Marseille ?</strong></p>
+<p>Notre délai médian de relocation est de 18 jours.
+Ce résultat s'explique principalement par la qualité de la présentation de l'annonce et la réactivité de diffusion.</p>
+<p><strong>Q2. Est-il difficile de trouver une location à Marseille ?</strong></p>
+<p>Oui, le marché est sous forte tension, particulièrement sur les petites surfaces (studios, T2) dans le centre-ville et le 5ᵉ arrondissement. Le stock disponible est limité face à une demande en hausse constante.</p>
+<p><strong>Q3. Combien coûte la mise en location par une agence à Marseille ?</strong></p>
+<p>À Marseille, classée <strong>zone tendue</strong> au sens de la <strong>loi ALUR</strong>, les honoraires de mise en location sont plafonnés à <strong>10,09€/m²</strong> pour le locataire, plus <strong>3,03€/m²</strong> pour l'état des lieux. Le bailleur supporte également des honoraires de location, qui sont librement fixés par l’agence. Les frais de <strong>gestion locative</strong> sont déductibles des <strong>revenus fonciers</strong> au régime réel.</p>
+<p><strong>Q4. Quels sont les quartiers les plus prisés par les locataires à Marseille ?</strong></p>
+<p>Les secteurs les plus recherchés se concentrent sur trois grands profils :</p>
+<ul>
+<li><strong>Littoral et résidentiel (7e et 8e) :</strong> Endoume, Vauban, Périer, Prado (recherchés par les cadres et familles pour le cadre de vie).</li>
+<li><strong>Hyper-centre animé (6e et 1er) :</strong> Notre-Dame-du-Mont, Cours Julien, Castellane, Vieux-Port (prisés par les jeunes actifs).</li>
+<li><strong>Pôle médical et étudiant (5e) :</strong> La Timone, Baille (très forte demande de petites surfaces et colocations).</li>
+</ul>
+<p><strong>Q5. Comment réduire la vacance locative de mon appartement à Marseille ?</strong></p>
+<p>Trois leviers principaux : <strong>estimer le loyer au prix de marché</strong> (une surestimation de 5% peut doubler la vacance locative), <strong>soigner la présentation</strong> (photos professionnelles + visite virtuelle réduisent le délai de 30% en moyenne), et <strong>mandater une agence réactive</strong> capable de publier l'annonce en 24h. En <strong>zone tendue</strong> comme Marseille, le préavis réduit à <strong>1 mois</strong> (loi ALUR) permet aussi d'enchaîner les locataires plus rapidement à condition d'anticiper la recherche dès réception du préavis sortant. <a href="https://www.bailfacile.fr/gestion-locative/marseille/preavis-logement-marseille">bailfacile</a></p>
+
+</section>
             </div>
 
         </div>
