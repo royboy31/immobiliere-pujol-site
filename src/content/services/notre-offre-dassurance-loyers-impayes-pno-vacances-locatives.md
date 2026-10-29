@@ -3,7 +3,7 @@ title: "Quelles sont assurances locatives et pourquoi les souscrire ?"
 slug: "services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives"
 ctaText: "Demander un devis"
 seoTitle: "Quelles sont assurances locatives et pourquoi les souscrire?"
-seoDescription: "Notre couverture loyers impayés à 1,8% est l'une des plus complète du marché. Notre assurance PNO à 35€ par an. Contactez nous et recevez une offre en moins de 24h"
+seoDescription: "Notre assurance loyers impayés à 1,8% est l'une des plus complète du marché. Notre assurance PNO à 35€ par an. Contactez nous et recevez une offre en moins de 24h"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

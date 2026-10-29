@@ -2,7 +2,7 @@
 title: "Une relation personnalisée en gestion locative"
 slug: "services/une-relation-personnalisee"
 seoTitle: "Une relation personnalisée en gestion locative"
-seoDescription: "Notre équipe de location et de gestion est la plus recommandée à Marseille par ses clients. Gestion locative à partir de 4% HT , Couverture loyers impayés à 1,8% TTC."
+seoDescription: "Notre équipe de location et de gestion est la plus recommandée à Marseille par ses clients. Gestion locative à partir de 4% HT , Garantie loyers impayés à 1,8% TTC."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >

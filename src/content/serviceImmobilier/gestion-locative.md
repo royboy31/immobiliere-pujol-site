@@ -10,7 +10,7 @@ seoDescription: "Pour la gestion locative de votre appartement ou maison, choisi
 	<!-- Content -->
 	<div class="hero__content">
     <h1 class="hero__title">Gestion Locative à Marseille</h1>    <h2 class="hero__catchphrase">Comment choisir votre agence de gestion locative ?</h2>    <h4 class="hero__descr"><p>Gestion locative à partir de 4,5% TTC<br />
-Couverture loyers impayés à 1,8% TTC</p></h4>
+Assurance loyers impayés à 1,8% TTC</p></h4>
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Obtenez un devis de gestion locative</a>

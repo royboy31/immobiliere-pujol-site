@@ -2,7 +2,7 @@
 title: "Demander une proposition en gestion locative"
 slug: "services/demander-une-proposition-en-gestion-locative"
 seoTitle: "Demander une proposition en gestion locative"
-seoDescription: "Nos propositions démarrent à 4% ht du montant des loyers. Notre couverture loyers impayés à 1,8% TTC. Recevez une proposition d'une agence parmi les plus recommandée à Marseille"
+seoDescription: "Nos propositions démarrent à 4% ht du montant des loyers. Notre garantie loyers impayés à 1,8% TTC. Recevez une proposition d'une agence parmi les plus recommandée à Marseille"
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
