@@ -49,6 +49,16 @@ const parentMatch = rawBody.match(
 const parentHref = parentMatch?.[1] || '/service-immobilier/agence-immobiliere-pujol/';
 const parentLabel = parentMatch?.[2]?.trim() || 'Notre agence immobilière';
 
+// Gestion and Location pages never say "Contacter l'agence": their hero CTA
+// points to one of the two owner forms (Caroline 29/10).
+const defaultCta =
+  parentHref.includes('/mettre-en-location/')
+    ? { label: 'Demander une estimation de loyer', href: '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form' }
+  : parentHref.includes('/gestion-locative/')
+    ? { label: 'Demander une proposition de gestion locative', href: '/services/devis-gestion-locative-marseille/#form' }
+  : { label: "Contacter l'agence", href: '#form' };
+const heroCta = entry.data.ctaText ? { label: entry.data.ctaText, href: '#form' } : defaultCta;
+
 const sectionLabel =
   rawBody
     .match(/<aside class="contextual__nav">[\s\S]*?<ul>\s*<li>([\s\S]*?)<\/li>\s*<\/ul>/)?.[1]
@@ -702,7 +712,7 @@ const pageSchemas = entry.data.jsonLd
     <div class="svc-hero__inner">
       <h1>{entry.data.title}</h1>
       {heroSub && <p class="svc-hero__sub">{heroSub}</p>}
-      <a class="svc-hero__cta" href="#form">{entry.data.ctaText || "Contacter l'agence"}</a>
+      <a class="svc-hero__cta" href={heroCta.href}>{heroCta.label}</a>
     </div>
   </section>
 
