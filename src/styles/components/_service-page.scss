@@ -3218,6 +3218,19 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 }
 
+// Laptop screens (Caroline 29/10: still big on a small screen): one step down.
+@media (min-width: $bp-tablet + 1) and (max-width: 1440px) {
+  .svc-hero--guide h1 { font-size: 40px; }
+
+  .svc-article-body--guide {
+    font-size: 16px;
+
+    h2 { font-size: 26px; }
+    h3 { font-size: 19px; }
+    .svc-guide-takeaway p { font-size: 16px; }
+  }
+}
+
 // Guide pages: a narrow sticky menu of related articles on the right, so
 // readers can switch article at any point (Caroline and Roy 29/10); below
 // the content on mobile.
