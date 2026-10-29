@@ -3218,15 +3218,16 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 }
 
-// Guide pages: a narrow sticky menu of related articles on the left, so
-// readers can switch article at any point (Caroline 29/10); below the
-// content on mobile.
+// Guide pages: a narrow sticky menu of related articles on the right, so
+// readers can switch article at any point (Caroline and Roy 29/10); below
+// the content on mobile.
 .svc-toc-section__inner:has(.svc-article-body--guide) {
-  grid-template-columns: 240px minmax(0, 820px);
+  grid-template-columns: minmax(0, 820px) 240px;
   justify-content: center;
   gap: 48px;
 
   .svc-toc {
+    order: 2;
     padding: 24px 20px;
     max-height: calc(100vh - 130px);
     overflow-y: auto;
