@@ -3259,8 +3259,37 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 
   .svc-guide-num { color: $ds-olive-2; font-weight: 700; }
 
+  // Data tables read as a real grid: ruled cells, tinted header row (Roy 29/10).
+  table {
+    width: 100%;
+    margin: 24px 0 28px;
+    border-collapse: collapse;
+    border: 1px solid $ds-hairline-2;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  th,
+  td {
+    padding: 10px 14px;
+    border: 1px solid $ds-hairline-2;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: $ds-soft-green;
+    color: $ds-ink;
+    font-weight: 700;
+  }
+
+  tbody tr:nth-child(even) td { background: rgba($ds-paper, .6); }
+
   // Wide tables scroll inside their block instead of pushing the page sideways.
-  table { display: block; max-width: 100%; overflow-x: auto; }
+  @media (max-width: $bp-tablet) {
+    table { display: block; max-width: 100%; overflow-x: auto; }
+    th, td { min-width: 140px; }
+  }
 
   h2 {
     margin-top: 56px;
