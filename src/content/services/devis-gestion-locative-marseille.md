@@ -1,5 +1,5 @@
 ---
-title: "Obtenir Un Devis Pour La Gestion Locative De Vos Biens Immobiliers"
+title: "Obtenir un devis pour la gestion locative de vos biens immobiliers"
 slug: "services/devis-gestion-locative-marseille"
 ctaText: "Demander un devis"
 seoTitle: "Obtenir un devis pour la gestion locative de vos biens immobiliers"
@@ -9,7 +9,7 @@ seoDescription: "Obtenir un devis pour une gestion locative de biens immobiliers
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Obtenir Un Devis Pour La Gestion Locative De Vos Biens Immobiliers</h1>        
+    <h1 class="hero__title">Obtenir un devis pour la gestion locative de vos biens immobiliers</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -53,11 +53,11 @@ seoDescription: "Obtenir un devis pour une gestion locative de biens immobiliers
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Obtenir Un Devis Pour La Gestion Locative De Vos Biens Immobiliers</h3>
+                    <h3 class="contextual__title">Obtenir un devis pour la gestion locative de vos biens immobiliers</h3>
                     <p>La mise en location d’un bien et sa gestion requiert du temps et une certaine expertise pour éviter des erreurs. Nous nous adaptons à votre budget et élaborons une offre sur mesure. <br />
 Notre but est de vous aider à louer vite et bien, au juste prix, en évitant les erreurs de la mise en location : locataire insolvable, malfaçons suite aux travaux, flou sur les clauses, déclarations fiscales contestables…</p>
 <p>Nous assumons tout ou partie des actes de gestion locative. Déléguer la gestion locative à un professionnel présente de nombreux avantages : gain de temps, sécurisation des revenus… vous vous ôtez d’un poids et contractez des revenus réellement passifs.</p>
-<h2>La gestion locative pour qui?</h2>
+<h2>La gestion locative pour qui ?</h2>
 <p>Pour les propriétaires désireux de déléguer toutes les tâches de location et de gestion à un administrateur de biens expérimenté. <br />
 Dans ce cadre, l&rsquo;Immobilière Pujol assure  la rénovation éventuelle du bien, sa mise en publicité, la recherche d’un locataire solvable, la rédaction du bail, la réalisation de l&rsquo;état des lieux, le paiement des charges au syndic de l’immeuble de copropriété…</p>
 <p>Pour compléter cette prestation, nous proposons d&rsquo;autres garanties pour sécuriser vos locations :</p>
@@ -67,7 +67,7 @@ Dans ce cadre, l&rsquo;Immobilière Pujol assure  la rénovation éventuelle du
 </ul>
 <p>Notre objectif n’est nullement de vous vendre ces options. Nous jugeons au cas par cas de leur utilité. Notez aussi que ces honoraires optionnels sont déductibles de vos revenus fonciers.</p>
 <p>&nbsp;</p>
-<h2>Qu&rsquo;est-ce qu&rsquo;un mandat de gestion ?</h2>
+<h2>Qu&rsquo;est-ce qu&rsquo;un mandat de gestion ?</h2>
 <p>Le mandat nous autorise légalement à assumer toute la gestion locative de votre patrimoine et à vous représenter tout en ayant l’obligation de vous tenir informé de nos actes. Il inclut en premier lieu la mise en location : rédaction de l’annonce immobilière (descriptif, photos, schémas, prix…), la diffusion et promotion de l’annonce, la réception des appels et les entretiens des candidats locataires les plus prometteurs.</p>
 <p><u>Mise en location</u><br />
 Nous n’hésitons pas à vous apporter notre expertise sur le prix de votre bien : nous connaissons le marché et sommes à même d’attribuer une valeur juste à votre appartement ou la maison que vous souhaitez louer.</p>
@@ -88,7 +88,7 @@ Le mandat nous autorise à préparer les éléments de la déclaration fiscale.<
 <p>Le bailleur paye en général entre 5 % et 8 % du total des loyers hors taxes générés par le ou les biens au cours d’une année.</p>
 <p><u>Notre offre en gestion locative se situe entre 4% et 7% TTC</u> du montant des encaissements selon le montant des loyers, la nature du bail et du bien que nous aurons à gérer.</p>
 <p>Les honoraires de gestion sont déductibles de vos revenus fonciers. En intégrant l&rsquo;impact fiscal, le coût d&rsquo;une gestion locative est donc d&rsquo;environ 25 à 30€ par mois.</p>
-<h2>Comment suivre la gestion de votre bien?</h2>
+<h2>Comment suivre la gestion de votre bien ?</h2>
 <p>Tous nos bailleurs bénéficient d&rsquo;un accès à leur dossier en ligne via leur espace client. </p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

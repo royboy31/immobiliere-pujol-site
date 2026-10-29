@@ -1,5 +1,5 @@
 ---
-title: "Le Coût D'une Commission De Location (Sans Gestion Locative)"
+title: "Le coût d'une commission de location (sans gestion locative)"
 slug: "services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement"
 ctaText: "Louer et choisissez votre locataire"
 seoTitle: "Le coût d’une commission de location (sans gestion locative)"
@@ -9,7 +9,7 @@ seoDescription: "Quel est le coût d'une commission de location à Marseille? Ob
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Le Coût D'une Commission De Location (Sans Gestion Locative)</h1>        
+    <h1 class="hero__title">Le coût d'une commission de location (sans gestion locative)</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Louer et choisissez votre locataire</a>
@@ -50,7 +50,7 @@ seoDescription: "Quel est le coût d'une commission de location à Marseille? Ob
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Le Coût D'une Commission De Location (Sans Gestion Locative)</h3>
+                    <h3 class="contextual__title">Le coût d'une commission de location (sans gestion locative)</h3>
                     <p>Parfois certains propriétaires souhaitent conserver la gestion locative de leur appartement pour garder une certaine maîtrise.<br />
 Hormis le fait qu&rsquo;ils pourraient continuer à avoir cette même maîtrise à travers notre gestion locative, nous pouvons vous proposer la mise en location seule de votre appartement à Marseille (sous certaines conditions). </p>
 <blockquote>

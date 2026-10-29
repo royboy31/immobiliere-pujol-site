@@ -1,5 +1,5 @@
 ---
-title: "Nos Résultats En Vente"
+title: "Nos résultats en vente"
 slug: "services/nos-resultats-en-vente"
 ctaText: "Demander une estimation"
 seoTitle: "Nos résultats en vente"
@@ -9,7 +9,7 @@ seoDescription: "Chaque membre de l'équipe réalise entre 30 ventes et 40 vente
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Nos Résultats En Vente</h1>        
+    <h1 class="hero__title">Nos résultats en vente</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation</a>
@@ -44,7 +44,7 @@ seoDescription: "Chaque membre de l'équipe réalise entre 30 ventes et 40 vente
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Nos Résultats En Vente</h3>
+                    <h3 class="contextual__title">Nos résultats en vente</h3>
                     <p>Chaque membre de l&rsquo;équipe réalise entre 30 ventes et 40 ventes tous les ans , un résultat bien au-dessus de la moyenne des agents immobiliers.</p>
 <p><strong>Notre délai pour vendre est en moyenne de 45 jours.<br />
 </strong><strong>La moyenne du secteur immobilier à Marseille oscille entre 88 et 105 jours. <br />
@@ -54,7 +54,7 @@ seoDescription: "Chaque membre de l'équipe réalise entre 30 ventes et 40 vente
 Pourquoi?<br />
 &#8211; Pour vous offrir le meilleur de nos services et un accompagnement personnalisé,<br />
 &#8211; Pour défendre le prix de votre bien en premier et pas nos honoraires comme dans un mandat simple. </p>
-<h3>Comment s&rsquo;expliquent nos résultats ?</h3>
+<h3>Comment s&rsquo;expliquent nos résultats ?</h3>
 <p><img loading="lazy" decoding="async" class="alignnone  wp-image-379263" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-800x533.jpg" alt="" width="453" height="302" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-1536x1024.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-2048x1365.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/location-meuble-luxe-13006-1200x800.jpg 1200w" sizes="auto, (max-width: 453px) 100vw, 453px" /></p>
 <p>Nous travaillons sur des biens immobiliers dont les prix correspondent aux prix du marché.<br />
 Autrement dit, qui ne sont pas surévalués mais pas sous-évalués non plus : <b>le juste prix</b> est décisif dans la réussite d’une commercialisation immobilière.<br />

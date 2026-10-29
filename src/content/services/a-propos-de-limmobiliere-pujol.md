@@ -1,5 +1,5 @@
 ---
-title: "A Propos De L'immobilière Pujol"
+title: "A propos de l'Immobilière Pujol"
 slug: "services/a-propos-de-limmobiliere-pujol"
 seoTitle: "A propos de l’Immobilière Pujol"
 seoDescription: "L'équipe est composée de 70 personnes autour des principaux métiers de l’immobilier. Notre activité se répartit entre : La gestion locative qui représente 50% de l'activité de l'agence : nous gérons les biens de plus de 1200 propriétaires en habitation et plus de 250 baux commerciaux, privés et institutionnels La…"
@@ -8,7 +8,7 @@ seoDescription: "L'équipe est composée de 70 personnes autour des principaux m
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">A Propos De L'immobilière Pujol</h1>        
+    <h1 class="hero__title">A propos de l'Immobilière Pujol</h1>        
 
         
     
@@ -27,7 +27,7 @@ seoDescription: "L'équipe est composée de 70 personnes autour des principaux m
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">A Propos De L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">A propos de l'Immobilière Pujol</h3>
                     <p>L&rsquo;équipe est composée de 70 personnes autour des principaux métiers de l’immobilier. Notre activité se répartit entre :</p>
 <ul>
 	<li><strong>La gestion locative</strong> qui représente 50% de l&rsquo;activité de l&rsquo;agence : nous gérons les biens de plus de 1200 propriétaires en habitation et plus de 250 baux commerciaux, privés et institutionnels</li>

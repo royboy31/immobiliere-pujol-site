@@ -1,5 +1,5 @@
 ---
-title: "Etude Sur Le Marché De La Location À Marseille"
+title: "Etude sur le marché de la location à Marseille"
 slug: "services/etude-sur-le-marche-de-la-location-a-marseille"
 seoTitle: "Etude sur le marché de la location à Marseille"
 seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondissement, durée d'occupation moyenne en location vide ou meublée..."
@@ -8,7 +8,7 @@ seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondisse
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Etude Sur Le Marché De La Location À Marseille</h1>        
+    <h1 class="hero__title">Etude sur le marché de la location à Marseille</h1>        
 
 
         
@@ -29,7 +29,7 @@ seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondisse
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>6. Tout savoir sur le marché de la location à Marseille</li>
@@ -40,8 +40,8 @@ seoDescription: "Evolution des prix des loyers à Marseille, prix par arrondisse
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Etude Sur Le Marché De La Location À Marseille</h3>
-                    <h2>Découvrez notre dossier annuel sur le Marché de la Location à Marseille</h2>
+                    <h3 class="contextual__title">Etude sur le marché de la location à Marseille</h3>
+                    <h2>Découvrez notre dossier annuel sur le marché de la location à Marseille</h2>
 <p>Chaque année, nous nous engageons à vous fournir une analyse approfondie et précise du marché de la location à Marseille. <br />
 Notre dossier annuel est une ressource essentielle pour les propriétaires bailleurs et les investisseurs souhaitant prendre des décisions informées dans le secteur immobilier.</p>
 <p>En téléchargeant notre dossier, vous aurez accès à des : </p>

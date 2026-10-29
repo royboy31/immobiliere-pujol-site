@@ -1,5 +1,5 @@
 ---
-title: "Qualité Des Services Et Des Travaux = Tranquillité = Pérennité En Copropriété"
+title: "Qualité des services et des travaux = tranquillité = pérennité en copropriété"
 slug: "services/formulaire-vous-voulez-un-service-de-qualite-des-charges-optimisees"
 seoTitle: "Qualité des services et des travaux = tranquillité = pérennité en copropriété"
 seoDescription: "La mauvaise qualité coûte chère. Faites gérer votre copropriété par un syndic soucieux de la qualité des prestataires et des travaux dans le temps"
@@ -8,7 +8,7 @@ seoDescription: "La mauvaise qualité coûte chère. Faites gérer votre copropr
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Qualité Des Services Et Des Travaux = Tranquillité = Pérennité En Copropriété</h1>        
+    <h1 class="hero__title">Qualité des services et des travaux = tranquillité = pérennité en copropriété</h1>        
 
 
         
@@ -46,7 +46,7 @@ seoDescription: "La mauvaise qualité coûte chère. Faites gérer votre copropr
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Qualité Des Services Et Des Travaux = Tranquillité = Pérennité En Copropriété</h3>
+                    <h3 class="contextual__title">Qualité des services et des travaux = tranquillité = pérennité en copropriété</h3>
                     <p>&nbsp;</p>
 <p>La mission d&rsquo;un syndic est de sécuriser la réalisation des travaux par le contrôle régulier des prestataires qui interviennent sur les copropriétés. <br />
 Pourtant, ce n&rsquo;est pas parce qu&rsquo;un fournisseur est en règle d&rsquo;un point de vue administratif, que cela suffit à assurer une qualité de réalisation.</p>

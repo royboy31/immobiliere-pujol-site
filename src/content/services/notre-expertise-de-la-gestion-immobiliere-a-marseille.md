@@ -1,5 +1,5 @@
 ---
-title: "Comment Choisir Son Administrateur De Biens À Marseille?"
+title: "Comment choisir son administrateur de biens à Marseille ?"
 slug: "services/notre-expertise-de-la-gestion-immobiliere-a-marseille"
 seoTitle: "Comment choisir son administrateur de biens à Marseille?"
 seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences immobilières. Nous louons et gérons vos biens comme si c'était les nôtres, c'est ça la différence ! Obtenez un devis sans engagement en 24H"
@@ -8,7 +8,7 @@ seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences im
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Choisir Son Administrateur De Biens À Marseille?</h1>        
+    <h1 class="hero__title">Comment choisir son administrateur de biens à Marseille ?</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences im
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>1. Combien cela coûte de faire gérer son bien?</li>
@@ -52,7 +52,7 @@ seoDescription: "Chez Immobilière Pujol nous croyons aux belles expériences im
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Choisir Son Administrateur De Biens À Marseille?</h3>
+                    <h3 class="contextual__title">Comment choisir son administrateur de biens à Marseille ?</h3>
                     <p>Faire le choix d&rsquo;un administrateur de biens immobiliers à Marseille pour son patrimoine, c&rsquo;est être accompagné par :</p>
 <ul>
 	<li>Une agence qui aura un lien sincère avec vous,</li>

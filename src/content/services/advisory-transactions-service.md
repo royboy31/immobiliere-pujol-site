@@ -1,5 +1,5 @@
 ---
-title: "Our Advisory And Transactions Service"
+title: "Our advisory and transactions service"
 slug: "services/advisory-transactions-service"
 seoTitle: "Our advisory and transactions service"
 seoDescription: "We support you in your investment plans and help you better distribute your resources - in either traditional or innovative ways - and to achieve the best possible added value on the sale of your property (our average sale time is 45 days!). We are familiar with the local and…"
@@ -8,7 +8,7 @@ seoDescription: "We support you in your investment plans and help you better dis
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Our Advisory And Transactions Service</h1>        <h4 class="hero__descr">sous-titre : Our advisory and transactions service</h4>
+    <h1 class="hero__title">Our advisory and transactions service</h1>        <h4 class="hero__descr">sous-titre : Our advisory and transactions service</h4>
 
 
         
@@ -47,11 +47,11 @@ seoDescription: "We support you in your investment plans and help you better dis
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Our Advisory And Transactions Service</h3>
+                    <h3 class="contextual__title">Our advisory and transactions service</h3>
                     We support you in your investment plans and help you better distribute your resources &#8211; in either traditional or innovative ways &#8211; and to achieve the best possible added value on the sale of your property (our average sale time is 45 days!).
 
 We are familiar with the local and national real estate markets, the trends, the going rates, who is ready to buy, which of the properties on sale are genuine bargains&#8230; This vision is the result of hundreds of successful transactions and close daily monitoring.
-<h2>How is the sale of your property managed?</h2>
+<h2>How is the sale of your property managed ?</h2>
 We start by estimating the value of the property for sale, in line with current markets. Then follows the creation of the sales dossier (which partly depends on the reaction times of building managers and notaries), the execution of any works (if necessary), the photo shoot of the property and the advertising of the sale.
 
 We draw the attention of our portfolio of buyers to the property and publish the advertisement both on paper and online. We organize the viewings and keep you up to date on all developments.
@@ -61,7 +61,7 @@ We draw the attention of our portfolio of buyers to the property and publish the
 Once a purchaser has been found, we prepare the preliminary sale agreement for signature. Lastly, we oversee the financing arrangements for the property and conclude the sale through a notary.
 
 For a quote, a valuation, a simple query or an expert opinion, you can contact us 24/7 via our <a href="/contact/">contract form</a>.
-<h2>So you&rsquo;re looking to buy?</h2>
+<h2>So you&rsquo;re looking to buy ?</h2>
 We discuss your real estate project together and provide you with recommendations about which investments most suit your needs. We seek the perfect match between your initial wishes, your budget and the market availability.
 
 The purchase process goes through several key stages:

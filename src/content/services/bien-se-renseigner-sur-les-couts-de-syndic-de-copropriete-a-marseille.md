@@ -1,5 +1,5 @@
 ---
-title: "De Quoi Dépend Le Niveau Des Charges De Copropriété?"
+title: "De quoi dépend le niveau des charges de copropriété ?"
 slug: "services/bien-se-renseigner-sur-les-couts-de-syndic-de-copropriete-a-marseille"
 seoTitle: "De quoi dépend le niveau des charges de copropriété?"
 seoDescription: "OPTIMISEZ vos charges et faites gérer votre copropriété par un syndic qui renégocie vos contrats et fait baisser les prix des charges de copropriété"
@@ -8,7 +8,7 @@ seoDescription: "OPTIMISEZ vos charges et faites gérer votre copropriété par 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">De Quoi Dépend Le Niveau Des Charges De Copropriété?</h1>        
+    <h1 class="hero__title">De quoi dépend le niveau des charges de copropriété ?</h1>        
 
         
     
@@ -46,7 +46,7 @@ seoDescription: "OPTIMISEZ vos charges et faites gérer votre copropriété par 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">De Quoi Dépend Le Niveau Des Charges De Copropriété?</h3>
+                    <h3 class="contextual__title">De quoi dépend le niveau des charges de copropriété ?</h3>
                     <p>A 10% en moyenne des honoraires du syndic. <br />
 A 90% du travail des autres postes de dépenses pour le bon fonctionnement de la copropriété .</p>
 <p>Ne pensez-vous pas qu&rsquo;il faille porter son attention sur les autres postes de dépenses plutôt que les honoraires du syndic? <br />
@@ -67,7 +67,7 @@ Ne pensez-vous pas qu&rsquo;il faille intéresser votre syndic à la bonne gesti
 <p>Faire nettoyer la cage d’escalier une fois par semaine et les halls 2 fois par semaine par une entreprise de nettoyage ne permet pas d&rsquo;atteindre le même niveau de propreté qu’un gardien concierge qui a des prestations quotidiennes.</p>
 <p>L’assemblée générale ou plus souvent le conseil syndical doit donc définir clairement le niveau de prestation attendu (entretien minimum, normal ou soigné) suivant un budget fixé par l&rsquo;assemblée générale.</p>
 <p>Notre rôle est à la fois d’assurer un suivi méticuleux de ces prestations et de conseiller et accompagner les choix de la copropriété.</p>
-<h2>Les charges de chauffage collectif : pourquoi porter son attention sur ce poste de charges?</h2>
+<h2>Les charges de chauffage collectif : pourquoi porter son attention sur ce poste de charges ?</h2>
 <ul>
 	<li><strong>C’est LE poste dans lequel les copropriétés jettent l’argent par les fenêtres</strong>.</li>
 	<li>C’est donc sur ces dépenses qu’il y a le plus d’attention à porter, le plus de travail à réaliser.</li>

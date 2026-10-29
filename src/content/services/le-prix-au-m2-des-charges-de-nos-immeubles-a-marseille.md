@@ -1,5 +1,5 @@
 ---
-title: "Les Charges De Copropriété  : Définition Et Prix"
+title: "Les charges de copropriété : définition et prix"
 slug: "services/le-prix-au-m2-des-charges-de-nos-immeubles-a-marseille"
 ctaText: "Demander un devis"
 seoTitle: "Les charges de copropriété  : définition et prix"
@@ -9,7 +9,7 @@ seoDescription: "Les moyennes des charges de copropriété à Marseille. Consult
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Les Charges De Copropriété  : Définition Et Prix</h1>        
+    <h1 class="hero__title">Les charges de copropriété : définition et prix</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -50,7 +50,7 @@ seoDescription: "Les moyennes des charges de copropriété à Marseille. Consult
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Les Charges De Copropriété  : Définition Et Prix</h3>
+                    <h3 class="contextual__title">Les charges de copropriété : définition et prix</h3>
                     <p>Qu&rsquo;est-ce qu&rsquo;ils y a derrière les termes charges de copropriété ?<br />
 Ce sont tous les frais et dépenses requises pour assurer le bon fonctionnement de la copropriété.<br />
 Ces charges sont intimement liées aux caractéristiques techniques de l’immeuble. Raison pour laquelle le montant des charges variera entre un immeuble ancien de 20 lots, un programme neuf de 150 lots…</p>
@@ -64,7 +64,7 @@ Des frais généraux sont engagés par tous les copropriétaires car ils concern
 <h2>Charges de copropriété : ce qu’il faut savoir </h2>
 <ul>
 	<li>
-<h3>Quelle est la moyenne nationale des charges de copropriété ?</h3>
+<h3>Quelle est la moyenne nationale des charges de copropriété ?</h3>
 </li>
 </ul>
 <p>Sans surprise, les charges sont 2 fois plus élevées à Paris qu’à Marseille, Lyon ou encore Bordeaux. La capitale oblige chaque copropriétaire à débourser chaque année environ 2000€ (en moyenne : 40€ le m2).</p>
@@ -75,7 +75,7 @@ Des frais généraux sont engagés par tous les copropriétaires car ils concern
 Mais il s’agit ici d’un indicateur : les charges de copropriété varient énormément selon la ville et le type d’immeuble (voir nos résultats ci-après).</p>
 <ul>
 	<li>
-<h3>Comment déduire les charges de copropriété de mes revenus fonciers ?</h3>
+<h3>Comment déduire les charges de copropriété de mes revenus fonciers ?</h3>
 </li>
 </ul>
 <p>Si vous êtes propriétaire bailleur et que vous avez optez pour l’imposition au réel (et non au micro-foncier), vous pouvez déclarer une partie des charges pour diminuer vos revenus fonciers soumis à l’impôt. <br />
@@ -86,7 +86,7 @@ On renseigne ces provisions sur la ligne 229 du formulaire 2044 de déclaration 
 <p>L’Immobilière Pujol peut vous assister dans <a href="/service-immobilier/syndic-de-copropriete-a-marseille/#form">ces déclarations foncières</a>.</p>
 <ul>
 	<li>
-<h3>Que faire en cas d’impayés des charges dans la copropriété ?</h3>
+<h3>Que faire en cas d’impayés des charges dans la copropriété ?</h3>
 </li>
 </ul>
 <p>Les retards de paiement et les impayés fragilisent la copropriété. Pour éviter les déficits de trésorerie à répétition et couvrir les frais et travaux à temps, le syndic de copropriété peut engager une action en justice contre le ou les mauvais payeurs (art. 55 du décret du 17.3.67). Le conseil syndical devrait toujours participer au suivi des comptes et faire un point trimestriel avec son syndic.</p>
@@ -99,7 +99,7 @@ On renseigne ces provisions sur la ligne 229 du formulaire 2044 de déclaration 
 <a href="/service/comment-changer-de-syndic-a-marseille/">Changez de syndic </a> et contactez-nous !</h4>
 <ul>
 	<li>
-<h3>Comment payer les charges de copropriété?</h3>
+<h3>Comment payer les charges de copropriété ?</h3>
 </li>
 </ul>
 <p>Les provisions de charges se versent par chaque copropriétaire au syndic de copropriété. Ces provisions représentent ¼ du budget prévisionnel qui a été voté (sauf si l’Assemblée générale en décide autrement).</p>
@@ -112,7 +112,7 @@ On renseigne ces provisions sur la ligne 229 du formulaire 2044 de déclaration 
 </ul>
 <p>Un copropriétaire peut exiger une meilleure répartition des charges. Toute modification se fait à l’unanimité de l’Assemblée générale. La modification est souvent demandée après un changement (agrandissement d’un lot, nouveau service installé…).</p>
 <p>Le copropriétaire ne peut avoir recours qu’au TI que s’il estime que sa participation est supérieure de 25% à ce qu’il devrait payer ou s’il estime que la participation d’un autre copropriétaire est au contraire inférieure de plus de 25% au montant qu’il doit. Exemple classique : un lot du rez-de-chaussée qui supporte des frais d’ascenseur.</p>
-<h2>Comment calculer des charges de copropriété?</h2>
+<h2>Comment calculer des charges de copropriété ?</h2>
 <p>Comment calculer le paiement des charges entre les copropriétaires ? <br />
 Ce sujet est trop souvent source de litiges.</p>
 <p>Les charges générales sont réparties selon la quote-part de chaque copropriétaire. Cette quote-part des parties communes dépend de la superficie du lot, de sa consistance, de l’étage et de son exposition.</p>

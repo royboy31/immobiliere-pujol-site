@@ -1,5 +1,5 @@
 ---
-title: "Avis Clients Sur L'immobilière Pujol"
+title: "Avis clients sur l'Immobilière Pujol"
 slug: "services/avis-clients-immobiliere-pujol-marseille"
 seoTitle: "Avis clients sur l’Immobilière Pujol"
 seoDescription: "consultez les avis déposés par les clients de l'Immobilière Pujol, syndic, gestion locative n"
@@ -8,7 +8,7 @@ seoDescription: "consultez les avis déposés par les clients de l'Immobilière 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Avis Clients Sur L'immobilière Pujol</h1>        
+    <h1 class="hero__title">Avis clients sur l'Immobilière Pujol</h1>        
 
 
         
@@ -28,7 +28,7 @@ seoDescription: "consultez les avis déposés par les clients de l'Immobilière 
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Avis Clients Sur L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">Avis clients sur l'Immobilière Pujol</h3>
                     <p>Les avis des clients de l&rsquo;Immobilière Pujol sont un des indicateurs de la qualité de service que nous <span style="font-size: 16px;">délivrons.</span></p>
 <h3><span style="color: #000000; font-size: 14pt;">Les avis clients <a href="https://www.google.fr/search?q=immobili%C3%A8re+pujol&amp;cad=h" target="_blank" rel="noopener">google </a></span></h3>
 <p>&nbsp;</p>

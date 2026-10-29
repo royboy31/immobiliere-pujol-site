@@ -1,5 +1,5 @@
 ---
-title: "Mettre En Place Des Procédures Pour Contrôler Le Coût Des Travaux"
+title: "Mettre en place des procédures pour contrôler le coût des travaux"
 slug: "services/le-cout-des-travaux-la-mise-en-concurrence-et-levaluation-de-nos-prestataires-dans-nos-coproprietes"
 ctaText: "Demander un devis"
 seoTitle: "Mettre en place des procédures pour contrôler le coût des travaux"
@@ -9,7 +9,7 @@ seoDescription: "Contrôlez les travaux, contrôlez vos fournisseurs. Combien co
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Mettre En Place Des Procédures Pour Contrôler Le Coût Des Travaux</h1>        
+    <h1 class="hero__title">Mettre en place des procédures pour contrôler le coût des travaux</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -47,7 +47,7 @@ seoDescription: "Contrôlez les travaux, contrôlez vos fournisseurs. Combien co
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Mettre En Place Des Procédures Pour Contrôler Le Coût Des Travaux</h3>
+                    <h3 class="contextual__title">Mettre en place des procédures pour contrôler le coût des travaux</h3>
                     <p>Chez Immobilière Pujol, nous faisons évaluer régulièrement nos prestataires par nos équipes, mais aussi par nos clients. <br />
 Une de nos valeurs ajoutées est de proposer une palette d’artisan avec des prix, des expériences et des spécialités différentes.</p>
 <p>Ces artisans travaillent dans le cadre de bordereaux de prix selon la difficulté du travail à réaliser.</p>
@@ -95,13 +95,13 @@ La copropriété doit s&rsquo;entourer de fournisseur compétents et investis da
 <ul>
 	<li><strong>Remplacement d’une platine interphone</strong> pour 6 occupants TTC: 1.800€</li>
 </ul>
-<h3>Le coût à la journée :</h3>
+<h3>Le coût à la journée :</h3>
 <ul>
 	<li>Prix d’une journée d’un maçon : <strong>360€-400€</strong> TTC</li>
 	<li>Prix d’une journée d’un électricien : <strong>340€-360€</strong> TTC</li>
 	<li>Prix d’une journée d’un peintre : <strong>300-340€</strong> TTC</li>
 </ul>
-<h3>Le coût des interventions en copropriété  :</h3>
+<h3>Le coût des interventions en copropriété :</h3>
 <p>N’oubliez pas que Marseille est l’une des villes les plus embouteillées, que le stationnement est difficile, prévoyez donc 50€ HT en moyenne pour un déplacement.</p>
 <p>&nbsp;</p>
 <table style="width: 100%; border-collapse: collapse; border-color: #000000;" border="1">

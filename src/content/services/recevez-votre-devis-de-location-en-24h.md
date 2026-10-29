@@ -1,5 +1,5 @@
 ---
-title: "Recevez Votre Devis De Location D'appartements À Marseille En 24H"
+title: "Recevez votre devis de location d'appartements à Marseille en 24 h"
 slug: "services/recevez-votre-devis-de-location-en-24h"
 ctaText: "Vous souhaitez sécuriser votre location, contactez nous"
 seoTitle: "Recevez votre devis de location d’appartements à Marseille en 24h"
@@ -9,7 +9,7 @@ seoDescription: "Devis sous 24h pour la location de votre appartement ou maison.
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Recevez Votre Devis De Location D'appartements À Marseille En 24H</h1>        
+    <h1 class="hero__title">Recevez votre devis de location d'appartements à Marseille en 24 h</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Vous souhaitez sécuriser votre location, contactez nous</a>
@@ -51,7 +51,7 @@ seoDescription: "Devis sous 24h pour la location de votre appartement ou maison.
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Recevez Votre Devis De Location D'appartements À Marseille En 24H</h3>
+                    <h3 class="contextual__title">Recevez votre devis de location d'appartements à Marseille en 24 h</h3>
                     <h2>Recevez rapidement un devis pour la location de votre appartement, de votre maison ou bureau.</h2>
 <p><br />
 Remplissez simplement le formulaire , nous vous rappelons sous 24h</p>

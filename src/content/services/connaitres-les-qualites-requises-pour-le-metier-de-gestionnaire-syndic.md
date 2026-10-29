@@ -1,5 +1,5 @@
 ---
-title: "Comment Identifier Un Bon Gestionnaire De Copropriétés?"
+title: "Comment identifier un bon gestionnaire de copropriétés ?"
 slug: "services/connaitres-les-qualites-requises-pour-le-metier-de-gestionnaire-syndic"
 ctaText: "Demander un devis"
 seoTitle: "Comment identifier un bon gestionnaire de copropriétés?"
@@ -9,7 +9,7 @@ seoDescription: "Un bon syndic, c'est de bons gestionnaires de copropriété. Bi
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Identifier Un Bon Gestionnaire De Copropriétés?</h1>        
+    <h1 class="hero__title">Comment identifier un bon gestionnaire de copropriétés ?</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -56,7 +56,7 @@ seoDescription: "Un bon syndic, c'est de bons gestionnaires de copropriété. Bi
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Identifier Un Bon Gestionnaire De Copropriétés?</h3>
+                    <h3 class="contextual__title">Comment identifier un bon gestionnaire de copropriétés ?</h3>
                     <p><strong>Les métiers de l’immobilier</strong> sont en constante évolution pour des raisons essentiellement politiques. Chaque modification législative rend le cadre administratif et légal un plus rigide à chaque fois.</p>
 <p>Au milieu de cette complexité grandissante, il est souvent difficile d&rsquo;identifier les syndics qui assument la totalité des responsabilité qui sont définies par leur mandat.</p>
 <h2>Un bon gestionnaire de copropriété est un gestionnaire dont le patrimoine est « conforme »</h2>

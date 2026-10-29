@@ -1,5 +1,5 @@
 ---
-title: "Le Blog De L'immobilière Pujol"
+title: "Le blog de l'Immobilière Pujol"
 slug: "services/le-blog-de-limmobiliere-pujol"
 seoTitle: "Le blog de l’immobilière Pujol"
 seoDescription: "Ce blog est un espace d'information et de communication pour nos clients et nos futurs clients. Nous le tenons depuis la création de la société  au gré du temps et des ressources que nous pouvons y consacrer et au gré de nos envies. C'est aussi un espace de liberté, d'avis…"
@@ -8,7 +8,7 @@ seoDescription: "Ce blog est un espace d'information et de communication pour no
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Le Blog De L'immobilière Pujol</h1>        
+    <h1 class="hero__title">Le blog de l'Immobilière Pujol</h1>        
 
 
         
@@ -41,7 +41,7 @@ seoDescription: "Ce blog est un espace d'information et de communication pour no
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Le Blog De L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">Le blog de l'Immobilière Pujol</h3>
                     <p><a href="/blog/"><strong>Ce blog</strong></a> est un espace d&rsquo;information et de communication pour nos clients et nos futurs clients.</p>
 <p>Nous le tenons <strong>depuis la création de la société </strong> au gré du temps et des ressources que nous pouvons y consacrer et au gré de nos envies.</p>
 <p>C&rsquo;est aussi<strong> un espace de liberté, d&rsquo;avis et de coups de gueule</strong> de notre équipe qui y participe.</p>

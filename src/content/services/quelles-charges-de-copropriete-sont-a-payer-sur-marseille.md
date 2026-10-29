@@ -1,5 +1,5 @@
 ---
-title: "Calculer Vos Honoraires De Syndic À Marseille — Demandez Votre Devis"
+title: "Calculer vos honoraires de syndic à Marseille — demandez votre devis"
 slug: "services/quelles-charges-de-copropriete-sont-a-payer-sur-marseille"
 seoTitle: "Calculer vos honoraires de syndic à Marseille — Demandez votre devis"
 seoDescription: "Contactez l'Immobilière Pujol pour calculer vos honoraires de syndic à Marseille et obtenir un devis personnalisé sous 24 heures."
@@ -8,7 +8,7 @@ seoDescription: "Contactez l'Immobilière Pujol pour calculer vos honoraires de 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Calculer vos honoraires de syndic à Marseille — Demandez votre devis</h1>        
+    <h1 class="hero__title">Calculer vos honoraires de syndic à Marseille — demandez votre devis</h1>        
 
         
     
@@ -49,7 +49,7 @@ seoDescription: "Contactez l'Immobilière Pujol pour calculer vos honoraires de 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Calculer vos honoraires de syndic à Marseille — Demandez votre devis</h3>
+                    <h3 class="contextual__title">Calculer vos honoraires de syndic à Marseille — demandez votre devis</h3>
                     <p>Le calcul des honoraires de syndic dépend de plusieurs paramètres propres à votre copropriété : nombre de lots, équipements (ascenseur, chaufferie, gardien, espaces verts), procédures en cours, etc. Pour vous proposer un montant juste, nous étudions chaque dossier individuellement.</p>
 <p><strong>Renseignez le formulaire ci-dessous</strong> pour obtenir un devis personnalisé de syndic. Nous vous adresserons une proposition adaptée à votre copropriété sous 24 heures.</p>
                 </section>

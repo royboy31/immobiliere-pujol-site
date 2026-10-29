@@ -1,5 +1,5 @@
 ---
-title: "Contrat De Syndic De L'immobilière Pujol"
+title: "Contrat de syndic de l'Immobilière Pujol"
 slug: "services/contrat-de-syndic-de-limmobiliere-pujol"
 seoTitle: "Contrat de syndic de l’immobilière Pujol"
 seoDescription: "Notre équipe de syndic est l'une des plus mieux évaluez par ses clients. Consultez nous et recevez une proposition de syndic en moins de 24h"
@@ -8,7 +8,7 @@ seoDescription: "Notre équipe de syndic est l'une des plus mieux évaluez par s
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Contrat De Syndic De L'immobilière Pujol</h1>        
+    <h1 class="hero__title">Contrat de syndic de l'Immobilière Pujol</h1>        
 
 
         
@@ -28,7 +28,7 @@ seoDescription: "Notre équipe de syndic est l'une des plus mieux évaluez par s
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Contrat De Syndic De L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">Contrat de syndic de l'Immobilière Pujol</h3>
                     <p>Nota : ce contrat de syndic est basé sur le modèle réglementaire du décret du 26 mars 2015)</p>
 <p>&nbsp;</p>
 <h1 style="text-align: center;">CONTRAT DE SYNDIC</h1>

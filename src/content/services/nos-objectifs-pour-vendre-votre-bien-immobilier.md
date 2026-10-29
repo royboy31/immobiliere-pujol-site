@@ -1,5 +1,5 @@
 ---
-title: "Nos Actions Pour Vendre Votre Bien Immobilier"
+title: "Nos actions pour vendre votre bien immobilier"
 slug: "services/nos-objectifs-pour-vendre-votre-bien-immobilier"
 ctaText: "Demander une estimation de prix"
 seoTitle: "Nos actions pour vendre votre bien immobilier"
@@ -9,7 +9,7 @@ seoDescription: "Chaque année, nous réalisons de nombreuses ventes d'apparteme
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Nos Actions Pour Vendre Votre Bien Immobilier</h1>        
+    <h1 class="hero__title">Nos actions pour vendre votre bien immobilier</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de prix</a>
@@ -44,7 +44,7 @@ seoDescription: "Chaque année, nous réalisons de nombreuses ventes d'apparteme
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Nos Actions Pour Vendre Votre Bien Immobilier</h3>
+                    <h3 class="contextual__title">Nos actions pour vendre votre bien immobilier</h3>
                     <p>Chaque année, nous réalisons de nombreuses ventes d&rsquo;appartements, maisons ou immeubles à usage d&rsquo;habitation ainsi que des transactions de bureaux et de locaux commerciaux à Marseille.</p>
 <p>Quels est notre méthode et quels sont nos actions pour vendre rapidement votre bien ?</p>
 <h3>Fixer un prix de vente concurrentiel</h3>

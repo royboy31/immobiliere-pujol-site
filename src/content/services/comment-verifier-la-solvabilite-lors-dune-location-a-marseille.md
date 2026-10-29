@@ -78,7 +78,7 @@ jsonLd: |
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Vérifier La Solvabilité D'un Locataire?</h1>        <h4 class="hero__descr">Quel documents légaux êtes-vous en droit de demander aux candidats locataires?</h4>
+    <h1 class="hero__title">Comment vérifier la solvabilité d'un locataire ?</h1>        <h4 class="hero__descr">Quels documents légaux êtes-vous en droit de demander aux candidats locataires ?</h4>
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
@@ -102,7 +102,7 @@ jsonLd: |
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>2. Comment choisir son locataire?</li>
@@ -130,7 +130,7 @@ jsonLd: |
 <p>S'assurer de la solvabilité d'un candidat locataire à Marseille est une étape très importante pour sécuriser ses revenus locatifs. Entre falsifications de documents de plus en plus sophistiquées et encadrement juridique strict, la sélection d'un dossier demande rigueur, regard et habitude.</p>
 <p>Découvrez la méthode étape par étape de l'Immobilière Pujol pour vérifier l'authenticité d'un dossier locatif et louer votre bien en toute sérénité.</p>
 <hr />
-<h2>Les Documents que Vous Pouvez légalement demander</h2>
+<h2>Les documents que vous pouvez légalement demander</h2>
 <p>En tant que propriétaire bailleur, la loi (décret n° 2015-1437) encadre strictement les pièces que vous avez le droit d'exiger.</p>
 <p>Voici la liste exacte des justificatifs autorisés selon la situation du candidat :</p>
 <h3>Liste des pièces autorisées</h3>
@@ -140,7 +140,7 @@ jsonLd: |
 <li><strong>Justificatif d'activité professionnelle :</strong> Contrat de travail, attestation d'employeur récente, carte étudiant ou extrait Kbis (pour les indépendants).</li>
 <li><strong>Justificatif de ressources :</strong> 3 derniers bulletins de salaire, dernier avis d'imposition, ou décomptes de retraite.</li>
 </ul>
-<h3>Documents STRICTEMENT INTERDITS par la loi</h3>
+<h3>Documents strictement interdits par la loi</h3>
 <p>Il est illégal d'exiger :</p>
 <ul>
 <li>Relevés de compte bancaire</li>
@@ -149,11 +149,11 @@ jsonLd: |
 <li>Attestation de bonne tenue de compte bancaire</li>
 </ul>
 <hr />
-<h2>Calculer la Solvabilité : Méthodes et Nuances</h2>
+<h2>Calculer la solvabilité : méthodes et nuances</h2>
 <p>Le calcul classique du taux d'effort impose que les revenus nets mensuels du candidat (ou du ménage) représentent au moins <strong>3 fois le montant du loyer charges comprises</strong> (soit un taux d'effort maximal de <strong>33 %</strong>).</p>
 <p>Revenu net mensuel indicatif = loyer mensuel charges comprises × 3</p>
 <p><strong>Exemple :</strong> Pour un T2 loué 800 € CC dans le 6ᵉ arrondissement de Marseille, le candidat ou son ménage doit justifier d'au moins <strong>2 400 € net/mois</strong>.</p>
-<h3>Les nuances de calcul selon la situation du candidat :</h3>
+<h3>Les nuances de calcul selon la situation du candidat :</h3>
 <ol>
 <li><strong>Salariés en CDI (hors période d'essai) :</strong>
 <ul>
@@ -161,19 +161,19 @@ jsonLd: |
 <li><strong>Nuance :</strong> Si le candidat a des primes régulières (ex: 13ᵉ mois ou commissions contractuelles), intégrez-les au prorata sur l'année via l'avis d'imposition.</li>
 </ul>
 </li>
-<li><strong>Indépendants &amp; Professions Libérales :</strong>
+<li><strong>Indépendants &amp; professions libérales :</strong>
 <ul>
 <li><strong>Méthode :</strong> Prendre la moyenne du résultat fiscal des 2 derniers avis d'imposition.</li>
 <li><strong>Nuance :</strong> Un chiffre d'affaires élevé en micro-entreprise ne reflète pas le revenu net disponible après cotisations URSSAF et charges d'exploitation.</li>
 </ul>
 </li>
-<li><strong>Étudiants &amp; Jeunes Actifs :</strong>
+<li><strong>Étudiants &amp; jeunes actifs :</strong>
 <ul>
 <li><strong>Méthode :</strong> Analyse des revenus des garants physiques</li>
 <li><strong>Nuance :</strong> Le ou les garants doivent généralement justifier de revenus équivalents à <strong>3,5 à 4 fois le montant du loyer</strong>, car ils assument leurs propres charges personnelles en parallèle.</li>
 </ul>
 </li>
-<li><strong>Retraités &amp; Rentiers :</strong>
+<li><strong>Retraités &amp; rentiers :</strong>
 <ul>
 <li><strong>Méthode :</strong> Prise en compte du montant net des pensions ou des revenus fonciers/mobiliers récurrents sur le dernier avis d'imposition.</li>
 </ul>
@@ -181,7 +181,7 @@ jsonLd: |
 </ol>
 <h2>Calculer le reste à vivre net</h2>
 <p>Le reste à vivre se calcule en déduisant du revenu net mensuel : le loyer charges comprises, les remboursements de crédit (auto, conso, immobilier), les pensions alimentaires versées, et les charges fixes contractuelles (abonnements, assurances). Le seuil de vigilance : un reste à vivre inférieur à <strong>900€/mois pour un célibataire</strong> ou à <strong>1 400€ pour un couple sans enfant</strong> doit déclencher une demande de garant ou de GLI, quel que soit le taux d'effort apparent.</p>
-<h2>La grille de scoring Immobilière Pujol : 8 critères combinés</h2>
+<h2>La grille de scoring Immobilière Pujol : 8 critères combinés</h2>
 <p>l'Immobilière Pujol évalue chaque candidat sur une grille structurée de 8 critères pondérés :</p>
 <p><strong>Taux d'effort</strong> : Calcul du rapport entre le loyer charges comprises et les revenus nets mensuels (seuil standard à 33 %).</p>
 <p><strong>Reste à vivre</strong> : Analyse du solde disponible après déduction du loyer, des crédits en cours, des pensions et des charges fixes (seuil d'alerte à 900 € pour une personne seule et 1 400 € pour un couple).</p>
@@ -192,7 +192,7 @@ jsonLd: |
 <p><strong>Authentification des documents</strong> : Analyse anti-fraude des fiches de paie et contrôle des avis d'imposition via le service officiel 2D-Doc / Impots.gouv.fr.</p>
 <p><strong>Garant disponible</strong> : Présence d'un garant physique éligible</p>
 <hr />
-<h2>Détecter un Faux Dossier : signaux et méthodes</h2>
+<h2>Détecter un faux dossier : signaux et méthodes</h2>
 <p>La fraude documentaire dans les dossiers de location a considérablement augmenté depuis des années. Les outils de retouche numérique accessibles en ligne et gratuitement permettent de falsifier un bulletin de salaire ou un avis d'imposition en moins de 15 minutes. Sur le parc géré par l'Immobilière Pujol, <strong>2 à 3 faux dossiers sont détectés chaque mois</strong> — dont la majorité sur des candidatures qui paraissaient a priori solides.</p>
 <h2>Les signaux d'alerte par type de document</h2>
 <p><strong>Bulletins de salaire falsifiés :</strong></p>
@@ -217,8 +217,8 @@ jsonLd: |
 <li>Absence de tampon ou signature d'agence</li>
 </ul>
 <hr />
-<h2>RGPD et Traitement des candidatures : vos obligations en tant que bailleur</h2>
-<p>La collecte des pièces justificatives de candidats locataires constitue un <strong>traitement de données personnelles</strong> au sens du <strong>Règlement Général sur la Protection des Données (RGPD)</strong>. Un propriétaire bailleur est considéré comme responsable de traitement dès lors qu'il collecte et conserve ces données, même informellement.</p>
+<h2>RGPD et traitement des candidatures : vos obligations en tant que bailleur</h2>
+<p>La collecte des pièces justificatives de candidats locataires constitue un <strong>traitement de données personnelles</strong> au sens du <strong>Règlement général sur la protection des données (RGPD)</strong>. Un propriétaire bailleur est considéré comme responsable de traitement dès lors qu'il collecte et conserve ces données, même informellement.</p>
 <h2>Ce que le RGPD impose concrètement</h2>
 <ul>
 <li><strong>Durée de conservation limitée</strong> : les dossiers des candidats non retenus doivent être détruits dans un délai raisonnable (généralement 1 mois après la fin de la sélection)</li>
@@ -230,7 +230,7 @@ jsonLd: |
 <p>Vérifier la solvabilité d'un locataire à Marseille est un processus en quatre temps : <strong>collecter les bonnes pièces</strong> (et uniquement celles autorisées par le décret du 5 novembre 2015), <strong>calculer le taux d'effort et le reste à vivre</strong> de façon combinée, <strong>authentifier les documents</strong> et <strong>évaluer le profil dans sa globalité</strong>.</p>
 <p>Une analyse structurée, appliquée systématiquement à des milliers de dossiers tous les ans, produit un résultat mesurable : 0,12% de taux d'impayés sur 18 ans. Confier cette analyse à un gestionnaire professionnel transfère la méthode et la responsabilité civile qui va avec.</p>
 <hr />
-<h2>FAQ — Solvabilité et Documents Légaux à Marseille</h2>
+<h2>FAQ — solvabilité et documents légaux à Marseille</h2>
 <p><strong>Q1. Quels documents un propriétaire peut-il légalement demander à Marseille ?</strong></p>
 <p>Exclusivement ceux listés dans le <strong>décret du 5 novembre 2015</strong> (application de la <strong>loi ALUR 2014</strong>) : pièce d'identité valide, justificatif de domicile actuel (quittances de loyer ou attestation d'hébergement), justificatif de situation professionnelle (contrat de travail, bulletins de salaire ou bilans pour indépendants), et justificatif de ressources (avis d'imposition, attestation CAF). Tout document hors liste — relevé bancaire, casier judiciaire, acte de mariage — est interdit.</p>
 <p><strong>Q2. Comment calculer la solvabilité d'un candidat locataire à Marseille ?</strong></p>

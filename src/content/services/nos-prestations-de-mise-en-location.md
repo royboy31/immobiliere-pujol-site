@@ -1,5 +1,5 @@
 ---
-title: "Mise En Location À Marseille  : Ce Que Nous Allons Faire Pour Vous"
+title: "Mise en location à Marseille : ce que nous allons faire pour vous"
 slug: "services/nos-prestations-de-mise-en-location"
 ctaText: "Demander une estimation de loyer"
 seoTitle: "Mise en location à Marseille  : ce que nous allons faire pour vous"
@@ -9,7 +9,7 @@ seoDescription: "Bien louer à Marseille : ce que l'immobilière Pujol, agence l
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Mise En Location À Marseille  : Ce Que Nous Allons Faire Pour Vous</h1>        
+    <h1 class="hero__title">Mise en location à Marseille : ce que nous allons faire pour vous</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
@@ -51,7 +51,7 @@ seoDescription: "Bien louer à Marseille : ce que l'immobilière Pujol, agence l
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Mise En Location À Marseille  : Ce Que Nous Allons Faire Pour Vous</h3>
+                    <h3 class="contextual__title">Mise en location à Marseille : ce que nous allons faire pour vous</h3>
                     <ul>
 	<li class="hero__title">
 <h2> Mise en publicité : valorisation et publication de l&rsquo;annonce immobilière</h2>

@@ -1,5 +1,5 @@
 ---
-title: "Combien Coûte La Gestion Locative D'un Bien ?"
+title: "Combien coûte la gestion locative d'un bien ?"
 slug: "services/le-cout-de-la-gestion-locative"
 seoTitle: "Combien coûte la gestion locative d’un bien ?"
 seoDescription: "Le coût d'une gestion locative à partir de 4% HT, ou 25€ par mois. Recevez l'offre de l'Immobilière Pujol en moins de 24h. Notre agence est parmi les plus recommandées par ses clients"
@@ -8,7 +8,7 @@ seoDescription: "Le coût d'une gestion locative à partir de 4% HT, ou 25€ pa
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Combien Coûte La Gestion Locative D'un Bien ?</h1>        
+    <h1 class="hero__title">Combien coûte la gestion locative d'un bien ?</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Le coût d'une gestion locative à partir de 4% HT, ou 25€ pa
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>1. Combien cela coûte de faire gérer son bien?</li>
@@ -52,7 +52,7 @@ seoDescription: "Le coût d'une gestion locative à partir de 4% HT, ou 25€ pa
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Combien Coûte La Gestion Locative D'un Bien ?</h3>
+                    <h3 class="contextual__title">Combien coûte la gestion locative d'un bien ?</h3>
                     <p>La gestion immobilière commence quand un locataire s’installe dans un logement (appartement ou maison), d&rsquo;un local ou d&rsquo;un bureau.<br />
 Un gestionnaire va donc percevoir les loyers, embaucher les prestataires pour assumer les travaux nécessaires, gérer les litiges et entreprendre d’éventuelles actions en justice, assumer les charges et impôts requis… <br />
 <br />
@@ -82,7 +82,7 @@ Si vous avez plusieurs biens à gérer ou que vous vivez loin de votre bien, la 
 Dans tous les cas, la multiplication des tâches administratives et la complexité fiscale incitent de plus en plus de propriétaires à s’entourer d’un gestionnaire expérimenté. <br />
 <br />
 </p>
-<h2>Combien coûte réellement une gestion locative ?</h2>
+<h2>Combien coûte réellement une gestion locative ?</h2>
 <p>Les critères que nous appliquons pour déterminer le coût de la gestion locative chez Immobilière Pujol :</p>
 <ul>
 	<li>La qualité de l&rsquo;appartement : état de l&rsquo;intérieur, de l&rsquo;immeuble, du quartier (on loue plus facilement un appartement dans le 13008 que dans le 13016)</li>
@@ -92,7 +92,7 @@ Dans tous les cas, la multiplication des tâches administratives et la complexit
 <p><strong>Le coût d&rsquo;une gestion locative oscille entre 30€ et 50€ mensuel</strong>, avant impact fiscal. <br />
 <strong>Tous les honoraires de gestion locative et mises en location sont déductibles des revenus fonciers</strong>. <br />
 Pour une personne taxée à 25% plus la CSG, l&rsquo;impact financier réel est de 25 à 35€ maximum, tous les mois.</p>
-<h2>Quels seront vos frais en tant que propriétaire bailleur?</h2>
+<h2>Quels seront vos frais en tant que propriétaire bailleur ?</h2>
 <ul>
 	<li>Les honoraires de l&rsquo;agence pour la gestion locative (déductible des revenus fonciers)</li>
 	<li>Les frais de mises en location à chaque nouvelle location (déductible des revenus fonciers)</li>
@@ -102,7 +102,7 @@ Pour une personne taxée à 25% plus la CSG, l&rsquo;impact financier réel est�
 	<li>Les travaux éventuels de rénovations et/ou réparations (déductible des revenus fonciers)</li>
 </ul>
 <p>Plus vous êtes « fiscalisé », plus le coût réel de votre gestion immobilière s&rsquo;allège.</p>
-<h2>A présent, posez-vous la question suivante :</h2>
+<h2>A présent, posez-vous la question suivante :</h2>
 <p><strong>Pour 25 à 35€ par mois après fiscalité</strong>, avez-vous vraiment envie de vous occuper<br />
 des annonces,<br />
 des travaux, <br />

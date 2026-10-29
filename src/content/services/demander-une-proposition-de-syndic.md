@@ -1,5 +1,5 @@
 ---
-title: "Demandez Une Proposition De Syndic"
+title: "Demandez une proposition de syndic"
 slug: "services/demander-une-proposition-de-syndic"
 ctaText: "Demander un devis"
 seoTitle: "Demandez une proposition de syndic"
@@ -9,7 +9,7 @@ seoDescription: "Demandez une proposition de syndic de copropriété à Marseill
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Demandez Une Proposition De Syndic</h1>        
+    <h1 class="hero__title">Demandez une proposition de syndic</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -32,7 +32,7 @@ seoDescription: "Demandez une proposition de syndic de copropriété à Marseill
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Demandez Une Proposition De Syndic</h3>
+                    <h3 class="contextual__title">Demandez une proposition de syndic</h3>
                     
                 
 

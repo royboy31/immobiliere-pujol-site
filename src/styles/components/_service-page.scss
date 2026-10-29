@@ -3205,8 +3205,33 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   @media (max-width: $bp-tablet) { height: auto; min-height: 340px; padding-top: 48px; padding-bottom: 48px; }
 }
 
+@media (min-width: $bp-tablet + 1) {
+  .svc-hero--guide h1 { font-size: 48px; line-height: 1.15; }
+
+  .svc-article-body--guide {
+    font-size: 17px;
+    line-height: 1.6;
+
+    h2 { font-size: 30px; }
+    h3 { font-size: 21px; }
+  }
+}
+
+// Guide pages read as one central column: the related-articles menu moves
+// below the content on desktop too (Caroline 29/10).
+.svc-toc-section__inner:has(.svc-article-body--guide) {
+  grid-template-columns: minmax(0, 820px);
+  justify-content: center;
+  gap: 56px;
+
+  .svc-toc { order: 2; position: static; }
+}
+
 .svc-article-body--guide {
   font-weight: 400;
+  max-width: none;
+
+  .svc-guide-num { color: $ds-olive-2; font-weight: 700; }
 
   h2 {
     margin-top: 56px;
@@ -3435,7 +3460,4 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 }
 
-// Mobile: the related-services menu goes below the guide, not before it.
-@media (max-width: $bp-tablet) {
-  .svc-toc-section__inner:has(.svc-article-body--guide) .svc-toc { order: 2; }
-}
+

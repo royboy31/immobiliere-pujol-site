@@ -1,5 +1,5 @@
 ---
-title: "Comment Évaluer Son Syndic?"
+title: "Comment évaluer son syndic ?"
 slug: "services/definition-de-syndic-professionnel-le-gestionnaire-de-copropriete-a-marseille"
 ctaText: "Demander un devis"
 seoTitle: "Comment évaluer son syndic?"
@@ -9,7 +9,7 @@ seoDescription: "Comment évaluez le service de votre syndic de copropriété à
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Évaluer Son Syndic?</h1>        <h4 class="hero__descr">La qualité des relations est notre priorité pour assurer un service de syndic de qualité.</h4>
+    <h1 class="hero__title">Comment évaluer son syndic ?</h1>        <h4 class="hero__descr">La qualité des relations est notre priorité pour assurer un service de syndic de qualité.</h4>
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -56,7 +56,7 @@ seoDescription: "Comment évaluez le service de votre syndic de copropriété à
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Évaluer Son Syndic?</h3>
+                    <h3 class="contextual__title">Comment évaluer son syndic ?</h3>
                     <p><a href="/services/quel-est-le-cout-dun-syndic-a-marseille-en-2017/">Le métier de syndic</a> est un métier passionnant et complexe. Evaluer la qualité de travail d&rsquo;une société de syndic est difficile.</p>
 <p>Il n&rsquo;y a pas encore de mesure de la qualité de service de nos métiers et nos clients doivent évaluer notre travail sur des critères subjectifs, difficiles à quantifier.</p>
 <p>Pour évaluer son syndic, il faut évaluer la qualité de ses outils, la sécurité juridique qu&rsquo;il apporte, la capacité de ses équipes techniques à suivre des dossiers complexes et sa capacité à créer des relations équilibrées.</p>

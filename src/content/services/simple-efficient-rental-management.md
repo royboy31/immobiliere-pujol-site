@@ -1,5 +1,5 @@
 ---
-title: "Simple And Efficient Rental Management"
+title: "Simple and efficient rental management"
 slug: "services/simple-efficient-rental-management"
 seoTitle: "Simple and efficient rental management"
 seoDescription: "Rental management is a full-time job! And it's one that requires the skills of a whole team of professionals. Whether you have one apartment to manage or a whole series, Immobilière Pujol offers you a personalized solution and supports you at every stage. We operate in Marseille and the surrounding…"
@@ -8,7 +8,7 @@ seoDescription: "Rental management is a full-time job! And it's one that require
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Simple And Efficient Rental Management</h1>        
+    <h1 class="hero__title">Simple and efficient rental management</h1>        
 
 
         
@@ -47,14 +47,14 @@ seoDescription: "Rental management is a full-time job! And it's one that require
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Simple And Efficient Rental Management</h3>
+                    <h3 class="contextual__title">Simple and efficient rental management</h3>
                     <p>Rental management is a full-time job! And it&rsquo;s one that requires the skills of a whole team of professionals. Whether you have one apartment to manage or a whole series, Immobilière Pujol offers you a personalized solution and supports you at every stage. We operate in Marseille and the surrounding area.</p>
 <p>We take care of all the legal issues (energy performance diagnostic (DPE), the Boutin Act&#8230;) and the administrative management of real estate on behalf of the owners. We handle all kinds of property: apartments, houses, business premises and offices.</p>
 <p>We look after your rental agreements and property income, both short-term (such as vacation rentals, rentals to students&#8230;) or long-term.</p>
 <p><img loading="lazy" decoding="async" class="size-medium wp-image-227490 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille-800x533.jpg" alt="louer votre appartement" width="800" height="533" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille-1200x800.jpg 1200w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/12/donner-a-louer-votre-appartement-a-marseille.jpg 1400w" sizes="auto, (max-width: 800px) 100vw, 800px" /></p>
 <p>Property management is never easy, but it is even harder if you are unfamiliar with the country. And even more difficult in Marseille, a city of strong contrasts.</p>
 <p>Our teams speak perfect English:  this way, we remove the language barrier and help you enter the rental market with ease.</p>
-<h2>How We Do It</h2>
+<h2>How we do it</h2>
 <p>First, we estimate the value of your property in line with the prices of the local market you want to enter. We make suggestions about any improvements or renovation that would increase the value of the property. Together we set a competitive price that is appropriate for your property and will attract demand.</p>
 <p>Then we take care of the online advertising.</p>
 <p>Next, we select the most creditworthy candidates amongst the prospective tenants. We carefully analyze their rental records to reduce as far as possible the risk of defaulting.</p>

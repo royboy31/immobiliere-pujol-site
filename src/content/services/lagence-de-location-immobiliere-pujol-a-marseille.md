@@ -1,5 +1,5 @@
 ---
-title: "L'agence De Location Immobilière Pujol À Marseille"
+title: "L'agence de location Immobilière Pujol à Marseille"
 slug: "services/lagence-de-location-immobiliere-pujol-a-marseille"
 seoTitle: "L’agence de location immobilière Pujol à Marseille"
 seoDescription: "Contactez l'agence de location la plus recommandée par ses clients, Immobilière Pujol  Proposition commerciale en 24h"
@@ -8,7 +8,7 @@ seoDescription: "Contactez l'agence de location la plus recommandée par ses cli
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">L'agence De Location Immobilière Pujol À Marseille</h1>        
+    <h1 class="hero__title">L'agence de location Immobilière Pujol à Marseille</h1>        
 
         
     
@@ -46,13 +46,13 @@ seoDescription: "Contactez l'agence de location la plus recommandée par ses cli
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">L'agence De Location Immobilière Pujol À Marseille</h3>
+                    <h3 class="contextual__title">L'agence de location Immobilière Pujol à Marseille</h3>
                     <p>Nos experts immobiliers en gestion locative assurent la mise en location de vos appartements, maisons et bureaux/locaux à Marseille. <br />
 Une location immobilière ne se fait pas au hasard.<br />
 Chez Immobilière Pujol nous vous accompagnons avec bienveillance dans toutes vos démarches et dans le temps.</p>
-<h2>Pourquoi déléguer la location à une agence spécialisée en location immobilière ?</h2>
+<h2>Pourquoi déléguer la location à une agence spécialisée en location immobilière ?</h2>
 <p>Une agence immobilière locale connait la ville, son évolution, ses quartiers populaires, ses programmes neufs, les opportunités du marché et les pièges à éviter.</p>
-<h3>Chez Immobilière Pujol :</h3>
+<h3>Chez Immobilière Pujol :</h3>
 <ul>
 	<li>
 <h3>Nous accompagnons  tous les ans plus de 600 propriétaires dans la mise en location de leur patrimoine immobilier</h3>

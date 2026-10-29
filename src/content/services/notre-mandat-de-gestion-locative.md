@@ -1,5 +1,5 @@
 ---
-title: "Notre Mandat De Gestion Locative"
+title: "Notre mandat de gestion locative"
 slug: "services/notre-mandat-de-gestion-locative"
 ctaText: "Demander un devis"
 seoTitle: "Notre mandat de gestion locative"
@@ -9,7 +9,7 @@ seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Notre Mandat De Gestion Locative</h1>        
+    <h1 class="hero__title">Notre mandat de gestion locative</h1>        
 
 
         <div class="hero__cta">
@@ -33,7 +33,7 @@ seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Notre Mandat De Gestion Locative</h3>
+                    <h3 class="contextual__title">Notre mandat de gestion locative</h3>
                     <p><img loading="lazy" decoding="async" class="size-medium wp-image-39871 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/01/logo-immobilier-Pujol-h-RVB-300x90.jpg" alt="" width="300" height="90" /></p>
 <p><strong>MANDAT DE GERANCE PERSONNE PHYSIQUE N°</strong></p>
 <p><em>Articles 1984 et suivants du Code civil</em><br />
@@ -60,7 +60,7 @@ seoDescription: "Les tarifs de notre mandat de gestion locative commencent à 4%
 	<li>Profession :</li>
 	<li>Domicile:</li>
 </ul>
-<h4>Date et lieu de mariage :</h4>
+<h4>Date et lieu de mariage :</h4>
 <p>Propriétaire, usufruitier, nu-propriétaire, propriétaire indivis des biens et droits immobiliers ci-après énoncés désigné comme LE MANDANT dans la suite des présentes.</p>
 <h3><strong>LE MANDATAIRE</strong></h3>
 <p>L’IMMOBILIERE PUJOL &#8211; 7 Rue du Docteur Jean Fiolle 13006 MARSEILLE, représentée par Stéphane PUJOL, Président, SARL au capital de 37 000€ &#8211; RC MARSEILLE B 056 808 868 &#8211; SIRET 056 808 868 000 30. Titulaire de la carte professionnelle N° CPI 1310 2015 000 000 284 délivrée par la CCI Marseille.</p>
@@ -122,12 +122,12 @@ La durée du bail consentie, sera fonction de la destination du bien et de la qu
 <p><strong>Modalité de règlement</strong> : VERSEMENT PAR VIREMENT BANCAIRE</p>
 <p>Le mandant dispense le mandataire de l’envoi, par pli recommandé, de la lettre prévue par l’article 67 du décret n°72-678 du 20 Juillet 1972 pour les versements ou remises afférents à des locations nouvelles dont le mandataire rendra compte dans le cadre général de la reddition de ses comptes.</p>
 <h2><strong>3 . HONORAIRES</strong></h2>
-<h3>A. Honoraires de base forfaitaires :</h3>
+<h3>A. Honoraires de base forfaitaires :</h3>
 <p>Le mandataire percevra la rémunération convenue d’un commun accord et arrêté à <strong>x% H.T</strong> du montant des sommes, effets ou valeurs encaissés pour le compte du mandant.</p>
-<h3>B. Honoraires particuliers :</h3>
+<h3>B. Honoraires particuliers :</h3>
 <p>Le mandataire est également expressément autorisé par le mandant à se faire payer par les locataires, les frais et honoraires de négociation, de rédaction d’actes, baux ou avenants, engagements de location, etc…………..</p>
 <p>La part de ces frais et honoraires mise par la loi à la charge du propriétaire sera supportée par ce dernier qui l’accepte suivant le barème de notre cabinet joint au présent mandat.</p>
-<h3>C. Honoraires divers :</h3>
+<h3>C. Honoraires divers :</h3>
 <ul>
 	<li>Transmission du dossier contentieux à l’huissier</li>
 	<li>Transmission du dossier contentieux à l’avocat</li>

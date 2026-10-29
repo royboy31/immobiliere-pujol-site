@@ -1,5 +1,5 @@
 ---
-title: "Prix De L'immobilier À Marseille"
+title: "Prix de l'immobilier à Marseille"
 slug: "services/demander-une-estimation-de-prix-de-vente"
 ctaText: "Demander une estimation"
 seoTitle: "Prix de l’immobilier à Marseille"
@@ -9,7 +9,7 @@ seoDescription: "La valeur d'un bien immobilier dépend de plusieurs facteurs : 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Prix De L'immobilier À Marseille</h1>        <h4 class="hero__descr">Vous souhaitez connaitre les prix du marché et la valeur de votre bien en vue de sa vente?</h4>
+    <h1 class="hero__title">Prix de l'immobilier à Marseille</h1>        <h4 class="hero__descr">Vous souhaitez connaitre les prix du marché et la valeur de votre bien en vue de sa vente ?</h4>
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation</a>
@@ -47,7 +47,7 @@ seoDescription: "La valeur d'un bien immobilier dépend de plusieurs facteurs : 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Prix De L'immobilier À Marseille</h3>
+                    <h3 class="contextual__title">Prix de l'immobilier à Marseille</h3>
                     <p><img loading="lazy" decoding="async" class="wp-image-379273 alignleft" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-800x533.jpg" alt="" width="366" height="244" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-800x533.jpg 800w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-768x512.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-1536x1024.jpg 1536w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-2048x1366.jpg 2048w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-600x400.jpg 600w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/web-home-staging_0023-caroline-semac-8eme-3-1200x800.jpg 1200w" sizes="auto, (max-width: 366px) 100vw, 366px" /></p>
 <p>La valeur d&rsquo;un bien immobilier dépend de plusieurs facteurs :</p>
 <ul>

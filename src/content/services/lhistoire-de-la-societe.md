@@ -1,5 +1,5 @@
 ---
-title: "L'histoire De La Société"
+title: "L'histoire de la société"
 slug: "services/lhistoire-de-la-societe"
 seoTitle: "L’histoire de la société"
 seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée sur des valeurs humaines et un service client exceptionnel avec une équipe engagée et une approche centrée sur la confiance et la transparence."
@@ -8,7 +8,7 @@ seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">L'histoire De La Société</h1>        
+    <h1 class="hero__title">L'histoire de la société</h1>        
 
         
     
@@ -55,7 +55,7 @@ seoDescription: "Immobilier Pujol, une agence immobilière à Marseille fondée 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">L'histoire De La Société</h3>
+                    <h3 class="contextual__title">L'histoire de la société</h3>
                     <p>Le projet de la société Immobilière Pujol est né en 2001, le jour où j’ai compris que <strong>je n’avais plus ma place dans les grands groupes immobiliers pour lesquels je travaillais depuis déjà quelques années. </strong></p>
 <p>Je n’étais plus en phase avec leur vision financière du métier qui oublie:</p>
 <ul>

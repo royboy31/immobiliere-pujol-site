@@ -1,5 +1,5 @@
 ---
-title: "Combien Rapporte Un Bon Syndic De Copropriété ?"
+title: "Combien rapporte un bon syndic de copropriété ?"
 slug: "services/comment-faire-baisser-le-cout-un-syndic-a-marseillle"
 seoTitle: "Combien rapporte un bon syndic de copropriété ?"
 seoDescription: "Consultez Immbilière Pujol, élu meilleur syndic de France en 2020 et le plus recommandé à Marseille par ses clients pour la qualité de ses services."
@@ -8,7 +8,7 @@ seoDescription: "Consultez Immbilière Pujol, élu meilleur syndic de France en 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Combien Rapporte Un Bon Syndic De Copropriété ?</h1>        
+    <h1 class="hero__title">Combien rapporte un bon syndic de copropriété ?</h1>        
 
         
     
@@ -48,7 +48,7 @@ seoDescription: "Consultez Immbilière Pujol, élu meilleur syndic de France en 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Combien Rapporte Un Bon Syndic De Copropriété ?</h3>
+                    <h3 class="contextual__title">Combien rapporte un bon syndic de copropriété ?</h3>
                     <p>Chez Immobilière Pujol, nous l’avons bien compris et c’est pour cela que :<br />
 &#8211; nous ne surchargeons pas les portefeuilles de nos gestionnaires et les mettons dans les meilleures conditions pour bien gérer votre immeuble.<br />
 &#8211; Nous n’hésitons pas à refuser un nouveau contrat de syndic si nous ne pensons pas pouvoir le gérer correctement.<br />

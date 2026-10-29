@@ -1,5 +1,5 @@
 ---
-title: "Ce Que Nous Vous Garantissons"
+title: "Ce que nous vous garantissons"
 slug: "services/ce-que-nous-vous-garantissons"
 seoTitle: "Ce que nous vous garantissons"
 seoDescription: "Nous vous garantissons: une location rapide aux meilleures conditions du marché: 37 jours en moyenne en 2016 et 39 jours en 2017 une transparence totale et un accès 24H/24H en temps réel à tous les documents avec un accès à tous vos documents (devis, courriers, décompte de gestion, factures, nos…"
@@ -8,7 +8,7 @@ seoDescription: "Nous vous garantissons: une location rapide aux meilleures cond
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Ce Que Nous Vous Garantissons</h1>        
+    <h1 class="hero__title">Ce que nous vous garantissons</h1>        
 
 
         
@@ -28,7 +28,7 @@ seoDescription: "Nous vous garantissons: une location rapide aux meilleures cond
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Ce Que Nous Vous Garantissons</h3>
+                    <h3 class="contextual__title">Ce que nous vous garantissons</h3>
                     Nous vous garantissons:
 <ul>
  	<li>une <strong>location rapide</strong> aux meilleures conditions du marché: 37 jours en moyenne en 2016 et 39 jours en 2017</li>

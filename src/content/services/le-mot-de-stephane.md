@@ -1,5 +1,5 @@
 ---
-title: "Le Mot De Stéphane Pujol"
+title: "Le mot de Stéphane Pujol"
 slug: "services/le-mot-de-stephane"
 seoTitle: "Le mot de Stéphane Pujol"
 seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujours été pour moi source de révolte. Trop de personnes sont mal conseillées et mal accompagnées, achètent et investissent sur un coup de tête, sur de fausses croyances ou en rencontrant un vendeur de rêve… Partager ma vision de l’immobilier Pourquoi…"
@@ -8,7 +8,7 @@ seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujo
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Le Mot De Stéphane Pujol</h1>        
+    <h1 class="hero__title">Le mot de Stéphane Pujol</h1>        
 
         
     
@@ -55,7 +55,7 @@ seoDescription: "Les prédateurs qui abondent dans le monde immobilier ont toujo
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Le Mot De Stéphane Pujol</h3>
+                    <h3 class="contextual__title">Le mot de Stéphane Pujol</h3>
                     <p>Les prédateurs qui abondent dans le monde immobilier ont toujours été pour moi source de révolte.</p>
 <p>Trop de personnes sont mal conseillées et mal accompagnées, achètent et investissent sur un coup de tête, sur de fausses croyances ou en rencontrant un vendeur de rêve…</p>
 <h3>Partager ma vision de l’immobilier</h3>

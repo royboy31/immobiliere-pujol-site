@@ -1,5 +1,5 @@
 ---
-title: "Les Tarifs Et Coûts De La Gestion Locative À Marseille"
+title: "Les tarifs et coûts de la gestion locative à Marseille"
 slug: "services/quels-tarifs-gestion-immobiliere-marseille"
 seoTitle: "Les tarifs et coûts de la gestion locative à Marseille"
 seoDescription: "Gestion locative à partir de 4%HT, couverture loyers impayés à 1,8% TTC . Immobilière Pujol l'agence la plus recommandée par ses clients"
@@ -8,7 +8,7 @@ seoDescription: "Gestion locative à partir de 4%HT, couverture loyers impayés 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Les Tarifs Et Coûts De La Gestion Locative À Marseille</h1>        
+    <h1 class="hero__title">Les tarifs et coûts de la gestion locative à Marseille</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Gestion locative à partir de 4%HT, couverture loyers impayés 
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>1. Combien cela coûte de faire gérer son bien?</li>
@@ -52,13 +52,13 @@ seoDescription: "Gestion locative à partir de 4%HT, couverture loyers impayés 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Les Tarifs Et Coûts De La Gestion Locative À Marseille</h3>
+                    <h3 class="contextual__title">Les tarifs et coûts de la gestion locative à Marseille</h3>
                     <p>L’achat d’un bien immobilier pour placement nécessite une gestion active.<br />
 Si vous pouvez assumer tout ou partie de la gestion du bien, il est beaucoup moins risqué de confier la gérance à un professionnel de l’immobilier.</p>
 <h2>Les avantages d’un service de gestion immobilière</h2>
 <p>L’administrateur de biens exerce un métier de service : c’est un gérant professionnel qui sait sécuriser les loyers en prévenant les impayés, rédiger un bail conforme, trouvez des locataires responsables, recommandez les aménagements et travaux de décoration quand ils sont nécessaires, choisir des artisans qualifiés, assurer la conformité des déclarations fiscales…</p>
 <p>Pour un propriétaire, avoir un gérant à ses côtés, c’est gagner en sérénité et avoir des garanties. Mise en location, maintenance, conseils techniques et juridiques… L’Immobilière Pujol assume tout ou partie de la gestion locative de votre patrimoine immobilier et engage sa responsabilité dans ses actes et ses conseils.</p>
-<h2>Quel est le coût réel d’une gestion locative à Marseille ?</h2>
+<h2>Quel est le coût réel d’une gestion locative à Marseille ?</h2>
 <p>Les honoraires d’un gestionnaire sont libres. <br />
 Pour donner une fourchette de prix large, disons que la gestion locative d’un professionnel coûte entre 4 et 12% HT du montant annuel des encaissements du ou des biens dont il a la charge. <br />
 <strong>Pour un appartement qui a un loyer 700€, la moyenne du marché est à 5%ht. Chez Immobilière Pujol nous nous positionnons à 4%HT .</strong></p>

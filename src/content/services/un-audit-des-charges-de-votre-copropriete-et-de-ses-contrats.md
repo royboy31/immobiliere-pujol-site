@@ -1,5 +1,5 @@
 ---
-title: "Un Audit Des Charges De Votre Copropriété Et De Ses Contrats"
+title: "Un audit des charges de votre copropriété et de ses contrats"
 slug: "services/un-audit-des-charges-de-votre-copropriete-et-de-ses-contrats"
 seoTitle: "Un audit des charges de votre copropriété et de ses contrats"
 seoDescription: "Nous mettons en concurrence tous les contrats souscrits pour le compte de votre copropriété. Consultez nous et recevez un devis en moins de 24h"
@@ -8,7 +8,7 @@ seoDescription: "Nous mettons en concurrence tous les contrats souscrits pour le
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Un Audit Des Charges De Votre Copropriété Et De Ses Contrats</h1>        
+    <h1 class="hero__title">Un audit des charges de votre copropriété et de ses contrats</h1>        
 
         
     
@@ -27,7 +27,7 @@ seoDescription: "Nous mettons en concurrence tous les contrats souscrits pour le
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Un Audit Des Charges De Votre Copropriété Et De Ses Contrats</h3>
+                    <h3 class="contextual__title">Un audit des charges de votre copropriété et de ses contrats</h3>
                     <p>Au cours de la première année et très régulièrement, <strong>nous procédons à un audit complet des charges de votre copropriété et des contrats de prestations en vigueur</strong>.</p>
 <p>Lors de l’audit, nous évaluons :</p>
 <ul>

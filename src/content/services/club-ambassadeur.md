@@ -1,5 +1,5 @@
 ---
-title: "Club Ambassadeur"
+title: "Club ambassadeur"
 slug: "services/club-ambassadeur"
 seoTitle: "Club ambassadeur"
 seoDescription: ""

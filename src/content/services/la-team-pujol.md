@@ -1,5 +1,5 @@
 ---
-title: "La Team Pujol"
+title: "La team Pujol"
 slug: "services/la-team-pujol"
 seoTitle: "La team Pujol"
 seoDescription: "A la rencontre de notre équipe ! Nous aimons notre métier mais nous aimons aussi partager de bons moments ensemble, rire, chanter, danser, .........."
@@ -8,7 +8,7 @@ seoDescription: "A la rencontre de notre équipe ! Nous aimons notre métier mai
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">La Team Pujol</h1>        
+    <h1 class="hero__title">La team Pujol</h1>        
 
 
         
@@ -56,7 +56,7 @@ seoDescription: "A la rencontre de notre équipe ! Nous aimons notre métier mai
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">La Team Pujol</h3>
+                    <h3 class="contextual__title">La team Pujol</h3>
                     <p style="text-align: center;"><span style="font-family: impact, sans-serif; font-size: 14pt;">A la rencontre de notre équipe !</span></p>
 <p style="text-align: center;">Nous aimons notre métier <br />
 mais nous aimons aussi partager de bons moments ensemble, rire, chanter, danser, &#8230;&#8230;&#8230;.</p>

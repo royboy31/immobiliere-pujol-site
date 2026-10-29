@@ -1,5 +1,5 @@
 ---
-title: "Comment Résilier Un Contrat De Syndic En Cours De Mandat?"
+title: "Comment résilier un contrat de syndic en cours de mandat ?"
 slug: "services/comment-annuler-des-contrats-de-syndic"
 seoTitle: "Comment résilier un contrat de syndic en cours de mandat?"
 seoDescription: "Résilier le contrat de votre syndic de copropriété et changez de syndic. La marche à suivre ici ! Immobilière Pujol, un syndic reconnu par ses clients"
@@ -8,7 +8,7 @@ seoDescription: "Résilier le contrat de votre syndic de copropriété et change
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Résilier Un Contrat De Syndic En Cours De Mandat?</h1>        
+    <h1 class="hero__title">Comment résilier un contrat de syndic en cours de mandat ?</h1>        
 
 
         
@@ -52,7 +52,7 @@ seoDescription: "Résilier le contrat de votre syndic de copropriété et change
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Résilier Un Contrat De Syndic En Cours De Mandat?</h3>
+                    <h3 class="contextual__title">Comment résilier un contrat de syndic en cours de mandat ?</h3>
                     <p>Tout copropriétaire peut <a href="/services/comment-changer-de-syndic-a-marseille/" target="_blank" rel="noopener">proposer l&rsquo;élection d&rsquo;un nouveau syndic</a> à l&rsquo;ordre du jour de la prochaine.</p>
 <p>Si le syndic commet des fautes professionnelles dans le cadre de ses missions, sa révocation en cours de mandat est possible. <br />
 La loi ALUR permet une révocation du syndic si ce dernier a commis des fautes de gestion. <br />
@@ -65,7 +65,7 @@ En revanche, il faut que la cause soit légitime et que cette révocation soit m
 	<li><a href="/service/definition-de-syndic-professionnel-le-gestionnaire-de-copropriete-a-marseille/">Comment évaluer son syndic ?</a></li>
 	<li><a href="/service/combien-coute-syndic-copropriete/">Combien coûte un syndic ?</a></li>
 </ul>
-<h2>1er cas: Comment changer un syndic de copropriété quand il n&rsquo;y a pas de faute grave?</h2>
+<h2>1er cas : comment changer un syndic de copropriété quand il n&rsquo;y a pas de faute grave ?</h2>
 <p>S’il n’y a pas de fautes graves, le changement de syndic se fait à l’issue du mandat. <strong>L’assemblée générale devra avoir lieu avant la date d’échéance du mandat de syndic actuel</strong>.</p>
 <p>Le conseil syndical synthétise d’abord ses besoins. Il doit donc préparer <a href="/service/definition-dun-bon-service-de-syndic-a-marseille/">un cahier des charges</a>. Ce document inclura entre autres le nombre et la durée des visites de syndic, le nombre de conseils syndicaux…</p>
 <p>La loi ALUR incite vivement le conseil syndical à mettre en concurrence son syndic. En pratique, aucune sanction ne sera appliquée si ce n’est pas fait.</p>
@@ -77,7 +77,7 @@ Demandez-lui ensuite un devis et comparez-le au syndic actuel.</p>
 <p>Une fois que vous avez au moins un nouveau devis, vous pouvez comparer les offres sur la base du cahier des charges.</p>
 <p>Enfin, préparez l’assemblée générale : le conseil syndical doit sensibiliser chaque copropriétaire vis-à-vis du changement et demander au syndic actuel d’inscrire la nomination d’un nouveau syndic à l’ordre du jour (envoyez un courrier recommandé avec avis de réception).</p>
 <p>Deux votes auront lieu : la révocation du syndic actuel, puis la nomination du nouveau syndic. Découvrez <a href="/service/comment-changer-de-syndic-a-marseille/">comment se déroulent l’assemblée et le vote</a>.</p>
-<h2>2ème cas: Comment changer de syndic en cours de mandat quand il y a faute ?</h2>
+<h2>2ème cas : comment changer de syndic en cours de mandat quand il y a faute ?</h2>
 <p>Si le syndic commet des fautes graves ou des fautes de gestion répétées (Engagement de dépenses sans autorisation, travaux d&rsquo;entretien non réalisés, non souscription d&rsquo;assurances obligatoires etc&#8230; ) vous pouvez en changer avant même la fin de son mandat.<br />
 Ces fautes vont en général de pair avec un syndic qui casse trop ses prix ou souvent lors des rachats que mènent les grands groupes.</p>
 <p>Si vous ne voulez pas attendre la prochaine assemblée compte tenu des insuffisances constatées, le président du conseil syndical peux procéder à la convocation d’une assemblée extraordinaire (par lettre recommandée à chaque copropriétaire). L<strong>es copropriétaires représentant au moins le quart des voix peuvent également organiser cette assemblée</strong>.</p>

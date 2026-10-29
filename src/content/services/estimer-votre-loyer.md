@@ -1,5 +1,5 @@
 ---
-title: "Estimez Votre Loyer À Marseille"
+title: "Estimez votre loyer à Marseille"
 slug: "services/estimer-votre-loyer"
 heroVideo: "https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/11/signature_pujol.mp4"
 ctaText: "Demandez-nous une estimation de loyer"
@@ -10,7 +10,7 @@ seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Estimez Votre Loyer À Marseille</h1>        
+    <h1 class="hero__title">Estimez votre loyer à Marseille</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demandez-nous une estimation de loyer</a>
@@ -32,7 +32,7 @@ seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>3. Comment évaluer le loyer à Marseille?</li>
@@ -53,7 +53,7 @@ seoDescription: "Faites estimer en moins de 24h votre loyer à Marseille par une
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Estimez Votre Loyer À Marseille</h3>
+                    <h3 class="contextual__title">Estimez votre loyer à Marseille</h3>
                     <h2>Faites estimer le loyer de votre appartement sous 24h</h2>
 <p>Nous louons<strong> 400 appartements, bureaux et locaux commerciaux</strong> chaque année.</p>
 <p>Nos outils permettent de positionner le prix de votre appartement pour trouver un locataire solvable.</p>

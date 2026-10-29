@@ -1,5 +1,5 @@
 ---
-title: "Comment Estimer Le Prix D'un Loyer À Marseille ?"
+title: "Comment estimer le prix d'un loyer à Marseille ?"
 slug: "services/comment-nous-estimons-le-prix-de-votre-loyer-sur-marseille"
 ctaText: "Demander une estimation de loyer"
 seoTitle: "Comment estimer le prix d’un loyer à Marseille ?"
@@ -9,7 +9,7 @@ seoDescription: "Parce qu'un loyer correctement fixé attire les bons locataires
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Estimer Le Prix D'un Loyer À Marseille ?</h1>        <h4 class="hero__descr">Trouver le bon compromis du juste prix pour fidéliser votre locataire</h4>
+    <h1 class="hero__title">Comment estimer le prix d'un loyer à Marseille ?</h1>        <h4 class="hero__descr">Trouver le bon compromis du juste prix pour fidéliser votre locataire</h4>
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
@@ -33,7 +33,7 @@ seoDescription: "Parce qu'un loyer correctement fixé attire les bons locataires
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>3. Comment évaluer le loyer à Marseille?</li>
@@ -54,7 +54,7 @@ seoDescription: "Parce qu'un loyer correctement fixé attire les bons locataires
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Estimer Le Prix D'un Loyer À Marseille ?</h3>
+                    <h3 class="contextual__title">Comment estimer le prix d'un loyer à Marseille ?</h3>
                     <h2>Un loyer doit correspondre au confort et à l&#8217;emplacement du bien que vous proposez</h2>
 <p><br />
 Le loyer auquel votre bien immobilier va être présenté sur le marché immobilier Marseillais <strong>est stratégique. <br />
@@ -102,7 +102,7 @@ Si au bout de 3 semaines ou 1 mois de mise en publicité, le bien n’est pas lo
 <p>Le visiteur doit ressentir un vif enthousiasme en voyant les photos, la vidéo ou la visite virtuelle.<br />
 Une impression qui sera renforcée lors des visites, d’où l’importance du professionnalisme de l’agent immobilier en charge de votre bien que se soit pour la rédaction de l&rsquo;annonce, la prise de photo, la réalisation d&rsquo;une vidéo ou d&rsquo;une visite virtuelle. Le candidat locataire doit s’imaginer vivre dans l’appartement et prendre possession des lieux.<br />
 Chez Immobilière Pujol toutes nos biens à louer bénéficient d&rsquo;un reportage photo en qualité HDR, d&rsquo;une vidéo ou d&rsquo;une visite virtuelle. </p>
-<h2>Vous souhaitez estimer le loyer de votre appartement à louer?</h2>
+<h2>Vous souhaitez estimer le loyer de votre appartement à louer ?</h2>
 <p>Contactez-nous directement ou n&rsquo;hésitez pas à nous demander une estimation de loyer en remplissant ce formulaire. </p>
                 </section>
             </div>

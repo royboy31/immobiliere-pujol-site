@@ -1,5 +1,5 @@
 ---
-title: "La Mission De L'immobilière Pujol"
+title: "La mission de l'Immobilière Pujol"
 slug: "services/la-mission-de-immobiliere-pujol"
 seoTitle: "La mission de l’Immobilière Pujol"
 seoDescription: "L'Immobilière Pujol est une entreprise qui incarne l'éthique, l'égalité et le développement durable dans le secteur immobilier à Marseille. Engagés envers la responsabilité sociale, nous offrons des services de qualité tout en contribuant au logement et à la fluidité du marché. Avec intégrité et engagement, nous croyons en la création de belles expériences immobilières pour nos clients."
@@ -8,7 +8,7 @@ seoDescription: "L'Immobilière Pujol est une entreprise qui incarne l'éthique,
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">La Mission De L'immobilière Pujol</h1>        
+    <h1 class="hero__title">La mission de l'Immobilière Pujol</h1>        
 
 
         
@@ -56,7 +56,7 @@ seoDescription: "L'Immobilière Pujol est une entreprise qui incarne l'éthique,
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">La Mission De L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">La mission de l'Immobilière Pujol</h3>
                     <p>Une entreprise est un organisme vivant qui nourrit, grandit, se nourrit et doit faire grandir son équipe, ses fournisseurs et ses clients.</p>
 <p>Nous avions déjà formalisé la <strong><a href="/services/pourquoi-nous-faisons-ce-metier/">mission d’entreprise de l&rsquo;immobilière Pujol</a></strong> , car nous sentions que nous en avions besoin. <br />
 Celle-ci a évolué au grès des étapes que nous avons franchies.</p>

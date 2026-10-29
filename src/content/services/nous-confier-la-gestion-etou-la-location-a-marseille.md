@@ -1,5 +1,5 @@
 ---
-title: "Nous Confier La Gestion Et/Ou La Location À Marseille"
+title: "Nous confier la gestion et/ou la location à Marseille"
 slug: "services/nous-confier-la-gestion-etou-la-location-a-marseille"
 seoTitle: "Nous confier la gestion et/ou la location à Marseille"
 seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux. Nos clients nous recommandent. Découvre pourquoi et recevez une proposition de l'Immobilière Pujol"
@@ -8,7 +8,7 @@ seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux.
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Nous Confier La Gestion Et/Ou La Location À Marseille</h1>        
+    <h1 class="hero__title">Nous confier la gestion et/ou la location à Marseille</h1>        
 
 
         
@@ -28,7 +28,7 @@ seoDescription: "Vous pouvez nous confier la location OU la gestion OU les deux.
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Nous Confier La Gestion Et/Ou La Location À Marseille</h3>
+                    <h3 class="contextual__title">Nous confier la gestion et/ou la location à Marseille</h3>
                     <p>Vous avez décidé de gagner du temps et d&rsquo;avoir recours aux services d&rsquo;un agent immobilier à Marseille pour gérer et louer vos biens?<br />
 Voici les informations qu’un propriétaire doit transmettre quand il souhaite nous confier la gestion de son bien.</p>
 <h2>Le titre de propriété</h2>

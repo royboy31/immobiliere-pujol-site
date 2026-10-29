@@ -1,5 +1,5 @@
 ---
-title: "Property Management, A Question Of Expertise"
+title: "Property management, a question of expertise"
 slug: "services/property-management-question-expertise"
 seoTitle: "Property management, a question of expertise"
 seoDescription: "Property management is not for everyone. It's exciting work, but also complex and challenging. There are many human and emotional aspects, presenting a constant challenge. It's a hands-on job. We manage all aspects of co-ownership properties: reception staff, cleaners, refuse sorting and disposal, maintenance of green areas, fire detection, heating,…"
@@ -8,7 +8,7 @@ seoDescription: "Property management is not for everyone. It's exciting work, bu
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Property Management, A Question Of Expertise</h1>        
+    <h1 class="hero__title">Property management, a question of expertise</h1>        
 
 
         
@@ -47,7 +47,7 @@ seoDescription: "Property management is not for everyone. It's exciting work, bu
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Property Management, A Question Of Expertise</h3>
+                    <h3 class="contextual__title">Property management, a question of expertise</h3>
                     Property management is not for everyone. It&rsquo;s exciting work, but also complex and challenging. There are many human and emotional aspects, presenting a constant challenge. It&rsquo;s a hands-on job.
 
 We manage all aspects of co-ownership properties: reception staff, cleaners, refuse sorting and disposal, maintenance of green areas, fire detection, heating, lifts&#8230;

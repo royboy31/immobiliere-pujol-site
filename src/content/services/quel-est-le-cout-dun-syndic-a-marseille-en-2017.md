@@ -1,5 +1,5 @@
 ---
-title: "Quel Est Le Coût D'un Syndic À Marseille ?"
+title: "Quel est le coût d'un syndic à Marseille ?"
 slug: "services/quel-est-le-cout-dun-syndic-a-marseille-en-2017"
 seoTitle: "Quel est le coût d’un syndic à Marseille ?"
 seoDescription: "Le coût d'un syndic de copropriété est une dépense. Consultez l'équipe de syndic, parmi les plus recommandée par ses clients. Recevez un devis en 24h"
@@ -8,7 +8,7 @@ seoDescription: "Le coût d'un syndic de copropriété est une dépense. Consult
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Quel Est Le Coût D'un Syndic À Marseille ?</h1>        
+    <h1 class="hero__title">Quel est le coût d'un syndic à Marseille ?</h1>        
 
         
     
@@ -27,7 +27,7 @@ seoDescription: "Le coût d'un syndic de copropriété est une dépense. Consult
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Quel Est Le Coût D'un Syndic À Marseille ?</h3>
+                    <h3 class="contextual__title">Quel est le coût d'un syndic à Marseille ?</h3>
                     <p><strong>Les syndics de copropriétés ont trop souvent mauvaise presse</strong>.<br />
 Loin de nous l’idée de défendre coûte que coûte l’ensemble de la profession, car il n&rsquo;y a parfois aucun service délivré.</p>
 <p>Le plus souvent c&rsquo;est un manque de temps et d’attention qui sont à l’origine des difficultés ressenties et donc de notre réputation.</p>
@@ -62,7 +62,7 @@ Le rôle d&rsquo;un bon syndic est :</p>
 	<li>de faire les liens entre toutes les partie</li>
 </ul>
 <p>&nbsp;</p>
-<h2>Le coût d&rsquo;un syndic de copropriété à Marseille :</h2>
+<h2>Le coût d&rsquo;un syndic de copropriété à Marseille :</h2>
 <p>Le coût d&rsquo;un syndic est compris entre 150€ par an par appartement et 300€ par an selon la taille de la copropriété, sa structure des charges, ses équipements communs, le cahier des charges du contrat de syndic.</p>
 <h2>Le syndic, un peu, beaucoup, à la folie</h2>
 <p>La gestion des syndicats de copropriété nous passionne. Nous prenons cette activité à cœur car nous aimons rendre ce service, sommes utiles à nos clients et aimons du travail bien fait.</p>

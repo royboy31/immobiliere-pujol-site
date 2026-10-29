@@ -1,5 +1,5 @@
 ---
-title: "Notre Service De Gestion Immobilière"
+title: "Notre service de gestion immobilière"
 slug: "services/notre-service-de-gestion-immobiliere"
 ctaText: "Demander un devis"
 seoTitle: "Notre service de gestion immobilière"
@@ -9,7 +9,7 @@ seoDescription: "Une organisation simplifiée Notre organisation est volontairem
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Notre Service De Gestion Immobilière</h1>        
+    <h1 class="hero__title">Notre service de gestion immobilière</h1>        
 
 
         <div class="hero__cta">
@@ -33,7 +33,7 @@ seoDescription: "Une organisation simplifiée Notre organisation est volontairem
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Notre Service De Gestion Immobilière</h3>
+                    <h3 class="contextual__title">Notre service de gestion immobilière</h3>
                     <h2>Une organisation simplifiée</h2>
 Notre organisation est volontairement simple pour que le service de gestion immobilière soit rapide et efficace.
 

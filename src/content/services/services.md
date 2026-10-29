@@ -1,5 +1,5 @@
 ---
-title: "Nos Services"
+title: "Nos services"
 slug: "services"
 seoTitle: "Services"
 seoDescription: ""

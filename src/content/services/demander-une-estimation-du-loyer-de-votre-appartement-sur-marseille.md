@@ -1,5 +1,5 @@
 ---
-title: "Demander Une Estimation Du Loyer De Votre Appartement Sur Marseille"
+title: "Demander une estimation du loyer de votre appartement sur Marseille"
 slug: "services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille"
 seoTitle: "Demander une estimation du loyer de votre appartement sur Marseille"
 seoDescription: "Ce service est uniquement fourni pour des biens immobiliers situés à Marseille, Allauch et Plan de Cuques.  "
@@ -8,7 +8,7 @@ seoDescription: "Ce service est uniquement fourni pour des biens immobiliers sit
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Demander Une Estimation Du Loyer De Votre Appartement Sur Marseille</h1>        
+    <h1 class="hero__title">Demander une estimation du loyer de votre appartement sur Marseille</h1>        
 
         
     
@@ -27,7 +27,7 @@ seoDescription: "Ce service est uniquement fourni pour des biens immobiliers sit
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Demander Une Estimation Du Loyer De Votre Appartement Sur Marseille</h3>
+                    <h3 class="contextual__title">Demander une estimation du loyer de votre appartement sur Marseille</h3>
                     <p>Le marché locatif varie énormément d'une commune à l'autre. C'est pourquoi nos experts qui louent plus de 600 biens par an analysent les spécificités de chaque zone pour vous livrer un prix juste :</p>
                     <ul>
                         <li>Les cœurs urbains et étudiant : De Marseille à Aix-en-Provence</li>

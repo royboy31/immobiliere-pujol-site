@@ -178,7 +178,7 @@ if (isGuide) {
     (run) => {
       const items = [...run.matchAll(/<p><strong>([^<]+)<\/strong>\s*:\s*([\s\S]*?)<\/p>/g)];
       return `<ol class="svc-guide-cards">${items
-        .map((m) => `<li><strong>${m[1].trim()}</strong><span>${m[2].trim()}</span></li>`)
+        .map((m) => `<li><strong>${m[1].replace(/\s*:\s*$/, '').trim()}</strong><span>${m[2].trim()}</span></li>`)
         .join('')}</ol>`;
     }
   );
@@ -195,14 +195,19 @@ if (isGuide) {
 
   // Anchors on every h2, collected for the Sommaire.
   const toc: { id: string; label: string }[] = [];
+  // Each h2 carries the same number as its Sommaire entry.
   bodyHtml = bodyHtml.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner) => {
     const id = anchorOf(inner);
     toc.push({ id, label: stripTags(inner).replace(/\s*:\s*$/, '') });
-    return `<h2 id="${id}">${inner}</h2>`;
+    return `<h2 id="${id}"><span class="svc-guide-num">${toc.length}.</span> ${inner}</h2>`;
   });
 
+  // French punctuation: a non-breaking space before : ; ? ! so they never
+  // wrap alone onto the next line (text nodes only, never inside tags).
+  bodyHtml = bodyHtml.replace(/>([^<]+)</g, (_m, text) => `>${text.replace(/ ([:;?!])/g, '\u00a0$1')}<`);
+
   // "À retenir" reuses the first paragraph of the page's own conclusion.
-  const takeaway = bodyHtml.match(/<h2[^>]*>\s*Conclusion\s*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
+  const takeaway = bodyHtml.match(/<h2[^>]*>\s*(?:<span class="svc-guide-num">[^<]*<\/span>\s*)?Conclusion\s*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
   const takeawayHtml = takeaway
     ? `<aside class="svc-guide-takeaway"><span class="svc-guide-takeaway__label">À retenir</span><p>${takeaway}</p></aside>`
     : '';

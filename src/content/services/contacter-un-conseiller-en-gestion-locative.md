@@ -1,5 +1,5 @@
 ---
-title: "Contacter Un Expert En Gestion Locative"
+title: "Contacter un expert en gestion locative"
 slug: "services/contacter-un-conseiller-en-gestion-locative"
 seoTitle: "Contacter un expert en gestion locative"
 seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez Immobilière Pujol Bonjour, vous souhaitez avoir des renseignements et obtenir un proposition personnalisée pour la gestion locative de vos biens à Marseille que se soit dans le neuf , dans l'ancien pour une location vide ou meublée , pour des bureaux ou des…"
@@ -8,7 +8,7 @@ seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez I
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Contacter Un Expert En Gestion Locative</h1>        
+    <h1 class="hero__title">Contacter un expert en gestion locative</h1>        
 
 
         
@@ -29,7 +29,7 @@ seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez I
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>5. Contacter un conseiller en gestion locative</li>
@@ -41,7 +41,7 @@ seoDescription: "Gaëlle LAPERT  Directrice commerciale Gestion Locative chez I
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Contacter Un Expert En Gestion Locative</h3>
+                    <h3 class="contextual__title">Contacter un expert en gestion locative</h3>
                     <p><br />
 <img loading="lazy" decoding="async" class="wp-image-683858 aligncenter" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/gaelle-685x800.jpg" alt="" width="272" height="318" srcset="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/gaelle-685x800.jpg 685w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/gaelle-768x897.jpg 768w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/gaelle-514x600.jpg 514w, https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/gaelle.jpg 878w" sizes="auto, (max-width: 272px) 100vw, 272px" /></p>
 <p style="text-align: center;"><span style="font-size: 18pt;"><strong>Gaëlle LAPERT </strong></span><br />

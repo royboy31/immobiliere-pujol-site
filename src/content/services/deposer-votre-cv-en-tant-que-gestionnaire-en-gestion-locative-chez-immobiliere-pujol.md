@@ -1,5 +1,5 @@
 ---
-title: "Candidater Au Poste De Gestionnaire En Gestion Locative Chez Immobilière Pujol"
+title: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol"
 slug: "services/deposer-votre-cv-en-tant-que-gestionnaire-en-gestion-locative-chez-immobiliere-pujol"
 seoTitle: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol"
 seoDescription: "Déposez votre candidature pour un poste de gestion locative chez Immobilière Pujol"
@@ -8,7 +8,7 @@ seoDescription: "Déposez votre candidature pour un poste de gestion locative ch
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Candidater Au Poste De Gestionnaire En Gestion Locative Chez Immobilière Pujol</h1>        
+    <h1 class="hero__title">Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol</h1>        
 
         
     
@@ -45,7 +45,7 @@ seoDescription: "Déposez votre candidature pour un poste de gestion locative ch
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Candidater Au Poste De Gestionnaire En Gestion Locative Chez Immobilière Pujol</h3>
+                    <h3 class="contextual__title">Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol</h3>
                     <p>Notre développement nous amène à recruter régulièrement des gestionnaire en gestion locative.</p>
 <p>Nous recrutons des personnalités qui savent ce que service et engagement signifient.</p>
 <h2>Horaires</h2>

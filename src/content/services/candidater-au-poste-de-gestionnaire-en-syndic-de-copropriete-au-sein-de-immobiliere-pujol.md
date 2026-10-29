@@ -1,5 +1,5 @@
 ---
-title: "Candidater Au Poste De Gestionnaire De Copropriété Chez Immobilière Pujol"
+title: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol"
 slug: "services/candidater-au-poste-de-gestionnaire-en-syndic-de-copropriete-au-sein-de-immobiliere-pujol"
 seoTitle: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol"
 seoDescription: "Déposer votre candidature au poste de gestionnaires syndic de copropriétés chez Immobilière Pujol"
@@ -8,7 +8,7 @@ seoDescription: "Déposer votre candidature au poste de gestionnaires syndic de 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Candidater Au Poste De Gestionnaire De Copropriété Chez Immobilière Pujol</h1>        
+    <h1 class="hero__title">Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol</h1>        
 
 
         
@@ -46,7 +46,7 @@ seoDescription: "Déposer votre candidature au poste de gestionnaires syndic de 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Candidater Au Poste De Gestionnaire De Copropriété Chez Immobilière Pujol</h3>
+                    <h3 class="contextual__title">Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol</h3>
                     <p>Notre développement nous amène à recruter régulièrement des gestionnaires en syndic de copropriété.</p>
 <p>Nous cherchons des personnes qui soient les « patrons » de leur portefeuille de copropriétés et qui ont envie de s&rsquo;engager dans une gestion à long terme et le maintien d&rsquo;une relation de qualité avec les clients. </p>
 <h2>Horaires</h2>

@@ -1,5 +1,5 @@
 ---
-title: "Une Agence Pour La Location De Votre Appartement À Marseille"
+title: "Une agence pour la location de votre appartement à Marseille"
 slug: "services/agence-location-appartement-marseille"
 seoTitle: "Une agence pour la location de votre appartement à Marseille"
 seoDescription: "Une Agence Pour La Location De Votre Appartement à Marseille. Une agence recommandée par ses clients. Consultez l'Immobilière Pujol"
@@ -8,7 +8,7 @@ seoDescription: "Une Agence Pour La Location De Votre Appartement à Marseille. 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Une Agence Pour La Location De Votre Appartement À Marseille</h1>        
+    <h1 class="hero__title">Une agence pour la location de votre appartement à Marseille</h1>        
 
         
     
@@ -48,9 +48,9 @@ seoDescription: "Une Agence Pour La Location De Votre Appartement à Marseille. 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Une Agence Pour La Location De Votre Appartement À Marseille</h3>
+                    <h3 class="contextual__title">Une agence pour la location de votre appartement à Marseille</h3>
                     <p>L’Immobilière Pujol propose une offre de gestion locative sur mesure, en toute transparence et sur la base de mandats clairs. Nous évaluons la solvabilité des locataires, prévenons les impayés et sécurisons vos loyers. Nos services de gestion et location d&rsquo;appartements ont fait leurs preuves auprès de nombreux clients satisfaits de notre agence. Si vous avez un appartement sur Marseille et ses environs et que vous souhaitez vous lancer dans la location avec agence, contactez-nous.</p>
-<h2 class="hero__title">Louer un bien immobilier : qu&rsquo;est-ce que cela implique?</h2>
+<h2 class="hero__title">Louer un bien immobilier : qu&rsquo;est-ce que cela implique ?</h2>
 <p>Mettre en location un appartement requiert une certaine expertise.</p>
 <ul>
 	<li>
@@ -77,7 +77,7 @@ Un appartement bien rénové attirera des candidats qualifiés, ce qui est essen
 <br />
 </p>
 <p>&nbsp;</p>
-<h2 class="hero__title">Pourquoi choisir une agence pour louer son appartement ?</h2>
+<h2 class="hero__title">Pourquoi choisir une agence pour louer son appartement ?</h2>
 <ul>
 	<li>
 <h3>Un expert de l&rsquo;immobilier à vos côtés</h3>

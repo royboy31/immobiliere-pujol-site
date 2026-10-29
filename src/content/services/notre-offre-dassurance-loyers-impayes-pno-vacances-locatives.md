@@ -1,5 +1,5 @@
 ---
-title: "Quelles Sont Assurances Locatives Et Pourquoi Les Souscrire?"
+title: "Quelles sont assurances locatives et pourquoi les souscrire ?"
 slug: "services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives"
 ctaText: "Demander un devis"
 seoTitle: "Quelles sont assurances locatives et pourquoi les souscrire?"
@@ -9,7 +9,7 @@ seoDescription: "Notre couverture loyers impayés à 1,8% est l'une des plus com
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Quelles Sont Assurances Locatives Et Pourquoi Les Souscrire?</h1>        
+    <h1 class="hero__title">Quelles sont assurances locatives et pourquoi les souscrire ?</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -33,7 +33,7 @@ seoDescription: "Notre couverture loyers impayés à 1,8% est l'une des plus com
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>4. Faut-il prendre une Garantie des Loyers Impayés (GLI)?</li>
@@ -47,21 +47,21 @@ seoDescription: "Notre couverture loyers impayés à 1,8% est l'une des plus com
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Quelles Sont Assurances Locatives Et Pourquoi Les Souscrire?</h3>
+                    <h3 class="contextual__title">Quelles sont assurances locatives et pourquoi les souscrire ?</h3>
                     <h2>Le garantie de loyers impayés</h2>
 <p>Nous proposons à nos clients propriétaires une garantie loyers impayés à 1,8% TTC des encaissements en option . Cette assurance permet de percevoir les loyers en cas d&rsquo;impayés et de couvrir les frais de remise en état de votre bien immobilier en cas de dégradations par le locataire.<br />
 Si ce pourcentage est aussi bas, c&rsquo;est que nous maintenons chez Immobilière Pujol un taux de sinistres des impayés à des niveaux très bas sur Marseille.<br />
 Ce faible taux de sinistralité nous permet de négocier au mieux le coût et les garanties (pas de franchise, garantie illimitée, prise en charge des dégradations &amp; frais de procédures) dont nous faisons profiter nos clients propriétaires. <br />
 Pour en savoir plus, lire l&rsquo;article dédié à<a href="/services/notre-garantie-de-loyers-impayes/" target="_blank" rel="noopener"> cette couverture de loyers impayés.</a> </p>
 <h2> </h2>
-<h2>L&rsquo;assurance propriétaire Non Occupant</h2>
+<h2>L&rsquo;assurance propriétaire non occupant</h2>
 <p>Depuis <a href="/proprietaires-cout-loi-duflot/">la loi Duflot</a>, le propriétaire d&rsquo;un appartement en copropriété doit s&rsquo;assurer en responsabilité civil. Or les compagnies d&rsquo;assurance ne proposent pas ce contrat d&rsquo;assurance responsabilité civile : nous devons donc souscrire des contrats d&rsquo;assurance PNO (Propriétaire non occupant) pour le compte de nos clients.<br />
 Si cette assurance est assez peu mis en cause dans les sinistres et dégâts, elle intervient en cas de sinistres dans un appartement vacant ou si les garanties de la multi-risques habitation du locataire sont insuffisantes.</p>
 <ul>
 	<li style="list-style-type: none;">
 <ul>
 	<li>
-<h3>Les tarifs PNO que propose l&rsquo;Immobilière Pujol :</h3>
+<h3>Les tarifs PNO que propose l&rsquo;Immobilière Pujol :</h3>
 <ul>
 	<li> 35€ annuel pour les appartements en copropriété inférieurs à 200 m².</li>
 	<li>15€ annuel pour les emplacements de parking.</li>
@@ -79,7 +79,7 @@ Une assurance vacance locative va palier l&rsquo;absence de locataire et la pert
 La garantie vacance locative prend effet deux mois après la date du préavis légal, après libération de l&rsquo;appartement. Quand l&rsquo;immeuble est neuf, et là on parle de carence, celle-ci prend effet 3 mois après remise des clés.</p>
 <ul>
 	<li>
-<h3>Les tarifs carence locative que propose l&rsquo;Immobilière Pujol :</h3>
+<h3>Les tarifs carence locative que propose l&rsquo;Immobilière Pujol :</h3>
 </li>
 </ul>
 <p>Nous proposons exclusivement cette assurance pour les appartements neufs, lors des premières locations. <br />

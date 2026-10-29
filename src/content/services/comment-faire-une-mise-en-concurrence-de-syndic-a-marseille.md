@@ -1,5 +1,5 @@
 ---
-title: "Comment Faire Une Mise En Concurrence De Syndic À Marseille ?"
+title: "Comment faire une mise en concurrence de syndic à Marseille ?"
 slug: "services/comment-faire-une-mise-en-concurrence-de-syndic-a-marseille"
 seoTitle: "Comment faire une mise en concurrence de syndic à Marseille ?"
 seoDescription: "Mettez en concurrence votre syndic pour que votre immeuble soit mieux géré. Consultez un syndic de copropriété parmi les plus recommandé   de sa ville"
@@ -8,7 +8,7 @@ seoDescription: "Mettez en concurrence votre syndic pour que votre immeuble soit
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Faire Une Mise En Concurrence De Syndic À Marseille ?</h1>        
+    <h1 class="hero__title">Comment faire une mise en concurrence de syndic à Marseille ?</h1>        
 
         
     
@@ -27,7 +27,7 @@ seoDescription: "Mettez en concurrence votre syndic pour que votre immeuble soit
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Faire Une Mise En Concurrence De Syndic À Marseille ?</h3>
+                    <h3 class="contextual__title">Comment faire une mise en concurrence de syndic à Marseille ?</h3>
                     <p>L’Immobilière<b> Pujol,</b> à Marseille, ne propose à ses clients que des contrats d’un an.</p>
 <p>C’est notre façon d’être compétitifs et vigilants chaque année.</p>
 <p>Un contrat de 3 ans invite malheureusement à l’attentisme. Nous estimons en outre qu’un syndic n’a plus à gérer une copropriété quand l&rsquo;entente réciproque n&rsquo;est plus là.</p>

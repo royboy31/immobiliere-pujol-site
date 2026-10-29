@@ -1,5 +1,5 @@
 ---
-title: "Nos Résultats Pour La Mise En Location À Marseille"
+title: "Nos résultats pour la mise en location à Marseille"
 slug: "services/nos-resultats-pour-la-mise-en-location"
 ctaText: "Demander une estimation de loyer"
 seoTitle: "Nos résultats pour la mise en location à Marseille"
@@ -9,7 +9,7 @@ seoDescription: "Votre appartement loué en moins de 35 jours chez Immobilière 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Nos Résultats Pour La Mise En Location À Marseille</h1>        
+    <h1 class="hero__title">Nos résultats pour la mise en location à Marseille</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
@@ -51,7 +51,7 @@ seoDescription: "Votre appartement loué en moins de 35 jours chez Immobilière 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Nos Résultats Pour La Mise En Location À Marseille</h3>
+                    <h3 class="contextual__title">Nos résultats pour la mise en location à Marseille</h3>
                     <h2>Une mise en ligne rapide de l&rsquo;annonce de location</h2>
 <p>Une agence immobilière doit être évaluée sous plusieurs angles. <br />
 L&rsquo;un des critères d&rsquo;évaluation d&rsquo;une agence de location est sa rapidité d&rsquo;exécution et de mise en location .</p>

@@ -1,5 +1,5 @@
 ---
-title: "Notre Assurance Garantie Loyers Impayés Au Taux De 1,8% Ttc"
+title: "Notre assurance garantie loyers impayés au taux de 1,8% TTC"
 slug: "services/notre-garantie-de-loyers-impayes"
 ctaText: "Demander un devis"
 seoTitle: "Notre assurance garantie loyers impayés au taux de 1,8% TTC"
@@ -9,7 +9,7 @@ seoDescription: "Bénéficiez d'une couverture loyers impayés au taux bas de 1,
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Notre Assurance Garantie Loyers Impayés Au Taux De 1,8% Ttc</h1>        
+    <h1 class="hero__title">Notre assurance garantie loyers impayés au taux de 1,8% TTC</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -33,7 +33,7 @@ seoDescription: "Bénéficiez d'une couverture loyers impayés au taux bas de 1,
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>4. Faut-il prendre une Garantie des Loyers Impayés (GLI)?</li>
@@ -47,7 +47,7 @@ seoDescription: "Bénéficiez d'une couverture loyers impayés au taux bas de 1,
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Notre Assurance Garantie Loyers Impayés Au Taux De 1,8% Ttc</h3>
+                    <h3 class="contextual__title">Notre assurance garantie loyers impayés au taux de 1,8% TTC</h3>
                     <h2><strong>Pourquoi souscrire une couverture de loyers impayés ?</strong></h2>
 <p>Parce que bien choisir ses locataires offre une garantie qui contribue à réduire fortement le risque d’impayés mais ne garantie pas les accidents de la vie ou les retournements de carrière. Pour couvrir ce risque, nous proposons à nos clients une solution couvrant les loyers impayés et les dégradations matérielles.</p>
 <h2>La couverture de loyers impayés de l&rsquo;Immobilière Pujol</h2>
@@ -56,11 +56,11 @@ seoDescription: "Bénéficiez d'une couverture loyers impayés au taux bas de 1,
 Ce prix est à notre connaissance le plus compétitif du marché. Ce taux bas signifie que nous avons peu de sinistres et que nous <a href="/services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque/" target="_blank" rel="noopener">choisissons nos candidats locataires avec rigueur</a>.</p>
 <p>Avec cette assurance,<strong> dès le premier impayé et sans franchise</strong>, le paiement du loyer et des charges est assuré ainsi que les frais d’avocat et d’huissier dans leur intégralité.<br />
 Sont également prises en charge les dégradations volontaires du locataire (coups de pieds dans les murs ou portes,  portes arrachées…) dans la limite de 7500€.</p>
-<h2>Faut-il prendre cette couverture de Loyers?</h2>
+<h2>Faut-il prendre cette couverture de loyers ?</h2>
 <p>Notre politique n’est nullement d’inciter nos clients à souscrire systématiquement cette couverture . Cette option se souscrit lors de l’entrée du locataire et vous pouvez l&rsquo;arrêter à tout moment.</p>
 <p>Il s&rsquo;agit surtout d&rsquo;une option non négligeable pour l’investisseur qui ne peut supporter <strong>un trou de trésorerie en cas d’impayés ou de décalage de loyers</strong>.</p>
 <p>Cette option permet de s&rsquo;assurer contre les accidents de la vie des locataires. Même le locataire idéal n’est pas à l’abri de complications financières suite à un chômage, un divorce, une maladie… il y a donc toujours <a href="/service/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives/">un risque d’impayé</a>, même minime.</p>
-<h2>Quelles sont les garanties de notre couverture perte de loyer et dégradations immobilières ?</h2>
+<h2>Quelles sont les garanties de notre couverture perte de loyer et dégradations immobilières ?</h2>
 <ol>
 	<li>En cas de non-paiement du loyer imputable au locataire, le mandataire s’engage à payer au mandant les loyers impayés par le locataire, augmentés des charges et taxes y afférentes, ou les indemnités d’occupation fixées par le tribunal, du premier jour de l’impayé jusqu’au jour de l’évacuation des lieux par le locataire pour quelque cause ou motif que ce soit ou de la remise des clés par celui-ci. Le versement de l’indemnité de garantie loyer impayé interviendra chaque trimestre .</li>
 	<li>L’assureur, désignée dans les conditions particulières, s’engage à payer au bailleur, son mandant, les frais de remise en état des parties privatives évacuées par les locataires défaillants, consécutifs à la dégradation des lieux par ces derniers, à l’exclusion des embellissements et travaux d’aménagement effectués par les locataires, et sous déduction d’un coefficient de vétusté basé sur une durée d’utilisation moyenne ainsi déterminée :</li>

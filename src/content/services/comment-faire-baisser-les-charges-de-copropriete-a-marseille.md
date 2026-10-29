@@ -1,5 +1,5 @@
 ---
-title: "Evaluez Les Prestations Et Leur Coût Pour Une Véritable Mise En Concurrence"
+title: "Evaluez les prestations et leur coût pour une véritable mise en concurrence"
 slug: "services/comment-faire-baisser-les-charges-de-copropriete-a-marseille"
 ctaText: "Demander un devis"
 seoTitle: "Evaluez les prestations et leur coût pour une véritable mise en concurrence"
@@ -9,7 +9,7 @@ seoDescription: "Evaluez votre votre syndic, sa réactivité, la qualité de son
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Evaluez Les Prestations Et Leur Coût Pour Une Véritable Mise En Concurrence</h1>        
+    <h1 class="hero__title">Evaluez les prestations et leur coût pour une véritable mise en concurrence</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -32,7 +32,7 @@ seoDescription: "Evaluez votre votre syndic, sa réactivité, la qualité de son
         <div class="contextual container container--medium flex">
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Evaluez Les Prestations Et Leur Coût Pour Une Véritable Mise En Concurrence</h3>
+                    <h3 class="contextual__title">Evaluez les prestations et leur coût pour une véritable mise en concurrence</h3>
                     <p><a href="/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/">Le métier de syndic</a> est un métier de proximité dans lequel l’attention au client est la clef.<br />
 Notre qualité de service vient de cette attention et du conseil personnalisé que nous donnons. Je crois qu&rsquo;il vient également que nous évaluons régulièrement la qualité de nos prestations et celle de nos prestataires.</p>
 <p>Evaluez le coût est facile. Evaluez une qualité de service et d&rsquo;attention l&rsquo;est beaucoup moins. Pour cette raison, la réputation, le bouche à oreille favorable est le meilleur indicateur de la qualité ressentie par nos clients.</p>

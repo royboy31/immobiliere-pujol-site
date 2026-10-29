@@ -1,5 +1,5 @@
 ---
-title: "Devenir Un Collaborateur De L'immobilière Pujol"
+title: "Devenir un collaborateur de l'Immobilière Pujol"
 slug: "services/devenir-gestionnaire-immobilier-a-marseille"
 seoTitle: "Devenir un collaborateur de l’Immobilière Pujol"
 seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les métiers de gestionnaire locatif, gestionnaires de copropriété et négociateur immobilier."
@@ -8,7 +8,7 @@ seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Devenir Un Collaborateur De L'immobilière Pujol</h1>        
+    <h1 class="hero__title">Devenir un collaborateur de l'Immobilière Pujol</h1>        
 
 
         
@@ -47,7 +47,7 @@ seoDescription: "Les métiers sur lesquels l'immobilière Pujol recrute sont les
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Devenir Un Collaborateur De L'immobilière Pujol</h3>
+                    <h3 class="contextual__title">Devenir un collaborateur de l'Immobilière Pujol</h3>
                     <h2>« Il n’y a de richesses que d’hommes »</h2>
 <p>Cet adage est vrai et particulièrement en matière d’immobilier. Beaucoup de confrères peuvent être « vendeur » dans leur approche, mais un constat s’impose : peu d’entre nous répondent complètement aux besoins de nos clients, que ce soit <a href="/immobiliere-pujol-avis-et-experience-collaborateur-en-syndic/">en syndic</a>, en <a href="/lexperience-employe-en-gestion-locative/">gestion locative</a> ou en <a href="/service-immobilier/vendre/">transaction</a>. A tel point qu’il est aujourd’hui plus difficile de trouver les bons gestionnaires immobiliers que les bons clients.</p>
 <p>Quand on a de bons collaborateurs, on trouve de bons clients. L’inverse n’est pas évident. C’est pourquoi l’Immobilière Pujol ouvre 3 à 4 postes chaque année : pour faire face à son développement et répondre à la demande.</p>

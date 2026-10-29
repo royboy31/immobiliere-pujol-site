@@ -1,5 +1,5 @@
 ---
-title: "Combien Coûte Un Syndic De Copropriété À Marseille?"
+title: "Combien coûte un syndic de copropriété à Marseille ?"
 slug: "services/combien-coute-syndic-copropriete"
 ctaText: "Demander un devis"
 seoTitle: "Combien coûte un syndic de copropriété à Marseille?"
@@ -9,7 +9,7 @@ seoDescription: "Les honoraires du syndic à Marseille varient entre 150€ et 3
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Combien Coûte Un Syndic De Copropriété À Marseille?</h1>        
+    <h1 class="hero__title">Combien coûte un syndic de copropriété à Marseille ?</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -53,7 +53,7 @@ seoDescription: "Les honoraires du syndic à Marseille varient entre 150€ et 3
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Combien Coûte Un Syndic De Copropriété À Marseille?</h3>
+                    <h3 class="contextual__title">Combien coûte un syndic de copropriété à Marseille ?</h3>
                     <p>Comment les honoraires sont-ils calculés?<br />
 Que contient un contrat de syndic? <br />
 Que coûte une gestion courante comparée aux prestations spécifiques?<br />
@@ -75,7 +75,7 @@ Ce document définit clairement les missions que doit remplir le syndic pour le 
 <p>Les honoraires sont ensuite inscrits au contrat. Si ce contrat est d’au moins 1 an, on peut y inclure une clause de révision annuelle des honoraires. Ces honoraires peuvent se diviser en 2 : les honoraires de gestion courante et les honoraires spécifiques. Voir ci-après.</p>
 <h3>Qui paie les honoraires de syndic ?</h3>
 <p>Les honoraires de syndic sont à la charge de tous les copropriétaires. La somme à payer variera en fonction des tantièmes que chaque copropriétaire détient.</p>
-<h3>Comment se calculent les honoraires du syndic de copropriété?</h3>
+<h3>Comment se calculent les honoraires du syndic de copropriété ?</h3>
 <p><a href="/service/comment-calculer-le-cout-de-gestion-de-copropriete/">Le calcul de nos honoraires de syndic</a>, à Marseille, suit deux principes simples :</p>
 <ul>
 	<li><strong>1er principe : être attentifs à nos clients</strong>
@@ -99,7 +99,7 @@ Ce document définit clairement les missions que doit remplir le syndic pour le 
 <p>En outre, <strong>nous les révisons chaque année</strong> : cela nous permet d’adapter nos offres à la législation et la demande de nos clients car il nous arrive également de les baisser. <a href="/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/">A chaque copropriété, son niveau de charges</a>, d&rsquo;honoraires de syndic et de prestations.</p>
 <p><strong>Nous privilégions la gestion participative des copropriétés</strong> pour mieux faire face aux contraintes législatives et proposer le meilleur service.</p>
 <p>&nbsp;</p>
-<h3>Comment nos honoraires sont-ils révisés?</h3>
+<h3>Comment nos honoraires sont-ils révisés ?</h3>
 <p><strong>Nos honoraires de syndic de copropriété sont révisés chaque année, selon accord de l&rsquo;assemblée générale</strong> pour faire face aux modifications constantes de la législation et l’évolution de la demande de nos clients.</p>
 <p>Les nouvelles contraintes législatives se sont accumulées ces dernières années et le temps passé à les mettre en place également.</p>
 <p>C’est pourquoi, nous souhaitons <strong>nous orienter vers la gestion de copropriétés participatives</strong> avec des <strong>copropriétaires actifs</strong> dans la gestion de leur immeuble, permettant <a href="/service/quelles-charges-de-copropriete-sont-a-payer-sur-marseille/">une gestion collaborative à des prix raisonnables</a>.</p>
@@ -139,7 +139,7 @@ Ce forfait et les modalités de paiement du dit forfait doivent être inscrits a
 <h3>Les travaux</h3>
 <p>Certains travaux ne relèvent ni de l’entretien courant des parties communes, ni de la maintenance des équipements communs. Ils sont donc facturés hors forfait annuel. Les études techniques, la surélévation de l’immeuble ou encore la transformation d’un équipement existant entrent dans ces travaux spécifiques.</p>
 <p>Pour être adoptés, les travaux spécifiques doivent être votés en assemblée générale. Il doit y avoir une majorité de votes pour lancer les travaux. Les honoraires sont un pourcentage du montant hors taxes des travaux (art. 18-1 A loi 10 juillet 1965).</p>
-<h2>Comment réduire les honoraires du syndic ?</h2>
+<h2>Comment réduire les honoraires du syndic ?</h2>
 <p>Quelques économies sont toujours possibles. Nous attirons votre attention sur les points suivant :</p>
 <ul>
 	<li><strong>Reproduction des documents</strong>: pensez à inclure les frais de photocopies dans les charges courantes ou négocier un forfait. Si vous ne le faites pas, il peut y avoir litige sur le sujet.</li>

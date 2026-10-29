@@ -1,5 +1,5 @@
 ---
-title: "Nos Conseils, Avis Et Articles  : Le Blog De L'agence"
+title: "Nos conseils, avis et articles : le blog de l'agence"
 slug: "services/nos-conseils-avis-et-articles-sur-la-gestion-locative"
 seoTitle: "Nos conseils, avis et articles  : Le Blog de l’agence"
 seoDescription: "Guider vos choix immobiliers La raison d'être de notre agence est de guider vos choix immobiliers, qu'il s'agisse de gestion locative, de la vente d'un bien ou de la gestion d'une copropriété. Les grands groupes immobiliers n'ont ni le temps ni l'intention de vous accompagner tout au long de votre,…"
@@ -8,7 +8,7 @@ seoDescription: "Guider vos choix immobiliers La raison d'être de notre agence 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Nos Conseils, Avis Et Articles  : Le Blog De L'agence</h1>        
+    <h1 class="hero__title">Nos conseils, avis et articles : le blog de l'agence</h1>        
 
         
     
@@ -55,7 +55,7 @@ seoDescription: "Guider vos choix immobiliers La raison d'être de notre agence 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Nos Conseils, Avis Et Articles  : Le Blog De L'agence</h3>
+                    <h3 class="contextual__title">Nos conseils, avis et articles : le blog de l'agence</h3>
                     <h2>Guider vos choix immobiliers</h2>
 <p>La raison d&rsquo;être de notre agence est de <strong>guider vos choix immobiliers</strong>, qu&rsquo;il s&rsquo;agisse de gestion locative, de la vente d&rsquo;un bien ou de la gestion d&rsquo;une copropriété.</p>
 <p>Les grands groupes immobiliers n&rsquo;ont ni le temps ni l&rsquo;intention de vous accompagner tout au long de votre, de vous écouter et de vous guider. Nous le savons bien, car nous avons travaillé pour ces grands groupes. <strong>L&rsquo;Immobilière Pujol est née en 2002 pour répondre aux besoins d&rsquo;écoute, de conseils et de services</strong> dont nous étions témoin au quotidien.</p>

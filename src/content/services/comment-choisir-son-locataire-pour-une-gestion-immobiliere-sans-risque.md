@@ -1,5 +1,5 @@
 ---
-title: "Comment Choisir Son Locataire Pour Une Gestion Immobilière Sans Risques ?"
+title: "Comment choisir son locataire pour une gestion immobilière sans risques ?"
 slug: "services/comment-choisir-son-locataire-pour-une-gestion-immobiliere-sans-risque"
 seoTitle: "Comment choisir son locataire pour une gestion immobilière sans risques ?"
 seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les meilleurs candidats. Vous restez maître du choix du locataire. Recevez une proposition de l'Immobilière Pujol en moins de 24h"
@@ -8,7 +8,7 @@ seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les m
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Choisir Son Locataire Pour Une Gestion Immobilière Sans Risques ?</h1>        
+    <h1 class="hero__title">Comment choisir son locataire pour une gestion immobilière sans risques ?</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les m
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>2. Comment choisir son locataire?</li>
@@ -52,10 +52,10 @@ seoDescription: "Nous recevons 100 contacts par jours. Nous sélectionnons les m
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Choisir Son Locataire Pour Une Gestion Immobilière Sans Risques ?</h3>
+                    <h3 class="contextual__title">Comment choisir son locataire pour une gestion immobilière sans risques ?</h3>
                     <p>L’objectif est de choisir un locataire sérieux. <br />
 Mais <strong>qu’est-ce qu’un locataire sérieux  et comment le choisir ?</strong></p>
-<h2>Qu&rsquo;est-ce qu&rsquo;un locataire sérieux?</h2>
+<h2>Qu&rsquo;est-ce qu&rsquo;un locataire sérieux ?</h2>
 <p>C&rsquo;est candidat qui présente bien. <br />
 U<strong>ne personne responsable</strong> qui trouvera normal de vous fournir les papiers quand vous les lui demanderez. <br />
 Une personne qui répondra aux questions sans se faire prier.</p>
@@ -63,7 +63,7 @@ Une personne qui répondra aux questions sans se faire prier.</p>
 <p>Imaginons que je demande un garant au candidat locataire. <strong>Si la personne est fiable, elle trouvera aisément un proche ou un ami pour se porter caution</strong>. Souvent, le montant des revenus n’est pas le critère essentiel, mais la capacité à se faire cautionner, à être crédible vis-à-vis de son entourage.</p>
 <p>Trouver un locataire sérieux, c’est choisir une personne solvable et responsable.</p>
 <p>Il faut sécuriser votre appartement et s’assurer qu’il sera entretenu par un locataire qui sera assuré et assumera les tâches locatives courantes comme le ramonage et l’entretien de chaudière gaz, le nettoyage des filtres de la clim, le changement d&rsquo;une chasse d&rsquo;eau si elle coule&#8230;</p>
-<h2>Comment voir dans une agence de gestion locative que les locataires en place sont sérieux?</h2>
+<h2>Comment voir dans une agence de gestion locative que les locataires en place sont sérieux ?</h2>
 <p>Au taux d&rsquo;impayés de l&rsquo;agence.<br />
 Chez Immobilière Pujol, notre politique de recrutement des candidats locataires est rigoureuse : nous enregistrons un taux d’impayés de 0,12 % TTC des montants encaissés, et ce depuis 18 ans !<br />
 Nous avons toujours enregistré très peu de sinistres, raison pour laquelle nous avons pu négocier avec les compagnies d’assurance une <a href="/services/notre-offre-dassurance-loyers-impayes-pno-vacances-locatives/" target="_blank" rel="noopener">assurance de loyers impayés</a> le plus faible de la région de Marseille à 1,8% TTC pour nos clients propriétaires bailleurs. </p>
@@ -134,7 +134,7 @@ Nous privilégions les métiers stables, dans lesquels la personne a développé
 Puis après accord, nous programmons la signature du contrat de location.<br />
 Les candidats qui n’ont pas été retenus reçoivent un mail (il est important de garder une trace des échanges). Nous ne mentionnons pas la raison qui nous a poussée à rejeter un dossier, sauf si le candidat nous en fait la demande.</p>
 <p><strong>La loi interdit toute discrimination sur la base du genre, de l’âge, de la couleur de peau</strong>, etc. L’agence est au fait de la loi et la respecte : tout rejet de candidature sera basé sur la procédure détaillée plus haut : Documentation en règle, Solvabilité, Qualité des échanges (mail, téléphone, entretien)</p>
-<h2>Qui sont les locataires de l&rsquo;Immobilière Pujol?</h2>
+<h2>Qui sont les locataires de l&rsquo;Immobilière Pujol ?</h2>
 <ul>
 	<li>30% de nos appartements sont loués à des étudiants</li>
 	<li>25% à des cadres</li>

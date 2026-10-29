@@ -1,5 +1,5 @@
 ---
-title: "Choisir Le Bon Locataire Et Sécuriser Vos Contrats  : Les Tarifs"
+title: "Choisir le bon locataire et sécuriser vos contrats : les tarifs"
 slug: "services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes"
 seoTitle: "Choisir le bon locataire et sécuriser vos contrats  : les tarifs"
 seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un bon locataire et sécuriser vos contrats de location?"
@@ -8,7 +8,7 @@ seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un b
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Choisir Le Bon Locataire Et Sécuriser Vos Contrats  : Les Tarifs</h1>        
+    <h1 class="hero__title">Choisir le bon locataire et sécuriser vos contrats : les tarifs</h1>        
 
         
     
@@ -56,7 +56,7 @@ seoDescription: "Quels sont les tarifs de l'Immobilière Pujol pour trouver un b
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Choisir Le Bon Locataire Et Sécuriser Vos Contrats  : Les Tarifs</h3>
+                    <h3 class="contextual__title">Choisir le bon locataire et sécuriser vos contrats : les tarifs</h3>
                     <table style="width: 100%; border-collapse: collapse; border-color: #000000;" border="1">
 <tbody>
 <tr>

@@ -1,5 +1,5 @@
 ---
-title: "Pour Quoi Nous Faisons Ce Métier?"
+title: "Pour quoi nous faisons ce métier ?"
 slug: "services/pourquoi-nous-faisons-ce-metier"
 seoTitle: "Pour quoi nous faisons ce métier?"
 seoDescription: "Les valeurs de l'agence Immobilière Pujol , syndic, gestion locative, loctaion , vente de biens immobiliers"
@@ -8,7 +8,7 @@ seoDescription: "Les valeurs de l'agence Immobilière Pujol , syndic, gestion lo
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Pour Quoi Nous Faisons Ce Métier?</h1>        
+    <h1 class="hero__title">Pour quoi nous faisons ce métier ?</h1>        
 
         
     
@@ -55,7 +55,7 @@ seoDescription: "Les valeurs de l'agence Immobilière Pujol , syndic, gestion lo
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Pour Quoi Nous Faisons Ce Métier?</h3>
+                    <h3 class="contextual__title">Pour quoi nous faisons ce métier ?</h3>
                     <p>Nous avons construit au fil des années une agence immobilière qui a développé des solutions innovantes, pour prendre soin de ses clients, les sécuriser dans leurs choix et leurs projets.</p>
 <p>Nous cultivons notre indépendance en tant que professionnel de l&rsquo;immobilier pour :</p>
 <ul>

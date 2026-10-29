@@ -1,5 +1,5 @@
 ---
-title: "Une Relation Personnalisée En Gestion Locative"
+title: "Une relation personnalisée en gestion locative"
 slug: "services/une-relation-personnalisee"
 seoTitle: "Une relation personnalisée en gestion locative"
 seoDescription: "Notre équipe de location et de gestion est la plus recommandée à Marseille par ses clients. Gestion locative à partir de 4% HT , Couverture loyers impayés à 1,8% TTC."
@@ -8,7 +8,7 @@ seoDescription: "Notre équipe de location et de gestion est la plus recommandé
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Une Relation Personnalisée En Gestion Locative</h1>        
+    <h1 class="hero__title">Une relation personnalisée en gestion locative</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Notre équipe de location et de gestion est la plus recommandé
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>1. Combien cela coûte de faire gérer son bien?</li>
@@ -52,7 +52,7 @@ seoDescription: "Notre équipe de location et de gestion est la plus recommandé
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Une Relation Personnalisée En Gestion Locative</h3>
+                    <h3 class="contextual__title">Une relation personnalisée en gestion locative</h3>
                     <h2>Nous prenons soin de vous et de votre patrimoine</h2>
 <p>L&rsquo;immobilière Pujol est petite entreprise indépendante si on la compare aux mastodontes du marché. C&rsquo;est ce qui fait notre différence et notre force. </p>
 <p>Chaque client a face à lui des <strong>personnes responsables et dédiées</strong> : un gestionnaire et un comptable .<br />

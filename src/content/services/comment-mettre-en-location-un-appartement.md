@@ -1,5 +1,5 @@
 ---
-title: "Comment Mettre En Location Un Appartement?"
+title: "Comment mettre en location un appartement ?"
 slug: "services/comment-mettre-en-location-un-appartement"
 ctaText: "Demander une estimation de loyer"
 seoTitle: "Comment mettre en location un appartement?"
@@ -9,7 +9,7 @@ seoDescription: "Louer vite et bien Marseille . Comment et pourquoi choisir l'ag
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Mettre En Location Un Appartement?</h1>        
+    <h1 class="hero__title">Comment mettre en location un appartement ?</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
@@ -51,7 +51,7 @@ seoDescription: "Louer vite et bien Marseille . Comment et pourquoi choisir l'ag
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Mettre En Location Un Appartement?</h3>
+                    <h3 class="contextual__title">Comment mettre en location un appartement ?</h3>
                     <h2>La marche à suivre pour mettre en location</h2>
 <ul>
 	<li>

@@ -1,5 +1,5 @@
 ---
-title: "Comment Établir Un Cahier Des Charges De Contrat De Syndic?"
+title: "Comment établir un cahier des charges de contrat de syndic ?"
 slug: "services/definition-dun-bon-service-de-syndic-a-marseille"
 ctaText: "Demander un devis"
 seoTitle: "Comment établir un cahier des charges de contrat de syndic?"
@@ -9,7 +9,7 @@ seoDescription: "Une copropriété bien géré, c'est un bon service syndic et u
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Établir Un Cahier Des Charges De Contrat De Syndic?</h1>        
+    <h1 class="hero__title">Comment établir un cahier des charges de contrat de syndic ?</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Demander un devis</a>
@@ -56,7 +56,7 @@ seoDescription: "Une copropriété bien géré, c'est un bon service syndic et u
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Établir Un Cahier Des Charges De Contrat De Syndic?</h3>
+                    <h3 class="contextual__title">Comment établir un cahier des charges de contrat de syndic ?</h3>
                     <p>Le cadre légal du syndic de copropriété est, depuis la loi Alur , homogène d&rsquo;un point de vue juridique et contractuel. Il a également permis d&rsquo;être plus transparent sur le prix de nos prestations.<br />
 Il est défini par le<a href="/service/contrat-de-syndic-de-limmobiliere-pujol/"> contrat de syndic</a> régulièrement mis à jour par le ministère. <br />
 Aucun syndic n&rsquo;a le droit de rajouter ou de modifier ce contrat.</p>

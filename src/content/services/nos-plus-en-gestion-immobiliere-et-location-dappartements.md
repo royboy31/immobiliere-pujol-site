@@ -1,5 +1,5 @@
 ---
-title: "Le Location Et La Gestion Chez Immobilière Pujol : Quoi De Plus Pour Vous?"
+title: "Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous ?"
 slug: "services/nos-plus-en-gestion-immobiliere-et-location-dappartements"
 seoTitle: "Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous?"
 seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses clients. Gestion locative à partir 4% HT. Couverture loyers impayés à 1,8% TTC . Des services et des conseils en plus  !"
@@ -8,7 +8,7 @@ seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses cl
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Le Location Et La Gestion Chez Immobilière Pujol : Quoi De Plus Pour Vous?</h1>        
+    <h1 class="hero__title">Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous ?</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses cl
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>1. Combien cela coûte de faire gérer son bien?</li>
@@ -52,7 +52,7 @@ seoDescription: "Immobilière Pujol est l'agence la plus recommandée par ses cl
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Le Location Et La Gestion Chez Immobilière Pujol : Quoi De Plus Pour Vous?</h3>
+                    <h3 class="contextual__title">Le location et la gestion chez Immobilière Pujol : quoi de plus pour vous ?</h3>
                     <h2><strong>La sécurisation des revenus fonciers des clients par le choix rigoureux des locataires<br />
 </strong></h2>
 <p>Depuis sa création, l’Immobilière Pujol a enregistré très peu de sinistres et d&rsquo;impayés et assure à ses clients une récurrence de revenus.<br />

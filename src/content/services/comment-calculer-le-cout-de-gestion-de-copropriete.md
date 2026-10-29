@@ -1,5 +1,5 @@
 ---
-title: "Comment Calculer Les Honoraires Du Syndic Pour La Gestion De Votre Copropriété ?"
+title: "Comment calculer les honoraires du syndic pour la gestion de votre copropriété ?"
 slug: "services/comment-calculer-le-cout-de-gestion-de-copropriete"
 seoTitle: "Comment calculer les honoraires du syndic pour la gestion de votre copropriété ?"
 seoDescription: "Evaluez les honoraires de gestion d'un syndic de copropriété à Marseille. Consultez un syndic recommandé par ses clients"
@@ -8,7 +8,7 @@ seoDescription: "Evaluez les honoraires de gestion d'un syndic de copropriété 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Calculer Les Honoraires Du Syndic Pour La Gestion De Votre Copropriété ?</h1>        
+    <h1 class="hero__title">Comment calculer les honoraires du syndic pour la gestion de votre copropriété ?</h1>        
 
 
         
@@ -50,7 +50,7 @@ seoDescription: "Evaluez les honoraires de gestion d'un syndic de copropriété 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Calculer Les Honoraires Du Syndic Pour La Gestion De Votre Copropriété ?</h3>
+                    <h3 class="contextual__title">Comment calculer les honoraires du syndic pour la gestion de votre copropriété ?</h3>
                     <p>Les honoraires de gestion des copropriétés sont très homogènes car la concurrence dans nos marchés est très importante.<br />
 Certains confrères sont à la recherche de parts de marché, là où d&rsquo;autres (comme notre équipe) cherchent à faire leur travail le mieux possible avec la volonté d&rsquo;être les meilleurs et de vrais artisans de leur métier.</p>
 <p>Ces honoraires se calculent à partir:</p>

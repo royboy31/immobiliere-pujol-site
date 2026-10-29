@@ -1,5 +1,5 @@
 ---
-title: "Comment Diminuer Les Risques De Litiges Avec Vos Locataires À Marseille"
+title: "Comment diminuer les risques de litiges avec vos locataires à Marseille"
 slug: "services/eviter-les-litiges-avec-vos-locataires-a-marseille"
 seoTitle: "Comment diminuer les risques de litiges avec vos locataires à Marseille"
 seoDescription: "Ce que nous faisons pour diminuer les risques liés à la location. Comment nous le faisons. Consultez l'immobilière Pujol, agence de location et gestion parmi les plus recommandée à Marseille"
@@ -8,7 +8,7 @@ seoDescription: "Ce que nous faisons pour diminuer les risques liés à la locat
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Comment Diminuer Les Risques De Litiges Avec Vos Locataires À Marseille</h1>        
+    <h1 class="hero__title">Comment diminuer les risques de litiges avec vos locataires à Marseille</h1>        
 
         
     
@@ -28,7 +28,7 @@ seoDescription: "Ce que nous faisons pour diminuer les risques liés à la locat
                         <aside class="contextual__nav">
                             
                                                   <a class="contextual__parent" href="/service-immobilier/gestion-locative/">
-                    <h4>Gestion Locative à Marseille</h4>
+                    <h4>Gestion locative à Marseille</h4>
                   </a>
                                                       <ul>
                     <li>2. Comment choisir son locataire?</li>
@@ -52,7 +52,7 @@ seoDescription: "Ce que nous faisons pour diminuer les risques liés à la locat
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Comment Diminuer Les Risques De Litiges Avec Vos Locataires À Marseille</h3>
+                    <h3 class="contextual__title">Comment diminuer les risques de litiges avec vos locataires à Marseille</h3>
                     <p>Chez Immobilière Pujol, avec l&rsquo;expérience de nos années d&rsquo;activité,  nous avons appris à anticiper les conflits et les litiges.</p>
 <p>Quels sont les litiges auxquels un propriétaire bailleur peut être confronté?</p>
 <ol>

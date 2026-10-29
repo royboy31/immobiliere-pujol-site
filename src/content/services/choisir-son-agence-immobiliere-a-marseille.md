@@ -1,5 +1,5 @@
 ---
-title: "Choisir Son Agence Immobilière À Marseille"
+title: "Choisir son agence immobilière à Marseille"
 slug: "services/choisir-son-agence-immobiliere-a-marseille"
 ctaText: "Me faire rappeler"
 seoTitle: "Choisir son agence immobilière à Marseille"
@@ -9,7 +9,7 @@ seoDescription: "Vous avez décidé de vendre . Une première décision importan
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Choisir Son Agence Immobilière À Marseille</h1>        
+    <h1 class="hero__title">Choisir son agence immobilière à Marseille</h1>        
 
         <div class="hero__cta">
         <a href="#form" target="e" class="button button--primary">Me faire rappeler</a>
@@ -44,7 +44,7 @@ seoDescription: "Vous avez décidé de vendre . Une première décision importan
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Choisir Son Agence Immobilière À Marseille</h3>
+                    <h3 class="contextual__title">Choisir son agence immobilière à Marseille</h3>
                     <p>Vous avez décidé de vendre .</p>
 <p>Une première décision importante doit être prise : choisir <b>le bon agent Immobilier.</b></p>
 <p>La vente de votre bien nécessite plus qu’un panneau sur votre maison ou des papiers dans les boites aux lettres.</p>

@@ -1,5 +1,5 @@
 ---
-title: "Location D'appartements À Marseille : Nos Résultats Et Nos Tarifs !"
+title: "Location d'appartements à Marseille : nos résultats et nos tarifs !"
 slug: "services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix"
 seoTitle: "Location d’appartements à Marseille : nos résultats et nos tarifs !"
 seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de taux d'encaissements des loyers. Immobilière Pujol, une agence recommandée par ses clients"
@@ -8,7 +8,7 @@ seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de 
 <section  class="hero hero__page hero--medium objectFitContainer" >
 	<!-- Content -->
 	<div class="hero__content">
-    <h1 class="hero__title">Location D'appartements À Marseille : Nos Résultats Et Nos Tarifs !</h1>        
+    <h1 class="hero__title">Location d'appartements à Marseille : nos résultats et nos tarifs !</h1>        
 
         
     
@@ -57,7 +57,7 @@ seoDescription: "70% des locations sont conclues en moins de 35 jours. 99,7% de 
             </aside>
                         <div class="contextual__content container container--small container--small__content">
                 <section class="contextual__section" id="">
-                    <h3 class="contextual__title">Location D'appartements À Marseille : Nos Résultats Et Nos Tarifs !</h3>
+                    <h3 class="contextual__title">Location d'appartements à Marseille : nos résultats et nos tarifs !</h3>
                     <p>Nous<b> </b>réalisons tous les ans <b>plus de 400 locations</b> d&rsquo;appartements et de biens immobiliers neufs ou anciens à Marseille et ses alentours.</p>
 <ul>
 	<li>
