@@ -1,7 +1,7 @@
 ---
 title: Votre devis de gestion locative à Marseille en 24 h
 slug: services/recevez-votre-devis-de-location-en-24h
-ctaText: Vous souhaitez sécuriser votre location, contactez nous
+ctaText: Demander une proposition de gestion locative
 seoTitle: Votre devis de gestion locative à Marseille en 24 h
 seoDescription: Préparez votre demande de devis de gestion locative à Marseille et découvrez les services, les garanties et les étapes de prise en charge par Pujol.
 jsonLd: |
@@ -81,7 +81,7 @@ jsonLd: |
     <h1 class="hero__title">Recevez votre devis de location d'appartements à Marseille en 24 h</h1>        
 
         <div class="hero__cta">
-        <a href="#form" target="e" class="button button--primary">Vous souhaitez sécuriser votre location, contactez nous</a>
+        <a href="#form" target="e" class="button button--primary">Demander une proposition de gestion locative</a>
 
     </div>
         

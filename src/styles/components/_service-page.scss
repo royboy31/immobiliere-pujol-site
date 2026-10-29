@@ -3259,6 +3259,9 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
 
   .svc-guide-num { color: $ds-olive-2; font-weight: 700; }
 
+  // Wide tables scroll inside their block instead of pushing the page sideways.
+  table { display: block; max-width: 100%; overflow-x: auto; }
+
   h2 {
     margin-top: 56px;
     padding-top: 28px;

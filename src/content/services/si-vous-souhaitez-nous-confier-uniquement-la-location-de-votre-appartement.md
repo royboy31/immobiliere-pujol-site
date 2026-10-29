@@ -1,7 +1,7 @@
 ---
 title: Mise en location seule ou gestion complète à Marseille ?
 slug: services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement
-ctaText: Louer et choisissez votre locataire
+ctaText: Demander une estimation de loyer
 seoTitle: Mise en location seule ou gestion complète à Marseille ?
 seoDescription: 'Mettre en location sans déléguer la gestion : comparez les responsabilités qui restent au bailleur et les services d’un mandat de gestion complet chez Pujol.'
 jsonLd: |
@@ -73,7 +73,7 @@ jsonLd: |
     <h1 class="hero__title">Le coût d'une commission de location (sans gestion locative)</h1>        
 
         <div class="hero__cta">
-        <a href="#form" target="e" class="button button--primary">Louer et choisissez votre locataire</a>
+        <a href="#form" target="e" class="button button--primary">Demander une estimation de loyer</a>
 
     </div>
         
