@@ -1,7 +1,7 @@
 ---
 title: "Gestion Locative à Marseille"
 slug: "gestion-locative"
-ctaText: "Obtenez un devis de gestion locative"
+ctaText: 'Obtenir mon devis de gestion locative'
 seoTitle: "Gestion Locative à Marseille"
 seoDescription: "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients . L'immobilière vous accompagnera avec plaisir dans votre projet immobilier à Marseille"
 ---
