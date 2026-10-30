@@ -3260,6 +3260,94 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 }
 
+// Guide pages on mobile: the sidebar sits below the article, so a folded
+// "Dans cette rubrique" panel at the top gives access to the other guides of
+// the section (Roy 30/10). Hidden on desktop, where the sticky sidebar does it.
+.svc-mobnav {
+  display: none;
+
+  @media (max-width: $bp-tablet) {
+    display: block;
+    margin: 0 0 20px;
+    background: $white;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
+  }
+
+  &__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 52px 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      font-weight: 300;
+      color: $ds-olive-2;
+    }
+
+    &:focus-visible { outline: 2px solid $ds-olive-2; outline-offset: 2px; border-radius: 18px; }
+  }
+
+  &__details[open] &__summary::after { content: '−'; }
+
+  &__kicker {
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: $ds-olive-2;
+  }
+
+  &__section {
+    font-family: $ds-font-helv;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.25;
+    color: $black;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 12px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.35;
+    color: $black;
+    text-decoration: none;
+
+    &.is-active { background: $ds-olive; font-weight: 700; }
+  }
+
+  &__hub {
+    display: block;
+    padding: 12px 24px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: $ds-olive-2;
+    text-decoration: underline;
+  }
+}
+
 .svc-article-body--guide {
   font-weight: 400;
   max-width: none;

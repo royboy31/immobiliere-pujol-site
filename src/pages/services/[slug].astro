@@ -770,6 +770,30 @@ const pageSchemas = entry.data.jsonLd
         </aside>
 
         <div class="svc-content svc-content--article">
+          {guideSection && (
+            <nav class="svc-mobnav" aria-label="Autres guides de la rubrique">
+              <details class="svc-mobnav__details">
+                <summary class="svc-mobnav__summary">
+                  <span class="svc-mobnav__kicker">Dans cette rubrique</span>
+                  <span class="svc-mobnav__section">{guideSection.title}</span>
+                </summary>
+                <ul class="svc-mobnav__list">
+                  {sidebarItems.map((it) => (
+                    <li>
+                      <a
+                        class={`svc-mobnav__link${it.current ? ' is-active' : ''}`}
+                        href={it.href}
+                        aria-current={it.current ? 'page' : undefined}
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="svc-mobnav__hub" href={sidebarSectionHref}>Voir tous les guides de gestion locative</a>
+              </details>
+            </nav>
+          )}
           {reviewPlatforms.length > 0 ? (
             <>
               <section class="svc-reviews-hero">
