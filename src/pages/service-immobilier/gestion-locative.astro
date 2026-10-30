@@ -10,7 +10,6 @@ const seoDescription =
   entry?.data.seoDescription ||
   "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients. L'Immobilière Pujol vous accompagne avec plaisir dans votre projet immobilier à Marseille.";
 const ctaText = entry?.data.ctaText || 'Obtenez un devis de gestion locative';
-const heroCatch = 'Comment choisir votre agence de gestion locative ?';
 
 const heroImg =
   'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-1200x800.jpg';
@@ -74,28 +73,266 @@ const sections = [
   },
 ];
 const toc = sections.map((s) => ({ id: s.id, label: s.title }));
+
+// ---- Landing page content: Caroline's "LP Gestion Locative" (Analyse Préparatoire 1/2,
+// tab t.49cxdwmq15ml, validated in the 30/10 call). Lead magnets that don't exist yet and
+// proof lines without a validated figure are left out.
+const ESTIMATION = '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form';
+const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
+const sectionTitle = new Map(GUIDE_SECTIONS.map((g, i) => [g.id, `${i + 1}. ${g.title}`]));
+
+const personas = [
+  { kicker: 'Je suis déjà en agence', title: 'Déçu de votre agence actuelle ?', text: 'Je veux voir ce que changer d’agence gestionnaire peut vraiment améliorer.', href: '/services/changer-agence-gestion-locative-marseille/' },
+  { kicker: 'Je gère seul ma location', title: 'Gérer seul devient complexe et chronophage ?', text: 'Je veux rester décisionnaire mais déléguer le juridique et l’administratif.', href: '/services/deleguer-gestion-locative-marseille/' },
+  { kicker: 'Je loue pour la première fois', title: 'Premier investissement ?', text: 'Je veux sécuriser la rentabilité de mon achat.', href: '/services/premiere-mise-en-location-marseille/' },
+  { kicker: 'Je suis copropriétaire chez Immobilière Pujol', title: 'Votre syndic peut aussi gérer votre location', text: 'Je veux profiter de la synergie unique entre vos services.', href: '/services/coproprietaire-syndic-gestion-locative-marseille/' },
+];
+
+const avant = [
+  'Heures passées à gérer visites, relances, paperasse et petits travaux.',
+  'Doutes sur les baux, les diagnostics, les règles et les risques juridiques.',
+  'Peur de l’impayé, des dégradations et des procédures longues.',
+  'Impression de subir la vacance locative et les imprévus.',
+];
+const apres = [
+  'Loyers sécurisés, versés à date, avec un suivi structuré des impayés.',
+  'Baux, diagnostics et obligations légales gérés par une équipe spécialisée.',
+  'Un gestionnaire dédié qui s’occupe de votre bien comme si c’était le sien.',
+  'Un patrimoine mieux valorisé, avec des conseils pour maximiser votre rentabilité et sécuriser vos revenus.',
+];
+
+type Item = { lead: string; text: string };
+const steps: { title: string; items: Item[]; guides: string[]; ctas: { label: string; href: string }[] }[] = [
+  {
+    title: 'L’estimation du juste loyer et la stratégie de commercialisation',
+    items: [
+      { lead: 'Estimation du loyer au regard du marché marseillais.', text: 'Notre connaissance du marché local vous garantit un loyer juste, attractif et pérenne.' },
+      { lead: 'Diagnostics obligatoires et conseils sur les travaux de rénovation à prévoir.', text: 'Nous avons à cœur de valoriser votre patrimoine dans le temps et de maximiser vos loyers.' },
+      { lead: 'Préparation à la commercialisation : photos, visite virtuelle, embellissement ou désencombrement avec l’IA, rédaction et multidiffusion de l’annonce sur les portails majeurs.', text: 'Nous mettons en lumière les atouts de votre patrimoine pour donner plus de visibilité à votre annonce face à la concurrence.' },
+    ],
+    guides: ['estimation-du-loyer', 'le-marche-et-le-prix-des-loyers', 'commercialisation', 'travaux-et-renovation-energetique'],
+    ctas: [{ label: 'Obtenir mon estimation de loyer gratuite en 24h', href: ESTIMATION }],
+  },
+  {
+    title: 'Une mise en location sécurisée',
+    items: [
+      { lead: 'Présélection des dossiers locataires avant visite.', text: 'Nous demandons aux candidats des informations sur leur situation en amont de toute visite, pour ne faire visiter votre bien qu’à des personnes qualifiées et motivées.' },
+      { lead: 'Sélection des dossiers locataires et présentation des meilleurs profils.', text: 'Nous vérifions rigoureusement la solvabilité des candidats (authenticité des avis d’imposition, cohérence des revenus, garants physiques) pour sélectionner un locataire fiable et respectueux de votre patrimoine.' },
+      { lead: 'Rédaction et signature du bail conformes à la loi.', text: 'Nous vous protégeons juridiquement en utilisant des documents contractuels conformes à la loi.' },
+      { lead: 'État des lieux d’entrée détaillé, avec photos et comparatif entrée/sortie.', text: 'Toujours le même logiciel, ce qui nous permet de comparer rapidement l’entrée et la sortie et de minimiser les risques de conflits.' },
+      { lead: 'Pré-visite de sortie.', text: 'Votre gestionnaire vérifie l’état de l’appartement avec le locataire avant son départ et lui donne des consignes. Le bien est remis en publicité dès votre accord, pour réduire les délais de relocation entre deux locataires.' },
+    ],
+    guides: ['mettre-en-location', 'selection-du-locataire', 'securite-juridique'],
+    ctas: [{ label: 'Confiez-nous votre recherche de locataire', href: '#form' }],
+  },
+  {
+    title: 'La gestion locative au quotidien',
+    items: [
+      { lead: 'Versement des loyers à date fixe, relances dès le 1er jour de retard, gestion des charges de copropriété.', text: 'Nous déployons tous les moyens nécessaires pour sécuriser la régularité de vos revenus.' },
+      { lead: 'Gestion des sinistres, maintenance technique et demandes de vos locataires.', text: 'Dégâts des eaux, pannes de chaudière, interventions d’urgence : vous n’êtes sollicité que pour validation, jamais pour la gestion de crise. Vous décidez, nous gérons.' },
+      { lead: 'Suivi et pilotage des travaux avec des artisans de confiance.', text: 'Des artisans locaux réactifs, testés depuis des années, à des tarifs négociés grâce à nos volumes de commandes. Pas de surfacturation « surprise ».' },
+      { lead: 'Un espace client dédié.', text: 'Comptabilité en temps réel et documents (avis d’échéance, baux, décomptes) téléchargeables 24h/24 : une visibilité totale sur votre gestion.' },
+    ],
+    guides: ['gestion-locative'],
+    ctas: [
+      { label: 'Demandez votre devis de gestion personnalisée', href: '#form' },
+      { label: 'Voir les avis de nos clients', href: '/services/les-avis-clients-de-limmobiliere-pujol/' },
+    ],
+  },
+  {
+    title: 'Sécurité et performance financière',
+    items: [
+      { lead: 'La gestion des retards de paiement et des impayés dès le 1er mois.', text: 'Relance à J+1, mise en demeure à J+15, transmission au service contentieux interne. Si vous avez souscrit notre assurance loyers impayés, vous percevez vos loyers sans interruption.' },
+      { lead: 'Une aide à la déclaration de vos revenus fonciers.', text: 'Un récapitulatif annuel (aide à la 2044) avec la ventilation des charges déductibles, pour que vos déclarations ne soient plus une source de stress.' },
+      { lead: 'Une assurance loyers impayés proposée à chaque relocation.', text: 'Zéro franchise, indemnisation dès le 1er mois, durée illimitée, prise en charge des frais de procédure et des dégradations immobilières.' },
+    ],
+    guides: ['assurances-locatives', 'loyers-impayes'],
+    ctas: [],
+  },
+  {
+    title: 'Conseils stratégiques et accompagnement',
+    items: [
+      { lead: 'Une équipe dédiée : un gestionnaire et un comptable.', text: 'Pas de plateforme d’appel anonyme : un binôme qui connaît l’historique de l’appartement, le locataire et l’état des finances, et un interlocuteur unique qui connaît votre dossier.' },
+      { lead: 'Des points réguliers avec votre gestionnaire.', text: 'Évolutions législatives (DPE), travaux d’amélioration, tendances du marché locatif : nous anticipons ensemble les opportunités de valorisation de votre patrimoine.' },
+    ],
+    guides: ['rentabilite-investissement-locatif', 'changer-d-agence-de-gestion'],
+    ctas: [{ label: 'Comprendre en détail comment nous prendrons en charge votre bien', href: '/services/taches-gestion-locative-deleguees-marseille/' }],
+  },
+];
+
+const results30 = [
+  'Votre bien est loué ou reloué dans des conditions maîtrisées (annonce, dossier, bail, état des lieux).',
+  'Vos loyers sont versés à date, avec un suivi clair des encaissements et relances.',
+  'Vos baux, diagnostics et obligations sont mis à jour et sécurisés.',
+  'Vous disposez d’un premier bilan sur la performance de votre bien et les actions à venir.',
+];
+
+// Figures validated by Caroline on 27/10; her other proof lines had no figure yet.
+const proofs = [
+  { value: '99,7 %', label: 'des loyers appelés encaissés' },
+  { value: '18 jours', label: 'délai médian de relocation' },
+];
+const reassurances = [
+  'Agence marseillaise installée depuis de nombreuses années, reconnue pour sa gestion, ses conseils, sa rigueur et sa réactivité.',
+  'Un service syndic de copropriété dans la même agence, pour une meilleure coordination sur les immeubles et les sujets techniques.',
+  'Un barème clair, sans frais cachés, expliqué avant engagement.',
+];
+
+const parcours = [
+  { title: 'Se renseigner sans s’engager', text: 'Nos guides gratuits : louer sans erreur, comprendre le marché marseillais, préparer un premier investissement.', cta: { label: 'Consulter nos guides', href: '#guides' } },
+  { title: 'Faire le point sur votre situation', text: 'Rendez-vous téléphonique ou visio avec un gestionnaire pour analyser votre bien, vos risques et vos objectifs.', cta: { label: 'Parler à un gestionnaire', href: CONSEILLER } },
+  { title: 'Mettre en route la gestion', text: 'Mise en place de la gestion, mise en location ou relocation, cadrage juridique, organisation du suivi.', cta: { label: 'Obtenir un devis de gestion locative', href: '#form' } },
+];
 ---
 
 <BaseLayout title={seoTitle} description={seoDescription}>
   {/* ============= HERO ============= */}
-  <section class="svc-hero">
+  <section class="svc-hero lp-hero">
     <picture class="svc-hero__video">
       {heroSources.map((s) => (
         <source media={s.media} srcset={s.srcset} />
       ))}
-      <img src={heroImg} alt="Gestion locative à Marseille — Immobilière Pujol" loading="eager" />
+      <img src={heroImg} alt="Gestion locative à Marseille, Immobilière Pujol" loading="eager" />
     </picture>
     <div class="svc-hero__overlay"></div>
 
-    <div class="svc-hero__inner">
-      <h1><b>Gestion Locative</b><br />à Marseille</h1>
-      <p class="svc-hero__sub">{heroCatch}</p>
-      <p class="svc-hero__sub">Gestion locative à partir de 4,5% TTC — Garantie loyers impayés à 1,8% TTC</p>
-      <a class="svc-hero__cta" href="#form">{ctaText}</a>
+    <div class="svc-hero__inner lp-hero__inner">
+      <p class="lp-hero__eyebrow">Gestion locative à Marseille</p>
+      <h1>Valorisez votre patrimoine immobilier et sécurisez vos revenus locatifs durablement.</h1>
+      <p class="svc-hero__sub">L’expertise Immobilière Pujol à Marseille : une gestion proactive pour optimiser la rentabilité de vos biens tout en vous protégeant contre les impayés et les risques juridiques.</p>
+      <ul class="lp-hero__bullets">
+        <li><b>Encaissez vos loyers sans stress :</b> vous êtes payé à date fixe, même si le locataire est en retard, grâce à notre assurance loyers impayés.</li>
+        <li><b>Zéro gestion, 100 % liberté :</b> de la visite à la réparation d’une fuite, on s’occupe de tout. Vous restez décisionnaire.</li>
+        <li><b>Un patrimoine qui vieillit bien :</b> nous veillons à l’entretien et à la conformité de votre bien pour la meilleure valeur locative et de revente demain.</li>
+      </ul>
+      <div class="lp-hero__ctas">
+        <a class="svc-hero__cta" href="#form">{ctaText}</a>
+        <a class="lp-btn lp-btn--ghost" href={CONSEILLER}>Savoir comment nous sécurisons vos loyers</a>
+      </div>
     </div>
   </section>
 
   <div class="svc-page">
+
+    {/* ============= BLOC 1: PROFILS ============= */}
+    <section class="lp-block">
+      <div class="lp-wrap">
+        <h2 class="lp-title">À qui s’adresse notre gestion locative à <b>Marseille</b> ?</h2>
+        <p class="lp-intro">Que vous soyez déjà accompagné par un professionnel, en autogestion, en train d’acheter votre premier bien ou copropriétaire chez nous, nous avons un parcours adapté à vos besoins.</p>
+        <ul class="lp-cards">
+          {personas.map((c) => (
+            <li>
+              <a class="lp-card" href={c.href}>
+                <span class="lp-card__kicker">{c.kicker}</span>
+                <span class="lp-card__title">{c.title}</span>
+                <span class="lp-card__text">{c.text}</span>
+                <span class="lp-card__more">Voir mon parcours →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {/* ============= BLOC 2: AVANT / APRÈS ============= */}
+    <section class="lp-block lp-block--tint">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Avant / après : ce que change une vraie <b>gestion locative</b></h2>
+        <div class="lp-compare">
+          <div class="lp-compare__col lp-compare__col--before">
+            <h3>Avant</h3>
+            <ul>{avant.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <div class="lp-compare__col lp-compare__col--after">
+            <h3>Après</h3>
+            <ul>{apres.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        </div>
+        <p class="lp-center"><a class="lp-btn" href="#etapes">Je veux savoir à quoi ressemble une gestion locative vraiment sereine</a></p>
+      </div>
+    </section>
+
+    {/* ============= BLOC 3: 5 ÉTAPES ============= */}
+    <section class="lp-block" id="etapes">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Comment se passe la gestion locative de votre bien <b>chez nous</b> ?</h2>
+        <ol class="lp-steps">
+          {steps.map((st, i) => (
+            <li class="lp-step">
+              <div class="lp-step__head">
+                <span class="lp-step__num">Étape {i + 1}</span>
+                <h3 class="lp-step__title">{st.title}</h3>
+              </div>
+              <ul class="lp-step__items">
+                {st.items.map((it) => (
+                  <li><b>{it.lead}</b> {it.text}</li>
+                ))}
+              </ul>
+              <p class="lp-step__guides">
+                <span>Nos guides sur cette étape :</span>
+                {st.guides.map((id) => (
+                  <a href={`#${id}`}>{sectionTitle.get(id)?.replace(/^\d+\.\s*/, '')}</a>
+                ))}
+              </p>
+              {st.ctas.length > 0 && (
+                <p class="lp-step__ctas">
+                  {st.ctas.map((c, j) => (
+                    <a class={`lp-btn${j > 0 ? ' lp-btn--line' : ''}`} href={c.href}>{c.label}</a>
+                  ))}
+                </p>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= BLOC 4: 30 JOURS ============= */}
+    <section class="lp-block lp-block--tint">
+      <div class="lp-wrap">
+        <h2 class="lp-title">En 30 jours, nous reprenons votre gestion : votre bien est loué et vos <b>loyers sont sécurisés</b></h2>
+        <ol class="lp-results">
+          {results30.map((t) => <li>{t}</li>)}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= BLOC 5: PREUVES ============= */}
+    <section class="lp-block">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Pourquoi autant de bailleurs nous confient déjà leur bien à <b>Marseille</b> ?</h2>
+        <ul class="lp-proofs">
+          {proofs.map((p) => (
+            <li><span class="lp-proofs__value">{p.value}</span><span class="lp-proofs__label">{p.label}</span></li>
+          ))}
+        </ul>
+        <ul class="lp-checks">{reassurances.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </section>
+
+    {/* ============= BLOC 6: PARCOURS ============= */}
+    <section class="lp-block lp-block--tint">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Choisissez comment <b>avancer avec nous</b></h2>
+        <ol class="lp-path">
+          {parcours.map((p, i) => (
+            <li>
+              <span class="lp-path__num">{i + 1}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+              <a class="lp-btn" href={p.cta.href}>{p.cta.label}</a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= GUIDES INDEX (Caroline's 12 sections, 40 guides) ============= */}
+    <section class="lp-block lp-guides-head" id="guides">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Tous nos guides de la <b>gestion locative</b></h2>
+      </div>
+    </section>
 
     {/* ============= TOC + SECTIONS ============= */}
     <section class="svc-toc-section">
@@ -149,114 +386,15 @@ const toc = sections.map((s) => ({ id: s.id, label: s.title }));
       </div>
     </section>
 
-    {/* ============= LONG-FORM CONTENT ============= */}
-    <section class="svc-toc-section svc-toc-section--prose">
-      <div class="svc-toc-section__inner svc-toc-section__inner--single">
-        <div class="svc-article-body">
-          <h2><b>Gestion Locative</b> à Marseille</h2>
-          <p>
-            Vous avez un appartement à louer ? Vous recherchez une agence spécialisée en gestion
-            locative à Marseille ?
-          </p>
-
-          <h2>Pourquoi choisir une agence de gestion immobilière ?</h2>
-
-          <h3>Pour éviter des erreurs qui coûtent cher</h3>
-          <p>
-            La complexité juridique, les choix de travaux, les difficultés relationnelles, la
-            rédaction des engagements et des états des lieux sont autant de pièges qui coûtent
-            cher si vous faites une erreur.
-          </p>
-          <p>
-            Coûts financier en frais d'avocat ou d'huissier pour gérer les litiges, frais de
-            travaux si vous avez mal évalué votre locataire, énervement garanti pour tenter de
-            rattraper le coup.
-          </p>
-          <p>
-            Notre expertise consiste à gérer ces difficultés pour votre compte en satisfaisant
-            toutes les parties, en appliquant la réglementation qui protège, en assumant notre
-            devoir de conseil.
-          </p>
-
-          <h3>Pour être juridiquement protégé</h3>
-          <p>
-            Les garanties de nos contrats (clauses évolutives des baux, rédaction des états des
-            lieux, garanties de loyers impayés pour les appartements, assurance propriétaire non
-            occupant…) vous sécurisent dans vos choix, vos projets.
-          </p>
-          <p>
-            Notre offre de gestion locative à Marseille est probablement la plus compétitive de
-            notre ville
-            ({' '}<a href="/service/le-cout-de-la-gestion-locative/">consultez le prix de notre gestion locative</a>).
-          </p>
-
-          <h3>Pour vous concentrer sur ce qui est important pour vous</h3>
-          <p>
-            Votre temps est précieux et chacun son métier. La location et la gestion locative en
-            est un. Par l'expérience et l'expertise, notre équipe va plus vite, loue plus cher et
-            trouve de meilleurs locataires. Alors pourquoi s'en priver — d'autant que nos
-            honoraires sont en plus déductibles de vos impôts ?
-          </p>
-
-          <h2>Pourquoi choisir l'Immobilière Pujol pour gérer votre location ?</h2>
-
-          <h3>Des gestionnaires à votre écoute, des conseillers qui vous répondent</h3>
-          <p>
-            L'<a href="/service-immobilier/agence-immobiliere-pujol/" target="_blank" rel="noopener">Immobilière Pujol est une PME familiale et indépendante</a>.
-            Nous sommes proches de nos clients, avons le sourire et nous leur accordons le temps
-            nécessaire pour bien comprendre leur projet immobilier et les conseiller au mieux.
-            C'est là notre force sur les grands groupes immobiliers : nous ne surchargeons pas
-            nos équipes afin de garantir un service de qualité à chaque client.
-          </p>
-
-          <h3>Des méthodes de travail qui nous permettent de louer mieux et plus vite</h3>
-          <p>
-            Notre société a l'obsession du mieux faire sans cesse et plus vite. Nos clients
-            bénéficient de cette innovation permanente. Mettre en location un appartement, c'est
-            valoriser votre patrimoine, diffuser et augmenter sa visibilité quand il s'agit de
-            trouver un locataire. Fort de notre expérience, nous maîtrisons parfaitement le
-            processus de mise en location, à commencer par
-            {' '}<a href="/aavant-apres-renovation-dun-appartement-pour-de-la-location-meublee/" target="_blank" rel="noopener">les conseils de valorisation immobilière</a>,
-            la prise de
-            {' '}<a href="/photos-montrent-qualite-appartements-a-louer/" target="_blank" rel="noopener">photos immobilières professionnelles</a>,
-            {' '}<a href="https://tour.previsite.com/4BD3493D-B5AF-9C47-59D4-68499E03C495?lead_capture=false" target="_blank" rel="noopener">la visite virtuelle</a>,
-            la rédaction des annonces et la diffusion large sur internet. Nous rédigeons des
-            annonces avec des descriptifs complets et attractifs pour les meilleurs candidats
-            locataires. Cette étape est essentielle, car elle conditionne toutes les autres.
-            S'en suivent les entretiens des candidats et l'étude de leur solvabilité.
-          </p>
-
-          <h3>Une agence immobilière recommandée par ses clients</h3>
-          <p>
-            Nos clients sont nos meilleurs ambassadeurs. Consultez leur avis sur nos différentes
-            plateformes de recueil d'opinions :
-            {' '}<a href="/services/les-avis-clients-de-limmobiliere-pujol/" target="_blank" rel="noopener">avis de nos clients</a>.
-          </p>
-
-          <h2>Ce que nous allons gérer pour vous</h2>
-          <p>Notre objectif : <strong>sécuriser</strong> vos revenus et vous faire gagner en <strong>sérénité</strong>.</p>
-
-          <h3>1 — Location ou relocation de votre bien immobilier</h3>
-          <p>
-            Nous vous accompagnons pour la première mise en location de votre bien s'il est neuf
-            ou pour sa relocation : étude de marché, prix du loyer, travaux de valorisation,
-            reportage photos, réalisation des annonces, promotion du bien, étude des dossiers
-            locataires, entretiens, état des lieux, mise en place du contrat de location…
-          </p>
-
-          <h3>2 — La gestion locative de votre bien</h3>
-          <p>
-            Nous assurons la gestion courante du bien sur la base d'un mandat de gestion. Nous
-            pouvons ainsi gérer la perception des loyers mensuels, la commande et le suivi des
-            éventuels travaux de rafraîchissement, la relation avec le locataire et avec le
-            syndic de la copropriété (paiement des charges, assemblées générales…).
-          </p>
-          <p>
-            Cette gestion vous donne accès en temps réel dans votre espace client à votre compte,
-            au compte du locataire et à tous les documents que vous pouvez télécharger 24h/24 et
-            7 jours/7.
-          </p>
-        </div>
+    {/* ============= BLOC FINAL ============= */}
+    <section class="lp-block lp-final">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Prêt à sécuriser vos loyers et à alléger votre <b>quotidien de bailleur</b> ?</h2>
+        <p class="lp-intro">Que vous soyez déjà en agence, en autogestion, sur votre premier investissement ou copropriétaire chez nous, un simple échange avec un gestionnaire permet de voir ce que nous pouvons changer dans les prochains mois pour votre bien à Marseille.</p>
+        <p class="lp-center">
+          <a class="lp-btn" href="#form">Obtenir mon devis de gestion locative</a>
+          <a class="lp-btn lp-btn--line" href={CONSEILLER}>Parler à un gestionnaire avant de décider</a>
+        </p>
       </div>
     </section>
 

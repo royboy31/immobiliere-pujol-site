@@ -19,6 +19,7 @@ export const GUIDE_SECTIONS: GuideSection[] = [
       p('deleguer-gestion-locative-marseille'), // G2
       p('taches-gestion-locative-deleguees-marseille'), // Titre 3
       p('syndic-gestion-locative-pujol-marseille'), // Titre 13
+      p('coproprietaire-syndic-gestion-locative-marseille'), // G4 (LP persona, 30/10)
     ],
   },
   {
@@ -103,6 +104,7 @@ export const GUIDE_SECTIONS: GuideSection[] = [
     id: 'rentabilite-investissement-locatif',
     title: 'Rentabilité de son investissement locatif',
     pages: [
+      p('premiere-mise-en-location-marseille'), // G3 (LP persona, 30/10)
       p('reduire-vacance-locative-marseille'), // Titre 6
       p('ameliorer-rentabilite-locative-marseille'), // Titre 8
       p('investissement-locatif-marseille-parcours'), // Titre 16

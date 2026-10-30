@@ -731,7 +731,8 @@ const pageSchemas = entry.data.jsonLd
 
 <BaseLayout title={title} description={description} schemas={pageSchemas} bypassSeoMirror={isGuide}>
   {/* ============= HERO ============= */}
-  <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
+  {/* Guide pages: no photo header (Caroline 30/10), a plain title band instead. */}
+  <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={isGuide ? undefined : `background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
 
     <div class="svc-hero__inner">
@@ -1131,6 +1132,31 @@ const pageSchemas = entry.data.jsonLd
               </script>
             )}
             </>
+          )}
+          {/* Mobile: the same section menu again at the end of the guide, open (Caroline 30/10). */}
+          {guideSection && (
+            <nav class="svc-mobnav svc-mobnav--bottom" aria-label="Autres guides de la rubrique (fin de page)">
+              <details class="svc-mobnav__details" open>
+                <summary class="svc-mobnav__summary">
+                  <span class="svc-mobnav__kicker">Dans cette rubrique</span>
+                  <span class="svc-mobnav__section">{guideSection.title}</span>
+                </summary>
+                <ul class="svc-mobnav__list">
+                  {sidebarItems.map((it) => (
+                    <li>
+                      <a
+                        class={`svc-mobnav__link${it.current ? ' is-active' : ''}`}
+                        href={it.href}
+                        aria-current={it.current ? 'page' : undefined}
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="svc-mobnav__hub" href={sidebarSectionHref}>Voir tous les guides de gestion locative</a>
+              </details>
+            </nav>
           )}
 
           {valueCards.length > 0 && (

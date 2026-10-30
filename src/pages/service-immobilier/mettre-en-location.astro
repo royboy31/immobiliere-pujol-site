@@ -3,6 +3,10 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getEntry } from 'astro:content';
 
+// Caroline 30/10: no separate Mise en location landing; renting out is a step of the
+// Gestion locative landing. The legacy page below stays in the repo until production.
+return Astro.redirect('/service-immobilier/gestion-locative/', 301);
+
 const entry = await getEntry('serviceImmobilier', 'mettre-en-location');
 const seoTitle = entry?.data.seoTitle || 'Mettre en location – Immobilière Pujol';
 const seoDescription = entry?.data.seoDescription || 'Soyez bien conseillé pour mieux louer';
