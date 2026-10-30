@@ -601,6 +601,9 @@ const formObjects = [
   'Autre (bien détailler votre demande)',
   'Client : déclarer une urgence le week-end et les jours fériés',
 ];
+// Gestion locative guides are read by owners: preselect that request, not the
+// first option (a rental search).
+const defaultFormObject = guideSection ? formObjects[2] : undefined;
 
 // ── Slug-specific form overrides ────────────────────────────────────────────
 // Pages that need a dedicated form instead of the generic contact form (GF 4).
@@ -1295,7 +1298,7 @@ const pageSchemas = entry.data.jsonLd
               <span>Objet de votre demande *</span>
               <select name="input_10" required>
                 {formObjects.map((o) => (
-                  <option value={o}>{o}</option>
+                  <option value={o} selected={o === defaultFormObject}>{o}</option>
                 ))}
               </select>
             </label>
