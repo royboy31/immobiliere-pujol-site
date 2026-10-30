@@ -2,6 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { GUIDE_HUB, guideSectionFor } from '../../lib/guide-nav';
 
 const slugify = (s: string): string =>
   s
@@ -575,10 +576,21 @@ if (slug === 'contacter-un-conseiller-en-gestion-locative') {
 const serviceTitles = new Map(
   (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
 );
-const sidebarItems = [
-  ...siblings.map((s) => ({ ...s, label: serviceTitles.get(s.href) || s.label, current: false })),
-  { href: pagePath, label: entry.data.title, current: true },
-].sort((a, b) => a.label.localeCompare(b.label));
+// Pages in the Gestion locative guide follow Caroline's 12 sections and order
+// (src/lib/guide-nav.ts); every other page keeps its legacy siblings.
+const guideSection = guideSectionFor(pagePath);
+const sidebarItems = guideSection
+  ? guideSection.pages.map((href) => ({
+      href,
+      label: href === pagePath ? entry.data.title : serviceTitles.get(href) || href,
+      current: href === pagePath,
+    }))
+  : [
+      ...siblings.map((s) => ({ ...s, label: serviceTitles.get(s.href) || s.label, current: false })),
+      { href: pagePath, label: entry.data.title, current: true },
+    ].sort((a, b) => a.label.localeCompare(b.label));
+const sidebarSectionLabel = guideSection ? guideSection.title : sectionLabel;
+const sidebarSectionHref = guideSection ? `${GUIDE_HUB}#${guideSection.id}` : '';
 
 const formObjects = [
   "Location : vous êtes intéressés par une annonce de location /à la recherche d'un bien à louer ?",
@@ -739,7 +751,9 @@ const pageSchemas = entry.data.jsonLd
           <a class="svc-toc__parent" href={parentHref}>
             <p class="svc-toc__title">{parentLabel}</p>
           </a>
-          {sectionLabel && <p class="svc-toc__section-label">{sectionLabel}</p>}
+          {sidebarSectionLabel && (sidebarSectionHref
+            ? <a class="svc-toc__section-label" href={sidebarSectionHref}>{sidebarSectionLabel}</a>
+            : <p class="svc-toc__section-label">{sidebarSectionLabel}</p>)}
           <ul class="svc-toc__list">
             {sidebarItems.map((it) => (
               <li>

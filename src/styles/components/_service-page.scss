@@ -326,6 +326,13 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     margin: 0 0 14px;
   }
 
+  a#{&}__section-label {
+    display: block;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
   &__list {
     list-style: none;
     margin: 0;
