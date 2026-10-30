@@ -9,7 +9,7 @@ const seoTitle = entry?.data.seoTitle || 'Gestion Locative à Marseille – Immo
 const seoDescription =
   entry?.data.seoDescription ||
   "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients. L'Immobilière Pujol vous accompagne avec plaisir dans votre projet immobilier à Marseille.";
-const ctaText = entry?.data.ctaText || 'Obtenez un devis de gestion locative';
+const ctaText = entry?.data.ctaText || 'Obtenir mon devis de gestion locative';
 
 const heroImg =
   'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/exposio_0002-1200x800.jpg';
@@ -136,7 +136,7 @@ const steps: { title: string; items: Item[]; guides: string[]; ctas: { label: st
     guides: ['gestion-locative'],
     ctas: [
       { label: 'Demandez votre devis de gestion personnalisée', href: '#form' },
-      { label: 'Voir les avis de nos clients', href: '/services/les-avis-clients-de-limmobiliere-pujol/' },
+      { label: 'Voir nos avis', href: '/services/les-avis-clients-de-limmobiliere-pujol/' },
     ],
   },
   {
@@ -179,9 +179,9 @@ const reassurances = [
 ];
 
 const parcours = [
-  { title: 'Se renseigner sans s’engager', text: 'Nos guides gratuits : louer sans erreur, comprendre le marché marseillais, préparer un premier investissement.', cta: { label: 'Consulter nos guides', href: '#guides' } },
-  { title: 'Faire le point sur votre situation', text: 'Rendez-vous téléphonique ou visio avec un gestionnaire pour analyser votre bien, vos risques et vos objectifs.', cta: { label: 'Parler à un gestionnaire', href: CONSEILLER } },
-  { title: 'Mettre en route la gestion', text: 'Mise en place de la gestion, mise en location ou relocation, cadrage juridique, organisation du suivi.', cta: { label: 'Obtenir un devis de gestion locative', href: '#form' } },
+  { title: 'Se renseigner sans s’engager', text: 'Guides gratuits : louer sans erreur, comprendre le marché marseillais, préparer un premier investissement.' },
+  { title: 'Faire le point sur votre situation', text: 'Rendez-vous téléphonique ou visio avec un gestionnaire pour analyser votre bien, vos risques et vos objectifs.', cta: { label: 'Parler à un gestionnaire pour faire le point', href: CONSEILLER } },
+  { title: 'Mettre en route la reprise de gestion', text: 'Mise en place de la gestion, mise en location ou relocation, cadrage juridique, organisation du suivi.', cta: { label: 'Obtenir un devis de gestion locative', href: '#form' } },
 ];
 ---
 
@@ -320,7 +320,7 @@ const parcours = [
               <span class="lp-path__num">{i + 1}</span>
               <h3>{p.title}</h3>
               <p>{p.text}</p>
-              <a class="lp-btn" href={p.cta.href}>{p.cta.label}</a>
+              {p.cta && <a class="lp-btn" href={p.cta.href}>{p.cta.label}</a>}
             </li>
           ))}
         </ol>
