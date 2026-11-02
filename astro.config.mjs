@@ -13,6 +13,9 @@ export default defineConfig({
   // Astro 6: output defaults to 'static'. SSR pages opt-in with `export const prerender = false`
   // Annonce pages will use SSR (prerender = false), everything else is static.
   trailingSlash: 'always',
+  // Astro 7 changed the default to 'jsx', which strips the whitespace between
+  // inline elements (e.g. menu labels and their chevron icons). Keep Astro 6 output.
+  compressHTML: true,
   server: { host: true },
   // Legacy 301 redirects preserved from live WP (checked against live host).
   redirects: {
