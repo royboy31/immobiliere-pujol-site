@@ -1,0 +1,252 @@
+// ============================================
+// LP Gestion locative, magazine test (10/11/2026)
+// Scoped under .mag: used only by /service-immobilier/gestion-locative-magazine/.
+// Type scale: H1 serif · H2 serif · H3 serif · body Noto. Eyebrows above titles.
+// ============================================
+$mag-ink:      rgb(38, 42, 44);
+$mag-text:     rgb(64, 68, 70);
+$mag-accent:   rgb(104, 118, 30);   // dark olive, AA on white and paper
+$mag-paper:    rgb(246, 244, 239);
+$mag-olive-bg: rgb(225, 232, 196);
+$mag-wrap:     1200px;
+
+.mag {
+  color: $mag-text;
+  font-family: $ds-font-noto;
+  font-size: 17px;
+  line-height: 1.65;
+
+}
+// Zero-specificity resets so component classes below always win.
+:where(.mag) img { display: block; max-width: 100%; height: auto; }
+:where(.mag) :where(ul, ol) { list-style: none; margin: 0; padding: 0; }
+:where(.mag) :where(p, figure) { margin: 0; }
+
+.mag-wrap { max-width: $mag-wrap; margin: 0 auto; padding: 0 40px;
+  @media (max-width: $bp-tablet) { padding: 0 22px; }
+}
+
+// ---------- type ----------
+.mag-h1, .mag-h2, .mag-h3 { font-family: $ds-font-serif; color: $mag-ink; text-wrap: balance; margin: 0; }
+.mag-h1 { font-weight: 600; font-size: clamp(40px, 5vw, 64px); line-height: 1.06; letter-spacing: -.01em; }
+.mag-h2 { font-weight: 600; font-size: clamp(32px, 3.6vw, 48px); line-height: 1.14; max-width: 28ch; }
+.mag-h3 { font-weight: 600; font-size: 26px; line-height: 1.2; }
+.mag-h3--lg { font-size: clamp(28px, 2.6vw, 34px); }
+.mag-h2 em, .mag-h1 em { font-style: italic; font-weight: 500; color: $mag-accent; }
+
+.mag-eyebrow {
+  font-family: $ds-font-noto; font-size: 12.5px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; line-height: 1.5; color: $mag-accent; margin: 0 0 14px;
+  &--light { color: rgba(255, 255, 255, .9); }
+  &--olive { color: $ds-olive; }
+}
+.mag-lead { font-size: 19px; line-height: 1.6; max-width: 62ch; margin-top: 20px; }
+
+.mag-head { margin-bottom: 56px;
+  &__num { display: block; font-family: $ds-font-serif; font-style: italic; font-size: 22px; color: $mag-accent; margin-bottom: 10px; }
+  &--tight { margin-bottom: 36px; }
+  @media (max-width: $bp-tablet) { margin-bottom: 36px; }
+}
+
+// ---------- buttons ----------
+.mag-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px;
+  &--center { justify-content: center; }
+}
+.mag-btn {
+  display: inline-flex; align-items: center; justify-content: center; text-align: center;
+  padding: 15px 28px; border-radius: 999px; background: $ds-olive; color: $mag-ink;
+  font-family: $ds-font-noto; font-weight: 600; font-size: 15.5px; line-height: 1.3;
+  text-decoration: none; border: 2px solid $ds-olive; transition: background .2s, color .2s;
+  &:hover { background: $mag-ink; border-color: $mag-ink; color: #fff; }
+  &--ghost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .8);
+    &:hover { background: #fff; color: $mag-ink; border-color: #fff; } }
+  &--line { background: transparent; border-color: $mag-ink; color: $mag-ink; }
+  &--dark { background: $mag-ink; border-color: $mag-ink; color: #fff;
+    &:hover { background: transparent; color: $mag-ink; } }
+  &:focus-visible { outline: 3px solid $ds-orange; outline-offset: 3px; }
+}
+
+// ---------- sections ----------
+.mag-section { padding: 112px 0;
+  &--paper { background: $mag-paper; }
+  &--olive { background: $mag-olive-bg; }
+  &--ink { background: $mag-ink; color: rgba(255, 255, 255, .86);
+    .mag-h2, .mag-h3 { color: #fff; }
+    .mag-h2 em { color: $ds-olive; }
+    .mag-head__num { color: $ds-olive; }
+  }
+  @media (max-width: $bp-tablet) { padding: 64px 0; }
+}
+
+// ---------- hero ----------
+.mag-hero {
+  position: relative; isolation: isolate; min-height: 640px; display: flex; align-items: flex-end;
+  color: #fff; overflow: hidden;
+  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  &::before { content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(20, 24, 26, .82) 0%, rgba(20, 24, 26, .55) 50%, rgba(20, 24, 26, .15) 100%); }
+  &__inner { max-width: $mag-wrap; width: 100%; margin: 0 auto; padding: 120px 40px 80px; }
+  .mag-h1 { color: #fff; max-width: 21ch; }
+  &__sub { font-size: 19px; line-height: 1.6; max-width: 56ch; margin-top: 24px; color: rgba(255, 255, 255, .92); }
+  @media (max-width: $bp-tablet) {
+    min-height: 560px;
+    &::before { background: linear-gradient(180deg, rgba(20, 24, 26, .35) 0%, rgba(20, 24, 26, .85) 70%); }
+    &__inner { padding: 120px 22px 48px; }
+    &__sub { font-size: 17px; }
+  }
+}
+
+.mag-promises { background: $mag-ink; color: rgba(255, 255, 255, .86); padding: 44px 0;
+  &__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  li { display: flex; gap: 16px; font-size: 15.5px; line-height: 1.6; }
+  b { color: #fff; }
+  &__num { font-family: $ds-font-serif; font-style: italic; font-size: 30px; line-height: 1; color: $ds-olive; flex: none; }
+  @media (max-width: 900px) { &__list { grid-template-columns: 1fr; gap: 22px; } }
+}
+
+// ---------- personas ----------
+.mag-personas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+  @media (max-width: 1100px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $bp-mobile) { grid-template-columns: 1fr; }
+}
+.mag-persona {
+  display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit;
+  img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-radius: 4px; transition: transform .5s $ease-out; }
+  &__body { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; flex: 1; }
+  &__q { font-family: $ds-font-serif; font-style: italic; font-size: 21px; line-height: 1.3; color: $mag-accent; }
+  &__text { font-size: 16px; line-height: 1.6; }
+  &__more { margin-top: auto; padding-top: 8px; font-weight: 600; font-size: 15px; color: $mag-ink; border-bottom: 2px solid $ds-olive; align-self: flex-start; }
+  &:hover img { transform: scale(1.02); }
+  &:hover .mag-persona__more { border-color: $mag-ink; }
+  &:focus-visible { outline: 3px solid $ds-orange; outline-offset: 6px; }
+}
+
+// ---------- compare ----------
+.mag-compare { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 0; align-items: stretch;
+  &__photo { margin: 0; img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; } }
+  &__col { padding: 44px 40px; font-size: 16.5px;
+    li { padding: 14px 0; border-top: 1px solid rgba(0, 0, 0, .1); }
+    li:first-child { border-top: 0; padding-top: 0; }
+  }
+  &__col--before { background: #fff; }
+  &__col--after { background: $mag-ink; color: rgba(255, 255, 255, .9);
+    li { border-color: rgba(255, 255, 255, .15); }
+  }
+  @media (max-width: 1000px) { grid-template-columns: 1fr 1fr;
+    &__photo { grid-column: 1 / -1; img { min-height: 0; aspect-ratio: 16 / 7; } }
+  }
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; &__col { padding: 32px 24px; } }
+}
+
+// ---------- steps (zigzag) ----------
+.mag-steps { display: flex; flex-direction: column; gap: 96px;
+  @media (max-width: $bp-tablet) { gap: 64px; }
+}
+.mag-step { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+  &:nth-child(even) .mag-step__photo { order: 2; }
+  &__photo { margin: 0; img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; } }
+  &__num { font-family: $ds-font-serif; font-style: italic; font-size: 22px; color: $mag-accent; margin-bottom: 8px; }
+  &__leads { margin-top: 26px;
+    li { position: relative; padding: 10px 0 10px 28px; border-top: 1px solid rgba(0, 0, 0, .08); line-height: 1.5; color: $mag-ink; }
+    li::before { content: ''; position: absolute; left: 0; top: 19px; width: 12px; height: 2px; background: $ds-olive; }
+  }
+  &__items li { padding: 8px 0; }
+  @media (max-width: 900px) { grid-template-columns: 1fr; gap: 28px;
+    &:nth-child(even) .mag-step__photo { order: 0; }
+  }
+}
+.mag-more { margin-top: 16px;
+  summary { cursor: pointer; font-weight: 600; font-size: 15px; color: $mag-accent; list-style: none; display: inline-flex; gap: 8px; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 20px; line-height: 1; }
+  &[open] summary::after { content: '–'; }
+  summary:focus-visible { outline: 3px solid $ds-orange; outline-offset: 4px; }
+  > ul { margin-top: 12px; font-size: 16px; }
+}
+.mag-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 24px;
+  &__label { flex-basis: 100%; font-size: 12.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: $mag-text; margin-bottom: 2px; }
+  a { font-size: 14px; padding: 6px 14px; border-radius: 999px; text-decoration: none; color: $mag-ink; background: $mag-olive-bg; transition: background .2s; }
+  a:hover { background: $ds-olive; }
+}
+.mag-step--2 .mag-chips a { background: rgb(250, 222, 205); }
+.mag-step--3 .mag-chips a { background: rgb(214, 228, 240); }
+.mag-step--4 .mag-chips a { background: rgb(254, 236, 200); }
+.mag-step--5 .mag-chips a { background: rgb(222, 228, 231); }
+
+// ---------- timeline ----------
+.mag-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative;
+  &::before { content: ''; position: absolute; left: 0; right: 0; top: 22px; height: 1px; background: rgba(255, 255, 255, .25); }
+  li { position: relative; }
+  &__dot { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: $ds-olive; color: $mag-ink;
+    font-family: $ds-font-serif; font-weight: 600; font-size: 22px; margin-bottom: 22px; }
+  p { font-size: 16.5px; }
+  @media (max-width: 900px) { grid-template-columns: 1fr; gap: 24px;
+    &::before { left: 22px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+    li { display: flex; gap: 20px; align-items: flex-start; }
+    &__dot { flex: none; margin: 0; }
+    p { padding-top: 9px; }
+  }
+}
+
+// ---------- proof ----------
+.mag-proof { display: grid; grid-template-columns: 1.15fr 1fr; gap: 72px; align-items: center;
+  &__photo { margin: 0; img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; } }
+  @media (max-width: 900px) { grid-template-columns: 1fr; gap: 40px; &__photo img { aspect-ratio: 16 / 10; } }
+}
+.mag-figures { display: flex; gap: 56px; flex-wrap: wrap; padding: 28px 0; border-top: 1px solid rgba(0, 0, 0, .12); border-bottom: 1px solid rgba(0, 0, 0, .12);
+  li { display: flex; flex-direction: column; }
+  &__value { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(52px, 5vw, 72px); line-height: 1; color: $mag-ink; }
+  &__label { font-size: 15px; margin-top: 8px; }
+}
+.mag-checks { margin-top: 28px;
+  li { position: relative; padding: 8px 0 8px 32px; }
+  li::before { content: '✓'; position: absolute; left: 0; top: 8px; color: $mag-accent; font-weight: 700; }
+}
+
+// ---------- parcours ----------
+.mag-path { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  li { display: flex; flex-direction: column; gap: 14px; background: #fff; padding: 36px 32px; border-radius: 4px; }
+  li p { flex: 1; font-size: 16px; }
+  .mag-btn { align-self: flex-start; }
+  &__num { font-family: $ds-font-serif; font-style: italic; font-size: 40px; line-height: 1; color: $mag-accent; }
+  @media (max-width: 900px) { grid-template-columns: 1fr; }
+}
+
+// ---------- guides ----------
+.mag-guides { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start;
+  > li { scroll-margin-top: 110px; }
+  @media (max-width: 1000px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+}
+.mag-guide { background: #fff; border-radius: 4px; border-top: 3px solid $ds-olive;
+  summary { cursor: pointer; list-style: none; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 2px; padding: 22px 24px; }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible { outline: 3px solid $ds-orange; outline-offset: -3px; }
+  &__num { grid-row: span 2; font-family: $ds-font-serif; font-style: italic; font-size: 26px; line-height: 1.1; color: $mag-accent; }
+  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 22px; line-height: 1.2; color: $mag-ink; }
+  &__count { font-size: 13.5px; color: $mag-text; }
+  &[open] summary { border-bottom: 1px solid rgba(0, 0, 0, .08); }
+  &__lead { padding: 16px 24px 0; font-size: 15px; }
+  &__links { padding: 10px 24px 20px;
+    a { display: block; padding: 8px 0; font-size: 15px; line-height: 1.45; color: $mag-ink; text-decoration: none; border-bottom: 1px solid rgba(0, 0, 0, .06); }
+    a:hover { color: $mag-accent; }
+  }
+}
+.mag-guides__contact { margin-top: 32px; text-align: center; scroll-margin-top: 110px;
+  a { font-weight: 600; color: $mag-accent; }
+}
+
+// ---------- final ----------
+.mag-final { position: relative; isolation: isolate; padding: 128px 0; color: rgba(255, 255, 255, .92); text-align: center; overflow: hidden;
+  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  &::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(20, 24, 26, .72); }
+  .mag-h2 { color: #fff; margin: 0 auto; }
+  .mag-h2 em { color: $ds-olive; }
+  .mag-lead { margin: 22px auto 0; }
+  @media (max-width: $bp-tablet) { padding: 72px 0; }
+}
+
+// Form heading in the page's serif (form itself unchanged).
+.mag-formwrap .svc-form h2 { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(32px, 3.6vw, 44px); line-height: 1.14;
+  b { font-style: italic; font-weight: 500; }
+}

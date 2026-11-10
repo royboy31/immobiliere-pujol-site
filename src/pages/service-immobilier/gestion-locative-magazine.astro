@@ -1,0 +1,550 @@
+---
+export const prerender = true;
+// TEST PAGE (10/11/2026): magazine redesign of /service-immobilier/gestion-locative/ after
+// Caroline's 09/11 video review. Same copy as the live landing (duplicated on purpose so the
+// live page stays untouched while this is reviewed). noindex, not in the sitemap or menu.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, getEntry } from 'astro:content';
+import { GUIDE_SECTIONS } from '../../lib/guide-nav';
+
+const entry = await getEntry('serviceImmobilier', 'gestion-locative');
+const seoTitle = entry?.data.seoTitle || 'Gestion Locative à Marseille – Immobilière Pujol';
+const seoDescription =
+  entry?.data.seoDescription ||
+  "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients. L'Immobilière Pujol vous accompagne avec plaisir dans votre projet immobilier à Marseille.";
+const ctaText = entry?.data.ctaText || 'Obtenir mon devis de gestion locative';
+
+
+// Sections and page order: Caroline's 12 sections (29/10), shared with the guide
+// sidebars in src/lib/guide-nav.ts. Link labels follow each page's current title.
+const serviceTitles = new Map(
+  (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
+);
+
+// Legacy lead paragraphs kept for the sections they still describe.
+const leads: Record<string, string[]> = {
+  'gestion-locative': [
+    "Le coût d'une gestion locative est de 25€ à 35€ (en tenant compte de la déductibilité fiscale) par mois pour un service et une sécurité juridique.",
+  ],
+  'estimation-du-loyer': [
+    "Positionner un loyer est difficile car les loyers peuvent varier d'un maximum de 10% selon le marché. Pour cette raison, nous réalisons des études de positionnement du loyer dans son marché toutes les 3 semaines.",
+  ],
+  'le-marche-et-le-prix-des-loyers': [
+    "Accédez à une analyse approfondie du marché de la location à Marseille, avec des données actualisées, des tendances clés et des conseils pratiques pour optimiser vos investissements immobiliers.",
+  ],
+  'selection-du-locataire': [
+    "Choisir son locataire à Marseille est l'étape la plus importante pour réussir la gestion et s'assurer des revenus réguliers.",
+  ],
+  'assurances-locatives': [
+    "Si nous faisons bien notre sélection du profil du locataire, souscrire une assurance des loyers impayés n'est pas nécessaire. Mais il faut que vos finances vous permettent de faire face à des décalages de trésorerie.",
+    "N'oubliez pas non plus qu'un accident de la vie peut remettre en question l'équilibre financier de votre locataire.",
+  ],
+};
+
+const sections = [
+  ...GUIDE_SECTIONS.map((g, i) => ({
+    id: g.id,
+    title: `${i + 1}. ${g.title}`,
+    paragraphs: leads[g.id] || [],
+    articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+  })),
+  {
+    id: 'contacter-un-conseiller-en-gestion-locative',
+    title: 'Contacter un conseiller en gestion locative',
+    paragraphs: [
+      "Vous avez des questions et souhaitez vous entretenir avec un conseiller en gestion locative ?",
+    ],
+    articles: [
+      { href: '/services/contacter-un-conseiller-en-gestion-locative/', label: 'Contacter un expert en gestion locative' },
+    ],
+  },
+];
+const toc = sections.map((s) => ({ id: s.id, label: s.title }));
+
+// ---- Landing page content: Caroline's "LP Gestion Locative" (Analyse Préparatoire 1/2,
+// tab t.49cxdwmq15ml, validated in the 30/10 call). Lead magnets that don't exist yet and
+// proof lines without a validated figure are left out.
+const ESTIMATION = '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form';
+const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
+const sectionTitle = new Map(GUIDE_SECTIONS.map((g, i) => [g.id, `${i + 1}. ${g.title}`]));
+
+const personas = [
+  { kicker: 'Je suis déjà en agence', title: 'Déçu de votre agence actuelle ?', text: 'Je veux voir ce que changer d’agence gestionnaire peut vraiment améliorer.', href: '/services/changer-agence-gestion-locative-marseille/' },
+  { kicker: 'Je gère seul ma location', title: 'Gérer seul devient complexe et chronophage ?', text: 'Je veux rester décisionnaire mais déléguer le juridique et l’administratif.', href: '/services/deleguer-gestion-locative-marseille/' },
+  { kicker: 'Je loue pour la première fois', title: 'Premier investissement ?', text: 'Je veux sécuriser la rentabilité de mon achat.', href: '/services/premiere-mise-en-location-marseille/' },
+  { kicker: 'Je suis copropriétaire chez Immobilière Pujol', title: 'Votre syndic peut aussi gérer votre location', text: 'Je veux profiter de la synergie unique entre vos services.', href: '/services/coproprietaire-syndic-gestion-locative-marseille/' },
+];
+
+const avant = [
+  'Heures passées à gérer visites, relances, paperasse et petits travaux.',
+  'Doutes sur les baux, les diagnostics, les règles et les risques juridiques.',
+  'Peur de l’impayé, des dégradations et des procédures longues.',
+  'Impression de subir la vacance locative et les imprévus.',
+];
+const apres = [
+  'Loyers sécurisés, versés à date, avec un suivi structuré des impayés.',
+  'Baux, diagnostics et obligations légales gérés par une équipe spécialisée.',
+  'Un gestionnaire dédié qui s’occupe de votre bien comme si c’était le sien.',
+  'Un patrimoine mieux valorisé, avec des conseils pour maximiser votre rentabilité et sécuriser vos revenus.',
+];
+
+type Item = { lead: string; text: string };
+const steps: { title: string; items: Item[]; guides: string[]; ctas: { label: string; href: string }[] }[] = [
+  {
+    title: 'L’estimation du juste loyer et la stratégie de commercialisation',
+    items: [
+      { lead: 'Estimation du loyer au regard du marché marseillais.', text: 'Notre connaissance du marché local vous garantit un loyer juste, attractif et pérenne.' },
+      { lead: 'Diagnostics obligatoires et conseils sur les travaux de rénovation à prévoir.', text: 'Nous avons à cœur de valoriser votre patrimoine dans le temps et de maximiser vos loyers.' },
+      { lead: 'Préparation à la commercialisation : photos, visite virtuelle, embellissement ou désencombrement avec l’IA, rédaction et multidiffusion de l’annonce sur les portails majeurs.', text: 'Nous mettons en lumière les atouts de votre patrimoine pour donner plus de visibilité à votre annonce face à la concurrence.' },
+    ],
+    guides: ['estimation-du-loyer', 'le-marche-et-le-prix-des-loyers', 'commercialisation', 'travaux-et-renovation-energetique'],
+    ctas: [{ label: 'Obtenir mon estimation de loyer gratuite en 24h', href: ESTIMATION }],
+  },
+  {
+    title: 'Une mise en location sécurisée',
+    items: [
+      { lead: 'Présélection des dossiers locataires avant visite.', text: 'Nous demandons aux candidats des informations sur leur situation en amont de toute visite, pour ne faire visiter votre bien qu’à des personnes qualifiées et motivées.' },
+      { lead: 'Sélection des dossiers locataires et présentation des meilleurs profils.', text: 'Nous vérifions rigoureusement la solvabilité des candidats (authenticité des avis d’imposition, cohérence des revenus, garants physiques) pour sélectionner un locataire fiable et respectueux de votre patrimoine.' },
+      { lead: 'Rédaction et signature du bail conformes à la loi.', text: 'Nous vous protégeons juridiquement en utilisant des documents contractuels conformes à la loi.' },
+      { lead: 'État des lieux d’entrée détaillé, avec photos et comparatif entrée/sortie.', text: 'Toujours le même logiciel, ce qui nous permet de comparer rapidement l’entrée et la sortie et de minimiser les risques de conflits.' },
+      { lead: 'Pré-visite de sortie.', text: 'Votre gestionnaire vérifie l’état de l’appartement avec le locataire avant son départ et lui donne des consignes. Le bien est remis en publicité dès votre accord, pour réduire les délais de relocation entre deux locataires.' },
+    ],
+    guides: ['mettre-en-location', 'selection-du-locataire', 'securite-juridique'],
+    ctas: [{ label: 'Confiez-nous votre recherche de locataire', href: '#form' }],
+  },
+  {
+    title: 'La gestion locative au quotidien',
+    items: [
+      { lead: 'Versement des loyers à date fixe, relances dès le 1er jour de retard, gestion des charges de copropriété.', text: 'Nous déployons tous les moyens nécessaires pour sécuriser la régularité de vos revenus.' },
+      { lead: 'Gestion des sinistres, maintenance technique et demandes de vos locataires.', text: 'Dégâts des eaux, pannes de chaudière, interventions d’urgence : vous n’êtes sollicité que pour validation, jamais pour la gestion de crise. Vous décidez, nous gérons.' },
+      { lead: 'Suivi et pilotage des travaux avec des artisans de confiance.', text: 'Des artisans locaux réactifs, testés depuis des années, à des tarifs négociés grâce à nos volumes de commandes. Pas de surfacturation « surprise ».' },
+      { lead: 'Un espace client dédié.', text: 'Comptabilité en temps réel et documents (avis d’échéance, baux, décomptes) téléchargeables 24h/24 : une visibilité totale sur votre gestion.' },
+    ],
+    guides: ['gestion-locative'],
+    ctas: [
+      { label: 'Demandez votre devis de gestion personnalisée', href: '#form' },
+      { label: 'Voir nos avis', href: '/services/les-avis-clients-de-limmobiliere-pujol/' },
+    ],
+  },
+  {
+    title: 'Sécurité et performance financière',
+    items: [
+      { lead: 'La gestion des retards de paiement et des impayés dès le 1er mois.', text: 'Relance à J+1, mise en demeure à J+15, transmission au service contentieux interne. Si vous avez souscrit notre assurance loyers impayés, vous percevez vos loyers sans interruption.' },
+      { lead: 'Une aide à la déclaration de vos revenus fonciers.', text: 'Un récapitulatif annuel (aide à la 2044) avec la ventilation des charges déductibles, pour que vos déclarations ne soient plus une source de stress.' },
+      { lead: 'Une assurance loyers impayés proposée à chaque relocation.', text: 'Zéro franchise, indemnisation dès le 1er mois, durée illimitée, prise en charge des frais de procédure et des dégradations immobilières.' },
+    ],
+    guides: ['assurances-locatives', 'loyers-impayes'],
+    ctas: [],
+  },
+  {
+    title: 'Conseils stratégiques et accompagnement',
+    items: [
+      { lead: 'Une équipe dédiée : un gestionnaire et un comptable.', text: 'Pas de plateforme d’appel anonyme : un binôme qui connaît l’historique de l’appartement, le locataire et l’état des finances, et un interlocuteur unique qui connaît votre dossier.' },
+      { lead: 'Des points réguliers avec votre gestionnaire.', text: 'Évolutions législatives (DPE), travaux d’amélioration, tendances du marché locatif : nous anticipons ensemble les opportunités de valorisation de votre patrimoine.' },
+    ],
+    guides: ['rentabilite-investissement-locatif', 'changer-d-agence-de-gestion'],
+    ctas: [{ label: 'Comprendre en détail comment nous prendrons en charge votre bien', href: '/services/taches-gestion-locative-deleguees-marseille/' }],
+  },
+];
+
+const results30 = [
+  'Votre bien est loué ou reloué dans des conditions maîtrisées (annonce, dossier, bail, état des lieux).',
+  'Vos loyers sont versés à date, avec un suivi clair des encaissements et relances.',
+  'Vos baux, diagnostics et obligations sont mis à jour et sécurisés.',
+  'Vous disposez d’un premier bilan sur la performance de votre bien et les actions à venir.',
+];
+
+// Figures validated by Caroline on 27/10; her other proof lines had no figure yet.
+const proofs = [
+  { value: '99,7 %', label: 'des loyers appelés encaissés' },
+  { value: '18 jours', label: 'délai médian de relocation' },
+];
+const reassurances = [
+  'Agence marseillaise installée depuis de nombreuses années, reconnue pour sa gestion, ses conseils, sa rigueur et sa réactivité.',
+  'Un service syndic de copropriété dans la même agence, pour une meilleure coordination sur les immeubles et les sujets techniques.',
+  'Un barème clair, sans frais cachés, expliqué avant engagement.',
+];
+
+const parcours = [
+  { title: 'Se renseigner sans s’engager', text: 'Guides gratuits : louer sans erreur, comprendre le marché marseillais, préparer un premier investissement.' },
+  { title: 'Faire le point sur votre situation', text: 'Rendez-vous téléphonique ou visio avec un gestionnaire pour analyser votre bien, vos risques et vos objectifs.', cta: { label: 'Parler à un gestionnaire pour faire le point', href: CONSEILLER } },
+  { title: 'Mettre en route la reprise de gestion', text: 'Mise en place de la gestion, mise en location ou relocation, cadrage juridique, organisation du suivi.', cta: { label: 'Obtenir un devis de gestion locative', href: '#form' } },
+];
+
+// Photos: Immobilière Pujol rental listings (watermarked), provisional until Pujol's own bank.
+const R2 = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/';
+const PH = {
+  hero: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/aa01dec9.jpg',
+  compare: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/466ca6f8.jpg',
+  proofs: R2 + '1684neot-19-avenue-guy-de-maupassant-13008-marseille-08/43227d20.jpg',
+  final: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/f31ebe12.jpg',
+};
+const personaPhotos = [
+  R2 + '1523neot-16-rue-des-heros-13001-marseille-01/85069693.jpg',
+  R2 + '1454neot-29-rue-d-endoume-13007-marseille-07/f6ba1e64.jpg',
+  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/e5d32fb.jpg',
+  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/5cec1822.jpg',
+];
+const stepPhotos = [
+  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/ca7da625.jpg',
+  R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/fd3d6f1d.jpg',
+  R2 + '1454neot-29-rue-d-endoume-13007-marseille-07/1fef8869.jpg',
+  R2 + '1607neot-114-avenue-des-poilus-13013-marseille-13/730b6079.jpg',
+  R2 + '1523neot-16-rue-des-heros-13001-marseille-01/eb2205bc.jpg',
+];
+const heroBullets = [
+  { lead: 'Encaissez vos loyers sans stress :', text: 'vous êtes payé à date fixe, même si le locataire est en retard, grâce à notre assurance loyers impayés.' },
+  { lead: 'Zéro gestion, 100 % liberté :', text: 'de la visite à la réparation d’une fuite, on s’occupe de tout. Vous restez décisionnaire.' },
+  { lead: 'Un patrimoine qui vieillit bien :', text: 'nous veillons à l’entretien et à la conformité de votre bien pour la meilleure valeur locative et de revente demain.' },
+];
+const guideTiles = sections.filter((s) => s.id !== 'contacter-un-conseiller-en-gestion-locative');
+const contactSection = sections.find((s) => s.id === 'contacter-un-conseiller-en-gestion-locative');
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<BaseLayout title={seoTitle} description={seoDescription} noindex={true} preloadImage={PH.hero}>
+  <div class="mag">
+
+    {/* ============= HERO ============= */}
+    <section class="mag-hero">
+      <img class="mag-hero__img" src={PH.hero} alt="Séjour lumineux d’un appartement géré par l’Immobilière Pujol à Marseille" loading="eager" fetchpriority="high" width="1200" height="800" />
+      <div class="mag-hero__inner">
+        <p class="mag-eyebrow mag-eyebrow--light">Gestion locative à Marseille</p>
+        <h1 class="mag-h1">Valorisez votre patrimoine immobilier et sécurisez vos revenus locatifs durablement.</h1>
+        <p class="mag-hero__sub">L’expertise Immobilière Pujol à Marseille : une gestion proactive pour optimiser la rentabilité de vos biens tout en vous protégeant contre les impayés et les risques juridiques.</p>
+        <div class="mag-actions">
+          <a class="mag-btn" href="#form">{ctaText}</a>
+          <a class="mag-btn mag-btn--ghost" href={CONSEILLER}>Contactez-nous pour savoir comment nous sécurisons vos loyers</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mag-promises" aria-label="Nos engagements">
+      <ul class="mag-wrap mag-promises__list">
+        {heroBullets.map((b, i) => (
+          <li>
+            <span class="mag-promises__num">{pad(i + 1)}</span>
+            <p><b>{b.lead}</b> {b.text}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {/* ============= PROFILS ============= */}
+    <section class="mag-section">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">01</span>
+          <h2 class="mag-h2">À qui s’adresse notre gestion locative à <em>Marseille</em> ?</h2>
+          <p class="mag-lead">Que vous soyez déjà accompagné par un professionnel, en autogestion, en train d’acheter votre premier bien ou copropriétaire chez nous, nous avons un parcours adapté à vos besoins.</p>
+        </header>
+        <ul class="mag-personas">
+          {personas.map((c, i) => (
+            <li>
+              <a class="mag-persona" href={c.href}>
+                <img src={personaPhotos[i]} alt="" loading="lazy" width="1200" height="800" />
+                <span class="mag-persona__body">
+                  <span class="mag-h3">{c.kicker}</span>
+                  <span class="mag-persona__q">{c.title}</span>
+                  <span class="mag-persona__text">{c.text}</span>
+                  <span class="mag-persona__more">Voir mon parcours <span aria-hidden="true">→</span></span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    {/* ============= AVANT / APRÈS ============= */}
+    <section class="mag-section mag-section--paper">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">02</span>
+          <h2 class="mag-h2">Avant / après : ce que change une vraie <em>gestion locative</em></h2>
+        </header>
+        <div class="mag-compare">
+          <figure class="mag-compare__photo"><img src={PH.compare} alt="" loading="lazy" width="1200" height="800" /></figure>
+          <div class="mag-compare__col mag-compare__col--before">
+            <p class="mag-eyebrow">Avant</p>
+            <ul>{avant.map((t) => <li>{t}</li>)}</ul>
+          </div>
+          <div class="mag-compare__col mag-compare__col--after">
+            <p class="mag-eyebrow mag-eyebrow--olive">Après</p>
+            <ul>{apres.map((t) => <li>{t}</li>)}</ul>
+          </div>
+        </div>
+        <p class="mag-actions mag-actions--center"><a class="mag-btn" href="#etapes">Je veux savoir à quoi ressemble une gestion locative vraiment sereine</a></p>
+      </div>
+    </section>
+
+    {/* ============= 5 ÉTAPES ============= */}
+    <section class="mag-section" id="etapes">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">03</span>
+          <h2 class="mag-h2">Comment se passe la gestion locative de votre bien <em>chez nous</em> ?</h2>
+        </header>
+        <ol class="mag-steps">
+          {steps.map((st, i) => (
+            <li class={`mag-step mag-step--${i + 1}`}>
+              <figure class="mag-step__photo"><img src={stepPhotos[i]} alt="" loading="lazy" width="1200" height="800" /></figure>
+              <div class="mag-step__body">
+                <p class="mag-step__num">Étape {i + 1}</p>
+                <h3 class="mag-h3 mag-h3--lg">{st.title}</h3>
+                <ul class="mag-step__leads">
+                  {st.items.map((it) => <li>{it.lead}</li>)}
+                </ul>
+                <details class="mag-more">
+                  <summary>Le détail de cette étape</summary>
+                  <ul class="mag-step__items">
+                    {st.items.map((it) => (
+                      <li><b>{it.lead}</b> {it.text}</li>
+                    ))}
+                  </ul>
+                </details>
+                <p class="mag-chips">
+                  <span class="mag-chips__label">Nos guides sur cette étape :</span>
+                  {st.guides.map((id) => (
+                    <a href={`#${id}`}>{sectionTitle.get(id)?.replace(/^\d+\.\s*/, '')}</a>
+                  ))}
+                </p>
+                {st.ctas.length > 0 && (
+                  <p class="mag-actions">
+                    {st.ctas.map((c, j) => (
+                      <a class={`mag-btn${j > 0 ? ' mag-btn--line' : ''}`} href={c.href}>{c.label}</a>
+                    ))}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= 30 JOURS ============= */}
+    <section class="mag-section mag-section--ink">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">04</span>
+          <h2 class="mag-h2">En 30 jours, nous reprenons votre gestion : votre bien est loué et vos <em>loyers sont sécurisés</em></h2>
+        </header>
+        <ol class="mag-timeline">
+          {results30.map((t, i) => (
+            <li><span class="mag-timeline__dot">{i + 1}</span><p>{t}</p></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= PREUVES ============= */}
+    <section class="mag-section">
+      <div class="mag-wrap mag-proof">
+        <div class="mag-proof__text">
+          <header class="mag-head mag-head--tight">
+            <span class="mag-head__num">05</span>
+            <h2 class="mag-h2">Pourquoi autant de bailleurs nous confient déjà leur bien à <em>Marseille</em> ?</h2>
+          </header>
+          <ul class="mag-figures">
+            {proofs.map((p) => (
+              <li><span class="mag-figures__value">{p.value}</span><span class="mag-figures__label">{p.label}</span></li>
+            ))}
+          </ul>
+          <ul class="mag-checks">{reassurances.map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <figure class="mag-proof__photo"><img src={PH.proofs} alt="" loading="lazy" width="1200" height="800" /></figure>
+      </div>
+    </section>
+
+    {/* ============= PARCOURS ============= */}
+    <section class="mag-section mag-section--olive">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">06</span>
+          <h2 class="mag-h2">Choisissez comment <em>avancer avec nous</em></h2>
+        </header>
+        <ol class="mag-path">
+          {parcours.map((p, i) => (
+            <li>
+              <span class="mag-path__num">{i + 1}</span>
+              <h3 class="mag-h3">{p.title}</h3>
+              <p>{p.text}</p>
+              <a class="mag-btn mag-btn--dark" href={p.cta ? p.cta.href : '#guides'}>{p.cta ? p.cta.label : 'Consulter nos guides gratuits'}</a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* ============= GUIDES (12 rubriques, all links kept) ============= */}
+    <section class="mag-section mag-section--paper" id="guides">
+      <div class="mag-wrap">
+        <header class="mag-head">
+          <span class="mag-head__num">07</span>
+          <h2 class="mag-h2">Tous nos guides de la <em>gestion locative</em></h2>
+        </header>
+        <ul class="mag-guides">
+          {guideTiles.map((s, i) => (
+            <li id={s.id}>
+              <details class="mag-guide">
+                <summary>
+                  <span class="mag-guide__num">{pad(i + 1)}</span>
+                  <span class="mag-guide__title">{s.title.replace(/^\d+\.\s*/, '')}</span>
+                  <span class="mag-guide__count">{s.articles.length} guide{s.articles.length > 1 ? 's' : ''}</span>
+                </summary>
+                {s.paragraphs.map((p) => <p class="mag-guide__lead">{p}</p>)}
+                <ul class="mag-guide__links">
+                  {s.articles.map((a) => <li><a href={a.href}>{a.label}</a></li>)}
+                </ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+        {contactSection && (
+          <p class="mag-guides__contact" id={contactSection.id}>
+            {contactSection.paragraphs[0]} <a href={contactSection.articles[0].href}>{contactSection.articles[0].label} →</a>
+          </p>
+        )}
+      </div>
+    </section>
+
+    {/* ============= FINAL ============= */}
+    <section class="mag-final">
+      <img class="mag-final__img" src={PH.final} alt="" loading="lazy" width="1200" height="800" />
+      <div class="mag-wrap mag-final__inner">
+        <h2 class="mag-h2">Prêt à sécuriser vos loyers et à alléger votre <em>quotidien de bailleur</em> ?</h2>
+        <p class="mag-lead">Que vous soyez déjà en agence, en autogestion, sur votre premier investissement ou copropriétaire chez nous, un simple échange avec un gestionnaire permet de voir ce que nous pouvons changer dans les prochains mois pour votre bien à Marseille.</p>
+        <p class="mag-actions mag-actions--center">
+          <a class="mag-btn" href="#form">Obtenir mon devis de gestion locative</a>
+          <a class="mag-btn mag-btn--ghost" href={CONSEILLER}>Parler à un gestionnaire avant de décider</a>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="svc-page mag-formwrap">
+    {/* ============= CONTACT FORM ============= */}
+    <section class="svc-form-wrap" id="form">
+      <form
+        class="svc-form"
+        method="post"
+        action="https://pujol-email.roy-68a.workers.dev/contact"
+        enctype="multipart/form-data"
+        novalidate
+        data-ajax-form
+      >
+      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
+        <h2>Vous souhaitez louer et <b>faire gérer</b></h2>
+        <p class="svc-form__lead">
+          Contactez-nous pour obtenir des réponses ou un devis. Nous prenons contact avec vous
+          dans les 24 heures.
+        </p>
+
+        <div class="svc-form__grid">
+          <label class="svc-field">
+            <span>Prénom *</span>
+            <input type="text" name="input_2.3" placeholder="Prénom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Nom *</span>
+            <input type="text" name="input_2.6" placeholder="Nom" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Téléphone *</span>
+            <input type="tel" name="input_8" placeholder="Téléphone" required />
+          </label>
+
+          <label class="svc-field">
+            <span>Email *</span>
+            <input type="email" name="input_4" placeholder="Email" required />
+          </label>
+
+          <label class="svc-field svc-field--full">
+            <span>Votre message *</span>
+            <textarea name="input_3" rows="6" placeholder="Votre message" required></textarea>
+          </label>
+        </div>
+
+        <label class="svc-form__agree">
+          <input
+            type="checkbox"
+            name="input_5.1"
+            value="J'accepte le traitement de mes données dans le cadre de ma demande"
+            required
+          />
+          <span>J'accepte le traitement de mes données dans le cadre de ma demande *</span>
+        </label>
+
+        <p class="svc-form__legal">
+          Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect des règles posées par le Règlement général sur les données personnelles (RGPD) et par la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Vous pouvez accéder aux informations relatives aux traitements de vos données personnelles ainsi qu'à vos droits en consultant notre politique de traitements des données personnelles sur la page suivante&nbsp;: <a href="https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868" target="_blank" rel="noopener">https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868</a>. Vous pouvez vous opposer à ce que vos données soient utilisées par notre agence à des fins de prospection commerciale en contactant l'Immobilière Pujol au <a href="tel:0491373839">04&nbsp;91&nbsp;37&nbsp;38&nbsp;39</a> ou par mail&nbsp;: <a href="mailto:rgpd@immobiliere-pujol.fr">rgpd@immobiliere-pujol.fr</a>
+        </p>
+
+        {/* Honeypot — preserved from the legacy Gravity Forms markup. */}
+        <div style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+          <label>Instagram<input type="text" name="input_9" tabindex="-1" autocomplete="new-password" /></label>
+        </div>
+        <input type="hidden" name="gform_submit" value="1" />
+        <input type="hidden" name="is_submit_1" value="1" />
+
+        <button class="svc-form__submit" type="submit">
+          <span>ENVOYER VOTRE DEMANDE</span>
+          <svg width="18" height="14" viewBox="0 0 22 14" fill="none">
+            <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Opening a guide anchor (#selection-du-locataire...) unfolds its tile.
+    function openGuideFromHash() {
+      const id = location.hash.slice(1);
+      const el = id ? document.getElementById(id) : null;
+      const d = el?.querySelector("details.mag-guide") as HTMLDetailsElement | null;
+      if (d) d.open = true;
+    }
+    window.addEventListener("hashchange", openGuideFromHash);
+    openGuideFromHash();
+  </script>
+
+  <script>
+    document.querySelectorAll<HTMLFormElement>('[data-ajax-form]').forEach((form) => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        const btn = form.querySelector<HTMLButtonElement>('.svc-form__submit');
+        if (btn) { btn.disabled = true; btn.classList.add('is-submitting'); }
+        try {
+          const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+          const data = await res.json();
+          if (data.ok) {
+            try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'form_submit', form_type: 'devis-gestion-locative' }); } catch (e) {}
+            form.innerHTML = '<div class="svc-form__success"><h2>Merci !</h2><p>Votre message a bien été envoyé. Nous vous recontacterons dans les 24 heures.</p></div>';
+          } else {
+            showError(form, data.error || "Une erreur est survenue. Veuillez réessayer.");
+            if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
+          }
+        } catch {
+          showError(form, "Erreur de connexion. Veuillez réessayer.");
+          if (btn) { btn.disabled = false; btn.classList.remove('is-submitting'); }
+        }
+      });
+    });
+    function showError(form: HTMLFormElement, msg: string) {
+      let el = form.querySelector('.svc-form__error');
+      if (!el) {
+        el = document.createElement('p');
+        el.className = 'svc-form__error';
+        (el as HTMLElement).style.cssText = 'color:#c0392b;font-weight:600;margin-top:12px';
+        form.querySelector('.svc-form__submit')?.insertAdjacentElement('beforebegin', el);
+      }
+      el.textContent = msg;
+    }
+  </script>
+</BaseLayout>
