@@ -43,7 +43,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
       <ul class="mag-wrap prop-figures__list">
         {KEY_FIGURES.map((f) => (
           <li>
-            {f.pre && <span class="prop-figures__pre">{f.pre}</span>}
+            <span class="prop-figures__pre">{f.pre || "\u00a0"}</span>
             <span class="prop-figures__value">{f.value}</span>
             <span class="prop-figures__label">{f.label}</span>
           </li>
@@ -70,7 +70,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
                 <p class="prop-ba__tag">{b.before.title}</p>
                 <ul>{b.before.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
                 {b.before.items.length > VISIBLE && (
-                  <details class="prop-more"><summary>Voir les {b.before.items.length - VISIBLE} autres points</summary>
+                  <details class="prop-more"><summary>{(b.before.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${b.before.items.length - VISIBLE} autres points`}</summary>
                     <ul>{b.before.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
                 )}
               </div>
@@ -78,7 +78,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
                 <p class="prop-ba__tag">{b.after.title}</p>
                 <ul>{b.after.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
                 {b.after.items.length > VISIBLE && (
-                  <details class="prop-more"><summary>Voir les {b.after.items.length - VISIBLE} autres points</summary>
+                  <details class="prop-more"><summary>{(b.after.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${b.after.items.length - VISIBLE} autres points`}</summary>
                     <ul>{b.after.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
                 )}
               </div>
@@ -135,6 +135,29 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
         </section>
       );
       const pic = nextPic();
+      const keeps = b.groups.filter((g) => g.title);
+      if (keeps.length >= 2) return (
+        <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center prop-keeps__h">{b.title}</h2>
+            <figure class="prop-keeps__photo"><img src={pic.src} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            {b.groups.filter((g) => !g.title).map((g) => g.paras.map((t) => <p class="prop-intro">{t}</p>))}
+            <div class="prop-keeps">
+              {keeps.map((g, gi) => (
+                <div class={`prop-tile prop-tile--${(gi % 3) + 1}`}>
+                  <h3 class="prop-keeps__title">{g.title}</h3>
+                  {g.paras.map((t) => <p>{t}</p>)}
+                  <ul class="prop-checks">{g.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
+                  {g.items.length > VISIBLE && (
+                    <details class="prop-more"><summary>{(g.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${g.items.length - VISIBLE} autres points`}</summary>
+                      <ul class="prop-checks">{g.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
       return (
         <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
           <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}`}>
@@ -147,7 +170,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
                   {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
                   <ul class="prop-checks">{g.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
                   {g.items.length > VISIBLE && (
-                    <details class="prop-more"><summary>Voir les {g.items.length - VISIBLE} autres points</summary>
+                    <details class="prop-more"><summary>{(g.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${g.items.length - VISIBLE} autres points`}</summary>
                       <ul class="prop-checks">{g.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
                   )}
                 </div>

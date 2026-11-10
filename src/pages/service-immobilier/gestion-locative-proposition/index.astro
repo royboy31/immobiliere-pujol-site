@@ -65,7 +65,7 @@ const reassurances = [
       <ul class="mag-wrap prop-figures__list">
         {KEY_FIGURES.map((f) => (
           <li>
-            {f.pre && <span class="prop-figures__pre">{f.pre}</span>}
+            <span class="prop-figures__pre">{f.pre || "\u00a0"}</span>
             <span class="prop-figures__value">{f.value}</span>
             <span class="prop-figures__label">{f.label}</span>
           </li>
