@@ -1,0 +1,192 @@
+---
+export const prerender = true;
+// TEST PAGES (10/11/2026): layout proposal for the 4 "profil" pages, same copy as the live
+// /services/... pages (parsed from their markdown, nothing rewritten). Visible text is cut by
+// showing the first items of each list; the rest opens on click. noindex, not in sitemap or menu.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PropositionForm from '../../../components/lp/PropositionForm.astro';
+import { getEntry } from 'astro:content';
+import { KEY_FIGURES, PROFILES, LP_IMG } from '../../../lib/lp-proposition';
+import { parseProfile } from '../../../lib/profile-blocks';
+
+export function getStaticPaths() {
+  return PROFILES.map((p) => ({ params: { profil: p.slug }, props: { card: p } }));
+}
+const { card } = Astro.props as { card: (typeof PROFILES)[number] };
+const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
+const prof = parseProfile(entry?.body ?? '');
+const others = PROFILES.filter((p) => p.slug !== card.slug);
+const VISIBLE = 4;
+const pics = [LP_IMG.steps[0], LP_IMG.steps[2], LP_IMG.steps[4], LP_IMG.proofs, LP_IMG.steps[1]];
+let picIdx = 0;
+const nextPic = () => pics[picIdx++ % pics.length];
+const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
+---
+
+<BaseLayout title={entry?.data.seoTitle || prof.title} description="Proposition de mise en page (test)." noindex={true} preloadImage={card.img.src}>
+  <div class={`mag prop prop--${card.color}`}>
+
+    <section class="prop-hero prop-hero--profile">
+      <img class="prop-hero__img" src={card.img.src} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
+      <div class="prop-hero__inner">
+        <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
+        <h1 class="mag-h1">{prof.title}</h1>
+        {prof.lead && <p class="prop-hero__sub">{prof.lead}</p>}
+        <div class="mag-actions">
+          <a class="mag-btn" href="#form">Obtenir mon devis de gestion locative</a>
+          <a class="mag-btn mag-btn--ghost" href={CONSEILLER}>Parler à un gestionnaire pour faire le point</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-figures" aria-label="Nos chiffres clés">
+      <ul class="mag-wrap prop-figures__list">
+        {KEY_FIGURES.map((f) => (
+          <li>
+            {f.pre && <span class="prop-figures__pre">{f.pre}</span>}
+            <span class="prop-figures__value">{f.value}</span>
+            <span class="prop-figures__label">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {prof.bullets.length > 0 && (
+      <section class="prop-section prop-section--tight">
+        <div class="mag-wrap">
+          {prof.sub && <p class="prop-intro">{prof.sub}</p>}
+          <ul class="prop-pills">{prof.bullets.map((b) => <li>{b}</li>)}</ul>
+        </div>
+      </section>
+    )}
+
+    {prof.blocks.map((b, bi) => {
+      if (b.kind === 'compare') return (
+        <section class="prop-section prop-section--paper">
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <div class="prop-ba">
+              <div class="prop-ba__col prop-ba__col--before">
+                <p class="prop-ba__tag">{b.before.title}</p>
+                <ul>{b.before.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
+                {b.before.items.length > VISIBLE && (
+                  <details class="prop-more"><summary>Voir les {b.before.items.length - VISIBLE} autres points</summary>
+                    <ul>{b.before.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
+                )}
+              </div>
+              <div class="prop-ba__col prop-ba__col--after">
+                <p class="prop-ba__tag">{b.after.title}</p>
+                <ul>{b.after.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
+                {b.after.items.length > VISIBLE && (
+                  <details class="prop-more"><summary>Voir les {b.after.items.length - VISIBLE} autres points</summary>
+                    <ul>{b.after.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+      if (b.kind === 'timeline') return (
+        <section class="prop-section prop-section--ink">
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <ol class="prop-timeline">
+              {b.items.map((t, i) => <li><span>{i + 1}</span><p>{t}</p></li>)}
+            </ol>
+          </div>
+        </section>
+      );
+      if (b.kind === 'steps') return (
+        <section class="prop-section">
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <ol class="prop-path">
+              {b.steps.map((s, i) => (
+                <li>
+                  <span class="prop-path__num">{i + 1}</span>
+                  <h3 class="prop-path__title">{s.name}</h3>
+                  <details class="prop-more"><summary>Le détail</summary><p>{s.text}</p></details>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      );
+      if (b.kind === 'offer') return (
+        <section class="prop-section prop-section--accent">
+          <div class="mag-wrap prop-offer">
+            <div>
+              <h2 class="mag-h2">{b.title}</h2>
+              {b.paras.map((p) => <p class="prop-offer__p">{p}</p>)}
+            </div>
+            <div>
+              <ul class="prop-checks">{b.items.map((t) => <li>{t}</li>)}</ul>
+              <p class="mag-actions"><a class="mag-btn mag-btn--dark" href={CONSEILLER}>Parler à un gestionnaire pour faire le point</a></p>
+            </div>
+          </div>
+        </section>
+      );
+      if (b.kind === 'closing') return (
+        <section class="prop-section prop-section--paper">
+          <div class="mag-wrap prop-closing">
+            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            {b.paras.map((p) => <p>{p}</p>)}
+          </div>
+        </section>
+      );
+      const pic = nextPic();
+      return (
+        <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
+          <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}`}>
+            <figure class="prop-split__photo"><img src={pic.src} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            <div>
+              <h2 class="mag-h2">{b.title}</h2>
+              {b.groups.map((g) => (
+                <div class={g.title ? 'prop-keep' : ''}>
+                  {g.title && <p class="prop-keep__title">{g.title}</p>}
+                  {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
+                  <ul class="prop-checks">{g.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
+                  {g.items.length > VISIBLE && (
+                    <details class="prop-more"><summary>Voir les {g.items.length - VISIBLE} autres points</summary>
+                      <ul class="prop-checks">{g.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    })}
+
+    {prof.faq.length > 0 && (
+      <section class="prop-section">
+        <div class="mag-wrap prop-faq">
+          <h2 class="mag-h2 prop-center">Questions fréquentes</h2>
+          {prof.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+        </div>
+      </section>
+    )}
+
+    <section class="prop-section prop-section--paper">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Ce n’est pas votre situation ?</h2>
+        <ul class="prop-cubes prop-cubes--3">
+          {others.map((p) => (
+            <li>
+              <a class={`prop-cube prop-cube--${p.color}`} href={`/service-immobilier/gestion-locative-proposition/${p.slug}/`}>
+                <span class="prop-cube__body">
+                  <span class="prop-cube__kicker">{p.kicker}</span>
+                  <span class="prop-cube__q">{p.question}</span>
+                  <span class="prop-cube__more">Voir mon parcours →</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="prop-center prop-back"><a class="prop-link" href="/service-immobilier/gestion-locative-proposition/">← Retour à la gestion locative</a></p>
+      </div>
+    </section>
+  </div>
+
+  <PropositionForm />
+</BaseLayout>

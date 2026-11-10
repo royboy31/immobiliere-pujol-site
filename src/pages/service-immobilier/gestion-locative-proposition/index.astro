@@ -1,0 +1,180 @@
+---
+export const prerender = true;
+// TEST PAGE (10/11/2026): layout proposal v2 of /service-immobilier/gestion-locative/ after the
+// 10/11 call with Caroline (Fathom 896090948): Manda as reference, key figures at the top in
+// white on the dark band, four profile cubes, much less visible text. Caroline's copy is
+// reused word for word; sections are selected, not rewritten. noindex, not in sitemap or menu.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PropositionForm from '../../../components/lp/PropositionForm.astro';
+import { getCollection } from 'astro:content';
+import { GUIDE_SECTIONS } from '../../../lib/guide-nav';
+import { KEY_FIGURES, PROFILES, LP_IMG } from '../../../lib/lp-proposition';
+
+const serviceTitles = new Map(
+  (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
+);
+const guides = GUIDE_SECTIONS.map((g) => ({
+  id: g.id,
+  title: g.title,
+  articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+}));
+
+const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
+const ESTIMATION = '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form';
+
+// Caroline's three hero promises (LP Gestion Locative doc), word for word.
+const promises = [
+  { lead: 'Encaissez vos loyers sans stress', text: 'vous êtes payé à date fixe, même si le locataire est en retard, grâce à notre assurance loyers impayés.', icon: '€' },
+  { lead: 'Zéro gestion, 100 % liberté', text: 'de la visite à la réparation d’une fuite, on s’occupe de tout. Vous restez décisionnaire.', icon: '✓' },
+  { lead: 'Un patrimoine qui vieillit bien', text: 'nous veillons à l’entretien et à la conformité de votre bien pour la meilleure valeur locative et de revente demain.', icon: '↗' },
+];
+
+// The 5 steps: title + first key sentence only. The detail lives in the guides.
+const steps = [
+  { title: 'L’estimation du juste loyer et la stratégie de commercialisation', lead: 'Estimation du loyer au regard du marché marseillais.', guide: 'estimation-du-loyer' },
+  { title: 'Une mise en location sécurisée', lead: 'Sélection des dossiers locataires et présentation des meilleurs profils.', guide: 'selection-du-locataire' },
+  { title: 'La gestion locative au quotidien', lead: 'Versement des loyers à date fixe, relances dès le 1er jour de retard, gestion des charges de copropriété.', guide: 'gestion-locative' },
+  { title: 'Sécurité et performance financière', lead: 'Une assurance loyers impayés proposée à chaque relocation.', guide: 'assurances-locatives' },
+  { title: 'Conseils stratégiques et accompagnement', lead: 'Une équipe dédiée : un gestionnaire et un comptable.', guide: 'rentabilite-investissement-locatif' },
+];
+const firstGuide = new Map(guides.map((g) => [g.id, g.articles[0]?.href]));
+
+const reassurances = [
+  'Agence marseillaise installée depuis de nombreuses années, reconnue pour sa gestion, ses conseils, sa rigueur et sa réactivité.',
+  'Un service syndic de copropriété dans la même agence, pour une meilleure coordination sur les immeubles et les sujets techniques.',
+  'Un barème clair, sans frais cachés, expliqué avant engagement.',
+];
+---
+
+<BaseLayout title="Gestion Locative à Marseille – Immobilière Pujol" description="Proposition de mise en page (test)." noindex={true} preloadImage={LP_IMG.hero.src}>
+  <div class="mag prop">
+
+    <section class="prop-hero">
+      <img class="prop-hero__img" src={LP_IMG.hero.src} alt="" loading="eager" fetchpriority="high" width={LP_IMG.hero.w} height={LP_IMG.hero.h} />
+      <div class="prop-hero__inner">
+        <p class="mag-eyebrow mag-eyebrow--light">Gestion locative à Marseille</p>
+        <h1 class="mag-h1">Valorisez votre patrimoine immobilier et sécurisez vos revenus locatifs durablement.</h1>
+        <div class="mag-actions">
+          <a class="mag-btn" href="#form">Obtenir mon devis de gestion locative</a>
+          <a class="mag-btn mag-btn--ghost" href={CONSEILLER}>Parler à un gestionnaire pour faire le point</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-figures" aria-label="Nos chiffres clés">
+      <ul class="mag-wrap prop-figures__list">
+        {KEY_FIGURES.map((f) => (
+          <li>
+            {f.pre && <span class="prop-figures__pre">{f.pre}</span>}
+            <span class="prop-figures__value">{f.value}</span>
+            <span class="prop-figures__label">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="prop-section">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Vous êtes…</h2>
+        <ul class="prop-cubes">
+          {PROFILES.map((p) => (
+            <li>
+              <a class={`prop-cube prop-cube--${p.color}`} href={`/service-immobilier/gestion-locative-proposition/${p.slug}/`}>
+                <img src={p.img.src} alt="" loading="lazy" width={p.img.w} height={p.img.h} />
+                <span class="prop-cube__body">
+                  <span class="prop-cube__kicker">{p.kicker}</span>
+                  <span class="prop-cube__q">{p.question}</span>
+                  <span class="prop-cube__more">Voir mon parcours →</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Ce que change une vraie <em>gestion locative</em></h2>
+        <ul class="prop-tiles">
+          {promises.map((b, i) => (
+            <li class={`prop-tile prop-tile--${i + 1}`}>
+              <span class="prop-tile__icon" aria-hidden="true">{b.icon}</span>
+              <h3 class="mag-h3">{b.lead}</h3>
+              <p>{b.text.charAt(0).toUpperCase() + b.text.slice(1)}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="prop-section" id="etapes">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Comment se passe la gestion de votre bien <em>chez nous</em> ?</h2>
+        <ol class="prop-steps">
+          {steps.map((s, i) => (
+            <li class="prop-step">
+              <img src={LP_IMG.steps[i].src} alt="" loading="lazy" width={LP_IMG.steps[i].w} height={LP_IMG.steps[i].h} />
+              <span class="prop-step__num">{i + 1}</span>
+              <h3 class="prop-step__title">{s.title}</h3>
+              <p>{s.lead}</p>
+              {firstGuide.get(s.guide) && <a class="prop-link" href={firstGuide.get(s.guide)}>En savoir plus →</a>}
+            </li>
+          ))}
+        </ol>
+        <p class="mag-actions mag-actions--center"><a class="mag-btn" href={ESTIMATION}>Obtenir mon estimation de loyer gratuite en 24h</a></p>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--green">
+      <div class="mag-wrap prop-proof">
+        <figure class="prop-proof__photo"><img src={LP_IMG.proofs.src} alt="" loading="lazy" width={LP_IMG.proofs.w} height={LP_IMG.proofs.h} /></figure>
+        <div>
+          <h2 class="mag-h2">Pourquoi autant de bailleurs nous confient déjà leur bien à <em>Marseille</em> ?</h2>
+          <p class="prop-proof__figure"><b>99,7 %</b> des loyers appelés encaissés</p>
+          <ul class="prop-checks">{reassurances.map((t) => <li>{t}</li>)}</ul>
+          <p class="mag-actions"><a class="mag-btn mag-btn--dark" href="/services/les-avis-clients-de-limmobiliere-pujol/">Voir nos avis</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="guides">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Tous nos guides de la <em>gestion locative</em></h2>
+        <ul class="prop-guides">
+          {guides.map((g) => (
+            <li id={g.id}>
+              <details>
+                <summary>{g.title}<span>{g.articles.length}</span></summary>
+                <ul>{g.articles.map((a) => <li><a href={a.href}>{a.label}</a></li>)}</ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="prop-final">
+      <img class="prop-final__img" src={LP_IMG.final.src} alt="" loading="lazy" width={LP_IMG.final.w} height={LP_IMG.final.h} />
+      <div class="mag-wrap prop-final__inner">
+        <h2 class="mag-h2">Prêt à sécuriser vos loyers et à alléger votre <em>quotidien de bailleur</em> ?</h2>
+        <p class="mag-actions mag-actions--center">
+          <a class="mag-btn" href="#form">Obtenir mon devis de gestion locative</a>
+          <a class="mag-btn mag-btn--ghost" href={CONSEILLER}>Parler à un gestionnaire avant de décider</a>
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <PropositionForm />
+
+  <script>
+    function openGuideFromHash() {
+      const id = location.hash.slice(1);
+      const d = id ? document.getElementById(id)?.querySelector('details') : null;
+      if (d) d.open = true;
+    }
+    window.addEventListener('hashchange', openGuideFromHash);
+    openGuideFromHash();
+  </script>
+</BaseLayout>
