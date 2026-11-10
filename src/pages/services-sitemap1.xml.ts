@@ -8,9 +8,6 @@ import { entry, wrapUrlset, xmlResponse } from '../lib/sitemap';
 export const GET: APIRoute = async ({ request }) => {
   const urls: string[] = [];
 
-  // Services listing page
-  urls.push(entry('/services/'));
-
   try {
     const origin = new URL(request.url).origin;
     const resp = await fetch(`${origin}/_data/sitemap-slugs.json`);

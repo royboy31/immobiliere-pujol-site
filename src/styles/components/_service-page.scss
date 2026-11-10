@@ -3217,6 +3217,11 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   .svc-hero__overlay { display: none; }
   h1, .svc-hero__sub { color: $black; }
 
+  // way back to the hub's guide index (Roy 10/11: breadcrumb alone was not clear)
+  .svc-hero__back { align-self: center; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid $green-dark; border-radius: 999px;
+    font-size: 14px; font-weight: 600; letter-spacing: .02em; color: $black; text-decoration: none; background: #fff;
+    &:hover, &:focus-visible { background: $green-dark; border-color: $green-dark; color: #fff; } }
+
   @media (max-width: $bp-tablet) {
     min-height: 0;
     padding: 36px 20px 32px;

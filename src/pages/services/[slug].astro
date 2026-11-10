@@ -727,18 +727,38 @@ const customForm = CUSTOM_FORMS[slug] || null;
 // Phase 2 rewrites ship their own JSON-LD (WebPage + FAQPage) in front matter.
 // Fragment ids ("#faq") are made absolute against the page URL.
 const pageUrl = new URL(pagePath, Astro.site ?? 'https://www.immobiliere-pujol.fr').href;
+// Breadcrumb = the real site section, never the technical "/services/" prefix
+// (Roy 10/11). Gestion locative guides: hub › their rubric in Caroline's 12.
+const RUBRICS: Array<[string, string, string]> = [
+  ['/gestion-locative/', 'Gestion locative', GUIDE_HUB],
+  ['/mettre-en-location/', 'Gestion locative', GUIDE_HUB],
+  ['/vendre/', 'Vente', '/service-immobilier/vendre/'],
+  ['/syndic-de-copropriete-a-marseille/', 'Syndic', '/service-immobilier/syndic-de-copropriete-a-marseille/'],
+  ['/agence-immobiliere-pujol/', "L'agence", '/service-immobilier/agence-immobiliere-pujol/'],
+];
+const crumbSection = guideSectionFor(pagePath);
+const rubric = RUBRICS.find(([k]) => parentHref.includes(k)) ?? RUBRICS[4];
+const breadcrumbCrumbs = crumbSection
+  ? [
+      { label: 'Gestion locative', href: GUIDE_HUB },
+      // the first rubric is itself called "Gestion locative": don't repeat it
+      ...(crumbSection.title === 'Gestion locative' ? [] : [{ label: crumbSection.title, href: `${GUIDE_HUB}#${crumbSection.id}` }]),
+    ]
+  : [{ label: rubric[1], href: rubric[2] }];
+
 const pageSchemas = entry.data.jsonLd
   ? [JSON.parse(entry.data.jsonLd.replace(/"@id":\s*"#/g, `"@id": "${pageUrl}#`))]
   : [];
 ---
 
-<BaseLayout title={title} description={description} schemas={pageSchemas} bypassSeoMirror={isGuide}>
+<BaseLayout title={title} description={description} schemas={pageSchemas} bypassSeoMirror={isGuide} breadcrumbCrumbs={breadcrumbCrumbs}>
   {/* ============= HERO ============= */}
   {/* Guide pages: no photo header (Caroline 30/10), a plain title band instead. */}
   <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={isGuide ? undefined : `background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
 
     <div class="svc-hero__inner">
+      {crumbSection && <a class="svc-hero__back" href={`${GUIDE_HUB}#guides`}>← Retour aux guides de gestion locative</a>}
       <h1>{entry.data.title}</h1>
       {heroSub && <p class="svc-hero__sub">{heroSub}</p>}
       <a class="svc-hero__cta" href={heroCta.href}>{heroCta.label}</a>

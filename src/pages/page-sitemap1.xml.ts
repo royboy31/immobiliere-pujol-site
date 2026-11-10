@@ -13,7 +13,6 @@ export const GET: APIRoute = async ({ request }) => {
   urls.push(entry('/contact-immobiliere-pujol/'));
   urls.push(entry('/estimez-le-prix-de-vente-de-votre-bien-en-2mn/'));
   urls.push(entry('/experts/'));
-  urls.push(entry('/services/'));
   urls.push(entry('/annonces/'));
   urls.push(entry('/annonces/locations/'));
   urls.push(entry('/annonces/ventes/'));

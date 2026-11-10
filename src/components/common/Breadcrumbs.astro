@@ -5,6 +5,8 @@
 // Always includes "Accueil" as the first item and a non-link last item for
 // the current page (unless the page provides those explicitly in `crumbs`).
 
+import { TECHNICAL_SEGMENTS } from '../../lib/schemas';
+
 type Crumb = { label: string; href: string | null };
 
 interface Props {
@@ -38,6 +40,7 @@ if (customCrumbs && customCrumbs.length > 0) {
   let acc = '';
   for (let i = 0; i < segs.length - 1; i++) {
     acc += '/' + segs[i];
+    if (TECHNICAL_SEGMENTS.has(segs[i])) continue;
     crumbs.push({ label: prettifySegment(segs[i]), href: acc + '/' });
   }
 }

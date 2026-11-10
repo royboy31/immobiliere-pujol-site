@@ -148,6 +148,11 @@ export function buildBreadcrumb(items: BreadcrumbItem[]) {
 /** Auto-generate a sensible breadcrumb from a path. Falls back to "Accueil → <Last segment>".
  *  When customCrumbs is provided, the URL-segment derivation is replaced with the
  *  caller's trail so the JSON-LD stays aligned with the visible nav. */
+/** URL prefixes kept from the WordPress migration ("/services/", "/service-immobilier/").
+ *  They are not site sections (Roy 10/11: Gestion locative, Vente, Syndic, L'agence,
+ *  Conseils), so auto breadcrumbs skip them. */
+export const TECHNICAL_SEGMENTS = new Set(['services', 'service-immobilier']);
+
 export function autoBreadcrumb(
   pathname: string,
   pageTitle: string,
@@ -173,6 +178,7 @@ export function autoBreadcrumb(
     let acc = '';
     for (let i = 0; i < segs.length - 1; i++) {
       acc += '/' + segs[i];
+      if (TECHNICAL_SEGMENTS.has(segs[i])) continue;
       const name = segs[i]
         .replace(/-/g, ' ')
         .replace(/\b\w/g, (c) => c.toUpperCase());
