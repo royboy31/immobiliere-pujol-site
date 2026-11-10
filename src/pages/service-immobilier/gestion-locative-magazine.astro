@@ -171,26 +171,27 @@ const parcours = [
   { title: 'Mettre en route la reprise de gestion', text: 'Mise en place de la gestion, mise en location ou relocation, cadrage juridique, organisation du suivi.', cta: { label: 'Obtenir un devis de gestion locative', href: '#form' } },
 ];
 
-// Photos: Immobilière Pujol rental listings (watermarked), provisional until Pujol's own bank.
-const R2 = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/annonces/';
+// Photos: Immobilière Pujol's own image bank (Caroline's Google Photos albums "Banque images"
+// and "Photos déco appartements", shared 03/04/2026). Sources: RESEARCH/PUJOL_LP_MAGAZINE_PHOTOS_2026_11_10.md
+const IMG = '/images/services/lp-magazine/';
 const PH = {
-  hero: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/aa01dec9.jpg',
-  compare: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/466ca6f8.jpg',
-  proofs: R2 + '1684neot-19-avenue-guy-de-maupassant-13008-marseille-08/43227d20.jpg',
-  final: R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/f31ebe12.jpg',
+  hero: { src: IMG + 'hero.webp', w: 1800, h: 1201 },
+  compare: { src: IMG + 'compare.webp', w: 1200, h: 1800 },
+  proofs: { src: IMG + 'proofs.webp', w: 1400, h: 1050 },
+  final: { src: IMG + 'final.webp', w: 1600, h: 1200 },
 };
 const personaPhotos = [
-  R2 + '1523neot-16-rue-des-heros-13001-marseille-01/85069693.jpg',
-  R2 + '1454neot-29-rue-d-endoume-13007-marseille-07/f6ba1e64.jpg',
-  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/e5d32fb.jpg',
-  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/5cec1822.jpg',
+  { src: IMG + 'p-agence.webp', w: 900, h: 600 },
+  { src: IMG + 'p-seul.webp', w: 800, h: 533 },
+  { src: IMG + 'p-premier.webp', w: 900, h: 600 },
+  { src: IMG + 'p-copro.webp', w: 900, h: 1350 },
 ];
 const stepPhotos = [
-  R2 + '1520neot-1-rue-niels-bohr-13013-marseille-13/ca7da625.jpg',
-  R2 + '1651neot-3-chemin-des-accates-13011-marseille-11/fd3d6f1d.jpg',
-  R2 + '1454neot-29-rue-d-endoume-13007-marseille-07/1fef8869.jpg',
-  R2 + '1607neot-114-avenue-des-poilus-13013-marseille-13/730b6079.jpg',
-  R2 + '1523neot-16-rue-des-heros-13001-marseille-01/eb2205bc.jpg',
+  { src: IMG + 'step1.webp', w: 1400, h: 1050 },
+  { src: IMG + 'step2.webp', w: 1200, h: 1800 },
+  { src: IMG + 'step3.webp', w: 1400, h: 934 },
+  { src: IMG + 'step4.webp', w: 1200, h: 1800 },
+  { src: IMG + 'step5.webp', w: 1400, h: 934 },
 ];
 const heroBullets = [
   { lead: 'Encaissez vos loyers sans stress :', text: 'vous êtes payé à date fixe, même si le locataire est en retard, grâce à notre assurance loyers impayés.' },
@@ -202,12 +203,12 @@ const contactSection = sections.find((s) => s.id === 'contacter-un-conseiller-en
 const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription} noindex={true} preloadImage={PH.hero}>
+<BaseLayout title={seoTitle} description={seoDescription} noindex={true} preloadImage={PH.hero.src}>
   <div class="mag">
 
     {/* ============= HERO ============= */}
     <section class="mag-hero">
-      <img class="mag-hero__img" src={PH.hero} alt="Séjour lumineux d’un appartement géré par l’Immobilière Pujol à Marseille" loading="eager" fetchpriority="high" width="1200" height="800" />
+      <img class="mag-hero__img" src={PH.hero.src} alt="Séjour lumineux d’un appartement à Marseille" loading="eager" fetchpriority="high" width={PH.hero.w} height={PH.hero.h} />
       <div class="mag-hero__inner">
         <p class="mag-eyebrow mag-eyebrow--light">Gestion locative à Marseille</p>
         <h1 class="mag-h1">Valorisez votre patrimoine immobilier et sécurisez vos revenus locatifs durablement.</h1>
@@ -242,7 +243,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
           {personas.map((c, i) => (
             <li>
               <a class="mag-persona" href={c.href}>
-                <img src={personaPhotos[i]} alt="" loading="lazy" width="1200" height="800" />
+                <img src={personaPhotos[i].src} alt="" loading="lazy" width={personaPhotos[i].w} height={personaPhotos[i].h} />
                 <span class="mag-persona__body">
                   <span class="mag-h3">{c.kicker}</span>
                   <span class="mag-persona__q">{c.title}</span>
@@ -264,7 +265,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
           <h2 class="mag-h2">Avant / après : ce que change une vraie <em>gestion locative</em></h2>
         </header>
         <div class="mag-compare">
-          <figure class="mag-compare__photo"><img src={PH.compare} alt="" loading="lazy" width="1200" height="800" /></figure>
+          <figure class="mag-compare__photo"><img src={PH.compare.src} alt="" loading="lazy" width={PH.compare.w} height={PH.compare.h} /></figure>
           <div class="mag-compare__col mag-compare__col--before">
             <p class="mag-eyebrow">Avant</p>
             <ul>{avant.map((t) => <li>{t}</li>)}</ul>
@@ -288,7 +289,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
         <ol class="mag-steps">
           {steps.map((st, i) => (
             <li class={`mag-step mag-step--${i + 1}`}>
-              <figure class="mag-step__photo"><img src={stepPhotos[i]} alt="" loading="lazy" width="1200" height="800" /></figure>
+              <figure class="mag-step__photo"><img src={stepPhotos[i].src} alt="" loading="lazy" width={stepPhotos[i].w} height={stepPhotos[i].h} /></figure>
               <div class="mag-step__body">
                 <p class="mag-step__num">Étape {i + 1}</p>
                 <h3 class="mag-h3 mag-h3--lg">{st.title}</h3>
@@ -353,7 +354,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
           </ul>
           <ul class="mag-checks">{reassurances.map((t) => <li>{t}</li>)}</ul>
         </div>
-        <figure class="mag-proof__photo"><img src={PH.proofs} alt="" loading="lazy" width="1200" height="800" /></figure>
+        <figure class="mag-proof__photo"><img src={PH.proofs.src} alt="" loading="lazy" width={PH.proofs.w} height={PH.proofs.h} /></figure>
       </div>
     </section>
 
@@ -411,7 +412,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
     {/* ============= FINAL ============= */}
     <section class="mag-final">
-      <img class="mag-final__img" src={PH.final} alt="" loading="lazy" width="1200" height="800" />
+      <img class="mag-final__img" src={PH.final.src} alt="" loading="lazy" width={PH.final.w} height={PH.final.h} />
       <div class="mag-wrap mag-final__inner">
         <h2 class="mag-h2">Prêt à sécuriser vos loyers et à alléger votre <em>quotidien de bailleur</em> ?</h2>
         <p class="mag-lead">Que vous soyez déjà en agence, en autogestion, sur votre premier investissement ou copropriétaire chez nous, un simple échange avec un gestionnaire permet de voir ce que nous pouvons changer dans les prochains mois pour votre bien à Marseille.</p>
