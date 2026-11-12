@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 
 import { getSeventeeApplicationUrl, isCommercialRental } from '../src/lib/seventee.ts';
 
-test('builds Seventee URLs for residential and parking rentals', () => {
+test('restores the contact form for every residential and parking rental', () => {
   const eligibleTypes = ['Studio', 'T3', 'Appartement', 'Maison', 'Villa', 'Garage individuel', 'Parking couvert', 'Box'];
 
   for (const propertyType of eligibleTypes) {
     assert.equal(
       getSeventeeApplicationUrl('L', propertyType, '1301neot'),
-      'https://candidate.seventee.com/agencies/pujol/offers/1301neot',
+      null,
     );
   }
 });
@@ -22,10 +22,10 @@ test('keeps the contact form for sales, commercial rentals, and missing referenc
   assert.equal(getSeventeeApplicationUrl('L', 'Appartement', '  '), null);
 });
 
-test('trims and safely encodes the listing reference', () => {
+test('keeps Seventee disabled for nonstandard listing references', () => {
   assert.equal(
     getSeventeeApplicationUrl('L', 'Appartement', ' REF 42/A '),
-    'https://candidate.seventee.com/agencies/pujol/offers/REF%2042%2FA',
+    null,
   );
 });
 
