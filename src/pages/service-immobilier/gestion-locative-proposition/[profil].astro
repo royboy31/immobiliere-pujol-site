@@ -27,7 +27,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
   <div class={`mag prop prop--${card.color}`}>
 
     <section class="prop-hero prop-hero--profile">
-      <img class="prop-hero__img" src={card.img.src} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
+      <img class="prop-hero__img" src={card.img.src} style={card.heroPosMobile ? `--hero-pos-mobile: ${card.heroPosMobile}` : undefined} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
       <div class="prop-hero__inner">
         <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
         <h1 class="mag-h1">{prof.title}</h1>
