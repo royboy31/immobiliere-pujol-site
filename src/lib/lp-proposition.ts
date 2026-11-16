@@ -39,7 +39,7 @@ export type ProfileCard = {
 
 export const PROFILES: ProfileCard[] = [
   { slug: 'deja-en-agence', service: 'changer-agence-gestion-locative-marseille', kicker: 'Je suis déjà en agence', question: 'Déçu de votre agence actuelle ?', color: 'green', img: { src: IMG + 'p-agence.webp', w: 1024, h: 640 } },
-  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 683 } },
-  { slug: 'premiere-location', service: 'premiere-mise-en-location-marseille', kicker: 'Je loue pour la première fois', question: 'Premier investissement ?', color: 'slate', img: { src: IMG + 'p-premier.webp', w: 1024, h: 640 } },
+  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 } },
+  { slug: 'premiere-location', service: 'premiere-mise-en-location-marseille', kicker: 'Je loue pour la première fois', question: 'Premier investissement ?', color: 'slate', img: { src: IMG + 'p-premier.webp', w: 1024, h: 683 } },
   { slug: 'coproprietaire', service: 'coproprietaire-syndic-gestion-locative-marseille', kicker: 'Je suis copropriétaire chez Immobilière Pujol', question: 'Votre syndic peut aussi gérer votre location', color: 'sand', img: { src: IMG + 'p-copro.webp', w: 1024, h: 683 } },
 ];
