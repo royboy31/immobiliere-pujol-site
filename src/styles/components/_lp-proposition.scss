@@ -124,6 +124,9 @@ $p-slate-soft:  rgb(226, 232, 235);
   li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; background: $p-green; color: $p-ink;
     font-size: 13px; font-weight: 700; display: grid; place-items: center; }
 }
+// Orange-tinted blocks: orange disc with a white tick (Caroline 16/11: green on orange clashes).
+.prop-section--accent .prop-checks li::before,
+.prop-keep .prop-checks li::before { background: $p-orange; color: #fff; }
 
 // ---------- guides: compact grid of foldable rubrics ----------
 .prop-guides { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start;
