@@ -32,7 +32,7 @@ $p-slate-soft:  rgb(226, 232, 235);
 
 // ---------- hero: big photo, big title, nothing else ----------
 .prop-hero { position: relative; isolation: isolate; min-height: 78vh; display: flex; align-items: flex-end; color: #fff;
-  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; object-position: var(--hero-pos, 50% 50%);
     @media (max-width: $bp-tablet) { object-position: var(--hero-pos-mobile, 50% 78%); } }
   &::before { content: ''; position: absolute; inset: 0; z-index: -1;
     background: linear-gradient(180deg, rgba(20, 22, 24, .15) 0%, rgba(20, 22, 24, .7) 100%); }

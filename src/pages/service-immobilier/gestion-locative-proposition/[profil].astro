@@ -6,7 +6,7 @@ export const prerender = true;
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getEntry } from 'astro:content';
-import { KEY_FIGURES, PROFILES, LP_IMG } from '../../../lib/lp-proposition';
+import { KEY_FIGURES, PROFILES } from '../../../lib/lp-proposition';
 import { parseProfile } from '../../../lib/profile-blocks';
 
 export function getStaticPaths() {
@@ -16,7 +16,7 @@ const { card } = Astro.props as { card: (typeof PROFILES)[number] };
 const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
 const prof = parseProfile(entry?.body ?? '');
 const others = PROFILES.filter((p) => p.slug !== card.slug);
-const pics = [LP_IMG.steps[0], LP_IMG.steps[2], LP_IMG.steps[4], LP_IMG.proofs, LP_IMG.steps[1]];
+const pics = card.pics; // own photos per page, never the landing page's (Caroline 18/11)
 let picIdx = 0;
 const nextPic = () => pics[picIdx++ % pics.length];
 const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
@@ -26,7 +26,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
   <div class={`mag prop prop--${card.color}`}>
 
     <section class="prop-hero prop-hero--profile">
-      <img class="prop-hero__img" src={card.img.src} style={card.heroPosMobile ? `--hero-pos-mobile: ${card.heroPosMobile}` : undefined} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
+      <img class="prop-hero__img" src={card.img.src} style={[card.heroPos && `--hero-pos: ${card.heroPos}`, card.heroPosMobile && `--hero-pos-mobile: ${card.heroPosMobile}`].filter(Boolean).join('; ') || undefined} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
       <div class="prop-hero__inner">
         <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
         <h1 class="mag-h1">{prof.title}</h1>
