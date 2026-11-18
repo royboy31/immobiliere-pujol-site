@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+export const prerender = false; // photos come from the admin (lp-photos), published instantly
 // TEST PAGES (10/11/2026): layout proposal for the 4 "profil" pages, same copy as the live
 // /services/... pages (parsed from their markdown, nothing rewritten). Every list point is shown
 // (Caroline 16/11). noindex, not in sitemap or menu.
@@ -8,25 +8,29 @@ import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getEntry } from 'astro:content';
 import { KEY_FIGURES, PROFILES } from '../../../lib/lp-proposition';
 import { parseProfile } from '../../../lib/profile-blocks';
+import { posStyle } from '../../../lib/lp-photos';
+import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
+import LpPreviewBar from '../../../components/lp/LpPreviewBar.astro';
 
-export function getStaticPaths() {
-  return PROFILES.map((p) => ({ params: { profil: p.slug }, props: { card: p } }));
-}
-const { card } = Astro.props as { card: (typeof PROFILES)[number] };
+const card = PROFILES.find((p) => p.slug === Astro.params.profil);
+if (!card) return new Response('Not found', { status: 404 });
+const { photos: ph, preview } = await loadLpPhotos(Astro.request, Astro.url);
+const hero = ph[`${card.slug}-hero`];
 const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
 const prof = parseProfile(entry?.body ?? '');
 const others = PROFILES.filter((p) => p.slug !== card.slug);
-const pics = card.pics; // own photos per page, never the landing page's (Caroline 18/11)
+const pics = card.pics.map((_, i) => ph[`${card.slug}-s${i + 1}`]); // own photos per page, never the landing page's (Caroline 18/11)
 let picIdx = 0;
 const nextPic = () => pics[picIdx++ % pics.length];
 const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
 ---
 
-<BaseLayout title={entry?.data.seoTitle || prof.title} description="Proposition de mise en page (test)." noindex={true} preloadImage={card.img.src}>
+<BaseLayout title={entry?.data.seoTitle || prof.title} description="Proposition de mise en page (test)." noindex={true} preloadImage={hero.src}>
+  {preview && <LpPreviewBar page={card.slug} />}
   <div class={`mag prop prop--${card.color}`}>
 
     <section class="prop-hero prop-hero--profile">
-      <img class="prop-hero__img" src={card.img.src} style={[card.heroPos && `--hero-pos: ${card.heroPos}`, card.heroPosMobile && `--hero-pos-mobile: ${card.heroPosMobile}`].filter(Boolean).join('; ') || undefined} alt="" loading="eager" fetchpriority="high" width={card.img.w} height={card.img.h} />
+      <img class="prop-hero__img" src={hero.src} style={posStyle(hero, true)} alt="" loading="eager" fetchpriority="high" width={hero.w} height={hero.h} />
       <div class="prop-hero__inner">
         <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
         <h1 class="mag-h1">{prof.title}</h1>
@@ -133,7 +137,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
         <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
           <div class="mag-wrap">
             <h2 class="mag-h2 prop-center prop-keeps__h">{b.title}</h2>
-            <figure class="prop-keeps__photo"><img src={pic.src} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            <figure class="prop-keeps__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
             {b.groups.filter((g) => !g.title).map((g) => g.paras.map((t) => <p class="prop-intro">{t}</p>))}
             <div class="prop-keeps">
               {keeps.map((g, gi) => (
@@ -151,7 +155,7 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
       return (
         <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
           <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}${keeps.length ? ' prop-split--keep' : ''}`}>
-            <figure class="prop-split__photo"><img src={pic.src} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            <figure class="prop-split__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
             <div class="prop-split__text">
               <h2 class="mag-h2">{b.title}</h2>
               {plain.map((g) => (

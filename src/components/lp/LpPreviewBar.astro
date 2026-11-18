@@ -1,0 +1,15 @@
+---
+// Shown on the proposal pages only for a signed-in admin on ?apercu=1: the page shows the DRAFT photos.
+import { getAdminEnv, getAdminPath } from '../../lib/admin-auth';
+const { page } = Astro.props as { page: string };
+const base = `/${getAdminPath(await getAdminEnv())}`;
+---
+<div class="lp-preview-bar" role="status">
+  <strong>Aperçu</strong> : cette page montre vos photos en brouillon, pas encore visibles par les visiteurs.
+  <a href={`${base}/photos/#page-${page}`}>Retour aux photos</a>
+</div>
+<style>
+  .lp-preview-bar { position: sticky; top: 0; z-index: 1000; background: #f5b335; color: #1d1d1b; padding: 10px 16px;
+    font: 500 15px/1.4 system-ui, sans-serif; text-align: center; }
+  .lp-preview-bar a { color: inherit; font-weight: 700; margin-left: 12px; }
+</style>

@@ -30,6 +30,10 @@ $p-slate-soft:  rgb(226, 232, 235);
   &:hover { border-color: $p-ink; }
 }
 
+// Framing set in the admin (lp-photos): --pos on desktop, --pos-m on phone. Hero uses --hero-pos*.
+.lp-pos { object-position: var(--pos, 50% 50%);
+  @media (max-width: $bp-tablet) { object-position: var(--pos-m, var(--pos, 50% 50%)); } }
+
 // ---------- hero: big photo, big title, nothing else ----------
 .prop-hero { position: relative; isolation: isolate; min-height: 78vh; display: flex; align-items: flex-end; color: #fff;
   &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; object-position: var(--hero-pos, 50% 50%);

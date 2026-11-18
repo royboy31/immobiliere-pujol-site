@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+export const prerender = false; // photos come from the admin (lp-photos), published instantly
 // TEST PAGE (10/11/2026): layout proposal v2 of /service-immobilier/gestion-locative/ after the
 // 10/11 call with Caroline (Fathom 896090948): Manda as reference, key figures at the top in
 // white on the dark band, four profile cubes, much less visible text. Caroline's copy is
@@ -8,7 +8,13 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getCollection } from 'astro:content';
 import { GUIDE_SECTIONS } from '../../../lib/guide-nav';
-import { KEY_FIGURES, PROFILES, LP_IMG } from '../../../lib/lp-proposition';
+import { KEY_FIGURES, PROFILES } from '../../../lib/lp-proposition';
+import { posStyle } from '../../../lib/lp-photos';
+import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
+import LpPreviewBar from '../../../components/lp/LpPreviewBar.astro';
+
+const { photos: ph, preview } = await loadLpPhotos(Astro.request, Astro.url);
+const stepPh = [1, 2, 3, 4, 5].map((n) => ph[`accueil-step${n}`]);
 
 const serviceTitles = new Map(
   (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
@@ -46,11 +52,12 @@ const reassurances = [
 ];
 ---
 
-<BaseLayout title="Gestion Locative à Marseille – Immobilière Pujol" description="Proposition de mise en page (test)." noindex={true} preloadImage={LP_IMG.hero.src}>
+<BaseLayout title="Gestion Locative à Marseille – Immobilière Pujol" description="Proposition de mise en page (test)." noindex={true} preloadImage={ph['accueil-hero'].src}>
+  {preview && <LpPreviewBar page="accueil" />}
   <div class="mag prop">
 
     <section class="prop-hero">
-      <img class="prop-hero__img" src={LP_IMG.hero.src} alt="" loading="eager" fetchpriority="high" width={LP_IMG.hero.w} height={LP_IMG.hero.h} />
+      <img class="prop-hero__img" src={ph['accueil-hero'].src} style={posStyle(ph['accueil-hero'], true)} alt="" loading="eager" fetchpriority="high" width={ph['accueil-hero'].w} height={ph['accueil-hero'].h} />
       <div class="prop-hero__inner">
         <p class="mag-eyebrow mag-eyebrow--light">Gestion locative à Marseille</p>
         <h1 class="mag-h1">Valorisez votre patrimoine immobilier et sécurisez vos revenus locatifs durablement.</h1>
@@ -80,7 +87,7 @@ const reassurances = [
           {PROFILES.map((p) => (
             <li>
               <a class={`prop-cube prop-cube--${p.color}`} href={`/service-immobilier/gestion-locative-proposition/${p.slug}/`}>
-                <img src={p.img.src} alt="" loading="lazy" width={p.img.w} height={p.img.h} />
+                <img class="lp-pos" src={ph[`${p.slug}-hero`].src} style={posStyle(ph[`${p.slug}-hero`])} alt="" loading="lazy" width={ph[`${p.slug}-hero`].w} height={ph[`${p.slug}-hero`].h} />
                 <span class="prop-cube__body">
                   <span class="prop-cube__kicker">{p.kicker}</span>
                   <span class="prop-cube__q">{p.question}</span>
@@ -114,7 +121,7 @@ const reassurances = [
         <ol class="prop-steps">
           {steps.map((s, i) => (
             <li class="prop-step">
-              <img src={LP_IMG.steps[i].src} alt="" loading="lazy" width={LP_IMG.steps[i].w} height={LP_IMG.steps[i].h} />
+              <img class="lp-pos" src={stepPh[i].src} style={posStyle(stepPh[i])} alt="" loading="lazy" width={stepPh[i].w} height={stepPh[i].h} />
               <span class="prop-step__num">{i + 1}</span>
               <h3 class="prop-step__title">{s.title}</h3>
               <p>{s.lead}</p>
@@ -128,7 +135,7 @@ const reassurances = [
 
     <section class="prop-section prop-section--green">
       <div class="mag-wrap prop-proof">
-        <figure class="prop-proof__photo"><img src={LP_IMG.proofs.src} alt="" loading="lazy" width={LP_IMG.proofs.w} height={LP_IMG.proofs.h} /></figure>
+        <figure class="prop-proof__photo"><img class="lp-pos" src={ph['accueil-proofs'].src} style={posStyle(ph['accueil-proofs'])} alt="" loading="lazy" width={ph['accueil-proofs'].w} height={ph['accueil-proofs'].h} /></figure>
         <div>
           <h2 class="mag-h2">Pourquoi autant de bailleurs nous confient déjà leur bien à <em>Marseille</em> ?</h2>
           <p class="prop-proof__figure"><b>99,7 %</b> des loyers appelés encaissés</p>
@@ -155,7 +162,7 @@ const reassurances = [
     </section>
 
     <section class="prop-final">
-      <img class="prop-final__img" src={LP_IMG.final.src} alt="" loading="lazy" width={LP_IMG.final.w} height={LP_IMG.final.h} />
+      <img class="prop-final__img lp-pos" src={ph['accueil-final'].src} style={posStyle(ph['accueil-final'])} alt="" loading="lazy" width={ph['accueil-final'].w} height={ph['accueil-final'].h} />
       <div class="mag-wrap prop-final__inner">
         <h2 class="mag-h2">Prêt à sécuriser vos loyers et à alléger votre <em>quotidien de bailleur</em> ?</h2>
         <p class="mag-actions mag-actions--center">

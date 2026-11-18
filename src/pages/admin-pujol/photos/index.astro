@@ -1,0 +1,306 @@
+---
+export const prerender = false;
+// Photos of the 5 gestion locative proposal pages (Caroline, 18/11/2026). Photos only: text and
+// layout stay in code. Each page is published on its own, instantly (the pages read D1 on request).
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+import { getEntry } from 'astro:content';
+import { PROFILES } from '../../../lib/lp-proposition';
+import { parseProfile } from '../../../lib/profile-blocks';
+import { LP_PAGES, duplicateGroups, ensureLpPhotosSchema, getSlotStates, sectionPhotoUses } from '../../../lib/lp-photos';
+import { getDB } from '../../../lib/pages-db';
+
+let data: any = null;
+let error = '';
+try {
+  const db = await getDB();
+  await ensureLpPhotosSchema(db);
+  const slots = await getSlotStates(db);
+  data = { slots, duplicates: duplicateGroups(Object.fromEntries(slots.map((s) => [s.id, s.draft]))) };
+} catch (e: any) {
+  error = String(e?.message || e);
+}
+
+// Where each section photo shows: the section headings of the page, in page order.
+const uses: Record<string, string[]> = {};
+for (const p of PROFILES) {
+  const entry = (await getEntry('services', p.service)) ?? (await getEntry('services', `services/${p.service}`));
+  const prof = parseProfile(entry?.body ?? '');
+  sectionPhotoUses(prof.blocks, p.pics.length).forEach((t, i) => { uses[`${p.slug}-s${i + 1}`] = t; });
+}
+const boot = JSON.stringify({ ...data, pages: LP_PAGES, uses });
+---
+<AdminLayout title="Photos gestion locative" section="photos">
+  <div class="toolbar"><h1 style="margin:0;">Photos des pages gestion locative</h1></div>
+
+  {error && <div class="card" style="border-color:var(--danger);color:var(--danger);">Erreur D1 : {error}</div>}
+
+  {!error && (
+    <div class="card lpa-help">
+      <p><b>Comment ça marche</b></p>
+      <ol>
+        <li><b>Remplacer la photo</b> : choisissez une photo sur votre ordinateur ou téléphone. Elle est enregistrée en brouillon, les visiteurs ne la voient pas encore.</li>
+        <li><b>Cadrage</b> : cliquez sur le visage ou le sujet de la photo. Les deux aperçus montrent ce qui sera visible sur ordinateur et sur téléphone.</li>
+        <li><b>Aperçu de la page</b> : ouvre la page entière avec vos brouillons (visible seulement par vous).</li>
+        <li><b>Publier les photos de cette page</b> : les visiteurs voient les nouvelles photos tout de suite. Cela ne publie rien d’autre (articles, experts, pages légales).</li>
+      </ol>
+      <p class="lpa-muted">Vous pouvez toujours revenir à la photo d’origine ou à la photo précédente, puis republier.</p>
+    </div>
+  )}
+
+  <nav class="lpa-jump" id="lpa-jump"></nav>
+  <div id="lpa-root"></div>
+  <script type="application/json" id="lpa-data" set:html={boot}></script>
+</AdminLayout>
+
+<style is:global>
+  .lpa-help ol { margin: 6px 0 6px 18px; padding: 0; font-size: 14px; line-height: 1.55; }
+  .lpa-help p { margin: 0; }
+  .lpa-muted { color: #777; font-size: 13px; }
+  .lpa-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  .lpa-jump a { padding: 6px 12px; border: 1px solid #d6dadd; border-radius: 999px; font-size: 13px; text-decoration: none; color: inherit; background: #fff; }
+  .lpa-jump a.has-pending { border-color: #e0a100; background: #fff6dd; }
+  .lpa-page { margin: 22px 0 34px; scroll-margin-top: 16px; }
+  .lpa-page__head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; justify-content: space-between; padding: 14px 16px; background: #fff; border: 1px solid #e2e5e8; border-radius: 10px; position: sticky; top: 0; z-index: 5; }
+  .lpa-page__head h2 { margin: 0; font-size: 18px; }
+  .lpa-page__links { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .lpa-btn { display: inline-block; padding: 8px 14px; border-radius: 6px; border: 1px solid #c9ced2; background: #fff; color: #222; font-size: 14px; cursor: pointer; text-decoration: none; }
+  .lpa-btn:disabled { opacity: .45; cursor: not-allowed; }
+  .lpa-btn--go { background: #2f6f3e; border-color: #2f6f3e; color: #fff; font-weight: 600; }
+  .lpa-btn--small { padding: 5px 10px; font-size: 13px; }
+  .lpa-msg { width: 100%; font-size: 14px; margin: 4px 0 0; }
+  .lpa-msg--ok { color: #2f6f3e; } .lpa-msg--err { color: #b3261e; }
+  .lpa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; margin-top: 14px; }
+  .lpa-slot { background: #fff; border: 1px solid #e2e5e8; border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .lpa-slot.is-pending { border-color: #e0a100; box-shadow: 0 0 0 2px #fff0c2; }
+  .lpa-slot.is-busy { opacity: .6; pointer-events: none; }
+  .lpa-slot h3 { margin: 0; font-size: 15px; }
+  .lpa-where { margin: 0; font-size: 12.5px; color: #666; }
+  .lpa-badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #e7f2ea; color: #2f6f3e; }
+  .lpa-badge--draft { background: #fff0c2; color: #7a5a00; }
+  .lpa-dup { font-size: 13px; color: #b3261e; background: #fdecea; padding: 6px 8px; border-radius: 6px; margin: 0; }
+  .lpa-frame { position: relative; cursor: crosshair; border-radius: 6px; overflow: hidden; background: #f1f2f3; }
+  .lpa-frame img { display: block; width: 100%; height: auto; }
+  .lpa-dot { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 2px #e0a100; pointer-events: none; }
+  .lpa-dot--m { border-style: dashed; }
+  .lpa-crops { display: grid; grid-template-columns: 1.6fr 1fr; gap: 10px; align-items: end; }
+  .lpa-crop p { margin: 0 0 4px; font-size: 12px; color: #666; }
+  .lpa-crop img { display: block; width: 100%; object-fit: cover; border-radius: 4px; border: 1px solid #e2e5e8; }
+  .lpa-mode { display: flex; gap: 12px; font-size: 13px; flex-wrap: wrap; }
+  .lpa-mode label, label.lpa-btn { text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 13px; }
+  .lpa-legend { font-size: 12px; color: #666; margin: -4px 0 0; }
+  @media (max-width: 700px) { .lpa-page__head { position: static; } .lpa-page__links { width: 100%; } .lpa-page__links > * { flex: 1 1 100%; text-align: center; } }
+  .lpa-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .lpa-live { display: flex; gap: 8px; align-items: center; font-size: 12.5px; color: #666; }
+  .lpa-live img { width: 64px; height: 44px; object-fit: cover; border-radius: 4px; }
+  .lpa-warn { font-size: 13px; color: #7a5a00; margin: 0; }
+</style>
+
+<script>
+  type Photo = { src: string; w: number; h: number; pos?: string; posMobile?: string };
+  type Slot = {
+    id: string; page: string; label: string; shape: string; def: Photo; draft: Photo; published: Photo; previous: Photo | null;
+    pending: boolean; isDefault: boolean; revision: number; updatedBy: string | null; publishedAt: string | null;
+  };
+  const API = '/api/admin-pujol/photos/';
+  const boot = JSON.parse(document.getElementById('lpa-data')!.textContent || '{}');
+  if (!boot.slots) throw new Error('no data');
+  let slots: Slot[] = boot.slots;
+  let duplicates: string[][] = boot.duplicates;
+  const pages: { id: string; title: string; url: string }[] = boot.pages;
+  const uses: Record<string, string[]> = boot.uses;
+  const messages: Record<string, { ok: boolean; text: string; html?: string }> = {};
+  const modes: Record<string, 'both' | 'desk' | 'mob'> = {};
+  const root = document.getElementById('lpa-root')!;
+
+  // Shapes as they appear on the pages (desktop, phone), and the photo's default framing.
+  const RATIO: Record<string, [string, string]> = {
+    hero: ['2.75 / 1', '4 / 5'], step: ['4 / 3', '4 / 3'], proof: ['4 / 3', '4 / 3'], final: ['3 / 1', '3 / 4'], section: ['4 / 3', '16 / 9'],
+  };
+  const deskPos = (p: Photo) => p.pos || '50% 50%';
+  const mobPos = (p: Photo, shape: string) => p.posMobile || (shape === 'hero' ? '50% 78%' : p.pos || '50% 50%');
+  // One size for every slot, so the same file always gives the same bytes (and R2 key): that is what
+  // the "same photo used twice" warning compares. 1600 px is sharp on the heroes, ~250 KB in WebP.
+  const MAX_W = 1600;
+  const pageTitle = (id: string) => pages.find((p) => p.id === id)?.title || id;
+  const slotById = (id: string) => slots.find((s) => s.id === id)!;
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+  const thumb = (p: Photo) => esc(p.src);
+
+  function render() {
+    document.getElementById('lpa-jump')!.innerHTML = pages.map((pg) => {
+      const n = slots.filter((s) => s.page === pg.id && s.pending).length;
+      return `<a href="#page-${pg.id}" class="${n ? 'has-pending' : ''}">${esc(pg.title)}${n ? ` · ${n} brouillon${n > 1 ? 's' : ''}` : ''}</a>`;
+    }).join('');
+    root.innerHTML = pages.map(renderPage).join('');
+  }
+
+  function renderPage(pg: { id: string; title: string; url: string }) {
+    const own = slots.filter((s) => s.page === pg.id);
+    const n = own.filter((s) => s.pending).length;
+    const msg = messages[pg.id];
+    return `<section class="lpa-page" id="page-${pg.id}">
+      <div class="lpa-page__head">
+        <h2>${esc(pg.title)}</h2>
+        <div class="lpa-page__links">
+          <a class="lpa-btn lpa-btn--small" href="${pg.url}" target="_blank" rel="noopener">Voir la page en ligne</a>
+          <a class="lpa-btn lpa-btn--small" href="${pg.url}?apercu=1" target="_blank" rel="noopener">Aperçu de la page avec mes brouillons</a>
+          ${n ? `<button class="lpa-btn lpa-btn--small" data-act="discard" data-page="${pg.id}">Annuler les brouillons</button>` : ''}
+          <button class="lpa-btn lpa-btn--go" data-act="publish" data-page="${pg.id}" ${n ? '' : 'disabled'}>
+            ${n ? `Publier les photos de cette page (${n})` : 'Tout est en ligne'}</button>
+        </div>
+        ${msg ? `<p class="lpa-msg ${msg.ok ? 'lpa-msg--ok' : 'lpa-msg--err'}">${msg.html || esc(msg.text)}</p>` : ''}
+      </div>
+      <div class="lpa-grid">${own.map(renderSlot).join('')}</div>
+    </section>`;
+  }
+
+  function renderSlot(s: Slot) {
+    const d = s.draft;
+    const [rd, rm] = RATIO[s.shape] || RATIO.section;
+    const dup = duplicates.find((g) => g.includes(s.id));
+    const others = dup ? dup.filter((id) => id !== s.id).map((id) => `${pageTitle(slotById(id).page)} : ${slotById(id).label}`) : [];
+    const where = uses[s.id]?.length ? `Section${uses[s.id].length > 1 ? 's' : ''} : ${uses[s.id].map((t) => `« ${esc(t)} »`).join(', ')}` : '';
+    const mode = modes[s.id] || 'both';
+    const [dx, dy] = deskPos(d).split(' ');
+    const [mx, my] = mobPos(d, s.shape).split(' ');
+    const sameDot = dx === mx && dy === my;
+    const small = !s.isDefault && d.w < (s.shape === 'hero' || s.shape === 'final' ? 1200 : 800);
+    return `<article class="lpa-slot ${s.pending ? 'is-pending' : ''}" data-slot="${s.id}">
+      <div>
+        <h3>${esc(s.label)}</h3>
+        ${where ? `<p class="lpa-where">${where}</p>` : ''}
+      </div>
+      <div>${s.pending ? '<span class="lpa-badge lpa-badge--draft">Brouillon, pas encore publié</span>' : '<span class="lpa-badge">En ligne</span>'}
+        ${s.isDefault ? '<span class="lpa-muted"> · photo d’origine</span>' : ''}</div>
+      ${others.length ? `<p class="lpa-dup">Même photo utilisée aussi ici : ${others.map(esc).join(' ; ')}</p>` : ''}
+      <div class="lpa-frame" data-frame="${s.id}" title="Cliquez sur le sujet pour cadrer">
+        <img src="${thumb(d)}" alt="" loading="lazy" />
+        <span class="lpa-dot" style="left:${dx};top:${dy}"></span>
+        ${sameDot ? '' : `<span class="lpa-dot lpa-dot--m" style="left:${mx};top:${my}"></span>`}
+      </div>
+      ${sameDot ? '' : '<p class="lpa-legend">Rond plein : cadrage ordinateur. Rond pointillé : cadrage téléphone.</p>'}
+      <div class="lpa-mode">
+        <span>Le clic cadre :</span>
+        ${(['both', 'desk', 'mob'] as const).map((m) => `<label><input type="radio" name="mode-${s.id}" value="${m}" data-mode="${s.id}" ${mode === m ? 'checked' : ''}/> ${{ both: 'les deux', desk: 'ordinateur', mob: 'téléphone' }[m]}</label>`).join('')}
+      </div>
+      <div class="lpa-crops">
+        <div class="lpa-crop"><p>Sur ordinateur</p><img src="${thumb(d)}" alt="" style="aspect-ratio:${rd};object-position:${deskPos(d)}" loading="lazy" /></div>
+        <div class="lpa-crop"><p>Sur téléphone</p><img src="${thumb(d)}" alt="" style="aspect-ratio:${rm};object-position:${mobPos(d, s.shape)}" loading="lazy" /></div>
+      </div>
+      ${small ? `<p class="lpa-warn">Photo assez petite (${d.w} px de large) : elle peut paraître un peu floue sur grand écran.</p>` : ''}
+      <div class="lpa-actions">
+        <label class="lpa-btn lpa-btn--small">Remplacer la photo<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/*" data-file="${s.id}" hidden /></label>
+        ${s.isDefault ? '' : `<button class="lpa-btn lpa-btn--small" data-act="default" data-slot="${s.id}">Photo d’origine</button>`}
+        ${s.previous ? `<button class="lpa-btn lpa-btn--small" data-act="previous" data-slot="${s.id}">Photo précédente</button>` : ''}
+      </div>
+      ${s.pending ? `<div class="lpa-live"><img src="${thumb(s.published)}" alt="" /> En ligne actuellement</div>` : ''}
+    </article>`;
+  }
+
+  async function call(body: any): Promise<any> {
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    if (r.status === 401) { location.reload(); throw new Error('Session expirée'); }
+    const j: any = await r.json().catch(() => ({ ok: false, error: `Erreur ${r.status}` }));
+    if (j.slots) { slots = j.slots; duplicates = j.duplicates; }
+    if (!j.ok) throw new Error(j.error || 'Erreur');
+    return j;
+  }
+
+  function busy(slotId: string, on: boolean) {
+    root.querySelector(`[data-slot="${slotId}"]`)?.classList.toggle('is-busy', on);
+  }
+
+  async function act(page: string, fn: () => Promise<any>, ok?: (j: any) => { text: string; html?: string }) {
+    try {
+      const j = await fn();
+      if (ok) messages[page] = { ok: true, ...ok(j) }; else delete messages[page];
+    } catch (e: any) {
+      messages[page] = { ok: false, text: e?.message || String(e) };
+    }
+    render();
+  }
+
+  const saveDraft = (s: Slot, photo: Photo | null) =>
+    act(s.page, () => call({ action: 'draft', slot: s.id, photo, revision: s.revision }));
+
+  // Resize in the browser: phone photos are 5 to 10 MB, the page needs ~300 KB.
+  async function shrink(file: File, maxW: number): Promise<{ blob: Blob; w: number; h: number; origW: number }> {
+    let bmp: ImageBitmap;
+    try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' } as any); }
+    catch { throw new Error('Cette photo ne peut pas être lue par le navigateur. Enregistrez-la en JPEG puis réessayez.'); }
+    const scale = Math.min(1, maxW / bmp.width);
+    const w = Math.round(bmp.width * scale), h = Math.round(bmp.height * scale);
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    c.getContext('2d')!.drawImage(bmp, 0, 0, w, h);
+    const toBlob = (type: string) => new Promise<Blob | null>((res) => c.toBlob(res, type, 0.82));
+    let blob = await toBlob('image/webp');
+    if (!blob || blob.type !== 'image/webp') blob = await toBlob('image/jpeg'); // Safari cannot encode WebP
+    if (!blob) throw new Error('Conversion de la photo impossible');
+    return { blob, w, h, origW: bmp.width };
+  }
+
+  async function upload(s: Slot, file: File) {
+    busy(s.id, true);
+    await act(s.page, async () => {
+      const { blob, w, h } = await shrink(file, MAX_W);
+      if (w < 200 || h < 200) throw new Error('Photo trop petite');
+      const fd = new FormData();
+      fd.append('file', blob, file.name.replace(/\.[^.]+$/, '') + (blob.type === 'image/webp' ? '.webp' : '.jpg'));
+      fd.append('w', String(w)); fd.append('h', String(h));
+      const r = await fetch(API + 'upload/', { method: 'POST', body: fd });
+      if (!r.ok) throw new Error((await r.text()) || `Erreur ${r.status}`);
+      const { photo } = (await r.json()) as any;
+      return call({ action: 'draft', slot: s.id, photo, revision: s.revision });
+    }, () => ({ text: 'Photo enregistrée en brouillon. Cliquez sur le sujet pour la cadrer, puis publiez.' }));
+  }
+
+  root.addEventListener('click', (ev) => {
+    const t = ev.target as HTMLElement;
+    const frame = t.closest('[data-frame]') as HTMLElement | null;
+    if (frame) {
+      const s = slotById(frame.dataset.frame!);
+      const box = frame.getBoundingClientRect();
+      const x = Math.max(0, Math.min(100, Math.round(((ev as MouseEvent).clientX - box.left) / box.width * 100)));
+      const y = Math.max(0, Math.min(100, Math.round(((ev as MouseEvent).clientY - box.top) / box.height * 100)));
+      const p = `${x}% ${y}%`;
+      const m = modes[s.id] || 'both';
+      const next: Photo = { ...s.draft };
+      if (m !== 'mob') next.pos = p;
+      if (m !== 'desk') next.posMobile = p;
+      if (m === 'mob' && !next.pos) next.pos = '50% 50%';
+      busy(s.id, true);
+      saveDraft(s, next);
+      return;
+    }
+    const btn = t.closest('[data-act]') as HTMLElement | null;
+    if (!btn) return;
+    const a = btn.dataset.act!;
+    if (a === 'default') { const s = slotById(btn.dataset.slot!); busy(s.id, true); saveDraft(s, null); }
+    if (a === 'previous') {
+      const s = slotById(btn.dataset.slot!); busy(s.id, true);
+      act(s.page, () => call({ action: 'previous', slot: s.id, revision: s.revision }));
+    }
+    if (a === 'discard') {
+      const page = btn.dataset.page!;
+      if (!confirm('Annuler les photos en brouillon de cette page ? Les photos en ligne restent.')) return;
+      act(page, () => call({ action: 'discard', page }), () => ({ text: 'Brouillons annulés.' }));
+    }
+    if (a === 'publish') {
+      const page = btn.dataset.page!;
+      const pg = pages.find((p) => p.id === page)!;
+      const revisions = Object.fromEntries(slots.filter((s) => s.page === page).map((s) => [s.id, s.revision]));
+      (btn as HTMLButtonElement).disabled = true;
+      act(page, () => call({ action: 'publish', page, revisions }), (j) => ({
+        text: '', html: `C’est en ligne : ${j.changed.length} photo${j.changed.length > 1 ? 's' : ''} publiée${j.changed.length > 1 ? 's' : ''}. <a href="${pg.url}" target="_blank" rel="noopener">Voir la page</a>`,
+      }));
+    }
+  });
+
+  root.addEventListener('change', (ev) => {
+    const t = ev.target as HTMLInputElement;
+    if (t.dataset.mode) { modes[t.dataset.mode] = t.value as any; return; }
+    if (t.dataset.file && t.files?.[0]) upload(slotById(t.dataset.file), t.files[0]);
+  });
+
+  render();
+</script>
