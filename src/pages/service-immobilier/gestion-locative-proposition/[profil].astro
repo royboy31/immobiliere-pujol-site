@@ -1,8 +1,8 @@
 ---
 export const prerender = true;
 // TEST PAGES (10/11/2026): layout proposal for the 4 "profil" pages, same copy as the live
-// /services/... pages (parsed from their markdown, nothing rewritten). Visible text is cut by
-// showing the first items of each list; the rest opens on click. noindex, not in sitemap or menu.
+// /services/... pages (parsed from their markdown, nothing rewritten). Every list point is shown
+// (Caroline 16/11). noindex, not in sitemap or menu.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getEntry } from 'astro:content';
@@ -16,7 +16,6 @@ const { card } = Astro.props as { card: (typeof PROFILES)[number] };
 const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
 const prof = parseProfile(entry?.body ?? '');
 const others = PROFILES.filter((p) => p.slug !== card.slug);
-const VISIBLE = 4;
 const pics = [LP_IMG.steps[0], LP_IMG.steps[2], LP_IMG.steps[4], LP_IMG.proofs, LP_IMG.steps[1]];
 let picIdx = 0;
 const nextPic = () => pics[picIdx++ % pics.length];
@@ -54,8 +53,10 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
     {prof.bullets.length > 0 && (
       <section class="prop-section prop-section--tight">
         <div class="mag-wrap">
-          {prof.sub && <p class="prop-intro">{prof.sub}</p>}
-          <ul class="prop-pills">{prof.bullets.map((b) => <li>{b}</li>)}</ul>
+          <div class={`prop-lead${prof.sub ? '' : ' prop-lead--solo'}`}>
+            {prof.sub && <p class="prop-lead__text">{prof.sub}</p>}
+            <ul class="prop-checks">{prof.bullets.map((b) => <li>{b}</li>)}</ul>
+          </div>
         </div>
       </section>
     )}
@@ -68,19 +69,11 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
             <div class="prop-ba">
               <div class="prop-ba__col prop-ba__col--before">
                 <p class="prop-ba__tag">{b.before.title}</p>
-                <ul>{b.before.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
-                {b.before.items.length > VISIBLE && (
-                  <details class="prop-more"><summary>{(b.before.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${b.before.items.length - VISIBLE} autres points`}</summary>
-                    <ul>{b.before.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
-                )}
+                <ul>{b.before.items.map((t) => <li>{t}</li>)}</ul>
               </div>
               <div class="prop-ba__col prop-ba__col--after">
                 <p class="prop-ba__tag">{b.after.title}</p>
-                <ul>{b.after.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
-                {b.after.items.length > VISIBLE && (
-                  <details class="prop-more"><summary>{(b.after.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${b.after.items.length - VISIBLE} autres points`}</summary>
-                    <ul>{b.after.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
-                )}
+                <ul>{b.after.items.map((t) => <li>{t}</li>)}</ul>
               </div>
             </div>
           </div>
@@ -147,35 +140,38 @@ const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
                 <div class={`prop-tile prop-tile--${(gi % 3) + 1}`}>
                   <h3 class="prop-keeps__title">{g.title}</h3>
                   {g.paras.map((t) => <p>{t}</p>)}
-                  <ul class="prop-checks">{g.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
-                  {g.items.length > VISIBLE && (
-                    <details class="prop-more"><summary>{(g.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${g.items.length - VISIBLE} autres points`}</summary>
-                      <ul class="prop-checks">{g.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
-                  )}
+                  <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
                 </div>
               ))}
             </div>
           </div>
         </section>
       );
+      const plain = b.groups.filter((g) => !g.title);
       return (
         <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`}>
-          <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}`}>
+          <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}${keeps.length ? ' prop-split--keep' : ''}`}>
             <figure class="prop-split__photo"><img src={pic.src} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
-            <div>
+            <div class="prop-split__text">
               <h2 class="mag-h2">{b.title}</h2>
-              {b.groups.map((g) => (
-                <div class={g.title ? 'prop-keep' : ''}>
-                  {g.title && <p class="prop-keep__title">{g.title}</p>}
+              {plain.map((g) => (
+                <div>
                   {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
-                  <ul class="prop-checks">{g.items.slice(0, VISIBLE).map((t) => <li>{t}</li>)}</ul>
-                  {g.items.length > VISIBLE && (
-                    <details class="prop-more"><summary>{(g.items.length - VISIBLE) === 1 ? "Voir le point suivant" : `Voir les ${g.items.length - VISIBLE} autres points`}</summary>
-                      <ul class="prop-checks">{g.items.slice(VISIBLE).map((t) => <li>{t}</li>)}</ul></details>
-                  )}
+                  <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
                 </div>
               ))}
             </div>
+            {keeps.length > 0 && (
+              <div class="prop-split__keeps">
+                {keeps.map((g) => (
+                  <div class="prop-keep">
+                    <p class="prop-keep__title">{g.title}</p>
+                    {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
+                    <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       );

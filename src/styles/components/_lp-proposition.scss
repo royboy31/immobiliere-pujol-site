@@ -42,6 +42,21 @@ $p-slate-soft:  rgb(226, 232, 235);
   &__sub { font-size: 20px; line-height: 1.5; max-width: 52ch; margin-top: 20px; color: rgba(255, 255, 255, .94); font-weight: 500; }
   &--profile { min-height: 64vh; }
   &--profile .mag-h1 { font-size: clamp(36px, 4.4vw, 58px); }
+  // Desktop (Roy 17/11): header + photo + key figures fit the first screen, photo never above 60 % of it.
+  // 208px = site header and breadcrumb, 170px = the figures band below plus a small margin.
+  @media (min-width: #{$bp-tablet + 1px}) {
+    &, &--profile { min-height: clamp(300px, calc(100svh - 208px - 170px), 60svh); }
+    &__inner { padding: 36px 40px 36px; }
+    .mag-h1, &--profile .mag-h1 { font-size: clamp(34px, 3.4vw, 48px); max-width: 28ch; }
+    .mag-eyebrow { margin-bottom: 10px; }
+    &__sub { font-size: 18px; margin-top: 12px; max-width: 60ch; }
+    .mag-actions { margin-top: 22px; }
+  }
+  // Phone: no tall empty band above the title, so the first key figure shows on the first screen.
+  @media (max-width: $bp-tablet) {
+    &, &--profile { min-height: 0; }
+    &__inner { padding: 56px 22px 32px; }
+  }
 }
 
 // ---------- key figures: white on dark, very large ----------
@@ -54,6 +69,12 @@ $p-slate-soft:  rgb(226, 232, 235);
   &__pre { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: $p-green; font-weight: 600; }
   &__value { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(48px, 5vw, 68px); line-height: 1; color: #fff; }
   &__label { font-size: 16.5px; color: rgba(255, 255, 255, .9); max-width: 26ch; }
+  @media (min-width: #{$bp-tablet + 1px}) { padding: 22px 0;
+    li { gap: 2px; }
+    &__pre { font-size: 12.5px; }
+    &__value { font-size: clamp(38px, 3.4vw, 48px); }
+    &__label { font-size: 15px; max-width: 40ch; }
+  }
 }
 
 // ---------- profile cubes: one colour each ----------
@@ -105,9 +126,9 @@ $p-slate-soft:  rgb(226, 232, 235);
   @media (max-width: 600px) { grid-template-columns: 1fr; } }
 .prop-step { position: relative; display: flex; flex-direction: column; gap: 12px; background: $p-paper; border-radius: 6px; overflow: hidden; padding-bottom: 24px;
   img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-  &__num { position: absolute; top: 12px; left: 12px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
-    background: $p-orange; color: $p-ink; font-family: $ds-font-serif; font-weight: 700; font-size: 22px; }
-  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 21px; line-height: 1.2; color: $p-ink; margin: 6px 20px 0; }
+  // number sits in the text, never on the photo (it used to land on faces)
+  &__num { display: block; margin: 8px 20px -4px; font-family: $ds-font-serif; font-weight: 700; font-size: 34px; line-height: 1; color: $p-orange; }
+  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 21px; line-height: 1.2; color: $p-ink; margin: 0 20px; }
   p, .prop-link { margin: 0 20px !important; font-size: 15.5px; line-height: 1.5; }
   .prop-link { margin-top: auto !important; align-self: flex-start; }
 }
@@ -159,11 +180,15 @@ $p-slate-soft:  rgb(226, 232, 235);
 // ---------- profile pages ----------
 .prop-intro { font-size: 18px; line-height: 1.6; max-width: 62ch; margin: 0 auto 28px !important; text-align: center; }
 .prop-split .prop-intro { text-align: left; margin: 16px 0 !important; }
-.prop-pills { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 920px; margin: 0 auto;
-  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
-  li { background: $p-green-soft; border-radius: 6px; padding: 18px 22px; font-size: 15.5px; line-height: 1.5; color: $p-ink; }
-  li:nth-child(3n+2) { background: $p-orange-soft; }
-  li:nth-child(3n) { background: $p-slate-soft; }
+// intro: sentence on the left, one tidy list on the right (balanced whatever the number of points)
+.prop-lead { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; align-items: center;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 24px; }
+  &--solo { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+  &__text { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(24px, 2.3vw, 31px); line-height: 1.3; color: $p-ink; margin: 0 !important; }
+  .prop-checks { gap: 0; }
+  .prop-checks li { padding: 15px 0 15px 36px; border-bottom: 1px solid rgba(0, 0, 0, .1); font-size: 16.5px; line-height: 1.5; color: $p-ink; }
+  .prop-checks li:last-child { border-bottom: 0; }
+  .prop-checks li::before { top: 16px; }
 }
 .prop-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
   @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
@@ -193,13 +218,21 @@ $p-slate-soft:  rgb(226, 232, 235);
   &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 21px; line-height: 1.2; color: $p-ink; margin: 10px 0 0; }
   .prop-more p { font-size: 15px; line-height: 1.55; }
 }
-.prop-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: start;
-  &--rev .prop-split__photo { order: 2; }
-  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 28px; &--rev .prop-split__photo { order: 0; } }
-  &__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+// text on one side; photo with the orange "you keep control" box under it on the other, so both
+// columns end near the same height. Without an orange box the text is centred against the photo.
+.prop-split { display: grid; grid-template-columns: 1.2fr 1fr; column-gap: 64px; row-gap: 24px; align-items: center;
+  grid-template-areas: "text photo";
+  &--rev { grid-template-columns: 1fr 1.2fr; grid-template-areas: "photo text"; }
+  &--keep { align-items: start; grid-template-rows: auto 1fr; grid-template-areas: "text photo" "text keep"; }
+  &--keep.prop-split--rev { grid-template-areas: "photo text" "keep text"; }
+  @media (max-width: $bp-tablet) { &, &--rev, &--keep, &--keep.prop-split--rev { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "photo" "text" "keep"; row-gap: 24px; } }
+  &__photo { grid-area: photo; margin: 0; }
+  &__text { grid-area: text; }
+  &__keeps { grid-area: keep; display: grid; gap: 16px; align-content: start; }
+  &__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; }
   .prop-checks { margin-top: 24px; }
 }
-.prop-keep { margin-top: 28px; background: $p-orange-soft; border-radius: 6px; padding: 22px 24px;
+.prop-keep { background: $p-orange-soft; border-radius: 6px; padding: 22px 24px;
   .prop-checks { margin-top: 12px; }
   &__title { font-weight: 700; color: $p-ink; }
 }
