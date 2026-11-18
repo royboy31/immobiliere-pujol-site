@@ -10,7 +10,9 @@ import {
 
 const source = (path) => readFile(new URL(path, import.meta.url), 'utf8');
 
-function d1(db) {
+// `beforeWrite(sql)` runs just before a statement executes: lets a test land a concurrent save
+// between the editor's last read and the page action itself (Codex review of ddb00fcd).
+function d1(db, beforeWrite = () => {}) {
   return {
     prepare(sql) {
       let values = [];
@@ -21,7 +23,7 @@ function d1(db) {
           return { meta: { changes: Number(result.changes), last_row_id: Number(result.lastInsertRowid || 0) } };
         },
         async first() { return db.prepare(sql).get(...values) || null; },
-        async all() { return { results: db.prepare(sql).all(...values) }; },
+        async all() { if (/^\s*UPDATE/i.test(sql)) beforeWrite(sql); return { results: db.prepare(sql).all(...values) }; },
       };
       return statement;
     },
@@ -127,7 +129,7 @@ test('discard restores the drafts of one page to what is online', async () => {
   const db = await fresh();
   await saveDraft(db, 'premiere-location-s1', up('8'), 0, 'x');
   await saveDraft(db, 'deja-en-agence-s1', up('9'), 0, 'x');
-  assert.deepEqual(await discardPage(db, 'premiere-location', 'x'), ['premiere-location-s1']);
+  assert.deepEqual(await discardPage(db, 'premiere-location', await revisionsOf(db, 'premiere-location'), 'x'), ['premiere-location-s1']);
   const draft = await getPhotoMap(db, 'draft');
   assert.equal(draft['premiere-location-s1'].src, defaultPhotoMap()['premiere-location-s1'].src);
   assert.equal(draft['deja-en-agence-s1'].src, up('9').src);
@@ -176,4 +178,64 @@ test('admin endpoints are guarded and the photo API never touches the global pub
   assert.match(upload, /sniffImage\(bytes\)/);
   const runtime = await source('../src/lib/lp-photos-runtime.ts');
   assert.match(runtime, /wantsPreview && !!\(await requireAdmin\(request\)\)/);
+});
+
+// ── interleaving regressions (Codex, 18/11): a save landing while a page action is in flight ──
+
+async function racing() {
+  const raw = new DatabaseSync(':memory:');
+  let hook = null;
+  const db = d1(raw, (sql) => { if (hook) { const h = hook; hook = null; h(sql); } });
+  await ensureLpPhotosSchema(db);
+  return { db, raw, inject: (fn) => { hook = fn; } };
+}
+const sneak = (raw, slot, photo) => raw.prepare('UPDATE lp_photos SET draft_json = ?, revision = revision + 1 WHERE slot = ?').run(JSON.stringify(photo), slot);
+
+test('publish is all or nothing when another save lands mid-publish', async () => {
+  const { db, raw, inject } = await racing();
+  await saveDraft(db, 'accueil-hero', up('a'), 0, 'editor1');
+  await saveDraft(db, 'accueil-step1', up('b'), 0, 'editor1');
+  const seen = await revisionsOf(db, 'accueil');
+  inject(() => sneak(raw, 'accueil-step1', up('c')));
+  await assert.rejects(publishPage(db, 'accueil', seen, 'editor1'), ConflictError);
+  const pub = await getPhotoMap(db, 'published');
+  assert.equal(pub['accueil-hero'].src, defaultPhotoMap()['accueil-hero'].src, 'no slot of the page went live');
+  assert.equal(pub['accueil-step1'].src, defaultPhotoMap()['accueil-step1'].src);
+  assert.equal((await getPhotoMap(db, 'draft'))['accueil-step1'].src, up('c').src, 'the concurrent draft is kept');
+});
+
+test('publish is refused when a slot without a row gets one mid-publish', async () => {
+  const { db, raw, inject } = await racing();
+  await saveDraft(db, 'accueil-hero', up('a'), 0, 'editor1');
+  const seen = await revisionsOf(db, 'accueil');
+  inject(() => raw.prepare('INSERT INTO lp_photos (slot, draft_json, revision) VALUES (?, ?, 1)').run('accueil-final', JSON.stringify(up('d'))));
+  await assert.rejects(publishPage(db, 'accueil', seen, 'editor1'), ConflictError);
+  assert.equal((await getPhotoMap(db, 'published'))['accueil-hero'].src, defaultPhotoMap()['accueil-hero'].src);
+});
+
+test('a stale tab cannot discard a newer draft', async () => {
+  const db = await fresh();
+  await saveDraft(db, 'je-gere-seul-hero', up('a'), 0, 'editor1');
+  const stale = await revisionsOf(db, 'je-gere-seul');
+  await saveDraft(db, 'je-gere-seul-hero', up('b'), 1, 'editor2');
+  await assert.rejects(discardPage(db, 'je-gere-seul', stale, 'stale-editor1'), ConflictError);
+  assert.equal((await getPhotoMap(db, 'draft'))['je-gere-seul-hero'].src, up('b').src);
+  await assert.rejects(discardPage(db, 'je-gere-seul', {}, 'no-revisions'), ConflictError);
+});
+
+test('discard is all or nothing when another save lands mid-discard', async () => {
+  const { db, raw, inject } = await racing();
+  await saveDraft(db, 'premiere-location-s1', up('a'), 0, 'editor1');
+  await saveDraft(db, 'premiere-location-hero', up('b'), 0, 'editor1');
+  const seen = await revisionsOf(db, 'premiere-location');
+  inject(() => sneak(raw, 'premiere-location-hero', up('c')));
+  await assert.rejects(discardPage(db, 'premiere-location', seen, 'editor1'), ConflictError);
+  const draft = await getPhotoMap(db, 'draft');
+  assert.equal(draft['premiere-location-s1'].src, up('a').src, 'nothing discarded');
+  assert.equal(draft['premiere-location-hero'].src, up('c').src);
+});
+
+test('publishing with nothing pending is a no-op, not a conflict', async () => {
+  const db = await fresh();
+  assert.deepEqual(await publishPage(db, 'accueil', await revisionsOf(db, 'accueil'), 'x'), []);
 });

@@ -3,8 +3,9 @@
 //   { action: 'draft',    slot, photo, revision }   photo null = back to the original photo
 //   { action: 'previous', slot, revision }          draft = the photo online before the last publish
 //   { action: 'publish',  page, revisions }         put the drafts of ONE page online (nothing else)
-//   { action: 'discard',  page }                    drop the unpublished drafts of one page
-// A stale editor (revision mismatch) gets 409 and must reload; nothing is overwritten.
+//   { action: 'discard',  page, revisions }         drop the unpublished drafts of one page
+// A stale editor (revision mismatch) gets 409 and must reload; nothing is overwritten. Page actions
+// (publish, discard) are one guarded UPDATE each: the whole page changes or nothing does.
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
@@ -42,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
       case 'draft': await saveDraft(d, String(body.slot), body.photo ?? null, Number(body.revision ?? 0), admin); break;
       case 'previous': await draftFromPrevious(d, String(body.slot), Number(body.revision ?? 0), admin); break;
       case 'publish': changed = await publishPage(d, String(body.page), body.revisions || {}, admin); break;
-      case 'discard': changed = await discardPage(d, String(body.page), admin); break;
+      case 'discard': changed = await discardPage(d, String(body.page), body.revisions || {}, admin); break;
       default: return Response.json({ ok: false, error: 'Action inconnue' }, { status: 400 });
     }
     return Response.json({ ok: true, changed, ...(await state(d)) });

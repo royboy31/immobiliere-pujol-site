@@ -187,41 +187,54 @@ export async function draftFromPrevious(db: D1Database, slotId: string, expected
 }
 
 /**
- * Put the drafts of ONE page online. `revisions` is what the editor saw (slot → revision): if any slot
- * of the page changed since, nothing is published. Returns the slots that changed.
+ * SQL guard: true only while every slot of the page still has the revision the editor saw
+ * (slot → revision; 0 = no row yet). Used inside a single UPDATE so the check and the write are one
+ * atomic statement: either the whole page changes or nothing does.
  */
-export async function publishPage(db: D1Database, page: string, revisions: Record<string, number>, by: string): Promise<string[]> {
-  const slots = slotsOfPage(page);
-  if (!slots.length) throw new Error('Page inconnue');
-  const byId = await rows(db);
-  for (const s of slots) if ((byId.get(s.id)?.revision ?? 0) !== Number(revisions?.[s.id] ?? 0)) throw new ConflictError('Modifié entre-temps');
-  const changed: string[] = [];
-  const t = now();
-  for (const s of slots) {
-    const r = byId.get(s.id);
-    if (!r || norm(r.draft_json) === norm(r.published_json)) continue;
-    const res = await db.prepare(
-      `UPDATE lp_photos SET previous_json = published_json, published_json = draft_json, revision = revision + 1,
-         published_by = ?, published_at = ? WHERE slot = ? AND revision = ?`
-    ).bind(by, t, s.id, r.revision).run();
-    if (!res.meta.changes) throw new ConflictError('Modifié entre-temps');
-    changed.push(s.id);
-  }
-  return changed;
+function pageGuard(ids: string[], revisions: Record<string, number>): { sql: string; binds: (string | number)[] } {
+  const exp = ids.map((id) => [id, Math.max(0, Math.floor(Number(revisions?.[id] ?? 0)) || 0)] as const);
+  const withRow = exp.filter(([, r]) => r > 0).length;
+  const inList = ids.map(() => '?').join(',');
+  const cases = exp.map(() => 'WHEN ? THEN ?').join(' ');
+  return {
+    sql: `(SELECT COUNT(*) FROM lp_photos g WHERE g.slot IN (${inList})) = ?
+      AND (SELECT COUNT(*) FROM lp_photos g WHERE g.slot IN (${inList}) AND g.revision = CASE g.slot ${cases} END) = ?`,
+    binds: [...ids, withRow, ...ids, ...exp.flatMap(([id, r]) => [id, r]), withRow],
+  };
 }
 
-/** Throw away the unpublished drafts of one page (draft = what is online). */
-export async function discardPage(db: D1Database, page: string, by: string): Promise<string[]> {
+const PENDING = `IFNULL(draft_json, '') <> IFNULL(published_json, '')`;
+
+/** Runs one guarded page UPDATE; returns the changed slots, or throws ConflictError if the guard failed. */
+async function guardedPageUpdate(db: D1Database, page: string, revisions: Record<string, number>, set: string, setBinds: (string | number)[]): Promise<string[]> {
+  const ids = slotsOfPage(page).map((s) => s.id);
+  if (!ids.length) throw new Error('Page inconnue');
+  const g = pageGuard(ids, revisions);
+  const { results } = await db.prepare(
+    `UPDATE lp_photos SET ${set} WHERE slot IN (${ids.map(() => '?').join(',')}) AND ${PENDING} AND ${g.sql} RETURNING slot`
+  ).bind(...setBinds, ...ids, ...g.binds).all();
+  const changed = ((results as any[]) || []).map((r) => String(r.slot));
+  if (changed.length) return changed;
+  // Nothing written: either nothing was pending, or the page changed under the editor.
   const byId = await rows(db);
-  const out: string[] = [];
-  for (const s of slotsOfPage(page)) {
-    const r = byId.get(s.id);
-    if (!r || norm(r.draft_json) === norm(r.published_json)) continue;
-    await db.prepare(`UPDATE lp_photos SET draft_json = published_json, revision = revision + 1, updated_by = ?, updated_at = ? WHERE slot = ?`)
-      .bind(by, now(), s.id).run();
-    out.push(s.id);
-  }
-  return out;
+  for (const id of ids) if ((byId.get(id)?.revision ?? 0) !== Number(revisions?.[id] ?? 0)) throw new ConflictError('Modifié entre-temps');
+  return [];
+}
+
+/**
+ * Put the drafts of ONE page online, all slots at once or none. `revisions` is what the editor saw
+ * (slot → revision): if any slot of the page changed since, nothing is published. Returns the slots
+ * that changed.
+ */
+export async function publishPage(db: D1Database, page: string, revisions: Record<string, number>, by: string): Promise<string[]> {
+  return guardedPageUpdate(db, page, revisions,
+    `previous_json = published_json, published_json = draft_json, revision = revision + 1, published_by = ?, published_at = ?`, [by, now()]);
+}
+
+/** Throw away the unpublished drafts of one page (draft = what is online), same all-or-nothing rule. */
+export async function discardPage(db: D1Database, page: string, revisions: Record<string, number>, by: string): Promise<string[]> {
+  return guardedPageUpdate(db, page, revisions,
+    `draft_json = published_json, revision = revision + 1, updated_by = ?, updated_at = ?`, [by, now()]);
 }
 
 /** Groups of slots showing the same photo (her first complaint was the same photos everywhere). */

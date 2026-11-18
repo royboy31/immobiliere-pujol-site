@@ -283,7 +283,8 @@ const boot = JSON.stringify({ ...data, pages: LP_PAGES, uses });
     if (a === 'discard') {
       const page = btn.dataset.page!;
       if (!confirm('Annuler les photos en brouillon de cette page ? Les photos en ligne restent.')) return;
-      act(page, () => call({ action: 'discard', page }), () => ({ text: 'Brouillons annulés.' }));
+      const revisions = Object.fromEntries(slots.filter((s) => s.page === page).map((s) => [s.id, s.revision]));
+      act(page, () => call({ action: 'discard', page, revisions }), () => ({ text: 'Brouillons annulés.' }));
     }
     if (a === 'publish') {
       const page = btn.dataset.page!;
