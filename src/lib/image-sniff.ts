@@ -93,3 +93,76 @@ export function imageSize(bytes: ArrayBuffer, ext: string): { w: number; h: numb
   }
   return null;
 }
+
+let CRC_TABLE: Uint32Array | null = null;
+function crc32(b: Uint8Array, start: number, end: number): number {
+  if (!CRC_TABLE) {
+    CRC_TABLE = new Uint32Array(256);
+    for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; CRC_TABLE[n] = c >>> 0; }
+  }
+  let c = 0xffffffff;
+  for (let i = start; i < end; i++) c = CRC_TABLE[(c ^ b[i]) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+
+/**
+ * Structural check of the WHOLE file, not just its header: a truncated or padded-header file with a
+ * plausible signature and size is refused (Codex review of 91dc0c6b). No image library runs in the
+ * Worker, so this does not decode the compressed pixels; it proves the container is complete:
+ * - PNG: every chunk fits and its CRC matches, IHDR first, at least one IDAT, ends with IEND.
+ * - JPEG: markers walk cleanly to a frame header and the scan, and the file ends with EOI.
+ * - WebP: RIFF size matches the file, every chunk fits, and an image chunk (VP8/VP8L) has data.
+ */
+export function imageLooksComplete(bytes: ArrayBuffer, ext: string): boolean {
+  const b = new Uint8Array(bytes);
+  const u32be = (o: number) => ((b[o] << 24) >>> 0) + ((b[o + 1] << 16) | (b[o + 2] << 8) | b[o + 3]);
+  const u32le = (o: number) => (b[o] | (b[o + 1] << 8) | (b[o + 2] << 16)) + ((b[o + 3] << 24) >>> 0);
+  const tag = (o: number) => String.fromCharCode(b[o], b[o + 1], b[o + 2], b[o + 3]);
+  if (ext === 'png') {
+    let o = 8, first = true, idat = false;
+    while (o + 12 <= b.length) {
+      const len = u32be(o), type = tag(o + 4), end = o + 8 + len;
+      if (end + 4 > b.length) return false;
+      if (crc32(b, o + 4, end) !== u32be(end)) return false;
+      if (first && type !== 'IHDR') return false;
+      first = false;
+      if (type === 'IDAT' && len > 0) idat = true;
+      if (type === 'IEND') return idat && end + 4 === b.length;
+      o = end + 4;
+    }
+    return false;
+  }
+  if (ext === 'jpg') {
+    let end = b.length;
+    while (end > 2 && b[end - 1] === 0x00) end--; // some encoders pad with zeros after EOI
+    if (end < 4 || b[end - 2] !== 0xff || b[end - 1] !== 0xd9) return false;
+    let o = 2, frame = false;
+    while (o + 4 <= end) {
+      if (b[o] !== 0xff) return false;
+      const m = b[o + 1];
+      if (m === 0xff) { o++; continue; }
+      if (m === 0x01 || (m >= 0xd0 && m <= 0xd7)) { o += 2; continue; }
+      if (m === 0xd9) return false; // EOI before any scan
+      const len = (b[o + 2] << 8) | b[o + 3];
+      if (len < 2 || o + 2 + len > end) return false;
+      if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) frame = true;
+      if (m === 0xda) return frame && o + 2 + len < end - 2; // scan header, then entropy data, then EOI
+      o += 2 + len;
+    }
+    return false;
+  }
+  if (ext === 'webp') {
+    if (b.length < 20) return false;
+    const riff = u32le(4) + 8;
+    if (riff !== b.length && riff + 1 !== b.length) return false;
+    let o = 12, image = false;
+    while (o + 8 <= riff) {
+      const type = tag(o), len = u32le(o + 4), end = o + 8 + len;
+      if (end > riff) return false;
+      if ((type === 'VP8 ' || type === 'VP8L') && len > 10) image = true;
+      o = end + (len & 1);
+    }
+    return image && o >= riff;
+  }
+  return false;
+}

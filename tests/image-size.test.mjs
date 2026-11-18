@@ -26,3 +26,41 @@ test('imageSize reads the transparent extended WebP header (VP8X)', async () => 
   const ab = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
   assert.deepEqual(imageSize(ab, 'webp'), { w: 801, h: 402 });
 });
+
+// ── whole-file integrity (Codex review of 91dc0c6b): a plausible header is not a readable image ──
+import { imageLooksComplete } from '../src/lib/image-sniff.ts';
+
+const ab = (buf) => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+const encode = async (fmt, opts = {}, alpha = false) =>
+  ab(await sharp({ create: { width: 640, height: 400, channels: alpha ? 4 : 3, background: alpha ? { r: 9, g: 99, b: 199, alpha: 0.5 } : '#3a7' } })[fmt](opts).toBuffer());
+
+test('complete images from a real encoder pass the integrity check', async () => {
+  for (const [fmt, opts, alpha, ext] of [['jpeg', {}, false, 'jpg'], ['jpeg', { progressive: true }, false, 'jpg'], ['png', {}, false, 'png'], ['png', {}, true, 'png'],
+    ['webp', {}, false, 'webp'], ['webp', { lossless: true }, false, 'webp'], ['webp', {}, true, 'webp']]) {
+    assert.equal(imageLooksComplete(await encode(fmt, opts, alpha), ext), true, `${fmt} ${JSON.stringify(opts)} alpha=${alpha}`);
+  }
+});
+
+test("Codex's 24-byte PNG with signature, IHDR tag and 1600×1000 is refused", () => {
+  const b = new Uint8Array(24);
+  b.set([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 13, 0x49, 0x48, 0x44, 0x52]);
+  new DataView(b.buffer).setUint32(16, 1600); new DataView(b.buffer).setUint32(20, 1000);
+  assert.deepEqual(imageSize(b.buffer, 'png'), { w: 1600, h: 1000 }, 'header alone looks fine');
+  assert.equal(imageLooksComplete(b.buffer, 'png'), false);
+});
+
+test('truncated files are refused for every format', async () => {
+  for (const [fmt, ext] of [['jpeg', 'jpg'], ['png', 'png'], ['webp', 'webp']]) {
+    const full = new Uint8Array(await encode(fmt));
+    for (const keep of [0.25, 0.5, 0.9, 0.99]) {
+      const cut = full.slice(0, Math.floor(full.length * keep)).buffer;
+      assert.equal(imageLooksComplete(cut, ext), false, `${fmt} cut at ${keep}`);
+    }
+  }
+});
+
+test('a PNG with one corrupted byte inside a chunk is refused (CRC)', async () => {
+  const b = new Uint8Array(await encode('png'));
+  b[40] ^= 0xff;
+  assert.equal(imageLooksComplete(b.buffer, 'png'), false);
+});
