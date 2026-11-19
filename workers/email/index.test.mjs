@@ -639,9 +639,38 @@ test('matched-listing emails require the dedicated alert token', async () => {
   assert.equal(alertTokenWithoutBrevo.status, 501);
 });
 
-async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode: 'append' }), brevo = () => Response.json({ messageId: 'x' }) } = {}) {
+function createGuideDb({ fail = false } = {}) {
+  const rows = [];
+  return {
+    rows,
+    prepare(sql) {
+      let args = [];
+      const st = {
+        bind(...v) { args = v; return st; },
+        async run() {
+          if (fail) throw new Error('D1_ERROR: down');
+          if (sql.startsWith('CREATE TABLE')) return { success: true };
+          if (sql.startsWith('INSERT INTO guide_requests')) {
+            const [created_at, email, prenom, nom, guide, tag, consent] = args;
+            rows.push({ id: rows.length + 1, created_at, email, prenom, nom, guide, tag, consent, status: 'received', sheet_ok: 0, lead_ok: 0 });
+            return { success: true, meta: { last_row_id: rows.length } };
+          }
+          if (sql.startsWith('UPDATE guide_requests')) {
+            const [status, sheet_ok, lead_ok, id] = args;
+            Object.assign(rows[id - 1], { status, sheet_ok, lead_ok });
+            return { success: true };
+          }
+          throw new Error(`unexpected D1 query: ${sql}`);
+        },
+      };
+      return st;
+    },
+  };
+}
+
+async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode: 'append' }), brevo = () => Response.json({ messageId: 'x' }), db = createGuideDb() } = {}) {
   const originalFetch = globalThis.fetch;
-  const calls = { sheet: [], mails: [] };
+  const calls = { sheet: [], mails: [], db };
   globalThis.fetch = async (input, init = {}) => {
     const url = String(input);
     if (url.includes('script.google.com')) { calls.sheet.push(JSON.parse(init.body)); return sheet(); }
@@ -653,7 +682,7 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
     for (const [k, v] of Object.entries(fields)) body.set(k, v);
     const res = await worker.fetch(new Request('https://worker.example/guide', {
       method: 'POST', headers: { Origin: 'https://www.immobiliere-pujol.fr' }, body,
-    }), productionEnv, { waitUntil() {} });
+    }), { ...productionEnv, DB: db }, { waitUntil() {} });
     return { res, json: await res.json(), calls };
   } finally {
     globalThis.fetch = originalFetch;
@@ -714,4 +743,30 @@ test('guide: Sheet failures after a sent guide still answer ok and flag it in th
   const leadFails = await postGuide(GUIDE_OK, { brevo: (m) => toLead(m) ? new Response('{}', { status: 500 }) : Response.json({ messageId: 'x' }) });
   assert.equal(leadFails.res.status, 200);
   assert.equal(leadFails.calls.sheet.length, 1);
+});
+
+test('guide: durable D1 record before sending; Sheet and Gaëlle both down still keeps the request', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, {
+    sheet: () => new Response('down', { status: 503 }),
+    brevo: (m) => toLead(m) ? new Response('{}', { status: 503 }) : Response.json({ messageId: 'x' }),
+  });
+  assert.equal(res.status, 200, 'the guide was sent, so the visitor is told so');
+  assert.equal(calls.db.rows.length, 1);
+  assert.deepEqual(
+    { email: calls.db.rows[0].email, prenom: calls.db.rows[0].prenom, nom: calls.db.rows[0].nom, tag: calls.db.rows[0].tag, status: calls.db.rows[0].status, sheet_ok: calls.db.rows[0].sheet_ok, lead_ok: calls.db.rows[0].lead_ok },
+    { email: 'bailleur@example.com', prenom: 'Marie', nom: 'Durand', tag: 'Demande guide gestion - gérer seul', status: 'sent', sheet_ok: 0, lead_ok: 0 },
+  );
+  assert.match(calls.db.rows[0].consent, /J'accepte de recevoir gratuitement ce guide/);
+});
+
+test('guide: if the D1 record fails, nothing is sent (503)', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, { db: createGuideDb({ fail: true }) });
+  assert.equal(res.status, 503);
+  assert.equal(calls.mails.length + calls.sheet.length, 0);
+});
+
+test('guide: refused guide email leaves the D1 row as send_failed', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, { brevo: () => new Response('{}', { status: 400 }) });
+  assert.equal(res.status, 502);
+  assert.equal(calls.db.rows[0].status, 'send_failed');
 });

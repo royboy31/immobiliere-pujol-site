@@ -921,6 +921,34 @@ async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> 
   }
 }
 
+// Durable record of every guide request (D1, same database as newsletter_reminders), written
+// BEFORE anything is sent, so a request is never lost even if the Sheet and Gaëlle's email both
+// fail afterwards. Rows with sheet_ok = 0 are the ones to re-enter by hand.
+async function recordGuideRequest(env: Env, r: { email: string; prénom: string; nom: string; guide: string; tag: string }): Promise<number | null> {
+  try {
+    await env.DB.prepare(`CREATE TABLE IF NOT EXISTS guide_requests (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL, email TEXT NOT NULL, prenom TEXT, nom TEXT,
+      guide TEXT NOT NULL, tag TEXT NOT NULL, consent TEXT NOT NULL, status TEXT NOT NULL,
+      sheet_ok INTEGER NOT NULL DEFAULT 0, lead_ok INTEGER NOT NULL DEFAULT 0)`).run();
+    const res = await env.DB.prepare(`INSERT INTO guide_requests (created_at, email, prenom, nom, guide, tag, consent, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 'received')`)
+      .bind(new Date().toISOString(), r.email, r.prénom, r.nom, r.guide, r.tag, GUIDE_CONSENT_TEXT).run();
+    const id = Number((res as { meta?: { last_row_id?: number } })?.meta?.last_row_id);
+    return Number.isFinite(id) && id > 0 ? id : null;
+  } catch (err) {
+    console.error('guide: D1 record failed', String(err));
+    return null;
+  }
+}
+async function updateGuideRequest(env: Env, id: number, status: string, sheetOk = false, leadOk = false): Promise<void> {
+  try {
+    await env.DB.prepare('UPDATE guide_requests SET status = ?, sheet_ok = ?, lead_ok = ? WHERE id = ?')
+      .bind(status, sheetOk ? 1 : 0, leadOk ? 1 : 0, id).run();
+  } catch (err) {
+    console.error('guide: D1 update failed', id, String(err));
+  }
+}
+
 // The PDF paths are unlisted (random folder, never in the page HTML) and only travel in the
 // guide email: a shareable link, not a per-visitor authorisation.
 async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; recorded?: boolean }> {
@@ -939,8 +967,14 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
   const base = [env.ALLOWED_ORIGIN, ...PROD_ORIGINS].includes(origin) ? origin : SITE_URL;
   const link = base + guide.file;
 
-  // 1. The guide email is the delivery. If Brevo refuses it, nothing is recorded and the
-  //    visitor is asked to try again (no Sheet row, no lead email, so no duplicate later).
+  // 0. Durable record first. Without it nothing is sent (the visitor can simply retry).
+  const reqId = await recordGuideRequest(env, { email, prénom, nom, guide: guideId, tag: guide.tag });
+  if (reqId === null) {
+    return { ok: false, status: 503, error: "Votre demande n'a pas pu être enregistrée. Merci de réessayer dans quelques minutes." };
+  }
+
+  // 1. The guide email is the delivery. If Brevo refuses it, no Sheet row and no lead email
+  //    (so no duplicate if the visitor retries); the D1 row keeps status send_failed.
   const sent = await sendEmail(env, {
     subject: `Votre guide : ${guide.title}`,
     html: buildCustomerEmail({
@@ -955,6 +989,7 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
     fromName: 'Immobilière Pujol — Gestion Locative',
   }).catch(() => ({ ok: false }));
   if (!sent.ok) {
+    await updateGuideRequest(env, reqId, 'send_failed');
     return { ok: false, status: 502, error: "Le guide n'a pas pu être envoyé à cette adresse. Vérifiez-la et réessayez dans quelques minutes." };
   }
 
@@ -964,13 +999,14 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
   const recorded = await appendSheetChecked('Gestion Locative', [now(), prénom, nom, '', email, note]);
   const lead = await sendEmail(env, {
     subject: `[${guide.tag}] ${prénom} ${nom}`,
-    html: buildTable(`${guide.tag}`, [['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main']]),
+    html: buildTable(`${guide.tag}`, [['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main'], ['Référence', `guide_requests #${reqId}`]]),
     replyTo: email,
     to: `gaelle${D}`,
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol — Guides gestion locative',
   }).catch(() => ({ ok: false }));
-  if (!recorded) console.error('guide: consent row not written', guide.tag);
+  await updateGuideRequest(env, reqId, 'sent', recorded, lead.ok);
+  if (!recorded) console.error('guide: consent row not written, see D1 guide_requests id', reqId);
   if (!lead.ok) console.error('guide: lead email to Gaëlle failed', guide.tag);
   return { ok: true, recorded };
 }
