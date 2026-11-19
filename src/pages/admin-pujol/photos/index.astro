@@ -178,10 +178,10 @@ const boot = JSON.stringify({ ...data, pages: LP_PAGES, uses });
         <span class="lpa-dot" style="left:${dx};top:${dy}"></span>
         ${sameDot ? '' : `<span class="lpa-dot lpa-dot--m" style="left:${mx};top:${my}"></span>`}
       </div>
-      ${sameDot ? '' : '<p class="lpa-legend">Rond plein : cadrage ordinateur. Rond pointillé : cadrage téléphone.</p>'}
+      <p class="lpa-legend">Cliquez sur la photo à l’endroit qui doit toujours rester visible (un visage par exemple). C’est la même photo partout : le clic choisit seulement la partie gardée quand elle est recadrée, voir les deux aperçus ci-dessous.${sameDot ? '' : ' Rond plein : ordinateur. Rond pointillé : téléphone.'}</p>
       <div class="lpa-mode">
-        <span>Le clic cadre :</span>
-        ${(['both', 'desk', 'mob'] as const).map((m) => `<label><input type="radio" name="mode-${s.id}" value="${m}" data-mode="${s.id}" ${mode === m ? 'checked' : ''}/> ${{ both: 'les deux', desk: 'ordinateur', mob: 'téléphone' }[m]}</label>`).join('')}
+        <span>Le clic recadre :</span>
+        ${(['both', 'desk', 'mob'] as const).map((m) => `<label><input type="radio" name="mode-${s.id}" value="${m}" data-mode="${s.id}" ${mode === m ? 'checked' : ''}/> ${{ both: 'ordinateur et téléphone', desk: 'ordinateur seulement', mob: 'téléphone seulement' }[m]}</label>`).join('')}
       </div>
       <div class="lpa-crops">
         <div class="lpa-crop"><p>Sur ordinateur</p><img src="${thumb(d)}" alt="" style="aspect-ratio:${rd};object-position:${deskPos(d)}" loading="lazy" /></div>
