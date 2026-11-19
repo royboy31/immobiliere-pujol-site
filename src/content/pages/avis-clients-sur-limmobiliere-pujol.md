@@ -34,13 +34,7 @@ seoDescription: "Consultez les avis clients sur l'Immobilière Pujol, agence imm
 <h3><span style="color: #000000; font-size: 14pt;"><a style="color: #000000;" href="https://www.google.fr/search?q=immobili%C3%A8re+pujol&amp;cad=h" target="_blank" rel="noopener">Les avis clients google Immobilière Pujol</a></span></h3>
 </li>
 	<li>
-<h3><span style="color: #000000;"><a style="color: #000000;" href="http://avis-immobiliere-pujolvente.opinionsystem.fr/" target="_blank" rel="noopener">Les avis clients Immobilière Pujol opinion system en vente</a></span></h3>
-</li>
-	<li>
-<h3><span style="color: #000000;"><a style="color: #000000;" href="http://immobilere-pujol-syndic.opinionsystem.fr/">Les avis clients Immobilière Pujol opinion system en syndic</a></span></h3>
-</li>
-	<li>
-<h3><span style="color: #000000;"><a style="color: #000000;" href="http://avis-immobiliere-pujol-gestionlocative.opinionsystem.fr/">Les avis clients clients Immobilière Pujol opinion system en location et gestion locative</a></span></h3>
+<h3><span style="color: #000000;"><a style="color: #000000;" href="https://www.opinionsystem.fr/fr-fr/certificate/4429" target="_blank" rel="noopener">Les avis clients Immobilière Pujol opinion system en vente</a></span></h3>
 </li>
 	<li>
 <h3><span style="color: #000000;"><a style="color: #000000;" href="https://www.immodvisor.com/pro/immobiliere-pujol-marseille-13006-149.html" target="_blank" rel="noopener">Les avis clients  Immobilière Pujol  Immoadvisor</a></span></h3>

@@ -367,31 +367,18 @@ if (
     external: true,
   };
 
+  // OpinionSystem (19/11/2026): only the Vente certificate 4429 is still online. The Syndic and
+  // Gestion locative pages (old *.opinionsystem.fr subdomains, certificates 4430/4431) are gone,
+  // so their cards are removed until Pujol gives a working address.
   if (slug === 'les-avis-clients-de-limmobiliere-pujol') {
     reviewPlatforms = [
       googleCard,
       {
         key: 'os-vente',
-        href: 'http://avis-immobiliere-pujolvente.opinionsystem.fr/',
+        href: 'https://www.opinionsystem.fr/fr-fr/certificate/4429',
         name: 'Opinion System — Vente',
         tagline: 'Avis vérifiés des clients qui ont vendu un bien avec nous.',
         cta: 'Lire les avis vente',
-        external: true,
-      },
-      {
-        key: 'os-syndic',
-        href: 'http://immobilere-pujol-syndic.opinionsystem.fr/',
-        name: 'Opinion System — Syndic',
-        tagline: 'Retours des copropriétés que nous accompagnons en syndic.',
-        cta: 'Lire les avis syndic',
-        external: true,
-      },
-      {
-        key: 'os-gestion',
-        href: 'http://avis-immobiliere-pujol-gestionlocative.opinionsystem.fr/',
-        name: 'Opinion System — Gestion locative',
-        tagline: 'Témoignages des propriétaires qui nous confient leur bien.',
-        cta: 'Lire les avis gestion',
         external: true,
       },
       immodvisorCard,
@@ -408,22 +395,6 @@ if (
         href: 'https://www.opinionsystem.fr/fr-fr/certificate/4429',
         name: 'Opinion System — Vente',
         tagline: 'Certificat des avis vérifiés sur nos transactions de vente.',
-        cta: 'Voir le certificat',
-        external: true,
-      },
-      {
-        key: 'os-syndic',
-        href: 'https://www.opinionsystem.fr/fr-fr/certificate/4431',
-        name: 'Opinion System — Syndic',
-        tagline: 'Certificat des avis vérifiés sur notre service syndic.',
-        cta: 'Voir le certificat',
-        external: true,
-      },
-      {
-        key: 'os-gestion',
-        href: 'https://www.opinionsystem.fr/fr-fr/certificate/4430',
-        name: 'Opinion System — Gestion locative',
-        tagline: "Certificat des avis vérifiés sur notre service de gestion locative.",
         cta: 'Voir le certificat',
         external: true,
       },
