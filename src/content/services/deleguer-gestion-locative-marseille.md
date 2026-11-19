@@ -93,6 +93,7 @@ jsonLd: |
 <li>Un gestionnaire dédié qui connaît votre bien et votre situation, réactif pour répondre à toutes vos questions.</li>
 <li>Des baux et états des lieux qui vous protègent et vous évitent des conflits</li>
 <li>Un accès en ligne à vos comptes en temps réel (loyers, charges, travaux) et documents</li>
+<li>Des conseils à chaque remise en location</li>
 </ul>
 <h2>Avant / après : ce que change vraiment la fin de l’autogestion</h2>
 <h3>Avant (autogestion)</h3>
@@ -123,7 +124,7 @@ jsonLd: |
 <li>Toutes vos obligations en tant que bailleur (baux, diagnostics, encadrement des loyers, DPE, mises aux normes) sont vérifiées et mises à jour par des professionnels.</li>
 <li>Un gestionnaire dédié qui vous apporte des conseils au quotidien pour mieux louer, améliorer le DPE de votre bien et sécuriser vos loyers.</li>
 </ol>
-<h2>Comment se déroule la fin de votre autogestion, étape par étape</h2>
+<h2>La fin de votre autogestion, étape par étape</h2>
 <ul>
 <li><strong>Étape 1 – Point de situation par téléphone</strong>
 Appel avec notre expert-conseil en gestion locative, revue de votre situation (bail actuel, locataire, travaux récents, loyer, risques juridiques éventuels). Réception d’une proposition tarifaire.</li>
@@ -155,11 +156,11 @@ Encaissement des loyers, versement à date, gestion des demandes locataires, sui
 <li>La validation de chaque devis travaux.</li>
 <li>Les grands arbitrages de loyers et de stratégie sur votre bien.</li>
 </ul>
-<h2>Pourquoi vous pouvez nous confier votre bien en toute confiance</h2>
+<h2>Vous pouvez nous confier votre bien en toute confiance</h2>
 <ul>
-<li>Très peu d’impayés depuis la création de l’agence grâce à un suivi rigoureux des dossiers et des relances.</li>
-<li>Relocations plus rapides que la moyenne du marché marseillais.</li>
-<li>Des milliers de bailleurs nous confient déjà la gestion de leurs biens.</li>
+<li>Très peu d’impayés depuis la création de l’agence grâce à un suivi rigoureux des dossiers et des relances, ce que démontre notre taux d’assurance loyers impayés à 1,8% TTC</li>
+<li>Relocations plus rapides que la moyenne du marché marseillais (en 18 jours médians)</li>
+<li>Des milliers de bailleurs qui nous font déjà confiance pour la gestion de leurs biens.</li>
 </ul>
 <h2>Un diagnostic offert pour sortir de l’autogestion</h2>
 <p>En 20 minutes avec notre expert-conseil en gestion locative, vous faites le point sur :</p>

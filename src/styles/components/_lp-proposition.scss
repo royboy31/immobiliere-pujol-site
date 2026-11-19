@@ -276,8 +276,7 @@ $p-slate-soft:  rgb(226, 232, 235);
     &:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 6px 18px rgba($p-ink, .16);
       &::after { transform: translateX(3px); } }
     &:focus-visible { outline: 2px solid $p-ink; outline-offset: 3px; } }
-  .prop-section--ink & .prop-link { background: rgba(#fff, .12); color: #fff;
-    &::after { background: $p-green; color: $p-ink; } &:hover { background: rgba(#fff, .2); } } }
+  .prop-section--ink & .prop-link:hover { background: #fff; } }
 
 // ---------- guides to download (Je gère seul, 19/11) ----------
 .prop-guidedl { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
@@ -318,7 +317,8 @@ $p-slate-soft:  rgb(226, 232, 235);
   .mag-h2 { color: #fff; margin-bottom: 28px !important; }
   p { color: rgba(#fff, .88); font-size: 19px; line-height: 1.7; max-width: 60ch; }
   p.prop-ctas { margin-top: 40px !important; max-width: none; }
-  .mag-btn--line { background: #fff; border-color: #fff; color: $p-ink; &:hover { background: $p-green; border-color: $p-green; } }
+  // secondary on the dark panel: coloured (orange), white only on hover (Caroline 19/11)
+  .mag-btn--line { background: $p-orange; border-color: $p-orange; color: $p-ink; &:hover { background: #fff; border-color: #fff; color: $p-ink; } }
   @media (max-width: $bp-tablet) { padding: 48px 24px; p { font-size: 17px; } } }
 // Split block with the orange "Vous restez décisionnaire" box: photo runs along the whole list,
 // the box goes full width underneath so it is clearly seen.

@@ -63,27 +63,39 @@ export const PROFILES: ProfileCard[] = [
     { match: 'Avant / après', ctas: [{ label: 'Voir comment d’autres bailleurs ont amélioré leur gestion en changeant d’agence', href: '#preuves', style: 'text' }] },
     { match: 'Changer d’agence de gestion, étape par étape', ctas: [{ label: 'Comprendre en détail comment se déroule un changement d’agence', href: '/services/changement-gestionnaire-locatif-etapes-marseille/', style: 'text' }] },
     { match: 'Tout ce que vous n’aurez pas à gérer', ctas: [{ label: 'Discutez avec un expert-conseil de la gestion locative', href: CONSEILLER, style: 'text' }] },
-    { match: 'D’autres propriétaires bailleurs', id: 'preuves' },
+    { match: 'En 30 jours', ctas: [{ label: 'Faire le point sur la performance actuelle de la gestion de mon bien', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
+    { match: 'D’autres propriétaires bailleurs', id: 'preuves', ctas: [{ label: 'Parler à un gestionnaire pour envisager le changement d’agence', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver un diagnostic gratuit de changement d’agence avec un expert-conseil de la gestion locative', href: CONSEILLER }] },
+    { match: 'FAQ', ctas: [{ label: 'Planifier un appel pour passer en revue mon mandat actuel', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Prêt à voir', ctas: [{ label: 'Obtenir mon devis de gestion locative chez Immobilière Pujol', href: FORM }, { label: 'Parler à un expert-conseil avant de décider de changer', href: CONSEILLER, style: 'line' }] },
   ] },
   { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }], guides: [
     { id: 'gerer-seul-cout', title: 'Gérer seul ou déléguer ?', sub: 'Gérer seul vous coûte plus cher que de confier votre bien à un expert.', cover: '/images/services/guides/cover-gerer-seul-ou-deleguer.jpg' },
     { id: 'gerer-seul-risque', title: 'Gérer seul : vous portez le risque', sub: 'Responsabilité civile et pénale : dans un contexte législatif qui se durcit chaque année, l’erreur n’est plus une option.', cover: '/images/services/guides/cover-gerer-seul-risque.jpg' },
   ], heroCtas: [{ label: 'Parler à un expert-conseil de la gestion locative pour estimer vos gains et votre sécurité en passant par un professionnel', href: CONSEILLER }], sections: [
-    { match: 'Avant / après', ctas: [{ label: 'Voir tout ce que vous pourriez arrêter de gérer dès ce mois‑ci', href: '/services/taches-gestion-locative-deleguees-marseille/', style: 'text' }] },
-    { match: 'Comment se déroule la fin', ctas: [{ label: 'Réserver mon diagnostic gratuit de fin d’autogestion', href: CONSEILLER, style: 'text' }] },
+    { match: 'Avant / après', ctas: [{ label: 'Voir tout ce que vous pourriez arrêter de gérer dès ce mois‑ci', href: CONSEILLER, style: 'text' }] },
+    { match: 'En 30 jours', ctas: [{ label: 'Savoir comment nous sécurisons vos revenus et votre location', href: CONSEILLER, style: 'text' }] },
+    { match: 'La fin de votre autogestion', ctas: [{ label: 'Réserver mon diagnostic gratuit de fin d’autogestion', href: CONSEILLER, style: 'text' }] },
+    { match: 'Tout ce que vous n’aurez plus à faire', ctas: [{ label: 'Réserver un rendez-vous avec notre experte de la gestion locative', href: CONSEILLER, style: 'text' }] },
+    { match: 'Vous pouvez nous confier', ctas: [{ label: 'Parler à un gestionnaire pour voir comment garder la main en déléguant', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver mon diagnostic gratuit', href: CONSEILLER }] },
+    { match: 'FAQ', ctas: [{ label: 'Faire vérifier gratuitement mon bail et mes diagnostics', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Prêt à arrêter', ctas: [{ label: 'Obtenir mon devis de gestion locative', href: FORM }, { label: 'Parler à un expert de la gestion locative avant de décider', href: CONSEILLER, style: 'line' }] },
   ] },
   { slug: 'premiere-location', service: 'premiere-mise-en-location-marseille', kicker: 'Je loue pour la première fois', question: 'Premier investissement ?', color: 'slate', img: { src: IMG + 'p-premier.webp', w: 1024, h: 683 }, heroPos: '50% 12%', heroPosMobile: '72% 40%', pics: [{ src: IMG + 's-premier-1.webp', w: 1024, h: 640 }, { src: IMG + 's-premier-2.webp', w: 800, h: 533 }], heroCtas: [{ label: 'Faire estimer le loyer et la rentabilité de mon bien', href: ESTIMATION }], sections: [
     { match: 'Avant / après', ctas: [{ label: 'Voir à quoi ressemble une 1ère mise en location réussie', href: '#reussite', style: 'text' }] },
-    { match: 'En 45 jours', id: 'reussite' },
+    { match: 'En 45 jours', id: 'reussite', ctas: [{ label: 'Faire valider mon plan de 1ère mise en location en 30 minutes', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Votre première mise en location, étape par étape', ctas: [{ label: 'Parler à un expert-conseil en gestion locative pour cadrer mon calendrier', href: CONSEILLER, style: 'text' }] },
+    { match: 'Tout ce que vous n’aurez pas à improviser', ctas: [{ label: 'Parler à un gestionnaire avant de mettre mon bien en location', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
+    { match: 'Nous accompagnons déjà', ctas: [{ label: 'Estimer mon loyer par un gestionnaire qui signe 400 baux/an', href: ESTIMATION, style: 'text' }] }, // CTA tab suggestion
+    { match: 'FAQ', ctas: [{ label: 'Planifier un appel pour cadrer achat + 1ère location', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'Avant la mise sur le marché', ctas: [{ label: 'Faire estimer le loyer et la rentabilité de mon bien', href: ESTIMATION }] },
     { match: 'Votre premier locataire', ctas: [{ label: 'Obtenir mon devis de gestion locative pour mon 1er bien', href: FORM }, { label: 'Parler à un gestionnaire avant de me lancer', href: CONSEILLER, style: 'line' }] },
   ] },
   { slug: 'coproprietaire', service: 'coproprietaire-syndic-gestion-locative-marseille', kicker: 'Je suis copropriétaire chez Immobilière Pujol', question: 'Votre syndic peut aussi gérer votre location', color: 'sand', img: { src: IMG + 'p-copro.webp', w: 1600, h: 1067 }, pics: [{ src: IMG + 's-copro-1.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-2.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-3.webp', w: 800, h: 533 }], heroCtas: [{ label: 'Parler à un gestionnaire pour faire le point sur votre bien à louer et à gérer', href: CONSEILLER }], sections: [
+    { match: 'Les avantages pour vous de la synergie', ctas: [{ label: 'Planifier un entretien pour revoir mon lot et ma copropriété ensemble', href: CONSEILLER, style: 'text' }] }, // Doc "Réserver un entretien avec" is unfinished: CTA tab wording instead
+    { match: 'Quand copropriété', ctas: [{ label: 'Demander un diagnostic copropriétaire bailleur (lot + copropriété)', href: CONSEILLER, style: 'text' }] }, // synergy guide not supplied: CTA tab wording instead
+    { match: 'FAQ', ctas: [{ label: 'Voir ce que changerait la gestion locative Immobilière Pujol pour mon lot', href: FORM, style: 'text' }] }, // CTA tab suggestion
     { match: 'Tout ce que vous n’aurez plus à faire', ctas: [{ label: 'Déjà client Syndic ? Découvrez vos avantages exclusifs pour la gestion locative', href: '#diagnostic', style: 'text' }] },
     { match: 'Un diagnostic dédié', id: 'diagnostic', ctas: [{ label: 'Réserver mon diagnostic copropriétaire bailleur avec un gestionnaire expert', href: CONSEILLER }] },
     { match: 'Votre patrimoine locatif', ctas: [{ label: 'Voir ce que change la gestion locative Immobilière Pujol pour mon bien locatif', href: FORM }, { label: 'Parler à un gestionnaire dédié aux copropriétaires', href: CONSEILLER, style: 'line' }] },

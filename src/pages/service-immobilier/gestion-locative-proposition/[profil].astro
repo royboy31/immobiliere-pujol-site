@@ -195,6 +195,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
         <div class="mag-wrap prop-faq">
           <h2 class="mag-h2 prop-center">Questions fréquentes</h2>
           {prof.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+          <LpCtas ctas={sec('FAQ')?.ctas} center />
         </div>
       </section>
     )}
