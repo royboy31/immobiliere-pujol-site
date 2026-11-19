@@ -901,45 +901,69 @@ async function handleContact(fd: FormData, env: Env, ctx: ExecutionContext): Pro
 // contacted again about gestion locative; without it, no guide. The browser starts the
 // download itself once we answer ok; we also email the link and notify Gaëlle.
 const GUIDES: Record<string, { title: string; file: string }> = {
-  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/guide-gerer-seul-ou-deleguer.pdf' },
-  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/guide-gerer-seul-risque-juridique-penal.pdf' },
+  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-ou-deleguer.pdf' },
+  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-risque-juridique-penal.pdf' },
 };
 const GUIDE_CONSENT_TEXT =
   "J'accepte que l'Immobilière Pujol me recontacte par email au sujet de la gestion locative de mon bien.";
 
-async function handleGuide(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string }> {
+// Appends one row and confirms the Apps Script really wrote it (HTTP ok AND {ok:true}).
+async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> {
+  try {
+    const res = await fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify({ tab, row }), redirect: 'follow' });
+    if (!res.ok) return false;
+    const result = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    return result?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
+// The PDF paths are unlisted (random folder, never in the page HTML): the link is only
+// returned after consent. It is a shareable link, not a per-visitor authorisation.
+async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; url?: string; emailed?: boolean }> {
   const email = ((fd.get('email') as string) || '').trim();
   const guide = GUIDES[((fd.get('guide') as string) || '').trim()];
-  if (!guide) return { ok: false, error: 'Guide inconnu.' };
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, error: 'Adresse email invalide.' };
-  if (fd.get('consent') !== '1') return { ok: false, error: 'Merci de cocher la case pour recevoir le guide.' };
+  if (!guide) return { ok: false, status: 400, error: 'Guide inconnu.' };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, status: 400, error: 'Adresse email invalide.' };
+  if (fd.get('consent') !== '1') return { ok: false, status: 400, error: 'Merci de cocher la case pour recevoir le guide.' };
 
   const base = [env.ALLOWED_ORIGIN, ...PROD_ORIGINS].includes(origin) ? origin : SITE_URL;
   const link = base + guide.file;
-  const note = `Téléchargement du guide « ${guide.title} ». Consentement coché : ${GUIDE_CONSENT_TEXT}`;
 
-  ctx.waitUntil(logToSheet('Gestion Locative', [now(), '', '', '', email, note]));
-  ctx.waitUntil(sendEmail(env, {
-    subject: `Nouveau téléchargement de guide : ${guide.title}`,
-    html: buildTable('Téléchargement de guide', [['Email', email], ['Guide', guide.title], ['Consentement', GUIDE_CONSENT_TEXT]]),
-    replyTo: email,
-    to: `gaelle${D}`,
-    fromEmail: NOTIFY_FROM,
-    fromName: 'Immobilière Pujol — Guides gestion locative',
-  }).then(() => undefined, () => undefined));
-  ctx.waitUntil(sendEmail(env, {
-    subject: `Votre guide : ${guide.title}`,
-    html: buildCustomerEmail({
-      bodyHtml: `<p>Merci pour votre intérêt. Voici votre guide « ${esc(guide.title)} » :</p>
+  // 1. Proof of consent first. If it can't be recorded, nothing else happens (no
+  //    download, no email), so a retry never duplicates Gaëlle's lead email.
+  const note = `Téléchargement du guide « ${guide.title} ». Consentement coché : ${GUIDE_CONSENT_TEXT}`;
+  if (!(await appendSheetChecked('Gestion Locative', [now(), '', '', '', email, note]))) {
+    return { ok: false, status: 503, error: "Votre demande n'a pas pu être enregistrée. Merci de réessayer dans quelques minutes." };
+  }
+
+  // 2. Both emails, awaited. A failed email does not undo the download (consent is on
+  //    file); the visitor is only told about the email when it was accepted.
+  const [lead, visitor] = await Promise.all([
+    sendEmail(env, {
+      subject: `Nouveau téléchargement de guide : ${guide.title}`,
+      html: buildTable('Téléchargement de guide', [['Email', email], ['Guide', guide.title], ['Consentement', GUIDE_CONSENT_TEXT]]),
+      replyTo: email,
+      to: `gaelle${D}`,
+      fromEmail: NOTIFY_FROM,
+      fromName: 'Immobilière Pujol — Guides gestion locative',
+    }).catch(() => ({ ok: false })),
+    sendEmail(env, {
+      subject: `Votre guide : ${guide.title}`,
+      html: buildCustomerEmail({
+        bodyHtml: `<p>Merci pour votre intérêt. Voici votre guide « ${esc(guide.title)} » :</p>
 <p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
 <p>Une question sur la gestion de votre bien ? Répondez simplement à cet email, Gaëlle vous recontacte.</p>`,
-    }),
-    to: email,
-    replyTo: `gaelle${D}`,
-    fromEmail: `gaelle${D}`,
-    fromName: 'Immobilière Pujol — Gestion Locative',
-  }).then(() => undefined, () => undefined));
-  return { ok: true };
+      }),
+      to: email,
+      replyTo: `gaelle${D}`,
+      fromEmail: `gaelle${D}`,
+      fromName: 'Immobilière Pujol — Gestion Locative',
+    }).catch(() => ({ ok: false })),
+  ]);
+  if (!lead.ok) console.error('guide: lead email to Gaëlle failed', guide.title);
+  return { ok: true, url: link, emailed: visitor.ok };
 }
 
 async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
@@ -1954,10 +1978,11 @@ export default {
       case '/contact-annonce':
         result = await handleContactAnnonce(fd, env, ctx);
         break;
-      case '/guide':
-        result = await handleGuide(fd, env, ctx, origin);
-        if (!result.ok) return jsonErr(result.error || 'Erreur', 400, origin, env);
-        break;
+      case '/guide': {
+        const g = await handleGuide(fd, env, origin);
+        if (!g.ok) return jsonErr(g.error || 'Erreur', g.status || 400, origin, env);
+        return jsonOk({ ok: true, url: g.url, emailed: g.emailed }, origin, env);
+      }
       case '/newsletter':
         result = await handleNewsletter(fd, env, ctx, origin);
         break;

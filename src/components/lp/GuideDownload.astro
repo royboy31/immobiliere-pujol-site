@@ -17,7 +17,7 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
           <div class="prop-guidedl__body">
             <h3 class="prop-guidedl__title">{g.title}</h3>
             <p>{g.sub}</p>
-            <button type="button" class="mag-btn" data-guide={g.id} data-file={g.file} aria-controls="guide-form">Télécharger le guide</button>
+            <button type="button" class="mag-btn" data-guide={g.id} aria-controls="guide-form">Télécharger le guide</button>
           </div>
         </li>
       ))}
@@ -41,10 +41,8 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
     const msg = form.querySelector<HTMLElement>('.prop-guidedl__msg')!;
     const chosen = form.querySelector<HTMLElement>('.prop-guidedl__chosen')!;
     const guideInput = form.querySelector<HTMLInputElement>('input[name="guide"]')!;
-    let file = '';
     document.querySelectorAll<HTMLButtonElement>('[data-guide]').forEach((b) => b.addEventListener('click', () => {
       guideInput.value = b.dataset.guide || '';
-      file = b.dataset.file || '';
       chosen.textContent = 'Guide choisi : ' + (b.closest('li')?.querySelector('h3')?.textContent || '');
       form.hidden = false; msg.textContent = '';
       form.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -60,10 +58,14 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
         const data = await res.json().catch(() => ({}));
-        if (res.ok && data.ok) {
+        if (res.ok && data.ok && typeof data.url === 'string') {
           try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_download', guide: guideInput.value }); } catch {}
-          msg.innerHTML = 'Merci ! Le téléchargement démarre, et le guide vous attend aussi dans votre boîte mail. <a href="' + file + '" download>Relancer le téléchargement</a>';
-          const a = document.createElement('a'); a.href = file; a.download = ''; document.body.appendChild(a); a.click(); a.remove();
+          msg.textContent = data.emailed
+            ? 'Merci ! Le téléchargement démarre, et le guide vous attend aussi dans votre boîte mail. '
+            : 'Merci ! Le téléchargement démarre. ';
+          const again = document.createElement('a'); again.href = data.url; again.download = ''; again.textContent = 'Relancer le téléchargement';
+          msg.appendChild(again);
+          const a = document.createElement('a'); a.href = data.url; a.download = ''; document.body.appendChild(a); a.click(); a.remove();
         } else {
           msg.textContent = data.error || 'Une erreur est survenue. Veuillez réessayer.';
         }

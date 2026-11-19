@@ -49,7 +49,7 @@ export type ProfileCard = {
 // labels word for word. Download and "receive by email" CTAs are left out until the guide or the
 // email exists; G4 "Réserver un entretien avec" is left out until Caroline completes it.
 export type Cta = { label: string; href: string; style?: 'text' | 'line' }; // text: Doc "CTA texte / discret"
-export type Guide = { id: string; title: string; sub: string; file: string; cover: string };
+export type Guide = { id: string; title: string; sub: string; cover: string }; // PDF path lives in the email worker only
 export type SectionCta = { match: string; id?: string; ctas?: Cta[] };
 
 export const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
@@ -68,8 +68,8 @@ export const PROFILES: ProfileCard[] = [
     { match: 'Prêt à voir', ctas: [{ label: 'Obtenir mon devis de gestion locative chez Immobilière Pujol', href: FORM }, { label: 'Parler à un expert-conseil avant de décider de changer', href: CONSEILLER, style: 'line' }] },
   ] },
   { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }], guides: [
-    { id: 'gerer-seul-cout', title: 'Gérer seul ou déléguer ?', sub: 'Gérer seul vous coûte plus cher que de confier votre bien à un expert.', file: '/guides/guide-gerer-seul-ou-deleguer.pdf', cover: '/images/services/guides/cover-gerer-seul-ou-deleguer.jpg' },
-    { id: 'gerer-seul-risque', title: 'Gérer seul : vous portez le risque', sub: 'Responsabilité civile et pénale : dans un contexte législatif qui se durcit chaque année, l’erreur n’est plus une option.', file: '/guides/guide-gerer-seul-risque-juridique-penal.pdf', cover: '/images/services/guides/cover-gerer-seul-risque.jpg' },
+    { id: 'gerer-seul-cout', title: 'Gérer seul ou déléguer ?', sub: 'Gérer seul vous coûte plus cher que de confier votre bien à un expert.', cover: '/images/services/guides/cover-gerer-seul-ou-deleguer.jpg' },
+    { id: 'gerer-seul-risque', title: 'Gérer seul : vous portez le risque', sub: 'Responsabilité civile et pénale : dans un contexte législatif qui se durcit chaque année, l’erreur n’est plus une option.', cover: '/images/services/guides/cover-gerer-seul-risque.jpg' },
   ], heroCtas: [{ label: 'Parler à un expert-conseil de la gestion locative pour estimer vos gains et votre sécurité en passant par un professionnel', href: CONSEILLER }], sections: [
     { match: 'Avant / après', ctas: [{ label: 'Voir tout ce que vous pourriez arrêter de gérer dès ce mois‑ci', href: '/services/taches-gestion-locative-deleguees-marseille/', style: 'text' }] },
     { match: 'Comment se déroule la fin', ctas: [{ label: 'Réserver mon diagnostic gratuit de fin d’autogestion', href: CONSEILLER, style: 'text' }] },

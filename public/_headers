@@ -2,3 +2,7 @@
 # Remove this file at go-live
 /*
   X-Robots-Tag: noindex, nofollow
+
+# Guide PDFs (unlisted folder, link given after consent): never indexed. Keep this rule in production.
+/guides/*
+  X-Robots-Tag: noindex, nofollow

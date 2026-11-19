@@ -639,41 +639,76 @@ test('matched-listing emails require the dedicated alert token', async () => {
   assert.equal(alertTokenWithoutBrevo.status, 501);
 });
 
-test('guide download needs the consent box, then mails the guide and notifies Gaëlle', async () => {
+async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode: 'append' }), brevo = () => Response.json({ messageId: 'x' }) } = {}) {
   const originalFetch = globalThis.fetch;
-  const mails = [];
-  const sheet = [];
+  const calls = { sheet: [], mails: [] };
   globalThis.fetch = async (input, init = {}) => {
     const url = String(input);
-    if (url.includes('script.google.com')) { sheet.push(JSON.parse(init.body)); return Response.json({ ok: true }); }
-    if (url.includes('/v3/smtp/email')) { mails.push(JSON.parse(init.body)); return Response.json({ messageId: 'x' }); }
+    if (url.includes('script.google.com')) { calls.sheet.push(JSON.parse(init.body)); return sheet(); }
+    if (url.includes('/v3/smtp/email')) { const m = JSON.parse(init.body); calls.mails.push(m); return brevo(m); }
     throw new Error(`unexpected fetch ${url}`);
   };
-  const post = async (fields) => {
+  try {
     const body = new FormData();
     for (const [k, v] of Object.entries(fields)) body.set(k, v);
-    const pending = [];
     const res = await worker.fetch(new Request('https://worker.example/guide', {
       method: 'POST', headers: { Origin: 'https://www.immobiliere-pujol.fr' }, body,
-    }), productionEnv, { waitUntil(p) { pending.push(p); } });
-    await Promise.all(pending);
-    return res;
-  };
-  try {
-    const refused = await post({ email: 'bailleur@example.com', guide: 'gerer-seul-cout' });
-    assert.equal(refused.status, 400);
-    assert.equal(mails.length + sheet.length, 0, 'nothing sent without consent');
-    assert.equal((await post({ email: 'bailleur@example.com', guide: 'inconnu', consent: '1' })).status, 400);
-
-    const ok = await post({ email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' });
-    assert.equal(ok.status, 200);
-    assert.equal(mails.length, 2);
-    const toVisitor = mails.find((m) => m.to?.[0]?.email === 'bailleur@example.com');
-    assert.match(toVisitor.htmlContent, /https:\/\/www\.immobiliere-pujol\.fr\/guides\/guide-gerer-seul-ou-deleguer\.pdf/);
-    assert.ok(mails.some((m) => m.to?.[0]?.email === 'gaelle@immobiliere-pujol.fr'));
-    assert.equal(sheet[0].tab, 'Gestion Locative');
-    assert.match(sheet[0].row[5], /Consentement coché/);
+    }), productionEnv, { waitUntil() {} });
+    return { res, json: await res.json(), calls };
   } finally {
     globalThis.fetch = originalFetch;
   }
+}
+const GUIDE_OK = { email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
+
+test('guide: refused without consent or with an unknown guide, nothing written or sent', async () => {
+  for (const fields of [{ email: 'bailleur@example.com', guide: 'gerer-seul-cout' }, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }]) {
+    const { res, calls } = await postGuide(fields);
+    assert.equal(res.status, 400);
+    assert.equal(calls.sheet.length + calls.mails.length, 0);
+  }
+});
+
+test('guide: consent recorded, both emails sent, link returned', async () => {
+  const { res, json, calls } = await postGuide(GUIDE_OK);
+  assert.equal(res.status, 200);
+  assert.equal(json.emailed, true);
+  assert.match(json.url, /^https:\/\/www\.immobiliere-pujol\.fr\/guides\/[0-9a-f]{24}\/guide-gerer-seul-ou-deleguer\.pdf$/);
+  assert.equal(calls.sheet[0].tab, 'Gestion Locative');
+  assert.match(calls.sheet[0].row[5], /Consentement coché/);
+  assert.equal(calls.mails.length, 2);
+  assert.ok(calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'));
+  assert.ok(calls.mails.find((m) => m.to[0].email === 'bailleur@example.com').htmlContent.includes(json.url));
+});
+
+test('guide: if the consent record fails (HTTP error, error body, bad body, network), no link and no email', async () => {
+  const failures = [
+    () => new Response('down', { status: 503 }),
+    () => Response.json({ ok: false, error: 'Tab not found' }),
+    () => new Response('<html>not json</html>', { status: 200 }),
+    () => { throw new TypeError('network'); },
+  ];
+  for (const sheet of failures) {
+    const { res, json, calls } = await postGuide(GUIDE_OK, { sheet });
+    assert.equal(res.status, 503);
+    assert.equal(json.ok, false);
+    assert.equal(json.url, undefined);
+    assert.equal(calls.mails.length, 0, 'no lead email, so a retry never duplicates it');
+  }
+});
+
+test('guide: email rejections do not block the recorded download, visitor told only about a sent email', async () => {
+  const visitorFails = await postGuide(GUIDE_OK, { brevo: (m) => m.to[0].email === 'bailleur@example.com' ? new Response('{}', { status: 400 }) : Response.json({ messageId: 'x' }) });
+  assert.equal(visitorFails.res.status, 200);
+  assert.equal(visitorFails.json.emailed, false);
+  assert.ok(visitorFails.json.url);
+
+  const leadFails = await postGuide(GUIDE_OK, { brevo: (m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr' ? new Response('{}', { status: 500 }) : Response.json({ messageId: 'x' }) });
+  assert.equal(leadFails.res.status, 200);
+  assert.equal(leadFails.json.emailed, true);
+
+  const bothThrow = await postGuide(GUIDE_OK, { brevo: () => { throw new TypeError('network'); } });
+  assert.equal(bothThrow.res.status, 200);
+  assert.equal(bothThrow.json.emailed, false);
+  assert.equal(bothThrow.calls.sheet.length, 1);
 });
