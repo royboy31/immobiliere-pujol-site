@@ -1,0 +1,76 @@
+---
+// Guides to download against an email + a mandatory consent box (Caroline + Roy 19/11/2026).
+// The worker (/guide) refuses without the box, emails the link and notifies Gaëlle; the
+// browser then starts the download. Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
+import type { Guide } from '../../lib/lp-proposition';
+interface Props { guides: Guide[] }
+const { guides } = Astro.props;
+const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au sujet de la gestion locative de mon bien.";
+---
+<section class="prop-section prop-section--paper" id="guides">
+  <div class="mag-wrap">
+    <h2 class="mag-h2 prop-center">Nos guides à télécharger</h2>
+    <ul class="prop-guidedl">
+      {guides.map((g) => (
+        <li class="prop-guidedl__card">
+          <img src={g.cover} alt={`Couverture du guide « ${g.title} »`} width="452" height="640" loading="lazy" />
+          <div class="prop-guidedl__body">
+            <h3 class="prop-guidedl__title">{g.title}</h3>
+            <p>{g.sub}</p>
+            <button type="button" class="mag-btn" data-guide={g.id} data-file={g.file} aria-controls="guide-form">Télécharger le guide</button>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <form id="guide-form" class="prop-guidedl__form" method="post" action="https://pujol-email.roy-68a.workers.dev/guide" novalidate hidden>
+      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
+      <input type="hidden" name="guide" value="" />
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
+      <p class="prop-guidedl__chosen" aria-live="polite"></p>
+      <label class="prop-guidedl__email">Votre email<input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr" /></label>
+      <label class="prop-guidedl__consent"><input type="checkbox" name="consent" value="1" required /> <span>{CONSENT}</span></label>
+      <button type="submit" class="mag-btn">Recevoir le guide</button>
+      <p class="prop-guidedl__msg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('guide-form') as HTMLFormElement | null;
+  if (form) {
+    const msg = form.querySelector<HTMLElement>('.prop-guidedl__msg')!;
+    const chosen = form.querySelector<HTMLElement>('.prop-guidedl__chosen')!;
+    const guideInput = form.querySelector<HTMLInputElement>('input[name="guide"]')!;
+    let file = '';
+    document.querySelectorAll<HTMLButtonElement>('[data-guide]').forEach((b) => b.addEventListener('click', () => {
+      guideInput.value = b.dataset.guide || '';
+      file = b.dataset.file || '';
+      chosen.textContent = 'Guide choisi : ' + (b.closest('li')?.querySelector('h3')?.textContent || '');
+      form.hidden = false; msg.textContent = '';
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      form.querySelector<HTMLInputElement>('input[name="email"]')?.focus({ preventScroll: true });
+    }));
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const consent = form.querySelector<HTMLInputElement>('input[name="consent"]')!;
+      if (!consent.checked) { msg.textContent = 'Merci de cocher la case pour recevoir le guide.'; consent.focus(); return; }
+      if (!form.reportValidity()) return;
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      btn.disabled = true; msg.textContent = 'Envoi…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_download', guide: guideInput.value }); } catch {}
+          msg.innerHTML = 'Merci ! Le téléchargement démarre, et le guide vous attend aussi dans votre boîte mail. <a href="' + file + '" download>Relancer le téléchargement</a>';
+          const a = document.createElement('a'); a.href = file; a.download = ''; document.body.appendChild(a); a.click(); a.remove();
+        } else {
+          msg.textContent = data.error || 'Une erreur est survenue. Veuillez réessayer.';
+        }
+      } catch {
+        msg.textContent = 'Erreur de connexion. Veuillez réessayer.';
+      }
+      btn.disabled = false;
+    });
+  }
+</script>

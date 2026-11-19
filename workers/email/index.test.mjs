@@ -638,3 +638,42 @@ test('matched-listing emails require the dedicated alert token', async () => {
   }), { ...baseEnv, BREVO_API_KEY: undefined }, {});
   assert.equal(alertTokenWithoutBrevo.status, 501);
 });
+
+test('guide download needs the consent box, then mails the guide and notifies Gaëlle', async () => {
+  const originalFetch = globalThis.fetch;
+  const mails = [];
+  const sheet = [];
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    if (url.includes('script.google.com')) { sheet.push(JSON.parse(init.body)); return Response.json({ ok: true }); }
+    if (url.includes('/v3/smtp/email')) { mails.push(JSON.parse(init.body)); return Response.json({ messageId: 'x' }); }
+    throw new Error(`unexpected fetch ${url}`);
+  };
+  const post = async (fields) => {
+    const body = new FormData();
+    for (const [k, v] of Object.entries(fields)) body.set(k, v);
+    const pending = [];
+    const res = await worker.fetch(new Request('https://worker.example/guide', {
+      method: 'POST', headers: { Origin: 'https://www.immobiliere-pujol.fr' }, body,
+    }), productionEnv, { waitUntil(p) { pending.push(p); } });
+    await Promise.all(pending);
+    return res;
+  };
+  try {
+    const refused = await post({ email: 'bailleur@example.com', guide: 'gerer-seul-cout' });
+    assert.equal(refused.status, 400);
+    assert.equal(mails.length + sheet.length, 0, 'nothing sent without consent');
+    assert.equal((await post({ email: 'bailleur@example.com', guide: 'inconnu', consent: '1' })).status, 400);
+
+    const ok = await post({ email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' });
+    assert.equal(ok.status, 200);
+    assert.equal(mails.length, 2);
+    const toVisitor = mails.find((m) => m.to?.[0]?.email === 'bailleur@example.com');
+    assert.match(toVisitor.htmlContent, /https:\/\/www\.immobiliere-pujol\.fr\/guides\/guide-gerer-seul-ou-deleguer\.pdf/);
+    assert.ok(mails.some((m) => m.to?.[0]?.email === 'gaelle@immobiliere-pujol.fr'));
+    assert.equal(sheet[0].tab, 'Gestion Locative');
+    assert.match(sheet[0].row[5], /Consentement coché/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

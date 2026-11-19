@@ -897,6 +897,51 @@ async function handleContact(fd: FormData, env: Env, ctx: ExecutionContext): Pro
   return emailResult;
 }
 
+// Guide download (Caroline + Roy 19/11/2026): email + a mandatory consent box to be
+// contacted again about gestion locative; without it, no guide. The browser starts the
+// download itself once we answer ok; we also email the link and notify Gaëlle.
+const GUIDES: Record<string, { title: string; file: string }> = {
+  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/guide-gerer-seul-ou-deleguer.pdf' },
+  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/guide-gerer-seul-risque-juridique-penal.pdf' },
+};
+const GUIDE_CONSENT_TEXT =
+  "J'accepte que l'Immobilière Pujol me recontacte par email au sujet de la gestion locative de mon bien.";
+
+async function handleGuide(fd: FormData, env: Env, ctx: ExecutionContext, origin: string): Promise<{ ok: boolean; error?: string }> {
+  const email = ((fd.get('email') as string) || '').trim();
+  const guide = GUIDES[((fd.get('guide') as string) || '').trim()];
+  if (!guide) return { ok: false, error: 'Guide inconnu.' };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, error: 'Adresse email invalide.' };
+  if (fd.get('consent') !== '1') return { ok: false, error: 'Merci de cocher la case pour recevoir le guide.' };
+
+  const base = [env.ALLOWED_ORIGIN, ...PROD_ORIGINS].includes(origin) ? origin : SITE_URL;
+  const link = base + guide.file;
+  const note = `Téléchargement du guide « ${guide.title} ». Consentement coché : ${GUIDE_CONSENT_TEXT}`;
+
+  ctx.waitUntil(logToSheet('Gestion Locative', [now(), '', '', '', email, note]));
+  ctx.waitUntil(sendEmail(env, {
+    subject: `Nouveau téléchargement de guide : ${guide.title}`,
+    html: buildTable('Téléchargement de guide', [['Email', email], ['Guide', guide.title], ['Consentement', GUIDE_CONSENT_TEXT]]),
+    replyTo: email,
+    to: `gaelle${D}`,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol — Guides gestion locative',
+  }).then(() => undefined, () => undefined));
+  ctx.waitUntil(sendEmail(env, {
+    subject: `Votre guide : ${guide.title}`,
+    html: buildCustomerEmail({
+      bodyHtml: `<p>Merci pour votre intérêt. Voici votre guide « ${esc(guide.title)} » :</p>
+<p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
+<p>Une question sur la gestion de votre bien ? Répondez simplement à cet email, Gaëlle vous recontacte.</p>`,
+    }),
+    to: email,
+    replyTo: `gaelle${D}`,
+    fromEmail: `gaelle${D}`,
+    fromName: 'Immobilière Pujol — Gestion Locative',
+  }).then(() => undefined, () => undefined));
+  return { ok: true };
+}
+
 async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
   const name = ((fd.get('name') as string) || '').trim();
   const email = ((fd.get('email') as string) || '').trim();
@@ -1908,6 +1953,10 @@ export default {
         break;
       case '/contact-annonce':
         result = await handleContactAnnonce(fd, env, ctx);
+        break;
+      case '/guide':
+        result = await handleGuide(fd, env, ctx, origin);
+        if (!result.ok) return jsonErr(result.error || 'Erreur', 400, origin, env);
         break;
       case '/newsletter':
         result = await handleNewsletter(fd, env, ctx, origin);

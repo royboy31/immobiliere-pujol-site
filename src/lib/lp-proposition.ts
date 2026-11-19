@@ -41,6 +41,7 @@ export type ProfileCard = {
   heroPosMobile?: string; // object-position of the hero photo on mobile, when the centre crop cuts the subject
   pics: Img[]; // section photos, own to this page
   heroCtas: Cta[];
+  guides?: Guide[]; // downloadable against email + consent (GuideDownload.astro)
   sections: SectionCta[]; // CTAs under the sections, matched on the start of the section title
 };
 
@@ -48,6 +49,7 @@ export type ProfileCard = {
 // labels word for word. Download and "receive by email" CTAs are left out until the guide or the
 // email exists; G4 "Réserver un entretien avec" is left out until Caroline completes it.
 export type Cta = { label: string; href: string; style?: 'text' | 'line' }; // text: Doc "CTA texte / discret"
+export type Guide = { id: string; title: string; sub: string; file: string; cover: string };
 export type SectionCta = { match: string; id?: string; ctas?: Cta[] };
 
 export const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
@@ -65,7 +67,10 @@ export const PROFILES: ProfileCard[] = [
     { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver un diagnostic gratuit de changement d’agence avec un expert-conseil de la gestion locative', href: CONSEILLER }] },
     { match: 'Prêt à voir', ctas: [{ label: 'Obtenir mon devis de gestion locative chez Immobilière Pujol', href: FORM }, { label: 'Parler à un expert-conseil avant de décider de changer', href: CONSEILLER, style: 'line' }] },
   ] },
-  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }], heroCtas: [{ label: 'Parler à un expert-conseil de la gestion locative pour estimer vos gains et votre sécurité en passant par un professionnel', href: CONSEILLER }], sections: [
+  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }], guides: [
+    { id: 'gerer-seul-cout', title: 'Gérer seul ou déléguer ?', sub: 'Gérer seul vous coûte plus cher que de confier votre bien à un expert.', file: '/guides/guide-gerer-seul-ou-deleguer.pdf', cover: '/images/services/guides/cover-gerer-seul-ou-deleguer.jpg' },
+    { id: 'gerer-seul-risque', title: 'Gérer seul : vous portez le risque', sub: 'Responsabilité civile et pénale : dans un contexte législatif qui se durcit chaque année, l’erreur n’est plus une option.', file: '/guides/guide-gerer-seul-risque-juridique-penal.pdf', cover: '/images/services/guides/cover-gerer-seul-risque.jpg' },
+  ], heroCtas: [{ label: 'Parler à un expert-conseil de la gestion locative pour estimer vos gains et votre sécurité en passant par un professionnel', href: CONSEILLER }], sections: [
     { match: 'Avant / après', ctas: [{ label: 'Voir tout ce que vous pourriez arrêter de gérer dès ce mois‑ci', href: '/services/taches-gestion-locative-deleguees-marseille/', style: 'text' }] },
     { match: 'Comment se déroule la fin', ctas: [{ label: 'Réserver mon diagnostic gratuit de fin d’autogestion', href: CONSEILLER, style: 'text' }] },
     { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver mon diagnostic gratuit', href: CONSEILLER }] },

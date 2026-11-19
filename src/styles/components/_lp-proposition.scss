@@ -279,3 +279,22 @@ $p-slate-soft:  rgb(226, 232, 235);
   .prop-section--paper & .prop-link { background: #fff; &:hover { background: $p-green; } }
   .prop-section--ink & .prop-link { background: rgba(#fff, .12); color: #fff;
     &::after { background: $p-green; color: $p-ink; } &:hover { background: rgba(#fff, .2); } } }
+
+// ---------- guides to download (Je gère seul, 19/11) ----------
+.prop-guidedl { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  &__card { display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: center; background: #fff; border-radius: 10px; padding: 22px;
+    img { width: 150px; height: auto; border-radius: 4px; box-shadow: 0 8px 24px rgba($p-ink, .14); }
+    @media (max-width: 480px) { grid-template-columns: 110px 1fr; gap: 16px; padding: 16px; img { width: 110px; } } }
+  &__title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; color: $p-ink; }
+  &__body p { margin: 0 0 18px; font-size: 15px; line-height: 1.5; }
+  &__body .mag-btn { padding: 11px 20px; font-size: 14.5px; }
+  &__form { max-width: 560px; margin: 36px auto 0; background: #fff; border-radius: 10px; padding: 26px; display: grid; gap: 16px;
+    &[hidden] { display: none; } }
+  &__chosen { margin: 0; font-weight: 700; color: $p-ink; }
+  &__email { display: grid; gap: 6px; font-weight: 600; font-size: 14px;
+    input { font: inherit; font-weight: 400; padding: 12px 14px; border: 1.5px solid rgba($p-ink, .25); border-radius: 8px; } }
+  &__consent { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.45;
+    input { margin-top: 3px; width: 18px; height: 18px; flex: none; accent-color: $p-ink; } }
+  &__msg { margin: 0; font-size: 14.5px; font-weight: 600; color: $p-ink; a { color: inherit; } }
+}

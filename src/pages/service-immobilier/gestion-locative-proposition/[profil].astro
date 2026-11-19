@@ -8,6 +8,7 @@ import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getEntry } from 'astro:content';
 import { KEY_FIGURES, PROFILES, sectionFor } from '../../../lib/lp-proposition';
 import LpCtas from '../../../components/lp/LpCtas.astro';
+import GuideDownload from '../../../components/lp/GuideDownload.astro';
 import { parseProfile } from '../../../lib/profile-blocks';
 import { posStyle } from '../../../lib/lp-photos';
 import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
@@ -186,6 +187,8 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
         </section>
       );
     })}
+
+    {card.guides && <GuideDownload guides={card.guides} />}
 
     {prof.faq.length > 0 && (
       <section class="prop-section">
