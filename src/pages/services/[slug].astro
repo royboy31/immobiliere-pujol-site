@@ -550,6 +550,8 @@ type ContactExpert = {
   email: string;
   qrSrc: string;
   qrCaption: string;
+  agendaHref: string; // same booking page the QR code opens (decoded 19/11), as a normal link for screens
+  agendaLabel: string;
 };
 let contactExpert: ContactExpert | null = null;
 
@@ -567,6 +569,8 @@ if (slug === 'contacter-un-conseiller-en-gestion-locative') {
     email: 'gaelle@immobiliere-pujol.fr',
     qrSrc: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/QR-CODES.jpg',
     qrCaption: 'Scannez ce QR code pour réserver un rendez-vous téléphonique avec Gaëlle.',
+    agendaHref: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0fgtiWYuB8b-HQxfvOfUQ0ZkIXJk4eE-GTP7MyGPDnx3DcAXrFqHCYKrlEZPcLxDxAjP78k1bT',
+    agendaLabel: 'Réserver un rendez-vous téléphonique',
   };
   bodyHtml = '';
 }
@@ -1139,7 +1143,10 @@ const pageSchemas = entry.data.jsonLd
                 </ul>
                 <figure class="svc-expert__qr">
                   <img src={contactExpert.qrSrc} alt="QR code de prise de rendez-vous" loading="lazy" />
-                  <figcaption>{contactExpert.qrCaption}</figcaption>
+                  <figcaption>
+                    {contactExpert.qrCaption}
+                    <a class="svc-expert__agenda" href={contactExpert.agendaHref} target="_blank" rel="noopener">{contactExpert.agendaLabel}</a>
+                  </figcaption>
                 </figure>
               </div>
             </section>

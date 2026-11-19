@@ -40,11 +40,47 @@ export type ProfileCard = {
   heroPos?: string; // desktop object-position of the hero photo, when the wide crop cuts a head
   heroPosMobile?: string; // object-position of the hero photo on mobile, when the centre crop cuts the subject
   pics: Img[]; // section photos, own to this page
+  heroCtas: Cta[];
+  sections: SectionCta[]; // CTAs under the sections, matched on the start of the section title
 };
 
+// CTAs: Caroline's Doc "Immo Pujol - Analyse Préparatoire 1/2", tabs G1 to G4 (snapshot 19/11/2026),
+// labels word for word. Download and "receive by email" CTAs are left out until the guide or the
+// email exists; G4 "Réserver un entretien avec" is left out until Caroline completes it.
+export type Cta = { label: string; href: string; style?: 'text' | 'line' }; // text: Doc "CTA texte / discret"
+export type SectionCta = { match: string; id?: string; ctas?: Cta[] };
+
+export const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
+export const ESTIMATION = '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form';
+const FORM = '#form';
+const norm = (s: string) => s.normalize('NFC').replace(/[\u2018\u2019]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase();
+export const sectionFor = (card: ProfileCard, title: string) => card.sections.find((s) => norm(title).startsWith(norm(s.match)));
+
 export const PROFILES: ProfileCard[] = [
-  { slug: 'deja-en-agence', service: 'changer-agence-gestion-locative-marseille', kicker: 'Je suis déjà en agence', question: 'Déçu de votre agence actuelle ?', color: 'green', img: { src: IMG + 'p-agence.webp', w: 1024, h: 683 }, heroPos: '50% 18%', heroPosMobile: '68% 40%', pics: [{ src: IMG + 's-agence-1.webp', w: 1024, h: 683 }, { src: IMG + 's-agence-2.webp', w: 1024, h: 683 }] },
-  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }] },
-  { slug: 'premiere-location', service: 'premiere-mise-en-location-marseille', kicker: 'Je loue pour la première fois', question: 'Premier investissement ?', color: 'slate', img: { src: IMG + 'p-premier.webp', w: 1024, h: 683 }, heroPos: '50% 12%', heroPosMobile: '72% 40%', pics: [{ src: IMG + 's-premier-1.webp', w: 1024, h: 640 }, { src: IMG + 's-premier-2.webp', w: 800, h: 533 }] },
-  { slug: 'coproprietaire', service: 'coproprietaire-syndic-gestion-locative-marseille', kicker: 'Je suis copropriétaire chez Immobilière Pujol', question: 'Votre syndic peut aussi gérer votre location', color: 'sand', img: { src: IMG + 'p-copro.webp', w: 1600, h: 1067 }, pics: [{ src: IMG + 's-copro-1.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-2.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-3.webp', w: 800, h: 533 }] },
+  { slug: 'deja-en-agence', service: 'changer-agence-gestion-locative-marseille', kicker: 'Je suis déjà en agence', question: 'Déçu de votre agence actuelle ?', color: 'green', img: { src: IMG + 'p-agence.webp', w: 1024, h: 683 }, heroPos: '50% 18%', heroPosMobile: '68% 40%', pics: [{ src: IMG + 's-agence-1.webp', w: 1024, h: 683 }, { src: IMG + 's-agence-2.webp', w: 1024, h: 683 }], heroCtas: [{ label: 'Discuter avec notre expert et envisager le changement d’agence', href: CONSEILLER }], sections: [
+    { match: 'Avant / après', ctas: [{ label: 'Voir comment d’autres bailleurs ont amélioré leur gestion en changeant d’agence', href: '#preuves', style: 'text' }] },
+    { match: 'Changer d’agence de gestion, étape par étape', ctas: [{ label: 'Comprendre en détail comment se déroule un changement d’agence', href: '/services/changement-gestionnaire-locatif-etapes-marseille/', style: 'text' }] },
+    { match: 'Tout ce que vous n’aurez pas à gérer', ctas: [{ label: 'Discutez avec un expert-conseil de la gestion locative', href: CONSEILLER, style: 'text' }] },
+    { match: 'D’autres propriétaires bailleurs', id: 'preuves' },
+    { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver un diagnostic gratuit de changement d’agence avec un expert-conseil de la gestion locative', href: CONSEILLER }] },
+    { match: 'Prêt à voir', ctas: [{ label: 'Obtenir mon devis de gestion locative chez Immobilière Pujol', href: FORM }, { label: 'Parler à un expert-conseil avant de décider de changer', href: CONSEILLER, style: 'line' }] },
+  ] },
+  { slug: 'je-gere-seul', service: 'deleguer-gestion-locative-marseille', kicker: 'Je gère seul ma location', question: 'Gérer seul devient complexe et chronophage ?', color: 'orange', img: { src: IMG + 'p-seul.webp', w: 1024, h: 640 }, pics: [{ src: IMG + 's-seul-1.webp', w: 1024, h: 683 }, { src: IMG + 's-seul-2.webp', w: 1024, h: 683 }], heroCtas: [{ label: 'Parler à un expert-conseil de la gestion locative pour estimer vos gains et votre sécurité en passant par un professionnel', href: CONSEILLER }], sections: [
+    { match: 'Avant / après', ctas: [{ label: 'Voir tout ce que vous pourriez arrêter de gérer dès ce mois‑ci', href: '/services/taches-gestion-locative-deleguees-marseille/', style: 'text' }] },
+    { match: 'Comment se déroule la fin', ctas: [{ label: 'Réserver mon diagnostic gratuit de fin d’autogestion', href: CONSEILLER, style: 'text' }] },
+    { match: 'Un diagnostic offert', ctas: [{ label: 'Réserver mon diagnostic gratuit', href: CONSEILLER }] },
+    { match: 'Prêt à arrêter', ctas: [{ label: 'Obtenir mon devis de gestion locative', href: FORM }, { label: 'Parler à un expert de la gestion locative avant de décider', href: CONSEILLER, style: 'line' }] },
+  ] },
+  { slug: 'premiere-location', service: 'premiere-mise-en-location-marseille', kicker: 'Je loue pour la première fois', question: 'Premier investissement ?', color: 'slate', img: { src: IMG + 'p-premier.webp', w: 1024, h: 683 }, heroPos: '50% 12%', heroPosMobile: '72% 40%', pics: [{ src: IMG + 's-premier-1.webp', w: 1024, h: 640 }, { src: IMG + 's-premier-2.webp', w: 800, h: 533 }], heroCtas: [{ label: 'Faire estimer le loyer et la rentabilité de mon bien', href: ESTIMATION }], sections: [
+    { match: 'Avant / après', ctas: [{ label: 'Voir à quoi ressemble une 1ère mise en location réussie', href: '#reussite', style: 'text' }] },
+    { match: 'En 45 jours', id: 'reussite' },
+    { match: 'Votre première mise en location, étape par étape', ctas: [{ label: 'Parler à un expert-conseil en gestion locative pour cadrer mon calendrier', href: CONSEILLER, style: 'text' }] },
+    { match: 'Avant la mise sur le marché', ctas: [{ label: 'Faire estimer le loyer et la rentabilité de mon bien', href: ESTIMATION }] },
+    { match: 'Votre premier locataire', ctas: [{ label: 'Obtenir mon devis de gestion locative pour mon 1er bien', href: FORM }, { label: 'Parler à un gestionnaire avant de me lancer', href: CONSEILLER, style: 'line' }] },
+  ] },
+  { slug: 'coproprietaire', service: 'coproprietaire-syndic-gestion-locative-marseille', kicker: 'Je suis copropriétaire chez Immobilière Pujol', question: 'Votre syndic peut aussi gérer votre location', color: 'sand', img: { src: IMG + 'p-copro.webp', w: 1600, h: 1067 }, pics: [{ src: IMG + 's-copro-1.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-2.webp', w: 1024, h: 683 }, { src: IMG + 's-copro-3.webp', w: 800, h: 533 }], heroCtas: [{ label: 'Parler à un gestionnaire pour faire le point sur votre bien à louer et à gérer', href: CONSEILLER }], sections: [
+    { match: 'Tout ce que vous n’aurez plus à faire', ctas: [{ label: 'Déjà client Syndic ? Découvrez vos avantages exclusifs pour la gestion locative', href: '#diagnostic', style: 'text' }] },
+    { match: 'Un diagnostic dédié', id: 'diagnostic', ctas: [{ label: 'Réserver mon diagnostic copropriétaire bailleur avec un gestionnaire expert', href: CONSEILLER }] },
+    { match: 'Votre patrimoine locatif', ctas: [{ label: 'Voir ce que change la gestion locative Immobilière Pujol pour mon bien locatif', href: FORM }, { label: 'Parler à un gestionnaire dédié aux copropriétaires', href: CONSEILLER, style: 'line' }] },
+  ] },
 ];

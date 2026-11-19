@@ -846,7 +846,28 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
       line-height: 1.45;
       color: $ds-ink;
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
     }
+  }
+
+  // Clickable twin of the QR code (Caroline 19/11): the same booking page, for people already on a screen.
+  &__agenda {
+    display: inline-block;
+    background: $ds-olive;
+    color: $black;
+    font-family: $ds-font-noto;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.25;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    transition: background $transition-fast, transform $transition-base;
+
+    &:hover { background: $ds-olive-2; color: $white; transform: translateY(-1px); }
   }
 }
 
