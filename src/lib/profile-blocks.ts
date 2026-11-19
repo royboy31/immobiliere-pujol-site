@@ -91,3 +91,12 @@ export function parseProfile(body: string): Profile {
   }
   return { title, lead, sub, bullets, blocks, faq };
 }
+
+// Caroline 19/11: no quotation marks in titles; the quoted words are underlined instead.
+// Input is plain text (already stripped); output is safe HTML for set:html.
+const escHtml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+export function quoteSpans(text: string): string {
+  return escHtml(text)
+    .replace(/[\u2018\u201C«"]\s*([^\u2018\u2019\u201C\u201D«»"]+?)\s*[\u2019\u201D»"]/g, '<span class="prop-q">$1</span>')
+    .replace(/(^|[\s(])'([^']+?)'(?=[\s.,;:!?)]|$)/g, '$1<span class="prop-q">$2</span>');
+}

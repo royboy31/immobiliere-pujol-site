@@ -9,7 +9,7 @@ import { getEntry } from 'astro:content';
 import { KEY_FIGURES, PROFILES, sectionFor } from '../../../lib/lp-proposition';
 import LpCtas from '../../../components/lp/LpCtas.astro';
 import GuideDownload from '../../../components/lp/GuideDownload.astro';
-import { parseProfile } from '../../../lib/profile-blocks';
+import { parseProfile, quoteSpans } from '../../../lib/profile-blocks';
 import { posStyle } from '../../../lib/lp-photos';
 import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
 import LpPreviewBar from '../../../components/lp/LpPreviewBar.astro';
@@ -37,9 +37,6 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
         <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
         <h1 class="mag-h1">{prof.title}</h1>
         {prof.lead && <p class="prop-hero__sub">{prof.lead}</p>}
-        <div class="mag-actions">
-          {card.heroCtas.map((c, i) => <a class={`mag-btn${i ? ' mag-btn--ghost' : ''}`} href={c.href}>{c.label}</a>)}
-        </div>
       </div>
     </section>
 
@@ -55,11 +52,18 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       </ul>
     </section>
 
+    {prof.bullets.length === 0 && (
+      <section class="prop-section prop-section--tight"><div class="mag-wrap"><LpCtas ctas={card.heroCtas} center /></div></section>
+    )}
+
     {prof.bullets.length > 0 && (
       <section class="prop-section prop-section--tight">
         <div class="mag-wrap">
-          <div class={`prop-lead${prof.sub ? '' : ' prop-lead--solo'}`}>
-            {prof.sub && <p class="prop-lead__text">{prof.sub}</p>}
+          <div class="prop-lead">
+            <div>
+              {prof.sub && <p class="prop-lead__text">{prof.sub}</p>}
+              <LpCtas ctas={card.heroCtas} />
+            </div>
             <ul class="prop-checks">{prof.bullets.map((b) => <li>{b}</li>)}</ul>
           </div>
         </div>
@@ -70,7 +74,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       if (b.kind === 'compare') return (
         <section class="prop-section prop-section--paper" id={sec(b.title)?.id}>
           <div class="mag-wrap">
-            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
             <div class="prop-ba">
               <div class="prop-ba__col prop-ba__col--before">
                 <p class="prop-ba__tag">{b.before.title}</p>
@@ -88,7 +92,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       if (b.kind === 'timeline') return (
         <section class="prop-section prop-section--ink" id={sec(b.title)?.id}>
           <div class="mag-wrap">
-            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
             <ol class="prop-timeline">
               {b.items.map((t, i) => <li><span>{i + 1}</span><p>{t}</p></li>)}
             </ol>
@@ -99,7 +103,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       if (b.kind === 'steps') return (
         <section class="prop-section" id={sec(b.title)?.id}>
           <div class="mag-wrap">
-            <h2 class="mag-h2 prop-center">{b.title}</h2>
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
             <ol class="prop-path">
               {b.steps.map((s, i) => (
                 <li>
@@ -116,22 +120,18 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       if (b.kind === 'offer') return (
         <section class="prop-section prop-section--accent" id={sec(b.title)?.id}>
           <div class="mag-wrap prop-offer">
-            <div>
-              <h2 class="mag-h2">{b.title}</h2>
-              {b.paras.map((p) => <p class="prop-offer__p">{p}</p>)}
-            </div>
-            <div>
-              <ul class="prop-checks">{b.items.map((t) => <li>{t}</li>)}</ul>
-              <LpCtas ctas={sec(b.title)?.ctas} />
-            </div>
+            <h2 class="mag-h2" set:html={quoteSpans(b.title)} />
+            {b.paras.map((p) => <p class="prop-offer__p">{p}</p>)}
+            <ul class="prop-checks prop-offer__list">{b.items.map((t) => <li>{t}</li>)}</ul>
+            <LpCtas ctas={sec(b.title)?.ctas} />
           </div>
         </section>
       );
       if (b.kind === 'closing') return (
         <section class="prop-section prop-section--paper" id={sec(b.title)?.id}>
           <div class="mag-wrap prop-closing">
-            <h2 class="mag-h2 prop-center">{b.title}</h2>
-            {b.paras.map((p) => <p>{p}</p>)}
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
+            {b.paras.map((p) => <p set:html={quoteSpans(p)} />)}
             <LpCtas ctas={sec(b.title)?.ctas} center />
           </div>
         </section>
@@ -141,7 +141,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       if (keeps.length >= 2) return (
         <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`} id={sec(b.title)?.id}>
           <div class="mag-wrap">
-            <h2 class="mag-h2 prop-center prop-keeps__h">{b.title}</h2>
+            <h2 class="mag-h2 prop-center prop-keeps__h" set:html={quoteSpans(b.title)} />
             <figure class="prop-keeps__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
             {b.groups.filter((g) => !g.title).map((g) => g.paras.map((t) => <p class="prop-intro">{t}</p>))}
             <div class="prop-keeps">
@@ -163,7 +163,7 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
           <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}${keeps.length ? ' prop-split--keep' : ''}`}>
             <figure class="prop-split__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
             <div class="prop-split__text">
-              <h2 class="mag-h2">{b.title}</h2>
+              <h2 class="mag-h2" set:html={quoteSpans(b.title)} />
               {plain.map((g) => (
                 <div>
                   {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
