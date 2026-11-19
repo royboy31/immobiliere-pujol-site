@@ -830,6 +830,7 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     padding: 18px;
     border-radius: 16px;
     border: 1.5px solid $ds-olive;
+    flex-wrap: wrap;
 
     img {
       width: 200px;
@@ -840,6 +841,8 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
     }
 
     figcaption {
+      flex: 1 1 0; // stays beside the QR code on desktop now that the box wraps
+      min-width: 0;
       font-family: $ds-font-noto;
       font-weight: 400;
       font-size: 14px;
@@ -854,8 +857,11 @@ $ds-side-pad-svc: unquote("max(100px, calc(50% - 620px))");
   }
 
   // Clickable twin of the QR code (Caroline 19/11): the same booking page, for people already on a screen.
+  // First child of the QR box, full width so it sits above the QR code (Caroline asked "au dessus").
   &__agenda {
-    display: inline-block;
+    display: block;
+    flex: 0 0 100%;
+    text-align: center;
     background: $ds-olive;
     color: $black;
     font-family: $ds-font-noto;

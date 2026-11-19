@@ -1113,11 +1113,9 @@ const pageSchemas = entry.data.jsonLd
                   </li>
                 </ul>
                 <figure class="svc-expert__qr">
+                  <a class="svc-expert__agenda" href={contactExpert.agendaHref} target="_blank" rel="noopener">{contactExpert.agendaLabel}</a>
                   <img src={contactExpert.qrSrc} alt="QR code de prise de rendez-vous" loading="lazy" />
-                  <figcaption>
-                    {contactExpert.qrCaption}
-                    <a class="svc-expert__agenda" href={contactExpert.agendaHref} target="_blank" rel="noopener">{contactExpert.agendaLabel}</a>
-                  </figcaption>
+                  <figcaption>{contactExpert.qrCaption}</figcaption>
                 </figure>
               </div>
             </section>
