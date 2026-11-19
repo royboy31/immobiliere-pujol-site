@@ -265,5 +265,17 @@ $p-slate-soft:  rgb(226, 232, 235);
 // ---------- Caroline's CTAs under the sections (19/11) ----------
 .prop .prop-section[id] { scroll-margin-top: 110px; }
 .prop-ctas { margin-top: 36px; }
+// "CTA texte / discret" from the Doc: a soft pill with a round arrow (Caroline 19/11: no underlined text).
 .prop-cta-text { margin: 28px 0 0; font-size: 16px; line-height: 1.5;
-  .prop-section--ink & .prop-link { color: #fff; } }
+  .prop-link { display: inline-flex; align-items: center; gap: 12px; margin: 6px 0 0;
+    padding: 10px 10px 10px 22px; border: 0; border-radius: 999px; background: $p-green-soft; color: $p-ink;
+    font-weight: 600; font-size: 15px; line-height: 1.3; text-align: left; text-decoration: none;
+    box-shadow: inset 0 0 0 1.5px rgba($p-ink, .08); transition: background .2s, box-shadow .2s, transform .2s;
+    &::after { content: '→'; flex: none; display: grid; place-items: center; width: 32px; height: 32px;
+      border-radius: 50%; background: $p-ink; color: #fff; font-size: 15px; transition: transform .2s; }
+    &:hover { background: $p-green; transform: translateY(-1px); box-shadow: 0 6px 18px rgba($p-ink, .12);
+      &::after { transform: translateX(3px); } }
+    &:focus-visible { outline: 2px solid $p-ink; outline-offset: 3px; } }
+  .prop-section--paper & .prop-link { background: #fff; &:hover { background: $p-green; } }
+  .prop-section--ink & .prop-link { background: rgba(#fff, .12); color: #fff;
+    &::after { background: $p-green; color: $p-ink; } &:hover { background: rgba(#fff, .2); } } }
