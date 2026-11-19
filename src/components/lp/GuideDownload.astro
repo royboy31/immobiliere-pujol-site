@@ -1,7 +1,10 @@
 ---
 // Guides to download against an email + a mandatory consent box (Caroline + Roy 19/11/2026).
-// The worker (/guide) refuses without the box, emails the link and notifies Gaëlle; the
-// browser then starts the download. Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
+// Each guide card carries its own small form, always visible (no hidden step: on 19/11 a
+// "Télécharger" button that only revealed a form further down looked like it did nothing).
+// The worker (/guide) refuses without the box, records the consent, emails the link and
+// notifies Gaëlle; it returns the PDF link and the browser starts the download.
+// Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
 import type { Guide } from '../../lib/lp-proposition';
 interface Props { guides: Guide[] }
 const { guides } = Astro.props;
@@ -17,49 +20,39 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
           <div class="prop-guidedl__body">
             <h3 class="prop-guidedl__title">{g.title}</h3>
             <p>{g.sub}</p>
-            <button type="button" class="mag-btn" data-guide={g.id} aria-controls="guide-form">Télécharger le guide</button>
+            <form class="prop-guidedl__form" method="post" action="https://pujol-email.roy-68a.workers.dev/guide" novalidate data-guide-form>
+              <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
+              <input type="hidden" name="guide" value={g.id} />
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
+              <label class="prop-guidedl__email"><span>Votre email</span><input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr" /></label>
+              <label class="prop-guidedl__consent"><input type="checkbox" name="consent" value="1" required /> <span>{CONSENT}</span></label>
+              <button type="submit" class="mag-btn">Télécharger le guide</button>
+              <p class="prop-guidedl__msg" role="status"></p>
+            </form>
           </div>
         </li>
       ))}
     </ul>
-    <form id="guide-form" class="prop-guidedl__form" method="post" action="https://pujol-email.roy-68a.workers.dev/guide" novalidate hidden>
-      <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
-      <input type="hidden" name="guide" value="" />
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
-      <p class="prop-guidedl__chosen" aria-live="polite"></p>
-      <label class="prop-guidedl__email">Votre email<input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr" /></label>
-      <label class="prop-guidedl__consent"><input type="checkbox" name="consent" value="1" required /> <span>{CONSENT}</span></label>
-      <button type="submit" class="mag-btn">Recevoir le guide</button>
-      <p class="prop-guidedl__msg" role="status"></p>
-    </form>
   </div>
 </section>
 
 <script>
-  const form = document.getElementById('guide-form') as HTMLFormElement | null;
-  if (form) {
+  document.querySelectorAll<HTMLFormElement>('[data-guide-form]').forEach((form) => {
     const msg = form.querySelector<HTMLElement>('.prop-guidedl__msg')!;
-    const chosen = form.querySelector<HTMLElement>('.prop-guidedl__chosen')!;
-    const guideInput = form.querySelector<HTMLInputElement>('input[name="guide"]')!;
-    document.querySelectorAll<HTMLButtonElement>('[data-guide]').forEach((b) => b.addEventListener('click', () => {
-      guideInput.value = b.dataset.guide || '';
-      chosen.textContent = 'Guide choisi : ' + (b.closest('li')?.querySelector('h3')?.textContent || '');
-      form.hidden = false; msg.textContent = '';
-      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      form.querySelector<HTMLInputElement>('input[name="email"]')?.focus({ preventScroll: true });
-    }));
+    const guide = form.querySelector<HTMLInputElement>('input[name="guide"]')!.value;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const email = form.querySelector<HTMLInputElement>('input[name="email"]')!;
       const consent = form.querySelector<HTMLInputElement>('input[name="consent"]')!;
+      if (!email.value.trim() || !email.checkValidity()) { msg.textContent = 'Merci d’indiquer votre adresse email.'; email.focus(); return; }
       if (!consent.checked) { msg.textContent = 'Merci de cocher la case pour recevoir le guide.'; consent.focus(); return; }
-      if (!form.reportValidity()) return;
       const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       btn.disabled = true; msg.textContent = 'Envoi…';
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
         const data = await res.json().catch(() => ({}));
         if (res.ok && data.ok && typeof data.url === 'string') {
-          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_download', guide: guideInput.value }); } catch {}
+          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_download', guide }); } catch {}
           msg.textContent = data.emailed
             ? 'Merci ! Le téléchargement démarre, et le guide vous attend aussi dans votre boîte mail. '
             : 'Merci ! Le téléchargement démarre. ';
@@ -74,5 +67,5 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
       }
       btn.disabled = false;
     });
-  }
+  });
 </script>
