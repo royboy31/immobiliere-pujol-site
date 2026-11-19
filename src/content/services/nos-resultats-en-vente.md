@@ -61,7 +61,7 @@ Autrement dit, qui ne sont pas surévalués mais pas sous-évalués non plus : <
 Et donc, nous ne travaillons qu’avec des <strong>clients qui ont confiance</strong> <strong>en notre expertise et nos conseils.</strong></p>
 <p>Deuxième facteur de réussite, notre publication soutenue<b> d’annonces bien faites</b> : un juste prix, un descriptif précis, des visuels qui reflètent l’état du bien et le caractérisent, une visite virtuelle et éventuellement des plans ou aménagement virtuels pour aider les acquéreurs à se projeter et pour mieux valoriser , entre autres, les appartements vides.</p>
 <p>Et enfin, troisième facteur de réussite , <strong>notre totale transparence avec les acquéreur que nous mettons en confiance</strong> et que nous rassurons par notre connaissance du  métier, du bâtiment, du bien, de la copropriété, des travaux éventuels &#8230;</p>
-<p>Si vous souhaitez consulter les <a href="http://avis-immobiliere-pujol-vente.opinionsystem.fr/">avis clients de l&rsquo;immobilière Pujol en vente</a></p>
+<p>Si vous souhaitez consulter les <a href="https://www.opinionsystem.fr/fr-fr/certificate/4429" target="_blank" rel="noopener">avis clients de l&rsquo;immobilière Pujol en vente</a></p>
 <p>Vous souhaitez vendre votre bien et souhaitez bénéficier d&rsquo;un accompagnement personnalisé? N&rsquo;hésitez pas à nous <a href="/contact/" target="_blank" rel="noopener noreferrer">contacter </a>ou à faire une demande d&rsquo;estimation en remplissant le formulaire ci-dessus :</p>
 <h2>Contactez nous pour un rendez vous ou une estimation</h2>
                 </section>
