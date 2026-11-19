@@ -923,7 +923,9 @@ async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> 
 // returned after consent. It is a shareable link, not a per-visitor authorisation.
 async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; url?: string; emailed?: boolean }> {
   const email = ((fd.get('email') as string) || '').trim();
-  const guide = GUIDES[((fd.get('guide') as string) || '').trim()];
+  const guideId = ((fd.get('guide') as string) || '').trim();
+  // Own keys only: 'toString', '__proto__'… must not resolve to an inherited value.
+  const guide = Object.hasOwn(GUIDES, guideId) ? GUIDES[guideId] : undefined;
   if (!guide) return { ok: false, status: 400, error: 'Guide inconnu.' };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, status: 400, error: 'Adresse email invalide.' };
   if (fd.get('consent') !== '1') return { ok: false, status: 400, error: 'Merci de cocher la case pour recevoir le guide.' };

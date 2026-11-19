@@ -662,7 +662,8 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
 const GUIDE_OK = { email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
 
 test('guide: refused without consent or with an unknown guide, nothing written or sent', async () => {
-  for (const fields of [{ email: 'bailleur@example.com', guide: 'gerer-seul-cout' }, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }]) {
+  const inherited = ['toString', 'constructor', '__proto__', 'hasOwnProperty', 'valueOf'].map((guide) => ({ ...GUIDE_OK, guide }));
+  for (const fields of [{ email: 'bailleur@example.com', guide: 'gerer-seul-cout' }, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }, ...inherited]) {
     const { res, calls } = await postGuide(fields);
     assert.equal(res.status, 400);
     assert.equal(calls.sheet.length + calls.mails.length, 0);
