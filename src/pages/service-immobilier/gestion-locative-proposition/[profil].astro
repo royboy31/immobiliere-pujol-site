@@ -20,7 +20,8 @@ const { photos: ph, preview } = await loadLpPhotos(Astro.request, Astro.url);
 const hero = ph[`${card.slug}-hero`];
 const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
 const prof = parseProfile(entry?.body ?? '');
-const others = PROFILES.filter((p) => p.slug !== card.slug);
+// Caroline 19/11 video: no 3-card "Ce n'est pas votre situation ?" block, just a link to the copropriétaire page.
+const copro = card.slug === 'coproprietaire' ? undefined : PROFILES.find((p) => p.slug === 'coproprietaire');
 const pics = card.pics.map((_, i) => ph[`${card.slug}-s${i + 1}`]); // own photos per page, never the landing page's (Caroline 18/11)
 let picIdx = 0;
 const nextPic = () => pics[picIdx++ % pics.length];
@@ -202,20 +203,12 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
 
     <section class="prop-section prop-section--paper">
       <div class="mag-wrap">
-        <h2 class="mag-h2 prop-center">Ce n’est pas votre situation ?</h2>
-        <ul class="prop-cubes prop-cubes--3">
-          {others.map((p) => (
-            <li>
-              <a class={`prop-cube prop-cube--${p.color}`} href={`/service-immobilier/gestion-locative-proposition/${p.slug}/`}>
-                <span class="prop-cube__body">
-                  <span class="prop-cube__kicker">{p.kicker}</span>
-                  <span class="prop-cube__q">{p.question}</span>
-                  <span class="prop-cube__more">Voir mon parcours →</span>
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {copro && (
+          <div class="prop-copro-cta">
+            <h2 class="mag-h3">Votre bien se trouve dans une copropriété que nous gérons en tant que syndic ?</h2>
+            <p class="mag-actions"><a class="mag-btn" href={`/service-immobilier/gestion-locative-proposition/${copro.slug}/`}>{copro.kicker}</a></p>
+          </div>
+        )}
         <p class="prop-center prop-back"><a class="prop-link" href="/service-immobilier/gestion-locative-proposition/">← Retour à la gestion locative</a></p>
       </div>
     </section>

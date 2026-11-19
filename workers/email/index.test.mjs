@@ -659,30 +659,47 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
     globalThis.fetch = originalFetch;
   }
 }
-const GUIDE_OK = { email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
+const GUIDE_OK = { prenom: 'Marie', nom: 'Durand', email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
+const toVisitor = (m) => m.to[0].email === 'bailleur@example.com';
+const toLead = (m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr';
 
-test('guide: refused without consent or with an unknown guide, nothing written or sent', async () => {
+test('guide: refused without consent, names, valid email or a real guide; nothing written or sent', async () => {
   const inherited = ['toString', 'constructor', '__proto__', 'hasOwnProperty', 'valueOf'].map((guide) => ({ ...GUIDE_OK, guide }));
-  for (const fields of [{ email: 'bailleur@example.com', guide: 'gerer-seul-cout' }, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }, ...inherited]) {
+  const { consent, ...noConsent } = GUIDE_OK;
+  for (const fields of [noConsent, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }, { ...GUIDE_OK, prenom: '' }, { ...GUIDE_OK, nom: ' ' }, ...inherited]) {
     const { res, calls } = await postGuide(fields);
     assert.equal(res.status, 400);
     assert.equal(calls.sheet.length + calls.mails.length, 0);
   }
 });
 
-test('guide: consent recorded, both emails sent, link returned', async () => {
+test('guide: sent by email (no link in the answer), tagged consent row, tagged lead email', async () => {
   const { res, json, calls } = await postGuide(GUIDE_OK);
   assert.equal(res.status, 200);
-  assert.equal(json.emailed, true);
-  assert.match(json.url, /^https:\/\/www\.immobiliere-pujol\.fr\/guides\/[0-9a-f]{24}\/guide-gerer-seul-ou-deleguer\.pdf$/);
+  assert.deepEqual(json, { ok: true });
+  const visitor = calls.mails.find(toVisitor);
+  assert.match(visitor.htmlContent, /https:\/\/www\.immobiliere-pujol\.fr\/guides\/[0-9a-f]{24}\/guide-gerer-seul-ou-deleguer\.pdf/);
+  assert.match(visitor.htmlContent, /Bonjour Marie/);
   assert.equal(calls.sheet[0].tab, 'Gestion Locative');
-  assert.match(calls.sheet[0].row[5], /Consentement coché/);
-  assert.equal(calls.mails.length, 2);
-  assert.ok(calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'));
-  assert.ok(calls.mails.find((m) => m.to[0].email === 'bailleur@example.com').htmlContent.includes(json.url));
+  assert.deepEqual(calls.sheet[0].row.slice(1, 5), ['Marie', 'Durand', '', 'bailleur@example.com']);
+  assert.match(calls.sheet[0].row[5], /^Demande guide gestion - gérer seul \|/);
+  assert.match(calls.sheet[0].row[5], /J'accepte de recevoir gratuitement ce guide/);
+  const lead = calls.mails.find(toLead);
+  assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Marie Durand');
+  assert.equal(calls.mails.indexOf(visitor), 0, 'guide email goes first');
 });
 
-test('guide: if the consent record fails (HTTP error, error body, bad body, network), no link and no email', async () => {
+test('guide: if the guide email is refused or the network fails, 502 and nothing recorded', async () => {
+  for (const brevo of [() => new Response('{}', { status: 400 }), () => { throw new TypeError('network'); }]) {
+    const { res, json, calls } = await postGuide(GUIDE_OK, { brevo });
+    assert.equal(res.status, 502);
+    assert.equal(json.ok, false);
+    assert.equal(calls.sheet.length, 0);
+    assert.equal(calls.mails.filter(toLead).length, 0, 'no lead email, so a retry never duplicates it');
+  }
+});
+
+test('guide: Sheet failures after a sent guide still answer ok and flag it in the lead email', async () => {
   const failures = [
     () => new Response('down', { status: 503 }),
     () => Response.json({ ok: false, error: 'Tab not found' }),
@@ -690,26 +707,11 @@ test('guide: if the consent record fails (HTTP error, error body, bad body, netw
     () => { throw new TypeError('network'); },
   ];
   for (const sheet of failures) {
-    const { res, json, calls } = await postGuide(GUIDE_OK, { sheet });
-    assert.equal(res.status, 503);
-    assert.equal(json.ok, false);
-    assert.equal(json.url, undefined);
-    assert.equal(calls.mails.length, 0, 'no lead email, so a retry never duplicates it');
+    const { res, calls } = await postGuide(GUIDE_OK, { sheet });
+    assert.equal(res.status, 200);
+    assert.match(calls.mails.find(toLead).htmlContent, /NON, à saisir à la main/);
   }
-});
-
-test('guide: email rejections do not block the recorded download, visitor told only about a sent email', async () => {
-  const visitorFails = await postGuide(GUIDE_OK, { brevo: (m) => m.to[0].email === 'bailleur@example.com' ? new Response('{}', { status: 400 }) : Response.json({ messageId: 'x' }) });
-  assert.equal(visitorFails.res.status, 200);
-  assert.equal(visitorFails.json.emailed, false);
-  assert.ok(visitorFails.json.url);
-
-  const leadFails = await postGuide(GUIDE_OK, { brevo: (m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr' ? new Response('{}', { status: 500 }) : Response.json({ messageId: 'x' }) });
+  const leadFails = await postGuide(GUIDE_OK, { brevo: (m) => toLead(m) ? new Response('{}', { status: 500 }) : Response.json({ messageId: 'x' }) });
   assert.equal(leadFails.res.status, 200);
-  assert.equal(leadFails.json.emailed, true);
-
-  const bothThrow = await postGuide(GUIDE_OK, { brevo: () => { throw new TypeError('network'); } });
-  assert.equal(bothThrow.res.status, 200);
-  assert.equal(bothThrow.json.emailed, false);
-  assert.equal(bothThrow.calls.sheet.length, 1);
+  assert.equal(leadFails.calls.sheet.length, 1);
 });

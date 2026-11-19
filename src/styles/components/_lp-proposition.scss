@@ -289,6 +289,8 @@ $p-slate-soft:  rgb(226, 232, 235);
   &__form { display: grid; gap: 12px; }
   &__email { display: grid; gap: 6px; font-weight: 600; font-size: 14px;
     input { font: inherit; font-weight: 400; padding: 11px 14px; border: 1.5px solid rgba($p-ink, .25); border-radius: 8px; } }
+  &__names { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; @media (max-width: 420px) { grid-template-columns: 1fr; } }
+  &__legal { margin: 0; font-size: 11.5px; line-height: 1.45; color: rgba($p-ink, .7); a { color: inherit; text-decoration: underline; } }
   &__consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.45;
     input { margin-top: 2px; width: 18px; height: 18px; flex: none; accent-color: $p-ink; } }
   &__form .mag-btn { justify-self: start; padding: 12px 22px; font-size: 14.5px; }
@@ -328,3 +330,11 @@ $p-slate-soft:  rgb(226, 232, 235);
   .prop-keep__title { font-family: $ds-font-serif; font-size: 24px; font-weight: 600; }
   @media (max-width: $bp-tablet) { grid-template-areas: "photo" "text" "keep"; &.prop-split--rev { grid-template-areas: "photo" "text" "keep"; }
     .prop-split__photo img { height: auto; min-height: 0; aspect-ratio: 4 / 3; } } }
+
+// "Votre bien se trouve dans une copropriété…" (replaces the 3 other-profile cards, Caroline 19/11)
+.prop-copro-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+  background: $p-sand; border-radius: 12px; padding: 36px 40px;
+  .mag-h3 { margin: 0; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25; max-width: 30ch; }
+  .mag-actions { margin: 0; }
+  @media (max-width: $bp-tablet) { padding: 28px 22px; } }
+.prop-section:not(.prop-section--paper) .prop-guidedl__card { background: $p-paper; }

@@ -1,18 +1,16 @@
 ---
-// Guides to download against an email + a mandatory consent box (Caroline + Roy 19/11/2026).
-// Each guide card carries its own small form, always visible (no hidden step: on 19/11 a
-// "Télécharger" button that only revealed a form further down looked like it did nothing).
-// The worker (/guide) refuses without the box, records the consent, emails the link and
-// notifies Gaëlle; it returns the PDF link and the browser starts the download.
-// Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
+// Guides sent BY EMAIL against first name, last name, email and a mandatory consent box
+// (Caroline 19/11/2026, 16:08-16:24). Each guide card carries its own always-visible form.
+// The worker (/guide) refuses without the box, emails the guide, then records the consent with
+// the guide's CRM tag and notifies Gaëlle. Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
 import type { Guide } from '../../lib/lp-proposition';
-interface Props { guides: Guide[] }
-const { guides } = Astro.props;
-const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au sujet de la gestion locative de mon bien.";
+interface Props { guides: Guide[]; title?: string; id?: string; paper?: boolean }
+const { guides, title = 'Nos guides à télécharger', id = 'guides', paper = true } = Astro.props;
+const CONSENT = "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
 ---
-<section class="prop-section prop-section--paper" id="guides">
+<section class={`prop-section${paper ? ' prop-section--paper' : ''}`} id={id}>
   <div class="mag-wrap">
-    <h2 class="mag-h2 prop-center">Nos guides à télécharger</h2>
+    <h2 class="mag-h2 prop-center">{title}</h2>
     <ul class="prop-guidedl">
       {guides.map((g) => (
         <li class="prop-guidedl__card">
@@ -24,9 +22,14 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
               <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" />
               <input type="hidden" name="guide" value={g.id} />
               <div class="cf-turnstile" data-sitekey="0x4AAAAAADow4gNbXgTPXvdL" data-appearance="interaction-only"></div>
-              <label class="prop-guidedl__email"><span>Votre email</span><input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr" /></label>
+              <div class="prop-guidedl__names">
+                <label class="prop-guidedl__email"><span>Prénom</span><input type="text" name="prenom" required autocomplete="given-name" /></label>
+                <label class="prop-guidedl__email"><span>Nom</span><input type="text" name="nom" required autocomplete="family-name" /></label>
+              </div>
+              <label class="prop-guidedl__email"><span>Email</span><input type="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr" /></label>
               <label class="prop-guidedl__consent"><input type="checkbox" name="consent" value="1" required /> <span>{CONSENT}</span></label>
-              <button type="submit" class="mag-btn">Télécharger le guide</button>
+              <p class="prop-guidedl__legal">Votre adresse e-mail sera utilisée pour vous envoyer le guide demandé ainsi que nos prochains contenus et offres liés à la gestion locative. Vous pouvez vous désinscrire à tout moment en un clic via le lien présent en bas de nos e-mails. En savoir plus sur notre <a href="/politique-de-confidentialite/">Politique de confidentialité</a>.</p>
+              <button type="submit" class="mag-btn">Recevoir le guide par email</button>
               <p class="prop-guidedl__msg" role="status"></p>
             </form>
           </div>
@@ -42,8 +45,10 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
     const guide = form.querySelector<HTMLInputElement>('input[name="guide"]')!.value;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = form.querySelector<HTMLInputElement>('input[name="email"]')!;
-      const consent = form.querySelector<HTMLInputElement>('input[name="consent"]')!;
+      const field = (n: string) => form.querySelector<HTMLInputElement>(`input[name="${n}"]`)!;
+      const email = field('email'), consent = field('consent');
+      const prenom = field('prenom'), nom = field('nom');
+      if (!prenom.value.trim() || !nom.value.trim()) { msg.textContent = 'Merci d’indiquer votre prénom et votre nom.'; (prenom.value.trim() ? nom : prenom).focus(); return; }
       if (!email.value.trim() || !email.checkValidity()) { msg.textContent = 'Merci d’indiquer votre adresse email.'; email.focus(); return; }
       if (!consent.checked) { msg.textContent = 'Merci de cocher la case pour recevoir le guide.'; consent.focus(); return; }
       const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
@@ -51,14 +56,11 @@ const CONSENT = "J'accepte que l'Immobilière Pujol me recontacte par email au s
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
         const data = await res.json().catch(() => ({}));
-        if (res.ok && data.ok && typeof data.url === 'string') {
-          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_download', guide }); } catch {}
-          msg.textContent = data.emailed
-            ? 'Merci ! Le téléchargement démarre, et le guide vous attend aussi dans votre boîte mail. '
-            : 'Merci ! Le téléchargement démarre. ';
-          const again = document.createElement('a'); again.href = data.url; again.download = ''; again.textContent = 'Relancer le téléchargement';
-          msg.appendChild(again);
-          const a = document.createElement('a'); a.href = data.url; a.download = ''; document.body.appendChild(a); a.click(); a.remove();
+        if (res.ok && data.ok) {
+          try { ((window as any).dataLayer = (window as any).dataLayer || []).push({ event: 'guide_request', guide }); } catch {}
+          msg.textContent = `Merci ${prenom.value.trim()} ! Le guide vient d’être envoyé à ${email.value.trim()}. Pensez à regarder dans vos courriers indésirables s’il n’arrive pas.`;
+          form.querySelectorAll('input, button').forEach((el) => ((el as HTMLInputElement).disabled = true));
+          return;
         } else {
           msg.textContent = data.error || 'Une erreur est survenue. Veuillez réessayer.';
         }

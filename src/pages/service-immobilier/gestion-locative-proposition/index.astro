@@ -12,6 +12,7 @@ import { KEY_FIGURES, PROFILES } from '../../../lib/lp-proposition';
 import { posStyle } from '../../../lib/lp-photos';
 import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
 import LpPreviewBar from '../../../components/lp/LpPreviewBar.astro';
+import GuideDownload from '../../../components/lp/GuideDownload.astro';
 
 const { photos: ph, preview } = await loadLpPhotos(Astro.request, Astro.url);
 const stepPh = [1, 2, 3, 4, 5].map((n) => ph[`accueil-step${n}`]);
@@ -150,6 +151,9 @@ const reassurances = [
         </div>
       </div>
     </section>
+
+    {/* Caroline 19/11: all her guides visible on the main landing too */}
+    <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
 
     <section class="prop-section prop-section--paper" id="guides">
       <div class="mag-wrap">

@@ -897,15 +897,17 @@ async function handleContact(fd: FormData, env: Env, ctx: ExecutionContext): Pro
   return emailResult;
 }
 
-// Guide download (Caroline + Roy 19/11/2026): email + a mandatory consent box to be
-// contacted again about gestion locative; without it, no guide. The browser starts the
-// download itself once we answer ok; we also email the link and notify Gaëlle.
-const GUIDES: Record<string, { title: string; file: string }> = {
-  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-ou-deleguer.pdf' },
-  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-risque-juridique-penal.pdf' },
+// Guides (Caroline 19/11/2026): first name, last name, email and a mandatory consent box.
+// The guide is SENT BY EMAIL (Caroline 16:24: that is what justifies collecting the address),
+// never downloaded from the page. Each guide carries a CRM tag (one per rubric) so Pujol can
+// filter the leads: it goes into the Sheet row and Gaëlle's notification.
+const GUIDES: Record<string, { title: string; file: string; tag: string }> = {
+  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-ou-deleguer.pdf', tag: 'Demande guide gestion - gérer seul' },
+  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-risque-juridique-penal.pdf', tag: 'Demande guide gestion - gérer seul' },
 };
+// Caroline's wording, 19/11 16:23 (must match GuideDownload.astro).
 const GUIDE_CONSENT_TEXT =
-  "J'accepte que l'Immobilière Pujol me recontacte par email au sujet de la gestion locative de mon bien.";
+  "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
 
 // Appends one row and confirms the Apps Script really wrote it (HTTP ok AND {ok:true}).
 async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> {
@@ -919,53 +921,58 @@ async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> 
   }
 }
 
-// The PDF paths are unlisted (random folder, never in the page HTML): the link is only
-// returned after consent. It is a shareable link, not a per-visitor authorisation.
-async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; url?: string; emailed?: boolean }> {
-  const email = ((fd.get('email') as string) || '').trim();
-  const guideId = ((fd.get('guide') as string) || '').trim();
+// The PDF paths are unlisted (random folder, never in the page HTML) and only travel in the
+// guide email: a shareable link, not a per-visitor authorisation.
+async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; recorded?: boolean }> {
+  const val = (k: string) => ((fd.get(k) as string) || '').trim();
+  const email = val('email');
+  const prénom = val('prenom').slice(0, 80);
+  const nom = val('nom').slice(0, 80);
+  const guideId = val('guide');
   // Own keys only: 'toString', '__proto__'… must not resolve to an inherited value.
   const guide = Object.hasOwn(GUIDES, guideId) ? GUIDES[guideId] : undefined;
   if (!guide) return { ok: false, status: 400, error: 'Guide inconnu.' };
+  if (!prénom || !nom) return { ok: false, status: 400, error: 'Merci d’indiquer votre prénom et votre nom.' };
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, status: 400, error: 'Adresse email invalide.' };
   if (fd.get('consent') !== '1') return { ok: false, status: 400, error: 'Merci de cocher la case pour recevoir le guide.' };
 
   const base = [env.ALLOWED_ORIGIN, ...PROD_ORIGINS].includes(origin) ? origin : SITE_URL;
   const link = base + guide.file;
 
-  // 1. Proof of consent first. If it can't be recorded, nothing else happens (no
-  //    download, no email), so a retry never duplicates Gaëlle's lead email.
-  const note = `Téléchargement du guide « ${guide.title} ». Consentement coché : ${GUIDE_CONSENT_TEXT}`;
-  if (!(await appendSheetChecked('Gestion Locative', [now(), '', '', '', email, note]))) {
-    return { ok: false, status: 503, error: "Votre demande n'a pas pu être enregistrée. Merci de réessayer dans quelques minutes." };
-  }
-
-  // 2. Both emails, awaited. A failed email does not undo the download (consent is on
-  //    file); the visitor is only told about the email when it was accepted.
-  const [lead, visitor] = await Promise.all([
-    sendEmail(env, {
-      subject: `Nouveau téléchargement de guide : ${guide.title}`,
-      html: buildTable('Téléchargement de guide', [['Email', email], ['Guide', guide.title], ['Consentement', GUIDE_CONSENT_TEXT]]),
-      replyTo: email,
-      to: `gaelle${D}`,
-      fromEmail: NOTIFY_FROM,
-      fromName: 'Immobilière Pujol — Guides gestion locative',
-    }).catch(() => ({ ok: false })),
-    sendEmail(env, {
-      subject: `Votre guide : ${guide.title}`,
-      html: buildCustomerEmail({
-        bodyHtml: `<p>Merci pour votre intérêt. Voici votre guide « ${esc(guide.title)} » :</p>
+  // 1. The guide email is the delivery. If Brevo refuses it, nothing is recorded and the
+  //    visitor is asked to try again (no Sheet row, no lead email, so no duplicate later).
+  const sent = await sendEmail(env, {
+    subject: `Votre guide : ${guide.title}`,
+    html: buildCustomerEmail({
+      prénom,
+      bodyHtml: `<p>Merci pour votre demande. Voici votre guide « ${esc(guide.title)} » :</p>
 <p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
 <p>Une question sur la gestion de votre bien ? Répondez simplement à cet email, Gaëlle vous recontacte.</p>`,
-      }),
-      to: email,
-      replyTo: `gaelle${D}`,
-      fromEmail: `gaelle${D}`,
-      fromName: 'Immobilière Pujol — Gestion Locative',
-    }).catch(() => ({ ok: false })),
-  ]);
-  if (!lead.ok) console.error('guide: lead email to Gaëlle failed', guide.title);
-  return { ok: true, url: link, emailed: visitor.ok };
+    }),
+    to: email,
+    replyTo: `gaelle${D}`,
+    fromEmail: `gaelle${D}`,
+    fromName: 'Immobilière Pujol — Gestion Locative',
+  }).catch(() => ({ ok: false }));
+  if (!sent.ok) {
+    return { ok: false, status: 502, error: "Le guide n'a pas pu être envoyé à cette adresse. Vérifiez-la et réessayez dans quelques minutes." };
+  }
+
+  // 2. Proof of consent + CRM tag, then Gaëlle's notification. The guide is already sent, so a
+  //    failure here is not shown to the visitor; Gaëlle's email carries the same data.
+  const note = `${guide.tag} | Guide « ${guide.title} » envoyé par email | Consentement coché : ${GUIDE_CONSENT_TEXT}`;
+  const recorded = await appendSheetChecked('Gestion Locative', [now(), prénom, nom, '', email, note]);
+  const lead = await sendEmail(env, {
+    subject: `[${guide.tag}] ${prénom} ${nom}`,
+    html: buildTable(`${guide.tag}`, [['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main']]),
+    replyTo: email,
+    to: `gaelle${D}`,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol — Guides gestion locative',
+  }).catch(() => ({ ok: false }));
+  if (!recorded) console.error('guide: consent row not written', guide.tag);
+  if (!lead.ok) console.error('guide: lead email to Gaëlle failed', guide.tag);
+  return { ok: true, recorded };
 }
 
 async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
@@ -1983,7 +1990,7 @@ export default {
       case '/guide': {
         const g = await handleGuide(fd, env, origin);
         if (!g.ok) return jsonErr(g.error || 'Erreur', g.status || 400, origin, env);
-        return jsonOk({ ok: true, url: g.url, emailed: g.emailed }, origin, env);
+        return jsonOk({ ok: true }, origin, env);
       }
       case '/newsletter':
         result = await handleNewsletter(fd, env, ctx, origin);

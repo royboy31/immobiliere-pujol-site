@@ -5,12 +5,13 @@ interface Props { ctas?: Cta[]; center?: boolean }
 const { ctas = [], center = false } = Astro.props;
 const text = ctas.filter((c) => c.style === 'text');
 const buttons = ctas.filter((c) => c.style !== 'text');
+const ext = (h: string) => (h.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {}); // Gaëlle's agenda opens in a new tab
 ---
 {buttons.length > 0 && (
   <p class={`mag-actions prop-ctas${center ? ' mag-actions--center' : ''}`}>
-    {buttons.map((c) => <a class={`mag-btn${c.style === 'line' ? ' mag-btn--line' : ''}`} href={c.href}>{c.label}</a>)}
+    {buttons.map((c) => <a class={`mag-btn${c.style === 'line' ? ' mag-btn--line' : ''}`} href={c.href} {...ext(c.href)}>{c.label}</a>)}
   </p>
 )}
 {text.map((c) => (
-  <p class={`prop-cta-text${center ? ' prop-center' : ''}`}><a class="prop-link" href={c.href}>{c.label}</a></p>
+  <p class={`prop-cta-text${center ? ' prop-center' : ''}`}><a class="prop-link" href={c.href} {...ext(c.href)}>{c.label}</a></p>
 ))}
