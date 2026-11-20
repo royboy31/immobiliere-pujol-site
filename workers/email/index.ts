@@ -1082,6 +1082,15 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
       fromEmail,
       fromName,
     }));
+    // Caroline 20/11: copy of every lead sent to the Zoho parser, at least at the start.
+    ctx.waitUntil(sendEmail(env, {
+      subject,
+      html: buildTable(subject, tableRows),
+      replyTo: email,
+      to: `carolinepujol${D}`,
+      fromEmail,
+      fromName,
+    }));
   } else {
     if (routeToListingContact) {
       // Caroline's commercial-rental exception: keep the form and notify the
@@ -1106,6 +1115,15 @@ async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContex
       html: buildTable(subject, tableRows),
       replyTo: email,
       to: ZOHO_PARSER,
+      fromEmail,
+      fromName,
+    }));
+    // Caroline 20/11: copy of every lead sent to the Zoho parser, at least at the start.
+    ctx.waitUntil(sendEmail(env, {
+      subject,
+      html: buildTable(subject, tableRows),
+      replyTo: email,
+      to: `carolinepujol${D}`,
       fromEmail,
       fromName,
     }));

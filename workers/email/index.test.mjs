@@ -532,7 +532,7 @@ test('commercial rental contact forms notify the listing contact and keep the CR
       sends
         .filter((payload) => payload.subject.startsWith('Contact Annonce - Location'))
         .map((payload) => payload.to[0].email),
-      ['agent@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com'],
+      ['agent@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr'],
     );
   } finally {
     globalThis.fetch = originalFetch;
