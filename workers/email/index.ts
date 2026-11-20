@@ -993,21 +993,25 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
     return { ok: false, status: 502, error: "Le guide n'a pas pu être envoyé à cette adresse. Vérifiez-la et réessayez dans quelques minutes." };
   }
 
-  // 2. Proof of consent + CRM tag, then Gaëlle's notification. The guide is already sent, so a
-  //    failure here is not shown to the visitor; Gaëlle's email carries the same data.
+  // 2. Proof of consent + CRM tag, then the lead to the Zoho parser and Caroline. The guide is
+  //    already sent, so a failure here is not shown to the visitor (D1 keeps the request).
   const note = `${guide.tag} | Guide « ${guide.title} » envoyé par email | Consentement coché : ${GUIDE_CONSENT_TEXT}`;
   const recorded = await appendSheetChecked('Gestion Locative', [now(), prénom, nom, '', email, note]);
-  const lead = await sendEmail(env, {
+  // Caroline 20/11: the lead goes into the CRM loop, i.e. to the Zoho parser, with her in
+  // copy (same pair as the alert leads), instead of an email to Gaëlle.
+  const leadMail = (to: string) => sendEmail(env, {
     subject: `[${guide.tag}] ${prénom} ${nom}`,
-    html: buildTable(`${guide.tag}`, [['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main'], ['Référence', `guide_requests #${reqId}`]]),
+    html: buildTable(`${guide.tag}`, [['Catégorie', guide.tag], ['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main'], ['Référence', `guide_requests #${reqId}`]]),
     replyTo: email,
-    to: `gaelle${D}`,
+    to,
     fromEmail: NOTIFY_FROM,
     fromName: 'Immobilière Pujol — Guides gestion locative',
   }).catch(() => ({ ok: false }));
+  const [zoho, caroline] = [await leadMail(ZOHO_PARSER), await leadMail(`carolinepujol${D}`)];
+  const lead = { ok: zoho.ok && caroline.ok };
   await updateGuideRequest(env, reqId, 'sent', recorded, lead.ok);
   if (!recorded) console.error('guide: consent row not written, see D1 guide_requests id', reqId);
-  if (!lead.ok) console.error('guide: lead email to Gaëlle failed', guide.tag);
+  if (!lead.ok) console.error('guide: lead email to Zoho or Caroline failed', guide.tag, zoho.ok, caroline.ok);
   return { ok: true, recorded };
 }
 

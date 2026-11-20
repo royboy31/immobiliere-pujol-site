@@ -690,7 +690,8 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
 }
 const GUIDE_OK = { prenom: 'Marie', nom: 'Durand', email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
 const toVisitor = (m) => m.to[0].email === 'bailleur@example.com';
-const toLead = (m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr';
+const toLead = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com' || m.to[0].email === 'carolinepujol@immobiliere-pujol.fr';
+const toZoho = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com';
 
 test('guide: refused without consent, names, valid email or a real guide; nothing written or sent', async () => {
   const inherited = ['toString', 'constructor', '__proto__', 'hasOwnProperty', 'valueOf'].map((guide) => ({ ...GUIDE_OK, guide }));
@@ -713,8 +714,11 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   assert.deepEqual(calls.sheet[0].row.slice(1, 5), ['Marie', 'Durand', '', 'bailleur@example.com']);
   assert.match(calls.sheet[0].row[5], /^Demande guide gestion - gérer seul \|/);
   assert.match(calls.sheet[0].row[5], /J'accepte de recevoir gratuitement ce guide/);
-  const lead = calls.mails.find(toLead);
-  assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Marie Durand');
+  const leads = calls.mails.filter(toLead);
+  assert.deepEqual(leads.map((m) => m.to[0].email).sort(), ['carolinepujol@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com']);
+  for (const lead of leads) assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Marie Durand');
+  assert.equal(leads[0].replyTo.email, 'bailleur@example.com');
+  assert.ok(!calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'), 'no longer to Gaëlle (Caroline 20/11)');
   assert.equal(calls.mails.indexOf(visitor), 0, 'guide email goes first');
 });
 
@@ -745,7 +749,7 @@ test('guide: Sheet failures after a sent guide still answer ok and flag it in th
   assert.equal(leadFails.calls.sheet.length, 1);
 });
 
-test('guide: durable D1 record before sending; Sheet and Gaëlle both down still keeps the request', async () => {
+test('guide: durable D1 record before sending; Sheet and the Zoho/Caroline leads all down still keeps the request', async () => {
   const { res, calls } = await postGuide(GUIDE_OK, {
     sheet: () => new Response('down', { status: 503 }),
     brevo: (m) => toLead(m) ? new Response('{}', { status: 503 }) : Response.json({ messageId: 'x' }),
