@@ -774,3 +774,33 @@ test('guide: refused guide email leaves the D1 row as send_failed', async () => 
   assert.equal(res.status, 502);
   assert.equal(calls.db.rows[0].status, 'send_failed');
 });
+
+test('listing enquiries: Vente and ordinary Location both copy Caroline next to the Zoho parser', async () => {
+  for (const [type, extra, expected] of [
+    ['V', { negociateur_email: 'agent@immobiliere-pujol.fr' }, ['agent@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr']],
+    ['L', {}, ['g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr']],
+  ]) {
+    const originalFetch = globalThis.fetch;
+    const sends = [];
+    const pending = [];
+    globalThis.fetch = async (input, init = {}) => {
+      const url = String(input);
+      if (url.includes('/v3/smtp/email')) { sends.push(JSON.parse(init.body)); return Response.json({ messageId: 'x' }, { status: 201 }); }
+      if (url.includes('script.google.com')) return Response.json({ ok: true });
+      throw new Error(`unexpected fetch ${url}`);
+    };
+    try {
+      const body = new FormData();
+      for (const [k, v] of Object.entries({ name: 'Camille Martin', email: 'camille@example.com', message: 'Test', reference: 'ref1', title: 'Appartement', type, ...extra })) body.set(k, v);
+      const response = await worker.fetch(new Request('https://worker.example/contact-annonce', {
+        method: 'POST', headers: { Origin: 'https://www.immobiliere-pujol.fr' }, body,
+      }), productionEnv, { waitUntil(p) { pending.push(p); } });
+      await Promise.all(pending);
+      assert.equal(response.status, 200);
+      const lead = sends.filter((p) => p.subject.startsWith('Contact Annonce')).map((p) => p.to[0].email);
+      assert.deepEqual(lead, expected, `type ${type}`);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  }
+});
