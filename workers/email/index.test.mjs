@@ -428,18 +428,17 @@ test('alert notifications follow the confirmed CRM routing matrix', async () => 
     {
       name: 'location',
       body: { transac: 'L', bien_a_vendre: false },
-      recipients: ['g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr'],
+      recipients: ['carolinepujol@immobiliere-pujol.fr'],
     },
     {
       name: 'sale search without a property to sell',
       body: { transac: 'V', bien_a_vendre: false },
-      recipients: ['g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr'],
+      recipients: ['carolinepujol@immobiliere-pujol.fr'],
     },
     {
       name: 'sale search with a property to sell',
       body: { transac: 'V', bien_a_vendre: true },
       recipients: [
-        'g9f4fx36@parser.eu.zohocrm.com',
         'carolinepujol@immobiliere-pujol.fr',
         'benoit@immobiliere-pujol.fr',
       ],
