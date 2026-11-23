@@ -1000,7 +1000,8 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
   // Caroline 20/11: the lead goes into the CRM loop, i.e. to the Zoho parser, with her in
   // copy (same pair as the alert leads), instead of an email to Gaëlle.
   const leadMail = (to: string) => sendEmail(env, {
-    subject: `[${guide.tag}] ${prénom} ${nom}`,
+    // Caroline 23/11: the exact guide title in the subject too, to match her Zoho list.
+    subject: `[${guide.tag}] ${guide.title} | ${prénom} ${nom}`,
     html: buildTable(`${guide.tag}`, [['Catégorie', guide.tag], ['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main'], ['Référence', `guide_requests #${reqId}`]]),
     replyTo: email,
     to,

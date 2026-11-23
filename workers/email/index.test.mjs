@@ -716,10 +716,24 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   assert.match(calls.sheet[0].row[5], /J'accepte de recevoir gratuitement ce guide/);
   const leads = calls.mails.filter(toLead);
   assert.deepEqual(leads.map((m) => m.to[0].email).sort(), ['carolinepujol@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com']);
-  for (const lead of leads) assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Marie Durand');
+  for (const lead of leads) {
+    assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Gérer seul ou déléguer ? | Marie Durand');
+    assert.match(lead.htmlContent, /Guide envoyé[\s\S]*Gérer seul ou déléguer \?/);
+  }
   assert.equal(leads[0].replyTo.email, 'bailleur@example.com');
   assert.ok(!calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'), 'no longer to Gaëlle (Caroline 20/11)');
   assert.equal(calls.mails.indexOf(visitor), 0, 'guide email goes first');
+});
+
+test('guide: the second guide carries its own exact title to Zoho and Caroline', async () => {
+  const { res, calls } = await postGuide({ ...GUIDE_OK, guide: 'gerer-seul-risque' });
+  assert.equal(res.status, 200);
+  const leads = calls.mails.filter(toLead);
+  assert.equal(leads.length, 2);
+  for (const lead of leads) {
+    assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Gérer seul : vous portez le risque | Marie Durand');
+    assert.match(lead.htmlContent, /Guide envoyé[\s\S]*Gérer seul : vous portez le risque/);
+  }
 });
 
 test('guide: if the guide email is refused or the network fails, 502 and nothing recorded', async () => {
