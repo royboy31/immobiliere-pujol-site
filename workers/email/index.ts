@@ -1781,8 +1781,9 @@ async function handleAlertNotify(req: Request, env: Env): Promise<Response> {
   const subject = `Nouvelle alerte ${isVente ? 'Vente' : 'Location'} : ${String(b.prenom || '')} ${String(b.nom || '')} (${String(b.email || '')})`.replace(/\s+/g, ' ').trim();
   const html = buildTable(subject, rows);
 
+  // Caroline 23/11: alert registrations no longer go to the Zoho parser (no import rule there,
+  // they only raised anomaly notifications). Caroline keeps her copy.
   const recipients = new Set<string>([
-    ZOHO_PARSER,
     `carolinepujol${D}`,
   ]);
   if (!!b.bien_a_vendre) recipients.add(CONTACT_ROUTING['Vente'].to);
