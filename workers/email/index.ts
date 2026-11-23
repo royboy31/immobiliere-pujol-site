@@ -321,6 +321,9 @@ async function fetchDueNewsletterReminders(env: Env, start: string, cutoff: stri
 
 const SITE_URL = 'https://www.immobiliere-pujol.fr';
 const RGPD_URL = 'https://www.declarations-juridiques.fr/processing-policy/immobiliere-pujol_056808868';
+// Caroline 23/11: every email sent to a visitor carries her Zoho unsubscribe form.
+// Plain link only: it does not opt anyone out of Brevo or of website alerts by itself.
+const ZOHO_UNSUB_URL = 'https://forms.zohopublic.eu/immobilierepujol1/form/Dsinscriptionmails/formperma/tqhnXP6xlSKl3FcTR5ZLS0LrISUavrBbqBH5RvB8YXw';
 
 // Sender for INTERNAL form notifications. Must NOT be one of the recipient
 // agents: Gmail ignores Reply-To when you reply to a mail that appears to come
@@ -398,7 +401,7 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
         <tr><td style="background-color:#ffffff;padding:0 32px 14px">
           <hr style="border:none;border-top:1px solid #eef3ef;margin:0 0 8px">
           <p style="margin:0;font-size:9px;color:#aaa;line-height:1.3">
-            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0491373839" style="color:#aaa;text-decoration:underline">04&nbsp;91&nbsp;37&nbsp;38&nbsp;39</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>.
+            Dans le cadre de nos activités, nous traitons les données à caractère personnel de nos clients, prospects, salariés, dans le respect du Règlement général sur les données personnelles (RGPD) et de la loi n°78-17 du 6 janvier 1978. Vous pouvez accéder aux informations relatives aux traitements de vos données et à vos droits via notre <a href="${RGPD_URL}" style="color:#aaa;text-decoration:underline">politique de traitement des données</a>. Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection en contactant l'Immobilière Pujol au <a href="tel:0491373839" style="color:#aaa;text-decoration:underline">04&nbsp;91&nbsp;37&nbsp;38&nbsp;39</a> ou à <a href="mailto:rgpd@immobiliere-pujol.fr" style="color:#aaa;text-decoration:underline">rgpd@immobiliere-pujol.fr</a>. Pour ne plus recevoir nos emails&nbsp;: <a href="${ZOHO_UNSUB_URL}" style="color:#aaa;text-decoration:underline">se désinscrire</a>.
           </p>
         </td></tr>
 
@@ -1699,7 +1702,7 @@ function buildAlertOptin(prenom: string, nom: string, criteriaText: string, conf
         <p style="margin:0;font-size:11px;color:#8a8a8a;line-height:1.6">Si le bouton ne fonctionne pas, copiez ce lien&nbsp;:<br>
           <a href="${confirmUrl}" style="color:#8a8a8a;text-decoration:underline;word-break:break-all">${confirmUrl}</a></p>
       </td></tr>
-      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.</p></td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.<br><a href="${ZOHO_UNSUB_URL}" style="color:#fff;text-decoration:underline">Se désinscrire de nos emails</a></p></td></tr>
     </table>
   </td></tr></table></body></html>`;
 }
@@ -1837,7 +1840,7 @@ function buildAlertMatch(prenom: string, criteriaText: string, listings: any[], 
         <p style="margin:0;font-size:12px;color:#8a8a8a;line-height:1.6">Vous recevez cet e-mail car vous avez créé une alerte sur immobiliere-pujol.fr.<br>
           <a href="${manageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Gérer ou supprimer mon alerte</a></p>
       </td></tr>
-      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.</p></td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br>Vente, location, gestion locative et syndic de copropriété.<br><a href="${ZOHO_UNSUB_URL}" style="color:#fff;text-decoration:underline">Se désinscrire de nos emails</a></p></td></tr>
     </table>
   </td></tr></table></body></html>`;
 }
@@ -1882,7 +1885,7 @@ function buildAlertRegistered(prenom: string, nom: string, criteriaText: string,
         </div>
         <p style="margin:0 0 6px"><a href="${manageUrl}" style="color:#0f1a2b;font-weight:700;text-decoration:underline">Supprimer mon alerte</a></p>
       </td></tr>
-      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille</p></td></tr>
+      <tr><td style="background:#0f1a2b;padding:24px 32px;border-radius:0 0 8px 8px"><p style="margin:0;font-size:12px;color:#fff;opacity:.75;line-height:1.6">Immobilière Pujol — 7 rue du Docteur Fiolle, 13006 Marseille<br><a href="${ZOHO_UNSUB_URL}" style="color:#fff;text-decoration:underline">Se désinscrire de nos emails</a></p></td></tr>
     </table>
   </td></tr></table></body></html>`;
 }

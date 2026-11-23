@@ -816,3 +816,32 @@ test('listing enquiries: Vente and ordinary Location both copy Caroline next to 
     }
   }
 });
+
+const ZOHO_UNSUB = 'https://forms.zohopublic.eu/immobilierepujol1/form/Dsinscriptionmails/formperma/tqhnXP6xlSKl3FcTR5ZLS0LrISUavrBbqBH5RvB8YXw';
+
+test('visitor emails carry Caroline\'s Zoho unsubscribe link; internal lead notifications do not', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK);
+  assert.equal(res.status, 200);
+  assert.ok(calls.mails.find(toVisitor).htmlContent.includes(ZOHO_UNSUB), 'guide email');
+  for (const lead of calls.mails.filter(toLead)) assert.ok(!lead.htmlContent.includes(ZOHO_UNSUB), 'lead notification');
+
+  const originalFetch = globalThis.fetch;
+  const sent = [];
+  globalThis.fetch = async (_input, init = {}) => { sent.push(JSON.parse(init.body)); return Response.json({ messageId: 'x' }, { status: 201 }); };
+  try {
+    const env = { BREVO_API_KEY: 'test-key', NEWSLETTER_INTERNAL_TOKEN: 'test-token', ALERT_INTERNAL_TOKEN: 'match-token', NEWSLETTER_SENDER_EMAIL: 'notifications@example.com' };
+    const post = (path, body, token = 'test-token') => worker.fetch(new Request(`https://worker.example${path}`, {
+      method: 'POST', headers: { 'content-type': 'application/json', 'x-internal-token': token }, body: JSON.stringify(body),
+    }), env, {});
+    const base = { email: 'prospect@example.com', prenom: 'Camille', nom: 'Martin', criteriaText: 'Location', manageUrl: 'https://example.com/manage' };
+    assert.equal((await post('/alerts/optin', { ...base, confirmUrl: 'https://example.com/confirm' })).status, 200);
+    assert.equal((await post('/alerts/registered', base)).status, 200);
+    assert.equal((await post('/alerts/match', { ...base, listings: [{ title: 'T2', url: 'https://example.com/a' }] }, 'match-token')).status, 200);
+    assert.equal(sent.length, 3);
+    for (const m of sent) assert.ok(m.htmlContent.includes(ZOHO_UNSUB), m.subject);
+    assert.ok(sent[1].htmlContent.includes('https://example.com/manage'), 'alert keeps its own unsubscribe link');
+    assert.ok(sent[2].htmlContent.includes('https://example.com/manage'), 'match keeps its own manage link');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
