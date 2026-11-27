@@ -109,7 +109,10 @@ jobs:
       # domain live, robots.txt also flips to Allow on its own. PROD only —
       # staging (deploy.yml) keeps public/_headers untouched.
       - name: Remove staging X-Robots-Tag header (go-live)
-        run: rm -f public/_headers
+        run: |
+          rm -f public/_headers
+          # Guide PDFs (unlisted, link sent by email after consent) stay out of search results.
+          printf '/guides/*\n  X-Robots-Tag: noindex, nofollow\n' > public/_headers
 
       # ── Build ──────────────────────────────────────────────────────────
       - run: npm run build
