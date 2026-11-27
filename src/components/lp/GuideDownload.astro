@@ -13,7 +13,7 @@ const CONSENT = "J'accepte de recevoir gratuitement ce guide ainsi que d'autres 
     <h2 class="mag-h2 prop-center">{title}</h2>
     <ul class="prop-guidedl">
       {guides.map((g) => (
-        <li class="prop-guidedl__card">
+        <li class="prop-guidedl__card" id={`guide-${g.id}`}>
           <img src={g.cover} alt={`Couverture du guide « ${g.title} »`} width="452" height="640" loading="lazy" />
           <div class="prop-guidedl__body">
             <h3 class="prop-guidedl__title">{g.title}</h3>

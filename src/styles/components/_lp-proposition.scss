@@ -281,11 +281,14 @@ $p-slate-soft:  rgb(226, 232, 235);
 // ---------- guides to download (Je gère seul, 19/11): one always-visible form per guide ----------
 .prop-guidedl { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
   @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
-  &__card { display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start; background: #fff; border-radius: 10px; padding: 24px;
+  &__card { scroll-margin-top: 110px; display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start; background: #fff; border-radius: 10px; padding: 24px;
     img { width: 150px; height: auto; border-radius: 4px; box-shadow: 0 8px 24px rgba($p-ink, .14); }
     @media (max-width: 520px) { grid-template-columns: 1fr; img { width: 140px; } } }
   &__title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; color: $p-ink; }
-  &__body > p { margin: 0 0 16px; font-size: 15px; line-height: 1.5; }
+  // Roy 27/11: the guide's promise must read at a glance to push the download:
+  // dark, semi-bold, larger, with an orange bar instead of the light grey body text.
+  &__body > p { margin: 0 0 18px; padding-left: 14px; border-left: 4px solid $p-orange;
+    font-size: 17px; line-height: 1.5; font-weight: 600; color: $p-ink; max-width: 36ch; }
   &__form { display: grid; gap: 12px; }
   &__email { display: grid; gap: 6px; font-weight: 600; font-size: 14px;
     input { font: inherit; font-weight: 400; padding: 11px 14px; border: 1.5px solid rgba($p-ink, .25); border-radius: 8px; } }
