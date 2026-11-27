@@ -704,11 +704,10 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   // Caroline 27/11: Gaëlle's wording, booking link and signature, signed by her.
   assert.match(visitor.htmlContent, /Répondez simplement à cet email\. Gaëlle Lapert, notre experte en gestion locative, vous rappelle\./);
   assert.match(visitor.htmlContent, /calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\/AcZssZ0fgtiWYuB8b/);
-  // Text signature until Caroline's image is corrected: expert-page phone (85), never 87.
-  assert.match(visitor.htmlContent, /06 08 85 20 05/);
-  assert.doesNotMatch(visitor.htmlContent, /87 ?20 ?05/);
-  assert.doesNotMatch(visitor.htmlContent, /signature-gaelle-lapert\.jpg/);
-  assert.match(visitor.htmlContent, />Réserver un rendez-vous<\/a>/);
+  // Caroline 27/11: 87 is Gaëlle's number, so her signature image (which shows 87) is used.
+  assert.match(visitor.htmlContent, /\/images\/email\/signature-gaelle-lapert\.jpg/);
+  assert.match(visitor.htmlContent, /<a href="https:\/\/calendar\.google\.com[^"]*"><img /, 'signature image opens her agenda');
+  assert.doesNotMatch(visitor.htmlContent, /85 ?20 ?05/);
   assert.match(visitor.htmlContent, />Gaëlle Lapert<\/p>/);
   assert.doesNotMatch(visitor.htmlContent, /L(&#39;|&#x27;|')équipe Immobilière Pujol/, 'signed by Gaëlle, not the team');
   assert.equal(calls.sheet[0].tab, 'Gestion Locative');
@@ -809,12 +808,12 @@ test('guide: a failed copy to Caroline (refused or network) changes nothing for 
   }
 });
 
-test('Gaëlle signature: image mode keeps the clickable signature image, text mode the expert-page phone', () => {
+test('Gaëlle signature: image mode keeps the clickable signature image, text mode her phone (87, Caroline 27/11)', () => {
   const img = gaelleSignatureHtml('https://example.test', 'image');
   assert.match(img, /https:\/\/example\.test\/images\/email\/signature-gaelle-lapert\.jpg/);
   assert.match(img, /<a href="https:\/\/calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\//);
   const text = gaelleSignatureHtml('https://example.test', 'text');
-  assert.match(text, /href="tel:0608852005"/);
+  assert.match(text, /href="tel:0608872005"/);
   assert.match(text, /gaelle@immobiliere-pujol\.fr/);
-  assert.doesNotMatch(text, /87/);
+  assert.doesNotMatch(text, /85 ?20 ?05/);
 });

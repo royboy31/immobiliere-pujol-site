@@ -915,11 +915,10 @@ const GUIDES: Record<string, { title: string; file: string; tag: string }> = {
 // Gaëlle's booking agenda: same URL as her expert page (gaelle-lapert.json) and the QR code of her signature.
 const GAELLE_AGENDA = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0fgtiWYuB8b-HQxfvOfUQ0ZkIXJk4eE-GTP7MyGPDnx3DcAXrFqHCYKrlEZPcLxDxAjP78k1bT';
 
-// Gaëlle's signature in the guide email. The image Caroline sent on 27/11 shows 06 08 87 20 05,
-// but her expert page (the reference, Roy 27/11) says 06 08 85 20 05: an email must never show 87.
-// 'text' until Caroline sends a corrected image; then replace the .jpg and switch to 'image'.
-const GAELLE_SIGNATURE_MODE: 'image' | 'text' = 'text';
-const GAELLE_PHONE = '06 08 85 20 05';
+// Gaëlle's signature in the guide email: the image Caroline sent on 27/11 (06 08 87 20 05).
+// Caroline confirmed 87 is the right number (Roy 27/11, 12:26); the expert page said 85 and is fixed too.
+const GAELLE_SIGNATURE_MODE: 'image' | 'text' = 'image';
+const GAELLE_PHONE = '06 08 87 20 05';
 
 export function gaelleSignatureHtml(base: string, mode: 'image' | 'text' = GAELLE_SIGNATURE_MODE): string {
   if (mode === 'image') {
