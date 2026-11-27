@@ -360,7 +360,7 @@ Créez votre alerte annonces en 30 secondes&nbsp;: vous recevrez par email chaqu
   signoff: 'Le service Location',
 };
 
-function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string }): string {
+function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string; signatureHtml?: string }): string {
   const greeting = vars.prénom
     ? `Bonjour ${esc(vars.prénom)},`
     : 'Bonjour,';
@@ -394,6 +394,7 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
           </div>
 
           <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(signoff)}</p>
+          ${vars.signatureHtml ?? ''}
 
         </td></tr>
 
@@ -909,6 +910,8 @@ const GUIDES: Record<string, { title: string; file: string; tag: string }> = {
   'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-risque-juridique-penal.pdf', tag: 'Demande guide gestion - gérer seul' },
 };
 // Caroline's wording, 19/11 16:23 (must match GuideDownload.astro).
+// Gaëlle's booking agenda: same URL as her expert page (gaelle-lapert.json) and the QR code of her signature.
+const GAELLE_AGENDA = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0fgtiWYuB8b-HQxfvOfUQ0ZkIXJk4eE-GTP7MyGPDnx3DcAXrFqHCYKrlEZPcLxDxAjP78k1bT';
 const GUIDE_CONSENT_TEXT =
   "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
 
@@ -984,7 +987,13 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
       prénom,
       bodyHtml: `<p>Merci pour votre demande. Voici votre guide « ${esc(guide.title)} » :</p>
 <p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
-<p>Une question sur la gestion de votre bien ? Répondez simplement à cet email, Gaëlle vous recontacte.</p>`,
+<p>Une question sur la gestion locative de votre bien ? Répondez simplement à cet email. Gaëlle Lapert, notre experte en gestion locative, vous rappelle.</p>
+<p>Vous pouvez aussi <a href="${GAELLE_AGENDA}" style="color:#0f1a2b;font-weight:700">prendre rendez-vous directement dans son agenda</a>.</p>
+<p>Bien cordialement,</p>`,
+      // Caroline 27/11: signed by Gaëlle with her signature (image from Caroline, 27/11),
+      // not by "l'équipe Immobilière Pujol". Image links to her booking agenda.
+      signoff: 'Gaëlle Lapert',
+      signatureHtml: `<p style="margin:12px 0 0"><a href="${GAELLE_AGENDA}"><img src="${esc(base)}/images/email/signature-gaelle-lapert.jpg" alt="Gaëlle Lapert, Immobilière Pujol. Réserver un rendez-vous" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0"></a></p>`,
     }),
     to,
     replyTo: `gaelle${D}`,
@@ -999,7 +1008,8 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
   // Roy 27/11: at launch Caroline also receives a copy of the exact email the visitor got,
   // until Roy asks to remove it. Separate email (not cc) so her address stays hidden from
   // the visitor; a failed copy never affects the visitor's answer.
-  const copy = await guideMail(`carolinepujol${D}`, `[Copie envoyée à ${email}] Votre guide : ${guide.title}`);
+  // Caroline 27/11: the old subject ("[Copie envoyée à ...]") was unclear to her.
+  const copy = await guideMail(`carolinepujol${D}`, `Copie du guide envoyé à ${prénom} ${nom} (${email}) : ${guide.title}`);
   if (!copy.ok) console.error('guide: copy to Caroline failed', guideId);
 
   // 2. Proof of consent + CRM tag, then the lead to the Zoho parser and Caroline. The guide is

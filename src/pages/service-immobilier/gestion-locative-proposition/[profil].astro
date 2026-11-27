@@ -21,6 +21,7 @@ const hero = ph[`${card.slug}-hero`];
 const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
 const prof = parseProfile(entry?.body ?? '');
 // Caroline 19/11 video: no 3-card "Ce n'est pas votre situation ?" block, just a link to the copropriétaire page.
+const allGuides = [...(card.guides ?? []), ...PROFILES.filter((p) => p !== card).flatMap((p) => p.guides ?? [])];
 const copro = card.slug === 'coproprietaire' ? undefined : PROFILES.find((p) => p.slug === 'coproprietaire');
 const pics = card.pics.map((_, i) => ph[`${card.slug}-s${i + 1}`]); // own photos per page, never the landing page's (Caroline 18/11)
 let picIdx = 0;
@@ -189,7 +190,8 @@ const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and a
       );
     })}
 
-    {card.guides && <GuideDownload guides={card.guides} />}
+    {/* Caroline 27/11: every gestion guide on every gestion profile page, own profile's guides first */}
+    {allGuides.length > 0 && <GuideDownload guides={allGuides} />}
 
     {prof.faq.length > 0 && (
       <section class="prop-section">

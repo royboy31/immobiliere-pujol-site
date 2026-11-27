@@ -688,7 +688,7 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
 }
 const GUIDE_OK = { prenom: 'Marie', nom: 'Durand', email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
 const toVisitor = (m) => m.to[0].email === 'bailleur@example.com';
-const isGuideCopy = (m) => m.subject.startsWith('[Copie envoyée à ');
+const isGuideCopy = (m) => m.subject.startsWith('Copie du guide envoyé à ');
 const toLead = (m) => !isGuideCopy(m) && (m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com' || m.to[0].email === 'carolinepujol@immobiliere-pujol.fr');
 const toZoho = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com';
 
@@ -709,6 +709,12 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   const visitor = calls.mails.find(toVisitor);
   assert.match(visitor.htmlContent, /https:\/\/www\.immobiliere-pujol\.fr\/guides\/[0-9a-f]{24}\/guide-gerer-seul-ou-deleguer\.pdf/);
   assert.match(visitor.htmlContent, /Bonjour Marie/);
+  // Caroline 27/11: Gaëlle's wording, booking link and signature, signed by her.
+  assert.match(visitor.htmlContent, /Répondez simplement à cet email\. Gaëlle Lapert, notre experte en gestion locative, vous rappelle\./);
+  assert.match(visitor.htmlContent, /calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\/AcZssZ0fgtiWYuB8b/);
+  assert.match(visitor.htmlContent, /\/images\/email\/signature-gaelle-lapert\.jpg/);
+  assert.match(visitor.htmlContent, />Gaëlle Lapert<\/p>/);
+  assert.doesNotMatch(visitor.htmlContent, /L(&#39;|&#x27;|')équipe Immobilière Pujol/, 'signed by Gaëlle, not the team');
   assert.equal(calls.sheet[0].tab, 'Gestion Locative');
   assert.deepEqual(calls.sheet[0].row.slice(1, 5), ['Marie', 'Durand', '', 'bailleur@example.com']);
   assert.match(calls.sheet[0].row[5], /^Demande guide gestion - gérer seul \|/);
@@ -725,7 +731,7 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   const copies = calls.mails.filter(isGuideCopy);
   assert.equal(copies.length, 1, 'Caroline gets one copy of the visitor email (Roy 27/11)');
   assert.equal(copies[0].to[0].email, 'carolinepujol@immobiliere-pujol.fr');
-  assert.equal(copies[0].subject, '[Copie envoyée à bailleur@example.com] Votre guide : Gérer seul ou déléguer ?');
+  assert.equal(copies[0].subject, 'Copie du guide envoyé à Marie Durand (bailleur@example.com) : Gérer seul ou déléguer ?');
   assert.equal(copies[0].htmlContent, visitor.htmlContent, 'same content as the visitor email');
   assert.ok(!visitor.cc, 'Caroline is not visible to the visitor');
   assert.equal(calls.mails.length, 4, 'visitor + copy + Zoho lead + Caroline lead');

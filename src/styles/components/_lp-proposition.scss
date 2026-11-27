@@ -284,7 +284,7 @@ $p-slate-soft:  rgb(226, 232, 235);
   &__card { scroll-margin-top: 110px; display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start; background: #fff; border-radius: 10px; padding: 24px;
     img { width: 150px; height: auto; border-radius: 4px; box-shadow: 0 8px 24px rgba($p-ink, .14); }
     @media (max-width: 520px) { grid-template-columns: 1fr; img { width: 140px; } } }
-  &__title { margin: 0 0 8px; font-size: 20px; line-height: 1.25; color: $p-ink; }
+  &__title { margin: 0 0 10px; font-size: 24px; line-height: 1.2; color: $p-ink; } // Caroline 27/11: titles were too small
   // Roy 27/11: the guide's promise must read at a glance to push the download:
   // dark, semi-bold, larger, with an orange bar instead of the light grey body text.
   &__body > p { margin: 0 0 18px; padding-left: 14px; border-left: 4px solid $p-orange;
