@@ -22,7 +22,11 @@ const GESTION = '/service-immobilier/gestion-locative/';
 const serviceTitles = new Map(
   (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
 );
-const q = (href: string, fallback: string) => guideQuestion(href) || fallback;
+// The one legacy link that is not a guide gets its question here (new wording, for Caroline's validation).
+const EXTRA_QUESTIONS: Record<string, string> = {
+  '/services/agence-location-appartement-marseille/': 'Pourquoi confier la location de votre appartement à une agence\u00a0?',
+};
+const q = (href: string, fallback: string) => guideQuestion(href) || EXTRA_QUESTIONS[href] || fallback;
 
 // The legacy page's 3 blocks, their texts and links (every URL preserved), one of Caroline's photos each.
 const blocks = [
