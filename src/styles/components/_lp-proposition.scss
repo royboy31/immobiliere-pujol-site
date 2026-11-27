@@ -158,8 +158,8 @@ $p-slate-soft:  rgb(226, 232, 235);
   @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
   details { background: #fff; border-radius: 6px; border: 1px solid transparent; transition: border-color .2s, box-shadow .2s; }
   details:hover, details[open] { border-color: $p-green; box-shadow: 0 6px 18px rgba(0, 0, 0, .06); }
-  // one fixed height per rubric (fits 2 lines) so every row of the grid is even
-  summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; min-height: 86px; padding: 14px 20px; font-weight: 600; color: $p-ink;
+  // one fixed height per rubric so every closed box is even: fits the 3-line questions (Roy 27/11)
+  summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; min-height: 112px; padding: 14px 20px; font-weight: 600; color: $p-ink;
     > span { flex: none; margin-left: auto; min-width: 28px; height: 28px; border-radius: 14px; background: $p-green-soft; display: grid; place-items: center; font-size: 13px; }
     // chevron: shows the rubric opens
     &::after { content: ''; flex: none; width: 9px; height: 9px; margin: -4px 2px 0 0; border-right: 2px solid $p-ink; border-bottom: 2px solid $p-ink; transform: rotate(45deg); transition: transform .2s; }
@@ -168,6 +168,8 @@ $p-slate-soft:  rgb(226, 232, 235);
     &:focus-visible { outline: 3px solid $p-orange; outline-offset: 2px; } }
   details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
   details[open] summary > span { background: $p-green; }
+  // one column on mobile: no row to align, so no tall empty boxes
+  @media (max-width: $bp-tablet) { summary { min-height: 72px; } }
   details ul { padding: 4px 20px 18px; display: grid; gap: 10px; font-size: 15px; border-top: 1px solid $p-paper; padding-top: 14px; }
   // article links look like links: underlined, darker green on hover
   details a { color: $p-ink; text-decoration: underline; text-decoration-color: $p-green; text-decoration-thickness: 2px; text-underline-offset: 4px;
