@@ -912,6 +912,23 @@ const GUIDES: Record<string, { title: string; file: string; tag: string }> = {
 // Caroline's wording, 19/11 16:23 (must match GuideDownload.astro).
 // Gaëlle's booking agenda: same URL as her expert page (gaelle-lapert.json) and the QR code of her signature.
 const GAELLE_AGENDA = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0fgtiWYuB8b-HQxfvOfUQ0ZkIXJk4eE-GTP7MyGPDnx3DcAXrFqHCYKrlEZPcLxDxAjP78k1bT';
+
+// Gaëlle's signature in the guide email. The image Caroline sent on 27/11 shows 06 08 87 20 05,
+// but her expert page (the reference, Roy 27/11) says 06 08 85 20 05: an email must never show 87.
+// 'text' until Caroline sends a corrected image; then replace the .jpg and switch to 'image'.
+const GAELLE_SIGNATURE_MODE: 'image' | 'text' = 'text';
+const GAELLE_PHONE = '06 08 85 20 05';
+
+export function gaelleSignatureHtml(base: string, mode: 'image' | 'text' = GAELLE_SIGNATURE_MODE): string {
+  if (mode === 'image') {
+    return `<p style="margin:12px 0 0"><a href="${GAELLE_AGENDA}"><img src="${esc(base)}/images/email/signature-gaelle-lapert.jpg" alt="Gaëlle Lapert, Immobilière Pujol. Réserver un rendez-vous" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0"></a></p>`;
+  }
+  return `<p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#0f1a2b">`
+    + `Expert conseil en gestion locative<br>Immobilière Pujol<br>`
+    + `<a href="tel:${GAELLE_PHONE.replace(/ /g, '')}" style="color:#0f1a2b">${GAELLE_PHONE}</a> · `
+    + `<a href="mailto:gaelle${D}" style="color:#0f1a2b">gaelle${D}</a><br>`
+    + `<a href="${GAELLE_AGENDA}" style="color:#0f1a2b;font-weight:700">Réserver un rendez-vous</a></p>`;
+}
 const GUIDE_CONSENT_TEXT =
   "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
 
@@ -990,10 +1007,9 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
 <p>Une question sur la gestion locative de votre bien ? Répondez simplement à cet email. Gaëlle Lapert, notre experte en gestion locative, vous rappelle.</p>
 <p>Vous pouvez aussi <a href="${GAELLE_AGENDA}" style="color:#0f1a2b;font-weight:700">prendre rendez-vous directement dans son agenda</a>.</p>
 <p>Bien cordialement,</p>`,
-      // Caroline 27/11: signed by Gaëlle with her signature (image from Caroline, 27/11),
-      // not by "l'équipe Immobilière Pujol". Image links to her booking agenda.
+      // Caroline 27/11: signed by Gaëlle, not by "l'équipe Immobilière Pujol".
       signoff: 'Gaëlle Lapert',
-      signatureHtml: `<p style="margin:12px 0 0"><a href="${GAELLE_AGENDA}"><img src="${esc(base)}/images/email/signature-gaelle-lapert.jpg" alt="Gaëlle Lapert, Immobilière Pujol. Réserver un rendez-vous" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0"></a></p>`,
+      signatureHtml: gaelleSignatureHtml(base),
     }),
     to,
     replyTo: `gaelle${D}`,

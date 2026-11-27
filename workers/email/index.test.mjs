@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
-import worker from './index.ts';
+import worker, { gaelleSignatureHtml } from './index.ts';
 
 function createReminderDb(seed = []) {
   const rows = new Map(seed.map((row) => [row.email.toLowerCase(), {
@@ -712,7 +712,11 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   // Caroline 27/11: Gaëlle's wording, booking link and signature, signed by her.
   assert.match(visitor.htmlContent, /Répondez simplement à cet email\. Gaëlle Lapert, notre experte en gestion locative, vous rappelle\./);
   assert.match(visitor.htmlContent, /calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\/AcZssZ0fgtiWYuB8b/);
-  assert.match(visitor.htmlContent, /\/images\/email\/signature-gaelle-lapert\.jpg/);
+  // Text signature until Caroline's image is corrected: expert-page phone (85), never 87.
+  assert.match(visitor.htmlContent, /06 08 85 20 05/);
+  assert.doesNotMatch(visitor.htmlContent, /87 ?20 ?05/);
+  assert.doesNotMatch(visitor.htmlContent, /signature-gaelle-lapert\.jpg/);
+  assert.match(visitor.htmlContent, />Réserver un rendez-vous<\/a>/);
   assert.match(visitor.htmlContent, />Gaëlle Lapert<\/p>/);
   assert.doesNotMatch(visitor.htmlContent, /L(&#39;|&#x27;|')équipe Immobilière Pujol/, 'signed by Gaëlle, not the team');
   assert.equal(calls.sheet[0].tab, 'Gestion Locative');
@@ -870,4 +874,14 @@ test('visitor emails carry Caroline\'s Zoho unsubscribe link; internal lead noti
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('Gaëlle signature: image mode keeps the clickable signature image, text mode the expert-page phone', () => {
+  const img = gaelleSignatureHtml('https://example.test', 'image');
+  assert.match(img, /https:\/\/example\.test\/images\/email\/signature-gaelle-lapert\.jpg/);
+  assert.match(img, /<a href="https:\/\/calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\//);
+  const text = gaelleSignatureHtml('https://example.test', 'text');
+  assert.match(text, /href="tel:0608852005"/);
+  assert.match(text, /gaelle@immobiliere-pujol\.fr/);
+  assert.doesNotMatch(text, /87/);
 });
