@@ -978,23 +978,29 @@ async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok
 
   // 1. The guide email is the delivery. If Brevo refuses it, no Sheet row and no lead email
   //    (so no duplicate if the visitor retries); the D1 row keeps status send_failed.
-  const sent = await sendEmail(env, {
-    subject: `Votre guide : ${guide.title}`,
+  const guideMail = (to: string, subject: string) => sendEmail(env, {
+    subject,
     html: buildCustomerEmail({
       prénom,
       bodyHtml: `<p>Merci pour votre demande. Voici votre guide « ${esc(guide.title)} » :</p>
 <p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
 <p>Une question sur la gestion de votre bien ? Répondez simplement à cet email, Gaëlle vous recontacte.</p>`,
     }),
-    to: email,
+    to,
     replyTo: `gaelle${D}`,
     fromEmail: `gaelle${D}`,
     fromName: 'Immobilière Pujol — Gestion Locative',
   }).catch(() => ({ ok: false }));
+  const sent = await guideMail(email, `Votre guide : ${guide.title}`);
   if (!sent.ok) {
     await updateGuideRequest(env, reqId, 'send_failed');
     return { ok: false, status: 502, error: "Le guide n'a pas pu être envoyé à cette adresse. Vérifiez-la et réessayez dans quelques minutes." };
   }
+  // Roy 27/11: at launch Caroline also receives a copy of the exact email the visitor got,
+  // until Roy asks to remove it. Separate email (not cc) so her address stays hidden from
+  // the visitor; a failed copy never affects the visitor's answer.
+  const copy = await guideMail(`carolinepujol${D}`, `[Copie envoyée à ${email}] Votre guide : ${guide.title}`);
+  if (!copy.ok) console.error('guide: copy to Caroline failed', guideId);
 
   // 2. Proof of consent + CRM tag, then the lead to the Zoho parser and Caroline. The guide is
   //    already sent, so a failure here is not shown to the visitor (D1 keeps the request).

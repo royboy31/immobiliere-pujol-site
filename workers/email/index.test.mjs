@@ -688,7 +688,8 @@ async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode:
 }
 const GUIDE_OK = { prenom: 'Marie', nom: 'Durand', email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
 const toVisitor = (m) => m.to[0].email === 'bailleur@example.com';
-const toLead = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com' || m.to[0].email === 'carolinepujol@immobiliere-pujol.fr';
+const isGuideCopy = (m) => m.subject.startsWith('[Copie envoyée à ');
+const toLead = (m) => !isGuideCopy(m) && (m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com' || m.to[0].email === 'carolinepujol@immobiliere-pujol.fr');
 const toZoho = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com';
 
 test('guide: refused without consent, names, valid email or a real guide; nothing written or sent', async () => {
@@ -721,6 +722,13 @@ test('guide: sent by email (no link in the answer), tagged consent row, tagged l
   assert.equal(leads[0].replyTo.email, 'bailleur@example.com');
   assert.ok(!calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'), 'no longer to Gaëlle (Caroline 20/11)');
   assert.equal(calls.mails.indexOf(visitor), 0, 'guide email goes first');
+  const copies = calls.mails.filter(isGuideCopy);
+  assert.equal(copies.length, 1, 'Caroline gets one copy of the visitor email (Roy 27/11)');
+  assert.equal(copies[0].to[0].email, 'carolinepujol@immobiliere-pujol.fr');
+  assert.equal(copies[0].subject, '[Copie envoyée à bailleur@example.com] Votre guide : Gérer seul ou déléguer ?');
+  assert.equal(copies[0].htmlContent, visitor.htmlContent, 'same content as the visitor email');
+  assert.ok(!visitor.cc, 'Caroline is not visible to the visitor');
+  assert.equal(calls.mails.length, 4, 'visitor + copy + Zoho lead + Caroline lead');
 });
 
 test('guide: the second guide carries its own exact title to Zoho and Caroline', async () => {
