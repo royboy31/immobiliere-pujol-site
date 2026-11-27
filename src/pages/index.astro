@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import InstagramFeed from '../components/agency/InstagramFeed.astro';
 import { buildWebSite } from '../lib/schemas';
 // Prebuilt by scripts/build-home-data.mjs. Imported as static JSON instead of
 // getCollection() so astro:content (and the ~24 MB content data layer) is NOT
@@ -434,6 +435,17 @@ const services = [
       </div>
     </section>
 
+    {/* ============= PRESSE (Caroline 27/11): Stéphane on France 3 ============= */}
+    <section class="home-press" aria-labelledby="home-press-title">
+      <img class="home-press__img" src="https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-800x500.jpg" alt="Stéphane Pujol" loading="lazy" decoding="async" width="800" height="500" />
+      <div class="home-press__body">
+        <p class="home-press__eyebrow">Vu à la télé</p>
+        <h2 id="home-press-title">Stéphane Pujol <b>sur France 3</b></h2>
+        <p>Notre fondateur partage son regard sur le marché immobilier marseillais. Retrouvez nos passages à la télévision et dans la presse.</p>
+        <a class="home-press__cta" href="/service-immobilier/immobiliere-pujol-dans-la-presse/">Pujol dans la presse <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
     {/* ============= REVIEWS (Google widget) ============= */}
     <section class="reviews" id="avis">
       <h3 class="stat-title">Votre confiance est<br /><b>notre plus belle récompense</b></h3>
@@ -485,6 +497,8 @@ const services = [
       })();
     </script>
 
+    <InstagramFeed />
+
     {/* ============= LOCAL EDITORIAL: useful orientation + internal links ============= */}
     <section class="home-seo" aria-labelledby="home-seo-title">
       <div class="home-seo__intro">
@@ -525,4 +539,13 @@ const services = [
     </section>
 
   </div>
+  <style>
+    .home-press { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 36px; align-items: center; max-width: 1200px; margin: 24px auto 56px; padding: 0 20px; }
+    .home-press__img { width: 100%; height: auto; border-radius: 10px; display: block; }
+    .home-press__eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: 13px; font-weight: 700; color: rgb(236, 114, 52); margin: 0 0 8px; }
+    .home-press h2 { font-size: 32px; line-height: 1.2; margin: 0 0 14px; font-weight: 400; }
+    .home-press p { line-height: 1.6; }
+    .home-press__cta { display: inline-block; margin-top: 10px; font-weight: 700; text-decoration: underline; }
+    @media (max-width: 800px) { .home-press { grid-template-columns: 1fr; gap: 20px; } .home-press h2 { font-size: 26px; } }
+  </style>
 </BaseLayout>

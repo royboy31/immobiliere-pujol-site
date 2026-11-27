@@ -1,0 +1,76 @@
+---
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// T3 (Caroline 27/11): "Pujol dans la presse" page. PROPOSAL: the entries below wait for
+// Caroline's material (France 3 report link, magazine reference). France 5 is not listed
+// until the programme has aired. The page stays noindex while an entry has no link.
+type PressItem = { media: string; title: string; date: string; text: string; href: string | null; image: string };
+const items: PressItem[] = [
+  {
+    media: 'France 3',
+    title: "Stéphane Pujol interviewé sur France 3",
+    date: '',
+    text: "Reportage régional avec Stéphane Pujol, fondateur de l'Immobilière Pujol.",
+    href: null, // waiting for the report link (Caroline asks Stéphane)
+    image: 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2017/10/PU-0747-1200x750.jpg',
+  },
+  {
+    media: 'Magazine',
+    title: "L'Immobilière Pujol dans la presse écrite",
+    date: '',
+    text: 'Article à compléter.',
+    href: null, // waiting for the magazine reference
+    image: '',
+  },
+];
+const incomplete = items.some((i) => !i.href);
+---
+
+<BaseLayout
+  title="L'Immobilière Pujol dans la presse et à la télévision"
+  description="Stéphane Pujol et l'Immobilière Pujol, agence immobilière indépendante à Marseille, dans les médias : reportages télévisés et articles de presse."
+  noindex={incomplete}
+>
+  <section class="svc-hero" style="background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.5)), url('https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/team-pujol-immobilier-marseille.jpg');">
+    <div class="svc-hero__inner">
+      <h1>Pujol <b>dans la presse</b></h1>
+    </div>
+  </section>
+
+  <div class="svc-page">
+    <section class="press">
+      <p class="press__lead">Stéphane Pujol et l'équipe de l'Immobilière Pujol partagent régulièrement leur regard sur le marché immobilier marseillais dans les médias.</p>
+      <ul class="press__grid">
+        {items.map((i) => (
+          <li class="press__card">
+            {i.image && <img src={i.image} alt="" loading="lazy" decoding="async" />}
+            <div class="press__body">
+              <p class="press__media">{i.media}{i.date && ` · ${i.date}`}</p>
+              <h2>{i.title}</h2>
+              <p>{i.text}</p>
+              {i.href
+                ? <a class="press__link" href={i.href} target="_blank" rel="noopener">Voir le reportage</a>
+                : <p class="press__pending">Lien à venir</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="press__back"><a href="/service-immobilier/agence-immobiliere-pujol/">← Notre agence immobilière</a></p>
+    </section>
+  </div>
+
+  <style>
+    .press { max-width: 1100px; margin: 0 auto; padding: 56px 20px 72px; }
+    .press__lead { font-size: 18px; line-height: 1.6; max-width: 760px; margin: 0 0 32px; }
+    .press__grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .press__card { border: 1px solid #e3e6ea; border-radius: 10px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+    .press__card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
+    .press__body { padding: 20px 22px 24px; }
+    .press__media { text-transform: uppercase; letter-spacing: .08em; font-size: 13px; font-weight: 700; color: rgb(236, 114, 52); margin: 0 0 8px; }
+    .press__body h2 { font-size: 21px; margin: 0 0 10px; }
+    .press__link { font-weight: 700; text-decoration: underline; }
+    .press__pending { font-style: italic; color: #8a8f96; }
+    .press__back { margin-top: 36px; }
+  </style>
+</BaseLayout>

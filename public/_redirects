@@ -20,3 +20,22 @@
 /agence-immobiliere/ /agence-immobiliere-marseille/ 301
 /mentions-legales /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301
 /mentions-legales/ /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301
+
+# T3 agency merge (Caroline 27/11): the four story pages live on the agency page.
+/services/lhistoire-de-la-societe /service-immobilier/agence-immobiliere-pujol/ 301
+/services/lhistoire-de-la-societe/ /service-immobilier/agence-immobiliere-pujol/ 301
+/services/le-mot-de-stephane /service-immobilier/agence-immobiliere-pujol/ 301
+/services/le-mot-de-stephane/ /service-immobilier/agence-immobiliere-pujol/ 301
+/services/la-mission-de-immobiliere-pujol /service-immobilier/agence-immobiliere-pujol/ 301
+/services/la-mission-de-immobiliere-pujol/ /service-immobilier/agence-immobiliere-pujol/ 301
+/services/pourquoi-nous-faisons-ce-metier /service-immobilier/agence-immobiliere-pujol/ 301
+/services/pourquoi-nous-faisons-ce-metier/ /service-immobilier/agence-immobiliere-pujol/ 301
+# English pages retired to their French equivalent (Codex 301 map, 27/11).
+/services/advisory-transactions-service /service-immobilier/vendre/ 301
+/services/advisory-transactions-service/ /service-immobilier/vendre/ 301
+/services/property-management-question-expertise /service-immobilier/syndic-de-copropriete-a-marseille/ 301
+/services/property-management-question-expertise/ /service-immobilier/syndic-de-copropriete-a-marseille/ 301
+/services/simple-efficient-rental-management /service-immobilier/gestion-locative/ 301
+/services/simple-efficient-rental-management/ /service-immobilier/gestion-locative/ 301
+/service-immobilier/limmobiliere-pujol-en-anglais /service-immobilier/agence-immobiliere-pujol/ 301
+/service-immobilier/limmobiliere-pujol-en-anglais/ /service-immobilier/agence-immobiliere-pujol/ 301

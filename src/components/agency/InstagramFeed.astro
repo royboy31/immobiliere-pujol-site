@@ -1,0 +1,25 @@
+---
+// T3 (Caroline 27/11): Instagram feed on the team page and at the bottom of the homepage.
+// The paid embed plugin is Roy's choice (he subscribes and rebills). Until EMBED is set this
+// renders a visible placeholder on staging/preview only; it must render nothing in production.
+interface Props { heading?: string }
+const { heading = 'Suivez-nous sur Instagram' } = Astro.props;
+const EMBED: string | null = null; // e.g. the plugin's <div class="..."> snippet once chosen
+const showPlaceholder = !EMBED && import.meta.env.PUBLIC_SHOW_PROPOSALS === '1';
+---
+{EMBED ? (
+  <section class="ig-feed" aria-label={heading}>
+    <h2 class="ig-feed__title">{heading}</h2>
+    <div set:html={EMBED} />
+  </section>
+) : showPlaceholder ? (
+  <section class="ig-feed ig-feed--placeholder" aria-label={heading}>
+    <h2 class="ig-feed__title">{heading}</h2>
+    <div class="ig-feed__slot">Fil Instagram : emplacement réservé, en attente du choix du plugin</div>
+  </section>
+) : null}
+<style>
+  .ig-feed { max-width: 1200px; margin: 0 auto; padding: 48px 20px; }
+  .ig-feed__title { font-size: 26px; margin: 0 0 20px; text-align: center; }
+  .ig-feed__slot { border: 2px dashed rgba(0,0,0,.28); border-radius: 10px; padding: 64px 20px; text-align: center; color: rgb(86,103,112); font-style: italic; }
+</style>

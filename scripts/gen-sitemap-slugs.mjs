@@ -130,9 +130,14 @@ function dirSlugs(dir, ext) {
 // dropped, and a duplicate mentions-légales): their `__` slugs have no valid
 // route (404) and must not appear in the sitemap.
 const pages = dirSlugs('src/content/pages', '.md').filter((s) => !s.includes('__'));
-const services = dirSlugs('src/content/services', '.md');
+// Merged into the agency page and 301-redirected (T3, Caroline 27/11); see src/lib/agency-merge.ts.
+const MERGED_SERVICES = new Set([
+  'lhistoire-de-la-societe', 'le-mot-de-stephane', 'la-mission-de-immobiliere-pujol', 'pourquoi-nous-faisons-ce-metier',
+  'advisory-transactions-service', 'property-management-question-expertise', 'simple-efficient-rental-management',
+]);
+const services = dirSlugs('src/content/services', '.md').filter((s) => !MERGED_SERVICES.has(s));
 const experts = dirSlugs('src/content/experts', '.json');
-const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md');
+const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md').filter((s) => s !== 'limmobiliere-pujol-en-anglais');
 const arrondissements = dirSlugs('src/content/arrondissements', '.json');
 const quartiers = dirSlugs('src/content/quartiers', '.json');
 

@@ -14,6 +14,8 @@ export async function getStaticPaths() {
     'vendre',
     'gestion-locative',
     'mettre-en-location',
+    // English hub: 301 to the agency page (T3, Caroline 27/11).
+    'limmobiliere-pujol-en-anglais',
   ]);
   const entries = await getCollection('serviceImmobilier');
   return entries

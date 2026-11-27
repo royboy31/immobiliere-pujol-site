@@ -3,6 +3,7 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { GUIDE_HUB, guideSectionFor } from '../../lib/guide-nav';
+import { isMergedService, remapMergedHref } from '../../lib/agency-merge';
 
 const slugify = (s: string): string =>
   s
@@ -16,6 +17,8 @@ export async function getStaticPaths() {
   const services = await getCollection('services');
   return services
     .filter((entry) => entry.data.slug && entry.data.slug !== 'services')
+    // Merged into the agency page and 301-redirected (T3, Caroline 27/11).
+    .filter((entry) => !isMergedService(entry.data.slug.replace(/^services\//, '')))
     .map((entry) => {
       const slug = entry.data.slug.replace(/^services\//, '');
       return {
@@ -68,7 +71,9 @@ const sectionLabel =
 const siblingRegex = /<a class=\s*"\s*contextual__item"\s+href="([^"]+)">([\s\S]*?)<\/a>/g;
 const siblings: { href: string; label: string }[] = [];
 for (const m of rawBody.matchAll(siblingRegex)) {
-  siblings.push({ href: m[1], label: m[2].replace(/\s+/g, ' ').trim() });
+  // Merged agency pages point at their anchor on the agency page; English pages are dropped.
+  const href = remapMergedHref(m[1]);
+  if (href) siblings.push({ href, label: m[2].replace(/\s+/g, ' ').trim() });
 }
 
 // Article body: pull only the inner content of <section class="contextual__section">.
@@ -444,14 +449,7 @@ if (
     cta: 'Voir sur Immodvisor',
     external: true,
   };
-  const youtubeCard: ReviewPlatform = {
-    key: 'youtube',
-    href: 'https://www.youtube.com/channel/UCqKIrOqKql-5A7sUsGuIphA',
-    name: 'YouTube',
-    tagline: 'Nos clients racontent leur expérience face caméra.',
-    cta: 'Voir les vidéos',
-    external: true,
-  };
+  // YouTube channel card removed (Caroline 27/11: confusing, the channel is mostly listings).
   const pagesJaunesCard: ReviewPlatform = {
     key: 'pagesjaunes',
     href: 'https://www.pagesjaunes.fr/pros/09570235',
@@ -476,7 +474,6 @@ if (
         external: true,
       },
       immodvisorCard,
-      youtubeCard,
     ];
   } else {
     // avis-clients-immobiliere-pujol-marseille — uses Pages Jaunes + the
@@ -493,7 +490,6 @@ if (
         external: true,
       },
       immodvisorCard,
-      youtubeCard,
     ];
   }
 

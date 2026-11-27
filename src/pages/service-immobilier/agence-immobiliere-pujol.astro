@@ -1,91 +1,86 @@
 ---
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content';
 
 // Pull SEO + media from the markdown so editors keep one source of truth.
 const entry = await getEntry('serviceImmobilier', 'agence-immobiliere-pujol');
 const seoTitle = entry?.data.seoTitle || "Notre agence immobilière – Immobilière Pujol";
 const seoDescription = entry?.data.seoDescription || '';
-const heroVideo =
-  entry?.data.heroVideo ||
-  'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/meilleure-agence-immobiliere-marseille.mp4';
-const heroPoster = '/images/home/hero-bg.jpg';
 const ctaText = entry?.data.ctaText || "Contacter l'agence";
 
-// Sidebar nav order is preserved exactly as on the legacy page (1, 2, 4, 5, 3).
-const toc = [
-  { id: 'service-immobilier-a-marseille',           label: '1. Nous' },
-  { id: 'candidature-immobilier-marseille',         label: '2. Vous' },
-  { id: 'limmobiliere-pujol-en-anglais',            label: "4. L'Immobilière Pujol in english" },
-  { id: 'blog-marche-immobilier-marseille',         label: "5. Le blog de l'agence" },
-  { id: 'avis-clients-agence-immobiliere-marseille-pujol', label: '3. Avis de nos clients' },
+// T3 (Caroline 27/11): one agency page. The four story pages (histoire, mot de Stéphane,
+// mission, pourquoi ce métier) are merged here with their texts kept verbatim, read from
+// their markdown so there is one source of truth; their old URLs 301 here (public/_redirects).
+// Team, recruitment and review pages stay separate (GSC traffic, see
+// RESEARCH/PUJOL_AGENCY_ENGLISH_REDIRECT_REVIEW_2026_11_27.md).
+const STORY_SLUGS = [
+  { slug: 'lhistoire-de-la-societe',          id: 'histoire',  label: "L'histoire" },
+  { slug: 'le-mot-de-stephane',               id: 'mot-de-stephane', label: 'Le mot de Stéphane' },
+  { slug: 'la-mission-de-immobiliere-pujol',  id: 'mission',   label: 'Notre mission' },
+  { slug: 'pourquoi-nous-faisons-ce-metier',  id: 'pourquoi-nous-faisons-ce-metier', label: 'Pourquoi ce métier' },
+];
+// Old story URLs now point at their anchor on this page.
+const STORY_LINK_MAP: Record<string, string> = Object.fromEntries(
+  STORY_SLUGS.map((s) => [`/services/${s.slug}/`, `#${s.id}`]),
+);
+function storyHtml(body: string): { title: string; html: string } {
+  const sec = body.match(/<section class="contextual__section"[^>]*>([\s\S]*?)<\/section>/);
+  let inner = sec?.[1] ?? '';
+  const title = (inner.match(/<h3 class="contextual__title">([\s\S]*?)<\/h3>/)?.[1] ?? '').trim();
+  inner = inner.replace(/<h3 class="contextual__title">[\s\S]*?<\/h3>/, '');
+  inner = inner
+    .replace(/<p>(?:\s|&nbsp;)*<\/p>/g, '')
+    .replace(/\sstyle="[^"]*"/g, '')
+    .replace(/href="\/blog\/"/g, 'href="/blog-immobilier-marseille/"')
+    .replace(/href="(\/services\/[^"]+\/)"/g, (m, h) => (STORY_LINK_MAP[h] ? `href="${STORY_LINK_MAP[h]}"` : m))
+    .replace(/<h3>/g, '<h4>').replace(/<\/h3>/g, '</h4>')
+    .replace(/<h2>/g, '<h3>').replace(/<\/h2>/g, '</h3>');
+  return { title, html: inner.trim() };
+}
+// The glob loader keys entries by their `slug` frontmatter ("services/<slug>").
+const serviceEntries = await getCollection('services');
+const stories = STORY_SLUGS.map((s) => {
+  const e = serviceEntries.find((x) => x.data.slug === `services/${s.slug}`);
+  if (!e) throw new Error(`agency page: missing story ${s.slug}`);
+  const { title, html } = storyHtml(((e as any).body ?? '') as string);
+  if (!html) throw new Error(`agency page: empty story ${s.slug}`);
+  return { ...s, title: title || s.label, html };
+});
+
+const recruitment = [
+  { href: '/services/devenir-gestionnaire-immobilier-a-marseille/', label: "Devenir un collaborateur de l'Immobilière Pujol" },
+  { href: '/services/deposer-votre-cv-en-tant-que-gestionnaire-en-gestion-locative-chez-immobiliere-pujol/', label: 'Candidater au poste de gestionnaire en gestion locative' },
+  { href: '/services/candidater-au-poste-de-gestionnaire-en-syndic-de-copropriete-au-sein-de-immobiliere-pujol/', label: 'Candidater au poste de gestionnaire de copropriété' },
 ];
 
-// All section content + article links from the legacy markdown body.
-// Every URL is preserved exactly.
-const sections = [
-  {
-    id: 'service-immobilier-a-marseille',
-    title: '1. Nous',
-    paragraphs: [
-      "Nous sommes une entreprise indépendante crée en 2002.",
-      "Nous avons fait le choix de la qualité et du service pour nos clients et nos collaborateurs à qui nous donnons un confort de travail et des outils efficaces.",
-      "Nous avons construit au fil des années une agence immobilière qui a développé des solutions innovantes, pour prendre soin de ses clients, les sécuriser dans leurs choix et leurs projets.",
-      "Nous sommes une agence immobilière engagée, responsable, qui cultive les bonnes valeurs et dans laquelle l'humain est au coeur de nos préoccupations.",
-    ],
-    articles: [
-      { href: '/services/lhistoire-de-la-societe/',                              label: "L'histoire de la société" },
-      { href: '/services/la-mission-de-immobiliere-pujol/',                      label: "La mission de l'Immobilière Pujol" },
-      { href: '/services/la-team-pujol/',                                        label: "La team Pujol" },
-      { href: '/services/pourquoi-nous-faisons-ce-metier/',                      label: "Pour quoi nous faisons ce métier?" },
-      { href: '/services/nos-conseils-avis-et-articles-sur-la-gestion-locative/', label: "Nos conseils, avis et articles : Le Blog de l'agence" },
-      { href: '/services/le-mot-de-stephane/',                                   label: "Le mot de Stéphane Pujol" },
-    ],
-  },
-  {
-    id: 'candidature-immobilier-marseille',
-    title: '2. Vous',
-    paragraphs: [
-      "Si vous cherchez à travailler dans l'immobilier, nous offrons un cadre épanouissant et reconnaissant.",
-      "Rejoignez nous, candidatez.",
-    ],
-    articles: [
-      { href: '/services/deposer-votre-cv-en-tant-que-gestionnaire-en-gestion-locative-chez-immobiliere-pujol/',                            label: "Candidater au poste de gestionnaire en gestion locative chez Immobilière Pujol" },
-      { href: '/services/candidater-au-poste-de-gestionnaire-en-syndic-de-copropriete-au-sein-de-immobiliere-pujol/',                       label: "Candidater au poste de gestionnaire de copropriété chez Immobilière Pujol" },
-      { href: '/services/devenir-gestionnaire-immobilier-a-marseille/',                                                                     label: "Devenir un collaborateur de l'Immobilière Pujol" },
-    ],
-  },
-  {
-    id: 'limmobiliere-pujol-en-anglais',
-    title: "4. L'Immobilière Pujol in english",
-    paragraphs: [
-      "We speak english for our clients who wants to invest or sell or live in Marseille",
-    ],
-    articles: [
-      { href: '/services/advisory-transactions-service/',          label: "Our advisory and transactions service" },
-      { href: '/services/property-management-question-expertise/', label: "Property management, a question of expertise" },
-      { href: '/services/simple-efficient-rental-management/',     label: "Simple and efficient rental management" },
-    ],
-  },
-  {
-    id: 'blog-marche-immobilier-marseille',
-    title: "5. Le blog de l'agence",
-    paragraphs: [],
-    articles: [
-      { href: '/services/le-blog-de-limmobiliere-pujol/', label: "Le blog de l'immobilière Pujol" },
-    ],
-  },
-  {
-    id: 'avis-clients-agence-immobiliere-marseille-pujol',
-    title: '3. Avis de nos clients',
-    paragraphs: [
-      "Nos clients nous recommandent pour le service, notre proximité et notre réactivité.",
-    ],
-    articles: [
-      { href: '/services/les-avis-clients-de-limmobiliere-pujol/', label: "Les avis clients de l'Immobilière Pujol" },
-    ],
-  },
+// Related blog articles (Caroline 27/11: link the agency's own stories, e.g. "la maison").
+const related = [
+  { href: '/pourquoi-nous-avons-choisi-detre-une-maison-dans-le-service-immobilier/', label: "Pourquoi nous avons choisi d'être une maison dans le service immobilier ?" },
+  { href: '/histoire-societe-immobiliere-pujol/', label: 'Construire la société de ses rêves : un peu notre histoire' },
+  { href: '/immobiliere-pujol-le-choix-de-lhumain-et-de-la-qualite/', label: "Immobilière Pujol : le choix de l'humain et de la qualité" },
+  { href: '/limmobiliere-pujol-fete-ses-20-ans/', label: "L'Immobilière Pujol fête ses 20 ans !" },
+  { href: '/la-valeur-temps-et-la-magie-de-lengagement-des-equipes/', label: "La valeur temps et la magie de l'engagement des équipes" },
+];
+
+// Team photo replaces the hero video (Caroline 27/11). PLACEHOLDER until Caroline sends
+// this year's group photo.
+const teamPhoto = 'https://pub-a37eed540afe4dc9b4479da74ba265e1.r2.dev/2021/01/team-pujol-immobilier-marseille.jpg';
+
+const toc = [
+  { id: 'une-relation-personnalisee', label: 'Qui sommes-nous ?' },
+  ...STORY_SLUGS.map((s) => ({ id: s.id, label: s.label })),
+  { id: 'equipe', label: 'La team Pujol' },
+  { id: 'presse', label: 'Dans la presse' },
+  { id: 'avis', label: 'Avis de nos clients' },
+  { id: 'candidature-immobilier-marseille', label: 'Nous rejoindre' },
+];
+
+const intro = [
+  "Nous sommes une entreprise indépendante crée en 2002.",
+  "Nous avons fait le choix de la qualité et du service pour nos clients et nos collaborateurs à qui nous donnons un confort de travail et des outils efficaces.",
+  "Nous avons construit au fil des années une agence immobilière qui a développé des solutions innovantes, pour prendre soin de ses clients, les sécuriser dans leurs choix et leurs projets.",
+  "Nous sommes une agence immobilière engagée, responsable, qui cultive les bonnes valeurs et dans laquelle l'humain est au coeur de nos préoccupations.",
 ];
 
 // Form objet options preserved from the original Gravity Forms select.
@@ -101,13 +96,8 @@ const formObjects = [
 ---
 
 <BaseLayout title={seoTitle} description={seoDescription}>
-  {/* ============= HERO ============= */}
-  <section class="svc-hero">
-    <video class="svc-hero__video" autoplay muted loop playsinline preload="auto" poster={heroPoster}>
-      <source src={heroVideo} type="video/mp4" />
-    </video>
-    <div class="svc-hero__overlay"></div>
-
+  {/* ============= HERO: team photo instead of the video (Caroline 27/11) ============= */}
+  <section class="svc-hero agc-hero" style={`background-image: linear-gradient(rgba(15,25,42,.30), rgba(15,25,42,.50)), url('${teamPhoto}');`}>
     <div class="svc-hero__inner">
       <h1>Notre <b>agence immobilière</b></h1>
       <a class="svc-hero__cta" href="#form">{ctaText}</a>
@@ -115,8 +105,6 @@ const formObjects = [
   </section>
 
   <div class="svc-page">
-
-    {/* ============= TOC + SECTIONS ============= */}
     <section class="svc-toc-section">
       <div class="svc-toc-section__inner">
 
@@ -129,40 +117,63 @@ const formObjects = [
           </ul>
         </aside>
 
-        <div class="svc-content">
-          {sections.map((s) => (
-            <section class="svc-section" id={s.id}>
-              <h2 class="svc-section__title">
-                {s.title.includes('.') ? (
-                  <>
-                    <span class="num">{s.title.split('.')[0]}.</span>
-                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
-                  </>
-                ) : (
-                  <b>{s.title}</b>
-                )}
-              </h2>
+        <div class="svc-content agc">
+          <section class="svc-section" id="une-relation-personnalisee">
+            <h2 class="svc-section__title"><b>Qui sommes-nous ?</b></h2>
+            {intro.map((p) => <p class="svc-section__lead">{p}</p>)}
+          </section>
 
-              {s.paragraphs.map((p) => (
-                <p class="svc-section__lead">{p}</p>
-              ))}
-
-              {s.articles.length > 0 && (
-                <ul class="svc-articles">
-                  {s.articles.map((a) => (
-                    <li>
-                      <a class="svc-article-link" href={a.href}>
-                        <span>{a.label}</span>
-                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
+          {stories.map((st) => (
+            <section class="svc-section agc-story" id={st.id}>
+              <h2 class="svc-section__title"><b>{st.title}</b></h2>
+              <div class="agc-prose" set:html={st.html} />
             </section>
           ))}
+
+          <section class="svc-section" id="equipe">
+            <h2 class="svc-section__title"><b>La team Pujol</b></h2>
+            <figure class="agc-team">
+              <img src={teamPhoto} alt="L'équipe de l'Immobilière Pujol" loading="lazy" decoding="async" />
+            </figure>
+            <a class="svc-article-link" href="/services/la-team-pujol/"><span>Découvrir toute l'équipe</span>
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+          </section>
+
+          <section class="svc-section" id="presse">
+            <h2 class="svc-section__title"><b>Pujol dans la presse</b></h2>
+            <p class="svc-section__lead">Stéphane Pujol et l'agence à la télévision et dans la presse.</p>
+            <a class="svc-article-link" href="/service-immobilier/immobiliere-pujol-dans-la-presse/"><span>Voir nos passages presse et télé</span>
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+          </section>
+
+          <section class="svc-section" id="avis">
+            <h2 class="svc-section__title"><b>Avis de nos clients</b></h2>
+            <p class="svc-section__lead">Nos clients nous recommandent pour le service, notre proximité et notre réactivité.</p>
+            <a class="svc-article-link" href="/services/avis-clients-immobiliere-pujol-marseille/"><span>Les avis de nos clients</span>
+              <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
+          </section>
+
+          <section class="svc-section" id="articles">
+            <h2 class="svc-section__title"><b>Nos articles sur l'agence</b></h2>
+            <ul class="svc-articles">
+              {related.map((a) => (
+                <li><a class="svc-article-link" href={a.href}><span>{a.label}</span>
+                  <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></a></li>
+              ))}
+            </ul>
+          </section>
+
+          <section class="svc-section" id="candidature-immobilier-marseille">
+            <h2 class="svc-section__title"><b>Nous rejoindre</b></h2>
+            <p class="svc-section__lead">Si vous cherchez à travailler dans l'immobilier, nous offrons un cadre épanouissant et reconnaissant.</p>
+            <p class="svc-section__lead">Rejoignez nous, candidatez.</p>
+            <ul class="svc-articles">
+              {recruitment.map((a) => (
+                <li><a class="svc-article-link" href={a.href}><span>{a.label}</span>
+                  <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></a></li>
+              ))}
+            </ul>
+          </section>
         </div>
 
       </div>
@@ -309,4 +320,15 @@ const formObjects = [
       el.textContent = msg;
     }
   </script>
+  <style>
+    .agc-prose { font-size: 17px; line-height: 1.7; }
+    .agc-prose :global(p), .agc-prose :global(ul) { margin: 0 0 14px; }
+    .agc-prose :global(ul) { padding-left: 22px; }
+    .agc-prose :global(h3) { font-size: 22px; margin: 28px 0 12px; }
+    .agc-prose :global(h4) { font-size: 19px; margin: 24px 0 10px; }
+    .agc-prose :global(img) { display: block; max-width: 100%; height: auto; margin: 18px auto; border-radius: 6px; }
+    .agc-prose :global(a) { text-decoration: underline; }
+    .agc-team { margin: 0 0 18px; }
+    .agc-team img { width: 100%; height: auto; border-radius: 8px; display: block; }
+  </style>
 </BaseLayout>
