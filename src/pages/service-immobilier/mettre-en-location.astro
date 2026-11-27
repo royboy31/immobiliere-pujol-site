@@ -1,147 +1,139 @@
 ---
-export const prerender = true;
+// Mise en location landing (Roy + Caroline 27/11, replaces Caroline's 30/10 "no separate page" decision).
+// Same URL as the legacy page (keeps its SEO). Existing texts only: the legacy page's hero lines,
+// its 3 blocks and 10 links (worded as questions like the guides), the guide questions of the
+// renting-out sections, and the legacy rent estimate form. Photos: Caroline's published LP choices
+// (lp_photos, not those of the gestion landing) + the legacy hero (film shoot).
+export const prerender = false; // photos come from the admin (lp-photos), published instantly
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import { GUIDE_SECTIONS, guideQuestion } from '../../lib/guide-nav';
+import { posStyle } from '../../lib/lp-photos';
+import { loadLpPhotos } from '../../lib/lp-photos-runtime';
 
-// Caroline 30/10: no separate Mise en location landing; renting out is a step of the
-// Gestion locative landing. The legacy page below stays in the repo until production.
-return Astro.redirect('/service-immobilier/gestion-locative/', 301);
-
+const { photos: ph } = await loadLpPhotos(Astro.request, Astro.url);
 const entry = await getEntry('serviceImmobilier', 'mettre-en-location');
 const seoTitle = entry?.data.seoTitle || 'Mettre en location – Immobilière Pujol';
 const seoDescription = entry?.data.seoDescription || 'Soyez bien conseillé pour mieux louer';
-const ctaText = 'Demander un devis de mise en location';
-const heroCatch = 'Sécuriser votre location et vos revenus immobiliers';
-const heroSub = 'Soyez bien conseillé pour mieux louer';
+const heroImage = '/images/services/mise-en-location-tournage-2026.jpg';
+const ESTIMATION = '#form';
+const GESTION = '/service-immobilier/gestion-locative/';
 
-const heroImage =
-  entry?.data.heroImage || '/images/services/mise-en-location-tournage-2026.jpg';
+const serviceTitles = new Map(
+  (await getCollection('services')).map((s) => [`/${s.data.slug.replace(/^\/|\/$/g, '')}/`, s.data.title])
+);
+const q = (href: string, fallback: string) => guideQuestion(href) || fallback;
 
-// Sidebar nav order preserved exactly as on the legacy page (1, 2, 3).
-const toc = [
-  { id: '1-pourquoi-nous-choisir',                 label: '1. Pourquoi nous choisir' },
-  { id: '2-comment-nous-louons',                   label: '2. Comment nous louons' },
-  { id: '3-notre-service-location-cest-aussi',     label: "3. Notre service location c'est aussi" },
-];
-
-// All section content + article links from the legacy markdown body.
-// Every URL is preserved exactly.
-const sections = [
+// The legacy page's 3 blocks, their texts and links (every URL preserved), one of Caroline's photos each.
+const blocks = [
   {
-    id: '1-pourquoi-nous-choisir',
-    title: '1. Pourquoi nous choisir',
-    paragraphs: [
-      "C'est un élément clé pour garantir la rapidité de mise en location de votre appartement : louer au bon prix est le premier argument que vous devez contrôler.",
-    ],
-    articles: [
-      { href: '/services/nos-resultats-pour-la-mise-en-location/',          label: 'Nos résultats pour la mise en location à Marseille' },
-      { href: '/services/lagence-de-location-immobiliere-pujol-a-marseille/', label: "L'agence de location immobilière Pujol à Marseille" },
-      { href: '/services/recevez-votre-devis-de-location-en-24h/',           label: "Recevez votre devis de location d'appartements à Marseille en 24h" },
+    title: 'Pourquoi nous choisir',
+    text: "C'est un élément clé pour garantir la rapidité de mise en location de votre appartement : louer au bon prix est le premier argument que vous devez contrôler.",
+    photo: ph['coproprietaire-s2'],
+    links: [
+      '/services/nos-resultats-pour-la-mise-en-location/',
+      '/services/lagence-de-location-immobiliere-pujol-a-marseille/',
+      '/services/recevez-votre-devis-de-location-en-24h/',
     ],
   },
   {
-    id: '2-comment-nous-louons',
-    title: '2. Comment nous louons',
-    paragraphs: [],
-    articles: [
-      { href: '/services/nos-prestations-de-mise-en-location/',                                       label: 'Mise en location à Marseille : ce que nous allons faire pour vous' },
-      { href: '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/', label: "Le coût d'une commission de location (sans gestion locative)" },
-      { href: '/services/comment-mettre-en-location-un-appartement/',                                  label: 'Comment mettre en location un appartement ?' },
+    title: 'Comment nous louons',
+    text: '',
+    photo: ph['je-gere-seul-s1'],
+    links: [
+      '/services/nos-prestations-de-mise-en-location/',
+      '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/',
+      '/services/comment-mettre-en-location-un-appartement/',
     ],
   },
   {
-    id: '3-notre-service-location-cest-aussi',
-    title: "3. Notre service location c'est aussi",
-    paragraphs: [
-      "Louer vite à un locataire solvable et respectueux du bien qui lui est confié est l'objectif de notre équipe de location. Car se tromper dans le choix des locataires peut coûter cher.",
-    ],
-    articles: [
-      { href: '/services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix/', label: "Location d'appartements à Marseille : nos résultats et nos tarifs !" },
-      { href: '/services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes/',        label: 'Choisir le bon locataire et sécuriser vos contrats : les tarifs' },
-      { href: '/services/agence-location-appartement-marseille/',                                     label: 'Une agence pour la location de votre appartement à Marseille' },
-      { href: '/services/devis-gestion-locative-marseille/',                                          label: 'Obtenir un devis pour la gestion locative de vos biens immobiliers' },
+    title: "Notre service location c'est aussi",
+    text: "Louer vite à un locataire solvable et respectueux du bien qui lui est confié est l'objectif de notre équipe de location. Car se tromper dans le choix des locataires peut coûter cher.",
+    photo: ph['deja-en-agence-s2'],
+    links: [
+      '/services/nos-resultats-en-termes-de-location-dappartements-a-marseille-et-de-prix/',
+      '/services/la-securite-dans-le-choix-des-locataires-des-contrats-et-des-actes/',
+      '/services/agence-location-appartement-marseille/',
+      '/services/devis-gestion-locative-marseille/',
     ],
   },
-];
+].map((b) => ({ ...b, links: b.links.map((href) => ({ href, label: q(href, serviceTitles.get(href) || href) })) }));
+
+// The guide sections about renting out (same questions as the gestion landing).
+const RENTING = ['mettre-en-location', 'estimation-du-loyer', 'le-marche-et-le-prix-des-loyers', 'commercialisation', 'selection-du-locataire', 'securite-juridique'];
+const guides = RENTING.map((id) => GUIDE_SECTIONS.find((g) => g.id === id)!).map((g) => ({
+  id: g.id,
+  title: g.title,
+  articles: g.pages.map((href) => ({ href, label: guideQuestion(href) || serviceTitles.get(href) || href })),
+}));
+const BRIDGE = '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/';
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription}>
-  {/* ============= HERO ============= */}
-  <section class="svc-hero">
-    <picture class="svc-hero__video">
-      <img
-        src={heroImage}
-        alt="Visite d'un appartement à louer avec l'Immobilière Pujol"
-        width="1024"
-        height="683"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </picture>
-    <div class="svc-hero__overlay"></div>
+<BaseLayout title={seoTitle} description={seoDescription} preloadImage={heroImage}>
+  <div class="mag prop">
 
-    <div class="svc-hero__inner">
-      <h1><b>Mettre</b> en location</h1>
-      <p class="svc-hero__sub">{heroCatch}</p>
-      <p class="svc-hero__sub">{heroSub}</p>
-      <a class="svc-hero__cta" href="#form">{ctaText}</a>
-    </div>
-  </section>
-
-  <div class="svc-page">
-
-    {/* ============= TOC + SECTIONS ============= */}
-    <section class="svc-toc-section">
-      <div class="svc-toc-section__inner">
-
-        <aside class="svc-toc">
-          <p class="svc-toc__title">Mettre en location</p>
-          <ul class="svc-toc__list">
-            {toc.map((t) => (
-              <li><a class="svc-toc__link" href={`#${t.id}`}>{t.label}</a></li>
-            ))}
-          </ul>
-        </aside>
-
-        <div class="svc-content">
-          {sections.map((s) => (
-            <section class="svc-section" id={s.id}>
-              <h2 class="svc-section__title">
-                {s.title.includes('.') ? (
-                  <>
-                    <span class="num">{s.title.split('.')[0]}.</span>
-                    <b>{s.title.split('.').slice(1).join('.').trim()}</b>
-                  </>
-                ) : (
-                  <b>{s.title}</b>
-                )}
-              </h2>
-
-              {s.paragraphs.map((p) => (
-                <p class="svc-section__lead">{p}</p>
-              ))}
-
-              {s.articles.length > 0 && (
-                <ul class="svc-articles">
-                  {s.articles.map((a) => (
-                    <li>
-                      <a class="svc-article-link" href={a.href}>
-                        <span>{a.label}</span>
-                        <svg width="22" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-                          <path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
+    <section class="prop-hero">
+      <img class="prop-hero__img" src={heroImage} alt="Visite d'un appartement à louer avec l'Immobilière Pujol" loading="eager" fetchpriority="high" width="1024" height="683" />
+      <div class="prop-hero__inner">
+        <p class="mag-eyebrow mag-eyebrow--light">Mettre en location</p>
+        <h1 class="mag-h1">Sécuriser votre location et vos revenus immobiliers</h1>
+        <p class="mel-hero__sub">Soyez bien conseillé pour mieux louer</p>
+        <div class="mag-actions">
+          <a class="mag-btn" href={ESTIMATION}>Obtenir mon estimation de loyer gratuite en 24h</a>
+          <a class="mag-btn mag-btn--ghost" href="/annonces/locations/">Nos annonces de location</a>
         </div>
-
       </div>
     </section>
 
+    <section class="prop-section">
+      <div class="mag-wrap">
+        <ul class="mel-blocks">
+          {blocks.map((b) => (
+            <li class="mel-block">
+              <img class="lp-pos" src={b.photo.src} style={posStyle(b.photo)} alt="" loading="lazy" width={b.photo.w} height={b.photo.h} />
+              <div class="mel-block__body">
+                <h2 class="mag-h3">{b.title}</h2>
+                {b.text && <p>{b.text}</p>}
+                <ul>{b.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="guides">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Toutes les questions que vous vous posez sur la <em>mise en location</em></h2>
+        <ul class="prop-guides">
+          {guides.map((g) => (
+            <li id={g.id}>
+              <details>
+                <summary>{g.title}<span>{g.articles.length}</span></summary>
+                <ul>{g.articles.map((a) => <li><a href={a.href}>{a.label}</a></li>)}</ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="prop-section">
+      <div class="mag-wrap mel-bridge">
+        <img class="lp-pos" src={ph['premiere-location-s1'].src} style={posStyle(ph['premiere-location-s1'])} alt="" loading="lazy" width={ph['premiere-location-s1'].w} height={ph['premiere-location-s1'].h} />
+        <div>
+          <h2 class="mag-h2">{guideQuestion(BRIDGE)}</h2>
+          <p class="mag-actions">
+            <a class="mag-btn mag-btn--dark" href={BRIDGE}>{serviceTitles.get(BRIDGE)}</a>
+            <a class="mag-btn mag-btn--line" href={GESTION}>Notre gestion locative à Marseille</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="svc-page">
     {/* ============= CONTACT FORM ============= */}
     <section class="svc-form-wrap" id="form">
       <form

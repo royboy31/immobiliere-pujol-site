@@ -341,3 +341,20 @@ $p-slate-soft:  rgb(226, 232, 235);
   .mag-actions { margin: 0; }
   @media (max-width: $bp-tablet) { padding: 28px 22px; } }
 .prop-section:not(.prop-section--paper) .prop-guidedl__card { background: $p-paper; }
+
+// ---------- Mise en location landing (Roy + Caroline 27/11) ----------
+.mel-hero__sub { margin: 10px 0 0; font-size: 19px; opacity: .92; }
+.mel-blocks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; } }
+.mel-block { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 8px 24px rgba($p-ink, .08); display: flex; flex-direction: column;
+  > img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  &__body { padding: 22px 24px 26px;
+    .mag-h3 { margin: 0 0 10px; }
+    > p { margin: 0 0 14px; line-height: 1.55; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    a { color: $p-ink; font-weight: 600; text-decoration: underline; text-decoration-color: $p-green; text-decoration-thickness: 2px; text-underline-offset: 4px;
+      &:hover { color: $p-green; } } } }
+.mel-bridge { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  > img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; }
+  .mag-h2 { margin-top: 0; }
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 24px; } }
