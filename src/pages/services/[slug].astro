@@ -2,7 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { GUIDE_HUB, guideSectionFor, guideTitles } from '../../lib/guide-nav';
+import { GUIDE_HUB, guideSectionFor, guideQuestion, guideTitles } from '../../lib/guide-nav';
 
 const slugify = (s: string): string =>
   s
@@ -558,7 +558,7 @@ const guideSection = guideSectionFor(pagePath);
 const sidebarItems = guideSection
   ? guideSection.pages.map((href) => ({
       href,
-      label: href === pagePath ? entry.data.title : serviceTitles.get(href) || href,
+      label: guideQuestion(href) || (href === pagePath ? entry.data.title : serviceTitles.get(href) || href),
       current: href === pagePath,
     }))
   : [
@@ -718,7 +718,9 @@ const breadcrumbCrumbs = crumbSection
   ? [
       { label: 'Gestion locative', href: GUIDE_HUB },
       // the first rubric is itself called "Gestion locative": don't repeat it
-      ...(crumbSection.title === 'Gestion locative' ? [] : [{ label: crumbSection.title, href: `${GUIDE_HUB}#${crumbSection.id}` }]),
+      ...(crumbSection.short === 'Gestion locative' ? [] : [{ label: crumbSection.title, href: `${GUIDE_HUB}#${crumbSection.id}` }]),
+      // Caroline 27/11: the current page shows as its question too (the H1 and SEO title stay unchanged).
+      ...(guideQuestion(pagePath) ? [{ label: guideQuestion(pagePath) as string, href: null }] : []),
     ]
   : [{ label: rubric[1], href: rubric[2] }];
 

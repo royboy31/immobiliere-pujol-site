@@ -7,7 +7,7 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PropositionForm from '../../components/lp/PropositionForm.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { GUIDE_SECTIONS, guideTitles } from '../../lib/guide-nav';
+import { GUIDE_SECTIONS, guideQuestion, guideTitles } from '../../lib/guide-nav';
 import { KEY_FIGURES, PROFILES } from '../../lib/lp-proposition';
 import { LP_PHOTOS as ph, posStyle } from '../../lib/lp-photos';
 import GuideDownload from '../../components/lp/GuideDownload.astro';
@@ -18,7 +18,7 @@ const serviceTitles = guideTitles(await getCollection('services'));
 const guides = GUIDE_SECTIONS.map((g) => ({
   id: g.id,
   title: g.title,
-  articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+  articles: g.pages.map((href) => ({ href, label: guideQuestion(href) || serviceTitles.get(href) || href })),
 }));
 // Keep the existing SEO title/description of this URL (main query "gestion locative Marseille").
 const entry = await getEntry('serviceImmobilier', 'gestion-locative');
@@ -150,12 +150,10 @@ const reassurances = [
       </div>
     </section>
 
-    {/* Caroline 19/11: all her guides visible on the main landing too */}
-    <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
-
+    {/* Caroline 27/11: the questions block is important, it sits above the PDF downloads */}
     <section class="prop-section prop-section--paper" id="guides">
       <div class="mag-wrap">
-        <h2 class="mag-h2 prop-center">Tous nos guides de la <em>gestion locative</em></h2>
+        <h2 class="mag-h2 prop-center">Toutes les questions que vous vous posez sur la <em>gestion locative</em> et la mise en location</h2>
         <ul class="prop-guides">
           {guides.map((g) => (
             <li id={g.id}>
@@ -168,6 +166,10 @@ const reassurances = [
         </ul>
       </div>
     </section>
+
+    {/* Caroline 19/11: all her guides visible on the main landing too */}
+    <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
+
 
     <section class="prop-final">
       <img class="prop-final__img lp-pos" src={ph['accueil-final'].src} style={posStyle(ph['accueil-final'])} alt="" loading="lazy" width={ph['accueil-final'].w} height={ph['accueil-final'].h} />
