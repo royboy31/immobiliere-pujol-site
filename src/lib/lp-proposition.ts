@@ -64,9 +64,7 @@ export const sectionFor = (card: ProfileCard, title: string) => card.sections.fi
 export const PROFILES: ProfileCard[] = [
   { slug: 'deja-en-agence', service: 'changer-agence-gestion-locative-marseille', kicker: 'Je suis déjà en agence', question: 'Déçu de votre agence actuelle ?', color: 'green', img: { src: IMG + 'p-agence.webp', w: 1024, h: 683 }, heroPos: '50% 18%', heroPosMobile: '68% 40%', pics: [{ src: IMG + 's-agence-1.webp', w: 1024, h: 683 }, { src: IMG + 's-agence-2.webp', w: 1024, h: 683 }], heroCtas: [{ label: 'Discuter avec notre expert et envisager le changement d’agence', href: CONSEILLER }], sections: [
     { match: 'Avant / après', ctas: [{ label: 'Voir comment d’autres bailleurs ont amélioré leur gestion en changeant d’agence', href: '#preuves', style: 'text' }] },
-    // Release 27/11: hidden until the Phase 2 guides ship (FABLE): Caroline's CTA, unchanged, comes back then:
-    // { label: 'Comprendre en détail comment se déroule un changement d’agence', href: '/services/changement-gestionnaire-locatif-etapes-marseille/', style: 'text' }
-    { match: 'Changer d’agence de gestion, étape par étape', ctas: [] },
+    { match: 'Changer d’agence de gestion, étape par étape', ctas: [{ label: 'Comprendre en détail comment se déroule un changement d’agence', href: '/services/changement-gestionnaire-locatif-etapes-marseille/', style: 'text' }] },
     { match: 'Tout ce que vous n’aurez pas à gérer', ctas: [{ label: 'Discutez avec un expert-conseil de la gestion locative', href: CONSEILLER, style: 'text' }] },
     { match: 'En 30 jours', ctas: [{ label: 'Faire le point sur la performance actuelle de la gestion de mon bien', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion
     { match: 'D’autres propriétaires bailleurs', id: 'preuves', ctas: [{ label: 'Parler à un gestionnaire pour envisager le changement d’agence', href: CONSEILLER, style: 'text' }] }, // CTA tab suggestion

@@ -1,18 +1,25 @@
 ---
 export const prerender = true;
 // Gestion locative landing (Caroline's design, approved 27/11): replaces the former page at the same
-// URL. Caroline's copy is reused word for word. Release scope (27/11): photos are the static snapshot
-// of her published choices (lib/lp-photos.ts); the 40 Phase 2 website guides are not released yet,
-// so their index and the steps' "En savoir plus" links are left out (they come back with Phase 2).
+// URL. Caroline's copy is reused word for word. Photos are the static snapshot of her published
+// choices (lib/lp-photos.ts). Phase 2 website guides released 27/11 (Roy: approved by Caroline):
+// their index and the steps' "En savoir plus" links are back.
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PropositionForm from '../../components/lp/PropositionForm.astro';
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
+import { GUIDE_SECTIONS, guideTitles } from '../../lib/guide-nav';
 import { KEY_FIGURES, PROFILES } from '../../lib/lp-proposition';
 import { LP_PHOTOS as ph, posStyle } from '../../lib/lp-photos';
 import GuideDownload from '../../components/lp/GuideDownload.astro';
 
 const stepPh = [1, 2, 3, 4, 5].map((n) => ph[`accueil-step${n}`]);
 
+const serviceTitles = guideTitles(await getCollection('services'));
+const guides = GUIDE_SECTIONS.map((g) => ({
+  id: g.id,
+  title: g.title,
+  articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+}));
 // Keep the existing SEO title/description of this URL (main query "gestion locative Marseille").
 const entry = await getEntry('serviceImmobilier', 'gestion-locative');
 const seoTitle = entry?.data.seoTitle || 'Gestion Locative à Marseille – Immobilière Pujol';
@@ -38,6 +45,7 @@ const steps = [
   { title: 'Sécurité et performance financière', lead: 'Une assurance loyers impayés proposée à chaque relocation.', guide: 'assurances-locatives' },
   { title: 'Conseils stratégiques et accompagnement', lead: 'Une équipe dédiée : un gestionnaire et un comptable.', guide: 'rentabilite-investissement-locatif' },
 ];
+const firstGuide = new Map(guides.map((g) => [g.id, g.articles[0]?.href]));
 
 const reassurances = [
   'Agence marseillaise installée depuis de nombreuses années, reconnue pour sa gestion, ses conseils, sa rigueur et sa réactivité.',
@@ -119,6 +127,7 @@ const reassurances = [
               <span class="prop-step__num">{i + 1}</span>
               <h3 class="prop-step__title">{s.title}</h3>
               <p>{s.lead}</p>
+              {firstGuide.get(s.guide) && <a class="prop-link" href={firstGuide.get(s.guide)}>En savoir plus →</a>}
             </li>
           ))}
         </ol>
@@ -143,6 +152,22 @@ const reassurances = [
 
     {/* Caroline 19/11: all her guides visible on the main landing too */}
     <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
+
+    <section class="prop-section prop-section--paper" id="guides">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Tous nos guides de la <em>gestion locative</em></h2>
+        <ul class="prop-guides">
+          {guides.map((g) => (
+            <li id={g.id}>
+              <details>
+                <summary>{g.title}<span>{g.articles.length}</span></summary>
+                <ul>{g.articles.map((a) => <li><a href={a.href}>{a.label}</a></li>)}</ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
 
     <section class="prop-final">
       <img class="prop-final__img lp-pos" src={ph['accueil-final'].src} style={posStyle(ph['accueil-final'])} alt="" loading="lazy" width={ph['accueil-final'].w} height={ph['accueil-final'].h} />

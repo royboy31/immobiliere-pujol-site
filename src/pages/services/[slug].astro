@@ -2,6 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { GUIDE_HUB, guideSectionFor, guideTitles } from '../../lib/guide-nav';
 
 const slugify = (s: string): string =>
   s
@@ -55,6 +56,16 @@ const parentMatch = rawBody.match(
 );
 const parentHref = parentMatch?.[1] || '/service-immobilier/agence-immobiliere-pujol/';
 const parentLabel = parentMatch?.[2]?.trim() || 'Notre agence immobilière';
+
+// Gestion and Location pages never say "Contacter l'agence": their hero CTA
+// points to one of the two owner forms (Caroline 29/10).
+const defaultCta =
+  parentHref.includes('/mettre-en-location/')
+    ? { label: 'Demander une estimation de loyer', href: '/services/demander-une-estimation-du-loyer-de-votre-appartement-sur-marseille/#form' }
+  : parentHref.includes('/gestion-locative/')
+    ? { label: 'Demander une proposition de gestion locative', href: '/services/devis-gestion-locative-marseille/#form' }
+  : { label: "Contacter l'agence", href: '#form' };
+const heroCta = entry.data.ctaText ? { label: entry.data.ctaText, href: '#form' } : defaultCta;
 
 const sectionLabel =
   rawBody
@@ -154,6 +165,89 @@ bodyHtml = bodyHtml.replace(
     return `<p class="svc-article-body__cta-wrap"><a class="svc-article-body__cta" href="${href}"${target}${rel}><span>${label}</span><svg width="18" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M1 7 H20 M14 1 L20 7 L14 13" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>`;
   }
 );
+
+// Phase 2 guide pages (they carry their own jsonLd) get a reading layout:
+// "À retenir" box, in-page Sommaire, formula/example callouts, criteria
+// cards and a FAQ accordion. Legacy service pages are left untouched.
+const isGuide = Boolean(entry.data.jsonLd);
+if (isGuide) {
+  const stripTags = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const anchorOf = (s: string) =>
+    stripTags(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+
+  // Prohibited-items card grid (intro mentions "illégal"/"interdit") gets a warning variant.
+  bodyHtml = bodyHtml.replace(
+    /<p class="svc-indicators-intro">([^<]*(?:illégal|interdit)[^<]*)<\/p><ul class="svc-indicators">/gi,
+    '<p class="svc-indicators-intro">$1</p><ul class="svc-indicators svc-indicators--warning">'
+  );
+
+  // Section rules: spacing on the h2s replaces the <hr> separators.
+  bodyHtml = bodyHtml.replace(/<hr\s*\/?>/gi, '');
+
+  // Worked calculation: a tag-free "A = B" line becomes a formula box, and the
+  // paragraph opening with "Exemple" becomes an example callout.
+  bodyHtml = bodyHtml.replace(/<p>([^<]{3,160}\s=\s[^<]{3,160})<\/p>/g, '<p class="svc-guide-formula">$1</p>');
+  bodyHtml = bodyHtml.replace(/<p>(<strong>\s*Exemple\b)/gi, '<p class="svc-guide-example">$1');
+
+  // A run of 3+ "<strong>Label</strong> : text" paragraphs becomes numbered cards.
+  bodyHtml = bodyHtml.replace(
+    /(?:<p><strong>[^<]+<\/strong>\s*:[\s\S]*?<\/p>\s*){3,}/g,
+    (run) => {
+      const items = [...run.matchAll(/<p><strong>([^<]+)<\/strong>\s*:\s*([\s\S]*?)<\/p>/g)];
+      return `<ol class="svc-guide-cards">${items
+        .map((m) => `<li><strong>${m[1].replace(/\s*:\s*$/, '').trim()}</strong><span>${m[2].trim()}</span></li>`)
+        .join('')}</ol>`;
+    }
+  );
+
+  // FAQ: "<p><strong>Q1. …</strong></p><p>answer</p>" pairs after the FAQ
+  // heading become an accordion. Answers stay in the DOM (closed <details>).
+  bodyHtml = bodyHtml.replace(/(<h2[^>]*>\s*FAQ[\s\S]*?<\/h2>)([\s\S]*)$/i, (_m, heading, rest) => {
+    // An answer runs until the next question, so lists and extra paragraphs stay inside it.
+    const faq = rest.replace(
+      /<p><strong>(?:Q\d+\.\s*)?([\s\S]*?)<\/strong><\/p>\s*([\s\S]*?)(?=<p><strong>(?:Q\d+\.)|$)/g,
+      (_q, question, answer) =>
+        `<details class="svc-guide-faq__item"><summary>${question}</summary><div class="svc-guide-faq__answer">${answer.trim()}</div></details>`
+    );
+    return `${heading}<div class="svc-guide-faq">${faq}</div>`;
+  });
+
+  // Anchors on every h2, collected for the Sommaire.
+  const toc: { id: string; label: string }[] = [];
+  // Each h2 carries the same number as its Sommaire entry.
+  bodyHtml = bodyHtml.replace(/<h2>([\s\S]*?)<\/h2>/g, (_m, inner) => {
+    const id = anchorOf(inner);
+    toc.push({ id, label: stripTags(inner).replace(/\s*:\s*$/, '') });
+    return `<h2 id="${id}"><span class="svc-guide-num">${toc.length}.</span> ${inner}</h2>`;
+  });
+
+  // French punctuation: a non-breaking space before : ; ? ! so they never
+  // wrap alone onto the next line (text nodes only, never inside tags).
+  bodyHtml = bodyHtml.replace(/>([^<]+)</g, (_m, text) => `>${text.replace(/ ([:;?!])/g, '\u00a0$1')}<`);
+
+  // "À retenir" reuses the first paragraph of the page's own conclusion.
+  const takeaway = bodyHtml.match(/<h2[^>]*>\s*(?:<span class="svc-guide-num">[^<]*<\/span>\s*)?Conclusion\b[^<]*<\/h2>\s*<p>([\s\S]*?)<\/p>/i)?.[1];
+  const takeawayHtml = takeaway
+    ? `<aside class="svc-guide-takeaway"><span class="svc-guide-takeaway__label">À retenir</span><p>${takeaway}</p></aside>`
+    : '';
+  const tocHtml = toc.length >= 3
+    ? `<nav class="svc-guide-toc" aria-label="Sommaire"><details class="svc-guide-toc__details"><summary class="svc-guide-toc__label">Sommaire</summary><ol>${toc
+        .map((t) => `<li><a href="#${t.id}">${t.label}</a></li>`)
+        .join('')}</ol></details></nav>`
+    : '';
+  const firstH2 = bodyHtml.search(/<h2[\s>]/);
+  if (firstH2 >= 0) {
+    bodyHtml = bodyHtml.slice(0, firstH2) + takeawayHtml + tocHtml + bodyHtml.slice(firstH2);
+  }
+
+  // Each numbered section becomes its own block, so readers see where one
+  // part ends and the next begins (Caroline 29/10).
+  bodyHtml = bodyHtml
+    .split(/(?=<h2 id=")/)
+    .map((part) => (part.startsWith('<h2 id="') ? `<section class="svc-guide-section">${part}</section>` : part))
+    .join('');
+}
 
 // Page-specific enhancement: render "Les valeurs de l'Immobilière Pujol"
 // as a clean cards grid instead of the raw alternating <ul>/<p> markup.
@@ -456,10 +550,23 @@ if (slug === 'contacter-un-conseiller-en-gestion-locative') {
 }
 
 // Build the sidebar list: parent header, section label, then siblings + current page.
-const sidebarItems = [
-  ...siblings.map((s) => ({ ...s, current: false })),
-  { href: pagePath, label: entry.data.title, current: true },
-].sort((a, b) => a.label.localeCompare(b.label));
+// Sibling labels follow each page's current title, not the legacy link text.
+const serviceTitles = guideTitles(await getCollection('services'));
+// Pages in the Gestion locative guide follow Caroline's 12 sections and order
+// (src/lib/guide-nav.ts); every other page keeps its legacy siblings.
+const guideSection = guideSectionFor(pagePath);
+const sidebarItems = guideSection
+  ? guideSection.pages.map((href) => ({
+      href,
+      label: href === pagePath ? entry.data.title : serviceTitles.get(href) || href,
+      current: href === pagePath,
+    }))
+  : [
+      ...siblings.map((s) => ({ ...s, label: serviceTitles.get(s.href) || s.label, current: false })),
+      { href: pagePath, label: entry.data.title, current: true },
+    ].sort((a, b) => a.label.localeCompare(b.label));
+const sidebarSectionLabel = guideSection ? guideSection.title : sectionLabel;
+const sidebarSectionHref = guideSection ? `${GUIDE_HUB}#${guideSection.id}` : '';
 
 const formObjects = [
   "Location : vous êtes intéressés par une annonce de location /à la recherche d'un bien à louer ?",
@@ -470,6 +577,9 @@ const formObjects = [
   'Autre (bien détailler votre demande)',
   'Client : déclarer une urgence le week-end et les jours fériés',
 ];
+// Gestion locative guides are read by owners: preselect that request, not the
+// first option (a rental search).
+const defaultFormObject = guideSection ? formObjects[2] : undefined;
 
 // ── Slug-specific form overrides ────────────────────────────────────────────
 // Pages that need a dedicated form instead of the generic contact form (GF 4).
@@ -589,17 +699,45 @@ const CUSTOM_FORMS: Record<string, CustomFormConfig> = {
 };
 
 const customForm = CUSTOM_FORMS[slug] || null;
+
+// Phase 2 rewrites ship their own JSON-LD (WebPage + FAQPage) in front matter.
+// Fragment ids ("#faq") are made absolute against the page URL.
+const pageUrl = new URL(pagePath, Astro.site ?? 'https://www.immobiliere-pujol.fr').href;
+// Breadcrumb = the real site section, never the technical "/services/" prefix
+// (Roy 10/11). Gestion locative guides: hub › their rubric in Caroline's 12.
+const RUBRICS: Array<[string, string, string]> = [
+  ['/gestion-locative/', 'Gestion locative', GUIDE_HUB],
+  ['/mettre-en-location/', 'Gestion locative', GUIDE_HUB],
+  ['/vendre/', 'Vente', '/service-immobilier/vendre/'],
+  ['/syndic-de-copropriete-a-marseille/', 'Syndic', '/service-immobilier/syndic-de-copropriete-a-marseille/'],
+  ['/agence-immobiliere-pujol/', "L'agence", '/service-immobilier/agence-immobiliere-pujol/'],
+];
+const crumbSection = guideSectionFor(pagePath);
+const rubric = RUBRICS.find(([k]) => parentHref.includes(k)) ?? RUBRICS[4];
+const breadcrumbCrumbs = crumbSection
+  ? [
+      { label: 'Gestion locative', href: GUIDE_HUB },
+      // the first rubric is itself called "Gestion locative": don't repeat it
+      ...(crumbSection.title === 'Gestion locative' ? [] : [{ label: crumbSection.title, href: `${GUIDE_HUB}#${crumbSection.id}` }]),
+    ]
+  : [{ label: rubric[1], href: rubric[2] }];
+
+const pageSchemas = entry.data.jsonLd
+  ? [JSON.parse(entry.data.jsonLd.replace(/"@id":\s*"#/g, `"@id": "${pageUrl}#`))]
+  : [];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} schemas={pageSchemas} bypassSeoMirror={isGuide} breadcrumbCrumbs={breadcrumbCrumbs}>
   {/* ============= HERO ============= */}
-  <section class="svc-hero" style={`background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
+  {/* Guide pages: no photo header (Caroline 30/10), a plain title band instead. */}
+  <section class={`svc-hero${isGuide ? ' svc-hero--guide' : ''}`} style={isGuide ? undefined : `background-image: linear-gradient(rgba(15,25,42,.35), rgba(15,25,42,.45)), url('${heroImg}');`}>
     <div class="svc-hero__overlay"></div>
 
     <div class="svc-hero__inner">
+      {crumbSection && <a class="svc-hero__back" href={`${GUIDE_HUB}#guides`}>← Retour aux guides de gestion locative</a>}
       <h1>{entry.data.title}</h1>
       {heroSub && <p class="svc-hero__sub">{heroSub}</p>}
-      <a class="svc-hero__cta" href="#form">{entry.data.ctaText || "Contacter l'agence"}</a>
+      <a class="svc-hero__cta" href={heroCta.href}>{heroCta.label}</a>
     </div>
   </section>
 
@@ -613,7 +751,9 @@ const customForm = CUSTOM_FORMS[slug] || null;
           <a class="svc-toc__parent" href={parentHref}>
             <p class="svc-toc__title">{parentLabel}</p>
           </a>
-          {sectionLabel && <p class="svc-toc__section-label">{sectionLabel}</p>}
+          {sidebarSectionLabel && (sidebarSectionHref
+            ? <a class="svc-toc__section-label" href={sidebarSectionHref}>{sidebarSectionLabel}</a>
+            : <p class="svc-toc__section-label">{sidebarSectionLabel}</p>)}
           <ul class="svc-toc__list">
             {sidebarItems.map((it) => (
               <li>
@@ -630,6 +770,30 @@ const customForm = CUSTOM_FORMS[slug] || null;
         </aside>
 
         <div class="svc-content svc-content--article">
+          {guideSection && (
+            <nav class="svc-mobnav" aria-label="Autres guides de la rubrique">
+              <details class="svc-mobnav__details">
+                <summary class="svc-mobnav__summary">
+                  <span class="svc-mobnav__kicker">Dans cette rubrique</span>
+                  <span class="svc-mobnav__section">{guideSection.title}</span>
+                </summary>
+                <ul class="svc-mobnav__list">
+                  {sidebarItems.map((it) => (
+                    <li>
+                      <a
+                        class={`svc-mobnav__link${it.current ? ' is-active' : ''}`}
+                        href={it.href}
+                        aria-current={it.current ? 'page' : undefined}
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="svc-mobnav__hub" href={sidebarSectionHref}>Voir tous les guides de gestion locative</a>
+              </details>
+            </nav>
+          )}
           {reviewPlatforms.length > 0 ? (
             <>
               <section class="svc-reviews-hero">
@@ -956,7 +1120,42 @@ const customForm = CUSTOM_FORMS[slug] || null;
               </div>
             </section>
           ) : (
-            <article class="svc-article-body" set:html={bodyHtml}></article>
+            <>
+            <article class={`svc-article-body${isGuide ? ' svc-article-body--guide' : ''}`} set:html={bodyHtml}></article>
+            {isGuide && (
+              <script is:inline>
+                // Sommaire: expanded on desktop, collapsed on mobile.
+                if (window.matchMedia('(min-width: 769px)').matches) {
+                  document.querySelectorAll('.svc-guide-toc__details').forEach((d) => d.setAttribute('open', ''));
+                }
+              </script>
+            )}
+            </>
+          )}
+          {/* Mobile: the same section menu again at the end of the guide, open (Caroline 30/10). */}
+          {guideSection && (
+            <nav class="svc-mobnav svc-mobnav--bottom" aria-label="Autres guides de la rubrique (fin de page)">
+              <details class="svc-mobnav__details" open>
+                <summary class="svc-mobnav__summary">
+                  <span class="svc-mobnav__kicker">Dans cette rubrique</span>
+                  <span class="svc-mobnav__section">{guideSection.title}</span>
+                </summary>
+                <ul class="svc-mobnav__list">
+                  {sidebarItems.map((it) => (
+                    <li>
+                      <a
+                        class={`svc-mobnav__link${it.current ? ' is-active' : ''}`}
+                        href={it.href}
+                        aria-current={it.current ? 'page' : undefined}
+                      >
+                        {it.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="svc-mobnav__hub" href={sidebarSectionHref}>Voir tous les guides de gestion locative</a>
+              </details>
+            </nav>
           )}
 
           {valueCards.length > 0 && (
@@ -1095,7 +1294,7 @@ const customForm = CUSTOM_FORMS[slug] || null;
               <span>Objet de votre demande *</span>
               <select name="input_10" required>
                 {formObjects.map((o) => (
-                  <option value={o}>{o}</option>
+                  <option value={o} selected={o === defaultFormObject}>{o}</option>
                 ))}
               </select>
             </label>
