@@ -33,6 +33,10 @@ export const GET: APIRoute = async ({ request }) => {
       for (const slug of data.serviceImmobilier) {
         urls.push(entry(`/service-immobilier/${slug}/`));
       }
+      // Gestion locative profile pages (release 27/11), nested under the landing.
+      for (const profil of ['deja-en-agence', 'je-gere-seul', 'premiere-location', 'coproprietaire']) {
+        urls.push(entry(`/service-immobilier/gestion-locative/${profil}/`));
+      }
 
       // Content pages
       for (const slug of data.pages) {

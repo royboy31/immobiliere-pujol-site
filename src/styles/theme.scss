@@ -23,6 +23,8 @@
 @import 'components/home';
 @import 'components/breadcrumbs';
 @import 'components/service-page';
+@import 'components/lp-magazine'; // shared .mag styles of the landing (the magazine test route is not released)
+@import 'components/lp-proposition';
 @import 'components/annonces';
 @import 'components/expert-detail';
 @import 'components/search-overlay';

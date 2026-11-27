@@ -130,7 +130,12 @@ function dirSlugs(dir, ext) {
 // dropped, and a duplicate mentions-légales): their `__` slugs have no valid
 // route (404) and must not appear in the sitemap.
 const pages = dirSlugs('src/content/pages', '.md').filter((s) => !s.includes('__'));
-const services = dirSlugs('src/content/services', '.md');
+// Gestion locative profile texts are rendered under /service-immobilier/gestion-locative/, not /services/.
+const GESTION_PROFILE_SERVICES = new Set([
+  'changer-agence-gestion-locative-marseille', 'deleguer-gestion-locative-marseille',
+  'premiere-mise-en-location-marseille', 'coproprietaire-syndic-gestion-locative-marseille',
+]);
+const services = dirSlugs('src/content/services', '.md').filter((s) => !GESTION_PROFILE_SERVICES.has(s));
 const experts = dirSlugs('src/content/experts', '.json');
 const serviceImmobilier = dirSlugs('src/content/serviceImmobilier', '.md');
 const arrondissements = dirSlugs('src/content/arrondissements', '.json');

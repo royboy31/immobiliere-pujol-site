@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
-import worker from './index.ts';
+import worker, { gaelleSignatureHtml } from './index.ts';
 
 function createReminderDb(seed = []) {
   const rows = new Map(seed.map((row) => [row.email.toLowerCase(), {
@@ -627,4 +627,194 @@ test('matched-listing emails require the dedicated alert token', async () => {
     body,
   }), { ...baseEnv, BREVO_API_KEY: undefined }, {});
   assert.equal(alertTokenWithoutBrevo.status, 501);
+});
+
+function createGuideDb({ fail = false } = {}) {
+  const rows = [];
+  return {
+    rows,
+    prepare(sql) {
+      let args = [];
+      const st = {
+        bind(...v) { args = v; return st; },
+        async run() {
+          if (fail) throw new Error('D1_ERROR: down');
+          if (sql.startsWith('CREATE TABLE')) return { success: true };
+          if (sql.startsWith('INSERT INTO guide_requests')) {
+            const [created_at, email, prenom, nom, guide, tag, consent] = args;
+            rows.push({ id: rows.length + 1, created_at, email, prenom, nom, guide, tag, consent, status: 'received', sheet_ok: 0, lead_ok: 0 });
+            return { success: true, meta: { last_row_id: rows.length } };
+          }
+          if (sql.startsWith('UPDATE guide_requests')) {
+            const [status, sheet_ok, lead_ok, id] = args;
+            Object.assign(rows[id - 1], { status, sheet_ok, lead_ok });
+            return { success: true };
+          }
+          throw new Error(`unexpected D1 query: ${sql}`);
+        },
+      };
+      return st;
+    },
+  };
+}
+
+async function postGuide(fields, { sheet = () => Response.json({ ok: true, mode: 'append' }), brevo = () => Response.json({ messageId: 'x' }), db = createGuideDb() } = {}) {
+  const originalFetch = globalThis.fetch;
+  const calls = { sheet: [], mails: [], db };
+  globalThis.fetch = async (input, init = {}) => {
+    const url = String(input);
+    if (url.includes('script.google.com')) { calls.sheet.push(JSON.parse(init.body)); return sheet(); }
+    if (url.includes('/v3/smtp/email')) { const m = JSON.parse(init.body); calls.mails.push(m); return brevo(m); }
+    throw new Error(`unexpected fetch ${url}`);
+  };
+  try {
+    const body = new FormData();
+    for (const [k, v] of Object.entries(fields)) body.set(k, v);
+    const res = await worker.fetch(new Request('https://worker.example/guide', {
+      method: 'POST', headers: { Origin: 'https://www.immobiliere-pujol.fr' }, body,
+    }), { ...productionEnv, DB: db }, { waitUntil() {} });
+    return { res, json: await res.json(), calls };
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+const GUIDE_OK = { prenom: 'Marie', nom: 'Durand', email: 'bailleur@example.com', guide: 'gerer-seul-cout', consent: '1' };
+const toVisitor = (m) => m.to[0].email === 'bailleur@example.com';
+const isGuideCopy = (m) => m.subject.startsWith('Copie du guide envoyé à ');
+const toLead = (m) => !isGuideCopy(m) && (m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com' || m.to[0].email === 'carolinepujol@immobiliere-pujol.fr');
+const toZoho = (m) => m.to[0].email === 'g9f4fx36@parser.eu.zohocrm.com';
+
+test('guide: refused without consent, names, valid email or a real guide; nothing written or sent', async () => {
+  const inherited = ['toString', 'constructor', '__proto__', 'hasOwnProperty', 'valueOf'].map((guide) => ({ ...GUIDE_OK, guide }));
+  const { consent, ...noConsent } = GUIDE_OK;
+  for (const fields of [noConsent, { ...GUIDE_OK, guide: 'inconnu' }, { ...GUIDE_OK, email: 'pas-un-email' }, { ...GUIDE_OK, prenom: '' }, { ...GUIDE_OK, nom: ' ' }, ...inherited]) {
+    const { res, calls } = await postGuide(fields);
+    assert.equal(res.status, 400);
+    assert.equal(calls.sheet.length + calls.mails.length, 0);
+  }
+});
+
+test('guide: sent by email (no link in the answer), tagged consent row, tagged lead email', async () => {
+  const { res, json, calls } = await postGuide(GUIDE_OK);
+  assert.equal(res.status, 200);
+  assert.deepEqual(json, { ok: true });
+  const visitor = calls.mails.find(toVisitor);
+  assert.match(visitor.htmlContent, /https:\/\/www\.immobiliere-pujol\.fr\/guides\/[0-9a-f]{24}\/guide-gerer-seul-ou-deleguer\.pdf/);
+  assert.match(visitor.htmlContent, /Bonjour Marie/);
+  // Caroline 27/11: Gaëlle's wording, booking link and signature, signed by her.
+  assert.match(visitor.htmlContent, /Répondez simplement à cet email\. Gaëlle Lapert, notre experte en gestion locative, vous rappelle\./);
+  assert.match(visitor.htmlContent, /calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\/AcZssZ0fgtiWYuB8b/);
+  // Text signature until Caroline's image is corrected: expert-page phone (85), never 87.
+  assert.match(visitor.htmlContent, /06 08 85 20 05/);
+  assert.doesNotMatch(visitor.htmlContent, /87 ?20 ?05/);
+  assert.doesNotMatch(visitor.htmlContent, /signature-gaelle-lapert\.jpg/);
+  assert.match(visitor.htmlContent, />Réserver un rendez-vous<\/a>/);
+  assert.match(visitor.htmlContent, />Gaëlle Lapert<\/p>/);
+  assert.doesNotMatch(visitor.htmlContent, /L(&#39;|&#x27;|')équipe Immobilière Pujol/, 'signed by Gaëlle, not the team');
+  assert.equal(calls.sheet[0].tab, 'Gestion Locative');
+  assert.deepEqual(calls.sheet[0].row.slice(1, 5), ['Marie', 'Durand', '', 'bailleur@example.com']);
+  assert.match(calls.sheet[0].row[5], /^Demande guide gestion - gérer seul \|/);
+  assert.match(calls.sheet[0].row[5], /J'accepte de recevoir gratuitement ce guide/);
+  const leads = calls.mails.filter(toLead);
+  assert.deepEqual(leads.map((m) => m.to[0].email).sort(), ['carolinepujol@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com']);
+  for (const lead of leads) {
+    assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Gérer seul ou déléguer ? | Marie Durand');
+    assert.match(lead.htmlContent, /Guide envoyé[\s\S]*Gérer seul ou déléguer \?/);
+  }
+  assert.equal(leads[0].replyTo.email, 'bailleur@example.com');
+  assert.ok(!calls.mails.some((m) => m.to[0].email === 'gaelle@immobiliere-pujol.fr'), 'no longer to Gaëlle (Caroline 20/11)');
+  assert.equal(calls.mails.indexOf(visitor), 0, 'guide email goes first');
+  const copies = calls.mails.filter(isGuideCopy);
+  assert.equal(copies.length, 1, 'Caroline gets one copy of the visitor email (Roy 27/11)');
+  assert.equal(copies[0].to[0].email, 'carolinepujol@immobiliere-pujol.fr');
+  assert.equal(copies[0].subject, 'Copie du guide envoyé à Marie Durand (bailleur@example.com) : Gérer seul ou déléguer ?');
+  assert.equal(copies[0].htmlContent, visitor.htmlContent, 'same content as the visitor email');
+  assert.ok(!visitor.cc, 'Caroline is not visible to the visitor');
+  assert.equal(calls.mails.length, 4, 'visitor + copy + Zoho lead + Caroline lead');
+});
+
+test('guide: the second guide carries its own exact title to Zoho and Caroline', async () => {
+  const { res, calls } = await postGuide({ ...GUIDE_OK, guide: 'gerer-seul-risque' });
+  assert.equal(res.status, 200);
+  const leads = calls.mails.filter(toLead);
+  assert.equal(leads.length, 2);
+  for (const lead of leads) {
+    assert.equal(lead.subject, '[Demande guide gestion - gérer seul] Gérer seul : vous portez le risque | Marie Durand');
+    assert.match(lead.htmlContent, /Guide envoyé[\s\S]*Gérer seul : vous portez le risque/);
+  }
+});
+
+test('guide: if the guide email is refused or the network fails, 502 and nothing recorded', async () => {
+  for (const brevo of [() => new Response('{}', { status: 400 }), () => { throw new TypeError('network'); }]) {
+    const { res, json, calls } = await postGuide(GUIDE_OK, { brevo });
+    assert.equal(res.status, 502);
+    assert.equal(json.ok, false);
+    assert.equal(calls.sheet.length, 0);
+    assert.equal(calls.mails.filter(toLead).length, 0, 'no lead email, so a retry never duplicates it');
+  }
+});
+
+test('guide: Sheet failures after a sent guide still answer ok and flag it in the lead email', async () => {
+  const failures = [
+    () => new Response('down', { status: 503 }),
+    () => Response.json({ ok: false, error: 'Tab not found' }),
+    () => new Response('<html>not json</html>', { status: 200 }),
+    () => { throw new TypeError('network'); },
+  ];
+  for (const sheet of failures) {
+    const { res, calls } = await postGuide(GUIDE_OK, { sheet });
+    assert.equal(res.status, 200);
+    assert.match(calls.mails.find(toLead).htmlContent, /NON, à saisir à la main/);
+  }
+  const leadFails = await postGuide(GUIDE_OK, { brevo: (m) => toLead(m) ? new Response('{}', { status: 500 }) : Response.json({ messageId: 'x' }) });
+  assert.equal(leadFails.res.status, 200);
+  assert.equal(leadFails.calls.sheet.length, 1);
+});
+
+test('guide: durable D1 record before sending; Sheet and the Zoho/Caroline leads all down still keeps the request', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, {
+    sheet: () => new Response('down', { status: 503 }),
+    brevo: (m) => toLead(m) ? new Response('{}', { status: 503 }) : Response.json({ messageId: 'x' }),
+  });
+  assert.equal(res.status, 200, 'the guide was sent, so the visitor is told so');
+  assert.equal(calls.db.rows.length, 1);
+  assert.deepEqual(
+    { email: calls.db.rows[0].email, prenom: calls.db.rows[0].prenom, nom: calls.db.rows[0].nom, tag: calls.db.rows[0].tag, status: calls.db.rows[0].status, sheet_ok: calls.db.rows[0].sheet_ok, lead_ok: calls.db.rows[0].lead_ok },
+    { email: 'bailleur@example.com', prenom: 'Marie', nom: 'Durand', tag: 'Demande guide gestion - gérer seul', status: 'sent', sheet_ok: 0, lead_ok: 0 },
+  );
+  assert.match(calls.db.rows[0].consent, /J'accepte de recevoir gratuitement ce guide/);
+});
+
+test('guide: if the D1 record fails, nothing is sent (503)', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, { db: createGuideDb({ fail: true }) });
+  assert.equal(res.status, 503);
+  assert.equal(calls.mails.length + calls.sheet.length, 0);
+});
+
+test('guide: refused guide email leaves the D1 row as send_failed', async () => {
+  const { res, calls } = await postGuide(GUIDE_OK, { brevo: () => new Response('{}', { status: 400 }) });
+  assert.equal(res.status, 502);
+  assert.equal(calls.db.rows[0].status, 'send_failed');
+});
+
+test('guide: a failed copy to Caroline (refused or network) changes nothing for the visitor or the leads', async () => {
+  for (const fail of [() => new Response('{}', { status: 500 }), () => { throw new TypeError('network'); }]) {
+    const { res, json, calls } = await postGuide(GUIDE_OK, { brevo: (m) => isGuideCopy(m) ? fail() : Response.json({ messageId: 'x' }) });
+    assert.equal(res.status, 200);
+    assert.deepEqual(json, { ok: true });
+    assert.equal(calls.mails.filter(isGuideCopy).length, 1, 'the copy was attempted');
+    assert.deepEqual(calls.mails.filter(toLead).map((m) => m.to[0].email).sort(), ['carolinepujol@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com']);
+    assert.equal(calls.sheet.length, 1);
+    assert.deepEqual({ status: calls.db.rows[0].status, sheet_ok: calls.db.rows[0].sheet_ok, lead_ok: calls.db.rows[0].lead_ok }, { status: 'sent', sheet_ok: 1, lead_ok: 1 });
+  }
+});
+
+test('Gaëlle signature: image mode keeps the clickable signature image, text mode the expert-page phone', () => {
+  const img = gaelleSignatureHtml('https://example.test', 'image');
+  assert.match(img, /https:\/\/example\.test\/images\/email\/signature-gaelle-lapert\.jpg/);
+  assert.match(img, /<a href="https:\/\/calendar\.google\.com\/calendar\/u\/0\/appointments\/schedules\//);
+  const text = gaelleSignatureHtml('https://example.test', 'text');
+  assert.match(text, /href="tel:0608852005"/);
+  assert.match(text, /gaelle@immobiliere-pujol\.fr/);
+  assert.doesNotMatch(text, /87/);
 });

@@ -12,9 +12,16 @@ const slugify = (s: string): string =>
     .replace(/^-|-$/g, '');
 
 export async function getStaticPaths() {
+  const GESTION_PROFILE_SERVICES = new Set([
+    'changer-agence-gestion-locative-marseille', 'deleguer-gestion-locative-marseille',
+    'premiere-mise-en-location-marseille', 'coproprietaire-syndic-gestion-locative-marseille',
+  ]);
   const services = await getCollection('services');
   return services
     .filter((entry) => entry.data.slug && entry.data.slug !== 'services')
+    // Gestion locative profile texts: rendered at /service-immobilier/gestion-locative/<profil>/,
+    // never as /services/ pages (release 27/11).
+    .filter((entry) => !GESTION_PROFILE_SERVICES.has(entry.data.slug.replace(/^services\//, '')))
     .map((entry) => {
       const slug = entry.data.slug.replace(/^services\//, '');
       return {
