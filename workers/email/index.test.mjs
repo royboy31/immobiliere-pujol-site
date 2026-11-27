@@ -795,6 +795,18 @@ test('guide: refused guide email leaves the D1 row as send_failed', async () => 
   assert.equal(calls.db.rows[0].status, 'send_failed');
 });
 
+test('guide: a failed copy to Caroline (refused or network) changes nothing for the visitor or the leads', async () => {
+  for (const fail of [() => new Response('{}', { status: 500 }), () => { throw new TypeError('network'); }]) {
+    const { res, json, calls } = await postGuide(GUIDE_OK, { brevo: (m) => isGuideCopy(m) ? fail() : Response.json({ messageId: 'x' }) });
+    assert.equal(res.status, 200);
+    assert.deepEqual(json, { ok: true });
+    assert.equal(calls.mails.filter(isGuideCopy).length, 1, 'the copy was attempted');
+    assert.deepEqual(calls.mails.filter(toLead).map((m) => m.to[0].email).sort(), ['carolinepujol@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com']);
+    assert.equal(calls.sheet.length, 1);
+    assert.deepEqual({ status: calls.db.rows[0].status, sheet_ok: calls.db.rows[0].sheet_ok, lead_ok: calls.db.rows[0].lead_ok }, { status: 'sent', sheet_ok: 1, lead_ok: 1 });
+  }
+});
+
 test('listing enquiries: Vente and ordinary Location both copy Caroline next to the Zoho parser', async () => {
   for (const [type, extra, expected] of [
     ['V', { negociateur_email: 'agent@immobiliere-pujol.fr' }, ['agent@immobiliere-pujol.fr', 'g9f4fx36@parser.eu.zohocrm.com', 'carolinepujol@immobiliere-pujol.fr']],
