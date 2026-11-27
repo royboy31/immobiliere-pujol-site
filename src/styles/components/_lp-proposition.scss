@@ -168,8 +168,6 @@ $p-slate-soft:  rgb(226, 232, 235);
     &:focus-visible { outline: 3px solid $p-orange; outline-offset: 2px; } }
   details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
   details[open] summary > span { background: $p-green; }
-  // one column on mobile: no row to align, so no tall empty boxes
-  @media (max-width: $bp-tablet) { summary { min-height: 72px; } }
   details ul { padding: 4px 20px 18px; display: grid; gap: 10px; font-size: 15px; border-top: 1px solid $p-paper; padding-top: 14px; }
   // article links look like links: underlined, darker green on hover
   details a { color: $p-ink; text-decoration: underline; text-decoration-color: $p-green; text-decoration-thickness: 2px; text-underline-offset: 4px;
