@@ -7,7 +7,7 @@ export const prerender = false; // photos come from the admin (lp-photos), publi
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getCollection } from 'astro:content';
-import { GUIDE_SECTIONS } from '../../../lib/guide-nav';
+import { GUIDE_SECTIONS, guideQuestion } from '../../../lib/guide-nav';
 import { KEY_FIGURES, PROFILES } from '../../../lib/lp-proposition';
 import { posStyle } from '../../../lib/lp-photos';
 import { loadLpPhotos } from '../../../lib/lp-photos-runtime';
@@ -23,7 +23,7 @@ const serviceTitles = new Map(
 const guides = GUIDE_SECTIONS.map((g) => ({
   id: g.id,
   title: g.title,
-  articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+  articles: g.pages.map((href) => ({ href, label: guideQuestion(href) || serviceTitles.get(href) || href })),
 }));
 
 const CONSEILLER = '/services/contacter-un-conseiller-en-gestion-locative/';
@@ -155,7 +155,7 @@ const reassurances = [
 
     <section class="prop-section prop-section--paper" id="guides">
       <div class="mag-wrap">
-        <h2 class="mag-h2 prop-center">Tous nos guides de la <em>gestion locative</em></h2>
+        <h2 class="mag-h2 prop-center">Toutes les questions que vous vous posez sur la <em>gestion locative</em> et la mise en location</h2>
         <ul class="prop-guides">
           {guides.map((g) => (
             <li id={g.id}>

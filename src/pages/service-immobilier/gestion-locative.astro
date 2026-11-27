@@ -2,7 +2,7 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, getEntry } from 'astro:content';
-import { GUIDE_SECTIONS } from '../../lib/guide-nav';
+import { GUIDE_SECTIONS, guideQuestion } from '../../lib/guide-nav';
 
 const entry = await getEntry('serviceImmobilier', 'gestion-locative');
 const seoTitle = entry?.data.seoTitle || 'Gestion Locative à Marseille – Immobilière Pujol';
@@ -59,7 +59,7 @@ const sections = [
     id: g.id,
     title: `${i + 1}. ${g.title}`,
     paragraphs: leads[g.id] || [],
-    articles: g.pages.map((href) => ({ href, label: serviceTitles.get(href) || href })),
+    articles: g.pages.map((href) => ({ href, label: guideQuestion(href) || serviceTitles.get(href) || href })),
   })),
   {
     id: 'contacter-un-conseiller-en-gestion-locative',
@@ -330,7 +330,7 @@ const parcours = [
     {/* ============= GUIDES INDEX (Caroline's 12 sections, 40 guides) ============= */}
     <section class="lp-block lp-guides-head" id="guides">
       <div class="lp-wrap">
-        <h2 class="lp-title">Tous nos guides de la <b>gestion locative</b></h2>
+        <h2 class="lp-title">Toutes les questions que vous vous posez sur la <b>gestion locative</b> et la mise en location</h2>
       </div>
     </section>
 
