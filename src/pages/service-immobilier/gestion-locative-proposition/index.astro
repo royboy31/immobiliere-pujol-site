@@ -150,9 +150,7 @@ const reassurances = [
       </div>
     </section>
 
-    {/* Caroline 19/11: all her guides visible on the main landing too */}
-    <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
-
+    {/* Caroline 27/11: the questions block is important, it sits above the PDF downloads */}
     <section class="prop-section prop-section--paper" id="guides">
       <div class="mag-wrap">
         <h2 class="mag-h2 prop-center">Toutes les questions que vous vous posez sur la <em>gestion locative</em> et la mise en location</h2>
@@ -168,6 +166,10 @@ const reassurances = [
         </ul>
       </div>
     </section>
+
+    {/* Caroline 19/11: all her guides visible on the main landing too */}
+    <GuideDownload guides={PROFILES.flatMap((p) => p.guides ?? [])} id="guides-pdf" paper={false} />
+
 
     <section class="prop-final">
       <img class="prop-final__img lp-pos" src={ph['accueil-final'].src} style={posStyle(ph['accueil-final'])} alt="" loading="lazy" width={ph['accueil-final'].w} height={ph['accueil-final'].h} />
