@@ -362,7 +362,7 @@ Créez votre alerte annonces en 30 secondes&nbsp;: vous recevrez par email chaqu
   signoff: 'Le service Location',
 };
 
-function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string }): string {
+function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff?: string; signatureHtml?: string }): string {
   const greeting = vars.prénom
     ? `Bonjour ${esc(vars.prénom)},`
     : 'Bonjour,';
@@ -396,6 +396,7 @@ function buildCustomerEmail(vars: { prénom?: string; bodyHtml?: string; signoff
           </div>
 
           <p style="margin:16px 0 0;font-size:14px;color:#0f1a2b;font-weight:600">${esc(signoff)}</p>
+          ${vars.signatureHtml ?? ''}
 
         </td></tr>
 
@@ -900,6 +901,156 @@ async function handleContact(fd: FormData, env: Env, ctx: ExecutionContext): Pro
   }
 
   return emailResult;
+}
+
+// Guides (Caroline 19/11/2026): first name, last name, email and a mandatory consent box.
+// The guide is SENT BY EMAIL (Caroline 16:24: that is what justifies collecting the address),
+// never downloaded from the page. Each guide carries a CRM tag (one per rubric) so Pujol can
+// filter the leads: it goes into the Sheet row and Gaëlle's notification.
+const GUIDES: Record<string, { title: string; file: string; tag: string }> = {
+  'gerer-seul-cout': { title: 'Gérer seul ou déléguer ?', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-ou-deleguer.pdf', tag: 'Demande guide gestion - gérer seul' },
+  'gerer-seul-risque': { title: 'Gérer seul : vous portez le risque', file: '/guides/4c4bf5e2d1b05dac64ec75a5/guide-gerer-seul-risque-juridique-penal.pdf', tag: 'Demande guide gestion - gérer seul' },
+};
+// Caroline's wording, 19/11 16:23 (must match GuideDownload.astro).
+// Gaëlle's booking agenda: same URL as her expert page (gaelle-lapert.json) and the QR code of her signature.
+const GAELLE_AGENDA = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0fgtiWYuB8b-HQxfvOfUQ0ZkIXJk4eE-GTP7MyGPDnx3DcAXrFqHCYKrlEZPcLxDxAjP78k1bT';
+
+// Gaëlle's signature in the guide email. The image Caroline sent on 27/11 shows 06 08 87 20 05,
+// but her expert page (the reference, Roy 27/11) says 06 08 85 20 05: an email must never show 87.
+// 'text' until Caroline sends a corrected image; then replace the .jpg and switch to 'image'.
+const GAELLE_SIGNATURE_MODE: 'image' | 'text' = 'text';
+const GAELLE_PHONE = '06 08 85 20 05';
+
+export function gaelleSignatureHtml(base: string, mode: 'image' | 'text' = GAELLE_SIGNATURE_MODE): string {
+  if (mode === 'image') {
+    return `<p style="margin:12px 0 0"><a href="${GAELLE_AGENDA}"><img src="${esc(base)}/images/email/signature-gaelle-lapert.jpg" alt="Gaëlle Lapert, Immobilière Pujol. Réserver un rendez-vous" width="520" style="display:block;width:100%;max-width:520px;height:auto;border:0"></a></p>`;
+  }
+  return `<p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#0f1a2b">`
+    + `Expert conseil en gestion locative<br>Immobilière Pujol<br>`
+    + `<a href="tel:${GAELLE_PHONE.replace(/ /g, '')}" style="color:#0f1a2b">${GAELLE_PHONE}</a> · `
+    + `<a href="mailto:gaelle${D}" style="color:#0f1a2b">gaelle${D}</a><br>`
+    + `<a href="${GAELLE_AGENDA}" style="color:#0f1a2b;font-weight:700">Réserver un rendez-vous</a></p>`;
+}
+const GUIDE_CONSENT_TEXT =
+  "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
+
+// Appends one row and confirms the Apps Script really wrote it (HTTP ok AND {ok:true}).
+async function appendSheetChecked(tab: string, row: string[]): Promise<boolean> {
+  try {
+    const res = await fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify({ tab, row }), redirect: 'follow' });
+    if (!res.ok) return false;
+    const result = (await res.json().catch(() => null)) as { ok?: boolean } | null;
+    return result?.ok === true;
+  } catch {
+    return false;
+  }
+}
+
+// Durable record of every guide request (D1, same database as newsletter_reminders), written
+// BEFORE anything is sent, so a request is never lost even if the Sheet and Gaëlle's email both
+// fail afterwards. Rows with sheet_ok = 0 are the ones to re-enter by hand.
+async function recordGuideRequest(env: Env, r: { email: string; prénom: string; nom: string; guide: string; tag: string }): Promise<number | null> {
+  try {
+    await env.DB.prepare(`CREATE TABLE IF NOT EXISTS guide_requests (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, created_at TEXT NOT NULL, email TEXT NOT NULL, prenom TEXT, nom TEXT,
+      guide TEXT NOT NULL, tag TEXT NOT NULL, consent TEXT NOT NULL, status TEXT NOT NULL,
+      sheet_ok INTEGER NOT NULL DEFAULT 0, lead_ok INTEGER NOT NULL DEFAULT 0)`).run();
+    const res = await env.DB.prepare(`INSERT INTO guide_requests (created_at, email, prenom, nom, guide, tag, consent, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, 'received')`)
+      .bind(new Date().toISOString(), r.email, r.prénom, r.nom, r.guide, r.tag, GUIDE_CONSENT_TEXT).run();
+    const id = Number((res as { meta?: { last_row_id?: number } })?.meta?.last_row_id);
+    return Number.isFinite(id) && id > 0 ? id : null;
+  } catch (err) {
+    console.error('guide: D1 record failed', String(err));
+    return null;
+  }
+}
+async function updateGuideRequest(env: Env, id: number, status: string, sheetOk = false, leadOk = false): Promise<void> {
+  try {
+    await env.DB.prepare('UPDATE guide_requests SET status = ?, sheet_ok = ?, lead_ok = ? WHERE id = ?')
+      .bind(status, sheetOk ? 1 : 0, leadOk ? 1 : 0, id).run();
+  } catch (err) {
+    console.error('guide: D1 update failed', id, String(err));
+  }
+}
+
+// The PDF paths are unlisted (random folder, never in the page HTML) and only travel in the
+// guide email: a shareable link, not a per-visitor authorisation.
+async function handleGuide(fd: FormData, env: Env, origin: string): Promise<{ ok: boolean; status?: number; error?: string; recorded?: boolean }> {
+  const val = (k: string) => ((fd.get(k) as string) || '').trim();
+  const email = val('email');
+  const prénom = val('prenom').slice(0, 80);
+  const nom = val('nom').slice(0, 80);
+  const guideId = val('guide');
+  // Own keys only: 'toString', '__proto__'… must not resolve to an inherited value.
+  const guide = Object.hasOwn(GUIDES, guideId) ? GUIDES[guideId] : undefined;
+  if (!guide) return { ok: false, status: 400, error: 'Guide inconnu.' };
+  if (!prénom || !nom) return { ok: false, status: 400, error: 'Merci d’indiquer votre prénom et votre nom.' };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, status: 400, error: 'Adresse email invalide.' };
+  if (fd.get('consent') !== '1') return { ok: false, status: 400, error: 'Merci de cocher la case pour recevoir le guide.' };
+
+  const base = [env.ALLOWED_ORIGIN, ...PROD_ORIGINS].includes(origin) ? origin : SITE_URL;
+  const link = base + guide.file;
+
+  // 0. Durable record first. Without it nothing is sent (the visitor can simply retry).
+  const reqId = await recordGuideRequest(env, { email, prénom, nom, guide: guideId, tag: guide.tag });
+  if (reqId === null) {
+    return { ok: false, status: 503, error: "Votre demande n'a pas pu être enregistrée. Merci de réessayer dans quelques minutes." };
+  }
+
+  // 1. The guide email is the delivery. If Brevo refuses it, no Sheet row and no lead email
+  //    (so no duplicate if the visitor retries); the D1 row keeps status send_failed.
+  const guideMail = (to: string, subject: string) => sendEmail(env, {
+    subject,
+    html: buildCustomerEmail({
+      prénom,
+      bodyHtml: `<p>Merci pour votre demande. Voici votre guide « ${esc(guide.title)} » :</p>
+<p><a href="${esc(link)}" style="color:#0f1a2b;font-weight:700">Télécharger le guide (PDF)</a></p>
+<p>Une question sur la gestion locative de votre bien ? Répondez simplement à cet email. Gaëlle Lapert, notre experte en gestion locative, vous rappelle.</p>
+<p>Vous pouvez aussi <a href="${GAELLE_AGENDA}" style="color:#0f1a2b;font-weight:700">prendre rendez-vous directement dans son agenda</a>.</p>
+<p>Bien cordialement,</p>`,
+      // Caroline 27/11: signed by Gaëlle, not by "l'équipe Immobilière Pujol".
+      signoff: 'Gaëlle Lapert',
+      signatureHtml: gaelleSignatureHtml(base),
+    }),
+    to,
+    replyTo: `gaelle${D}`,
+    fromEmail: `gaelle${D}`,
+    fromName: 'Immobilière Pujol — Gestion Locative',
+  }).catch(() => ({ ok: false }));
+  const sent = await guideMail(email, `Votre guide : ${guide.title}`);
+  if (!sent.ok) {
+    await updateGuideRequest(env, reqId, 'send_failed');
+    return { ok: false, status: 502, error: "Le guide n'a pas pu être envoyé à cette adresse. Vérifiez-la et réessayez dans quelques minutes." };
+  }
+  // Roy 27/11: at launch Caroline also receives a copy of the exact email the visitor got,
+  // until Roy asks to remove it. Separate email (not cc) so her address stays hidden from
+  // the visitor; a failed copy never affects the visitor's answer.
+  // Caroline 27/11: the old subject ("[Copie envoyée à ...]") was unclear to her.
+  const copy = await guideMail(`carolinepujol${D}`, `Copie du guide envoyé à ${prénom} ${nom} (${email}) : ${guide.title}`);
+  if (!copy.ok) console.error('guide: copy to Caroline failed', guideId);
+
+  // 2. Proof of consent + CRM tag, then the lead to the Zoho parser and Caroline. The guide is
+  //    already sent, so a failure here is not shown to the visitor (D1 keeps the request).
+  const note = `${guide.tag} | Guide « ${guide.title} » envoyé par email | Consentement coché : ${GUIDE_CONSENT_TEXT}`;
+  const recorded = await appendSheetChecked('Gestion Locative', [now(), prénom, nom, '', email, note]);
+  // Caroline 20/11: the lead goes into the CRM loop, i.e. to the Zoho parser, with her in
+  // copy (same pair as the alert leads), instead of an email to Gaëlle.
+  const leadMail = (to: string) => sendEmail(env, {
+    // Caroline 23/11: the exact guide title in the subject too, to match her Zoho list.
+    subject: `[${guide.tag}] ${guide.title} | ${prénom} ${nom}`,
+    html: buildTable(`${guide.tag}`, [['Catégorie', guide.tag], ['Prénom', prénom], ['Nom', nom], ['Email', email], ['Guide envoyé', guide.title], ['Consentement', GUIDE_CONSENT_TEXT], ['Enregistré dans le Sheet', recorded ? 'oui' : 'NON, à saisir à la main'], ['Référence', `guide_requests #${reqId}`]]),
+    replyTo: email,
+    to,
+    fromEmail: NOTIFY_FROM,
+    fromName: 'Immobilière Pujol — Guides gestion locative',
+  }).catch(() => ({ ok: false }));
+  const [zoho, caroline] = [await leadMail(ZOHO_PARSER), await leadMail(`carolinepujol${D}`)];
+  const lead = { ok: zoho.ok && caroline.ok };
+  await updateGuideRequest(env, reqId, 'sent', recorded, lead.ok);
+  if (!recorded) console.error('guide: consent row not written, see D1 guide_requests id', reqId);
+  if (!lead.ok) console.error('guide: lead email to Zoho or Caroline failed', guide.tag, zoho.ok, caroline.ok);
+  return { ok: true, recorded };
 }
 
 async function handleContactAnnonce(fd: FormData, env: Env, ctx: ExecutionContext): Promise<{ ok: boolean; error?: string }> {
@@ -1924,6 +2075,11 @@ export default {
       case '/contact-annonce':
         result = await handleContactAnnonce(fd, env, ctx);
         break;
+      case '/guide': {
+        const g = await handleGuide(fd, env, origin);
+        if (!g.ok) return jsonErr(g.error || 'Erreur', g.status || 400, origin, env);
+        return jsonOk({ ok: true }, origin, env);
+      }
       case '/newsletter':
         result = await handleNewsletter(fd, env, ctx, origin);
         break;

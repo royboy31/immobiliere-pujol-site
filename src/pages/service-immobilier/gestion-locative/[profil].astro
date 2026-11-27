@@ -1,0 +1,219 @@
+---
+export const prerender = true;
+// The 4 gestion locative profile pages (Caroline's design, approved 27/11), nested under the landing.
+// Copy parsed from their markdown, nothing rewritten; every list point is shown (Caroline 16/11).
+// Their markdown entries are not built as /services/ pages (see services/[slug].astro).
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PropositionForm from '../../../components/lp/PropositionForm.astro';
+import { getEntry } from 'astro:content';
+import { KEY_FIGURES, PROFILES, sectionFor } from '../../../lib/lp-proposition';
+import LpCtas from '../../../components/lp/LpCtas.astro';
+import GuideDownload from '../../../components/lp/GuideDownload.astro';
+import { parseProfile, quoteSpans } from '../../../lib/profile-blocks';
+import { LP_PHOTOS as ph, posStyle } from '../../../lib/lp-photos';
+
+export function getStaticPaths() {
+  return PROFILES.map((p) => ({ params: { profil: p.slug } }));
+}
+
+const card = PROFILES.find((p) => p.slug === Astro.params.profil)!;
+const hero = ph[`${card.slug}-hero`];
+const entry = (await getEntry('services', card.service)) ?? (await getEntry('services', `services/${card.service}`));
+const prof = parseProfile(entry?.body ?? '');
+// Caroline 19/11 video: no 3-card "Ce n'est pas votre situation ?" block, just a link to the copropriétaire page.
+const allGuides = [...(card.guides ?? []), ...PROFILES.filter((p) => p !== card).flatMap((p) => p.guides ?? [])];
+const copro = card.slug === 'coproprietaire' ? undefined : PROFILES.find((p) => p.slug === 'coproprietaire');
+const pics = card.pics.map((_, i) => ph[`${card.slug}-s${i + 1}`]); // own photos per page, never the landing page's (Caroline 18/11)
+let picIdx = 0;
+const nextPic = () => pics[picIdx++ % pics.length];
+const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and anchors for this section
+---
+
+<BaseLayout title={entry?.data.seoTitle || prof.title} description={entry?.data.seoDescription || card.question} preloadImage={hero.src}>
+  <div class={`mag prop prop--${card.color}`}>
+
+    <section class="prop-hero prop-hero--profile">
+      <img class="prop-hero__img" src={hero.src} style={posStyle(hero, true)} alt="" loading="eager" fetchpriority="high" width={hero.w} height={hero.h} />
+      <div class="prop-hero__inner">
+        <p class="mag-eyebrow mag-eyebrow--light">{card.kicker}</p>
+        <h1 class="mag-h1">{prof.title}</h1>
+        {prof.lead && <p class="prop-hero__sub">{prof.lead}</p>}
+      </div>
+    </section>
+
+    <section class="prop-figures" aria-label="Nos chiffres clés">
+      <ul class="mag-wrap prop-figures__list">
+        {KEY_FIGURES.map((f) => (
+          <li>
+            <span class="prop-figures__pre">{f.pre || "\u00a0"}</span>
+            <span class="prop-figures__value">{f.value}</span>
+            <span class="prop-figures__label">{f.label}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {prof.bullets.length === 0 && (
+      <section class="prop-section prop-section--tight"><div class="mag-wrap"><LpCtas ctas={card.heroCtas} center /></div></section>
+    )}
+
+    {prof.bullets.length > 0 && (
+      <section class="prop-section prop-section--tight">
+        <div class="mag-wrap">
+          <div class="prop-lead">
+            <div>
+              {prof.sub && <p class="prop-lead__text">{prof.sub}</p>}
+              <LpCtas ctas={card.heroCtas} />
+            </div>
+            <ul class="prop-checks">{prof.bullets.map((b) => <li>{b}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {prof.blocks.map((b, bi) => {
+      if (b.kind === 'compare') return (
+        <section class="prop-section prop-section--paper" id={sec(b.title)?.id}>
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
+            <div class="prop-ba">
+              <div class="prop-ba__col prop-ba__col--before">
+                <p class="prop-ba__tag">{b.before.title}</p>
+                <ul>{b.before.items.map((t) => <li>{t}</li>)}</ul>
+              </div>
+              <div class="prop-ba__col prop-ba__col--after">
+                <p class="prop-ba__tag">{b.after.title}</p>
+                <ul>{b.after.items.map((t) => <li>{t}</li>)}</ul>
+              </div>
+            </div>
+            <LpCtas ctas={sec(b.title)?.ctas} center />
+          </div>
+        </section>
+      );
+      if (b.kind === 'timeline') return (
+        <section class="prop-section prop-section--ink" id={sec(b.title)?.id}>
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
+            <ol class="prop-timeline">
+              {b.items.map((t, i) => <li><span>{i + 1}</span><p>{t}</p></li>)}
+            </ol>
+            <LpCtas ctas={sec(b.title)?.ctas} center />
+          </div>
+        </section>
+      );
+      if (b.kind === 'steps') return (
+        <section class="prop-section" id={sec(b.title)?.id}>
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
+            <ol class="prop-path">
+              {b.steps.map((s, i) => (
+                <li>
+                  <span class="prop-path__num">{i + 1}</span>
+                  <h3 class="prop-path__title">{s.name}</h3>
+                  <details class="prop-more"><summary>Le détail</summary><p>{s.text}</p></details>
+                </li>
+              ))}
+            </ol>
+            <LpCtas ctas={sec(b.title)?.ctas} center />
+          </div>
+        </section>
+      );
+      if (b.kind === 'offer') return (
+        <section class="prop-section prop-section--accent" id={sec(b.title)?.id}>
+          <div class="mag-wrap prop-offer">
+            <h2 class="mag-h2" set:html={quoteSpans(b.title)} />
+            {b.paras.map((p) => <p class="prop-offer__p">{p}</p>)}
+            <ul class="prop-checks prop-offer__list">{b.items.map((t) => <li>{t}</li>)}</ul>
+            <LpCtas ctas={sec(b.title)?.ctas} />
+          </div>
+        </section>
+      );
+      if (b.kind === 'closing') return (
+        <section class="prop-section prop-section--paper" id={sec(b.title)?.id}>
+          <div class="mag-wrap prop-closing">
+            <h2 class="mag-h2 prop-center" set:html={quoteSpans(b.title)} />
+            {b.paras.map((p) => <p set:html={quoteSpans(p)} />)}
+            <LpCtas ctas={sec(b.title)?.ctas} center />
+          </div>
+        </section>
+      );
+      const pic = nextPic();
+      const keeps = b.groups.filter((g) => g.title);
+      if (keeps.length >= 2) return (
+        <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`} id={sec(b.title)?.id}>
+          <div class="mag-wrap">
+            <h2 class="mag-h2 prop-center prop-keeps__h" set:html={quoteSpans(b.title)} />
+            <figure class="prop-keeps__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            {b.groups.filter((g) => !g.title).map((g) => g.paras.map((t) => <p class="prop-intro">{t}</p>))}
+            <div class="prop-keeps">
+              {keeps.map((g, gi) => (
+                <div class={`prop-tile prop-tile--${(gi % 3) + 1}`}>
+                  <h3 class="prop-keeps__title">{g.title}</h3>
+                  {g.paras.map((t) => <p>{t}</p>)}
+                  <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+            <LpCtas ctas={sec(b.title)?.ctas} center />
+          </div>
+        </section>
+      );
+      const plain = b.groups.filter((g) => !g.title);
+      return (
+        <section class={`prop-section${bi % 2 ? ' prop-section--paper' : ''}`} id={sec(b.title)?.id}>
+          <div class={`mag-wrap prop-split${bi % 2 ? ' prop-split--rev' : ''}${keeps.length ? ' prop-split--keep' : ''}`}>
+            <figure class="prop-split__photo"><img class="lp-pos" src={pic.src} style={posStyle(pic)} alt="" loading="lazy" width={pic.w} height={pic.h} /></figure>
+            <div class="prop-split__text">
+              <h2 class="mag-h2" set:html={quoteSpans(b.title)} />
+              {plain.map((g) => (
+                <div>
+                  {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
+                  <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
+                </div>
+              ))}
+            </div>
+            {keeps.length > 0 && (
+              <div class="prop-split__keeps">
+                {keeps.map((g) => (
+                  <div class="prop-keep">
+                    <p class="prop-keep__title">{g.title}</p>
+                    {g.paras.map((p) => <p class="prop-intro">{p}</p>)}
+                    <ul class="prop-checks">{g.items.map((t) => <li>{t}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div class="mag-wrap"><LpCtas ctas={sec(b.title)?.ctas} center /></div>
+        </section>
+      );
+    })}
+
+    {/* Caroline 27/11: every gestion guide on every gestion profile page, own profile's guides first */}
+    {allGuides.length > 0 && <GuideDownload guides={allGuides} />}
+
+    {prof.faq.length > 0 && (
+      <section class="prop-section">
+        <div class="mag-wrap prop-faq">
+          <h2 class="mag-h2 prop-center">Questions fréquentes</h2>
+          {prof.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+          <LpCtas ctas={sec('FAQ')?.ctas} center />
+        </div>
+      </section>
+    )}
+
+    <section class="prop-section prop-section--paper">
+      <div class="mag-wrap">
+        {copro && (
+          <div class="prop-copro-cta">
+            <h2 class="mag-h3">Votre bien se trouve dans une copropriété que nous gérons en tant que syndic ?</h2>
+            <p class="mag-actions"><a class="mag-btn" href={`/service-immobilier/gestion-locative/${copro.slug}/`}>{copro.kicker}</a></p>
+          </div>
+        )}
+        <p class="prop-center prop-back"><a class="prop-link" href="/service-immobilier/gestion-locative/">← Retour à la gestion locative</a></p>
+      </div>
+    </section>
+  </div>
+
+  <PropositionForm />
+</BaseLayout>

@@ -1,0 +1,343 @@
+// ============================================
+// LP Gestion locative, layout proposal v2 (10/11/2026)
+// Scoped under .prop (always together with .mag): used only by
+// /service-immobilier/gestion-locative-proposition/ and its 4 profile pages.
+// Brand colours: Pujol green, orange and slate, one per block.
+// ============================================
+$p-ink:    rgb(38, 42, 44);
+$p-green:  rgb(178, 197, 79);   // #B2C54F
+$p-orange: rgb(253, 127, 36);   // #FD7F24
+$p-slate:  rgb(85, 102, 111);   // #55666f
+$p-sand:   rgb(244, 233, 214);
+$p-paper:  rgb(246, 244, 239);
+$p-green-soft:  rgb(236, 242, 210);
+$p-orange-soft: rgb(255, 232, 214);
+$p-slate-soft:  rgb(226, 232, 235);
+
+.prop-center { text-align: center; margin-left: auto !important; margin-right: auto !important; }
+.prop-section { padding: 96px 0;
+  &--tight { padding: 64px 0; }
+  &--paper { background: $p-paper; }
+  &--green { background: $p-green-soft; }
+  &--accent { background: $p-orange-soft; }
+  &--ink { background: $p-ink; color: rgba(255, 255, 255, .88);
+    .mag-h2 { color: #fff; }
+  }
+  .mag-h2.prop-center { margin-bottom: 56px; }
+  @media (max-width: $bp-tablet) { padding: 64px 0; .mag-h2.prop-center { margin-bottom: 36px; } }
+}
+.prop-link { font-weight: 600; color: $p-ink; text-decoration: none; border-bottom: 2px solid $p-green;
+  &:hover { border-color: $p-ink; }
+}
+
+// Framing set in the admin (lp-photos): --pos on desktop, --pos-m on phone. Hero uses --hero-pos*.
+.lp-pos { object-position: var(--pos, 50% 50%);
+  @media (max-width: $bp-tablet) { object-position: var(--pos-m, var(--pos, 50% 50%)); } }
+
+// ---------- hero: big photo, big title, nothing else ----------
+.prop-hero { position: relative; isolation: isolate; min-height: 78vh; display: flex; align-items: flex-end; color: #fff;
+  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; object-position: var(--hero-pos, 50% 50%);
+    @media (max-width: $bp-tablet) { object-position: var(--hero-pos-mobile, 50% 78%); } }
+  &::before { content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(20, 22, 24, .15) 0%, rgba(20, 22, 24, .7) 100%); }
+  &__inner { max-width: $mag-wrap; width: 100%; margin: 0 auto; padding: 140px 40px 72px;
+    @media (max-width: $bp-tablet) { padding: 110px 22px 48px; } }
+  .mag-h1 { color: #fff; max-width: 20ch; }
+  &__sub { font-size: 20px; line-height: 1.5; max-width: 52ch; margin-top: 20px; color: rgba(255, 255, 255, .94); font-weight: 500; }
+  &--profile { min-height: 64vh; }
+  &--profile .mag-h1 { font-size: clamp(36px, 4.4vw, 58px); }
+  // Desktop (Roy 17/11): header + photo + key figures fit the first screen, photo never above 60 % of it.
+  // 208px = site header and breadcrumb, 170px = the figures band below plus a small margin.
+  @media (min-width: #{$bp-tablet + 1px}) {
+    &, &--profile { min-height: clamp(300px, calc(100svh - 208px - 170px), 60svh); }
+    &__inner { padding: 36px 40px 36px; }
+    .mag-h1, &--profile .mag-h1 { font-size: clamp(34px, 3.4vw, 48px); max-width: 28ch; }
+    .mag-eyebrow { margin-bottom: 10px; }
+    &__sub { font-size: 18px; margin-top: 12px; max-width: 60ch; }
+    .mag-actions { margin-top: 22px; }
+  }
+  // Phone: no tall empty band above the title, so the first key figure shows on the first screen.
+  @media (max-width: $bp-tablet) {
+    &, &--profile { min-height: 0; }
+    &__inner { padding: 56px 22px 32px; }
+  }
+}
+
+// ---------- key figures: white on dark, very large ----------
+.prop-figures { background: $p-ink; color: #fff; padding: 48px 0;
+  &__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center;
+    @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 28px; } }
+  li { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  li + li { border-left: 1px solid rgba(255, 255, 255, .18);
+    @media (max-width: $bp-tablet) { border-left: 0; border-top: 1px solid rgba(255, 255, 255, .18); padding-top: 24px; } }
+  &__pre { font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: $p-green; font-weight: 600; }
+  &__value { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(48px, 5vw, 68px); line-height: 1; color: #fff; }
+  &__label { font-size: 16.5px; color: rgba(255, 255, 255, .9); max-width: 26ch; }
+  @media (min-width: #{$bp-tablet + 1px}) { padding: 22px 0;
+    li { gap: 2px; }
+    &__pre { font-size: 12.5px; }
+    &__value { font-size: clamp(38px, 3.4vw, 48px); }
+    &__label { font-size: 15px; max-width: 40ch; }
+  }
+}
+
+// ---------- profile cubes: one colour each ----------
+.prop-cubes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  &--3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 1100px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+.prop-cube { display: flex; flex-direction: column; height: 100%; border-radius: 6px; overflow: hidden; text-decoration: none; color: $p-ink;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06); transition: transform .2s, box-shadow .2s;
+  img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .35s;
+    @media (max-width: 600px) { aspect-ratio: 16 / 7; } }
+  &__body { display: flex; flex-direction: column; gap: 10px; padding: 26px 24px 28px; flex: 1;
+    @media (max-width: 600px) { padding: 18px 20px 20px; gap: 6px; } }
+  // same title height in every card (3 lines on desktop) so the questions and links line up
+  &__kicker { font-family: $ds-font-serif; font-weight: 600; font-size: 26px; line-height: 1.15; min-height: 3.45em;
+    @media (max-width: 1100px) { min-height: 2.3em; }
+    @media (max-width: 600px) { min-height: 0; } }
+  &__q { font-size: 16.5px; line-height: 1.45; }
+  // reads as a link: underlined label, arrow slides on hover
+  &__more { margin-top: auto; padding-top: 14px; font-weight: 700; font-size: 15px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 5px; }
+  &--green  { background: $p-green; }
+  &--orange { background: $p-orange; }
+  &--slate  { background: $p-slate; }
+  &--sand   { background: $p-sand; }
+  &--slate, &--slate:hover { color: #fff; }
+  // the site-wide a:hover would turn the whole card text dark green: keep each card's own colour
+  &:hover { color: $p-ink; transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .14); }
+  &:hover img { transform: scale(1.04); }
+  &:hover .prop-cube__more { text-decoration-thickness: 3px; }
+  &:focus-visible { outline: 3px solid $p-ink; outline-offset: 4px; }
+}
+
+// ---------- 3 promise tiles ----------
+.prop-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; } }
+.prop-tile { background: #fff; border-radius: 6px; padding: 36px 32px; border-top: 6px solid $p-green;
+  &--2 { border-top-color: $p-orange; }
+  &--3 { border-top-color: $p-slate; }
+  &__icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: $p-green-soft; font-size: 24px; font-weight: 700; color: $p-ink; margin-bottom: 20px; }
+  &--2 .prop-tile__icon { background: $p-orange-soft; }
+  &--3 .prop-tile__icon { background: $p-slate-soft; }
+  p { margin-top: 12px !important; font-size: 16.5px; }
+}
+
+// ---------- 5 steps as short cards ----------
+.prop-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; counter-reset: s;
+  @media (max-width: 1100px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; } }
+.prop-step { position: relative; display: flex; flex-direction: column; gap: 12px; background: $p-paper; border-radius: 6px; overflow: hidden; padding-bottom: 24px;
+  img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  // number sits in the text, never on the photo (it used to land on faces)
+  &__num { display: block; margin: 8px 20px -4px; font-family: $ds-font-serif; font-weight: 700; font-size: 34px; line-height: 1; color: $p-orange; }
+  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 21px; line-height: 1.2; color: $p-ink; margin: 0 20px; }
+  p, .prop-link { margin: 0 20px !important; font-size: 15.5px; line-height: 1.5; }
+  .prop-link { margin-top: auto !important; align-self: flex-start; }
+}
+
+// ---------- proof ----------
+.prop-proof { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 32px; }
+  &__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; }
+  &__figure { margin: 28px 0 !important; font-size: 18px;
+    b { display: block; font-family: $ds-font-serif; font-size: clamp(56px, 6vw, 80px); line-height: 1; color: $p-ink; } }
+}
+.prop-checks { display: grid; gap: 12px;
+  li { position: relative; padding-left: 34px; }
+  li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; background: $p-green; color: $p-ink;
+    font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+}
+// Orange-tinted blocks: orange disc with a white tick (Caroline 16/11: green on orange clashes).
+.prop-section--accent .prop-checks li::before,
+.prop-keep .prop-checks li::before { background: $p-orange; color: #fff; }
+
+// ---------- guides: compact grid of foldable rubrics ----------
+.prop-guides { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  details { background: #fff; border-radius: 6px; border: 1px solid transparent; transition: border-color .2s, box-shadow .2s; }
+  details:hover, details[open] { border-color: $p-green; box-shadow: 0 6px 18px rgba(0, 0, 0, .06); }
+  // one fixed height per rubric (fits 2 lines) so every row of the grid is even
+  summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 12px; min-height: 86px; padding: 14px 20px; font-weight: 600; color: $p-ink;
+    > span { flex: none; margin-left: auto; min-width: 28px; height: 28px; border-radius: 14px; background: $p-green-soft; display: grid; place-items: center; font-size: 13px; }
+    // chevron: shows the rubric opens
+    &::after { content: ''; flex: none; width: 9px; height: 9px; margin: -4px 2px 0 0; border-right: 2px solid $p-ink; border-bottom: 2px solid $p-ink; transform: rotate(45deg); transition: transform .2s; }
+    &::-webkit-details-marker { display: none; }
+    &:hover { color: $p-ink; }
+    &:focus-visible { outline: 3px solid $p-orange; outline-offset: 2px; } }
+  details[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+  details[open] summary > span { background: $p-green; }
+  details ul { padding: 4px 20px 18px; display: grid; gap: 10px; font-size: 15px; border-top: 1px solid $p-paper; padding-top: 14px; }
+  // article links look like links: underlined, darker green on hover
+  details a { color: $p-ink; text-decoration: underline; text-decoration-color: $p-green; text-decoration-thickness: 2px; text-underline-offset: 4px;
+    &:hover { color: $color-link-hover; text-decoration-color: currentColor; } }
+}
+
+// ---------- final ----------
+.prop-final { position: relative; isolation: isolate; color: #fff; text-align: center;
+  &__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  &::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(20, 22, 24, .62); }
+  &__inner { padding: 120px 40px; .mag-h2 { color: #fff; margin: 0 auto; } .mag-h2 em { color: $p-green; } }
+}
+
+// ---------- profile pages ----------
+.prop-intro { font-size: 18px; line-height: 1.6; max-width: 62ch; margin: 0 auto 28px !important; text-align: center; }
+.prop-split .prop-intro { text-align: left; margin: 16px 0 !important; }
+// intro: sentence on the left, one tidy list on the right (balanced whatever the number of points)
+.prop-lead { display: grid; grid-template-columns: 1fr 1.25fr; gap: 64px; align-items: center;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 24px; }
+  &--solo { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+  &__text { font-family: $ds-font-serif; font-weight: 600; font-size: clamp(24px, 2.3vw, 31px); line-height: 1.3; color: $p-ink; margin: 0 !important; }
+  .prop-checks { gap: 0; }
+  .prop-checks li { padding: 15px 0 15px 36px; border-bottom: 1px solid rgba(0, 0, 0, .1); font-size: 16.5px; line-height: 1.5; color: $p-ink; }
+  .prop-checks li:last-child { border-bottom: 0; }
+  .prop-checks li::before { top: 16px; }
+}
+.prop-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  &__col { border-radius: 6px; padding: 36px 34px;
+    ul { display: grid; gap: 14px; }
+    li { position: relative; padding-left: 32px; }
+    li::before { position: absolute; left: 0; top: 0; font-weight: 700; } }
+  &__col--before { background: #fff; li::before { content: '✕'; color: $p-orange; } }
+  &__col--after { background: $p-slate; color: #fff; li::before { content: '✓'; color: $p-green; } summary { color: #fff; } }
+  &__tag { font-family: $ds-font-serif; font-weight: 600; font-size: 26px; margin-bottom: 20px !important; }
+}
+.prop-more { margin-top: 14px;
+  summary { cursor: pointer; font-weight: 600; font-size: 15px; text-decoration: underline; text-underline-offset: 3px; }
+  > ul, > p { margin-top: 12px !important; }
+}
+.prop-timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: $p-green; color: $p-ink;
+    font-family: $ds-font-serif; font-weight: 700; font-size: 24px; margin-bottom: 18px; }
+  p { font-size: 16px; line-height: 1.55; }
+}
+.prop-path { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px;
+  li { background: $p-paper; border-radius: 6px; padding: 24px 20px; border-top: 5px solid $p-orange; }
+  li:nth-child(even) { border-top-color: $p-green; }
+  &__num { font-family: $ds-font-serif; font-weight: 700; font-size: 34px; line-height: 1; color: $p-orange; }
+  li:nth-child(even) .prop-path__num { color: rgb(120, 136, 40); }
+  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 21px; line-height: 1.2; color: $p-ink; margin: 10px 0 0; }
+  .prop-more p { font-size: 15px; line-height: 1.55; }
+}
+// text on one side; photo with the orange "you keep control" box under it on the other, so both
+// columns end near the same height. Without an orange box the text is centred against the photo.
+.prop-split { display: grid; grid-template-columns: 1.2fr 1fr; column-gap: 64px; row-gap: 24px; align-items: center;
+  grid-template-areas: "text photo";
+  &--rev { grid-template-columns: 1fr 1.2fr; grid-template-areas: "photo text"; }
+  &--keep { align-items: start; grid-template-rows: auto 1fr; grid-template-areas: "text photo" "text keep"; }
+  &--keep.prop-split--rev { grid-template-areas: "photo text" "keep text"; }
+  @media (max-width: $bp-tablet) { &, &--rev, &--keep, &--keep.prop-split--rev { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "photo" "text" "keep"; row-gap: 24px; } }
+  &__photo { grid-area: photo; margin: 0; }
+  &__text { grid-area: text; }
+  &__keeps { grid-area: keep; display: grid; gap: 16px; align-content: start; }
+  &__photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; display: block; }
+  .prop-checks { margin-top: 24px; }
+}
+.prop-keep { background: $p-orange-soft; border-radius: 6px; padding: 22px 24px;
+  .prop-checks { margin-top: 12px; }
+  &__title { font-weight: 700; color: $p-ink; }
+}
+.prop-keeps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  &__h { max-width: 30ch; margin-left: auto !important; margin-right: auto !important; }
+  &__photo { margin: 36px 0 0; img { width: 100%; aspect-ratio: 21 / 8; object-fit: cover; border-radius: 6px; display: block;
+    @media (max-width: 600px) { aspect-ratio: 16 / 9; } } }
+  &__title { font-family: $ds-font-serif; font-weight: 600; font-size: 24px; line-height: 1.2; color: $p-ink; margin: 0 0 18px; }
+  .prop-tile { @media (max-width: 600px) { padding: 24px 20px; } }
+  .prop-section--paper & .prop-tile { background: #fff; }
+  .prop-section:not(.prop-section--paper) & .prop-tile { background: $p-paper; }
+}
+.prop-offer { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 24px; }
+  &__p { margin-top: 18px !important; font-size: 18px; }
+}
+.prop-closing { text-align: center; p { max-width: 64ch; margin: 0 auto !important; font-size: 18px; } }
+.prop-faq { max-width: 860px;
+  details { border-bottom: 1px solid rgba(0, 0, 0, .12); padding: 18px 0; }
+  summary { cursor: pointer; font-weight: 600; font-size: 18px; color: $p-ink; }
+  p { margin-top: 10px !important; }
+}
+.prop-back { margin-top: 36px !important; }
+
+// ---------- Caroline's CTAs under the sections (19/11) ----------
+.prop .prop-section[id] { scroll-margin-top: 110px; }
+.prop-ctas { margin-top: 36px; }
+// "CTA texte / discret" from the Doc: a soft pill with a round arrow (Caroline 19/11: no underlined text).
+.prop-cta-text { margin: 28px 0 0; font-size: 16px; line-height: 1.5;
+  .prop-link { display: inline-flex; align-items: center; gap: 12px; margin: 6px 0 0;
+    padding: 10px 10px 10px 22px; border: 0; border-radius: 999px; background: $p-green; color: $p-ink;
+    font-weight: 600; font-size: 15px; line-height: 1.3; text-align: left; text-decoration: none;
+    box-shadow: inset 0 0 0 1.5px rgba($p-ink, .08); transition: background .2s, box-shadow .2s, transform .2s;
+    &::after { content: '→'; flex: none; display: grid; place-items: center; width: 32px; height: 32px;
+      border-radius: 50%; background: $p-ink; color: #fff; font-size: 15px; transition: transform .2s; }
+    &:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 6px 18px rgba($p-ink, .16);
+      &::after { transform: translateX(3px); } }
+    &:focus-visible { outline: 2px solid $p-ink; outline-offset: 3px; } }
+  .prop-section--ink & .prop-link:hover { background: #fff; } }
+
+// ---------- guides to download (Je gère seul, 19/11): one always-visible form per guide ----------
+.prop-guidedl { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  @media (max-width: $bp-tablet) { grid-template-columns: 1fr; }
+  &__card { scroll-margin-top: 110px; display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start; background: #fff; border-radius: 10px; padding: 24px;
+    img { width: 150px; height: auto; border-radius: 4px; box-shadow: 0 8px 24px rgba($p-ink, .14); }
+    @media (max-width: 520px) { grid-template-columns: 1fr; img { width: 140px; } } }
+  &__title { margin: 0 0 10px; font-size: 24px; line-height: 1.2; color: $p-ink; } // Caroline 27/11: titles were too small
+  // Roy 27/11: the guide's promise must read at a glance to push the download:
+  // dark, semi-bold, larger, with an orange bar instead of the light grey body text.
+  &__body > p { margin: 0 0 18px; padding-left: 14px; border-left: 4px solid $p-orange;
+    font-size: 17px; line-height: 1.5; font-weight: 600; color: $p-ink; max-width: 36ch; }
+  &__form { display: grid; gap: 12px; }
+  &__email { display: grid; gap: 6px; font-weight: 600; font-size: 14px;
+    input { font: inherit; font-weight: 400; padding: 11px 14px; border: 1.5px solid rgba($p-ink, .25); border-radius: 8px; } }
+  &__names { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; @media (max-width: 420px) { grid-template-columns: 1fr; } }
+  &__legal { margin: 0; font-size: 11.5px; line-height: 1.45; color: rgba($p-ink, .7); a { color: inherit; text-decoration: underline; } }
+  &__consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; line-height: 1.45;
+    input { margin-top: 2px; width: 18px; height: 18px; flex: none; accent-color: $p-ink; } }
+  &__form .mag-btn { justify-self: start; padding: 12px 22px; font-size: 14.5px; }
+  &__msg { margin: 0; font-size: 14px; font-weight: 600; color: $p-ink; min-height: 1em; a { color: inherit; } }
+}
+
+// ---------- Caroline video review 19/11 (Je gère seul, same logic on the 4 profiles) ----------
+// Secondary buttons are coloured too (dark), white on hover.
+.prop .mag-btn--line { background: $p-ink; border-color: $p-ink; color: #fff;
+  &:hover { background: #fff; color: $p-ink; border-color: $p-ink; } }
+// The hero CTA now sits under the sentence of the first white block.
+.prop-lead .prop-ctas { margin-top: 28px; }
+// Words that were between quotation marks in a title: underlined instead.
+.prop-q { text-decoration: underline; text-decoration-color: $p-green; text-decoration-thickness: .12em; text-underline-offset: .14em; }
+.mag-h2 { line-height: 1.2; }
+// Diagnostic block: title and sentence first, then the points, then the button.
+.prop-offer { grid-template-columns: 1fr; gap: 0; max-width: 980px; margin: 0 auto;
+  .prop-offer__p { max-width: 62ch; }
+  &__list { margin-top: 28px !important; display: grid; grid-template-columns: repeat(2, 1fr); column-gap: 40px; row-gap: 14px;
+    @media (max-width: $bp-tablet) { grid-template-columns: 1fr; } }
+  .prop-ctas { margin-top: 32px; } }
+// Final block: a dark panel with air, instead of a cramped centred paragraph.
+.prop-closing { background: $p-ink; color: #fff; border-radius: 12px; padding: 72px 56px; max-width: 1040px;
+  .mag-h2 { color: #fff; margin-bottom: 28px !important; }
+  p { color: rgba(#fff, .88); font-size: 19px; line-height: 1.7; max-width: 60ch; }
+  p.prop-ctas { margin-top: 40px !important; max-width: none; }
+  // secondary on the dark panel: coloured (orange), white only on hover (Caroline 19/11)
+  .mag-btn--line { background: $p-orange; border-color: $p-orange; color: $p-ink; &:hover { background: #fff; border-color: #fff; color: $p-ink; } }
+  @media (max-width: $bp-tablet) { padding: 48px 24px; p { font-size: 17px; } } }
+// Split block with the orange "Vous restez décisionnaire" box: photo runs along the whole list,
+// the box goes full width underneath so it is clearly seen.
+.prop-split--keep { align-items: stretch; grid-template-rows: auto auto; grid-template-areas: "text photo" "keep keep";
+  &.prop-split--rev { grid-template-areas: "photo text" "keep keep"; }
+  .prop-split__photo img { height: 100%; min-height: 320px; aspect-ratio: auto; }
+  .prop-split__keeps { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 16px; }
+  .prop-keep { padding: 28px 32px; border-left: 6px solid $p-orange; }
+  .prop-keep__title { font-family: $ds-font-serif; font-size: 24px; font-weight: 600; }
+  @media (max-width: $bp-tablet) { grid-template-areas: "photo" "text" "keep"; &.prop-split--rev { grid-template-areas: "photo" "text" "keep"; }
+    .prop-split__photo img { height: auto; min-height: 0; aspect-ratio: 4 / 3; } } }
+
+// "Votre bien se trouve dans une copropriété…" (replaces the 3 other-profile cards, Caroline 19/11)
+.prop-copro-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+  background: $p-sand; border-radius: 12px; padding: 36px 40px;
+  .mag-h3 { margin: 0; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25; max-width: 30ch; }
+  .mag-actions { margin: 0; }
+  @media (max-width: $bp-tablet) { padding: 28px 22px; } }
+.prop-section:not(.prop-section--paper) .prop-guidedl__card { background: $p-paper; }
