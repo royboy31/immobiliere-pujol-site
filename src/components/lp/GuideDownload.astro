@@ -5,7 +5,7 @@
 // the guide's CRM tag and notifies Gaëlle. Consent wording must match GUIDE_CONSENT_TEXT in workers/email.
 import type { Guide } from '../../lib/lp-proposition';
 interface Props { guides: Guide[]; title?: string; id?: string; paper?: boolean }
-const { guides, title = 'Nos guides à télécharger', id = 'guides', paper = true } = Astro.props;
+const { guides, title = 'Nos guides sur la gestion locative à télécharger', id = 'guides', paper = true } = Astro.props;
 const CONSENT = "J'accepte de recevoir gratuitement ce guide ainsi que d'autres conseils, ressources et informations sur la gestion locative de la part de l'Immobilière Pujol.";
 ---
 <section class={`prop-section${paper ? ' prop-section--paper' : ''}`} id={id}>
