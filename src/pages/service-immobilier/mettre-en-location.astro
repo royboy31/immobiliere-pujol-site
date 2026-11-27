@@ -73,7 +73,7 @@ const guides = RENTING.map((id) => GUIDE_SECTIONS.find((g) => g.id === id)!).map
 const BRIDGE = '/services/si-vous-souhaitez-nous-confier-uniquement-la-location-de-votre-appartement/';
 ---
 
-<BaseLayout title={seoTitle} description={seoDescription} preloadImage={heroImage}>
+<BaseLayout title={seoTitle} description={seoDescription} preloadImage={heroImage} breadcrumbCrumbs={[{ label: 'Gestion locative', href: GESTION }, { label: 'Mettre en location', href: null }]}>
   <div class="mag prop">
 
     <section class="prop-hero">
