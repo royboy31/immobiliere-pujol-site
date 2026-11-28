@@ -235,6 +235,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
     var filter = function () { var c = document.querySelector('input[name="obs-rooms"]:checked'); return c ? c.value : 'all'; };
     var state = { q: { code: null, pinned: false, link: null }, a: { code: null, pinned: false, link: null } };
     var mobile = window.matchMedia('(max-width: 900px)');
+    var restoring = false;
 
     function render(kind) {
       var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
@@ -276,12 +277,12 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
       if (box) { box.hidden = true; box.innerHTML = ''; }
       document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.remove('is-active'); });
       var link = st.link; st.code = null; st.pinned = false; st.link = null;
-      if (restoreFocus && link) link.focus();
+      if (restoreFocus && link) { restoring = true; link.focus(); restoring = false; } // focus back without reopening
     }
     document.querySelectorAll('[data-panel]').forEach(function (link) {
       var kind = link.getAttribute('data-panel');
       link.addEventListener('mouseenter', function () { if (!mobile.matches) show(kind, link, false); });
-      link.addEventListener('focus', function () { state[kind].pinned = false; show(kind, link, false); }); // keyboard: the focused zone always shows
+      link.addEventListener('focus', function () { if (restoring) return; state[kind].pinned = false; show(kind, link, false); }); // keyboard: the focused zone always shows
       link.addEventListener('click', function (e) { e.preventDefault(); state[kind].pinned = false; show(kind, link, true); });
     });
     document.addEventListener('keydown', function (e) {
