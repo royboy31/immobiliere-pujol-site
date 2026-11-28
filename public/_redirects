@@ -20,3 +20,20 @@
 /agence-immobiliere/ /agence-immobiliere-marseille/ 301
 /mentions-legales /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301
 /mentions-legales/ /agence-immobiliere-marseille-gestion-locative-et-syndic/mentions-legales-immobiliere-pujol/ 301
+
+# Gestion release follow-up (Codex table RESEARCH/PUJOL_GESTION_REDIRECT_DECISIONS_2026_11_28.md, 28/11):
+# sources 404 on prod, targets 200 + self-canonical. Both slash forms so every source is one hop.
+/services/deleguer-gestion-locative-marseille /service-immobilier/gestion-locative/je-gere-seul/ 301
+/services/deleguer-gestion-locative-marseille/ /service-immobilier/gestion-locative/je-gere-seul/ 301
+/services/changer-agence-gestion-locative-marseille /service-immobilier/gestion-locative/deja-en-agence/ 301
+/services/changer-agence-gestion-locative-marseille/ /service-immobilier/gestion-locative/deja-en-agence/ 301
+/services/premiere-mise-en-location-marseille /service-immobilier/gestion-locative/premiere-location/ 301
+/services/premiere-mise-en-location-marseille/ /service-immobilier/gestion-locative/premiere-location/ 301
+/services/coproprietaire-syndic-gestion-locative-marseille /service-immobilier/gestion-locative/coproprietaire/ 301
+/services/coproprietaire-syndic-gestion-locative-marseille/ /service-immobilier/gestion-locative/coproprietaire/ 301
+/experts/ines-gestion-locative/amp /experts/ines-gestion-locative/ 301
+/experts/ines-gestion-locative/amp/ /experts/ines-gestion-locative/ 301
+/services/le-prix-au-m2-des-charges-nos-immeubles-a-marseille /services/le-prix-au-m2-des-charges-de-nos-immeubles-a-marseille/ 301
+/services/le-prix-au-m2-des-charges-nos-immeubles-a-marseille/ /services/le-prix-au-m2-des-charges-de-nos-immeubles-a-marseille/ 301
+/la-loi-elan-a-simplifie-casse-tete-gestion-petites-coproprietes /la-loi-elan-a-simplifie-le-casse-tete-de-la-gestion-des-petites-coproprietes/ 301
+/la-loi-elan-a-simplifie-casse-tete-gestion-petites-coproprietes/ /la-loi-elan-a-simplifie-le-casse-tete-de-la-gestion-des-petites-coproprietes/ 301
