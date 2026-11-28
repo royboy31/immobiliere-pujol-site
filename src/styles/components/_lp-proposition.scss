@@ -439,3 +439,35 @@ $p-slate-soft:  rgb(226, 232, 235);
     th, td { white-space: normal; padding: 10px 8px; }
     thead th { font-size: 11px; } }
 }
+
+// Side panel on the maps (Roy 28/11). JS only: without JS the panel stays hidden and the tables carry everything.
+.obs-explore { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px; align-items: start; max-width: 1200px;
+  @media (max-width: 900px) { grid-template-columns: minmax(0, 1fr); } }
+.obs-map a.is-active .obs-area { stroke: $p-ink; stroke-width: 3; }
+.obs-map a.is-active .obs-area--q { stroke-width: 2.2; }
+.obs-panel { background: #fff; border-radius: 12px; border: 1px solid rgba($p-ink, .1); box-shadow: 0 10px 30px rgba($p-ink, .12);
+  padding: 22px 22px 20px; position: sticky; top: 110px; font-size: 15px; min-width: 0;
+  &[hidden] { display: none; }
+  &.is-pinned { border-color: $p-ink; }
+  &__close { position: absolute; top: 10px; right: 12px; border: 0; background: none; font-size: 26px; line-height: 1; cursor: pointer; color: $p-ink; padding: 4px 8px; }
+  &__eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: rgba($p-ink, .65); margin: 0 28px 8px 0; }
+  &__title { font-size: 24px; line-height: 1.2; margin: 0; }
+  &__sub { margin: 4px 0 14px; color: rgba($p-ink, .65); }
+  &__none { font-style: italic; color: rgba($p-ink, .7); margin: 8px 0 16px; }
+  &__big { display: flex; flex-direction: column; gap: 4px; margin: 0 0 14px; padding: 12px 14px; background: $p-green-soft; border-radius: 8px;
+    span { font-size: 13px; } strong { font-size: 28px; line-height: 1.1; } }
+  &__all { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 14px;
+    div { min-width: 0; } dt { font-size: 12px; color: rgba($p-ink, .65); } dd { margin: 2px 0 0; font-weight: 700; } }
+  &__rooms { width: 100%; border-collapse: collapse; font-size: 13px;
+    caption { text-align: left; font-weight: 600; padding-bottom: 6px; }
+    th, td { padding: 6px 4px; border-bottom: 1px solid $p-paper; text-align: right; }
+    th:first-child { text-align: left; }
+    thead th { font-size: 11px; text-transform: uppercase; color: rgba($p-ink, .65); }
+    tr.is-current { background: $p-orange-soft; font-weight: 700; } }
+  &__actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+  &__row { color: $p-ink; text-decoration: underline; text-decoration-color: $p-green; text-underline-offset: 3px; }
+  &--inline { position: static; margin-top: 24px; }
+  // Mobile: bottom sheet.
+  @media (max-width: 900px) {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 60; max-height: 72vh; overflow-y: auto;
+    border-radius: 16px 16px 0 0; margin: 0; } }

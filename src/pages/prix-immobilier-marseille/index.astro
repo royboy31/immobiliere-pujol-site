@@ -7,7 +7,7 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ARRONDISSEMENT_SHAPES, MAP_VIEWBOX } from '../../data/marseille-arrondissements-map';
 import { QUARTIER_SHAPES } from '../../data/marseille-quartiers-map';
-import { QUARTIERS, QUARTIER_ROOMS, QUARTIERS_COVERAGE } from '../../data/observatoire-quartiers';
+import { QUARTIERS, QUARTIER_ROOMS, QUARTIERS_COVERAGE, QUARTIERS_PERIOD } from '../../data/observatoire-quartiers';
 import { NA, ROOM_LABELS, eur, findRow, latestEdition, periodLabel, type RoomCategory } from '../../data/observatoire';
 
 const edition = latestEdition();
@@ -55,6 +55,24 @@ const quartiers = QUARTIER_SHAPES.map((s) => ({ ...s, q: qByCode.get(s.code) }))
 const qStyle = (code: string) => OPTIONS.map((o) => `--f-${o.key}: ${qFills[o.key](qOpt(code, o.key)?.medianM2)}`).join('; ');
 const byArr = arrondissements.map((a) => ({ ...a, quartiers: quartiers.filter((x) => x.arr === a.code).sort((x, y) => x.name.localeCompare(y.name, 'fr')) }));
 
+// Side panel (Roy 28/11: hover the map → details). Same figures as the tables, nothing recomputed.
+const ROOM_KEYS = Object.keys(ROOM_LABELS) as RoomCategory[];
+const pick = (r?: { medianM2?: number; medianPrice?: number; medianSurface?: number; share?: number; sales?: number }) =>
+  r ? { m2: r.medianM2, price: r.medianPrice, surf: r.medianSurface, share: r.share, sales: r.sales } : undefined;
+const qPeriod = `${new Date(QUARTIERS_PERIOD.start + 'T00:00:00Z').toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' })} – ${new Date(QUARTIERS_PERIOD.end + 'T00:00:00Z').toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' })}`;
+const aPeriod = edition ? `${new Date(edition.periodStart + 'T00:00:00Z').toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' })} – ${new Date(edition.periodEnd + 'T00:00:00Z').toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' })}` : '';
+const panelData = {
+  rooms: ROOM_KEYS.map((k) => [k, ROOM_LABELS[k]]),
+  q: Object.fromEntries(quartiers.map((x) => [x.code, {
+    name: x.name, sub: `Marseille ${ord(Number(x.arr.slice(3)))} (${x.arr})`, row: `q${x.code}`, period: qPeriod,
+    all: pick(qOpt(x.code, 'all') as any), byRoom: Object.fromEntries(ROOM_KEYS.map((k) => [k, pick(qOpt(x.code, k) as any)])),
+  }])),
+  a: Object.fromEntries(arrondissements.map((a) => [a.code, {
+    name: a.label, sub: a.code, row: `a${a.code}`, period: aPeriod,
+    all: pick(a.byOpt.all), byRoom: Object.fromEntries(ROOM_KEYS.map((k) => [k, pick(a.byOpt[k])])),
+  }])),
+};
+
 const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
 const CONSEILLER = '/contact-immobiliere-pujol/';
 const title = 'Prix immobilier à Marseille : prix au m² par arrondissement';
@@ -97,10 +115,11 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
               <label><input type="radio" name="obs-rooms" id={`obs-${o.key}`} value={o.key} checked={i === 0} /> <span>{o.label}</span></label>
             ))}
           </fieldset>
-        <div class="obs-qmap-wrap">
+        <div class="obs-qmap-wrap obs-explore">
+          <div class="obs-explore__map">
           <svg class="obs-map obs-map--q" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 111 quartiers de Marseille">
             {quartiers.map((x) => (
-              <a href={`#q${x.code}`} aria-label={`${x.name} (${x.arr}) : voir les prix du quartier`}>
+              <a href={`#q${x.code}`} data-panel="q" data-code={x.code} aria-label={`${x.name} (${x.arr}) : voir les prix du quartier`}>
                 <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name} ({x.arr})</title></path>
               </a>
             ))}
@@ -111,6 +130,8 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
             {[0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)}
             <li><span class="obs-sw obs-sw--na"></span>{NA}</li>
           </ul>
+          </div>
+          <aside class="obs-panel" data-panel-box="q" aria-label="Détail du quartier" hidden></aside>
         </div>
         <div class="obs-qlist">
           {byArr.map((a) => (
@@ -149,10 +170,11 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
               ? [0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)
               : <li><span class="obs-sw obs-sw--na"></span>{NA}</li>}
           </ul>
+          <aside class="obs-panel obs-panel--inline" data-panel-box="a" aria-label="Détail de l'arrondissement" hidden></aside>
         </div>
         <svg class="obs-map" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 16 arrondissements de Marseille">
           {arrondissements.map((a) => (
-            <a href={`#a${a.code}`} aria-label={`${a.label} : voir les prix de l'arrondissement`}>
+            <a href={`#a${a.code}`} data-panel="a" data-code={a.code} aria-label={`${a.label} : voir les prix de l'arrondissement`}>
               <path class="obs-area" style={areaStyle(a)} d={a.d}><title>{a.label}</title></path>
               <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>
             </a>
@@ -201,4 +223,72 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
     </section>
 
   </div>
+  <script type="application/json" id="obs-panel-data" set:html={JSON.stringify(panelData)} />
+  <script is:inline define:vars={{ NA, ESTIMATION }}>
+  (function () {
+    var dataEl = document.getElementById('obs-panel-data');
+    if (!dataEl) return;
+    var D = JSON.parse(dataEl.textContent);
+    var eur = function (n) { return n.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + '\u00a0€'; };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var na = '<span class="obs-na">' + NA + '</span>';
+    var filter = function () { var c = document.querySelector('input[name="obs-rooms"]:checked'); return c ? c.value : 'all'; };
+    var state = { q: { code: null, pinned: false, link: null }, a: { code: null, pinned: false, link: null } };
+    var mobile = window.matchMedia('(max-width: 900px)');
+
+    function render(kind) {
+      var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
+      if (!box || !st.code) return;
+      var it = D[kind][st.code], f = filter();
+      var cur = f === 'all' ? it.all : it.byRoom[f];
+      var curLabel = f === 'all' ? 'Toutes tailles' : (D.rooms.find(function (r) { return r[0] === f; }) || [, ''])[1];
+      var none = !it.all || !it.all.m2;
+      var h = '<button type="button" class="obs-panel__close" aria-label="Fermer le détail">×</button>';
+      h += '<p class="obs-panel__eyebrow">Analyse Immobilière Pujol · ' + esc(it.period) + '</p>';
+      h += '<h3 class="obs-panel__title">' + esc(it.name) + '</h3><p class="obs-panel__sub">' + esc(it.sub) + '</p>';
+      if (none) {
+        h += '<p class="obs-panel__none">Donnée non disponible pour cette période.</p>';
+      } else {
+        h += '<p class="obs-panel__big"><span>Prix médian au m², ' + esc(curLabel.toLowerCase()) + '</span><strong>' + (cur && cur.m2 ? eur(cur.m2) : na) + '</strong></p>';
+        h += '<dl class="obs-panel__all"><div><dt>Prix médian</dt><dd>' + (it.all.price ? eur(it.all.price) : na) + '</dd></div><div><dt>Surface médiane</dt><dd>' + (it.all.surf ? it.all.surf + '\u00a0m²' : na) + '</dd></div><div><dt>Ventes analysées</dt><dd>' + (it.all.sales ? it.all.sales.toLocaleString('fr-FR') : na) + '</dd></div></dl>';
+        h += '<table class="obs-panel__rooms"><caption>Par nombre de pièces</caption><thead><tr><th scope="col">Taille</th><th scope="col">€/m²</th><th scope="col">Prix</th><th scope="col">Surface</th><th scope="col">Part</th></tr></thead><tbody>';
+        D.rooms.forEach(function (r) {
+          var v = it.byRoom[r[0]] || {};
+          h += '<tr' + (f === r[0] ? ' class="is-current"' : '') + '><th scope="row">' + esc(r[1]) + '</th><td>' + (v.m2 ? eur(v.m2) : na) + '</td><td>' + (v.price ? eur(v.price) : na) + '</td><td>' + (v.surf ? v.surf + '\u00a0m²' : na) + '</td><td>' + (v.share !== undefined && v.share !== null ? v.share.toLocaleString('fr-FR') + '\u00a0%' : na) + '</td></tr>';
+        });
+        h += '</tbody></table>';
+      }
+      h += '<div class="obs-panel__actions"><a class="mag-btn" href="' + ESTIMATION + '">Estimer mon bien</a><a class="obs-panel__row" href="#' + it.row + '">Voir dans le tableau</a></div>';
+      box.innerHTML = h;
+      box.hidden = false;
+      box.classList.toggle('is-pinned', st.pinned);
+      box.querySelector('.obs-panel__close').addEventListener('click', function () { close(kind, true); });
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.toggle('is-active', l.getAttribute('data-code') === st.code); });
+    }
+    function show(kind, link, pin) {
+      var st = state[kind];
+      if (st.pinned && !pin && st.code !== link.getAttribute('data-code')) return; // a pinned panel stays until closed or another click
+      st.code = link.getAttribute('data-code'); st.link = link; if (pin) st.pinned = true;
+      render(kind);
+    }
+    function close(kind, restoreFocus) {
+      var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
+      if (box) { box.hidden = true; box.innerHTML = ''; }
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.remove('is-active'); });
+      var link = st.link; st.code = null; st.pinned = false; st.link = null;
+      if (restoreFocus && link) link.focus();
+    }
+    document.querySelectorAll('[data-panel]').forEach(function (link) {
+      var kind = link.getAttribute('data-panel');
+      link.addEventListener('mouseenter', function () { if (!mobile.matches) show(kind, link, false); });
+      link.addEventListener('focus', function () { state[kind].pinned = false; show(kind, link, false); }); // keyboard: the focused zone always shows
+      link.addEventListener('click', function (e) { e.preventDefault(); state[kind].pinned = false; show(kind, link, true); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      ['q', 'a'].forEach(function (k) { if (state[k].code) close(k, true); });
+    });
+    document.querySelectorAll('input[name="obs-rooms"]').forEach(function (r) { r.addEventListener('change', function () { render('q'); render('a'); }); });
+  })();
+  </script>
 </BaseLayout>
