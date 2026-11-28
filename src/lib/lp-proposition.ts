@@ -61,6 +61,14 @@ const FORM = '#form';
 const norm = (s: string) => s.normalize('NFC').replace(/[\u2018\u2019]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase();
 export const sectionFor = (card: ProfileCard, title: string) => card.sections.find((s) => norm(title).startsWith(norm(s.match)));
 
+// Short page names for the breadcrumb (Roy 28/11: Accueil > Gestion locative > short name).
+export const PROFILE_SHORT_NAMES: Record<string, string> = {
+  'deja-en-agence': 'Changer d’agence',
+  'je-gere-seul': 'Je gère seul',
+  'premiere-location': 'Première location',
+  'coproprietaire': 'Copropriétaire',
+};
+
 export const PROFILES: ProfileCard[] = [
   { slug: 'deja-en-agence', service: 'changer-agence-gestion-locative-marseille', kicker: 'Je suis déjà en agence', question: 'Déçu de votre agence actuelle ?', color: 'green', img: { src: IMG + 'p-agence.webp', w: 1024, h: 683 }, heroPos: '50% 18%', heroPosMobile: '68% 40%', pics: [{ src: IMG + 's-agence-1.webp', w: 1024, h: 683 }, { src: IMG + 's-agence-2.webp', w: 1024, h: 683 }], heroCtas: [{ label: 'Discuter avec notre expert et envisager le changement d’agence', href: CONSEILLER }], sections: [
     { match: 'Avant / après', ctas: [{ label: 'Voir comment d’autres bailleurs ont amélioré leur gestion en changeant d’agence', href: '#preuves', style: 'text' }] },
