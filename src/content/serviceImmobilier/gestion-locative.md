@@ -2,8 +2,8 @@
 title: "Gestion Locative à Marseille"
 slug: "gestion-locative"
 ctaText: 'Obtenir mon devis de gestion locative'
-seoTitle: "Gestion Locative à Marseille"
-seoDescription: "Pour la gestion locative de votre appartement ou maison, choisissez une agence recommandée par ses clients . L'immobilière vous accompagnera avec plaisir dans votre projet immobilier à Marseille"
+seoTitle: "Gestion locative à Marseille : tarifs et devis"
+seoDescription: "Gestion locative à Marseille à partir de 3,75 % HT : sélection du locataire, loyers versés à date fixe, assurance loyers impayés à 1,8 % TTC. Devis en 24 h."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
