@@ -1,0 +1,186 @@
+---
+// Observatoire: one page per arrondissement (quote PWS-PUJ-20261123-01, staging 28/11).
+// Same data as /prix-immobilier-marseille/ (src/data/observatoire*.ts), nothing recomputed:
+// the arrondissement's figures and size breakdown, its quartiers on a zoomed map with the side panel,
+// and the quartier table. Label "Analyse Immobilière Pujol", never the source's name.
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PanelScript from '../../components/observatoire/PanelScript.astro';
+import { ARRONDISSEMENT_SHAPES } from '../../data/marseille-arrondissements-map';
+import { QUARTIER_SHAPES } from '../../data/marseille-quartiers-map';
+import { QUARTIERS, QUARTIER_ROOMS, QUARTIERS_PERIOD } from '../../data/observatoire-quartiers';
+import { NA, ROOM_LABELS, eur, findRow, latestEdition, type RoomCategory } from '../../data/observatoire';
+
+export function getStaticPaths() {
+  return ARRONDISSEMENT_SHAPES.map((a) => ({ params: { arr: a.code } }));
+}
+
+const code = Astro.params.arr as string;
+const shape = ARRONDISSEMENT_SHAPES.find((a) => a.code === code)!;
+const ord = (n: number) => (n === 1 ? '1er' : `${n}e`);
+const label = `Marseille ${ord(shape.num)}`;
+const edition = latestEdition();
+const monthYear = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+const period = `${monthYear(QUARTIERS_PERIOD.start)} – ${monthYear(QUARTIERS_PERIOD.end)}`;
+
+const ROOM_KEYS = Object.keys(ROOM_LABELS) as RoomCategory[];
+const OPTIONS: { key: string; rooms?: RoomCategory; label: string }[] = [
+  { key: 'all', label: 'Toutes tailles' },
+  ...ROOM_KEYS.map((k) => ({ key: k, rooms: k, label: ROOM_LABELS[k] })),
+];
+const flat = findRow(edition, code, 'appartement_ancien');
+const byRoom = Object.fromEntries(ROOM_KEYS.map((k) => [k, findRow(edition, code, 'appartement_ancien', k)]));
+
+// Quartiers of this arrondissement. Colour scale = the city-wide scale of the main page, so colours
+// mean the same thing on every page.
+const qByCode = new Map(QUARTIERS.map((q) => [q.code, q]));
+const qOpt = (c: string, key: string) => {
+  const q = qByCode.get(c);
+  if (key === 'all') return q?.published ? q : undefined;
+  return QUARTIER_ROOMS.find((r) => r.code === c && r.rooms === key);
+};
+const SCALE = ['rgb(236, 242, 210)', 'rgb(214, 226, 160)', 'rgb(190, 207, 108)', 'rgb(150, 168, 60)', 'rgb(104, 120, 36)'];
+const NA_FILL = 'rgb(226, 226, 222)';
+const qFills = Object.fromEntries(OPTIONS.map((o) => {
+  const vals = QUARTIERS.map((q) => qOpt(q.code, o.key)?.medianM2).filter((v): v is number => typeof v === 'number');
+  const min = Math.min(...vals), max = Math.max(...vals);
+  return [o.key, (v?: number) => (v === undefined ? NA_FILL : SCALE[Math.min(4, Math.floor(((v - min) / Math.max(1, max - min)) * 5))])];
+}));
+const qStyle = (c: string) => OPTIONS.map((o) => `--f-${o.key}: ${qFills[o.key](qOpt(c, o.key)?.medianM2)}`).join('; ');
+const quartiers = QUARTIER_SHAPES.filter((s) => s.arr === code).sort((x, y) => x.name.localeCompare(y.name, 'fr'));
+const published = quartiers.filter((x) => qByCode.get(x.code)?.published).length;
+
+// Zoomed viewBox: bounding box of this arrondissement's quartiers (+ margin), same projection.
+const pts = quartiers.flatMap((x) => [...x.d.matchAll(/(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/g)].map((m) => [Number(m[1]), Number(m[2])]));
+const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+const pad = 12;
+const minX = Math.min(...xs) - pad, minY = Math.min(...ys) - pad;
+const viewBox = `${minX} ${minY} ${Math.max(...xs) - minX + pad} ${Math.max(...ys) - minY + pad}`;
+
+const pick = (r?: { medianM2?: number; medianPrice?: number; medianSurface?: number; share?: number; sales?: number }) =>
+  r ? { m2: r.medianM2, price: r.medianPrice, surf: r.medianSurface, share: r.share, sales: r.sales } : undefined;
+const panelData = {
+  rooms: ROOM_KEYS.map((k) => [k, ROOM_LABELS[k]]),
+  q: Object.fromEntries(quartiers.map((x) => [x.code, {
+    name: x.name, sub: `${label} (${code})`, row: `q${x.code}`, period,
+    all: pick(qOpt(x.code, 'all') as any), byRoom: Object.fromEntries(ROOM_KEYS.map((k) => [k, pick(qOpt(x.code, k) as any)])),
+  }])),
+  a: {},
+};
+
+const others = ARRONDISSEMENT_SHAPES.filter((a) => a.code !== code);
+const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
+const CONSEILLER = '/contact-immobiliere-pujol/';
+const title = `Prix immobilier ${label} (${code}) : prix au m² par quartier`;
+const description = `Prix médian au m² des appartements anciens à ${label} (${code}), par quartier et par nombre de pièces : ${period}. Analyse Immobilière Pujol.`;
+---
+
+<BaseLayout title={`${title} – Immobilière Pujol`} description={description} breadcrumbCrumbs={[{ label: 'Prix immobilier à Marseille', href: '/prix-immobilier-marseille/' }, { label, href: null }]}>
+  <div class="mag prop obs">
+
+    <section class="obs-hero">
+      <div class="mag-wrap">
+        <p class="mag-eyebrow">Observatoire des prix · Analyse Immobilière Pujol · {period}</p>
+        <h1 class="mag-h1">Prix immobilier à {label}</h1>
+        <p class="obs-lead">
+          {flat?.medianM2
+            ? <>Le prix médian au m² d'un appartement ancien à {label} ({code}) est de <strong>{eur(flat.medianM2)}</strong> (ventes de {period}).</>
+            : <>{NA} pour cette période.</>}
+        </p>
+        <p class="obs-coverage">Prix publiés pour <strong>{published} quartiers sur {quartiers.length}</strong> dans cet arrondissement ; les autres sont indiqués « {NA} ».</p>
+        <ul class="obs-figures">
+          <li><span class="obs-figures__label">Appartement ancien, prix médian au m²</span><span class="obs-figures__value">{flat?.medianM2 ? eur(flat.medianM2) : NA}</span></li>
+          <li><span class="obs-figures__label">Appartement ancien, prix médian de vente</span><span class="obs-figures__value">{flat?.medianPrice ? eur(flat.medianPrice) : NA}</span></li>
+          <li><span class="obs-figures__label">Surface médiane</span><span class="obs-figures__value">{flat?.medianSurface ? `${flat.medianSurface} m²` : NA}</span></li>
+          <li><span class="obs-figures__label">Ventes analysées</span><span class="obs-figures__value">{flat?.sales ? flat.sales.toLocaleString('fr-FR') : NA}</span></li>
+        </ul>
+        <div class="mag-actions">
+          <a class="mag-btn" href={ESTIMATION}>Estimer mon bien</a>
+          <a class="mag-btn mag-btn--line" href={CONSEILLER}>Contacter un conseiller</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section" id="tailles">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Les prix à {label} par <em>nombre de pièces</em></h2>
+        <div class="obs-table-wrap">
+          <table class="obs-table">
+            <caption>Appartements anciens, ventes de {period}. Analyse Immobilière Pujol.</caption>
+            <thead><tr><th scope="col">Taille</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Part des ventes</th></tr></thead>
+            <tbody>
+              {ROOM_KEYS.map((k) => { const v = byRoom[k]; return (
+                <tr>
+                  <th scope="row">{ROOM_LABELS[k]}</th>
+                  <td>{v?.medianM2 ? eur(v.medianM2) : <span class="obs-na">{NA}</span>}</td>
+                  <td>{v?.medianPrice ? eur(v.medianPrice) : <span class="obs-na">{NA}</span>}</td>
+                  <td>{v?.medianSurface ? `${v.medianSurface} m²` : <span class="obs-na">{NA}</span>}</td>
+                  <td>{v?.share !== undefined ? `${v.share.toLocaleString('fr-FR')} %` : <span class="obs-na">{NA}</span>}</td>
+                </tr>
+              ); })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="quartiers">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Les quartiers du <em>{ord(shape.num)} arrondissement</em></h2>
+        <fieldset class="obs-filter">
+          <legend>Nombre de pièces</legend>
+          {OPTIONS.map((o, i) => (
+            <label><input type="radio" name="obs-rooms" id={`obs-${o.key}`} value={o.key} checked={i === 0} /> <span>{o.label}</span></label>
+          ))}
+        </fieldset>
+        <div class="obs-qmap-wrap obs-explore">
+          <div class="obs-explore__map">
+            <svg class="obs-map obs-map--q" viewBox={viewBox} role="img" aria-label={`Carte des ${quartiers.length} quartiers de ${label}`}>
+              {quartiers.map((x) => (
+                <a href={`#q${x.code}`} data-panel="q" data-code={x.code} aria-controls="obs-panel-q" aria-expanded="false" aria-label={`${x.name} : voir les prix du quartier`}>
+                  <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name}</title></path>
+                </a>
+              ))}
+              <path class="obs-arr-line" d={shape.d} />
+            </svg>
+            <ul class="obs-legend" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)}
+              <li><span class="obs-sw obs-sw--na"></span>{NA}</li>
+            </ul>
+          </div>
+          <aside class="obs-panel" id="obs-panel-q" tabindex="-1" data-panel-box="q" aria-label="Détail du quartier" hidden></aside>
+        </div>
+        <div class="obs-table-wrap">
+          <table class="obs-table">
+            <caption>Appartements anciens, ventes de {period}. Analyse Immobilière Pujol.</caption>
+            <thead><tr><th scope="col">Quartier</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Ventes <span class="obs-th-note">(part, par taille)</span></th></tr></thead>
+            <tbody>
+              {quartiers.map((x) => (
+                <tr id={`q${x.code}`}>
+                  <th scope="row">{x.name}</th>
+                  <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianM2 ? eur(v.medianM2) : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                  <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianPrice ? eur(v.medianPrice) : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                  <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianSurface ? `${v.medianSurface} m²` : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                  <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key) as any; return <span class={`obs-v obs-v--${o.key}`}>{o.key === 'all' ? (v?.sales ? v.sales.toLocaleString('fr-FR') : <span class="obs-na">{NA}</span>) : (v?.share !== undefined ? `${v.share.toLocaleString('fr-FR')} % des ventes` : <span class="obs-na">{NA}</span>)}</span>; })}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="obs-intro"><a href="/prix-immobilier-marseille/#methodologie">Méthodologie et limites de lecture</a> · <a href={`/arrondissement/${code}/`}>Biens à vendre à {label}</a></p>
+      </div>
+    </section>
+
+    <section class="prop-section" id="autres">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Les autres <em>arrondissements</em></h2>
+        <ul class="obs-arr-links">
+          <li><a href="/prix-immobilier-marseille/">Tout Marseille</a></li>
+          {others.map((a) => <li><a href={`/prix-immobilier-marseille/${a.code}/`}>Marseille {ord(a.num)}</a></li>)}
+        </ul>
+      </div>
+    </section>
+
+  </div>
+  <PanelScript panelData={panelData} NA={NA} ESTIMATION={ESTIMATION} />
+</BaseLayout>

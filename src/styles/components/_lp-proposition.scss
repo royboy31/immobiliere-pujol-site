@@ -472,3 +472,9 @@ $p-slate-soft:  rgb(226, 232, 235);
   @media (max-width: 900px) {
     position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 60; max-height: 72vh; overflow-y: auto;
     border-radius: 16px 16px 0 0; margin: 0; } }
+
+// Arrondissement pages (28/11): zoomed quartier map keeps thin borders; links to the other arrondissements.
+.obs-map--q path { vector-effect: non-scaling-stroke; }
+.obs-arr-links { list-style: none; padding: 0; margin: 24px auto 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 900px;
+  a { display: inline-block; padding: 8px 14px; border-radius: 999px; border: 1.5px solid rgba($p-ink, .25); background: #fff; color: $p-ink; text-decoration: none; font-size: 14px; }
+  a:hover, a:focus-visible { border-color: $p-ink; } }

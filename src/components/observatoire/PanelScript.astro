@@ -1,0 +1,76 @@
+---
+// Side panel for the observatoire maps (Roy 28/11): hover/focus previews, click/tap pins, Esc/× closes.
+// panelData = { rooms, q: {code: {...}}, a: {code: {...}} } built by the page from the same data as its tables.
+interface Props { panelData: unknown; NA: string; ESTIMATION: string }
+const { panelData, NA, ESTIMATION } = Astro.props;
+---
+  <script type="application/json" id="obs-panel-data" set:html={JSON.stringify(panelData)} />
+  <script is:inline define:vars={{ NA, ESTIMATION }}>
+  (function () {
+    var dataEl = document.getElementById('obs-panel-data');
+    if (!dataEl) return;
+    var D = JSON.parse(dataEl.textContent);
+    var eur = function (n) { return n.toLocaleString('fr-FR', { maximumFractionDigits: 0 }) + '\u00a0€'; };
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var na = '<span class="obs-na">' + NA + '</span>';
+    var filter = function () { var c = document.querySelector('input[name="obs-rooms"]:checked'); return c ? c.value : 'all'; };
+    var state = { q: { code: null, pinned: false, link: null }, a: { code: null, pinned: false, link: null } };
+    var mobile = window.matchMedia('(max-width: 900px)');
+    var restoring = false;
+
+    function render(kind) {
+      var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
+      if (!box || !st.code) return;
+      var it = D[kind][st.code], f = filter();
+      var cur = f === 'all' ? it.all : it.byRoom[f];
+      var curLabel = f === 'all' ? 'Toutes tailles' : (D.rooms.find(function (r) { return r[0] === f; }) || [, ''])[1];
+      var none = !it.all || !it.all.m2;
+      var h = '<button type="button" class="obs-panel__close" aria-label="Fermer le détail">×</button>';
+      h += '<p class="obs-panel__eyebrow">Analyse Immobilière Pujol · ' + esc(it.period) + '</p>';
+      h += '<h3 class="obs-panel__title">' + esc(it.name) + '</h3><p class="obs-panel__sub">' + esc(it.sub) + '</p>';
+      if (none) {
+        h += '<p class="obs-panel__none">Donnée non disponible pour cette période.</p>';
+      } else {
+        h += '<p class="obs-panel__big"><span>Prix médian au m², ' + esc(curLabel.toLowerCase()) + '</span><strong>' + (cur && cur.m2 ? eur(cur.m2) : na) + '</strong></p>';
+        h += '<p class="obs-panel__label">Toutes tailles</p><dl class="obs-panel__all"><div><dt>Prix médian</dt><dd>' + (it.all.price ? eur(it.all.price) : na) + '</dd></div><div><dt>Surface médiane</dt><dd>' + (it.all.surf ? it.all.surf + '\u00a0m²' : na) + '</dd></div><div><dt>Ventes analysées</dt><dd>' + (it.all.sales ? it.all.sales.toLocaleString('fr-FR') : na) + '</dd></div></dl>';
+        h += '<table class="obs-panel__rooms"><caption>Par nombre de pièces</caption><thead><tr><th scope="col">Taille</th><th scope="col">€/m²</th><th scope="col">Prix</th><th scope="col">Surface</th><th scope="col">Part</th></tr></thead><tbody>';
+        D.rooms.forEach(function (r) {
+          var v = it.byRoom[r[0]] || {};
+          h += '<tr' + (f === r[0] ? ' class="is-current"' : '') + '><th scope="row">' + esc(r[1]) + '</th><td>' + (v.m2 ? eur(v.m2) : na) + '</td><td>' + (v.price ? eur(v.price) : na) + '</td><td>' + (v.surf ? v.surf + '\u00a0m²' : na) + '</td><td>' + (v.share !== undefined && v.share !== null ? v.share.toLocaleString('fr-FR') + '\u00a0%' : na) + '</td></tr>';
+        });
+        h += '</tbody></table>';
+      }
+      h += '<div class="obs-panel__actions"><a class="mag-btn" href="' + ESTIMATION + '">Estimer mon bien</a><a class="obs-panel__row" href="#' + it.row + '">Voir dans le tableau</a>' + (it.page ? '<a class="obs-panel__row" href="' + it.page + '">' + esc(it.pageLabel) + '</a>' : '') + '</div>';
+      box.innerHTML = h;
+      box.hidden = false;
+      box.classList.toggle('is-pinned', st.pinned);
+      box.querySelector('.obs-panel__close').addEventListener('click', function () { close(kind, true); });
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { var on = l.getAttribute('data-code') === st.code; l.classList.toggle('is-active', on); l.setAttribute('aria-expanded', on ? 'true' : 'false'); });
+    }
+    function show(kind, link, pin) {
+      var st = state[kind];
+      if (st.pinned && !pin && st.code !== link.getAttribute('data-code')) return; // a pinned panel stays until closed or another click
+      var other = kind === 'q' ? 'a' : 'q'; if (state[other].code) close(other, false); // one panel at a time
+      st.code = link.getAttribute('data-code'); st.link = link; if (pin) st.pinned = true;
+      render(kind);
+    }
+    function close(kind, restoreFocus) {
+      var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
+      if (box) { box.hidden = true; box.innerHTML = ''; }
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.remove('is-active'); l.setAttribute('aria-expanded', 'false'); });
+      var link = st.link; st.code = null; st.pinned = false; st.link = null;
+      if (restoreFocus && link) { restoring = true; link.focus(); restoring = false; } // focus back without reopening
+    }
+    document.querySelectorAll('[data-panel]').forEach(function (link) {
+      var kind = link.getAttribute('data-panel');
+      link.addEventListener('mouseenter', function () { if (!mobile.matches) show(kind, link, false); });
+      link.addEventListener('focus', function () { if (restoring) return; state[kind].pinned = false; show(kind, link, false); }); // keyboard: the focused zone always shows
+      link.addEventListener('click', function (e) { e.preventDefault(); state[kind].pinned = false; show(kind, link, true); if (e.detail === 0) { var box = document.querySelector('[data-panel-box="' + kind + '"]'); if (box) box.focus(); } }); // keyboard Enter: jump into the details
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      ['q', 'a'].forEach(function (k) { if (state[k].code) close(k, true); });
+    });
+    document.querySelectorAll('input[name="obs-rooms"]').forEach(function (r) { r.addEventListener('change', function () { render('q'); render('a'); }); });
+  })();
+  </script>
