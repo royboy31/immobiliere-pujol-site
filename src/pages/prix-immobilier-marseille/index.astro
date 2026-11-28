@@ -100,8 +100,8 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         <div class="obs-qmap-wrap">
           <svg class="obs-map obs-map--q" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 111 quartiers de Marseille">
             {quartiers.map((x) => (
-              <a href={`#q${x.code}`} aria-label={`${x.name} : ${x.q?.published && x.q.medianM2 ? eur(x.q.medianM2) + ' au m²' : NA}`}>
-                <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name} ({x.arr}) : {x.q?.published && x.q.medianM2 ? `${eur(x.q.medianM2)} au m²` : NA}</title></path>
+              <a href={`#q${x.code}`} aria-label={`${x.name} (${x.arr}) : voir les prix du quartier`}>
+                <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name} ({x.arr})</title></path>
               </a>
             ))}
             {ARRONDISSEMENT_SHAPES.map((a) => <path class="obs-arr-line" d={a.d} />)}
@@ -152,8 +152,8 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         </div>
         <svg class="obs-map" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 16 arrondissements de Marseille">
           {arrondissements.map((a) => (
-            <a href={`#a${a.code}`} aria-label={`${a.label} : ${a.flat?.medianM2 ? eur(a.flat.medianM2) + ' au m²' : NA}`}>
-              <path class="obs-area" style={areaStyle(a)} d={a.d}><title>{a.label} : {a.flat?.medianM2 ? `${eur(a.flat.medianM2)} au m²` : NA}</title></path>
+            <a href={`#a${a.code}`} aria-label={`${a.label} : voir les prix de l'arrondissement`}>
+              <path class="obs-area" style={areaStyle(a)} d={a.d}><title>{a.label}</title></path>
               <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>
             </a>
           ))}
