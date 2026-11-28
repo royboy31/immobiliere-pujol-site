@@ -417,3 +417,17 @@ $p-slate-soft:  rgb(226, 232, 235);
 .obs:has(#obs-3p:checked) { .obs-area { fill: var(--f-3p); } .obs-v--all { display: none; } .obs-v--3p { display: inline; } }
 .obs:has(#obs-4p:checked) { .obs-area { fill: var(--f-4p); } .obs-v--all { display: none; } .obs-v--4p { display: inline; } }
 .obs:has(#obs-5p:checked) { .obs-area { fill: var(--f-5p); } .obs-v--all { display: none; } .obs-v--5p { display: inline; } }
+
+// Quartier level (Roy 28/11: main entry of the observatoire)
+.obs-coverage { margin: -14px 0 24px; font-size: 15px; color: rgba($p-ink, .8); }
+.obs-intro { max-width: 60ch; }
+#quartiers .obs-filter { justify-content: center; margin: 24px auto 0; legend { text-align: center; } }
+.obs-qmap-wrap { max-width: 860px; margin: 28px auto 0; .obs-legend { justify-content: center; } }
+.obs-area--q { stroke: #fff; stroke-width: .8; }
+.obs-arr-line { fill: none; stroke: $p-ink; stroke-width: 2; pointer-events: none; opacity: .55; }
+.obs-qlist { margin-top: 40px; display: grid; gap: 10px;
+  details { background: #fff; border-radius: 8px; border: 1px solid rgba($p-ink, .08); }
+  summary { cursor: pointer; padding: 16px 20px; font-weight: 600; }
+  details[open] summary { border-bottom: 1px solid $p-paper; }
+  .obs-table-wrap { margin: 0; }
+  tbody tr:target { background: $p-orange-soft; } }

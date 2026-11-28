@@ -6,6 +6,8 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ARRONDISSEMENT_SHAPES, MAP_VIEWBOX } from '../../data/marseille-arrondissements-map';
+import { QUARTIER_SHAPES } from '../../data/marseille-quartiers-map';
+import { QUARTIERS, QUARTIER_ROOMS, QUARTIERS_COVERAGE } from '../../data/observatoire-quartiers';
 import { NA, ROOM_LABELS, eur, findRow, latestEdition, periodLabel, type RoomCategory } from '../../data/observatoire';
 
 const edition = latestEdition();
@@ -37,6 +39,22 @@ const fills = Object.fromEntries(OPTIONS.map((o) => {
 const values = arrondissements.map((a) => a.flat?.medianM2).filter((v): v is number => typeof v === 'number');
 const areaStyle = (a: (typeof arrondissements)[number]) => OPTIONS.map((o) => `--f-${o.key}: ${fills[o.key](a.byOpt[o.key]?.medianM2)}`).join('; ');
 
+// Quartier level (main entry, Roy 28/11): 111 official quartiers; unpublished ones stay grey and say so.
+const qByCode = new Map(QUARTIERS.map((q) => [q.code, q]));
+const qOpt = (code: string, key: string) => {
+  const q = qByCode.get(code);
+  if (key === 'all') return q?.published ? q : undefined;
+  return QUARTIER_ROOMS.find((r) => r.code === code && r.rooms === key);
+};
+const qFills = Object.fromEntries(OPTIONS.map((o) => {
+  const vals = QUARTIERS.map((q) => qOpt(q.code, o.key)?.medianM2).filter((v): v is number => typeof v === 'number');
+  const min = Math.min(...vals), max = Math.max(...vals);
+  return [o.key, (v?: number) => (v === undefined ? NA_FILL : SCALE[Math.min(4, Math.floor(((v - min) / Math.max(1, max - min)) * 5))])];
+}));
+const quartiers = QUARTIER_SHAPES.map((s) => ({ ...s, q: qByCode.get(s.code) }));
+const qStyle = (code: string) => OPTIONS.map((o) => `--f-${o.key}: ${qFills[o.key](qOpt(code, o.key)?.medianM2)}`).join('; ');
+const byArr = arrondissements.map((a) => ({ ...a, quartiers: quartiers.filter((x) => x.arr === a.code).sort((x, y) => x.name.localeCompare(y.name, 'fr')) }));
+
 const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
 const CONSEILLER = '/contact-immobiliere-pujol/';
 const title = 'Prix immobilier à Marseille : prix au m² par arrondissement';
@@ -55,6 +73,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
             ? <>Le prix médian au m² d'un appartement ancien à Marseille est de <strong>{eur(city.medianM2)}</strong> ({period}).</>
             : <>Le prix médian au m² par arrondissement, sur la dernière période de ventes disponible. <span class="obs-na">[chiffres en cours d'import]</span></>}
         </p>
+        <p class="obs-coverage">Prix publiés pour <strong>{QUARTIERS_COVERAGE.published} quartiers sur {QUARTIERS_COVERAGE.official}</strong> pour cette période ; les autres sont indiqués « {NA} ».</p>
         <ul class="obs-figures">
           <li><span class="obs-figures__label">Appartement ancien, prix médian au m²</span><span class="obs-figures__value">{city?.medianM2 ? eur(city.medianM2) : NA}</span></li>
           <li><span class="obs-figures__label">Appartement ancien, prix médian de vente</span><span class="obs-figures__value">{city?.medianPrice ? eur(city.medianPrice) : NA}</span></li>
@@ -68,16 +87,62 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
       </div>
     </section>
 
-    <section class="prop-section prop-section--paper" id="carte">
-      <div class="mag-wrap obs-map-wrap">
-        <div>
-          <h2 class="mag-h2">Les prix au m² par <em>arrondissement</em></h2>
-          <fieldset class="obs-filter">
+    <section class="prop-section" id="quartiers">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Les prix au m² par <em>quartier</em></h2>
+        <p class="prop-center obs-intro">Marseille compte 111 quartiers. Choisissez un quartier sur la carte, ou ouvrez un arrondissement dans la liste.</p>
+        <fieldset class="obs-filter">
             <legend>Nombre de pièces</legend>
             {OPTIONS.map((o, i) => (
               <label><input type="radio" name="obs-rooms" id={`obs-${o.key}`} value={o.key} checked={i === 0} /> <span>{o.label}</span></label>
             ))}
           </fieldset>
+        <div class="obs-qmap-wrap">
+          <svg class="obs-map obs-map--q" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 111 quartiers de Marseille">
+            {quartiers.map((x) => (
+              <a href={`#q${x.code}`} aria-label={`${x.name} : ${x.q?.published && x.q.medianM2 ? eur(x.q.medianM2) + ' au m²' : NA}`}>
+                <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name} ({x.arr}) : {x.q?.published && x.q.medianM2 ? `${eur(x.q.medianM2)} au m²` : NA}</title></path>
+              </a>
+            ))}
+            {ARRONDISSEMENT_SHAPES.map((a) => <path class="obs-arr-line" d={a.d} />)}
+            {ARRONDISSEMENT_SHAPES.map((a) => <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>)}
+          </svg>
+          <ul class="obs-legend" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)}
+            <li><span class="obs-sw obs-sw--na"></span>{NA}</li>
+          </ul>
+        </div>
+        <div class="obs-qlist">
+          {byArr.map((a) => (
+            <details id={`q-arr-${a.code}`}>
+              <summary>{a.label} <span class="obs-cp">· {a.quartiers.filter((x) => x.q?.published).length} quartiers publiés sur {a.quartiers.length}</span></summary>
+              <div class="obs-table-wrap">
+                <table class="obs-table">
+                  <thead><tr><th scope="col">Quartier</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Ventes <span class="obs-th-note">(part, par taille)</span></th></tr></thead>
+                  <tbody>
+                    {a.quartiers.map((x) => (
+                      <tr id={`q${x.code}`}>
+                        <th scope="row">{x.name}</th>
+                        <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianM2 ? eur(v.medianM2) : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                        <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianPrice ? eur(v.medianPrice) : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                        <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key); return <span class={`obs-v obs-v--${o.key}`}>{v?.medianSurface ? `${v.medianSurface}\u00a0m²` : <span class="obs-na">{NA}</span>}</span>; })}</td>
+                        <td>{OPTIONS.map((o) => { const v = qOpt(x.code, o.key) as any; return <span class={`obs-v obs-v--${o.key}`}>{o.key === 'all' ? (v?.sales ? v.sales.toLocaleString('fr-FR') : <span class="obs-na">{NA}</span>) : (v?.share !== undefined ? `${v.share.toLocaleString('fr-FR')}\u00a0% des ventes` : <span class="obs-na">{NA}</span>)}</span>; })}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="carte">
+      <div class="mag-wrap obs-map-wrap">
+        <div>
+          <h2 class="mag-h2">Les prix au m² par <em>arrondissement</em></h2>
+
           <p>Choisissez un arrondissement sur la carte pour voir son prix médian au m², la période et le nombre de ventes.</p>
           <ul class="obs-legend" aria-hidden="true">
             {values.length
