@@ -251,7 +251,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         h += '<p class="obs-panel__none">Donnée non disponible pour cette période.</p>';
       } else {
         h += '<p class="obs-panel__big"><span>Prix médian au m², ' + esc(curLabel.toLowerCase()) + '</span><strong>' + (cur && cur.m2 ? eur(cur.m2) : na) + '</strong></p>';
-        h += '<dl class="obs-panel__all"><div><dt>Prix médian</dt><dd>' + (it.all.price ? eur(it.all.price) : na) + '</dd></div><div><dt>Surface médiane</dt><dd>' + (it.all.surf ? it.all.surf + '\u00a0m²' : na) + '</dd></div><div><dt>Ventes analysées</dt><dd>' + (it.all.sales ? it.all.sales.toLocaleString('fr-FR') : na) + '</dd></div></dl>';
+        h += '<p class="obs-panel__label">Toutes tailles</p><dl class="obs-panel__all"><div><dt>Prix médian</dt><dd>' + (it.all.price ? eur(it.all.price) : na) + '</dd></div><div><dt>Surface médiane</dt><dd>' + (it.all.surf ? it.all.surf + '\u00a0m²' : na) + '</dd></div><div><dt>Ventes analysées</dt><dd>' + (it.all.sales ? it.all.sales.toLocaleString('fr-FR') : na) + '</dd></div></dl>';
         h += '<table class="obs-panel__rooms"><caption>Par nombre de pièces</caption><thead><tr><th scope="col">Taille</th><th scope="col">€/m²</th><th scope="col">Prix</th><th scope="col">Surface</th><th scope="col">Part</th></tr></thead><tbody>';
         D.rooms.forEach(function (r) {
           var v = it.byRoom[r[0]] || {};
