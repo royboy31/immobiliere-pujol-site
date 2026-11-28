@@ -6,7 +6,7 @@ export const prerender = false; // photos come from the admin (lp-photos), publi
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PropositionForm from '../../../components/lp/PropositionForm.astro';
 import { getEntry } from 'astro:content';
-import { KEY_FIGURES, PROFILES, sectionFor } from '../../../lib/lp-proposition';
+import { KEY_FIGURES, PROFILES, PROFILE_SHORT_NAMES, sectionFor } from '../../../lib/lp-proposition';
 import LpCtas from '../../../components/lp/LpCtas.astro';
 import GuideDownload from '../../../components/lp/GuideDownload.astro';
 import { parseProfile, quoteSpans } from '../../../lib/profile-blocks';
@@ -29,7 +29,7 @@ const nextPic = () => pics[picIdx++ % pics.length];
 const sec = (title: string) => sectionFor(card, title); // Caroline's CTAs and anchors for this section
 ---
 
-<BaseLayout title={entry?.data.seoTitle || prof.title} description="Proposition de mise en page (test)." noindex={true} preloadImage={hero.src}>
+<BaseLayout title={entry?.data.seoTitle || prof.title} description="Proposition de mise en page (test)." noindex={true} preloadImage={hero.src} breadcrumbCrumbs={[{ label: 'Gestion locative', href: '/service-immobilier/gestion-locative-proposition/' }, { label: PROFILE_SHORT_NAMES[card.slug] ?? prof.title, href: null }]}>
   {preview && <LpPreviewBar page={card.slug} />}
   <div class={`mag prop prop--${card.color}`}>
 

@@ -716,8 +716,7 @@ const rubric = RUBRICS.find(([k]) => parentHref.includes(k)) ?? RUBRICS[4];
 const breadcrumbCrumbs = crumbSection
   ? [
       { label: 'Gestion locative', href: GUIDE_HUB },
-      // the first rubric is itself called "Gestion locative": don't repeat it
-      ...(crumbSection.short === 'Gestion locative' ? [] : [{ label: crumbSection.title, href: `${GUIDE_HUB}#${crumbSection.id}` }]),
+      // Roy 28/11: no crumb to a section anchor, only real pages (Accueil > Gestion locative > question).
       // Caroline 27/11: the current page shows as its question too (the H1 and SEO title stay unchanged).
       ...(guideQuestion(pagePath) ? [{ label: guideQuestion(pagePath) as string, href: null }] : []),
     ]
