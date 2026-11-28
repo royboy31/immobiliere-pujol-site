@@ -387,7 +387,8 @@ $p-slate-soft:  rgb(226, 232, 235);
 .obs-legend { list-style: none; margin: 18px 0 0; padding: 0; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; font-size: 13px;
   li { display: flex; align-items: center; gap: 6px; } }
 .obs-sw { display: inline-block; width: 28px; height: 14px; border-radius: 3px; }
-.obs-table-wrap { overflow-x: auto; margin-top: 32px; max-width: 100%; }
+// position: relative keeps the screen-reader-only header inside the scroll box (it was widening the page on mobile).
+.obs-table-wrap { position: relative; overflow-x: auto; margin-top: 32px; max-width: 100%; }
 .obs-table { width: 100%; border-collapse: collapse; font-size: 15px; background: #fff;
   caption { caption-side: bottom; text-align: left; padding-top: 10px; font-size: 13px; color: rgba($p-ink, .7); }
   th, td { padding: 12px 14px; border-bottom: 1px solid $p-paper; text-align: right; white-space: nowrap; }
@@ -432,3 +433,9 @@ $p-slate-soft:  rgb(226, 232, 235);
   details[open] summary { border-bottom: 1px solid $p-paper; }
   .obs-table-wrap { margin: 0; }
   tbody tr:target { background: $p-orange-soft; } }
+// Mobile (Codex 28/11): cells may wrap so tables stay narrow.
+@media (max-width: 600px) {
+  .obs-table { font-size: 13px;
+    th, td { white-space: normal; padding: 10px 8px; }
+    thead th { font-size: 11px; } }
+}
