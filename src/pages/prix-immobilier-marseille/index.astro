@@ -119,7 +119,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
           <div class="obs-explore__map">
           <svg class="obs-map obs-map--q" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 111 quartiers de Marseille">
             {quartiers.map((x) => (
-              <a href={`#q${x.code}`} data-panel="q" data-code={x.code} aria-label={`${x.name} (${x.arr}) : voir les prix du quartier`}>
+              <a href={`#q${x.code}`} data-panel="q" data-code={x.code} aria-controls="obs-panel-q" aria-expanded="false" aria-label={`${x.name} (${x.arr}) : voir les prix du quartier`}>
                 <path class="obs-area obs-area--q" style={qStyle(x.code)} d={x.d}><title>{x.name} ({x.arr})</title></path>
               </a>
             ))}
@@ -131,7 +131,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
             <li><span class="obs-sw obs-sw--na"></span>{NA}</li>
           </ul>
           </div>
-          <aside class="obs-panel" data-panel-box="q" aria-label="Détail du quartier" hidden></aside>
+          <aside class="obs-panel" id="obs-panel-q" tabindex="-1" data-panel-box="q" aria-label="Détail du quartier" hidden></aside>
         </div>
         <div class="obs-qlist">
           {byArr.map((a) => (
@@ -170,11 +170,11 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
               ? [0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)
               : <li><span class="obs-sw obs-sw--na"></span>{NA}</li>}
           </ul>
-          <aside class="obs-panel obs-panel--inline" data-panel-box="a" aria-label="Détail de l'arrondissement" hidden></aside>
+          <aside class="obs-panel obs-panel--inline" id="obs-panel-a" tabindex="-1" data-panel-box="a" aria-label="Détail de l'arrondissement" hidden></aside>
         </div>
         <svg class="obs-map" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 16 arrondissements de Marseille">
           {arrondissements.map((a) => (
-            <a href={`#a${a.code}`} data-panel="a" data-code={a.code} aria-label={`${a.label} : voir les prix de l'arrondissement`}>
+            <a href={`#a${a.code}`} data-panel="a" data-code={a.code} aria-controls="obs-panel-a" aria-expanded="false" aria-label={`${a.label} : voir les prix de l'arrondissement`}>
               <path class="obs-area" style={areaStyle(a)} d={a.d}><title>{a.label}</title></path>
               <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>
             </a>
@@ -264,18 +264,19 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
       box.hidden = false;
       box.classList.toggle('is-pinned', st.pinned);
       box.querySelector('.obs-panel__close').addEventListener('click', function () { close(kind, true); });
-      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.toggle('is-active', l.getAttribute('data-code') === st.code); });
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { var on = l.getAttribute('data-code') === st.code; l.classList.toggle('is-active', on); l.setAttribute('aria-expanded', on ? 'true' : 'false'); });
     }
     function show(kind, link, pin) {
       var st = state[kind];
       if (st.pinned && !pin && st.code !== link.getAttribute('data-code')) return; // a pinned panel stays until closed or another click
+      var other = kind === 'q' ? 'a' : 'q'; if (state[other].code) close(other, false); // one panel at a time
       st.code = link.getAttribute('data-code'); st.link = link; if (pin) st.pinned = true;
       render(kind);
     }
     function close(kind, restoreFocus) {
       var st = state[kind], box = document.querySelector('[data-panel-box="' + kind + '"]');
       if (box) { box.hidden = true; box.innerHTML = ''; }
-      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.remove('is-active'); });
+      document.querySelectorAll('[data-panel="' + kind + '"]').forEach(function (l) { l.classList.remove('is-active'); l.setAttribute('aria-expanded', 'false'); });
       var link = st.link; st.code = null; st.pinned = false; st.link = null;
       if (restoreFocus && link) { restoring = true; link.focus(); restoring = false; } // focus back without reopening
     }
@@ -283,7 +284,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
       var kind = link.getAttribute('data-panel');
       link.addEventListener('mouseenter', function () { if (!mobile.matches) show(kind, link, false); });
       link.addEventListener('focus', function () { if (restoring) return; state[kind].pinned = false; show(kind, link, false); }); // keyboard: the focused zone always shows
-      link.addEventListener('click', function (e) { e.preventDefault(); state[kind].pinned = false; show(kind, link, true); });
+      link.addEventListener('click', function (e) { e.preventDefault(); state[kind].pinned = false; show(kind, link, true); if (e.detail === 0) { var box = document.querySelector('[data-panel-box="' + kind + '"]'); if (box) box.focus(); } }); // keyboard Enter: jump into the details
     });
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
