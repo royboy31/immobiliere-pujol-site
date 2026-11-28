@@ -399,3 +399,21 @@ $p-slate-soft:  rgb(226, 232, 235);
 .obs-cp { color: rgba($p-ink, .6); font-weight: 400; }
 .obs-method { max-width: 860px; ul { padding-left: 1.2em; display: grid; gap: 10px; line-height: 1.55; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+// Room-count filter (CSS only: all figures are in the HTML, the checked radio picks what shows).
+.obs-filter { border: 0; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px;
+  legend { width: 100%; font-size: 13px; font-weight: 600; margin-bottom: 8px; padding: 0; }
+  label { cursor: pointer; }
+  input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  span { display: inline-block; padding: 8px 14px; border-radius: 999px; border: 1.5px solid rgba($p-ink, .25); font-size: 14px; background: #fff; }
+  input:checked + span { background: $p-ink; border-color: $p-ink; color: #fff; }
+  input:focus-visible + span { outline: 3px solid $p-orange; outline-offset: 2px; } }
+.obs .obs-area { fill: var(--f-all); }
+.obs-v { display: none; }
+.obs-v--all { display: inline; }
+.obs-th-note { font-weight: 400; text-transform: none; letter-spacing: 0; }
+.obs:has(#obs-studio:checked) { .obs-area { fill: var(--f-studio); } .obs-v--all { display: none; } .obs-v--studio { display: inline; } }
+.obs:has(#obs-2p:checked) { .obs-area { fill: var(--f-2p); } .obs-v--all { display: none; } .obs-v--2p { display: inline; } }
+.obs:has(#obs-3p:checked) { .obs-area { fill: var(--f-3p); } .obs-v--all { display: none; } .obs-v--3p { display: inline; } }
+.obs:has(#obs-4p:checked) { .obs-area { fill: var(--f-4p); } .obs-v--all { display: none; } .obs-v--4p { display: inline; } }
+.obs:has(#obs-5p:checked) { .obs-area { fill: var(--f-5p); } .obs-v--all { display: none; } .obs-v--5p { display: inline; } }

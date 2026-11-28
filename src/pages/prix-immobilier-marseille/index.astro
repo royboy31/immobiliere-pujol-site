@@ -6,22 +6,36 @@
 export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ARRONDISSEMENT_SHAPES, MAP_VIEWBOX } from '../../data/marseille-arrondissements-map';
-import { NA, eur, findRow, latestEdition, periodLabel } from '../../data/observatoire';
+import { NA, ROOM_LABELS, eur, findRow, latestEdition, periodLabel, type RoomCategory } from '../../data/observatoire';
 
 const edition = latestEdition();
 const period = edition ? periodLabel(edition) : undefined;
 const city = findRow(edition, '13000', 'appartement_ancien');
 
 const ord = (n: number) => (n === 1 ? '1er' : `${n}e`);
-const arrondissements = ARRONDISSEMENT_SHAPES.map((a) => {
-  const flat = findRow(edition, a.code, 'appartement_ancien');
-  return { ...a, label: `Marseille ${ord(a.num)}`, flat };
-});
+// Filter by number of rooms (quote: "filtres par nombre de pièces"). Pure HTML/CSS: every option's figures
+// are in the page, the checked radio decides which ones show (readable without JavaScript and by bots).
+const OPTIONS: { key: string; rooms?: RoomCategory; label: string }[] = [
+  { key: 'all', label: 'Toutes tailles' },
+  ...(Object.keys(ROOM_LABELS) as RoomCategory[]).map((k) => ({ key: k, rooms: k, label: ROOM_LABELS[k] })),
+];
+const arrondissements = ARRONDISSEMENT_SHAPES.map((a) => ({
+  ...a,
+  label: `Marseille ${ord(a.num)}`,
+  flat: findRow(edition, a.code, 'appartement_ancien'),
+  byOpt: Object.fromEntries(OPTIONS.map((o) => [o.key, findRow(edition, a.code, 'appartement_ancien', o.rooms)])),
+}));
 
-// Map colour scale (5 steps) on the median price per m² of old apartments, only when data exists.
+// Map colour scale (5 steps) on the median price per m², computed per filter option, grey when no data.
+const SCALE = ['rgb(236, 242, 210)', 'rgb(214, 226, 160)', 'rgb(190, 207, 108)', 'rgb(150, 168, 60)', 'rgb(104, 120, 36)'];
+const NA_FILL = 'rgb(226, 226, 222)';
+const fills = Object.fromEntries(OPTIONS.map((o) => {
+  const vals = arrondissements.map((a) => a.byOpt[o.key]?.medianM2).filter((v): v is number => typeof v === 'number');
+  const min = Math.min(...vals), max = Math.max(...vals);
+  return [o.key, (v?: number) => (v === undefined ? NA_FILL : SCALE[Math.min(4, Math.floor(((v - min) / Math.max(1, max - min)) * 5))])];
+}));
 const values = arrondissements.map((a) => a.flat?.medianM2).filter((v): v is number => typeof v === 'number');
-const min = Math.min(...values), max = Math.max(...values);
-const step = (v?: number) => (v === undefined || !values.length ? 'na' : String(Math.min(4, Math.floor(((v - min) / Math.max(1, max - min)) * 5))));
+const areaStyle = (a: (typeof arrondissements)[number]) => OPTIONS.map((o) => `--f-${o.key}: ${fills[o.key](a.byOpt[o.key]?.medianM2)}`).join('; ');
 
 const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
 const CONSEILLER = '/contact-immobiliere-pujol/';
@@ -58,6 +72,12 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
       <div class="mag-wrap obs-map-wrap">
         <div>
           <h2 class="mag-h2">Les prix au m² par <em>arrondissement</em></h2>
+          <fieldset class="obs-filter">
+            <legend>Nombre de pièces</legend>
+            {OPTIONS.map((o, i) => (
+              <label><input type="radio" name="obs-rooms" id={`obs-${o.key}`} value={o.key} checked={i === 0} /> <span>{o.label}</span></label>
+            ))}
+          </fieldset>
           <p>Choisissez un arrondissement sur la carte pour voir son prix médian au m², la période et le nombre de ventes.</p>
           <ul class="obs-legend" aria-hidden="true">
             {values.length
@@ -68,7 +88,7 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         <svg class="obs-map" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 16 arrondissements de Marseille">
           {arrondissements.map((a) => (
             <a href={`#a${a.code}`} aria-label={`${a.label} : ${a.flat?.medianM2 ? eur(a.flat.medianM2) + ' au m²' : NA}`}>
-              <path class={`obs-area obs-sw--${step(a.flat?.medianM2)}`} d={a.d}><title>{a.label} : {a.flat?.medianM2 ? `${eur(a.flat.medianM2)} au m²` : NA}</title></path>
+              <path class="obs-area" style={areaStyle(a)} d={a.d}><title>{a.label} : {a.flat?.medianM2 ? `${eur(a.flat.medianM2)} au m²` : NA}</title></path>
               <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>
             </a>
           ))}
@@ -82,15 +102,15 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         <div class="obs-table-wrap">
           <table class="obs-table">
             <caption>Appartements anciens, {period ?? 'période en cours d’import'}. Analyse Immobilière Pujol.</caption>
-            <thead><tr><th scope="col">Arrondissement</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Ventes</th><th scope="col"><span class="sr-only">Biens</span></th></tr></thead>
+            <thead><tr><th scope="col">Arrondissement</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Ventes <span class="obs-th-note">(part, par taille)</span></th><th scope="col"><span class="sr-only">Biens</span></th></tr></thead>
             <tbody>
               {arrondissements.map((a) => (
                 <tr id={`a${a.code}`}>
                   <th scope="row">{a.label} <span class="obs-cp">({a.code})</span></th>
-                  <td>{a.flat?.medianM2 ? eur(a.flat.medianM2) : <span class="obs-na">{NA}</span>}</td>
-                  <td>{a.flat?.medianPrice ? eur(a.flat.medianPrice) : <span class="obs-na">{NA}</span>}</td>
-                  <td>{a.flat?.medianSurface ? `${a.flat.medianSurface}\u00a0m²` : <span class="obs-na">{NA}</span>}</td>
-                  <td>{a.flat?.sales ? a.flat.sales.toLocaleString('fr-FR') : <span class="obs-na">{NA}</span>}</td>
+                  <td>{OPTIONS.map((o) => <span class={`obs-v obs-v--${o.key}`}>{a.byOpt[o.key]?.medianM2 ? eur(a.byOpt[o.key]!.medianM2!) : <span class="obs-na">{NA}</span>}</span>)}</td>
+                  <td>{OPTIONS.map((o) => <span class={`obs-v obs-v--${o.key}`}>{a.byOpt[o.key]?.medianPrice ? eur(a.byOpt[o.key]!.medianPrice!) : <span class="obs-na">{NA}</span>}</span>)}</td>
+                  <td>{OPTIONS.map((o) => <span class={`obs-v obs-v--${o.key}`}>{a.byOpt[o.key]?.medianSurface ? `${a.byOpt[o.key]!.medianSurface}\u00a0m²` : <span class="obs-na">{NA}</span>}</span>)}</td>
+                  <td>{OPTIONS.map((o) => <span class={`obs-v obs-v--${o.key}`}>{o.key === 'all' ? (a.flat?.sales ? a.flat.sales.toLocaleString('fr-FR') : <span class="obs-na">{NA}</span>) : (a.byOpt[o.key]?.share !== undefined ? `${a.byOpt[o.key]!.share!.toLocaleString('fr-FR')}\u00a0% des ventes` : <span class="obs-na">{NA}</span>)}</span>)}</td>
                   <td><a href={`/arrondissement/${a.code}/`}>Biens à vendre</a></td>
                 </tr>
               ))}
@@ -105,9 +125,11 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
         <h2 class="mag-h2">Méthodologie</h2>
         <ul>
           <li><strong>Prix médian au m²</strong> : la moitié des ventes s'est faite au-dessus, l'autre moitié en dessous. Il est moins sensible aux ventes exceptionnelles qu'une moyenne.</li>
-          <li><strong>Période</strong> : chaque chiffre indique la période réelle des ventes analysées.</li>
           <li><strong>Mise à jour</strong> : à chaque nouvelle édition des données de ventes, la page entière est mise à jour en une fois.</li>
-          <li><strong>Limites</strong> : quand une zone ou un type de bien n'a pas assez de ventes, nous affichons « {NA} » plutôt qu'un chiffre estimé.</li>
+          <li><strong>Période</strong> : une fenêtre d'étude de douze mois, qui n'est pas la date de publication.</li>
+          <li><strong>Ventes analysées</strong> : les transactions de l'échantillon étudié, pas une liste exhaustive de toutes les ventes du marché. Le nombre de ventes n'est donné que toutes tailles confondues ; par nombre de pièces, nous affichons la part des ventes.</li>
+          <li><strong>Donnée non disponible</strong> : un chiffre non publié n'est jamais remplacé par zéro ni estimé.</li>
+          <li><strong>Comparaisons</strong> : les médianes des arrondissements ne se moyennent pas entre elles, et aucune évolution n'est déduite de périodes qui ne correspondent pas.</li>
         </ul>
         <p class="obs-na">[Texte de méthodologie complet à rédiger et à faire valider par Caroline]</p>
       </div>
