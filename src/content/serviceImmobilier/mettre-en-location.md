@@ -2,8 +2,8 @@
 title: "Mettre en location"
 slug: "mettre-en-location"
 heroImage: "/images/services/mise-en-location-tournage-2026.jpg"
-seoTitle: "Mettre en location"
-seoDescription: "Soyez bien conseillé pour mieux louer"
+seoTitle: "Mise en location à Marseille"
+seoDescription: "Mise en location de votre appartement à Marseille : estimation du loyer gratuite en 24 h, sélection du locataire, location seule ou gestion complète."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
