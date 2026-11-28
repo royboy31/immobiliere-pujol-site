@@ -374,7 +374,8 @@ $p-slate-soft:  rgb(226, 232, 235);
   @media (max-width: $bp-tablet) { grid-template-columns: 1fr; gap: 24px; } }
 .obs-map { width: 100%; height: auto; max-height: 640px;
   a:focus-visible .obs-area, a:hover .obs-area { stroke: $p-ink; stroke-width: 3; }
-  &__num { font-size: 22px; font-weight: 700; fill: $p-ink; text-anchor: middle; dominant-baseline: middle; pointer-events: none; } }
+  // white digits with a dark outline: readable on every step of the green scale
+  &__num { font-size: 22px; font-weight: 700; fill: #fff; stroke: $p-ink; stroke-width: 4px; paint-order: stroke; text-anchor: middle; dominant-baseline: middle; pointer-events: none; } }
 .obs-area { stroke: #fff; stroke-width: 1.5; transition: stroke .15s; }
 // 5-step scale on the median price per m² (light to dark green), grey when no data.
 .obs-sw--0 { fill: rgb(236, 242, 210); background: rgb(236, 242, 210); }
