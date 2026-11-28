@@ -10,7 +10,7 @@ import { KEY_FIGURES, PROFILES, sectionFor } from '../../../lib/lp-proposition';
 import LpCtas from '../../../components/lp/LpCtas.astro';
 import GuideDownload from '../../../components/lp/GuideDownload.astro';
 import { parseProfile, quoteSpans } from '../../../lib/profile-blocks';
-import { GUIDE_HUB, guideSectionFor, guideQuestion } from '../../../lib/guide-nav';
+import { GUIDE_HUB, guideQuestion } from '../../../lib/guide-nav';
 import { LP_PHOTOS as ph, posStyle } from '../../../lib/lp-photos';
 
 export function getStaticPaths() {
@@ -24,10 +24,9 @@ const prof = parseProfile(entry?.body ?? '');
 // Caroline 19/11 video: no 3-card "Ce n'est pas votre situation ?" block, just a link to the copropriétaire page.
 // Caroline 27/11: breadcrumb as questions, like the guide pages (H1 and SEO title unchanged).
 const profileUrl = `/service-immobilier/gestion-locative/${card.slug}/`;
-const profileSection = guideSectionFor(profileUrl);
 const profileCrumbs = [
   { label: 'Gestion locative', href: GUIDE_HUB },
-  ...(profileSection && profileSection.short !== 'Gestion locative' ? [{ label: profileSection.title, href: `${GUIDE_HUB}#${profileSection.id}` }] : []),
+  // Roy 28/11: a profile page is a direct child of the Gestion locative landing, never under a guide section.
   { label: guideQuestion(profileUrl) || prof.title, href: null },
 ];
 const allGuides = [...(card.guides ?? []), ...PROFILES.filter((p) => p !== card).flatMap((p) => p.guides ?? [])];
