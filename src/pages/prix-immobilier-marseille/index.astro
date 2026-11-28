@@ -1,0 +1,117 @@
+---
+// Observatoire des prix à Marseille (quote PWS-PUJ-20261123-01, staging preview 28/11).
+// Figures come only from src/data/observatoire.ts (imported editions, checked against the source PDF).
+// Until the first edition is imported, every figure shows "donnée non disponible": nothing is invented.
+// Wording to be validated by Caroline. Label: "Analyse Immobilière Pujol", never the source's name.
+export const prerender = true;
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ARRONDISSEMENT_SHAPES, MAP_VIEWBOX } from '../../data/marseille-arrondissements-map';
+import { NA, eur, findRow, latestEdition, periodLabel } from '../../data/observatoire';
+
+const edition = latestEdition();
+const period = edition ? periodLabel(edition) : undefined;
+const city = findRow(edition, '13000', 'appartement_ancien');
+
+const ord = (n: number) => (n === 1 ? '1er' : `${n}e`);
+const arrondissements = ARRONDISSEMENT_SHAPES.map((a) => {
+  const flat = findRow(edition, a.code, 'appartement_ancien');
+  return { ...a, label: `Marseille ${ord(a.num)}`, flat };
+});
+
+// Map colour scale (5 steps) on the median price per m² of old apartments, only when data exists.
+const values = arrondissements.map((a) => a.flat?.medianM2).filter((v): v is number => typeof v === 'number');
+const min = Math.min(...values), max = Math.max(...values);
+const step = (v?: number) => (v === undefined || !values.length ? 'na' : String(Math.min(4, Math.floor(((v - min) / Math.max(1, max - min)) * 5))));
+
+const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
+const CONSEILLER = '/contact-immobiliere-pujol/';
+const title = 'Prix immobilier à Marseille : prix au m² par arrondissement';
+const description = 'Observatoire des prix au m² à Marseille, par arrondissement : prix médian, période des ventes et nombre de ventes. Analyse Immobilière Pujol.';
+---
+
+<BaseLayout title={`${title} – Immobilière Pujol`} description={description} breadcrumbCrumbs={[{ label: 'Prix immobilier à Marseille', href: null }]}>
+  <div class="mag prop obs">
+
+    <section class="obs-hero">
+      <div class="mag-wrap">
+        <p class="mag-eyebrow">Observatoire des prix · Analyse Immobilière Pujol{period && <> · {period}</>}</p>
+        <h1 class="mag-h1">Prix immobilier à Marseille</h1>
+        <p class="obs-lead">
+          {city?.medianM2 && period
+            ? <>Le prix médian au m² d'un appartement ancien à Marseille est de <strong>{eur(city.medianM2)}</strong> ({period}).</>
+            : <>Le prix médian au m² par arrondissement, sur la dernière période de ventes disponible. <span class="obs-na">[chiffres en cours d'import]</span></>}
+        </p>
+        <ul class="obs-figures">
+          <li><span class="obs-figures__label">Appartement ancien, prix médian au m²</span><span class="obs-figures__value">{city?.medianM2 ? eur(city.medianM2) : NA}</span></li>
+          <li><span class="obs-figures__label">Appartement ancien, prix médian de vente</span><span class="obs-figures__value">{city?.medianPrice ? eur(city.medianPrice) : NA}</span></li>
+          <li><span class="obs-figures__label">Surface médiane</span><span class="obs-figures__value">{city?.medianSurface ? `${city.medianSurface}\u00a0m²` : NA}</span></li>
+          <li><span class="obs-figures__label">Ventes analysées</span><span class="obs-figures__value">{city?.sales ? city.sales.toLocaleString('fr-FR') : NA}</span></li>
+        </ul>
+        <div class="mag-actions">
+          <a class="mag-btn" href={ESTIMATION}>Estimer mon bien</a>
+          <a class="mag-btn mag-btn--line" href={CONSEILLER}>Contacter un conseiller</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="carte">
+      <div class="mag-wrap obs-map-wrap">
+        <div>
+          <h2 class="mag-h2">Les prix au m² par <em>arrondissement</em></h2>
+          <p>Choisissez un arrondissement sur la carte pour voir son prix médian au m², la période et le nombre de ventes.</p>
+          <ul class="obs-legend" aria-hidden="true">
+            {values.length
+              ? [0, 1, 2, 3, 4].map((i) => <li><span class={`obs-sw obs-sw--${i}`}></span>{i === 0 ? 'moins cher' : i === 4 ? 'plus cher' : ''}</li>)
+              : <li><span class="obs-sw obs-sw--na"></span>{NA}</li>}
+          </ul>
+        </div>
+        <svg class="obs-map" viewBox={MAP_VIEWBOX} role="img" aria-label="Carte des 16 arrondissements de Marseille">
+          {arrondissements.map((a) => (
+            <a href={`#a${a.code}`} aria-label={`${a.label} : ${a.flat?.medianM2 ? eur(a.flat.medianM2) + ' au m²' : NA}`}>
+              <path class={`obs-area obs-sw--${step(a.flat?.medianM2)}`} d={a.d}><title>{a.label} : {a.flat?.medianM2 ? `${eur(a.flat.medianM2)} au m²` : NA}</title></path>
+              <text class="obs-map__num" x={a.cx} y={a.cy}>{a.num}</text>
+            </a>
+          ))}
+        </svg>
+      </div>
+    </section>
+
+    <section class="prop-section" id="tableau">
+      <div class="mag-wrap">
+        <h2 class="mag-h2 prop-center">Tous les arrondissements de <em>Marseille</em></h2>
+        <div class="obs-table-wrap">
+          <table class="obs-table">
+            <caption>Appartements anciens, {period ?? 'période en cours d’import'}. Analyse Immobilière Pujol.</caption>
+            <thead><tr><th scope="col">Arrondissement</th><th scope="col">Prix médian au m²</th><th scope="col">Prix médian</th><th scope="col">Surface médiane</th><th scope="col">Ventes</th><th scope="col"><span class="sr-only">Biens</span></th></tr></thead>
+            <tbody>
+              {arrondissements.map((a) => (
+                <tr id={`a${a.code}`}>
+                  <th scope="row">{a.label} <span class="obs-cp">({a.code})</span></th>
+                  <td>{a.flat?.medianM2 ? eur(a.flat.medianM2) : <span class="obs-na">{NA}</span>}</td>
+                  <td>{a.flat?.medianPrice ? eur(a.flat.medianPrice) : <span class="obs-na">{NA}</span>}</td>
+                  <td>{a.flat?.medianSurface ? `${a.flat.medianSurface}\u00a0m²` : <span class="obs-na">{NA}</span>}</td>
+                  <td>{a.flat?.sales ? a.flat.sales.toLocaleString('fr-FR') : <span class="obs-na">{NA}</span>}</td>
+                  <td><a href={`/arrondissement/${a.code}/`}>Biens à vendre</a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="prop-section prop-section--paper" id="methodologie">
+      <div class="mag-wrap obs-method">
+        <h2 class="mag-h2">Méthodologie</h2>
+        <ul>
+          <li><strong>Prix médian au m²</strong> : la moitié des ventes s'est faite au-dessus, l'autre moitié en dessous. Il est moins sensible aux ventes exceptionnelles qu'une moyenne.</li>
+          <li><strong>Période</strong> : chaque chiffre indique la période réelle des ventes analysées.</li>
+          <li><strong>Mise à jour</strong> : à chaque nouvelle édition des données de ventes, la page entière est mise à jour en une fois.</li>
+          <li><strong>Limites</strong> : quand une zone ou un type de bien n'a pas assez de ventes, nous affichons « {NA} » plutôt qu'un chiffre estimé.</li>
+        </ul>
+        <p class="obs-na">[Texte de méthodologie complet à rédiger et à faire valider par Caroline]</p>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
