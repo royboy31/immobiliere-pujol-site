@@ -3,7 +3,7 @@ title: "Gestion Locative à Marseille"
 slug: "gestion-locative"
 ctaText: "Obtenez un devis de gestion locative"
 seoTitle: "Gestion locative à Marseille : tarifs et devis"
-seoDescription: "Gestion locative à Marseille à partir de 3,75 % HT : sélection du locataire, loyers versés à date fixe, assurance loyers impayés à 1,8 %. Devis en 24 h."
+seoDescription: "Gestion locative à Marseille à partir de 3,75 % HT : sélection du locataire, loyers versés à date fixe, assurance loyers impayés à 1,8 % TTC. Devis en 24 h."
 ---
 
 <section  class="hero hero__page hero--medium objectFitContainer" >
