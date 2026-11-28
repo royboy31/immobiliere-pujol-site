@@ -73,6 +73,8 @@ const panelData = {
   }])),
 };
 
+const fullDate = (iso: string) => new Date(iso + 'T00:00:00Z').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).replace(/^1 /, '1er ');
+const qPeriodFull = `${fullDate(QUARTIERS_PERIOD.start)} au ${fullDate(QUARTIERS_PERIOD.end)}`;
 const ESTIMATION = '/estimez-le-prix-de-vente-de-votre-bien-en-2mn/';
 const CONSEILLER = '/contact-immobiliere-pujol/';
 const title = 'Prix immobilier à Marseille : prix au m² par arrondissement';
@@ -210,15 +212,33 @@ const description = 'Observatoire des prix au m² à Marseille, par arrondisseme
     <section class="prop-section prop-section--paper" id="methodologie">
       <div class="mag-wrap obs-method">
         <h2 class="mag-h2">Méthodologie</h2>
+        <p>Cet observatoire est une <strong>Analyse Immobilière Pujol</strong> des ventes d'appartements anciens à Marseille. Les chiffres ne sont ni recalculés ni estimés : ils reprennent tels quels les résultats publiés pour la période étudiée.</p>
+
+        <h3 class="mag-h3">Ce que mesurent les chiffres</h3>
         <ul>
-          <li><strong>Prix médian au m²</strong> : la moitié des ventes s'est faite au-dessus, l'autre moitié en dessous. Il est moins sensible aux ventes exceptionnelles qu'une moyenne.</li>
-          <li><strong>Mise à jour</strong> : à chaque nouvelle édition des données de ventes, la page entière est mise à jour en une fois.</li>
-          <li><strong>Période</strong> : une fenêtre d'étude de douze mois, qui n'est pas la date de publication.</li>
-          <li><strong>Ventes analysées</strong> : les transactions de l'échantillon étudié, pas une liste exhaustive de toutes les ventes du marché. Le nombre de ventes n'est donné que toutes tailles confondues ; par nombre de pièces, nous affichons la part des ventes.</li>
-          <li><strong>Donnée non disponible</strong> : un chiffre non publié n'est jamais remplacé par zéro ni estimé.</li>
-          <li><strong>Comparaisons</strong> : les médianes des arrondissements ne se moyennent pas entre elles, et aucune évolution n'est déduite de périodes qui ne correspondent pas.</li>
+          <li><strong>Période étudiée</strong> : ventes signées du {qPeriodFull}. C'est la fenêtre des ventes analysées, pas la date de mise à jour de cette page.</li>
+          <li><strong>Prix médian au m²</strong> : la moitié des ventes s'est faite au-dessus, l'autre moitié en dessous. La médiane est moins sensible aux ventes exceptionnelles qu'une moyenne.</li>
+          <li><strong>Prix médian de vente et surface médiane</strong> : ce sont deux médianes distinctes. Multiplier le prix médian au m² par la surface médiane ne donne pas le prix médian de vente, ni la valeur d'un bien.</li>
+          <li><strong>Par nombre de pièces</strong> : pour chaque taille (studio à 5 pièces et plus), le prix médian au m², le prix médian, la surface médiane et la part que cette taille représente dans les ventes de la zone.</li>
+          <li><strong>Ventes analysées</strong> : le nombre de ventes de l'échantillon étudié, toutes tailles confondues. Ce n'est pas l'inventaire exhaustif de toutes les ventes du marché.</li>
         </ul>
-        <p class="obs-na">[Texte de méthodologie complet à rédiger et à faire valider par Caroline]</p>
+
+        <h3 class="mag-h3">Couverture</h3>
+        <ul>
+          <li><strong>Arrondissements</strong> : les 16 arrondissements de Marseille sont publiés pour cette période.</li>
+          <li><strong>Quartiers</strong> : des prix sont publiés pour {QUARTIERS_COVERAGE.published} des {QUARTIERS_COVERAGE.official} quartiers. Un chiffre n'est diffusé qu'au-delà d'un nombre minimum de ventes ; en dessous, nous affichons « {NA} ».</li>
+          <li><strong>Donnée non disponible</strong> : un chiffre non publié n'est jamais remplacé par zéro, ni emprunté à l'arrondissement ou à un quartier voisin. Il ne signifie pas qu'aucune vente n'a eu lieu.</li>
+          <li><strong>Pas d'addition</strong> : toutes les ventes ne sont pas rattachées à un quartier publié, donc les ventes des quartiers ne s'additionnent pas pour retrouver celles de l'arrondissement, et les médianes ne se moyennent pas entre elles.</li>
+        </ul>
+
+        <h3 class="mag-h3">Lecture et limites</h3>
+        <ul>
+          <li><strong>Pas d'estimation</strong> : une médiane décrit les ventes d'une zone, pas la valeur d'un bien en particulier. Pour votre bien, demandez une estimation.</li>
+          <li><strong>Pas d'évolution affichée</strong> : nous ne déduisons pas de hausse ou de baisse de périodes qui ne correspondent pas. Une différence de médiane peut aussi venir d'un changement dans le type de biens vendus.</li>
+          <li><strong>Maisons et logements neufs</strong> : ils ne sont pas inclus dans cette page.</li>
+          <li><strong>Mise à jour</strong> : à chaque nouvelle période de ventes disponible, l'ensemble de la page est mis à jour en une seule fois.</li>
+          <li><strong>Carte des quartiers</strong> : les 111 quartiers suivent les contours reconstruits par Datactivist à partir des contours IRIS de l'IGN, publiés sous Licence Ouverte 2.0.</li>
+        </ul>
       </div>
     </section>
 
